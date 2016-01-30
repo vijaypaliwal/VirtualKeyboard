@@ -1,0 +1,54 @@
+﻿
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Keyboard Example</title>
+    <link rel="stylesheet" href="../lib/css/jkeyboard.css">
+    <style>
+        body{
+            background: #144766
+        }
+        #search_field{
+            display: block;
+            margin: 0 auto;
+            padding: 5px 10px;
+            font-size: 28px; 
+            width: 50%;
+        }
+
+
+        .jkeyboard .jline .shivam {
+            width: 120px;
+        }
+            
+    </style>
+</head>
+<body>
+    
+    <input type="text" id="search_field">
+    <div id="keyboard"></div>
+
+
+    <div style="width:100%; position:fixed; bottom:0">
+        <div style="width: 50%; height: 35px; background:#808080; line-height: 35px; text-align: center; float: left;">
+            <a style="color:#000;" href="../index.html">Keboard1</a>
+        </div>
+        <div style="width: 50%; text-align: center; height: 35px; background: #37c1c1; line-height: 35px; float: left;">
+            <a style="color:#fff" href="#">Keboard2</a>
+        </div>
+
+    </div>
+    
+
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="../lib/js/jkeyboard.js"></script>
+    <script>
+        $('#keyboard').jkeyboard({
+            layout: "english",
+          input: $('#search_field')
+        });
+    </script>
+</body>
+</html>
