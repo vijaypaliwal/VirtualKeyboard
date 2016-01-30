@@ -1,130 +1,47 @@
 ﻿<!DOCTYPE html>
-<!--
-    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
-
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <title>Hello World</title>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-    <style type="text/css">
-        .nmpd-wrapper {
-            display: none;
-        }
-
-        .nmpd-grid {
-            position: absolute;
-            left: 50px;
-            top: 50px;
-            z-index: 5000;
-            -khtml-user-select: none;
-            border-radius: 10px;
-            padding: 10px;
-        }
-
-        .nmpd-overlay {
-            z-index: 4999;
-        }
-
-        input.nmpd-display {
-            text-align: right;
-        }
-
-        .controlgroup-textinput {
-            padding-top: .22em;
-            padding-bottom: .22em;
-        }
-    </style>
-
-
-    
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script src="js/keyboardNumeric.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <script type="text/javascript">
-        // Set NumPad defaults for jQuery mobile.
-        // These defaults will be applied to all NumPads within this document!
-        $.fn.numpad.defaults.gridTpl = '<table class="ui-bar-a"></table>';
-        $.fn.numpad.defaults.backgroundTpl = '<div class="ui-popup-screen ui-overlay-a"></div>';
-        $.fn.numpad.defaults.displayTpl = '<input data-theme="b" type="text" />';
-        $.fn.numpad.defaults.buttonNumberTpl = '<a data-role="button" data-theme="b"></a>';
-        $.fn.numpad.defaults.buttonFunctionTpl = '<a data-role="button" data-theme="a"></a>';
-        $.fn.numpad.defaults.onKeypadCreate = function () { $(this).enhanceWithin(); };
-
-        // Instantiate NumPad once the page is ready to be shown
-        $(document).on('pageshow', function () {
-            $('#text-basic').numpad();
-            $('#password').numpad({
-                displayTpl: '<input data-theme="b" type="password" />'
-            });
-            $('#numpadButton-btn').numpad({
-                target: $('#numpadButton'),
-            });
-            $('#numpad4div').numpad();
-            $('#numpad4column .qtyInput').numpad();
-        });
-    </script>
-    
+    <meta charset="utf-8">
+    <title>Virtual Keyboard</title>
+    <!-- jQuery (required) & jQuery UI + theme (optional) -->
+    <link href="docs/css/jquery-ui.min.css" rel="stylesheet">
+    <script src="docs/js/jquery-1.12.0.min.js"></script>
+    <script src="docs/js/jquery-ui.min.js"></script>
+    <script src="docs/js/jquery-migrate-1.3.0.min.js"></script>
+    <!-- keyboard widget css & script (required) -->
+    <link href="css/keyboard.css" rel="stylesheet">
+    <script src="js/jquery.keyboard.js"></script>
+    <!-- keyboard extensions (optional) -->
+    <script src="js/jquery.mousewheel.js"></script>
+    <script src="js/jquery.keyboard.extension-typing.js"></script>
+    <script src="js/jquery.keyboard.extension-autocomplete.js"></script>
+    <script src="js/jquery.keyboard.extension-caret.js"></script>
+    <!-- demo only -->
+    <link rel="stylesheet" href="docs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="docs/css/font-awesome.min.css">
+    <link href="docs/css/demo.css" rel="stylesheet">
+    <link href="docs/css/tipsy.css" rel="stylesheet">
+    <link href="docs/css/prettify.css" rel="stylesheet">
+    <script src="docs/js/bootstrap.min.js"></script>
+    <script src="docs/js/demo.js"></script>
+    <script src="docs/js/jquery.tipsy.min.js"></script>
+    <script src="docs/js/prettify.js"></script> <!-- syntax highlighting -->
 </head>
 <body>
-     
-    <div data-role="page" class="ui-content jqm-content" >
-       
-        <div class="ui-content" role="main" data-theme="true">
-            <h2>Numeric keypads for input fields</h2>
-            <div data-demo-html="true">
-                <label for="text-basic">Simple input (click to toggle numpad)</label>
-                <input type="text" name="text-basic" id="text-basic" value="1">
-            </div><!-- /demo-html -->
 
-            <div data-demo-html="true">
-                <label for="password">Password input for PIN codes (click to toggle numpad - note, that sensitive data is hidden at all times!)</label>
-                <input type="password" name="password" id="password" value="">
-            </div><!-- /demo-html -->
+    <div id="page-wrap">
+        <h1>
+            <a href="#">Shivam Keyboard</a><br>
+            <small class="version"></small>
+        </h1>
 
-            <div>
-                <label for="numpadButton">Input with extra numpad button (the input is directly editable, while the button shows the NumPad)</label>
-                <div data-role="controlgroup" data-type="horizontal">
-                    <input type="text" id="numpadButton" data-wrapper-class="controlgroup-textinput ui-btn" value="2">
-                    <button id="numpadButton-btn" class="ui-btn ui-icon-grid ui-btn-icon-notext ui-alt-icon ui-nodisc-icon">&nbsp;</button>
-                </div>
-            </div><!-- /demo-html -->
-            <h2>Numeric keypad for a div element</h2>
-            <div data-demo-html="true">
-                <div id="numpad4div">3</div>
-            </div><!-- /demo-html -->
+        <div class="block" id="autocomplete">
+            <h2>
+                <span class="tooltip-tipsy" title="Click, then scroll down to see this code">Type something</span>
+            </h2>
+            <input id="text" type="text" placeholder="Enter something...">
+            <br>
         </div>
-
-
     </div>
-    
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-        app.initialize();
-    </script>
 </body>
 </html>
