@@ -62,7 +62,8 @@ var app = {
           
 
             document.getElementById("summarytable").style.display = 'block';
-
+        
+            
           
 
             //alert("We got a barcode\n" + 
