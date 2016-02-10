@@ -46,11 +46,26 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),
                 success: function (response) {
 
+                    alert("Success");
+
                     if (response.LoginResult.Success == true) {
                         // alert(response.LoginResult.Payload);
                         // debugger;
-                        PayloadToken = response.LoginResult.Payload;
-                        alert("success");
+                        alert("success in");
+
+                        //PayloadToken = response.LoginResult.Payload;
+
+                            if (loginData.useRefreshTokens) {
+                                localStorageService.set('authorizationData', { token: response.LoginResult.Payload, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
+                            }
+                            else {
+                                localStorageService.set('authorizationData', { token: response.LoginResult.Payload, userName: loginData.userName, refreshToken: "", useRefreshTokens: false });
+                            }
+                            _authentication.isAuth = true;
+                            _authentication.userName = loginData.userName;
+                            _authentication.useRefreshTokens = loginData.useRefreshTokens;
+
+                      
 
                     }
                     else {
