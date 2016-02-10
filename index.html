@@ -1,281 +1,99 @@
 ﻿<!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
+<html data-ng-app="AngularAuthApp">
 <head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 
-    <title>Shivam ITCS - Products Demo</title>
-    <style type="text/css">
-        body {
-            background: #eee;
-        }
-
-        html, body {
-            position: relative;
-            height: 100%;
-        }
-
-        .login-container {
-            position: relative;
-            width: 300px;
-            margin: 0px auto;
-            text-align: center;
-            /* padding: 20px 40px 40px;
-
-                background: #fff;
-                border: 1px solid #ccc;*/
-        }
-
-
-        #output.alert-success {
-            background: rgb(25, 204, 25);
-        }
-
-        #output.alert-danger {
-            background: rgb(228, 105, 105);
-            color: #ffffff;
-        }
-
-
-        .login-container::before, .login-container::after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 3.5px;
-            left: 0;
-            z-index: -1;
-        }
-
-        .login-container::after {
-            top: 45px;
-            -webkit-transform: rotateZ(-2deg);
-            -moz-transform: rotateZ(-2deg);
-            -ms-transform: rotateZ(-2deg);
-        }
-
-        .avatar {
-            width: 100px;
-            height: 100px;
-            margin: 10px auto 30px;
-            border-radius: 100%;
-            border: 2px solid #aaa;
-            background-size: cover;
-        }
-
-
-
-        .form-box input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            text-align: center;
-            height: 40px;
-            border: 1px solid #ccc;
-            ;
-            background: #fafafa;
-            transition: 0.2s ease-in-out;
-        }
-
-            .form-box input:focus {
-                outline: 0;
-                background: #eee;
-            }
-
-            .form-box input[type="text"] {
-                border-radius: 5px 5px 0 0;
-                text-transform: lowercase;
-            }
-
-            .form-box input[type="password"] {
-                /*border-radius: 0 0 5px 5px;
-                border-top: 0;*/
-                border-radius: 5px 5px 0 0;
-            }
-
-        .form-box button.login {
-            margin-top: 15px;
-            padding: 10px 20px;
-        }
-
-        .animated {
-            -webkit-animation-duration: 1s;
-            animation-duration: 1s;
-            -webkit-animation-fill-mode: both;
-            animation-fill-mode: both;
-        }
-
-        @-webkit-keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                -webkit-transform: translateY(20px);
-                transform: translateY(20px);
-            }
-
-            100% {
-                opacity: 1;
-                -webkit-transform: translateY(0);
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                -webkit-transform: translateY(20px);
-                -ms-transform: translateY(20px);
-                transform: translateY(20px);
-            }
-
-            100% {
-                opacity: 1;
-                -webkit-transform: translateY(0);
-                -ms-transform: translateY(0);
-                transform: translateY(0);
-            }
-        }
-
-        .fadeInUp {
-            -webkit-animation-name: fadeInUp;
-            animation-name: fadeInUp;
-        }
-
-        .avatar {
-            background: url(img/logon.png);
-            background-size: 50px 50px;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-    </style>
+    <meta name="keywords" content="angularjs,SPA,Single Page Application,refresh tokens,authentication,bearer token authentication,OWIN,bootstrap,bootstrap ui,tutorial,JS framework,ASP.NET WEB API 2,Taiseer Joudeh" />
+    <meta name="description" content="SPA built using angularjs,authentication is done using bearer token,back end built using Asp.net web api 2 and OWIN Framework,creatd by Taiseer Joudeh" />
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>ClearlyInventory Barcode Reader</title>
+    <link href="content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="content/css/site.css" rel="stylesheet" />
+    <link href="content/css/loading-bar.css" rel="stylesheet" />
+    <link href="content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="content/css/social-buttons.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="header" data-role="ejmheader" data-ej-title="Clearly Inventory"></div>
-    <div class="container">
-        <div class="login-container">
 
-            <div class="avatar">
-                <img />
-
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-ng-controller="indexController">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="btn btn-success navbar-toggle" data-ng-click="navbarExpanded = !navbarExpanded">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+                <a class="navbar-brand" href="#/">Home</a>
             </div>
-            <div id="output"></div>
-            <h5>Sign In - Clearly Inventory</h5>
-            <div class="form-box">
-                <form action="" method="">
-                    <input name="user" type="text" id="accountname" placeholder="accountname">
-                    <input name="user" type="text" id="username" placeholder="username">
-                    <input type="password" id="password" placeholder="password"><br /><br /><br />
-                    <button class="btn btn-info btn-block login" onclick="Login()" type="button">Login</button>
-                </form>
+            <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
+                <ul class="nav navbar-nav navbar-right">
+                    <li data-ng-hide="!authentication.isAuth"><a href="#">Welcome {{authentication.userName}}</a></li>
+                    <li data-ng-hide="!authentication.isAuth"><a href="#/orders">Inventory</a></li>
+                    <!--<li data-ng-hide="!authentication.isAuth"><a href="#/refresh">Refresh Token</a></li>-->
+                    <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+     
+        <div class="container">
+            <div class="page-header">
+                <h3>Cart Activities</h3>
+            </div>
+            
+        </div>
+    
+
+    <div class="container">
+        <div data-ng-view="">
+        </div>
+    </div>
+
+ 
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                 
+                    <p class="text-muted">Clearly Inverntory </p>
+                
+                
             </div>
         </div>
     </div>
 
-
-
-    <script type="text/javascript" src="scripts/jquery-1.11.0.min.js"></script>
-    
+    <!-- 3rd party libraries -->
+    <script src="scripts/jquery-1.11.0.min.js"></script>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.min.js"></script>
+    <script src="scripts/angular-local-storage.min.js"></script>
+    <script src="scripts/loading-bar.min.js"></script>
+    <!--<script type="text/javascript" src="cordova.js"></script>-->
+    <script type="text/javascript" src="barcodescanner.js"></script>
+    <!--<script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
+        app.initialize();
+    </script>-->
 
-        var PayloadToken = "";
-        function loadPage(url, onleave, onenter) {
+    <!-- Load app main script -->
+    <script src="app/app.js?v=2"></script>
 
-            // If onleave function specified
-            if (onleave) {
-                onleave();
-            }
+    <!-- Load services -->
+    <script src="app/services/authInterceptorService.js?v=2"></script>
+    <script src="app/services/authService.js?v=2"></script>
+    <script src="app/services/ordersService.js?v=2"></script>
+    <script src="app/services/tokensManagerService.js?v=2"></script>
+    <!-- Load controllers -->
+    <script src="app/controllers/indexController.js?v=2"></script>
+    <script src="app/controllers/homeController.js?v=2"></script>
+    <script src="app/controllers/loginController.js?v=2"></script>
+    <script src="app/controllers/signupController.js?v=2"></script>
+    <script src="app/controllers/ordersController.js?v=2"></script>
+    <script src="app/controllers/refreshController.js?v=2"></script>
+    <script src="app/controllers/tokensManagerController.js?v=2"></script>
+    <script src="app/controllers/associateController.js?v=2"></script>
+    <!-- Load custom filters -->
+    <!-- Load custom directives -->
 
-            var xmlhttp = new XMLHttpRequest();
-
-            // Callback function when XMLHttpRequest is ready
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState === 4) {
-                    if (xmlhttp.status === 200) {
-                        document.getElementById('container').innerHTML = xmlhttp.responseText;
-
-                        // If onenter function specified
-                        if (onenter) {
-                            onenter();
-                        }
-                    }
-                    else {
-                        document.getElementById('container').innerHTML = "Error loading page " + url;
-                    }
-                }
-            };
-            xmlhttp.open("GET", url, true);
-            xmlhttp.send();
-        }
-
-        function Login() {
-            var loginurl = 'http://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/Login';
-            var username = $('#username').val();
-            var password = $('#password').val();
-            var accountname = $("#accountname").val();
-            if (username != "" && password != "") {
-                $.ajax
-                ({
-                    type: "POST",
-                    url: loginurl,
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'text json',
-                    data: JSON.stringify({ "UserName": username, "Password": password, "AccountName": accountname }),
-                    success: function (response) {
-                        alert("success");
-
-                        if (response.LoginResult.Success == true) {
-                            // alert(response.LoginResult.Payload);
-                            // debugger;
-                            PayloadToken = response.LoginResult.Payload;
-                            //  CurrentUserDetail.UserName=username;
-                            // CurrentUserDetail.AccountName=accountname;
-                            //CurrentUserDetail.payload=PayloadToken;
-                            window.location.href = "DeviceFunctions.html?mytoken=" + PayloadToken;
-
-                        }
-                        else {
-                            $("#output").addClass("alert alert-danger animated fadeInUp").html(response.LoginResult.Message).show();
-
-                        }
-
-
-                    },
-                    error: function (err) {
-                        alert("error");
-                        $("#output").addClass("alert alert-danger animated fadeInUp").html(err.responseText).show();
-                    }
-                });
-            }
-            else {
-                //remove success mesage replaced with error message
-                $("#output").removeClass(' alert alert-success');
-                $("#output").addClass("alert alert-danger animated fadeInUp").html("sorry enter a username and password").show();
-                setTimeout(function () {
-                    $("#output").addClass("alert alert-danger animated fadeInUp").html("sorry enter a username and password").hide();
-                }, 5000);
-
-            }
-
-        }
-
-    </script>
 </body>
 </html>
