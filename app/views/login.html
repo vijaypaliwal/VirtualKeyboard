@@ -1,8 +1,5 @@
 ﻿<div class="container">
-    <div class="page-header">
-        <h3>Login</h3>
-    </div>
-
+  
 </div>
 
 <form role="form">
@@ -23,8 +20,8 @@
                 </label>
             </div>-->
             <br />
-            <button class="btn btn-md btn-info btn-block" ng-if="IsLoginEnable==false" type="submit" data-ng-click="login()">Login</button>
-            <button class="btn btn-md btn-info btn-block" ng-if="IsLoginEnable==true"  type="button" disabled="disabled">Logging in..</button>
+            <button class="btn btn-md btn-info btn-block" type="submit" data-ng-click="login()">Login</button>
+       
               <div data-ng-hide="message == ''" class="alert alert-danger">
                 {{message}}
             </div>
