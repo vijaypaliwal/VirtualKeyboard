@@ -1,8 +1,10 @@
 ﻿'use strict';
-app.controller('ordersController', ['$scope', 'ordersService', function ($scope, ordersService) {
+app.controller('ordersController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
     $scope.orders = [];
     $scope.scannerText = "";
+    $scope.isSanned = false;
+    $scope.SecurityToken = "";
 
     //ordersService.getOrders().then(function (results) {
 
@@ -12,9 +14,9 @@ app.controller('ordersController', ['$scope', 'ordersService', function ($scope,
     //    //alert(error.data.message);
     //});
 
-    $scope.Scan=function()
-    {
-        alert(" I am in ");
+    $scope.Scan = function () {
+        $scope.isSanned = false;
+
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
         scanner.scan(function (result) {
@@ -22,15 +24,15 @@ app.controller('ordersController', ['$scope', 'ordersService', function ($scope,
 
 
             $scope.scannerText = result.text;
-            
 
+            $scope.isSanned = true;
+            $scope.$apply();
 
-           
             console.log("Scanner result: \n" +
                  "text: " + result.text + "\n" +
                  "format: " + result.format + "\n" +
                  "cancelled: " + result.cancelled + "\n");
-            
+
             /*
             if (args.format == "QR_CODE") {
                 window.plugins.childBrowser.showWebPage(args.text, { showLocationBar: false });
@@ -40,6 +42,36 @@ app.controller('ordersController', ['$scope', 'ordersService', function ($scope,
         }, function (error) {
             console.log("Scanning failed: ", error);
         });
+    }
+
+    $scope.AddtoCart = function () {
+        alert("add to cart");
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        alert($scope.SecurityToken);
+
+        $.ajax
+           ({
+               type: "POST",
+               url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/GetItemByItemNumber',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ItemNumber": $scope.scannerText }),
+               success: function (response) {
+
+                   alert("success Item found");
+
+
+               },
+               error: function (err) {
+
+                   alert("error");
+
+
+               }
+           });
     }
 
 }]);
