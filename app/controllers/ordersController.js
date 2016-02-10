@@ -2,6 +2,7 @@
 app.controller('ordersController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
     $scope.orders = [];
+    $scope.InventoryItems = [];
     $scope.scannerText = "";
     $scope.isSanned = false;
     $scope.SecurityToken = "";
@@ -55,13 +56,21 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
         $.ajax
            ({
                type: "POST",
-               url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/GetItemByItemNumber',
+               url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/GetCurrentInventoryByItemNumber',
                contentType: 'application/json; charset=utf-8',
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ItemNumber": $scope.scannerText }),
                success: function (response) {
 
                    alert("success Item found");
+
+                   if(response!=null && response.Payload.length>0)
+                   {
+                       $scope.InventoryItems = response.Payload;
+                       $scope.$apply();
+
+                   }
+
 
 
                },
