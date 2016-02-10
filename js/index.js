@@ -51,45 +51,43 @@ var appnew = {
         console.log('Received Event: ' + id);
     },
 
-    //scan: function() {
-    //    console.log('scanning');
+    scan: function() {
+        console.log('scanning');
         
-    //    var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-    //    scanner.scan(function (result) {
-
-
+        scanner.scan(function (result) {
           
 
-    //        document.getElementById("summarytable").style.display = 'block';
+            document.getElementById("summarytable").style.display = 'block';
         
             
           
 
-    //        //alert("We got a barcode\n" + 
-    //        //"Result: " + result.text + "\n" + 
-    //        //"Format: " + result.format + "\n" + 
-    //        //"Cancelled: " + result.cancelled);  
+            //alert("We got a barcode\n" + 
+            //"Result: " + result.text + "\n" + 
+            //"Format: " + result.format + "\n" + 
+            //"Cancelled: " + result.cancelled);  
 
-    //       console.log("Scanner result: \n" +
-    //            "text: " + result.text + "\n" +
-    //            "format: " + result.format + "\n" +
-    //            "cancelled: " + result.cancelled + "\n");
-    //       document.getElementById("info").innerHTML = result.text;
-    //       document.getElementById("format").innerHTML = result.format;
+           console.log("Scanner result: \n" +
+                "text: " + result.text + "\n" +
+                "format: " + result.format + "\n" +
+                "cancelled: " + result.cancelled + "\n");
+           document.getElementById("info").innerHTML = result.text;
+           document.getElementById("format").innerHTML = result.format;
 
            
-    //        console.log(result);
-    //        /*
-    //        if (args.format == "QR_CODE") {
-    //            window.plugins.childBrowser.showWebPage(args.text, { showLocationBar: false });
-    //        }
-    //        */
+            console.log(result);
+            /*
+            if (args.format == "QR_CODE") {
+                window.plugins.childBrowser.showWebPage(args.text, { showLocationBar: false });
+            }
+            */
 
-    //    }, function (error) { 
-    //        console.log("Scanning failed: ", error); 
-    //    } );
-    //},
+        }, function (error) { 
+            console.log("Scanning failed: ", error); 
+        } );
+    },
 
     encode: function() {
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");

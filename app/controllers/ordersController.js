@@ -14,6 +14,7 @@ app.controller('ordersController', ['$scope', 'ordersService', function ($scope,
 
     $scope.Scan=function()
     {
+        alert(" I am in ");
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
         scanner.scan(function (result) {
