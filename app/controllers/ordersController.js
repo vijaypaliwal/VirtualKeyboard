@@ -61,18 +61,24 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ItemNumber": $scope.scannerText }),
                success: function (response) {
+                   var _invData=response.GetCurrentInventoryByItemNumberResult.Payload;
 
-                   alert("success Item found");
 
+                   if ($scope.InventoryItems.length <= 0) {
 
-                 
-                   alert("into data" + response.GetCurrentInventoryByItemNumberResult.Payload.length);
-                   $scope.InventoryItems = response.GetCurrentInventoryByItemNumberResult.Payload;
+                       $scope.InventoryItems = _invData;
+                   }
+                   else {
+                       if (_invData.length > 0)
+                       {
+                           for (var i = 0; i < _invData.length; i++) {
+                               $scope.InventoryItems.push(_invData[i]);
+                           }
+                       }
+
+                   }
                        $scope.$apply();
 
-                       for (var i = 0; i < $scope.InventoryItems; i++) {
-                           alert($scope.InventoryItems[i].ItemNumber);
-                       }
 
 
 

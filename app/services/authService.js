@@ -46,12 +46,10 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),
                 success: function (response) {
 
-                    alert("Success");
 
                     if (response.LoginResult.Success == true) {
                         // alert(response.LoginResult.Payload);
                         // debugger;
-                        alert("success in");
 
                         //PayloadToken = response.LoginResult.Payload;
 
