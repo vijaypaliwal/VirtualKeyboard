@@ -64,9 +64,10 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
 
                    alert("success Item found");
 
+
                  
-                       alert("into data" + response.Payload.length);
-                       $scope.InventoryItems = response.Payload;
+                       alert("into data" + response.length);
+                       $scope.InventoryItems = response;
                        $scope.$apply();
 
                        for (var i = 0; i < $scope.InventoryItems; i++) {
