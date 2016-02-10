@@ -33,7 +33,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         if (loginData.useRefreshTokens) {
             data = data + "&client_id=" + ngAuthSettings.clientId;
         }
-        $scope.IsLoginEnable = true;
+     
         var deferred = $q.defer();
         
             $.ajax

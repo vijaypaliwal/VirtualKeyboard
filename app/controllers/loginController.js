@@ -8,7 +8,7 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
         useRefreshTokens: false
     };
 
-    $scope.IsLoginEnable = false;
+ 
     $scope.message = "";
 
     $scope.login = function () {
