@@ -27,14 +27,13 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     };
 
     var _login = function (loginData) {
-        debugger;
 
         var data = "UserName=" + loginData.userName + "&Password=" + loginData.password + "&AccountName=" + loginData.account;
 
         if (loginData.useRefreshTokens) {
             data = data + "&client_id=" + ngAuthSettings.clientId;
         }
-
+        $scope.IsLoginEnable = true;
         var deferred = $q.defer();
         
             $.ajax
@@ -45,13 +44,10 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 dataType: 'text json',
                 data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),
                 success: function (response) {
-
+                    $scope.IsLoginEnable = false;
 
                     if (response.LoginResult.Success == true) {
-                        // alert(response.LoginResult.Payload);
-                        // debugger;
-
-                        //PayloadToken = response.LoginResult.Payload;
+                      
 
                             if (loginData.useRefreshTokens) {
                                 localStorageService.set('authorizationData', { token: response.LoginResult.Payload, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
@@ -74,6 +70,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                 },
                 error: function (err) {
+                    $scope.IsLoginEnable = false;
                     _logOut();
                       deferred.reject(err);
                     

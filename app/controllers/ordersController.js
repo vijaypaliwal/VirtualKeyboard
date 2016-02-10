@@ -46,12 +46,10 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     }
 
     $scope.AddtoCart = function () {
-        alert("add to cart");
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
-        alert($scope.SecurityToken);
 
         $.ajax
            ({
@@ -63,19 +61,24 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                success: function (response) {
                    var _invData=response.GetCurrentInventoryByItemNumberResult.Payload;
 
+                   if (_invData.length > 0) {
 
-                   if ($scope.InventoryItems.length <= 0) {
+                       if ($scope.InventoryItems.length <= 0) {
 
-                       $scope.InventoryItems = _invData;
+                           $scope.InventoryItems = _invData;
+                       }
+                       else {
+                           if (_invData.length > 0) {
+                               for (var i = 0; i < _invData.length; i++) {
+                                   $scope.InventoryItems.push(_invData[i]);
+                               }
+                           }
+
+                       }
+                       alert("inventory item successfully added.");
                    }
                    else {
-                       if (_invData.length > 0)
-                       {
-                           for (var i = 0; i < _invData.length; i++) {
-                               $scope.InventoryItems.push(_invData[i]);
-                           }
-                       }
-
+                       alert("this item not found,please add into your inventory.");
                    }
                        $scope.$apply();
 
