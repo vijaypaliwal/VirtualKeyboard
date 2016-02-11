@@ -8,7 +8,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     $scope.SecurityToken = "";
     $scope.IsActivityOn = false;
     $scope.TotalLength = 0;
-    $scope.CurrentIndex = 0;
+    $scope.CurrentIndex =1;
     $scope.CurrentObject = { ItemNumber: "", Location: "", UOM: "", Status: "", InventoryID: 0, Quantity: 0, CostPerUnit: 0, CustomData: [] };
     //ordersService.getOrders().then(function (results) {
 
@@ -137,14 +137,22 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "InventoryID": $scope.CurrentObject.InventoryID, "Quantity": $scope.CurrentObject.Quantity, "CostPerUnit": $scope.CurrentObject.CostPerUnit, "CustomData": $scope.CurrentObject.CustomData }),
                success: function (response) {
-                   alert("success called");
                    var _TransID = response.AddInventoryResult.Payload;
 
                    if (_TransID > 0) {
 
-                       alert(_TransID);
-                      
                        alert("inventory item successfully increased.");
+
+                       if ($scope.TotalLength == $scope.CurrentIndex)
+                       {
+                           $scope.InventoryItems = [];
+                           $scope.TotalLength = 0;
+                           $scope.CurrentIndex = 1;
+                           $scope.IsActivityOn = false;
+
+                           $scope.$apply();
+
+                       }
                    }
                    else {
                        alert(response.Message);
