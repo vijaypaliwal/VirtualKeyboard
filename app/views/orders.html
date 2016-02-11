@@ -49,11 +49,11 @@
         right: 20px;
         z-index: 13000;
         color: #fff !important;
-        height:40px;
-        width:40px;
+        height:50px;
+        width:50px;
         border-radius:100%;
         text-align:center;
-        line-height:38px;
+        line-height:50px;
     }
 
     #selectAction
@@ -68,18 +68,19 @@
     #selectAction li {
        list-style-type:none;
     }
-    
-    
-    
-     #selectAction .btn {
-        height: 32px;
-        width: 32px;
-        padding:0px;
-        border-radius: 100%;
-        text-align:center;
-        line-height:30px;
-        margin-bottom:5px;
-    }
+
+
+
+        #selectAction .btn {
+            height: 40px;
+            width: 40px;
+            padding: 0px;
+            border-radius: 100%;
+            text-align: center;
+            line-height: 38px;
+            border: transparent;
+            margin-bottom: 5px;
+        }
 </style>
 
 <div ng-if="IsActivityOn==false">
@@ -144,7 +145,7 @@
 
     </div>
 
-    <a data-toggle="modal" data-target="#myModal1" id="AvailableTransactions" class="Addbtn btn-primary">
+    <a data-toggle="modal" data-target="#myModal1" id="AvailableTransactions" class="Addbtn btn-info">
         <i class="fa fa-shopping-cart"></i>
     </a>
 </div>
@@ -170,7 +171,7 @@
             </div>
             <div class="col-xs-3">
                 <div style="text-align:right">
-                    <a class="btn btn-primary" style="padding: 6px;">Next <i class="fa fa-chevron-right"></i></a>
+                    <a class="btn btn-primary" ng-class="TotalLength == 0 ||TotalLength==CurrentIndex ? 'disabled' :''" style="padding: 6px;" ng-click="GoToNextItem()">Next <i class="fa fa-chevron-right"></i></a>
                 </div>
 
             </div>
@@ -218,10 +219,15 @@
                 <input class="form-control" type="text" ng-model="CurrentObject.CostPerUnit" name="cpu" />
             </div>
 
-            <a ng-click="ApplyTransaction()" class="btn btn-primary">Apply activity</a>
+            <a style="width:100%;" ng-click="ApplyTransaction()" class="btn btn-primary">Apply activity <i class="fa fa-arrow-circle-right"></i></a>
         </div>
 
      
+    </div>
+
+    <div>
+        <br />
+        <br />
     </div>
 </div>
 <!-- Activity Modal end -->

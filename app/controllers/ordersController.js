@@ -7,6 +7,8 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     $scope.isSanned = false;
     $scope.SecurityToken = "";
     $scope.IsActivityOn = false;
+    $scope.TotalLength = 0;
+    $scope.CurrentIndex = 0;
     $scope.CurrentObject = { ItemNumber: "", Location: "", UOM: "", Status: "", InventoryID: 0, Quantity: 0, CostPerUnit: 0, CustomData: [] };
     //ordersService.getOrders().then(function (results) {
 
@@ -76,6 +78,8 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                            }
 
                        }
+
+                       $scope.TotalLength = $scope.InventoryItems.length;
                        alert("inventory item successfully added.");
                    }
                    else {
@@ -99,6 +103,8 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
 
     $scope.Proceed = function () {
         $(".modal-backdrop").remove();
+
+        $("body").removeClass("modal-open");
         if($scope.InventoryItems.length >0)
         {
 
@@ -157,5 +163,23 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
 
                }
            });
+    }
+    $scope.GoToNextItem = function () {
+
+        $scope.CurrentIndex = $scope.CurrentIndex + 1;
+        
+
+        if ($scope.InventoryItems.length >= $scope.CurrentIndex) {
+
+            $scope.CurrentObject.ItemNumber = $scope.InventoryItems[$scope.CurrentIndex].ItemNumber;
+            $scope.CurrentObject.Location = $scope.InventoryItems[$scope.CurrentIndex].Location;
+            $scope.CurrentObject.UOM = $scope.InventoryItems[$scope.CurrentIndex].UOM;
+            $scope.CurrentObject.Status = $scope.InventoryItems[$scope.CurrentIndex].StatusValue;
+
+            $scope.CurrentObject.InventoryID = $scope.InventoryItems[$scope.CurrentIndex].InventoryID;
+            $scope.CurrentObject.Quantity = $scope.InventoryItems[$scope.CurrentIndex].CurrentQuantity;
+            $scope.CurrentObject.CostPerUnit = $scope.InventoryItems[$scope.CurrentIndex].CostPerUnit;
+        }
+        $scope.$apply();
     }
 }]);

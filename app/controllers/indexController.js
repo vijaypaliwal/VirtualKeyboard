@@ -1,7 +1,9 @@
 ﻿'use strict';
 app.controller('indexController', ['$scope', '$location', 'authService', function ($scope, $location, authService) {
-    $scope.InventoryItemsCore = [];
+  
     $scope.logOut = function () {
+
+        alert("Logout");
         authService.logOut();
         $location.path('/login');
     }

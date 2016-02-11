@@ -15,6 +15,10 @@
 
     <link href="content/css/simple-sidebar.css" rel="stylesheet" />
 
+  
+
+    
+
     <style>
         .navbar-inverse {
             background-color: #d24238 !important; 
@@ -32,8 +36,8 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-ng-controller="indexController">
         <div class="container">
             <div class="navbar-header">
-                <button style="display:none; padding-left:10px; padding-right:10px;" data-ng-click="logOut()" class="btn btn-success navbar-toggle">
-                    <i class="fa fa-sign-out"></i>
+                <button style="display:none; padding-left:10px; padding-right:10px;"  class="btn btn-success navbar-toggle">
+                    {{authentication.userName}}
                 </button>
                 <a style="display:none;" href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-th-list"></i></a>
                 <a style="padding:0px;" class="navbar-brand" href="#/">
@@ -47,19 +51,17 @@
     <!-- Sidebar -->
 
     <div id="wrapper">
-        <div style="background:#EFEFEF" id="sidebar-wrapper">
-
-
+        <div id="sidebar-wrapper">
 
             <ul style="margin-top:12px;" class="sidebar-nav">
 
-                
+
 
 
                 <li><a><i class="fa fa-user"></i> Profile </a></li>
                 <li><a><i class="fa fa-plus"></i> Inventory</a></li>
 
-                <li><a data-ng-click="logOut()"><i class="fa fa-sign-out"></i> Sign Out</a></li>
+                <li><a href="#" ng-click="logOut()"><i class="fa fa-sign-out"></i> Sign Out</a></li>
             </ul>
         </div>
     </div>
@@ -120,9 +122,6 @@
 
 
         $("#menu-toggle").click(function (e) {
-
-            alert("In");
-
 
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");

@@ -24,9 +24,9 @@
     left: 250px;
     width: 0;
     height: 100%;
-    margin-left: -250px;
+    margin-left: -270px;
     overflow-y: auto;
- 
+    box-shadow: 12px 0 15px -4px #999999, -12px 0 8px -4px #999999;
     margin-top:-5px;
     background: #fff;
     -webkit-transition: all 0.5s ease;
@@ -69,13 +69,13 @@
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #000;
-    border-bottom:1px solid #d24238 ;
+    color: #8E8A8A;
+    border-bottom:1px solid #E0E0E0 ;
 }
 
 .sidebar-nav li a:hover {
     text-decoration: none;
-    color: #000;
+    color: #8E8A8A;
     background: #fff;
 }
 
