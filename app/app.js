@@ -18,6 +18,13 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/signup.html"
     });
 
+
+    $routeProvider.when("/transaction", {
+        controller: "transactionController",
+        templateUrl: "app/views/transaction.html"
+    });
+
+
     $routeProvider.when("/orders", {
         controller: "ordersController",
         templateUrl: "app/views/orders.html"

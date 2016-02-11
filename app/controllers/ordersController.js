@@ -6,7 +6,8 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     $scope.scannerText = "";
     $scope.isSanned = false;
     $scope.SecurityToken = "";
-
+    $scope.IsActivityOn = false;
+    $scope.CurrentObject = { ItemNumber: "", Location: "", UOM: "", Status: "", InventoryID: 0, Quantity: 0, CostPerUnit: 0, CustomData: [] };
     //ordersService.getOrders().then(function (results) {
 
     //    $scope.orders = results.data;
@@ -96,4 +97,65 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
            });
     }
 
+    $scope.Proceed = function () {
+        $(".modal-backdrop").remove();
+        if($scope.InventoryItems.length >0)
+        {
+
+            $scope.CurrentObject.ItemNumber = $scope.InventoryItems[0].ItemNumber;
+            $scope.CurrentObject.Location = $scope.InventoryItems[0].Location;
+            $scope.CurrentObject.UOM = $scope.InventoryItems[0].UOM;
+            $scope.CurrentObject.Status = $scope.InventoryItems[0].StatusValue;
+            
+            $scope.CurrentObject.InventoryID = $scope.InventoryItems[0].InventoryID;
+            $scope.CurrentObject.Quantity = $scope.InventoryItems[0].CurrentQuantity;
+            $scope.CurrentObject.CostPerUnit = $scope.InventoryItems[0].CostPerUnit;
+        }
+        
+        $scope.IsActivityOn = true;
+
+    }
+
+    $scope.ApplyTransaction = function () {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/AddInventory',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "InventoryID": $scope.CurrentObject.InventoryID, "Quantity": $scope.CurrentObject.Quantity, "CostPerUnit": $scope.CurrentObject.CostPerUnit, "CustomData": $scope.CurrentObject.CustomData }),
+               success: function (response) {
+                   alert("success called");
+                   var _TransID = response.AddInventoryResult.Payload;
+
+                   if (_TransID > 0) {
+
+                       alert(_TransID);
+                      
+                       alert("inventory item successfully increased.");
+                   }
+                   else {
+                       alert(response.Message);
+                   }
+                   $scope.$apply();
+
+
+
+
+
+               },
+               error: function (err) {
+
+                   alert("error");
+
+
+               }
+           });
+    }
 }]);
