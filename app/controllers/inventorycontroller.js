@@ -35,8 +35,8 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                },
                error: function (err) {
 
-                   alert(err.Message);
-
+                   alert(err.GetLocationsResult.Message);
+                   $scope.InventoryObject.Location = 678030;
                }
            });
       
