@@ -28,7 +28,9 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
                    alert("get location success");
-                   $scope.LocationList = response.GetLocationsResult.PayLoad;
+
+                   alert(response.GetLocationsResult.Payload.length);
+                   $scope.LocationList = response.GetLocationsResult.Payload;
                    $scope.$apply();
                },
                error: function (err) {
@@ -105,7 +107,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
                    alert("get uom success");
-                   $scope.UOMList = response.GetUnitsOfMeasureResult.PayLoad;
+                   $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
                    $scope.$apply();
                },
                error: function (err) {
@@ -134,7 +136,8 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
                    alert("get item success");
-                   $scope.ItemList = response.GetItemsResult.PayLoad;
+                   alert(response.GetItemsResult.Payload.length);
+                   $scope.ItemList = response.GetItemsResult.Payload;
                    $scope.$apply();
                },
                error: function (err) {
