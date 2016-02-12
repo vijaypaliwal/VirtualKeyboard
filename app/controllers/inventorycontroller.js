@@ -58,7 +58,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "LocationID": $scope.InventoryObject.Location, "PartID": $scope.InventoryObject.ItemName, "UnitOfMeasureID": $scope.InventoryObject.UOM, "Quantity": $scope.InventoryObject.Quantity, "CostPerUnit": $scope.InventoryObject.CostPerUnit, "UniqueTag": $scope.InventoryObject.uniquetag, "CustomData": $scope.InventoryObject.CustomData }),
                success: function (response) {
 
-
+                   alert("Inventory item successfully added.");
               
 
                    var _TransID = response.AddInventoryResult.Payload;
