@@ -35,7 +35,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                },
                error: function (err) {
 
-                   alert(err.GetLocationsResult.Message);
+                   alert("Get Location Error");
                    $scope.InventoryObject.Location = 678030;
                }
            });
@@ -51,6 +51,10 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
             $scope.SecurityToken = authData.token;
         }
 
+        alert($scope.InventoryObject.Location);
+        alert($scope.InventoryObject.ItemName);
+        alert($scope.InventoryObject.UOM);
+
         $.ajax
            ({
                type: "POST",
@@ -59,6 +63,10 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "LocationID": $scope.InventoryObject.Location, "PartID": $scope.InventoryObject.ItemName, "UnitOfMeasureID": $scope.InventoryObject.UOM, "Quantity": $scope.InventoryObject.Quantity, "CostPerUnit": $scope.InventoryObject.CostPerUnit, "UniqueTag": $scope.InventoryObject.uniquetag, "CustomData": $scope.InventoryObject.CustomData }),
                success: function (response) {
+
+
+                   alert("Add inventory success In");
+
                    var _TransID = response.AddInventoryResult.Payload;
 
                    if (_TransID > 0) {
@@ -71,7 +79,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
                    }
                    else {
-                       alert(response.Message);
+                       alert(response.AddInventoryResult.Message);
                    }
                    $scope.$apply();
 
@@ -82,7 +90,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                },
                error: function (err) {
 
-                   alert("error");
+                   alert(response.AddInventoryResult.Message);
 
 
                }
