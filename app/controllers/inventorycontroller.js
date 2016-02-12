@@ -1,6 +1,9 @@
 ﻿'use strict';
 app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
+    alert("Inventory controller called");
+
+
     $scope.orders = [];
     $scope.InventoryItems = [];
     $scope.scannerText = "";
@@ -37,7 +40,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
       
     }
     
-    alert("Inventory controller called");
+  
 
     $scope.addinventory = function ()
     {
