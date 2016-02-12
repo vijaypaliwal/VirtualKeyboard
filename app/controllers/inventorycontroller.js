@@ -35,7 +35,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                },
                error: function (err) {
 
-                   alert("Get Location Error");
+                   alert(response.GetLocationsResult.Message);
                    $scope.InventoryObject.Location = 678030;
                }
            });
@@ -54,6 +54,8 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
         alert($scope.InventoryObject.Location);
         alert($scope.InventoryObject.ItemName);
         alert($scope.InventoryObject.UOM);
+
+        alert($scope.InventoryObject.Quantity);
 
         $.ajax
            ({
