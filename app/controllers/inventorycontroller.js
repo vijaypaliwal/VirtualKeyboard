@@ -33,7 +33,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
                    $scope.InventoryObject.Location = 678030;
 
-                   alert(response.GetLocationsResult.Message);
+                  
                 
                }
            });
@@ -138,7 +138,6 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-                   alert("get item success");
                  
                    $scope.ItemList = response.GetItemsResult.Payload;
                    $scope.$apply();
