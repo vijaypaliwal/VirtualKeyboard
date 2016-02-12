@@ -217,7 +217,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "InventoryID": $scope.CurrentObject.InventoryID, "Quantity": $scope.CurrentObject.Quantity, "CostPerUnit": $scope.CurrentObject.CostPerUnit, "CustomData": $scope.CurrentObject.CustomData }),
                success: function (response) {
-                   var _TransID = response.AddInventoryResult.Payload;
+                   var _TransID = response.SubtractInventoryResult.Payload;
 
                    if (_TransID > 0) {
 

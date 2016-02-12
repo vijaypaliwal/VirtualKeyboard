@@ -10,7 +10,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
     $scope.UOMList = [];
     $scope.ItemList = [];
     $scope.getlocation = function () {
-
+        alert("Get location in");
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -37,7 +37,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
       
     }
     
-    
+    alert("Inventory controller called");
 
     $scope.addinventory = function ()
     {
@@ -86,6 +86,8 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.getuom = function ()
     {
+        alert("Get Uom In");
+
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -113,6 +115,8 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
     }
 
     $scope.getitems = function () {
+
+        alert("Get Item In");
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -139,13 +143,12 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
     }
 
-    function init()
-    {
+   
         $scope.getlocation();
         $scope.getuom();
         $scope.getitems();
-    }
+   
 
-    init();
+   
   
 }]);
