@@ -19,9 +19,9 @@ app.config(function ($routeProvider) {
     });
 
 
-    $routeProvider.when("/transaction", {
-        controller: "transactionController",
-        templateUrl: "app/views/transaction.html"
+    $routeProvider.when("/inventory", {
+        controller: "inventoryController",
+        templateUrl: "app/views/inventory.html"
     });
 
 

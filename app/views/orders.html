@@ -137,7 +137,7 @@
         <div class="modal-body">
             <ul class="animated bounceIn" id="selectAction">
                 <li><a class="btn-info btn increase" style="background-color: #177B3D;" data-dismiss="modal"  ng-click="Proceed()"> <i class="fa fa-plus"></i> </a></li>
-                <li><a class="btn-info btn decrease" style="background-color: #AF2525;" data-dismiss="modal" ng-click="Proceed()" > <i class="fa fa-minus"></i> </a></li>
+                <li><a class="btn-info btn decrease" style="background-color: #AF2525;" data-dismiss="modal" ng-click="Proceedfordecrease()" > <i class="fa fa-minus"></i> </a></li>
 
             </ul>
         </div>
@@ -165,7 +165,7 @@
             </div>
             <div class="col-xs-6">
                 <div style="text-align:center">
-                    <p>Increase activity</p>
+                    <p>Activity</p>
                 </div>
 
             </div>
@@ -219,10 +219,12 @@
                 <input class="form-control" type="text" ng-model="CurrentObject.CostPerUnit" name="cpu" />
             </div>
 
-            <a style="width:100%;" ng-click="ApplyTransaction()" class="btn btn-primary">Apply activity <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
+            <a ng-if="IsIncreaseActivity==true" style="width:100%;" ng-click="ApplyTransaction()" class="btn btn-primary">Apply Increase activity <i class="fa fa-arrow-circle-right"></i></a>
 
-     
+            <a ng-if="IsDecreaseActivity==true" style="width:100%;" ng-click="ApplyDecreaseTransaction()" class="btn btn-primary">Apply Decrease activity <i class="fa fa-arrow-circle-right"></i></a>
+
+            
+        </div>
     </div>
 
     <div>

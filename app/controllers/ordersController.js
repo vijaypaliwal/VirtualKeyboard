@@ -7,6 +7,9 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     $scope.isSanned = false;
     $scope.SecurityToken = "";
     $scope.IsActivityOn = false;
+    $scope.IsIncreaseActivity = false;
+    $scope.IsDecreaseActivity = false;
+ 
     $scope.TotalLength = 0;
     $scope.CurrentIndex =1;
     $scope.CurrentObject = { ItemNumber: "", Location: "", UOM: "", Status: "", InventoryID: 0, Quantity: 0, CostPerUnit: 0, CustomData: [] };
@@ -120,6 +123,32 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
         
         $scope.IsActivityOn = true;
 
+        $scope.IsIncreaseActivity = true;
+        $scope.IsDecreaseActivity = false;
+
+    }
+
+    $scope.Proceedfordecrease = function () {
+        $(".modal-backdrop").remove();
+
+        $("body").removeClass("modal-open");
+        if ($scope.InventoryItems.length > 0) {
+
+            $scope.CurrentObject.ItemNumber = $scope.InventoryItems[0].ItemNumber;
+            $scope.CurrentObject.Location = $scope.InventoryItems[0].Location;
+            $scope.CurrentObject.UOM = $scope.InventoryItems[0].UOM;
+            $scope.CurrentObject.Status = $scope.InventoryItems[0].StatusValue;
+
+            $scope.CurrentObject.InventoryID = $scope.InventoryItems[0].InventoryID;
+            $scope.CurrentObject.Quantity = $scope.InventoryItems[0].CurrentQuantity;
+            $scope.CurrentObject.CostPerUnit = $scope.InventoryItems[0].CostPerUnit;
+        }
+
+        $scope.IsActivityOn = true;
+
+        $scope.IsIncreaseActivity = false;
+        $scope.IsDecreaseActivity = true;
+
     }
 
     $scope.ApplyTransaction = function () {
@@ -172,6 +201,57 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                }
            });
     }
+
+    $scope.ApplyDecreaseTransaction = function () {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/SubtractInventory',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "InventoryID": $scope.CurrentObject.InventoryID, "Quantity": $scope.CurrentObject.Quantity, "CostPerUnit": $scope.CurrentObject.CostPerUnit, "CustomData": $scope.CurrentObject.CustomData }),
+               success: function (response) {
+                   var _TransID = response.AddInventoryResult.Payload;
+
+                   if (_TransID > 0) {
+
+                       alert("Inventory item successfully Decreased.");
+
+                       if ($scope.TotalLength == $scope.CurrentIndex) {
+                           $scope.InventoryItems = [];
+                           $scope.TotalLength = 0;
+                           $scope.CurrentIndex = 1;
+                           $scope.IsActivityOn = false;
+
+                           $scope.$apply();
+
+                       }
+                   }
+                   else {
+                       alert(response.Message);
+                   }
+                   $scope.$apply();
+
+
+
+
+
+               },
+               error: function (err) {
+
+                   alert("error");
+
+
+               }
+           });
+    }
+
     $scope.GoToNextItem = function () {
 
         $scope.CurrentIndex = $scope.CurrentIndex + 1;
