@@ -1,9 +1,6 @@
 ﻿'use strict';
 app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
-    alert("Inventory controller called");
-
-
     $scope.orders = [];
     $scope.InventoryItems = [];
     $scope.scannerText = "";
@@ -12,8 +9,9 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
     $scope.LocationList = [];
     $scope.UOMList = [];
     $scope.ItemList = [];
+
     $scope.getlocation = function () {
-        alert("Get location in");
+
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -53,12 +51,6 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
             $scope.SecurityToken = authData.token;
         }
 
-        alert($scope.InventoryObject.Location);
-        alert($scope.InventoryObject.ItemName);
-        alert($scope.InventoryObject.UOM);
-
-        alert($scope.InventoryObject.Quantity);
-
         $.ajax
            ({
                type: "POST",
@@ -69,7 +61,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                success: function (response) {
 
 
-                   alert("Add inventory success In");
+              
 
                    var _TransID = response.AddInventoryResult.Payload;
 
@@ -103,7 +95,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.getuom = function ()
     {
-        alert("Get Uom In");
+       
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -133,7 +125,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.getitems = function () {
 
-        alert("Get Item In");
+     
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -148,7 +140,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
                    alert("get item success");
-                   alert(response.GetItemsResult.Payload.length);
+                 
                    $scope.ItemList = response.GetItemsResult.Payload;
                    $scope.$apply();
                },
