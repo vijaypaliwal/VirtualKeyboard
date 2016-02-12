@@ -25,9 +25,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-                   alert("get location success");
 
-                   alert(response.GetLocationsResult.Payload.length);
                    $scope.LocationList = response.GetLocationsResult.Payload;
                    $scope.$apply();
                },
@@ -71,12 +69,14 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
                      
                        $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 0, uniquetag: "", CostPerUnit: 0, CustomData: [] };
-                           $scope.$apply();
+                       $scope.$apply();
 
                    }
                    else {
                        alert(response.AddInventoryResult.Message);
                    }
+
+                   $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 0, uniquetag: "", CostPerUnit: 0, CustomData: [] };
                    $scope.$apply();
 
 
@@ -110,7 +110,6 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-                   alert("get uom success");
                    $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
                    $scope.$apply();
                },
