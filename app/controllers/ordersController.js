@@ -9,6 +9,8 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     $scope.IsActivityOn = false;
     $scope.IsIncreaseActivity = false;
     $scope.IsDecreaseActivity = false;
+
+    $scope.IsMoveActivity = false;
  
     $scope.TotalLength = 0;
     $scope.CurrentIndex =1;
@@ -125,6 +127,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
 
         $scope.IsIncreaseActivity = true;
         $scope.IsDecreaseActivity = false;
+        $scope.IsMoveActivity = false;
 
     }
 
@@ -147,7 +150,32 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
         $scope.IsActivityOn = true;
 
         $scope.IsIncreaseActivity = false;
+        $scope.IsMoveActivity = false;
         $scope.IsDecreaseActivity = true;
+
+    }
+
+
+    $scope.Proceedformove = function () {
+        $(".modal-backdrop").remove();
+
+        $("body").removeClass("modal-open");
+        if ($scope.InventoryItems.length > 0) {
+
+            $scope.CurrentObject.ItemNumber = $scope.InventoryItems[0].ItemNumber;
+            $scope.CurrentObject.Location = $scope.InventoryItems[0].Location;
+            $scope.CurrentObject.UOM = $scope.InventoryItems[0].UOM;
+            $scope.CurrentObject.Status = $scope.InventoryItems[0].StatusValue;
+
+            $scope.CurrentObject.InventoryID = $scope.InventoryItems[0].InventoryID;
+            $scope.CurrentObject.Quantity = $scope.InventoryItems[0].CurrentQuantity;
+            $scope.CurrentObject.CostPerUnit = $scope.InventoryItems[0].CostPerUnit;
+        }
+
+        $scope.IsActivityOn = true;
+        $scope.IsMoveActivity = true;
+        $scope.IsIncreaseActivity = false;
+        $scope.IsDecreaseActivity = false;
 
     }
 
@@ -251,6 +279,59 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                }
            });
     }
+
+
+    $scope.ApplyMoveTransaction = function () {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/MoveInventory',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "InventoryID": $scope.CurrentObject.InventoryID, "NewLocationID": 678030, "Quantity": $scope.CurrentObject.Quantity, "CostPerUnit": $scope.CurrentObject.CostPerUnit, "CustomData": $scope.CurrentObject.CustomData }),
+               success: function (response) {
+                   var _TransID = response.SubtractInventoryResult.Payload;
+
+                   if (_TransID > 0) {
+
+                       alert("Inventory item successfully Moved.");
+
+                       if ($scope.TotalLength == $scope.CurrentIndex) {
+                           $scope.InventoryItems = [];
+                           $scope.TotalLength = 0;
+                           $scope.CurrentIndex = 1;
+                           $scope.IsActivityOn = false;
+
+                           $scope.$apply();
+
+                       }
+                   }
+                   else {
+                       alert(response.Message);
+                   }
+                   $scope.$apply();
+
+
+
+
+
+               },
+               error: function (err) {
+
+                   alert("error");
+
+
+               }
+           });
+    }
+
+
 
     $scope.GoToNextItem = function () {
 
