@@ -91,7 +91,5 @@ app.controller('itemController', ['$scope', 'ordersService', 'localStorageServic
 
     }
 
-   
-     
   
 }]);

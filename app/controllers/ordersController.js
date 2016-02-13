@@ -294,7 +294,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/MoveInventory',
                contentType: 'application/json; charset=utf-8',
                dataType: 'text json',
-               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "InventoryID": $scope.CurrentObject.InventoryID, "NewLocationID": 678030, "Quantity": $scope.CurrentObject.Quantity, "CostPerUnit": $scope.CurrentObject.CostPerUnit, "CustomData": $scope.CurrentObject.CustomData }),
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "InventoryID": $scope.CurrentObject.InventoryID, "NewLocationID": 663546, "Quantity": $scope.CurrentObject.Quantity, "CostPerUnit": $scope.CurrentObject.CostPerUnit, "CustomData": $scope.CurrentObject.CustomData }),
                success: function (response) {
                    var _TransID = response.SubtractInventoryResult.Payload;
 
