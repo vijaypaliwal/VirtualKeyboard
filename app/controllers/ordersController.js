@@ -2,7 +2,7 @@
 app.controller('ordersController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
     $scope.orders = [];
-    $scope.InventoryItems = [];
+    $scope.InventoryItems = [{ ItemNumber: "", Location: "", UOM: "", Status: "", InventoryID: "", Quantity: "", CostPerUnit: "", CustomData: [] }];
     $scope.scannerText = "";
     $scope.isSanned = false;
     $scope.SecurityToken = "";
@@ -139,7 +139,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
         }
     }
     $scope.Proceed = function () {
-      
+        $(".modal-backdrop").remove();
 
         $("body").removeClass("modal-open");
         if($scope.InventoryItems.length >0)
