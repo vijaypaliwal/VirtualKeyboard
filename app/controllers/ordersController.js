@@ -14,7 +14,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
  
     $scope.TotalLength = 0;
     $scope.CurrentIndex =1;
-    $scope.CurrentObject = { ItemNumber: "", Location: "", UOM: "", Status: "", InventoryID: 0, Quantity: 0, CostPerUnit: 0, CustomData: [] };
+    $scope.CurrentObject = { ItemNumber: "", Location: "", UOM: "", Status: "", InventoryID: "", Quantity: "", CostPerUnit: "", CustomData: [] };
     //ordersService.getOrders().then(function (results) {
 
     //    $scope.orders = results.data;
@@ -22,6 +22,23 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     //}, function (error) {
     //    //alert(error.data.message);
     //});
+
+    $scope.OpenCloseModal=function()
+    {
+        
+            var _Display = $("#myModal1").css("display");
+            if (_Display == "block") {
+                $("#myModal1").css("display", "none");
+                $(".modal-backdrop").hide();
+
+            }
+            else {
+                $("#myModal1").css("display", "block");
+                $(".modal-backdrop").show();
+
+            }
+        
+    }
 
     $scope.Scan = function () {
         $scope.isSanned = false;
@@ -106,8 +123,23 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
            });
     }
 
+    $scope.Clearcart = function ()
+    {
+        $scope.InventoryItems = [];
+        $scope.$apply();
+    }
+
+    $scope.removeThisItem=function(ID)
+    {
+        for (var i = 0; i < $scope.InventoryItems.length; i++) {
+            if($scope.InventoryItems[i].InventoryID==ID)
+            {
+                $scope.InventoryItems.splice(i, 1);
+            }
+        }
+    }
     $scope.Proceed = function () {
-        $(".modal-backdrop").remove();
+      
 
         $("body").removeClass("modal-open");
         if($scope.InventoryItems.length >0)
@@ -332,6 +364,25 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     }
 
 
+    
+    $scope.GoToBackItem = function () {
+
+        $scope.CurrentIndex = $scope.CurrentIndex - 1;
+
+
+        if ($scope.InventoryItems.length >= $scope.CurrentIndex) {
+
+            $scope.CurrentObject.ItemNumber = $scope.InventoryItems[$scope.CurrentIndex].ItemNumber;
+            $scope.CurrentObject.Location = $scope.InventoryItems[$scope.CurrentIndex].Location;
+            $scope.CurrentObject.UOM = $scope.InventoryItems[$scope.CurrentIndex].UOM;
+            $scope.CurrentObject.Status = $scope.InventoryItems[$scope.CurrentIndex].StatusValue;
+
+            $scope.CurrentObject.InventoryID = $scope.InventoryItems[$scope.CurrentIndex].InventoryID;
+            $scope.CurrentObject.Quantity = $scope.InventoryItems[$scope.CurrentIndex].CurrentQuantity;
+            $scope.CurrentObject.CostPerUnit = $scope.InventoryItems[$scope.CurrentIndex].CostPerUnit;
+        }
+        $scope.$apply();
+    }
 
     $scope.GoToNextItem = function () {
 

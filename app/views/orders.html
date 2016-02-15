@@ -114,17 +114,25 @@
             <a style="width:100%;" class="btn btn-primary topcoat-button" ng-click="AddtoCart()" id="AddtoCart"><i class="fa fa-plus"></i> Add to Cart</a>
         </div>
     </div>
+    <br />
+    <!--Work For apply a remove cart button-->
+    <div class="row">
+        <div class="col-md-12">
+            <a style="width:100%;" class="btn btn-info topcoat-button" ng-click="Clearcart()" id="clearcart"><i class="fa fa-times"></i> Clear Cart</a>
+        </div>
+    </div>
     <div>
         <br />
     </div>
     <div class="row">
-        <div ng-repeat="_obj in InventoryItems" class="col-xs-12">
-            <div style="width:100%; margin-bottom:5px; text-align:left; padding:10px;" class="btn btn-primary">
+        <div ng-repeat="_obj in InventoryItems" class="col-xs-12" >
+            <div style="width: 100%; margin-bottom: 5px; text-align: left; padding: 10px;"  class="btn btn-primary">
                 <h4> {{_obj.ItemNumber}}</h4>
                 <hr />
                 <p>Quantity - {{_obj.CurrentQuantity}} <span class="pull-right">UOM - {{_obj.UOM}}</span></p>
                 <p>Location - {{_obj.Location}} <span class="pull-right">Status - {{_obj.StatusValue}}</span></p>
                 <p>{{_obj.ItemDescription}}</p>
+                <a class="btn btn-sm btn-default pull-right" ng-click="removeThisItem(_obj.InventoryID)"><i class="fa fa-trash-o"></i></a>
             </div>
         </div>
     </div>
@@ -146,7 +154,7 @@
 
     </div>
 
-    <a data-toggle="modal" data-target="#myModal1" id="AvailableTransactions" class="Addbtn btn-info">
+    <a data-toggle="modal" data-target="#myModal1" id="AvailableTransactions" ng-click="OpenCloseModal()" class="Addbtn btn-info">
         <i class="fa fa-shopping-cart"></i>
     </a>
 </div>
@@ -160,7 +168,7 @@
         <div class="row">
             <div class="col-xs-3">
                 <div style="text-align:left">
-                    <a class="btn btn-primary" style="padding: 6px;"><i class="fa fa-chevron-left"></i> Back</a>
+                    <a class="btn btn-primary" ng-click="GoToBackItem()" ng-class="TotalLength == 0 ||CurrentIndex==1 ? 'disabled' :''" style="padding: 6px;"><i class="fa fa-chevron-left"></i> Back</a>
                 </div>
 
             </div>
@@ -239,3 +247,7 @@
 
 
 
+<script>
+       
+
+</script>
