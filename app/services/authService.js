@@ -59,14 +59,14 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                             _authentication.userName = loginData.userName;
                             _authentication.useRefreshTokens = loginData.useRefreshTokens;
 
-                      
+                            deferred.resolve(response);
 
                     }
                     else {
                         alert(response.LoginResult.Message);
 
                     }
-                    deferred.resolve(response);
+                  
 
                 },
                 error: function (err) {

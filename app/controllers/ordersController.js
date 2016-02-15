@@ -2,7 +2,7 @@
 app.controller('ordersController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
 
     $scope.orders = [];
-    $scope.InventoryItems = [{ ItemNumber: "", Location: "", UOM: "", Status: "", InventoryID: "", Quantity: "", CostPerUnit: "", CustomData: [] }];
+    $scope.InventoryItems = [];
     $scope.scannerText = "";
     $scope.isSanned = false;
     $scope.SecurityToken = "";
@@ -328,7 +328,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "InventoryID": $scope.CurrentObject.InventoryID, "NewLocationID": 663546, "Quantity": $scope.CurrentObject.Quantity, "CostPerUnit": $scope.CurrentObject.CostPerUnit, "CustomData": $scope.CurrentObject.CustomData }),
                success: function (response) {
-                   var _TransID = response.SubtractInventoryResult.Payload;
+                   var _TransID = response.MoveInventoryResult.Payload;
 
                    if (_TransID > 0) {
 
