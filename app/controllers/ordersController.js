@@ -15,6 +15,9 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     $scope.TotalLength = 0;
     $scope.CurrentIndex =1;
     $scope.CurrentObject = { ItemNumber: "", Location: "", UOM: "", Status: "", InventoryID: "", Quantity: "", CostPerUnit: "", CustomData: [] };
+
+ 
+
     //ordersService.getOrders().then(function (results) {
 
     //    $scope.orders = results.data;
@@ -139,6 +142,9 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
         }
     }
     $scope.Proceed = function () {
+
+       
+
         $(".modal-backdrop").remove();
 
         $("body").removeClass("modal-open");
@@ -232,6 +238,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
 
                        alert("inventory item successfully increased.");
 
+                       $scope.GoToNextItem();
                        if ($scope.TotalLength == $scope.CurrentIndex)
                        {
                            $scope.InventoryItems = [];
@@ -282,7 +289,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                    if (_TransID > 0) {
 
                        alert("Inventory item successfully Decreased.");
-
+                       $scope.GoToNextItem();
                        if ($scope.TotalLength == $scope.CurrentIndex) {
                            $scope.InventoryItems = [];
                            $scope.TotalLength = 0;
@@ -333,7 +340,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                    if (_TransID > 0) {
 
                        alert("Inventory item successfully Moved.");
-
+                       $scope.GoToNextItem();
                        if ($scope.TotalLength == $scope.CurrentIndex) {
                            $scope.InventoryItems = [];
                            $scope.TotalLength = 0;
@@ -369,36 +376,33 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
 
         $scope.CurrentIndex = $scope.CurrentIndex - 1;
 
+        if ($scope.CurrentIndex>=1) {
+            var _toMapIndex = $scope.CurrentIndex - 1;
+            $scope.CurrentObject.ItemNumber = $scope.InventoryItems[_toMapIndex].ItemNumber;
+            $scope.CurrentObject.Location = $scope.InventoryItems[_toMapIndex].Location;
+            $scope.CurrentObject.UOM = $scope.InventoryItems[_toMapIndex].UOM;
+            $scope.CurrentObject.Status = $scope.InventoryItems[_toMapIndex].StatusValue;
 
-        if ($scope.InventoryItems.length >= $scope.CurrentIndex) {
-
-            $scope.CurrentObject.ItemNumber = $scope.InventoryItems[$scope.CurrentIndex].ItemNumber;
-            $scope.CurrentObject.Location = $scope.InventoryItems[$scope.CurrentIndex].Location;
-            $scope.CurrentObject.UOM = $scope.InventoryItems[$scope.CurrentIndex].UOM;
-            $scope.CurrentObject.Status = $scope.InventoryItems[$scope.CurrentIndex].StatusValue;
-
-            $scope.CurrentObject.InventoryID = $scope.InventoryItems[$scope.CurrentIndex].InventoryID;
-            $scope.CurrentObject.Quantity = $scope.InventoryItems[$scope.CurrentIndex].CurrentQuantity;
-            $scope.CurrentObject.CostPerUnit = $scope.InventoryItems[$scope.CurrentIndex].CostPerUnit;
+            $scope.CurrentObject.InventoryID = $scope.InventoryItems[_toMapIndex].InventoryID;
+            $scope.CurrentObject.Quantity = $scope.InventoryItems[_toMapIndex].CurrentQuantity;
+            $scope.CurrentObject.CostPerUnit = $scope.InventoryItems[_toMapIndex].CostPerUnit;
         }
         $scope.$apply();
     }
 
     $scope.GoToNextItem = function () {
-
         $scope.CurrentIndex = $scope.CurrentIndex + 1;
-        
 
         if ($scope.InventoryItems.length >= $scope.CurrentIndex) {
+            var _toMapIndex = $scope.CurrentIndex - 1;
+            $scope.CurrentObject.ItemNumber = $scope.InventoryItems[_toMapIndex].ItemNumber;
+            $scope.CurrentObject.Location = $scope.InventoryItems[_toMapIndex].Location;
+            $scope.CurrentObject.UOM = $scope.InventoryItems[_toMapIndex].UOM;
+            $scope.CurrentObject.Status = $scope.InventoryItems[_toMapIndex].StatusValue;
 
-            $scope.CurrentObject.ItemNumber = $scope.InventoryItems[$scope.CurrentIndex].ItemNumber;
-            $scope.CurrentObject.Location = $scope.InventoryItems[$scope.CurrentIndex].Location;
-            $scope.CurrentObject.UOM = $scope.InventoryItems[$scope.CurrentIndex].UOM;
-            $scope.CurrentObject.Status = $scope.InventoryItems[$scope.CurrentIndex].StatusValue;
-
-            $scope.CurrentObject.InventoryID = $scope.InventoryItems[$scope.CurrentIndex].InventoryID;
-            $scope.CurrentObject.Quantity = $scope.InventoryItems[$scope.CurrentIndex].CurrentQuantity;
-            $scope.CurrentObject.CostPerUnit = $scope.InventoryItems[$scope.CurrentIndex].CostPerUnit;
+            $scope.CurrentObject.InventoryID = $scope.InventoryItems[_toMapIndex].InventoryID;
+            $scope.CurrentObject.Quantity = $scope.InventoryItems[_toMapIndex].CurrentQuantity;
+            $scope.CurrentObject.CostPerUnit = $scope.InventoryItems[_toMapIndex].CostPerUnit;
         }
         $scope.$apply();
     }

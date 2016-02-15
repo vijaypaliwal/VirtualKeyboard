@@ -33,7 +33,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         if (loginData.useRefreshTokens) {
             data = data + "&client_id=" + ngAuthSettings.clientId;
         }
-     
+        $("#loginBtn").addClass("disabled");
+        $("#loginBtn").find(".fa").removeClass("fa-sign-in").addClass("fa-spin fa-spinner");
         var deferred = $q.defer();
         
             $.ajax
@@ -44,7 +45,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 dataType: 'text json',
                 data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),
                 success: function (response) {
-               
+                    $("#loginBtn").removeClass("disabled");
+                    $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
 
                     if (response.LoginResult.Success == true) {
                       
@@ -59,6 +61,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                             _authentication.userName = loginData.userName;
                             _authentication.useRefreshTokens = loginData.useRefreshTokens;
 
+
+
                             deferred.resolve(response);
 
                     }
@@ -70,7 +74,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                 },
                 error: function (err) {
-                  
+                    $("#loginBtn").removeClass("disabled");
+                    $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
                     _logOut();
                       deferred.reject(err);
                     
