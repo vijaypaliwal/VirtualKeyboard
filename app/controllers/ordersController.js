@@ -143,8 +143,6 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     }
     $scope.Proceed = function () {
 
-       
-
         $(".modal-backdrop").remove();
 
         $("body").removeClass("modal-open");
@@ -340,7 +338,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                    if (_TransID > 0) {
 
                        alert("Inventory item successfully Moved.");
-                       $scope.GoToNextItem();
+                          $scope.GoToNextItem();
                        if ($scope.TotalLength == $scope.CurrentIndex) {
                            $scope.InventoryItems = [];
                            $scope.TotalLength = 0;
