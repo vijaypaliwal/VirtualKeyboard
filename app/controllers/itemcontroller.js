@@ -5,11 +5,55 @@ app.controller('itemController', ['$scope', 'ordersService', 'localStorageServic
     $scope.InventoryItems = [];
     $scope.scannerText = "";
     $scope.SecurityToken = "";
-    $scope.ItemObject = { ItemID: 0, ItemNumber: "", ItemDescription: "", ItemGroup: "", ItemNote: "", DefaultLocation:"",DefaultUOM:"",TargetLevel: 0, ReorderLevel: 0, DefaultCost: 0, DefaultUOMID: 0, DefaultLocationID: 0, CustomData: [] };
-  
+    $scope.ItemObject = { ItemID: 0, ItemNumber: "", ItemDescription: "", ItemGroup: "", ItemNote: "", DefaultLocation: "", DefaultUOM: "", TargetLevel: 0, ReorderLevel: 0, DefaultCost: 0, DefaultUOMID: 0, DefaultLocationID: 0, CustomData: [] };
+    $scope.CustomItemFields = [];
     $scope.UOMList = [];
-  
-    
+    $scope.GetCustomFields = function () {
+
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+
+        $.ajax
+           ({
+               type: "POST",
+               url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/GetCustomItemFields',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+                   var _customFields = response.GetCustomItemFieldsResult.Payload;
+
+                   if (_customFields.length > 0) {
+
+                       alert("Custom fields loaded successfully.");
+
+                       $scope.CustomItemFields = _customFields;
+                       $scope.ItemObject.CustomData = $scope.CustomItemFields;
+                       $scope.$apply();
+
+                   }
+                   else {
+                       alert("Can't get any data");
+                   }
+                   $scope.$apply();
+
+
+
+
+
+               },
+               error: function (err) {
+
+                   alert("error");
+                   $scope.$apply();
+               }
+           });
+    }
+    $scope.GetCustomFields();
 
     $scope.additem = function ()
     {

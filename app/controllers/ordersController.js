@@ -9,7 +9,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     $scope.IsActivityOn = false;
     $scope.IsIncreaseActivity = false;
     $scope.IsDecreaseActivity = false;
-
+    $scope.IsUpdateActivity = false;
     $scope.IsMoveActivity = false;
     $scope._IsActivityInProcess = 0;
    
@@ -17,7 +17,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     $scope.CurrentIndex =1;
     $scope.CurrentObject = { ItemNumber: "", Location: "", UOM: "", Status: "", InventoryID: "", Quantity: "", CostPerUnit: "", CustomData: [] };
 
-   
+    $scope.Statuses = [{ StatusValue: "Damaged" }, { StatusValue: "For Production" }, { StatusValue: "On Order" }, { StatusValue: "Sold" }];
     //ordersService.getOrders().then(function (results) {
 
     //    $scope.orders = results.data;
@@ -132,6 +132,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
         $scope.$apply();
     }
 
+ 
     $scope.removeThisItem=function(ID)
     {
         for (var i = 0; i < $scope.InventoryItems.length; i++) {
@@ -214,7 +215,29 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
         $scope.IsDecreaseActivity = false;
 
     }
+    $scope.Proceedforupdate = function () {
+        $(".modal-backdrop").remove();
 
+        $("body").removeClass("modal-open");
+        if ($scope.InventoryItems.length > 0) {
+
+            $scope.CurrentObject.ItemNumber = $scope.InventoryItems[0].ItemNumber;
+            $scope.CurrentObject.Location = $scope.InventoryItems[0].Location;
+            $scope.CurrentObject.UOM = $scope.InventoryItems[0].UOM;
+            $scope.CurrentObject.Status = $scope.InventoryItems[0].StatusValue;
+
+            $scope.CurrentObject.InventoryID = $scope.InventoryItems[0].InventoryID;
+            $scope.CurrentObject.Quantity = $scope.InventoryItems[0].CurrentQuantity;
+            $scope.CurrentObject.CostPerUnit = $scope.InventoryItems[0].CostPerUnit;
+        }
+        $scope.IsUpdateActivity = true;
+        $scope.IsActivityOn = true;
+        $scope.IsMoveActivity = false;
+        $scope.IsIncreaseActivity = false;
+        $scope.IsDecreaseActivity = false;
+
+    }
+    
     $scope.ApplyTransaction = function () {
 
         var authData = localStorageService.get('authorizationData');
@@ -384,7 +407,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/StatusUpdateInventory',
                contentType: 'application/json; charset=utf-8',
                dataType: 'text json',
-               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "InventoryID": $scope.CurrentObject.InventoryID, "NewStatus": 663546, "Quantity": $scope.CurrentObject.Quantity, "CustomData": $scope.CurrentObject.CustomData }),
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "InventoryID": $scope.CurrentObject.InventoryID, "NewStatus": $scope.CurrentObject.Status, "Quantity": $scope.CurrentObject.Quantity, "CustomData": $scope.CurrentObject.CustomData }),
                success: function (response) {
                    var _TransID = response.StatusUpdateInventoryResult.Payload;
                    $scope._IsActivityInProcess = 0;

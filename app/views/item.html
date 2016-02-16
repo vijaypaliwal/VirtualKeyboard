@@ -140,6 +140,12 @@
         <input ng-model="ItemObject.DefaultLocation" class="form-control" type="text" name="name" value="" />
     </div>
 
+    <div class="row" ng-if="ItemObject.CustomData.length>0">
+        <div class="form-group" ng-repeat="_objdata in ItemObject.CustomData">
+            <label>{{_objdata.CustomFieldName}}</label>
+            <input ng-model="_objdata.CustomFieldValue" class="form-control" type="text" name="name" value="" />
+        </div>
+    </div>
 
 
     <a ng-click="additem()" style="width:100%;" ng-disabled="myform.$invalid" id="btnadditem" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Item</a>
