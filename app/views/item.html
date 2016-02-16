@@ -89,60 +89,61 @@
 </div>
 
 
-
-<div class="form-group">
-    <label>Item Name</label>
-    <input ng-model="ItemObject.ItemNumber" class="form-control" type="text" name="name" value="" />
-</div>
-
-
-<div class="form-group">
-    <label>Item Decription</label>
-    <input ng-model="ItemObject.ItemDescription" class="form-control" type="text" name="name" value="" />
-</div>
-
-<div class="form-group">
-    <label>Item Group</label>
-    <input ng-model="ItemObject.ItemGroup" class="form-control" type="text" name="name" value="" />
-</div>
-
-<div class="form-group">
-    <label>Item Note</label>
-    <input ng-model="ItemObject.ItemNote" class="form-control" type="text" name="name" value="" />
-</div>
+<form name="myform">
+    <div class="form-group">
+        <label>Item Name</label>
+        <input ng-model="ItemObject.ItemNumber" class="form-control" type="text" name="name" value="" required="" autofocus=""/>
+    </div>
 
 
-<div class="form-group">
-    <label>High Quantity Threshold</label>
-    <input ng-model="ItemObject.TargetLevel" class="form-control" type="text" name="name" value="" />
-</div>
+    <div class="form-group">
+        <label>Item Decription</label>
+        <input ng-model="ItemObject.ItemDescription" class="form-control" type="text" name="name" value="" required="" />
+    </div>
+
+    <div class="form-group">
+        <label>Item Group</label>
+        <input ng-model="ItemObject.ItemGroup" class="form-control" type="text" name="name" value="" />
+    </div>
+
+    <div class="form-group">
+        <label>Item Note</label>
+        <input ng-model="ItemObject.ItemNote" class="form-control" type="text" name="name" value="" />
+    </div>
 
 
-<div class="form-group">
-    <label>Low Quantity Threshold</label>
-    <input ng-model="ItemObject.ReorderLevel" class="form-control" type="text" name="name" value="" />
-</div>
-
-<div class="form-group">
-    <label>Default Cost</label>
-    <input ng-model="ItemObject.DefaultCost" class="form-control" type="text" name="name" value="" />
-</div>
+    <div class="form-group">
+        <label>High Quantity Threshold</label>
+        <input ng-model="ItemObject.TargetLevel" class="form-control" type="text" name="name" value="" />
+    </div>
 
 
-<div class="form-group">
-    <label>Default UOM</label>
-    <input ng-model="ItemObject.DefaultUOM" class="form-control" type="text" name="name" value="" />
-</div>
+    <div class="form-group">
+        <label>Low Quantity Threshold</label>
+        <input ng-model="ItemObject.ReorderLevel" class="form-control" type="text" name="name" value="" />
+    </div>
+
+    <div class="form-group">
+        <label>Default Cost</label>
+        <input ng-model="ItemObject.DefaultCost" class="form-control" type="text" name="name" value="" />
+    </div>
 
 
-<div class="form-group">
-    <label>Default Location</label>
-    <input ng-model="ItemObject.DefaultLocation" class="form-control" type="text" name="name" value="" />
-</div>
+    <div class="form-group">
+        <label>Default UOM</label>
+        <input ng-model="ItemObject.DefaultUOM" class="form-control" type="text" name="name" value="" />
+    </div>
+
+
+    <div class="form-group">
+        <label>Default Location</label>
+        <input ng-model="ItemObject.DefaultLocation" class="form-control" type="text" name="name" value="" />
+    </div>
 
 
 
-<a ng-click="additem()" style="width:100%;" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Item</a>
+    <a ng-click="additem()" style="width:100%;" ng-disabled="myform.$invalid" id="btnadditem" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Item</a>
+</form>
 <div>
     <br /><br /><br />
 </div>

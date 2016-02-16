@@ -11,13 +11,13 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     $scope.IsDecreaseActivity = false;
 
     $scope.IsMoveActivity = false;
- 
+    $scope._IsActivityInProcess = 0;
+   
     $scope.TotalLength = 0;
     $scope.CurrentIndex =1;
     $scope.CurrentObject = { ItemNumber: "", Location: "", UOM: "", Status: "", InventoryID: "", Quantity: "", CostPerUnit: "", CustomData: [] };
 
- 
-
+   
     //ordersService.getOrders().then(function (results) {
 
     //    $scope.orders = results.data;
@@ -221,7 +221,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
-
+        $scope._IsActivityInProcess = 1;
         $.ajax
            ({
                type: "POST",
@@ -231,7 +231,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "InventoryID": $scope.CurrentObject.InventoryID, "Quantity": $scope.CurrentObject.Quantity, "CostPerUnit": $scope.CurrentObject.CostPerUnit, "CustomData": $scope.CurrentObject.CustomData }),
                success: function (response) {
                    var _TransID = response.AddInventoryResult.Payload;
-
+                   $scope._IsActivityInProcess = 0;
                    if (_TransID > 0) {
 
                        alert("inventory item successfully increased.");
@@ -243,7 +243,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                            $scope.TotalLength = 0;
                            $scope.CurrentIndex = 1;
                            $scope.IsActivityOn = false;
-
+                           $scope._IsActivityInProcess = 0;
                            $scope.$apply();
 
                        }
@@ -261,8 +261,8 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                error: function (err) {
 
                    alert("error");
-
-
+                   $scope._IsActivityInProcess = 0;
+                   $scope.$apply();
                }
            });
     }
@@ -273,6 +273,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
+        $scope._IsActivityInProcess = 1;
 
         $.ajax
            ({
@@ -283,11 +284,12 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "InventoryID": $scope.CurrentObject.InventoryID, "Quantity": $scope.CurrentObject.Quantity, "CostPerUnit": $scope.CurrentObject.CostPerUnit, "CustomData": $scope.CurrentObject.CustomData }),
                success: function (response) {
                    var _TransID = response.SubtractInventoryResult.Payload;
-
+                   $scope._IsActivityInProcess = 0;
                    if (_TransID > 0) {
 
                        alert("Inventory item successfully Decreased.");
                        $scope.GoToNextItem();
+                       
                        if ($scope.TotalLength == $scope.CurrentIndex) {
                            $scope.InventoryItems = [];
                            $scope.TotalLength = 0;
@@ -311,8 +313,8 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                error: function (err) {
 
                    alert("error");
-
-
+                   $scope._IsActivityInProcess = 0;
+                   $scope.$apply();
                }
            });
     }
@@ -324,7 +326,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
-
+        $scope._IsActivityInProcess = 1;
         $.ajax
            ({
                type: "POST",
@@ -334,7 +336,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "InventoryID": $scope.CurrentObject.InventoryID, "NewLocationID": 663546, "Quantity": $scope.CurrentObject.Quantity, "CostPerUnit": $scope.CurrentObject.CostPerUnit, "CustomData": $scope.CurrentObject.CustomData }),
                success: function (response) {
                    var _TransID = response.MoveInventoryResult.Payload;
-
+                   $scope._IsActivityInProcess = 0;
                    if (_TransID > 0) {
 
                        alert("Inventory item successfully Moved.");
@@ -362,14 +364,62 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                error: function (err) {
 
                    alert("error");
-
-
+                   $scope._IsActivityInProcess = 0;
+                   $scope.$apply();
                }
            });
     }
 
 
-    
+    $scope.ApplyUpdateTransaction = function () {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $scope._IsActivityInProcess = 1;
+        $.ajax
+           ({
+               type: "POST",
+               url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/StatusUpdateInventory',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "InventoryID": $scope.CurrentObject.InventoryID, "NewStatus": 663546, "Quantity": $scope.CurrentObject.Quantity, "CustomData": $scope.CurrentObject.CustomData }),
+               success: function (response) {
+                   var _TransID = response.StatusUpdateInventoryResult.Payload;
+                   $scope._IsActivityInProcess = 0;
+                   if (_TransID > 0) {
+
+                       alert("Inventory item successfully updated.");
+                       $scope.GoToNextItem();
+                       if ($scope.TotalLength == $scope.CurrentIndex) {
+                           $scope.InventoryItems = [];
+                           $scope.TotalLength = 0;
+                           $scope.CurrentIndex = 1;
+                           $scope.IsActivityOn = false;
+
+                           $scope.$apply();
+
+                       }
+                   }
+                   else {
+                       alert(response.Message);
+                   }
+                   $scope.$apply();
+
+
+
+
+
+               },
+               error: function (err) {
+
+                   alert("error");
+                   $scope._IsActivityInProcess = 0;
+                   $scope.$apply();
+               }
+           });
+    }
     $scope.GoToBackItem = function () {
 
         $scope.CurrentIndex = $scope.CurrentIndex - 1;

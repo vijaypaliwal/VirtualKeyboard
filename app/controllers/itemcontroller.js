@@ -17,6 +17,8 @@ app.controller('itemController', ['$scope', 'ordersService', 'localStorageServic
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
+        $("#btnadditem").addClass("disabled");
+        $("#btnadditem").find(".fa").addClass("fa-spin");
 
         $.ajax
            ({
@@ -26,6 +28,9 @@ app.controller('itemController', ['$scope', 'ordersService', 'localStorageServic
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "NewItem": $scope.ItemObject }),
                success: function (response) {
+                   debugger;
+                   $("#btnadditem").removeClass("disabled");
+                   $("#btnadditem").find(".fa").removeClass("fa-spin");
 
                    alert("item successfully added in.");
               
@@ -54,9 +59,12 @@ app.controller('itemController', ['$scope', 'ordersService', 'localStorageServic
 
                },
                error: function (err) {
+                   debugger;
+                   $("#btnadditem").removeClass("disabled");
+                   $("#btnadditem").find(".fa").removeClass("fa-spin");
 
                    alert(response.CreateItemResult.Message);
-
+                  
 
                }
            });

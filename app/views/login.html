@@ -7,7 +7,7 @@
   
 </div>
 
-<form role="form">
+<form role="form" name="myform">
     <div class="row">
        
         <div class="col-md-12">
@@ -23,7 +23,7 @@
                 </label>
             </div>-->
             <br />
-            <button class="btn btn-md btn-primary btn-block" type="submit" id="loginBtn" data-ng-click="login()">Login <i class="fa fa-sign-in"></i></button>
+            <button class="btn btn-md btn-primary btn-block" type="submit" ng-disabled="myform.$invalid" id="loginBtn" data-ng-click="login()">Login <i class="fa fa-sign-in"></i></button>
        
               <div data-ng-hide="message == ''" class="alert alert-danger">
                 {{message}}

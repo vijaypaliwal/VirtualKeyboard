@@ -88,11 +88,11 @@
     <h3>Add Inventory</h3>
 </div>
 
-
+<form name="myform">
 <div class="form-group">
     <label>Item Name</label>   
 
-    <select class="form-control" ng-model="InventoryObject.ItemName">
+    <select class="form-control" ng-model="InventoryObject.ItemName" required="" autofocus>
         <option ng-repeat="_optionValue in ItemList" value="{{_optionValue.ItemID}}">{{_optionValue.ItemNumber}}</option>
     </select>
 </div>
@@ -114,7 +114,7 @@
 
     
 
-    <select class="form-control" ng-model="InventoryObject.UOM">
+    <select class="form-control" ng-model="InventoryObject.UOM" required="">
         <option ng-repeat="_optionValue in UOMList" value="{{_optionValue.UnitOfMeasureID}}">{{_optionValue.UnitOfMeasureName}}</option>
     </select>
 
@@ -137,7 +137,8 @@
     <input ng-model="InventoryObject.uniquetag" class="form-control" type="text" name="unit" value="" />
 </div>
 
-<a ng-click="addinventory()" style="width:100%;" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
+    <a ng-click="addinventory()" style="width:100%;" ng-disabled="myform.$invalid" id="addinventories" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
+    </form>
 <div>
     <br /><br /><br />
 </div>
