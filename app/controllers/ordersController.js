@@ -129,6 +129,8 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     $scope.Clearcart = function ()
     {
         $scope.InventoryItems = [];
+        $scope.TotalLength = $scope.InventoryItems.length;
+
         $scope.$apply();
     }
 
@@ -141,6 +143,9 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                 $scope.InventoryItems.splice(i, 1);
             }
         }
+
+        $scope.TotalLength = $scope.InventoryItems.length;
+        $scope.$apply();
     }
     $scope.Proceed = function () {
 

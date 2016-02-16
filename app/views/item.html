@@ -140,10 +140,10 @@
         <input ng-model="ItemObject.DefaultLocation" class="form-control" type="text" name="name" value="" />
     </div>
 
-    <div class="row" ng-if="ItemObject.CustomData.length>0">
+    <div ng-if="ItemObject.CustomData.length>0">
         <div class="form-group" ng-repeat="_objdata in ItemObject.CustomData">
             <label>{{_objdata.CustomFieldName}}</label>
-            <input ng-model="_objdata.CustomFieldValue" class="form-control" type="text" name="name" value="" />
+            <input ng-model="ItemObject.CustomData[$index].CustomFieldValue" class="form-control" type="text" name="name" value="" />
         </div>
     </div>
 

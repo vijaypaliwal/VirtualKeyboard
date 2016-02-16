@@ -212,7 +212,7 @@
             </div>
             <div class="col-xs-6">
                 <div style="text-align:center">
-                    <p>Activity of {{CurrentIndex}}/{{TotalLength}}</p>
+                    <p>Activity of {{CurrentIndex}}/{{InventoryItems.length}}</p>
                 </div>
 
             </div>
@@ -267,7 +267,7 @@
             </div>
             <div class="form-group" ng-if="IsUpdateActivity==true">
                 <label>Status</label>
-                <select class="form-control" ng-model="CurrentObject.CostPerUnit">
+                <select class="form-control" ng-model="CurrentObject.Status">
                     <option value="{{_obj.StatusValue}}" ng-repeat="_obj in Statuses">{{_obj.StatusValue}}</option>
                 </select>
             </div>

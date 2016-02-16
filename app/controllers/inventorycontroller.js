@@ -82,19 +82,16 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                        alert(response.AddInventoryResult.Message);
                    }
 
+
                    $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 0, uniquetag: "", CostPerUnit: 0, CustomData: [] };
                    $scope.$apply();
-
-
-
-
 
                },
                error: function (err) {
 
-                   alert(response.AddInventoryResult.Message);
-
-
+                   alert("error occurred");
+                   $('#addinventories').removeClass("disabled");
+                   $('#addinventories').find(".fa").removeClass("fa-spin");
                }
            });
     }

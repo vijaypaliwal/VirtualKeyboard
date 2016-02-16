@@ -8,6 +8,7 @@ app.controller('itemController', ['$scope', 'ordersService', 'localStorageServic
     $scope.ItemObject = { ItemID: 0, ItemNumber: "", ItemDescription: "", ItemGroup: "", ItemNote: "", DefaultLocation: "", DefaultUOM: "", TargetLevel: 0, ReorderLevel: 0, DefaultCost: 0, DefaultUOMID: 0, DefaultLocationID: 0, CustomData: [] };
     $scope.CustomItemFields = [];
     $scope.UOMList = [];
+   
     $scope.GetCustomFields = function () {
 
 
@@ -57,6 +58,7 @@ app.controller('itemController', ['$scope', 'ordersService', 'localStorageServic
 
     $scope.additem = function ()
     {
+       
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -85,10 +87,6 @@ app.controller('itemController', ['$scope', 'ordersService', 'localStorageServic
 
                        alert("item successfully added .");
 
-                     
-                       $scope.ItemObject = { ItemID: 0, ItemNumber: "", ItemDescription: "", ItemGroup: "", ItemNote: "", DefaultLocation: "", DefaultUOM: "", TargetLevel: 0, ReorderLevel: 0, DefaultCost: 0, DefaultUOMID: 0, DefaultLocationID: 0, CustomData: [] };
-                       $scope.$apply();
-
                    }
                    else {
                        alert(response.CreateItemResult.Message);
@@ -103,12 +101,12 @@ app.controller('itemController', ['$scope', 'ordersService', 'localStorageServic
 
                },
                error: function (err) {
-                   debugger;
                    $("#btnadditem").removeClass("disabled");
                    $("#btnadditem").find(".fa").removeClass("fa-spin");
 
                    alert(response.CreateItemResult.Message);
-                  
+                   $scope.ItemObject = { ItemID: 0, ItemNumber: "", ItemDescription: "", ItemGroup: "", ItemNote: "", DefaultLocation: "", DefaultUOM: "", TargetLevel: 0, ReorderLevel: 0, DefaultCost: 0, DefaultUOMID: 0, DefaultLocationID: 0, CustomData: [] };
+                   $scope.$apply();
 
                }
            });
