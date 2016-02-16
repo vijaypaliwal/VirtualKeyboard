@@ -74,7 +74,6 @@ app.controller('itemController', ['$scope', 'ordersService', 'localStorageServic
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "NewItem": $scope.ItemObject }),
                success: function (response) {
-                   debugger;
                    $("#btnadditem").removeClass("disabled");
                    $("#btnadditem").find(".fa").removeClass("fa-spin");
 

@@ -17,6 +17,9 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     $scope.CurrentIndex =1;
     $scope.CurrentObject = { ItemNumber: "", Location: "", UOM: "", Status: "", InventoryID: "", Quantity: "", CostPerUnit: "", CustomData: [] };
 
+   
+
+
     $scope.Statuses = [{ StatusValue: "Damaged" }, { StatusValue: "For Production" }, { StatusValue: "On Order" }, { StatusValue: "Sold" }];
     //ordersService.getOrders().then(function (results) {
 
@@ -264,7 +267,8 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
 
                        alert("inventory item successfully increased.");
 
-                       $scope.GoToNextItem();
+                     
+                       
                        if ($scope.TotalLength == $scope.CurrentIndex)
                        {
                            $scope.InventoryItems = [];
@@ -275,6 +279,8 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                            $scope.$apply();
 
                        }
+
+                       $scope.GoToNextItem();
                    }
                    else {
                        alert(response.Message);
@@ -290,6 +296,19 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
 
                    alert("error");
                    $scope._IsActivityInProcess = 0;
+
+                   if ($scope.TotalLength == $scope.CurrentIndex) {
+                       $scope.InventoryItems = [];
+                       $scope.TotalLength = 0;
+                       $scope.CurrentIndex = 1;
+                       $scope.IsActivityOn = false;
+                       $scope._IsActivityInProcess = 0;
+                       $scope.$apply();
+
+                   }
+
+                   $scope.GoToNextItem();
+
                    $scope.$apply();
                }
            });
@@ -327,6 +346,8 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                            $scope.$apply();
 
                        }
+
+                       $scope.GoToNextItem();
                    }
                    else {
                        alert(response.Message);
@@ -368,7 +389,6 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                    if (_TransID > 0) {
 
                        alert("Inventory item successfully Moved.");
-                          $scope.GoToNextItem();
                        if ($scope.TotalLength == $scope.CurrentIndex) {
                            $scope.InventoryItems = [];
                            $scope.TotalLength = 0;
@@ -378,6 +398,9 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                            $scope.$apply();
 
                        }
+
+                       $scope.GoToNextItem();
+
                    }
                    else {
                        alert(response.Message);
@@ -419,7 +442,6 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                    if (_TransID > 0) {
 
                        alert("Inventory item successfully updated.");
-                       $scope.GoToNextItem();
                        if ($scope.TotalLength == $scope.CurrentIndex) {
                            $scope.InventoryItems = [];
                            $scope.TotalLength = 0;
@@ -429,6 +451,9 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                            $scope.$apply();
 
                        }
+
+                       $scope.GoToNextItem();
+
                    }
                    else {
                        alert(response.Message);
