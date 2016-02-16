@@ -17,7 +17,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     $scope.CurrentIndex =1;
     $scope.CurrentObject = { ItemNumber: "", Location: "", UOM: "", Status: "", InventoryID: "", Quantity: "", CostPerUnit: "", CustomData: [] };
 
-   
+
 
 
     $scope.Statuses = [{ StatusValue: "Damaged" }, { StatusValue: "For Production" }, { StatusValue: "On Order" }, { StatusValue: "Sold" }];
@@ -81,7 +81,9 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
-
+        
+        $("#AddtoCart").addClass("disabled");
+        $("#AddtoCart").find(".fa").addClass("fa-spin");
         $.ajax
            ({
                type: "POST",
@@ -109,12 +111,17 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
 
                        $scope.TotalLength = $scope.InventoryItems.length;
                        alert("inventory item successfully added.");
+
+                    
                    }
                    else {
                        alert("this item not found,please add into your inventory.");
                    }
-                       $scope.$apply();
+                   $scope.$apply();
 
+
+                       $("#AddtoCart").removeClass("disabled");
+                       $("#AddtoCart").find(".fa").removeClass("fa-spin");
 
 
 
@@ -123,7 +130,8 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
                error: function (err) {
 
                    alert("error");
-
+                   $("#AddtoCart").removeClass("disabled");
+                   $("#AddtoCart").find(".fa").removeClass("fa-spin");
 
                }
            });
@@ -133,7 +141,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     {
         $scope.InventoryItems = [];
         $scope.TotalLength = $scope.InventoryItems.length;
-
+        $scope.CurrentIndex = 1;
         $scope.$apply();
     }
 
@@ -147,13 +155,15 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
             }
         }
 
+        $scope.CurrentIndex = 1;
+
         $scope.TotalLength = $scope.InventoryItems.length;
         $scope.$apply();
     }
     $scope.Proceed = function () {
 
         $(".modal-backdrop").remove();
-
+        $scope.CurrentIndex = 1;
         $("body").removeClass("modal-open");
         if($scope.InventoryItems.length >0)
         {
@@ -178,7 +188,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
 
     $scope.Proceedfordecrease = function () {
         $(".modal-backdrop").remove();
-
+        $scope.CurrentIndex = 1;
         $("body").removeClass("modal-open");
         if ($scope.InventoryItems.length > 0) {
 
@@ -203,7 +213,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
 
     $scope.Proceedformove = function () {
         $(".modal-backdrop").remove();
-
+        $scope.CurrentIndex = 1;
         $("body").removeClass("modal-open");
         if ($scope.InventoryItems.length > 0) {
 
@@ -225,7 +235,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
     }
     $scope.Proceedforupdate = function () {
         $(".modal-backdrop").remove();
-
+        $scope.CurrentIndex = 1;
         $("body").removeClass("modal-open");
         if ($scope.InventoryItems.length > 0) {
 
