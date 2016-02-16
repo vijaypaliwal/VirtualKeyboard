@@ -136,6 +136,11 @@
             <br />
         </div>
      
+    <div ng-if="InventoryItems.length!=0">
+        <h4>Cart Items - {{ InventoryItems.length}} </h4>
+        <hr />
+    </div>
+    
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="_obj in InventoryItems">
                 <div class="row" style="border-bottom:1px solid #ccc;">
@@ -266,12 +271,12 @@
                     <option value="{{_obj.StatusValue}}" ng-repeat="_obj in Statuses">{{_obj.StatusValue}}</option>
                 </select>
             </div>
-            <a ng-if="IsIncreaseActivity==true" style="width:100%;" ng-click="ApplyTransaction()" ng-class="CurrentObject.Quantity==''||_IsActivityInProcess==1?'disabled':''" class="btn btn-primary">Increase activity <i class="fa fa-arrow-circle-right" ng-class="_IsActivityInProcess==1?'fa-spin':''"></i></a>
+            <a ng-if="IsIncreaseActivity==true" style="width:100%;background-color: #177B3D !important;" ng-click="ApplyTransaction()" ng-class="CurrentObject.Quantity==''||_IsActivityInProcess==1?'disabled':''" class="btn btn-primary">Increase activity <i class="fa fa-plus" ng-class="_IsActivityInProcess==1?'fa-spin':''"></i></a>
 
-            <a ng-if="IsDecreaseActivity==true" style="width:100%;" ng-click="ApplyDecreaseTransaction()" ng-class="CurrentObject.Quantity==''||_IsActivityInProcess==1?'disabled':''" class="btn btn-primary">Decrease activity <i class="fa fa-arrow-circle-right" ng-class="_IsActivityInProcess==1?'fa-spin':''"></i></a>
+            <a ng-if="IsDecreaseActivity==true" style="width: 100%; background-color: #AF2525 !important;" ng-click="ApplyDecreaseTransaction()" ng-class="CurrentObject.Quantity==''||_IsActivityInProcess==1?'disabled':''" class="btn btn-primary">Decrease activity <i class="fa fa-minus" ng-class="_IsActivityInProcess==1?'fa-spin':''"></i></a>
 
-            <a ng-if="IsMoveActivity==true" style="width:100%;" ng-click="ApplyMoveTransaction()" ng-class="CurrentObject.Quantity==''||_IsActivityInProcess==1?'disabled':''" class="btn btn-primary">Move activity <i class="fa fa-arrow-circle-right" ng-class="_IsActivityInProcess==1?'fa-spin':''"></i></a>
-            <a ng-if="IsUpdateActivity==true" style="width:100%;" ng-click="ApplyUpdateTransaction()" ng-class="CurrentObject.Quantity==''||_IsActivityInProcess==1?'disabled':''" class="btn btn-primary">Update activity <i class="fa fa-arrow-circle-right" ng-class="_IsActivityInProcess==1?'fa-spin':''"></i></a>
+            <a ng-if="IsMoveActivity==true" style="width: 100%; background-color: #C65E28 !important;" ng-click="ApplyMoveTransaction()" ng-class="CurrentObject.Quantity==''||_IsActivityInProcess==1?'disabled':''" class="btn btn-primary">Move activity <i class="fa fa-exchange" ng-class="_IsActivityInProcess==1?'fa-spin':''"></i></a>
+            <a ng-if="IsUpdateActivity==true" style="width: 100%; background-color: #583782 !important;" ng-click="ApplyUpdateTransaction()" ng-class="CurrentObject.Quantity==''||_IsActivityInProcess==1?'disabled':''" class="btn btn-primary">Update activity <i class="fa fa-history fa-flip-horizontal" ng-class="_IsActivityInProcess==1?'fa-spin':''"></i></a>
             
         </div>
     </div>
