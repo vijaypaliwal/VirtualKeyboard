@@ -82,7 +82,7 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
             $scope.SecurityToken = authData.token;
         }
         
-        $("#AddtoCart").addClass("disabled");
+        $("#AddtoCart").addClass("disabled");  
         $("#AddtoCart").find(".fa").addClass("fa-spin");
         $.ajax
            ({
@@ -122,8 +122,6 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
 
                        $("#AddtoCart").removeClass("disabled");
                        $("#AddtoCart").find(".fa").removeClass("fa-spin");
-
-
 
 
                },

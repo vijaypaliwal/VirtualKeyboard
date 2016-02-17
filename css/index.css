@@ -33,6 +33,10 @@ body {
     background:#fff;
    
 }
+.loginlogo
+{
+  width:125px;
+}
 
 /* Portrait layout (default) */
 .app {
@@ -46,7 +50,7 @@ padding:20px;
     position:fixed;
     top:0;
     left:0;
-    background:#128ece;
+    background:#4487c9;
     text-align:center;
     font-weight:100;
 

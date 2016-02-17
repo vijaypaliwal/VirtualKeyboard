@@ -9,7 +9,7 @@ body {
     /* Margin bottom by footer height */
  
       padding-top: 40px;
-  xpadding-bottom: 10px;
+ 
 }
 
 
@@ -60,3 +60,21 @@ body {
         border-top-right-radius: 0;
     }
 
+
+      body {
+        background:#128ece;
+        padding-top:0px;
+    }
+
+      .form-group label
+      {
+          color:#fff;
+      }
+
+      .form-control
+      {
+          height:45px;
+      }
+
+
+    

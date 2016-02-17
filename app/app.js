@@ -13,8 +13,13 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/login.html"
     });
 
+    $routeProvider.when("/mainmenu", {
+        controller: "menuController",
+        templateUrl: "app/views/mainmenu.html"
+    });
+
     $routeProvider.when("/signup", {
-        controller: "signupController",
+        controller: "mainmenuController",
         templateUrl: "app/views/signup.html"
     });
 
@@ -24,6 +29,10 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/inventory.html"
     });
 
+    $routeProvider.when("/FindItems", {
+        controller: "FindItemsController",
+        templateUrl: "app/views/FindItems.html"
+    });
     $routeProvider.when("/item", {
         controller: "itemController",
         templateUrl: "app/views/item.html"

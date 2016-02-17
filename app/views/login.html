@@ -1,34 +1,104 @@
 ﻿
 <style>
+    .navbar
+    {
+        display:none;
+    }
+    body {
+        background:#128ece;
+        padding-top:7px;
+    }
+
+    .loginlogo
+    {
+        width:82px;
+        margin-bottom:15px;
+    }
+    label
+    {
+        color:#fff;
+        font-size:15px;
+     
+    }
+
+    .login-form .col-xs-5 {
+        text-align: right;
+    }
+
+    .btn-primary
+    {
+     margin:0 auto;
+     margin-bottom:15px;
+    }
+
+        .btn-primary .fa-angle-right {
+            position: absolute;
+            right: 25px;
+            font-size: 25px;
+            margin-top: -2px;
+        }
+
+ .form-control {
+        height: 45px;
+    }
+
+    .login-form .row
+    {
+        margin-bottom:15px;
+    }
 
 </style>
 
-<div class="container">
-  
-</div>
 
-<form role="form" name="myform">
-    <div class="row">
-       
+    <form class="login-form" role="form" name="myform">
+        <div class="row">
         <div class="col-md-12">
-            <h2 class="form-login-heading">Login</h2>
-            <input type="text" class="form-control" placeholder="Account" data-ng-model="loginData.account" required autofocus>
-            <br />
-            <input type="text" class="form-control" placeholder="Username" data-ng-model="loginData.userName" required autofocus>
-            <br />
-            <input type="password" class="form-control" placeholder="Password" data-ng-model="loginData.password" required>
-            <!--<div class="checkbox">
-                <label>
-                    <input type="checkbox" data-ng-model="loginData.useRefreshTokens"><strong> Use Refresh Tokens</strong>
-                </label>
-            </div>-->
-            <br />
-            <button class="btn btn-md btn-primary btn-block" type="submit" ng-disabled="myform.$invalid" id="loginBtn" data-ng-click="login()">Login <i class="fa fa-sign-in"></i></button>
-       
-              <div data-ng-hide="message == ''" class="alert alert-danger">
-                {{message}}
+            <div style="text-align:center">
+
+                <img class="loginlogo" src="img/u2.png" alt="Alternate Text" />
+
+                </div>
+                <div class="row">
+                  
+                    <div class="col-xs-12">
+                        <label>Account Name</label>
+                        <input type="text" class="form-control" placeholder="Account" data-ng-model="loginData.account" required autofocus>
+                    </div>
+                </div>
+             
+
+
+                <div class="row">
+                  
+                    <div class="col-xs-12">
+                        <label>User Name</label>
+                        <input type="text" class="form-control" placeholder="Username" data-ng-model="loginData.userName" required>
+
+                    </div>
+                </div>
+
+            
+
+
+                <div class="row">
+                 
+                    <div class="col-xs-12">
+
+                        <label>Password</label>
+                        <input type="password" class="form-control" placeholder="Password" data-ng-model="loginData.password" required>
+                    </div>
+                </div>
+
+
+              
+
+                <button class="btn  btn-primary btn-block" type="submit" ng-disabled="myform.$invalid" id="loginBtn" data-ng-click="login()">Sign In <i class="fa fa-angle-right"></i> </button>
+
+                <button class="btn btn-primary btn-block">I Forgot my Info Email to Me <i class="fa fa-angle-right"></i></button>
+
+                <button class="btn btn-primary btn-block">Create Account <i class="fa fa-angle-right"></i></button>
+
+
             </div>
         </div>
-     
-    </div>
-</form>
+    </form>
