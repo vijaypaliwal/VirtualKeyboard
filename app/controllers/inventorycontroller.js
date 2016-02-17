@@ -174,16 +174,29 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
 
     $scope.ScanNew = function (ControlID) {
-        alert("into Scan new");
+     
         var _id = "#" + ControlID;
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
         scanner.scan(function (result) {
 
-            alert("into result");
+          
             if (ControlID == "pPartForm") {
-                $scope.InventoryObject.ItemName = $scope.GetValueFromArrray(result.text);
-                $(_id).val($scope.GetValueFromArrray(result.text));
+
+                var resultvalue = $scope.GetValueFromArrray(result.text)
+
+                if (resultvalue != "") {
+
+                    $scope.InventoryObject.ItemName = resultvalue;
+                    $(_id).val(resultvalue);
+
+                }
+
+                else {
+                    alert("Item not found in list !!");
+                }
+
+               
             }
             else {
                 $(_id).val(result.text);
