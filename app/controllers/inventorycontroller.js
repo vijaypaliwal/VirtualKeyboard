@@ -175,19 +175,17 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
     $scope.ScanValue = function (ControlID) {
         var _id = "#" + ControlID;
 
-        ordersService.getScannedValue().then(function (results) {
-
+        var _results = ordersService.getScannedValue();
+        
             if (ControlID == "pPartForm") {
-                $(_id).val($scope.GetValueFromArrray(results));
+                $(_id).val($scope.GetValueFromArrray(_results));
             }
             else {
-                $(_id).val(results)
+                $(_id).val(_results)
 
             }
 
-        }, function (error) {
-            //alert(error.data.message);
-        });
+        
 
     }
 
