@@ -5,7 +5,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
     $scope.InventoryItems = [];
     $scope.scannerText = "";
     $scope.SecurityToken = "";
-    $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 0, uniquetag: "", CostPerUnit: 0, CustomData: [] };
+    $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 1, uniquetag: "", CostPerUnit: 0, CustomData: [] };
     $scope.LocationList = [];
     $scope.UOMList = [];
     $scope.ItemList = [];
@@ -33,17 +33,18 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
                    $scope.InventoryObject.Location = 678030;
 
-                  
-                
+
+
                }
            });
-      
-    }
-    
-  
 
-    $scope.addinventory = function ()
-    {
+    }
+
+
+
+
+
+    $scope.addinventory = function () {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -63,7 +64,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                    $('#addinventories').find(".fa").removeClass("fa-spin");
 
                    alert("Inventory item successfully added.");
-              
+
 
                    var _TransID = response.AddInventoryResult.Payload;
 
@@ -71,7 +72,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
                        alert("Inventory item successfully added.");
 
-                     
+
                        $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 0, uniquetag: "", CostPerUnit: 0, CustomData: [] };
                        $scope.$apply();
 
@@ -96,9 +97,8 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
            });
     }
 
-    $scope.getuom = function ()
-    {
-       
+    $scope.getuom = function () {
+
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -127,7 +127,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.getitems = function () {
 
-     
+
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -141,7 +141,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-                 
+
                    $scope.ItemList = response.GetItemsResult.Payload;
                    $scope.$apply();
                },
@@ -154,12 +154,57 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
     }
 
-   
-        $scope.getlocation();
-        $scope.getuom();
-        $scope.getitems();
-   
 
-   
-  
+    $scope.getlocation();
+    $scope.getuom();
+    $scope.getitems();
+
+    $scope.GetValueFromArrray = function (ItemNumber) {
+        if ($.trim(ItemNumber) != "") {
+
+            for (var i = 0; i < $scope.ItemList.length; i++) {
+                if ($scope.ItemList[i].ItemNumber == ItemNumber) {
+                    return $scope.ItemList[i].ItemID;
+                }
+
+            }
+        }
+        return "";
+    }
+
+    $scope.ScanValue = function (ControlID) {
+        var _id = "#" + ControlID;
+
+        ordersService.getScannedValue().then(function (results) {
+
+            if (ControlID == "pPartForm") {
+                $(_id).val($scope.GetValueFromArrray(results));
+            }
+            else {
+                $(_id).val(results)
+
+            }
+
+        }, function (error) {
+            //alert(error.data.message);
+        });
+
+    }
+
+    $scope.UpDownValue = function (value, IsUp) {
+        switch (value) {
+            case "Quantity":
+                if ($scope.InventoryObject.Quantity > 0) {
+
+                    $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity + (IsUp ? 1 : -1);
+                }
+                break;
+            default:
+
+        }
+    }
+
+
+
+
 }]);

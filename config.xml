@@ -27,7 +27,7 @@
   <preference name="fullscreen"       value="false" />
   <preference name="webviewbounce"    value="false" />
 
-  <preference name="StatusBarOverlaysWebView" value="true" />
+  <preference name="StatusBarOverlaysWebView" value="false" />
   <preference name="StatusBarBackgroundColor" value="#128ece" />
   <preference name="StatusBarStyle" value="lightcontent" />
 
