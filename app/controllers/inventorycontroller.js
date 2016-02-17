@@ -172,20 +172,51 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
         return "";
     }
 
+
+    $scope.ScanNew = function (ControlID) {
+        alert("into Scan new");
+        var _id = "#" + ControlID;
+        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+        scanner.scan(function (result) {
+
+            alert("into result");
+            if (ControlID == "pPartForm") {
+                $scope.InventoryObject.ItemName = $scope.GetValueFromArrray(result.text);
+                $(_id).val($scope.GetValueFromArrray(result.text));
+            }
+            else {
+                $(_id).val(result.text);
+
+            }
+
+            $scope.$apply();
+
+
+
+
+
+        }, function (error) {
+            console.log("Scanning failed: ", error);
+        });
+    }
+
     $scope.ScanValue = function (ControlID) {
         var _id = "#" + ControlID;
 
         var _results = ordersService.getScannedValue();
-        
-            if (ControlID == "pPartForm") {
-                $(_id).val($scope.GetValueFromArrray(_results));
-            }
-            else {
-                $(_id).val(_results)
 
-            }
+        alert("After getting results " + _results);
+        if (ControlID == "pPartForm") {
+            $scope.InventoryObject.ItemName = $scope.GetValueFromArrray(_results);
+            $(_id).val($scope.GetValueFromArrray(_results));
+        }
+        else {
+            $(_id).val(_results);
 
-        
+        }
+
+
 
     }
 

@@ -15,17 +15,18 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuth
 
     var _getScannedValue=function()
     {
+        alert("Into scanning function");
+        var _resultValue = "";
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(function (result) {
-
-
-
-           return result.text;
-
+            alert("After return result");
+            _resultValue= result.text;
 
         }, function (error) {
             alert("Scanning failed: ", error);
         });
+
+        return _resultValue;
     }
      
 

@@ -132,7 +132,7 @@
                 </select>
 
                 <span class="input-group-addon last" ng-click="ScanValue('pPartForm')"><i class="fa fa-barcode"></i></span>
-                <span class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                <span ng-click="ScanNew('pPartForm')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
             </div>
         </div>
 
@@ -146,7 +146,7 @@
                 <input type="text" id="pDescriptionForm" name="name" class="form-control" value="" />
 
                 <span class="input-group-addon last" ng-click="ScanValue('pDescriptionForm')"><i class="fa fa-barcode"></i></span>
-                <span class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                <span class="input-group-addon last" ng-click="ScanNew('pDescriptionForm')"><i class="fa fa-refresh"></i></span>
             </div>
         </div>
 
@@ -224,7 +224,14 @@
         </div>
 
 
-        <input style="width:100%;" class="btn btn-primary" type="file" name="name" value="Add Image" />
+        <div class="fileUpload btn btn-primary">
+            <div><i class="fa fa-plus-circle"></i></div>
+            <span>Add Image</span>
+            <input type="file" class="upload" />
+        </div>
+
+
+      
 
 
 
