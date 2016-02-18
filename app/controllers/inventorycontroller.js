@@ -40,7 +40,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                },
                error: function (response) {
 
-                   $scope.InventoryObject.Location = 678030;
+              //     $scope.InventoryObject.Location = 678030;
 
 
 
@@ -50,18 +50,23 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
     }
 
 
-    $scope.GetLastValue=function(field)
+    $scope.GetLastValue=function(field,id)
     {
-        
+        debugger;
+        alert("Field name" + field);
         var _value = "";
         var _toCheckValue=localStorageService.get(field);
         if (_toCheckValue != null && _toCheckValue!=undefined )
         {
             _value = _toCheckValue;
-            return _value;
-        }
+            alert("Field value" + _value);
 
-        return _value;
+            $(id).val(_value);
+        }
+        else {
+            $(id).val(_value);
+
+        }
     }
 
 
@@ -78,7 +83,9 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
         var _TempObj = $scope.InventoryObject;
 
         $.each(_TempObj, function (datakey, datavalue) {
+            debugger;
             datakey = "Inv_" + datakey;
+            localStorageService.set(datakey, "");
             localStorageService.set(datakey, datavalue);
         });
 
@@ -208,7 +215,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
             for (var i = 0; i < $scope.LocationList.length; i++) {
                 if ($scope.LocationList[i].Location == Location) {
-                    return $scope.ItemList[i].LocationID;
+                    return $scope.LocationList[i].LocationID;
                 }
 
             }

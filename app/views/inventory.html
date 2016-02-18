@@ -127,12 +127,12 @@
 
 
                 <!--<input type="text" id="pPartForm" class="form-control" ng-model="InventoryObject.ItemName" required="" autofocus />-->
-               <select class="form-control" ng-model="InventoryObject.ItemName" required="" autofocus>
+               <select class="form-control" id="ItemName" ng-model="InventoryObject.ItemName" required="" autofocus>
                     <option ng-repeat="_optionValue in ItemList" value="{{_optionValue.ItemID}}">{{_optionValue.ItemNumber}}</option>
                 </select>
 
                 <span class="input-group-addon last" ng-click="ScanNew('pPartForm')"> scan</span>
-                <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemName')"><i class="fa fa-refresh"></i></span>
+                <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemName','#ItemName')"><i class="fa fa-refresh"></i></span>
             </div>
         </div>
 
@@ -146,7 +146,7 @@
                 <input type="text" id="pDescriptionForm" name="name" class="form-control" value="" />
 
                 <span class="input-group-addon last" ng-click="ScanNew('pDescriptionForm')"> scan</span>
-                <span class="input-group-addon last" ng-click="GetLastValue('Inv_pDescriptionForm')"><i class="fa fa-refresh"></i></span>
+                <span class="input-group-addon last" ng-click="GetLastValue('Inv_pDescriptionForm','#pDescriptionForm')"><i class="fa fa-refresh"></i></span>
             </div>
         </div>
 
@@ -174,7 +174,7 @@
                 </select>
 
                 <span class="input-group-addon last" ng-click="ScanNew('Location')"> scan</span>
-                <span class="input-group-addon last" ng-click="GetLastValue('Inv_Location')"><i class="fa fa-refresh"></i></span>
+                <span class="input-group-addon last" ng-click="GetLastValue('Inv_Location','#Location')"><i class="fa fa-refresh"></i></span>
             </div>
         </div>
 
@@ -184,12 +184,12 @@
 
 
 
-                <select class="form-control" ng-model="InventoryObject.UOM" required="">
+                <select class="form-control" ng-model="InventoryObject.UOM" id="UOM" required="">
                     <option ng-repeat="_optionValue in UOMList" value="{{_optionValue.UnitOfMeasureID}}">{{_optionValue.UnitOfMeasureName}}</option>
                 </select>
 
 
-                <span class="input-group-addon last" ng-click="GetLastValue('Inv_UOM')"><i class="fa fa-refresh"></i></span>
+                <span class="input-group-addon last" ng-click="GetLastValue('Inv_UOM','#UOM')"><i class="fa fa-refresh"></i></span>
             </div>
         </div>
 
@@ -200,10 +200,10 @@
 
 
 
-                <input class="form-control" type="text" name="name" value=" " />
+                <input class="form-control" id="Status" type="text" name="name" value=" " />
 
 
-                <span class="input-group-addon last" ng-click="GetLastValue('Inv_UOM')"><i class="fa fa-refresh"></i></span>
+                <span class="input-group-addon last" ng-click="GetLastValue('Inv_Status','#Status')"><i class="fa fa-refresh"></i></span>
             </div>
         </div>
 
