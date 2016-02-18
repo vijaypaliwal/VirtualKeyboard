@@ -184,7 +184,7 @@
 
 
 
-                <select class="form-control" ng-model="InventoryObject.UOM" id="UOM" required="">
+                <select selectpicker class="form-control" ng-model="InventoryObject.UOM" id="UOM" required="">
                     <option ng-repeat="_optionValue in UOMList" value="{{_optionValue.UnitOfMeasureID}}">{{_optionValue.UnitOfMeasureName}}</option>
                 </select>
 
@@ -223,27 +223,27 @@
             <input ng-model="InventoryObject.uniquetag" class="form-control" type="text" name="unit" value="" />
         </div>
 
+        <output style="float:left; padding-top:0px; margin-top:0px;  " id="list"></output>
 
-        <div class="fileUpload btn btn-primary" ng-click="OpenBox()">
+
+        <div style="float:left;" class="fileUpload btn btn-primary" ng-click="OpenBox()">
             <div><i class="fa fa-plus-circle"></i></div>
             <span>Add Image</span>
-            
+
             <input type="file" style="visibility:hidden" id="files" multiple />
         </div>
 
       
-        <output id="list"></output>
+      
 
       
 
 
 
 
-        <div>
-            <br />
-        </div>
+    
 
-        <a ng-click="addinventory()" style="width:100%;" ng-disabled="myform.$invalid" id="addinventories" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
+        <a ng-click="addinventory()" style="width:100%; margin-top:15px;" ng-disabled="myform.$invalid" id="addinventories" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
     </form>
 </div>
 <div>

@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageService','log', function ($scope, ordersService, localStorageService,log) {
+app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageService', 'log',  function ($scope, ordersService, localStorageService, log) {
 
     $scope.orders = [];
     $scope.InventoryItems = [];
@@ -48,11 +48,9 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
            });
 
     }
-
-
+  
     $scope.GetLastValue=function(field,id)
     {
-        debugger;
         alert("Field name" + field);
         var _value = "";
         var _toCheckValue=localStorageService.get(field);
@@ -64,7 +62,15 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
             $(id).val(_value);
         }
         else {
-            $(id).val(_value);
+            if (id == "UOM")
+            {
+                $scope.InventoryObject.UOM = _value;
+                $(id).val(_value);
+            }
+            else {
+                $(id).val(_value);
+            }
+            
 
         }
     }
@@ -309,3 +315,23 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
 
 }]);
+
+
+app.directive('selectpicker', function () {
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function (scope, element, attrs, ctrl) {
+           
+                element.select2();
+
+                scope.$watch(attrs.ngModel, function (Oldvalue, NewValue) {
+
+         
+
+                });
+
+
+        }
+    };
+});
