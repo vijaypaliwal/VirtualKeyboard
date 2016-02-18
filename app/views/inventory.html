@@ -224,12 +224,15 @@
         </div>
 
 
-        <div class="fileUpload btn btn-primary">
+        <div class="fileUpload btn btn-primary" ng-click="OpenBox()">
             <div><i class="fa fa-plus-circle"></i></div>
             <span>Add Image</span>
-            <input type="file" class="upload" />
+            
+            <input type="file" style="visibility:hidden" id="files" multiple />
         </div>
 
+      
+        <output id="list"></output>
 
       
 

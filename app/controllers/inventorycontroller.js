@@ -192,6 +192,13 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
     }
 
+    $scope.OpenBox =function () {
+        $("#files").trigger("click");
+    }
+    $("#files").on('change', function (event) {
+        
+        handleFileSelect(event);
+    });
 
     $scope.getlocation();
     $scope.getuom();
@@ -214,7 +221,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
         if ($.trim(Location) != "") {
 
             for (var i = 0; i < $scope.LocationList.length; i++) {
-                if ($scope.LocationList[i].Location == Location) {
+                if ($scope.LocationList[i].LocationName == Location) {
                     return $scope.LocationList[i].LocationID;
                 }
 
@@ -223,6 +230,8 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
         return "";
 
     }
+
+ 
 
     $scope.ScanNew = function (ControlID) {
      
@@ -282,25 +291,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
         });
     }
 
-    $scope.ScanValue = function (ControlID) {
-        var _id = "#" + ControlID;
-
-        var _results = ordersService.getScannedValue();
-
-        alert("After getting results " + _results);
-        if (ControlID == "pPartForm") {
-            $scope.InventoryObject.ItemName = $scope.GetValueFromArrray(_results);
-            $(_id).val($scope.GetValueFromArrray(_results));
-        }
-        else {
-            $(_id).val(_results);
-
-        }
-
-
-
-    }
-
+  
     $scope.UpDownValue = function (value, IsUp) {
         switch (value) {
             case "Quantity":
