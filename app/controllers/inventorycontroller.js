@@ -282,7 +282,7 @@ app.controller('inventoryController', ['$scope','$location', 'ordersService', 'l
           
             if (ControlID == "pPartForm") {
 
-                var resultvalue = $scope.GetValueFromArrray(result.text)
+                var resultvalue = result.text;
 
                 if (resultvalue != "") {
 
