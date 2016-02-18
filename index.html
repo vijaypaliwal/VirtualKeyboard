@@ -12,7 +12,7 @@
     <link href="content/css/loading-bar.css" rel="stylesheet" />
     <link href="content/css/font-awesome.min.css" rel="stylesheet" />
     <link href="content/css/social-buttons.css" rel="stylesheet" />
-
+    <link href="content/css/toastr.css" rel="stylesheet" />
     <link href="content/css/simple-sidebar.css" rel="stylesheet" />
 
   
@@ -157,7 +157,9 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="barcodescanner.js"></script>
 
-    <link href="content/css/selectize.default.css" rel="stylesheet" />
+    <script src="scripts/toastr.js"></script>
+
+    
 
 
     <script src="scripts/selectize.js"></script>
@@ -211,6 +213,24 @@
 
             $("#wrapper").toggleClass("toggled");
         });
+
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        function onDeviceReady() {
+
+            var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
+
+            alert(deviceType);
+
+            document.addEventListener("backbutton", function (e) {
+               
+                    navigator.app.exitApp();
+             
+            }, false);
+        }
+
+    
 
 
 

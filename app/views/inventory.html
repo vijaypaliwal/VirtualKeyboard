@@ -131,8 +131,8 @@
                     <option ng-repeat="_optionValue in ItemList" value="{{_optionValue.ItemID}}">{{_optionValue.ItemNumber}}</option>
                 </select>
 
-                <span class="input-group-addon last" ng-click="ScanNew('pPartForm')"><i class="fa fa-barcode"></i></span>
-                <span class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                <span class="input-group-addon last" ng-click="ScanNew('pPartForm')"> scan</span>
+                <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemName')"><i class="fa fa-refresh"></i></span>
             </div>
         </div>
 
@@ -145,8 +145,8 @@
 
                 <input type="text" id="pDescriptionForm" name="name" class="form-control" value="" />
 
-                <span class="input-group-addon last" ng-click="ScanNew('pDescriptionForm')"><i class="fa fa-barcode"></i></span>
-                <span class="input-group-addon last" ><i class="fa fa-refresh"></i></span>
+                <span class="input-group-addon last" ng-click="ScanNew('pDescriptionForm')"> scan</span>
+                <span class="input-group-addon last" ng-click="GetLastValue('Inv_pDescriptionForm')"><i class="fa fa-refresh"></i></span>
             </div>
         </div>
 
@@ -169,12 +169,12 @@
 
 
 
-                <select class="form-control" ng-model="InventoryObject.Location">
+                <select class="form-control" id="Location" ng-model="InventoryObject.Location">
                     <option ng-repeat="_optionValue in LocationList" value="{{_optionValue.LocationID}}">{{_optionValue.LocationName}}</option>
                 </select>
 
-                <span class="input-group-addon last"><i class="fa fa-barcode"></i></span>
-                <span class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                <span class="input-group-addon last" ng-click="ScanNew('Location')"> scan</span>
+                <span class="input-group-addon last" ng-click="GetLastValue('Inv_Location')"><i class="fa fa-refresh"></i></span>
             </div>
         </div>
 
@@ -189,7 +189,7 @@
                 </select>
 
 
-                <span class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                <span class="input-group-addon last" ng-click="GetLastValue('Inv_UOM')"><i class="fa fa-refresh"></i></span>
             </div>
         </div>
 
@@ -203,7 +203,7 @@
                 <input class="form-control" type="text" name="name" value=" " />
 
 
-                <span class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                <span class="input-group-addon last" ng-click="GetLastValue('Inv_UOM')"><i class="fa fa-refresh"></i></span>
             </div>
         </div>
 

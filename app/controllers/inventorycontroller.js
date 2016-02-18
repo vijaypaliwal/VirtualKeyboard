@@ -1,12 +1,21 @@
 ﻿'use strict';
-app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
+app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageService','log', function ($scope, ordersService, localStorageService,log) {
 
     $scope.orders = [];
     $scope.InventoryItems = [];
     $scope.scannerText = "";
     $scope.SecurityToken = "";
     $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 1, uniquetag: "", CostPerUnit: 0, CustomData: [] };
-    $scope.LocationList = [];
+    $scope.LocationList = [{ LocationName: "dhdd", LocationZone: "", LocationID: 678325 },
+                           { LocationName: "Here", LocationZone: "", LocationID: 678323 },
+                           { LocationName: "in store", LocationZone: "", LocationID: 678030 },
+                           { LocationName: "New gallon location", LocationZone: "", LocationID: 678363 },
+                           { LocationName: "New loc", LocationZone: "", LocationID: 678542 },
+                           { LocationName: "Random", LocationZone: "", LocationID: 678370 },
+                           { LocationName: "Stock", LocationZone: "", LocationID: 678361 },
+                           { LocationName: "there", LocationZone: "", LocationID: 663546 },
+                           { LocationName: "Trade", LocationZone: "", LocationID: 678546 },
+                           { LocationName: "BLC1009", LocationZone: "", LocationID: 123 }];
     $scope.UOMList = [];
     $scope.ItemList = [];
 
@@ -41,7 +50,19 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
     }
 
 
+    $scope.GetLastValue=function(field)
+    {
+        
+        var _value = "";
+        var _toCheckValue=localStorageService.get(field);
+        if (_toCheckValue != null && _toCheckValue!=undefined )
+        {
+            _value = _toCheckValue;
+            return _value;
+        }
 
+        return _value;
+    }
 
 
     $scope.addinventory = function () {
@@ -51,6 +72,15 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
         }
         $('#addinventories').addClass("disabled");
         $('#addinventories').find(".fa").addClass("fa-spin");
+
+
+        
+        var _TempObj = $scope.InventoryObject;
+
+        $.each(_TempObj, function (datakey, datavalue) {
+            datakey = "Inv_" + datakey;
+            localStorageService.set(datakey, datavalue);
+        });
 
         $.ajax
            ({
@@ -63,14 +93,14 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                    $('#addinventories').removeClass("disabled");
                    $('#addinventories').find(".fa").removeClass("fa-spin");
 
-                   alert("Inventory item successfully added.");
+                   log.success("Inventory item successfully added.");
 
 
                    var _TransID = response.AddInventoryResult.Payload;
 
                    if (_TransID > 0) {
 
-                       alert("Inventory item successfully added.");
+                       log.success("Inventory item successfully added.");
 
 
                        $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 0, uniquetag: "", CostPerUnit: 0, CustomData: [] };
@@ -80,7 +110,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                    else {
                        $('#addinventories').removeClass("disabled");
                        $('#addinventories').find(".fa").removeClass("fa-spin");
-                       alert(response.AddInventoryResult.Message);
+                       log.error(response.AddInventoryResult.Message);
                    }
 
 
@@ -90,7 +120,8 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                },
                error: function (err) {
 
-                   alert("error occurred");
+                   log.error("error occurred");
+         
                    $('#addinventories').removeClass("disabled");
                    $('#addinventories').find(".fa").removeClass("fa-spin");
                }
@@ -118,7 +149,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                },
                error: function (err) {
 
-                   alert(err.Message);
+                   log.error(err.Message);
 
                }
            });
@@ -147,7 +178,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                },
                error: function (err) {
 
-                   alert(err.Message);
+                   log.error(err.Message);
 
                }
            });
@@ -171,7 +202,20 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
         }
         return "";
     }
+    $scope.GetLocaValuefromArray=function(Location)
+    {
+        if ($.trim(Location) != "") {
 
+            for (var i = 0; i < $scope.LocationList.length; i++) {
+                if ($scope.LocationList[i].Location == Location) {
+                    return $scope.ItemList[i].LocationID;
+                }
+
+            }
+        }
+        return "";
+
+    }
 
     $scope.ScanNew = function (ControlID) {
      
@@ -193,10 +237,27 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                 }
 
                 else {
-                    alert("Item not found in list !!");
+                    log.error("Item not found in list !!");
                 }
 
                
+            }
+            else if(ControlID=="Location")
+            {
+
+                var resultvalue = $scope.GetLocaValuefromArray(result.text)
+
+                if (resultvalue != "") {
+
+                    $scope.InventoryObject.Location = resultvalue;
+                    $(_id).val(resultvalue);
+
+                }
+
+                else {
+                    log.error("Location not found in list !!");
+                }
+
             }
             else {
                 $(_id).val(result.text);
@@ -210,7 +271,7 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
 
 
         }, function (error) {
-            console.log("Scanning failed: ", error);
+            log.error("Scanning failed: ", error);
         });
     }
 

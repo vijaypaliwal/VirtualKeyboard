@@ -78,4 +78,26 @@ app.run(['authService', function (authService) {
     authService.fillAuthData();
 }]);
 
+// factory for all messages 
+app.factory('log', function () {
+    toastr.options = {
+        closeButton: true,
+        positionClass: 'toast-top-right',
+    };
+    return {
+        success: function (text) {
+            toastr.success(text, "Success");
+        },
+        error: function (text) {
+            toastr.error(text, "Error");
+        },
+        info: function (text) {
+            toastr.info(text, "Info");
+        },
+        warning: function (text) {
+            toastr.warning(text, "Warning");
+        },
+    };
+});
+
 
