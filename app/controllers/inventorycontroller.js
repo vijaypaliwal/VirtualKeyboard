@@ -1,11 +1,11 @@
 ﻿'use strict';
-app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageService', 'log',  function ($scope, ordersService, localStorageService, log) {
-
+app.controller('inventoryController', ['$scope','$location', 'ordersService', 'localStorageService', 'log',  function ($scope,$location, ordersService, localStorageService, log) {
+    ''
     $scope.orders = [];
     $scope.InventoryItems = [];
     $scope.scannerText = "";
     $scope.SecurityToken = "";
-    $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 1, uniquetag: "", CostPerUnit: 0, CustomData: [] };
+    $scope.InventoryObject = { ItemName: "",Description:"",LocationText:"",UOMText:"", Location: "", UOM: "", Status: "", Quantity: 1, uniquetag: "", CostPerUnit: 0, CustomData: [] };
     $scope.LocationList = [{ LocationName: "dhdd", LocationZone: "", LocationID: 678325 },
                            { LocationName: "Here", LocationZone: "", LocationID: 678323 },
                            { LocationName: "in store", LocationZone: "", LocationID: 678030 },
@@ -18,7 +18,14 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
                            { LocationName: "BLC1009", LocationZone: "", LocationID: 123 }];
     $scope.UOMList = [];
     $scope.ItemList = [];
-
+    $scope.UOMList = [{ UnitOfMeasureID: 1, UnitOfMeasureName: "box/es" },
+               { UnitOfMeasureID: 2, UnitOfMeasureName: "carton/s" },
+                { UnitOfMeasureID: 1, UnitOfMeasureName: "cup/s" },
+               { UnitOfMeasureID: 2, UnitOfMeasureName: "dozen" },
+               { UnitOfMeasureID: 1, UnitOfMeasureName: "ea." },
+               { UnitOfMeasureID: 2, UnitOfMeasureName: "gallon/s" },
+               { UnitOfMeasureID: 2, UnitOfMeasureName: "lbs." },
+               { UnitOfMeasureID: 2, UnitOfMeasureName: "pc(s)" }];
     $scope.getlocation = function () {
 
         var authData = localStorageService.get('authorizationData');
@@ -51,26 +58,25 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
   
     $scope.GetLastValue=function(field,id)
     {
-        alert("Field name" + field);
         var _value = "";
         var _toCheckValue=localStorageService.get(field);
         if (_toCheckValue != null && _toCheckValue!=undefined )
         {
             _value = _toCheckValue;
-            alert("Field value" + _value);
 
-            $(id).val(_value);
-        }
-        else {
-            if (id == "UOM")
-            {
+            if (id == "#UOM") {
                 $scope.InventoryObject.UOM = _value;
+                $(id).select2("val", _value);
                 $(id).val(_value);
             }
             else {
                 $(id).val(_value);
             }
-            
+        }
+        else {
+           
+            $(id).val(_value);
+
 
         }
     }
@@ -89,56 +95,83 @@ app.controller('inventoryController', ['$scope', 'ordersService', 'localStorageS
         var _TempObj = $scope.InventoryObject;
 
         $.each(_TempObj, function (datakey, datavalue) {
-            debugger;
             datakey = "Inv_" + datakey;
             localStorageService.set(datakey, "");
             localStorageService.set(datakey, datavalue);
         });
+        for (var i = 0; i <  $scope.LocationList.length; i++) {
+            if( $scope.LocationList[i].LocationID==_TempObj.Location)
+            {
+                _TempObj.LocationText = $scope.LocationList[i].LocationName;
+                break;
 
-        $.ajax
-           ({
-               type: "POST",
-               url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/AddInventoryRow',
-               contentType: 'application/json; charset=utf-8',
-               dataType: 'text json',
-               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "LocationID": $scope.InventoryObject.Location, "PartID": $scope.InventoryObject.ItemName, "UnitOfMeasureID": $scope.InventoryObject.UOM, "Quantity": $scope.InventoryObject.Quantity, "CostPerUnit": $scope.InventoryObject.CostPerUnit, "UniqueTag": $scope.InventoryObject.uniquetag, "CustomData": $scope.InventoryObject.CustomData }),
-               success: function (response) {
-                   $('#addinventories').removeClass("disabled");
-                   $('#addinventories').find(".fa").removeClass("fa-spin");
+            }
+        }
 
-                   log.success("Inventory item successfully added.");
+        for (var i = 0; i < $scope.LocationList.length; i++) {
+            if ($scope.UOMList[i].UnitOfMeasureID == _TempObj.UOM) {
+                _TempObj.UOMText = $scope.LocationList[i].UnitOfMeasureName;
+                break;
+
+            }
+        }
+       
+
+       var _IsAdded= ordersService.AddInventory(_TempObj);
+
+       if(_IsAdded)
+       {
+           log.success("Inventory item successfully added.");
+           $location.path('/FindItems');
+
+       }
+       else {
+           log.error("Error during add operation.");
+       }
+        //$.ajax
+        //   ({
+        //       type: "POST",
+        //       url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/AddInventoryRow',
+        //       contentType: 'application/json; charset=utf-8',
+        //       dataType: 'text json',
+        //       data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "LocationID": $scope.InventoryObject.Location, "PartID": $scope.InventoryObject.ItemName, "UnitOfMeasureID": $scope.InventoryObject.UOM, "Quantity": $scope.InventoryObject.Quantity, "CostPerUnit": $scope.InventoryObject.CostPerUnit, "UniqueTag": $scope.InventoryObject.uniquetag, "CustomData": $scope.InventoryObject.CustomData }),
+        //       success: function (response) {
+        //           $('#addinventories').removeClass("disabled");
+        //           $('#addinventories').find(".fa").removeClass("fa-spin");
+
+        //           log.success("Inventory item successfully added.");
 
 
-                   var _TransID = response.AddInventoryResult.Payload;
+        //           var _TransID = response.AddInventoryResult.Payload;
 
-                   if (_TransID > 0) {
+        //           if (_TransID > 0) {
 
-                       log.success("Inventory item successfully added.");
-
-
-                       $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 0, uniquetag: "", CostPerUnit: 0, CustomData: [] };
-                       $scope.$apply();
-
-                   }
-                   else {
-                       $('#addinventories').removeClass("disabled");
-                       $('#addinventories').find(".fa").removeClass("fa-spin");
-                       log.error(response.AddInventoryResult.Message);
-                   }
+        //               log.success("Inventory item successfully added.");
 
 
-                   $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 0, uniquetag: "", CostPerUnit: 0, CustomData: [] };
-                   $scope.$apply();
+        //               $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 0, uniquetag: "", CostPerUnit: 0, CustomData: [] };
+        //               $scope.$apply();
 
-               },
-               error: function (err) {
+        //           }
+        //           else {
+        //               $('#addinventories').removeClass("disabled");
+        //               $('#addinventories').find(".fa").removeClass("fa-spin");
+        //               log.error(response.AddInventoryResult.Message);
+        //           }
 
-                   log.error("error occurred");
+
+        //           $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 0, uniquetag: "", CostPerUnit: 0, CustomData: [] };
+        //           $scope.$apply();
+
+        //       },
+        //       error: function (err) {
+
+        //           log.error("error occurred");
          
-                   $('#addinventories').removeClass("disabled");
-                   $('#addinventories').find(".fa").removeClass("fa-spin");
-               }
-           });
+        //           $('#addinventories').removeClass("disabled");
+        //           $('#addinventories').find(".fa").removeClass("fa-spin");
+        //       }
+        //   });
     }
 
     $scope.getuom = function () {
@@ -323,11 +356,10 @@ app.directive('selectpicker', function () {
         require: "ngModel",
         link: function (scope, element, attrs, ctrl) {
            
-                element.select2();
+            element.select2();
 
-                scope.$watch(attrs.ngModel, function (Oldvalue, NewValue) {
+            scope.$watch(attrs.ngModel, function (Oldvalue, NewValue) {
 
-         
 
                 });
 

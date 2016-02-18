@@ -192,19 +192,8 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.PopulateInventoryItems = function () {
 
-        $scope.InventoryItems = [];
-        for (var i = 0; i < 100; i++) {
-            ResetInvObj();
-
-            $scope.InvObject = {
-                InventoryID: i, CurrentQuantity: i + 2, AvgCostPerUnit: i + 50, Uncontrolled: "True", UniqueTag: "UniqueTag"+i,
-                ItemID: i, ItemNumber: makeid(), ItemDescription: makedescription(), UomID: i, UOM: GetRandomData(2), LocationID: i, Location: GetRandomData(3),
-                LocationZone: "", LastTransactionID: i, StatusValue: GetRandomData(1), LastQuantityChange: 0, LastDateChange: "",
-                CustomData: []
-            };
-
-            $scope.InventoryItems.push($scope.InvObject);
-        }
+        $scope.InventoryItems = ordersService.PopulateInventoryItems();
+       
 
 
     }
