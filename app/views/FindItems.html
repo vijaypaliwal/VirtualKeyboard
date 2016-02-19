@@ -329,7 +329,7 @@
                 <a data-toggle="dropdown" aria-expanded="true">
                     <img src="img/dummy-user48.png" alt="">
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu animated slideInDown">
 
 
                     <li>
@@ -356,31 +356,31 @@
 
 
 
+<div class="animated slideInLeft">
+
+    <div class="pageData ">
+        <div class="page-header">
+
+            <h3>Find Inventory Items </h3>
 
 
+        </div>
 
-<div class="pageData">
-    <div class="page-header">
-
-        <h3>Find Inventory Items </h3>
-    
-
-    </div>
-
-        <ul class="widget-products">
+        <ul class=" widget-products">
             <li ng-repeat="_obj in InventoryItems">
-                <a >
+                <a class="">
                     <span data-toggle="modal" data-target="#myModal1" class="img">
                         <img src="img/_dummyImage.jpg" alt="">
                     </span>
                     <span class="product clearfix">
                         <!--<span class="name">
-                           
+
 
                         </span>-->
 
-                        <h5 class="list-group-item-heading">{{_obj.ItemNumber}} <span class="pull-right"> <span class="">{{_obj.CurrentQuantity}} </span> {{_obj.UOM}} </span> 
-                        
+                        <h5 class="list-group-item-heading">
+                            {{_obj.ItemNumber}} <span class="pull-right"> <span class="">{{_obj.CurrentQuantity}} </span> {{_obj.UOM}} </span>
+
                         </h5>
 
                         <span class="list-group-item-text">
@@ -391,72 +391,73 @@
                                 {{_obj.StatusValue}}
                             </span>
                         </span>
-                      <br />      
-                            <span class="text">
-                                {{_obj.ItemDescription}}
+                        <br />
+                        <span class="text">
+                            {{_obj.ItemDescription}}
 
-                            </span>
+                        </span>
 
-                      
-                        
+
+
                     </span>
                 </a>
             </li>
-         
+
         </ul>
 
 
-    <div class="bottmsectop">
-        <table class="searchtable">
-            <tbody>
-                <tr>
-                    <td>
-                        <ul style="padding:0px; margin:auto">
-                            <li style="list-style-type:none;" class="dropdown">
-                                <button data-toggle="dropdown" type="button" class="btn transparentBtn status" aria-expanded="false">
-                                    <span class="textData"> {{SearchFromText}} </span> <span class="caret"></span>
-                                </button>
+        <div class="bottmsectop">
+            <table class="searchtable">
+                <tbody>
+                    <tr>
+                        <td>
+                            <ul style="padding:0px; margin:auto">
+                                <li style="list-style-type:none;" class="dropdown">
+                                    <button data-toggle="dropdown" type="button" class="btn transparentBtn status" aria-expanded="false">
+                                        <span class="textData"> {{SearchFromText}} </span> <span class="caret"></span>
+                                    </button>
 
-                                <ul class="dropdown-menu dm-icon searchlist">
-                                    <li><a ng-click="searchfunction('All')" alt="All">All</a></li>
-                                    <li><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
-                                    <li><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
-                                    <li><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">Status</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">Unique Tag</a></li>
-                                    <!--<li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag2')" alt="iUnitTag2">Unit Tag 2</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag3')" alt="iUnitTag3">Unit Tag 3</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber1')" alt="iUnitNumber1">Unit Number</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber2')" alt="iUnitNumber2">Unit Number 2</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUniqueDate')" alt="iUniqueDate">unit date</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitDate2')" alt="iUnitDate2">Unit Date 2</a></li>-->
+                                    <ul class="dropdown-menu dm-icon searchlist">
+                                        <li><a ng-click="searchfunction('All')" alt="All">All</a></li>
+                                        <li><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
+                                        <li><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
+                                        <li><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">Status</a></li>
+                                        <li class="unitSearchFields" style="display: block;"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">Unique Tag</a></li>
+                                        <!--<li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag2')" alt="iUnitTag2">Unit Tag 2</a></li>
+                                        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag3')" alt="iUnitTag3">Unit Tag 3</a></li>
+                                        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber1')" alt="iUnitNumber1">Unit Number</a></li>
+                                        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber2')" alt="iUnitNumber2">Unit Number 2</a></li>
+                                        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUniqueDate')" alt="iUniqueDate">unit date</a></li>
+                                        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitDate2')" alt="iUnitDate2">Unit Date 2</a></li>-->
 
-                                </ul>
-                            </li>
-                        </ul>
-                    </td>
-                    <td>
-                        <div style="position:relative" class="fg-line">
-                            <input style="border-radius:0px; margin-left:2px; height:37px;" id="MasterSearch" type="text" ng-model="SearchValue" class="form-control" placeholder="Type to Search">
-                            <i id="btnClearSearch" class="fa fa-times-circle" ng-click="ClearFilter()" ng-show="SearchValue!=''"></i>
-                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <div style="position:relative" class="fg-line">
+                                <input style="border-radius:0px; margin-left:2px; height:37px;" id="MasterSearch" type="text" ng-model="SearchValue" class="form-control" placeholder="Type to Search">
+                                <i id="btnClearSearch" class="fa fa-times-circle" ng-click="ClearFilter()" ng-show="SearchValue!=''"></i>
+                            </div>
 
-                    </td>
-                    <td>
-                        <a style="margin-top: 0px; height: 35px; padding-left: 9px; margin-left: 5px; height: 35px; width: 35px; border-radius: 100%; " id="btnMasterSearch" ng-click="SearchInventory()"  class="btn transparentBtn"><i class="fa fa-search"></i></a>
-                        
-                        
-                    </td>
-                    <td>
-                        <a style="margin-top: 0px; height: 35px; padding-left: 9px; margin-left: 5px; height: 35px; width: 35px; border-radius: 100%; " ng-click="ScanItemSearch()" class="btn transparentBtn"><i class="fa fa-qrcode"></i></a>
-                    </td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+                        </td>
+                        <td>
+                            <a style="margin-top: 0px; height: 35px; padding-left: 9px; margin-left: 5px; height: 35px; width: 35px; border-radius: 100%; " id="btnMasterSearch" ng-click="SearchInventory()" class="btn transparentBtn"><i class="fa fa-search"></i></a>
+
+
+                        </td>
+                        <td>
+                            <a style="margin-top: 0px; height: 35px; padding-left: 9px; margin-left: 5px; height: 35px; width: 35px; border-radius: 100%; " ng-click="ScanItemSearch()" class="btn transparentBtn"><i class="fa fa-qrcode"></i></a>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
     </div>
-
-
-  
 </div>
 
 <div style="text-align: center; color: #d9534f; display:none; margin-top: 20px;" class="maincontent norecords">
@@ -465,11 +466,11 @@
 </div>
 
 
-<div style="text-align:center; top:50px; overflow:hidden;" id="myModal1" class="modal  fade" role="dialog">
+<div style="text-align:center; top:100px; overflow:hidden;" id="myModal1" class="modal fade animated flipInY" role="dialog">
 
 
     <div class="modal-body">
-        <img style="max-width:220px; max-height:270px;" src="img/_dummyImage.jpg" alt="">
+        <img style="max-width:250px; max-height:280px;" src="img/_dummyImage.jpg" alt="">
         <button style="padding: 2px 7px; position: absolute; margin-left: -23px; margin-top:-5px;" class="btn-danger" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
     </div>
 

@@ -17,6 +17,8 @@
 
     <link href="content/css/select2.min.css" rel="stylesheet" />
 
+    <link href="content/css/animate.min.css" rel="stylesheet" />
+
 
     <style>
         .navbar-inverse {
@@ -287,11 +289,7 @@
 
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
 
-            if (deviceType == "iPhone" || deviceType == "iPad") {
-
-                $("body").css("margin-top","20px")
-
-            }
+        
 
 
             document.addEventListener("backbutton", function (e) {
