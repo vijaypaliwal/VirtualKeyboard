@@ -111,7 +111,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', 'localStorageService', 
             CustomData: []
         };
 
-        _Data.push(InvObject);
+        _Data.unshift(InvObject);
         localStorageService.set("InventoryData", []);
         localStorageService.set("InventoryData", _Data);
 

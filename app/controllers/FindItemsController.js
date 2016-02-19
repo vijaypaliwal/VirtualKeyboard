@@ -153,7 +153,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
         $scope.InventoryItems = _tempArray;
 
-        alert(_tempArray.length);
+       
         if (_tempArray.length == 0) {
 
             $(".norecords").show();

@@ -370,7 +370,7 @@
         <ul class="widget-products">
             <li ng-repeat="_obj in InventoryItems">
                 <a >
-                    <span class="img">
+                    <span data-toggle="modal" data-target="#myModal1" class="img">
                         <img src="img/_dummyImage.jpg" alt="">
                     </span>
                     <span class="product clearfix">
@@ -463,6 +463,20 @@
     <h2><i class="fa fa-meh-o"></i> Oops !! </h2>
     <h3>No record matched your Query</h3>
 </div>
+
+
+<div style="text-align:center; top:50px; overflow:hidden;" id="myModal1" class="modal  fade" role="dialog">
+
+
+    <div class="modal-body">
+        <img style="max-width:220px; max-height:270px;" src="img/_dummyImage.jpg" alt="">
+        <button style="padding: 2px 7px; position: absolute; margin-left: -23px; margin-top:-5px;" class="btn-danger" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+    </div>
+
+   
+</div>
+
+
 
 
 <div>
