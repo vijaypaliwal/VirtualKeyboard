@@ -58,6 +58,8 @@ app.controller('inventoryController', ['$scope','$location', 'ordersService', 'l
   
     $scope.GetLastValue=function(field,id)
     {
+        debugger;
+
         var _value = "";
         var _toCheckValue=localStorageService.get(field);
         if (_toCheckValue != null && _toCheckValue!=undefined )

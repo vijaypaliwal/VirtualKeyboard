@@ -50,7 +50,6 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
                 };
 
                 $location.path('/associate');
-
             }
             else {
                 //Obtain access token and redirect to orders

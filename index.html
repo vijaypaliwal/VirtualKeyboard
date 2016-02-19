@@ -126,6 +126,27 @@
             border-radius: 4px;
             height: 45px;
         }
+
+        .headerdropdown ul {
+            margin-left: -105px;
+        }
+
+
+        .headerdropdown li a {
+            color: #000 !important;
+            font-size: 14px;
+            padding: 12px;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .headerdropdown img
+        {
+            height:35px;
+            width:35px;
+            border-radius:100%;
+        }
     </style>
 
 </head>
@@ -142,6 +163,8 @@
         <div data-ng-view="">
         </div>
     </div>
+
+
 
  
 
@@ -171,7 +194,7 @@
     <script src="scripts/select2.min.js"></script>
 
 
-    <script src="scripts/selectize.js"></script>
+    <script src="scripts/bootbox.js"></script>
     <!--<script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
         appnew.initialize();
@@ -202,6 +225,10 @@
     <script src="app/controllers/associateController.js?v=2"></script>
     <!-- Load custom filters -->
     <!-- Load custom directives -->
+
+    <script>
+     
+    </script>
     <script>
 
         
@@ -237,27 +264,16 @@
             }
 
 
-            document.addEventListener("backbutton", ShowExitDialog, false);
+            document.addEventListener("backbutton", function (e) {
 
-            function ShowExitDialog() {
-                navigator.notification.confirm(
-                        ("Do you want to Exit?"), // message
-                        alertexit, // callback
-                        'My APp', // title
-                        'YES,NO' // buttonName
-                );
+                bootbox.confirm("Are you sure to exit app ?", function (result) {
+                    if (result) {
+                        navigator.app.exitApp();
 
-            }
-
-
-            function alertexit(button) {
-
-                if (button == "1" || button == 1) {
-
-                    device.exitApp();
-                }
-
-            }
+                    }
+                });
+               
+            }, false);
 
          
         }
