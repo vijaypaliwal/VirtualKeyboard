@@ -57,16 +57,18 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
     }
 
     $scope.GetLastValue = function (field, id) {
-
         var _value = "";
         var _toCheckValue = localStorageService.get(field);
         if (_toCheckValue != null && _toCheckValue != undefined) {
             _value = _toCheckValue;
 
             if (id == "#UOM") {
-                $scope.InventoryObject.UOM = parseInt(_value);
+                $scope.InventoryObject.UOM = _value;
 
 
+            }
+            else if (id == "#Location") {
+                $scope.InventoryObject.Location = _value;
             }
             else {
                 $(id).val(_value);
@@ -92,6 +94,7 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
         $('#addinventories').addClass("disabled");
         $('#addinventories').find(".fa").addClass("fa-spin");
 
+        debugger;
 
 
         var _TempObj = $scope.InventoryObject;
@@ -109,9 +112,9 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
             }
         }
 
-        for (var i = 0; i < $scope.LocationList.length; i++) {
+        for (var i = 0; i < $scope.UOMList.length; i++) {
             if ($scope.UOMList[i].UnitOfMeasureID == _TempObj.UOM) {
-                _TempObj.UOMText = $scope.LocationList[i].UnitOfMeasureName;
+                _TempObj.UOMText = $scope.UOMList[i].UnitOfMeasureName;
                 break;
 
             }
