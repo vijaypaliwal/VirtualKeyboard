@@ -1,11 +1,11 @@
 ﻿'use strict';
-app.controller('inventoryController', ['$scope','$location', 'ordersService', 'localStorageService', 'log',  function ($scope,$location, ordersService, localStorageService, log) {
+app.controller('inventoryController', ['$scope', '$location', 'ordersService', 'localStorageService', 'log', function ($scope, $location, ordersService, localStorageService, log) {
     ''
     $scope.orders = [];
     $scope.InventoryItems = [];
     $scope.scannerText = "";
     $scope.SecurityToken = "";
-    $scope.InventoryObject = { ItemName: "",Description:"",LocationText:"",UOMText:"", Location: "", UOM: "", Status: "", Quantity: 1, uniquetag: "", CostPerUnit: 0, CustomData: [] };
+    $scope.InventoryObject = { ItemName: "", Description: "", LocationText: "", UOMText: "", Location: "", UOM: "", Status: "", Quantity: 1, uniquetag: "", CostPerUnit: 0, CustomData: [] };
     $scope.LocationList = [{ LocationName: "dhdd", LocationZone: "", LocationID: 678325 },
                            { LocationName: "Here", LocationZone: "", LocationID: 678323 },
                            { LocationName: "in store", LocationZone: "", LocationID: 678030 },
@@ -20,12 +20,12 @@ app.controller('inventoryController', ['$scope','$location', 'ordersService', 'l
     $scope.ItemList = [];
     $scope.UOMList = [{ UnitOfMeasureID: 1, UnitOfMeasureName: "box/es" },
                { UnitOfMeasureID: 2, UnitOfMeasureName: "carton/s" },
-                { UnitOfMeasureID: 1, UnitOfMeasureName: "cup/s" },
-               { UnitOfMeasureID: 2, UnitOfMeasureName: "dozen" },
-               { UnitOfMeasureID: 1, UnitOfMeasureName: "ea." },
-               { UnitOfMeasureID: 2, UnitOfMeasureName: "gallon/s" },
-               { UnitOfMeasureID: 2, UnitOfMeasureName: "lbs." },
-               { UnitOfMeasureID: 2, UnitOfMeasureName: "pc(s)" }];
+                { UnitOfMeasureID: 3, UnitOfMeasureName: "cup/s" },
+               { UnitOfMeasureID: 4, UnitOfMeasureName: "dozen" },
+               { UnitOfMeasureID: 5, UnitOfMeasureName: "ea." },
+               { UnitOfMeasureID: 6, UnitOfMeasureName: "gallon/s" },
+               { UnitOfMeasureID: 7, UnitOfMeasureName: "lbs." },
+               { UnitOfMeasureID: 8, UnitOfMeasureName: "pc(s)" }];
     $scope.getlocation = function () {
 
         var authData = localStorageService.get('authorizationData');
@@ -47,7 +47,7 @@ app.controller('inventoryController', ['$scope','$location', 'ordersService', 'l
                },
                error: function (response) {
 
-              //     $scope.InventoryObject.Location = 678030;
+                   //     $scope.InventoryObject.Location = 678030;
 
 
 
@@ -55,32 +55,32 @@ app.controller('inventoryController', ['$scope','$location', 'ordersService', 'l
            });
 
     }
-  
-    $scope.GetLastValue=function(field,id)
-    {
-        debugger;
+
+    $scope.GetLastValue = function (field, id) {
 
         var _value = "";
-        var _toCheckValue=localStorageService.get(field);
-        if (_toCheckValue != null && _toCheckValue!=undefined )
-        {
+        var _toCheckValue = localStorageService.get(field);
+        if (_toCheckValue != null && _toCheckValue != undefined) {
             _value = _toCheckValue;
 
             if (id == "#UOM") {
-                $scope.InventoryObject.UOM = _value;
-                $(id).select2("val", _value);
-                $(id).val(_value);
+                $scope.InventoryObject.UOM = parseInt(_value);
+
+
             }
             else {
                 $(id).val(_value);
+                $(id).trigger('change');
             }
         }
         else {
-           
-            $(id).val(_value);
 
+            $(id).val(_value);
+            $(id).trigger('change');
 
         }
+
+
     }
 
 
@@ -93,7 +93,7 @@ app.controller('inventoryController', ['$scope','$location', 'ordersService', 'l
         $('#addinventories').find(".fa").addClass("fa-spin");
 
 
-        
+
         var _TempObj = $scope.InventoryObject;
 
         $.each(_TempObj, function (datakey, datavalue) {
@@ -101,9 +101,8 @@ app.controller('inventoryController', ['$scope','$location', 'ordersService', 'l
             localStorageService.set(datakey, "");
             localStorageService.set(datakey, datavalue);
         });
-        for (var i = 0; i <  $scope.LocationList.length; i++) {
-            if( $scope.LocationList[i].LocationID==_TempObj.Location)
-            {
+        for (var i = 0; i < $scope.LocationList.length; i++) {
+            if ($scope.LocationList[i].LocationID == _TempObj.Location) {
                 _TempObj.LocationText = $scope.LocationList[i].LocationName;
                 break;
 
@@ -117,19 +116,18 @@ app.controller('inventoryController', ['$scope','$location', 'ordersService', 'l
 
             }
         }
-       
 
-       var _IsAdded= ordersService.AddInventory(_TempObj);
 
-       if(_IsAdded)
-       {
-           log.success("Inventory item successfully added.");
-           $location.path('/FindItems');
+        var _IsAdded = ordersService.AddInventory(_TempObj);
 
-       }
-       else {
-           log.error("Error during add operation.");
-       }
+        if (_IsAdded) {
+            log.success("Inventory item successfully added.");
+            $location.path('/FindItems');
+
+        }
+        else {
+            log.error("Error during add operation.");
+        }
         //$.ajax
         //   ({
         //       type: "POST",
@@ -169,7 +167,7 @@ app.controller('inventoryController', ['$scope','$location', 'ordersService', 'l
         //       error: function (err) {
 
         //           log.error("error occurred");
-         
+
         //           $('#addinventories').removeClass("disabled");
         //           $('#addinventories').find(".fa").removeClass("fa-spin");
         //       }
@@ -233,11 +231,11 @@ app.controller('inventoryController', ['$scope','$location', 'ordersService', 'l
 
     }
 
-    $scope.OpenBox =function () {
+    $scope.OpenBox = function () {
         $("#files").trigger("click");
     }
     $("#files").on('change', function (event) {
-        
+
         handleFileSelect(event);
     });
 
@@ -257,8 +255,7 @@ app.controller('inventoryController', ['$scope','$location', 'ordersService', 'l
         }
         return "";
     }
-    $scope.GetLocaValuefromArray=function(Location)
-    {
+    $scope.GetLocaValuefromArray = function (Location) {
         if ($.trim(Location) != "") {
 
             for (var i = 0; i < $scope.LocationList.length; i++) {
@@ -272,16 +269,16 @@ app.controller('inventoryController', ['$scope','$location', 'ordersService', 'l
 
     }
 
- 
+
 
     $scope.ScanNew = function (ControlID) {
-     
+
         var _id = "#" + ControlID;
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
         scanner.scan(function (result) {
 
-          
+
             if (ControlID == "pPartForm") {
 
                 var resultvalue = result.text;
@@ -297,10 +294,9 @@ app.controller('inventoryController', ['$scope','$location', 'ordersService', 'l
                     log.error("Item not found in list !!");
                 }
 
-               
+
             }
-            else if(ControlID=="Location")
-            {
+            else if (ControlID == "Location") {
 
                 var resultvalue = $scope.GetLocaValuefromArray(result.text)
 
@@ -332,12 +328,17 @@ app.controller('inventoryController', ['$scope','$location', 'ordersService', 'l
         });
     }
 
-  
+
     $scope.UpDownValue = function (value, IsUp) {
         switch (value) {
             case "Quantity":
-                if ($scope.InventoryObject.Quantity > 0) {
+                if (!IsUp) {
+                    if ($scope.InventoryObject.Quantity > 0) {
 
+                        $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity + (IsUp ? 1 : -1);
+                    }
+                }
+                else if (IsUp) {
                     $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity + (IsUp ? 1 : -1);
                 }
                 break;
@@ -357,13 +358,17 @@ app.directive('selectpicker', function () {
         restrict: "A",
         require: "ngModel",
         link: function (scope, element, attrs, ctrl) {
-           
+
             element.select2();
 
-            scope.$watch(attrs.ngModel, function (Oldvalue, NewValue) {
+
+            var refreshSelect = function () {
+
+                element.trigger('change');
+            };
 
 
-                });
+            scope.$watch(attrs.ngModel, refreshSelect);
 
 
         }
