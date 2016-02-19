@@ -75,6 +75,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         $scope.PopulateInventoryItems();
         $scope.SearchFromData = "All"
         $scope.SearchFromText = "Search";
+        $(".norecords").hide();
 
     }
     $scope.SearchInventory=function()
@@ -146,7 +147,19 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
         }
 
+
+     
+
+
         $scope.InventoryItems = _tempArray;
+
+        alert(_tempArray.length);
+        if (_tempArray.length == 0) {
+
+            $(".norecords").show();
+
+        }
+       
 
         $scope.$apply();
 

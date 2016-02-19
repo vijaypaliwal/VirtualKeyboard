@@ -96,8 +96,9 @@
 
     .widget-products li .product {
         display: block;
-        margin-left: 90px;
+        margin-left: 80px;
         margin-top: 7px;
+        border-bottom: 1px solid #D8D8D8;
     }
 
     .widget-products li .img {
@@ -122,8 +123,8 @@
     }
 
     .widget-products li {
-        border-bottom: 1px solid #ebebeb;
-        background:white;
+       
+        background:#f4f4f4;
     }
 
     .widget-products {
@@ -262,7 +263,8 @@
 
     h5.list-group-item-heading
     {
-        font-size:18px !important;
+        font-size:14px !important;
+        text-transform:uppercase;
     }
 
     .list-group-item-heading .pull-right {
@@ -276,18 +278,37 @@
         font-weight: 100;
         color: #333;
         padding-bottom: 3px;
+        font-family:Verdana;
     }
+
+    .list-group-item-text
+    {
+        font-size:12px;
+    }
+    .text
+    {
+        font-size:12px;
+    }
+
+
 
     #btnClearSearch {
         color: #BE0D2F;
-        background: white;
-        /* padding: 5px; */
+        background: #eaeaea;
+        padding: 7px;
         /* padding-top: 6px; */
         position: absolute;
         cursor: pointer;
-        margin-top: -28px;
-        right: 5px;
+        margin-top: -37px;
+        right: -2px;
         font-size: 22px;
+    }
+
+    .img img
+    {
+        height:60px;
+        width:60px;
+        border:1px solid #ccc;
     }
 
 </style>
@@ -335,6 +356,9 @@
 
 
 
+
+
+
 <div class="pageData">
     <div class="page-header">
 
@@ -347,7 +371,7 @@
             <li ng-repeat="_obj in InventoryItems">
                 <a >
                     <span class="img">
-                        <img class="img-thumbnail" src="img/_dummyImage.jpg" alt="">
+                        <img src="img/_dummyImage.jpg" alt="">
                     </span>
                     <span class="product clearfix">
                         <!--<span class="name">
@@ -411,8 +435,8 @@
                         </ul>
                     </td>
                     <td>
-                        <div style="width:120px; position:relative" class="fg-line">
-                            <input id="MasterSearch" type="text" ng-model="SearchValue" class="form-control" placeholder="Type to Search">
+                        <div style="position:relative" class="fg-line">
+                            <input style="border-radius:0px; margin-left:2px; height:37px;" id="MasterSearch" type="text" ng-model="SearchValue" class="form-control" placeholder="Type to Search">
                             <i id="btnClearSearch" class="fa fa-times-circle" ng-click="ClearFilter()" ng-show="SearchValue!=''"></i>
                         </div>
 
@@ -432,8 +456,15 @@
     </div>
 
 
-    <div>
-        <br /><br /><br />
-    </div>
+  
 </div>
 
+<div style="text-align: center; color: #d9534f; display:none; margin-top: 20px;" class="maincontent norecords">
+    <h2><i class="fa fa-meh-o"></i> Oops !! </h2>
+    <h3>No record matched your Query</h3>
+</div>
+
+
+<div>
+    <br /><br /><br />
+</div>

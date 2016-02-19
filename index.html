@@ -128,7 +128,7 @@
         }
 
         .headerdropdown ul {
-            margin-left: -105px;
+            margin-left: -110px;
         }
 
 
@@ -143,10 +143,39 @@
 
         .headerdropdown img
         {
-            height:35px;
-            width:35px;
+            height:38px;
+            width:38px;
             border-radius:100%;
+            border:2px solid #e5e5e5;
+            margin-top:2px;
         }
+
+        .bootbox-confirm {
+            top: 30%;
+            overflow:hidden;
+        }
+
+            .bootbox-confirm .btn {
+                background: #0083C7;
+                color: #fff;
+                padding: 8px 10px;
+            }
+
+            .bootbox-confirm .btn i {
+              margin-right:5px;
+            }
+
+            .bootbox-confirm .modal-footer {
+                margin-top: 0px;
+                padding: 10px 15px 10px;
+                text-align: left;
+                border-top: 1px solid #e5e5e5;
+            }
+            .container
+            {
+                padding-left:8px;
+                padding-right:8px;
+            }
     </style>
 
 </head>
@@ -231,6 +260,7 @@
     </script>
     <script>
 
+   
         
 
         $("#menu-toggle").click(function (e) {
@@ -266,7 +296,7 @@
 
             document.addEventListener("backbutton", function (e) {
 
-                bootbox.confirm("Are you sure to exit app ?", function (result) {
+                bootbox.confirm("Are you sure to exit App ?", function (result) {
                     if (result) {
                         navigator.app.exitApp();
 
