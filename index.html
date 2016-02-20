@@ -179,6 +179,17 @@
                 padding-left:8px;
                 padding-right:8px;
             }
+
+        .nointernet {
+            width: 100%;
+            color: #8a6d3b;
+            background-color: #fcf8e3;
+            border: #fcf8e3;
+            position:absolute;
+            top:0px;
+            z-index:1;
+            display:none;
+        }
     </style>
 
 </head>
@@ -188,6 +199,12 @@
      
         
     <!-- Sidebar -->
+
+    <div class="nointernet alert alert-danger">
+        <h3><i class="fa fa-exclamation-triangle"></i> No Internet Connection</h3>
+        <p>Sorry, no internet connectivity detected. Please reconnect and try again.</p>
+    </div>
+
 
     
 
@@ -305,13 +322,7 @@
             }, false);
 
             document.addEventListener("offline", function () {
-
-                bootbox.confirm("Device is Offline !!!", function (result) {
-                    if (result) {
-                      
-                    }
-                });
-
+                $(".nointernet").show();
             }, false);
         }
 

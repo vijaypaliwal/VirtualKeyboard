@@ -175,7 +175,7 @@
             <label>Quantity</label>
             <div class="input-group">
 
-                <input ng-model="InventoryObject.Quantity" class="form-control" type="text" name="Quantity" value="" />
+                <input ng-model="InventoryObject.Quantity" min="0" class="form-control" type="number" name="Quantity" value="" />
 
                 <span class="input-group-addon last" ng-click="UpDownValue('Quantity',true)"><i class="fa fa-plus"></i></span>
                 <span class="input-group-addon last" ng-click="UpDownValue('Quantity',false)"><i class="fa fa-minus"></i></span>
@@ -233,7 +233,7 @@
 
             <div class="input-group">
 
-                <input ng-model="InventoryObject.CostPerUnit" id="Costperunit" class="form-control" type="text" name="cost" value="" />
+                <input ng-model="InventoryObject.CostPerUnit" min="0" id="Costperunit" class="form-control" type="number" name="cost" value="" />
 
                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_CostPerUnit','#Costperunit')"><i class="fa fa-refresh"></i></span>
 
@@ -259,7 +259,7 @@
         <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBox()">
             <div><i class="fa fa-plus-circle"></i></div>
             <span>Add Image</span>
-            <input type="file" style="visibility:hidden" id="files" />
+            <input type="file" style="visibility:hidden" id="files" accept="image/*" capture />
         </div>
 
         <div>
