@@ -304,7 +304,15 @@
                
             }, false);
 
-         
+            document.addEventListener("offline", function () {
+
+                bootbox.confirm("Device is Offline !!!", function (result) {
+                    if (result) {
+                      
+                    }
+                });
+
+            }, false);
         }
 
     
