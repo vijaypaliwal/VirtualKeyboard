@@ -6,17 +6,14 @@
     <meta name="description" content="SPA built using angularjs,authentication is done using bearer token,back end built using Asp.net web api 2 and OWIN Framework,creatd by Taiseer Joudeh" />
     <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>ClearlyInventory Barcode Reader</title>
+    <title>ClearlyInventory App</title>
     <link href="content/css/bootstrap.min.css" rel="stylesheet" />
     <link href="content/css/site.css" rel="stylesheet" />
     <link href="content/css/loading-bar.css" rel="stylesheet" />
     <link href="content/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="content/css/social-buttons.css" rel="stylesheet" />
     <link href="content/css/toastr.css" rel="stylesheet" />
     <link href="content/css/simple-sidebar.css" rel="stylesheet" />
-
     <link href="content/css/select2.min.css" rel="stylesheet" />
-
     <link href="content/css/animate.min.css" rel="stylesheet" />
 
 
@@ -196,44 +193,20 @@
 
 </head>
 <body>
-
-    
-    <button onclick="capturePhotoWithData();">Capture Photo With Image Data</button> <br>
-    <button onclick="capturePhotoWithFile();">Capture Photo With Image File URI</button> <br>
-    <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
-    <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
-    <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
-    <img style="display:none;" id="largeImage" src="" />
-        
+ 
     <!-- Sidebar -->
 
     <div class="nointernet alert alert-danger">
         <h3><i class="fa fa-exclamation-triangle"></i> No Internet Connection</h3>
         <p>Sorry, no internet connectivity detected. Please reconnect and try again.</p>
     </div>
-
-
     
-
+    
     <div class="container" id="viewdata">
         <div data-ng-view="">
         </div>
     </div>
 
-
-
- 
-
-    <!--<div id="footer">
-        <div class="container">
-            <div class="row">
-                 
-                    <p class="text-muted">Clearly Inverntory.com </p>
-                
-                
-            </div>
-        </div>
-    </div>-->
 
     <!-- 3rd party libraries -->
     <script src="scripts/jquery-1.11.0.min.js"></script>
@@ -244,12 +217,8 @@
     <script src="scripts/loading-bar.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="barcodescanner.js"></script>
-
     <script src="scripts/toastr.js"></script>
-
     <script src="scripts/select2.min.js"></script>
-
-
     <script src="scripts/bootbox.js"></script>
     <!--<script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
@@ -374,92 +343,7 @@
 
     </script>
 
-    <script>
-        var pictureSource;   // picture source
-        var destinationType; // sets the format of returned value 
-        // Wait for PhoneGap to connect with the device
-        //
-        document.addEventListener("deviceready", onDeviceReady, false);
-        // PhoneGap is ready to be used!
-        //
-        function onDeviceReady() {
-            pictureSource = navigator.camera.PictureSourceType;
-            destinationType = navigator.camera.DestinationType;
-        }
-        // Called when a photo is successfully retrieved
-        //
-        function onPhotoDataSuccess(imageData) {
-            // Get image handle
-            //
-            var smallImage = document.getElementById('smallImage');
-            // Unhide image elements
-            //
-            smallImage.style.display = 'block';
-            // Show the captured photo
-            // The inline CSS rules are used to resize the image
-            //
-            smallImage.src = "data:image/jpeg;base64," + imageData;
-        }
-
-        // Called when a photo is successfully retrieved
-        //
-        function onPhotoFileSuccess(imageData) {
-            // Get image handle
-            console.log(JSON.stringify(imageData));
-
-            // Get image handle
-            //
-            var smallImage = document.getElementById('smallImage');
-            // Unhide image elements
-            //
-            smallImage.style.display = 'block';
-            // Show the captured photo
-            // The inline CSS rules are used to resize the image
-            //
-            smallImage.src = imageData;
-        }
-        // Called when a photo is successfully retrieved
-        //
-        function onPhotoURISuccess(imageURI) {
-            // Uncomment to view the image file URI 
-            // console.log(imageURI);
-            // Get image handle
-            //
-            var largeImage = document.getElementById('largeImage');
-            // Unhide image elements
-            //
-            largeImage.style.display = 'block';
-            // Show the captured photo
-            // The inline CSS rules are used to resize the image
-            //
-            largeImage.src = imageURI;
-        }
-        // A button will call this function
-        //
-        function capturePhotoWithData() {
-            // Take picture using device camera and retrieve image as base64-encoded string
-            navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
-        }
-        function capturePhotoWithFile() {
-            navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI });
-        }
-
-        // A button will call this function
-        //
-        function getPhoto(source) {
-            // Retrieve image file location from specified source
-            navigator.camera.getPicture(onPhotoURISuccess, onFail, {
-                quality: 50,
-                destinationType: destinationType.FILE_URI,
-                sourceType: source
-            });
-        }
-        // Called if something bad happens.
-        // 
-        function onFail(message) {
-            alert('Failed because: ' + message);
-        }
-    </script>
+    
 
 
 
