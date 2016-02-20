@@ -17,6 +17,7 @@
   <gap:plugin name="org.apache.cordova.statusbar" spec="0.1.4" source="pgb" />
    <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
+
     <gap:plugin name="org.apache.cordova.media-capture" />
     <gap:plugin name="org.apache.cordova.console" />
     <gap:plugin name="org.apache.cordova.contacts" />
@@ -33,6 +34,7 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
+  <gap:plugin name="Camera" value="org.apache.cordova.CameraLauncher" />
   <feature name="http://api.phonegap.com/1.0/device" />
   <feature name="debug-server" required="true">
     <param name="domain" value="http://debug.phonegap.com"/>
