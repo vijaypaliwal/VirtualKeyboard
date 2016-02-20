@@ -231,15 +231,19 @@
         right:0px;
     }
 
-    .searchtable {
+
+  
+    
+     .searchtable {
         margin: 0 auto;
         margin-top: 5px;
         margin-bottom: 5px;
+        width: 100%;
     }
 
     .searchlist {
         top: initial;
-        bottom: 100%;
+        /*bottom: 100%;*/
     }
 
     .transparentBtn {
@@ -311,6 +315,28 @@
         border:1px solid #ccc;
     }
 
+    .cd-top.cd-is-visible {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .cd-top {
+        height: 50px;
+        width: 50px;
+        color: #fff !important;
+        background: #128ECE;
+        position: fixed;
+        right: 25px;
+        bottom: 25px;
+        border-radius: 100%;
+        z-index: 100;
+        font-size: 25px;
+        padding-left: 12px;
+        padding-top: 6px;
+        opacity: 1;
+        visibility: hidden;
+    }
+
 </style>
 
 
@@ -355,6 +381,7 @@
 </div>
 
 
+<a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
 
 <div class="animated slideInLeft">
 
@@ -365,52 +392,7 @@
 
 
         </div>
-
-        <ul class=" widget-products">
-            <li ng-repeat="_obj in InventoryItems">
-                <a class="">
-                    <span data-toggle="modal" data-target="#myModal1" class="img">
-                        <img src="img/_dummyImage.jpg" alt="">
-                    </span>
-                    <span class="product clearfix">
-                        <!--<span class="name">
-
-
-                        </span>-->
-
-                        <h5 class="list-group-item-heading">
-                            {{_obj.ItemNumber}} <span class="pull-right"> <span class="">{{_obj.CurrentQuantity}} </span> {{_obj.UOM}} </span>
-
-                        </h5>
-
-                        <span class="list-group-item-text">
-                            <span class="text" style="width:30%">
-                                {{_obj.Location}}
-                            </span>
-                            <span class="" style="float:right">
-                                {{_obj.StatusValue}}
-                            </span>
-                        </span>
-                        <br />
-                        <span class="text">
-                            {{_obj.ItemDescription}}
-
-                        </span>
-
-
-
-                    </span>
-                </a>
-            </li>
-
-        </ul>
-
-        <div>
-            <br /><br /><br />
-        </div>
-
-
-        <div class="bottmsectop">
+        <div class="topup">
             <table class="searchtable">
                 <tbody>
                     <tr>
@@ -428,11 +410,11 @@
                                         <li><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">Status</a></li>
                                         <li class="unitSearchFields" style="display: block;"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">Unique Tag</a></li>
                                         <!--<li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag2')" alt="iUnitTag2">Unit Tag 2</a></li>
-                                        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag3')" alt="iUnitTag3">Unit Tag 3</a></li>
-                                        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber1')" alt="iUnitNumber1">Unit Number</a></li>
-                                        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber2')" alt="iUnitNumber2">Unit Number 2</a></li>
-                                        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUniqueDate')" alt="iUniqueDate">unit date</a></li>
-                                        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitDate2')" alt="iUnitDate2">Unit Date 2</a></li>-->
+                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag3')" alt="iUnitTag3">Unit Tag 3</a></li>
+                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber1')" alt="iUnitNumber1">Unit Number</a></li>
+                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber2')" alt="iUnitNumber2">Unit Number 2</a></li>
+                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUniqueDate')" alt="iUniqueDate">unit date</a></li>
+                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitDate2')" alt="iUnitDate2">Unit Date 2</a></li>-->
 
                                     </ul>
                                 </li>
@@ -446,22 +428,70 @@
 
                         </td>
                         <td>
-                            <a style="margin-top: 0px; height: 35px; padding-left: 9px; margin-left: 5px; height: 35px; width: 35px; border-radius: 100%; " id="btnMasterSearch" ng-click="SearchInventory()" class="btn transparentBtn"><i class="fa fa-search"></i></a>
+                            <a style="margin-top: 0px; height: 35px; padding-left: 9px; margin-left: 5px; height: 35px; width: 35px;" id="btnMasterSearch" ng-click="SearchInventory()" class="btn transparentBtn"><i class="fa fa-search"></i></a>
 
 
                         </td>
                         <td>
-                            <a style="margin-top: 0px; height: 35px; padding-left: 9px; margin-left: 5px; height: 35px; width: 35px; border-radius: 100%; " ng-click="ScanItemSearch()" class="btn transparentBtn"><i class="fa fa-qrcode"></i></a>
+                            <a style="margin-top: 0px; height: 35px; padding-left: 9px; margin-left: 5px; height: 35px; width: 35px;  " ng-click="ScanItemSearch()" class="btn transparentBtn"><i class="fa fa-qrcode"></i></a>
                         </td>
                         <td></td>
                     </tr>
                 </tbody>
             </table>
+            </div>
+            <ul class=" widget-products">
+                <li ng-repeat="_obj in InventoryItems">
+                    <a class="">
+                        <span data-toggle="modal" data-target="#myModal1" class="img">
+                            <img src="img/_dummyImage.jpg" alt="">
+                        </span>
+                        <span class="product clearfix">
+                            <!--<span class="name">
+
+
+                        </span>-->
+
+                            <h5 class="list-group-item-heading">
+                                {{_obj.ItemNumber}} <span class="pull-right"> <span class="">{{_obj.CurrentQuantity}} </span> {{_obj.UOM}} </span>
+
+                            </h5>
+
+                            <span class="list-group-item-text">
+                                <span class="text" style="width:30%">
+                                    {{_obj.Location}}
+                                </span>
+                                <span class="" style="float:right">
+                                    {{_obj.StatusValue}}
+                                </span>
+                            </span>
+                            <br />
+                            <span class="text">
+                                {{_obj.ItemDescription}}
+
+                            </span>
+
+
+
+                        </span>
+                    </a>
+                </li>
+
+            </ul>
+
+        <div>
+            <br />
+            <br />
+         
         </div>
 
+            <!--<div class="bottmsectop">
+
+        </div>-->
 
 
-    </div>
+
+        </div>
 </div>
 
 <div style="text-align: center; color: #d9534f; display:none; margin-top: 20px;" class="maincontent norecords">
@@ -482,3 +512,24 @@
 
 
 
+<script>
+
+
+    var offset = 300;
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    var offset_opacity = 1200;
+    //duration of the top scrolling animation (in ms)
+    var scroll_top_duration = 700;
+    //grab the "back to top" link
+    var $back_to_top = $('.cd-top');
+
+    function scrollToTop() {
+      
+        $('html, body').animate({ scrollTop: 0 }, 500, 'linear');
+    }    $(window).scroll(function () {
+        ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if ($(this).scrollTop() > offset_opacity) {
+            $back_to_top.addClass('cd-fade-out');
+        }
+    });
+</script>
