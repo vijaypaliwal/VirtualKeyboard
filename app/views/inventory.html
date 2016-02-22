@@ -1,6 +1,6 @@
 ﻿
 
-
+<script src="scripts/idangerous.swiper.min.js"></script>
 <style>
     .navbar-toggle {
         display: block !important;
@@ -89,7 +89,22 @@
 </style>
 
 
-
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+        pagination: '.pagination',
+        loop: false,
+        grabCursor: true,
+        paginationClickable: true
+    })
+    $('.arrow-left').on('click', function (e) {
+        e.preventDefault()
+        mySwiper.swipePrev()
+    })
+    $('.arrow-right').on('click', function (e) {
+        e.preventDefault()
+        mySwiper.swipeNext()
+    })
+</script>
 
 <div class="topheader">
     <div class="col-xs-3">
@@ -141,132 +156,160 @@
 
     <form name="myform">
 
-        <div class="form-group">
-            <label>Item Name</label>
-            <div class="input-group">
+        <div class="device">
+            <a class="arrow-left" href="#"></a>
+            <a class="arrow-right" href="#"></a>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+
+                        <div class="form-group">
+                            <label>Item Name</label>
+                            <div class="input-group">
 
 
-                <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemName" required="" autofocus />
-                <!--<select class="form-control" id="ItemName"  ng-model="InventoryObject.ItemName" required="" autofocus>
-                    <option ng-repeat="_optionValue in ItemList" value="{{_optionValue.ItemID}}">{{_optionValue.ItemNumber}}</option>
-                </select>-->
+                                <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemName" required="" autofocus />
+                                <!--<select class="form-control" id="ItemName"  ng-model="InventoryObject.ItemName" required="" autofocus>
+                <option ng-repeat="_optionValue in ItemList" value="{{_optionValue.ItemID}}">{{_optionValue.ItemNumber}}</option>
+            </select>-->
 
-                <span class="input-group-addon last" ng-click="ScanNew('pPartForm')"> scan</span>
-                <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemName','#ItemName')"><i class="fa fa-refresh"></i></span>
+                                <span class="input-group-addon last" ng-click="ScanNew('pPartForm')"> scan</span>
+                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemName','#ItemName')"><i class="fa fa-refresh"></i></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Item Description</label>
+                            <div class="input-group">
+
+
+
+                                <input type="text" id="pDescriptionForm" ng-model="InventoryObject.Description" name="name" class="form-control" value="" />
+
+                                <span class="input-group-addon last" ng-click="ScanNew('pDescriptionForm')"> scan</span>
+                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_Description','#pDescriptionForm')"><i class="fa fa-refresh"></i></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <div class="input-group">
+
+                                <input ng-model="InventoryObject.Quantity" min="0" class="form-control" type="number" name="Quantity" value="" />
+
+                                <span class="input-group-addon last" ng-click="UpDownValue('Quantity',true)"><i class="fa fa-plus"></i></span>
+                                <span class="input-group-addon last" ng-click="UpDownValue('Quantity',false)"><i class="fa fa-minus"></i></span>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="swiper-slide">
+
+                        <div class="form-group">
+                            <label>Select Location</label>
+                            <div class="input-group">
+
+
+
+                                <select class="form-control" id="Location" ng-model="InventoryObject.Location">
+                                    <option ng-repeat="_optionValue in LocationList" value="{{_optionValue.LocationID}}">{{_optionValue.LocationName}}</option>
+                                </select>
+                                <span class="input-group-addon last" ng-click="ScanNew('Location')"> scan</span>
+                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_Location','#Location')"><i class="fa fa-refresh"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Select UOM</label>
+                            <div class="input-group">
+
+
+
+                                <select class="form-control" ng-model="InventoryObject.UOM" selectpicker id="UOM" required="">
+                                    <option ng-repeat="_optionValue in UOMList" value="{{_optionValue.UnitOfMeasureID}}">{{_optionValue.UnitOfMeasureName}}</option>
+                                </select>
+
+
+                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_UOM','#UOM')"><i class="fa fa-refresh"></i></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Status</label>
+                            <div class="input-group">
+
+
+
+                                <input class="form-control" id="Status" ng-model="InventoryObject.Status" type="text" name="name" value=" " />
+
+
+                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_Status','#Status')"><i class="fa fa-refresh"></i></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="form-group">
+                            <label>Cost per unit</label>
+
+                            <div class="input-group">
+
+                                <input ng-model="InventoryObject.CostPerUnit" min="0" id="Costperunit" class="form-control" type="number" name="cost" value="" />
+
+                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_CostPerUnit','#Costperunit')"><i class="fa fa-refresh"></i></span>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label>Unique tag</label>
+                            <div class="input-group">
+                                <input id="Unittag" ng-model="InventoryObject.uniquetag" class="form-control" type="text" name="unit" value="" />
+                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_uniquetag','#Unittag')"><i class="fa fa-refresh"></i></span>
+                            </div>
+                        </div>
+
+
+                        <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list"></output>
+
+                        <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBox()">
+                            <div><i class="fa fa-plus-circle"></i></div>
+                            <span>Add Image</span>
+                            <input type="file" style="visibility:hidden" id="files" accept="image/*;capture=camera" />
+                        </div>
+
+                        <div>
+                            <br />
+                        </div>
+
+                        <a ng-click="addinventory()" style="width:100%; margin-top:15px;" ng-disabled="myform.$invalid" id="addinventories" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
+                     
+                    </div>
+                </div>
             </div>
-        </div>
-
-
-        <div class="form-group">
-            <label>Item Description</label>
-            <div class="input-group">
-
-
-
-                <input type="text" id="pDescriptionForm" ng-model="InventoryObject.Description" name="name" class="form-control" value="" />
-
-                <span class="input-group-addon last" ng-click="ScanNew('pDescriptionForm')"> scan</span>
-                <span class="input-group-addon last" ng-click="GetLastValue('Inv_Description','#pDescriptionForm')"><i class="fa fa-refresh"></i></span>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <label>Quantity</label>
-            <div class="input-group">
-
-                <input ng-model="InventoryObject.Quantity" min="0" class="form-control" type="number" name="Quantity" value="" />
-
-                <span class="input-group-addon last" ng-click="UpDownValue('Quantity',true)"><i class="fa fa-plus"></i></span>
-                <span class="input-group-addon last" ng-click="UpDownValue('Quantity',false)"><i class="fa fa-minus"></i></span>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <label>Select Location</label>
-            <div class="input-group">
-
-
-
-                <select class="form-control" id="Location" ng-model="InventoryObject.Location">
-                    <option ng-repeat="_optionValue in LocationList" value="{{_optionValue.LocationID}}">{{_optionValue.LocationName}}</option>
-                </select>
-                <span class="input-group-addon last" ng-click="ScanNew('Location')"> scan</span>
-                <span class="input-group-addon last" ng-click="GetLastValue('Inv_Location','#Location')"><i class="fa fa-refresh"></i></span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Select UOM</label>
-            <div class="input-group">
-
-
-
-                <select class="form-control" ng-model="InventoryObject.UOM" selectpicker id="UOM" required="">
-                    <option ng-repeat="_optionValue in UOMList" value="{{_optionValue.UnitOfMeasureID}}">{{_optionValue.UnitOfMeasureName}}</option>
-                </select>
-
-
-                <span class="input-group-addon last" ng-click="GetLastValue('Inv_UOM','#UOM')"><i class="fa fa-refresh"></i></span>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <label>Status</label>
-            <div class="input-group">
-
-
-
-                <input class="form-control" id="Status" ng-model="InventoryObject.Status" type="text" name="name" value=" " />
-
-
-                <span class="input-group-addon last" ng-click="GetLastValue('Inv_Status','#Status')"><i class="fa fa-refresh"></i></span>
-            </div>
+            <div style="display: none;" class="pagination"></div>
         </div>
 
 
 
-        <div class="form-group">
-            <label>Cost per unit</label>
+     
 
-            <div class="input-group">
-
-                <input ng-model="InventoryObject.CostPerUnit" min="0" id="Costperunit" class="form-control" type="number" name="cost" value="" />
-
-                <span class="input-group-addon last" ng-click="GetLastValue('Inv_CostPerUnit','#Costperunit')"><i class="fa fa-refresh"></i></span>
-
-            </div>
-
-           
-        </div>
+      
 
 
 
-        <div class="form-group">
-
-            <label>Unique tag</label>
-            <div class="input-group">
-                <input id="Unittag" ng-model="InventoryObject.uniquetag" class="form-control" type="text" name="unit" value="" />
-                <span class="input-group-addon last" ng-click="GetLastValue('Inv_uniquetag','#Unittag')"><i class="fa fa-refresh"></i></span>
-            </div>
-        </div>
-
-
-        <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list"></output>
-
-        <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBox()">
-            <div><i class="fa fa-plus-circle"></i></div>
-            <span>Add Image</span>
-            <input type="file" style="visibility:hidden" id="files" accept="image/*;capture=camera" />
-        </div>
-
-        <div>
-            <br />
-        </div>
-
-        <a ng-click="addinventory()" style="width:100%; margin-top:15px;" ng-disabled="myform.$invalid" id="addinventories" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
+     
     </form>
 </div>
 <div>

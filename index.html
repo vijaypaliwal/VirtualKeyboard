@@ -13,9 +13,9 @@
     <link href="content/css/font-awesome.min.css" rel="stylesheet" />
     <link href="content/css/toastr.css" rel="stylesheet" />
     <link href="content/css/simple-sidebar.css" rel="stylesheet" />
+    <link href="content/css/idangerous.swiper.css" rel="stylesheet" />
     <link href="content/css/select2.min.css" rel="stylesheet" />
     <link href="content/css/animate.min.css" rel="stylesheet" />
-
 
     <style>
         .navbar-inverse {
@@ -189,6 +189,16 @@
             padding-top:0px;
 
         }
+
+        .removeImage {
+            padding: 7px;
+            margin-top: -77px;
+            margin-left: -29px;
+            border-radius: 100%;
+            height: 30px;
+            width: 30px;
+            padding-top: 3px;
+        }
     </style>
 
 </head>
@@ -251,13 +261,10 @@
     <!-- Load custom filters -->
     <!-- Load custom directives -->
 
-    <script>
-     
-    </script>
+  
     <script>
 
-   
-        
+
 
         $("#menu-toggle").click(function (e) {
 
@@ -279,30 +286,43 @@
 
         document.addEventListener("deviceready", onDeviceReady, false);
 
+        var exitApp = false, intval = setInterval(function () { exitApp = false; }, 1000);
+        document.addEventListener("backbutton", function (e) {
+            e.preventDefault();
+            if (exitApp) {
+                clearInterval(intval)
+                (navigator.app && navigator.app.exitApp()) || (device && device.exitApp())
+            }
+            else {
+                exitApp = true
+              
+                history.go(-1);
+                navigator.app.backHistory();
+            }
+        }, false);
+
+        document.addEventListener("online", onOnline, false);
+        document.addEventListener("offline", onOffline, false);
+
+    
+
+     
+
         function onDeviceReady() {
 
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
 
-        
-
-
-            document.addEventListener("backbutton", function (e) {
-
-                bootbox.confirm("Are you sure to exit App ?", function (result) {
-                    if (result) {
-                        navigator.app.exitApp();
-
-                    }
-                });
-               
-            }, false);
-
-            document.addEventListener("offline", function () {
-                $(".nointernet").show();
-            }, false);
         }
 
-    
+        function onOffline() {
+            alert("online");
+            $(".nointernet").show();
+        }
+
+        function onOnline() {
+            alert("offline");
+            $(".nointernet").hide();
+        }
         function handleFileSelect(evt) {
             var files = evt.target.files;
 
@@ -326,7 +346,7 @@
                           '<img style="height: 75px; width:75px; border: 1px solid #ccc; margin:10px; margin-top:0px;" src="',
                           e.target.result,
                           '" title="', escape(theFile.name),
-                          '"/>'
+                          '"/><a class="btn btn-danger removeImage" onclick="removeImage(this)"><i class="fa fa-times"></i></a>'
                         ].join('');
 
                         document.getElementById('list').insertBefore(span, null);
@@ -338,10 +358,22 @@
             }
         }
 
-     
+
+        function removeImage(_this) {
+
+            $(_this).parent("span").remove();
+        }
+
+
 
 
     </script>
+
+
+
+
+
+
 
     
 
