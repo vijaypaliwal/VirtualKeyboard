@@ -1,4 +1,24 @@
-﻿<style>
+﻿
+<style>
+    #sticky {
+       
+        width: 100%;
+      
+    
+    }
+
+        #sticky.stick {
+            position: fixed;
+            top: 0;
+            z-index: 10000;
+            background: #0083C7;
+            padding-bottom: 2px;
+            padding-top: 2px;
+            padding-right: 20px;
+        }
+</style>
+
+<style>
     #viewdata {
         background: #128ECE;
         width: 100%;
@@ -383,63 +403,68 @@
 
 <a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
 
+
+<div class="page-header">
+
+    <h3>Find Inventory Items </h3>
+
+
+</div>
+
+<div id="sticky-anchor"></div>
+<div id="sticky" class="topup">
+    <table class="searchtable">
+        <tbody>
+            <tr>
+                <td>
+                    <ul style="padding:0px; margin:auto">
+                        <li style="list-style-type:none;" class="dropdown">
+                            <button data-toggle="dropdown" type="button" class="btn transparentBtn status" aria-expanded="false">
+                                <span class="textData"> {{SearchFromText}} </span> <span class="caret"></span>
+                            </button>
+
+                            <ul class="dropdown-menu dm-icon searchlist">
+                                <li><a ng-click="searchfunction('All')" alt="All">All</a></li>
+                                <li><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
+                                <li><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
+                                <li><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">Status</a></li>
+                                <li class="unitSearchFields" style="display: block;"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">Unique Tag</a></li>
+                                <!--<li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag2')" alt="iUnitTag2">Unit Tag 2</a></li>
+                                <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag3')" alt="iUnitTag3">Unit Tag 3</a></li>
+                                <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber1')" alt="iUnitNumber1">Unit Number</a></li>
+                                <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber2')" alt="iUnitNumber2">Unit Number 2</a></li>
+                                <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUniqueDate')" alt="iUniqueDate">unit date</a></li>
+                                <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitDate2')" alt="iUnitDate2">Unit Date 2</a></li>-->
+
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <div style="position:relative" class="fg-line">
+                        <input style="border-radius:0px; margin-left:2px; height:37px;" id="MasterSearch" type="text" ng-model="SearchValue" class="form-control" placeholder="Type to Search">
+                        <i id="btnClearSearch" class="fa fa-times-circle" ng-click="ClearFilter()" ng-show="SearchValue!=''"></i>
+                    </div>
+
+                </td>
+                <td>
+                    <a style="margin-top: 0px; height: 35px; padding-left: 9px; margin-left: 5px; height: 35px; width: 35px;" id="btnMasterSearch" ng-click="SearchInventory()" class="btn transparentBtn"><i class="fa fa-search"></i></a>
+
+
+                </td>
+                <td>
+                    <a style="margin-top: 0px; height: 35px; padding-left: 9px; margin-left: 5px; height: 35px; width: 35px;  " ng-click="ScanItemSearch()" class="btn transparentBtn"><i class="fa fa-qrcode"></i></a>
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 <div class="animated slideInLeft">
 
     <div class="pageData ">
-        <div class="page-header">
-
-            <h3>Find Inventory Items </h3>
-
-
-        </div>
-        <div class="topup">
-            <table class="searchtable">
-                <tbody>
-                    <tr>
-                        <td>
-                            <ul style="padding:0px; margin:auto">
-                                <li style="list-style-type:none;" class="dropdown">
-                                    <button data-toggle="dropdown" type="button" class="btn transparentBtn status" aria-expanded="false">
-                                        <span class="textData"> {{SearchFromText}} </span> <span class="caret"></span>
-                                    </button>
-
-                                    <ul class="dropdown-menu dm-icon searchlist">
-                                        <li><a ng-click="searchfunction('All')" alt="All">All</a></li>
-                                        <li><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
-                                        <li><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
-                                        <li><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">Status</a></li>
-                                        <li class="unitSearchFields" style="display: block;"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">Unique Tag</a></li>
-                                        <!--<li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag2')" alt="iUnitTag2">Unit Tag 2</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag3')" alt="iUnitTag3">Unit Tag 3</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber1')" alt="iUnitNumber1">Unit Number</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber2')" alt="iUnitNumber2">Unit Number 2</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUniqueDate')" alt="iUniqueDate">unit date</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitDate2')" alt="iUnitDate2">Unit Date 2</a></li>-->
-
-                                    </ul>
-                                </li>
-                            </ul>
-                        </td>
-                        <td>
-                            <div style="position:relative" class="fg-line">
-                                <input style="border-radius:0px; margin-left:2px; height:37px;" id="MasterSearch" type="text" ng-model="SearchValue" class="form-control" placeholder="Type to Search">
-                                <i id="btnClearSearch" class="fa fa-times-circle" ng-click="ClearFilter()" ng-show="SearchValue!=''"></i>
-                            </div>
-
-                        </td>
-                        <td>
-                            <a style="margin-top: 0px; height: 35px; padding-left: 9px; margin-left: 5px; height: 35px; width: 35px;" id="btnMasterSearch" ng-click="SearchInventory()" class="btn transparentBtn"><i class="fa fa-search"></i></a>
-
-
-                        </td>
-                        <td>
-                            <a style="margin-top: 0px; height: 35px; padding-left: 9px; margin-left: 5px; height: 35px; width: 35px;  " ng-click="ScanItemSearch()" class="btn transparentBtn"><i class="fa fa-qrcode"></i></a>
-                        </td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
+     
             <ul class=" widget-products">
                 <li ng-repeat="_obj in InventoryItems">
                     <a class="">
@@ -525,4 +550,21 @@
             $back_to_top.addClass('cd-fade-out');
         }
     });
+</script>
+
+<script>
+    function sticky_relocate() {
+        var window_top = $(window).scrollTop();
+        var div_top = $('#sticky-anchor').offset().top;
+        if (window_top > div_top) {
+            $('#sticky').addClass('stick');
+        } else {
+            $('#sticky').removeClass('stick');
+        }
+    }
+
+    $(function () {
+        $(window).scroll(sticky_relocate);
+        sticky_relocate();
+    });
 </script>
