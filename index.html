@@ -290,13 +290,21 @@
         document.addEventListener("backbutton", function (e) {
             e.preventDefault();
             if (exitApp) {
-                clearInterval(intval)
+
+
+                bootbox.confirm("Are you sure to exit App ?", function (result) {
+                    if (result) {
+                        clearInterval(intval)
                 (navigator.app && navigator.app.exitApp()) || (device && device.exitApp())
+
+                    }
+                });
+
+               
             }
             else {
                 exitApp = true
-              
-                history.go(-1);
+               
                 navigator.app.backHistory();
             }
         }, false);
@@ -315,12 +323,12 @@
         }
 
         function onOffline() {
-            alert("online");
+        
             $(".nointernet").show();
         }
 
         function onOnline() {
-            alert("offline");
+        
             $(".nointernet").hide();
         }
         function handleFileSelect(evt) {
