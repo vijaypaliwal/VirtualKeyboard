@@ -1,6 +1,6 @@
 ﻿
 
-<script src="scripts/idangerous.swiper.min.js"></script>
+
 <style>
     .navbar-toggle {
         display: block !important;
@@ -91,74 +91,13 @@
 
 
 <script>
-    var mySwiper = new Swiper('.swiper-container', {
-
-        initialSlide: 0,
-        
-        onSlideChangeEnd: function (swiperHere) {
-          
-            var swiperPage = mySwiper.activeSlide()
-
-            changeNav();
-         
-            debugger;
-            console.log(swiperPage);
-        }
-    });
+  
 
 
 
 
 
-
-    function changeNav() {
-
-        setTimeout(function () { $(".swiper-slide-active input:text").eq(0).trigger("click") }, 500);
-
-    };
-
-
-    changeNav()
-
-
-    function activequantity(index)
-    {
-
-        var mySwiper = new Swiper('.swiper-container', {
-
-            initialSlide: index,
-
-            onSlideChangeEnd: function (swiperHere) {
-                changeNav();
-                var swiperPage = mySwiper.activeSlide()
-
-                alert(mySwiper.activeIndex);
-
-
-                debugger;
-                console.log(swiperPage);
-            }
-        });
-
-    }
-   
-
-    $('.arrow-left').on('click', function (e) {
-        debugger;
-      
-        e.preventDefault()
-        mySwiper.swipePrev()
-
-      
-       
-    })
-    $('.arrow-right').on('click', function (e) {
-        debugger;
-       
-        e.preventDefault()
-        mySwiper.swipeNext()
-        
-    })
+  
 </script>
 
 <div class="topheader">
@@ -207,7 +146,7 @@
 </div>
 <div class="maincontent animated slideInLeft">
 
-    <form name="myform">
+    <form id="myform" name="myform">
 
         <div class="device">
         
@@ -242,7 +181,7 @@
                                     <a class="scanbtn btn btn-primary" ng-click="ScanNew('pPartForm')"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
                                     </td>
                                     <td>
-                                    <a class="btn btn-primary arrow-right" href="#">Next&nbsp;&nbsp;<i class="fa fa-angle-right"></i></a>
+                                    <a class="btn btn-primary arrow-right">Next&nbsp;&nbsp;<i class="fa fa-angle-right"></i></a>
                                     </td>
                                 </tr>
                             </table>
@@ -263,7 +202,7 @@
 
 
 
-                                <input type="text" id="pDescriptionForm" ng-model="InventoryObject.Description" name="name" class="form-control" value="" />
+                                <input type="text" id="pDescriptionForm" ng-model="InventoryObject.Description" name="name" class="form-control" value="" autofocus />
 
                             
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Description','#pDescriptionForm')"><i class="fa fa-refresh"></i></span>
@@ -272,9 +211,9 @@
 
                             <table style="width:100%;">
                                 <tr>
-                                    <td><a class="btn btn-primary arrow-left" href="#"><i class="fa fa-angle-left"></i> Back</a></td>
+                                    <td><a class="btn btn-primary arrow-left"><i class="fa fa-angle-left"></i> Back</a></td>
                                     <td><a class="scanbtn btn btn-primary" ng-click="ScanNew('pDescriptionForm')"><i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a></td> 
-                                    <td><a class="btn btn-primary arrow-right" href="#">Next <i class="fa fa-angle-right"></i></a></td> 
+                                    <td><a class="btn btn-primary arrow-right" >Next <i class="fa fa-angle-right"></i></a></td> 
                                 </tr>
                             </table>
 
@@ -306,10 +245,10 @@
 
                         <table>
                             <tr>
-                                <td><a class="btn btn-primary arrow-left" href="#"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;Back</a></td>
+                                <td><a class="btn btn-primary arrow-left" ><i class="fa fa-angle-left"></i>&nbsp;&nbsp;Back</a></td>
                                 <td><button  ng-click="UpDownValue('Quantity',true)" type="button" class="btn scanbtn btn-primary"><i class="fa fa-plus"></i></button></td>
                                 <td><button ng-click="UpDownValue('Quantity',false)" type="button" class="btn scanbtn btn-primary"><i class="fa fa-minus"></i> </button></td>
-                                <td><a class="btn btn-primary arrow-right" href="#">Next&nbsp;&nbsp;<i class="fa fa-angle-right"></i></a></td>
+                                <td><a class="btn btn-primary arrow-right" >Next&nbsp;&nbsp;<i class="fa fa-angle-right"></i></a></td>
                             </tr>
                         </table>
 
@@ -333,9 +272,9 @@
 
                             <table>
                                 <tr>
-                                    <td><a class="btn btn-primary arrow-left" href="#"><i class="fa fa-angle-left"></i> Back</a></td>
+                                    <td><a class="btn btn-primary arrow-left" ><i class="fa fa-angle-left"></i> Back</a></td>
                                     <td><a class="scanbtn btn btn-primary" ng-click="ScanNew('Location')"> <i class="fa fa-barcode"></i> Scan</a></td>
-                                    <td><a class="btn btn-primary arrow-right" href="#">Next <i class="fa fa-angle-right"></i></a></td>
+                                    <td><a class="btn btn-primary arrow-right" >Next <i class="fa fa-angle-right"></i></a></td>
                                 </tr>
                             </table>
 
@@ -378,9 +317,9 @@
 
                         <table>
                             <tr>
-                                <td><a class="scanbtn btn btn-primary arrow-left" href="#"><i class="fa fa-angle-left"></i> Back</a></td>
+                                <td><a class="scanbtn btn btn-primary arrow-left" ><i class="fa fa-angle-left"></i> Back</a></td>
                              
-                                <td><a class="btn btn-primary arrow-right" href="#">Next <i class="fa fa-angle-right"></i></a></td>
+                                <td><a class="btn btn-primary arrow-right" >Next <i class="fa fa-angle-right"></i></a></td>
                             </tr>
                         </table>
 
@@ -420,9 +359,9 @@
 
                         <table>
                             <tr>
-                                <td><a class="scanbtn btn btn-primary arrow-left" href="#"><i class="fa fa-angle-left"></i> Back</a></td>
+                                <td><a class="scanbtn btn btn-primary arrow-left"><i class="fa fa-angle-left"></i> Back</a></td>
 
-                                <td><a class="btn btn-primary arrow-right" href="#">Next <i class="fa fa-angle-right"></i></a></td>
+                                <td><a class="btn btn-primary arrow-right" >Next <i class="fa fa-angle-right"></i></a></td>
                             </tr>
                         </table>
 
@@ -461,9 +400,9 @@
 
                         <table>
                             <tr>
-                                <td><a class="scanbtn btn btn-primary arrow-left" href="#"><i class="fa fa-angle-left"></i> Back</a></td>
+                                <td><a class="scanbtn btn btn-primary arrow-left"><i class="fa fa-angle-left"></i> Back</a></td>
 
-                                <td><a class="btn btn-primary arrow-right" href="#">Next <i class="fa fa-angle-right"></i></a></td>
+                                <td><a class="btn btn-primary arrow-right" >Next <i class="fa fa-angle-right"></i></a></td>
                             </tr>
                         </table>
                      

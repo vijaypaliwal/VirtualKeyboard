@@ -353,6 +353,8 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
 
     $scope.movetoback = function () {
 
+        alert("In");
+
         bootbox.confirm("Are you sure to Move back ?", function (result) {
             if (result) {
 
@@ -365,6 +367,50 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
         });
 
     }
+
+
+    var mySwiper = new Swiper('.swiper-container', {
+
+        initialSlide: 0,
+
+        onSlideChangeEnd: function (swiperHere) {
+
+            var swiperPage = mySwiper.activeSlide()
+
+            $scope.changeNav();
+
+            debugger;
+            console.log(swiperPage);
+        }
+    });
+
+
+    $scope.changeNav = function () {
+        $("#myform .swiper-slide-active input, #myform .swiper-slide-active textarea").first().focus();
+
+    }
+
+
+
+  
+
+
+    $('.arrow-left').on('click', function (e) {
+        debugger;
+
+        e.preventDefault()
+        mySwiper.swipePrev()
+
+
+
+    })
+    $('.arrow-right').on('click', function (e) {
+        debugger;
+
+        e.preventDefault()
+        mySwiper.swipeNext()
+
+    })
 
 
 
