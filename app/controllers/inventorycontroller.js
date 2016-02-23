@@ -379,14 +379,16 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
 
             $scope.changeNav();
 
-            debugger;
             console.log(swiperPage);
         }
     });
 
 
     $scope.changeNav = function () {
-        $("#myform .swiper-slide-active input, #myform .swiper-slide-active textarea").first().focus();
+        debugger;
+
+        $("#myform .swiper-slide input").removeAttr("autofocus");
+        $("#myform .swiper-slide-active input").focus().trigger("click");
         $scope.$apply();
 
     }
