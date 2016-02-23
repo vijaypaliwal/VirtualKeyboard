@@ -86,18 +86,18 @@
     }
 
 
-  
+
 </style>
 
 
 <script>
-  
 
 
 
 
 
-  
+
+
 </script>
 
 <div class="topheader">
@@ -110,9 +110,9 @@
     </div>
     <div class="col-xs-3">
         <div style="float:right;">
-            <div class="headerdropdown dropdown" >
+            <div class="headerdropdown dropdown">
                 <a data-toggle="dropdown" aria-expanded="true">
-                    <img  src="img/dummy-user48.png" alt="">
+                    <img src="img/dummy-user48.png" alt="">
                 </a>
                 <ul class="dropdown-menu animated slideInDown">
 
@@ -149,17 +149,37 @@
     <form id="myform" name="myform">
 
         <div class="device">
-        
+
             <div class="swiper-container">
 
-             
+                <div class="row iteminfo">
+                    <div class="col-md-2 col-xs-3">
+
+                        <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
+                   
+                        <img ng-click="getstep(6)" style="height:60px; width:60px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
+                    </div>
+                    <div class="col-md-10 col-xs-9">
+                        <span ng-click="getstep(2)"> {{ Quantity }}</span> <span ng-click="getstep(4)"> {{UOM}}</span>  of <span ng-click="getstep(0)">{{ItemName}}</span> 
+                        <span ng-click="getstep(1)">   [{{ Description }}] </span>
+
+                        <div>
+                            Location :<span ng-click="getstep(3)">  {{Location}} </span> Status :<span ng-click="getstep(4)"> {{Status }} </span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
 
                 <div class="swiper-wrapper">
-                 
-                 
+
+
                     <div class="swiper-slide">
 
-                     
+
 
                         <div class="form-group">
                             <label>Item Name</label>
@@ -167,34 +187,34 @@
 
 
                                 <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemName" required="" autofocus />
-                               
-                             
+
+
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemName','#ItemName')"><i class="fa fa-refresh"></i></span>
                             </div>
 
                             <table style="width:100%;">
                                 <tr>
                                     <td>
-                                    <a ng-click="movetoback()" class="btn btn-primary"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;Back</a>
+                                        <a ng-click="movetoback()" class="btn btn-primary"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;Back</a>
                                     </td>
                                     <td>
-                                    <a class="scanbtn btn btn-primary" ng-click="ScanNew('pPartForm')"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
+                                        <a class="scanbtn btn btn-primary" ng-click="ScanNew('pPartForm')"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
                                     </td>
                                     <td>
-                                    <a class="btn btn-primary arrow-right">Next&nbsp;&nbsp;<i class="fa fa-angle-right"></i></a>
+                                        <a class="btn btn-primary arrow-right">Next&nbsp;&nbsp;<i class="fa fa-angle-right"></i></a>
                                     </td>
                                 </tr>
                             </table>
 
 
-                           
+
                         </div>
 
                     </div>
 
                     <div class="swiper-slide">
 
-                   
+
 
                         <div class="form-group">
                             <label>Item Description</label>
@@ -202,9 +222,9 @@
 
 
 
-                                <input type="text" id="pDescriptionForm" ng-model="InventoryObject.Description" name="name" class="form-control" value=""  />
+                                <input type="text" id="pDescriptionForm" ng-model="InventoryObject.Description" name="name" class="form-control" value="" />
 
-                            
+
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Description','#pDescriptionForm')"><i class="fa fa-refresh"></i></span>
                             </div>
 
@@ -212,43 +232,41 @@
                             <table style="width:100%;">
                                 <tr>
                                     <td><a class="btn btn-primary arrow-left"><i class="fa fa-angle-left"></i> Back</a></td>
-                                    <td><a class="scanbtn btn btn-primary" ng-click="ScanNew('pDescriptionForm')"><i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a></td> 
-                                    <td><a class="btn btn-primary arrow-right" >Next <i class="fa fa-angle-right"></i></a></td> 
+                                    <td><a class="scanbtn btn btn-primary" ng-click="ScanNew('pDescriptionForm')"><i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a></td>
+                                    <td><a class="btn btn-primary arrow-right">Next <i class="fa fa-angle-right"></i></a></td>
                                 </tr>
                             </table>
 
-                        
 
 
-                        
-</div>
 
 
-                  
+                        </div>
+
+
+
 
                     </div>
 
                     <div class="swiper-slide">
-                     
+
                         <div class="form-group">
                             <label>Quantity</label>
-                        
 
-                                <input ng-model="InventoryObject.Quantity" min="0" class="form-control" type="number" name="Quantity" value="" />
 
-                             
-                           
+                            <input ng-model="InventoryObject.Quantity" min="0" class="form-control" type="number" name="Quantity" value="" />
+
+
+
                         </div>
-                        <div>
-                            <br />
-                        </div>
+
 
                         <table>
                             <tr>
-                                <td><a class="btn btn-primary arrow-left" ><i class="fa fa-angle-left"></i>&nbsp;&nbsp;Back</a></td>
-                                <td><button  ng-click="UpDownValue('Quantity',true)" type="button" class="btn scanbtn btn-primary"><i class="fa fa-plus"></i></button></td>
+                                <td><a class="btn btn-primary arrow-left"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;Back</a></td>
+                                <td><button ng-click="UpDownValue('Quantity',true)" type="button" class="btn scanbtn btn-primary"><i class="fa fa-plus"></i></button></td>
                                 <td><button ng-click="UpDownValue('Quantity',false)" type="button" class="btn scanbtn btn-primary"><i class="fa fa-minus"></i> </button></td>
-                                <td><a class="btn btn-primary arrow-right" >Next&nbsp;&nbsp;<i class="fa fa-angle-right"></i></a></td>
+                                <td><a class="btn btn-primary arrow-right">Next&nbsp;&nbsp;<i class="fa fa-angle-right"></i></a></td>
                             </tr>
                         </table>
 
@@ -256,7 +274,7 @@
 
                     <div class="swiper-slide">
 
-                    
+
                         <div class="form-group">
                             <label>Select Location</label>
                             <div class="input-group">
@@ -266,26 +284,26 @@
                                 <select class="form-control" id="Location" ng-model="InventoryObject.Location">
                                     <option ng-repeat="_optionValue in LocationList" value="{{_optionValue.LocationID}}">{{_optionValue.LocationName}}</option>
                                 </select>
-                             
+
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Location','#Location')"><i class="fa fa-refresh"></i></span>
                             </div>
 
                             <table>
                                 <tr>
-                                    <td><a class="btn btn-primary arrow-left" ><i class="fa fa-angle-left"></i> Back</a></td>
+                                    <td><a class="btn btn-primary arrow-left"><i class="fa fa-angle-left"></i> Back</a></td>
                                     <td><a class="scanbtn btn btn-primary" ng-click="ScanNew('Location')"> <i class="fa fa-barcode"></i> Scan</a></td>
-                                    <td><a class="btn btn-primary arrow-right" >Next <i class="fa fa-angle-right"></i></a></td>
+                                    <td><a class="btn btn-primary arrow-right">Next <i class="fa fa-angle-right"></i></a></td>
                                 </tr>
                             </table>
 
-                          
+
                         </div>
 
                     </div>
 
 
                     <div class="swiper-slide">
-                     
+
                         <div class="form-group">
                             <label>Status</label>
                             <div class="input-group">
@@ -299,7 +317,7 @@
                             </div>
                         </div>
 
-                     
+
                         <hr />
                         <div class="form-group">
                             <label>Select UOM</label>
@@ -313,13 +331,13 @@
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_UOM','#UOM')"><i class="fa fa-refresh"></i></span>
                             </div>
                         </div>
-                    
+
 
                         <table>
                             <tr>
-                                <td><a class="scanbtn btn btn-primary arrow-left" ><i class="fa fa-angle-left"></i> Back</a></td>
-                             
-                                <td><a class="btn btn-primary arrow-right" >Next <i class="fa fa-angle-right"></i></a></td>
+                                <td><a class="scanbtn btn btn-primary arrow-left"><i class="fa fa-angle-left"></i> Back</a></td>
+
+                                <td><a class="btn btn-primary arrow-right">Next <i class="fa fa-angle-right"></i></a></td>
                             </tr>
                         </table>
 
@@ -328,7 +346,7 @@
 
 
                     <div class="swiper-slide">
-                     
+
                         <div class="form-group">
 
                             <label>Unique tag</label>
@@ -337,7 +355,7 @@
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_uniquetag','#Unittag')"><i class="fa fa-refresh"></i></span>
                             </div>
                         </div>
-                      
+
                         <hr />
 
                         <div class="form-group">
@@ -355,36 +373,29 @@
                         </div>
 
 
-                    
+
 
                         <table>
                             <tr>
                                 <td><a class="scanbtn btn btn-primary arrow-left"><i class="fa fa-angle-left"></i> Back</a></td>
 
-                                <td><a class="btn btn-primary arrow-right" >Next <i class="fa fa-angle-right"></i></a></td>
+                                <td><a class="btn btn-primary arrow-right">Next <i class="fa fa-angle-right"></i></a></td>
                             </tr>
                         </table>
 
-                        
+
                     </div>
 
 
                     <div class="swiper-slide">
 
-                        <p>
-
-                            {{ InventoryObject.Quantity }} ea. of {{InventoryObject.ItemName}}
-                            {{ InventoryObject.Description }}
-
-                            Location:{{InventoryObject.Location}}, Status: {{InventoryObject.Status }}
-
-                        </p>
-                        <hr />
-                     
-                        
 
 
-                        <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list"></output>
+
+
+
+
+                        <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list123"></output>
 
                         <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBox()">
                             <div><i class="fa fa-plus-circle"></i></div>
@@ -402,17 +413,17 @@
                             <tr>
                                 <td><a class="scanbtn btn btn-primary arrow-left"><i class="fa fa-angle-left"></i> Back</a></td>
 
-                                <td><a class="btn btn-primary arrow-right" >Next <i class="fa fa-angle-right"></i></a></td>
+                                <td><a class="btn btn-primary arrow-right">Next <i class="fa fa-angle-right"></i></a></td>
                             </tr>
                         </table>
-                     
+
                     </div>
                 </div>
             </div>
             <div style="display: none;" class="pagination"></div>
         </div>
 
-     
+
     </form>
 </div>
 <div>

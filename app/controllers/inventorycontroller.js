@@ -26,6 +26,15 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
                { UnitOfMeasureID: 6, UnitOfMeasureName: "gallon/s" },
                { UnitOfMeasureID: 7, UnitOfMeasureName: "lbs." },
                { UnitOfMeasureID: 8, UnitOfMeasureName: "pc(s)" }];
+
+
+    $scope.Quantity = "N/A";
+    $scope.ItemName = "N/A";
+    $scope.Description = "N/A";
+    $scope.Location = "N/A";
+    $scope.Status = "N/A";
+    $scope.UOM = "N/A";
+
     $scope.getlocation = function () {
 
         var authData = localStorageService.get('authorizationData');
@@ -84,6 +93,45 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
 
 
     }
+
+    $scope.$watch('InventoryObject', function () {
+
+
+
+        var _TempObj = $scope.InventoryObject;
+
+        $.each(_TempObj, function (datakey, datavalue) {
+           
+
+            switch (datakey) {
+                case "ItemName":
+                    $scope.ItemName = datavalue != null && datavalue != undefined && datavalue != "" ? datavalue : "N/A";
+                    break;
+                case "Description":
+                    $scope.Description = datavalue != null && datavalue != undefined && datavalue != "" ? datavalue : "N/A";
+                    break;
+                case "Status":
+                    $scope.Status = datavalue != null && datavalue != undefined && datavalue != "" ? datavalue : "N/A";
+                    break;
+                case "Quantity":
+
+                    $scope.Quantity = datavalue != null && datavalue != undefined && datavalue!=""?datavalue:"N/A";
+                    break;
+                case "UOM":
+                    $scope.UOM = datavalue != null && datavalue != undefined && datavalue != "" ? $scope.GetUOMfromArray(datavalue) : "N/A";
+                    break;
+                case "Location":
+                    $scope.Location = datavalue != null && datavalue != undefined && datavalue != "" ? $scope.GetLocaTextfromArray(datavalue) : "N/A";
+                    break;
+                default:
+
+            }
+
+        });
+
+      
+       
+    }, true);
 
 
     $scope.addinventory = function () {
@@ -271,8 +319,32 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
         return "";
 
     }
+    $scope.GetLocaTextfromArray = function (Location) {
+        if ($.trim(Location) != "") {
 
+            for (var i = 0; i < $scope.LocationList.length; i++) {
+                if ($scope.LocationList[i].LocationID == Location) {
+                    return $scope.LocationList[i].LocationName;
+                }
 
+            }
+        }
+        return "";
+
+    }
+    $scope.GetUOMfromArray = function (UOMID)
+    {
+        if ($.trim(UOMID) != "") {
+
+            for (var i = 0; i < $scope.UOMList.length; i++) {
+                if ($scope.UOMList[i].UnitOfMeasureID == UOMID) {
+                    return $scope.UOMList[i].UnitOfMeasureName;
+                }
+
+            }
+        }
+        return "";
+    }
 
     $scope.ScanNew = function (ControlID) {
 
@@ -353,9 +425,8 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
 
     $scope.movetoback = function () {
 
-        alert("In");
 
-        bootbox.confirm("Are you sure to Move back ?", function (result) {
+        bootbox.confirm("Are you sure to exit ?", function (result) {
             if (result) {
 
                 debugger;
@@ -385,7 +456,6 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
 
 
     $scope.changeNav = function () {
-        debugger;
 
         $("#myform .swiper-slide input").removeAttr("autofocus");
         $("#myform .swiper-slide-active input").focus().trigger("click");
@@ -394,12 +464,31 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
     }
 
 
+    $scope.getstep = function (currentstep) {
+
+
+        debugger;
+
+        var mySwiper = new Swiper('.swiper-container', {
+
+            initialSlide: currentstep,
+
+            onSlideChangeEnd: function (swiperHere) {
+
+                var swiperPage = mySwiper.activeSlide()
+
+                $scope.changeNav();
+
+             
+            }
+        });
+
+    }
+
 
   
 
-
     $('.arrow-left').on('click', function (e) {
-        debugger;
 
         e.preventDefault()
         mySwiper.swipePrev()
