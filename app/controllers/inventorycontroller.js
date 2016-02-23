@@ -387,6 +387,7 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
 
     $scope.changeNav = function () {
         $("#myform .swiper-slide-active input, #myform .swiper-slide-active textarea").first().focus();
+        $scope.$apply();
 
     }
 
