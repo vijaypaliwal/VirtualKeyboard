@@ -457,9 +457,9 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
 
     $scope.changeNav = function () {
 
-        $("#myform .swiper-slide input").removeAttr("autofocus");
-        $("#myform .swiper-slide-active input").focus().trigger("click");
-        $scope.$apply();
+      //  $("#myform .swiper-slide input").removeAttr("autofocus");
+    //    $("#myform .swiper-slide-active input").focus().trigger("click");
+    //    $scope.$apply();
 
     }
 
