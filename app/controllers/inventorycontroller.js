@@ -351,6 +351,22 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
     }
 
 
+    $scope.movetoback = function () {
+
+        bootbox.confirm("Are you sure to Move back ?", function (result) {
+            if (result) {
+
+                debugger;
+                $location.path('/mainmenu');
+
+                $scope.$apply();
+
+            }
+        });
+
+    }
+
+
 
 
 }]);
