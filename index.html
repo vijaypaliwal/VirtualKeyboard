@@ -265,7 +265,7 @@
 
             .iteminfo span {
                 color: #6683DA;
-                font-size: 14px;
+                font-size: 15px;
             }
         .select2-container--default .select2-selection--single .select2-selection__arrow
         {
@@ -442,7 +442,7 @@
 
                         document.getElementById('list123').insertBefore(span, null);
 
-                        var imagepath = '<span><img id="'+id + '" style="height: 60px; width:60px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
+                        var imagepath = '<span><img  id="' + id + '" style="height: 60px; width:60px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
                          
 
                        $("#list321").append(imagepath);
@@ -460,14 +460,14 @@
 
             debugger;
 
-
-         
+          
 
             $("#" + _this).parent("span").remove();
 
+            setTimeout(function () { $("#" + _this).parent("span").hide(); }, 500);
+           
 
             removeImage(_this)
-
 
           
         }
