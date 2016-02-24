@@ -362,6 +362,7 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
 
                     $scope.InventoryObject.ItemName = resultvalue;
                     $(_id).val(resultvalue);
+                 
 
                 }
 
@@ -379,6 +380,7 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
 
                     $scope.InventoryObject.Location = resultvalue;
                     $(_id).val(resultvalue);
+                   
 
                 }
 
@@ -392,9 +394,9 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
 
             }
 
+            mySwiper.swipeNext();
+
             $scope.$apply();
-
-
 
 
 
@@ -443,6 +445,9 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
     var mySwiper = new Swiper('.swiper-container', {
 
         initialSlide: 0,
+        speed: 200,
+        effect:'flip',
+      
 
         onSlideChangeEnd: function (swiperHere) {
 
@@ -466,22 +471,7 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
 
     $scope.getstep = function (currentstep) {
 
-
-        debugger;
-
-        var mySwiper = new Swiper('.swiper-container', {
-
-            initialSlide: currentstep,
-
-            onSlideChangeEnd: function (swiperHere) {
-
-                var swiperPage = mySwiper.activeSlide()
-
-                $scope.changeNav();
-
-             
-            }
-        });
+        mySwiper.swipeTo(currentstep);
 
     }
 

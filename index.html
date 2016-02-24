@@ -267,6 +267,14 @@
                 color: #6683DA;
                 font-size: 14px;
             }
+        .select2-container--default .select2-selection--single .select2-selection__arrow
+        {
+            top:12px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered
+        {
+         line-height:45px;
+        }
     </style>
 
 </head>
@@ -416,19 +424,28 @@
 
                 // Closure to capture the file information.
                 reader.onload = (function (theFile) {
+
+                    debugger;
+
+                    var id =  theFile.lastModified;
+
                     return function (e) {
                         // Render thumbnail.
                         var span = document.createElement('span');
                         span.innerHTML =
                         [
-                          '<img style="height: 75px; width:75px; border: 1px solid #ccc; margin:10px; margin-top:0px;" src="',
+                          '<img id="'+id+'" style="height: 75px; width:75px; border: 1px solid #ccc; margin:10px; margin-top:0px;" src="',
                           e.target.result,
                           '" title="', escape(theFile.name),
-                          '"/><a class="btn btn-danger removeImage" onclick="removeImage(this)"><i class="fa fa-times"></i></a>'
+                          '"/><a class="btn btn-danger removeImage" onclick="removeImage('+id+')"><i class="fa fa-times"></i></a>'
                         ].join('');
 
                         document.getElementById('list123').insertBefore(span, null);
 
+                        var imagepath = '<span><img id="'+id + '" style="height: 60px; width:60px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
+                         
+
+                       $("#list321").append(imagepath);
 
                     };
                 })(f);
@@ -441,9 +458,21 @@
 
         function removeImage(_this) {
 
-            $(_this).parent("span").remove();
+            debugger;
+
+
+         
+
+            $("#" + _this).parent("span").remove();
+
+
+            removeImage(_this)
+
+
+          
         }
 
+   
 
 
 
