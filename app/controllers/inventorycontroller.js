@@ -142,11 +142,11 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
         $('#addinventories').addClass("disabled");
         $('#addinventories').find(".fa").addClass("fa-spin");
 
-        debugger;
+   
 
 
         var _TempObj = $scope.InventoryObject;
-
+        _TempObj.Images = $("#list123").find("img").attr("src");
         $.each(_TempObj, function (datakey, datavalue) {
             datakey = "Inv_" + datakey;
             localStorageService.set(datakey, "");
@@ -390,6 +390,8 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
 
             }
             else {
+                $scope.InventoryObject.Description = resultvalue;
+
                 $(_id).val(result.text);
 
             }

@@ -463,15 +463,16 @@
      
             <ul class=" widget-products">
                 <li ng-repeat="_obj in InventoryItems">
-                    <a class="">
-                        <span data-toggle="modal" data-target="#myModal1" class="img">
-                            <img src="img/_dummyImage.jpg" alt="">
+                    <a class="" ng-click="_updateImg(_obj.ImagePath)">
+                        <span class="img">
+                            <img ng-if="_obj.ImagePath==''" src="/img/default.png" alt="" />
+                            <img ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="" />
                         </span>
                         <span class="product clearfix">
                             <!--<span class="name">
 
 
-                        </span>-->
+            </span>-->
 
                             <h5 class="list-group-item-heading">
                                 {{_obj.ItemNumber}} <span class="pull-right"> <span class="">{{_obj.CurrentQuantity}} </span> {{_obj.UOM}} </span>
@@ -519,7 +520,7 @@
 <div style="text-align:center; top:100px; overflow:hidden;" id="myModal1" class="modal fade " role="dialog">
 
     <div class="animated flipInY modal-body">
-        <img style="max-width:250px; max-height:280px;" src="img/_dummyImage.jpg" alt="">
+        <img style="max-width:250px; max-height:280px;" src="{{selectedImage}}" alt="">
         <button style="padding: 2px 7px; position: absolute; margin-left: -23px; margin-top:-5px;" class="btn-danger" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
     </div>
 
@@ -540,12 +541,17 @@
     function scrollToTop() {
       
         $('html, body').animate({ scrollTop: 0 }, 500, 'linear');
-    }    $(window).scroll(function () {
+    }
+
+
+
+    $(window).scroll(function () {
         ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
         if ($(this).scrollTop() > offset_opacity) {
             $back_to_top.addClass('cd-fade-out');
         }
-    });
+    });
+
 </script>
 
 <script>

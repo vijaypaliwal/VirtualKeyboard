@@ -205,10 +205,17 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.PopulateInventoryItems = function () {
 
+        debugger;
         $scope.InventoryItems = ordersService.PopulateInventoryItems();
        
 
 
+    }
+
+    $scope._updateImg = function (src) {
+        debugger;
+        $scope.selectedImage = src;
+        $("#myModal1").modal('show');
     }
   
     $scope.PopulateInventoryItems();

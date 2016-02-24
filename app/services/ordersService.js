@@ -73,6 +73,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', 'localStorageService', 
     }
 
     var _PopulateInventoryItems = function () {
+        debugger;
         var _Data = localStorageService.get("InventoryData");
         var _RandomArray = [];
         if (_Data == null || _Data == undefined || _Data.length == 0) {
@@ -83,7 +84,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', 'localStorageService', 
                     InventoryID: i, CurrentQuantity: i + 2, AvgCostPerUnit: i + 50, Uncontrolled: "True", UniqueTag: "UniqueTag" + i,
                     ItemID: i, ItemNumber: makeid(), ItemDescription: makedescription(), UomID: i, UOM: GetRandomData(2), LocationID: i, Location: GetRandomData(3),
                     LocationZone: "", LastTransactionID: i, StatusValue: GetRandomData(1), LastQuantityChange: 0, LastDateChange: "",
-                    CustomData: []
+                    CustomData: [], ImagePath:"/img/default.png"
                 };
 
                 _RandomArray.push(InvObject);
@@ -101,14 +102,14 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', 'localStorageService', 
      
     var _AddInventory=function(object)
     {
-        debugger;
+        
         var _Data = _PopulateInventoryItems();
 
         var InvObject = {
             InventoryID: Math.floor(Math.random() * 7), CurrentQuantity: object.Quantity, AvgCostPerUnit: object.CostPerUnit, Uncontrolled: "True", UniqueTag: object.uniquetag,
             ItemID: Math.floor(Math.random() * 7), ItemNumber: object.ItemName, ItemDescription: object.Description, UomID: object.UOM, UOM: object.UOMText, LocationID: object.Location, Location: object.LocationText,
             LocationZone: "", LastTransactionID: 465, StatusValue: object.Status, LastQuantityChange: 0, LastDateChange: "",
-            CustomData: []
+            CustomData: [], ImagePath: object.Images == null || object.Images == "" || object.Images == undefined ? "/img/default.png" : object.Images
         };
 
         _Data.unshift(InvObject);
