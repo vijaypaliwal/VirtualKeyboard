@@ -58,8 +58,6 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
 
                    //     $scope.InventoryObject.Location = 678030;
 
-
-
                }
            });
 
@@ -142,8 +140,6 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
         $('#addinventories').addClass("disabled");
         $('#addinventories').find(".fa").addClass("fa-spin");
 
-   
-
 
         var _TempObj = $scope.InventoryObject;
         _TempObj.Images = $("#list123").find("img").attr("src");
@@ -179,50 +175,7 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
         else {
             log.error("Error during add operation.");
         }
-        //$.ajax
-        //   ({
-        //       type: "POST",
-        //       url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/AddInventoryRow',
-        //       contentType: 'application/json; charset=utf-8',
-        //       dataType: 'text json',
-        //       data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "LocationID": $scope.InventoryObject.Location, "PartID": $scope.InventoryObject.ItemName, "UnitOfMeasureID": $scope.InventoryObject.UOM, "Quantity": $scope.InventoryObject.Quantity, "CostPerUnit": $scope.InventoryObject.CostPerUnit, "UniqueTag": $scope.InventoryObject.uniquetag, "CustomData": $scope.InventoryObject.CustomData }),
-        //       success: function (response) {
-        //           $('#addinventories').removeClass("disabled");
-        //           $('#addinventories').find(".fa").removeClass("fa-spin");
-
-        //           log.success("Inventory item successfully added.");
-
-
-        //           var _TransID = response.AddInventoryResult.Payload;
-
-        //           if (_TransID > 0) {
-
-        //               log.success("Inventory item successfully added.");
-
-
-        //               $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 0, uniquetag: "", CostPerUnit: 0, CustomData: [] };
-        //               $scope.$apply();
-
-        //           }
-        //           else {
-        //               $('#addinventories').removeClass("disabled");
-        //               $('#addinventories').find(".fa").removeClass("fa-spin");
-        //               log.error(response.AddInventoryResult.Message);
-        //           }
-
-
-        //           $scope.InventoryObject = { ItemName: "", Location: "", UOM: "", Status: "", Quantity: 0, uniquetag: "", CostPerUnit: 0, CustomData: [] };
-        //           $scope.$apply();
-
-        //       },
-        //       error: function (err) {
-
-        //           log.error("error occurred");
-
-        //           $('#addinventories').removeClass("disabled");
-        //           $('#addinventories').find(".fa").removeClass("fa-spin");
-        //       }
-        //   });
+       
     }
 
     $scope.getuom = function () {

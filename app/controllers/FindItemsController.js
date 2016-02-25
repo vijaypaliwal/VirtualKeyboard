@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageService', function ($scope, ordersService, localStorageService) {
+app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageService', 'authService', '$location', 'log', function ($scope, ordersService, localStorageService, authService, $location, log) {
 
     $scope.InventoryItems = [];
     $scope.SecurityToken = "";
@@ -69,6 +69,36 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         return text;
     }
 
+
+    $scope.logOut = function () {
+
+        alert("Logout");
+        authService.logOut();
+        $location.path('/login');
+        $scope.$apply();
+    }
+
+    $scope.authentication = authService.authentication.isAuth;
+
+    alert($scope.authentication = authService.authentication.isAuth);
+
+
+    $scope.afterlogout = function () {
+        $location.path('/login');
+
+        log.error("You are Logged Out (You can't Go back)");
+        
+    }
+
+
+    if ($scope.authentication == false) {
+        $scope.afterlogout();
+    }
+
+
+
+
+    
     $scope.ClearFilter=function()
     {
         $scope.SearchValue = '';
