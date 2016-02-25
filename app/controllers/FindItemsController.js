@@ -80,13 +80,13 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.authentication = authService.authentication.isAuth;
 
-    alert($scope.authentication = authService.authentication.isAuth);
+   
 
 
     $scope.afterlogout = function () {
         $location.path('/login');
 
-        log.error("You are Logged Out (You can't Go back)");
+        log.error("You are Logged Out (You can't Go back further)");
         
     }
 

@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('inventoryController', ['$scope', '$location', 'ordersService', 'localStorageService', 'log', function ($scope, $location, ordersService, localStorageService, log) {
+app.controller('inventoryController', ['$scope', '$location', 'authService', 'ordersService', 'localStorageService', 'log', '$compile', function ($scope, $location, authService, ordersService, localStorageService, log, $compile) {
     ''
     $scope.orders = [];
     $scope.InventoryItems = [];
@@ -34,6 +34,32 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
     $scope.Location = "N/A";
     $scope.Status = "N/A";
     $scope.UOM = "N/A";
+
+
+    $scope.logOut = function () {
+
+        alert("Logout");
+        authService.logOut();
+        $location.path('/login');
+        $scope.$apply();
+    }
+
+    $scope.authentication = authService.authentication.isAuth;
+
+
+
+
+    $scope.afterlogout = function () {
+        $location.path('/login');
+
+        log.error("You are Logged Out (You can't Go back further)");
+
+    }
+
+
+    if ($scope.authentication == false) {
+      $scope.afterlogout();
+    }
 
     $scope.getlocation = function () {
 
@@ -240,8 +266,96 @@ app.controller('inventoryController', ['$scope', '$location', 'ordersService', '
     }
     $("#files").on('change', function (event) {
 
-        handleFileSelect(event);
+        $scope.handleFileSelect(event);
     });
+
+
+    $scope.handleFileSelect = function (evt) {
+
+        var files = evt.target.files;
+
+        // Loop through the FileList and render image files as thumbnails.
+        for (var i = 0, f; f = files[i]; i++) {
+
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            // Closure to capture the file information.
+            reader.onload = (function (theFile) {
+
+                debugger;
+
+                var id = theFile.lastModified;
+
+
+                var crossicon = '<a class="btn btn-danger removeImage" altid="'+id+'" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
+                var compilehtml = $compile(crossicon)($scope);
+
+
+              
+
+                return function (e) {
+                    // Render thumbnail.
+                    var span = document.createElement('span');
+                    span.innerHTML =
+                    [
+                      '<img id="' + id + '" style="height: 75px; width:75px; border: 1px solid #ccc; margin:10px; margin-top:0px;" src="',
+                      e.target.result,
+                      '" title="', escape(theFile.name),
+                      '"/> ' + compilehtml[0].outerHTML+ ''
+                    ].join('');
+
+                    document.getElementById('list123').insertBefore(span, null);
+
+                    var imagepath = '<span><img  id="' + id + '" style="height: 60px; width:60px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
+
+
+                    $("#list321").append(imagepath);
+
+                };
+            })(f);
+
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(f);
+        }
+
+        setTimeout(function () {
+            $(".removeImage").bind("click", function () {
+
+                removeImage($(this).attr("altid"));
+            });
+        },100);
+
+       
+
+    }
+
+    
+
+
+   
+
+
+    function removeImage (_this) {
+
+
+
+        $("#" + _this).each(function () {
+            
+            $(this).parent("span").remove();
+        });
+
+        
+
+
+        removeImage(_this)
+
+    }
+  
 
     $scope.getlocation();
     $scope.getuom();

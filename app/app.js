@@ -14,7 +14,7 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when("/mainmenu", {
-        controller: "menuController",
+        controller: "mainmenuController",
         templateUrl: "app/views/mainmenu.html"
     });
 
