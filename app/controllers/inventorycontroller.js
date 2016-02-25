@@ -534,6 +534,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
       //  $("#myform .swiper-slide input").removeAttr("autofocus");
            $("#myform .swiper-slide-active input:first").focus();
            $("#myform .swiper-slide-active input:first").trigger("click");
+
+           SoftKeyboard.show();
     //    $scope.$apply();
 
     }
