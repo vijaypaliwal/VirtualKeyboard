@@ -90,9 +90,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     var _logOut = function () {
 
-        alert("In");
-
-        debugger;
+       
 
         localStorageService.remove('authorizationData');
 

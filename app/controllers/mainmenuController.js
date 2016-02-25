@@ -18,13 +18,13 @@ app.controller('mainmenuController', ['$scope', '$location', 'authService', 'ngA
 
     $scope.logOut = function () {
 
-        alert("Logout");
+   
         authService.logOut();
         $location.path('/login');
         $scope.$apply();
     }
 
-    $scope.authentication = authService.authentication.isAuth; alert($scope.authentication);
+    $scope.authentication = authService.authentication.isAuth; 
 
 
 

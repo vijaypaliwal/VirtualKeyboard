@@ -38,7 +38,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.logOut = function () {
 
-        alert("Logout");
+      
         authService.logOut();
         $location.path('/login');
         $scope.$apply();
@@ -58,7 +58,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     if ($scope.authentication == false) {
-      $scope.afterlogout();
+     $scope.afterlogout();
     }
 
     $scope.getlocation = function () {
@@ -434,7 +434,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                 }
 
                 else {
-                    log.error("Item not found in list !!");
+                    //log.error("Item not found in list !!");
                 }
 
 
@@ -452,7 +452,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                 }
 
                 else {
-                    log.error("Location not found in list !!");
+                    //log.error("Location not found in list !!");
                 }
 
             }
@@ -515,16 +515,33 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
         initialSlide: 0,
         speed: 200,
-        effect:'flip',
-      
+        effect: 'flip',
+        onSlideChangeStart: function (swiper) {
+            console.log(swiper.activeIndex);
+            //before Event use it for your purpose
+        },
+        onTouchStart: function (swiper) { 
+          
 
+        
+        },
+        onTouchEnd: function (swiper) { 
+          
+
+        },
         onSlideChangeEnd: function (swiperHere) {
+
+           
 
             var swiperPage = mySwiper.activeSlide()
 
-            $scope.changeNav();
 
-            console.log(swiperPage);
+            if (mySwiper.activeIndex != 3 && mySwiper.activeIndex != 6) {
+
+                $scope.changeNav();
+
+            }
+
         }
     });
 

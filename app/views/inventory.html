@@ -160,11 +160,10 @@
                         <img ng-click="getstep(6)" style="height:60px; width:60px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
                     </div>
                     <div class="col-md-10 col-xs-9">
-                        <span ng-click="getstep(2)"> {{ Quantity }}</span> <span ng-click="getstep(4)"> {{UOM}}</span>  of <span ng-click="getstep(0)">{{ItemName}}</span> 
-                        <span ng-click="getstep(1)">   [{{ Description }}] </span>
-
+                       <div> <span style="font-size:18px;" ng-click="getstep(2)"> {{ Quantity }}</span> <span ng-click="getstep(4)"> {{UOM}}</span>  of <span ng-click="getstep(0)">{{ItemName}}</span>  </div>
+                        <div ng-click="getstep(1)">  <span> [{{ Description }}] </span> </div>
                         <div>
-                            Location :<span ng-click="getstep(3)">  {{Location}} </span> Status :<span ng-click="getstep(4)"> {{Status }} </span>
+                            Loc:<span ng-click="getstep(3)">  {{Location}} </span> Status:<span ng-click="getstep(4)"> {{Status }} </span>
                         </div>
                     </div>
                 </div>
@@ -392,7 +391,9 @@
 
 
 
-
+                        <div ng-if="myform.$invalid" class="wellNew">
+                            <span ng-click="getstep(0)"> Item Name </span> and <span ng-click="getstep(4)"> unit of measure</span> is required please fill them first.
+                        </div>
 
 
                         <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list123"></output>

@@ -72,7 +72,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.logOut = function () {
 
-        alert("Logout");
+      
         authService.logOut();
         $location.path('/login');
         $scope.$apply();
