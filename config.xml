@@ -22,7 +22,7 @@
     <gap:plugin name="org.apache.cordova.file-transfer" />
     <gap:plugin name="org.apache.cordova.network-information" />
    <gap:plugin name="de.phonostar.softkeyboard-custom" spec="0.1.1" source="pgb" />
-  <gap:plugin name="com.applicationnexus.plugins.speechrecognition" spec="0.0.1" source="pgb" />
+
 
   <feature name="http://api.phonegap.com/1.0/device" />
   <feature name="debug-server" required="true">
