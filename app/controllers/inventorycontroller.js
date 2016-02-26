@@ -513,22 +513,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         initialSlide: 0,
         speed: 200,
         effect: 'flip',
+
+        allowSwipeToPrev : false,
         onSlideChangeStart: function (swiper) {
+
+          
             console.log(swiper.activeIndex);
             //before Event use it for your purpose
         },
-        onTouchStart: function (swiper) { 
-          
-
-        
-        },
-        onTouchEnd: function (swiper) { 
-          
-
-        },
+     
+    
         onSlideChangeEnd: function (swiperHere) {
-
-           
 
             var swiperPage = mySwiper.activeSlide()
 

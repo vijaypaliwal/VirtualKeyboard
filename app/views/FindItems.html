@@ -248,8 +248,6 @@
         right:0px;
     }
 
-
-  
     
      .searchtable {
         margin: 0 auto;
@@ -457,22 +455,27 @@
     </table>
 </div>
 
+<div style="display:none">
+    <input type="file" id="myfile" name="myfile" />
+
+</div>
+
 <div class="animated slideInLeft">
 
     <div class="pageData ">
      
             <ul class=" widget-products">
                 <li ng-repeat="_obj in InventoryItems">
-                    <a class="" ng-click="_updateImg(_obj.ImagePath)">
+                    <a class="">
                         <span class="img">
-                            <img ng-if="_obj.ImagePath==''" src="/img/default.png" alt="" />
-                            <img ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="" />
+                            <img id="Img_{{_obj.InventoryID}}" ng-if="_obj.ImagePath==''" ng-click="UploadImg(_obj.InventoryID,_obj)" src="/img/default.png" alt="" />
+                            <img ng-click="_updateImg(_obj.ImagePath)" ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="" />
                         </span>
                         <span class="product clearfix">
                             <!--<span class="name">
 
 
-            </span>-->
+                          </span>-->
 
                             <h5 class="list-group-item-heading">
                                 {{_obj.ItemNumber}} <span class="pull-right"> <span class="">{{_obj.CurrentQuantity}} </span> {{_obj.UOM}} </span>

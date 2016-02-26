@@ -9,11 +9,13 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         LocationZone: "", LastTransactionID: 0, StatusValue: "", LastQuantityChange: 0, LastDateChange: "",
         CustomData: []
     };
+
+    $scope.CurrentImgID = "";
     $scope.SearchFromData="All"
     $scope.SearchFromText = "Search";
     $scope.SearchValue = "";
     $scope.Statuses = ["For Production", "Damaged", "On Order", "Sold", "Reserved"];
-
+    $scope.CurrentObj = {};
     $scope.UOM = ["box/es", "carton/s", "cup/s", "dozen", "ea.", "gallon/s", "lbs.", "pc(s)"];
 
     $scope.Locations = ["Bin 100", "In Stock", "New location", "Refridgerator one", "Refridgerator two", "Pantry, Rack 1, Shelf 1-L", "Pantry, Rack 1, Shelf 1-M", "Storage Room A"];
@@ -69,7 +71,55 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         return text;
     }
 
+    $scope.handleFileSelect = function (evt) {
 
+        var files = evt.target.files;
+
+        // Loop through the FileList and render image files as thumbnails.
+        for (var i = 0, f; f = files[i]; i++) {
+
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            // Closure to capture the file information.
+            reader.onload = (function (theFile) {
+                debugger;
+
+                var id = theFile.lastModified;
+
+
+                return function (e) {
+                    // Render thumbnail.
+                   
+                    $($scope.CurrentImgID).attr("src", e.target.result);
+
+                    $scope.CurrentObj.ImagePath = e.target.result;
+                    $scope.UpdateInventory();
+
+                };
+            })(f);
+
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(f);
+        }
+
+      
+
+
+
+    }
+
+    $scope.UpdateInventory=function()
+    {
+        ordersService.UpdateInventory($scope.CurrentObj);
+        $scope.CurrentObj = {};
+        $scope.InventoryItems = [];
+        $scope.PopulateInventoryItems();
+    }
     $scope.logOut = function () {
 
       
@@ -81,8 +131,16 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     $scope.authentication = authService.authentication.isAuth;
 
    
+    $scope.UploadImg = function (id,_obj) {
+        debugger;
+        $scope.CurrentImgID = "#Img_" + id;
+        $scope.CurrentObj = _obj;
+        $("#myfile").trigger("click");
+    }
+    $("#myfile").on('change', function (event) {
 
-
+        $scope.handleFileSelect(event);
+    });
     $scope.afterlogout = function () {
         $location.path('/login');
 
@@ -92,7 +150,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
     if ($scope.authentication == false) {
-        $scope.afterlogout();
+      //  $scope.afterlogout();
     }
 
 
@@ -237,7 +295,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
         debugger;
         $scope.InventoryItems = ordersService.PopulateInventoryItems();
-       
+    
 
 
     }
