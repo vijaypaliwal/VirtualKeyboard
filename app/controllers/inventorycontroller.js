@@ -58,7 +58,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     if ($scope.authentication == false) {
-     $scope.afterlogout();
+   //  $scope.afterlogout();
     }
 
     $scope.getlocation = function () {
@@ -266,7 +266,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
     $("#files").on('change', function (event) {
 
-        $scope.handleFileSelect(event);
+    $scope.handleFileSelect(event);
     });
 
 
@@ -335,9 +335,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
     
-
-
-   
 
 
     function removeImage (_this) {
@@ -538,7 +535,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
             if (mySwiper.activeIndex != 3 && mySwiper.activeIndex != 6) {
 
-                $scope.changeNav();
+              $scope.changeNav();
+
+            }
+
+            else {
+
+              SoftKeyboard.hide();
 
             }
 
@@ -565,8 +568,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
-  
-
     $('.arrow-left').on('click', function (e) {
 
         e.preventDefault()
@@ -582,7 +583,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         mySwiper.swipeNext()
 
     })
-
 
 
 
