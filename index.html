@@ -439,6 +439,29 @@
 
     </script>
 
+    <script>
+
+        var queryid = "myform";
+        var gnStartTime = 0;
+        var gbStillTouching = false;
+        function checkTapHold(nID) {
+            if ((gbStillTouching) && (gnStartTime == nID)) {
+                gnStartTime = 0;
+
+                lastClickedId = queryid;
+                alert(queryid);
+            }
+        }
+        document.getElementById(queryid).addEventListener('touchstart', function (event) {
+            gnStartTime = Number(new Date());
+            gbStillTouching = true;
+            setTimeout(function () { checkTapHold(gnStartTime); clearTimeout(); }, 1000);
+        }, false);
+        document.getElementById(queryid).addEventListener('touchend', function (event) {
+            gbStillTouching = false;
+        }, false);
+    </script>
+
 
 
 
