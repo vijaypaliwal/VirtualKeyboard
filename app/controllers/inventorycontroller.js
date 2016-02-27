@@ -414,9 +414,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
      
     $scope.ScanNew = function () {
 
-      
+        debugger;
      
         var _id = "#" + $scope.scanfieldID;
+
+        var ControlID = $scope.scanfieldID;
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
         scanner.scan(function (result) {
@@ -564,8 +566,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     $scope.slidenumber = function (slidenumber) {
-
-     
 
         debugger;
 
