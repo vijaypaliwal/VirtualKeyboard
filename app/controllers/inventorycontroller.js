@@ -410,6 +410,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         return "";
     }
 
+    $(document).on('touchend', '#ItemName', function (e) {
+        $scope.ScanNew("ItemName");
+    });
     $scope.ScanNew = function (ControlID) {
 
         var _id = "#" + ControlID;
