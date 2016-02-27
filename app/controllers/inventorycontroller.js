@@ -266,13 +266,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         $("#files").trigger("click");
     }
     $("#files").on('change', function (event) {
-
     $scope.handleFileSelect(event);
     });
 
 
     $scope.handleFileSelect = function (evt) {
-
         var files = evt.target.files;
 
         // Loop through the FileList and render image files as thumbnails.
@@ -288,7 +286,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
             // Closure to capture the file information.
             reader.onload = (function (theFile) {
 
-                debugger;
 
                 var id = theFile.lastModified;
 
