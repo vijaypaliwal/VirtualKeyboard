@@ -433,6 +433,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
                     $scope.InventoryObject.ItemName = resultvalue;
                     $(_id).val(resultvalue);
+                    mySwiper.swipeNext();
+
+                    $scope.$apply();
                  
 
                 }
@@ -451,6 +454,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
                     $scope.InventoryObject.Location = resultvalue;
                     $(_id).val(resultvalue);
+                    mySwiper.swipeNext();
+
+                    $scope.$apply();
                    
 
                 }
@@ -464,12 +470,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                 $scope.InventoryObject.Description = resultvalue;
 
                 $(_id).val(result.text);
+                mySwiper.swipeNext();
+                $scope.$apply();
 
             }
 
-            mySwiper.swipeNext();
-
-            $scope.$apply();
+        
 
 
 
@@ -497,7 +503,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         }
     }
 
-    $(document).on('touchend', '.moveback', function (e) {
+    $(document).on('touchend', '#moveback', function (e) {
         bootbox.confirm("Are you sure to exit ?", function (result) {
             if (result) {
 
