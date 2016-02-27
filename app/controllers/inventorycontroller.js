@@ -34,6 +34,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.Location = "N/A";
     $scope.Status = "N/A";
     $scope.UOM = "N/A";
+    $scope.scanfieldID = "pPartForm" 
 
     _CurrentUrl = "Inventory";
     $scope.logOut = function () {
@@ -411,9 +412,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
      
-    $scope.ScanNew = function (ControlID) {
+    $scope.ScanNew = function () {
+
+      
      
-        var _id = "#" + ControlID;
+        var _id = "#" + $scope.scanfieldID;
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
         scanner.scan(function (result) {
@@ -528,6 +531,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
             var swiperPage = mySwiper.activeSlide()
 
+            $scope.slidenumber(mySwiper.activeIndex);
+
 
             if (mySwiper.activeIndex != 3 && mySwiper.activeIndex != 6) {
 
@@ -554,6 +559,45 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
            SoftKeyboard.show();
     //    $scope.$apply();
 
+    }
+
+
+
+    $scope.slidenumber = function (slidenumber) {
+
+     
+
+        debugger;
+
+        switch (slidenumber) {
+            case 0:
+                $scope.scanfieldID = "pPartForm"
+                break;
+            case 1:
+                $scope.scanfieldID = "pDescriptionForm"
+                break;
+            case 2:
+                $scope.scanfieldID = "forquantity";
+                break;
+            case 3:
+                $scope.scanfieldID = "Location"
+                break;
+            case 4:
+                $scope.scanfieldID = "";
+                break;
+            case 5:
+             
+                $scope.scanfieldID = "";
+            case 6:
+                $scope.scanfieldID = "";
+                break;
+            default:
+                $scope.scanfieldID = "";
+                break;
+
+        }
+
+        $scope.$apply();
     }
 
 
