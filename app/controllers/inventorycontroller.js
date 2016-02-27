@@ -404,20 +404,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                 if ($scope.UOMList[i].UnitOfMeasureID == UOMID) {
                     return $scope.UOMList[i].UnitOfMeasureName;
                 }
+
             }
         }
         return "";
     }
 
-    
-
-    $(document).on('touchend', '.scanbtn', function (e) {
-
-        $(this).trigger('click');
-    });
-
     $scope.ScanNew = function (ControlID) {
-
 
         var _id = "#" + ControlID;
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
@@ -433,9 +426,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
                     $scope.InventoryObject.ItemName = resultvalue;
                     $(_id).val(resultvalue);
-                    mySwiper.swipeNext();
-
-                    $scope.$apply();
                  
 
                 }
@@ -454,8 +444,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
                     $scope.InventoryObject.Location = resultvalue;
                     $(_id).val(resultvalue);
-                    mySwiper.swipeNext();
-                    $scope.$apply();
                    
 
                 }
@@ -466,27 +454,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
             }
             else {
-              
+                $scope.InventoryObject.Description = resultvalue;
 
+                $(_id).val(result.text);
 
-                var resultvalue = result.text;
-
-                if (resultvalue != "") {
-
-                    $scope.InventoryObject.Description = resultvalue;
-
-                    $(_id).val(result.text);
-                    mySwiper.swipeNext();
-                    $scope.$apply();
-
-                }
-
-                else {
-                    //log.error("Item not found in list !!");
-                }
             }
 
-        
+            mySwiper.swipeNext();
+
+            $scope.$apply();
 
 
 
@@ -514,20 +490,22 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         }
     }
 
-    $(document).on('touchend', '#moveback', function (e) {
+
+    $scope.movetoback = function () {
+
+
         bootbox.confirm("Are you sure to exit ?", function (result) {
             if (result) {
 
+                debugger;
                 $location.path('/mainmenu');
 
                 $scope.$apply();
 
             }
         });
-    });
 
-
-    
+    }
 
 
     var mySwiper = new Swiper('.swiper-container', {
@@ -539,6 +517,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         allowSwipeToPrev : false,
         onSlideChangeStart: function (swiper) {
 
+          
+            console.log(swiper.activeIndex);
+            //before Event use it for your purpose
         },
      
     
@@ -568,6 +549,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
       //  $("#myform .swiper-slide input").removeAttr("autofocus");
            $("#myform .swiper-slide-active input:first").focus();
            $("#myform .swiper-slide-active input:first").trigger("click");
+
            SoftKeyboard.show();
     //    $scope.$apply();
 
@@ -581,16 +563,22 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
-    $(document).on('touchend', '.arrow-left', function (e) {
+    $('.arrow-left').on('click', function (e) {
+
         e.preventDefault()
         mySwiper.swipePrev()
-    });
 
 
-    $(document).on('touchend', '.arrow-right', function (e) {
+
+    })
+    $('.arrow-right').on('click', function (e) {
+        debugger;
+
         e.preventDefault()
         mySwiper.swipeNext()
-    });
+
+    })
+
 
 
 }]);

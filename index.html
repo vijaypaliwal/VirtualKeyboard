@@ -320,6 +320,7 @@
     <script src="scripts/jquery-1.11.0.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-touch.js"></script>
     <script src="scripts/angular-route.min.js"></script>
     <script src="scripts/angular-local-storage.min.js"></script>
     <script src="scripts/loading-bar.min.js"></script>
@@ -439,28 +440,7 @@
 
     </script>
 
-    <script>
-
-        var queryid = "myform";
-        var gnStartTime = 0;
-        var gbStillTouching = false;
-        function checkTapHold(nID) {
-            if ((gbStillTouching) && (gnStartTime == nID)) {
-                gnStartTime = 0;
-
-                lastClickedId = queryid;
-                alert(queryid);
-            }
-        }
-        document.getElementById(queryid).addEventListener('touchstart', function (event) {
-            gnStartTime = Number(new Date());
-            gbStillTouching = true;
-            setTimeout(function () { checkTapHold(gnStartTime); clearTimeout(); }, 1000);
-        }, false);
-        document.getElementById(queryid).addEventListener('touchend', function (event) {
-            gbStillTouching = false;
-        }, false);
-    </script>
+   
 
 
 
