@@ -410,6 +410,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         return "";
     }
 
+    
+
+    $(document).on('touchend', '#itemScan', function (e) {
+
+        alert("Touch clicl");
+        $scope.ScanNew('pPartForm')
+    });
+
     $scope.ScanNew = function (ControlID) {
 
 
