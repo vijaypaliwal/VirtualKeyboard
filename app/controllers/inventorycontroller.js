@@ -404,7 +404,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                 if ($scope.UOMList[i].UnitOfMeasureID == UOMID) {
                     return $scope.UOMList[i].UnitOfMeasureName;
                 }
-
             }
         }
         return "";
@@ -419,8 +418,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.ScanNew = function (ControlID) {
 
-
-        alert("In");
 
         var _id = "#" + ControlID;
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
@@ -500,22 +497,20 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         }
     }
 
-
-    $scope.movetoback = function () {
-
-
+    $(document).on('touchend', '.moveback', function (e) {
         bootbox.confirm("Are you sure to exit ?", function (result) {
             if (result) {
 
-                debugger;
                 $location.path('/mainmenu');
 
                 $scope.$apply();
 
             }
         });
+    });
 
-    }
+
+    
 
 
     var mySwiper = new Swiper('.swiper-container', {
