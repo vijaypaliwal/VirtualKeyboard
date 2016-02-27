@@ -412,10 +412,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     
 
-    $(document).on('touchend', '#itemScan', function (e) {
+    $(document).on('touchend', '.scanbtn', function (e) {
 
-        alert("Touch clicl");
-        $scope.ScanNew('pPartForm')
+        $(this).trigger('click');
     });
 
     $scope.ScanNew = function (ControlID) {
@@ -570,16 +569,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
-    $('.arrow-left').on('click', function (e) {
+    $(document).on('touchend', '.arrow-left', function (e) {
         e.preventDefault()
         mySwiper.swipePrev()
-    })
-    $('.arrow-right').on('click', function (e) {
+    });
+
+
+    $(document).on('touchend', '.arrow-right', function (e) {
         e.preventDefault()
         mySwiper.swipeNext()
-
-    })
-
+    });
 
 
 }]);
