@@ -410,9 +410,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         return "";
     }
 
-    
+     
     $scope.ScanNew = function (ControlID) {
-
+        alert(" IN ANGULAR");
         var _id = "#" + ControlID;
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
