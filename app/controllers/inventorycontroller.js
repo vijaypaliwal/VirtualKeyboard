@@ -410,9 +410,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         return "";
     }
 
-    $(document).on('touchend', '#ItemName', function (e) {
-        $scope.ScanNew("ItemName");
-    });
+    
     $scope.ScanNew = function (ControlID) {
 
         var _id = "#" + ControlID;
@@ -552,7 +550,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
       //  $("#myform .swiper-slide input").removeAttr("autofocus");
            $("#myform .swiper-slide-active input:first").focus();
            $("#myform .swiper-slide-active input:first").trigger("click");
-
+           $("#myform .swiper-slide-active input:first").trigger("keypress");
            SoftKeyboard.show();
     //    $scope.$apply();
 
