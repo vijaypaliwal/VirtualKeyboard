@@ -412,6 +412,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.ScanNew = function (ControlID) {
 
+
+        alert("In");
+
         var _id = "#" + ControlID;
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
