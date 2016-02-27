@@ -365,7 +365,8 @@
   
     <script>
 
-
+        var _CurrentUrl = "Login";
+        var _isOpenBootbox = false;
 
         $("#menu-toggle").click(function (e) {
 
@@ -392,21 +393,33 @@
             e.preventDefault();
             if (exitApp) {
 
+                if (_isOpenBootbox == false) {
+                    _isOpenBootbox = true;
+                    bootbox.confirm("Are you sure to exit App ?", function (result) {
+                        if (result) {
+                            clearInterval(intval)
+                    (navigator.app && navigator.app.exitApp()) || (device && device.exitApp())
+                            _isOpenBootbox = false;
 
-                bootbox.confirm("Are you sure to exit App ?", function (result) {
-                    if (result) {
-                        clearInterval(intval)
-                (navigator.app && navigator.app.exitApp()) || (device && device.exitApp())
+                        }
+                        _isOpenBootbox = false;
+                    });
 
-                    }
-                });
+                }
 
-               
             }
             else {
-                exitApp = true
-               
-                navigator.app.backHistory();
+                exitApp = true;
+
+                if (_CurrentUrl != "MainMenu")
+                {
+
+                    navigator.app.backHistory();
+                    _isOpenBootbox = false;
+
+                }
+
+            
             }
         }, false);
 

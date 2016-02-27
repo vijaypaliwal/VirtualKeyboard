@@ -460,58 +460,58 @@
 
 </div>
 
-<div class="animated slideInLeft">
+<div class="animated slideInLeft" id="mylist">
 
     <div class="pageData ">
-     
-            <ul class=" widget-products">
-                <li ng-repeat="_obj in InventoryItems">
-                    <a class="">
-                        <span class="img">
-                            <img id="Img_{{_obj.InventoryID}}" ng-if="_obj.ImagePath==''" ng-click="UploadImg(_obj.InventoryID,_obj)" src="/img/default.png" alt="" />
-                            <img ng-click="_updateImg(_obj.ImagePath)" ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="" />
+
+        <ul class=" widget-products">
+            <li ng-repeat="_obj in InventoryItems">
+                <a class="">
+                    <span class="img">
+                        <img id="Img_{{_obj.InventoryID}}" ng-if="_obj.ImagePath==''" ng-click="UploadImg(_obj.InventoryID,_obj)" src="/img/default.png" alt="" />
+                        <img ng-click="_updateImg(_obj.ImagePath)" ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="" />
+                    </span>
+                    <span class="product clearfix">
+                        <!--<span class="name">
+
+
+                        </span>-->
+
+                        <h5 class="list-group-item-heading">
+                            {{_obj.ItemNumber}} <span class="pull-right"> <span class="">{{_obj.CurrentQuantity}} </span> {{_obj.UOM}} </span>
+
+                        </h5>
+
+                        <span class="list-group-item-text">
+                            <span class="text" style="width:30%">
+                                {{_obj.Location}}
+                            </span>
+                            <span class="" style="float:right">
+                                {{_obj.StatusValue}}
+                            </span>
                         </span>
-                        <span class="product clearfix">
-                            <!--<span class="name">
-
-
-                          </span>-->
-
-                            <h5 class="list-group-item-heading">
-                                {{_obj.ItemNumber}} <span class="pull-right"> <span class="">{{_obj.CurrentQuantity}} </span> {{_obj.UOM}} </span>
-
-                            </h5>
-
-                            <span class="list-group-item-text">
-                                <span class="text" style="width:30%">
-                                    {{_obj.Location}}
-                                </span>
-                                <span class="" style="float:right">
-                                    {{_obj.StatusValue}}
-                                </span>
-                            </span>
-                            <br />
-                            <span class="text">
-                                {{_obj.ItemDescription}}
-
-                            </span>
-
-
+                        <br />
+                        <span class="text">
+                            {{_obj.ItemDescription}}
 
                         </span>
-                    </a>
-                </li>
 
-            </ul>
+
+
+                    </span>
+                </a>
+            </li>
+
+        </ul>
 
         <div>
             <br />
             <br />
-         
+
         </div>
 
 
-        </div>
+    </div>
 </div>
 
 <div style="text-align: center; color: #d9534f; display:none; margin-top: 20px;" class="maincontent norecords">

@@ -35,7 +35,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.Status = "N/A";
     $scope.UOM = "N/A";
 
-
+    _CurrentUrl = "Inventory";
     $scope.logOut = function () {
 
       
@@ -412,7 +412,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
      
     $scope.ScanNew = function (ControlID) {
-        alert(" IN ANGULAR");
+     
         var _id = "#" + ControlID;
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 

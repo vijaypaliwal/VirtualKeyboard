@@ -15,7 +15,7 @@ app.controller('mainmenuController', ['$scope', '$location', 'authService', 'ngA
     $scope.message = "";
 
 
-
+    _CurrentUrl = "MainMenu";
     $scope.logOut = function () {
 
    

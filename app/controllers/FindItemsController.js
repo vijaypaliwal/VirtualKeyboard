@@ -10,6 +10,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         CustomData: []
     };
 
+
     $scope.CurrentImgID = "";
     $scope.SearchFromData="All"
     $scope.SearchFromText = "Search";
@@ -29,6 +30,27 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
             CustomData: []
         };
     }
+
+    _CurrentUrl = "FindItems";
+
+    var pressTimer
+
+    $("#mylist").mouseup(function () {
+        clearTimeout(pressTimer)
+        // Clear timeout
+        return false;
+    }).mousedown(function () {
+        // Set timeout
+        pressTimer = window.setTimeout(function () {
+            bootbox.confirm("Are you sure to exit App ?", function (result) {
+                if (result) {
+                    (navigator.app && navigator.app.exitApp()) || (device && device.exitApp())
+
+                }
+            });
+        }, 1000)
+        return false;
+    });
 
     function GetRandomData(Type)
     {
@@ -87,7 +109,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
             // Closure to capture the file information.
             reader.onload = (function (theFile) {
-                debugger;
+                 
 
                 var id = theFile.lastModified;
 
@@ -115,9 +137,11 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.UpdateInventory=function()
     {
+
         ordersService.UpdateInventory($scope.CurrentObj);
         $scope.CurrentObj = {};
         $scope.InventoryItems = [];
+        $scope.$apply();
         $scope.PopulateInventoryItems();
     }
     $scope.logOut = function () {
@@ -132,7 +156,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
    
     $scope.UploadImg = function (id,_obj) {
-        debugger;
+         
         $scope.CurrentImgID = "#Img_" + id;
         $scope.CurrentObj = _obj;
         $("#myfile").trigger("click");
@@ -166,6 +190,11 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         $(".norecords").hide();
 
     }
+
+
+    
+
+
     $scope.SearchInventory=function()
     {
         
@@ -293,15 +322,13 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.PopulateInventoryItems = function () {
 
-        debugger;
         $scope.InventoryItems = ordersService.PopulateInventoryItems();
     
-
-
+        $scope.$apply();
     }
 
     $scope._updateImg = function (src) {
-        debugger;
+         
         $scope.selectedImage = src;
         $("#myModal1").modal('show');
     }
