@@ -41,6 +41,10 @@
   <preference name="StatusBarStyle" value="lightcontent" />
   <preference name="KeyboardDisplayRequiresUserAction" value="false" />
 
+  <preference name="KeyboardShrinksView" value="true" />
+
+  
+  
   <icon src="icon.png" />
 
   <icon src=".pgbomit/res/icon/android/icon-36-ldpi.png"   gap:platform="android"    gap:density="ldpi" />
