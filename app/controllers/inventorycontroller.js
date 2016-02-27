@@ -520,9 +520,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         allowSwipeToPrev : false,
         onSlideChangeStart: function (swiper) {
 
-          
-            console.log(swiper.activeIndex);
-            //before Event use it for your purpose
         },
      
     
@@ -552,7 +549,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
       //  $("#myform .swiper-slide input").removeAttr("autofocus");
            $("#myform .swiper-slide-active input:first").focus();
            $("#myform .swiper-slide-active input:first").trigger("click");
-
            SoftKeyboard.show();
     //    $scope.$apply();
 
@@ -567,16 +563,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     $('.arrow-left').on('click', function (e) {
-
         e.preventDefault()
         mySwiper.swipePrev()
-
-
-
     })
     $('.arrow-right').on('click', function (e) {
-        debugger;
-
         e.preventDefault()
         mySwiper.swipeNext()
 
