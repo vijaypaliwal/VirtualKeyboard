@@ -157,7 +157,7 @@
 
                         <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
                    
-                        <img ng-click="getstep(6)" style="height:60px; width:60px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
+                        <img ng-click="getstep(8)" style="height:60px; width:60px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
                     </div>
                     <div class="col-md-10 col-xs-9">
                        <div> <span style="font-size:18px;" ng-click="getstep(2)"> {{ Quantity }}</span> <span ng-click="getstep(4)"> {{UOM}}</span>  of <span ng-click="getstep(0)">{{ItemName}}</span>  </div>
@@ -264,9 +264,7 @@
 
                     </div>
 
-
                     <div class="swiper-slide">
-
                         <div class="form-group">
                             <label>Status</label>
                             <div class="input-group">
@@ -279,9 +277,14 @@
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Status','#Status')"><i class="fa fa-refresh"></i></span>
                             </div>
                         </div>
+                    </div>
 
 
-                        <hr />
+
+
+                    <div class="swiper-slide">
+
+                    
                         <div class="form-group">
                             <label>Select UOM</label>
                             <div class="input-group">
@@ -303,7 +306,6 @@
 
 
                     <div class="swiper-slide">
-
                         <div class="form-group">
 
                             <label>Unique tag</label>
@@ -312,8 +314,12 @@
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_uniquetag','#Unittag')"><i class="fa fa-refresh"></i></span>
                             </div>
                         </div>
+                    </div>
 
-                        <hr />
+
+                    <div class="swiper-slide">
+
+                        
 
                         <div class="form-group">
                             <label>Cost per unit</label>
@@ -338,24 +344,27 @@
                     <div class="swiper-slide">
 
 
+                        <div ng-if="scanfieldID=='laststep'">
+                            <div ng-if="myform.$invalid" class="wellNew">
+                                <span ng-click="getstep(0)"> Item Name </span> and <span ng-click="getstep(4)"> unit of measure</span> is required please fill them first.
+                            </div>
 
 
-                        <div ng-if="myform.$invalid" class="wellNew">
-                            <span ng-click="getstep(0)"> Item Name </span> and <span ng-click="getstep(4)"> unit of measure</span> is required please fill them first.
+                            <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list123"></output>
+
+                            <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBox()">
+                                <div><i class="fa fa-plus-circle"></i></div>
+                                <span>Add Image</span>
+                                <input type="file" style="visibility:hidden" id="files" accept="image/*;capture=camera" />
+                            </div>
+
+                            <div>
+                                <br />
+                            </div>
                         </div>
 
 
-                        <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list123"></output>
-
-                        <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBox()">
-                            <div><i class="fa fa-plus-circle"></i></div>
-                            <span>Add Image</span>
-                            <input type="file" style="visibility:hidden" id="files" accept="image/*;capture=camera" />
-                        </div>
-
-                        <div>
-                            <br />
-                        </div>
+                   
 
                         <a ng-click="addinventory()" style="width:100%; margin-top:15px;" ng-disabled="myform.$invalid" id="addinventories" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
 

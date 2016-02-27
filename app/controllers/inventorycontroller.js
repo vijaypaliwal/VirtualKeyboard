@@ -591,6 +591,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
             case 6:
                 $scope.scanfieldID = "";
                 break;
+            case 7:
+                $scope.scanfieldID = "";
+                break;
+            case 8:
+                $scope.scanfieldID = "laststep";
+                break;
             default:
                 $scope.scanfieldID = "";
                 break;
