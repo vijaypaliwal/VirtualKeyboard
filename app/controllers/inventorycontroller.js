@@ -455,7 +455,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                     $scope.InventoryObject.Location = resultvalue;
                     $(_id).val(resultvalue);
                     mySwiper.swipeNext();
-
                     $scope.$apply();
                    
 
@@ -467,12 +466,24 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
             }
             else {
-                $scope.InventoryObject.Description = resultvalue;
+              
 
-                $(_id).val(result.text);
-                mySwiper.swipeNext();
-                $scope.$apply();
 
+                var resultvalue = result.text;
+
+                if (resultvalue != "") {
+
+                    $scope.InventoryObject.Description = resultvalue;
+
+                    $(_id).val(result.text);
+                    mySwiper.swipeNext();
+                    $scope.$apply();
+
+                }
+
+                else {
+                    //log.error("Item not found in list !!");
+                }
             }
 
         
