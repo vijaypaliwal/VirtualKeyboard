@@ -43,7 +43,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         // Set timeout
         pressTimer = window.setTimeout(function () {
             $("#myModalforlist").modal('show');
-        }, 1000)
+        }, 700)
         return false;
     });
 
