@@ -89,6 +89,36 @@
 
 </style>
 
+<style>
+    #myModalforlist {
+        top: 25%;
+        overflow: hidden;
+        width: 95%;
+        margin: 0 auto;
+    }
+
+        #myModalforlist ul {
+            padding: 0px;
+            margin-bottom: 0px;
+        }
+
+            #myModalforlist ul li {
+                padding: 14px;
+                border-bottom: 1px solid #ccc;
+                background:#fff;
+                list-style-type:none;
+            }
+
+                #myModalforlist ul li a {
+                    padding-left: 20px;
+                    display: block;
+                    width: 100%;
+                    text-decoration: none !important;
+                    background:#fff;
+                    color:#000;
+                }
+</style>
+
 
 <script>
 
@@ -368,10 +398,12 @@
                             
 
                             <div style="display:none;" class="androidbtn">
-                                <button class="btn btn-primary" onclick="capturePhoto();" type="button">Capture Photo</button>
-                               
-                                <button class="btn btn-primary" onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);" type="button">From Photo Libarary</button>
-                               
+                                
+                                <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBoxAndroid()">
+                                    <div><i class="fa fa-plus-circle"></i></div>
+                                    <span>Add Image</span>
+                                    <input type="file" style="visibility:hidden" id="files" accept="image/*;capture=camera" />
+                                </div>
                             </div>
 
 
@@ -412,6 +444,13 @@
                 </table>
             </div>
             <div style="display: none;" class="pagination"></div>
+
+
+
+
+            
+
+
         </div>
 
 
@@ -419,4 +458,30 @@
 </div>
 <div>
     <br /><br />
+</div>
+<div id="myModalforlist" class="modal fade" role="dialog">
+    <!-- Modal content-->
+
+
+   
+
+        <div class="modal-body">
+
+            <ul>
+                <li>
+                    <a onclick="capturePhoto();"> <i class="fa fa-camera"></i> Capture Photo</a>
+                </li>
+                <li>
+                    <a ng-click="triggerFileClick()"><i class="fa fa-picture-o"></i> From Photo Libarary</a>
+                </li>  
+            </ul>
+
+           
+           
+        </div>
+        <!--<div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+        </div>-->
+  
+
 </div>

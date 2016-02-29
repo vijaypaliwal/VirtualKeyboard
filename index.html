@@ -443,8 +443,8 @@
         function onPhotoDataSuccess(imageData) {
             // Uncomment to view the base64 encoded image data
             // console.log(imageData);
-            alert("photo capture success");
-            alert(imageData);
+           // alert("photo capture success");
+            //alert(imageData);
             // Get image handle
             //
             //var smallImage = document.getElementById('smallImage');
@@ -459,7 +459,7 @@
 
             document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
 
-
+            document.getElementById('list321').innerHTML = document.getElementById('list321').innerHTML + _htmltoRender;
             // Show the captured photo
             // The inline CSS rules are used to resize the image
             //
@@ -471,10 +471,10 @@
         function onPhotoURISuccess(imageURI) {
             // Uncomment to view the image file URI
             // console.log(imageURI);
-            alert("photo url success");
+            //alert("photo url success");
             // Get image handle
 
-            alert(imageURI);
+          //  alert(imageURI);
 
             //  var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
             //var compilehtml = $compile(crossicon)($scope);
@@ -486,12 +486,13 @@
 
 
             document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
+            document.getElementById('list321').innerHTML = document.getElementById('list321').innerHTML + _htmltoRender;
         }
 
         // A button will call this function
         //
         function capturePhoto() {
-            alert("in capture photo");
+          //  alert("in capture photo");
             // Take picture using device camera and retrieve image as base64-encoded string
             navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
                 quality: 50,
@@ -502,7 +503,6 @@
         // A button will call this function
         //
         function capturePhotoEdit() {
-            alert("in capture photo edit");
             // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
             navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
                 quality: 20, allowEdit: true,
@@ -513,7 +513,6 @@
         // A button will call this function
         //
         function getPhoto(source) {
-            alert("in get photo");
             // Retrieve image file location from specified source
             navigator.camera.getPicture(onPhotoURISuccess, onFail, {
                 quality: 50,
