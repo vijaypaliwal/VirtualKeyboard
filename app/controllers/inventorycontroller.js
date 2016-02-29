@@ -47,7 +47,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.authentication = authService.authentication.isAuth;
 
+    var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
 
+    alert(deviceType);
+
+    if (deviceType == 'iPhone') {
+        $(".iosbtn").show()
+    }
+    else {
+        $(".androidbtn").show()
+    }
 
 
     $scope.afterlogout = function () {
