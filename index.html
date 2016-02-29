@@ -26,7 +26,7 @@
             background-color: #128ece !important;
             border: transparent !important;
             border-radius: 5px;
-         
+
             width: 100%;
             height: 45px;
         }
@@ -40,9 +40,9 @@
             border: transparent !important;
             border-radius: 5px;
         }
-        
-        
-        
+
+
+
          label {
             font-size: 17px;
         }
@@ -114,7 +114,7 @@
 
             .fileUpload input.upload {
                 position: absolute;
-            
+
                 padding: 0;
                 font-size: 20px;
                 cursor: pointer;
@@ -294,7 +294,7 @@
             font-size: 17px;
             color: #6683DA;
             cursor: pointer;
-          
+
         }
 
         body {
@@ -314,14 +314,14 @@
 
 </head>
 <body>
- 
+
     <!-- Sidebar -->
 
     <div class="nointernet alert alert-danger">
         <h3><i class="fa fa-exclamation-triangle"></i> No Internet Connection</h3>
         <p>Sorry, no internet connectivity detected. Please reconnect and try again.</p>
     </div>
- 
+
 
     <div class="container" id="viewdata">
         <div data-ng-view="">
@@ -348,7 +348,6 @@
     <script type="text/javascript">
         appnew.initialize();
     </script>-->
-
     <!-- Load app main script -->
     <script src="app/app.js?v=2"></script>
 
@@ -363,7 +362,7 @@
     <script src="app/controllers/loginController.js?v=2"></script>
 
     <script src="app/controllers/mainmenuController.js?v=2"></script>
-   
+
     <script src="app/controllers/ordersController.js?v=2"></script>
     <script src="app/controllers/inventorycontroller.js?v=2"></script>
     <script src="app/controllers/itemcontroller.js?v=2"></script>
@@ -371,11 +370,11 @@
     <script src="app/controllers/transactionController.js?v=2"></script>
     <script src="app/controllers/refreshController.js?v=2"></script>
     <script src="app/controllers/tokensManagerController.js?v=2"></script>
- 
+
     <!-- Load custom filters -->
     <!-- Load custom directives -->
 
-  
+
     <script>
 
         var _CurrentUrl = "Login";
@@ -424,48 +423,42 @@
             else {
                 exitApp = true;
 
-                if (_CurrentUrl != "MainMenu")
-                {
+                if (_CurrentUrl != "MainMenu") {
 
                     navigator.app.backHistory();
                     _isOpenBootbox = false;
 
                 }
 
-            
+
             }
         }, false);
 
         document.addEventListener("online", onOnline, false);
         document.addEventListener("offline", onOffline, false);
 
-        var pictureSource; 
+        var pictureSource;
         var destinationType;
 
         function onPhotoDataSuccess(imageData) {
             // Uncomment to view the base64 encoded image data
             // console.log(imageData);
             alert("photo capture success");
-
+            alert(imageData);
             // Get image handle
             //
             //var smallImage = document.getElementById('smallImage');
-           // var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
+            // var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
             //var compilehtml = $compile(crossicon)($scope);
             // Unhide image elements
             //
-            smallImage.style.display = 'block';
+            //  smallImage.style.display = 'block';
 
-            imageData="data:image/jpeg;base64," + imageData
-            var span = document.createElement('span');
-            span.innerHTML =
-            [
-              '<img  style="height: 75px; width:75px; border: 1px solid #ccc; margin:10px; margin-top:0px;" src="',
-              imageData,
-              '"/> ' 
-            ].join('');
+            imageData = "data:image/jpeg;base64," + imageData;
+            var _htmltoRender = "<span>'<img  style='height: 75px; width:75px; border: 1px solid #ccc; margin:10px; margin-top:0px;' src='" + imageData + "'/></span>'";
 
-            document.getElementById('list123').insertBefore(span, null);
+            document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
+
 
             // Show the captured photo
             // The inline CSS rules are used to resize the image
@@ -476,29 +469,23 @@
         // Called when a photo is successfully retrieved
         //
         function onPhotoURISuccess(imageURI) {
-            // Uncomment to view the image file URI 
+            // Uncomment to view the image file URI
             // console.log(imageURI);
             alert("photo url success");
             // Get image handle
-        
 
+            alert(imageURI);
 
-          //  var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
+            //  var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
             //var compilehtml = $compile(crossicon)($scope);
             // Unhide image elements
             //
 
-            imageURI = "data:image/jpeg;base64," + imageURI
-            var span = document.createElement('span');
-            span.innerHTML =
-            [
-              '<img id="' + id + '" style="height: 75px; width:75px; border: 1px solid #ccc; margin:10px; margin-top:0px;" src="',
-              imageURI,
-              //'" title="', escape(theFile.name),
-              '"/> '
-            ].join('');
+            imageURI = "data:image/jpeg;base64," + imageURI;
+            var _htmltoRender = "<span>'<img  style='height: 75px; width:75px; border: 1px solid #ccc; margin:10px; margin-top:0px;' src='" + imageURI + "'/></span>'";
 
-            document.getElementById('list123').insertBefore(span, null);
+
+            document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
         }
 
         // A button will call this function
@@ -516,7 +503,7 @@
         //
         function capturePhotoEdit() {
             alert("in capture photo edit");
-            // Take picture using device camera, allow edit, and retrieve image as base64-encoded string  
+            // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
             navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
                 quality: 20, allowEdit: true,
                 destinationType: destinationType.DATA_URL
@@ -536,7 +523,7 @@
         }
 
         // Called if something bad happens.
-        // 
+        //
         function onFail(message) {
             alert('Failed because: ' + message);
         }
@@ -544,32 +531,32 @@
         function onDeviceReady() {
 
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
-             pictureSource= navigator.camera.PictureSourceType;
-             destinationType = navigator.camera.DestinationType;
+            pictureSource = navigator.camera.PictureSourceType;
+            destinationType = navigator.camera.DestinationType;
 
-            
+
         }
 
 
 
 
         function onOffline() {
-        
+
             $(".nointernet").show();
         }
 
         function onOnline() {
-        
+
             $(".nointernet").hide();
         }
-     
 
-   
-     
+
+
+
 
     </script>
 
-   
+
 
 
 

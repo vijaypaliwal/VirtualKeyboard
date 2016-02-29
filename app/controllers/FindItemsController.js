@@ -42,12 +42,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     }).mousedown(function () {
         // Set timeout
         pressTimer = window.setTimeout(function () {
-            bootbox.confirm("Are you sure to exit App ?", function (result) {
-                if (result) {
-                    (navigator.app && navigator.app.exitApp()) || (device && device.exitApp())
-
-                }
-            });
+            $("#myModalforlist").modal('show');
         }, 1000)
         return false;
     });

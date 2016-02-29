@@ -354,6 +354,63 @@
 
 </style>
 
+<style>
+    #myModalforlist
+    {
+        top:25%;
+        overflow:hidden;
+        width:90%;
+        margin:0 auto;
+    }
+
+    #myModalforlist ul
+
+    {
+        padding:0px;
+       margin-bottom:0px;
+    }
+
+        #myModalforlist ul li {
+           padding:9px;
+           border-bottom:1px solid #ccc;
+        }
+
+        #myModalforlist ul li a {
+            padding-left: 20px;
+            display:block;
+            width:100%;
+            text-decoration:none !important;
+           
+        }
+
+    .increase {
+        color: #177B3D;
+    }
+
+    .decrease {
+        color: #AF2525;
+    }
+
+    .move {
+        color: #C65E28;
+    }
+    .convert {
+        color: #CE59A1;
+    }
+
+    .update {
+        color: #583782;
+    }
+    .tag {
+        color: #0D190F;
+    }
+    .modal-body
+    {
+        padding:0px;
+    }
+
+</style>
+
 
 
 <div class="topheader">
@@ -527,6 +584,30 @@
         <button style="padding: 2px 7px; position: absolute; margin-left: -23px; margin-top:-5px;" class="btn-danger" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
     </div>
 
+</div>
+
+
+<div id="myModalforlist" class="modal fade" role="dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+         
+            <div class="modal-body">
+                <ul>
+                    <li><a class="increase"> <i class="fa fa-plus"></i>&nbsp;&nbsp;Increase</a></li>
+                    <li><a class="decrease"> <i class="fa fa-minus"></i>&nbsp;&nbsp;Decrease</a></li>
+                    <li><a class="move"> <i class="fa fa-exchange"></i>&nbsp;&nbsp;Move</a></li>
+                    <li><a class="convert"> <i class="fa fa-refresh"></i>&nbsp;&nbsp;Convert</a></li>
+                    <li><a class="update"> <i class="fa fa-pencil"></i>&nbsp;&nbsp;Update</a></li>
+                    <li><a class="tag"> <i class="fa fa-tag"></i>&nbsp;&nbsp;Tag</a></li>
+                </ul>
+             
+               
+            </div>
+            <!--<div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>-->
+        </div>
+  
 </div>
 
 

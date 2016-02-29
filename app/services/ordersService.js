@@ -70,7 +70,7 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', 'localStorageService', 
     }
 
     var _PopulateInventoryItems = function () {
-        debugger;
+    
         var _Data = localStorageService.get("InventoryData");
         var _RandomArray = [];
         if (_Data == null || _Data == undefined || _Data.length == 0) {
