@@ -452,6 +452,8 @@
         var destinationType;
 
         function onPhotoDataSuccess(imageData) {
+            $("#myModalforlist").modal("hide");
+
             // Uncomment to view the base64 encoded image data
             // console.log(imageData);
             // alert("photo capture success");
@@ -471,6 +473,9 @@
             document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
 
             document.getElementById('list321').innerHTML = document.getElementById('list321').innerHTML + _htmltoRender;
+
+            $("#defaultimg").hide();
+
             // Show the captured photo
             // The inline CSS rules are used to resize the image
             //
