@@ -322,10 +322,10 @@
         <p>Sorry, no internet connectivity detected. Please reconnect and try again.</p>
     </div>
     
-    <form action="http://www.example.com/search">
-        <input type="search" id="q" name="q" size=60>
-        <input type="button" value="Click to Speak" onclick="recognition.start()">
-    </form>
+    <button onclick="capturePhoto();" type="button">Capture Photo</button> <br>
+
+    <button onclick="getPhoto();" type="button">From Photo Library</button>
+
     <div class="container" id="viewdata">
         <div data-ng-view="">
         </div>
@@ -444,7 +444,39 @@
 
     
 
-     
+    var pictureSource = navigator.camera.PictureSourceType;
+    var destinationType = navigator.camera.DestinationType;
+
+        function capturePhoto() {
+
+            navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+                quality: 50,
+                destinationType: destinationType.DATA_URL
+            });
+        }
+
+        function onPhotoDataSuccess() {
+            alert("success photo from camera");
+        }
+
+        function getPhoto() {
+            // Retrieve image file location from specified source
+            navigator.camera.getPicture(onPhotoURISuccess, onFail, {
+                quality: 50,
+                destinationType: destinationType.FILE_URI,
+                sourceType: pictureSource.PHOTOLIBRARY
+            });
+        }
+
+        function onPhotoURISuccess()
+        {
+            alert("success photo from URL");
+        }
+
+        function onFail()
+        {
+            alert("error during photo upload");
+        }
 
         function onDeviceReady() {
 
