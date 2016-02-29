@@ -446,6 +446,8 @@
             // Uncomment to view the base64 encoded image data
             // console.log(imageData);
             alert("photo capture success");
+            var id = Math.floor(Math.random() * 420);
+            alert(id);
             // Get image handle
             //
             //var smallImage = document.getElementById('smallImage');
@@ -476,12 +478,15 @@
         // Called when a photo is successfully retrieved
         //
         function onPhotoURISuccess(imageURI) {
+
+
             // Uncomment to view the image file URI 
             // console.log(imageURI);
             alert("photo url success");
             // Get image handle
         
-
+            var id = Math.floor(Math.random() * 420);
+            alert(id);
 
             var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
             var compilehtml = $compile(crossicon)($scope);

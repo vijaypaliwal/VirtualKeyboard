@@ -54,7 +54,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         $(".iosbtn").show()
     }
     else {
-        $(".androidbtn").show()
+        $(".androidbtn").show();
+
     }
 
 
@@ -296,7 +297,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
                 var id = theFile.lastModified;
-
+                
 
                 var crossicon = '<a class="btn btn-danger removeImage" altid="'+id+'" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
                 var compilehtml = $compile(crossicon)($scope);
