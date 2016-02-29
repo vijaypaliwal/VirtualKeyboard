@@ -322,7 +322,10 @@
         <p>Sorry, no internet connectivity detected. Please reconnect and try again.</p>
     </div>
     
-    
+    <form action="http://www.example.com/search">
+        <input type="search" id="q" name="q" size=60>
+        <input type="button" value="Click to Speak" onclick="recognition.start()">
+    </form>
     <div class="container" id="viewdata">
         <div data-ng-view="">
         </div>
@@ -380,7 +383,7 @@
 
         var _CurrentUrl = "Login";
         var _isOpenBootbox = false;
-
+        var recognition;
         $("#menu-toggle").click(function (e) {
 
             e.preventDefault();
@@ -446,7 +449,13 @@
         function onDeviceReady() {
 
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
-
+            recognition = new SpeechRecognition();
+            recognition.onresult = function (event) {
+                if (event.results.length > 0) {
+                    q.value = event.results[0][0].transcript;
+                    q.form.submit();
+                }
+            }
         }
 
         function onOffline() {
