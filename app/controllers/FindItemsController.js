@@ -178,8 +178,6 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     }
 
 
-
-
     
     $scope.ClearFilter=function()
     {

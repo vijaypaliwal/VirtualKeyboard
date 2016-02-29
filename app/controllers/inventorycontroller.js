@@ -411,8 +411,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
      
     $scope.ScanNew = function () {
 
-        debugger;
-     
         var _id = "#" + $scope.scanfieldID;
 
         var ControlID = $scope.scanfieldID;
@@ -500,7 +498,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         bootbox.confirm("Are you sure to exit ?", function (result) {
             if (result) {
 
-                debugger;
                 $location.path('/mainmenu');
 
                 $scope.$apply();
@@ -564,8 +561,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.slidenumber = function (slidenumber) {
 
-        debugger;
-
         switch (slidenumber) {
             case 0:
                 $scope.scanfieldID = "pPartForm"
@@ -620,8 +615,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     })
     $('.arrow-right').on('click', function (e) {
-        debugger;
-
+      
         e.preventDefault()
         mySwiper.swipeNext()
 
