@@ -43,8 +43,8 @@ app.controller('mainmenuController', ['$scope', '$location', 'authService', 'ngA
 
     debugger;
 
-    $("#myModal1").modal('hide');
-    $("#myModalforlist").modal('hide');
+    $(".modal-backdrop").remove();
+    $("body").removeClass("modal-open");
 
     $scope.login = function () {
 

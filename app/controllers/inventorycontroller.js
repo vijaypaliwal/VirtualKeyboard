@@ -353,6 +353,20 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.OpenBox = function () {
         $("#files").trigger("click");
     }
+
+    $scope.triggerFileClick = function () {
+        $("#files").trigger("click");
+        $("#myModalforlist").modal("hide");
+    }
+
+
+    $scope.OpenBoxAndroid = function () {
+        $("#myModalforlist").modal("show");
+    }
+
+
+
+
     $("#files").on('change', function (event) {
     $scope.handleFileSelect(event);
     });
@@ -623,7 +637,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                 $scope.slidenumber(mySwiper.activeIndex);
 
 
+                if (mySwiper.activeIndex != 3 && mySwiper.activeIndex != 6) {
 
+                    $scope.changeNav();
+
+                }
+
+                else {
+
+                    SoftKeyboard.hide();
+
+                }
 
             }
         });
