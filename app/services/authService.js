@@ -28,6 +28,9 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     var _login = function (loginData) {
 
+
+        debugger;
+
         var data = "UserName=" + loginData.userName + "&Password=" + loginData.password + "&AccountName=" + loginData.account;
 
         if (loginData.useRefreshTokens) {
@@ -40,7 +43,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
             $.ajax
             ({
                 type: "POST",
-                url: 'http://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/Login',
+                url: 'http://dev.style.u8i9.com/API/ClearlyInventoryAPI.svc/Login',
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'text json',
                 data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),

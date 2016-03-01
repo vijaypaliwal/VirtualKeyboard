@@ -34,7 +34,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.Location = "N/A";
     $scope.Status = "N/A";
     $scope.UOM = "N/A";
-    $scope.scanfieldID = "pPartForm" 
+    $scope.scanfieldID = "pPartForm";
+    $scope.UnitDataList = [];
+    $scope.CustomItemDataList = [];
+    $scope.CustomActivityDataList = [];
 
     _CurrentUrl = "Inventory";
     $scope.logOut = function () {
@@ -49,12 +52,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
 
+
     if (deviceType == 'iPhone') {
         $(".iosbtn").show()
     }
     else {
-        $(".androidbtn").show();
-
+        $(".androidbtn").show()
     }
 
 
@@ -80,7 +83,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         $.ajax
            ({
                type: "POST",
-               url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/GetLocations',
+               url: serviceBase + 'GetLocations',
                contentType: 'application/json; charset=utf-8',
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
@@ -224,7 +227,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         $.ajax
            ({
                type: "POST",
-               url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/GetUnitsOfMeasure',
+               url: serviceBase + 'GetUnitsOfMeasure',
                contentType: 'application/json; charset=utf-8',
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
@@ -252,7 +255,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         $.ajax
            ({
                type: "POST",
-               url: 'https://app.clearlyinventory.com/API/ClearlyInventoryAPI.svc/GetItems',
+               url: serviceBase + 'GetItems',
                contentType: 'application/json; charset=utf-8',
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
@@ -270,21 +273,86 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     }
 
+    $scope.GetActiveUnitDataField = function () {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetActiveUnitDataFields',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+                   debugger;
+
+                   $scope.UnitDataList = response.GetActiveUnitDataFieldsResult.Payload;
+                   console.log("Unit Data Fields")
+                   console.log($scope.UnitDataList);
+                   $scope.$apply();
+               },
+               error: function (response) {
+
+                   //     $scope.InventoryObject.Location = 678030;
+
+               }
+           });
+    }
+
+    $scope.GetCustomDataField = function (Type) {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetCustomFieldsData',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken,"Type":Type }),
+               success: function (response) {
+                   debugger;
+                   if (Type == 0)
+                   {
+                       $scope.CustomItemDataList = response.GetCustomFieldsDataResult.Payload;
+
+                       console.log("Custom Item Fields")
+                       console.log($scope.CustomItemDataList);
+
+                   }
+                   else if(Type==1)
+                   {
+                       $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
+                       console.log("Custom Activity Fields")
+                       console.log($scope.CustomActivityDataList);
+                       $(window).trigger('resize');
+
+                       setTimeout(function () { $scope.swiperfunction(); }, 2000);
+
+                      
+                       $scope.$apply();
+
+                   
+
+                   }
+
+                   $scope.$apply();
+               },
+               error: function (response) {
+
+                   //     $scope.InventoryObject.Location = 678030;
+
+               }
+           });
+    }
+
     $scope.OpenBox = function () {
         $("#files").trigger("click");
     }
-
-    $scope.triggerFileClick = function () {
-        $("#files").trigger("click");
-        $("#myModalforlist").modal("hide");
-    }
-    
-
-    $scope.OpenBoxAndroid = function () {
-        $("#myModalforlist").modal("show");
-    }
-
-
     $("#files").on('change', function (event) {
     $scope.handleFileSelect(event);
     });
@@ -308,7 +376,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
                 var id = theFile.lastModified;
-                
+
 
                 var crossicon = '<a class="btn btn-danger removeImage" altid="'+id+'" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
                 var compilehtml = $compile(crossicon)($scope);
@@ -371,11 +439,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     }
   
-
+    $scope.GetActiveUnitDataField();
     $scope.getlocation();
     $scope.getuom();
     $scope.getitems();
-
+    $scope.GetCustomDataField(0);
+    $scope.GetCustomDataField(1);
     $scope.GetValueFromArrray = function (ItemNumber) {
         if ($.trim(ItemNumber) != "") {
 
@@ -414,6 +483,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         return "";
 
     }
+
+  
     $scope.GetUOMfromArray = function (UOMID)
     {
         if ($.trim(UOMID) != "") {
@@ -475,22 +546,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
             }
             else {
-              
+                $scope.InventoryObject.Description = resultvalue;
 
-                var resultvalue = result.text;
-
-                if (resultvalue != "") {
-
-                    $scope.InventoryObject.Description = result.text;
-
-                    $(_id).val(result.text);
-
-
-                }
-
-                else {
-                    //log.error("Item not found in list !!");
-                }
+                $(_id).val(result.text);
 
             }
 
@@ -541,10 +599,44 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
+    $scope.swiperfunction = function ()
+    { 
+        mySwiper = new Swiper('.swiper-container', {
+
+            initialSlide: 0,
+            speed: 300,
+            effect: 'flip',
+
+            allowSwipeToPrev: false,
+            onSlideChangeStart: function (swiper) {
+
+
+                console.log(swiper.activeIndex);
+                //before Event use it for your purpose
+            },
+
+
+            onSlideChangeEnd: function (swiperHere) {
+
+                var swiperPage = mySwiper.activeSlide()
+
+                $scope.slidenumber(mySwiper.activeIndex);
+
+
+
+
+            }
+        });
+    }
+
+
+
+
+
     var mySwiper = new Swiper('.swiper-container', {
 
         initialSlide: 0,
-        speed: 200,
+        speed: 300,
         effect: 'flip',
 
         allowSwipeToPrev : false,
@@ -563,7 +655,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
             $scope.slidenumber(mySwiper.activeIndex);
 
 
-            if (mySwiper.activeIndex != 3 && mySwiper.activeIndex != 8) {
+            if (mySwiper.activeIndex != 3 && mySwiper.activeIndex != 6) {
 
               $scope.changeNav();
 

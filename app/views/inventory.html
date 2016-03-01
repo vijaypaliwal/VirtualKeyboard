@@ -120,16 +120,6 @@
 </style>
 
 
-<script>
-
-
-
-
-
-
-
-</script>
-
 <div class="topheader">
     <div class="col-xs-3">
         <a href="#/mainmenu"><i class="fa fa-home"></i></a>
@@ -338,6 +328,7 @@
                     </div>
 
 
+
                     <div class="swiper-slide">
                         <div class="form-group">
 
@@ -422,6 +413,80 @@
                         
 
                     </div>
+
+
+                    <div class="swiper-slide" ng-repeat="obj in CustomItemDataList">
+
+                            <label>{{obj.cfdName}}</label>
+
+                            <input type="text" ng-if="obj.cfdDataType=='string'" ng-model="obj.CfValue" class="form-control stringType" value="{{obj.CfValue}}" />
+
+                            <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+                                <div class="form-control FormControlType" style="padding-top: 4px;margin-top: -9px;">
+
+                                    <label>
+                                        <input type="checkbox" ng-model="obj.CfValue"><i class="input-helper"></i>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div ng-if="obj.cfdDataType=='combobox'">
+                                <div class="fg-line">
+
+                                    <div class="select">
+                                        <select class="form-control" ng-model="obj.CfValue">
+
+                                            <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <input type="text" ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="form-control customFieldDatePicker FormDateType" value="{{obj.CfValue}}" />
+                            <input type="text" ng-if="obj.cfdDataType=='number'" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                            <input type="text" ng-if="obj.cfdDataType=='currency'" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
+
+
+                    </div>
+
+
+                        <div ng-repeat="obj in CustomActivityDataList" class="swiper-slide">
+                            <label>{{obj.cfdName}}</label>
+                            <input type="text" ng-if="obj.cfdDataType=='string'" ng-model="obj.CfValue" class="form-control stringType" value="{{obj.CfValue}}" />
+
+                            <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+                                <div class="form-control FormControlType" style="padding-top: 4px;margin-top: -9px;">
+
+                                    <label>
+                                        <input type="checkbox" ng-model="obj.CfValue"><i class="input-helper"></i>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div ng-if="obj.cfdDataType=='combobox'">
+                                <div class="fg-line">
+
+                                    <div class="select">
+                                        <select class="form-control" ng-model="obj.CfValue">
+
+                                            <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <input type="text" ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="form-control customFieldDatePicker FormDateType" value="{{obj.CfValue}}" />
+                            <input type="text" ng-if="obj.cfdDataType=='number'" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                            <input type="text" ng-if="obj.cfdDataType=='currency'" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
+
+                        </div>
+
                 </div>
 
                 <table style="width:100%;">
