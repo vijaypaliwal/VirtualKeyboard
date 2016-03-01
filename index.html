@@ -419,6 +419,8 @@
         var exitApp = false, intval = setInterval(function () { exitApp = false; }, 1000);
         document.addEventListener("backbutton", function (e) {
             e.preventDefault();
+            alert("Back button click");
+
             $("#myModal1").modal('hide');
             $("#myModalforlist").modal('hide');
             
