@@ -517,12 +517,16 @@
 
             $("#myModalforlist").modal("hide");
 
+            $("#defaultimg").hide();
+
             setTimeout(function () {
                 $(".removeImage").bind("click", function () {
 
                     removeImageNew($(this).attr("altid"));
                 });
             }, 100);
+
+
 
           
         }
