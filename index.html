@@ -461,36 +461,90 @@
         var pictureSource;
         var destinationType;
 
-        function onPhotoDataSuccess(imageData) {
-            $("#myModalforlist").modal("hide");
+        //function onPhotoDataSuccess(imageData) {
+        //    $("#myModalforlist").modal("hide");
 
-            // Uncomment to view the base64 encoded image data
-            // console.log(imageData);
-            // alert("photo capture success");
-            //alert(imageData);
-            // Get image handle
-            //
-            //var smallImage = document.getElementById('smallImage');
-            // var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
-            //var compilehtml = $compile(crossicon)($scope);
-            // Unhide image elements
-            //
-            //  smallImage.style.display = 'block';
+        //    // Uncomment to view the base64 encoded image data
+        //    // console.log(imageData);
+        //    // alert("photo capture success");
+        //    //alert(imageData);
+        //    // Get image handle
+        //    //
+        //    //var smallImage = document.getElementById('smallImage');
+        //    // var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
+        //    //var compilehtml = $compile(crossicon)($scope);
+        //    // Unhide image elements
+        //    //
+        //    //  smallImage.style.display = 'block';
+
+        //    imageData = "data:image/jpeg;base64," + imageData;
+        //    var _htmltoRender = "<span>'<img  style='height: 60px; width:60px; border:transparent; margin:0px;' src='" + imageData + "'/></span>'";
+
+        //    document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
+
+        //    document.getElementById('list321').innerHTML = document.getElementById('list321').innerHTML + _htmltoRender;
+
+        //    $("#defaultimg").hide();
+
+        //    // Show the captured photo
+        //    // The inline CSS rules are used to resize the image
+        //    //
+        //    //smallImage.src = "data:image/jpeg;base64," + imageData;
+        //}
+
+
+
+
+        function onPhotoDataSuccess(imageData) {
+           
+
+            var _length = 0;
+            if ($('#list123').html() != undefined && $('#list123').html() != "" && $('#list123').children("span") != undefined) {
+                _length = $('#list123').children("span").length;
+            }
+
+
+            var id = _length + 1;
+            var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImageNew(' + id + ')"><i class="fa fa-times"></i></a>';
+            var compilehtml = crossicon;
 
             imageData = "data:image/jpeg;base64," + imageData;
-            var _htmltoRender = "<span>'<img  style='height: 60px; width:60px; border:transparent; margin:0px;' src='" + imageData + "'/></span>'";
+            var _htmltoRender = "<span><img id='" + id + "' style='height: 75px; width:75px; border: 1px solid #ccc; margin:10px; margin-top:0px;' src='" + imageData + "'/>" + compilehtml + "</span>";
 
             document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
 
-            document.getElementById('list321').innerHTML = document.getElementById('list321').innerHTML + _htmltoRender;
+            document.getElementById('list321').innerHTML = _htmltoRender;
 
-            $("#defaultimg").hide();
+            $("#myModalforlist").modal("hide");
 
-            // Show the captured photo
-            // The inline CSS rules are used to resize the image
-            //
-            //smallImage.src = "data:image/jpeg;base64," + imageData;
+            setTimeout(function () {
+                $(".removeImage").bind("click", function () {
+
+                    removeImageNew($(this).attr("altid"));
+                });
+            }, 100);
+
+          
         }
+
+
+        function removeImageNew(_this) {
+
+
+
+            $("#" + _this).each(function () {
+
+                $(this).parent("span").remove();
+            });
+
+
+
+
+            removeImageNew(_this)
+
+        }
+
+
 
         // Called when a photo is successfully retrieved
         //

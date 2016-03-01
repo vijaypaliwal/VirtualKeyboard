@@ -562,7 +562,20 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
             else {
                 $scope.InventoryObject.Description = resultvalue;
 
-                $(_id).val(result.text);
+                var resultvalue = result.text;
+
+                if (resultvalue != "") {
+
+                    $scope.InventoryObject.Description = result.text;
+
+                    $(_id).val(result.text);
+
+
+                }
+
+                else {
+                    //log.error("Item not found in list !!");
+                }
 
             }
 
