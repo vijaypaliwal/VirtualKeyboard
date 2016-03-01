@@ -38,8 +38,13 @@ app.controller('mainmenuController', ['$scope', '$location', 'authService', 'ngA
 
 
     if ($scope.authentication == false) {
-        $scope.afterlogout();
+     //   $scope.afterlogout();
     }
+
+    debugger;
+
+    $("#myModal1").modal('hide');
+    $("#myModalforlist").modal('hide');
 
     $scope.login = function () {
 
