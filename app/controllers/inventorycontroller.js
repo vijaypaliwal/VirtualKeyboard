@@ -721,6 +721,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
             $(".iosbtn").hide()
         }
 
+        $(".swiper-container").show();
+        $(".spinner").hide();
+
 
      
         mySwiper = new Swiper('.swiper-container', {

@@ -164,7 +164,7 @@
 
 <div class="page-header">
 
-    <h3>Add Inventory -   {{slide}}</h3>
+    <h3>Add Inventory</h3>
 </div>
 
 <div class="maincontent animated slideInLeft">
@@ -173,10 +173,16 @@
 
         <div class="device">
 
+            <div class="spinner" style="text-align:center">
+                <i style="font-size: 100px; color: #0083C7;" class="fa fa-spin fa-spinner"></i>
+            </div>
+
+          
+
           
 
 
-            <div class="swiper-container">
+            <div style="display:none;"  class="swiper-container">
 
                 <div class="row iteminfo">
                     <div class="col-md-2 col-xs-3">
@@ -195,8 +201,6 @@
                 </div>
 
               
-
-
 
 
                 <div class="swiper-wrapper">
@@ -446,7 +450,7 @@
 
                         </div>
 
-                        <input type="date" ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="form-control customFieldDatePicker FormDateType" value="{{obj.CfValue}}" />
+                        <input type="text" ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="form-control customFieldDatePicker FormDateType" value="{{obj.CfValue}}" />
                         <input type="number" ng-if="obj.cfdDataType=='number'" class="form-control FormControlType" value="{{obj.CfValue}}" />
                         <input type="text" ng-if="obj.cfdDataType=='currency'" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
 
