@@ -331,7 +331,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                        console.log($scope.CustomActivityDataList);
                        $(window).trigger('resize');
 
-                       setTimeout(function () { $scope.swiperfunction(); }, 2000);
+                     //  setTimeout(function () { $scope.swiperfunction(); }, 2000);
 
                       
                        $scope.$apply();
@@ -634,45 +634,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
-    $scope.swiperfunction = function ()
-    { 
-        mySwiper = new Swiper('.swiper-container', {
-
-            initialSlide: 0,
-            speed: 300,
-            effect: 'flip',
-
-            allowSwipeToPrev: false,
-            onSlideChangeStart: function (swiper) {
-
-
-                console.log(swiper.activeIndex);
-                //before Event use it for your purpose
-            },
-
-
-            onSlideChangeEnd: function (swiperHere) {
-
-                var swiperPage = mySwiper.activeSlide()
-
-                $scope.slidenumber(mySwiper.activeIndex);
-
-
-                if (mySwiper.activeIndex != 3 && mySwiper.activeIndex != 6) {
-
-                    $scope.changeNav();
-
-                }
-
-                else {
-
-                    SoftKeyboard.hide();
-
-                }
-
-            }
-        });
-    }
+  
 
 
 
@@ -775,6 +737,24 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     }
 
+  
+     
+    
+
+    $scope.$on('ngRepeatFinished', function () {
+        mySwiper = new Swiper('.swiper-container', {
+            //Your options here:
+            initialSlide: 0,
+            speed: 300,
+            effect: 'flip',
+
+            allowSwipeToPrev : false,
+            onSlideClick: function (swiper) {
+                angular.element(swiper.clickedSlide).scope().clicked(angular.element(swiper.clickedSlide).scope().$index)
+            }
+        });
+    });
+
 
     $('.arrow-left').on('click', function (e) {
 
@@ -817,3 +797,15 @@ app.directive('selectpicker', function () {
         }
     };
 });
+
+app.directive('endRepeat', ['$timeout', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+              
+                    scope.$emit('ngRepeatFinished');
+            }
+        }
+    }
+}]);

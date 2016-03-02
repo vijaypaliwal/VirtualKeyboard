@@ -179,11 +179,11 @@
                     <div class="col-md-2 col-xs-3">
 
                         <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
-                   
+
                         <img id="defaultimg" ng-click="getstep(8)" style="height:60px; width:60px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
                     </div>
                     <div class="col-md-10 col-xs-9">
-                       <div> <span style="font-size:18px;" ng-click="getstep(2)"> {{ Quantity }}</span> <span ng-click="getstep(4)"> {{UOM}}</span>  of <span ng-click="getstep(0)">{{ItemName}}</span>  </div>
+                        <div> <span style="font-size:18px;" ng-click="getstep(2)"> {{ Quantity }}</span> <span ng-click="getstep(4)"> {{UOM}}</span>  of <span ng-click="getstep(0)">{{ItemName}}</span>  </div>
                         <div ng-click="getstep(1)">  <span> [{{ Description }}] </span> </div>
                         <div>
                             Loc:<span ng-click="getstep(3)">  {{Location}} </span> Status:<span ng-click="getstep(4)"> {{Status }} </span>
@@ -192,8 +192,8 @@
                 </div>
 
 
-                
-                
+
+
 
 
                 <div class="swiper-wrapper">
@@ -210,7 +210,7 @@
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemName','#ItemName')"><i class="fa fa-refresh"></i></span>
                             </div>
 
-                            
+
 
 
                         </div>
@@ -234,7 +234,7 @@
                             </div>
 
 
-                            
+
 
 
 
@@ -260,7 +260,7 @@
                         </div>
 
 
-                   
+
 
                     </div>
 
@@ -280,7 +280,7 @@
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Location','#Location')"><i class="fa fa-refresh"></i></span>
                             </div>
 
-                            
+
 
 
                         </div>
@@ -307,7 +307,7 @@
 
                     <div class="swiper-slide">
 
-                    
+
                         <div class="form-group">
                             <label>Select UOM</label>
                             <div class="input-group">
@@ -322,7 +322,7 @@
                         </div>
 
 
-                        
+
 
 
                     </div>
@@ -343,7 +343,7 @@
 
                     <div class="swiper-slide">
 
-                        
+
 
                         <div class="form-group">
                             <label>Cost per unit</label>
@@ -386,10 +386,10 @@
                                 </div>
                             </div>
 
-                            
+
 
                             <div style="display:none;" class="androidbtn">
-                                
+
                                 <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBoxAndroid()">
                                     <div><i class="fa fa-plus-circle"></i></div>
                                     <span>Add Image</span>
@@ -398,7 +398,7 @@
                             </div>
 
 
-                        
+
 
                             <div>
                                 <br />
@@ -406,86 +406,86 @@
                         </div>
 
 
-                   
+
 
                         <a ng-click="addinventory()" style="width:100%; margin-top:15px;" ng-disabled="myform.$invalid" id="addinventories" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
 
-                        
-
-                    </div>
-
-
-                    <div class="swiper-slide" ng-repeat="obj in CustomItemDataList">
-
-                            <label>{{obj.cfdName}}</label>
-
-                            <input type="text" ng-if="obj.cfdDataType=='string'" ng-model="obj.CfValue" class="form-control stringType" value="{{obj.CfValue}}" />
-
-                            <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
-                                <div class="form-control FormControlType" style="padding-top: 4px;margin-top: -9px;">
-
-                                    <label>
-                                        <input type="checkbox" ng-model="obj.CfValue"><i class="input-helper"></i>
-                                    </label>
-                                </div>
-
-                            </div>
-
-                            <div ng-if="obj.cfdDataType=='combobox'">
-                                <div class="fg-line">
-
-                                    <div class="select">
-                                        <select class="form-control" ng-model="obj.CfValue">
-
-                                            <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <input type="text" ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="form-control customFieldDatePicker FormDateType" value="{{obj.CfValue}}" />
-                            <input type="text" ng-if="obj.cfdDataType=='number'" class="form-control FormControlType" value="{{obj.CfValue}}" />
-                            <input type="text" ng-if="obj.cfdDataType=='currency'" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
 
 
                     </div>
 
 
-                        <div ng-repeat="obj in CustomActivityDataList" class="swiper-slide">
-                            <label>{{obj.cfdName}}</label>
-                            <input type="text" ng-if="obj.cfdDataType=='string'" ng-model="obj.CfValue" class="form-control stringType" value="{{obj.CfValue}}" />
+                    <div class="swiper-slide" ng-repeat="obj in CustomItemDataList" end-repeat>
 
-                            <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
-                                <div class="form-control FormControlType" style="padding-top: 4px;margin-top: -9px;">
+                        <label>{{obj.cfdName}}</label>
 
-                                    <label>
-                                        <input type="checkbox" ng-model="obj.CfValue"><i class="input-helper"></i>
-                                    </label>
-                                </div>
+                        <input type="text" ng-if="obj.cfdDataType=='string'" ng-model="obj.CfValue" class="form-control stringType" value="{{obj.CfValue}}" />
 
+                        <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+                            <div class="form-control FormControlType" style="padding-top: 4px;margin-top: -9px;">
+
+                                <label>
+                                    <input type="checkbox" ng-model="obj.CfValue"><i class="input-helper"></i>
+                                </label>
                             </div>
-
-                            <div ng-if="obj.cfdDataType=='combobox'">
-                                <div class="fg-line">
-
-                                    <div class="select">
-                                        <select class="form-control" ng-model="obj.CfValue">
-
-                                            <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <input type="text" ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="form-control customFieldDatePicker FormDateType" value="{{obj.CfValue}}" />
-                            <input type="text" ng-if="obj.cfdDataType=='number'" class="form-control FormControlType" value="{{obj.CfValue}}" />
-                            <input type="text" ng-if="obj.cfdDataType=='currency'" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
 
                         </div>
+
+                        <div ng-if="obj.cfdDataType=='combobox'">
+                            <div class="fg-line">
+
+                                <div class="select">
+                                    <select class="form-control" ng-model="obj.CfValue">
+
+                                        <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <input type="text" ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="form-control customFieldDatePicker FormDateType" value="{{obj.CfValue}}" />
+                        <input type="text" ng-if="obj.cfdDataType=='number'" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                        <input type="text" ng-if="obj.cfdDataType=='currency'" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
+
+
+                    </div>
+
+
+                    <div ng-repeat="obj in CustomActivityDataList" class="swiper-slide" end-repeat>
+                        <label>{{obj.cfdName}}</label>
+                        <input type="text" ng-if="obj.cfdDataType=='string'" ng-model="obj.CfValue" class="form-control stringType" value="{{obj.CfValue}}" />
+
+                        <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+                            <div class="form-control FormControlType" style="padding-top: 4px;margin-top: -9px;">
+
+                                <label>
+                                    <input type="checkbox" ng-model="obj.CfValue"><i class="input-helper"></i>
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <div ng-if="obj.cfdDataType=='combobox'">
+                            <div class="fg-line">
+
+                                <div class="select">
+                                    <select class="form-control" ng-model="obj.CfValue">
+
+                                        <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <input type="text" ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="form-control customFieldDatePicker FormDateType" value="{{obj.CfValue}}" />
+                        <input type="text" ng-if="obj.cfdDataType=='number'" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                        <input type="text" ng-if="obj.cfdDataType=='currency'" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
+
+                    </div>
 
                 </div>
 
