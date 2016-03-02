@@ -634,10 +634,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
-  
-
-
-
 
 
     var mySwiper = new Swiper('.swiper-container', {
