@@ -38,7 +38,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.UnitDataList = [];
     $scope.CustomItemDataList = [];
     $scope.CustomActivityDataList = [];
-
+    $scope.laststepindex = 0;
     _CurrentUrl = "Inventory";
     $scope.logOut = function () {
 
@@ -55,9 +55,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     if (deviceType == 'iPhone') {
         $(".iosbtn").show()
+        $(".androidbtn").hide()
     }
     else {
         $(".androidbtn").show()
+        $(".iosbtn").hide()
     }
 
 
@@ -715,7 +717,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                 $scope.scanfieldID = "";
                 break;
             case 8:
-                $scope.scanfieldID = "laststep";
+                $scope.scanfieldID = "";
                 break;
             default:
                 $scope.scanfieldID = "";
@@ -729,6 +731,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.getstep = function (currentstep) {
 
+
+
         mySwiper.swipeTo(currentstep);
 
     }
@@ -738,17 +742,60 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     
 
     $scope.$on('ngRepeatFinished', function () {
+
+        debugger;
+
+        $('.probeProbe').bootstrapSwitch('state', true);
+
+        if (deviceType == 'iPhone') {
+            $(".iosbtn").show()
+            $(".androidbtn").hide()
+        }
+        else {
+            $(".androidbtn").show()
+            $(".iosbtn").hide()
+        }
+
+
+     
         mySwiper = new Swiper('.swiper-container', {
             //Your options here:
             initialSlide: 0,
             speed: 300,
             effect: 'flip',
 
-            allowSwipeToPrev : false,
-            onSlideClick: function (swiper) {
-                angular.element(swiper.clickedSlide).scope().clicked(angular.element(swiper.clickedSlide).scope().$index)
+            allowSwipeToPrev: false,
+
+
+            onSlideChangeEnd: function (swiperHere) {
+
+                debugger;
+
+                var swiperPage = mySwiper.activeSlide()
+
+                $scope.slidenumber(mySwiper.activeIndex);
+
+
+                if (mySwiper.activeIndex != 3 && mySwiper.activeIndex != 6) {
+
+                    $scope.changeNav();
+
+                }
+
+                else {
+
+                    SoftKeyboard.hide();
+
+                }
+
             }
+
+          
         });
+
+        debugger;
+
+          $scope.laststepindex = mySwiper.slides.length;
     });
 
 
