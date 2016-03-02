@@ -638,43 +638,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
 
-    var mySwiper = new Swiper('.swiper-container', {
-
-        initialSlide: 0,
-        speed: 300,
-        effect: 'flip',
-
-        allowSwipeToPrev : false,
-        onSlideChangeStart: function (swiper) {
-
-          
-            console.log(swiper.activeIndex);
-            //before Event use it for your purpose
-        },
-     
-    
-        onSlideChangeEnd: function (swiperHere) {
-
-            var swiperPage = mySwiper.activeSlide()
-
-            $scope.slidenumber(mySwiper.activeIndex);
-
-
-            if (mySwiper.activeIndex != 3 && mySwiper.activeIndex != 6) {
-
-              $scope.changeNav();
-
-            }
-
-            else {
-
-              SoftKeyboard.hide();
-
-            }
-
-        }
-    });
-
+    var mySwiper;
 
     $scope.changeNav = function () {
 
@@ -690,6 +654,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     $scope.slidenumber = function (slidenumber) {
+
+        debugger;
 
         switch (slidenumber) {
             case 0:
@@ -717,7 +683,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                 $scope.scanfieldID = "";
                 break;
             case 8:
-                $scope.scanfieldID = "";
+                $scope.scanfieldID = "laststep";
                 break;
             default:
                 $scope.scanfieldID = "";
@@ -743,7 +709,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.$on('ngRepeatFinished', function () {
 
-        debugger;
 
         $('.probeProbe').bootstrapSwitch('state', true);
 
@@ -769,14 +734,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
             onSlideChangeEnd: function (swiperHere) {
 
-                debugger;
 
-                var swiperPage = mySwiper.activeSlide()
-
-                $scope.slidenumber(mySwiper.activeIndex);
+                $scope.slide = swiperHere.activeIndex;
 
 
-                if (mySwiper.activeIndex != 3 && mySwiper.activeIndex != 6) {
+
+                var swiperPage = swiperHere.activeSlide()
+
+                $scope.slidenumber(swiperHere.activeIndex);
+
+
+                if (swiperHere.activeIndex != 3 && swiperHere.activeIndex != 6) {
 
                     $scope.changeNav();
 
@@ -852,3 +820,32 @@ app.directive('endRepeat', ['$timeout', function ($timeout) {
         }
     }
 }]);
+
+
+app.directive('bootstrapSwitch', [
+        function() {
+            return {
+                restrict: 'A',
+                require: '?ngModel',
+                link: function(scope, element, attrs, ngModel) {
+                    element.bootstrapSwitch();
+
+                    element.on('switchChange.bootstrapSwitch', function(event, state) {
+                        if (ngModel) {
+                            scope.$apply(function() {
+                                ngModel.$setViewValue(state);
+                            });
+                        }
+                    });
+
+                    scope.$watch(attrs.ngModel, function(newValue, oldValue) {
+                        if (newValue) {
+                            element.bootstrapSwitch('state', true, true);
+                        } else {
+                            element.bootstrapSwitch('state', false, true);
+                        }
+                    });
+                }
+            };
+        }
+]);
