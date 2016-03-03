@@ -84,9 +84,6 @@
         height: 45px;
         padding-left: 16px;
     }
-
-
-
 </style>
 
 <style>
@@ -105,8 +102,8 @@
             #myModalforlist ul li {
                 padding: 14px;
                 border-bottom: 1px solid #ccc;
-                background:#fff;
-                list-style-type:none;
+                background: #fff;
+                list-style-type: none;
             }
 
                 #myModalforlist ul li a {
@@ -114,8 +111,8 @@
                     display: block;
                     width: 100%;
                     text-decoration: none !important;
-                    background:#fff;
-                    color:#000;
+                    background: #fff;
+                    color: #000;
                 }
 </style>
 
@@ -177,44 +174,44 @@
                 <i style="font-size: 100px; color: #0083C7;" class="fa fa-spin fa-spinner"></i>
             </div>
 
-          
-
-          
 
 
-            <div style="display:none;"  class="swiper-container">
+
+
+
+            <div style="display:none;" class="swiper-container">
 
                 <div class="row iteminfo">
                     <div class="col-md-2 col-xs-3">
 
                         <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
 
-                        <img id="defaultimg" ng-click="getstep(8)" style="height:60px; width:60px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
+                        <img id="defaultimg" ng-click="getstep(9)" style="height:60px; width:60px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
                     </div>
                     <div class="col-md-10 col-xs-9">
-                        <div> <span style="font-size:18px;" ng-click="getstep(2)"> {{ Quantity }}</span> <span ng-click="getstep(4)"> {{UOM}}</span>  of <span ng-click="getstep(0)">{{ItemName}}</span>  </div>
-                        <div ng-click="getstep(1)">  <span> [{{ Description }}] </span> </div>
+                        <div> <span style="font-size:18px;" ng-click="getstep(2)"> {{ InventoryObject.Quantity }}</span> <span ng-click="getstep(4)"> {{Uom}}</span>  of <span ng-click="getstep(0)">{{InventoryObject.ItemID}}</span>  </div>
+                        <div ng-click="getstep(1)">  <span> [{{ InventoryObject.Description }}] </span> </div>
                         <div>
-                            Loc:<span ng-click="getstep(3)">  {{Location}} </span> Status:<span ng-click="getstep(4)"> {{Status }} </span>
+                            Loc:<span ng-click="getstep(3)">  {{InventoryObject.Location}} </span> Status:<span ng-click="getstep(4)"> {{InventoryObject.Status }} </span>
                         </div>
                     </div>
                 </div>
 
-              
+
 
 
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
 
                         <div class="form-group">
-                            <label>Item Name</label>
+                            <label>Item Name <span>*</span> </label>
                             <div class="input-group">
 
 
-                                <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemName" required="" autofocus />
+                                <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" autofocus />
 
 
-                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemName','#ItemName')"><i class="fa fa-refresh"></i></span>
+                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemID','#ItemID')"><i class="fa fa-refresh"></i></span>
                             </div>
 
 
@@ -229,7 +226,7 @@
 
 
                         <div class="form-group">
-                            <label>Item Description</label>
+                            <label>Item Description </label>
                             <div class="input-group">
 
 
@@ -275,14 +272,14 @@
 
 
                         <div class="form-group">
-                            <label>Select Location</label>
+                            <label>Select Location <span>*</span></label>
                             <div class="input-group">
 
 
-
-                                <select class="form-control" id="Location" ng-model="InventoryObject.Location">
+                                <input type="text" class="form-control" id="Location" ng-model="InventoryObject.Location" />
+                                <!--<select class="form-control" id="Location" ng-model="InventoryObject.Location">
                                     <option ng-repeat="_optionValue in LocationList" value="{{_optionValue.LocationID}}">{{_optionValue.LocationName}}</option>
-                                </select>
+                                </select>-->
 
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Location','#Location')"><i class="fa fa-refresh"></i></span>
                             </div>
@@ -293,7 +290,28 @@
                         </div>
 
                     </div>
+                    <div class="swiper-slide">
 
+
+                        <div class="form-group">
+                            <label>Location Group</label>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" id="lZone" ng-model="InventoryObject.lZone" />
+
+                                <!--<select class="form-control" id="Location" ng-model="InventoryObject.lZone">
+                                    <option ng-repeat="_optionValue in LocationList" value="{{_optionValue.LocationID}}">{{_optionValue.LocationName}}</option>
+                                </select>-->
+
+                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_lZone','#lZone')"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+
+
+
+                        </div>
+
+                    </div>
                     <div class="swiper-slide">
                         <div class="form-group">
                             <label>Status</label>
@@ -316,36 +334,41 @@
 
 
                         <div class="form-group">
-                            <label>Select UOM</label>
+                            <label>Select UOM <span>*</span></label>
                             <div class="input-group">
 
-                                <select class="form-control" ng-model="InventoryObject.UOM" selectpicker id="UOM" required="">
-                                    <option ng-repeat="_optionValue in UOMList" value="{{_optionValue.UnitOfMeasureID}}">{{_optionValue.UnitOfMeasureName}}</option>
+                                <select class="form-control" ng-model="InventoryObject.Uom" selectpicker id="UOM" required="">
+                                    <option ng-repeat="_optionValue in UOMList" value="{{_optionValue.UnitOfMeasureName}}">{{_optionValue.UnitOfMeasureName}}</option>
                                 </select>
 
 
-                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_UOM','#UOM')"><i class="fa fa-refresh"></i></span>
+                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_Uom','#UOM')"><i class="fa fa-refresh"></i></span>
                             </div>
                         </div>
-
-
-
-
-
                     </div>
-
-
-
                     <div class="swiper-slide">
-                        <div class="form-group">
+                        <div class="swiper-slide">
+                            <div class="form-group">
+                                <label>Item Group</label>
+                                <div class="input-group">
 
-                            <label>Unique tag</label>
-                            <div class="input-group">
-                                <input id="Unittag" ng-model="InventoryObject.uniquetag" class="form-control" type="text" name="unit" value="" />
-                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_uniquetag','#Unittag')"><i class="fa fa-refresh"></i></span>
+
+
+                                    <input class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
+
+
+                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemGroup','#itemgroup')"><i class="fa fa-refresh"></i></span>
+                                </div>
                             </div>
                         </div>
+
+
+
                     </div>
+
+
+
+
 
 
                     <div class="swiper-slide">
@@ -357,9 +380,9 @@
 
                             <div class="input-group">
 
-                                <input ng-model="InventoryObject.CostPerUnit" min="0" id="Costperunit" class="form-control" type="number" name="cost" value="" />
+                                <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" class="form-control" type="number" name="cost" value="" />
 
-                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_CostPerUnit','#Costperunit')"><i class="fa fa-refresh"></i></span>
+                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_Cost','#Costperunit')"><i class="fa fa-refresh"></i></span>
 
                             </div>
 
@@ -375,9 +398,7 @@
 
 
                         <div ng-show="scanfieldID=='laststep'">
-                            <div ng-if="myform.$invalid" class="wellNew">
-                                <span ng-click="getstep(0)"> Item Name </span> and <span ng-click="getstep(4)"> unit of measure</span> is required please fill them first.
-                            </div>
+                       
 
 
                             <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list123"></output>
@@ -413,88 +434,175 @@
 
 
 
-
-
-
-
-
                     </div>
 
 
 
                     <div class="swiper-slide" ng-repeat="obj in CustomItemDataList" end-repeat>
 
-                        <label>{{obj.cfdName}}</label>
+                        <div class="form-group">
+                            <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
 
-                        <input type="text" ng-if="obj.cfdDataType=='string'" ng-model="obj.CfValue" class="form-control stringType" value="{{obj.CfValue}}" />
+                            <div ng-if="obj.cfdDataType=='string'" class="input-group">
+                                <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{obj.CfValue}}" />
 
-                        <div ng-if="obj.cfdDataType=='checkbox'" >
-                         
-                            
-                            <input ng-model="obj.CfValue" type="checkbox"  bootstrap-switch />
-                            
-                                       
-                        </div>
+                                <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
 
-                        <div ng-if="obj.cfdDataType=='combobox'">
-                            <div class="fg-line">
+                            <div ng-if="obj.cfdDataType=='checkbox'">
+
+
+                                <input ng-model="InventoryObject.CustomPartData[$index].Value" type="checkbox" bootstrap-switch />
+
+
+                            </div>
+
+                            <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
                                 <div class="select">
-                                    <select class="form-control" ng-model="obj.CfValue">
+                                    <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[$index].Value">
 
                                         <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
                                     </select>
                                 </div>
+                                <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+
                             </div>
+
+                            <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
+                                <input id="CustomItem_{{obj.cfdID}}" type="text" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
+                                <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.cfdDataType=='number'" class="input-group">
+                                <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
+                                <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+
+                            <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                                <input id="CustomItem_{{obj.cfdID}}" type="text" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
+                                <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
 
                         </div>
 
-                        <input type="text" ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="form-control customFieldDatePicker FormDateType" value="{{obj.CfValue}}" />
-                        <input type="number" ng-if="obj.cfdDataType=='number'" class="form-control FormControlType" value="{{obj.CfValue}}" />
-                        <input type="text" ng-if="obj.cfdDataType=='currency'" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
+
 
 
                     </div>
-
 
                     <div ng-repeat="obj in CustomActivityDataList" class="swiper-slide" end-repeat>
-                        <label>{{obj.cfdName}}</label>
-                        <input type="text" ng-if="obj.cfdDataType=='string'" ng-model="obj.CfValue" class="form-control stringType" value="{{obj.CfValue}}" />
 
-                        <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
-                            <div class="form-control FormControlType" style="padding-top: 4px;margin-top: -9px;">
-
-                                <label>
-                                    <input type="checkbox" ng-model="obj.CfValue"><i class="input-helper"></i>
-                                </label>
+                        <div class="form-group">
+                            <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
+                            <div ng-if="obj.cfdDataType=='string'" class="input-group">
+                                <input id="CustomActivity_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control stringType" value="{{obj.CfValue}}" />
+                                <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
                             </div>
 
-                        </div>
 
-                        <div ng-if="obj.cfdDataType=='combobox'">
-                            <div class="fg-line">
+                            <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+
+                                <input type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value" bootstrap-switch>
+
+                            </div>
+
+                            <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
+
 
                                 <div class="select">
-                                    <select class="form-control" ng-model="obj.CfValue">
+                                    <select id="CustomActivity_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
 
                                         <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
                                     </select>
                                 </div>
+                                <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+
+                            </div>
+
+
+                            <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
+                                <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control customFieldDatePicker FormDateType" value="{{obj.CfValue}}" />
+                                <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.cfdDataType=='number'" class="input-group">
+                                <input id="CustomActivity_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
+                                <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                                <input id="CustomActivity_{{obj.cfdID}}" type="text" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
+                                <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
                             </div>
 
                         </div>
 
-                        <input type="date" ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="form-control customFieldDatePicker FormDateType" value="{{obj.CfValue}}" />
-                        <input type="number" ng-if="obj.cfdDataType=='number'" class="form-control FormControlType" value="{{obj.CfValue}}" />
-                        <input type="text" ng-if="obj.cfdDataType=='currency'" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
+
+
+
+
+
+
+
+
+
+
+
 
                     </div>
 
-                    
+                    <div ng-repeat="obj in UnitDataList" class="swiper-slide" end-repeat>
 
-                  
+
+                        <div class="form-group">
+                            <label>{{obj.FieldLabel}}</label>
+
+                            <div ng-if="obj.FieldDataType=='Text' && obj.FieldName=='ReqValue'" class="input-group">
+                                <input id="UniqueTag" type="text" ng-model="InventoryObject.UniqueTag" class="form-control" value="" />
+                                <span ng-click="GetLastValue('Inv_UniqueTag','#UniqueTag')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.FieldDataType=='Text' && obj.FieldName=='UnitTag2'" class="input-group">
+                                <input id="UniqueTag" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
+                                <span ng-click="GetLastValue('Inv_UnitTag2','#UnitTag2')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.FieldDataType=='Text' && obj.FieldName=='UnitTag3'" class="input-group">
+                                <input id="UnitTag3" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />
+                                <span ng-click="GetLastValue('Inv_UnitTag3','#UnitTag3')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.FieldDataType=='Date' && obj.FieldName=='UniqueDate'" class="input-group">
+                                <input id="UniqueDate" type="date" ng-model="InventoryObject.UniqueDate" class="form-control" value="" />
+                                <span ng-click="GetLastValue('Inv_UniqueDate','#UniqueDate')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.FieldDataType=='Date' && obj.FieldName=='UnitDate2'" class="input-group">
+                                <input id="UnitDate2" type="date" ng-model="InventoryObject.UnitDate2" class="form-control" value="" />
+                                <span ng-click="GetLastValue('Inv_UnitDate2','#UnitDate2')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.FieldDataType=='Number' && obj.FieldName=='UnitNumber1'" class="input-group">
+                                <input id="UnitNumber1" type="number" class="form-control" value="" />
+                                <span ng-click="GetLastValue('Inv_UnitNumber1','#UnitNumber1')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.FieldDataType=='Number' && obj.FieldName=='UnitNumber2'" class="input-group">
+                                <input id="UnitNumber2" type="number" class="form-control" value="" />
+                                <span ng-click="GetLastValue('Inv_UnitNumber2','#UnitNumber2')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
 
                 </div>
 
@@ -521,7 +629,11 @@
                 <hr />
 
 
-                <a ng-click="addinventory()" style="width:100%; margin-top:15px;" ng-disabled="myform.$invalid" id="addinventories" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
+                <div ng-if="CheckRequiredField()==true" class="wellNew">
+                    Seems like your inventory details are not filled up correctly may be you are missing some required details or need to correct some value ,please avail correct values in those inputs.
+                </div>
+
+                <a ng-click="addinventory()" style="width:100%; margin-top:15px;" ng-disabled="CheckRequiredField()==true" id="addinventories" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
 
             </div>
             <div style="display: none;" class="pagination"></div>
@@ -529,7 +641,7 @@
 
 
 
-            
+
 
 
         </div>
@@ -544,25 +656,25 @@
     <!-- Modal content-->
 
 
-   
 
-        <div class="modal-body">
 
-            <ul>
-                <li>
-                    <a onclick="capturePhoto();"> <i class="fa fa-camera"></i> Capture Photo</a>
-                </li>
-                <li>
-                    <a ng-click="triggerFileClick()"><i class="fa fa-picture-o"></i> From Photo Libarary</a>
-                </li>  
-            </ul>
+    <div class="modal-body">
 
-           
-           
-        </div>
-        <!--<div class="modal-footer">
-            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-        </div>-->
-  
+        <ul>
+            <li>
+                <a onclick="capturePhoto();"> <i class="fa fa-camera"></i> Capture Photo</a>
+            </li>
+            <li>
+                <a ng-click="triggerFileClick()"><i class="fa fa-picture-o"></i> From Photo Libarary</a>
+            </li>
+        </ul>
+
+
+
+    </div>
+    <!--<div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+    </div>-->
+
 
 </div>

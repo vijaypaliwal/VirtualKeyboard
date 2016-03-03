@@ -208,7 +208,6 @@ app.controller('ordersController', ['$scope', 'ordersService', 'localStorageServ
 
     }
 
-
     $scope.Proceedformove = function () {
         $(".modal-backdrop").remove();
         $scope.CurrentIndex = 1;
