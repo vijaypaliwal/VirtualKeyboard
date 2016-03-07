@@ -410,7 +410,7 @@
 
 
 
-                    <div class="swiper-slide" ng-repeat="obj in CustomItemDataList" ng-if="IsAvailableinMyinventoryColumn(obj.ColumnMap)==true" end-repeat>
+                    <div class="swiper-slide" ng-repeat="obj in CustomItemDataList" ng-if="IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat>
 
                         <div class="form-group">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
@@ -466,7 +466,7 @@
 
                     </div>
 
-                    <div ng-repeat="obj in UnitDataList" ng-if="IsAvailableinMyinventoryColumn(obj.FieldName)==true" class="swiper-slide" end-repeat>
+                    <div ng-repeat="obj in UnitDataList" ng-if="IsAvailableMyInventoryColumn(obj.ColumnMap)==true" class="swiper-slide" end-repeat>
 
 
                         <div class="form-group">
