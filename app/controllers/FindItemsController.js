@@ -9,8 +9,8 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         LocationZone: "", LastTransactionID: 0, StatusValue: "", LastQuantityChange: 0, LastDateChange: "",
         CustomData: []
     };
-
-
+    $scope.myinventoryColumnLoaded = false;
+    $scope.MyinventoryFields = [];
     $scope.CurrentImgID = "";
     $scope.SearchFromData="All"
     $scope.SearchFromText = "Search";
@@ -149,6 +149,46 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.authentication = authService.authentication.isAuth;
 
+
+    $scope.GetMyinventoryColumns = function () {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'GetMyInventoryColumns',
+              contentType: 'application/json; charset=utf-8',
+
+              dataType: 'json',
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+              success: function (response) {
+                  debugger;
+                var _TempArray = response.GetMyInventoryColumnsResult.Payload;
+
+                for (var i = 0; i < _TempArray.length; i++) {
+                    var _ColName = _TempArray[i].ColumnName.split("#");
+                    _TempArray[i].ColumnName = _ColName[0];
+                    if (_TempArray[i].Show=="True")
+                    {
+                        $scope.MyinventoryFields.push(_TempArray[i])
+                    }
+                  }
+
+                  $scope.myinventoryColumnLoaded = true;
+                  $scope.$apply();
+
+              },
+              error: function (err) {
+                  console.log(err);
+                  log.error("Error Occurred during operation");
+
+
+              }
+          });
+
+    }
    
     $scope.UploadImg = function (id,_obj) {
          
@@ -187,6 +227,16 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     
 
+    $scope.IsAvailableMyInventoryColumn = function (ColumnName) {
+        var i = 0;
+        for (i = 0; i < $scope.MyinventoryFields.length; i++) {
+            if ($scope.MyinventoryFields[i].ColumnName == ColumnName) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     $scope.SearchInventory=function()
     {
@@ -328,7 +378,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
   
     $scope.PopulateInventoryItems();
 
-  
+    $scope.GetMyinventoryColumns();
 
     $scope.ScanItemSearch = function () {
         $scope.isSanned = false;

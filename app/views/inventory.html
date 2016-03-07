@@ -201,9 +201,12 @@
 
 
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
 
-                        <div class="form-group">
+
+                    <div class="swiper-slide" ng-repeat="obj in MyinventoryFields" end-repeat>
+
+
+                        <div class="form-group" ng-if="obj.ColumnName=='pPart'">
                             <label>Item Name <span>*</span> </label>
                             <div class="input-group">
 
@@ -219,13 +222,7 @@
 
                         </div>
 
-                    </div>
-
-                    <div class="swiper-slide">
-
-
-
-                        <div class="form-group">
+                        <div class="form-group" ng-if="obj.ColumnName=='pDescription'">
                             <label>Item Description </label>
                             <div class="input-group">
 
@@ -249,11 +246,8 @@
 
 
 
-                    </div>
 
-                    <div class="swiper-slide">
-
-                        <div class="form-group">
+                        <div class="form-group" ng-if="obj.ColumnName=='iQty'">
                             <label>Quantity</label>
 
 
@@ -266,12 +260,10 @@
 
 
 
-                    </div>
-
-                    <div class="swiper-slide">
 
 
-                        <div class="form-group">
+
+                        <div class="form-group" ng-if="obj.ColumnName=='lLoc'">
                             <label>Select Location <span>*</span></label>
                             <div class="input-group">
 
@@ -289,19 +281,16 @@
 
                         </div>
 
-                    </div>
-                    <div class="swiper-slide">
 
 
-                        <div class="form-group">
+
+                        <div class="form-group" ng-if="obj.ColumnName=='lZone'">
                             <label>Location Group</label>
                             <div class="input-group">
 
                                 <input type="text" class="form-control" id="lZone" ng-model="InventoryObject.lZone" />
 
-                                <!--<select class="form-control" id="Location" ng-model="InventoryObject.lZone">
-                                    <option ng-repeat="_optionValue in LocationList" value="{{_optionValue.LocationID}}">{{_optionValue.LocationName}}</option>
-                                </select>-->
+
 
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_lZone','#lZone')"><i class="fa fa-refresh"></i></span>
                             </div>
@@ -311,29 +300,23 @@
 
                         </div>
 
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="form-group">
+
+                        <div class="form-group" ng-if="obj.ColumnName=='iStatusValue'">
                             <label>Status</label>
                             <div class="input-group">
 
-
-
-                                <input class="form-control" id="Status" ng-model="InventoryObject.Status" type="text" name="name" value=" " />
+                                <select class="form-control"  id="Status" ng-model="InventoryObject.Status">
+                                    <option value="{{obj.StatusValue}}" ng-repeat="obj in StatusList">{{obj.StatusValue}}</option>
+                                </select>
 
 
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Status','#Status')"><i class="fa fa-refresh"></i></span>
                             </div>
                         </div>
-                    </div>
 
 
 
-
-                    <div class="swiper-slide">
-
-
-                        <div class="form-group">
+                        <div class="form-group" ng-if="obj.ColumnName=='uomUOM'">
                             <label>Select UOM <span>*</span></label>
                             <div class="input-group">
 
@@ -345,37 +328,24 @@
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Uom','#UOM')"><i class="fa fa-refresh"></i></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="swiper-slide">
-                            <div class="form-group">
-                                <label>Item Group</label>
-                                <div class="input-group">
+
+                        <div class="form-group" ng-if="obj.ColumnName=='pCountFrq'">
+                            <label>Item Group</label>
+                            <div class="input-group">
 
 
 
-                                    <input class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
+                                <input class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
 
 
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemGroup','#itemgroup')"><i class="fa fa-refresh"></i></span>
-                                </div>
+                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemGroup','#itemgroup')"><i class="fa fa-refresh"></i></span>
                             </div>
                         </div>
 
 
 
-                    </div>
 
-
-
-
-
-
-                    <div class="swiper-slide">
-
-
-
-                        <div class="form-group">
+                        <div class="form-group" ng-if="obj.ColumnName=='iCostPerUnit'">
                             <label>Cost per unit</label>
 
                             <div class="input-group">
@@ -390,6 +360,8 @@
                         </div>
 
 
+                        
+                       
 
 
                     </div>
@@ -398,7 +370,7 @@
 
 
                         <div ng-show="scanfieldID=='laststep'">
-                       
+
 
 
                             <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list123"></output>
@@ -438,7 +410,7 @@
 
 
 
-                    <div class="swiper-slide" ng-repeat="obj in CustomItemDataList" end-repeat>
+                    <div class="swiper-slide" ng-repeat="obj in CustomItemDataList" ng-if="IsAvailableinMyinventoryColumn(obj.ColumnMap)==true" end-repeat>
 
                         <div class="form-group">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
@@ -489,6 +461,53 @@
 
                         </div>
 
+
+
+
+                    </div>
+
+                    <div ng-repeat="obj in UnitDataList" ng-if="IsAvailableinMyinventoryColumn(obj.FieldName)==true" class="swiper-slide" end-repeat>
+
+
+                        <div class="form-group">
+                            <label>{{obj.FieldLabel}}</label>
+
+                            <div ng-if="obj.FieldDataType=='Text' && obj.FieldName=='ReqValue'" class="input-group">
+                                <input id="UniqueTag" type="text" ng-model="InventoryObject.UniqueTag" class="form-control" value="" />
+                                <span ng-click="GetLastValue('Inv_UniqueTag','#UniqueTag')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.FieldDataType=='Text' && obj.FieldName=='UnitTag2'" class="input-group">
+                                <input id="UniqueTag" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
+                                <span ng-click="GetLastValue('Inv_UnitTag2','#UnitTag2')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.FieldDataType=='Text' && obj.FieldName=='UnitTag3'" class="input-group">
+                                <input id="UnitTag3" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />
+                                <span ng-click="GetLastValue('Inv_UnitTag3','#UnitTag3')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.FieldDataType=='Date' && obj.FieldName=='UniqueDate'" class="input-group">
+                                <input id="UniqueDate" type="date" ng-model="InventoryObject.UniqueDate" class="form-control" value="" />
+                                <span ng-click="GetLastValue('Inv_UniqueDate','#UniqueDate')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.FieldDataType=='Date' && obj.FieldName=='UnitDate2'" class="input-group">
+                                <input id="UnitDate2" type="date" ng-model="InventoryObject.UnitDate2" class="form-control" value="" />
+                                <span ng-click="GetLastValue('Inv_UnitDate2','#UnitDate2')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.FieldDataType=='Number' && obj.FieldName=='UnitNumber1'" class="input-group">
+                                <input id="UnitNumber1" type="number" class="form-control" value="" />
+                                <span ng-click="GetLastValue('Inv_UnitNumber1','#UnitNumber1')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                            <div ng-if="obj.FieldDataType=='Number' && obj.FieldName=='UnitNumber2'" class="input-group">
+                                <input id="UnitNumber2" type="number" class="form-control" value="" />
+                                <span ng-click="GetLastValue('Inv_UnitNumber2','#UnitNumber2')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
+                            </div>
+
+                        </div>
 
 
 
@@ -556,52 +575,7 @@
 
                     </div>
 
-                    <div ng-repeat="obj in UnitDataList" class="swiper-slide" end-repeat>
 
-
-                        <div class="form-group">
-                            <label>{{obj.FieldLabel}}</label>
-
-                            <div ng-if="obj.FieldDataType=='Text' && obj.FieldName=='ReqValue'" class="input-group">
-                                <input id="UniqueTag" type="text" ng-model="InventoryObject.UniqueTag" class="form-control" value="" />
-                                <span ng-click="GetLastValue('Inv_UniqueTag','#UniqueTag')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
-                            </div>
-
-                            <div ng-if="obj.FieldDataType=='Text' && obj.FieldName=='UnitTag2'" class="input-group">
-                                <input id="UniqueTag" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
-                                <span ng-click="GetLastValue('Inv_UnitTag2','#UnitTag2')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
-                            </div>
-
-                            <div ng-if="obj.FieldDataType=='Text' && obj.FieldName=='UnitTag3'" class="input-group">
-                                <input id="UnitTag3" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />
-                                <span ng-click="GetLastValue('Inv_UnitTag3','#UnitTag3')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
-                            </div>
-
-                            <div ng-if="obj.FieldDataType=='Date' && obj.FieldName=='UniqueDate'" class="input-group">
-                                <input id="UniqueDate" type="date" ng-model="InventoryObject.UniqueDate" class="form-control" value="" />
-                                <span ng-click="GetLastValue('Inv_UniqueDate','#UniqueDate')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
-                            </div>
-
-                            <div ng-if="obj.FieldDataType=='Date' && obj.FieldName=='UnitDate2'" class="input-group">
-                                <input id="UnitDate2" type="date" ng-model="InventoryObject.UnitDate2" class="form-control" value="" />
-                                <span ng-click="GetLastValue('Inv_UnitDate2','#UnitDate2')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
-                            </div>
-
-                            <div ng-if="obj.FieldDataType=='Number' && obj.FieldName=='UnitNumber1'" class="input-group">
-                                <input id="UnitNumber1" type="number" class="form-control" value="" />
-                                <span ng-click="GetLastValue('Inv_UnitNumber1','#UnitNumber1')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
-                            </div>
-
-                            <div ng-if="obj.FieldDataType=='Number' && obj.FieldName=='UnitNumber2'" class="input-group">
-                                <input id="UnitNumber2" type="number" class="form-control" value="" />
-                                <span ng-click="GetLastValue('Inv_UnitNumber2','#UnitNumber2')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
-                            </div>
-
-                        </div>
-
-
-
-                    </div>
 
 
                 </div>

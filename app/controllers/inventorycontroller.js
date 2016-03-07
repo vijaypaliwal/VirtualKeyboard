@@ -2,16 +2,18 @@
 app.controller('inventoryController', ['$scope', '$location', 'authService', 'ordersService', 'localStorageService', 'log', '$compile', function ($scope, $location, authService, ordersService, localStorageService, log, $compile) {
     ''
     $scope.orders = [];
+    $scope.MyinventoryFields = [];
     $scope.InventoryItems = [];
     $scope.scannerText = "";
     $scope.SecurityToken = "";
+    $scope.StatusList = [];
     $scope.InventoryObject = {
         IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: 0, Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
         UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: "/Date(1320825600000-0800)/", UnitDate2: "/Date(1320825600000-0800)/", UnitNumber1: 0, UnitNumber2: 0, UnitTag2: "",
         UnitTag3: "", CustomPartData: [], CustomTxnData: []
     };
 
-   
+
 
     $scope.LocationList = [{ LocationName: "dhdd", LocationZone: "", LocationID: 678325 },
                            { LocationName: "Here", LocationZone: "", LocationID: 678323 },
@@ -25,14 +27,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                            { LocationName: "BLC1009", LocationZone: "", LocationID: 123 }];
     $scope.UOMList = [];
     $scope.ItemList = [];
-    $scope.UOMList = [{ UnitOfMeasureID: 1, UnitOfMeasureName: "box/es" },
-               { UnitOfMeasureID: 2, UnitOfMeasureName: "carton/s" },
-                { UnitOfMeasureID: 3, UnitOfMeasureName: "cup/s" },
-               { UnitOfMeasureID: 4, UnitOfMeasureName: "dozen" },
-               { UnitOfMeasureID: 5, UnitOfMeasureName: "ea." },
-               { UnitOfMeasureID: 6, UnitOfMeasureName: "gallon/s" },
-               { UnitOfMeasureID: 7, UnitOfMeasureName: "lbs." },
-               { UnitOfMeasureID: 8, UnitOfMeasureName: "pc(s)" }];
 
 
     $scope.Quantity = "N/A";
@@ -82,37 +76,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         //  $scope.afterlogout();
     }
 
-    $scope.getlocation = function () {
 
-        var authData = localStorageService.get('authorizationData');
-        if (authData) {
-            $scope.SecurityToken = authData.token;
-        }
-
-        $.ajax
-           ({
-               type: "POST",
-               url: serviceBase + 'GetLocations',
-               contentType: 'application/json; charset=utf-8',
-               dataType: 'text json',
-               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
-               success: function (response) {
-
-                   debugger;
-
-                   $scope.LocationList = response.GetLocationsResult.Payload;
-                   $scope.$apply();
-               },
-               error: function (response) {
-
-                   debugger;
-
-                   //     $scope.InventoryObject.Location = 678030;
-
-               }
-           });
-
-    }
 
 
     $scope.GetLastValueCustom = function (id, Type) {
@@ -284,8 +248,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
-    $scope.resetObject=function()
-    {
+    $scope.resetObject = function () {
         $scope.InventoryObject = {
             IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: 0, Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
             UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: "/Date(1320825600000-0800)/", UnitDate2: "/Date(1320825600000-0800)/", UnitNumber1: 0, UnitNumber2: 0, UnitTag2: "",
@@ -363,6 +326,81 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
+    $scope.IsAvailableMyInventoryColumn = function (ColumnName) {
+        var i = 0;
+        for (i = 0; i < $scope.MyinventoryFields.length; i++) {
+            if ($scope.MyinventoryFields[i].ColumnName == ColumnName) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    $scope.GetMyinventoryColumns = function () {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'GetMyInventoryColumns',
+              contentType: 'application/json; charset=utf-8',
+
+              dataType: 'json',
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+              success: function (response) {
+                  debugger;
+                  var _TempArray = response.GetMyInventoryColumnsResult.Payload;
+
+                  for (var i = 0; i < _TempArray.length; i++) {
+                      var _ColName = _TempArray[i].ColumnName.split("#");
+                      _TempArray[i].ColumnName = _ColName[0];
+                      if (_TempArray[i].Show == "True") {
+                          $scope.MyinventoryFields.push(_TempArray[i]);
+                      }
+                  }
+                  $scope.$apply();
+
+              },
+              error: function (err) {
+                  console.log(err);
+                  log.error("Error Occurred during operation");
+
+
+              }
+          });
+
+    }
+
+    $scope.getstatus = function () {
+
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetStatus',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+                   debugger;
+                   $scope.StatusList = response.GetStatusResult.Payload;
+                   $scope.$apply();
+               },
+               error: function (err) {
+
+                   log.error(err.Message);
+
+               }
+           });
+
+    }
 
     $scope.getuom = function () {
 
@@ -377,15 +415,51 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                type: "POST",
                url: serviceBase + 'GetUnitsOfMeasure',
                contentType: 'application/json; charset=utf-8',
-               dataType: 'text json',
+               dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
+                   debugger;
                    $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
                    $scope.$apply();
                },
                error: function (err) {
 
                    log.error(err.Message);
+
+               }
+           });
+
+    }
+
+
+
+    $scope.getlocation = function () {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetLocations',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+
+                   debugger;
+
+                   $scope.LocationList = response.GetLocationsResult.Payload;
+                   $scope.$apply();
+               },
+               error: function (response) {
+
+                   debugger;
+                   console.log(response);
+
+                   //$scope.InventoryObject.Location = 678030;
 
                }
            });
@@ -436,12 +510,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
 
-
-                   debugger;
-
                    $scope.UnitDataList = response.GetActiveUnitDataFieldsResult.Payload;
-                   console.log("Unit Data Fields")
-                   console.log($scope.UnitDataList);
                    $scope.$apply();
                },
                error: function (response) {
@@ -481,14 +550,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
                        for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
-                           $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomItemDataList[i].cfdID, Value: $scope.CustomItemDataList[i].cfdDefaultValue, DataType: $scope.CustomItemDataList[i].cfdDataType });
+                           $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomActivityDataList[i].cfdID, Value: $scope.CustomActivityDataList[i].cfdDefaultValue, DataType: $scope.CustomActivityDataList[i].cfdDataType });
                        }
 
                        //  setTimeout(function () { $scope.swiperfunction(); }, 2000);
 
 
                        $scope.$apply();
-
 
 
                    }
@@ -606,13 +674,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     }
 
-    $scope.GetActiveUnitDataField();
-    $scope.getlocation();
+    function init() {
+        $scope.GetActiveUnitDataField();
+        $scope.getlocation();
+        $scope.GetMyinventoryColumns();
+        $scope.getuom();
+        $scope.getitems();
+        $scope.getstatus();
+        $scope.GetCustomDataField(0);
+        $scope.GetCustomDataField(1);
+    }
 
-    $scope.getuom();
-    $scope.getitems();
-    $scope.GetCustomDataField(0);
-    $scope.GetCustomDataField(1);
+    init();
     $scope.GetValueFromArrray = function (ItemNumber) {
         if ($.trim(ItemNumber) != "") {
 
@@ -884,7 +957,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         mySwiper = new Swiper('.swiper-container', {
             //Your options here:
             initialSlide: 0,
-            speed: 300,
+            speed: 500,
             effect: 'flip',
 
             allowSwipeToPrev: false,

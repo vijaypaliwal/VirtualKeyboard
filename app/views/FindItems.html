@@ -520,7 +520,7 @@
 
 <div class="animated slideInLeft" id="mylist">
 
-    <div class="pageData ">
+    <div class="pageData" ng-if="myinventoryColumnLoaded==true">
 
         <ul class=" widget-products">
             <li ng-repeat="_obj in InventoryItems">
@@ -536,20 +536,21 @@
                         </span>-->
 
                         <h5 class="list-group-item-heading">
-                            {{_obj.ItemNumber}} <span class="pull-right"> <span class="">{{_obj.CurrentQuantity}} </span> {{_obj.UOM}} </span>
+                            
+                            {{_obj.ItemNumber}} <span class="pull-right"> <span class="" ng-if="IsAvailableMyInventoryColumn('iQty')">{{_obj.CurrentQuantity}} </span> <span ng-if="IsAvailableMyInventoryColumn('uomUOM')"> {{_obj.UOM}} </span></span>
 
                         </h5>
 
                         <span class="list-group-item-text">
-                            <span class="text" style="width:30%">
-                                {{_obj.Location}}
-                            </span>
-                            <span class="" style="float:right">
+                            <span class="text" style="width:30%" ng-if="IsAvailableMyInventoryColumn('lLoc')">
+                                    {{_obj.Location}}
+                                </span>
+                            <span class="" style="float:right" ng-if="IsAvailableMyInventoryColumn('iStatusValue')">
                                 {{_obj.StatusValue}}
                             </span>
-                        </span>
+                            </span>
                         <br />
-                        <span class="text">
+                        <span class="text" ng-if="IsAvailableMyInventoryColumn('pDescription')">
                             {{_obj.ItemDescription}}
 
                         </span>
@@ -569,6 +570,12 @@
         </div>
 
 
+    </div>
+
+    <div ng-if="myinventoryColumnLoaded==false">
+        <div class="spinner" style="text-align:center">
+            <i style="font-size: 100px; color: #fff;" class="fa fa-spin fa-spinner"></i>
+        </div>
     </div>
 </div>
 
