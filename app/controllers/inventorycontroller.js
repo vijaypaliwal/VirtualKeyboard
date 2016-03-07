@@ -675,14 +675,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
     function init() {
-        $scope.GetActiveUnitDataField();
-        $scope.getlocation();
         $scope.GetMyinventoryColumns();
+        $scope.GetCustomDataField(0);
+        $scope.GetCustomDataField(1);
+        $scope.GetActiveUnitDataField();
+
+        $scope.getlocation();
         $scope.getuom();
         $scope.getitems();
         $scope.getstatus();
-        $scope.GetCustomDataField(0);
-        $scope.GetCustomDataField(1);
+      
     }
 
     init();
