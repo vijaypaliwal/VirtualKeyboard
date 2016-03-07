@@ -306,7 +306,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                   $scope.getstep(0);
                   $scope.resetObject();
                   $scope.$apply();
-
+                  $location.path("/FindItems");
                   $('#addinventories').removeClass("disabled");
                   $('#addinventories').find(".fa").removeClass("fa-spin");
               },
@@ -938,6 +938,24 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.$on('ngRepeatFinished', function () {
 
 
+       
+
+    });
+
+    $scope.$on('ngRepeatFinished1', function () {
+
+
+
+
+    });
+    $scope.$on('ngRepeatFinished2', function () {
+
+
+
+
+    });
+
+    $scope.$on('ngRepeatFinished3', function () {
         $('.probeProbe').bootstrapSwitch('state', true);
 
         if (deviceType == 'iPhone') {
@@ -950,53 +968,56 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         }
 
         $(".swiper-container").show();
+
+
         $(".spinner").hide();
 
+        setTimeout(function () {
+
+            mySwiper = new Swiper('.swiper-container', {
+                //Your options here:
+                initialSlide: 0,
+                speed: 500,
+                effect: 'flip',
+
+                allowSwipeToPrev: false,
 
 
-        mySwiper = new Swiper('.swiper-container', {
-            //Your options here:
-            initialSlide: 0,
-            speed: 500,
-            effect: 'flip',
-
-            allowSwipeToPrev: false,
+                onSlideChangeEnd: function (swiperHere) {
 
 
-            onSlideChangeEnd: function (swiperHere) {
-
-
-                $scope.slide = swiperHere.activeIndex;
+                    $scope.slide = swiperHere.activeIndex;
 
 
 
-                var swiperPage = swiperHere.activeSlide()
+                    var swiperPage = swiperHere.activeSlide()
 
-                $scope.slidenumber(swiperHere.activeIndex);
+                    $scope.slidenumber(swiperHere.activeIndex);
 
 
-                if (swiperHere.activeIndex != 3 && swiperHere.activeIndex != 6) {
+                    if (swiperHere.activeIndex != 3 && swiperHere.activeIndex != 6) {
 
-                    $scope.changeNav();
+                        $scope.changeNav();
+
+                    }
+
+                    else {
+
+                        SoftKeyboard.hide();
+
+                    }
 
                 }
 
-                else {
 
-                    SoftKeyboard.hide();
+            });
 
-                }
+            debugger;
 
-            }
+            $scope.laststepindex = mySwiper.slides.length;
+        },10)
 
-
-        });
-
-        debugger;
-
-        $scope.laststepindex = mySwiper.slides.length;
     });
-
 
     $('.arrow-left').on('click', function (e) {
 
@@ -1047,6 +1068,39 @@ app.directive('endRepeat', ['$timeout', function ($timeout) {
             if (scope.$last === true) {
 
                 scope.$emit('ngRepeatFinished');
+            }
+        }
+    }
+}]);
+app.directive('endRepeat1', ['$timeout', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+
+                scope.$emit('ngRepeatFinished1');
+            }
+        }
+    }
+}]);
+app.directive('endRepeat2', ['$timeout', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+
+                scope.$emit('ngRepeatFinished2');
+            }
+        }
+    }
+}]);
+app.directive('endRepeat3', ['$timeout', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+
+                scope.$emit('ngRepeatFinished3');
             }
         }
     }
