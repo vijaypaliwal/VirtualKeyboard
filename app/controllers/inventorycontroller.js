@@ -677,8 +677,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     function init() {
         $scope.GetMyinventoryColumns();
         $scope.GetCustomDataField(0);
-        $scope.GetCustomDataField(1);
         $scope.GetActiveUnitDataField();
+        $scope.GetCustomDataField(1);
 
         $scope.getlocation();
         $scope.getuom();
