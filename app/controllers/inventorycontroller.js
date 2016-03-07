@@ -267,7 +267,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
         var _TempObj = $scope.InventoryObject;
-        _TempObj.Images = $("#list123").find("img").attr("src");
+        var ImageData = $("#list123").find("img").attr("src");
         $.each(_TempObj, function (datakey, datavalue) {
 
             if (datakey != "CustomPartData" && datakey != "CustomPartData") {
@@ -291,7 +291,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
             }
         });
 
-
+        ordersService.AddInventory(_TempObj, ImageData);
         $.ajax
           ({
               type: "POST",

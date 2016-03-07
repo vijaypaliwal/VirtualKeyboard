@@ -97,15 +97,16 @@ app.factory('ordersService', ['$http', 'ngAuthSettings', 'localStorageService', 
         return _RandomArray;
     }
 
-    var _AddInventory = function (object) {
+    var _AddInventory = function (object, ImageData) {
 
         var _Data = _PopulateInventoryItems();
 
+
         var InvObject = {
-            InventoryID: Math.floor(Math.random() * 7), CurrentQuantity: object.Quantity, AvgCostPerUnit: object.CostPerUnit, Uncontrolled: "True", UniqueTag: object.uniquetag,
-            ItemID: Math.floor(Math.random() * 7), ItemNumber: object.ItemName, ItemDescription: object.Description, UomID: object.UOM, UOM: object.UOMText, LocationID: object.Location, Location: object.LocationText,
-            LocationZone: "", LastTransactionID: 465, StatusValue: object.Status, LastQuantityChange: 0, LastDateChange: "",
-            CustomData: [], ImagePath: object.Images == null || object.Images == "" || object.Images == undefined ? "" : object.Images
+            InventoryID: Math.floor(Math.random() * 7), CurrentQuantity: object.Quantity, AvgCostPerUnit: object.Cost, Uncontrolled: "True", UniqueTag: object.UniqueTag,
+            ItemID: Math.floor(Math.random() * 7), ItemNumber: object.ItemID, ItemDescription: object.Description, UomID: object.UomID, UOM: object.Uom, LocationID: object.LocationID, Location: object.Location,
+            LocationZone: object.lZone, LastTransactionID: 465, StatusValue: object.Status, LastQuantityChange: 0, LastDateChange: "",
+            CustomData: [], ImagePath: ImageData == null || ImageData == "" || ImageData == undefined ? "" : ImageData
         };
 
         _Data.unshift(InvObject);
