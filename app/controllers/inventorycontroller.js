@@ -63,6 +63,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         $(".iosbtn").hide()
     }
 
+    $('#switch-change').on('switchChange', function (e, data) {
+
+        alert("Change");
+
+    });
+
 
     $scope.afterlogout = function () {
         $location.path('/login');
@@ -336,6 +342,105 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
         return false;
     }
+
+
+    function applyAutoComplete() {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+
+
+
+
+        $('#ItemName').typeahead({
+            source: function (request, response) {
+                $.ajax({
+
+                    type: "POST",
+                    url: serviceBase + "SearchItems",
+                    contentType: 'application/json; charset=utf-8',
+
+                    dataType: 'json',
+
+                    data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $('#ItemName').val() }),
+                    error: function () {
+                        log.error('There is a problem with the service!');
+                    },
+                    success: function (data) {
+                        if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
+
+                            try {
+
+                                response($.map(data.SearchItemsResult.Payload, function (item) {
+                                    return {
+                                        label: item.ItemLabel,         // tblPart.pPart : tblPart.pDescription
+                                        value: item.ItemLabel,         // tblPart.pPart : tblPart.pDescription
+                                        part: item.ItemID,             // tblPart.pPart
+                                        name: item.ItemDescription,    // tblPart.pDescription
+                                        id: item.pID,                  // tblPart.pID
+                                        uom: item.DefaultUom,          // tblUom.uomUOM
+                                        uomid: item.DefaultUomID,      // tblUom.uomID
+                                        loc: item.DefaultLocation,     // tblLocation.lLoc
+                                        locid: item.DefaultLocationID, // tblLocation.lID
+                                        cost: item.DefaultCost,        // tblPart.pDefaultCost
+                                        itemgroup: item.ItemGroup,        // tblPart.cCountFrq
+                                        locgroup: item.DefaultLocationGroup
+                                    };
+                                }));
+                            } catch (_ex) {
+                                alert(_ex);
+                            }
+                        }
+                    }
+                });
+            }
+
+        });
+
+
+        $('#Location').typeahead({
+            source: function (request, response) {
+                $.ajax({
+
+                    type: "POST",
+                    url: serviceBase + "SearchLocation",
+                    contentType: 'application/json; charset=utf-8',
+
+                    dataType: 'json',
+
+                    data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $('#Location').val() }),
+                    error: function () {
+                        log.error('There is a problem with the service!');
+                    },
+                    success: function (data) {
+                        if (data.SearchLocationResult != null && data.SearchLocationResult.Payload != null) {
+
+                            try {
+
+                                response($.map(data.LocationResult.Payload, function (item) {
+                                    return {
+                                        label: item.LocationName,  // tblLocation.lLoc
+                                        value: item.LocationID,     // tblLocation.lID
+                                        locgroup: item.LocationGroupName  // tblLocation.lZone
+                                    };
+                                }));
+                            } catch (_ex) {
+                                alert(_ex);
+                            }
+                        }
+                    }
+                });
+            }
+
+        });
+
+
+      
+    }
+
     $scope.GetMyinventoryColumns = function () {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -684,7 +789,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         $scope.getuom();
         $scope.getitems();
         $scope.getstatus();
-      
+
     }
 
     init();
@@ -940,7 +1045,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.$on('ngRepeatFinished', function () {
 
 
-       
+
 
     });
 
@@ -973,7 +1078,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
         $(".spinner").hide();
-
+        applyAutoComplete();
         setTimeout(function () {
 
             mySwiper = new Swiper('.swiper-container', {
@@ -1017,9 +1122,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
             debugger;
 
             $scope.laststepindex = mySwiper.slides.length;
-        },10)
+        }, 10)
 
     });
+
+
+
+
+
+
 
     $('.arrow-left').on('click', function (e) {
 
@@ -1136,3 +1247,4 @@ app.directive('bootstrapSwitch', [
             };
         }
 ]);
+

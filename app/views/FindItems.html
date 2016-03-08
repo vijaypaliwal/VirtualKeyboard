@@ -341,7 +341,7 @@
         color: #fff !important;
         background: #128ECE;
         position: fixed;
-        right: 25px;
+        left: 25px;
         bottom: 25px;
         border-radius: 100%;
         z-index: 100;
@@ -412,6 +412,85 @@
 
 </style>
 
+<style>
+    #myModal2 {
+        position: fixed;
+        right: 13px;
+        font-size: 18px;
+        text-align: right;
+        bottom: 125px;
+        display: none;
+        background: transparent;
+        overflow: hidden;
+    }
+
+        #myModal2 span {
+            font-size: 14px;
+            background: #fff;
+            padding: 3px;
+            box-shadow: 0 2px 10px rgba(0,0,0,.2);
+            margin-right: 7px;
+        }
+
+
+        #myModal2 .modal-body {
+            background: transparent;
+        }
+
+
+    .Addbtn {
+        position: fixed;
+        bottom: 23px;
+        right: 13px;
+        background: #CC6646 !important;
+        z-index: 13000;
+        color: #fff !important;
+        height: 50px;
+        width: 50px;
+        border-radius: 100%;
+        text-align: center;
+        line-height: 50px;
+    }
+
+        .Addbtn .fa {
+            font-size: 24px;
+            margin-top: 13px;
+            color: #fff !important;
+        }
+
+    #selectAction {
+        position: fixed;
+        bottom: 110px;
+        right: 25px;
+    }
+
+
+
+        #selectAction li {
+            list-style-type: none;
+        }
+
+
+        #selectAction li span {
+           color:#000;
+        }
+
+
+
+
+        #selectAction .btn {
+            height: 36px;
+            width: 36px;
+            padding: 0px;
+            border-radius: 100%;
+            text-align: center;
+            line-height: 35px;
+            border: transparent;
+            margin-bottom: 5px;
+            color:#fff;
+        }
+</style>
+
 
 
 <div class="topheader">
@@ -460,6 +539,8 @@
 
     <h3>Find Inventory Items </h3>
 
+  
+
 
 </div>
 
@@ -493,6 +574,9 @@
                     </ul>
                 </td>
                 <td>
+
+                 
+
                     <div style="position:relative" class="fg-line">
                         <input style="border-radius:0px; margin-left:2px; height:37px;" id="MasterSearch" type="text" ng-model="SearchValue" class="form-control" placeholder="Type to Search">
                         <i id="btnClearSearch" class="fa fa-times-circle" ng-click="ClearFilter()" ng-show="SearchValue!=''"></i>
@@ -520,38 +604,38 @@
 
 <div class="animated slideInLeft" id="mylist">
 
-    <div class="pageData" ng-if="myinventoryColumnLoaded==true">
+    <div class="pageData" >
 
         <ul class=" widget-products">
             <li ng-repeat="_obj in InventoryItems">
                 <a class="">
                     <span class="img">
-                        <img id="Img_{{_obj.InventoryID}}" ng-if="_obj.ImagePath==''" ng-click="UploadImg(_obj.InventoryID,_obj)" src="/img/default.png" alt="" />
+                        <img id="Img_{{_obj.InventoryID}}" ng-if="_obj.ImagePath==''" ng-click="UploadImg(_obj.InventoryID,_obj)" src="img/default.png" alt="" />
                         <img ng-click="_updateImg(_obj.ImagePath)" ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="" />
                     </span>
                     <span class="product clearfix">
                         <!--<span class="name">
 
 
-                        </span>-->
+                </span>-->
 
                         <h5 class="list-group-item-heading">
-                            
-                            {{_obj.ItemNumber}} <span class="pull-right"> <span class="" ng-if="IsAvailableMyInventoryColumn('iQty')">{{_obj.CurrentQuantity}} </span> <span ng-if="IsAvailableMyInventoryColumn('uomUOM')"> {{_obj.UOM}} </span></span>
+
+                            {{_obj.pPart}} <span class="pull-right"> <span>{{_obj.iQty}} {{_obj.uomUOM}} </span> </span>
 
                         </h5>
 
                         <span class="list-group-item-text">
-                            <span class="text" style="width:30%" ng-if="IsAvailableMyInventoryColumn('lLoc')">
-                                    {{_obj.Location}}
-                                </span>
-                            <span class="" style="float:right" ng-if="IsAvailableMyInventoryColumn('iStatusValue')">
-                                {{_obj.StatusValue}}
+                            <span class="text" style="width:30%">
+                                {{_obj.lLoc}}
                             </span>
+                            <span class="" style="float:right" >
+                                {{_obj.iStatusValue}}
                             </span>
+                        </span>
                         <br />
-                        <span class="text" ng-if="IsAvailableMyInventoryColumn('pDescription')">
-                            {{_obj.ItemDescription}}
+                        <span class="text" >
+                            {{_obj.pDescription}}
 
                         </span>
 
@@ -595,28 +679,22 @@
 </div>
 
 
-<div id="myModalforlist" class="modal fade" role="dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-         
-            <div class="modal-body">
-                <ul>
-                    <li><a class="increase"> <i class="fa fa-plus"></i>&nbsp;&nbsp;Increase</a></li>
-                    <li><a class="decrease"> <i class="fa fa-minus"></i>&nbsp;&nbsp;Decrease</a></li>
-                    <li><a class="move"> <i class="fa fa-exchange"></i>&nbsp;&nbsp;Move</a></li>
-                    <li><a class="convert"> <i class="fa fa-refresh"></i>&nbsp;&nbsp;Convert</a></li>
-                    <li><a class="update"> <i class="fa fa-pencil"></i>&nbsp;&nbsp;Update</a></li>
-                    <li><a class="tag"> <i class="fa fa-tag"></i>&nbsp;&nbsp;Tag</a></li>
-                </ul>
-             
-               
-            </div>
-            <!--<div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-            </div>-->
-        </div>
-  
+<div style="" id="myModal2" class="modal bottommenu fade" role="dialog">
+
+
+    <div class="modal-body">
+        <ul class="animated bounceIn" id="selectAction">
+            <li  ng-click="Showhideimage('true')"> <span>Show Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
+            <li  ng-click="Showhideimage('false')"> <span>Hide Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
+            <li  ng-click="showhidezerorecord('true')"><span>Show Zero record</span><a class="btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+            <li  ng-click="showhidezerorecord('false')"><span>Hide Zero record</span><a class="btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+        </ul>
+    </div>
 </div>
+
+<a data-toggle="modal" data-target="#myModal2" ng-click=" OpenCloseModal()" class="Addbtn btn-info" >
+    <i class="fa fa-plus"></i>
+</a>
 
 
 <script>

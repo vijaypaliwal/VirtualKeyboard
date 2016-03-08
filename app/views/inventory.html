@@ -202,23 +202,39 @@
 
                 <div class="swiper-wrapper">
 
-
                     <div class="swiper-slide" ng-repeat="obj in MyinventoryFields" end-repeat>
 
-
                         <div class="form-group" ng-if="obj.ColumnName=='pPart'">
-                            <label>Item Name <span>*</span> </label>
-                            <div class="input-group">
 
 
-                                <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" autofocus />
+                            <div class="row">
+                                <div class="col-xs-7">
+                                    <label>Item Name <span>*</span> </label>
+                                    <div class="input-group">
 
+                                        <div ng-if="InventoryObject.AutoID==false">
+                                            <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" autofocus />
 
-                                <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemID','#ItemID')"><i class="fa fa-refresh"></i></span>
+                                        </div>
+
+                                        <div ng-if="InventoryObject.AutoID==true">
+                                            <input placeholder="Automated" type="text" id="ItemName" disabled="disabled" value="Automated" class="form-control"  />
+                                        </div>
+                                     
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-5">
+                                    <label>Auto/Manual</label>
+                                    <br />
+
+                                    <div id="label-switch" class="make-switch" data-on-label="SI" data-off-label="NO">
+                                        <input data-on-label="auto" data-off-label="manual" type="checkbox" ng-model="InventoryObject.AutoID" bootstrap-switch>
+                                    </div>
+
+                                  
+                                </div>
                             </div>
-
-
-
 
                         </div>
 
@@ -244,9 +260,6 @@
                         </div>
 
 
-
-
-
                         <div class="form-group" ng-if="obj.ColumnName=='iQty'">
                             <label>Quantity</label>
 
@@ -256,10 +269,6 @@
 
 
                         </div>
-
-
-
-
 
 
 
@@ -509,7 +518,7 @@
 
                         </div>
 
-
+                     
 
                     </div>
 
