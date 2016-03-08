@@ -65,7 +65,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $('#switch-change').on('switchChange', function (e, data) {
 
-        alert("Change");
+    
 
     });
 
@@ -372,14 +372,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                     success: function (data) {
                         if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
 
+                            debugger;
                             try {
 
                                 response($.map(data.SearchItemsResult.Payload, function (item) {
                                     return {
-                                        label: item.ItemLabel,         // tblPart.pPart : tblPart.pDescription
-                                        value: item.ItemLabel,         // tblPart.pPart : tblPart.pDescription
+                                        label: item.ItemID,         // tblPart.pPart : tblPart.pDescription
+                                        value: item.ItemID,         // tblPart.pPart : tblPart.pDescription
                                         part: item.ItemID,             // tblPart.pPart
-                                        name: item.ItemDescription,    // tblPart.pDescription
+                                        name: item.ItemID,    // tblPart.pDescription
                                         id: item.pID,                  // tblPart.pID
                                         uom: item.DefaultUom,          // tblUom.uomUOM
                                         uomid: item.DefaultUomID,      // tblUom.uomID
@@ -391,7 +392,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                                     };
                                 }));
                             } catch (_ex) {
-                                alert(_ex);
+                              
                             }
                         }
                     }
@@ -406,32 +407,41 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                 $.ajax({
 
                     type: "POST",
-                    url: serviceBase + "SearchLocation",
+                    url: serviceBase + "SearchLocationAutoComplete",
                     contentType: 'application/json; charset=utf-8',
 
                     dataType: 'json',
 
                     data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $('#Location').val() }),
-                    error: function () {
-                        log.error('There is a problem with the service!');
-                    },
+                 
                     success: function (data) {
-                        if (data.SearchLocationResult != null && data.SearchLocationResult.Payload != null) {
+                        if (data.SearchLocationAutoCompleteResult != null && data.SearchLocationAutoCompleteResult.Payload != null) {
+
+                            debugger;
 
                             try {
 
-                                response($.map(data.LocationResult.Payload, function (item) {
+                                response($.map(data.SearchLocationAutoCompleteResult.Payload, function (item) {
                                     return {
-                                        label: item.LocationName,  // tblLocation.lLoc
-                                        value: item.LocationID,     // tblLocation.lID
-                                        locgroup: item.LocationGroupName  // tblLocation.lZone
+                                        name: item.LocationName,  // tblLocation.lLoc
+                                        value: item.LocationName,     // tblLocation.lID
+                                  //locgroup: item.LocationGroupName  // tblLocation.lZone
                                     };
                                 }));
                             } catch (_ex) {
-                                alert(_ex);
+
+                                debugger;
+                              
                             }
                         }
-                    }
+                    },
+                    error: function (err) {
+
+                        debugger;
+
+
+                        log.error('There is a problem with the service!');
+                    },
                 });
             }
 

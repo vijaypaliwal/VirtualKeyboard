@@ -12,7 +12,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     var _currentPage = 1;
     var _sortColumn = "iLastITID";
-    var _sortDir = "ASC";
+    var _sortDir = "DESC";
     $scope._areImagesShown = false;
     $scope._HasImages = false;
     //var _areZeroRecordsShown = true;
@@ -226,7 +226,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
      
 
         debugger;
-     
+        $("#myModal2").modal('hide');
 
         $scope.$apply();
 
@@ -239,7 +239,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
         $scope._areZeroRecordsShown = showzero;
         $scope.$apply();
-
+        $("#myModal2").modal('hide');
         $scope.GetInventories();
 
     }
@@ -396,7 +396,8 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
             dataType: 'json',
             success: function (result) {
                 debugger;
-                log.success("into inventory Success");
+                $scope._areImagesShown=result.GetInventoriesResult.Payload[0].AreImagesShown
+                $scope._areZeroRecordsShown = result.GetInventoriesResult.Payload[0].AreZeroRecords
                 console.log(result.GetInventoriesResult.Payload);
                 $scope.InventoryItems = result.GetInventoriesResult.Payload[0].Data;
 
