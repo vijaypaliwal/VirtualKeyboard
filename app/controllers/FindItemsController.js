@@ -403,6 +403,9 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
                 _TotalRecordsCurrent = result.GetInventoriesResult.Payload[0].Data.length;
 
+                if (_TotalRecordsCurrent == 0)
+                $(".norecords").show();
+
                 $scope.$apply();
             },
             error: function (req) {

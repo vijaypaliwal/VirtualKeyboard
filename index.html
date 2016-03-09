@@ -349,6 +349,7 @@
     <script src="scripts/toastr.js"></script>
     <script src="scripts/select2.min.js"></script>
     <script src="scripts/bootbox.js"></script>
+    <script src="scripts/fastclick.js"></script>
    
     <script src="scripts/idangerous.swiper.min.js"></script>
     <!--<script type="text/javascript" src="js/index.js"></script>
@@ -427,6 +428,8 @@
 
 
         document.addEventListener("deviceready", onDeviceReady, false);
+
+      
 
         var exitApp = false, intval = setInterval(function () { exitApp = false; }, 1000);
         document.addEventListener("backbutton", function (e) {
@@ -627,6 +630,8 @@
 
         function onDeviceReady() {
 
+            FastClick.attach(document.body);
+
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
             pictureSource = navigator.camera.PictureSourceType;
             destinationType = navigator.camera.DestinationType;
@@ -634,7 +639,7 @@
 
             navigator.geolocation.getCurrentPosition(
       function (position) {
-          alert(position.coords.latitude + ',' + position.coords.longitude);
+        //  alert(position.coords.latitude + ',' + position.coords.longitude);
           toastr.success("Hey your latitude and longitude is as below" + position.coords.latitude + ',' + position.coords.longitude)
           //alert();
       },
