@@ -496,7 +496,7 @@
                             </div>
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="text" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
+                                <input id="CustomItem_{{obj.cfdID}}" type="text" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" value="" />
                                 <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
                             </div>
 
@@ -598,7 +598,7 @@
 
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                                <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control customFieldDatePicker FormDateType" value="{{obj.CfValue}}" />
+                                <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control customFieldDatePicker FormDateType"  />
                                 <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
                             </div>
 

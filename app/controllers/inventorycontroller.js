@@ -1214,7 +1214,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     }
 
-
+    $(".modal-backdrop").remove();
+    $("body").removeClass("modal-open");
 
     $scope.slidenumber = function (slidenumber) {
 
