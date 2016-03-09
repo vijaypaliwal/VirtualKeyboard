@@ -12,6 +12,9 @@
             padding-bottom: 2px;
             padding-top: 2px;
             padding-right: 20px;
+            -webkit-animation: cssAnimation 1s 16 ease;
+            -moz-animation: cssAnimation 1s 16 ease;
+            -o-animation: cssAnimation 1s 16 ease;
         }
 </style>
 
@@ -148,6 +151,8 @@
         list-style: none;
         margin: 0;
         padding: 0;
+        min-height:175px;
+        background:#fff;
     }
 
     .widget-users li {
@@ -442,7 +447,7 @@
         position: fixed;
         bottom: 23px;
         right: 13px;
-        background: #CC6646 !important;
+        background: #f44336 !important;
         z-index: 13000;
         color: #fff !important;
         height: 50px;
@@ -531,19 +536,28 @@
 <div>
     <br /><br />
 </div>
-
-
 <a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
 
-<div class="page-header">
+<div style="margin-top:12px;" class="page-header">
 
-    <h3>Find Inventory Items </h3>
-
+   
+        <div style="padding-left:0px;" class="col-xs-5">
+            <h4 style="margin-top:0px; font-size:16px;">Inventory Items </h4>
+        </div>
+        <div style="padding-right:0px; text-align:right" class="col-xs-7">
+            <p style="font-size:13px;">{{currentrecord}} of {{totalrecords}} records shown</p>
+        </div>
   
-
 
 </div>
 
+<div ng-if="myinventoryColumnLoaded==false">
+
+    <div class="modal-backdrop fade in"></div>
+    <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
+        <i style="font-size: 100px; color: #0083C7; " class="fa fa-spin fa-spinner"></i>
+    </div>
+</div>
 <div id="sticky-anchor"></div>
 <div id="sticky" class="topup">
     <table class="searchtable">
@@ -601,6 +615,13 @@
     <input type="file" id="myfile" name="myfile" />
 
 </div>
+<div style="text-align: center; color: #d9534f; display:none;" class="maincontent norecords">
+    <br /><br /><br />
+    <h1><i class="fa fa-meh-o"></i> Oops !! </h1>
+    <h3>No record matched your Query</h3>
+    <br /><br />
+  
+</div>
 
 <div class="animated slideInLeft" id="mylist">
 
@@ -610,8 +631,8 @@
             <li ng-repeat="_obj in InventoryItems">
                 <a class="">
                     <span class="img">
-                        <img id="Img_{{_obj.InventoryID}}" ng-if="_obj.ImagePath==''" ng-click="UploadImg(_obj.InventoryID,_obj)" src="img/default.png" alt="" />
-                        <img ng-click="_updateImg(_obj.ImagePath)" ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="" />
+                        <img id="Img_{{_obj.InventoryID}}" ng-if="_obj.ImagePath==''"  src="img/default.png" alt="" />
+                        <img  ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="" />
                     </span>
                     <span class="product clearfix">
                         <!--<span class="name">
@@ -639,31 +660,16 @@
 
                         </span>
 
-
-
                     </span>
                 </a>
             </li>
-
         </ul>
-
-
     </div>
 
-    <div ng-if="myinventoryColumnLoaded==false">
-        <div class="spinner" style="text-align:center">
-            <i style="font-size: 100px; color: #fff;" class="fa fa-spin fa-spinner"></i>
-        </div>
-    </div>
+    
 </div>
 
-<div style="text-align: center; color: #d9534f; display:none;" class="maincontent norecords">
 
-    <br /><br />
-    <h1><i class="fa fa-meh-o"></i> Oops !! </h1>
-    <h3>No record matched your Query</h3>
-    <br /><br />
-</div>
 
 
 <div style="text-align:center; top:100px; overflow:hidden;" id="myModal1" class="modal fade " role="dialog">
@@ -678,9 +684,9 @@
 
 <div style="" id="myModal2" class="modal bottommenu fade" role="dialog">
 
-
     <div class="modal-body">
         <ul class="animated bounceIn" id="selectAction">
+            <li> <span>New Inventory</span> <a href="#/inventory" class="btn-success btn"> <i class="fa fa-plus"></i> </a></li>
             <li ng-if="_areImagesShown==false" ng-click="Showhideimage('true')"> <span>Show Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
             <li ng-if="_areImagesShown==true" ng-click="Showhideimage('false')"> <span>Hide Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
             <li ng-if="_areZeroRecordsShown==false"  ng-click=" showhidezerorecord('true')"><span>Show Zero record</span><a class="btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
@@ -718,14 +724,13 @@
             $back_to_top.addClass('cd-fade-out');
         }
     });
-
 </script>
 
 <script>
     function sticky_relocate() {
         var window_top = $(window).scrollTop();
         var div_top = $('#sticky-anchor').offset().top;
-        if (window_top > div_top) {
+        if (window_top > div_top + 22 ) {
             $('#sticky').addClass('stick');
         } else {
             $('#sticky').removeClass('stick');

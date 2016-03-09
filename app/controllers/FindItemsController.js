@@ -27,7 +27,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     var _IsSetSelectedIfAny = 0;
     var SelectedCartItemIds = [];
     var _IsFilterCartItems = 0;
- 
+
     var _IsLazyLoading = 0;
     var _TotalRecordsCurrent = 0;
     var _IsLazyLoadingUnderProgress = 0;
@@ -199,11 +199,17 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
     $scope.ClearFilter = function () {
+
+      
+
+        ClearFilterArray();
         $scope.SearchValue = '';
         $scope.PopulateInventoryItems();
         $scope.SearchFromData = "All"
         $scope.SearchFromText = "Search";
         $(".norecords").hide();
+      
+
 
     }
 
@@ -213,19 +219,23 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.SearchInventory = function () {
 
-      
+        $scope.myinventoryColumnLoaded = false;
+        $scope.$apply();
+
+
         $scope.GetInventories();
-      
+
     }
 
 
-    $scope.Showhideimage = function (isshow)
-    {
+    $scope.Showhideimage = function (isshow) {
+        $scope.myinventoryColumnLoaded = false;
+        $scope.$apply();
 
         $scope._areImagesShown = isshow;
         $scope._HasImages = isshow;
 
-     
+
 
         debugger;
         $("#myModal2").modal('hide');
@@ -236,6 +246,10 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     }
 
     $scope.showhidezerorecord = function (showzero) {
+
+
+        $scope.myinventoryColumnLoaded = false;
+        $scope.$apply();
 
         debugger;
 
@@ -249,30 +263,47 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     $(window).scroll(function () {
         var _SearchValue = $.trim($("#MasterSearch").val());
 
-        debugger;
-        if (_IsLazyLoadingUnderProgress === 0) {
+        if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
             if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                _IsLazyLoadingUnderProgress = 1;
+                _PageSize = _TotalRecordsCurrent + 10;
+                $scope.myinventoryColumnLoaded = false;
+                $scope.$apply();
+                $scope.GetInventories();
 
-                debugger;
-
-
-                    _PageSize = _TotalRecordsCurrent + 10;
-                  
-
-                    $scope.GetInventories();
-               
             }
         }
     });
 
 
 
+    function ClearFilterArray() {
+        for (var i = 0; i < $scope.FilterArray.length; i++) {
+            $scope.FilterArray[i].SearchValue = "";
 
+        }
+        $scope.$apply();
+    }
 
+    function UpdateFilterArray(Field, Value) {
 
+        for (var i = 0; i < $scope.FilterArray.length; i++) {
+            if ($scope.FilterArray[i].ColumnName == Field) {
+                $scope.FilterArray[i].SearchValue = Value;
+                break;
+            }
+
+        }
+
+        console.log("After updating data");
+        console.log($scope.FilterArray);
+
+        $scope.$apply();
+    }
 
     $scope.searchfunction = function (Byvalue) {
-        $scope.PopulateInventoryItems();
+        debugger;
+        ClearFilterArray();
         if ($.trim($scope.SearchValue) != "") {
             $scope.SearchFromData = Byvalue;
             var _tempArray = [];
@@ -280,40 +311,44 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
                 case "iStatusValue":
 
                     $scope.SearchFromText = "Status";
-
+                    UpdateFilterArray("iStatusValue", $.trim($scope.SearchValue));
 
                     break
                 case "lLoc":
                     $scope.SearchFromText = "Location";
-
+                    UpdateFilterArray("lLoc", $.trim($scope.SearchValue));
                     break
                 case "pPart":
                     $scope.SearchFromText = "Items";
 
-
+                    UpdateFilterArray("pPart", $.trim($scope.SearchValue));
                     break
                 case "All":
                     $scope.SearchFromText = "All";
+
                     break
                 case "iReqValue":
 
                     $scope.SearchFromText = "Unique Tag";
-
+                    UpdateFilterArray("iReqValue", $.trim($scope.SearchValue));
                     break
                 default:
+                    break;
 
             }
+            $scope.PopulateInventoryItems();
+
 
 
         }
     }
-    var FilterArray = [
+    $scope.FilterArray = [
         { ColumnName: 'pPart', FilterOperator: 'cn', SearchValue: $('#pPart-filter').val() },
         { ColumnName: 'pDescription', FilterOperator: 'cn', SearchValue: $('#pDescription-filter').val() },
         { ColumnName: 'iQty', FilterOperator: 'num-eq', SearchValue: $('#iQty-filter').val() },
-        { ColumnName: 'uomUOM', FilterOperator: 'in', SearchValue: $('#uomUOM-filter').val() },
+        { ColumnName: 'uomUOM', FilterOperator: 'cn', SearchValue: $('#uomUOM-filter').val() },
         { ColumnName: 'lLoc', FilterOperator: 'cn', SearchValue: $('#lLoc-filter').val() },
-        { ColumnName: 'iStatusValue', FilterOperator: 'in', SearchValue: $('#iStatusValue-filter').val() },
+        { ColumnName: 'iStatusValue', FilterOperator: 'cn', SearchValue: $('#iStatusValue-filter').val() },
         { ColumnName: 'iReqValue', FilterOperator: 'cn', SearchValue: $('#iReqValue-filter').val() },
         { ColumnName: 'pCountFrq', FilterOperator: 'cn', SearchValue: $('#pCountFrq-filter').val() },
         { ColumnName: 'lZone', FilterOperator: 'cn', SearchValue: $('#lZone-filter').val() },
@@ -379,34 +414,46 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     /// Get filters of inventory grid
 
     function GetFilters() {
-        return FilterArray;
+        return $scope.FilterArray;
     }
     $scope.GetInventories = function () {
+
+
+        $scope.myinventoryColumnLoaded = false;
+
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
 
         debugger;
-        var _masterSearch = $scope.SearchValue;
+        var _masterSearch = $scope.SearchFromData == "All" ? $scope.SearchValue : "";
 
         $.ajax({
             type: "POST",
             url: serviceBase + 'GetInventories',
-            data: JSON.stringify({ SecurityToken: $scope.SecurityToken, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: GetFilters(), SelectedCartIDs: SelectedCartItemIds, masterSearch: _masterSearch, showImage: $scope._areImagesShown, showZeroRecords: $scope._areZeroRecordsShown, PageSize: _PageSize }),
+            data: JSON.stringify({ SecurityToken: $scope.SecurityToken, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray, SelectedCartIDs: SelectedCartItemIds, masterSearch: _masterSearch, showImage: $scope._areImagesShown, showZeroRecords: $scope._areZeroRecordsShown, PageSize: _PageSize }),
             contentType: 'application/json',
             dataType: 'json',
             success: function (result) {
                 debugger;
-                $scope._areImagesShown=result.GetInventoriesResult.Payload[0].AreImagesShown
+                $scope._areImagesShown = result.GetInventoriesResult.Payload[0].AreImagesShown
                 $scope._areZeroRecordsShown = result.GetInventoriesResult.Payload[0].AreZeroRecords
                 console.log(result.GetInventoriesResult.Payload);
                 $scope.InventoryItems = result.GetInventoriesResult.Payload[0].Data;
 
                 _TotalRecordsCurrent = result.GetInventoriesResult.Payload[0].Data.length;
 
-                if (_TotalRecordsCurrent == 0)
+                $scope.currentrecord = _TotalRecordsCurrent;
+                $scope.totalrecords = result.GetInventoriesResult.Payload[0].TotalRercords;
+
+                if (_TotalRecordsCurrent == 0) {
                     $(".norecords").show();
+                }
+                else {
+                    $(".norecords").hide();
+
+                }
 
                 $scope.myinventoryColumnLoaded = true;
 
@@ -414,15 +461,15 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
             },
             error: function (req) {
                 log.error("error during get inventory Success");
+                $scope.myinventoryColumnLoaded = true;
+                $scope.$apply();
                 console.log(req);
             },
             complete: function () {
-
-
+                _IsLazyLoadingUnderProgress = 0;
             }
         });
     }
-
 
 
     $scope.PopulateInventoryItems = function () {

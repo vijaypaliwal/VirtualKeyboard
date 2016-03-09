@@ -114,8 +114,46 @@
                     background: #fff;
                     color: #000;
                 }
-</style>
 
+
+    .select2-container--default.select2-container--focus .select2-selection--multiple {
+        border: 1px solid #ccc;
+        height: 50px !important;
+    }
+
+    .select2-container--default .select2-selection--multiple {
+        border-radius: 0px !important;
+        height: 50px;
+    }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: transparent;
+            border: transparent;
+            border-radius: 4px;
+            cursor: default;
+            float: left;
+            margin-right: 5px;
+            margin-top: 10px;
+            padding: 0 5px;
+            /* font-size: 15px; */
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+         
+            cursor: pointer;
+            display: inline-block;
+            font-weight: bold;
+            position: absolute;
+            margin-right: 2px;
+            font-size: 20px;
+            top: 1px;
+            right: -1px;
+            padding: 10px;
+            background: brown;
+            padding-left: 15px;
+            color: #fff !important;
+            padding-right: 15px;
+        }
+    
+</style>
 
 
 
@@ -213,7 +251,12 @@
                                     <div class="input-group">
 
                                         <div ng-if="InventoryObject.AutoID==false">
-                                            <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" autofocus />
+
+                                            <select class="form-control" id="ItemName" ng-model="InventoryObject.ItemID">
+                                            </select>
+
+
+                                            <!--<input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" autofocus />-->
 
                                         </div>
 
@@ -277,10 +320,9 @@
                             <div class="input-group">
 
 
-                                <input type="text" class="form-control" id="Location" ng-model="InventoryObject.Location" />
-                                <!--<select class="form-control" id="Location" ng-model="InventoryObject.Location">
-                                    <option ng-repeat="_optionValue in LocationList" value="{{_optionValue.LocationID}}">{{_optionValue.LocationName}}</option>
-                                </select>-->
+                                <!--<input type="text" class="form-control" id="Location" ng-model="InventoryObject.Location" />-->
+                                <select class="form-control" id="Location" ng-model="InventoryObject.Location">
+                                </select>
 
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Location','#Location')"><i class="fa fa-refresh"></i></span>
                             </div>
