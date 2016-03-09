@@ -33,6 +33,8 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     var _IsLazyLoadingUnderProgress = 0;
     $scope._areZeroRecordsShown = false;
 
+    $scope.myinventoryColumnLoaded = false;
+
 
     $scope.CurrentImgID = "";
     $scope.SearchFromData = "All"
@@ -404,7 +406,9 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
                 _TotalRecordsCurrent = result.GetInventoriesResult.Payload[0].Data.length;
 
                 if (_TotalRecordsCurrent == 0)
-                $(".norecords").show();
+                    $(".norecords").show();
+
+                $scope.myinventoryColumnLoaded = true;
 
                 $scope.$apply();
             },
