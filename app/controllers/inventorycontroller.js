@@ -194,6 +194,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }, true);
 
 
+
+
+
+    
+
+
+
+
     $scope.GetLocalStoargeVarID = function (id) {
         return "Inv_" + id;
     }
@@ -273,6 +281,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
         var _TempObj = $scope.InventoryObject;
+
+       // $scope.InventoryObject.Location = $scope.InventoryObject.Location.length > 0 ? $scope.InventoryObject.Location[0] : ""
         var ImageData = $("#list123").find("img").attr("src");
         $.each(_TempObj, function (datakey, datavalue) {
 
@@ -900,6 +910,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.OpenBoxAndroid = function () {
         $("#myModalforlist").modal("show");
     }
+
 
 
 
