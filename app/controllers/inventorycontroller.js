@@ -83,7 +83,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
-
+   
 
     $scope.GetLastValueCustom = function (id, Type) {
 
@@ -355,56 +355,58 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
 
-        //$('#ItemName').typeahead({
-        //    source: function (request, response) {
-        //        $.ajax({
+        $('#ItemName').typeahead({
+            source: function (request, response) {
+                $.ajax({
 
-        //            type: "POST",
-        //            url: serviceBase + "SearchItems",
-        //            contentType: 'application/json; charset=utf-8',
+                    type: "POST",
+                    url: serviceBase + "SearchItems",
+                    contentType: 'application/json; charset=utf-8',
 
-        //            dataType: 'json',
+                    dataType: 'json',
 
-        //            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $('#ItemName').val() }),
-        //            error: function () {
-        //                log.error('There is a problem with the service!');
-        //            },
+                    data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $('#ItemName').val() }),
+                    error: function () {
+                        log.error('There is a problem with the service!');
+                    },
 
-        //            success: function (data) {
-        //                if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
+                    success: function (data) {
+                        if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
 
-        //                    debugger;
-        //                    try {
+                            debugger;
+                            try {
 
-        //                        response($.map(data.SearchItemsResult.Payload, function (item) {
-        //                            return {
-        //                                label: item.ItemID,         // tblPart.pPart : tblPart.pDescription
-        //                                value: item.ItemID,         // tblPart.pPart : tblPart.pDescription
-        //                                part: item.ItemID,             // tblPart.pPart
-        //                                name: item.ItemID,    // tblPart.pDescription
-        //                                id: item.pID,                  // tblPart.pID
-        //                                uom: item.DefaultUom,          // tblUom.uomUOM
-        //                                uomid: item.DefaultUomID,      // tblUom.uomID
-        //                                loc: item.DefaultLocation,     // tblLocation.lLoc
-        //                                locid: item.DefaultLocationID, // tblLocation.lID
-        //                                cost: item.DefaultCost,        // tblPart.pDefaultCost
-        //                                itemgroup: item.ItemGroup,        // tblPart.cCountFrq
-        //                                locgroup: item.DefaultLocationGroup
-        //                            };
-        //                        }));
-        //                    } catch (_ex) {
+                                response($.map(data.SearchItemsResult.Payload, function (item) {
+                                    return {
+                                        label: item.ItemID,         // tblPart.pPart : tblPart.pDescription
+                                        value: item.ItemID,         // tblPart.pPart : tblPart.pDescription
+                                        part: item.ItemID,             // tblPart.pPart
+                                        name: item.ItemID,    // tblPart.pDescription
+                                        id: item.pID,                  // tblPart.pID
+                                        uom: item.DefaultUom,          // tblUom.uomUOM
+                                        uomid: item.DefaultUomID,      // tblUom.uomID
+                                        loc: item.DefaultLocation,     // tblLocation.lLoc
+                                        locid: item.DefaultLocationID, // tblLocation.lID
+                                        cost: item.DefaultCost,        // tblPart.pDefaultCost
+                                        itemgroup: item.ItemGroup,        // tblPart.cCountFrq
+                                        locgroup: item.DefaultLocationGroup
+                                    };
+                                }));
+                            } catch (_ex) {
 
-        //                    }
-        //                }
-        //            }
-        //        });
-        //    },
-        //    updater: function (item) {
-        //        return item.name;
-        //    }
+                            }
+                        }
+                    }
+                });
+            },
+            updater: function (item) {
+                return item.name;
+            }
 
-        //});
+        });
 
+
+       
 
         //$('#Location').typeahead({
         //    source: function (request, response) {
@@ -452,68 +454,68 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         //    }
 
         //});
-        var $select2Elm1 = $('#ItemName');
+   //     var $select2Elm1 = $('#ItemName');
 
 
 
-        $select2Elm1.select2({
-            minimumInputLength: 1,
-            multiple: true,
-            maximumSelectionSize: 1,
+   //     $select2Elm1.select2({
+   //         minimumInputLength: 1,
+   //         multiple: true,
+   //         maximumSelectionSize: 1,
+   //         selectOnBlur:true,
+
+   //         ajax: {
+   //             type: "POST",
+   //             url: serviceBase + "SearchItems",
+   //             contentType: 'application/json; charset=utf-8',
+
+   //             dataType: 'json',
+   //             data: function (term) {
+   //                 return JSON.stringify({
+   //                     SecurityToken: $scope.SecurityToken,
+   //                     SearchValue: term.term
+   //                 }
+
+   //                 );
+   //             },
+
+   //             processResults: function (data, page) {
+   //                 debugger;
+   //                 if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
+
+   //                     return {
+   //                         results: $.map(data.SearchItemsResult.Payload, function (item) {
+   //                             return {
+   //                                 text: item.ItemID,
+   //                                 id: item.ItemID
+   //                             }
+   //                         })
+   //                     };
+   //                 }
+   //             },
 
 
-            ajax: {
-                type: "POST",
-                url: serviceBase + "SearchItems",
-                contentType: 'application/json; charset=utf-8',
+   //         }
 
-                dataType: 'json',
-                data: function (term) {
-                    return JSON.stringify({
-                        SecurityToken: $scope.SecurityToken,
-                        SearchValue: term.term
-                    }
+   //     }).on("change", function (e) {
+   //         console.log(e);
 
-                    );
-                },
+   //         var select21 = $select2Elm1.data('select2'),
+   //// get the select2 input tag
+   //$select2Input1 = $('.select2-input', select21.searchContainer),
+   //// get the useless tag
+   //$tagToRemove1 = $('li', select21.selection).eq(0),
+   //newValue1 = $.trim($tagToRemove1.text());
 
-                processResults: function (data, page) {
-                    debugger;
-                    if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
+   //         // append the value chosen into the select2 text input
+   //         $select2Input1.val(newValue1);
+   //         $select2Input1.trigger('keyup');
+   //         // set the new value to the original text field
+   //         $select2Elm1.val(newValue1);
+   //         // remove the useless tag
+   //         $tagToRemove1.remove();
 
-                        return {
-                            results: $.map(data.SearchItemsResult.Payload, function (item) {
-                                return {
-                                    text: item.ItemID,
-                                    id: item.ItemID
-                                }
-                            })
-                        };
-                    }
-                },
-
-
-            }
-
-        }).on("change", function (e) {
-            console.log(e);
-
-            var select21 = $select2Elm1.data('select2'),
-   // get the select2 input tag
-   $select2Input1 = $('.select2-input', select21.searchContainer),
-   // get the useless tag
-   $tagToRemove1 = $('li', select21.selection).eq(0),
-   newValue1 = $.trim($tagToRemove1.text());
-
-            // append the value chosen into the select2 text input
-            $select2Input1.val(newValue1);
-            $select2Input1.trigger('keyup');
-            // set the new value to the original text field
-            $select2Elm1.val(newValue1);
-            // remove the useless tag
-            $tagToRemove1.remove();
-
-        });
+   //     });
 
 
 
@@ -580,6 +582,72 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
 
+    }
+
+
+    $scope.GetAllData = function () {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'GetAllData',
+              contentType: 'application/json; charset=utf-8',
+
+              dataType: 'json',
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+              success: function (response) {
+                  debugger;
+                  var _TempArray = response.GetAllDataResult.Payload;
+
+                  // MY inventory column region
+                  var _TempArrayMyInventory = response.GetAllDataResult.Payload[0].MyInventoryColumns;
+
+                  for (var i = 0; i < _TempArrayMyInventory.length; i++) {
+                      var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
+                      _TempArrayMyInventory[i].ColumnName = _ColName[0];
+                      if (_TempArrayMyInventory[i].Show == "True") {
+                          $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
+                      }
+                  }
+                  $scope.$apply();
+                  // Custom Item Field 
+
+                  $scope.CustomItemDataList = response.GetAllDataResult.Payload[0].CustomItemField;
+                  $scope.$apply();
+                  for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+                      $scope.InventoryObject.CustomPartData.push({ CfdID: $scope.CustomItemDataList[i].cfdID, Value: $scope.CustomItemDataList[i].cfdDefaultValue, DataType: $scope.CustomItemDataList[i].cfdDataType });
+                  }
+                  $scope.$apply();
+                  // Custom Activity Field 
+
+                  $scope.CustomActivityDataList = response.GetAllDataResult.Payload[0].CustomActivityField;
+                  $scope.$apply();
+
+                  for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+                      $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomActivityDataList[i].cfdID, Value: $scope.CustomActivityDataList[i].cfdDefaultValue, DataType: $scope.CustomActivityDataList[i].cfdDataType });
+                  }
+                  $scope.$apply();
+                  // Unit Of Measure
+                  $scope.UOMList = response.GetAllDataResult.Payload[0].UnitOfMeasure;
+                  $scope.$apply();
+                  // Status
+                  $scope.StatusList = response.GetAllDataResult.Payload[0].Status;
+                  $scope.$apply();
+                  console.log("all Data in one call");
+                  console.log(_TempArray);
+                  AfterLoadedData();
+
+              },
+              error: function (err) {
+                  console.log(err);
+                  log.error("Error Occurred during operation");
+
+
+              }
+          });
     }
 
     $scope.GetMyinventoryColumns = function () {
@@ -923,16 +991,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
     function init() {
-        $scope.GetMyinventoryColumns();
-        $scope.GetCustomDataField(0);
-        $scope.GetActiveUnitDataField();
-        $scope.GetCustomDataField(1);
+        $scope.GetAllData();
 
-        $scope.getlocation();
-        $scope.getuom();
-        $scope.getitems();
-        $scope.getstatus();
-
+        //$scope.GetMyinventoryColumns();
+        //$scope.GetCustomDataField(0);
+        //$scope.GetActiveUnitDataField();
+        //$scope.GetCustomDataField(1);
+        //$scope.getuom();
+        //$scope.getstatus();
+     //   $scope.getlocation();
+        
+       // $scope.getitems();
+        
     }
 
     init();
@@ -1208,12 +1278,21 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     });
     $scope.$on('ngRepeatFinished2', function () {
 
-
+       
 
 
     });
 
     $scope.$on('ngRepeatFinished3', function () {
+     
+
+    });
+
+
+
+
+    function AfterLoadedData()
+    {
         $('.probeProbe').bootstrapSwitch('state', true);
 
         if (deviceType == 'iPhone') {
@@ -1274,13 +1353,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
             $scope.laststepindex = mySwiper.slides.length;
         }, 10)
-
-    });
-
-
-
-
-
+    }
 
 
     $('.arrow-left').on('click', function (e) {

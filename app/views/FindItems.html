@@ -341,8 +341,8 @@
     }
 
     .cd-top {
-        height: 50px;
-        width: 50px;
+        height:47px;
+        width:47px;
         color: #fff !important;
         background: #128ECE;
         position: fixed;
@@ -352,7 +352,7 @@
         z-index: 100;
         font-size: 25px;
         padding-left: 12px;
-        padding-top: 6px;
+        padding-top: 4px;
         opacity: 1;
         visibility: hidden;
     }
@@ -494,9 +494,10 @@
             margin-bottom: 5px;
             color:#fff;
         }
+    .bgm-red {
+        background: #f44336;
+    }
 </style>
-
-
 
 <div class="topheader">
     <div class="col-xs-3">
@@ -687,10 +688,10 @@
     <div class="modal-body">
         <ul class="animated bounceIn" id="selectAction">
             <li> <span>New Inventory</span> <a href="#/inventory" class="btn-success btn"> <i class="fa fa-plus"></i> </a></li>
-            <li ng-if="_areImagesShown==false" ng-click="Showhideimage('true')"> <span>Show Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
-            <li ng-if="_areImagesShown==true" ng-click="Showhideimage('false')"> <span>Hide Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
-            <li ng-if="_areZeroRecordsShown==false"  ng-click=" showhidezerorecord('true')"><span>Show Zero record</span><a class="btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
-            <li ng-if="_areZeroRecordsShown==true" ng-click="showhidezerorecord('false')"><span>Hide Zero record</span><a class="btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+            <li class="bottomlink" ng-if="_areImagesShown==false" ng-click="Showhideimage('true')"> <span>Show Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
+            <li class="bottomlink" ng-if="_areImagesShown==true" ng-click="Showhideimage('false')"> <span>Hide Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
+            <li class="bottomlink" ng-if="_areZeroRecordsShown==false" ng-click=" showhidezerorecord('true')"><span>Show Zero record</span><a class="btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+            <li class="bottomlink" ng-if="_areZeroRecordsShown==true" ng-click="showhidezerorecord('false')"><span>Hide Zero record</span><a class="btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
         </ul>
     </div>
 </div>
@@ -698,7 +699,6 @@
 <a data-toggle="modal" data-target="#myModal2" ng-click=" OpenCloseModal()" class="Addbtn btn-info" >
     <i class="fa fa-plus"></i>
 </a>
-
 
 <script>
 

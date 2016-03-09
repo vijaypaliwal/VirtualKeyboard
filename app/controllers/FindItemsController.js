@@ -35,6 +35,9 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.myinventoryColumnLoaded = false;
 
+    $(".modal-backdrop").remove();
+    $("body").removeClass("modal-open");
+
 
     $scope.CurrentImgID = "";
     $scope.SearchFromData = "All"
@@ -449,9 +452,12 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
                 if (_TotalRecordsCurrent == 0) {
                     $(".norecords").show();
+                    $(".bottomlink").hide();
+                    
                 }
                 else {
                     $(".norecords").hide();
+                    $(".bottomlink").show();
 
                 }
 
@@ -515,4 +521,18 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
             console.log("Scanning failed: ", error);
         });
     }
+
+
+    $("#MasterSearch").keyup(function (e) {
+
+        if ($('#MasterSearch').val() !== "") {
+          
+            $('#btnMasterSearch').addClass('bgm-red')
+        }
+        else {
+          
+            $('#btnMasterSearch').removeClass('bgm-red')
+        }
+
+    });
 }]);
