@@ -151,38 +151,37 @@
             padding-right: 15px;
         }
 
-
     
 </style>
 
 <style>
-    #itemlistmodal
-    {
-        background:#fff;
-        width:95%;
-        margin:0 auto;
-        top:5%;
-        bottom:auto;
-        overflow:hidden;
+    #itemlistmodal {
+    
+        background: rgba(255,255,255,0.9);
+        width: 100%;
+        margin: 0 auto;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
     }
 
         #itemlistmodal .modal-header {
             padding-top: 5px;
             padding-bottom: 5px;
-            color: #fff;
-            background: #0083C7;
+            padding-left:7px;
+          
         }
 
     #itemlistmodal .modal-body
     {
         overflow:auto;
         min-height:250px;
-        max-height:400px;
+        max-height:500px;
+        padding:7px;
     }
 
         #itemlistmodal .modal-header .close {
             margin-top: 6px;
-            color: #fff;
             opacity: 1;
         }
     .searchresultlist {
@@ -200,6 +199,7 @@
         padding-top: 10px;
         padding-bottom: 10px;
         border-bottom: 1px solid #ccc;
+        background:#fff;
     }
 
         .searchresultlist li a .fa-angle-right
@@ -209,6 +209,38 @@
             font-size:18px;
         }
 
+</style>
+
+
+<style>
+    #locationlistmodal {
+        background: rgba(255,255,255,0.9);
+        width: 100%;
+        margin: 0 auto;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+    }
+
+        #locationlistmodal .modal-header {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 7px;
+        }
+
+        #locationlistmodal .modal-body {
+            overflow: auto;
+            min-height: 250px;
+            max-height: 500px;
+            padding: 7px;
+        }
+
+        #locationlistmodal .modal-header .close {
+            margin-top: 6px;
+            opacity: 1;
+        }
+
+   
 </style>
 
 <div class="topheader">
@@ -302,25 +334,34 @@
                             <div class="row">
                                 <div class="col-xs-7">
                                     <label>Item Name <span>*</span> </label>
-                                    <div class="input-group">
+                                    <div ng-if="InventoryObject.AutoID==false" class="input-group">
 
-                                        <div ng-if="InventoryObject.AutoID==false">
+                                        <div>
 
                                             <!--<select class="form-control" id="ItemName" ng-model="InventoryObject.ItemID">
-                                            </select>-->
+            </select>-->
 
 
-                                            <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required=""  />
+                                            <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" />
 
                                         </div>
 
-                                        <div ng-if="InventoryObject.AutoID==true">
-                                            <input placeholder="Automated" type="text" id="ItemName" disabled="disabled" value="Automated" class="form-control"  />
-                                        </div>
+
 
                                         <span class="input-group-addon last" ng-click="itemlist()"><i class="fa fa-search"></i></span>
-                                     
+
                                     </div>
+
+
+                                    <div ng-if="InventoryObject.AutoID==true" class="input-group">
+
+                                        <div>
+                                            <input placeholder="Automated" type="text" id="ItemName" disabled="disabled" value="Automated" class="form-control" />
+                                        </div>
+
+                                    </div>
+
+                                    
                                 </div>
 
                                 <div class="col-xs-5">
@@ -374,11 +415,10 @@
                         <div class="form-group" ng-if="obj.ColumnName=='lLoc'">
                             <label>Select Location <span>*</span></label>
                             <div class="input-group">
-
-
-                                <!--<input type="text" class="form-control" id="Location" ng-model="InventoryObject.Location" />-->
-                                <select class="form-control" id="Location" ng-model="InventoryObject.Location">
-                                </select>
+                                <input type="text" class="form-control" id="Location" ng-model="InventoryObject.Location" />
+                                <!--<select class="form-control" id="Location" ng-model="InventoryObject.Location">
+                                </select>-->
+                                <span class="input-group-addon last" ng-click="locationlist()"><i class="fa fa-search"></i></span>
 
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Location','#Location')"><i class="fa fa-refresh"></i></span>
                             </div>
@@ -776,7 +816,7 @@
 
     <div class="modal-body">
         <div class="form-group">
-            <input type="text" placeholder="Find Items"  ng-change="OnChangeItemNameFunction()" class="form-control" ng-model="SearchItemValue" required="" autofocus />
+            <input type="text" placeholder="Type Keywork to find items"  ng-change="OnChangeItemNameFunction()" class="form-control" ng-model="SearchItemValue" required="" autofocus />
           
         </div>
 
@@ -785,6 +825,29 @@
         </div>
         <ul class="searchresultlist" ng-if="ItemSearching==false">
             <li ng-click="SetItemData(obj)" ng-repeat="obj in SearchList"><a>{{obj.ItemID}} <i class="fa fa-angle-right"></i></a></li>
+        </ul>
+
+    </div>
+</div>
+
+
+<div id="locationlistmodal" class="modal fade animated bounceIn">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+        <h4>select Location</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="form-group">
+            <input type="text" placeholder="Type Keywork to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
+
+        </div>
+
+        <div ng-if="LocationSearching==true">
+            <i class="fa fa-spin fa-spinner"></i> searching please wait..
+        </div>
+        <ul class="searchresultlist" ng-if="LocationSearching==false">
+            <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList"><a>{{obj.LocationName}} <i class="fa fa-angle-right"></i></a></li>
         </ul>
 
     </div>
