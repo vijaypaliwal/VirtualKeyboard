@@ -7,6 +7,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.scannerText = "";
     $scope.SecurityToken = "";
     $scope.StatusList = [];
+
+    $scope.Totalslides = 0;
     $scope.InventoryObject = {
         IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: 0, Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
         UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: "/Date(1320825600000-0800)/", UnitDate2: "/Date(1320825600000-0800)/", UnitNumber1: 0, UnitNumber2: 0, UnitTag2: "",
@@ -1493,36 +1495,43 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
                     $scope.slide = swiperHere.activeIndex;
 
+                    $scope.Totalslides = swiperHere.slides.length - 1;
+
+                   
+                        var swiperPage = swiperHere.activeSlide()
+
+                        $scope.slidenumber(swiperHere.activeIndex);
 
 
-                    var swiperPage = swiperHere.activeSlide()
+                        if (swiperHere.activeIndex != 3 && swiperHere.activeIndex != 6) {
 
-                    $scope.slidenumber(swiperHere.activeIndex);
+                            $scope.changeNav();
 
+                        }
 
-                    if (swiperHere.activeIndex != 3 && swiperHere.activeIndex != 6) {
+                        else {
 
-                        $scope.changeNav();
+                            SoftKeyboard.hide();
+
+                        }
 
                     }
 
-                    else {
-
-                        SoftKeyboard.hide();
-
-                    }
-
-                }
+                
 
 
             });
 
             debugger;
 
+            
+
             $scope.laststepindex = mySwiper.slides.length;
         }, 10)
     }
 
+
+    
 
     $('.arrow-left').on('click', function (e) {
 
@@ -1541,7 +1550,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     $scope.$watch("InventoryObject.AutoID", function () {
-        console.log($scope.InventoryObject.AutoID)
         if($scope.InventoryObject.AutoID)
         {
             $scope.InventoryObject.ItemID = "Automated";

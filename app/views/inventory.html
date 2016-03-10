@@ -319,14 +319,13 @@
                     </div>
                 </div>
 
-
-
+ 
 
                 <div class="swiper-wrapper">
 
-                    <div class="swiper-slide" ng-repeat="obj in MyinventoryFields" end-repeat>
+                    <div class="swiper-slide" ng-repeat="obj in MyinventoryFields" ng-if="obj.ColumnName=='pPart' || obj.ColumnName=='pDescription' || obj.ColumnName=='iQty' || obj.ColumnName=='lLoc' || obj.ColumnName=='lZone' || obj.ColumnName=='iStatusValue' || obj.ColumnName=='uomUOM' || obj.ColumnName=='pCountFrq' || obj.ColumnName=='iCostPerUnit'" end-repeat>
 
-                        <div class="form-group" ng-if="obj.ColumnName=='pPart'">
+                        <div class=" form-group" ng-if="obj.ColumnName=='pPart'">
 
 
                             <div class="row">
@@ -337,7 +336,7 @@
                                         <div>
 
                                             <!--<select class="form-control" id="ItemName" ng-model="InventoryObject.ItemID">
-                                            </select>-->
+                            </select>-->
 
 
                                             <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" />
@@ -354,7 +353,7 @@
                                     <div ng-if="InventoryObject.AutoID==true" class="input-group">
 
                                         <div>
-                                            <input placeholder="Automated" type="text" ng-model="InventoryObject.ItemID" id="ItemName" disabled="disabled"  class="form-control" />
+                                            <input placeholder="Automated" type="text" ng-model="InventoryObject.ItemID" id="ItemName" disabled="disabled" class="form-control" />
                                         </div>
 
                                     </div>
@@ -402,7 +401,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" id="Location" ng-model="InventoryObject.Location" />
                                 <!--<select class="form-control" id="Location" ng-model="InventoryObject.Location">
-                                </select>-->
+                </select>-->
                                 <span class="input-group-addon last" ng-click="locationlist()"><i class="fa fa-search"></i></span>
 
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Location','#Location')"><i class="fa fa-refresh"></i></span>
@@ -501,7 +500,7 @@
                     <div class="swiper-slide">
 
 
-                        <div ng-show="scanfieldID=='laststep'">
+                        <div >
 
 
 
@@ -542,7 +541,7 @@
 
 
 
-                    <div class="swiper-slide" ng-repeat="obj in CustomItemDataList" ng-if="IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
+                    <div class="swiper-slide" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
 
                         <div class="form-group">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
@@ -575,7 +574,7 @@
                             </div>
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="text" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value"  />
+                                <input id="CustomItem_{{obj.cfdID}}" type="text" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" />
                                 <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
                             </div>
 
@@ -598,7 +597,7 @@
 
                     </div>
 
-                    <div ng-repeat="obj in UnitDataList" ng-if="IsAvailableMyInventoryColumn(obj.ColumnMap)==true" class="swiper-slide" end-repeat2>
+                    <div ng-repeat="obj in UnitDataList" ng-if="UnitDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" class="swiper-slide" end-repeat2>
 
 
                         <div class="form-group">
@@ -645,7 +644,7 @@
 
                     </div>
 
-                    <div ng-repeat="obj in CustomActivityDataList" class="swiper-slide" end-repeat3>
+                    <div ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0" class="swiper-slide" end-repeat3>
 
                         <div class="form-group">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
@@ -677,7 +676,7 @@
 
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                                <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control customFieldDatePicker FormDateType"  />
+                                <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control customFieldDatePicker FormDateType" />
                                 <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
                             </div>
 
@@ -728,7 +727,7 @@
                             <a class="scanbtn btn btn-primary" ng-if="scanfieldID!='pPartForm'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
                         </td>
                         <td>
-                            <a class="btn btn-primary arrow-right">Next&nbsp;&nbsp;<i class="fa fa-angle-right"></i></a>
+                            <button class="btn btn-primary arrow-right" type="button" ng-disabled="slide == Totalslides">Next&nbsp;&nbsp;<i class="fa fa-angle-right"></i></button>
                         </td>
                     </tr>
                 </table>
