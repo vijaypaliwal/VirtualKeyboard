@@ -218,6 +218,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         $scope.InventoryObject.Uom = obj.DefaultUom;
 
         $("#itemlistmodal").modal('hide');
+
+        $("#locationlistmodal").modal('hide');
         $scope.$apply();
     }
 
@@ -230,7 +232,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
         $scope.InventoryObject.LocationID = obj.LocationID;
 
-    
+        $("#itemlistmodal").modal('hide');
 
         $("#locationlistmodal").modal('hide');
         $scope.$apply();
@@ -730,6 +732,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.itemlist = function ()
     {
+
+        $("#locationlistmodal").modal('hide');
      
         $("#itemlistmodal").modal('show');
 
@@ -739,6 +743,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.locationlist = function ()
     {
+
+        $("#itemlistmodal").modal('hide');
         $("#locationlistmodal").modal('show');
 
         $scope.LocationSearchList = [];
