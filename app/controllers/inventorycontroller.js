@@ -51,6 +51,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.authentication = authService.authentication.isAuth;
 
+    $scope.SearchItemValue = "";
+    $scope.ItemSearching = "";
+    $scope.SearchList = [];
+
     var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
 
 
@@ -196,7 +200,65 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
 
+    $scope.SetItemData = function (obj) {
+        $scope.InventoryObject.ItemID = obj.ItemID;
+        $("#itemlistmodal").modal('hide');
+        $scope.$apply();
+    }
+    $scope.OnChangeItemNameFunction = function () {
 
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $scope.ItemSearching = true;
+        $.ajax({
+
+            type: "POST",
+            url: serviceBase + "SearchItems",
+            contentType: 'application/json; charset=utf-8',
+
+            dataType: 'json',
+
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchItemValue }),
+            error: function () {
+
+                $scope.ItemSearching = false;
+                log.error('There is a problem with the service!');
+            },
+
+            success: function (data) {
+                debugger;
+                if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
+                    $scope.ItemSearching = false;
+                    $scope.SearchList = data.SearchItemsResult.Payload;
+                    $scope.$apply();
+                    //try {
+
+                    //    response($.map(data.SearchItemsResult.Payload, function (item) {
+                    //        return {
+                    //            label: item.ItemID,         // tblPart.pPart : tblPart.pDescription
+                    //            value: item.ItemID,         // tblPart.pPart : tblPart.pDescription
+                    //            part: item.ItemID,             // tblPart.pPart
+                    //            name: item.ItemID,    // tblPart.pDescription
+                    //            id: item.pID,                  // tblPart.pID
+                    //            uom: item.DefaultUom,          // tblUom.uomUOM
+                    //            uomid: item.DefaultUomID,      // tblUom.uomID
+                    //            loc: item.DefaultLocation,     // tblLocation.lLoc
+                    //            locid: item.DefaultLocationID, // tblLocation.lID
+                    //            cost: item.DefaultCost,        // tblPart.pDefaultCost
+                    //            itemgroup: item.ItemGroup,        // tblPart.cCountFrq
+                    //            locgroup: item.DefaultLocationGroup
+                    //        };
+                    //    }));
+                    //} catch (_ex) {
+
+                    //}
+                }
+            }
+        });
+    }
     
 
 
@@ -593,6 +655,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     }
+
+
+    $scope.itemlist = function ()
+    {
+     
+        $("#itemlistmodal").modal('show');
+    }
+
+
 
 
     $scope.GetAllData = function () {

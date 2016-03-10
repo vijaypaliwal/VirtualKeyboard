@@ -1,6 +1,4 @@
 ﻿
-
-
 <style>
     .navbar-toggle {
         display: block !important;
@@ -157,7 +155,61 @@
     
 </style>
 
+<style>
+    #itemlistmodal
+    {
+        background:#fff;
+        width:95%;
+        margin:0 auto;
+        top:5%;
+        bottom:auto;
+        overflow:hidden;
+    }
 
+        #itemlistmodal .modal-header {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            color: #fff;
+            background: #0083C7;
+        }
+
+    #itemlistmodal .modal-body
+    {
+        overflow:auto;
+        min-height:250px;
+        max-height:400px;
+    }
+
+        #itemlistmodal .modal-header .close {
+            margin-top: 6px;
+            color: #fff;
+            opacity: 1;
+        }
+    .searchresultlist {
+        padding-left: 0px;
+        border: 1px solid #eaeaea;
+    }
+    
+    
+     .searchresultlist li a {
+        color: #000;
+        padding-left:10px;
+    }
+    .searchresultlist li {
+        list-style-type: none;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+        .searchresultlist li a .fa-angle-right
+        {
+            position:absolute;
+            right:32px;
+            font-size:18px;
+        }
+
+</style>
 
 <div class="topheader">
     <div class="col-xs-3">
@@ -258,13 +310,15 @@
                                             </select>-->
 
 
-                                            <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" autofocus />
+                                            <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required=""  />
 
                                         </div>
 
                                         <div ng-if="InventoryObject.AutoID==true">
                                             <input placeholder="Automated" type="text" id="ItemName" disabled="disabled" value="Automated" class="form-control"  />
                                         </div>
+
+                                        <span class="input-group-addon last" ng-click="itemlist()"><i class="fa fa-search"></i></span>
                                      
                                     </div>
                                 </div>
@@ -496,7 +550,7 @@
                             </div>
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="text" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" value="" />
+                                <input id="CustomItem_{{obj.cfdID}}" type="text" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
                                 <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
                             </div>
 
@@ -598,7 +652,7 @@
 
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                                <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control customFieldDatePicker FormDateType"  />
+                                <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control customFieldDatePicker FormDateType" value="{{obj.CfValue}}" />
                                 <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
                             </div>
 
@@ -671,10 +725,18 @@
 
 
 
+
+
+
+
+
         </div>
 
 
     </form>
+
+
+
 </div>
 <div>
     <br /><br />
@@ -704,4 +766,26 @@
     </div>-->
 
 
+</div>
+
+<div id="itemlistmodal" class="modal fade animated bounceIn">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ><span> <i class="fa fa-times-circle"></i> </span></button>
+        <h4>select item</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="form-group">
+            <input type="text" placeholder="Find Items"  ng-change="OnChangeItemNameFunction()" class="form-control" ng-model="SearchItemValue" required="" autofocus />
+          
+        </div>
+
+        <div ng-if="ItemSearching==true">
+            <i class="fa fa-spin fa-spinner"></i> searching please wait..
+        </div>
+        <ul class="searchresultlist" ng-if="ItemSearching==false">
+            <li ng-click="SetItemData(obj)" ng-repeat="obj in SearchList"><a>{{obj.ItemID}} <i class="fa fa-angle-right"></i></a></li>
+        </ul>
+
+    </div>
 </div>

@@ -38,7 +38,9 @@
   <preference name="StatusBarOverlaysWebView" value="false" />
   <preference name="StatusBarBackgroundColor" value="#0083C7" />
   <preference name="StatusBarStyle" value="lightcontent" />
+  <preference name="KeyboardDisplayRequiresUserAction" value="false" />
 
+  <preference name="KeyboardShrinksView" value="true" />
 
   
   
