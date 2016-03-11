@@ -262,6 +262,10 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         $scope.GetInventories();
     }
 
+
+
+   
+
     $scope.showhidezerorecord = function (showzero) {
 
 
@@ -549,4 +553,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         }
 
     });
+
+
+    $scope.Showhideimage('true');
 }]);
