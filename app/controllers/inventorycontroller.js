@@ -56,10 +56,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.SearchItemValue = "";
     $scope.ItemSearching = "";
     $scope.SearchList = [];
-
     $scope.SearchLocationValue = "";
     $scope.LocationSearching = "";
     $scope.LocationSearchList = [];
+
+    $scope.isnoitemmsg = false;
+    $scope.isnolocationmsg = false;
+    
+
+
+   
+
+  
 
     var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
 
@@ -204,6 +212,25 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }, true);
 
 
+    $scope.fillitem = function () {
+
+        $scope.InventoryObject.ItemID = $scope.SearchItemValue;
+        $("#itemlistmodal").modal('hide');
+        $scope.$apply();
+
+    }
+
+    $scope.filllocation = function () {
+
+        $scope.InventoryObject.Location = $scope.SearchLocationValue;
+        $("#locationlistmodal").modal('hide');
+        $scope.$apply();
+
+    }
+
+    
+
+
 
 
     $scope.SetItemData = function (obj) {
@@ -245,7 +272,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.OnChangeItemNameFunction = function () {
 
 
-        alert( "alert" + $scope.SearchItemValue);
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -273,28 +299,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                 if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
                     $scope.ItemSearching = false;
                     $scope.SearchList = data.SearchItemsResult.Payload;
+
+                    if ($scope.SearchList.length == 0)
+                        $scope.isnoitemmsg = true
+                    else
+                        $scope.isnoitemmsg = false
+                  
+
                     $scope.$apply();
-                    //try {
-
-                    //    response($.map(data.SearchItemsResult.Payload, function (item) {
-                    //        return {
-                    //            label: item.ItemID,         // tblPart.pPart : tblPart.pDescription
-                    //            value: item.ItemID,         // tblPart.pPart : tblPart.pDescription
-                    //            part: item.ItemID,             // tblPart.pPart
-                    //            name: item.ItemID,    // tblPart.pDescription
-                    //            id: item.pID,                  // tblPart.pID
-                    //            uom: item.DefaultUom,          // tblUom.uomUOM
-                    //            uomid: item.DefaultUomID,      // tblUom.uomID
-                    //            loc: item.DefaultLocation,     // tblLocation.lLoc
-                    //            locid: item.DefaultLocationID, // tblLocation.lID
-                    //            cost: item.DefaultCost,        // tblPart.pDefaultCost
-                    //            itemgroup: item.ItemGroup,        // tblPart.cCountFrq
-                    //            locgroup: item.DefaultLocationGroup
-                    //        };
-                    //    }));
-                    //} catch (_ex) {
-
-                    //}
+                  
                 }
             }
         });
@@ -331,9 +344,19 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                 if (data.SearchLocationAutoCompleteResult != null && data.SearchLocationAutoCompleteResult.Payload != null) {
                     $scope.LocationSearching = false;
                     $scope.LocationSearchList = data.SearchLocationAutoCompleteResult.Payload;
+
+
+                    if ($scope.LocationSearchList.length == 0)
+                        $scope.isnolocationmsg = true
+                    else
+                        $scope.isnolocationmsg = false
+
                     $scope.$apply();
 
                 }
+
+
+
             }
         });
     }
@@ -743,6 +766,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
         $scope.SearchList = [];
         $scope.SearchItemValue = "";
+        $scope.isnoitemmsg = false
+
+      
     }
 
     $scope.locationlist = function () {
@@ -752,8 +778,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
         $scope.LocationSearchList = [];
         $scope.SearchLocationValue = "";
-    }
+        $scope.isnolocationmsg = false
 
+     
+    }
 
 
 
@@ -917,8 +945,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     }
 
-
-
     $scope.getlocation = function () {
 
         var authData = localStorageService.get('authorizationData');
@@ -1072,8 +1098,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.OpenBoxAndroid = function () {
         $("#myModalforlist").modal("show");
     }
-
-
 
 
 
@@ -1258,7 +1282,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
             setTimeout(function () {
                 $scope.OnChangeItemNameFunction();
                 $scope.$apply();
-            }, 2000);
+            }, 500);
 
            
 
@@ -1268,7 +1292,28 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         });
     }
 
+    $scope.ScanLocationsearch = function () {
+        $scope.SearchLocationValue = "";
+        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
+        scanner.scan(function (result) {
+
+            $scope.SearchLocationValue = result.text;
+
+            $scope.$apply();
+
+            setTimeout(function () {
+                $scope.OnChangeLocationNameFunction();
+                $scope.$apply();
+            }, 100);
+
+
+
+
+        }, function (error) {
+            log.error("Scanning failed: ", error);
+        });
+    }
     $scope.ScanNew = function () {
 
         debugger;

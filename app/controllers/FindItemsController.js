@@ -62,6 +62,8 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.searchstring = "";
 
+  
+
     var pressTimer
 
     $("#mylist").mouseup(function () {
