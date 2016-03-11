@@ -192,20 +192,25 @@
      .searchresultlist li a {
         color: #000;
         padding-left:10px;
+        font-size:16px;
+        text-decoration:none;
     }
     .searchresultlist li {
         list-style-type: none;
         padding-top: 10px;
         padding-bottom: 10px;
-        border-bottom: 1px solid #ccc;
         background:#fff;
     }
 
+        .searchresultlist li:nth-child(odd) {
+            background: #eeeeee;
+        }
+
         .searchresultlist li a .fa-angle-right
         {
-            position:absolute;
-            right:32px;
-            font-size:18px;
+         position:absolute;
+         right:32px;
+         font-size:26px;
         }
 
 </style>
@@ -295,10 +300,6 @@
             <div class="spinner" style="text-align:center">
                 <i style="font-size: 100px; color: #0083C7;" class="fa fa-spin fa-spinner"></i>
             </div>
-
-
-
-
 
 
             <div style="display:none;" class="swiper-container">
@@ -802,15 +803,23 @@
 
     <div class="modal-body">
         <div class="form-group">
-            <input type="text" placeholder="Type Keyword to find items" ng-change="OnChangeItemNameFunction()" class="form-control" ng-model="SearchItemValue" required="" autofocus />
 
+            <div class="input-group">
+                <input type="text" placeholder="Type Keyword to find items" ng-change="OnChangeItemNameFunction()" class="form-control" ng-model="SearchItemValue" required="" autofocus />
+                <span style="padding:0px;" class="input-group-addon last">
+                    <a class="btn btn-primary" ng-click="ScanNewsearch()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
+                </span>
+            </div>
         </div>
 
         <div ng-if="ItemSearching==true">
             <i class="fa fa-spin fa-spinner"></i> searching please wait..
         </div>
         <ul class="searchresultlist" ng-if="ItemSearching==false">
-            <li ng-click="SetItemData(obj)" ng-repeat="obj in SearchList"><a>{{obj.ItemID}} <i class="fa fa-angle-right"></i></a></li>
+            <li ng-click="SetItemData(obj)" ng-repeat="obj in SearchList">
+            <a>{{obj.ItemID}} <i class="fa fa-angle-right"></i></a>
+            <p style="font-size: 12px; margin-bottom: 0px; margin-left: 11px; color: #908C8C;"> {{obj.ItemDescription}} </p>
+            </li>
         </ul>
 
     </div>

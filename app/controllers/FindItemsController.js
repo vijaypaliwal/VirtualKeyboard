@@ -203,7 +203,6 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.ClearFilter = function () {
 
-      
 
         ClearFilterArray();
         $scope.SearchValue = '';
@@ -211,7 +210,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         $scope.SearchFromData = "All"
         $scope.SearchFromText = "Search";
         $(".norecords").hide();
-      
+        $("#btnMasterSearch").removeClass("bgm-red");
 
 
     }
@@ -222,12 +221,26 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.SearchInventory = function () {
 
-        $scope.myinventoryColumnLoaded = false;
-        $scope.$apply();
+        if ($('#MasterSearch').val() !== "")
+        {
+            $scope.myinventoryColumnLoaded = false;
+            $scope.$apply();
+            $scope.GetInventories();
+        }
+    }
 
 
-        $scope.GetInventories();
-
+    $scope.OpenmenuModal = function ()
+    {
+    
+      if ($("body").hasClass("modal-open"))
+      {
+      $("#myModal2").modal('hide');
+        }
+        else
+        {
+        $("#myModal2").modal('show');
+        }
     }
 
 
@@ -237,7 +250,6 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
         $scope._areImagesShown = isshow;
         $scope._HasImages = isshow;
-
 
 
         debugger;

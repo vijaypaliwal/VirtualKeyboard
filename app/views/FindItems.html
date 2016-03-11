@@ -632,8 +632,8 @@
             <li ng-repeat="_obj in InventoryItems">
                 <a class="">
                     <span class="img">
-                        <img id="Img_{{_obj.InventoryID}}" ng-if="_obj.ImagePath==''"  src="img/default.png" alt="" />
-                        <img  ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="" />
+                        <img ng-click="UploadImg(_obj.InventoryID,_obj)"  id="Img_{{_obj.InventoryID}}" ng-if="_obj.ImagePath==''" src="img/default.png" alt="" />
+                        <img ng-click="_updateImg(_obj.ImagePath)" ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="" />
                     </span>
                     <span class="product clearfix">
                         <!--<span class="name">
@@ -683,7 +683,7 @@
 </div>
 
 
-<div style="" id="myModal2" class="modal bottommenu fade" role="dialog">
+<div id="myModal2" class="modal bottommenu fade">
 
     <div class="modal-body">
         <ul class="animated bounceIn" id="selectAction">
@@ -696,7 +696,7 @@
     </div>
 </div>
 
-<a data-toggle="modal" data-target="#myModal2" ng-click=" OpenCloseModal()" class="Addbtn btn-info" >
+<a ng-click="OpenmenuModal()" class="Addbtn btn-info" >
     <i class="fa fa-plus"></i>
 </a>
 

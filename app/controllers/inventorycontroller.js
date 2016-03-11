@@ -1238,7 +1238,26 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
+    $scope.ScanNewsearch = function()
+    {
+
+        $scope.SearchItemValue = "";
+        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+        scanner.scan(function (result) {
+
+            $scope.SearchItemValue ==  result.text;
+
+
+        }, function (error) {
+            log.error("Scanning failed: ", error);
+        });
+    }
+
+
     $scope.ScanNew = function () {
+
+        debugger;
 
         var _id = "#" + $scope.scanfieldID;
 
