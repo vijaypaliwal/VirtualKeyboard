@@ -1246,11 +1246,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
         scanner.scan(function (result) {
 
-            alert("result : " + result.text);
-
             $scope.SearchItemValue = result.text;
-
             $scope.$apply();
+            $("#searchitem").trigger("change");
 
 
         }, function (error) {
