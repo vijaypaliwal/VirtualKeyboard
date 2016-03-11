@@ -244,6 +244,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.OnChangeItemNameFunction = function () {
 
+
+        alert( "alert" + $scope.SearchItemValue);
+
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -1241,14 +1244,23 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.ScanNewsearch = function()
     {
 
+      
+
         $scope.SearchItemValue = "";
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
         scanner.scan(function (result) {
 
             $scope.SearchItemValue = result.text;
+         
             $scope.$apply();
-            $("#searchitem").trigger("change");
+
+            setTimeout(function () {
+                $scope.OnChangeItemNameFunction();
+                $scope.$apply();
+            }, 2000);
+
+           
 
 
         }, function (error) {
