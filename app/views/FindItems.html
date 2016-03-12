@@ -732,8 +732,12 @@
         var div_top = $('#sticky-anchor').offset().top;
         if (window_top > div_top + 22 ) {
             $('#sticky').addClass('stick');
+            $('.page-header').hide();
+
+            
         } else {
             $('#sticky').removeClass('stick');
+            $('.page-header').show();
         }
     }
 

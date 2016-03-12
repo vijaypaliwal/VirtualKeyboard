@@ -112,7 +112,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.GetLastValueCustom = function (id, Type) {
 
-        debugger;
+         
 
         var field = "Inv_" + id;
         var _fieldid = "";
@@ -153,7 +153,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     };
     $scope.GetLastValue = function (field, id) {
 
-        debugger;
+         
 
 
         var _value = "";
@@ -267,7 +267,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.LocationSetItemData = function (obj) {
 
-        debugger;
+         
 
         $scope.InventoryObject.Location = obj.LocationName;
 
@@ -307,7 +307,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
             },
 
             success: function (data) {
-                debugger;
+                 
                 if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
                     $scope.ItemSearching = false;
                     $scope.SearchList = data.SearchItemsResult.Payload;
@@ -352,7 +352,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
             },
 
             success: function (data) {
-                debugger;
+                 
                 if (data.SearchLocationAutoCompleteResult != null && data.SearchLocationAutoCompleteResult.Payload != null) {
                     $scope.LocationSearching = false;
                     $scope.LocationSearchList = data.SearchLocationAutoCompleteResult.Payload;
@@ -446,7 +446,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
     $scope.addinventory = function () {
-        debugger;
+         
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -492,7 +492,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
               dataType: 'json',
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
-                  debugger;
+                   
                   log.success("Inventory item added successfully.");
                   $scope.getstep(0);
                   $scope.resetObject();
@@ -502,7 +502,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                   $('#addinventories').find(".fa").removeClass("fa-spin");
               },
               error: function (err) {
-                  debugger;
+                   
 
                   console.log(err);
                   log.error("Error Occurred during operation");
@@ -570,7 +570,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
               dataType: 'json',
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
               success: function (response) {
-                  debugger;
+                   
                   var _TempArray = response.GetAllDataResult.Payload;
 
                   // MY inventory column region
@@ -635,7 +635,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
               dataType: 'json',
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
               success: function (response) {
-                  debugger;
+                   
                   var _TempArray = response.GetMyInventoryColumnsResult.Payload;
 
                   for (var i = 0; i < _TempArray.length; i++) {
@@ -674,7 +674,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-                   debugger;
+                    
                    $scope.StatusList = response.GetStatusResult.Payload;
                    CheckScopeBeforeApply()
                },
@@ -685,6 +685,23 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                }
            });
 
+    }
+
+
+    
+
+    $scope.HighLightTerm = function (term, Text)
+    {
+
+        var src_str = Text;
+        var term = term;
+        term = term.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
+        var pattern = new RegExp("(" + term + ")", "gi");
+
+        src_str = src_str.replace(pattern, "<mark>$1</mark>");
+        src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
+   
+        return src_str;
     }
 
     $scope.getuom = function () {
@@ -703,7 +720,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-                   debugger;
+                    
                    $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
                    CheckScopeBeforeApply()
                },
@@ -732,14 +749,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
 
-                   debugger;
+                    
 
                    $scope.LocationList = response.GetLocationsResult.Payload;
                    CheckScopeBeforeApply()
                },
                error: function (response) {
 
-                   debugger;
+                    
                    console.log(response);
 
                    //$scope.InventoryObject.Location = 678030;
@@ -821,7 +838,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type }),
                success: function (response) {
-                   debugger;
+                    
                    if (Type == 0) {
                        $scope.CustomItemDataList = response.GetCustomFieldsDataResult.Payload;
 
@@ -1087,7 +1104,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
     $scope.ScanNew = function () {
 
-        debugger;
+         
 
         var _id = "#";
 
@@ -1098,7 +1115,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
             if (ControlID == "pPart") {
-                _id = "#pDescriptionForm";
+                _id = "#ItemName";
                 var resultvalue = result.text;
 
                 if (resultvalue != "") {
@@ -1227,7 +1244,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.slidenumber = function (slidenumber) {
 
-        debugger;
+         
 
         switch (slidenumber) {
             case 0:

@@ -299,6 +299,8 @@
                 <i style="font-size: 100px; color: #0083C7;" class="fa fa-spin fa-spinner"></i>
             </div>
 
+            
+        
 
             <div style="display:none;" class="swiper-container">
 
@@ -732,8 +734,8 @@
 
                         <td ng-if="CurrentActiveField=='pDescription'||CurrentActiveField=='pPart'||CurrentActiveField=='lLoc'">
 
-                            <button class="scanbtn btn btn-primary" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="scanfieldID=='pPartForm'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</button>
-                            <a class="scanbtn btn btn-primary" ng-if="scanfieldID!='pPartForm'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
+                            <button class="scanbtn btn btn-primary" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</button>
+                            <a class="scanbtn btn btn-primary" ng-if="CurrentActiveField!='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
                         </td>
                         <td>
                             <button class="btn btn-primary arrow-right" type="button" ng-disabled="slide == Totalslides">Next&nbsp;&nbsp;<i class="fa fa-angle-right"></i></button>
@@ -832,12 +834,13 @@
             </div>
         </div>
 
-        {{obj.ItemDescription.indexOf(SearchItemValue)}}
 
         <ul class="searchresultlist" ng-if="ItemSearching==false">
             <li ng-click="SetItemData(obj)" ng-repeat="obj in SearchList">
-                <a>{{obj.ItemID}} <i class="fa fa-angle-right"></i></a>
-                <p ng-class="{'highlight':obj.ItemDescription.indexOf(SearchItemValue)>-1}" style="font-size: 12px; margin-bottom: 0px; margin-left: 11px; color: #908C8C;"> {{obj.ItemDescription}} </p>
+                <a><span ng-bind-html="HighLightTerm(SearchItemValue,obj.ItemID)"></span><i class="fa fa-angle-right"></i></a>
+                <p ng-class="{'highlight':obj.ItemDescription.indexOf(SearchItemValue)>-1}" style="font-size: 12px; margin-bottom: 0px; margin-left: 11px; color: #908C8C;" ng-bind-html="HighLightTerm(SearchItemValue,obj.ItemDescription)">
+
+                </p>
             </li>
         </ul>
 
@@ -875,7 +878,11 @@
         </div>
 
         <ul class="searchresultlist" ng-if="LocationSearching==false">
-            <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList"><a>{{obj.LocationName}} <i class="fa fa-angle-right"></i></a></li>
+            <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList"><a>
+            <span ng-bind-html="HighLightTerm(SearchLocationValue,obj.LocationName)"></span>
+                                                                                              
+                
+                <i class="fa fa-angle-right"></i></a></li>
         </ul>
 
     </div>

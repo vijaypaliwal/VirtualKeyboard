@@ -570,31 +570,27 @@
         <a href="#/FindItems" style="width:100%; border:none; text-align:center; height:45px; font-size:21px; font-family:monospace" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Back to List</a>
 
         <div style="text-align:center; width:100%; background:#D8D8D8">
-            <div style="max-width:200px; margin:0 auto;">
+            <div style="max-width:220px; margin:0 auto;">
                 <img ng-if style="width:100%; max-height:200px;" src="img/_dummyImage.jpg" alt="Alternate Text" />
                 <img style="width: 100%; max-height: 200px;" id="Img_{{CurrentInventory.InventoryID}}" ng-if="CurrentInventory.ImagePath==''" src="img/default.png" alt="" />
                 <img style="width: 100%; max-height: 200px;"  ng-if="CurrentInventory.ImagePath!=''" src="{{CurrentInventory.ImagePath}}" alt="" />
             </div>
         </div>
 
-        <a style="width: 100%; border: none; text-align: center; height: 45px; font-size: 21px; background-color: #3A76A0 !important; font-family: monospace; " class="btn btn-primary">{{CurrentInventory.pPart}} [{{CurrentInventory.iQty}} {{CurrentInventory.uomUOM}}]</a>
+        <a style="width: 100%; border: none; text-align: center; height: 45px; font-size: 21px; background-color: #3A76A0 !important; font-family: monospace; " class="btn btn-primary">{{CurrentInventory.pPart}} <span style="font-size:13px; color:#D8D8D8">{{CurrentInventory.iQty}} {{CurrentInventory.uomUOM}}</span> </a>
 
-        <div style="background:#fff; padding:15px; color:#333; font-family:cursive;">
+        <div style="background: #fff; padding: 15px; color: #333; font-family: monospace;">
             <p>Location : {{CurrentInventory.lLoc}}</p>
             <p>Status : {{CurrentInventory.iStatusValue}}</p>
             <p>Quantity : {{CurrentInventory.iQty}} {{CurrentInventory.uomUOM}}</p>
             <p> {{CurrentInventory.pDescription}}</p>
+            <br /><br />
         </div>
-
     </div>
 
     <div class="editsection maincontent" ng-if="IsEditMode==true">
-
-        
-
         <div class="form-group">
             <label>Item Name</label>
-
             <div class="input-group">
                 <input type="text" class="form-control" ng-model="CurrentInventory.pPart" />
                 <span style="padding:0px;" class="input-group-addon last">
