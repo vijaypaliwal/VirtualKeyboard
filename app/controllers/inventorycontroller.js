@@ -111,7 +111,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     $scope.GetLastValueCustom = function (id, Type) {
-
+        debugger;
          
 
         var field = "Inv_" + id;
@@ -153,7 +153,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     };
     $scope.GetLastValue = function (field, id) {
 
-         
+        debugger;
 
 
         var _value = "";
@@ -162,7 +162,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
             _value = _toCheckValue;
 
             if (id == "#UOM") {
-                $scope.InventoryObject.UOM = _value;
+                $scope.InventoryObject.Uom = _value;
+                $scope.$apply();
+
+                $(id).trigger('change');
 
 
             }
@@ -171,6 +174,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
             }
             else {
                 $(id).val(_value);
+               
                 $(id).trigger('change');
             }
         }
@@ -456,12 +460,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
         var _TempObj = $scope.InventoryObject;
-
+        
         // $scope.InventoryObject.Location = $scope.InventoryObject.Location.length > 0 ? $scope.InventoryObject.Location[0] : ""
         var ImageData = $("#list123").find("img").attr("src");
         $.each(_TempObj, function (datakey, datavalue) {
 
-            if (datakey != "CustomPartData" && datakey != "CustomPartData") {
+            if (datakey != "CustomPartData" && datakey != "CustomTxnData") {
 
                 datakey = "Inv_" + datakey;
                 localStorageService.set(datakey, "");
