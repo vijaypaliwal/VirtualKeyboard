@@ -44,6 +44,11 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/orders.html"
     });
 
+    $routeProvider.when("/detail", {
+        controller: "detailController",
+        templateUrl: "app/views/detail.html"
+    });
+
     $routeProvider.when("/refresh", {
         controller: "refreshController",
         templateUrl: "app/views/refresh.html"

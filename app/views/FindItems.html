@@ -635,11 +635,11 @@
                         <img ng-click="UploadImg(_obj.InventoryID,_obj)"  id="Img_{{_obj.InventoryID}}" ng-if="_obj.ImagePath==''" src="img/default.png" alt="" />
                         <img ng-click="_updateImg(_obj.ImagePath)" ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="" />
                     </span>
-                    <span class="product clearfix">
+                    <span ng-click="GoToDetailPage(_obj)" class="product clearfix">
                         <!--<span class="name">
 
 
-                </span>-->
+        </span>-->
 
                         <h5 class="list-group-item-heading">
 
@@ -651,12 +651,12 @@
                             <span class="text" style="width:30%">
                                 {{_obj.lLoc}}
                             </span>
-                            <span class="" style="float:right" >
+                            <span class="" style="float:right">
                                 {{_obj.iStatusValue}}
                             </span>
                         </span>
                         <br />
-                        <span class="text" >
+                        <span class="text">
                             {{_obj.pDescription}}
 
                         </span>

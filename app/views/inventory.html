@@ -167,52 +167,50 @@
         #itemlistmodal .modal-header {
             padding-top: 5px;
             padding-bottom: 5px;
-            padding-left:7px;
-
+            padding-left: 7px;
         }
 
-    #itemlistmodal .modal-body
-    {
-        overflow:auto;
-        min-height:250px;
-        max-height:500px;
-        padding:7px;
-    }
+        #itemlistmodal .modal-body {
+            overflow: auto;
+            min-height: 250px;
+            max-height: 500px;
+            padding: 7px;
+        }
 
         #itemlistmodal .modal-header .close {
             margin-top: 6px;
             opacity: 1;
         }
+
     .searchresultlist {
         padding-left: 0px;
         border: 1px solid #eaeaea;
     }
 
 
-     .searchresultlist li a {
-        color: #000;
-        padding-left:10px;
-        font-size:16px;
-        text-decoration:none;
-    }
-    .searchresultlist li {
-        list-style-type: none;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        background:#fff;
-    }
-
-        .searchresultlist li:nth-child(odd) {
-            background: #eeeeee;
+        .searchresultlist li a {
+            color: #000;
+            padding-left: 10px;
+            font-size: 16px;
+            text-decoration: none;
         }
 
-        .searchresultlist li a .fa-angle-right
-        {
-         position:absolute;
-         right:32px;
-         font-size:26px;
+        .searchresultlist li {
+            list-style-type: none;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background: #fff;
         }
 
+            .searchresultlist li:nth-child(odd) {
+                background: #eeeeee;
+            }
+
+            .searchresultlist li a .fa-angle-right {
+                position: absolute;
+                right: 32px;
+                font-size: 26px;
+            }
 </style>
 
 
@@ -320,14 +318,13 @@
                     </div>
                 </div>
 
- 
+
 
                 <div class="swiper-wrapper">
 
                     <div class="swiper-slide myCols" data-index="{{$index}}" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" ng-if="CheckInCommonArray(obj.ColumnName)==true" end-repeat>
 
                         <div class=" form-group" ng-if="obj.ColumnName=='pPart'">
-
 
                             <div class="row">
                                 <div class="col-xs-7">
@@ -336,8 +333,7 @@
 
                                         <div>
 
-                                            <!--<select class="form-control" id="ItemName" ng-model="InventoryObject.ItemID">
-                            </select>-->
+
 
 
                                             <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" />
@@ -347,7 +343,7 @@
 
 
                                         <span class="input-group-addon last" ng-click="itemlist()"><i class="fa fa-search"></i></span>
-
+                                        <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemID','#ItemName')"><i class="fa fa-refresh"></i></span>
                                     </div>
 
 
@@ -356,7 +352,7 @@
                                         <div>
                                             <input placeholder="Automated" type="text" ng-model="InventoryObject.ItemID" id="ItemName" disabled="disabled" class="form-control" />
                                         </div>
-
+                                        <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemID','#ItemName')"><i class="fa fa-refresh"></i></span>
                                     </div>
 
 
@@ -504,7 +500,7 @@
                         <div ng-if="obj.ColumnName=='iUnitTag2'" class="form-group">
                             <label>{{obj.ColumnLabel}}</label>
                             <div class="input-group">
-                                <input id="UniqueTag" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
+                                <input id="UnitTag2" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
                                 <span ng-click="GetLastValue('Inv_UnitTag2','#UnitTag2')" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
                             </div>
                         </div>
@@ -632,7 +628,7 @@
                             </div>
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="text" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" />
+                                <input id="CustomItem_{{obj.cfdID}}" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" />
                                 <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>
                             </div>
 
@@ -655,7 +651,7 @@
 
                     </div>
 
-                    
+
 
                     <div ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0" class="swiper-slide" end-repeat3>
 
@@ -806,12 +802,10 @@
 
 
 </div>
-
 <div id="itemlistmodal" class="modal fade animated bounceIn">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
-        <h4>select item</h4>
-
+        <h4>select item <span style="font-size:11px;" ng-if="SearchList.length > 0">{{SearchList.length}} Item(s) found</span> </h4>
         <div class="form-group">
             <div class="input-group">
                 <input style="height:47px;" id="searchitem" type="text" placeholder="Type Keyword to find items" ng-change="OnChangeItemNameFunction()" class="form-control" ng-model="SearchItemValue" required="" autofocus />
@@ -822,8 +816,9 @@
         </div>
     </div>
 
+
     <div class="modal-body">
-        
+
         <div ng-if="ItemSearching==true">
             <i class="fa fa-spin fa-spinner"></i> searching please wait..
         </div>
@@ -837,10 +832,12 @@
             </div>
         </div>
 
+        {{obj.ItemDescription.indexOf(SearchItemValue)}}
+
         <ul class="searchresultlist" ng-if="ItemSearching==false">
             <li ng-click="SetItemData(obj)" ng-repeat="obj in SearchList">
-            <a>{{obj.ItemID}} <i class="fa fa-angle-right"></i></a>
-            <p style="font-size: 12px; margin-bottom: 0px; margin-left: 11px; color: #908C8C;"> {{obj.ItemDescription}} </p>
+                <a>{{obj.ItemID}} <i class="fa fa-angle-right"></i></a>
+                <p ng-class="{'highlight':obj.ItemDescription.indexOf(SearchItemValue)>-1}" style="font-size: 12px; margin-bottom: 0px; margin-left: 11px; color: #908C8C;"> {{obj.ItemDescription}} </p>
             </li>
         </ul>
 
@@ -851,7 +848,7 @@
 <div id="locationlistmodal" class="modal fade animated bounceIn">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
-        <h4>select Location</h4>
+        <h4>select Location <span style="font-size:11px;" ng-if="LocationSearchList.length > 0">{{LocationSearchList.length}} Location(s) found</span></h4>
         <div class="form-group">
 
             <div class="input-group">
@@ -860,13 +857,10 @@
                     <a class="btn btn-primary" ng-click="ScanLocationsearch()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
                 </span>
             </div>
-
-
         </div>
     </div>
 
     <div class="modal-body">
-        
 
         <div ng-if="LocationSearching==true">
             <i class="fa fa-spin fa-spinner"></i> searching please wait..
@@ -880,11 +874,11 @@
             </div>
         </div>
 
-        
-
         <ul class="searchresultlist" ng-if="LocationSearching==false">
             <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList"><a>{{obj.LocationName}} <i class="fa fa-angle-right"></i></a></li>
         </ul>
 
     </div>
 </div>
+
+

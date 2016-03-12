@@ -118,6 +118,12 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         return text;
     }
 
+    $scope.GoToDetailPage=function(obj)
+    {
+        localStorageService.set("CurrentDetailObject", obj);
+        $location.path("/detail");
+        console.log(localStorageService.get("CurrentDetailObject"));
+    }
     $scope.handleFileSelect = function (evt) {
 
         var files = evt.target.files;
