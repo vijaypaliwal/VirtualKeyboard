@@ -1087,6 +1087,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                 CheckScopeBeforeApply()
             }, 500);
 
+            vibrate()
+
 
 
 
@@ -1110,7 +1112,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                 CheckScopeBeforeApply()
             }, 100);
 
-
+            vibrate()
 
 
         }, function (error) {
@@ -1194,7 +1196,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
             }
 
-
+            vibrate()
 
 
 
