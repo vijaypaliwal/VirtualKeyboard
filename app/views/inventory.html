@@ -810,7 +810,7 @@
         <h4>select item <span style="font-size:11px;" ng-if="SearchList.length > 0">{{SearchList.length}} Item(s) found</span> </h4>
         <div class="form-group">
             <div class="input-group">
-                <input style="height:47px;" id="searchitem" type="text" placeholder="Type Keyword to find items" ng-change="OnChangeItemNameFunction()" class="form-control" ng-model="SearchItemValue" required="" autofocus />
+                <input style="height:47px;" id="searchitem" type="text" placeholder="Type Keyword to find items" ng-change="OnChangeItemNameFunction()" class="form-control" ng-model="SearchItemValue" required=""  />
                 <span style="padding:0px;" class="input-group-addon last">
                     <a class="btn btn-primary" ng-click="ScanNewsearch()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
                 </span>
@@ -855,7 +855,7 @@
         <div class="form-group">
 
             <div class="input-group">
-                <input style="height:47px;" type="text" id="searchlocation" placeholder="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
+                <input style="height:47px;" type="text" id="searchlocation" placeholder="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required=""  />
                 <span style="padding:0px;" class="input-group-addon last">
                     <a class="btn btn-primary" ng-click="ScanLocationsearch()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
                 </span>
