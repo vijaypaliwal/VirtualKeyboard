@@ -63,11 +63,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.isnoitemmsg = false;
     $scope.isnolocationmsg = false;
 
-    $scope.slide = 0;
-
-
-
-
+    $scope.slide = 1000;
 
 
 
@@ -1456,7 +1452,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     function onConfirmmove(buttonIndex) {
-        if (buttonIndex == 1 || buttonIndex == "1") {
+        if (buttonIndex == 2 || buttonIndex == "2") {
 
             $location.path('/FindItems');
             vibrate()
@@ -1480,7 +1476,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     function movetolist() {
         navigator.notification.confirm(
-            'Are you sure you want to Move to Inventory list ?', // message
+            'Do you want to add more records ?', // message
              onConfirmmove,            // callback to invoke with index of button pressed
             'Are you sure',           // title
             ['Yes', 'No']         // buttonLabels
@@ -1491,7 +1487,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $('.arrow-left').on('click', function (e) {
         e.preventDefault()
 
-        if ($scope.slide == 0)
+        if ($scope.slide == 0 || $scope.slide == 1000)
         {
             showConfirmInventory();
 
