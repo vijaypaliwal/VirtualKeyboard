@@ -1244,8 +1244,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
         //  $("#myform .swiper-slide input").removeAttr("autofocus");
         $("#myform .swiper-slide-active input:first").focus();
-        $("#myform .swiper-slide-active input:first").trigger("click");
-        $("#myform .swiper-slide-active input:first").trigger("keypress");
+        $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
+        $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
         SoftKeyboard.show();
         //    CheckScopeBeforeApply()
 
