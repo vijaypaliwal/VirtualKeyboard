@@ -70,6 +70,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                     }
                     else {
+
+                        playBeep();
                         log.error(response.LoginResult.Message);
 
                     }
@@ -77,6 +79,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                 },
                 error: function (err) {
+
+                    playBeep();
                     $("#loginBtn").removeClass("disabled");
                     $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
                     _logOut();
