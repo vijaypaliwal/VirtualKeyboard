@@ -329,48 +329,54 @@
                         <div class=" form-group" ng-if="obj.ColumnName=='pPart'">
 
                             <div class="row">
-                                <div class="col-xs-7">
-                                    <label>Item Name <span>*</span> </label>
-                                    <div ng-if="InventoryObject.AutoID==false" class="input-group">
+                                <div class="col-xs-12">
+                                   
 
-                                        <div>
+                                    <div class="row">
+                                        <div class="col-xs-5">
+                                            <label>Item Name <span>*</span> </label>
+                                        </div>
+                                        <div class="col-xs-5" style="margin-bottom:5px;">
+
+                                            <div id="label-switch" class="make-switch" data-on-label="SI" data-off-label="NO">
+                                                <input data-on-label="auto" data-off-label="manual" type="checkbox" id="AutoID" ng-model="InventoryObject.AutoID" bootstrap-switch>
+                                            </div>
+
+
+                                        </div>
+                                        </div>
+
+                                        <div ng-if="InventoryObject.AutoID==false" class="input-group">
+
+                                            <div>
 
 
 
 
-                                            <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" />
+                                                <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" />
+
+                                            </div>
+
+
+
+                                            <span class="input-group-addon last" ng-click="itemlist()"><i class="fa fa-search"></i></span>
+                                            <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemID','#ItemName')"><i class="fa fa-refresh"></i></span>
+                                        </div>
+
+
+                                        <div ng-if="InventoryObject.AutoID==true" class="input-group">
+
+                                            <div>
+                                                <input placeholder="Automated" type="text" ng-model="InventoryObject.ItemID" id="ItemName" disabled="disabled" class="form-control" />
+                                            </div>
 
                                         </div>
 
 
-
-                                        <span class="input-group-addon last" ng-click="itemlist()"><i class="fa fa-search"></i></span>
-                                        <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemID','#ItemName')"><i class="fa fa-refresh"></i></span>
-                                    </div>
-
-
-                                    <div ng-if="InventoryObject.AutoID==true" class="input-group">
-
-                                        <div>
-                                            <input placeholder="Automated" type="text" ng-model="InventoryObject.ItemID" id="ItemName" disabled="disabled" class="form-control" />
-                                        </div>
-                                        <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemID','#ItemName')"><i class="fa fa-refresh"></i></span>
                                     </div>
 
 
                                 </div>
-
-                                <div class="col-xs-5">
-                                    <label>Auto/Manual</label>
-                                    <br />
-
-                                    <div id="label-switch" class="make-switch" data-on-label="SI" data-off-label="NO">
-                                        <input data-on-label="auto" data-off-label="manual" type="checkbox" ng-model="InventoryObject.AutoID" bootstrap-switch>
-                                    </div>
-
-
-                                </div>
-                            </div>
                         </div>
 
                         <div class="form-group" ng-if="obj.ColumnName=='pDescription'">
@@ -804,13 +810,13 @@
 
 
 </div>
-<div id="itemlistmodal" class="modal animated bounceIn">
+<div style="z-index:5000;" id="itemlistmodal" class="modal animated bounceIn">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
         <h4>select item <span style="font-size:11px;" ng-if="SearchList.length > 0">{{SearchList.length}} Item(s) found</span> </h4>
         <div class="form-group">
             <div class="input-group">
-                <input style="height:47px;" id="searchitem" type="text" placeholder="Type Keyword to find items" ng-change="OnChangeItemNameFunction()" class="form-control" ng-model="SearchItemValue" required=""  />
+                <input style="height:47px;" id="searchitem" type="text" placeholder="Type Keyword to find items" ng-change="OnChangeItemNameFunction()" class="form-control" ng-model="SearchItemValue" required="" autofocus />
                 <span style="padding:0px;" class="input-group-addon last">
                     <a class="btn btn-primary" ng-click="ScanNewsearch()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
                 </span>
@@ -848,14 +854,14 @@
 </div>
 
 
-<div id="locationlistmodal" class="modal animated bounceIn">
+<div style="z-index:5000;" id="locationlistmodal" class="modal animated bounceIn">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
         <h4>select Location <span style="font-size:11px;" ng-if="LocationSearchList.length > 0">{{LocationSearchList.length}} Location(s) found</span></h4>
         <div class="form-group">
 
             <div class="input-group">
-                <input style="height:47px;" type="text" id="searchlocation" placeholder="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required=""  />
+                <input style="height:47px;" type="text" id="searchlocation" placeholder="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
                 <span style="padding:0px;" class="input-group-addon last">
                     <a class="btn btn-primary" ng-click="ScanLocationsearch()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
                 </span>
@@ -878,11 +884,14 @@
         </div>
 
         <ul class="searchresultlist" ng-if="LocationSearching==false">
-            <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList"><a>
-            <span ng-bind-html="HighLightTerm(SearchLocationValue,obj.LocationName)"></span>
-                                                                                              
-                
-                <i class="fa fa-angle-right"></i></a></li>
+            <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList">
+                <a>
+                    <span ng-bind-html="HighLightTerm(SearchLocationValue,obj.LocationName)"></span>
+
+
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
         </ul>
 
     </div>

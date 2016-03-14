@@ -158,6 +158,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
         var _value = "";
         var _toCheckValue = localStorageService.get(field);
+
+
+
+
         if (_toCheckValue != null && _toCheckValue != undefined) {
             _value = _toCheckValue;
 
@@ -466,9 +470,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         $.each(_TempObj, function (datakey, datavalue) {
 
             if (datakey != "CustomPartData" && datakey != "CustomTxnData") {
-                if (datakey == "ItemID" && _TempObj.AutoID == true)
-                {
-                
+                if (datakey == "ItemID" && _TempObj.AutoID == true) {
+
 
                     datakey = "Inv_" + datakey;
                     localStorageService.set(datakey, "");
@@ -479,7 +482,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                     localStorageService.set(datakey, "");
                     localStorageService.set(datakey, datavalue);
                 }
-                
+
             }
 
             else {
@@ -1537,8 +1540,13 @@ app.directive('bootstrapSwitch', [
                 restrict: 'A',
                 require: '?ngModel',
                 link: function (scope, element, attrs, ngModel) {
-                    element.bootstrapSwitch();
+                    var _id = element[0].id;
 
+
+                    element.bootstrapSwitch({
+                        onText: _id == 'AutoID' ? 'Auto' : 'On',
+                        offText: _id == 'AutoID' ? 'Manual' : 'Off'
+                    });
                     element.on('switchChange.bootstrapSwitch', function (event, state) {
                         if (ngModel) {
                             scope.$apply(function () {
