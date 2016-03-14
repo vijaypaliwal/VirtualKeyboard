@@ -20,6 +20,8 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
         },
          function (err) {
              $scope.message = err.error_description;
+             playBeep();
+
          });
     };
 

@@ -1432,13 +1432,38 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         }, 10)
     }
 
+    function onConfirmInv(buttonIndex) {
+        if(buttonIndex==1)
+        {
+            $location.path("/mainmenu");
+        }
+        else {
 
+        }
+    }
+
+    function showConfirmInventory() {
+        navigator.notification.confirm(
+            'Are you sure you want to leave this page ?', // message
+             onConfirmInv,            // callback to invoke with index of button pressed
+            'Are you sure',           // title
+            ['Yes', 'No']         // buttonLabels
+        );
+    }
 
 
     $('.arrow-left').on('click', function (e) {
-
         e.preventDefault()
-        mySwiper.swipePrev()
+
+        if ($scope.slide == 0)
+        {
+            showConfirmInventory();
+
+        }
+        else {
+            mySwiper.swipePrev();
+
+        }
 
 
 

@@ -171,7 +171,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         ordersService.UpdateInventory($scope.CurrentObj);
         $scope.CurrentObj = {};
         $scope.InventoryItems = [];
-        $scope.$apply();
+        CheckScopeBeforeApply();
         $scope.PopulateInventoryItems();
     }
     $scope.logOut = function () {
@@ -179,7 +179,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
         authService.logOut();
         $location.path('/login');
-        $scope.$apply();
+        CheckScopeBeforeApply();
     }
 
     $scope.authentication = authService.authentication.isAuth;
@@ -232,7 +232,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         if ($('#MasterSearch').val() !== "")
         {
             $scope.myinventoryColumnLoaded = false;
-            $scope.$apply();
+            CheckScopeBeforeApply();
             $scope.GetInventories();
         }
     }
@@ -254,7 +254,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.Showhideimage = function (isshow) {
         $scope.myinventoryColumnLoaded = false;
-        $scope.$apply();
+        CheckScopeBeforeApply();
 
         $scope._areImagesShown = isshow;
         $scope._HasImages = isshow;
@@ -263,7 +263,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         debugger;
         $("#myModal2").modal('hide');
 
-        $scope.$apply();
+        CheckScopeBeforeApply();
 
         $scope.GetInventories();
     }
@@ -276,12 +276,12 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
         $scope.myinventoryColumnLoaded = false;
-        $scope.$apply();
+        CheckScopeBeforeApply();
 
         debugger;
 
         $scope._areZeroRecordsShown = showzero;
-        $scope.$apply();
+        CheckScopeBeforeApply();
         $("#myModal2").modal('hide');
         $scope.GetInventories();
 
@@ -295,7 +295,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
                 _IsLazyLoadingUnderProgress = 1;
                 _PageSize = _TotalRecordsCurrent + 10;
                 $scope.myinventoryColumnLoaded = false;
-                $scope.$apply();
+                CheckScopeBeforeApply();
                 $scope.GetInventories();
 
             }
@@ -309,8 +309,14 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
             $scope.FilterArray[i].SearchValue = "";
 
         }
-        $scope.$apply();
+        CheckScopeBeforeApply();
     }
+
+    function CheckScopeBeforeApply() {
+        if (!$scope.$$phase) {
+            $scope.$apply();
+        }
+    };
 
     function UpdateFilterArray(Field, Value) {
 
@@ -325,7 +331,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         console.log("After updating data");
         console.log($scope.FilterArray);
 
-        $scope.$apply();
+        CheckScopeBeforeApply();
     }
 
     $scope.searchfunction = function (Byvalue) {
@@ -487,12 +493,12 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
                 $scope.myinventoryColumnLoaded = true;
 
-                $scope.$apply();
+                CheckScopeBeforeApply();
             },
             error: function (req) {
                 log.error("error during get inventory Success");
                 $scope.myinventoryColumnLoaded = true;
-                $scope.$apply();
+                CheckScopeBeforeApply();
                 console.log(req);
             },
             complete: function () {
@@ -506,7 +512,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
         //$scope.InventoryItems = ordersService.PopulateInventoryItems();
 
-        //$scope.$apply();
+        //CheckScopeBeforeApply();
 
 
         $scope.GetInventories();
@@ -532,7 +538,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
             $scope.SearchValue = result.text;
 
-            $scope.$apply();
+            CheckScopeBeforeApply();
 
             console.log("Scanner result: \n" +
                  "text: " + result.text + "\n" +

@@ -731,7 +731,7 @@
                 <table style="width:100%;">
                     <tr>
                         <td>
-                            <button type="button" class="btn btn-primary arrow-left" ng-disabled="slide == 0"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;Back</button>
+                            <button type="button" class="btn btn-primary arrow-left"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;Back</button>
                         </td>
 
                         <td ng-if="CurrentActiveField=='iQty'"><button ng-click="UpDownValue('Quantity',true)" type="button" class="btn scanbtn btn-primary"><i class="fa fa-plus"></i></button></td>
@@ -810,7 +810,7 @@
 
 
 </div>
-<div style="z-index:5000;" id="itemlistmodal" class="modal animated bounceIn">
+<div id="itemlistmodal" class="modal animated bounceIn">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
         <h4>select item <span style="font-size:11px;" ng-if="SearchList.length > 0">{{SearchList.length}} Item(s) found</span> </h4>
@@ -854,7 +854,7 @@
 </div>
 
 
-<div style="z-index:5000;" id="locationlistmodal" class="modal animated bounceIn">
+<div id="locationlistmodal" class="modal animated bounceIn">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
         <h4>select Location <span style="font-size:11px;" ng-if="LocationSearchList.length > 0">{{LocationSearchList.length}} Location(s) found</span></h4>
@@ -884,14 +884,11 @@
         </div>
 
         <ul class="searchresultlist" ng-if="LocationSearching==false">
-            <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList">
-                <a>
-                    <span ng-bind-html="HighLightTerm(SearchLocationValue,obj.LocationName)"></span>
-
-
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
+            <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList"><a>
+            <span ng-bind-html="HighLightTerm(SearchLocationValue,obj.LocationName)"></span>
+                                                                                              
+                
+                <i class="fa fa-angle-right"></i></a></li>
         </ul>
 
     </div>
