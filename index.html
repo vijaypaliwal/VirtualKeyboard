@@ -444,7 +444,30 @@
 
         document.addEventListener("deviceready", onDeviceReady, false);
 
-      
+        function showAlert() {
+            navigator.notification.alert(
+                'You are the winner!',  // message
+                '',         // callback
+                'Game Over',            // title
+                'Done'                  // buttonName
+            );
+        }
+
+
+        function onConfirm(buttonIndex) {
+            alert('You selected button ' + buttonIndex);
+        }
+
+        // Show a custom confirmation dialog
+        //
+        function showConfirm() {
+            navigator.notification.confirm(
+                'You are the winner!', // message
+                 onConfirm,            // callback to invoke with index of button pressed
+                'Game Over',           // title
+                ['Restart', 'Exit']         // buttonLabels
+            );
+        }
 
         var exitApp = false, intval = setInterval(function () { exitApp = false; }, 1000);
         document.addEventListener("backbutton", function (e) {
@@ -651,15 +674,21 @@
             destinationType = navigator.camera.DestinationType;
 
 
-            navigator.geolocation.getCurrentPosition(
-      function (position) {
-        //  alert(position.coords.latitude + ',' + position.coords.longitude);
-          toastr.success("Hey your latitude and longitude is as below" + position.coords.latitude + ',' + position.coords.longitude)
-          //alert();
-      },
-      function () {
+      //      navigator.geolocation.getCurrentPosition(
+      //function (position) {
+      //  //  alert(position.coords.latitude + ',' + position.coords.longitude);
+      //    toastr.success("Hey your latitude and longitude is as below" + position.coords.latitude + ',' + position.coords.longitude)
+      //    //alert();
+      //},
+      //function () {
         
-      });
+      //});
+
+            showAlert();
+
+            setTimeout(function () {
+                showConfirm();
+            }, 1000)
 
    }
 
