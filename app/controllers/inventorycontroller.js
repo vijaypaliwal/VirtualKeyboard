@@ -1438,9 +1438,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
         alert("Button Index" + buttonIndex);
 
-        if(buttonIndex==1)
+        if (buttonIndex == 1 || buttonIndex == "1")
         {
-            $location.path("/mainmenu");
+            alert("In");
+            $location.path('/mainmenu');
+            vibrate()
+            CheckScopeBeforeApply();
         }
         else {
 
