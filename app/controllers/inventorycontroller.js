@@ -1452,14 +1452,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     function onConfirmmove(buttonIndex) {
-        if (buttonIndex == 2 || buttonIndex == "2") {
-
-            $location.path('/FindItems');
-            vibrate()
-            CheckScopeBeforeApply();
+        if (buttonIndex == 2 || buttonIndex == "2")
+        {
+         $location.path('/FindItems');
+         vibrate()
+         CheckScopeBeforeApply();
         }
-        else {
-
+        else if (buttonIndex == 1 || buttonIndex == "1") {
+            $scope.getstep(0);
         }
 
     }
