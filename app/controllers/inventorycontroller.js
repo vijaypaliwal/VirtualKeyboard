@@ -513,10 +513,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
               success: function (response) {
 
                   log.success("Inventory item added successfully.");
-                  $scope.getstep(0);
+
+                  movetolist();
+
                   $scope.resetObject();
                   CheckScopeBeforeApply()
-                  $location.path("/FindItems");
+               
                   $('#addinventories').removeClass("disabled");
                   $('#addinventories').find(".fa").removeClass("fa-spin");
               },
@@ -1452,10 +1454,34 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         }
     }
 
+
+    function onConfirmmove(buttonIndex) {
+        if (buttonIndex == 1 || buttonIndex == "1") {
+
+            $location.path('/FindItems');
+            vibrate()
+            CheckScopeBeforeApply();
+        }
+        else {
+
+        }
+
+    }
+
+
     function showConfirmInventory() {
         navigator.notification.confirm(
             'Are you sure you want to leave this page ?', // message
              onConfirmInv,            // callback to invoke with index of button pressed
+            'Are you sure',           // title
+            ['Yes', 'No']         // buttonLabels
+        );
+    }
+
+    function movetolist() {
+        navigator.notification.confirm(
+            'Are you sure you want to Move to Inventory list ?', // message
+             onConfirmmove,            // callback to invoke with index of button pressed
             'Are you sure',           // title
             ['Yes', 'No']         // buttonLabels
         );
