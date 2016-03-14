@@ -554,7 +554,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
             $('#btnMasterSearch').addClass('bgm-red')
         }
         else {
-          
+            $scope.PopulateInventoryItems();
             $('#btnMasterSearch').removeClass('bgm-red')
         }
 

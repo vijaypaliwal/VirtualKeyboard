@@ -1454,9 +1454,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.$watch("InventoryObject.AutoID", function () {
         if ($scope.InventoryObject.AutoID) {
             $scope.InventoryObject.ItemID = "Automated";
+            $scope.InventoryObject.PID = 0;
         }
         else {
             $scope.InventoryObject.ItemID = "";
+            $scope.InventoryObject.PID = 0;
         }
         CheckScopeBeforeApply()
 

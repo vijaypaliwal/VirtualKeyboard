@@ -447,7 +447,7 @@
         function showAlert() {
             navigator.notification.alert(
                 'You are the winner!',  // message
-                '',         // callback
+                onConfirmnew,         // callback
                 'Game Over',            // title
                 'Done'                  // buttonName
             );
@@ -456,6 +456,10 @@
 
         function onConfirm(buttonIndex) {
             alert('You selected button ' + buttonIndex);
+        }
+
+        function onConfirmnew() {
+            alert('You selected button new ');
         }
 
         // Show a custom confirmation dialog
@@ -666,6 +670,16 @@
             alert('Failed because: ' + message);
         }
 
+
+        function vibrate() {
+            navigator.notification.vibrate(5000);
+        }
+
+
+        function playBeep() {
+            navigator.notification.beep(5);
+        }
+
         function onDeviceReady() {
 
 
@@ -673,6 +687,8 @@
             pictureSource = navigator.camera.PictureSourceType;
             destinationType = navigator.camera.DestinationType;
 
+           
+        
 
       //      navigator.geolocation.getCurrentPosition(
       //function (position) {
