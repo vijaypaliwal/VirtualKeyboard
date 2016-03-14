@@ -63,6 +63,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.isnoitemmsg = false;
     $scope.isnolocationmsg = false;
 
+    $scope.slide = 0;
+
 
 
 
@@ -1436,11 +1438,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     function onConfirmInv(buttonIndex) {
 
-        alert("Button Index" + buttonIndex);
+      
 
         if (buttonIndex == 1 || buttonIndex == "1")
         {
-            alert("In");
+           
             $location.path('/mainmenu');
             vibrate()
             CheckScopeBeforeApply();
