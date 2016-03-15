@@ -23,6 +23,10 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/signup.html"
     });
 
+    $routeProvider.when("/detail", {
+        controller: "detailController",
+        templateUrl: "app/views/detail.html"
+    });
 
     $routeProvider.when("/inventory", {
         controller: "inventoryController",
