@@ -385,6 +385,8 @@
             #myModalforlist ul li {
                 padding: 10px;
                 border-bottom: 1px solid #ccc;
+                background:#fff !important;
+                background-color:#fff !important;
             }
 
                 #myModalforlist ul li a {
@@ -396,6 +398,8 @@
                     color: #404040;
                     text-align: left;
                     font-family: Verdana;
+                    background: #fff !important;
+                    background-color: #fff !important;
                 }
 
     .modal-backdrop.in {
@@ -800,29 +804,29 @@
 
     <div class="modal-body">
         <ul class="list-group">
-            <li class="list-group-item" ng-click="GoToDetailPage(_Currentobj)">
+            <li data-dismiss="modal" class="list-group-item" ng-click="GoToDetailPage(_Currentobj)">
                 <a>
                     <i class="fa fa-info-circle"></i>&nbsp;&nbsp;View details -{{_Currentobj.pPart}}
                 </a>
             </li>
-            <li class="list-group-item">
+            <li data-dismiss="modal" ng-click="AddToCart(_Currentobj)" class="list-group-item">
                 <a>
                     <i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Add to cart
                 </a>
             </li>
-            <li class="list-group-item">
+            <li data-dismiss="modal" class="list-group-item">
                 <a>
                     <i class="fa fa-camera"></i>&nbsp;&nbsp;Add images to this item
                 </a>
             </li>
 
-            <li class="list-group-item">
+            <li data-dismiss="modal" class="list-group-item">
                 <a>
                     <i class="fa fa-dot-circle-o"></i>&nbsp;&nbsp;Other menu
                 </a>
             </li>
 
-            <li class="list-group-item">
+            <li data-dismiss="modal" class="list-group-item">
                 <a>
                     <i class="fa fa-dot-circle-o"></i>&nbsp;&nbsp;Other menu
                 </a>
