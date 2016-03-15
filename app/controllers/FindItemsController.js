@@ -9,6 +9,12 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         LocationZone: "", LastTransactionID: 0, StatusValue: "", LastQuantityChange: 0, LastDateChange: "",
         CustomData: []
     };
+    var _CanAct = 'True';
+    var _CartObjLimit = 25;
+    $scope.Cart = [];
+   $scope.mainObjectToSend = [];
+    $scope._Currentobj = {};
+    var _IsOpenModal = false;
 
     var _currentPage = 1;
     var _sortColumn = "iLastITID";
@@ -27,6 +33,8 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     var _IsSetSelectedIfAny = 0;
     var SelectedCartItemIds = [];
     var _IsFilterCartItems = 0;
+
+    $scope.CurrentActiveClass = "";
 
     var _IsLazyLoading = 0;
     var _TotalRecordsCurrent = 0;
@@ -62,21 +70,41 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.searchstring = "";
 
-  
+
 
     var pressTimer
 
-    $("#mylist").mouseup(function () {
-        clearTimeout(pressTimer)
-        // Clear timeout
-        return false;
-    }).mousedown(function () {
-        // Set timeout
-        pressTimer = window.setTimeout(function () {
+    //$("#mylist").mouseup(function () {
+    //    clearTimeout(pressTimer)
+    //    // Clear timeout
+    //    return false;
+    //}).mousedown(function () {
+    //    // Set timeout
+    //    pressTimer = window.setTimeout(function () {
+    //        $("#myModalforlist").modal('show');
+    //    }, 700)
+    //    return false;
+    //});
+
+
+    $scope.ShowOptionModal = function () {
+        if (_IsOpenModal == true)
+        {
             $("#myModalforlist").modal('show');
-        }, 700)
-        return false;
-    });
+
+            _IsOpenModal = false;
+        }
+    };
+
+    $scope.SetCurrentObject = function (CurrentObj) {
+        $scope._Currentobj = CurrentObj;
+        CheckScopeBeforeApply();
+        _IsOpenModal = true;
+    }
+
+
+   
+
 
     function GetRandomData(Type) {
         switch (Type) {
@@ -118,8 +146,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         return text;
     }
 
-    $scope.GoToDetailPage=function(obj)
-    {
+    $scope.GoToDetailPage = function (obj) {
         localStorageService.set("CurrentDetailObject", obj);
         $location.path("/detail");
         console.log(localStorageService.get("CurrentDetailObject"));
@@ -229,8 +256,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.SearchInventory = function () {
 
-        if ($('#MasterSearch').val() !== "")
-        {
+        if ($('#MasterSearch').val() !== "") {
             $scope.myinventoryColumnLoaded = false;
             CheckScopeBeforeApply();
             $scope.GetInventories();
@@ -238,16 +264,13 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     }
 
 
-    $scope.OpenmenuModal = function ()
-    {
-    
-      if ($("body").hasClass("modal-open"))
-      {
-      $("#myModal2").modal('hide');
+    $scope.OpenmenuModal = function () {
+
+        if ($("body").hasClass("modal-open")) {
+            $("#myModal2").modal('hide');
         }
-        else
-        {
-        $("#myModal2").modal('show');
+        else {
+            $("#myModal2").modal('show');
         }
     }
 
@@ -270,7 +293,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
 
-   
+
 
     $scope.showhidezerorecord = function (showzero) {
 
@@ -483,7 +506,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
                 if (_TotalRecordsCurrent == 0) {
                     $(".norecords").show();
                     $(".bottomlink").hide();
-                    
+
                 }
                 else {
                     $(".norecords").hide();
@@ -556,7 +579,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     $("#MasterSearch").keyup(function (e) {
 
         if ($('#MasterSearch').val() !== "") {
-          
+
             $('#btnMasterSearch').addClass('bgm-red')
         }
         else {
@@ -567,5 +590,274 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     });
 
 
+
+    $scope.AddToCart=function(obj)
+    {
+        debugger;
+        if (_CanAct == 'True') {
+
+
+            var originalID = "#actionQty_" + obj.iID;
+
+
+
+            //if ($(originalID).hasClass("btn-success"))
+            if ($(originalID).find(".fa-check").css("color") == "rgb(0, 150, 136)") {
+
+                $(originalID).find(".fa-check").css("color", "transparent");
+
+                $(originalID).parent(".newlistitem").find(".img").css("opacity", "1")
+
+
+            }
+            else {
+                if ($scope.mainObjectToSend.length < _CartObjLimit) {
+                    $(originalID).find(".fa-check").css("color", "#009688");
+                    $(originalID).parent(".newlistitem").find(".img").css("opacity", "0.4")
+                }
+
+            }
+
+            addItemsToCart(obj, obj.iID, originalID);
+
+        }
+        else {
+            return false;
+        }
+
+    }
+
+
+    $scope.SelectAll = function ()
+    {
+        //$('#mylist .checkicon').each(function () {
+        //    if ($(this).find(".fa-check").css("color") !== "rgb(0, 150, 136)") {
+        //        $(this).trigger("click");
+        //    }
+        //});
+
+        for (var i = 0; i < $scope.InventoryItems.length; i++) {
+            if (i > _CartObjLimit)
+            {
+                break;
+            }
+            else {
+                $scope.AddToCart($scope.InventoryItems[i]);
+
+            }
+
+        }
+
+        $scope.OpentransactionModal();
+    }
+
+    $scope.DeselectAll = function () {
+
+        $('#mylist .checkicon').each(function () {
+            $(this).parent(".newlistitem").find(".img").css("opacity", "1")
+            $(this).find(".fa-check").css("color", "transparent");
+        });
+        $scope.mainObjectToSend = [];
+        CheckScopeBeforeApply();
+    }
+
+    $scope.OpentransactionModal=function()
+    {
+
+        debugger;
+
+        if ($("body").hasClass("modal-open")) {
+
+            $(".transactionbody").removeClass('slideInUp');
+            $(".transactionbody").addClass('slideOutDown');
+            setTimeout(function () { $("#mycartModal").modal('hide'); }, 1000);
+           
+        }
+        else {
+
+            $(".transactionbody").removeClass('slideOutDown');
+            $(".transactionbody").addClass('slideInUp');
+            $("#mycartModal").modal('show');
+        }
+
+
+       
+    }
+    function addItemsToCart(object, IdToSave, originalID) {
+        var isItemExist = true;
+        var TempValue = 0;
+        var _zeroCount = 0;
+
+        if ($(originalID).find(".fa-check").css("color") == "rgb(0, 150, 136)" && $scope.mainObjectToSend.length < _CartObjLimit) {
+
+            console.log(IdToSave);
+            $.each($scope.InventoryItems, function (i, v) {
+                if (v.iID == IdToSave) {
+                    isItemExist = true;
+                    $.each($scope.mainObjectToSend, function (k, l) {
+
+                        if (l.uId == IdToSave) {
+                            isItemExist = false;
+                        }
+                    });
+
+                    if (isItemExist == true) {
+
+
+
+                        TempValue = 1;
+
+
+
+                     
+
+
+                        
+
+                        $scope.mainObjectToSend.push({
+                            uId: v.iID,
+                            pID: v.pID,
+                            pPart: v.pPart,
+                            iLID: v.iLID,
+                            iUOMID: v.iUOMID,
+                            iQty: TempValue,
+                            oquantity: v.iQty,
+                            uomUOM: v.uomUOM,
+                            lLoc: v.lLoc,
+                            iStatusValue: v.iStatusValue,
+                            pDescription: v.pDescription,
+                            Action: '',
+                            // CurrentInvObj: v,
+                            iUniqueDate_date: v.iUniqueDate,
+                            iUnitNumber2: v.iUnitNumber2,
+                            iUnitNumber1: v.iUnitNumber1,
+                            iUnitDate2_date: v.iUnitDate2,
+                            iUnitTag3: v.iUnitTag3,
+                            iUnitTag2: v.iUnitTag2,
+                            pCountFrq: v.pCountFrq,
+                            lZone: v.lZone,
+                            ImageThumbPath: v.ImageThumbPath,
+                            ImageDisplayName: v.ImageDisplayName,
+                            iReqValue: v.iReqValue,
+                            iCostPerUnit: v.pDefaultCost,
+
+
+
+                        });
+
+
+                    }
+                    else {
+                        var k = 0;
+
+                    }
+
+
+                }
+            });
+
+        } else {
+          
+            $scope.mainObjectToSend = $scope.mainObjectToSend.filter(function (el) {
+                return el.uId != IdToSave;
+
+            });
+
+
+        }
+      
+        if (_zeroCount != 0) {
+            $("#RemoveRecords").attr("disabled", "");
+            $("#RemoveRecords").attr("disabled", false);
+        }
+        else {
+            $("#RemoveRecords").attr("disabled", "disabled");
+            $("#RemoveRecords").attr("disabled", true);
+        }
+
+        $scope.CurrentActiveClass = "bounceIn";
+        CheckScopeBeforeApply();
+
+        ResetCurrentActiveClass();
+
+    }
+
+  function ResetCurrentActiveClass()
+    {
+        setTimeout(function () {
+
+            $scope.CurrentActiveClass = "";
+            CheckScopeBeforeApply();
+        },500);
+    }
     $scope.Showhideimage('true');
 }]);
+
+
+
+
+app.directive('onLongPress', function ($timeout) {
+    //Global variable, to cancel timer on touchend.
+    var timer;
+    var count = 0;
+    return {
+        restrict: 'A',
+        link: function ($scope, $elm, $attrs) {
+            $elm.bind('touchstart', function (evt) {
+                // Locally scoped variable that will keep track of the long press
+                $scope.longPress = true;
+
+                // We'll set a timeout for 600 ms for a long press
+                timer = $timeout(function () {
+                    if ($scope.longPress) {
+                        count++;
+                        // If the touchend event hasn't fired,
+                        // apply the function given in on the element's on-long-press attribute
+                        $scope.$apply(function () {
+                            $scope.$eval($attrs.onLongPress)
+                        });
+                    }
+                }, 600);
+
+                timer;
+            });
+
+            $elm.bind('touchend', function (evt) {
+                // Prevent the onLongPress event from firing
+                $scope.longPress = false;
+
+                // Prevent on quick presses, unwanted onLongPress selection.
+                $timeout.cancel(timer);
+
+                // If there is an on-touch-end function attached to this element, apply it
+                if ($attrs.onTouchEnd) {
+
+                    if (count < 1)
+                    {
+                        count = 0;
+                        //$scope.$apply(function () {
+                        //    $scope.$eval($attrs.ngClick)
+                        //});
+                    }
+                    else {
+                        count = 0;
+                        $scope.$apply(function () {
+                            $scope.$eval($attrs.onTouchEnd)
+                        });
+                    }
+                 
+
+
+                  
+
+
+                }
+            });
+
+
+         
+        }
+    };
+})
+
+

@@ -1,7 +1,7 @@
 ﻿
 <style>
     #sticky {
-     width: 100%;
+        width: 100%;
     }
 
         #sticky.stick {
@@ -16,6 +16,15 @@
             -moz-animation: cssAnimation 1s 16 ease;
             -o-animation: cssAnimation 1s 16 ease;
         }
+
+    .checkicon {
+        position: absolute !important;
+        z-index: 10;
+        height: auto;
+        left: 17px;
+        margin-top: -70px;
+        max-width: 70px;
+    }
 </style>
 
 <style>
@@ -25,11 +34,11 @@
         color: white;
     }
 
-    .container{
-        width:100% !important;
+    .container {
+        width: 100% !important;
     }
 
-  
+
 
     .btn-success {
         background-color: #2ecc71;
@@ -84,7 +93,7 @@
     }
 
     .widget-products a {
-        cursor:pointer;
+        cursor: pointer;
         text-decoration: none !important;
     }
 
@@ -143,16 +152,15 @@
     }
 
     .widget-products li {
-       
-        background:#f4f4f4;
+        background: #f4f4f4;
     }
 
     .widget-products {
         list-style: none;
         margin: 0;
         padding: 0;
-        min-height:175px;
-        background:#fff;
+        min-height: 175px;
+        background: #fff;
     }
 
     .widget-users li {
@@ -249,12 +257,12 @@
         width: 100%;
         position: fixed;
         bottom: 0;
-        left:0px;
-        right:0px;
+        left: 0px;
+        right: 0px;
     }
 
-    
-     .searchtable {
+
+    .searchtable {
         margin: 0 auto;
         margin-top: 5px;
         margin-bottom: 5px;
@@ -285,33 +293,31 @@
         line-height: 1.3;
     }
 
-    h5.list-group-item-heading
-    {
-        font-size:14px !important;
-        text-transform:uppercase;
+    h5.list-group-item-heading {
+        font-size: 14px !important;
+        text-transform: uppercase;
     }
 
     .list-group-item-heading .pull-right {
         font-size: 13px !important;
     }
-    
-     .list-group-item-heading {
+
+    .list-group-item-heading {
         margin-bottom: 0px;
         line-height: 20px !important;
         font-size: 14px !important;
         font-weight: 100;
         color: #333;
         padding-bottom: 3px;
-        font-family:Verdana;
+        font-family: Verdana;
     }
 
-    .list-group-item-text
-    {
-        font-size:12px;
+    .list-group-item-text {
+        font-size: 12px;
     }
-    .text
-    {
-        font-size:12px;
+
+    .text {
+        font-size: 12px;
     }
 
 
@@ -328,11 +334,10 @@
         font-size: 22px;
     }
 
-    .img img
-    {
-        height:60px;
-        width:60px;
-        border:1px solid #ccc;
+    .img img {
+        height: 60px;
+        width: 60px;
+        border: 1px solid #ccc;
     }
 
     .cd-top.cd-is-visible {
@@ -341,8 +346,8 @@
     }
 
     .cd-top {
-        height:47px;
-        width:47px;
+        height: 47px;
+        width: 47px;
         color: #fff !important;
         background: #128ECE;
         position: fixed;
@@ -356,38 +361,42 @@
         opacity: 1;
         visibility: hidden;
     }
-
 </style>
 
 <style>
-    #myModalforlist
-    {
-        top:25%;
-        overflow:hidden;
-        width:90%;
-        margin:0 auto;
+    #myModalforlist {
+        top: 25%;
+        overflow: hidden;
+        width: 90%;
+        margin: 0 auto;
     }
 
-    #myModalforlist ul
+        #myModalforlist ul {
+            padding: 0px;
+            margin-bottom: 0px;
+        }
 
-    {
-        padding:0px;
-       margin-bottom:0px;
+            #myModalforlist ul li {
+                padding: 10px;
+                border-bottom: 1px solid #ccc;
+            }
+
+                #myModalforlist ul li a {
+                    padding-left: 20px;
+                    display: block;
+                    width: 100%;
+                    text-decoration: none !important;
+                    font-size: 16px;
+                    color: #404040;
+                    text-align: left;
+                    font-family: Verdana;
+                }
+
+    .modal-backdrop.in {
+        opacity: 0.8;
     }
 
-        #myModalforlist ul li {
-           padding:10px;
-           border-bottom:1px solid #ccc;
-        }
 
-        #myModalforlist ul li a {
-            padding-left: 20px;
-            display:block;
-            width:100%;
-            text-decoration:none !important;
-            font-size:17px;
-           
-        }
 
     .increase {
         color: #177B3D;
@@ -400,6 +409,7 @@
     .move {
         color: #C65E28;
     }
+
     .convert {
         color: #CE59A1;
     }
@@ -407,23 +417,24 @@
     .update {
         color: #583782;
     }
+
     .tag {
         color: #0D190F;
     }
-    .modal-body
-    {
-        padding:0px;
-    }
 
+    .modal-body {
+        padding: 0px;
+    }
 </style>
 
 <style>
-
-    .modal-backdrop
-    {
-        background:#fff;
-        opacity:0.8;
+    .modal-backdrop {
+        background: #fff;
+        opacity: 0.8;
     }
+
+
+    
     
     
      #myModal2 {
@@ -451,6 +462,31 @@
         }
 
 
+    #mycartModal {
+        position: fixed;
+        right: 13px;
+        font-size: 18px;
+        text-align: right;
+        bottom: 125px;
+        display: none;
+        background: transparent;
+        overflow: hidden;
+    }
+
+        #mycartModal span {
+            font-size: 14px;
+            background: #fff;
+            padding: 3px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.5);
+            margin-right: 7px;
+        }
+
+
+        #mycartModal .modal-body {
+            background: transparent;
+        }
+
+
     .Addbtn {
         position: fixed;
         bottom: 23px;
@@ -471,7 +507,31 @@
             color: #fff !important;
         }
 
-    #selectAction {
+    .cartbtn {
+        position: fixed;
+        bottom: 23px;
+        right: 13px;
+      
+        z-index: 13000;
+        color: #fff !important;
+        height: 50px;
+        width: 50px;
+        border-radius: 100%;
+        text-align: center;
+        line-height: 50px;
+    }
+
+    .cartbtn .fa {
+        font-size: 24px;
+        margin-top: 13px;
+        color: #fff !important;
+    }
+
+    
+    
+    
+    
+     .selectAction {
         position: fixed;
         bottom: 110px;
         right: 25px;
@@ -479,19 +539,19 @@
 
 
 
-        #selectAction li {
+        .selectAction li {
             list-style-type: none;
         }
 
 
-        #selectAction li span {
-           color:#000;
-        }
+            .selectAction li span {
+                color: #000;
+            }
 
 
 
 
-        #selectAction .btn {
+        .selectAction .btn {
             height: 36px;
             width: 36px;
             padding: 0px;
@@ -500,8 +560,21 @@
             line-height: 35px;
             border: transparent;
             margin-bottom: 5px;
-            color:#fff;
+            color: #fff;
         }
+
+    .counter {
+        position: absolute;
+        left: -14px;
+        top: 13px;
+        color: #fff;
+        background: #EC2E0E;
+        height: 25px;
+        width: 25px;
+        line-height: 27px;
+        text-align: center;
+    }
+
     .bgm-red {
         background: #f44336;
     }
@@ -549,13 +622,13 @@
 
 <div style="margin-top:12px;" class="page-header">
 
-   
-        <div style="padding-left:0px;" class="col-xs-5">
-            <h4 style="margin-top:0px; font-size:16px;">Inventory Items </h4>
-        </div>
-        <div style="padding-right:0px; text-align:right" class="col-xs-7">
-            <p style="font-size:13px;">{{currentrecord}} of {{totalrecords}} records shown</p>
-        </div>
+
+    <div style="padding-left:0px;" class="col-xs-5">
+        <h4 style="margin-top:0px; font-size:16px;">Inventory Items </h4>
+    </div>
+    <div style="padding-right:0px; text-align:right" class="col-xs-7">
+        <p style="font-size:13px;">{{currentrecord}} of {{totalrecords}} records shown</p>
+    </div>
 </div>
 
 
@@ -598,7 +671,7 @@
                 </td>
                 <td>
 
-                 
+
 
                     <div style="position:relative" class="fg-line">
                         <input style="border-radius:0px; margin-left:2px; height:37px;" id="MasterSearch" type="text" ng-model="SearchValue" class="form-control" placeholder="Type to Search">
@@ -629,25 +702,26 @@
     <h1><i class="fa fa-meh-o"></i> Oops !! </h1>
     <h3>No record matched your Query</h3>
     <br /><br />
-  
+
 </div>
 
 <div class="animated slideInLeft" id="mylist">
 
-    <div class="pageData" >
+    <div class="pageData">
 
         <ul class=" widget-products">
-            <li ng-repeat="_obj in InventoryItems">
+            <li ng-repeat="_obj in InventoryItems" class="newlistitem">
                 <a class="">
                     <span class="img">
-                        <img ng-click="UploadImg(_obj.InventoryID,_obj)"  id="Img_{{_obj.InventoryID}}" ng-if="_obj.ImagePath==''" src="img/default.png" alt="" />
-                        <img ng-click="_updateImg(_obj.ImagePath)" ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="" />
+                        <img ng-if="_obj.ImagePath==''" src="img/default.png" alt="" />
+                        <img ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="" />
                     </span>
-                    <span ng-click="GoToDetailPage(_obj)" class="product clearfix">
+                    <span class="product clearfix" ng-click="GoToDetailPage(_obj)" on-long-press="SetCurrentObject(_obj)" on-touch-end="ShowOptionModal()">
+                        <!--<span class="product clearfix" ng-click="ShowOptionModal()">-->
                         <!--<span class="name">
 
 
-        </span>-->
+                        </span>-->
 
                         <h5 class="list-group-item-heading">
 
@@ -671,11 +745,17 @@
 
                     </span>
                 </a>
+
+                <a class="checkicon" id="actionQty_{{_obj.iID}}" ng-click="AddToCart(_obj)">
+
+                    <i style="font-size: 35px; color:transparent;" class="fa fa-check"></i>
+
+                </a>
             </li>
         </ul>
     </div>
 
-    
+
 </div>
 
 
@@ -694,19 +774,79 @@
 <div id="myModal2" class="modal bottommenu fade">
 
     <div class="modal-body">
-        <ul class="animated bounceIn" id="selectAction">
+        <ul class="animated bounceIn selectAction" >
             <li> <span>New Inventory</span> <a href="#/inventory" class="btn-success btn"> <i class="fa fa-plus"></i> </a></li>
             <li class="bottomlink" ng-if="_areImagesShown==false" ng-click="Showhideimage('true')"> <span>Show Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
             <li class="bottomlink" ng-if="_areImagesShown==true" ng-click="Showhideimage('false')"> <span>Hide Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
             <li class="bottomlink" ng-if="_areZeroRecordsShown==false" ng-click=" showhidezerorecord('true')"><span>Show Zero record</span><a class="btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
             <li class="bottomlink" ng-if="_areZeroRecordsShown==true" ng-click="showhidezerorecord('false')"><span>Hide Zero record</span><a class="btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+            <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class="btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
         </ul>
     </div>
 </div>
 
-<a ng-click="OpenmenuModal()" class="Addbtn btn-info" >
+<a ng-click="OpenmenuModal()" class="Addbtn btn-info" ng-if="mainObjectToSend.length==0">
     <i class="fa fa-plus"></i>
 </a>
+
+
+<div style="text-align:center; top:100px; overflow:hidden;" id="myModalforlist" class="modal fade">
+
+    <div class="modal-body">
+        <ul class="list-group">
+            <li class="list-group-item" ng-click="GoToDetailPage(_Currentobj)">
+                <a>
+                    <i class="fa fa-info-circle"></i>&nbsp;&nbsp;View details -{{_Currentobj.pPart}}
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a>
+                    <i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Add to cart
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a>
+                    <i class="fa fa-camera"></i>&nbsp;&nbsp;Add images to this item
+                </a>
+            </li>
+
+            <li class="list-group-item">
+                <a>
+                    <i class="fa fa-dot-circle-o"></i>&nbsp;&nbsp;Other menu
+                </a>
+            </li>
+
+            <li class="list-group-item">
+                <a>
+                    <i class="fa fa-dot-circle-o"></i>&nbsp;&nbsp;Other menu
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+
+<div id="mycartModal" class="modal bottommenu fade">
+
+    <div class="modal-body">
+        <ul class="animated transactionbody selectAction" >
+            <li class="bottomlink"> <span>Increase</span> <a style="background-color: #177B3D;" class="btn-success btn decrease" data-dismiss="modal"> <i class="fa fa-plus"></i> </a></li>
+            <li class="bottomlink"> <span>Decrease</span> <a style="background-color: #AF2525;"  class="btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-minus-circle"></i> </a></li>
+            <li class="bottomlink"><span>Move</span><a style="background-color: #C65E28;" class="btn-warning btn decrease" data-dismiss="modal"> <i class="fa fa-exchange"></i>  </a></li>
+            <li class="bottomlink"><span>Convert</span><a style="background-color: #CE59A1" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-refresh"></i>  </a></li>
+            <li class="bottomlink"><span>Update</span><a style=" background-color: #583782" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-pencil"></i>  </a></li>
+            <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class="btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
+            <li class="bottomlink" data-dismiss="modal" ng-click="DeselectAll()"><span>Deselect All</span><a class="btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-square-o"></i>  </a></li>
+        </ul>
+    </div>
+</div>
+
+<a ng-click="OpentransactionModal()" class="cartbtn btn-success" ng-if="mainObjectToSend.length>0">
+    <i class="fa fa-shopping-cart"></i> <span class="animated {{CurrentActiveClass}} counter">{{mainObjectToSend.length}}</span>
+</a>
+
+
 
 <script>
 
@@ -720,7 +860,7 @@
     var $back_to_top = $('.cd-top');
 
     function scrollToTop() {
-      
+
         $('html, body').animate({ scrollTop: 0 }, 500, 'linear');
     }
 
@@ -738,11 +878,11 @@
     function sticky_relocate() {
         var window_top = $(window).scrollTop();
         var div_top = $('#sticky-anchor').offset().top;
-        if (window_top > div_top + 22 ) {
+        if (window_top > div_top + 22) {
             $('#sticky').addClass('stick');
             $('.page-header').hide();
 
-            
+
         } else {
             $('#sticky').removeClass('stick');
             $('.page-header').show();

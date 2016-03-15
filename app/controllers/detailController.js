@@ -9,6 +9,9 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
         $scope.$apply();
     }
 
+    $(".modal-backdrop").remove();
+    $("body").removeClass("modal-open");
+
     $scope.OpenmenuModal = function () {
 
         if ($("body").hasClass("modal-open")) {

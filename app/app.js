@@ -44,11 +44,6 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/orders.html"
     });
 
-    $routeProvider.when("/detail", {
-        controller: "detailController",
-        templateUrl: "app/views/detail.html"
-    });
-
     $routeProvider.when("/refresh", {
         controller: "refreshController",
         templateUrl: "app/views/refresh.html"
@@ -68,7 +63,7 @@ app.config(function ($routeProvider) {
 
 });
 
-//var serviceBase = 'http://localhost:26264/';
+//var serviceBase = 'http://localhost:7440/API/ClearlyInventoryAPI.svc/';
 var serviceBase = 'http://dev.style.u8i9.com/API/ClearlyInventoryAPI.svc/';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
