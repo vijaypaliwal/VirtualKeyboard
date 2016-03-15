@@ -403,9 +403,13 @@
                 }
 
     .modal-backdrop.in {
-        opacity: 0.8;
+        opacity: 0.6;
     }
 
+    .modal-backdrop {
+        background: #0083C7;
+      
+    }
 
 
     .increase {
@@ -438,31 +442,29 @@
 </style>
 
 <style>
-    .modal-backdrop {
-        background: #fff;
-        opacity: 0.8;
+
+    .modal-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
     }
-
-
-    
-    
+   
     
      #myModal2 {
         position: fixed;
         right: 13px;
         font-size: 18px;
         text-align: right;
-        bottom: 125px;
+      
         display: none;
         background: transparent;
         overflow: hidden;
     }
 
         #myModal2 span {
-            font-size: 14px;
-            background: #fff;
-            padding: 3px;
-            box-shadow: 0 4px 15px rgba(0,0,0,.5);
+            font-size: 16px;
+            color: #fff;
+            font-family: verdana;
             margin-right: 7px;
         }
 
@@ -477,17 +479,16 @@
         right: 13px;
         font-size: 18px;
         text-align: right;
-        bottom: 125px;
+      
         display: none;
         background: transparent;
         overflow: hidden;
     }
 
         #mycartModal span {
-            font-size: 14px;
-            background: #fff;
-            padding: 3px;
-            box-shadow: 0 4px 15px rgba(0,0,0,.5);
+            font-size: 16px;
+            color: #fff;
+            font-family: verdana;
             margin-right: 7px;
         }
 
@@ -500,35 +501,40 @@
     .Addbtn {
         position: fixed;
         bottom: 23px;
-        right: 13px;
+        right: 20px;
         background: #f44336 !important;
         z-index: 13000;
         color: #fff !important;
-        height: 50px;
-        width: 50px;
+        height: 60px;
+        width: 60px;
         border-radius: 100%;
         text-align: center;
-        line-height: 50px;
+        line-height: 66px;
     }
-
         .Addbtn .fa {
             font-size: 24px;
             margin-top: 13px;
             color: #fff !important;
         }
 
+      .rotate {
+         -ms-transform: rotate(42deg);
+         -webkit-transform: rotate(42deg);
+         transform: rotate(42deg);
+       }
+
     .cartbtn {
         position: fixed;
         bottom: 23px;
-        right: 13px;
+        right: 20px;
       
         z-index: 13000;
         color: #fff !important;
-        height: 50px;
-        width: 50px;
+        height: 60px;
+        width: 60px;
         border-radius: 100%;
         text-align: center;
-        line-height: 50px;
+        line-height: 60px;
     }
 
     .cartbtn .fa {
@@ -538,12 +544,9 @@
     }
 
     
-    
-    
-    
      .selectAction {
         position: fixed;
-        bottom: 110px;
+        bottom: 90px;
         right: 25px;
     }
 
@@ -562,12 +565,12 @@
 
 
         .selectAction .btn {
-            height: 36px;
-            width: 36px;
+            height: 45px;
+            width: 45px;
             padding: 0px;
             border-radius: 100%;
             text-align: center;
-            line-height: 35px;
+            line-height: 45px;
             border: transparent;
             margin-bottom: 5px;
             color: #fff;
@@ -819,7 +822,7 @@
                     <i class="fa fa-camera"></i>&nbsp;&nbsp;Add images to this item
                 </a>
             </li>
-
+               
             <li data-dismiss="modal" class="list-group-item">
                 <a>
                     <i class="fa fa-dot-circle-o"></i>&nbsp;&nbsp;Other menu
@@ -841,11 +844,11 @@
 
     <div class="modal-body">
         <ul class="animated transactionbody selectAction" >
-            <li class="bottomlink"> <span>Increase</span> <a style="background-color: #177B3D;" class="btn-success btn decrease" data-dismiss="modal"> <i class="fa fa-plus"></i> </a></li>
-            <li class="bottomlink"> <span>Decrease</span> <a style="background-color: #AF2525;"  class="btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-minus-circle"></i> </a></li>
-            <li class="bottomlink"><span>Move</span><a style="background-color: #C65E28;" class="btn-warning btn decrease" data-dismiss="modal"> <i class="fa fa-exchange"></i>  </a></li>
-            <li class="bottomlink"><span>Convert</span><a style="background-color: #CE59A1" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-refresh"></i>  </a></li>
-            <li class="bottomlink"><span>Update</span><a style=" background-color: #583782" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-pencil"></i>  </a></li>
+            <li class="bottomlink" ng-click="GoToNextMobile(1)"> <span>Increase</span> <a style="background-color: #177B3D;" class="btn-success btn decrease" data-dismiss="modal"> <i class="fa fa-plus"></i> </a></li>
+            <li class="bottomlink" ng-click="GoToNextMobile(-1)"> <span>Decrease</span> <a style="background-color: #AF2525;" class="btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-minus-circle"></i> </a></li>
+            <li class="bottomlink" ng-click="GoToNextMobile(0)"><span>Move</span><a style="background-color: #C65E28;" class="btn-warning btn decrease" data-dismiss="modal"> <i class="fa fa-exchange"></i>  </a></li>
+            <li class="bottomlink" ng-click="GoToNextMobile(2)"><span>Convert</span><a style="background-color: #CE59A1" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-refresh"></i>  </a></li>
+            <li class="bottomlink" ng-click="GoToNextMobile(3)"><span>Update</span><a style=" background-color: #583782" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-pencil"></i>  </a></li>
             <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class="btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
             <li class="bottomlink" data-dismiss="modal" ng-click="DeselectAll()"><span>Deselect All</span><a class="btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-square-o"></i>  </a></li>
         </ul>

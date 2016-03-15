@@ -12,7 +12,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     var _CanAct = 'True';
     var _CartObjLimit = 25;
     $scope.Cart = [];
-   $scope.mainObjectToSend = [];
+    $scope.mainObjectToSend = [];
     $scope._Currentobj = {};
     var _IsOpenModal = false;
 
@@ -88,8 +88,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
     $scope.ShowOptionModal = function () {
-        if (_IsOpenModal == true)
-        {
+        if (_IsOpenModal == true) {
             $("#myModalforlist").modal('show');
 
             _IsOpenModal = false;
@@ -103,7 +102,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     }
 
 
-   
+
 
 
     function GetRandomData(Type) {
@@ -268,9 +267,14 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
         if ($("body").hasClass("modal-open")) {
             $("#myModal2").modal('hide');
+
+            $(".Addbtn .fa").removeClass('rotate');
+
+            
         }
         else {
             $("#myModal2").modal('show');
+            $(".Addbtn .fa").addClass('rotate');
         }
     }
 
@@ -283,7 +287,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         $scope._HasImages = isshow;
 
 
-        debugger;
+
         $("#myModal2").modal('hide');
 
         CheckScopeBeforeApply();
@@ -301,7 +305,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         $scope.myinventoryColumnLoaded = false;
         CheckScopeBeforeApply();
 
-        debugger;
+
 
         $scope._areZeroRecordsShown = showzero;
         CheckScopeBeforeApply();
@@ -358,7 +362,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     }
 
     $scope.searchfunction = function (Byvalue) {
-        debugger;
+
         ClearFilterArray();
         if ($.trim($scope.SearchValue) != "") {
             $scope.SearchFromData = Byvalue;
@@ -482,7 +486,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
             $scope.SecurityToken = authData.token;
         }
 
-        debugger;
+
         var _masterSearch = $scope.SearchFromData == "All" ? $scope.SearchValue : "";
 
         $.ajax({
@@ -492,7 +496,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
             contentType: 'application/json',
             dataType: 'json',
             success: function (result) {
-                debugger;
+
                 $scope._areImagesShown = result.GetInventoriesResult.Payload[0].AreImagesShown
                 $scope._areZeroRecordsShown = result.GetInventoriesResult.Payload[0].AreZeroRecords
                 console.log(result.GetInventoriesResult.Payload);
@@ -526,6 +530,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
             },
             complete: function () {
                 _IsLazyLoadingUnderProgress = 0;
+                SetSelectedIfAny();
             }
         });
     }
@@ -533,9 +538,6 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.PopulateInventoryItems = function () {
 
-        //$scope.InventoryItems = ordersService.PopulateInventoryItems();
-
-        //CheckScopeBeforeApply();
 
 
         $scope.GetInventories();
@@ -547,7 +549,6 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         $("#myModal1").modal('show');
     }
 
-    $scope.PopulateInventoryItems();
 
 
     $scope.ScanItemSearch = function () {
@@ -591,8 +592,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
 
-    $scope.AddToCart=function(obj)
-    {
+    $scope.AddToCart = function (obj) {
         debugger;
         if (_CanAct == 'True') {
 
@@ -628,17 +628,11 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     }
 
 
-    $scope.SelectAll = function ()
-    {
-        //$('#mylist .checkicon').each(function () {
-        //    if ($(this).find(".fa-check").css("color") !== "rgb(0, 150, 136)") {
-        //        $(this).trigger("click");
-        //    }
-        //});
+    $scope.SelectAll = function () {
+
 
         for (var i = 0; i < $scope.InventoryItems.length; i++) {
-            if (i > _CartObjLimit)
-            {
+            if (i > _CartObjLimit) {
                 break;
             }
             else {
@@ -658,20 +652,19 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
             $(this).find(".fa-check").css("color", "transparent");
         });
         $scope.mainObjectToSend = [];
+        localStorageService.set("ActivityCart", "");
         CheckScopeBeforeApply();
     }
 
-    $scope.OpentransactionModal=function()
-    {
+    $scope.OpentransactionModal = function () {
 
-        debugger;
 
         if ($("body").hasClass("modal-open")) {
 
             $(".transactionbody").removeClass('slideInUp');
             $(".transactionbody").addClass('slideOutDown');
             setTimeout(function () { $("#mycartModal").modal('hide'); }, 1000);
-           
+
         }
         else {
 
@@ -681,16 +674,16 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         }
 
 
-       
+
     }
     function addItemsToCart(object, IdToSave, originalID) {
+        debugger;
         var isItemExist = true;
         var TempValue = 0;
         var _zeroCount = 0;
 
         if ($(originalID).find(".fa-check").css("color") == "rgb(0, 150, 136)" && $scope.mainObjectToSend.length < _CartObjLimit) {
 
-            console.log(IdToSave);
             $.each($scope.InventoryItems, function (i, v) {
                 if (v.iID == IdToSave) {
                     isItemExist = true;
@@ -709,10 +702,10 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
 
-                     
 
 
-                        
+
+
 
                         $scope.mainObjectToSend.push({
                             uId: v.iID,
@@ -757,7 +750,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
             });
 
         } else {
-          
+
             $scope.mainObjectToSend = $scope.mainObjectToSend.filter(function (el) {
                 return el.uId != IdToSave;
 
@@ -765,15 +758,8 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
         }
-      
-        if (_zeroCount != 0) {
-            $("#RemoveRecords").attr("disabled", "");
-            $("#RemoveRecords").attr("disabled", false);
-        }
-        else {
-            $("#RemoveRecords").attr("disabled", "disabled");
-            $("#RemoveRecords").attr("disabled", true);
-        }
+
+
 
         $scope.CurrentActiveClass = "bounceIn";
         CheckScopeBeforeApply();
@@ -782,14 +768,128 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     }
 
-  function ResetCurrentActiveClass()
-    {
+
+
+
+    function ResetCurrentActiveClass() {
         setTimeout(function () {
 
             $scope.CurrentActiveClass = "";
             CheckScopeBeforeApply();
-        },500);
+        }, 500);
     }
+
+
+    function SetSelectedIfAny() {
+
+        for (var i = 0; i < $scope.mainObjectToSend.length; i++) {
+
+            $scope.AddToCart(GetInventoryItem($scope.mainObjectToSend[i].uId));
+
+
+        }
+
+
+    }
+
+    function GetInventoryItem(id) {
+        for (var i = 0; i < $scope.InventoryItems.length; i++) {
+
+            if ($scope.InventoryItems[i].iID == id) {
+                return $scope.InventoryItems[i];
+
+            }
+
+        }
+    }
+
+    function init() {
+        var _myItemsList = localStorageService.get("ActivityCart");
+        _myItemsList = _myItemsList != null && _myItemsList != undefined ? _myItemsList : [];
+        if (_myItemsList.length > 0) {
+
+            var j = 0;
+            for (j = 0; j < _myItemsList.length; j++) {
+                var v = _myItemsList[j].InventoryDataList;
+                $scope.mainObjectToSend.push({
+                    uId: v.uId,
+                    pID: v.pID,
+                    pPart: v.pPart,
+                    iLID: v.iLID,
+                    iUOMID: v.iUOMID,
+                    iQty: v.iQty,
+                    oquantity: v.oquantity,
+                    uomUOM: v.uomUOM,
+                    lLoc: v.lLoc,
+                    iStatusValue: v.iStatusValue,
+                    pDescription: v.pDescription,
+                    Action: '',
+                    iUniqueDate_date: v.iUniqueDate,
+                    iUnitNumber2: v.iUnitNumber2,
+                    iUnitNumber1: v.iUnitNumber1,
+                    iUnitDate2_date: v.iUnitDate2,
+                    iUnitTag3: v.iUnitTag3,
+                    iUnitTag2: v.iUnitTag2,
+                    pCountFrq: v.pCountFrq,
+                    lZone: v.lZone,
+                    ImageThumbPath: v.ImageThumbPath,
+                    ImageDisplayName: v.ImageDisplayName,
+                    iReqValue: v.iReqValue,
+                    iCostPerUnit: v.pDefaultCost,
+
+
+
+                });
+            }
+
+            CheckScopeBeforeApply();
+
+
+        }
+
+        $scope.PopulateInventoryItems();
+
+        //SetSelectedIfAny();
+
+    }
+
+    init();
+    function GetDataToSend(mainObjectToSend) {
+        if (mainObjectToSend.length > 0) {
+            for (var i = 0; i < mainObjectToSend.length; i++) {
+                $scope.Cart.push({
+                    InventoryID: mainObjectToSend[i].uId,
+                    iCostPerItem: mainObjectToSend[i].iCostPerUnit,
+                    ItemID: mainObjectToSend[i].pPart,
+                    ActionPerformed: $scope.selectedAction,
+                    InventoryDataList: mainObjectToSend[i],
+                    IncreaseDecreaseVMData: ({ ActionQuantity: "" }),
+                    MoveTransactionData: ({ ActionQuantity: "", StatusToUpdate: mainObjectToSend[i].iStatusValue, MoveToLocationText: "", MoveToLocation: "" }),
+                    UpdateTransactionData: ({ ActionQuantity: "", StatusToUpdate: mainObjectToSend[i].iStatusValue }),
+                    ApplyTransactionData: ({ ActionQuantity: "", UnitTag1: mainObjectToSend[i].iReqValue, UnitTag2: mainObjectToSend[i].iUnitTag2, UnitTag3: mainObjectToSend[i].iUnitTag3, UniqueDate: mainObjectToSend[i].iUniqueDate_date, UnitDate2: mainObjectToSend[i].iUnitDate2_date, UnitNumber1: mainObjectToSend[i].iUnitNumber1, UnitNumber2: mainObjectToSend[i].iUnitNumber2 }),
+                    ConvertTransactionData: ({ ActionFromQuantity: "", ActionToQuantity: "", ToUOMID: 0 }),
+                });
+            }
+
+        }
+        return $scope.Cart;
+    }
+
+
+
+    // Go to next page after select particular activity from list(Increase,decrease,move,convert,tag..)
+    $scope.GoToNextMobile = function (selectedAction) {
+        $scope.selectedAction = selectedAction;
+        var _dataToSend = GetDataToSend($scope.mainObjectToSend);
+        localStorageService.set("ActivityCart", "");
+        localStorageService.set("ActivityCart", _dataToSend);
+
+        console.log(localStorageService.get("ActivityCart"));
+        $("#mycartModal").modal('hide');
+        log.success("Your cart has been updated successfully, now you are redirecting to activity page.");
+
+    }
+
     $scope.Showhideimage('true');
 }]);
 
@@ -832,8 +932,7 @@ app.directive('onLongPress', function ($timeout) {
                 // If there is an on-touch-end function attached to this element, apply it
                 if ($attrs.onTouchEnd) {
 
-                    if (count < 1)
-                    {
+                    if (count < 1) {
                         count = 0;
                         //$scope.$apply(function () {
                         //    $scope.$eval($attrs.ngClick)
@@ -845,17 +944,17 @@ app.directive('onLongPress', function ($timeout) {
                             $scope.$eval($attrs.onTouchEnd)
                         });
                     }
-                 
 
 
-                  
+
+
 
 
                 }
             });
 
 
-         
+
         }
     };
 })
