@@ -1,0 +1,452 @@
+﻿
+<style>
+    .topheader a {
+        font-size: 17px;
+        padding: 10px;
+        font-weight: 100;
+        font-family: verdana;
+    }
+
+
+
+    .bottomnavigator {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        background: #177B3D;
+        left: 0;
+        right: 0;
+        color: #fff;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        z-index:10;
+    }
+
+        .bottomnavigator a {
+            font-size: 17px;
+            padding: 10px;
+            font-weight: 100;
+            font-family: verdana;
+            color: #fff;
+        }
+
+    .topheader {
+        padding-bottom: 3px;
+    }
+
+    .maincontent {
+        background: #fff;
+        padding: 10px;
+        font-size: 12px;
+        color: #6D6C6C;
+        font-family: verdana;
+    }
+
+    .nav-tabs li {
+        background: #fff;
+        border: transparent;
+        border-bottom: 2px solid #ccc;
+    }
+
+        .nav-tabs li a {
+            background: #fff;
+            border: transparent;
+        }
+
+    .nav-tabs .active {
+        border-bottom: 2px solid #128ece;
+    }
+
+        .nav-tabs .active a {
+            border: transparent !important;
+        }
+
+    .laststep .btn {
+        border-radius: 100%;
+        height: 50px;
+        width: 50px;
+        padding: 0px;
+        font-size: 22px;
+        text-align: center;
+        line-height: 46px;
+    }
+
+    .laststep .row {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+        padding-top: 5px;
+    }
+
+    .laststep .row h4 {
+      margin-top:12px;
+    }
+
+    .checkbox
+    {
+        padding-left:0px;
+    }
+
+    label
+    {
+        display:block;
+    }
+
+    .rotateData {
+        padding: 0px;
+        height: 50px;
+        width: 50px;
+        background: #128ece;
+         border-radius:100%;
+        color: #fff !important;
+    }
+
+    .pull-right > .dropdown-menu
+    {
+        right:17px;
+    }
+
+</style>
+
+<div style="top: 0; background: #177B3D;" class="topheader Increase">
+    <div class="row">
+
+        <div class="col-md-4 col-xs-3">
+            <a data-ng-click="GoToStep(CurrentStep-1)"><i class="fa fa-long-arrow-left"></i></a>
+        </div>
+        <div class="col-md-4 col-xs-6">
+            <div style="text-align:center">
+                <a>Increase</a>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-3">
+            <div class="pull-right">
+
+
+                <a data-ng-click="GoToStep(CurrentStep+1)" ng-class="{'adisabled': Group.length==0||  CurrentActiveStep==3}" class=""><i class="fa fa-long-arrow-right"></i></a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <br /><br />
+</div>
+
+
+<div style="margin-top:3px; margin-bottom:3px;" class="page-header">
+    <h4 style="font-size:12px; margin-top:2px;">ENTER LINE ITEMS QUANTITIES AND DATA </h4>
+</div>
+
+<div class="maincontent">
+
+
+
+
+
+    <div ng-if="_IsLoading==true">
+        <div class="modal-backdrop fade in"></div>
+        <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
+            <img src="img/loader.gif" alt="Alternate Text" />
+        </div>
+    </div>
+
+    <div class="swiper-container" ng-if="_IsLoading==false">
+
+        <!--<ul class="nav nav-tabs">
+            <li class="active"><a >Custom fields</a></li>
+            <li><a >Activity fields</a></li>
+            <li><a >Others</a></li>
+        </ul>-->
+
+
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" ng-repeat="CurrentActiveObject in CurrentCart" data-index="{{$index}}">
+                <div class="row">
+                    <div class="col-md-1 col-xs-3">
+
+                        <img ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath==''" style="height:60px; width:60px; border:1px solid #ccc;" src="img/default.png" />
+                        <img ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath!=''" style="height:60px; width:60px; border:1px solid #ccc;" src="{{CurrentActiveObject.InventoryDataList.ImageThumbPath}}" alt="" />
+                    </div>
+                    <div class="col-md-10 col-xs-9">
+                        <div> <span style="font-size:18px;">{{CurrentActiveObject.InventoryDataList.oquantity}}  </span> <span> {{CurrentActiveObject.InventoryDataList.uomUOM }} </span>  of <span> {{CurrentActiveObject.InventoryDataList.pPart }}</span>  </div>
+                        <div>  <span> {{CurrentActiveObject.InventoryDataList.pDescription }}  </span> </div>
+                        <div>
+                            {{CurrentActiveObject.InventoryDataList.lLoc }}    {{CurrentActiveObject.InventoryDataList.iStatusValue }}
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row" ng-if=" CurrentOperation!='Convert' &&  CurrentOperation!='Move'">
+                    <div class="col-xs-8 col-md-8">
+
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <div class="fg-line">
+                                <input type="number" placeholder="Fill Quantity" ng-model=" CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
+                            </div>
+                        </div>
+
+                        <div>
+
+
+
+
+                            <span ng-if=" CurrentOperation!='Increase'&&   CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
+
+                                <span ng-if=" CurrentOperation=='Increase' ||  CurrentOperation=='Decrease'">Quantity can't be greater than original quantity</span>
+                                <span ng-if=" AllowNegative!=null &&  AllowNegative!='True' &&  CurrentOperation!='Increase' &&  CurrentOperation!='Decrease'"> Quantity can't be greater than original quantity</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 col-md-4">
+                        <label>&nbsp;</label>
+                        <div class="pull-right">
+                            <button data-toggle="dropdown" aria-expanded="false" id="mybutton_{{ CurrentActiveObject.InventoryDataList.uId}}" type="button" class="btn rotateData btnPrimary btn-icon">
+                                <i class="fa fa-thumb-tack"></i>
+                            </button>
+
+
+                            <ul class="dropdown-menu">
+                                <li><a data-ng-click=" FillQuantity( CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity, CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
+                                <li><a data-ng-click=" FillQuantity( CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity, CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row" ng-if=" CurrentOperation=='Increase'&&  CanCost=='True'">
+
+                    <div class="col-xs-8 col-md-8">
+                        <div class="form-group" ng-if="_groupRow.ActionPerformed!=-1">
+                            <label>Cost per unit</label>
+                            <div class="fg-line">
+
+                                <input type="number" placeholder="Fill Cost per unit" class="form-control NumberType FormControlType" ng-model=" CurrentActiveObject.iCostPerItem" />
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                        <div class="pull-right">
+                            <label>&nbsp;</label>
+                            <button id="mybuttonCost_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillCost( CurrentActiveObject.iCostPerItem, CurrentActiveObject.InventoryDataList.uId)">
+                                <i class="fa fa-thumb-tack"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" data-ng-repeat="_columns in isLineItemColumnNames">
+
+
+                    <div class="col-xs-8 col-md-8">
+                        <div class="form-group">
+                            <label>{{_columns}} <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
+                            <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'fg-line':''}}">
+
+                                <input placeholder="fill {{_columns}}" type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+
+                                <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="checkbox">
+                                    <div class="form-control FormControlType">
+
+                                        <label>
+                                            <input type="checkbox" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue"><i class="input-helper"></i>
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                                <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='combobox'">
+                                    <div class="fg-line">
+
+                                        <div class="select">
+                                            <select class="form-control" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
+
+                                                <option value="{{_optionValue}}" ng-repeat="_optionValue in CurrentActiveObject.IsLineItemData[$index].cfdComboValues track by $index">{{_optionValue}}</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                <input type="number" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                            </div>
+                            <div>
+
+                                <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)=='' " class="errorMessage">
+                                    {{CurrentActiveObject.IsLineItemData[$index].cfdName }} field is required.
+
+                                </span>
+
+                                <span ng-if="(CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime') && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)!='' && CheckProperDate(CurrentActiveObject.IsLineItemData[$index].CfValue)!=true" class="errorMessage">
+                                    {{CurrentActiveObject.IsLineItemData[$index].cfdName }} value is not a proper date, please fill correct date.
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-4 col-md-4">
+                        <div class="pull-right">
+                            <label>&nbsp;</label>
+                            <button id="lineitem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}_{{CurrentActiveObject.IsLineItemData[$index].InventoryID}}" class="btn rotateData btnPrimary btn-icon" data-ng-click="FillLineItem($index,CurrentActiveObject.IsLineItemData[$index].cfdID,CurrentActiveObject.IsLineItemData[$index].CfValue,CurrentActiveObject.IsLineItemData[$index].InventoryID)">
+                                <i class="fa fa-thumb-tack"></i>
+                            </button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="swiper-slide customActivityData" data-index="{{CurrentCart.length}}">
+
+
+                <div class="form-group">
+                    <label>Activity Date</label>
+                    <div class="input-group">
+                        <input type="date" class="form-control" />
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveTransactionField(obj.cfdID)">
+                    <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
+                    <div ng-if="obj.cfdDataType=='string'" class="input-group">
+                        <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control stringType" value="{{obj.CfValue}}" />
+                    </div>
+
+
+                    <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+
+                        <input type="checkbox" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
+
+                    </div>
+
+                    <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
+
+
+                        <div class="select">
+                            <select id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
+
+                                <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
+                        <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="date" class="form-control customFieldDatePicker FormDateType" />
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='number'" class="input-group">
+                        <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                        <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+
+            <div class="swiper-slide laststep" data-index="{{CurrentCart.length+1}}">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <a class="btn btn-success">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                    </div>
+                    <div class="col-xs-8">
+                        <h4>Process cart</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4">
+                        <a class="btn btn-info">
+                            <i class="fa fa-info-circle"></i>
+                        </a>
+                    </div>
+                    <div class="col-xs-8">
+                        <h4>View summary</h4>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xs-4">
+                        <a class="btn btn-warning">
+                            <i class="fa fa-shopping-cart"></i>
+                        </a>
+                    </div>
+                    <div class="col-xs-8">
+                        <h4>Keep cart</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4">
+                        <a class="btn btn-danger">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                    <div class="col-xs-8">
+                        <h4>Cancel cart</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+<div>
+    <br /><br />
+</div>
+
+<div class="bottomnavigator">
+    <div class="row">
+
+        <div class="col-md-4 col-xs-3">
+            <a data-ng-click="GoToStep(CurrentStep-1)"><i class="fa fa-long-arrow-left"></i></a>
+        </div>
+        <div class="col-md-4 col-xs-6">
+            <div style="text-align:center">
+                <a>Increase</a>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-3">
+            <div class="pull-right">
+
+                <a data-ng-click="GoToStep(CurrentStep+1)" ng-class="{'adisabled': CurrentCart.length==0|| CurrentActiveStep==3}" class=""> <i class="fa fa-long-arrow-right"></i></a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+

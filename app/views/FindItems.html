@@ -341,9 +341,10 @@
     }
 
     .img img {
-        height: 60px;
-        width: 60px;
-        border: 1px solid #ccc;
+        height: 63px;
+        width: 63px;
+        border: 3px solid #ccc;
+        border-radius: 100%;
     }
 
     .cd-top.cd-is-visible {
@@ -537,11 +538,11 @@
         line-height: 60px;
     }
 
-    .cartbtn .fa {
-        font-size: 24px;
-        margin-top: 13px;
-        color: #fff !important;
-    }
+        .cartbtn .fa {
+            font-size: 30px;
+            margin-top: 14px;
+            color: #fff !important;
+        }
 
     
      .selectAction {
@@ -714,6 +715,7 @@
     <br /><br /><br />
     <h1><i class="fa fa-meh-o"></i> Oops !! </h1>
     <h3>No record matched your Query</h3>
+    <a style="cursor:pointer" ng-click="ClearFilter()">Clear your filters</a>
     <br /><br />
 
 </div>
@@ -855,14 +857,11 @@
     </div>
 </div>
 
-<a ng-click="OpentransactionModal()" class="cartbtn btn-success" ng-if="mainObjectToSend.length>0">
-    <i class="fa fa-shopping-cart"></i> <span class="animated {{CurrentActiveClass}} counter">{{mainObjectToSend.length}}</span>
+<a data-backdrop="static" style="text-decoration:none;" ng-click="OpentransactionModal()" class="animated {{CurrentActiveClass}} cartbtn btn-primary" ng-if="mainObjectToSend.length>0">
+    <span class="cartcounter" style="font-size:32px;"> {{mainObjectToSend.length}}</span>
+    <i style="display:none;" class="cartcrossicon fa fa-times"></i>
 </a>
-
-
-
 <script>
-
 
     var offset = 50;
     //browser window scroll (in pixels) after which the "back to top" link opacity is reduced

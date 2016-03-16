@@ -659,19 +659,33 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     $scope.OpentransactionModal = function () {
 
 
-        if ($("body").hasClass("modal-open")) {
+        debugger;
 
-            $(".transactionbody").removeClass('slideInUp');
-            $(".transactionbody").addClass('slideOutDown');
-            setTimeout(function () { $("#mycartModal").modal('hide'); }, 1000);
+
+        if (_TotalRecordsCurrent != 0) {
+
+            if ($("body").hasClass("modal-open")) {
+
+                $(".transactionbody").removeClass('slideInUp');
+                $(".transactionbody").addClass('slideOutDown');
+                $(".cartcrossicon").hide();
+                $(".cartcounter").show();
+                setTimeout(function () { $("#mycartModal").modal('hide'); }, 1000);
+
+            }
+            else {
+
+                $(".transactionbody").removeClass('slideOutDown');
+                $(".transactionbody").addClass('slideInUp');
+                $(".cartcrossicon").show();
+                $(".cartcounter").hide();
+                $("#mycartModal").modal('show');
+            }
 
         }
-        else {
 
-            $(".transactionbody").removeClass('slideOutDown');
-            $(".transactionbody").addClass('slideInUp');
-            $("#mycartModal").modal('show');
-        }
+
+       
 
 
 
@@ -884,9 +898,13 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         localStorageService.set("ActivityCart", "");
         localStorageService.set("ActivityCart", _dataToSend);
 
+        localStorageService.set("SelectedAction", "");
+        localStorageService.set("SelectedAction", selectedAction);
+
         console.log(localStorageService.get("ActivityCart"));
         $("#mycartModal").modal('hide');
         log.success("Your cart has been updated successfully, now you are redirecting to activity page.");
+        $location.path("/activity");
 
     }
 
