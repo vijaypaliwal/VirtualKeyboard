@@ -314,7 +314,7 @@
                 <div class="form-group">
                     <label>Activity Date</label>
                     <div class="input-group">
-                        <input type="date" class="form-control" />
+                        <input type="date" class="form-control" id="itUpdateDate" />
 
                     </div>
 
@@ -368,7 +368,7 @@
             </div>
 
             <div class="swiper-slide laststep" data-index="{{CurrentCart.length+1}}">
-                <div class="row">
+                <div class="row" ng-click="SubmitAllActivities()">
                     <div class="col-xs-4">
                         <a class="btn btn-success">
                             <i class="fa fa-refresh"></i>
