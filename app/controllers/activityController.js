@@ -9,7 +9,11 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     $scope.CanCost = true;
     $scope._IsLoading = true;
     $scope.totalLength = 0;
+    $scope.MyinventoryFields = [];
+    $scope.IsSummary = false;
     $scope.CurrentStep = 0;
+    var _AllowNegative = 'False';
+    $scope.IssueType = 0;
     $scope.isLineItemColumnNames = [];
     function CheckScopeBeforeApply() {
         if (!$scope.$$phase) {
@@ -40,6 +44,18 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     init();
 
+    $scope.OpenSummary = function () {
+
+        $scope.IsSummary = true;
+        CheckScopeBeforeApply();
+    }
+
+    $scope.CloseSummary = function () {
+
+        $scope.IsSummary = false;
+        CheckScopeBeforeApply();
+    }
+
     $scope.FillQuantity = function (value, id, type) {
         $scope.ActionQuantityValue = value;
 
@@ -57,7 +73,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
                     toastr.success("Data updated successfully.");
                     //  $scope.NextClickNew(2);
-                    //  $scope.CurrentActiveObject = $scope.Group[0];
+                    //  $scope.CurrentActiveObject = $scope.CurrentCart[0];
                     CheckScopeBeforeApply();;
                 }
                 else {
@@ -93,6 +109,45 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     };
 
 
+
+    $scope.GetMyInventoryColumns = function () {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'GetMyInventoryColumns',
+              contentType: 'application/json; charset=utf-8',
+
+              dataType: 'json',
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+              success: function (response) {
+
+
+                  // MY inventory column region
+                  var _TempArrayMyInventory = response.GetMyInventoryColumnsResult.Payload;
+
+                  for (var i = 0; i < _TempArrayMyInventory.length; i++) {
+                      var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
+                      _TempArrayMyInventory[i].ColumnName = _ColName[0];
+                      if (_TempArrayMyInventory[i].Show == "True") {
+                          $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
+                      }
+                  }
+                  CheckScopeBeforeApply()
+
+
+              },
+              error: function (err) {
+                  console.log(err);
+                  log.error("Error Occurred during operation");
+
+
+              }
+          });
+    }
     $scope.Scanitem = function () {
 
 
@@ -279,7 +334,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $scope.CurrentOperation = "Decrease";
                 $scope.CurrentIcon = "fa-arrow-down";
                 $scope.CurrentHeaderText = "Take these items out of inventory.";
-                value = -1;
+            
                 break;
             case 0:
                 $scope.CurrentClass = "bgm-move";
@@ -342,7 +397,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
             onSlideChangeEnd: function (swiperHere) {
 
+                $scope.CurrentStep = swiperHere.activeIndex;
+                CheckScopeBeforeApply();
 
+                $scope.changeNav();
 
 
             }
@@ -353,21 +411,92 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         });
     }
 
-
-    $scope.GoToStep = function (Index) {
-
+    function GetTypeByIndex() {
+        var _type = "";
         $(".swiper-slide").each(function () {
 
-            if ($(this).attr("data-index") == Index) {
-                mySwiper.swipeTo($(this).index(), 1000, false);
+            if ($(this).hasClass("swiper-slide-active")) {
+                _type = $(this).attr("data-type") != null && $(this).attr("data-type") != undefined ? $(this).attr("data-type") : "";
 
-
-                $scope.CurrentStep = Index;
-
-                return false;
+                console.log(_type);
             }
 
         });
+
+        return _type;
+
+    }
+
+
+    $scope.GoToStep = function (Index, _step) {
+        var type = GetTypeByIndex();
+        debugger;
+
+        _step = _step == null || _step == undefined ? 1 : _step;
+        switch (_step) {
+            case 1:
+                if (!$scope.ValidateObjectVMStop(Index, type)) {
+
+                    $(".swiper-slide").each(function () {
+
+                        if ($(this).attr("data-index") == Index) {
+                            mySwiper.swipeTo($(this).index(), 1000, false);
+
+
+
+                            $scope.CurrentStep = Index;
+                            CheckScopeBeforeApply();
+
+                            return false;
+                        }
+
+                    });
+                }
+                else {
+                    $scope.ShowErrorMessage($scope.IssueType)
+                }
+                break;
+            case 2:
+                $(".swiper-slide").each(function () {
+
+                    if ($(this).attr("data-index") == Index) {
+                        mySwiper.swipeTo($(this).index(), 1000, false);
+
+
+                        $scope.CurrentStep = Index;
+                        CheckScopeBeforeApply();
+
+                        return false;
+                    }
+
+                });
+                break;
+            default:
+
+                if (!$scope.ValidateObjectVMStop(Index, type)) {
+
+                    $(".swiper-slide").each(function () {
+
+                        if ($(this).attr("data-index") == Index) {
+                            mySwiper.swipeTo($(this).index(), 1000, false);
+
+
+                            $scope.CurrentStep = Index;
+                            CheckScopeBeforeApply();
+
+                            return false;
+                        }
+
+                    });
+                }
+                else {
+                    $scope.ShowErrorMessage($scope.IssueType)
+                }
+
+                break;
+
+        }
+       
 
 
     }
@@ -412,7 +541,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
                     log.success("Data updated successfully.");
                     //  $scope.NextClickNew(2);
-                    //  $scope.CurrentActiveObject = $scope.Group[0];
+                    //  $scope.CurrentActiveObject = $scope.CurrentCart[0];
                     CheckScopeBeforeApply();;
                 }
                 else {
@@ -454,14 +583,28 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     function BuildMultipleData() {
         var dt = new Date();
-
-        alert($("#itUpdateDate").val());
-        debugger;
         var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), dt.getHours(), dt.getMinutes(), dt.getSeconds(), dt.getMilliseconds()));
         var wcfDateStr = dt1.toMSJSON();
+        var wcfDateStr123 = dt1.toMSJSON();
 
-        var wcfDateStr1=dt1.toMSJSON();
-        var wcfDateStr2=dt1.toMSJSON();
+        var _updateDateval = $("#itUpdateDate").val();
+
+
+        var dsplit1 = _updateDateval.split("-");
+
+        var d122 = new Date(dsplit1[0], dsplit1[1] - 1, dsplit1[2]);
+
+        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), d122.getHours(), d122.getMinutes(), d122.getSeconds(), d122.getMilliseconds()))
+
+        wcfDateStr123 = d122.toMSJSON();
+
+
+
+        debugger;
+
+
+        var wcfDateStr1 = dt1.toMSJSON();
+        var wcfDateStr2 = dt1.toMSJSON();
 
         var k = 0;
         var _myData = [];
@@ -481,7 +624,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 itReqValue: "",
                 itSourceID: 1,
                 itStatusValue: "",
-                itUpdateDate: wcfDateStr,
+                itUpdateDate: wcfDateStr123,
                 itUOMID: 0,
                 itUncontrolled: 0,
                 itUniqueDate: wcfDateStr,
@@ -516,8 +659,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
             }
 
-            if($scope.CurrentCart[k].ApplyTransactionData.UniqueDate != undefined)
-            {
+            if ($scope.CurrentCart[k].ApplyTransactionData.UniqueDate != undefined) {
 
                 var dateVar = $scope.CurrentCart[k].ApplyTransactionData.UniqueDate;
                 var dsplit = dateVar.split("/");
@@ -528,14 +670,13 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
                 wcfDateStr1 = d11.toMSJSON();
             }
-            if($scope.CurrentCart[k].ApplyTransactionData.UnitDate2 != undefined)
-            {
+            if ($scope.CurrentCart[k].ApplyTransactionData.UnitDate2 != undefined) {
                 var dateVar = $scope.CurrentCart[k].ApplyTransactionData.UnitDate2;
                 var dsplit = dateVar.split("/");
 
                 var d2 = new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
 
-                
+
 
                 var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate(), d2.getHours(), d2.getMinutes(), d2.getSeconds(), d2.getMilliseconds()))
 
@@ -568,52 +709,582 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     }
 
+    $scope.keepcart = function () {
+        $location.path("/FindItems");
+    }
 
+
+    $scope.cancel = function () {
+
+        var box = bootbox.confirm("You want to cancel this process ?", function (result) {
+            if (result) {
+
+                debugger;
+                $scope.CurrentCart = [];
+                localStorageService.set("ActivityCart", "");
+                $location.path("/FindItems");
+                CheckScopeBeforeApply();
+
+            }
+
+        });
+
+
+
+
+    }
+
+    $scope.IsMyInventoryColumns = function (ColumnID) {
+
+        var j = 0;
+        for (j = 0; j < $scope.MyinventoryFields.length; j++) {
+            if ($scope.MyinventoryFields[j].ColumnName == ColumnID) {
+                return true;
+                break;
+            }
+
+        }
+        return false;
+    }
     $scope.SubmitAllActivities = function () {
+        debugger;
 
+        if (!$scope.ValidateObjectVM()) {
+
+            if (!CheckintoCustomData(0)) {
+
+                var authData = localStorageService.get('authorizationData');
+                if (authData) {
+                    $scope.SecurityToken = authData.token;
+                }
+
+                var _mdata = BuildMultipleData();
+
+                console.log(_mdata);
+
+                $.ajax({
+                    type: "POST",
+                    url: serviceBase + 'MultipleActivity',
+                    contentType: 'application/json; charset=utf-8',
+
+                    dataType: 'json',
+                    data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _mdata }),
+                    success: function (response) {
+
+                        debugger;
+
+                        $scope.CurrentCart = [];
+                        log.success("Activity performed successfully please, you are redirecting to inventory page.")
+
+                        $location.path("/FindItems");
+
+                        localStorageService.set("ActivityCart", "");
+                        localStorageService.set("SelectedAction", "");
+
+                        $scope.$apply();
+                        console.log(response);
+                    },
+                    error: function (err) {
+                        debugger;
+                        log.error("Some error occurred");
+                        console.log(err.responseText);
+
+                    }
+                });
+            }
+            else {
+                $scope.GoToStep($scope.CurrentCart.length,1);
+                $scope.ShowErrorMessage($scope.IssueType);
+            }
+        }
+
+        else {
+            $scope.ShowErrorMessage($scope.IssueType);
+        }
+
+
+
+    }
+
+
+    $scope.GetObjIndex = function (CurrentActiveObject) {
+
+        debugger;
+        for (var i = 0; i < $scope.CurrentCart.length; i++) {
+            if ($scope.CurrentCart[i].InventoryID == CurrentActiveObject.InventoryID) {
+                return i + 1;
+            }
+        }
+    }
+
+
+    $scope.DeleteItem = function (CurrentActiveObject) {
 
         debugger;
 
-        var authData = localStorageService.get('authorizationData');
-        if (authData) {
-            $scope.SecurityToken = authData.token;
-        }
+        var box = bootbox.confirm("Do you want to proceed ?", function (result) {
+            if (result) {
+                var _tempArray = $scope.CurrentCart;
+                for (var i = 0; i < _tempArray.length; i++) {
+                    if (_tempArray[i].InventoryID == CurrentActiveObject.InventoryID) {
+                        $scope.CurrentCart.splice(i, 1);
+                    }
+                }
 
-        var _mdata = BuildMultipleData();
+                localStorageService.set("ActivityCart", "")
+                localStorageService.set("ActivityCart", $scope.CurrentCart);
+                CheckScopeBeforeApply();
+                log.success("Item remove successfully from cart.")
 
-        console.log(_mdata);
+                if ($scope.CurrentCart.length == 0) {
+                    log.warning("Seems like you don't have any item in your cart.")
+                    $location.path("/FindItems");
+                    CheckScopeBeforeApply();
 
-        $.ajax({
-            type: "POST",
-            url: serviceBase + 'MultipleActivity',
-            contentType: 'application/json; charset=utf-8',
+                }
 
-            dataType: 'json',
-            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _mdata }),
-            success: function (response) {
 
-                debugger;
+            }
+            else {
 
-                $scope.CurrentCart = [];
-                log.success("Activity performed successfully please, you are redirecting to inventory page.")
 
-                $location.path("/FindItems");
-
-                localStorageService.set("ActivityCart", "");
-                localStorageService.set("SelectedAction", "");
-
-                $scope.$apply();
-                console.log(response);
-            },
-            error: function (err) {
-                debugger;
-                log.error("Some error occurred");
-                console.log(err.responseText);
 
             }
         });
 
+        box.on("shown.bs.modal", function () {
+            $(".mybootboxbody").html("Press ok to delete item to your cart list ");
+
+        });
     }
+
+
+
+
+
+
+    $scope.ShowErrorMessage = function (Option) {
+        switch (Option) {
+            case 1:
+                log.error("Quantity is required field,please fill quantity in cart items");
+                break;
+            case 2:
+                log.error("Convert Quantity,into this quantity and UOM are required fields,please fill proper values in cart items");
+                break;
+            case 3:
+                log.error("Moveable Quantity and location are required fields,please fill proper values in cart items");
+                break;
+            case 4:
+                log.error("Seems like some items are having same location where it was earlier, please select different location to move");
+                break;
+
+            case 5:
+                log.error("Seems like you haven't fill all required fields for activity data, please fill them first.")
+                break;
+            default:
+
+        }
+
+
+
+
+    }
+
+
+    function CheckintoArray(CurrentIndex) {
+        CurrentIndex = CurrentIndex - 1;
+        var k = 0;
+        if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
+            switch ($scope.CurrentOperation) {
+                case "Increase":
+                case "Decrease":
+                    for (k = 0; k < $scope.CurrentCart.length; k++) {
+                        if (k == CurrentIndex && ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "" || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null)) {
+                            $scope.IssueType = 1;
+                            return true;
+
+                            break;
+                        }
+                        else if ($scope.CurrentOperation == "Decrease") {
+
+
+                            if (k == CurrentIndex && $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                return true;
+                                break;
+                            }
+                            else {
+
+                            }
+                        }
+
+                    }
+                    break;
+                case "Convert":
+
+                    for (k = 0; k < $scope.CurrentCart.length; k++) {
+                        if (k == CurrentIndex && ($scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == null || $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == "")) {
+                            $scope.IssueType = 2;
+                            CheckScopeBeforeApply();;
+                            return true;
+
+                            break;
+                        }
+                        else if (_AllowNegative != null && _AllowNegative != "True") {
+                            if (k == CurrentIndex && $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                return true;
+                                break;
+                            }
+                            else {
+
+                            }
+
+                        }
+
+                    }
+                    break;
+                case "Move":
+
+                    for (k = 0; k < $scope.CurrentCart.length; k++) {
+                        if (k == CurrentIndex && ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity == null || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == null || $scope.CurrentCart[k].MoveTransactionData.ActionQuantity == "" || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "")) {
+                            $scope.IssueType = 3;
+                            CheckScopeBeforeApply();;
+                            return true;
+
+                            break;
+                        }
+                        else if (k == CurrentIndex && $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == $scope.CurrentCart[k].InventoryDataList.iLID) {
+
+                            $scope.IssueType = 31;
+                            CheckScopeBeforeApply();;
+                            return true;
+
+                            break;
+                        }
+                        else if (_AllowNegative != null && _AllowNegative != "True") {
+                            if (k == CurrentIndex && ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity)) {
+
+                                return true;
+                                break;
+                            }
+                            else {
+
+                            }
+                        }
+
+                    }
+                    break;
+                case "Apply":
+                    for (k = 0; k < $scope.CurrentCart.length; k++) {
+                        if (k == CurrentIndex && ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "" || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null)) {
+                            $scope.IssueType = 1;
+                            CheckScopeBeforeApply();;
+                            return true;
+
+                            break;
+                        }
+                        else if (_AllowNegative != null && _AllowNegative != "True") {
+                            if (k == CurrentIndex && $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                return true;
+                                break;
+                            }
+                            else {
+
+                            }
+                        }
+
+                    }
+                    break;
+                case "Update":
+                    for (k = 0; k < $scope.CurrentCart.length; k++) {
+                        if (k == CurrentIndex && ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "" || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null)) {
+                            $scope.IssueType = 1;
+                            CheckScopeBeforeApply();;
+                            return true;
+
+                            break;
+                        }
+                        else if (_AllowNegative != null && _AllowNegative != "True") {
+                            if (k == CurrentIndex && $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                return true;
+                                break;
+                            }
+                            else {
+
+                            }
+                        }
+
+                    }
+                    break;
+                default:
+
+            }
+
+            for (k = 0; k < $scope.CurrentCart.length; k++) {
+
+                if (k == CurrentIndex && $scope.CurrentCart[k].IsLineItemData != null && $scope.CurrentCart[k].IsLineItemData != undefined && $scope.CurrentCart[k].IsLineItemData.length > 0) {
+                    var _x = 0;
+                    for (_x = 0; _x < $scope.CurrentCart[k].IsLineItemData.length; _x++) {
+                        var _tempValueData = $.trim($scope.CurrentCart[k].IsLineItemData[_x].CfValue);
+                        if ($scope.IsActiveTransactionField($scope.CurrentCart[k].IsLineItemData[_x].cfdID) && $scope.CurrentCart[k].IsLineItemData[_x].cfdIsRequired == true && (_tempValueData == "" || _tempValueData == null)) {
+                            log.error($scope.CurrentCart[k].IsLineItemData[_x].cfdName + " is required field, please fill some value");
+                            CheckScopeBeforeApply();;
+                            return true;
+                        }
+                    }
+
+
+                }
+
+
+            }
+
+
+
+
+
+            return false;
+
+        }
+        else {
+            return true;
+        }
+    }
+    function CheckintoCustomData(CurrentIndex) {
+        var _returnVar = false
+
+        $.each($('.customActivityData input, select'), function () {
+            var value = $.trim($(this).val());
+            var cfdid = $(this).attr('cfd-id');
+            if ((value == null || value == undefined || value == "") && (cfdid != undefined && cfdid != null)) {
+                _returnVar = CheckintoCustomFieldList(cfdid);
+            }
+            else {
+
+            }
+        });
+
+        return _returnVar;
+
+    }
+
+    function CheckintoCustomFieldList(id) {
+        var k = 0;
+        for (k = 0; k < $scope.CustomActivityDataList.length; k++) {
+            if ($scope.CustomActivityDataList[k].cfdCustomFieldType == "Inventory" && $scope.CustomActivityDataList[k].cfdID == id && $scope.CustomActivityDataList[k].cfdIsRequired == true) {
+                $scope.IssueType = 5;
+                CheckScopeBeforeApply();
+                return true;
+            }
+
+
+        }
+        return false;
+    }
+
+    $scope.changeNav = function () {
+
+        //  $("#myform .swiper-slide input").removeAttr("autofocus");
+        $(".swiper-slide-active input:first").focus();
+        $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
+        $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
+        SoftKeyboard.show();
+        //    CheckScopeBeforeApply()
+
+    }
+
+    $scope.ValidateObjectVM = function () {
+
+        var k = 0;
+        if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
+            switch ($scope.CurrentOperation) {
+                case "Increase":
+                case "Decrease":
+                    for (k = 0; k < $scope.CurrentCart.length; k++) {
+                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
+                            $scope.IssueType = 1;
+                            $scope.GoToStep(k);
+                            return true;
+
+                            break;
+                        }
+                        else if ($scope.CurrentOperation == "Decrease") {
+
+
+                            if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                $scope.GoToStep(k);
+                                return true;
+                                break;
+                            }
+                            else {
+
+                            }
+                        }
+
+                    }
+                    break;
+                case "Convert":
+
+                    for (k = 0; k < $scope.CurrentCart.length; k++) {
+                        if ($scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == "") {
+                            $scope.IssueType = 2;
+                            $scope.GoToStep(k);
+                            CheckScopeBeforeApply();;
+                            return true;
+
+                            break;
+                        }
+                        else if (_AllowNegative != null && _AllowNegative != "True") {
+                            if ($scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                $scope.GoToStep(k);
+                                return true;
+                                break;
+                            }
+                            else {
+
+                            }
+
+                        }
+
+                    }
+                    break;
+                case "Move":
+
+                    for (k = 0; k < $scope.CurrentCart.length; k++) {
+                        if ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity == "" || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "") {
+                            $scope.IssueType = 3;
+                            $scope.GoToStep(k);
+                            CheckScopeBeforeApply();
+                            return true;
+
+                            break;
+                        }
+                        else if ($scope.CurrentCart[k].MoveTransactionData.MoveToLocation == $scope.CurrentCart[k].InventoryDataList.iLID) {
+
+                            $scope.IssueType = 31;
+                            $scope.GoToStep(k);
+                            CheckScopeBeforeApply();;
+                            return true;
+
+                            break;
+                        }
+                        else if (_AllowNegative != null && _AllowNegative != "True") {
+                            if ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                $scope.GoToStep(k);
+
+                                return true;
+                                break;
+                            }
+                            else {
+
+                            }
+                        }
+
+                    }
+                    break;
+                case "Apply":
+                    for (k = 0; k < $scope.CurrentCart.length; k++) {
+                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
+                            $scope.IssueType = 1;
+                            $scope.GoToStep(k);
+                            CheckScopeBeforeApply();;
+                            return true;
+
+                            break;
+                        }
+                        else if (_AllowNegative != null && _AllowNegative != "True") {
+                            if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                $scope.GoToStep(k);
+                                return true;
+                                break;
+                            }
+                            else {
+
+                            }
+                        }
+
+                    }
+                    break;
+                case "Update":
+                    for (k = 0; k < $scope.CurrentCart.length; k++) {
+                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
+                            $scope.IssueType = 1;
+                            $scope.GoToStep(k);
+                            CheckScopeBeforeApply();;
+                            return true;
+
+                            break;
+                        }
+                        else if (_AllowNegative != null && _AllowNegative != "True") {
+                            if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                $scope.GoToStep(k);
+                                return true;
+                                break;
+                            }
+                            else {
+
+                            }
+                        }
+
+                    }
+                    break;
+                default:
+
+            }
+
+            for (k = 0; k < $scope.CurrentCart.length; k++) {
+
+                if ($scope.CurrentCart[k].IsLineItemData != null && $scope.CurrentCart[k].IsLineItemData != undefined && $scope.CurrentCart[k].IsLineItemData.length > 0) {
+                    var _x = 0;
+                    for (_x = 0; _x < $scope.CurrentCart[k].IsLineItemData.length; _x++) {
+                        var _tempValueData = $.trim($scope.CurrentCart[k].IsLineItemData[_x].CfValue);
+                        if ($scope.IsActiveTransactionField($scope.CurrentCart[k].IsLineItemData[_x].cfdID) && $scope.CurrentCart[k].IsLineItemData[_x].cfdIsRequired == true && _tempValueData == "") {
+                            $scope.GoToStep(k);
+                            log.error($scope.CurrentCart[k].IsLineItemData[_x].cfdName + " is required field, please fill some value");
+                            CheckScopeBeforeApply();;
+                            return true;
+                        }
+                    }
+
+
+                }
+
+
+            }
+
+
+
+
+
+            return false;
+
+        }
+        else {
+            return true;
+        }
+    }
+
+    $scope.ValidateObjectVMStop = function (CurrentIndex, Type) {
+
+        switch (Type) {
+            case "Cart":
+                return CheckintoArray(CurrentIndex);
+                break;
+            case "Activity":
+                return CheckintoCustomData(CurrentIndex);
+                break;
+
+            default:
+                return false;
+
+        }
+
+
+
+
+    }
+
+
+
 }]);
 
 

@@ -3,7 +3,6 @@
     #sticky {
         width: 100%;
     }
-
         #sticky.stick {
             position: fixed;
             top: 0;
@@ -22,17 +21,13 @@
         z-index: 10;
         height: auto;
         left: 17px;
-        margin-top: -70px;
+        margin-top: -60px;
         max-width: 70px;
     }
 </style>
 
 <style>
-    #viewdata {
-        background: #128ECE;
-        width: 100%;
-        color: white;
-    }
+  
 
     .container {
         width: 100% !important;
@@ -127,7 +122,7 @@
         display: block;
         margin-left: 80px;
         margin-top: 7px;
-        border-bottom: 1px solid #D8D8D8;
+       
     }
 
     .widget-products li .img {
@@ -140,8 +135,9 @@
         margin-top: 7px;
     }
 
+
     .widget-products li > a {
-        height: 88px;
+        height: 80px;
         display: block;
         width: 100%;
         color: #344644;
@@ -151,10 +147,14 @@
         transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
     }
 
-    .widget-products li {
-        background: #f4f4f4;
+    .widget-products li:nth-child(odd) {
+        background: #f6f6f6;
     }
 
+    .widget-products li:nth-child(even) {
+        background: #fff;
+    } 
+    
     .widget-products {
         list-style: none;
         margin: 0;
@@ -167,83 +167,55 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-    }
-
-    .widget-users li {
+    } .widget-users li {
         border-bottom: 1px solid #ebebeb;
         padding: 15px 0;
         height: 96px;
-    }
-
-    .label {
+    } .label {
         border-radius: 3px;
         font-size: 0.875em;
         font-weight: 600;
-    }
-
-    .widget-users li > .details > .time {
+    } .widget-users li > .details > .time {
         color: #3498db;
         font-size: 0.75em;
         padding-bottom: 7px;
-    }
-
-    .widget-users li > .details > .name > a {
+    } .widget-users li > .details > .name > a {
         color: #344644;
-    }
-
-    .widget-users li > .details > .name {
+    } .widget-users li > .details > .name {
         font-weight: 600;
-    }
-
-    .widget-users li > .details {
+    } .widget-users li > .details {
         margin-left: 60px;
-    }
-
-    .widget-users li > .img {
+    } .widget-users li > .img {
         float: left;
         margin-top: 8px;
         width: 50px;
         height: 50px;
         overflow: hidden;
         border-radius: 50%;
-    }
-
-    .widget-users {
+    } .widget-users {
         list-style: none;
         margin: 0;
         padding: 0;
-    }
-
-    .tabs-wrapper.tabs-no-header .tab-content {
+    } .tabs-wrapper.tabs-no-header .tab-content {
         padding: 0 20px 20px;
-    }
-
-    .nav-tabs > li > a {
+    } .nav-tabs > li > a {
         border-radius: 0;
         font-size: 1.125em;
         font-weight: 300;
         outline: none;
         color: #555;
         margin-right: 3px;
-    }
-
-    .nav > li {
+    } .nav > li {
         float: left;
-    }
-
-    .tabs-wrapper .nav-tabs {
+    } .tabs-wrapper .nav-tabs {
         margin-bottom: 15px;
-    }
-
-    .nav-tabs {
+    } .nav-tabs {
         background: #d0d8de;
         border-color: transparent;
         -moz-border-radius: 3px 3px 0 0;
         -webkit-border-radius: 3px 3px 0 0;
         border-radius: 3px 3px 0 0;
-    }
-
-    .main-box {
+    } .main-box {
         background: #FFFFFF;
         -webkit-box-shadow: 1px 1px 2px 0 #CCCCCC;
         -moz-box-shadow: 1px 1px 2px 0 #CCCCCC;
@@ -254,10 +226,7 @@
         -webikt-border-radius: 3px;
         -moz-border-radius: 3px;
         border-radius: 3px;
-    }
-
-
-    .bottmsectop {
+    } .bottmsectop {
         background: rgba(18, 142, 206, 0.65);
         color: #fff;
         width: 100%;
@@ -265,30 +234,21 @@
         bottom: 0;
         left: 0px;
         right: 0px;
-    }
-
-
-    .searchtable {
+    } .searchtable {
         margin: 0 auto;
         margin-top: 5px;
         margin-bottom: 5px;
         width: 100%;
-    }
-
-    .searchlist {
+    } .searchlist {
         top: initial;
         /*bottom: 100%;*/
-    }
-
-    .transparentBtn {
-        background: transparent;
-        border: 2px solid white;
-        color: white !important;
+    } .transparentBtn {
+        background: #0083C7;
+        border: 2px solid #ebebeb;
+        color: #fff !important;
         margin-top: 0px;
         margin-left: 5px;
-    }
-
-    .text {
+    } .text {
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-inline-box;
@@ -297,18 +257,12 @@
         word-break: break-all;
         margin-bottom: 0;
         line-height: 1.3;
-    }
-
-    h5.list-group-item-heading {
+    } h5.list-group-item-heading {
         font-size: 14px !important;
         text-transform: uppercase;
-    }
-
-    .list-group-item-heading .pull-right {
+    } .list-group-item-heading .pull-right {
         font-size: 13px !important;
-    }
-
-    .list-group-item-heading {
+    } .list-group-item-heading {
         margin-bottom: 0px;
         line-height: 20px !important;
         font-size: 14px !important;
@@ -316,19 +270,11 @@
         color: #333;
         padding-bottom: 3px;
         font-family: Verdana;
-    }
-
-    .list-group-item-text {
+    } .list-group-item-text {
         font-size: 12px;
-    }
-
-    .text {
+    } .text {
         font-size: 12px;
-    }
-
-
-
-    #btnClearSearch {
+    } #btnClearSearch {
         color: #BE0D2F;
         background: #eaeaea;
         padding: 7px;
@@ -338,21 +284,15 @@
         margin-top: -37px;
         right: -2px;
         font-size: 22px;
-    }
-
-    .img img {
+    } .img img {
         height: 63px;
         width: 63px;
         border: 3px solid #ccc;
         border-radius: 100%;
-    }
-
-    .cd-top.cd-is-visible {
+    } .cd-top.cd-is-visible {
         visibility: visible;
         opacity: 1;
-    }
-
-    .cd-top {
+    } .cd-top {
         height: 47px;
         width: 47px;
         color: #fff !important;
@@ -592,6 +532,22 @@
     .bgm-red {
         background: #f44336;
     }
+
+    .container {
+        margin-left: 0px;
+        margin-right: 0px;
+        width: 100%;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .page-header {
+        color: #000;
+    }
+
+    body {
+        background: #fff;
+    }
 </style>
 
 <div class="topheader">
@@ -627,6 +583,8 @@
         </div>
 
     </div>
+
+ 
 </div>
 
 <div>
@@ -637,10 +595,10 @@
 <div style="margin-top:12px;" class="page-header">
 
 
-    <div style="padding-left:0px;" class="col-xs-5">
+    <div style="padding-left:9px;" class="col-xs-5">
         <h4 style="margin-top:0px; font-size:16px;">Inventory Items </h4>
     </div>
-    <div style="padding-right:0px; text-align:right" class="col-xs-7">
+    <div style="padding-right:8px; text-align:right" class="col-xs-7">
         <p style="font-size:13px;">{{currentrecord}} of {{totalrecords}} records shown</p>
     </div>
 </div>
@@ -848,9 +806,9 @@
         <ul class="animated transactionbody selectAction" >
             <li class="bottomlink" ng-click="GoToNextMobile(1)"> <span>Increase</span> <a style="background-color: #177B3D;" class="btn-success btn decrease" data-dismiss="modal"> <i class="fa fa-plus"></i> </a></li>
             <li class="bottomlink" ng-click="GoToNextMobile(-1)"> <span>Decrease</span> <a style="background-color: #AF2525;" class="btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-minus-circle"></i> </a></li>
-            <li class="bottomlink" ng-click="GoToNextMobile(0)"><span>Move</span><a style="background-color: #C65E28;" class="btn-warning btn decrease" data-dismiss="modal"> <i class="fa fa-exchange"></i>  </a></li>
-            <li class="bottomlink" ng-click="GoToNextMobile(2)"><span>Convert</span><a style="background-color: #CE59A1" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-refresh"></i>  </a></li>
-            <li class="bottomlink" ng-click="GoToNextMobile(3)"><span>Update</span><a style=" background-color: #583782" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-pencil"></i>  </a></li>
+            <li class="bottomlink"><span>Move</span><a style="background-color: #C65E28;" class="btn-warning btn decrease" data-dismiss="modal"> <i class="fa fa-exchange"></i>  </a></li>
+            <li class="bottomlink"><span>Convert</span><a style="background-color: #CE59A1" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-refresh"></i>  </a></li>
+            <li class="bottomlink"><span>Update</span><a style=" background-color: #583782" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-pencil"></i>  </a></li>
             <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class="btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
             <li class="bottomlink" data-dismiss="modal" ng-click="DeselectAll()"><span>Deselect All</span><a class="btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-square-o"></i>  </a></li>
         </ul>
@@ -892,12 +850,12 @@
         var div_top = $('#sticky-anchor').offset().top;
         if (window_top > div_top + 22) {
             $('#sticky').addClass('stick');
-            $('.page-header').hide();
+            $('.page-header').fadeOut(1000);
 
 
         } else {
             $('#sticky').removeClass('stick');
-            $('.page-header').show();
+            $('.page-header').fadeIn(1000);
         }
     }
 

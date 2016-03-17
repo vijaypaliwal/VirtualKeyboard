@@ -29,7 +29,7 @@
     // the base DOM structure needed to create a modal
     var templates = {
         dialog:
-          "<div class='bootbox modal' tabindex='-1' role='dialog'>" +
+          "<div class='bootbox animated bounceIn modal' tabindex='-1' role='dialog'>" +
             "<div class='modal-dialog'>" +
               "<div class='modal-content'>" +
                 "<div class='modal-body'><div class='bootbox-body'></div></div>" +
@@ -43,7 +43,7 @@
         footer:
           "<div class='mybootboxbody'></div><div class='modal-footer'></div>",
         closeButton:
-          "<button type='button' class='bootbox-close-button close' data-dismiss='modal' aria-hidden='true'><i class='fa fa-times-circle'></i></button>",
+          "<button type='button' class='bootbox-close-button close' data-dismiss='modal' aria-hidden='true'></button>",
         form:
           "<form class='bootbox-form'></form>",
         inputs: {
@@ -597,10 +597,10 @@
             // can just become a template too
 
             if (button.label == "OK") {
-                buttonStr += "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'><i class='fa fa-check'></i>" + button.label + "</button>";
+                buttonStr += "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'>" + button.label + "</button>";
             }
             else if (button.label == "Cancel") {
-                buttonStr += "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'><i class='fa fa-times'></i>" + button.label + "</button>";
+                buttonStr += "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'>" + button.label + "</button>";
             }
             else {
 
