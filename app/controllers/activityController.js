@@ -749,9 +749,13 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     $scope.SubmitAllActivities = function () {
         debugger;
 
+        var _dateVal = $("#itUpdateDate").val();
+        if (_dateVal != null && _dateVal != undefined) {
+            _dateVal = $.trim(_dateVal);
+        }
         if (!$scope.ValidateObjectVM()) {
 
-            if (!CheckintoCustomData(0)) {
+            if (!CheckintoCustomData(0) && _dateVal != "") {
 
                 var authData = localStorageService.get('authorizationData');
                 if (authData) {
@@ -793,7 +797,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 });
             }
             else {
-                $scope.GoToStep($scope.CurrentCart.length,1);
+                $scope.GoToStep($scope.CurrentCart.length, 1);
                 $scope.ShowErrorMessage($scope.IssueType);
             }
         }
@@ -805,6 +809,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
 
     }
+
 
 
     $scope.GetObjIndex = function (CurrentActiveObject) {
@@ -860,7 +865,32 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
 
 
+    $scope.FillLineItem = function (LineItemIndex, fieldID, value, InventoryID) {
 
+        $scope.ActionLineItemData = value;
+        if ($scope.ActionLineItemData != "") {
+            var k = 0;
+            for (k = 0; k < $scope.CurrentCart.length; k++) {
+                $scope.CurrentCart[k].IsLineItemData[LineItemIndex].CfValue = $scope.ActionLineItemData;
+
+            }
+
+            var _idtoPass = "#lineitem_" + fieldID.toString() + "_" + InventoryID.toString();
+            $(_idtoPass).removeClass("rotateData");
+
+            $scope.CurrentLineItemIndex = -1;
+            $scope.CurrentInventoryId = -1;
+            log.success("Data updated successfully.");
+
+
+
+
+        }
+
+        else {
+            log.error("Please fill some value.");
+        }
+    }
 
 
     $scope.ShowErrorMessage = function (Option) {
