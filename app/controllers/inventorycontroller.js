@@ -271,9 +271,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
-    $scope.LocationSetItemData = function (obj) {
-
-
+    $scope.LocationSetItemData = function (obj)
+    {
 
         $scope.InventoryObject.Location = obj.LocationName;
 

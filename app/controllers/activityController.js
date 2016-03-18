@@ -12,6 +12,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     $scope.MyinventoryFields = [];
     $scope.IsSummary = false;
     $scope.CurrentStep = 0;
+    $scope.IsProcessing = false;
     var _AllowNegative = 'False';
     $scope.IssueType = 0;
     $scope.isLineItemColumnNames = [];
@@ -42,7 +43,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     }
 
-    init();
+
 
     $scope.OpenSummary = function () {
 
@@ -107,6 +108,154 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         }
 
     };
+
+    $scope.getstatus = function () {
+
+
+
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetStatus',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+
+
+
+                   $scope.StatusList = response.GetStatusResult.Payload;
+                   CheckScopeBeforeApply()
+               },
+               error: function (err) {
+
+
+                   log.error(err.Message);
+
+               }
+           });
+
+    }
+
+
+    $scope.locationlist = function (inventoryid, locationid) {
+
+
+
+
+        $scope.currentinventoryid = inventoryid
+
+        $scope.currentlocationid = locationid
+
+
+        $("#locationlistmodal").modal('show');
+        $scope.LocationSearchList = [];
+        $scope.SearchLocationValue = "";
+        $scope.isnolocationmsg = false
+
+    }
+
+    $scope.OnChangeLocationNameFunction = function () {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $scope.LocationSearching = true;
+        $.ajax({
+
+            type: "POST",
+            url: serviceBase + "SearchLocationAutoComplete",
+            contentType: 'application/json; charset=utf-8',
+
+            dataType: 'json',
+
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchLocationValue }),
+            error: function () {
+
+                $scope.LocationSearching = false;
+                log.error('There is a problem with the service!');
+            },
+
+            success: function (data) {
+
+
+
+                if (data.SearchLocationAutoCompleteResult != null && data.SearchLocationAutoCompleteResult.Payload != null) {
+                    $scope.LocationSearching = false;
+                    $scope.LocationSearchList = data.SearchLocationAutoCompleteResult.Payload;
+
+
+                    if ($scope.LocationSearchList.length == 0)
+                        $scope.isnolocationmsg = true
+                    else
+                        $scope.isnolocationmsg = false
+
+                    CheckScopeBeforeApply()
+
+                }
+
+
+
+            }
+        });
+    }
+
+
+    $scope.HighLightTerm = function (term, Text) {
+
+        var src_str = Text;
+        var term = term;
+        term = term.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
+        var pattern = new RegExp("(" + term + ")", "gi");
+
+        src_str = src_str.replace(pattern, "<mark>$1</mark>");
+        src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
+
+        return src_str;
+    }
+
+    $scope.LocationSetItemData = function (obj) {
+
+
+
+        var k = 0;
+
+        for (k = 0; k < $scope.CurrentCart.length; k++) {
+            if ($scope.CurrentCart[k].InventoryDataList.uId == $scope.currentinventoryid) {
+
+                if ($scope.CurrentCart[k].InventoryDataList.iLID !== obj.LocationID) {
+
+                    $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText = obj.LocationName;
+                    $scope.CurrentCart[k].MoveTransactionData.MoveToLocation = obj.LocationID;
+                    break;
+                }
+                else {
+                    $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText = "";
+                    $scope.CurrentCart[k].MoveTransactionData.MoveToLocation = "";
+                    log.error("Please select other location, you can't move item to same location.")
+                    break;
+                }
+            }
+
+        }
+
+
+        CheckScopeBeforeApply();;
+
+
+
+
+        $("#locationlistmodal").modal('hide');
+        CheckScopeBeforeApply()
+    }
 
 
 
@@ -184,6 +333,8 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         });
     }
 
+    init();
+
     function UpdateCartWithCustomFields() {
         var k = 0;
         var j = 0;
@@ -196,27 +347,68 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
 
         }
-        var i = 0;
-        for (i = 0; i < $scope.CurrentCart.length; i++) {
+        if ($scope.CurrentCart.length > 0) {
+            var i = 0;
+            for (i = 0; i < $scope.CurrentCart.length; i++) {
 
-            for (j = 0; j < _TempArray.length; j++) {
-                $scope.CurrentCart[i].IsLineItemData.push({
-                    cfdIsRequired: _TempArray[j].cfdIsRequired, cfdName: _TempArray[j].cfdName,
-                    cfdID: _TempArray[j].cfdID,
-                    InventoryID: $scope.CurrentCart[i].InventoryID,
-                    cfdCustomFieldType: _TempArray[j].cfdCustomFieldType,
-                    ColumnMap: _TempArray[j].ColumnMap,
-                    cfdDataType: _TempArray[j].cfdDataType,
-                    CfValue: _TempArray[j].cfdDefaultValue != null && $.trim(_TempArray[j].cfdDefaultValue) != "" ? _TempArray[j].cfdDefaultValue : "",
-                    cfdComboValues: _TempArray[j].cfdComboValues == null ? [] : _TempArray[j].cfdComboValues
-                });
+                for (j = 0; j < _TempArray.length; j++) {
+                    $scope.CurrentCart[i].IsLineItemData.push({
+                        cfdIsRequired: _TempArray[j].cfdIsRequired, cfdName: _TempArray[j].cfdName,
+                        cfdID: _TempArray[j].cfdID,
+                        InventoryID: $scope.CurrentCart[i].InventoryID,
+                        cfdCustomFieldType: _TempArray[j].cfdCustomFieldType,
+                        ColumnMap: _TempArray[j].ColumnMap,
+                        cfdDataType: _TempArray[j].cfdDataType,
+                        CfValue: _TempArray[j].cfdDefaultValue != null && $.trim(_TempArray[j].cfdDefaultValue) != "" ? _TempArray[j].cfdDefaultValue : "",
+                        cfdComboValues: _TempArray[j].cfdComboValues == null ? [] : _TempArray[j].cfdComboValues
+                    });
+                }
+
             }
-
         }
 
         CheckScopeBeforeApply();
 
         AssignFirstObject();
+    }
+
+    function GetMyInventoryColumns() {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'GetMyInventoryColumns',
+              contentType: 'application/json; charset=utf-8',
+
+              dataType: 'json',
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+              success: function (response) {
+
+
+                  // MY inventory column region
+                  var _TempArrayMyInventory = response.GetMyInventoryColumnsResult.Payload;
+
+                  for (var i = 0; i < _TempArrayMyInventory.length; i++) {
+                      var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
+                      _TempArrayMyInventory[i].ColumnName = _ColName[0];
+                      if (_TempArrayMyInventory[i].Show == "True") {
+                          $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
+                      }
+                  }
+                  CheckScopeBeforeApply()
+
+
+              },
+              error: function (err) {
+                  console.log(err);
+                  log.error("Error Occurred during operation");
+
+
+              }
+          });
     }
 
     function AssignFirstObject() {
@@ -319,6 +511,9 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         GetActionType(_CurrentAction);
         $scope.totalLength = $scope.CurrentCart.length + 2;
         GetCustomDataField(1);
+
+        $scope.getstatus()
+        GetMyInventoryColumns();
         CheckScopeBeforeApply();
 
 
@@ -334,7 +529,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $scope.CurrentOperation = "Decrease";
                 $scope.CurrentIcon = "fa-arrow-down";
                 $scope.CurrentHeaderText = "Take these items out of inventory.";
-            
+
                 break;
             case 0:
                 $scope.CurrentClass = "bgm-move";
@@ -430,7 +625,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.GoToStep = function (Index, _step) {
         var type = GetTypeByIndex();
-        debugger;
+
 
         _step = _step == null || _step == undefined ? 1 : _step;
         switch (_step) {
@@ -496,7 +691,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 break;
 
         }
-       
+
 
 
     }
@@ -537,7 +732,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                         $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.ActionQuantityValue;
                     }
 
-                    //   $("#mybutton_" + id).removeClass("rotateData")
+                    $("#mybutton_" + id).addClass("movepin")
 
                     log.success("Data updated successfully.");
                     //  $scope.NextClickNew(2);
@@ -563,7 +758,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                     }
                 }
 
-                //    $("#mybutton_" + id).removeClass("rotateData")
+                $("#mybutton_" + id).addClass("movepin")
 
                 log.success("Data updated successfully.");
                 CheckScopeBeforeApply();;
@@ -575,6 +770,203 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         }
 
     };
+
+
+    $scope.FillQuantityMove = function (value, id, type) {
+
+
+        var k = 0;
+
+        $scope.ActionQuantityValueMove = value;
+
+
+
+        switch (type) {
+            case 1:
+                if ($scope.ActionQuantityValueMove != "" && $scope.ActionQuantityValueMove != undefined) {
+
+                    for (k = 0; k < $scope.CurrentCart.length; k++) {
+                        $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.ActionQuantityValueMove;
+
+                    }
+                    $("#movebutton_" + id).addClass("movepin")
+                    log.success("Data updated successfully.");
+                    CheckScopeBeforeApply();;
+
+                }
+                else {
+                    toastr.error("Please input some valid value");
+                }
+
+                break;
+            case 2:
+
+                for (k = 0; k < $scope.CurrentCart.length; k++) {
+                    $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.CurrentCart[k].InventoryDataList.oquantity;
+                }
+
+                $("#movebutton_" + id).addClass("movepin")
+                CheckScopeBeforeApply();;
+                toastr.success("Data updated successfully.");
+
+                break;
+
+            default:
+
+        }
+
+
+
+
+
+    };
+
+
+    $scope.FillLocation = function (value, text, id) {
+
+
+        $scope.ToLocID = value;
+        if ($scope.ToLocID != 0) {
+            var k = 0;
+            for (k = 0; k < $scope.CurrentCart.length; k++) {
+                $scope.CurrentCart[k].MoveTransactionData.MoveToLocation = $scope.ToLocID;
+                $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText = text;
+            }
+
+
+            CheckScopeBeforeApply();;
+
+
+            $("#location_" + id).addClass("movepin")
+            log.success("Data updated successfully.");
+        }
+
+        else {
+            log.error("Please select some value.");
+        }
+    }
+
+
+    $scope.FillStatusLineItems2 = function (value, id) {
+
+        $scope.StatusToUpdateLoc = value == null ? "" : value;
+        $scope.StatusToUpdateLoc = $scope.StatusToUpdateLoc == 0 ? "" : $scope.StatusToUpdateLoc;
+
+        var k = 0;
+        for (k = 0; k < $scope.CurrentCart.length; k++) {
+            $scope.CurrentCart[k].MoveTransactionData.StatusToUpdate = $scope.StatusToUpdateLoc;
+
+        }
+        CheckScopeBeforeApply();;
+
+        $scope.CurrentLineItemIndex = -1;
+        $scope.CurrentInventoryId = -1;
+
+        $("#LineItems2_" + id).addClass("movepin")
+
+        toastr.success("Data updated successfully.");
+
+    }
+
+    $scope.FillUnitData = function (FieldName, value, myid) {
+        var k = 0;
+        value = value == null || value == undefined ? "" : value;
+        switch (FieldName) {
+            case "iReqValue":
+                $scope.UnitDataTag1 = value;
+
+                for (k = 0; k < $scope.CurrentCart.length; k++) {
+                    $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 = $scope.UnitDataTag1;
+
+                }
+                $("#unittag1_" + myid).addClass("movepin")
+
+                break;
+            case "iUnitTag2":
+                $scope.UnitDataTag2 = value;
+
+                for (k = 0; k < $scope.CurrentCart.length; k++) {
+                    $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 = $scope.UnitDataTag2;
+
+                }
+                $("#unittag2_" + myid).addClass("movepin")
+
+
+                break;
+            case "iUnitTag3":
+                $scope.UnitDataTag3 = value;
+
+                for (k = 0; k < $scope.CurrentCart.length; k++) {
+                    $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 = $scope.UnitDataTag3;
+
+                }
+                $("#unittag3_" + myid).addClass("movepin")
+
+
+                break;
+            case "iUnitNumber1":
+                $scope.UnitDataNumber1 = value;
+
+                for (k = 0; k < $scope.CurrentCart.length; k++) {
+                    $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 = $scope.UnitDataNumber1;
+
+                }
+                $("#unitnumber1_" + myid).addClass("movepin")
+
+                break;
+            case "iUnitNumber2":
+                $scope.UnitDataNumber2 = value;
+
+                for (k = 0; k < $scope.CurrentCart.length; k++) {
+                    $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 = $scope.UnitDataNumber2;
+
+                }
+                $("#unitnumber2_" + myid).addClass("movepin")
+
+                break;
+            case "iUnitDate2":
+                $scope.UnitDataDate2 = value;
+
+                for (k = 0; k < $scope.CurrentCart.length; k++) {
+                    $scope.CurrentCart[k].ApplyTransactionData.UnitDate2 = $scope.UnitDataDate2;
+
+                }
+
+                $("#unitdate2_" + myid).addClass("movepin")
+
+                break;
+            case "iUniqueDate":
+                $scope.UnitDataDate1 = value;
+
+                for (k = 0; k < $scope.CurrentCart.length; k++) {
+                    $scope.CurrentCart[k].ApplyTransactionData.UniqueDate = $scope.UnitDataDate1;
+
+                }
+                $("#unitdate_" + myid).addClass("movepin")
+
+                break;
+            default:
+
+        }
+
+        log.success("Data updated success fully");
+
+    }
+
+    $scope.GetColumnLabel = function (ColumnID) {
+        var j = 0;
+
+        var ColumnLabel = ColumnID;
+        for (j = 0; j < $scope.MyinventoryFields.length; j++) {
+            if ($scope.MyinventoryFields[j].ColumnName == ColumnID) {
+                ColumnLabel = $scope.MyinventoryFields[j].ColumnLabel
+                break;
+            }
+
+        }
+        return ColumnLabel;
+
+    }
 
     Date.prototype.toMSJSON = function () {
         var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
@@ -600,11 +992,11 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
 
 
-        debugger;
 
 
-        var wcfDateStr1 = dt1.toMSJSON();
-        var wcfDateStr2 = dt1.toMSJSON();
+
+        var wcfDateStr1 = null;
+        var wcfDateStr2 = null;
 
         var k = 0;
         var _myData = [];
@@ -659,24 +1051,23 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
             }
 
-            if ($scope.CurrentCart[k].ApplyTransactionData.UniqueDate != undefined) {
+            if ($scope.CurrentCart[k].ApplyTransactionData.UniqueDate != undefined && $scope.CurrentCart[k].ApplyTransactionData.UniqueDate != "") {
 
                 var dateVar = $scope.CurrentCart[k].ApplyTransactionData.UniqueDate;
-                var dsplit = dateVar.split("/");
+                var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
 
-                var d1 = new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
+                var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
 
                 var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate(), d1.getHours(), d1.getMinutes(), d1.getSeconds(), d1.getMilliseconds()))
 
                 wcfDateStr1 = d11.toMSJSON();
             }
-            if ($scope.CurrentCart[k].ApplyTransactionData.UnitDate2 != undefined) {
+            if ($scope.CurrentCart[k].ApplyTransactionData.UnitDate2 != undefined && $scope.CurrentCart[k].ApplyTransactionData.UnitDate2 != "") {
                 var dateVar = $scope.CurrentCart[k].ApplyTransactionData.UnitDate2;
-                var dsplit = dateVar.split("/");
-
-                var d2 = new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
+                var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
 
 
+                var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
 
                 var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate(), d2.getHours(), d2.getMinutes(), d2.getSeconds(), d2.getMilliseconds()))
 
@@ -719,7 +1110,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         var box = bootbox.confirm("You want to cancel this process ?", function (result) {
             if (result) {
 
-                debugger;
+
                 $scope.CurrentCart = [];
                 localStorageService.set("ActivityCart", "");
                 $location.path("/FindItems");
@@ -748,7 +1139,6 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     }
     $scope.SubmitAllActivities = function () {
         debugger;
-
         var _dateVal = $("#itUpdateDate").val();
         if (_dateVal != null && _dateVal != undefined) {
             _dateVal = $.trim(_dateVal);
@@ -761,6 +1151,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 if (authData) {
                     $scope.SecurityToken = authData.token;
                 }
+                $scope.IsProcessing = true;
 
                 var _mdata = BuildMultipleData();
 
@@ -775,8 +1166,8 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                     data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _mdata }),
                     success: function (response) {
 
-                        debugger;
 
+                        $scope.IsProcessing = false;
                         $scope.CurrentCart = [];
                         log.success("Activity performed successfully please, you are redirecting to inventory page.")
 
@@ -814,7 +1205,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.GetObjIndex = function (CurrentActiveObject) {
 
-        debugger;
+
         for (var i = 0; i < $scope.CurrentCart.length; i++) {
             if ($scope.CurrentCart[i].InventoryID == CurrentActiveObject.InventoryID) {
                 return i + 1;
@@ -825,7 +1216,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.DeleteItem = function (CurrentActiveObject) {
 
-        debugger;
+
 
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {

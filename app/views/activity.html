@@ -13,6 +13,11 @@
     }
 
 
+    .linkdisabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
     .bottomnavigator {
         position: fixed;
         width: 100%;
@@ -100,7 +105,17 @@
         background: #128ece;
         border-radius: 100%;
         color: #fff !important;
+        -ms-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
     }
+
+    .movepin {
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
 
     .pull-right > .dropdown-menu {
         right: 17px;
@@ -242,7 +257,7 @@
     }
 
         .tabmenu .active {
-            border-bottom: 3px solid #fff;
+            transition: all 1s;
         }
 
 
@@ -254,7 +269,99 @@
         }
 </style>
 
+<style>
+    #locationlistmodal {
+        background: #fff;
+        background-color: #fff;
+        width: 100%;
+        margin: 0 auto;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+    }
 
+        #locationlistmodal .modal-header {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 7px;
+        }
+
+        #locationlistmodal .modal-body {
+            overflow: auto;
+            min-height: 250px;
+            max-height: 500px;
+            padding: 7px;
+        }
+
+        #locationlistmodal .modal-header .close {
+            margin-top: 6px;
+            opacity: 1;
+        }
+    .searchresultlist {
+        padding-left: 0px;
+        border: 1px solid #eaeaea;
+    }
+
+
+        .searchresultlist li a {
+            color: #000;
+            padding-left: 10px;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .searchresultlist li {
+            list-style-type: none;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background: #fff;
+        }
+
+            .searchresultlist li:nth-child(odd) {
+                background: #eeeeee;
+            }
+
+            .searchresultlist li a .fa-angle-right {
+                position: absolute;
+                right: 32px;
+                font-size: 26px;
+            }
+</style>
+
+
+<style>
+
+
+    .tabmenu .col-xs-4, .innerSpan {
+        -webkit-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        position: relative;
+    }
+
+
+    .tabmenu .innerSpan {
+        position: absolute;
+        bottom: 2px;
+        display: block;
+        width: 33.33333333%;
+        height: 3px;
+        background: white;
+    }
+
+    .left0{
+        left:0%;
+    }
+
+    .left33 {
+        left: 33%;
+    }
+
+    .left66 {
+        left: 66%;
+    }
+</style>
 
 
 
@@ -266,7 +373,8 @@
         </div>
         <div class="col-md-4 col-xs-6">
             <div style="text-align:center">
-                <a>{{CurrentOperation}}</a>
+                <a ng-if="CurrentOperation!='Apply'">{{CurrentOperation}}</a>
+                <a ng-if="CurrentOperation=='Apply'">Tag</a>
             </div>
         </div>
         <div class="col-md-4 col-xs-3">
@@ -297,6 +405,10 @@
 
     </div>
 
+
+
+
+
     <div class="row tabmenu">
         <div class="col-xs-4" ng-click="GoToStep(0,2)" ng-class="{'active':CurrentStep<CurrentCart.length}">
             <a>Cart Item <span style="border-radius:100%; background:#fff; padding-left:5px; padding-right:5px; color:#333;">{{CurrentCart.length}}</span> </a>
@@ -308,7 +420,12 @@
             <a>Process</a>
         </div>
 
+        <span class="innerSpan" ng-class="{'left0' : CurrentStep<CurrentCart.length, 'left33' : CurrentStep==CurrentCart.length,'left66' : CurrentStep==CurrentCart.length+1}"></span>
+    
+
     </div>
+
+    
 </div>
 
 
@@ -317,6 +434,8 @@
 
 
 <div class="maincontent">
+
+
 
     <div ng-if="_IsLoading==true">
         <div class="modal-backdrop fade in"></div>
@@ -357,13 +476,129 @@
                 </div>
 
 
+                <div ng-if="CurrentOperation=='Move'">
+
+                    <div class="row">
+                        <div class="col-xs-8 col-md-8">
+
+
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <div class="input-group">
+
+                                    <div class="fg-line">
+
+                                        <input placeholder="Fill Quantity" type="number" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
+
+                                    </div>
+                                 
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                            <div ng-if="CurrentActiveObject.MoveTransactionData.ActionQuantity>CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
+                                <span ng-if="AllowNegative!=null && AllowNegative!='True'"> Quantity can't be greater than original quantity</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <div class="pull-right">
+
+                                <label>&nbsp;</label>
+                                <button data-toggle="dropdown" aria-expanded="false" id="movebutton_{{CurrentActiveObject.InventoryDataList.uId}}" type="button" class="btn rotateData btnPrimary btn-icon">
+                                    <i class="fa fa-thumb-tack"></i>
+                                </button>
+
+
+                                <ul class="dropdown-menu">
+                                    <li><a data-ng-click="FillQuantityMove(CurrentActiveObject.MoveTransactionData.ActionQuantity,CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
+                                    <li><a data-ng-click="FillQuantityMove(CurrentActiveObject.MoveTransactionData.ActionQuantity,CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-xs-8 col-md-8">
+
+                            <div class="form-group">
+                                <div class="fg-line">
+
+                                    <label>Location {{CurrentActiveObject.InventoryDataList.lLoc}}{{CurrentActiveObject.InventoryDataList.iLID}}</label>
+
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
+
+                                        <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID)"><i class="fa fa-search"></i></span>
+                                    </div>
+
+                                   
+
+                                    <span ng-if="CurrentActiveObject.MoveTransactionData.MoveToLocation==CurrentActiveObject.InventoryDataList.iLID" class="errorMessage">
+                                     Can't move to same location please update.
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-4 col-md-4">
+                            <div class="pull-right">
+                                <label>&nbsp;</label>
+                                <button id="location_{{CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click="FillLocation(CurrentActiveObject.MoveTransactionData.MoveToLocation,CurrentActiveObject.MoveTransactionData.MoveToLocationText,CurrentActiveObject.InventoryDataList.uId)">
+                                    <i class="fa fa-thumb-tack"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-8 col-md-8">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <div class="fg-line">
+                                    <div class="select">
+
+                                     
+
+                                        <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
+                                            <option value="">None</option>
+                                            <option ng-repeat="_optionValue in StatusList" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+
+                            <label>&nbsp;</label>
+
+                            <div class="pull-right">
+                                <button id="LineItems2_{{CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click="FillStatusLineItems2(CurrentActiveObject.MoveTransactionData.StatusToUpdate,CurrentActiveObject.InventoryDataList.uId)">
+                                    <i class="fa fa-thumb-tack"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+
+
                 <div class="row" ng-if=" CurrentOperation!='Convert' &&  CurrentOperation!='Move'">
                     <div class="col-xs-8 col-md-8">
 
                         <div class="form-group">
                             <label>Quantity</label>
                             <div class="fg-line">
-                                <input type="number" placeholder="Fill Quantity" ng-model=" CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
+                                <input type="number" placeholder="Fill Quantity" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
                             </div>
                         </div>
 
@@ -486,6 +721,184 @@
 
 
                 </div>
+
+                <div ng-if="CurrentOperation=='Apply'">
+
+                    <div class="row" ng-if=" IsMyInventoryColumns('iReqValue')==true">
+                        <div class="col-xs-8 col-md-8">
+                            <div class="form-group">
+                                <label>{{ GetColumnLabel('iReqValue')}}</label>
+                                <div class="fg-line">
+
+                                    <input type="text" class="form-control" placeholder="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
+
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <label>&nbsp;</label>
+                            <div class="pull-right">
+                                <button id="unittag1_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iReqValue', CurrentActiveObject.ApplyTransactionData.UnitTag1, CurrentActiveObject.InventoryDataList.uId)">
+                                    <i class="fa fa-thumb-tack"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row" ng-if=" IsMyInventoryColumns('iUnitTag2')==true">
+                        <div class="col-xs-8 col-md-8">
+                            <div class="form-group">
+                                <label>{{ GetColumnLabel('iUnitTag2')}}</label>
+                                <div class="fg-line">
+
+                                    <input type="text" class="form-control" placeholder="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <div class="pull-right">
+                                <label>&nbsp;</label>
+                                <button id="unittag2_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUnitTag2', CurrentActiveObject.ApplyTransactionData.UnitTag2,  CurrentActiveObject.InventoryDataList.uId)">
+                                    <i class="fa fa-thumb-tack"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" ng-if=" IsMyInventoryColumns('iUnitTag3')==true">
+                        <div class="col-xs-8 col-md-8">
+                            <div class="form-group">
+                                <label>{{ GetColumnLabel('iUnitTag3')}}</label>
+                                <div class="fg-line">
+
+                                    <input type="text" class="form-control" placeholder="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <div class="pull-right">
+                                <label>&nbsp;</label>
+                                <button id="unittag3_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUnitTag3', CurrentActiveObject.ApplyTransactionData.UnitTag3, CurrentActiveObject.InventoryDataList.uId)">
+                                    <i class="fa fa-thumb-tack"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row" ng-if=" IsMyInventoryColumns('iUniqueDate')==true">
+                        <div class="col-xs-8 col-md-8">
+                            <div class="form-group">
+                                <label>{{ GetColumnLabel('iUniqueDate')}}</label>
+                                <div class="fg-line">
+                                    <input type="date" class="form-control unitDatePicker" placeholder="{{ GetColumnLabel('iUniqueDate')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UniqueDate" />
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <div class="pull-right">
+                                <label>&nbsp;</label>
+                                <button id="unitdate_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUniqueDate', CurrentActiveObject.ApplyTransactionData.UniqueDate, CurrentActiveObject.InventoryDataList.uId)">
+                                    <i class="fa fa-thumb-tack"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row" ng-if=" IsMyInventoryColumns('iUnitDate2')==true">
+                        <div class="col-xs-8 col-md-8">
+                            <div class="form-group">
+                                <label>{{ GetColumnLabel('iUnitDate2')}}</label>
+                                <div class="fg-line">
+                                    <input type="date" class="form-control unitDatePicker" placeholder="{{ GetColumnLabel('iUnitDate2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitDate2" />
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <div class="pull-right">
+                                <label>&nbsp;</label>
+                                <button id="unitdate2_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUnitDate2', CurrentActiveObject.ApplyTransactionData.UnitDate2, CurrentActiveObject.InventoryDataList.uId)">
+                                    <i class="fa fa-thumb-tack"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row" ng-if=" IsMyInventoryColumns('iUnitNumber1')==true">
+                        <div class="col-xs-8 col-md-8">
+
+                            <div class="form-group">
+                                <label>{{ GetColumnLabel('iUnitNumber1')}}</label>
+                                <div class="fg-line">
+
+                                    <input type="number" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <div class="pull-right">
+                                <label>&nbsp;</label>
+                                <button id="unitnumber1_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUnitNumber1', CurrentActiveObject.ApplyTransactionData.UnitNumber1, CurrentActiveObject.InventoryDataList.uId)">
+                                    <i class="fa fa-thumb-tack"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row" ng-if=" IsMyInventoryColumns('iUnitNumber2')==true">
+                        <div class="col-xs-8 col-md-8">
+
+                            <div class="form-group">
+                                <label>{{ GetColumnLabel('iUnitNumber2')}}</label>
+                                <div class="fg-line">
+
+                                    <input type="number" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <div class="pull-right">
+                                <label>&nbsp;</label>
+                                <button id="unitnumber2_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUnitNumber2', CurrentActiveObject.ApplyTransactionData.UnitNumber2, CurrentActiveObject.InventoryDataList.uId)">
+                                    <i class="fa fa-thumb-tack"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
             <div class="swiper-slide  customActivityData" data-type="Cart" data-index="{{CurrentCart.length}}">
@@ -551,52 +964,93 @@
 
                 <div ng-if="IsSummary==false">
 
-                    <div class="row" ng-click="SubmitAllActivities()">
-                        <div class="col-xs-4">
-                            <a class="btn btn-success">
-                                <i class="fa fa-refresh"></i>
-                            </a>
-                        </div>
+                    <div ng-if="IsProcessing==false" style=" margin-left:0px; margin-right:0px;" class="row btn-success" ng-click="SubmitAllActivities()">
+
                         <div class="col-xs-8">
                             <h4>Process cart</h4>
                         </div>
+                        <div class="col-xs-4">
+                            <div style="text-align:right;">
+                                <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-refresh"></i>
+                            </div>
+
+
+                        </div>
+
+
                     </div>
 
-                    <div class="row" ng-click="OpenSummary()">
-                        <div class="col-xs-4">
-                            <a class="btn btn-info">
-                                <i class="fa fa-info-circle"></i>
-                            </a>
+                    <div ng-if="IsProcessing==true" style=" margin-left:0px; margin-right:0px;" class="row btn-success linkdisabled" ng-click="SubmitAllActivities()">
+
+                        <div class="col-xs-8">
+                            <h4>Process cart</h4>
                         </div>
+                        <div class="col-xs-4">
+                            <div style="text-align:right;">
+                                <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-spin fa-refresh"></i>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                    
+
+                    <br />
+
+                    <div style="margin-left:0px; margin-right:0px;" class="btn-info row" ng-click="OpenSummary()">
+
                         <div class="col-xs-8">
                             <h4>View summary</h4>
                         </div>
+
+                        <div class="col-xs-4">
+
+                            <div style="text-align:right">
+                                <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-info-circle"></i>
+                            </div>
+
+
+
+                        </div>
                     </div>
 
 
+                    <br />
 
 
+                    <div style="margin-left:0px; margin-right:0px;" ng-click="keepcart()" class="row btn-warning">
 
-                    <div ng-click="keepcart()" class="row">
-                        <div class="col-xs-4">
-                            <a class="btn btn-warning">
-                                <i class="fa fa-shopping-cart"></i>
-                            </a>
-                        </div>
                         <div class="col-xs-8">
                             <h4>Keep cart</h4>
                         </div>
+                        <div class="col-xs-4">
+                            <div style="text-align:right">
+                                <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-shopping-cart"></i>
+                            </div>
+
+
+
+                        </div>
                     </div>
 
-                    <div ng-click="cancel()" class="row">
-                        <div class="col-xs-4">
-                            <a class="btn btn-danger">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
+                    <br />
+
+                    <div style="margin-left:0px; margin-right:0px;" ng-click="cancel()" class="row btn-danger">
                         <div class="col-xs-8">
                             <h4>Cancel cart</h4>
                         </div>
+                        <div class="col-xs-4">
+
+                            <div style="text-align:right;">
+                                <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-times"></i>
+                            </div>
+
+
+
+                        </div>
+
                     </div>
 
                 </div>
@@ -770,7 +1224,8 @@
         </div>
         <div class="col-md-4 col-xs-6">
             <div style="text-align:center">
-                <a>{{CurrentOperation}}</a>
+                <a ng-if="CurrentOperation!='Apply'">{{CurrentOperation}}</a>
+                <a ng-if="CurrentOperation=='Apply'">Tag</a>
             </div>
         </div>
         <div class="col-md-4 col-xs-3">
@@ -779,6 +1234,49 @@
                 <a data-ng-click="GoToStep(CurrentStep-1,1)" ng-class="{'adisabled': CurrentCart.length==0|| CurrentActiveStep==3}" class=""> <i class="fa fa-long-arrow-right"></i></a>
             </div>
         </div>
+
+    </div>
+</div>
+
+<div id="locationlistmodal" class="modal animated bounceIn">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+        <h4>select Location <span style="font-size:11px;" ng-if="LocationSearchList.length > 0">{{LocationSearchList.length}} Location(s) found</span></h4>
+        <div class="form-group">
+
+            <div class="input-group">
+                <input style="height:47px;" type="text" id="searchlocation" placeholder="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
+                <span style="padding:0px;" class="input-group-addon last">
+                    <a class="btn btn-primary" ng-click="ScanLocationsearch()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div ng-if="LocationSearching==true">
+            <i class="fa fa-spin fa-spinner"></i> searching please wait..
+        </div>
+
+        <div ng-if="isnolocationmsg == true" class="noitem">
+            <div style="text-align: center; border: 1px solid #eeeeee;">
+                <h4 style="font-size:20px;"><i class="fa fa-frown-o"></i> We're sorry !</h4>
+                <h4 style="font-size:15px;">We can't find the location you're looking for</h4>
+                <h5>click to <span ng-click="filllocation()" style="cursor:pointer; color:#0083C7; font-size:20px;">{{SearchLocationValue}}</span>  for add in your list.</h5>
+            </div>
+        </div>
+
+        <ul class="searchresultlist" ng-if="LocationSearching==false">
+            <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList">
+                <a>
+                    <span ng-bind-html="HighLightTerm(SearchLocationValue,obj.LocationName)"></span>
+
+
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
 
     </div>
 </div>

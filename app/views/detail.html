@@ -19,14 +19,12 @@
 </style>
 
 <style>
-    #viewdata {
-        background: #128ECE;
-        width: 100%;
-        color: white;
-    }
+  
 
     .container{
         width:100% !important;
+        padding-left:0px;
+        padding-right:0px;
     }
 
 
@@ -562,8 +560,51 @@
     }
 </style>
 
+
+<style>
+    .bluearea {
+   
+        margin-top:-20px;
+        min-height:110px;
+        background: rgba(73,155,234,1);
+        background: -moz-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
+        background: -webkit-gradient(left top, right top, color-stop(0%, rgba(73,155,234,1)), color-stop(90%, rgba(22,85,157,0.94)), color-stop(97%, rgba(18,80,151,0.94)), color-stop(100%, rgba(32,124,229,0.94)));
+        background: -webkit-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
+        background: -o-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
+        background: -ms-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
+        background: linear-gradient(to right, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(41, 100, 169, 0.94) 97%, rgba(32,124,229,0.94) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5', GradientType=1 );
+    }
+
+    body
+    {
+        background:#fff;
+        font-family:Verdana;
+        text-align:center;
+    }
+
+    .bluearea img
+    {
+        height:100px;
+        width:100px;
+        border-radius:100%;
+        border:1px solid #ccc;
+    }
+
+    .bluearea .btn {
+        border-radius: 100%;
+        border: transparent;
+        height: 60px;
+        width: 60px;
+        font-size: 30px;
+        margin-top:28px;
+    }
+</style>
+
 <div style="top:0" class="topheader">
-    <div class="col-xs-3">
+
+   
+    <div style="text-align:left;" class="col-xs-3">
         <a href="#/mainmenu"><i class="fa fa-home"></i></a>
 
     </div>
@@ -602,76 +643,65 @@
 <div style="margin-top:45px;" class="animated slideInLeft">
 
     <div style="margin-top:58px;" ng-if="IsEditMode==true" class="page-header">
-        <h5>Edit inventory details</h5>
+        <h5 style="color:#000; padding-left:12px; text-align:left;">Edit inventory details</h5>
     </div>
 
     <div class="detailsection" ng-if="IsEditMode==false">
 
-        <a href="#/FindItems" style="width: 100%; border: none; text-align: !important; text-align: center; height: 45px; font-size: 21px; font-family: verdana" class="btn btn-default"> <i class="fa fa-arrow-left"></i> Back to List</a>
+        <div class="bluearea">
 
-        <div style="text-align: center;  width:100%; background: #D8D8D8">
-          <div style="max-width:220px; margin:0 auto;">
-          <img ng-if style="width:100%; max-height:200px;" src="img/_dummyImage.jpg" alt="Alternate Text" />
-          <img style="width: 100%; max-height: 200px;" id="Img_{{CurrentInventory.InventoryID}}" ng-if="CurrentInventory.ImagePath==''" src="img/default.png" alt="" />
-          <img style="width: 100%; max-height: 200px;" ng-if="CurrentInventory.ImagePath!=''" src="{{CurrentInventory.ImagePath}}" alt="" />
-          </div>
+            <div style="position:absolute; width:100%; margin-top:50px;">
+                <div class="col-xs-3">
+                    <a class="btn btn-danger" href="#/FindItems">
+                        <i class="fa fa-arrow-left"> </i>
+                    </a>
+                </div>
+                <div class="col-xs-6">
+                    <img id="Img_{{CurrentInventory.InventoryID}}" ng-if="CurrentInventory.ImagePath==''" src="img/default.png" alt="" />
+                    <img ng-if="CurrentInventory.ImagePath!=''" src="{{CurrentInventory.ImagePath}}" alt="" />
+                </div>
+                <div class="col-xs-3">
+                    <a class="btn btn-warning">
+                        <i class="fa fa-plus"> </i>
+                    </a>
+                </div>
+            </div>
+
+          
+            
+          
+
+         
+
         </div>
 
-
-
-
-        <a style="width: 100%; border: none; text-align: center; height: 45px; font-size: 21px; background-color: rgba(0, 0, 0, 0.18) !important;  font-family: monospace; " class="btn btn-primary">{{CurrentInventory.pPart}} </a>
-
-
-        <div style="background: #fff; padding: 15px; color: #333; font-family: monospace;">
-
-            <table class="table table-bordered">
-
-                <tr>
-
-                    <td>
-                        Quantity
-                    </td>
-                    <td>
-                        {{CurrentInventory.iQty}} {{CurrentInventory.uomUOM}}
-                    </td>
-
-                </tr>
-                <tr>
-
-                    <td>
-                        Status
-                    </td>
-                    <td>
-                        {{CurrentInventory.iStatusValue}}
-                    </td>
-
-                </tr>
-                <tr>
-
-                    <td>
-                        Location
-                    </td>
-                    <td>
-                        {{CurrentInventory.lLoc}}
-                    </td>
-
-                </tr>
-                <tr>
-
-                    <td>
-                        Description
-                    </td>
-                    <td>
-                        {{CurrentInventory.pDescription}}
-                    </td>
-                </tr>
-
-            </table>
+        <div>
+            <br /><br />
         </div>
+        <div style="text-align:center">
+            <h4> {{CurrentInventory.pPart}}</h4>
+            <a> {{CurrentInventory.pDescription}}</a> 
+
+          
+
+            <h5> {{CurrentInventory.iQty}} {{CurrentInventory.uomUOM}} Quantity availabel at   {{CurrentInventory.lLoc}} with {{CurrentInventory.iStatusValue}} Status</h5>
+          
+        </div>
+
+     
+
+     
+
+
+
+
+     
+
+
+       
     </div>
 
-    <div class="editsection maincontent" ng-if="IsEditMode==true">
+    <div style="text-align:left; color:#000; padding:10px;" class="editsection maincontent" ng-if="IsEditMode==true">
         <div class="form-group">
             <label>Item Name</label>
             <div class="input-group">
