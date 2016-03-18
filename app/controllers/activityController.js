@@ -529,7 +529,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $scope.CurrentOperation = "Decrease";
                 $scope.CurrentIcon = "fa-arrow-down";
                 $scope.CurrentHeaderText = "Take these items out of inventory.";
-                StatusBar.backgroundColorByHexString("#AF2525");
+              //  StatusBar.backgroundColorByHexString("#AF2525");
 
                 break;
             case 0:
@@ -538,7 +538,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $scope.CurrentOperation = "Move";
                 $scope.CurrentIcon = "fa-arrow-right";
                 $scope.CurrentHeaderText = "Move these items to a different location.";
-                StatusBar.backgroundColorByHexString("#C65E28");
+              //  StatusBar.backgroundColorByHexString("#C65E28");
                 break;
             case 1:
                 $scope.CurrentClass = "bgm-increase"
@@ -546,7 +546,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $scope.CurrentOperation = "Increase";
                 $scope.CurrentIcon = "fa-arrow-up";
                 $scope.CurrentHeaderText = "Put these items in inventory.";
-                StatusBar.backgroundColorByHexString("#177B3D");
+             //   StatusBar.backgroundColorByHexString("#177B3D");
                 break;
             case 2:
                 $scope.CurrentClass = "bgm-convert"
@@ -570,7 +570,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $scope.CurrentOperation = "Apply";
                 $scope.CurrentIcon = "fa-tag";
                 $scope.CurrentHeaderText = "Tag these items with information.";
-                StatusBar.backgroundColorByHexString("#0D190F");
+             //   StatusBar.backgroundColorByHexString("#0D190F");
                 break;
             default:
                 $scope.CurrentOperation = "";
