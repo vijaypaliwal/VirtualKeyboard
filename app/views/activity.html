@@ -12,8 +12,12 @@
         color:red;
     }
 
-
-    .linkdisabled {
+    .errorMessage
+    {
+        color:red;
+    }
+    
+     .linkdisabled {
         opacity: 0.7;
         cursor: not-allowed;
     }
@@ -530,7 +534,7 @@
                             <div class="form-group">
                                 <div class="fg-line">
 
-                                    <label>Location {{CurrentActiveObject.InventoryDataList.lLoc}}{{CurrentActiveObject.InventoryDataList.iLID}}</label>
+                                    <label>Location </label>
 
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
