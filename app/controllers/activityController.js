@@ -1707,7 +1707,27 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     }
 
+    $scope.ScanLocationsearch = function () {
+        $scope.SearchLocationValue = "";
+        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
+        scanner.scan(function (result) {
+
+            $scope.SearchLocationValue = result.text;
+
+            CheckScopeBeforeApply()
+
+            setTimeout(function () {
+                $scope.OnChangeLocationNameFunction();
+                CheckScopeBeforeApply()
+            }, 100);
+
+
+
+        }, function (error) {
+            log.error("Scanning failed: ", error);
+        });
+    }
 
 }]);
 

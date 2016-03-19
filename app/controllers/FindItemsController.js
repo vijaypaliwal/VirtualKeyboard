@@ -270,7 +270,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
             $(".Addbtn .fa").removeClass('rotate');
 
-            
+
         }
         else {
             $("#myModal2").modal('show');
@@ -593,7 +593,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
     $scope.AddToCart = function (obj) {
-        debugger;
+         
         if (_CanAct == 'True') {
 
 
@@ -656,10 +656,33 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         CheckScopeBeforeApply();
     }
 
+
+    $('#mycartModal').on('hidden.bs.modal', function () {
+        // do something…
+        $(".cartcrossicon").hide();
+        $(".cartcounter").show();
+
+
+    });
+    
+
+    $('#myModal2').on('shown.bs.modal', function () {
+        $(".Addbtn .fa").addClass('rotate');
+    });
+
+    $('#myModal2').on('hidden.bs.modal', function () {
+        $(".Addbtn .fa").removeClass('rotate');
+    });
+
+    $('#mycartModal').on('shown.bs.modal', function () {
+        // do something…
+        $(".cartcrossicon").show();
+        $(".cartcounter").hide();
+    });
     $scope.OpentransactionModal = function () {
 
 
-        debugger;
+         
 
 
         if (_TotalRecordsCurrent != 0) {
@@ -685,13 +708,13 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         }
 
 
-       
+
 
 
 
     }
     function addItemsToCart(object, IdToSave, originalID) {
-        debugger;
+         
         var isItemExist = true;
         var TempValue = 0;
         var _zeroCount = 0;
@@ -873,6 +896,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
             for (var i = 0; i < mainObjectToSend.length; i++) {
                 $scope.Cart.push({
                     InventoryID: mainObjectToSend[i].uId,
+                    IsLineItemData: [],
                     iCostPerItem: mainObjectToSend[i].iCostPerUnit,
                     ItemID: mainObjectToSend[i].pPart,
                     ActionPerformed: $scope.selectedAction,

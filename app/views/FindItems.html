@@ -609,6 +609,7 @@
     <div class="modal-backdrop fade in"></div>
     <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
         <img src="img/loader.gif" alt="Alternate Text" />
+
         <!--<i style="font-size: 100px; color: #0083C7; " class="fa fa-spin fa-spinner"></i>-->
     </div>
 </div>
@@ -805,7 +806,7 @@
             <li class="bottomlink" ng-click="GoToNextMobile(1)"> <span>Increase</span> <a style="background-color: #177B3D;" class="btn-success btn decrease" data-dismiss="modal"> <i class="fa fa-plus"></i> </a></li>
             <li class="bottomlink" ng-click="GoToNextMobile(-1)"> <span>Decrease</span> <a style="background-color: #AF2525;" class="btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-minus-circle"></i> </a></li>
             <li class="bottomlink" ng-click="GoToNextMobile(4)"><span>Tag</span><a style="background-color: #0D190F" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-tag"></i>  </a></li>
-            <li class="bottomlink"><span>Move</span><a style="background-color: #C65E28;" class="btn-warning btn decrease" data-dismiss="modal"> <i class="fa fa-exchange"></i>  </a></li>
+            <li class="bottomlink" ng-click="GoToNextMobile(0)"><span>Move</span><a style="background-color: #C65E28;" class="btn-warning btn decrease" data-dismiss="modal"> <i class="fa fa-exchange"></i>  </a></li>
             <li class="bottomlink"><span>Convert</span><a style="background-color: #CE59A1" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-refresh"></i>  </a></li>
             <li class="bottomlink"><span>Update</span><a style=" background-color: #583782" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-pencil"></i>  </a></li>
             <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class="btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
