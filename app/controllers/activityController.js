@@ -1476,17 +1476,25 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     }
     function CheckintoCustomData(CurrentIndex) {
         var _returnVar = false
-
+        var _tempArray = [];
         $.each($('.customActivityData input, select'), function () {
             var value = $.trim($(this).val());
             var cfdid = $(this).attr('cfd-id');
             if ((value == null || value == undefined || value == "") && (cfdid != undefined && cfdid != null)) {
-                _returnVar = CheckintoCustomFieldList(cfdid);
+                var _tempVar = CheckintoCustomFieldList(cfdid);
+                _tempArray.push(_tempVar);
+
             }
             else {
 
             }
         });
+        var i = 0;
+        for (var i = 0; i < _tempArray.length; i++) {
+            if (_tempArray[i] == true || _tempArray[i] == "true") {
+                _returnVar = true;
+            }
+        }
 
         return _returnVar;
 
