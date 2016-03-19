@@ -1513,7 +1513,13 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         }
         return false;
     }
+    $scope.logOut = function () {
 
+
+        authService.logOut();
+        $location.path('/login');
+        CheckScopeBeforeApply();
+    }
     $scope.changeNav = function () {
 
         //  $("#myform .swiper-slide input").removeAttr("autofocus");

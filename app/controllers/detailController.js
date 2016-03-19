@@ -12,6 +12,14 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
 
+
+    $scope.logOut = function () {
+
+
+        authService.logOut();
+        $location.path('/login');
+        CheckScopeBeforeApply();
+    }
     $scope.OpenmenuModal = function () {
 
         if ($("body").hasClass("modal-open")) {
