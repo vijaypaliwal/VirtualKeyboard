@@ -10,12 +10,16 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     $scope._IsLoading = true;
     $scope.totalLength = 0;
     $scope.MyinventoryFields = [];
+    $scope.UOMList = [];
     $scope.IsSummary = false;
     $scope.CurrentStep = 0;
     $scope.IsProcessing = false;
     var _AllowNegative = 'False';
     $scope.IssueType = 0;
     $scope.isLineItemColumnNames = [];
+
+    $scope.IsSingleMode = false;
+
     function CheckScopeBeforeApply() {
         if (!$scope.$$phase) {
             $scope.$apply();
@@ -43,7 +47,34 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     }
 
+    function getuom() {
 
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetUnitsOfMeasure',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+
+                   $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
+                   CheckScopeBeforeApply()
+               },
+               error: function (err) {
+
+                   log.error(err.Message);
+
+               }
+           });
+
+    }
 
     $scope.OpenSummary = function () {
 
@@ -70,7 +101,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                         $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.ActionQuantityValue;
                     }
 
-                    //   $("#mybutton_" + id).removeClass("rotateData")
+                    //   $("#mybutton_" + id).addClass("movepin")
 
                     toastr.success("Data updated successfully.");
                     //  $scope.NextClickNew(2);
@@ -96,7 +127,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                     }
                 }
 
-                //    $("#mybutton_" + id).removeClass("rotateData")
+                //    $("#mybutton_" + id).addClass("movepin")
 
                 toastr.success("Data updated successfully.");
                 CheckScopeBeforeApply();;
@@ -257,6 +288,122 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         CheckScopeBeforeApply()
     }
 
+    $scope.FillUOMLineItems = function (value, myid) {
+        $scope.ToUOMID = value;
+        if ($scope.ToUOMID != 0) {
+            var k = 0;
+            for (k = 0; k < $scope.CurrentCart.length; k++) {
+                $scope.CurrentCart[k].ConvertTransactionData.ToUOMID = $scope.ToUOMID;
+
+            }
+            $("#uom_" + myid).addClass("movepin")
+            CheckScopeBeforeApply();
+            $scope.CurrentLineItemIndex = -1;
+            $scope.CurrentInventoryId = -1;
+        }
+
+        else {
+            toastr.error("Please select some value.");
+        }
+    }
+
+    $scope.FillQuantityConvert = function (value, myid, type) {
+        var k = 0;
+       $scope.ActionQuantityValueConvert = value;
+       $scope.ActionQuantityOptionConvert = type;
+
+       switch ($scope.ActionQuantityOptionConvert) {
+            case 1:
+                if ($scope.ActionQuantityValueConvert != "" && $scope.ActionQuantityValueConvert != undefined) {
+
+                    for (k = 0; k < $scope.CurrentCart.length; k++) {
+                        $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity = $scope.ActionQuantityValueConvert;
+
+                    }
+                    $("#convertqty_" + myid).addClass("movepin")
+                }
+                else {
+                    toastr.error("Please input some valid value");
+                }
+                break;
+            case 2:
+                for (k = 0; k < $scope.CurrentCart.length; k++) {
+                    $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity = $scope.CurrentCart[k].InventoryDataList.oquantity;
+
+                }
+
+                $("#convertqty_" + myid).addClass("movepin")
+
+                break;
+
+            default:
+
+        }
+    };
+
+
+   $scope.FillQuantityToConvert = function (value, myid, Type) {
+       $scope.ActionQuantityValueToConvert = value;
+       var k = 0;
+       $scope.ActionQuantityOptionToConvert = Type;
+       switch ($scope.ActionQuantityOptionToConvert) {
+            case 1:
+                if ($scope.ActionQuantityValueToConvert != "" && $scope.ActionQuantityValueToConvert != undefined) {
+
+                    for (k = 0; k < $scope.CurrentCart.length; k++) {
+                        $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity = $scope.ActionQuantityValueToConvert;
+                    }
+
+                    $("#convertqty2_" + myid).addClass("movepin")
+                }
+                else {
+                    toastr.error("Please input some valid value");
+                }
+                break;
+            case 2:
+                for (k = 0; k < $scope.CurrentCart.length; k++) {
+                    $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity = $scope.CurrentCart[k].InventoryDataList.oquantity;
+                }
+                $("#convertqty2_" + myid).addClass("movepin")
+                break;
+            case 3:
+                if ($scope.ActionQuantityValueToConvert != "" && $scope.ActionQuantityValueToConvert != undefined) {
+                    if ($scope.ActionQuantityValueToConvert != 0) {
+                        for (k = 0; k < $scope.CurrentCart.length; k++) {
+
+                            $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity = $scope.CurrentCart[k].InventoryDataList.oquantity * $scope.ActionQuantityValueToConvert;
+                        }
+                        $("#convertqty2_" + myid).addClass("movepin")
+                    }
+                    else {
+                        toastr.error("Zero value is not allowed,please fill some different value as multiplier")
+                    }
+                }
+                else {
+                    toastr.error("Please input some valid value");
+                }
+                break;
+            case 4:
+                if ($scope.ActionQuantityValueToConvert != "" && $scope.ActionQuantityValueToConvert != undefined) {
+                    if ($scope.ActionQuantityValueToConvert != 0) {
+                        for (k = 0; k < $scope.CurrentCart.length; k++) {
+                            var _tempValue = parseInt($scope.CurrentCart[k].InventoryDataList.oquantity / $scope.ActionQuantityValueToConvert);
+                            $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity = _tempValue;
+                        }
+                        $("#convertqty2_" + myid).addClass("movepin")
+                    }
+                    else {
+                        toastr.error("Zero value is not allowed, please fill some different value as dividend")
+                    }
+                }
+                else {
+                    toastr.error("Please input some valid value");
+                }
+                break;
+            default:
+
+        }
+    };
 
 
     $scope.GetMyInventoryColumns = function () {
@@ -511,7 +658,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         GetActionType(_CurrentAction);
         $scope.totalLength = $scope.CurrentCart.length + 2;
         GetCustomDataField(1);
-
+        getuom();
         $scope.getstatus()
         GetMyInventoryColumns();
         CheckScopeBeforeApply();
@@ -527,7 +674,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $scope.CurrentOperation = "Decrease";
                 $scope.CurrentIcon = "fa-arrow-down";
                 $scope.CurrentHeaderText = "Take these items out of inventory.";
-               // StatusBar.backgroundColorByHexString("#AF2525");
+                // StatusBar.backgroundColorByHexString("#AF2525");
 
                 break;
             case 0:
@@ -536,7 +683,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $scope.CurrentOperation = "Move";
                 $scope.CurrentIcon = "fa-arrow-right";
                 $scope.CurrentHeaderText = "Move these items to a different location.";
-               // StatusBar.backgroundColorByHexString("#C65E28");
+                // StatusBar.backgroundColorByHexString("#C65E28");
                 break;
             case 1:
                 $scope.CurrentClass = "bgm-increase"
@@ -544,7 +691,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $scope.CurrentOperation = "Increase";
                 $scope.CurrentIcon = "fa-arrow-up";
                 $scope.CurrentHeaderText = "Put these items in inventory.";
-               // StatusBar.backgroundColorByHexString("#177B3D");
+                // StatusBar.backgroundColorByHexString("#177B3D");
                 break;
             case 2:
                 $scope.CurrentClass = "bgm-convert"
@@ -568,7 +715,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $scope.CurrentOperation = "Apply";
                 $scope.CurrentIcon = "fa-tag";
                 $scope.CurrentHeaderText = "Tag these items with information.";
-              //  StatusBar.backgroundColorByHexString("#0D190F");
+                //  StatusBar.backgroundColorByHexString("#0D190F");
                 break;
             default:
                 $scope.CurrentOperation = "";

@@ -7,6 +7,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     $scope.scannerText = "";
     $scope.SecurityToken = "";
     $scope.StatusList = [];
+    $scope.UOMSearching = false;
     $scope.CurrentActiveField = "";
     $scope.Totalslides = 0;
     $scope.InventoryObject = {
@@ -62,7 +63,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.isnoitemmsg = false;
     $scope.isnolocationmsg = false;
-
+    $scope.isnouommsg = false;
     $scope.slide = 1000;
 
 
@@ -109,7 +110,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     $scope.GetLastValueCustom = function (id, Type) {
-        debugger;
+         
 
 
         var field = "Inv_" + id;
@@ -151,7 +152,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     };
     $scope.GetLastValue = function (field, id) {
 
-        debugger;
+         
 
 
         var _value = "";
@@ -246,7 +247,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     }
 
+    $scope.filluom = function () {
 
+        $scope.InventoryObject.Uom = $scope.SearchUOMValue;
+        $("#uomlistmodal").modal('hide');
+        CheckScopeBeforeApply()
+
+    }
 
 
 
@@ -267,6 +274,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         $("#itemlistmodal").modal('hide');
 
         $("#locationlistmodal").modal('hide');
+        $("#uomlistmodal").modal('hide');
         CheckScopeBeforeApply()
     }
 
@@ -281,9 +289,71 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         $("#itemlistmodal").modal('hide');
 
         $("#locationlistmodal").modal('hide');
+        $("#uomlistmodal").modal('hide');
         CheckScopeBeforeApply()
     }
 
+    
+
+    $scope.UOMSetItemData = function (obj) {
+
+        $scope.InventoryObject.Uom = obj.UnitOfMeasureName;
+
+
+        $("#itemlistmodal").modal('hide');
+
+        $("#locationlistmodal").modal('hide');
+        $("#uomlistmodal").modal('hide');
+        CheckScopeBeforeApply()
+    }
+
+
+    $scope.OnChangeUOMFunction=function()
+    {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $scope.UOMSearching = true;
+
+        $.ajax({
+
+            type: "POST",
+            url: serviceBase + "SearchUOMAutoComplete",
+            contentType: 'application/json; charset=utf-8',
+
+            dataType: 'json',
+
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchUOMValue }),
+            error: function () {
+
+                $scope.UOMSearching = false;
+                log.error('There is a problem with the service!');
+            },
+
+            success: function (data) {
+
+                if (data.SearchUOMAutoCompleteResult != null && data.SearchUOMAutoCompleteResult.Payload != null) {
+                    $scope.UOMSearching = false;
+                    $scope.UOMSearchList = data.SearchUOMAutoCompleteResult.Payload;
+
+
+                    if ($scope.UOMSearchList.length == 0)
+                        $scope.isnouommsg = true
+                    else
+                        $scope.isnouommsg = false
+
+                    CheckScopeBeforeApply()
+
+                }
+
+
+
+            }
+        });
+    }
 
 
     $scope.OnChangeItemNameFunction = function () {
@@ -420,7 +490,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     }
     $scope.CheckRequiredField = function () {
-        if ($scope.InventoryObject.ItemID == "" || $scope.InventoryObject.Location == "" && $scope.InventoryObject.Uom == "") {
+        if ($scope.InventoryObject.ItemID == "" || $scope.InventoryObject.Location == "" || $scope.InventoryObject.Uom == "") {
             return true;
         }
 
@@ -558,6 +628,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     }
 
+    $scope.UOMlist = function () {
+
+        $("#itemlistmodal").modal('hide');
+        $("#locationlistmodal").modal('hide');
+        $("#uomlistmodal").modal('show');
+        $scope.UOMSearchList = [];
+        $scope.SearchUOMValue = "";
+        $scope.isnoUOMmsg = false
+
+
+    }
+    
     $scope.locationlist = function () {
 
         $("#itemlistmodal").modal('hide');
@@ -1313,9 +1395,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                 if ($(this).attr("data-column") == ColumnName) {
                     mySwiper.swipeTo($(this).index(), 1000, false);
 
-
+                    $scope.slide = $(this).index();
                     $scope.CurrentActiveField = ColumnName;
-
+                    CheckScopeBeforeApply();
                     return false;
                 }
 
@@ -1390,9 +1472,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
                 onSlideChangeEnd: function (swiperHere) {
 
-
+                     
                     $scope.slide = swiperHere.activeIndex;
-
+                  
                     $scope.Totalslides = swiperHere.slides.length - 1;
                     var _colName = $(".swiper-slide-active").attr("data-column");
                     $scope.CurrentActiveField = _colName != undefined && _colName != "" ? _colName : "";
@@ -1485,7 +1567,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $('.arrow-left').on('click', function (e) {
         e.preventDefault()
-
+         
         if ($scope.slide == 0 || $scope.slide == 1000)
         {
             showConfirmInventory();

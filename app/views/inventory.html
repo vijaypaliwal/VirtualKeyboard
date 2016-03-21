@@ -243,7 +243,35 @@
             opacity: 1;
         }
 </style>
+<style>
+    #uomlistmodal {
+        background: #fff;
+        background-color: #fff;
+        width: 100%;
+        margin: 0 auto;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+    }
 
+        #uomlistmodal .modal-header {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 7px;
+        }
+
+        #uomlistmodal .modal-body {
+            overflow: auto;
+            min-height: 250px;
+            max-height: 500px;
+            padding: 7px;
+        }
+
+        #uomlistmodal .modal-header .close {
+            margin-top: 6px;
+            opacity: 1;
+        }
+</style>
 <div class="topheader">
     <div class="col-xs-3">
         <a href="#/mainmenu"><i class="fa fa-home"></i></a>
@@ -457,11 +485,12 @@
                             <label>Select UOM <span>*</span></label>
                             <div class="input-group">
 
-                                <select class="form-control" ng-model="InventoryObject.Uom" selectpicker id="UOM" required="">
+                                <!--<select class="form-control" ng-model="InventoryObject.Uom" selectpicker id="UOM" required="">
                                     <option ng-repeat="_optionValue in UOMList" value="{{_optionValue.UnitOfMeasureName}}">{{_optionValue.UnitOfMeasureName}}</option>
-                                </select>
+                                </select>-->
 
-
+                                <input type="text" class="form-control" name="UOM" required ng-model="InventoryObject.Uom" id="UOM" />
+                                <span class="input-group-addon last" ng-click="UOMlist()"><i class="fa fa-search"></i></span>
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Uom','#UOM')"><i class="fa fa-refresh"></i></span>
                             </div>
                         </div>
@@ -886,14 +915,57 @@
         </div>
 
         <ul class="searchresultlist" ng-if="LocationSearching==false">
-            <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList"><a>
-            <span ng-bind-html="HighLightTerm(SearchLocationValue,obj.LocationName)"></span>
-                                                                                              
-                
-                <i class="fa fa-angle-right"></i></a></li>
+            <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList">
+                <a>
+                    <span ng-bind-html="HighLightTerm(SearchLocationValue,obj.LocationName)"></span>
+
+
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
         </ul>
 
     </div>
 </div>
 
 
+<div id="uomlistmodal" class="modal animated bounceIn">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+        <h4>select UOM <span style="font-size:11px;" ng-if="UOMSearchList.length > 0">{{UOMSearchList.length}} UOM(s) found</span></h4>
+        <div class="form-group">
+
+            <div class="input-group">
+                <input style="height:47px;" type="text" id="searchuom" placeholder="Type Keyword to find uom" ng-change="OnChangeUOMFunction()" class="form-control" ng-model="SearchUOMValue" required="" autofocus />
+              
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div ng-if="UOMSearching==true">
+            <i class="fa fa-spin fa-spinner"></i> searching please wait..
+        </div>
+
+        <div ng-if="isnouommsg == true" class="noitem">
+            <div style="text-align: center; border: 1px solid #eeeeee;">
+                <h4 style="font-size:20px;"><i class="fa fa-frown-o"></i> We're sorry !</h4>
+                <h4 style="font-size:15px;">We can't find the UOM you're looking for</h4>
+                <h5>click to <span ng-click="filluom()" style="cursor:pointer; color:#0083C7; font-size:20px;">{{SearchUOMValue}}</span>  for add in your list.</h5>
+            </div>
+        </div>
+
+        <ul class="searchresultlist" ng-if="UOMSearching==false">
+            <li ng-click="UOMSetItemData(obj)" ng-repeat="obj in UOMSearchList">
+                <a>
+                    <span ng-bind-html="HighLightTerm(SearchUOMValue,obj.UnitOfMeasureName)"></span>
+
+
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</div>

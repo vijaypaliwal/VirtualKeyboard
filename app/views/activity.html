@@ -903,6 +903,122 @@
 
                     </div>
                 </div>
+
+
+
+                <div ng-if="CurrentOperation=='Convert'">
+                    <div class="row">
+                        <div class="col-xs-8 col-md-8">
+                            <div class="form-group">
+                                <label>Quantity</label>
+
+                                <div class="input-group">
+                                    <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity=='' ||  CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity ?'has-error':''">
+
+                                        <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity" />
+
+                                    </div>
+
+                                    <span class="input-group-addon last"> {{ CurrentActiveObject.InventoryDataList.uomUOM}}</span>
+                                </div>
+                            </div>
+                            <div ng-if=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
+                                <span ng-if=" AllowNegative!=null &&  AllowNegative!='True'"> Quantity can't be greater than original quantity</span>
+
+                            </div>
+
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <div class="pull-right">
+
+                                <label>&nbsp;</label>
+
+                                <button data-toggle="dropdown" aria-expanded="false" id="convertqty_{{ CurrentActiveObject.InventoryDataList.uId}}" type="button" class="btn rotateData btnPrimary btn-icon">
+                                    <i class="fa fa-thumb-tack"></i>
+                                </button>
+
+
+                                <ul class="dropdown-menu">
+                                    <li><a data-ng-click=" FillQuantityConvert( CurrentActiveObject.ConvertTransactionData.ActionFromQuantity, CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
+                                    <li><a data-ng-click=" FillQuantityConvert( CurrentActiveObject.ConvertTransactionData.ActionFromQuantity, CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-xs-8 col-md-8">
+
+                            <div class="form-group">
+                                <label>New Quantity</label>
+                                <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity==''?'has-error':''">
+
+                                    <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity" />
+
+                                </div>
+                            </div>
+
+
+                            <div>
+
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <div class="pull-right">
+                                <label>&nbsp;</label>
+
+                                <button data-toggle="dropdown" aria-expanded="false" id="convertqty2_{{ CurrentActiveObject.InventoryDataList.uId}}" type="button" class="btn rotateData btnPrimary btn-icon">
+                                    <i class="fa fa-thumb-tack"></i>
+                                </button>
+
+
+                                <ul class="dropdown-menu">
+                                    <li><a data-ng-click=" FillQuantityToConvert( CurrentActiveObject.ConvertTransactionData.ActionToQuantity, CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
+                                    <li><a data-ng-click=" FillQuantityToConvert( CurrentActiveObject.ConvertTransactionData.ActionToQuantity, CurrentActiveObject.InventoryDataList.uId,3)"><i class="fa fa-check"></i> Multiply all by this quantity</a></li>
+                                    <li><a data-ng-click=" FillQuantityToConvert( CurrentActiveObject.ConvertTransactionData.ActionToQuantity, CurrentActiveObject.InventoryDataList.uId,4)"><i class="fa fa-check"></i> Divide quantities by this Quantity</a></li>
+                                    <li><a data-ng-click=" FillQuantityToConvert( CurrentActiveObject.ConvertTransactionData.ActionToQuantity, CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-xs-8 col-md-8">
+
+                            <div class="form-group">
+                                <label>New Unit of Measure</label>
+                                <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ToUOMID==''?'has-error':''">
+                                    <div class="select">
+                                        <select class="form-control" ng-model=" CurrentActiveObject.ConvertTransactionData.ToUOMID">
+                                            <option value="">None</option>
+                                            <option ng-repeat="_optionValue in  UOMList" value="{{_optionValue.UnitOfMeasureID}}">{{_optionValue.UnitOfMeasureName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                            <div class="pull-right">
+                                <label>&nbsp;</label>
+                                <button id="uom_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUOMLineItems( CurrentActiveObject.ConvertTransactionData.ToUOMID, CurrentActiveObject.InventoryDataList.uId)">
+                                    <i class="fa fa-thumb-tack"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
 
             <div class="swiper-slide  customActivityData" data-type="Activity" data-index="{{CurrentCart.length}}">
