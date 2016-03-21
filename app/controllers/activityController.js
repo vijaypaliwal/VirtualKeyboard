@@ -1226,8 +1226,8 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
             k = $scope.IsSingleMode == true ? _i : 0;
             var _TempQty = $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity;
-            var _TempStatus = $scope.CurrentCart[k].InventoryDataList.iStatusValue;
-            var _TempLocID = $scope.CurrentCart[k].InventoryDataList.iLID;
+            var _TempStatus = $scope.CurrentCart[_i].InventoryDataList.iStatusValue;
+            var _TempLocID = $scope.CurrentCart[_i].InventoryDataList.iLID;
             if ($scope.CurrentOperation == "Convert") {
                 _TempQty = $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity;
             }
@@ -1269,11 +1269,11 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 ToStatusValue: _TempStatus,
                 iQty: _TempQty == "" ? 0 : _TempQty,
                 ToUOMID: $scope.CurrentCart[k].ConvertTransactionData.ToUOMID,
-                InvID: $scope.CurrentCart[k].InventoryDataList.uId,
+                InvID: $scope.CurrentCart[_i].InventoryDataList.uId,
                 ToConvertedQty: $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" ? 0 : $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity,
-                UOMID: $scope.CurrentCart[k].InventoryDataList.iUOMID,
+                UOMID: $scope.CurrentCart[_i].InventoryDataList.iUOMID,
                 LocationID: _TempLocID == "" ? 0 : _TempLocID,
-                pID: $scope.CurrentCart[k].InventoryDataList.pID,
+                pID: $scope.CurrentCart[_i].InventoryDataList.pID,
                 iStatusValue: $scope.CurrentCart[k].UpdateTransactionData.StatusToUpdate,
                 UnitTag1: $scope.CurrentCart[k].ApplyTransactionData.UnitTag1,
                 UnitTag2: $scope.CurrentCart[k].ApplyTransactionData.UnitTag2,
@@ -1393,6 +1393,18 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     }
 
 
+
+    $scope.HasClassData=function(id)
+    {
+        id = "#" + id;
+        if($(id).hasClass("in"))
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     $scope.GetObjIndex = function (CurrentActiveObject) {
 
