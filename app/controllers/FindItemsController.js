@@ -927,7 +927,6 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
         console.log(localStorageService.get("ActivityCart"));
         $("#mycartModal").modal('hide');
-        log.success("Your cart has been updated successfully, now you are redirecting to activity page.");
         $location.path("/activity");
 
     }
