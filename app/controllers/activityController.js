@@ -101,11 +101,8 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                         $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.ActionQuantityValue;
                     }
 
-                    //   $("#mybutton_" + id).addClass("movepin")
 
-                    toastr.success("Data updated successfully.");
-                    //  $scope.NextClickNew(2);
-                    //  $scope.CurrentActiveObject = $scope.CurrentCart[0];
+                  
                     CheckScopeBeforeApply();;
                 }
                 else {
@@ -129,7 +126,6 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
                 //    $("#mybutton_" + id).addClass("movepin")
 
-                toastr.success("Data updated successfully.");
                 CheckScopeBeforeApply();;
 
                 break;
@@ -1737,7 +1733,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $(".swiper-slide-active input:first").focus();
                 $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
                 $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
-                SoftKeyboard.show();
+               // SoftKeyboard.show();
             }, 10);
         
         }
