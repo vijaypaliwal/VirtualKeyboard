@@ -20,7 +20,9 @@
     <link href="content/css/bootstrap-switch.css" rel="stylesheet" />
 
     <style>
-
+        [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x- ng-cloak {
+            display: none !important;
+        }
         .input-group
         {
             width:100%;
@@ -334,6 +336,29 @@
         }
     </style>
 
+    <style>
+        #mysmallModal {
+            top: 30%;
+            overflow: hidden;
+            left: 25%;
+            position: fixed;
+            z-index: 1050;
+            display:none;
+        }
+
+            #mysmallModal .modal-body {
+                background: #000;
+                opacity: 0.8;
+                text-align: center;
+                width: 150px;
+                padding: 20px !important;
+            }
+
+        .bgColorTransparent {
+            background-color: transparent !important;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -342,11 +367,29 @@
         <h3><i class="fa fa-exclamation-triangle"></i> No Internet Connection</h3>
         <p>Sorry, no internet connectivity detected. Please reconnect and try again.</p>
     </div>
+
+    <div class="bs-example-modal-sm" id="mysmallModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" >
+        <div class="modal-dialog modal-sm">
+
+
+
+
+            <div class="modal-body">
+                <i class="fa fa-check" style="font-size: 40px; color: #fafafa;"></i> <br />
+
+                <span style="font-size:30px;font-weight:300;color:#fafafa;" id="DataText">
+                    Saved
+
+                </span>
+
+            </div>
+        </div>
+    </div>
     <div class="container" id="viewdata">
         <div data-ng-view="">
         </div>
-    </div>
-
+      
+        </div>
     <!-- 3rd party libraries -->
     <script src="scripts/jquery-1.11.0.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
@@ -398,9 +441,30 @@
 
     <script>
 
+  
+   
 
-      
 
+        $("body").click(function () {
+            //hideSuccess();
+        });
+
+        function hideSuccess() {
+            $("#mysmallModal").hide('slow');
+        }
+
+        function ShowSuccess(Message)
+        {
+            Message = Message != null && Message != undefined ? Message : "Saved";
+            $("#mysmallModal").show('slow');
+            $('#DataText').html(Message);
+
+            setTimeout(function () {
+                //hideSuccess();
+            },3000)
+        }
+
+       
         var _CurrentUrl = "Login";
         var _isOpenBootbox = false;
         var recognition;
@@ -669,6 +733,8 @@
             pictureSource = navigator.camera.PictureSourceType;
             destinationType = navigator.camera.DestinationType;
 
+            InitializeModal();
+
    }
 
         function onOffline() {
@@ -683,6 +749,8 @@
 
     
     </script>
+
+
 
 </body>
 </html>
