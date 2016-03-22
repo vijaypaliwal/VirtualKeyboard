@@ -345,13 +345,14 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     $scope.GetProperIndex = function (Type) {
         var _index = 0;
 
+
         switch (Type) {
             case 1:
                 if ($scope.IsSingleMode == false) {
                     _index = 1;
                 }
                 else {
-                    _index = CurrentCart.length;
+                    _index = $scope.CurrentCart.length;
                 }
 
                 break;
@@ -360,7 +361,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                     _index = 2;
                 }
                 else {
-                    _index = CurrentCart.length + 1;
+                    _index = $scope.CurrentCart.length + 1;
                 }
                 break;
 
@@ -696,7 +697,9 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
         $scope._CurrentAction = _CurrentAction;
         GetActionType(_CurrentAction);
-        $scope.totalLength = $scope.CurrentCart.length + 2;
+
+
+        $scope.totalLength = $scope.IsSingleMode == true ? $scope.CurrentCart.length + 2 : 3;
         GetCustomDataField(1);
         getuom();
         $scope.getstatus()
@@ -782,8 +785,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
             onSlideChangeEnd: function (swiperHere) {
 
                 $scope.CurrentStep = swiperHere.activeIndex;
-                CheckScopeBeforeApply();
 
+                $scope.totalLength = $scope.IsSingleMode == true ? $scope.CurrentCart.length + 2 : 3;
+
+                CheckScopeBeforeApply();
                 $scope.changeNav();
 
 
@@ -814,7 +819,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.GoToStep = function (Index, _step) {
         var type = GetTypeByIndex();
-        debugger;
+         
 
         _step = _step == null || _step == undefined ? 1 : _step;
         switch (_step) {
@@ -826,10 +831,12 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                         if ($(this).attr("data-index") == Index) {
                             mySwiper.swipeTo($(this).index(), 1000, false);
 
+                            setTimeout(function () {
+                                $scope.CurrentStep = Index;
+                                CheckScopeBeforeApply();
+                            }, 0);
 
 
-                            $scope.CurrentStep = Index;
-                            CheckScopeBeforeApply();
 
                             return false;
                         }
@@ -846,9 +853,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                     if ($(this).attr("data-index") == Index) {
                         mySwiper.swipeTo($(this).index(), 1000, false);
 
-
-                        $scope.CurrentStep = Index;
-                        CheckScopeBeforeApply();
+                        setTimeout(function () {
+                            $scope.CurrentStep = Index;
+                            CheckScopeBeforeApply();
+                        }, 0);
 
                         return false;
                     }
@@ -864,9 +872,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                         if ($(this).attr("data-index") == Index) {
                             mySwiper.swipeTo($(this).index(), 1000, false);
 
-
-                            $scope.CurrentStep = Index;
-                            CheckScopeBeforeApply();
+                            setTimeout(function () {
+                                $scope.CurrentStep = Index;
+                                CheckScopeBeforeApply();
+                            }, 0);
 
                             return false;
                         }
@@ -1327,7 +1336,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         return false;
     }
     $scope.SubmitAllActivities = function () {
-        debugger;
+         
         var _dateVal = $("#itUpdateDate").val();
         if (_dateVal != null && _dateVal != undefined) {
             _dateVal = $.trim(_dateVal);
@@ -1369,7 +1378,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                         console.log(response);
                     },
                     error: function (err) {
-                        debugger;
+                         
                         log.error("Some error occurred");
                         console.log(err.responseText);
 
@@ -1394,11 +1403,9 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
 
 
-    $scope.HasClassData=function(id)
-    {
+    $scope.HasClassData = function (id) {
         id = "#" + id;
-        if($(id).hasClass("in"))
-        {
+        if ($(id).hasClass("in")) {
             return true;
         }
         else {
@@ -1722,15 +1729,19 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         CheckScopeBeforeApply();
     }
     $scope.changeNav = function () {
-
-        //  $("#myform .swiper-slide input").removeAttr("autofocus");
-        setTimeout(function () {
-            $(".swiper-slide-active input:first").focus();
-            $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
-            $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
-            SoftKeyboard.show();
-        },10);
+         
+        var _tempLength=$scope.totalLength-1;
+        if (_tempLength != $scope.CurrentStep) {
+            
+            setTimeout(function () {
+                $(".swiper-slide-active input:first").focus();
+                $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
+                $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
+                SoftKeyboard.show();
+            }, 10);
         
+        }
+
         //    CheckScopeBeforeApply()
 
     }
