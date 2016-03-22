@@ -1724,10 +1724,13 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     $scope.changeNav = function () {
 
         //  $("#myform .swiper-slide input").removeAttr("autofocus");
-        $(".swiper-slide-active input:first").focus();
-        $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
-        $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
-        SoftKeyboard.show();
+        setTimeout(function () {
+            $(".swiper-slide-active input:first").focus();
+            $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
+            $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
+            SoftKeyboard.show();
+        },10);
+        
         //    CheckScopeBeforeApply()
 
     }
