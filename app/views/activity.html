@@ -237,6 +237,9 @@
         margin-top: 85px;
     }
 
+    .bgm-purple {
+        background: #583782;
+    }
     .bgm-increase {
         background-color: #177B3D;
     }
@@ -370,6 +373,18 @@
     .left66 {
         left: 66%;
     }
+
+    .changebtn {
+        height: 60px;
+        width: 60px;
+        bottom: 75px;
+        position: fixed;
+        border-radius: 60px;
+        font-size: 25px;
+        right: 50px;
+        color:#fff !important;
+        z-index:1000;
+    }
 </style>
 
 <div ng-cloak>
@@ -466,22 +481,16 @@
 
         <div class="swiper-container" ng-if="_IsLoading==false">
 
-
-
-
-
             <div class="swiper-wrapper">
 
-                <div class="swiper-slide singleSlide" ng-if="IsSingleMode==false" data-type="Cart" data-index="0">
+                <div class="animated slideInDown swiper-slide singleSlide" ng-if="IsSingleMode==false" data-type="Cart" data-index="0">
 
                     <div class="row" style="margin-top:80px">
                         <div class="col-md-8 col-xs-8">
                             <h3>Related Data</h3>
                         </div>
 
-                        <div class="col-md-3 col-xs-3 ">
-                            <a ng-click="changeMode()" class="btn btn-info btn-sm"><i class="fa fa-exchange"></i></a>
-                        </div>
+                   
                         <div class="col-xs-12">
                             <hr style="margin-top:0px;" />
 
@@ -624,63 +633,7 @@
                         </div>
 
 
-                        <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" data-ng-repeat="_columns in isLineItemColumnNames">
 
-
-                            <div class="col-xs-12 col-md-12">
-                                <div class="form-group">
-                                    <label>{{_columns}} <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
-                                    <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'fg-line':''}}">
-
-                                        <input placeholder="fill {{_columns}}" type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-
-                                        <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="checkbox">
-                                            <div class="form-control FormControlType">
-
-                                                <label>
-                                                    <input type="checkbox" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue"><i class="input-helper"></i>
-                                                </label>
-                                            </div>
-
-                                        </div>
-
-                                        <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='combobox'">
-                                            <div class="fg-line">
-
-                                                <div class="select">
-                                                    <select class="form-control" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
-
-                                                        <option value="{{_optionValue}}" ng-repeat="_optionValue in CurrentActiveObject.IsLineItemData[$index].cfdComboValues track by $index">{{_optionValue}}</option>
-
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                        <input type="number" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                        <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                    </div>
-                                    <div>
-
-                                        <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)=='' " class="errorMessage">
-                                            {{CurrentActiveObject.IsLineItemData[$index].cfdName }} field is required.
-
-                                        </span>
-
-                                        <span ng-if="(CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime') && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)!='' && CheckProperDate(CurrentActiveObject.IsLineItemData[$index].CfValue)!=true" class="errorMessage">
-                                            {{CurrentActiveObject.IsLineItemData[$index].cfdName }} value is not a proper date, please fill correct date.
-
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
-                        </div>
 
                         <div ng-if="CurrentOperation=='Apply'">
 
@@ -888,6 +841,89 @@
 
 
                         </div>
+
+                        <div ng-if="CurrentOperation=='Update'">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>To Status</label>
+                                        <div class="fg-line">
+                                            <div class="select">
+
+
+                                                <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
+                                                    <option value="">None</option>
+                                                    <option ng-repeat="_optionValue in  StatusList" value="{{_optionValue}}">{{_optionValue}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" data-ng-repeat="_columns in isLineItemColumnNames">
+
+
+                            <div class="col-xs-12 col-md-12">
+                                <div class="form-group">
+                                    <label>{{_columns}} <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
+                                    <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'fg-line':''}}">
+
+                                        <input placeholder="fill {{_columns}}" type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+
+                                        <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="checkbox">
+                                            <div class="form-control FormControlType">
+
+                                                <label>
+                                                    <input type="checkbox" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue"><i class="input-helper"></i>
+                                                </label>
+                                            </div>
+
+                                        </div>
+
+                                        <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='combobox'">
+                                            <div class="fg-line">
+
+                                                <div class="select">
+                                                    <select class="form-control" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
+
+                                                        <option value="{{_optionValue}}" ng-repeat="_optionValue in CurrentActiveObject.IsLineItemData[$index].cfdComboValues track by $index">{{_optionValue}}</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                        <input type="number" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                        <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                    </div>
+                                    <div>
+
+                                        <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)=='' " class="errorMessage">
+                                            {{CurrentActiveObject.IsLineItemData[$index].cfdName }} field is required.
+
+                                        </span>
+
+                                        <span ng-if="(CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime') && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)!='' && CheckProperDate(CurrentActiveObject.IsLineItemData[$index].CfValue)!=true" class="errorMessage">
+                                            {{CurrentActiveObject.IsLineItemData[$index].cfdName }} value is not a proper date, please fill correct date.
+
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
                     </div>
 
 
@@ -931,7 +967,7 @@
 
 
                 </div>
-                <div class="swiper-slide" ng-if="IsSingleMode==true" data-type="Cart" ng-repeat="CurrentActiveObject in CurrentCart" data-index="{{$index}}">
+                <div class="animated slideInLeft swiper-slide" ng-if="IsSingleMode==true" data-type="Cart" ng-repeat="CurrentActiveObject in CurrentCart" data-index="{{$index}}">
                     <div class="iteminfopanel">
                         <div class="row">
                             <div class="col-md-1 col-xs-3">
@@ -949,9 +985,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3 col-xs-3">
-                                <a ng-click="changeMode()" class="btn btn-info btn-sm"><i class="fa fa-exchange"></i></a>
-                            </div>
+
                         </div>
                     </div>
 
@@ -1136,71 +1170,37 @@
                         </div>
                     </div>
 
+                    <div ng-if="CurrentOperation=='Update'">
+                        <div class="row">
+                            <div class="col-xs-8 col-md-8">
+                                <div class="form-group">
+                                    <label>To Status</label>
+                                    <div class="fg-line">
+                                        <div class="select">
 
-                    <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" data-ng-repeat="_columns in isLineItemColumnNames">
-
-
-                        <div class="col-xs-8 col-md-8">
-                            <div class="form-group">
-                                <label>{{_columns}} <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
-                                <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'fg-line':''}}">
-
-                                    <input placeholder="fill {{_columns}}" type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-
-                                    <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="checkbox">
-                                        <div class="form-control FormControlType">
-
-                                            <label>
-                                                <input type="checkbox" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue"><i class="input-helper"></i>
-                                            </label>
+                                            <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
+                                                <option value="">None</option>
+                                                <option ng-repeat="_optionValue in StatusList" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
+                                            </select>
                                         </div>
-
                                     </div>
 
-                                    <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='combobox'">
-                                        <div class="fg-line">
-
-                                            <div class="select">
-                                                <select class="form-control" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
-
-                                                    <option value="{{_optionValue}}" ng-repeat="_optionValue in CurrentActiveObject.IsLineItemData[$index].cfdComboValues track by $index">{{_optionValue}}</option>
-
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                    <input type="number" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                    <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                 </div>
-                                <div>
 
-                                    <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)=='' " class="errorMessage">
-                                        {{CurrentActiveObject.IsLineItemData[$index].cfdName }} field is required.
 
-                                    </span>
-
-                                    <span ng-if="(CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime') && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)!='' && CheckProperDate(CurrentActiveObject.IsLineItemData[$index].CfValue)!=true" class="errorMessage">
-                                        {{CurrentActiveObject.IsLineItemData[$index].cfdName }} value is not a proper date, please fill correct date.
-
-                                    </span>
+                            </div>
+                            <div class="col-xs-4 col-md-4">
+                                <div class="pull-right">
+                                    <label>&nbsp;</label>
+                                    <button id="status_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click="FillStatusLineItems(CurrentActiveObject.UpdateTransactionData.StatusToUpdate, CurrentActiveObject.InventoryDataList.uId)">
+                                        <i class="fa fa-thumb-tack"></i>
+                                    </button>
                                 </div>
                             </div>
+
                         </div>
-
-
-                        <div class="col-xs-4 col-md-4">
-                            <div class="pull-right">
-                                <label>&nbsp;</label>
-                                <button id="lineitem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}_{{CurrentActiveObject.IsLineItemData[$index].InventoryID}}" class="btn rotateData btnPrimary btn-icon" data-ng-click="FillLineItem($index,CurrentActiveObject.IsLineItemData[$index].cfdID,CurrentActiveObject.IsLineItemData[$index].CfValue,CurrentActiveObject.IsLineItemData[$index].InventoryID)">
-                                    <i class="fa fa-thumb-tack"></i>
-                                </button>
-                            </div>
-                        </div>
-
-
                     </div>
+
 
                     <div ng-if="CurrentOperation=='Apply'">
 
@@ -1490,6 +1490,71 @@
                                         <i class="fa fa-thumb-tack"></i>
                                     </button>
                                 </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" data-ng-repeat="_columns in isLineItemColumnNames">
+
+
+                        <div class="col-xs-8 col-md-8">
+                            <div class="form-group">
+                                <label>{{_columns}} <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
+                                <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'fg-line':''}}">
+
+                                    <input placeholder="fill {{_columns}}" type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+
+                                    <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="checkbox">
+                                        <div class="form-control FormControlType">
+
+                                            <label>
+                                                <input type="checkbox" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue"><i class="input-helper"></i>
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+                                    <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='combobox'">
+                                        <div class="fg-line">
+
+                                            <div class="select">
+                                                <select class="form-control" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
+
+                                                    <option value="{{_optionValue}}" ng-repeat="_optionValue in CurrentActiveObject.IsLineItemData[$index].cfdComboValues track by $index">{{_optionValue}}</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                    <input type="number" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                    <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                </div>
+                                <div>
+
+                                    <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)=='' " class="errorMessage">
+                                        {{CurrentActiveObject.IsLineItemData[$index].cfdName }} field is required.
+
+                                    </span>
+
+                                    <span ng-if="(CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime') && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)!='' && CheckProperDate(CurrentActiveObject.IsLineItemData[$index].CfValue)!=true" class="errorMessage">
+                                        {{CurrentActiveObject.IsLineItemData[$index].cfdName }} value is not a proper date, please fill correct date.
+
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xs-4 col-md-4">
+                            <div class="pull-right">
+                                <label>&nbsp;</label>
+                                <button id="lineitem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}_{{CurrentActiveObject.IsLineItemData[$index].InventoryID}}" class="btn rotateData btnPrimary btn-icon" data-ng-click="FillLineItem($index,CurrentActiveObject.IsLineItemData[$index].cfdID,CurrentActiveObject.IsLineItemData[$index].CfValue,CurrentActiveObject.IsLineItemData[$index].InventoryID)">
+                                    <i class="fa fa-thumb-tack"></i>
+                                </button>
                             </div>
                         </div>
 
@@ -1911,6 +1976,8 @@
         </div>
     </div>
 
+
+    <a ng-click="changeMode()" class="btn {{CurrentHeaderClass}} btn-sm changebtn"><i class="fa fa-exchange"></i></a>
 
     </div>
 

@@ -1085,7 +1085,27 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         }
 
     }
+    $scope.FillStatusLineItems = function (value, myid) {
 
+        debugger;
+
+        $scope.StatusToUpdate = value == null ? "" : value;
+        $scope.StatusToUpdate = $scope.StatusToUpdate == 0 ? "" : $scope.StatusToUpdate;
+
+        var k = 0;
+        for (k = 0; k < $scope.CurrentCart.length; k++) {
+            $scope.CurrentCart[k].UpdateTransactionData.StatusToUpdate = $scope.StatusToUpdate;
+
+        }
+
+        CheckScopeBeforeApply();;
+        $scope.CurrentLineItemIndex = -1;
+        $scope.CurrentInventoryId = -1;
+
+        $("#status_" + myid).addClass("movepin")
+        ShowSuccess('Updated');
+
+    }
 
     $scope.FillStatusLineItems2 = function (value, id) {
 
