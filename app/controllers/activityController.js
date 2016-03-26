@@ -1823,7 +1823,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $(".swiper-slide-active input:first").focus();
                 $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
                 $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
-                SoftKeyboard.show();
+               
             }, 0);
 
         }
