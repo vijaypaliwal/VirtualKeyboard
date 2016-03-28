@@ -16,6 +16,8 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     $scope.IsProcessing = false;
     var _AllowNegative = 'False';
     $scope.IssueType = 0;
+    $scope.CollapsClass = "";
+    $scope.CollapsOpen = false;
     $scope.isLineItemColumnNames = [];
 
     $scope.IsSingleMode = true;
@@ -46,6 +48,9 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         $scope.$apply();
 
     }
+
+
+ 
 
     $scope.$watch('CurrentCart', function () {
         // do something here
@@ -409,6 +414,25 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
             InitializeSwiper();
 
             $scope.GoToStep(0, 2);
+            $(".panel-title").click(function () {
+
+                if ($("#collapseTwo").hasClass("in")) {
+                    $(this).find("a").css("color", "inherit");
+                    $scope.CollapsClass = "";
+                    $scope.CollapsOpen = false;
+                }
+                else {
+
+                    $(this).find("a").css("color", "white");
+                    $scope.CollapsClass = $scope.CurrentHeaderClass;
+                    $scope.CollapsOpen = true;
+
+                    
+                }
+
+                CheckScopeBeforeApply();
+
+            });
 
         }, 0);
         CheckScopeBeforeApply();

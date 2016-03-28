@@ -122,6 +122,19 @@
     .pull-right > .dropdown-menu {
         right: 17px;
     }
+
+    .panel-heading
+    {
+        padding-top:18px;
+        padding-bottom:18px;
+    }
+
+    .indicator
+    {
+        color:#fff;
+        margin-top:-7px;
+        font-size:32px;
+    }
 </style>
 
 <style>
@@ -223,12 +236,6 @@
 
 
 
-    .singleSlide .iteminfopanel {
-        margin-top: 10px !important;
-        margin-bottom: 5px !important;
-    }
-
-
     .customActivityData; {
         margin-top: 85px;
     }
@@ -238,30 +245,30 @@
     }
 
     .bgm-purple {
-        background: #583782;
+        background: #583782 !important;
     }
     .bgm-increase {
-        background-color: #177B3D;
+        background-color: #177B3D !important;
     }
 
     .bgm-move {
-        background-color: #C65E28;
+        background-color: #C65E28 !important;
     }
 
     .bgm-decrease {
-        background-color: #AF2525;
+        background-color: #AF2525 !important;
     }
 
     .bgm-convert {
-        background-color: #CE59A1;
+        background-color: #CE59A1 !important;
     }
 
     .bgm-status {
-        background-color: #583782;
+        background-color: #583782 !important;
     }
 
     .bgm-apply {
-        background-color: #0D190F;
+        background-color: #0D190F !important;
     }
 
     .tabmenu {
@@ -385,6 +392,23 @@
         color:#fff !important;
         z-index:1000;
     }
+    .panel-default > .panel-heading {
+        color: #333333;
+        background-color: #B7B5B5;
+        border-color: #dddddd;
+    }
+
+    .panel-collapse .iteminfopanel
+    {
+        margin-bottom:0px !important;
+        margin-top:0px !important;
+        border-bottom:1px solid #ccc;
+    }
+
+    .bootstrap-switch-container
+    {
+        min-width:135px;
+    }
 </style>
 
 <div ng-cloak>
@@ -485,7 +509,44 @@
 
                 <div class="animated slideInDown swiper-slide singleSlide" ng-if="IsSingleMode==false" data-type="Cart" data-index="0">
 
-                    <div class="row" style="margin-top:80px">
+
+                    <div style="margin-top:80px" class="panel-group" id="accordion">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading {{CollapsClass}}">
+                                <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo">
+                                    <a class="accordion-toggle" style="font-size:20px;" data-toggle="collapse" data-parent="#accordion" href="javascript:;" data-target="#collapseTwo">
+                                        Cart Items
+                                    </a><i ng-if="CollapsOpen==false"  class="indicator fa fa-plus-circle pull-right"></i><i ng-if="CollapsOpen==true" class="indicator fa fa-times-circle pull-right"></i>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse">
+                                <div class="iteminfopanel" ng-repeat="CurrentActiveObject in CurrentCart">
+                                    <div class="row">
+                                        <div class="col-md-1 col-xs-3">
+
+                                            <i ng-click="DeleteItem(CurrentActiveObject)" class="itemcheckicon fa fa-check"></i>
+
+                                            <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath==''" style="height:60px; width:60px; border:1px solid #ccc; border-radius:100%;" src="img/default.png" />
+                                            <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath!=''" style="height: 60px; width: 60px; border: 1px solid #ccc; border-radius: 100%;" src="{{CurrentActiveObject.InventoryDataList.ImageThumbPath}}" alt="" />
+                                        </div>
+                                        <div class="col-md-8 col-xs-9">
+                                            <div> <span style="font-size:18px;">{{CurrentActiveObject.InventoryDataList.oquantity}}  </span> <span> {{CurrentActiveObject.InventoryDataList.uomUOM }} </span>  of <span> {{CurrentActiveObject.InventoryDataList.pPart }}</span>  </div>
+                                            <div>  <span> {{CurrentActiveObject.InventoryDataList.pDescription }}  </span> </div>
+                                            <div>
+                                                {{CurrentActiveObject.InventoryDataList.lLoc }}    {{CurrentActiveObject.InventoryDataList.iStatusValue }}
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row" >
                         <div class="col-md-8 col-xs-8">
                             <h3>Related Data</h3>
                         </div>
@@ -853,7 +914,7 @@
 
                                                 <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
                                                     <option value="">None</option>
-                                                    <option ng-repeat="_optionValue in  StatusList" value="{{_optionValue}}">{{_optionValue}}</option>
+                                                    <option ng-repeat="_optionValue in StatusList" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -929,41 +990,7 @@
 
 
 
-                    <div class="panel-group" id="accordion">
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo">
-                                    <a class="accordion-toggle" style="font-size:20px;" data-toggle="collapse" data-parent="#accordion" href="javascript:;" data-target="#collapseTwo">
-                                        Cart Items
-                                    </a><span style="border-radius: 100%; background: #39b3d7; padding-left: 10px; padding-right: 10px; color: #fff; padding-top: 4px; padding-bottom: 4px; ">{{CurrentCart.length}}</span><i class="indicator fa pull-right" ng-class="{'fa-chevron-right' :HasClassData('collapseTwo')==false,'fa-chevron-down' : HasClassData('collapseTwo')==true}"></i>
-                                </h4>
-                            </div>
-                            <div id="collapseTwo" class="panel-collapse collapse">
-                                <div class="iteminfopanel" ng-repeat="CurrentActiveObject in CurrentCart">
-                                    <div class="row">
-                                        <div class="col-md-1 col-xs-3">
-
-                                            <i ng-click="DeleteItem(CurrentActiveObject)" class="itemcheckicon fa fa-check"></i>
-
-                                            <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath==''" style="height:60px; width:60px; border:1px solid #ccc;" src="img/default.png" />
-                                            <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath!=''" style="height:60px; width:60px; border:1px solid #ccc;" src="{{CurrentActiveObject.InventoryDataList.ImageThumbPath}}" alt="" />
-                                        </div>
-                                        <div class="col-md-8 col-xs-6">
-                                            <div> <span style="font-size:18px;">{{CurrentActiveObject.InventoryDataList.oquantity}}  </span> <span> {{CurrentActiveObject.InventoryDataList.uomUOM }} </span>  of <span> {{CurrentActiveObject.InventoryDataList.pPart }}</span>  </div>
-                                            <div>  <span> {{CurrentActiveObject.InventoryDataList.pDescription }}  </span> </div>
-                                            <div>
-                                                {{CurrentActiveObject.InventoryDataList.lLoc }}    {{CurrentActiveObject.InventoryDataList.iStatusValue }}
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                    
 
 
                 </div>
@@ -977,7 +1004,7 @@
                                 <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath==''" style="height:60px; width:60px; border:1px solid #ccc;" src="img/default.png" />
                                 <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath!=''" style="height:60px; width:60px; border:1px solid #ccc;" src="{{CurrentActiveObject.InventoryDataList.ImageThumbPath}}" alt="" />
                             </div>
-                            <div class="col-md-8 col-xs-6">
+                            <div class="col-md-8 col-xs-9">
                                 <div> <span style="font-size:18px;">{{CurrentActiveObject.InventoryDataList.oquantity}}  </span> <span> {{CurrentActiveObject.InventoryDataList.uomUOM }} </span>  of <span> {{CurrentActiveObject.InventoryDataList.pPart }}</span>  </div>
                                 <div>  <span> {{CurrentActiveObject.InventoryDataList.pDescription }}  </span> </div>
                                 <div>

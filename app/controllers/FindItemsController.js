@@ -250,12 +250,9 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     }
 
 
-
-
-
     $scope.SearchInventory = function () {
-
-        if ($('#MasterSearch').val() !== "") {
+        var _Value=$.trim($('#MasterSearch').val());
+        if (_Value !== "") {
             $scope.myinventoryColumnLoaded = false;
             CheckScopeBeforeApply();
             $scope.GetInventories();
@@ -578,8 +575,8 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
     $("#MasterSearch").keyup(function (e) {
-
-        if ($('#MasterSearch').val() !== "") {
+      var  _Value = $.trim($('#MasterSearch').val());
+      if (_Value !== "") {
 
             $('#btnMasterSearch').addClass('bgm-red')
         }
