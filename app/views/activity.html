@@ -494,8 +494,6 @@
 
     <div class="maincontent">
 
-
-
         <div ng-if="_IsLoading==true">
             <div class="modal-backdrop fade in"></div>
             <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
@@ -571,15 +569,13 @@
 
                                     <div class="form-group">
                                         <label>Quantity</label>
-                                        <div class="input-group">
 
-                                            <div class="fg-line">
-
-                                                <input placeholder="Fill Quantity" type="number" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
-
-                                            </div>
-
+                                        <div class="input-group"> 
+                                        <span class="input-group-addon"><i class="fa fa-plus" ng-click="IncreaseDecreaseValue(1,0)"></i></span> 
+                                            <input placeholder="Fill Quantity" type="number" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
+                                            <span class="input-group-addon" ng-click="IncreaseDecreaseValue(2,0)"><i class="fa fa-minus"></i></span> 
                                         </div>
+                                        
                                     </div>
 
 
@@ -652,10 +648,16 @@
                         <div class="row" ng-if=" CurrentOperation!='Convert' &&  CurrentOperation!='Move'">
                             <div class="col-xs-12 col-md-12">
 
+
+
+                              
                                 <div class="form-group">
                                     <label>Quantity</label>
-                                    <div class="fg-line">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-plus" ng-click="IncreaseDecreaseValue(1,0)"></i></span>
                                         <input type="number" placeholder="Fill Quantity" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
+
+                                        <span class="input-group-addon" ng-click="IncreaseDecreaseValue(2,0)"><i class="fa fa-minus"></i></span>
                                     </div>
                                 </div>
 
@@ -1055,7 +1057,7 @@
                                     </button>
 
 
-                                    <ul class="dropdown-menu">
+                                    <ul class="animated zoomIn dropdown-menu">
                                         <li><a data-ng-click="FillQuantityMove(CurrentActiveObject.MoveTransactionData.ActionQuantity,CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
                                         <li><a data-ng-click="FillQuantityMove(CurrentActiveObject.MoveTransactionData.ActionQuantity,CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
                                     </ul>
@@ -1164,7 +1166,7 @@
                                 </button>
 
 
-                                <ul class="dropdown-menu">
+                                <ul class="animated zoomIn dropdown-menu">
                                     <li><a data-ng-click=" FillQuantity( CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity, CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
                                     <li><a data-ng-click=" FillQuantity( CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity, CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
                                 </ul>
@@ -1441,7 +1443,7 @@
                                     </button>
 
 
-                                    <ul class="dropdown-menu">
+                                    <ul class="animated zoomIn dropdown-menu">
                                         <li><a data-ng-click=" FillQuantityConvert( CurrentActiveObject.ConvertTransactionData.ActionFromQuantity, CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
                                         <li><a data-ng-click=" FillQuantityConvert( CurrentActiveObject.ConvertTransactionData.ActionFromQuantity, CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
                                     </ul>
@@ -1478,7 +1480,7 @@
                                     </button>
 
 
-                                    <ul class="dropdown-menu">
+                                    <ul class="animated zoomIn dropdown-menu">
                                         <li><a data-ng-click=" FillQuantityToConvert( CurrentActiveObject.ConvertTransactionData.ActionToQuantity, CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
                                         <li><a data-ng-click=" FillQuantityToConvert( CurrentActiveObject.ConvertTransactionData.ActionToQuantity, CurrentActiveObject.InventoryDataList.uId,3)"><i class="fa fa-check"></i> Multiply all by this quantity</a></li>
                                         <li><a data-ng-click=" FillQuantityToConvert( CurrentActiveObject.ConvertTransactionData.ActionToQuantity, CurrentActiveObject.InventoryDataList.uId,4)"><i class="fa fa-check"></i> Divide quantities by this Quantity</a></li>
@@ -1901,6 +1903,7 @@
                                     </div>
                                     <div class="col-xs-4">
                                         <div style="text-align:right">
+                                            
                                             <img ng-if="_groupRow.InventoryDataList.ImageThumbPath==''" style="height:60px; width:60px; border:1px solid #ccc;" src="img/default.png" />
                                             <img ng-if="_groupRow.InventoryDataList.ImageThumbPath!=''" style="height:60px; width:60px; border:1px solid #ccc;" src="{{_groupRow.InventoryDataList.ImageThumbPath}}" alt="" />
                                         </div>
@@ -2007,4 +2010,14 @@
     <a ng-click="changeMode()" class="btn {{CurrentHeaderClass}} btn-sm changebtn"><i class="fa fa-exchange"></i></a>
 
     </div>
+
+
+<script>
+    $(init);
+
+    function init() {
+        $('.changebtn').draggable();
+        $('.changebtn').draggable();
+    }
+</script>
 

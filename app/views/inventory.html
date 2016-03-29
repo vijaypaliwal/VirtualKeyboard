@@ -4,6 +4,10 @@
         display: block !important;
     }
 
+    body {
+        background: #fff;
+    }
+
 
     #menu-toggle {
         display: block !important;
@@ -81,6 +85,12 @@
     .btn-block {
         height: 45px;
         padding-left: 16px;
+    }
+
+    .container {
+        width: 100%;
+        padding-left: 0px;
+        padding-right: 0px;
     }
 </style>
 
@@ -271,40 +281,68 @@
             margin-top: 6px;
             opacity: 1;
         }
+
+    .swiper-container table .ibtn {
+        border-radius: 100% !important;
+        padding: 0px;
+        height: 50px;
+        width: 50px;
+        line-height: 50px;
+        text-align: center;
+    }
+
+    .swiper-container table .dbtn {
+        border-radius: 100% !important;
+        padding: 0px;
+        height: 50px;
+        width: 50px;
+        line-height: 50px;
+        text-align: center;
+    }
+
+    .maincontent
+    {
+        padding-top:0px;
+        background:initial;
+    }
 </style>
-<div class="topheader">
-    <div class="col-xs-3">
-        <a href="#/mainmenu"><i class="fa fa-home"></i></a>
-
-    </div>
-    <div class="col-xs-6">
-        <img style="width:150px; margin-top:-2px;" src="img/logo.png" alt="Alternate Text" />
-    </div>
-    <div class="col-xs-3">
-        <div style="float:right;">
-            <div class="headerdropdown dropdown">
-                <a data-toggle="dropdown" aria-expanded="true">
-                    <img src="img/dummy-user48.png" alt="">
-                </a>
-                <ul class="dropdown-menu animated slideInDown">
+<div style="padding-left:9px; padding-right:9px; padding-top:2px; padding-bottom:2px; font-size:25px;" class="topheader">
 
 
-                    <li>
-                        <a><i class="fa fa-user"></i> My Profile</a>
-                    </li>
+    <table style="width:100%;">
+        <tr>
+            <td><a href="#/mainmenu"><i class="fa fa-long-arrow-left"></i></a></td>
+            <td><img style="width:40px; height:40px; border-radius:100%; border:1px solid #ccc;" src="img/dummy-user48.png" alt=""></td>
+            <td><img style="width:145px;" src="img/logo.png" alt="Alternate Text" /></td>
+            <td>
+                <div>
+                    <div class="headerdropdown dropdown">
+                        <a data-toggle="dropdown">
+                            <i style="font-size:25px;" class="fa fa-ellipsis-v"></i>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInX">
+
+
+                            <li>
+                                <a><i class="fa fa-user"></i> My Profile</a>
+                            </li>
 
 
 
 
-                    <li>
-                        <a ng-click="logOut()" title="Logout"><i class="fa fa-sign-out"></i> Log Out</a>
-                    </li>
-                </ul>
-            </div>
+                            <li>
+                                <a ng-click="logOut()" title="Logout"><i class="fa fa-sign-out"></i> Log Out</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
 
-        </div>
 
-    </div>
+
+
 </div>
 
 <div>
@@ -314,7 +352,7 @@
 
 <div class="page-header">
 
-    <h3>Add Inventory</h3>
+    <h4 style="font-size:16px; color:#000; padding-left:9px;">Add Inventory</h4>
 </div>
 
 <div class="maincontent animated slideInLeft">
@@ -329,8 +367,8 @@
                 <!--<i style="font-size: 100px; color: #0083C7;" class="fa fa-spin fa-spinner"></i>-->
             </div>
 
-            
-        
+
+
 
             <div style="display:none;" class="swiper-container">
 
@@ -360,7 +398,7 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                   
+
 
                                     <div class="row">
                                         <div class="col-xs-5">
@@ -374,39 +412,39 @@
 
 
                                         </div>
-                                        </div>
+                                    </div>
 
-                                        <div ng-if="InventoryObject.AutoID==false" class="input-group">
+                                    <div ng-if="InventoryObject.AutoID==false" class="input-group">
 
-                                            <div>
-
-
-
-
-                                                <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" />
-
-                                            </div>
+                                        <div>
 
 
 
-                                            <span class="input-group-addon last" ng-click="itemlist()"><i class="fa fa-search"></i></span>
-                                            <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemID','#ItemName')"><i class="fa fa-refresh"></i></span>
-                                        </div>
 
-
-                                        <div ng-if="InventoryObject.AutoID==true" class="input-group">
-
-                                            <div>
-                                                <input placeholder="Automated" type="text" ng-model="InventoryObject.ItemID" id="ItemName" disabled="disabled" class="form-control" />
-                                            </div>
+                                            <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" />
 
                                         </div>
 
+
+
+                                        <span class="input-group-addon last" ng-click="itemlist()"><i class="fa fa-search"></i></span>
+                                        <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemID','#ItemName')"><i class="fa fa-refresh"></i></span>
+                                    </div>
+
+
+                                    <div ng-if="InventoryObject.AutoID==true" class="input-group">
+
+                                        <div>
+                                            <input placeholder="Automated" type="text" ng-model="InventoryObject.ItemID" id="ItemName" disabled="disabled" class="form-control" />
+                                        </div>
 
                                     </div>
 
 
                                 </div>
+
+
+                            </div>
                         </div>
 
                         <div class="form-group" ng-if="obj.ColumnName=='pDescription'">
@@ -762,26 +800,48 @@
                 <table style="width:100%;">
                     <tr>
                         <td>
-                            <button type="button" class="btn btn-primary arrow-left"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;Back</button>
+                            <button type="button" class="btn btn-primary arrow-left"><i class="fa fa-angle-left"></i></button>
                         </td>
 
-                        <td ng-if="CurrentActiveField=='iQty'"><button ng-click="UpDownValue('Quantity',true)" type="button" class="btn scanbtn btn-primary"><i class="fa fa-plus"></i></button></td>
-                        <td ng-if="CurrentActiveField=='iQty'"><button ng-click="UpDownValue('Quantity',false)" type="button" class="btn scanbtn btn-primary"><i class="fa fa-minus"></i> </button></td>
+                        <td ng-if="CurrentActiveField=='iQty'">
+
+                            <div style="text-align:center">
+                                <button ng-click="UpDownValue('Quantity',true)" type="button" class="btn ibtn  btn-success"><i class="fa fa-plus"></i></button>
+                            </div>
+
+                     
+                        </td>
+                        <td ng-if="CurrentActiveField=='iQty'">
+
+                            <div style="text-align:center">
+                                <button ng-click="UpDownValue('Quantity',false)" type="button" class="btn dbtn  btn-danger"><i class="fa fa-minus"></i> </button>
+                            </div>
+
+                       
+                        </td>
 
 
                         <td ng-if="CurrentActiveField=='pDescription'||CurrentActiveField=='pPart'||CurrentActiveField=='lLoc'">
 
-                            <button class="scanbtn btn btn-primary" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</button>
-                            <a class="scanbtn btn btn-primary" ng-if="CurrentActiveField!='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
+                            <div style="text-align:center">
+                                <button class="scanbtn btn btn-primary" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i></button>
+                                <a class="scanbtn btn btn-primary" ng-if="CurrentActiveField!='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i></a>
+                            </div>
+
+                          
                         </td>
                         <td>
-                            <button class="btn btn-primary arrow-right" type="button" ng-disabled="slide == Totalslides">Next&nbsp;&nbsp;<i class="fa fa-angle-right"></i></button>
+                            <div style="text-align:right;">
+                                <button class="btn btn-primary arrow-right" type="button" ng-disabled="slide == Totalslides"><i class="fa fa-angle-right"></i></button>
+                            </div>
+
+                          
                         </td>
                     </tr>
                 </table>
 
 
-           
+
 
 
                 <div ng-if="CheckRequiredField()==true" class="wellNew">
@@ -937,7 +997,7 @@
 
             <div class="input-group">
                 <input style="height:47px;" type="text" id="searchuom" placeholder="Type Keyword to find uom" ng-change="OnChangeUOMFunction()" class="form-control" ng-model="SearchUOMValue" required="" autofocus />
-              
+
             </div>
         </div>
     </div>

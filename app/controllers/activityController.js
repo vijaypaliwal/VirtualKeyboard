@@ -52,6 +52,8 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
  
 
+ 
+
     $scope.$watch('CurrentCart', function () {
         // do something here
         var i = 0;
@@ -226,47 +228,131 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
+        $scope.SearchLocationValue = $.trim($scope.SearchLocationValue);
+        if ($scope.SearchLocationValue != null && $scope.SearchLocationValue != "") {
 
-        $scope.LocationSearching = true;
-        $.ajax({
+            $scope.LocationSearching = true;
+            $.ajax({
 
-            type: "POST",
-            url: serviceBase + "SearchLocationAutoComplete",
-            contentType: 'application/json; charset=utf-8',
+                type: "POST",
+                url: serviceBase + "SearchLocationAutoComplete",
+                contentType: 'application/json; charset=utf-8',
 
-            dataType: 'json',
+                dataType: 'json',
 
-            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchLocationValue }),
-            error: function () {
+                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchLocationValue }),
+                error: function () {
 
-                $scope.LocationSearching = false;
-                log.error('There is a problem with the service!');
-            },
-
-            success: function (data) {
-
-
-
-                if (data.SearchLocationAutoCompleteResult != null && data.SearchLocationAutoCompleteResult.Payload != null) {
                     $scope.LocationSearching = false;
-                    $scope.LocationSearchList = data.SearchLocationAutoCompleteResult.Payload;
+                    log.error('There is a problem with the service!');
+                },
+
+                success: function (data) {
 
 
-                    if ($scope.LocationSearchList.length == 0)
-                        $scope.isnolocationmsg = true
-                    else
-                        $scope.isnolocationmsg = false
 
-                    CheckScopeBeforeApply()
+                    if (data.SearchLocationAutoCompleteResult != null && data.SearchLocationAutoCompleteResult.Payload != null) {
+                        $scope.LocationSearching = false;
+                        $scope.LocationSearchList = data.SearchLocationAutoCompleteResult.Payload;
+
+
+                        if ($scope.LocationSearchList.length == 0)
+                            $scope.isnolocationmsg = true
+                        else
+                            $scope.isnolocationmsg = false
+
+
+                    }
+
+                    CheckScopeBeforeApply();
 
                 }
+            });
+        }
+        else {
+            $scope.LocationSearching = false;
+            $scope.LocationSearchList = [];
+            CheckScopeBeforeApply();
+        }
 
-
-
-            }
-        });
+       
+        
     }
 
+
+    $scope.IncreaseDecreaseValue=function(Type,IsConvert2)
+    {
+        debugger;
+        switch ($scope.CurrentOperation) {
+            case"Increase":
+            case "Decrease":
+            case "Update":
+            case "Apply":
+                $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity = parseInt($scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity);
+                $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity = isNaN($scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity) ? 0 : $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity;
+                if (Type == 1)
+                {
+                    $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity = $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity + 1;
+
+                }
+                else if (Type == 2) {
+                    if ($scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity > 0) {
+
+                        $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity = $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity - 1;
+                    }
+                }
+                break;
+            case "Move":
+                $scope.CurrentCart[0].MoveTransactionData.ActionQuantity = parseInt($scope.CurrentCart[0].MoveTransactionData.ActionQuantity);
+                $scope.CurrentCart[0].MoveTransactionData.ActionQuantity = isNaN($scope.CurrentCart[0].MoveTransactionData.ActionQuantity) ? 0 : $scope.CurrentCart[0].MoveTransactionData.ActionQuantity;
+                if (Type == 1) {
+                    $scope.CurrentCart[0].MoveTransactionData.ActionQuantity = $scope.CurrentCart[0].MoveTransactionData.ActionQuantity + 1;
+
+
+                }
+                else if (Type == 2) {
+                    if ($scope.CurrentCart[0].MoveTransactionData.ActionQuantity > 0) {
+                        $scope.CurrentCart[0].MoveTransactionData.ActionQuantity = $scope.CurrentCart[0].MoveTransactionData.ActionQuantity - 1;
+                    }
+
+                }
+                break;
+            case "Convert":
+                $scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity = parseInt($scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity);
+                $scope.CurrentCart[0].ConvertTransactionData.ActionToQuantity = parseInt($scope.CurrentCart[0].ConvertTransactionData.ActionToQuantity);
+
+                $scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity = isNaN($scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity) ? 0 : $scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity;
+                $scope.CurrentCart[0].ConvertTransactionData.ActionToQuantity = isNaN($scope.CurrentCart[0].ConvertTransactionData.ActionToQuantity) ? 0 : $scope.CurrentCart[0].ConvertTransactionData.ActionToQuantity;
+                if (Type == 1) {
+                    if (IsConvert2 == 0)
+                    {
+                        $scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity = $scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity + 1;
+
+                    }
+                    else if(IsConvert2==1) {
+                        $scope.CurrentCart[0].ConvertTransactionData.ActionToQuantity = $scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity + 1;
+                    }
+
+
+                }
+                else if (Type == 2) {
+                    if (IsConvert2 == 0) {
+                        $scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity = $scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity - 1;
+                    }
+
+                    else if (IsConvert2 == 1) {
+                        if ($scope.CurrentCart[0].ConvertTransactionData.ActionToQuantity > 0) {
+                            $scope.CurrentCart[0].ConvertTransactionData.ActionToQuantity = $scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity - 1;
+                        }
+                    }
+                }
+                break;
+
+        }
+
+
+        CheckScopeBeforeApply();
+    }
 
     $scope.HighLightTerm = function (term, Text) {
 
@@ -1537,9 +1623,15 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     $scope.DeleteItem = function (CurrentActiveObject) {
 
 
+        debugger;
+
+
 
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {
+
+                debugger;
+
                 var _tempArray = $scope.CurrentCart;
                 for (var i = 0; i < _tempArray.length; i++) {
                     if (_tempArray[i].InventoryID == CurrentActiveObject.InventoryID) {
