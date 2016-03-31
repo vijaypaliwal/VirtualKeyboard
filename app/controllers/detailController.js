@@ -3,6 +3,7 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
     $scope.CurrentInventory = {};
     $scope.SavingData = false;
     $scope.IsEditMode = false;
+    $scope.ImageList = [];
     function init() {
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
         console.log($scope.CurrentInventory);
@@ -38,6 +39,44 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
     }
 
     init();
+
+
+
+    function InitializeSwiper() {
+        var mySwiper = new Swiper('.swiper-container', {
+            //Your options here:
+            initialSlide: 0,
+            speed: 200,
+            effect: 'flip',
+
+            allowSwipeToPrev: false,
+
+
+            onSlideChangeEnd: function (swiperHere) {
+
+
+            }
+
+
+        });
+
+
+        $('.arrow-left').on('click', function (e) {
+            e.preventDefault()
+            mySwiper.swipePrev();
+
+        })
+        $('.arrow-right').on('click', function (e) {
+
+            e.preventDefault()
+            mySwiper.swipeNext()
+
+        })
+
+    }
+
+
+
 
 
 
@@ -96,8 +135,7 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (result) {
-                        if (result.UpdateInventoryResult.Payload == 1)
-                        {
+                        if (result.UpdateInventoryResult.Payload == 1) {
                             log.success("Inventory updated successfully.");
                             localStorageService.set("CurrentDetailObject", $scope.CurrentInventory);
                             $scope.SavingData = false;
@@ -106,7 +144,7 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
                             log.error(Message);
                         }
 
-                        
+
                     },
                     error: function (err) {
                         debugger;
@@ -135,6 +173,57 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
     }
 
 
+    $scope.getitemimage = function () {
 
+
+
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetItemImages',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ItemID": $scope.CurrentInventory.pID }),
+               contentType: 'application/json',
+               dataType: 'json',
+               success: function (response) {
+
+                   debugger;
+
+                   $scope.ImageList = response.GetItemImagesResult.Payload;
+                   $scope.$apply();
+
+                   setTimeout(function () { InitializeSwiper() }, 10);
+
+
+
+               },
+               error: function (err) {
+
+                   debugger;
+
+                   log.error(err.Message);
+
+               }
+           });
+
+    }
+
+    $scope.getitemimage();
+
+
+    $scope.OpenImageModal = function (Object) {
+        $("#imagemodal").modal('show');
+        $scope.CurrentActiveImage = Object;
+        $scope.$apply();
+    }
+    $scope.ToggleEditView = function () {
+        $scope.IsEditMode = !$scope.IsEditMode;
+        setTimeout(function () { InitializeSwiper() }, 10);
+    }
 
 }]);

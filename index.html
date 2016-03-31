@@ -101,7 +101,7 @@
 
             .topheader i {
                font-size:25px;
-               margin-top:3px;
+               margin-top:10px;
             }
 
             .topheader .headerdropdown i {
@@ -110,9 +110,6 @@
             }
 
 
-        
-        
-        
         
          .btn-md {
             text-align: left;
@@ -267,8 +264,19 @@
                 height: 52px;
                 width: auto;
             }
+            .swiper-container table .btn {
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 0px;
+                padding-bottom: 40px;
+                font-size: 40px;
+                line-height: 40px;
+                height: 42px;
+                border-radius: 0px;
+                width: auto;
+            }
         .swiper-container .scanbtn {
-            background: #43ac6a !important;
+        
             border-right: 1px solid #F7F7F7 !important;
             border-left: 1px solid #F7F7F7 !important;
             margin-top: 0px !important;
@@ -289,16 +297,18 @@
         }
 
         .iteminfo {
-            background: #e6e6e6;
+          
             margin-bottom: 10px;
             padding: 5px;
             box-shadow: 0 1px 11px rgba(0,0,0,.27);
             font-size: 13px;
+            margin-top:7px;
         }
 
             .iteminfo span {
-                color: #3E5EBD;
+                color: #716D6D;
                 font-size: 13px;
+                display:block;
             }
 
         .select2-container--default .select2-selection--single .select2-selection__arrow {
@@ -310,11 +320,13 @@
         }
 
         .wellNew {
-            border: 1px solid red;
+         
             background-color: pink;
-            padding: 5px;
+            padding: 8px;
             margin-top: 10px;
-            font-size: 12px;
+            font-size: 13px;
+            margin-bottom:10px;
+            font-family:Verdana;
         }
 
             .wellNew span {
@@ -376,6 +388,22 @@
         .bgColorTransparent {
             background-color: transparent !important;
         }
+
+        .bluearea {
+            min-height: 50px;
+            padding-left: 42px;
+            background: rgba(73,155,234,1);
+            background: -moz-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(73,155,234,1)), color-stop(90%, rgba(22,85,157,0.94)), color-stop(97%, rgba(18,80,151,0.94)), color-stop(100%, rgba(32,124,229,0.94)));
+            background: -webkit-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
+            background: -o-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
+            background: -ms-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
+            background: linear-gradient(to right, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(41, 100, 169, 0.94) 97%, rgba(32,124,229,0.94) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5', GradientType=1 );
+            color: #fff;
+            text-align: left;
+            padding-bottom: 2px;
+        }
     </style>
 
 </head>
@@ -406,14 +434,33 @@
         </div>
       
         </div>
+
+
+    <!-- Sidebar -->
+
+    <div class="slideInLeft" id="wrapper">
+        <div id="sidebar-wrapper">
+
+            <div class="bluearea">
+
+                <img style="height:75px; width:75px; margin-top:10px; margin-bottom:10px; border-radius: 100%; border: 1px solid #ccc;" src="img/default.png" alt="" />
+
+                <p>User Name</p>
+
+            </div>
+
+            <ul style="margin-top:5px;" class="sidebar-nav">
+                <li><a href="#/mainmenu"> <i class="fa fa-th-list"></i>&nbsp;Main Menu </a></li>
+                <li><a href="#/FindItems"><i class="fa fa-shopping-cart"></i>&nbsp;Find Items </a></li>
+                <li><a href="#/inventory"><i class="fa fa-plus-circle"></i>&nbsp;Add Inventory </a></li>
+                <li><a href="#"> <i class="fa fa-sign-out"></i>&nbsp;Sign Out </a></li>
+            </ul>
+        </div>
+    </div>
     <!-- 3rd party libraries -->
     <script src="scripts/jquery-1.11.0.min.js"></script>
     <script src="scripts/jquery-ui.js"></script>
-
     <script src="scripts/jquery.ui.touch-punch"></script>
-
-
-    
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/bootstrap-switch.js"></script>
     <script src="scripts/bootstrap3-typeahead.js"></script>
@@ -774,6 +821,6 @@
     </script>
 
 
-
+    
 </body>
 </html>

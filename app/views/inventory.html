@@ -350,10 +350,10 @@
 </div>
 
 
-<div class="page-header">
+<!--<div class="page-header">
 
     <h4 style="font-size:16px; color:#000; padding-left:9px;">Add Inventory</h4>
-</div>
+</div>-->
 
 <div class="maincontent animated slideInLeft">
 
@@ -377,15 +377,22 @@
 
                         <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
 
-                        <img id="defaultimg" ng-click="getstep(9,'Image')" style="height:60px; width:60px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
+                        <img id="defaultimg" ng-click="getstep(9,'Image')" style="height:70px; width:65px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
                     </div>
                     <div class="col-md-10 col-xs-9">
-                        <div> <span style="font-size:18px;" ng-click="getstep(2,'iQty')"> {{ InventoryObject.Quantity }}</span> <span ng-click="getstep(4,'uomUOM')"> {{Uom}}</span>  of <span ng-click="getstep(0,'pPart')">{{InventoryObject.ItemID}}</span>  </div>
-                        <div ng-click="getstep(1,'pDescription')">  <span> [{{ InventoryObject.Description }}] </span> </div>
-                        <div>
-                            Loc:<span ng-click="getstep(3,'lLoc')">  {{InventoryObject.Location}} </span> Status:<span ng-click="getstep(4,'iStatusValue')"> {{InventoryObject.Status }} </span>
-                        </div>
+                       <span style="color:#000;" ng-click="getstep(0,'pPart')">{{InventoryObject.ItemID}}</span>
+                        <span ng-click="getstep(1,'pDescription')"> {{ InventoryObject.Description }} </span> 
+                       
+                            <span ng-click="getstep(3,'lLoc')">  {{InventoryObject.Location}} </span> <span ng-click="getstep(4,'iStatusValue')"> {{InventoryObject.Status }} </span>
+                      
+                      
+                            <span ng-click="getstep(2,'iQty')"> {{ InventoryObject.Quantity }}</span> <span ng-click="getstep(4,'uomUOM')"> {{Uom}}</span>
+                       
                     </div>
+                </div>
+
+                <div ng-if="CheckRequiredField()==true" class="wellNew">
+                   You have missing some required fields
                 </div>
 
 
@@ -816,16 +823,14 @@
                             <div style="text-align:center">
                                 <button ng-click="UpDownValue('Quantity',false)" type="button" class="btn dbtn  btn-danger"><i class="fa fa-minus"></i> </button>
                             </div>
-
-                       
                         </td>
 
 
                         <td ng-if="CurrentActiveField=='pDescription'||CurrentActiveField=='pPart'||CurrentActiveField=='lLoc'">
 
                             <div style="text-align:center">
-                                <button class="scanbtn btn btn-primary" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i></button>
-                                <a class="scanbtn btn btn-primary" ng-if="CurrentActiveField!='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i></a>
+                                <button style="font-size:18px; line-height:42px;" class="scanbtn btn btn-primary" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> Scan Record</button>
+                                <a style="font-size:18px; line-height:42px;" class="scanbtn btn btn-primary" ng-if="CurrentActiveField!='pPart'" ng-click="ScanNew()"> Scan Record</a>
                             </div>
 
                           
@@ -844,9 +849,7 @@
 
 
 
-                <div ng-if="CheckRequiredField()==true" class="wellNew">
-                    Seems like your inventory details are not filled up correctly may be you are missing some required details or need to correct some value ,please avail correct values in those inputs.
-                </div>
+                
 
                 <a ng-click="addinventory()" style="width:100%; margin-top:15px;" ng-disabled="CheckRequiredField()==true" id="addinventories" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
 
