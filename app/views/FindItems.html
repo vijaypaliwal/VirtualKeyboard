@@ -551,43 +551,41 @@
     }
 </style>
 
-<div style="padding-left:9px; padding-right:9px; padding-top:2px; padding-bottom:2px; font-size:25px;" class="topheader">
+<div style="top:0" class="topheader">
 
 
-    <table style="width:100%;">
-        <tr>
-            <td><a href="#/mainmenu"><i class="fa fa-long-arrow-left"></i></a></td>
-            <td><img style="width:40px; height:40px; border-radius:100%; border:1px solid #ccc;" src="img/dummy-user48.png" alt=""></td>
-            <td><img style="width:145px;" src="img/logo.png" alt="Alternate Text" /></td>
-            <td>
-                <div>
-                    <div class="headerdropdown dropdown">
-                        <a data-toggle="dropdown">
-                            <i style="font-size:25px;" class="fa fa-ellipsis-v"></i>
-                        </a>
-                        <ul class="dropdown-menu animated fadeInX">
+    <div style="text-align:left;" class="col-xs-3">
+        <a id="menu-toggle"><i class="animated fa fa-bars"></i></a>
+
+    </div>
+    <div class="col-xs-6">
+        <img style="width:150px; margin-top:-2px;" src="img/logo.png" alt="Alternate Text" />
+    </div>
+    <div class="col-xs-3">
+        <div style="float:right;">
+            <div class="headerdropdown dropdown">
+                <a data-toggle="dropdown" aria-expanded="true">
+                    <img src="img/dummy-user48.png" alt="">
+                </a>
+                <ul class="dropdown-menu animated slideInDown">
 
 
-                            <li>
-                                <a><i class="fa fa-user"></i> My Profile</a>
-                            </li>
-
-
-
-
-                            <li>
-                                <a ng-click="logOut()" title="Logout"><i class="fa fa-sign-out"></i> Log Out</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
+                    <li>
+                        <a><i class="fa fa-user"></i> My Profile</a>
+                    </li>
 
 
 
 
+                    <li>
+                        <a ng-click="logOut()" title="Logout"><i class="fa fa-sign-out"></i> Log Out</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
 </div>
 
 <div>
@@ -866,4 +864,19 @@
         $(window).scroll(sticky_relocate);
         sticky_relocate();
     });
+</script>
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        if ($("#wrapper").hasClass("toggled")) {
+            $(this).find(".fa").removeClass("rotateIn fa-bars").addClass("rotateIn fa-arrow-left");
+        }
+        else {
+            $(this).find(".fa").removeClass("rotateIn fa-arrow-left").addClass("rotateIn fa-bars");
+        }
+    });
+
+
+
 </script>
