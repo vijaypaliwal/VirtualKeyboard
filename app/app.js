@@ -28,6 +28,11 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/detail.html"
     });
 
+    $routeProvider.when("/profile", {
+        controller: "profileController",
+        templateUrl: "app/views/profile.html"
+    });
+
     $routeProvider.when("/activity", {
         controller: "activityController",
         templateUrl: "app/views/activity.html"
