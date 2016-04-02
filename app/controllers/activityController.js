@@ -2215,6 +2215,9 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         });
     }
 
+
+
+
 }]);
 
 
