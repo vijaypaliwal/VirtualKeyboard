@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', 'log', function ($http, $q, localStorageService, ngAuthSettings,log) {
+app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', 'log', function ($http, $q, localStorageService, ngAuthSettings, log) {
 
     var serviceBase = ngAuthSettings.apiServiceBaseUri;
     var authServiceFactory = {};
@@ -29,7 +29,6 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     var _login = function (loginData) {
 
 
-        debugger;
 
         var data = "UserName=" + loginData.userName + "&Password=" + loginData.password + "&AccountName=" + loginData.account;
 
@@ -39,57 +38,57 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         $("#loginBtn").addClass("disabled");
         $("#loginBtn").find(".fa").removeClass("fa-sign-in").addClass("fa-spin fa-spinner");
         var deferred = $q.defer();
-        
-            $.ajax
-            ({
-                type: "POST",
-                url: 'http://dev.style.u8i9.com/API/ClearlyInventoryAPI.svc/Login',
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'text json',
-                data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),
-                success: function (response) {
-                    $("#loginBtn").removeClass("disabled");
-                    $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
 
-                    if (response.LoginResult.Success == true) {
-                      
+        $.ajax
+        ({
+            type: "POST",
+            url: serviceBase + 'Login',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'text json',
+            data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),
+            success: function (response) {
+                $("#loginBtn").removeClass("disabled");
+                $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
 
-                            if (loginData.useRefreshTokens) {
-                                localStorageService.set('authorizationData', { token: response.LoginResult.Payload, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
-                            }
-                            else {
-                                localStorageService.set('authorizationData', { token: response.LoginResult.Payload, userName: loginData.userName, refreshToken: "", useRefreshTokens: false });
-                            }
-                            _authentication.isAuth = true;
-                            _authentication.userName = loginData.userName;
-                            _authentication.useRefreshTokens = loginData.useRefreshTokens;
+                if (response.LoginResult.Success == true) {
 
 
-
-                            deferred.resolve(response);
-
+                    if (loginData.useRefreshTokens) {
+                        localStorageService.set('authorizationData', { token: response.LoginResult.Payload, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
                     }
                     else {
-
-                        playBeep();
-                        log.error(response.LoginResult.Message);
-
+                        localStorageService.set('authorizationData', { token: response.LoginResult.Payload, userName: loginData.userName, refreshToken: "", useRefreshTokens: false });
                     }
-                  
+                    _authentication.isAuth = true;
+                    _authentication.userName = loginData.userName;
+                    _authentication.useRefreshTokens = loginData.useRefreshTokens;
 
-                },
-                error: function (err) {
+
+
+                    deferred.resolve(response);
+
+                }
+                else {
 
                     playBeep();
-                    $("#loginBtn").removeClass("disabled");
-                    $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
-                    _logOut();
-                      deferred.reject(err);
-                    
+                    log.error(response.LoginResult.Message);
+
                 }
-            });
-        
-      
+
+
+            },
+            error: function (err) {
+
+                playBeep();
+                $("#loginBtn").removeClass("disabled");
+                $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
+                _logOut();
+                deferred.reject(err);
+
+            }
+        });
+
+
 
         return deferred.promise;
 
@@ -97,7 +96,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     var _logOut = function () {
 
-       
+
 
         localStorageService.remove('authorizationData');
 
@@ -192,7 +191,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         return deferred.promise;
 
     };
-   
+
     authServiceFactory.saveRegistration = _saveRegistration;
     authServiceFactory.login = _login;
     authServiceFactory.logOut = _logOut;

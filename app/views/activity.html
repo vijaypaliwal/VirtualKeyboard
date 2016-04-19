@@ -1,5 +1,27 @@
 ﻿
 <style>
+    .AdjustNetzero {
+        color: #000 !important;
+        padding: 5px;
+    }
+
+
+
+
+    .AdjustIncrease {
+        color: #177B3D !important;
+        padding: 5px;
+    }
+
+    .AdjustDecrease {
+        color: #AF2525 !important;
+        padding: 5px;
+    }
+
+    .bgm-orange {
+        background-color: #f8c217 !important;
+    }
+
     .topheader a {
         font-size: 18px;
         padding: 10px;
@@ -123,17 +145,15 @@
         right: 17px;
     }
 
-    .panel-heading
-    {
-        padding-top:18px;
-        padding-bottom:18px;
+    .panel-heading {
+        padding-top: 18px;
+        padding-bottom: 18px;
     }
 
-    .indicator
-    {
-        color:#000;
-        margin-top:-7px;
-        font-size:32px;
+    .indicator {
+        color: #000;
+        margin-top: -7px;
+        font-size: 32px;
     }
 </style>
 
@@ -284,7 +304,7 @@
         .tabmenu a {
             text-decoration: none;
             font-size: 15px;
-            color: #E0DBDB !important;
+            color: #fff !important;
             white-space: nowrap;
         }
 </style>
@@ -516,7 +536,7 @@
                                 <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo">
                                     <a class="accordion-toggle" style="font-size:20px;" data-toggle="collapse" data-parent="#accordion" href="javascript:;" data-target="#collapseTwo">
                                         Cart Items
-                                    </a><i ng-if="CollapsOpen==false"  class="indicator fa fa-plus-circle pull-right"></i><i ng-if="CollapsOpen==true" class="indicator fa fa-times-circle pull-right"></i>
+                                    </a><i ng-if="CollapsOpen==false" class="indicator fa fa-plus-circle pull-right"></i><i ng-if="CollapsOpen==true" class="indicator fa fa-times-circle pull-right"></i>
                                 </h4>
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse">
@@ -545,12 +565,12 @@
 
                     </div>
 
-                    <div class="row" >
+                    <div class="row">
                         <div class="col-md-8 col-xs-8">
                             <h3>Related Data</h3>
                         </div>
 
-                   
+
                         <div class="col-xs-12">
                             <hr style="margin-top:0px;" />
 
@@ -571,12 +591,12 @@
                                     <div class="form-group">
                                         <label>Quantity</label>
 
-                                        <div class="input-group"> 
-                                        <span class="input-group-addon"><i class="fa fa-plus" ng-click="IncreaseDecreaseValue(1,0)"></i></span> 
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-plus" ng-click="IncreaseDecreaseValue(1,0)"></i></span>
                                             <input placeholder="Fill Quantity" type="number" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
-                                            <span class="input-group-addon" ng-click="IncreaseDecreaseValue(2,0)"><i class="fa fa-minus"></i></span> 
+                                            <span class="input-group-addon" ng-click="IncreaseDecreaseValue(2,0)"><i class="fa fa-minus"></i></span>
                                         </div>
-                                        
+
                                     </div>
 
 
@@ -651,15 +671,23 @@
 
 
 
-                              
+
                                 <div class="form-group">
                                     <label>Quantity</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-plus" ng-click="IncreaseDecreaseValue(1,0)"></i></span>
-                                        <input type="number" placeholder="Fill Quantity" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
+                                        <input type="number" placeholder="Fill Quantity" ng-blur="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
 
                                         <span class="input-group-addon" ng-click="IncreaseDecreaseValue(2,0)"><i class="fa fa-minus"></i></span>
                                     </div>
+
+                                    <span ng-if="CurrentOperation=='Adjust' && TrimValue(CurrentActiveObject.AdjustCalculation)!=''" class="AdjustCalculation">
+                                        <span ng-if="CurrentActiveObject.ActionPerformed==1 && CurrentActiveObject.AdjustActionQuantity!=0" class="z-depth-1 AdjustIncrease">{{CurrentActiveObject.AdjustCalculation}}</span>
+                                        <span ng-if="CurrentActiveObject.ActionPerformed==-1 && CurrentActiveObject.AdjustActionQuantity!=0" class="z-depth-1 AdjustDecrease">{{CurrentActiveObject.AdjustCalculation}}</span>
+                                        <span ng-if="CurrentActiveObject.ActionPerformed==1 && CurrentActiveObject.AdjustActionQuantity==0" class="z-depth-1 AdjustNetzero">{{CurrentActiveObject.AdjustCalculation}}</span>
+
+
+                                    </span>
                                 </div>
 
                                 <div>
@@ -932,59 +960,59 @@
                         </div>
 
                         <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" data-ng-repeat="_columns in isLineItemColumnNames">
+                            <span ng-if="CheckOnAdjust(CurrentActiveObject.IsLineItemData[$index].cfdID,CurrentActiveObject.ActionPerformed)">
 
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>{{_columns}} <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
+                                        <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'fg-line':''}}">
 
-                            <div class="col-xs-12 col-md-12">
-                                <div class="form-group">
-                                    <label>{{_columns}} <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
-                                    <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'fg-line':''}}">
+                                            <input placeholder="fill {{_columns}}" type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
 
-                                        <input placeholder="fill {{_columns}}" type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                            <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="checkbox">
+                                                <div class="form-control FormControlType">
 
-                                        <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="checkbox">
-                                            <div class="form-control FormControlType">
-
-                                                <label>
-                                                    <input type="checkbox" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue"><i class="input-helper"></i>
-                                                </label>
-                                            </div>
-
-                                        </div>
-
-                                        <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='combobox'">
-                                            <div class="fg-line">
-
-                                                <div class="select">
-                                                    <select class="form-control" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
-
-                                                        <option value="{{_optionValue}}" ng-repeat="_optionValue in CurrentActiveObject.IsLineItemData[$index].cfdComboValues track by $index">{{_optionValue}}</option>
-
-                                                    </select>
+                                                    <label>
+                                                        <input type="checkbox" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue"><i class="input-helper"></i>
+                                                    </label>
                                                 </div>
+
                                             </div>
 
+                                            <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='combobox'">
+                                                <div class="fg-line">
+
+                                                    <div class="select">
+                                                        <select class="form-control" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
+
+                                                            <option value="{{_optionValue}}" ng-repeat="_optionValue in CurrentActiveObject.IsLineItemData[$index].cfdComboValues track by $index">{{_optionValue}}</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                            <input type="number" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                            <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                         </div>
-                                        <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                        <input type="number" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                        <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                    </div>
-                                    <div>
+                                        <div>
 
-                                        <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)=='' " class="errorMessage">
-                                            {{CurrentActiveObject.IsLineItemData[$index].cfdName }} field is required.
+                                            <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)=='' " class="errorMessage">
+                                                {{CurrentActiveObject.IsLineItemData[$index].cfdName }} field is required.
 
-                                        </span>
+                                            </span>
 
-                                        <span ng-if="(CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime') && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)!='' && CheckProperDate(CurrentActiveObject.IsLineItemData[$index].CfValue)!=true" class="errorMessage">
-                                            {{CurrentActiveObject.IsLineItemData[$index].cfdName }} value is not a proper date, please fill correct date.
+                                            <span ng-if="(CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime') && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)!='' && CheckProperDate(CurrentActiveObject.IsLineItemData[$index].CfValue)!=true" class="errorMessage">
+                                                {{CurrentActiveObject.IsLineItemData[$index].cfdName }} value is not a proper date, please fill correct date.
 
-                                        </span>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
 
-
+                            </span>
 
 
                         </div>
@@ -993,7 +1021,7 @@
 
 
 
-                    
+
 
 
                 </div>
@@ -1140,18 +1168,29 @@
                         <div class="col-xs-8 col-md-8">
 
                             <div class="form-group">
-                                <label>Quantity</label>
+                                <label>
+                                    Quantity 
+                                    <span ng-if="CurrentOperation=='Adjust' && TrimValue(CurrentActiveObject.AdjustCalculation)!=''" class="AdjustCalculation">
+                                        <span ng-if="CurrentActiveObject.ActionPerformed==1 && CurrentActiveObject.AdjustActionQuantity!=0" class="z-depth-1 AdjustIncrease">({{CurrentActiveObject.AdjustCalculation}})</span>
+                                        <span ng-if="CurrentActiveObject.ActionPerformed==-1 && CurrentActiveObject.AdjustActionQuantity!=0" class="z-depth-1 AdjustDecrease">({{CurrentActiveObject.AdjustCalculation}})</span>
+                                        <span ng-if="CurrentActiveObject.ActionPerformed==1 && CurrentActiveObject.AdjustActionQuantity==0" class="z-depth-1 AdjustNetzero">({{CurrentActiveObject.AdjustCalculation}})</span>
+
+
+                                    </span>
+                                </label>
                                 <div class="fg-line">
-                                    <input type="number" placeholder="Fill Quantity" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
+                                    <input type="number" placeholder="Fill Quantity" ng-blur="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
                                 </div>
                             </div>
+
+
 
                             <div>
 
 
 
 
-                                <span ng-if=" CurrentOperation!='Increase'&&   CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
+                                <span ng-if=" CurrentOperation!='Increase'&& CurrentOperation!='Adjust &&   CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
 
                                     <span ng-if=" CurrentOperation=='Increase' ||  CurrentOperation=='Decrease'">Quantity can't be greater than original quantity</span>
                                     <span ng-if=" AllowNegative!=null &&  AllowNegative!='True' &&  CurrentOperation!='Increase' &&  CurrentOperation!='Decrease'"> Quantity can't be greater than original quantity</span>
@@ -1594,59 +1633,171 @@
 
                 <div class="swiper-slide  customActivityData" data-type="Activity" data-index="{{GetProperIndex(1)}}">
 
-
-                    <div class="form-group" style="margin-top:80px;">
-                        <label>Activity Date <span>*</span> </label>
-                        <div class="input-group">
-                            <input type="date" class="form-control" id="itUpdateDate" />
-
-                        </div>
-
-                    </div>
+                    <div ng-if="CurrentOperation!='Adjust'">
 
 
-                    <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveTransactionField(obj.cfdID)">
-                        <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
-                        <div ng-if="obj.cfdDataType=='string'" class="input-group">
-                            <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control stringType" value="{{obj.CfValue}}" />
-                        </div>
+                        <div class="form-group" style="margin-top:80px;">
+                            <label>Activity Date <span>*</span> </label>
+                            <div class="input-group">
+                                <input type="date" class="form-control" id="itUpdateDate" />
 
-
-                        <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
-
-                            <input type="checkbox" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
-
-                        </div>
-
-                        <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
-
-
-                            <div class="select">
-                                <select id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
-
-                                    <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
-
-                                </select>
                             </div>
 
                         </div>
 
 
-                        <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                            <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="date" class="form-control customFieldDatePicker FormDateType" />
-                        </div>
+                        <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveTransactionField(obj.cfdID)">
+                            <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
+                            <div ng-if="obj.cfdDataType=='string'" class="input-group">
+                                <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control stringType" value="{{obj.CfValue}}" />
+                            </div>
 
-                        <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                            <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
-                        </div>
 
-                        <div ng-if="obj.cfdDataType=='currency'" class="input-group">
-                            <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
-                        </div>
+                            <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
 
+                                <input type="checkbox" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
+
+                            </div>
+
+                            <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
+
+
+                                <div class="select">
+                                    <select id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
+
+                                        <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
+
+                                    </select>
+                                </div>
+
+                            </div>
+
+
+                            <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
+                                <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="date" class="form-control customFieldDatePicker FormDateType" />
+                            </div>
+
+                            <div ng-if="obj.cfdDataType=='number'" class="input-group">
+                                <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                            </div>
+
+                            <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                                <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
+                            </div>
+
+                        </div>
                     </div>
+                    <div ng-if="CurrentOperation=='Adjust'">
+                        <div style="margin-top:85px;" id="transactionForm1">
+                            <h3 style="color: #177B3D">Activity details for increase </h3>
 
 
+                            <div class="form-group">
+                                <label>Activity Date <span>*</span> </label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" id="itUpdateDate" />
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveTransactionField(obj.cfdID)">
+                                <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
+                                <div ng-if="obj.cfdDataType=='string'" class="input-group">
+                                    <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control stringType" value="{{obj.CfValue}}" />
+                                </div>
+
+
+                                <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+
+                                    <input type="checkbox" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
+
+                                </div>
+
+                                <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
+
+
+                                    <div class="select">
+                                        <select id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
+
+                                            <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
+
+                                        </select>
+                                    </div>
+
+                                </div>
+
+
+                                <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
+                                    <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="date" class="form-control customFieldDatePicker FormDateType" />
+                                </div>
+
+                                <div ng-if="obj.cfdDataType=='number'" class="input-group">
+                                    <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                                </div>
+
+                                <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                                    <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div id="transactionForm2">
+                            <h3 style="color: #AF2525">Activity details for decrease </h3>
+                            <div class="form-group">
+                                <label>Activity Date <span>*</span> </label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" id="itUpdateDate" />
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveTransactionField(obj.cfdID)">
+                                <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
+                                <div ng-if="obj.cfdDataType=='string'" class="input-group">
+                                    <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control stringType" value="{{obj.CfValue}}" />
+                                </div>
+
+
+                                <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+
+                                    <input type="checkbox" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
+
+                                </div>
+
+                                <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
+
+
+                                    <div class="select">
+                                        <select id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
+
+                                            <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
+
+                                        </select>
+                                    </div>
+
+                                </div>
+
+
+                                <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
+                                    <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="date" class="form-control customFieldDatePicker FormDateType" />
+                                </div>
+
+                                <div ng-if="obj.cfdDataType=='number'" class="input-group">
+                                    <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                                </div>
+
+                                <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                                    <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
@@ -1904,7 +2055,7 @@
                                     </div>
                                     <div class="col-xs-4">
                                         <div style="text-align:right">
-                                            
+
                                             <img ng-if="_groupRow.InventoryDataList.ImageThumbPath==''" style="height:60px; width:60px; border:1px solid #ccc;" src="img/default.png" />
                                             <img ng-if="_groupRow.InventoryDataList.ImageThumbPath!=''" style="height:60px; width:60px; border:1px solid #ccc;" src="{{_groupRow.InventoryDataList.ImageThumbPath}}" alt="" />
                                         </div>
@@ -2008,9 +2159,10 @@
     </div>
 
 
-    <a ng-click="changeMode()" class="btn {{CurrentHeaderClass}} btn-sm changebtn"><i class="fa fa-exchange"></i></a>
+    <a ng-click="changeMode()" ng-if="CurrentOperation!='Adjust'" class="btn {{CurrentHeaderClass}} btn-sm changebtn"><i class="fa fa-exchange"></i></a>
+    <a ng-if="CurrentOperation=='Adjust'" class="btn {{CurrentHeaderClass}} btn-sm changebtn disabled"><i class="fa fa-exchange"></i></a>
 
-    </div>
+</div>
 
 
 <script>

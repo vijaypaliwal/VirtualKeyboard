@@ -4,6 +4,8 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
     $scope.SavingData = false;
     $scope.IsEditMode = false;
     $scope.ImageList = [];
+
+    $scope.mainObjectToSend = [];
     function init() {
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
         console.log($scope.CurrentInventory);
@@ -77,7 +79,7 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
 
 
 
-
+  
 
 
 
@@ -169,6 +171,21 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
             $(".mybootboxbody").html("This operation is going to change your item name and item description. ");
 
         });
+
+    }
+
+
+    function addItemsToCart(object, IdToSave, originalID) {
+
+     
+
+    }
+
+    $scope.addtocart = function (obj) {
+
+        debugger;
+        var originalID = "#actionQty_" + obj.iID;
+        addItemsToCart(obj, obj.iID, originalID);
 
     }
 

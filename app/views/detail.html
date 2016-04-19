@@ -559,6 +559,11 @@
 
 <style>
 
+    .topheader i {
+        font-size: 17px;
+        margin-top: 14px;
+    }
+
 
     body {
         background: #fff;
@@ -615,13 +620,9 @@
                 </a>
                 <ul class="dropdown-menu animated slideInDown">
 
-
                     <li>
-                        <a><i class="fa fa-user"></i> My Profile</a>
+                      <a><i class="fa fa-user"></i> My Profile</a>
                     </li>
-
-
-
 
                     <li>
                         <a ng-click="logOut()" title="Logout"><i class="fa fa-sign-out"></i> Log Out</a>
@@ -634,20 +635,7 @@
     </div>
 </div>
 
-
-
 <div style="margin-top:45px;" class="animated slideInLeft">
-
-
-
-
-
-
-
-
-
-
-
 
     <div style="margin-top:58px;" ng-if="IsEditMode==true" class="page-header">
         <h5 style="color:#000; padding-left:12px; text-align:left;">Edit inventory details</h5>
@@ -724,22 +712,6 @@
 
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
     </div>
 
@@ -752,22 +724,17 @@
                     <a class="btn btn-primary" ng-click="Scanitem()"> <i class="fa fa-barcode"></i>&nbsp;Scan</a>
                 </span>
             </div>
-
-
         </div>
 
         <div class="form-group">
             <label>Item Description</label>
             <div class="input-group">
-                <input type="text" class="form-control" ng-model="CurrentInventory.pDescription" />
-                <span style="padding:0px;" class="input-group-addon last">
-                    <a class="btn btn-primary" ng-click="Scandescription()"> <i class="fa fa-barcode"></i>&nbsp;Scan</a>
-                </span>
-
+              <input type="text" class="form-control" ng-model="CurrentInventory.pDescription" />
+              <span style="padding:0px;" class="input-group-addon last">
+              <a class="btn btn-primary" ng-click="Scandescription()"> <i class="fa fa-barcode"></i>&nbsp;Scan</a>
+              </span>
             </div>
-
-
-        </div>
+            </div>
 
         <div class="form-group">
             <label>Unit of Measure</label>
@@ -802,16 +769,15 @@
 
     <div class="modal-body">
         <ul class="animated bounceIn" id="selectAction">
-            <li><span>Option Menu</span><a class="btn-primary btn" data-dismiss="modal"> <i class="fa fa-th"></i> </a></li>
-            <li><span>Option Menu</span><a class="btn-success btn" data-dismiss="modal"> <i class="fa fa-th"></i> </a></li>
-            <li><span>Option Menu</span><a class="btn-danger btn" data-dismiss="modal"> <i class="fa fa-th"></i> </a></li>
-            <li><span>Option Menu</span><a class="btn-warning btn" data-dismiss="modal"> <i class="fa fa-th"></i> </a></li>
-            <li ng-click="ToggleEditView()"><span>Edit Item details</span><a class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-pencil"></i> </a></li>
+            <li><span>View history</span><a class="btn-info btn" data-dismiss="modal"> <i class="fa fa-file-text"></i> </a></li>
+            <li><span>Show all Inventory</span><a href="#/FindItems" class="btn-danger btn"> <i class="fa fa-dollar"></i> </a></li>
+            <li ng-click="addtocart(CurrentInventory)"><span>Select fot cart</span><a class="btn-success btn" data-dismiss="modal"> <i class="fa fa-shopping-cart"></i> </a></li>
+            <li ng-click="ToggleEditView()"><span>Edit Item details</span><a class="btn bgm-red" data-dismiss="modal"> <i class="fa fa-pencil"></i> </a></li>
         </ul>
     </div>
 </div>
 
-<a style="font-size: 30px; font-weight: 700; background: #4caf50 !important; font-family:monospace; text-decoration:none;" ng-click="OpenmenuModal()" class="Addbtn btn-info">
+<a style="font-size: 30px;  background: #4caf50 !important; font-family:monospace; text-decoration:none;" ng-click="OpenmenuModal()" class="Addbtn btn-info">
     I
 </a>
 

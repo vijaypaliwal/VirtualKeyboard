@@ -897,6 +897,8 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
                     iCostPerItem: mainObjectToSend[i].iCostPerUnit,
                     ItemID: mainObjectToSend[i].pPart,
                     ActionPerformed: $scope.selectedAction,
+                    AdjustActionQuantity: "",
+                    AdjustCalculation: "",
                     InventoryDataList: mainObjectToSend[i],
                     IncreaseDecreaseVMData: ({ ActionQuantity: "" }),
                     MoveTransactionData: ({ ActionQuantity: "", StatusToUpdate: mainObjectToSend[i].iStatusValue, MoveToLocationText: "", MoveToLocation: "" }),

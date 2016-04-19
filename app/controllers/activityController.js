@@ -19,7 +19,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     $scope.CollapsClass = "";
     $scope.CollapsOpen = false;
     $scope.isLineItemColumnNames = [];
-
+    $scope.IsQuantityUpdated = false;
     $scope.IsSingleMode = true;
 
     function CheckScopeBeforeApply() {
@@ -282,7 +282,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.IncreaseDecreaseValue=function(Type,IsConvert2)
     {
-        debugger;
+         
         switch ($scope.CurrentOperation) {
             case"Increase":
             case "Decrease":
@@ -908,6 +908,18 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $scope.CurrentHeaderText = "Tag these items with information.";
                 //  StatusBar.backgroundColorByHexString("#0D190F");
                 break;
+
+            case 12:
+
+                $scope.CurrentOperation = "Adjust";
+
+
+                $scope.CurrentClass = "bgm-orange";
+                $scope.CurrentHeaderClass = "bgm-orange";
+
+                $scope.CurrentIcon = "fa-arrows-v";
+                $scope.CurrentHeaderText = "Adjust the quantity of these items.";
+                break;
             default:
                 $scope.CurrentOperation = "";
                 break;
@@ -1041,9 +1053,85 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
 
     }
+    $scope.TrimValue = function (value) {
+        if (value != null && value != undefined) {
+            return $.trim(value);
+        }
+        else {
+            return "";
+        }
+
+    }
+    $scope.UpdateQty = function (Qty, Index) {
+
+        $scope.ActionQuantityValue = Qty;
+        var value = 0;
+        $scope.CurrentCart[Index].AdjustCalculation = "";
+        if ($scope.CurrentOperation == "Adjust") {
 
 
+            if ($scope.ActionQuantityValue != "" && $scope.ActionQuantityValue != null && $scope.ActionQuantityValue != undefined) {
 
+                if ($scope.ActionQuantityValue > $scope.CurrentCart[Index].InventoryDataList.oquantity) {
+                    value = $scope.ActionQuantityValue - $scope.CurrentCart[Index].InventoryDataList.oquantity;
+                    $scope.CurrentCart[Index].AdjustCalculation += $scope.CurrentCart[Index].InventoryDataList.oquantity.toString() + " + " + value.toString() + "=" + $scope.ActionQuantityValue.toString();
+                }
+                else if ($scope.ActionQuantityValue < $scope.CurrentCart[Index].InventoryDataList.oquantity) {
+                    value = $scope.CurrentCart[Index].InventoryDataList.oquantity - $scope.ActionQuantityValue;
+                    $scope.CurrentCart[Index].AdjustCalculation += $scope.CurrentCart[Index].InventoryDataList.oquantity.toString() + " - " + value.toString() + "=" + $scope.ActionQuantityValue.toString();
+                }
+                else {
+                    value = 0;
+                    $scope.CurrentCart[Index].AdjustCalculation += $scope.CurrentCart[Index].InventoryDataList.oquantity.toString() + " + " + value.toString() + "=" + $scope.ActionQuantityValue.toString();
+                }
+
+                $scope.CurrentCart[Index].AdjustActionQuantity = value;
+
+                // $scope.CurrentCart[Index].IncreaseDecreaseVMData.ActionQuantity = value;
+                $scope.IsQuantityUpdated = true;
+
+                $scope.CurrentCart[Index].ActionPerformed = ($scope.ActionQuantityValue > $scope.CurrentCart[Index].InventoryDataList.oquantity || $scope.ActionQuantityValue == $scope.CurrentCart[Index].InventoryDataList.oquantity) ? "1" : "-1";
+            }
+        }
+
+    }
+    $scope.CheckOnAdjust = function (cfdid, IsIncrease) {
+        var _data = true;
+        var _CurrentCustomColumns = angular.copy($scope.CustomActivityDataList);
+        for (var i = 0; i < _CurrentCustomColumns.length; i++) {
+            if (_CurrentCustomColumns[i].cfdCustomFieldType == "Inventory" && _CurrentCustomColumns[i].cfdID == cfdid) {
+                switch ($scope.CurrentOperation) {
+                    case "Increase":
+                    case "Decrease":
+                    case "Move":
+                    case "Apply":
+                    case "Update":
+                    case "Convert":
+                        return true;
+                        break;
+                    case "Adjust":
+                        var _value = true;
+                        if (IsIncrease == 1) {
+                            _value = _CurrentCustomColumns[i].cfdIncludeOnAdd && _data;
+
+                        }
+                        else if (IsIncrease == -1) {
+                            _value = _CurrentCustomColumns[i].cfdIncludeOnSubtract && _data;
+
+                        }
+
+                        return _value;
+                        break;
+
+                    default:
+                        return true;
+                        break;
+
+                }
+            }
+        }
+
+    }
 
     function BuildCustomArrayData() {
         var _array = [];
@@ -1065,7 +1153,33 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         return _array;
     }
 
+    function BuildCustomArrayDataSelector(selector) {
+        var _array = [];
+        // process all custom fields that are NOT checkboxes
+        //ETJ - add selector in front of select and textarea
+        $.each($(selector + ' input[cfd-id]:not(":checkbox"):not(":hidden"), ' + selector + ' select[cfd-id], ' + selector + ' textarea[cfd-id]:not(":hidden")'), function () {
 
+            _array.push({ "CfdID": $(this).attr('cfd-id'), "Value": $(this).val(), "DataType": $(this).attr('custom-data-type') });
+        });
+
+        // process the checkboxes by getting the Boolean string for whether they are currently checked
+
+        $.each($(selector + ' input:checkbox'), function () {
+
+            var _dataVal = $(this).is(':checked').toString();
+            _dataVal = _dataVal.substr(0, 1).toUpperCase() + _dataVal.substr(1).toLowerCase();
+            var _cfdid = $(this).attr('cfd-id');
+            var _cfdatatype = $(this).attr('custom-data-type');
+
+            if (_cfdid != undefined && _cfdatatype != undefined) {
+                _array.push({ "CfdID": _cfdid, "Value": _dataVal, "DataType": _cfdatatype });
+
+            }
+        });
+
+
+        return _array;
+    }
 
     $scope.FillQuantity = function (value, id, type) {
         $scope.ActionQuantityValue = value;
@@ -1197,7 +1311,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     }
     $scope.FillStatusLineItems = function (value, myid) {
 
-        debugger;
+         
 
         $scope.StatusToUpdate = value == null ? "" : value;
         $scope.StatusToUpdate = $scope.StatusToUpdate == 0 ? "" : $scope.StatusToUpdate;
@@ -1390,6 +1504,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         var k = 0;
         var _i = 0;
         var _myData = [];
+
         var _MyObjdata = {
             InvID: 0,
             Transaction: {
@@ -1425,12 +1540,85 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
             CustomData: BuildCustomArrayData()
         };
 
+
+        var _MyObjdata1 = {
+            InvID: 0,
+            Transaction: {
+                itAID: 0,
+                itAction: $scope._CurrentAction,
+                itBatchID: 0,
+                itCostPerUnit: 0,
+                itID: 0,
+                itInvID: 0,
+                itLID: 0,
+                itPID: 0,
+                itParentTransID: 0,
+                itQtyChange: 0,
+                itReqValue: "",
+                itSourceID: 1,
+                itStatusValue: "",
+                itUpdateDate: wcfDateStr123,
+                itUOMID: 0,
+                itUncontrolled: 0,
+                itUniqueDate: wcfDateStr,
+                itUnitDate2: wcfDateStr,
+                itUnitNumber1: 0,
+                itUnitNumber2: 0,
+                itUnitTag2: "",
+                itUnitTag3: ""
+            },
+            Targets: {
+                ToLocationID: 0,
+                ToUomID: 0,
+                ToConvertedQuantity: 0,
+                ToStatus: ""
+            },
+            CustomData: BuildCustomArrayDataSelector("#transactionForm1")
+        };
+
+        var _MyObjdata2 = {
+            InvID: 0,
+            Transaction: {
+                itAID: 0,
+                itAction: $scope._CurrentAction,
+                itBatchID: 0,
+                itCostPerUnit: 0,
+                itID: 0,
+                itInvID: 0,
+                itLID: 0,
+                itPID: 0,
+                itParentTransID: 0,
+                itQtyChange: 0,
+                itReqValue: "",
+                itSourceID: 1,
+                itStatusValue: "",
+                itUpdateDate: wcfDateStr123,
+                itUOMID: 0,
+                itUncontrolled: 0,
+                itUniqueDate: wcfDateStr,
+                itUnitDate2: wcfDateStr,
+                itUnitNumber1: 0,
+                itUnitNumber2: 0,
+                itUnitTag2: "",
+                itUnitTag3: ""
+            },
+            Targets: {
+                ToLocationID: 0,
+                ToUomID: 0,
+                ToConvertedQuantity: 0,
+                ToStatus: ""
+            },
+            CustomData: BuildCustomArrayDataSelector("#transactionForm2")
+        };
+        
+
         for (_i = 0; _i < $scope.CurrentCart.length; _i++) {
 
             k = $scope.IsSingleMode == true ? _i : 0;
             var _TempQty = $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity;
             var _TempStatus = $scope.CurrentCart[_i].InventoryDataList.iStatusValue;
             var _TempLocID = $scope.CurrentCart[_i].InventoryDataList.iLID;
+            var IsAdjustOnData = "False";
             if ($scope.CurrentOperation == "Convert") {
                 _TempQty = $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity;
             }
@@ -1441,6 +1629,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 _TempStatus = $scope.CurrentCart[k].MoveTransactionData.StatusToUpdate;
                 _TempLocID = $scope.CurrentCart[k].MoveTransactionData.MoveToLocation;
 
+            }
+
+            if ($scope.CurrentOperation == "Adjust") {
+                IsAdjustOnData = "True";
             }
 
             if ($scope.CurrentCart[k].ApplyTransactionData.UniqueDate != undefined && $scope.CurrentCart[k].ApplyTransactionData.UniqueDate != "") {
@@ -1467,26 +1659,96 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
             }
 
-            _myData.push({
-                CostPerItem: $scope.CurrentCart[k].iCostPerItem == undefined ? 0 : $scope.CurrentCart[k].iCostPerItem,
-                ToStatusValue: _TempStatus,
-                iQty: _TempQty == "" ? 0 : _TempQty,
-                ToUOMID: $scope.CurrentCart[k].ConvertTransactionData.ToUOMID,
-                InvID: $scope.CurrentCart[_i].InventoryDataList.uId,
-                ToConvertedQty: $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" ? 0 : $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity,
-                UOMID: $scope.CurrentCart[_i].InventoryDataList.iUOMID,
-                LocationID: _TempLocID == "" ? 0 : _TempLocID,
-                pID: $scope.CurrentCart[_i].InventoryDataList.pID,
-                iStatusValue: $scope.CurrentCart[k].UpdateTransactionData.StatusToUpdate,
-                UnitTag1: $scope.CurrentCart[k].ApplyTransactionData.UnitTag1,
-                UnitTag2: $scope.CurrentCart[k].ApplyTransactionData.UnitTag2,
-                UnitTag3: $scope.CurrentCart[k].ApplyTransactionData.UnitTag3,
-                UniqueDate: wcfDateStr1,
-                UnitDate2: wcfDateStr2,
-                UnitNumber1: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == undefined ? 0 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1,
-                UnitNumber2: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 == undefined ? 0 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2,
-                myPostObj: _MyObjdata, IsLineItem: $scope.CurrentCart[k].IsLineItemData
-            });
+
+
+            if (IsAdjustOnData == "True") {
+
+                var value = 0;
+                debugger;
+                if ($scope.IsQuantityUpdated == false) {
+
+                    $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity = parseInt($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity);
+                    $scope.CurrentCart[k].ActionPerformed = $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity ? "1" : "-1";
+
+                    if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                        value = $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity - $scope.CurrentCart[k].InventoryDataList.oquantity;
+                        _MyObjdata1.Transaction.itAction=1;
+                    }
+                    else {
+                        value = $scope.CurrentCart[k].InventoryDataList.oquantity - $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity;
+                        _MyObjdata2.Transaction.itAction=-1;
+                    }
+
+                    $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity = value;
+
+                    _TempQty = $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity;
+
+                    CheckScopeBeforeApply();
+
+                }
+                else {
+
+                    _TempQty = $scope.CurrentCart[k].AdjustActionQuantity;
+                    if ($scope.CurrentCart[k].ActionPerformed == 1 || $scope.CurrentCart[k].ActionPerformed == "1")
+                    {
+                        _MyObjdata1.Transaction.itAction = 1;
+                    }
+
+                    if ($scope.CurrentCart[k].ActionPerformed == -1 || $scope.CurrentCart[k].ActionPerformed == "-1") {
+                        _MyObjdata2.Transaction.itAction = -1;
+                    }
+                    CheckScopeBeforeApply();
+
+                }
+
+
+
+                _myData.push({
+                    CostPerItem: $scope.CurrentCart[k].iCostPerItem == undefined ? 0 : $scope.CurrentCart[k].iCostPerItem,
+                    IsAdjustOn: IsAdjustOnData,
+                    ActionData: parseInt($scope.CurrentCart[k].ActionPerformed),
+                    ToStatusValue: _TempStatus,
+                    iQty: _TempQty == "" ? 0 : _TempQty,
+                    ToUOMID: $scope.CurrentCart[k].ConvertTransactionData.ToUOMID,
+                    InvID: $scope.CurrentCart[_i].InventoryDataList.uId,
+                    ToConvertedQty: $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" ? 0 : $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity,
+                    UOMID: $scope.CurrentCart[_i].InventoryDataList.iUOMID,
+                    LocationID: _TempLocID == "" ? 0 : _TempLocID,
+                    pID: $scope.CurrentCart[_i].InventoryDataList.pID,
+                    iStatusValue: $scope.CurrentCart[k].UpdateTransactionData.StatusToUpdate,
+                    UnitTag1: $scope.CurrentCart[k].ApplyTransactionData.UnitTag1,
+                    UnitTag2: $scope.CurrentCart[k].ApplyTransactionData.UnitTag2,
+                    UnitTag3: $scope.CurrentCart[k].ApplyTransactionData.UnitTag3,
+                    UniqueDate: wcfDateStr1,
+                    UnitDate2: wcfDateStr2,
+                    UnitNumber1: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == undefined ? 0 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1,
+                    UnitNumber2: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 == undefined ? 0 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2,
+                    myPostObj: _MyObjdata1, myPostObj2: _MyObjdata2, IsLineItem: $scope.CurrentCart[k].IsLineItemData
+                });
+            }
+            else {
+                _myData.push({
+                    CostPerItem: $scope.CurrentCart[k].iCostPerItem == undefined ? 0 : $scope.CurrentCart[k].iCostPerItem,
+                    ToStatusValue: _TempStatus,
+                    iQty: _TempQty == "" ? 0 : _TempQty,
+                    ToUOMID: $scope.CurrentCart[k].ConvertTransactionData.ToUOMID,
+                    InvID: $scope.CurrentCart[_i].InventoryDataList.uId,
+                    ToConvertedQty: $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" ? 0 : $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity,
+                    UOMID: $scope.CurrentCart[_i].InventoryDataList.iUOMID,
+                    LocationID: _TempLocID == "" ? 0 : _TempLocID,
+                    pID: $scope.CurrentCart[_i].InventoryDataList.pID,
+                    iStatusValue: $scope.CurrentCart[k].UpdateTransactionData.StatusToUpdate,
+                    UnitTag1: $scope.CurrentCart[k].ApplyTransactionData.UnitTag1,
+                    UnitTag2: $scope.CurrentCart[k].ApplyTransactionData.UnitTag2,
+                    UnitTag3: $scope.CurrentCart[k].ApplyTransactionData.UnitTag3,
+                    UniqueDate: wcfDateStr1,
+                    UnitDate2: wcfDateStr2,
+                    UnitNumber1: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == undefined ? 0 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1,
+                    UnitNumber2: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 == undefined ? 0 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2,
+                    myPostObj: _MyObjdata, IsLineItem: $scope.CurrentCart[k].IsLineItemData
+                });
+            }
+           
         }
         return _myData;
 
@@ -1529,15 +1791,55 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         }
         return false;
     }
+
+    function IsDateValidated()
+    {
+        var _returnVar = true;
+
+        if ($scope.CurrentOperation == 12)
+        {
+            var _dateVal1 = $('#transactionForm1').find("#itUpdateDate").val();
+            if (_dateVal1 != null && _dateVal1 != undefined) {
+                _dateVal1 = $.trim(_dateVal1);
+            }
+
+            var _dateVal2 = $('#transactionForm2').find("#itUpdateDate").val();
+            if (_dateVal2 != null && _dateVal2 != undefined) {
+                _dateVal2 = $.trim(_dateVal2);
+            }
+
+            if(_dateVal1!="" && _dateVal2!="")
+            {
+                _returnVar = true;
+            }
+            else {
+                _returnVar = false;
+            }
+
+        }
+        else {
+            var _dateVal = $("#itUpdateDate").val();
+            if (_dateVal != null && _dateVal != undefined) {
+                _dateVal = $.trim(_dateVal);
+            }
+
+            if(_dateVal!="")
+            {
+                _returnVar = true;
+            }
+            else {
+                _returnVar = false;
+            }
+        }
+
+        return _returnVar
+    }
     $scope.SubmitAllActivities = function () {
 
-        var _dateVal = $("#itUpdateDate").val();
-        if (_dateVal != null && _dateVal != undefined) {
-            _dateVal = $.trim(_dateVal);
-        }
+       
         if (!$scope.ValidateObjectVM()) {
 
-            if (!CheckintoCustomData(0) && _dateVal != "") {
+            if (!CheckintoCustomData(0) && IsDateValidated()==true) {
 
                 var authData = localStorageService.get('authorizationData');
                 if (authData) {
@@ -1623,14 +1925,14 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     $scope.DeleteItem = function (CurrentActiveObject) {
 
 
-        debugger;
+         
 
 
 
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {
 
-                debugger;
+                 
 
                 var _tempArray = $scope.CurrentCart;
                 for (var i = 0; i < _tempArray.length; i++) {
@@ -1944,7 +2246,6 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
         }
 
-        //    CheckScopeBeforeApply()
 
     }
 

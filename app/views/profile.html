@@ -656,7 +656,9 @@
             <a id="menu-toggle"><i style="color:#fff;" class="animated fa fa-bars"></i></a>
             <br />
         </div>
-        <img src="http://seantheme.com/color-admin-v1.9/admin/html/assets/img/user-4.jpg" alt="Alternate Text" />
+
+
+        <img src="{{picURl}}" alt="Alternate Text" />
         <div>
             <br />
         </div>
@@ -671,7 +673,7 @@
                 </td>
 
                 <td>
-                    <h4>Dashrath Kumawat</h4>
+                    <h4>{{firstname}} {{lastname}}</h4>
                 </td>
 
                 <td ng-click="Editmode()">
@@ -679,14 +681,13 @@
                 </td>
             </tr>
         </table>
-
     </div>
 
 
     <div class="container">
-        <h4>  User.User@gmail.com</h4>
-        <h4> My Organization</h4>
-        <h4> 123-1234-65472</h4>
+        <h4>  {{email}}</h4>
+        <h4> {{organization}}</h4>
+        <h4> {{phone}}</h4>
     </div>
 </div>
 
@@ -735,23 +736,23 @@
 
     <div class="form-group">
         <label>First Name</label>
-        <input class="form-control" type="text" name="name" value=" " />
+        <input class="form-control" ng-model="firstname" type="text" name="name" />
     </div>
     <div class="form-group">
         <label>Last Name</label>
-        <input class="form-control" type="text" name="name" value=" " />
+        <input class="form-control" ng-model="lastname" type="text" name="name"  />
     </div>
     <div class="form-group">
         <label>Email</label>
-        <input class="form-control" type="text" name="name" value=" " />
+        <input class="form-control" ng-model="email" type="text" name="name" />
     </div>
     <div class="form-group">
         <label>Organization</label>
-        <input class="form-control" type="text" name="name" value=" " />
+        <input class="form-control" ng-model="organization" type="text" name="name"  />
     </div>
     <div class="form-group">
         <label>Phone</label>
-        <input class="form-control" type="text" name="name" value=" " />
+        <input class="form-control" ng-model="phone" type="text" name="name" />
     </div>
 
     <a style="line-height:30px;" ng-click="detailmode()" class="btn btn-primary"> <i class="fa fa-pencil"></i> Cancel</a>
@@ -769,7 +770,6 @@
             $(this).find(".fa").removeClass("rotateIn fa-arrow-left").addClass("rotateIn fa-bars");
         }
     });
-
 
   
 
