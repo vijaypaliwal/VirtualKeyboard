@@ -4,12 +4,12 @@ app.controller('profileController', ['$scope', 'ordersService', 'localStorageSer
     $scope.SavingData = false;
     $scope.IsEditMode = false;
     $scope.ImageList = [];
-    $scope.firstname = "Dashrath";
-    $scope.lastname = "Kumawat";
+    $scope.firstname = "";
+    $scope.lastname = "";
     $scope.usename = "";
-    $scope.phone = "9001783675";
-    $scope.organization = "Shivam";
-    $scope.email = "Dashrath.k@shivamitconsultancy.com";
+    $scope.phone = "";
+    $scope.organization = "";
+    $scope.email = "";
     $scope.picURl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
 
     function init() {

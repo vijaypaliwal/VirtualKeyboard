@@ -698,7 +698,7 @@
 
 
         <div style="text-align:left;" class="col-xs-3">
-            <a id="menu-toggle"><i class="animated fa fa-bars"></i></a>
+            <a id="menu-toggle1"><i class="animated fa fa-bars"></i></a>
 
         </div>
         <div class="col-xs-6">
@@ -755,21 +755,15 @@
         <input class="form-control" ng-model="phone" type="text" name="name" />
     </div>
 
-    <a style="line-height:30px;" ng-click="detailmode()" class="btn btn-primary"> <i class="fa fa-pencil"></i> Cancel</a>
+    <a style="line-height:30px;" ng-click="detailmode()" class="btn btn-primary"> <i class="fa fa-times"></i> Cancel</a>
+  
+
+    <a style="line-height:30px; margin-top:12px;" disabled class="btn btn-primary"> <i class="fa fa-pencil"></i> update</a>
 </div>
 
 
 <script>
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-        if ($("#wrapper").hasClass("toggled")) {
-            $(this).find(".fa").removeClass("rotateIn fa-bars").addClass("rotateIn fa-arrow-left");
-        }
-        else {
-            $(this).find(".fa").removeClass("rotateIn fa-arrow-left").addClass("rotateIn fa-bars");
-        }
-    });
+ 
 
   
 
@@ -843,5 +837,32 @@
 
  
   
+</script>
+
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        if ($("#wrapper").hasClass("toggled")) {
+            $(this).find(".fa").removeClass("rotateIn fa-bars").addClass("rotateIn fa-arrow-left");
+        }
+        else {
+            $(this).find(".fa").removeClass("rotateIn fa-arrow-left").addClass("rotateIn fa-bars");
+        }
+    });
+
+    $("#menu-toggle1").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        if ($("#wrapper").hasClass("toggled")) {
+            $(this).find(".fa").removeClass("rotateIn fa-bars").addClass("rotateIn fa-arrow-left");
+        }
+        else {
+            $(this).find(".fa").removeClass("rotateIn fa-arrow-left").addClass("rotateIn fa-bars");
+        }
+    });
+
+
+
 </script>
 
