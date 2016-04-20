@@ -555,7 +555,43 @@
         overflow: hidden;
     }
 </style>
+
+
 <style>
+    .bgm-increase {
+        background-color: #177B3D !important;
+    }
+
+    .bgm-move {
+        background-color: #C65E28 !important;
+    }
+
+    .bgm-decrease {
+        background-color: #AF2525 !important;
+    }
+
+    .bgm-convert {
+        background-color: #CE59A1 !important;
+    }
+
+    .bgm-status {
+        background-color: #583782 !important;
+    }
+
+    .bgm-apply {
+        background-color: #0D190F !important;
+    }
+    .iteminfo
+    {
+        padding:10px;
+    }
+    
+    
+    
+     .topheader i {
+        font-size: 17px;
+        margin-top: 14px;
+    }
 
 
     body {
@@ -593,271 +629,113 @@
             margin-top: 5px;
             margin-bottom: 5px;
         }
-</style>
-
-<style>
-    .form-group  label span
+    .activityinfo h5
     {
-        color:red;
-    }
-    
-    
-    
-     .followMeBar {
-        background-color: #0083C7;
-        position: relative;
-        z-index: 1;
-        color: #fff;
-    }
-
-        .followMeBar i
-        {
-            color:#fff;
-            font-size:24px;
-            margin-top:10px;
-        }
-        
-        
-         .followMeBar.fixed {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            box-sizing: border-box;
-            z-index: 0;
-        }
-
-            .followMeBar.fixed.absolute {
-                position: absolute;
-            }
-
-    .bluearea {
-        background: rgba(73,155,234,1);
-        background: -moz-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
-        background: -webkit-gradient(left top, right top, color-stop(0%, rgba(73,155,234,1)), color-stop(90%, rgba(22,85,157,0.94)), color-stop(97%, rgba(18,80,151,0.94)), color-stop(100%, rgba(32,124,229,0.94)));
-        background: -webkit-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
-        background: -o-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
-        background: -ms-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
-        background: linear-gradient(to right, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(41, 100, 169, 0.94) 97%, rgba(32,124,229,0.94) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5', GradientType=1 );
-        color: #fff;
-        text-align: center;
-        padding-left:12px;
-        padding-right:12px;
-        margin-top:-5px;
-     
-    }
-    /* For aesthetics only */
-
-    body {
-        margin: 0;
-        
+        padding:10px;
+        color:#fff;
     }
 </style>
 
-<div class=" animated bounceIn detailmode">
-    <div class="bluearea">
-        <div style="color:#fff; text-align:left; font-size:24px; margin-top:5px; padding-left:10px;">
-
-            <a id="menu-toggle"><i style="color:#fff;" class="animated fa fa-bars"></i></a>
-            <br />
-        </div>
+<div style="top:0" class="topheader">
 
 
-        <img src="{{picURl}}" alt="Alternate Text" />
-        <div>
-            <br />
-        </div>
+    <div style="text-align:left;" class="col-xs-3">
+        <a id="menu-toggle"><i class="animated fa fa-bars"></i></a>
+
     </div>
-
-    <div style="margin-top:0px;" class="followMeBar bluearea">
-
-        <table style="width:100%">
-            <tr>
-                <td>
-                    <i class="fa fa-arrow-left"></i>
-                </td>
-
-                <td>
-                    <h4>{{firstname}} {{lastname}}</h4>
-                </td>
-
-                <td ng-click="Editmode()">
-                    <i class="fa fa-pencil"></i>
-                </td>
-            </tr>
-        </table>
+    <div class="col-xs-6">
+        <img style="width:150px; margin-top:-2px;" src="img/logo.png" alt="Alternate Text" />
     </div>
+    <div class="col-xs-3">
+        <div style="float:right;">
+            <div class="headerdropdown dropdown">
+                <a data-toggle="dropdown" aria-expanded="true">
+                    <img src="img/dummy-user48.png" alt="">
+                </a>
+                <ul class="dropdown-menu animated slideInDown">
 
+                    <li>
+                      <a><i class="fa fa-user"></i> My Profile</a>
+                    </li>
 
-    <div class="container">
-        <h4>  {{email}}</h4>
-        <h4> {{organization}}</h4>
-        <h4> {{phone}}</h4>
-    </div>
-</div>
-
-<div class="animated slideInLeft editmode"  style="padding:15px; display:none; text-align:left">
-    <div style="top:0" class="topheader">
-
-
-        <div style="text-align:left;" class="col-xs-3">
-            <a id="menu-toggle1"><i class="animated fa fa-bars"></i></a>
-
-        </div>
-        <div class="col-xs-6">
-            <img style="width:150px; margin-top:-2px;" src="img/logo.png" alt="Alternate Text" />
-        </div>
-        <div class="col-xs-3">
-            <div style="float:right;">
-                <div class="headerdropdown dropdown">
-                    <a data-toggle="dropdown" aria-expanded="true">
-                        <img src="img/dummy-user48.png" alt="">
-                    </a>
-                    <ul class="dropdown-menu animated slideInDown">
-
-
-                        <li>
-                            <a><i class="fa fa-user"></i> My Profile</a>
-                        </li>
-
-
-
-
-                        <li>
-                            <a ng-click="logOut()" title="Logout"><i class="fa fa-sign-out"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </div>
-
+                    <li>
+                        <a ng-click="logOut()" title="Logout"><i class="fa fa-sign-out"></i> Log Out</a>
+                    </li>
+                </ul>
             </div>
 
         </div>
+
+    </div>
+</div>
+
+<div style="margin-top:40px; text-align:left; padding-left:12px; padding-right:12px;" class="container">
+
+    <div style="margin-top:12px;" class="page-header">
+        <h4 style="margin-top:16px; color:#000;">Inventory Summary</h4>
     </div>
 
-    <br /><br />
-    <h4>Update Info</h4>
-
-    <form name="myForm">
-
-        <div class="form-group">
-            <label>First Name <span>*</span></label>
-            <input class="form-control" ng-model="firstname" type="text" name="name" required />
-        </div>
-        <div class="form-group">
-            <label>Last Name</label>
-            <input class="form-control" ng-model="lastname" type="text" name="name" />
-        </div>
-        <div class="form-group">
-            <label>Email <span>*</span></label>
-            <input class="form-control" ng-model="email" type="text" name="name" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required />
-        </div>
-        <div class="form-group">
-            <label>Organization</label>
-            <input class="form-control" ng-model="organization" type="text" name="name" />
-        </div>
-        <div class="form-group">
-            <label>Phone</label>
-            <input class="form-control" ng-model="phone" type="text" name="name" />
+    <div class="iteminfo">
+        <div class="row">
+            <div class="col-xs-9">
+                <p style="margin-bottom:4px;">{{CurrentInventory.pPart}} </p>
+                <small> {{CurrentInventory.pDescription}} </small>
+            </div>
+            <div class="col-xs-3">
+                <div style="text-align:right">
+                    <h4 class="label label-warning">{{CurrentInventory.iQty}} {{CurrentInventory.uomUOM}}</h4>
+                </div>
+            </div>
         </div>
 
-        <a style="line-height:30px;" ng-click="detailmode()" class="btn btn-primary"> <i class="fa fa-times"></i> Cancel</a>
+        <div class="row">
+            <div class="col-xs-6">
+                <p>Loc {{CurrentInventory.lLoc}} </p>
+              
+            </div>
+            <div class="col-xs-6">
+                <div style="text-align:right">
+                    <p>Status {{CurrentInventory.iStatusValue}} </p>
+                </div>
+               
+            </div>
+        </div>
+    </div>
 
+    <h4>Recent Activities</h4>
 
-        <a ng-disabled="myForm.$invalid" ng-click="Updateinfo()" style="line-height:30px; margin-top:12px;" class="btn btn-primary"> <i class="fa fa-pencil"></i> update</a>
-    </form>
+    <div ng-repeat="_obj in Recentactivities">
+
+        <div ng-if="_obj.ParentAction=='Increase'" class="activityinfo bgm-increase">
+            <h5>Increase {{_obj.itQty}} {{_obj.uomUOM}} on {{_obj.itUpdateDate}}</h5>
+        </div>
+        <div ng-if="_obj.ParentAction=='Decrease'" class="bgm-decrease activityinfo">
+            <h5>Decrease {{_obj.itQty}} {{_obj.uomUOM}} on {{_obj.itUpdateDate}}</h5>
+        </div>
+
+        <div ng-if="_obj.ParentAction=='Move'" class="bgm-move activityinfo">
+            <h5>Move  {{_obj.itQty}} {{_obj.uomUOM}} on {{_obj.itUpdateDate}}</h5>
+        </div>
+
+        <div ng-if="_obj.ParentAction=='Convert'" class="bgm-convert activityinfo">
+            <h5>Convert  {{_obj.itQty}} {{_obj.uomUOM}} on {{_obj.itUpdateDate}}</h5>
+        </div>
+
+        <div ng-if="_obj.ParentAction=='Update'" class="bgm-status activityinfo">
+            <h5>Update  {{_obj.itQty}} {{_obj.uomUOM}} on {{_obj.itUpdateDate}}</h5>
+        </div>
+        <span ng-if="_obj.ItemDefaultCost==1">
+            <a class="btn btn-default" ng-click="Undo(_obj.itID,_obj.itInvID,_obj.itParentTransID)"> <i class="fa fa-refresh"></i></a>
+
+        </span>
+    </div>
 </div>
 
 
-<script>
- 
 
-  
-
-    var stickyHeaders = (function () {
-
-        var $window = $(window),
-            $stickies;
-
-        var load = function (stickies) {
-
-            if (typeof stickies === "object" && stickies instanceof jQuery && stickies.length > 0) {
-
-                $stickies = stickies.each(function () {
-
-                    var $thisSticky = $(this).wrap('<div class="followWrap" />');
-
-                    $thisSticky
-                        .data('originalPosition', $thisSticky.offset().top)
-                        .data('originalHeight', $thisSticky.outerHeight())
-                          .parent()
-                          .height($thisSticky.outerHeight());
-                });
-
-                $window.off("scroll.stickies").on("scroll.stickies", function () {
-                    _whenScrolling();
-                });
-            }
-        };
-
-        var _whenScrolling = function () {
-
-            $stickies.each(function (i) {
-
-                var $thisSticky = $(this),
-                    $stickyPosition = $thisSticky.data('originalPosition');
-
-                if ($stickyPosition <= $window.scrollTop()) {
-
-                    var $nextSticky = $stickies.eq(i + 1),
-                        $nextStickyPosition = $nextSticky.data('originalPosition') - $thisSticky.data('originalHeight');
-
-                    $thisSticky.addClass("fixed");
-
-                    if ($nextSticky.length > 0 && $thisSticky.offset().top >= $nextStickyPosition) {
-
-                        $thisSticky.addClass("absolute").css("top", $nextStickyPosition);
-                    }
-
-                } else {
-
-                    var $prevSticky = $stickies.eq(i - 1);
-
-                    $thisSticky.removeClass("fixed");
-
-                    if ($prevSticky.length > 0 && $window.scrollTop() <= $thisSticky.data('originalPosition') - $thisSticky.data('originalHeight')) {
-
-                        $prevSticky.removeClass("absolute").removeAttr("style");
-                    }
-                }
-            });
-        };
-
-        return {
-            load: load
-        };
-    })();
-
-    $(function () {
-        stickyHeaders.load($(".followMeBar"));
-    });
-
- 
-  
-</script>
 
 <script>
     $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-        if ($("#wrapper").hasClass("toggled")) {
-            $(this).find(".fa").removeClass("rotateIn fa-bars").addClass("rotateIn fa-arrow-left");
-        }
-        else {
-            $(this).find(".fa").removeClass("rotateIn fa-arrow-left").addClass("rotateIn fa-bars");
-        }
-    });
-
-    $("#menu-toggle1").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
         if ($("#wrapper").hasClass("toggled")) {

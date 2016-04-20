@@ -288,6 +288,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
             case "Decrease":
             case "Update":
             case "Apply":
+            case "Adjust":
                 $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity = parseInt($scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity);
                 $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity = isNaN($scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity) ? 0 : $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity;
                 if (Type == 1)
@@ -301,6 +302,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                         $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity = $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity - 1;
                     }
                 }
+              
                 break;
             case "Move":
                 $scope.CurrentCart[0].MoveTransactionData.ActionQuantity = parseInt($scope.CurrentCart[0].MoveTransactionData.ActionQuantity);
@@ -1095,6 +1097,46 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         }
 
     }
+
+
+    $scope.UpdateQtyAll = function (Qty, _Index) {
+
+        $scope.ActionQuantityValue = Qty;
+        var value = 0;
+        $scope.CurrentCart[_Index].AdjustCalculation = "";
+        if ($scope.CurrentOperation == "Adjust") {
+
+
+            if ($scope.ActionQuantityValue != "" && $scope.ActionQuantityValue != null && $scope.ActionQuantityValue != undefined) {
+
+                for (var Index = 0; Index < $scope.CurrentCart.length; Index++) {
+                    $scope.CurrentCart[Index].AdjustCalculation = "";
+                    if ($scope.ActionQuantityValue > $scope.CurrentCart[Index].InventoryDataList.oquantity) {
+                        value = $scope.ActionQuantityValue - $scope.CurrentCart[Index].InventoryDataList.oquantity;
+                        $scope.CurrentCart[Index].AdjustCalculation += $scope.CurrentCart[Index].InventoryDataList.oquantity.toString() + " + " + value.toString() + "=" + $scope.ActionQuantityValue.toString();
+                    }
+                    else if ($scope.ActionQuantityValue < $scope.CurrentCart[Index].InventoryDataList.oquantity) {
+                        value = $scope.CurrentCart[Index].InventoryDataList.oquantity - $scope.ActionQuantityValue;
+                        $scope.CurrentCart[Index].AdjustCalculation += $scope.CurrentCart[Index].InventoryDataList.oquantity.toString() + " - " + value.toString() + "=" + $scope.ActionQuantityValue.toString();
+                    }
+                    else {
+                        value = 0;
+                        $scope.CurrentCart[Index].AdjustCalculation += $scope.CurrentCart[Index].InventoryDataList.oquantity.toString() + " + " + value.toString() + "=" + $scope.ActionQuantityValue.toString();
+                    }
+
+                    $scope.CurrentCart[Index].AdjustActionQuantity = value;
+
+                    $scope.IsQuantityUpdated = true;
+
+                    $scope.CurrentCart[Index].ActionPerformed = ($scope.ActionQuantityValue > $scope.CurrentCart[Index].InventoryDataList.oquantity || $scope.ActionQuantityValue == $scope.CurrentCart[Index].InventoryDataList.oquantity) ? "1" : "-1";
+                }
+                CheckScopeBeforeApply();
+            }
+        }
+
+    }
+
+    
     $scope.CheckOnAdjust = function (cfdid, IsIncrease) {
         var _data = true;
         var _CurrentCustomColumns = angular.copy($scope.CustomActivityDataList);
@@ -1613,7 +1655,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         
 
         for (_i = 0; _i < $scope.CurrentCart.length; _i++) {
-
+            var _OriginalAction = $scope.CurrentCart[_i].ActionPerformed;
             k = $scope.IsSingleMode == true ? _i : 0;
             var _TempQty = $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity;
             var _TempStatus = $scope.CurrentCart[_i].InventoryDataList.iStatusValue;
@@ -1689,6 +1731,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 else {
 
                     _TempQty = $scope.CurrentCart[k].AdjustActionQuantity;
+                    $scope.CurrentCart[k].ActionPerformed = _OriginalAction;
                     if ($scope.CurrentCart[k].ActionPerformed == 1 || $scope.CurrentCart[k].ActionPerformed == "1")
                     {
                         _MyObjdata1.Transaction.itAction = 1;
@@ -1849,7 +1892,6 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
                 var _mdata = BuildMultipleData();
 
-                console.log(_mdata);
 
                 $.ajax({
                     type: "POST",
@@ -1863,7 +1905,6 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
                         $scope.IsProcessing = false;
                         $scope.CurrentCart = [];
-                        // log.success("Activity performed successfully please, you are redirecting to inventory page.")
                         ShowSuccess('Saved');
 
                         $location.path("/FindItems");

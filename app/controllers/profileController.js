@@ -50,6 +50,7 @@ app.controller('profileController', ['$scope', 'ordersService', 'localStorageSer
                    $scope.phone = response.GetUserInfoResult.Payload[0].Phone
                    $scope.organization = response.GetUserInfoResult.Payload[0].Organization
                    $scope.username = response.GetUserInfoResult.Payload[0].UserName
+                   $scope.myprofileimage = response.GetUserInfoResult.Payload[0].ProfilePic;
 
                    if (response.GetUserInfoResult.Payload[0].ProfilePic != null && response.GetUserInfoResult.Payload[0].ProfilePic != "") {
 
@@ -58,9 +59,8 @@ app.controller('profileController', ['$scope', 'ordersService', 'localStorageSer
 
                    else {
 
-                       $scope.picURl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
+                    $scope.picURl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
 
-                      
                    }
 
                    console.log(response)
@@ -80,11 +80,44 @@ app.controller('profileController', ['$scope', 'ordersService', 'localStorageSer
 
     }
 
+    
 
 
-    $scope.logOut = function () {
+    $scope.Updateinfo = function () {
+        debugger;
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        var _data = { "UserName": $scope.username, "FirstName": $scope.firstname, "LastName": $scope.lastname, "Email": $scope.email, "Phone": $scope.phone, "Organization": $scope.organization, "ProfilePic": $scope.myprofileimage };
+
+        debugger;
+        $.ajax({
+            url: serviceBase + "UpdateUserInfo",
+            type: 'POST',
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _data }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (result) {
+                log.success("Profile information Updated.");
+
+            },
+            error: function (err) {
+
+                log.error("Some thing went wrong");
+            
+            },
+            complete: function () {
+            }
+        });
+    
+    }
 
 
+
+    $scope.logOut = function ()
+    {
         authService.logOut();
         $location.path('/login');
         CheckScopeBeforeApply();

@@ -676,7 +676,7 @@
                                     <label>Quantity</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-plus" ng-click="IncreaseDecreaseValue(1,0)"></i></span>
-                                        <input type="number" placeholder="Fill Quantity" ng-blur="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
+                                        <input type="number" id="commonnumber" placeholder="Fill Quantity" ng-change="UpdateQtyAll(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-blur="UpdateQtyAll(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
 
                                         <span class="input-group-addon" ng-click="IncreaseDecreaseValue(2,0)"><i class="fa fa-minus"></i></span>
                                     </div>
@@ -695,7 +695,7 @@
 
 
 
-                                    <span ng-if=" CurrentOperation!='Increase'&&   CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
+                                    <span ng-if=" CurrentOperation!='Increase'&& CurrentOperation!='Adjust' &&   CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
 
                                         <span ng-if=" CurrentOperation=='Increase' ||  CurrentOperation=='Decrease'">Quantity can't be greater than original quantity</span>
                                         <span ng-if=" AllowNegative!=null &&  AllowNegative!='True' &&  CurrentOperation!='Increase' &&  CurrentOperation!='Decrease'"> Quantity can't be greater than original quantity</span>
@@ -2159,8 +2159,7 @@
     </div>
 
 
-    <a ng-click="changeMode()" ng-if="CurrentOperation!='Adjust'" class="btn {{CurrentHeaderClass}} btn-sm changebtn"><i class="fa fa-exchange"></i></a>
-    <a ng-if="CurrentOperation=='Adjust'" class="btn {{CurrentHeaderClass}} btn-sm changebtn disabled"><i class="fa fa-exchange"></i></a>
+    <a ng-click="changeMode()"  class="btn {{CurrentHeaderClass}} btn-sm changebtn"><i class="fa fa-exchange"></i></a>
 
 </div>
 

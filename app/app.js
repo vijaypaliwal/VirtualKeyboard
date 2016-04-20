@@ -47,9 +47,15 @@ app.config(function ($routeProvider) {
         controller: "FindItemsController",
         templateUrl: "app/views/FindItems.html"
     });
+
     $routeProvider.when("/item", {
         controller: "itemController",
         templateUrl: "app/views/item.html"
+    });
+
+    $routeProvider.when("/InventoryHistory", {
+        controller: "InventoryHistoryController",
+        templateUrl: "app/views/InventoryHistory.html"
     });
 
 
