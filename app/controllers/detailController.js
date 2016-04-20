@@ -79,7 +79,7 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
 
 
 
-  
+
 
 
 
@@ -177,15 +177,64 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
 
     function addItemsToCart(object, IdToSave, originalID) {
 
-     
+
 
     }
 
-    $scope.addtocart = function (obj) {
-
+    $scope.addtocart = function (v) {
         debugger;
-        var originalID = "#actionQty_" + obj.iID;
-        addItemsToCart(obj, obj.iID, originalID);
+
+        var _cartData = localStorageService.get("ActivityCart");
+        if (_cartData == null || _cartData == undefined)
+        {
+            _cartData = [];
+        }
+        var mainObjectToSend = {
+            uId: v.iID,
+            pID: v.pID,
+            pPart: v.pPart,
+            iLID: v.iLID,
+            iUOMID: v.iUOMID,
+            iQty: 1,
+            oquantity: v.iQty,
+            uomUOM: v.uomUOM,
+            lLoc: v.lLoc,
+            iStatusValue: v.iStatusValue,
+            pDescription: v.pDescription,
+            Action: '',
+            iUniqueDate_date: v.iUniqueDate,
+            iUnitNumber2: v.iUnitNumber2,
+            iUnitNumber1: v.iUnitNumber1,
+            iUnitDate2_date: v.iUnitDate2,
+            iUnitTag3: v.iUnitTag3,
+            iUnitTag2: v.iUnitTag2,
+            pCountFrq: v.pCountFrq,
+            lZone: v.lZone,
+            ImageThumbPath: v.ImageThumbPath,
+            ImageDisplayName: v.ImageDisplayName,
+            iReqValue: v.iReqValue,
+            iCostPerUnit: v.pDefaultCost,
+        }
+
+        _cartData.push({
+            InventoryID: mainObjectToSend.uId,
+            IsLineItemData: [],
+            iCostPerItem: mainObjectToSend.iCostPerUnit,
+            ItemID: mainObjectToSend.pPart,
+            ActionPerformed: $scope.selectedAction,
+            AdjustActionQuantity: "",
+            AdjustCalculation: "",
+            InventoryDataList: mainObjectToSend,
+            IncreaseDecreaseVMData: ({ ActionQuantity: "" }),
+            MoveTransactionData: ({ ActionQuantity: "", StatusToUpdate: mainObjectToSend.iStatusValue, MoveToLocationText: "", MoveToLocation: "" }),
+            UpdateTransactionData: ({ ActionQuantity: "", StatusToUpdate: mainObjectToSend.iStatusValue }),
+            ApplyTransactionData: ({ ActionQuantity: "", UnitTag1: mainObjectToSend.iReqValue, UnitTag2: mainObjectToSend.iUnitTag2, UnitTag3: mainObjectToSend.iUnitTag3, UniqueDate: mainObjectToSend.iUniqueDate_date, UnitDate2: mainObjectToSend.iUnitDate2_date, UnitNumber1: mainObjectToSend.iUnitNumber1, UnitNumber2: mainObjectToSend.iUnitNumber2 }),
+            ConvertTransactionData: ({ ActionFromQuantity: "", ActionToQuantity: "", ToUOMID: 0 }),
+        });
+
+        localStorageService.set("ActivityCart", "");
+        localStorageService.set("ActivityCart", _cartData);
+        ShowSuccess('Added');
 
     }
 
