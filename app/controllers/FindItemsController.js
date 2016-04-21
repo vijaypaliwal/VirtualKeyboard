@@ -1044,11 +1044,6 @@ app.directive('onLongPress', function ($timeout) {
                         });
                     }
 
-
-
-
-
-
                 }
             });
 

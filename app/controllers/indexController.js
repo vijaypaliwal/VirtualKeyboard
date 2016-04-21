@@ -43,10 +43,6 @@ app.controller('indexController', ['$scope', 'ordersService', 'localStorageServi
                },
                error: function (err) {
 
-                   alert("Error");
-                   debugger;
-
-                   alert(err.Message);
 
                }
            });
