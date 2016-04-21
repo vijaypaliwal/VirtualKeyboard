@@ -6,6 +6,8 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
     $scope.ImageList = [];
     $scope.Recentactivities = [];
     $scope.mainObjectToSend = [];
+    $scope.ActivityDate = "";
+    $scope.Activity = "";
     function init() {
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
         console.log($scope.CurrentInventory);
@@ -34,15 +36,37 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
         }
     }
 
-    $scope.Undo=function(TransID,InvID,ParentID)
-    {
+    $scope.Undo = function (TransID, InvID, ParentID) {
 
     }
-    $scope.GetRecentActivities=function()
-    {
+
+    Date.prototype.toMSJSON = function () {
+        var date = '/Date(' + this.getTime() + '-05:00)/'; //CHANGED LINE
+        return date;
+    };
+    $scope.GetRecentActivities = function () {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
+        }
+
+        debugger;
+        var _datestring = ""
+        var _updateDateval = $scope.ActivityDate;
+
+
+        if (_updateDateval != "" && _updateDateval != undefined) {
+
+            var dsplit1 = _updateDateval.indexOf("/") > -1 ? _updateDateval.split("/") : _updateDateval.split("-");
+            var d122 = new Date(dsplit1[0], dsplit1[1]-1, dsplit1[2]);
+
+            var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), d122.getHours(), d122.getMinutes(), d122.getSeconds(), d122.getMilliseconds()))
+
+            _datestring = d122.toMSJSON();
+        }
+
+        else {
+            _datestring = "/Date(0000000000000-0000)/";
         }
 
         $.ajax
@@ -51,7 +75,7 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
                url: serviceBase + 'GetRecentActivity',
                contentType: 'application/json; charset=utf-8',
                dataType: 'json',
-               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "id": $scope.CurrentInventory.pID}),
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "id": $scope.CurrentInventory.pID, "ActivityDate": _datestring, "Activity": $scope.Activity }),
                success: function (response) {
                    debugger;
                    console.log(response);
@@ -75,7 +99,9 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
 
     init();
 
-
+    $scope.$watch('Activity', function () {
+        $scope.GetRecentActivities();
+    });
 
     function InitializeSwiper() {
         var mySwiper = new Swiper('.swiper-container', {

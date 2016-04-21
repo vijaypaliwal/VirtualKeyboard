@@ -40,6 +40,23 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
 
     }
 
+    $scope.viewhistory = function () {
+        $location.path('/InventoryHistory');
+
+        $scope.$apply();
+
+    }
+
+    $scope.showinventory = function () {
+        $location.path('/FindItems');
+
+        $scope.$apply();
+
+    }
+
+
+    
+
     init();
 
 

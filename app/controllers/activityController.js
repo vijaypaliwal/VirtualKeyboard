@@ -50,9 +50,33 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     }
 
 
- 
+    $scope.cartitem = function () {
+        $(".cartitemmenu").addClass("active")
+        $(".relateddatamenu").removeClass("active")
 
- 
+        $("#home").show()
+
+        $("#menu1").hide()
+
+        
+
+        
+    }
+
+
+
+
+    $scope.relateddata = function () {
+        $(".relateddatamenu").addClass("active")
+        $(".cartitemmenu").removeClass("active")
+
+        $("#home").hide()
+
+        $("#menu1").show()
+    }
+
+
+    
 
     $scope.$watch('CurrentCart', function () {
         // do something here

@@ -559,11 +559,7 @@
 
 <style>
 
-    .topheader i {
-        font-size: 17px;
-        margin-top: 14px;
-    }
-
+  
 
     body {
         background: #fff;
@@ -602,40 +598,9 @@
         }
 </style>
 
-<div style="top:0" class="topheader">
 
 
-    <div style="text-align:left;" class="col-xs-3">
-        <a id="menu-toggle"><i class="animated fa fa-bars"></i></a>
-
-    </div>
-    <div class="col-xs-6">
-        <img style="width:150px; margin-top:-2px;" src="img/logo.png" alt="Alternate Text" />
-    </div>
-    <div class="col-xs-3">
-        <div style="float:right;">
-            <div class="headerdropdown dropdown">
-                <a data-toggle="dropdown" aria-expanded="true">
-                    <img src="img/dummy-user48.png" alt="">
-                </a>
-                <ul class="dropdown-menu animated slideInDown">
-
-                    <li>
-                      <a><i class="fa fa-user"></i> My Profile</a>
-                    </li>
-
-                    <li>
-                        <a ng-click="logOut()" title="Logout"><i class="fa fa-sign-out"></i> Log Out</a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-
-    </div>
-</div>
-
-<div style="margin-top:45px;" class="animated slideInLeft">
+<div class="animated slideInLeft">
 
     <div style="margin-top:58px;" ng-if="IsEditMode==true" class="page-header">
         <h5 style="color:#000; padding-left:12px; text-align:left;">Edit inventory details</h5>
@@ -769,8 +734,8 @@
 
     <div class="modal-body">
         <ul class="animated bounceIn" id="selectAction">
-            <li><span>View history</span><a href="#/InventoryHistory" class="btn-info btn"> <i class="fa fa-file-text"></i> </a></li>
-            <li><span>Show all Inventory</span><a href="#/FindItems" class="btn-danger btn"> <i class="fa fa-dollar"></i> </a></li>
+            <li ng-click="viewhistory()"><span>View history</span><a href="#/InventoryHistory" class="btn-info btn"> <i class="fa fa-file-text"></i> </a></li>
+            <li ng-click="showinventory()"><span>Show all Inventory</span><a href="#/FindItems" class="btn-danger btn"> <i class="fa fa-dollar"></i> </a></li>
             <li ng-click="addtocart(CurrentInventory)"><span>Select fot cart</span><a class="btn-success btn" data-dismiss="modal"> <i class="fa fa-shopping-cart"></i> </a></li>
             <li ng-click="ToggleEditView()"><span>Edit Item details</span><a class="btn bgm-red" data-dismiss="modal"> <i class="fa fa-pencil"></i> </a></li>
         </ul>
@@ -794,19 +759,5 @@
     </div>
 </div>
 
-<script>
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-        if ($("#wrapper").hasClass("toggled")) {
-            $(this).find(".fa").removeClass("rotateIn fa-bars").addClass("rotateIn fa-arrow-left");
-        }
-        else {
-            $(this).find(".fa").removeClass("rotateIn fa-arrow-left").addClass("rotateIn fa-bars");
-        }
-    });
 
-
-
-</script>
 

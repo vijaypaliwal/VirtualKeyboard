@@ -4,6 +4,8 @@
 
 app.controller('mainmenuController', ['$scope', '$location', 'authService', 'ngAuthSettings', 'log', function ($scope, $location, authService, ngAuthSettings, log) {
 
+  
+
     $scope.loginData = {
         userName: "",
         password: "",
@@ -24,7 +26,12 @@ app.controller('mainmenuController', ['$scope', '$location', 'authService', 'ngA
         $scope.$apply();
     }
 
-    $scope.authentication = authService.authentication.isAuth; 
+    $scope.authentication = authService.authentication.isAuth;
+
+
+   
+
+  
 
 
 

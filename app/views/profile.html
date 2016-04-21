@@ -4,6 +4,8 @@
         width: 100%;
     }
 
+   
+
         #sticky.stick {
             position: fixed;
             top: 0;
@@ -658,7 +660,7 @@
     <div class="bluearea">
         <div style="color:#fff; text-align:left; font-size:24px; margin-top:5px; padding-left:10px;">
 
-            <a id="menu-toggle"><i style="color:#fff;" class="animated fa fa-bars"></i></a>
+        
             <br />
         </div>
 
@@ -697,44 +699,9 @@
 </div>
 
 <div class="animated slideInLeft editmode"  style="padding:15px; display:none; text-align:left">
-    <div style="top:0" class="topheader">
+    
 
 
-        <div style="text-align:left;" class="col-xs-3">
-            <a id="menu-toggle1"><i class="animated fa fa-bars"></i></a>
-
-        </div>
-        <div class="col-xs-6">
-            <img style="width:150px; margin-top:-2px;" src="img/logo.png" alt="Alternate Text" />
-        </div>
-        <div class="col-xs-3">
-            <div style="float:right;">
-                <div class="headerdropdown dropdown">
-                    <a data-toggle="dropdown" aria-expanded="true">
-                        <img src="img/dummy-user48.png" alt="">
-                    </a>
-                    <ul class="dropdown-menu animated slideInDown">
-
-
-                        <li>
-                            <a><i class="fa fa-user"></i> My Profile</a>
-                        </li>
-
-
-
-
-                        <li>
-                            <a ng-click="logOut()" title="Logout"><i class="fa fa-sign-out"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-    <br /><br />
     <h4>Update Info</h4>
 
     <form name="myForm">
@@ -845,30 +812,5 @@
   
 </script>
 
-<script>
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-        if ($("#wrapper").hasClass("toggled")) {
-            $(this).find(".fa").removeClass("rotateIn fa-bars").addClass("rotateIn fa-arrow-left");
-        }
-        else {
-            $(this).find(".fa").removeClass("rotateIn fa-arrow-left").addClass("rotateIn fa-bars");
-        }
-    });
 
-    $("#menu-toggle1").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-        if ($("#wrapper").hasClass("toggled")) {
-            $(this).find(".fa").removeClass("rotateIn fa-bars").addClass("rotateIn fa-arrow-left");
-        }
-        else {
-            $(this).find(".fa").removeClass("rotateIn fa-arrow-left").addClass("rotateIn fa-bars");
-        }
-    });
-
-
-
-</script>
 

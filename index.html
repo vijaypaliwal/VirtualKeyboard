@@ -100,8 +100,8 @@
             }
 
             .topheader i {
-               font-size:25px;
-               margin-top:10px;
+                font-size: 17px;
+                margin-top: 12px;
             }
 
             .topheader .headerdropdown i {
@@ -350,6 +350,12 @@
         .bootstrap-switch-primary {
             background: #0083C7 !important;
         }
+
+        .activitylist .bottomlink
+        {
+            width:155px;
+            float:right;
+        }
     </style>
 
     <style>
@@ -404,10 +410,14 @@
             text-align: left;
             padding-bottom: 2px;
         }
+        #viewdata
+        {
+         margin-top:40px;
+        }
     </style>
 
 </head>
-<body>
+<body data-ng-controller="indexController">
 
     <!-- Sidebar -->
     <div class="nointernet alert alert-danger">
@@ -416,7 +426,7 @@
     </div>
 
     <div class="animated" id="mysmallModal">
-      
+
         <div class="errorcontent">
 
             <i class="fa fa-check-circle" style="font-size: 40px; color: #fafafa;"></i> <br />
@@ -427,13 +437,46 @@
             </span>
 
         </div>
-        
+
+    </div>
+
+    <div style="top:0" class="topheader layoutheader">
+
+
+        <div style="text-align:left;" class="col-xs-3" id="mySubjectLink">
+            <a id="menu-toggle"><i class="animated fa fa-bars"></i></a>
+
+        </div>
+        <div class="col-xs-6">
+            <img style="width:150px; margin-top:-2px;" src="img/logo.png" alt="Alternate Text" />
+        </div>
+        <div class="col-xs-3">
+            <div style="float:right;">
+                <div class="headerdropdown dropdown">
+                    <a data-toggle="dropdown" aria-expanded="true">
+                        <img src="{{picURl}}" alt="">
+                    </a>
+                    <ul class="dropdown-menu animated slideInDown">
+
+                        <li>
+                            <a href="#/profile"><i class="fa fa-user"></i> My Profile</a>
+                        </li>
+
+                        <li>
+                            <a ng-click="logOut()" title="Logout"><i class="fa fa-sign-out"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
     </div>
     <div class="container" id="viewdata">
         <div data-ng-view="">
         </div>
-      
-        </div>
+
+    </div>
 
 
     <!-- Sidebar -->
@@ -443,9 +486,9 @@
 
             <div class="bluearea">
 
-                <img style="height:75px; width:75px; margin-top:10px; margin-bottom:10px; border-radius: 100%; border: 1px solid #ccc;" src="img/default.png" alt="" />
+                <img style="height:75px; width:75px; margin-top:10px; margin-bottom:10px; border-radius: 100%; border: 1px solid #ccc;" src="{{picURl}}" alt="" />
 
-                <p>User Name</p>
+                <p>{{username}}</p>
 
             </div>
 
@@ -478,10 +521,10 @@
     <script src="scripts/select2.min.js"></script>
     <script src="scripts/bootbox.js"></script>
     <!--<script src="scripts/fastclick.js"></script>-->
-   
+
     <script src="scripts/idangerous.swiper.min.js"></script>
     <!--<script type="text/javascript" src="js/index.js"></script>
-  
+
     <!-- Load app main script -->
     <script src="app/app.js?v=2"></script>
 
@@ -513,8 +556,8 @@
 
     <script>
 
-  
-   
+
+
 
 
         $("#mysmallModal").click(function () {
@@ -525,8 +568,7 @@
             $("#mysmallModal").removeClass('bounceIn').addClass('bounceOut');
         }
 
-        function ShowSuccess(Message)
-        {
+        function ShowSuccess(Message) {
             Message = Message != null && Message != undefined ? Message : "Saved";
             $("#mysmallModal").removeClass('bounceOut').addClass('bounceIn');
             $('#mysmallModal').show();
@@ -534,17 +576,22 @@
 
             setTimeout(function () {
                 hideSuccess();
-            },3000)
+            }, 3000)
         }
 
-       
+
         var _CurrentUrl = "Login";
         var _isOpenBootbox = false;
         var recognition;
         $("#menu-toggle").click(function (e) {
-
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
+            //if ($("#wrapper").hasClass("toggled")) {
+            //    $(this).find(".fa").removeClass("rotateIn fa-bars").addClass("rotateIn fa-arrow-left");
+            //}
+            //else {
+            //    $(this).find(".fa").removeClass("rotateIn fa-arrow-left").addClass("rotateIn fa-bars");
+            //}
         });
 
 
@@ -559,7 +606,7 @@
         });
 
 
-  
+
 
 
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -596,9 +643,9 @@
         var exitApp = false, intval = setInterval(function () { exitApp = false; }, 1000);
         document.addEventListener("backbutton", function (e) {
             e.preventDefault();
-        
 
-          
+
+
             if (exitApp) {
 
                 if (_isOpenBootbox == false) {
@@ -614,7 +661,7 @@
                     });
 
                 }
-              
+
 
 
             }
@@ -691,7 +738,7 @@
 
 
         function onPhotoDataSuccess(imageData) {
-           
+
 
             var _length = 0;
             if ($('#list123').html() != undefined && $('#list123').html() != "" && $('#list123').children("span") != undefined) {
@@ -723,7 +770,7 @@
 
 
 
-          
+
         }
 
 
@@ -826,7 +873,7 @@
 
             InitializeModal();
 
-   }
+        }
 
         function onOffline() {
 
@@ -838,10 +885,30 @@
             $(".nointernet").hide();
         }
 
-    
-    </script>
 
+        function doOnOrientationChange() {
+            switch (window.orientation) {
+                case -90:
+                case 90:
+                  
+                    $("#mycartModal").addClass("activitylist")
+
+                    break;
+                default:
+                    $("#mycartModal").removeClass("activitylist")
+                    break;
+            }
+        }
+
+        window.addEventListener('orientationchange', doOnOrientationChange);
+
+        // Initial execution if needed
+        doOnOrientationChange();
+
+       
+    </script>
 
     
 </body>
+
 </html>

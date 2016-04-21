@@ -551,46 +551,7 @@
     }
 </style>
 
-<div style="top:0" class="topheader">
 
-
-    <div style="text-align:left;" class="col-xs-3">
-        <a id="menu-toggle"><i class="animated fa fa-bars"></i></a>
-
-    </div>
-    <div class="col-xs-6">
-        <img style="width:150px; margin-top:-2px;" src="img/logo.png" alt="Alternate Text" />
-    </div>
-    <div class="col-xs-3">
-        <div style="float:right;">
-            <div class="headerdropdown dropdown">
-                <a data-toggle="dropdown" aria-expanded="true">
-                    <img src="img/dummy-user48.png" alt="">
-                </a>
-                <ul class="dropdown-menu animated slideInDown">
-
-
-                    <li>
-                        <a><i class="fa fa-user"></i> My Profile</a>
-                    </li>
-
-
-
-
-                    <li>
-                        <a ng-click="logOut()" title="Logout"><i class="fa fa-sign-out"></i> Log Out</a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-
-    </div>
-</div>
-
-<div>
-    <br /><br />
-</div>
 <a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
 
 <div style="margin-top:12px;" class="page-header">
@@ -807,7 +768,7 @@
             <li class="bottomlink" ng-click="GoToNextMobile(1)"> <span>Increase</span> <a style="background-color: #177B3D;" class="btn-success btn decrease" data-dismiss="modal"> <i class="fa fa-plus"></i> </a></li>
             <li class="bottomlink" ng-click="GoToNextMobile(-1)"> <span>Decrease</span> <a style="background-color: #AF2525;" class="btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-minus-circle"></i> </a></li>
             <li class="bottomlink" ng-click="GoToNextMobile(12)"> <span>Adjust</span> <a style="background-color: #f8c217;" class="btn-danger btn adjust" data-dismiss="modal"> <i class="fa fa-arrows-v"></i> </a></li>
-            <li class="bottomlink" ng-click="GoToNextMobile(4)"><span>Tag</span><a style="background-color: #0D190F" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-tag"></i>  </a></li>
+            <li class="bottomlink" ng-if="UnitDataList.length!=0" ng-click="gotonextmobile(4)"><span>Tag</span><a style="background-color: #0D190F" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-tag"></i>  </a></li>
             <li class="bottomlink" ng-click="GoToNextMobile(0)"><span>Move</span><a style="background-color: #C65E28;" class="btn-warning btn decrease" data-dismiss="modal"> <i class="fa fa-exchange"></i>  </a></li>
             <li class="bottomlink" ng-click="GoToNextMobile(2)"><span>Convert</span><a style="background-color: #CE59A1" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-refresh"></i>  </a></li>
             <li class="bottomlink" ng-click="GoToNextMobile(3)"><span>Update</span><a style=" background-color: #583782" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-pencil"></i>  </a></li>
@@ -865,19 +826,4 @@
         $(window).scroll(sticky_relocate);
         sticky_relocate();
     });
-</script>
-<script>
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-        if ($("#wrapper").hasClass("toggled")) {
-            $(this).find(".fa").removeClass("rotateIn fa-bars").addClass("rotateIn fa-arrow-left");
-        }
-        else {
-            $(this).find(".fa").removeClass("rotateIn fa-arrow-left").addClass("rotateIn fa-bars");
-        }
-    });
-
-
-
 </script>

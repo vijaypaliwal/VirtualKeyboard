@@ -110,7 +110,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     $scope.GetLastValueCustom = function (id, Type) {
-         
+
 
 
         var field = "Inv_" + id;
@@ -152,7 +152,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     };
     $scope.GetLastValue = function (field, id) {
 
-         
+
 
 
         var _value = "";
@@ -279,8 +279,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
-    $scope.LocationSetItemData = function (obj)
-    {
+    $scope.LocationSetItemData = function (obj) {
 
         $scope.InventoryObject.Location = obj.LocationName;
 
@@ -293,7 +292,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         CheckScopeBeforeApply()
     }
 
-    
+
 
     $scope.UOMSetItemData = function (obj) {
 
@@ -308,8 +307,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
-    $scope.OnChangeUOMFunction=function()
-    {
+    $scope.OnChangeUOMFunction = function () {
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -583,7 +581,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
                   $scope.resetObject();
                   CheckScopeBeforeApply()
-               
+
                   $('#addinventories').removeClass("disabled");
                   $('#addinventories').find(".fa").removeClass("fa-spin");
               },
@@ -639,7 +637,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     }
-    
+
     $scope.locationlist = function () {
 
         $("#itemlistmodal").modal('hide');
@@ -919,7 +917,52 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                }
            });
     }
+    $scope.IsActiveTransactionField = function (cfdid) {
 
+
+        for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+            if ($scope.CustomActivityDataList[i].cfdCustomFieldType == "Inventory" && $scope.CustomActivityDataList[i].cfdID == cfdid) {
+                switch ($scope.CurrentOperation) {
+                    case "Increase":
+                        if ($scope.CustomActivityDataList[i].cfdIncludeOnAdd) {
+
+                            return true;
+                        }
+                        break;
+                    case "Decrease":
+                        if ($scope.CustomActivityDataList[i].cfdIncludeOnSubtract) {
+                            return true;
+                        }
+                        break;
+                    case "Move":
+                        if ($scope.CustomActivityDataList[i].cfdIncludeOnMove) {
+                            return true;
+                        }
+                        break;
+                    case "Apply":
+                        if ($scope.CustomActivityDataList[i].cfdIncludeOnApply) {
+                            return true;
+                        }
+                        break;
+                    case "Update":
+                        if ($scope.CustomActivityDataList[i].cfdIncludeOnStatus) {
+                            return true;
+                        }
+                        break;
+                    case "Convert":
+                        if ($scope.CustomActivityDataList[i].cfdIncludeOnConvert) {
+                            return true;
+                        }
+                        break;
+
+                    default:
+                        return true;
+                        break;
+
+                }
+            }
+        }
+    }
     $scope.GetCustomDataField = function (Type) {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -1472,9 +1515,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
                 onSlideChangeEnd: function (swiperHere) {
 
-                     
+
                     $scope.slide = swiperHere.activeIndex;
-                  
+
                     $scope.Totalslides = swiperHere.slides.length - 1;
                     var _colName = $(".swiper-slide-active").attr("data-column");
                     $scope.CurrentActiveField = _colName != undefined && _colName != "" ? _colName : "";
@@ -1517,11 +1560,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     function onConfirmInv(buttonIndex) {
 
-      
 
-        if (buttonIndex == 1 || buttonIndex == "1")
-        {
-           
+
+        if (buttonIndex == 1 || buttonIndex == "1") {
+
             $location.path('/mainmenu');
             vibrate()
             CheckScopeBeforeApply();
@@ -1533,11 +1575,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     function onConfirmmove(buttonIndex) {
-        if (buttonIndex == 2 || buttonIndex == "2")
-        {
-         $location.path('/FindItems');
-         vibrate()
-         CheckScopeBeforeApply();
+        if (buttonIndex == 2 || buttonIndex == "2") {
+            $location.path('/FindItems');
+            vibrate()
+            CheckScopeBeforeApply();
         }
         else if (buttonIndex == 1 || buttonIndex == "1") {
             $scope.getstep(0);
@@ -1567,9 +1608,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $('.arrow-left').on('click', function (e) {
         e.preventDefault()
-         
-        if ($scope.slide == 0 || $scope.slide == 1000)
-        {
+
+        if ($scope.slide == 0 || $scope.slide == 1000) {
             showConfirmInventory();
 
         }

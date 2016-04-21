@@ -33,7 +33,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     var _IsSetSelectedIfAny = 0;
     var SelectedCartItemIds = [];
     var _IsFilterCartItems = 0;
-
+    $scope.UnitDataList = [];
     $scope.CurrentActiveClass = "";
 
     var _IsLazyLoading = 0;
@@ -251,7 +251,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
     $scope.SearchInventory = function () {
-        var _Value=$.trim($('#MasterSearch').val());
+        var _Value = $.trim($('#MasterSearch').val());
         if (_Value !== "") {
             $scope.myinventoryColumnLoaded = false;
             CheckScopeBeforeApply();
@@ -342,6 +342,32 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         }
     };
 
+
+    $scope.GetActiveUnitDataField = function () {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetActiveUnitDataFields',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+
+                   $scope.UnitDataList = response.GetActiveUnitDataFieldsResult.Payload;
+                   CheckScopeBeforeApply()
+               },
+               error: function (response) {
+
+
+
+               }
+           });
+    }
     function UpdateFilterArray(Field, Value) {
 
         for (var i = 0; i < $scope.FilterArray.length; i++) {
@@ -575,8 +601,8 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
     $("#MasterSearch").keyup(function (e) {
-      var  _Value = $.trim($('#MasterSearch').val());
-      if (_Value !== "") {
+        var _Value = $.trim($('#MasterSearch').val());
+        if (_Value !== "") {
 
             $('#btnMasterSearch').addClass('bgm-red')
         }
@@ -590,7 +616,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
     $scope.AddToCart = function (obj) {
-         
+
         if (_CanAct == 'True') {
 
 
@@ -623,7 +649,40 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         }
 
     }
+    $scope.AddToCartSelectAll = function (obj) {
 
+        if (_CanAct == 'True') {
+
+
+            var originalID = "#actionQty_" + obj.iID;
+
+
+
+            //if ($(originalID).hasClass("btn-success"))
+            if ($(originalID).find(".fa-check").css("color") == "rgb(0, 150, 136)") {
+
+                $(originalID).find(".fa-check").css("color", "transparent");
+
+                $(originalID).parent(".newlistitem").find(".img").css("opacity", "1")
+
+
+            }
+            else {
+                if ($scope.mainObjectToSend.length < _CartObjLimit) {
+                    $(originalID).find(".fa-check").css("color", "#009688");
+                    $(originalID).parent(".newlistitem").find(".img").css("opacity", "0.4")
+                }
+
+            }
+
+            addItemsToCart(obj, obj.iID, originalID);
+
+        }
+        else {
+            return false;
+        }
+
+    }
 
     $scope.SelectAll = function () {
 
@@ -661,7 +720,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
     });
-    
+
 
     $('#myModal2').on('shown.bs.modal', function () {
         $(".Addbtn .fa").addClass('rotate');
@@ -679,7 +738,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     $scope.OpentransactionModal = function () {
 
 
-         
+
 
 
         if (_TotalRecordsCurrent != 0) {
@@ -711,7 +770,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     }
     function addItemsToCart(object, IdToSave, originalID) {
-         
+
         var isItemExist = true;
         var TempValue = 0;
         var _zeroCount = 0;
@@ -880,7 +939,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
         }
-
+        $scope.GetActiveUnitDataField();
         $scope.PopulateInventoryItems();
 
         //SetSelectedIfAny();
