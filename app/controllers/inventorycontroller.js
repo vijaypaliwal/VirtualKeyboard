@@ -110,7 +110,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     $scope.GetLastValueCustom = function (id, Type) {
-
+         
 
 
         var field = "Inv_" + id;
@@ -152,7 +152,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     };
     $scope.GetLastValue = function (field, id) {
 
-
+         
 
 
         var _value = "";
@@ -279,7 +279,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
-    $scope.LocationSetItemData = function (obj) {
+    $scope.LocationSetItemData = function (obj)
+    {
 
         $scope.InventoryObject.Location = obj.LocationName;
 
@@ -292,7 +293,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         CheckScopeBeforeApply()
     }
 
-
+    
 
     $scope.UOMSetItemData = function (obj) {
 
@@ -307,7 +308,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
-    $scope.OnChangeUOMFunction = function () {
+    $scope.OnChangeUOMFunction=function()
+    {
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -581,7 +583,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
                   $scope.resetObject();
                   CheckScopeBeforeApply()
-
+               
                   $('#addinventories').removeClass("disabled");
                   $('#addinventories').find(".fa").removeClass("fa-spin");
               },
@@ -637,7 +639,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     }
-
+    
     $scope.locationlist = function () {
 
         $("#itemlistmodal").modal('hide');
@@ -919,7 +921,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
     $scope.IsActiveTransactionField = function (cfdid) {
 
-
+        debugger;
+        $scope.CurrentOperation = "Increase";
         for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
             if ($scope.CustomActivityDataList[i].cfdCustomFieldType == "Inventory" && $scope.CustomActivityDataList[i].cfdID == cfdid) {
                 switch ($scope.CurrentOperation) {
@@ -979,6 +982,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type }),
                success: function (response) {
 
+                   debugger;
                    if (Type == 0) {
                        $scope.CustomItemDataList = response.GetCustomFieldsDataResult.Payload;
 
@@ -1515,9 +1519,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
                 onSlideChangeEnd: function (swiperHere) {
 
-
+                     
                     $scope.slide = swiperHere.activeIndex;
-
+                  
                     $scope.Totalslides = swiperHere.slides.length - 1;
                     var _colName = $(".swiper-slide-active").attr("data-column");
                     $scope.CurrentActiveField = _colName != undefined && _colName != "" ? _colName : "";
@@ -1560,10 +1564,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     function onConfirmInv(buttonIndex) {
 
+      
 
-
-        if (buttonIndex == 1 || buttonIndex == "1") {
-
+        if (buttonIndex == 1 || buttonIndex == "1")
+        {
+           
             $location.path('/mainmenu');
             vibrate()
             CheckScopeBeforeApply();
@@ -1575,10 +1580,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
     function onConfirmmove(buttonIndex) {
-        if (buttonIndex == 2 || buttonIndex == "2") {
-            $location.path('/FindItems');
-            vibrate()
-            CheckScopeBeforeApply();
+        if (buttonIndex == 2 || buttonIndex == "2")
+        {
+         $location.path('/FindItems');
+         vibrate()
+         CheckScopeBeforeApply();
         }
         else if (buttonIndex == 1 || buttonIndex == "1") {
             $scope.getstep(0);
@@ -1608,8 +1614,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $('.arrow-left').on('click', function (e) {
         e.preventDefault()
-
-        if ($scope.slide == 0 || $scope.slide == 1000) {
+         
+        if ($scope.slide == 0 || $scope.slide == 1000)
+        {
             showConfirmInventory();
 
         }
