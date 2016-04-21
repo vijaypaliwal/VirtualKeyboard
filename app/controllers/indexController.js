@@ -18,9 +18,7 @@ app.controller('indexController', ['$scope', 'ordersService', 'localStorageServi
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
 
-                   debugger;
-
-                
+               
              
                    $scope.username = response.GetUserInfoResult.Payload[0].UserName
                    $scope.myprofileimage = response.GetUserInfoResult.Payload[0].ProfilePic;

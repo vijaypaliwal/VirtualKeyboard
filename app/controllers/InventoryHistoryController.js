@@ -66,7 +66,7 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
         }
 
         else {
-            _datestring = "/Date(0000000000000-0000)/";
+            _datestring = "/Date(0000000000000)/";
         }
 
         $.ajax
