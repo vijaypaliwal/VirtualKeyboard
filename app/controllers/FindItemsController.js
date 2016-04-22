@@ -601,7 +601,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     $scope.IsAnyUnitDataFieldActive=function()
     {
-        var _Array = ["iReqValue", "iUnitTag2", "iUnitTag3", "iUnitNumber1", "iUnitNumber2", "iUnitDate1", "iUnitDate2"]
+        var _Array = ["iReqValue", "iUnitTag2", "iUnitTag3", "iUnitNumber1", "iUnitNumber2", "iUniqueDate", "iUnitDate2"]
         var _returnData = false;
         for (var i = 0; i < _Array.length; i++) {
             if ($scope.IsAvailableMyInventoryColumn(_Array[i]) == true)
