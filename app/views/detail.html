@@ -602,8 +602,8 @@
 
 <div class="animated slideInLeft">
 
-    <div style="margin-top:58px;" ng-if="IsEditMode==true" class="page-header">
-        <h5 style="color:#000; padding-left:12px; text-align:left;">Edit inventory details</h5>
+    <div ng-if="IsEditMode==true" class="page-header">
+        <h4 style="color:#000; padding-left:12px; text-align:left;">Edit inventory details</h4>
     </div>
 
     <div ng-if="IsEditMode==false">
@@ -614,9 +614,10 @@
 
                 <div ng-if="ImageList.length > 0" ng-repeat="obj in ImageList" class="swiper-slide">
                     <table class="imagesection">
+
                         <tr>
                             <td>
-                                <span class="arrow-left"><i class="fa fa-angle-left"></i></span>
+                                <span class="arrow-left"  ng-show="ImageList.length != 1"><i class="fa fa-angle-left"></i></span>
                             </td>
                             <td>
                                 <div style="text-align:center">
@@ -624,7 +625,7 @@
                                 </div>
                             </td>
                             <td>
-                                <span class="arrow-right"><i class="fa fa-angle-right"></i></span>
+                                <span class="arrow-right" ng-show="ImageList.length != 1"><i class="fa fa-angle-right"></i></span>
                             </td>
                         </tr>
                     </table>
@@ -634,7 +635,7 @@
                     <table class="imagesection">
                         <tr>
                             <td>
-                                <span class="arrow-left"><i class="fa fa-angle-left"></i></span>
+                              
                             </td>
                             <td>
                                 <div style="text-align:center">
@@ -642,7 +643,7 @@
                                 </div>
                             </td>
                             <td>
-                                <span class="arrow-right"><i class="fa fa-angle-right"></i></span>
+                             
                             </td>
                         </tr>
                     </table>

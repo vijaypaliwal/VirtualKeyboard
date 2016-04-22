@@ -24,8 +24,6 @@ app.controller('profileController', ['$scope', 'ordersService', 'localStorageSer
     $("body").removeClass("modal-open");
 
 
-
-
     $scope.Getuserinfo = function () {
 
         var authData = localStorageService.get('authorizationData');
@@ -41,8 +39,6 @@ app.controller('profileController', ['$scope', 'ordersService', 'localStorageSer
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-                
-                   debugger;
 
                    $scope.firstname = response.GetUserInfoResult.Payload[0].FirstName
                    $scope.lastname = response.GetUserInfoResult.Payload[0].LastName;

@@ -253,6 +253,10 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
         localStorageService.set("ActivityCart", _cartData);
         ShowSuccess('Added');
 
+        setTimeout(function () { $("#myModal2").modal('hide'); }, 1000);
+
+      
+
     }
 
 
@@ -281,7 +285,7 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
                    $scope.$apply();
 
                    setTimeout(function () { InitializeSwiper() }, 10);
-
+                 
 
 
                },
@@ -305,6 +309,12 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
         $scope.$apply();
     }
     $scope.ToggleEditView = function () {
+
+
+        $("#myModal2").modal('hide');
+        $(".modal-backdrop").remove();
+        $("body").removeClass("modal-open");
+
         $scope.IsEditMode = !$scope.IsEditMode;
         setTimeout(function () { InitializeSwiper() }, 10);
     }

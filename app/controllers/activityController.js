@@ -21,6 +21,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     $scope.isLineItemColumnNames = [];
     $scope.IsQuantityUpdated = false;
     $scope.IsSingleMode = true;
+    $scope.AffectedItemIds = [];
 
     function CheckScopeBeforeApply() {
         if (!$scope.$$phase) {
@@ -58,9 +59,9 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
         $("#menu1").hide()
 
-        
 
-        
+
+
     }
 
 
@@ -76,7 +77,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     }
 
 
-    
+
 
     $scope.$watch('CurrentCart', function () {
         // do something here
@@ -299,24 +300,22 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
             CheckScopeBeforeApply();
         }
 
-       
-        
+
+
     }
 
 
-    $scope.IncreaseDecreaseValue=function(Type,IsConvert2)
-    {
-         
+    $scope.IncreaseDecreaseValue = function (Type, IsConvert2) {
+
         switch ($scope.CurrentOperation) {
-            case"Increase":
+            case "Increase":
             case "Decrease":
             case "Update":
             case "Apply":
             case "Adjust":
                 $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity = parseInt($scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity);
                 $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity = isNaN($scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity) ? 0 : $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity;
-                if (Type == 1)
-                {
+                if (Type == 1) {
                     $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity = $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity + 1;
 
                 }
@@ -326,7 +325,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                         $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity = $scope.CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity - 1;
                     }
                 }
-              
+
                 break;
             case "Move":
                 $scope.CurrentCart[0].MoveTransactionData.ActionQuantity = parseInt($scope.CurrentCart[0].MoveTransactionData.ActionQuantity);
@@ -350,12 +349,11 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity = isNaN($scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity) ? 0 : $scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity;
                 $scope.CurrentCart[0].ConvertTransactionData.ActionToQuantity = isNaN($scope.CurrentCart[0].ConvertTransactionData.ActionToQuantity) ? 0 : $scope.CurrentCart[0].ConvertTransactionData.ActionToQuantity;
                 if (Type == 1) {
-                    if (IsConvert2 == 0)
-                    {
+                    if (IsConvert2 == 0) {
                         $scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity = $scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity + 1;
 
                     }
-                    else if(IsConvert2==1) {
+                    else if (IsConvert2 == 1) {
                         $scope.CurrentCart[0].ConvertTransactionData.ActionToQuantity = $scope.CurrentCart[0].ConvertTransactionData.ActionFromQuantity + 1;
                     }
 
@@ -539,7 +537,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                     $scope.CollapsClass = $scope.CurrentHeaderClass;
                     $scope.CollapsOpen = true;
 
-                    
+
                 }
 
                 CheckScopeBeforeApply();
@@ -1160,7 +1158,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     }
 
-    
+
     $scope.CheckOnAdjust = function (cfdid, IsIncrease) {
         var _data = true;
         var _CurrentCustomColumns = angular.copy($scope.CustomActivityDataList);
@@ -1377,7 +1375,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     }
     $scope.FillStatusLineItems = function (value, myid) {
 
-         
+
 
         $scope.StatusToUpdate = value == null ? "" : value;
         $scope.StatusToUpdate = $scope.StatusToUpdate == 0 ? "" : $scope.StatusToUpdate;
@@ -1676,7 +1674,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
             },
             CustomData: BuildCustomArrayDataSelector("#transactionForm2")
         };
-        
+
 
         for (_i = 0; _i < $scope.CurrentCart.length; _i++) {
             var _OriginalAction = $scope.CurrentCart[_i].ActionPerformed;
@@ -1738,11 +1736,11 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
                     if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
                         value = $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity - $scope.CurrentCart[k].InventoryDataList.oquantity;
-                        _MyObjdata1.Transaction.itAction=1;
+                        _MyObjdata1.Transaction.itAction = 1;
                     }
                     else {
                         value = $scope.CurrentCart[k].InventoryDataList.oquantity - $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity;
-                        _MyObjdata2.Transaction.itAction=-1;
+                        _MyObjdata2.Transaction.itAction = -1;
                     }
 
                     $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity = value;
@@ -1756,8 +1754,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
                     _TempQty = $scope.CurrentCart[k].AdjustActionQuantity;
                     $scope.CurrentCart[k].ActionPerformed = _OriginalAction;
-                    if ($scope.CurrentCart[k].ActionPerformed == 1 || $scope.CurrentCart[k].ActionPerformed == "1")
-                    {
+                    if ($scope.CurrentCart[k].ActionPerformed == 1 || $scope.CurrentCart[k].ActionPerformed == "1") {
                         _MyObjdata1.Transaction.itAction = 1;
                     }
 
@@ -1815,7 +1812,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                     myPostObj: _MyObjdata, IsLineItem: $scope.CurrentCart[k].IsLineItemData
                 });
             }
-           
+
         }
         return _myData;
 
@@ -1859,12 +1856,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         return false;
     }
 
-    function IsDateValidated()
-    {
+    function IsDateValidated() {
         var _returnVar = true;
 
-        if ($scope.CurrentOperation == 12)
-        {
+        if ($scope.CurrentOperation == 12) {
             var _dateVal1 = $('#transactionForm1').find("#itUpdateDate").val();
             if (_dateVal1 != null && _dateVal1 != undefined) {
                 _dateVal1 = $.trim(_dateVal1);
@@ -1875,8 +1870,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 _dateVal2 = $.trim(_dateVal2);
             }
 
-            if(_dateVal1!="" && _dateVal2!="")
-            {
+            if (_dateVal1 != "" && _dateVal2 != "") {
                 _returnVar = true;
             }
             else {
@@ -1890,8 +1884,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 _dateVal = $.trim(_dateVal);
             }
 
-            if(_dateVal!="")
-            {
+            if (_dateVal != "") {
                 _returnVar = true;
             }
             else {
@@ -1903,10 +1896,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     }
     $scope.SubmitAllActivities = function () {
 
-       
+
         if (!$scope.ValidateObjectVM()) {
 
-            if (!CheckintoCustomData(0) && IsDateValidated()==true) {
+            if (!CheckintoCustomData(0) && IsDateValidated() == true) {
 
                 var authData = localStorageService.get('authorizationData');
                 if (authData) {
@@ -1990,14 +1983,14 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     $scope.DeleteItem = function (CurrentActiveObject) {
 
 
-         
+
 
 
 
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {
 
-                 
+
 
                 var _tempArray = $scope.CurrentCart;
                 for (var i = 0; i < _tempArray.length; i++) {
@@ -2062,22 +2055,29 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
 
     $scope.ShowErrorMessage = function (Option) {
+        var _itemIDs = "";
+        debugger;
+        if ($scope.AffectedItemIds.length > 0) {
+            _itemIDs = $scope.AffectedItemIds.join(",");
+        }
         switch (Option) {
             case 1:
-                log.error("Quantity is required field,please fill quantity in cart items");
+                log.error("Quantity is required field,please fill quantity in following cart items " + _itemIDs);
                 break;
             case 2:
-                log.error("Convert Quantity,into this quantity and UOM are required fields,please fill proper values in cart items");
+                log.error("Convert Quantity,into this quantity and UOM are required fields,please fill proper values in following cart items " + _itemIDs);
                 break;
             case 3:
-                log.error("Moveable Quantity and location are required fields,please fill proper values in cart items");
+                log.error("Moveable Quantity and location are required fields,please fill proper values in following cart items " + _itemIDs);
                 break;
             case 4:
-                log.error("Seems like some items are having same location where it was earlier, please select different location to move");
+            case 31:
+
+                log.error("Seems like some items are having same location where it was earlier, please select different location to move in following cart items " + _itemIDs);
                 break;
 
             case 5:
-                log.error("Seems like you haven't fill all required fields for activity data, please fill them first.")
+                log.error("Seems like you haven't fill all required fields for activity data, please fill them first in following cart items " + _itemIDs)
                 break;
             default:
 
@@ -2091,6 +2091,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     function CheckintoArray(CurrentIndex) {
         CurrentIndex = CurrentIndex - 1;
+        $scope.AffectedItemIds = [];
         var k = 0;
         var _totalLength = $scope.IsSingleMode == true ? $scope.CurrentCart.length : 1;
         if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
@@ -2100,6 +2101,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                     for (k = 0; k < _totalLength; k++) {
                         if (k == CurrentIndex && ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "" || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null)) {
                             $scope.IssueType = 1;
+                            if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                            }
                             return true;
 
                             break;
@@ -2108,6 +2113,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
 
                             if (k == CurrentIndex && $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                    $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                                }
                                 return true;
                                 break;
                             }
@@ -2123,6 +2132,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                     for (k = 0; k < _totalLength; k++) {
                         if (k == CurrentIndex && ($scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == null || $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == "")) {
                             $scope.IssueType = 2;
+                            if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                            }
                             CheckScopeBeforeApply();;
                             return true;
 
@@ -2130,6 +2143,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                         }
                         else if (_AllowNegative != null && _AllowNegative != "True") {
                             if (k == CurrentIndex && $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                    $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                                }
                                 return true;
                                 break;
                             }
@@ -2145,6 +2162,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
                     for (k = 0; k < _totalLength; k++) {
                         if (k == CurrentIndex && ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity == null || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == null || $scope.CurrentCart[k].MoveTransactionData.ActionQuantity == "" || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "")) {
+                            if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                            }
                             $scope.IssueType = 3;
                             CheckScopeBeforeApply();;
                             return true;
@@ -2152,6 +2173,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                             break;
                         }
                         else if (k == CurrentIndex && $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == $scope.CurrentCart[k].InventoryDataList.iLID) {
+                            if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                            }
 
                             $scope.IssueType = 31;
                             CheckScopeBeforeApply();;
@@ -2161,6 +2186,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                         }
                         else if (_AllowNegative != null && _AllowNegative != "True") {
                             if (k == CurrentIndex && ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity)) {
+                                if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                    $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                                }
 
                                 return true;
                                 break;
@@ -2175,6 +2204,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 case "Apply":
                     for (k = 0; k < _totalLength; k++) {
                         if (k == CurrentIndex && ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "" || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null)) {
+                            if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                            }
                             $scope.IssueType = 1;
                             CheckScopeBeforeApply();;
                             return true;
@@ -2183,6 +2216,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                         }
                         else if (_AllowNegative != null && _AllowNegative != "True") {
                             if (k == CurrentIndex && $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                    $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                                }
                                 return true;
                                 break;
                             }
@@ -2196,6 +2233,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 case "Update":
                     for (k = 0; k < _totalLength; k++) {
                         if (k == CurrentIndex && ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "" || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null)) {
+                            if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                            }
                             $scope.IssueType = 1;
                             CheckScopeBeforeApply();;
                             return true;
@@ -2204,6 +2245,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                         }
                         else if (_AllowNegative != null && _AllowNegative != "True") {
                             if (k == CurrentIndex && $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                    $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                                }
                                 return true;
                                 break;
                             }
@@ -2306,7 +2351,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                 $(".swiper-slide-active input:first").focus();
                 $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
                 $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
-               
+
             }, 0);
 
         }
@@ -2318,6 +2363,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
 
     $scope.ValidateObjectVM = function () {
+        debugger;
 
         var k = 0;
         var _totalLength = $scope.CurrentCart.length;
@@ -2340,7 +2386,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
                                 if ($scope.IsSingleMode == false) {
                                     $scope.GoToStep(0);
-                                    log.error("Seems like one of the cart item is having more than original quantity for activity, please update");
+                                    log.error("Seems like " + $scope.CurrentCart[k].ItemID + " item is having more than original quantity for activity, please update");
                                 }
                                 else {
                                     $scope.GoToStep(k);
@@ -2372,7 +2418,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
                                 if ($scope.IsSingleMode == false) {
                                     $scope.GoToStep(0);
-                                    log.error("Seems like one of the cart item is having more than original quantity for activity, please update");
+                                    log.error("Seems like " + $scope.CurrentCart[k].ItemID + " item is having more than original quantity for activity, please update");
                                 }
                                 else {
                                     $scope.GoToStep(k);
@@ -2394,6 +2440,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                     for (k = 0; k < _totalLength; k++) {
                         if ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity == "" || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "") {
                             $scope.IssueType = 3;
+                            if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                            }
                             $scope.GoToStep(k);
                             CheckScopeBeforeApply();
                             return true;
@@ -2401,8 +2451,11 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                             break;
                         }
                         else if ($scope.CurrentCart[k].MoveTransactionData.MoveToLocation == $scope.CurrentCart[k].InventoryDataList.iLID) {
-
                             $scope.IssueType = 31;
+                            if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                            }
                             $scope.GoToStep(k);
                             CheckScopeBeforeApply();;
                             return true;
@@ -2414,9 +2467,13 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
                                 if ($scope.IsSingleMode == false) {
                                     $scope.GoToStep(0);
-                                    log.error("Seems like one of the cart item is having more than original quantity for activity, please update");
+                                    log.error("Seems like " + $scope.CurrentCart[k].ItemID + " item is having more than original quantity for activity, please update");
                                 }
                                 else {
+                                    if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                        $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                                    }
                                     $scope.GoToStep(k);
 
                                 }
@@ -2435,6 +2492,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                     for (k = 0; k < _totalLength; k++) {
                         if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
                             $scope.IssueType = 1;
+                            if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                            }
                             $scope.GoToStep(k);
                             CheckScopeBeforeApply();;
                             return true;
@@ -2448,9 +2509,13 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
                                 if ($scope.IsSingleMode == false) {
                                     $scope.GoToStep(0);
-                                    log.error("Seems like one of the cart item is having more than original quantity for activity, please update");
+                                    log.error("Seems like " + $scope.CurrentCart[k].ItemID + " item is having more than original quantity for activity, please update");
                                 }
                                 else {
+                                    if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                        $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                                    }
                                     $scope.GoToStep(k);
 
                                 }
@@ -2469,6 +2534,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                         if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
                             $scope.IssueType = 1;
                             $scope.GoToStep(k);
+                            if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                            }
                             CheckScopeBeforeApply();;
                             return true;
 
@@ -2479,9 +2548,13 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
                                 if ($scope.IsSingleMode == false) {
                                     $scope.GoToStep(0);
-                                    log.error("Seems like one of the cart item is having more than original quantity for activity, please update");
+                                    log.error("Seems like " + $scope.CurrentCart[k].ItemID + " item is having more than original quantity for activity, please update");
                                 }
                                 else {
+                                    if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                        $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                                    }
                                     $scope.GoToStep(k);
 
                                 }

@@ -35,14 +35,14 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     var _IsFilterCartItems = 0;
     $scope.UnitDataList = [];
     $scope.CurrentActiveClass = "";
-
+    $scope.MyinventoryFields = [];
     var _IsLazyLoading = 0;
     var _TotalRecordsCurrent = 0;
     var _IsLazyLoadingUnderProgress = 0;
     $scope._areZeroRecordsShown = false;
 
     $scope.myinventoryColumnLoaded = false;
-
+    var _isExceededLimit = false;
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
 
@@ -303,7 +303,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         CheckScopeBeforeApply();
 
 
-
+        localStorageService.set("ShowZeroRecords",showzero);
         $scope._areZeroRecordsShown = showzero;
         CheckScopeBeforeApply();
         $("#myModal2").modal('hide');
@@ -557,10 +557,77 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
             }
         });
     }
+    $scope.GetMyinventoryColumns = function () {
 
 
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+
+
+        $.ajax({
+            type: "POST",
+            url: serviceBase + 'GetMyInventoryColumns',
+            data: JSON.stringify({ SecurityToken: $scope.SecurityToken }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (result) {
+
+                // MY inventory column region
+                var _TempArrayMyInventory = result.GetMyInventoryColumnsResult.Payload;
+
+                for (var i = 0; i < _TempArrayMyInventory.length; i++) {
+                    var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
+                    _TempArrayMyInventory[i].ColumnName = _ColName[0];
+                    if (_TempArrayMyInventory[i].Show == "True") {
+                        $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
+                    }
+                }
+                CheckScopeBeforeApply();
+             
+            },
+            error: function (req) {
+                log.error("error during get inventory columns");
+             
+            },
+            complete: function () {
+              
+            }
+        });
+    }
+
+    $scope.IsAnyUnitDataFieldActive=function()
+    {
+        var _Array = ["iReqValue", "iUnitTag2", "iUnitTag3", "iUnitNumber1", "iUnitNumber2", "iUnitDate1", "iUnitDate2"]
+        var _returnData = false;
+        for (var i = 0; i < _Array.length; i++) {
+            if ($scope.IsAvailableMyInventoryColumn(_Array[i]) == true)
+            {
+                _returnData = true;
+                break;
+            }
+
+        }
+
+        return _returnData;
+    }
+
+    $scope.IsAvailableMyInventoryColumn = function (ColumnName) {
+        var i = 0;
+        for (i = 0; i < $scope.MyinventoryFields.length; i++) {
+            if ($scope.MyinventoryFields[i].ColumnName == ColumnName) {
+                return true;
+            }
+        }
+
+        return false;
+    }
     $scope.PopulateInventoryItems = function () {
 
+        $scope.GetMyinventoryColumns();
 
 
         $scope.GetInventories();
@@ -615,33 +682,37 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
 
-    $scope.AddToCart = function (obj) {
+    $scope.AddToCart = function (obj, _isSelectAll) {
          
         if (_CanAct == 'True') {
 
 
             var originalID = "#actionQty_" + obj.iID;
 
-
+            debugger;
 
             //if ($(originalID).hasClass("btn-success"))
             if ($(originalID).find(".fa-check").css("color") == "rgb(0, 150, 136)") {
 
-                $(originalID).find(".fa-check").css("color", "transparent");
+                if (_isSelectAll != true) {
 
-                $(originalID).parent(".newlistitem").find(".img").css("opacity", "1")
+                    $(originalID).find(".fa-check").css("color", "transparent");
+
+                    $(originalID).parent(".newlistitem").find(".img").css("opacity", "1")
+                }
 
 
             }
             else {
-                if ($scope.mainObjectToSend.length < _CartObjLimit) {
+                var _CartObjLimittemp = _isSelectAll == true ? _CartObjLimit : (_CartObjLimit - 1);
+                if ($scope.mainObjectToSend.length <= _CartObjLimittemp) {
                     $(originalID).find(".fa-check").css("color", "#009688");
                     $(originalID).parent(".newlistitem").find(".img").css("opacity", "0.4")
                 }
 
             }
 
-            addItemsToCart(obj, obj.iID, originalID);
+            addItemsToCart(obj, obj.iID, originalID, _isSelectAll);
 
         }
         else {
@@ -692,7 +763,9 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
                 break;
             }
             else {
-                $scope.AddToCart($scope.InventoryItems[i]);
+                if (i < _CartObjLimit) {
+                    $scope.AddToCart($scope.InventoryItems[i], true);
+                }
 
             }
 
@@ -769,14 +842,16 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
     }
-    function addItemsToCart(object, IdToSave, originalID) {
+    function addItemsToCart(object, IdToSave, originalID,_isSelectAll) {
          
         var isItemExist = true;
         var TempValue = 0;
         var _zeroCount = 0;
+        var _CartObjLimittemp = _isSelectAll == true ? _CartObjLimit : (_CartObjLimit - 1);
+        var _count = 0;
 
-        if ($(originalID).find(".fa-check").css("color") == "rgb(0, 150, 136)" && $scope.mainObjectToSend.length < _CartObjLimit) {
-
+        if ($(originalID).find(".fa-check").css("color") == "rgb(0, 150, 136)" && $scope.mainObjectToSend.length <= _CartObjLimittemp) {
+            _isExceededLimit = false;
             $.each($scope.InventoryItems, function (i, v) {
                 if (v.iID == IdToSave) {
                     isItemExist = true;
@@ -844,12 +919,28 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
         } else {
 
-            $scope.mainObjectToSend = $scope.mainObjectToSend.filter(function (el) {
-                return el.uId != IdToSave;
+            if (_isSelectAll != true) {
 
-            });
+                $scope.mainObjectToSend = $scope.mainObjectToSend.filter(function (el) {
+                    return el.uId != IdToSave;
 
+                });
+            }
 
+            if ($scope.mainObjectToSend.length <= _CartObjLimittemp)
+            {
+
+            }
+            else {
+                
+                if (_isExceededLimit == false) {
+
+                    log.warning("You can only select 25 items at one time.");
+                    _isExceededLimit = true;
+                }
+
+            
+            }
         }
 
 
@@ -877,7 +968,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
         for (var i = 0; i < $scope.mainObjectToSend.length; i++) {
 
-            $scope.AddToCart(GetInventoryItem($scope.mainObjectToSend[i].uId));
+            $scope.AddToCart(GetInventoryItem($scope.mainObjectToSend[i].uId),true);
 
 
         }
@@ -939,11 +1030,27 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
         }
-        $scope.GetActiveUnitDataField();
+        setZeroData();
+        
         $scope.PopulateInventoryItems();
 
         //SetSelectedIfAny();
 
+    }
+
+    function setZeroData()
+    {
+        var _Iszero = localStorageService.get("ShowZeroRecords");
+
+        if(_Iszero!=null && _Iszero!=undefined)
+        {
+            $scope._areZeroRecordsShown = _Iszero;
+
+        }
+        else {
+            $scope._areZeroRecordsShown = false;
+        }
+        CheckScopeBeforeApply();
     }
 
     init();

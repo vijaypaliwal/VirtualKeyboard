@@ -295,6 +295,10 @@
         padding-top:0px;
         background:initial;
     }
+
+    .redText{
+        color:red !important;
+    }
 </style>
 
 
@@ -339,9 +343,9 @@
                     </div>
                 </div>
 
-                <div ng-if="CheckRequiredField()==true" class="wellNew">
+                <!--<div ng-if="CheckRequiredField()==true" class="wellNew">
                    You have missing some required fields
-                </div>
+                </div>-->
 
 
 
@@ -357,7 +361,7 @@
 
                                     <div class="row">
                                         <div class="col-xs-5">
-                                            <label>Item Name <span>*</span> </label>
+                                            <label>Item Name <span class="redText">*</span> </label>
                                         </div>
                                         <div class="col-xs-5" style="margin-bottom:5px;">
 
@@ -425,7 +429,7 @@
 
 
                         <div class="form-group" ng-if="obj.ColumnName=='lLoc'">
-                            <label>Select Location <span>*</span></label>
+                            <label>Select Location <span class="redText">*</span></label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="Location" ng-model="InventoryObject.Location" />
 
@@ -475,7 +479,7 @@
 
 
                         <div class="form-group" ng-if="obj.ColumnName=='uomUOM'">
-                            <label>Select UOM <span>*</span></label>
+                            <label>Select UOM <span class="redText">*</span></label>
                             <div class="input-group">
 
                                 <!--<select class="form-control" ng-model="InventoryObject.Uom" selectpicker id="UOM" required="">
@@ -630,7 +634,7 @@
                     <div class="swiper-slide" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
 
                         <div class="form-group">
-                            <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
+                            <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
 
                             <div ng-if="obj.cfdDataType=='string'" class="input-group">
                                 <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{obj.CfValue}}" />
@@ -688,7 +692,7 @@
                     <div ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)" class="swiper-slide" end-repeat3>
 
                         <div class="form-group">
-                            <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
+                            <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
                             <div ng-if="obj.cfdDataType=='string'" class="input-group">
                                 <input id="CustomActivity_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control stringType" value="{{obj.CfValue}}" />
                                 <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-refresh"></i></span>

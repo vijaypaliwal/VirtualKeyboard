@@ -6,7 +6,6 @@
     <meta name="description" content="SPA built using angularjs,authentication is done using bearer token,back end built using Asp.net web api 2 and OWIN Framework,creatd by Taiseer Joudeh" />
     <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=yes maximum-scale=1" />
- 
     <title>ClearlyInventory App</title>
     <link href="content/css/bootstrap.min.css" rel="stylesheet" />
     <link href="content/css/site.css" rel="stylesheet" />
@@ -26,6 +25,24 @@
         .input-group
         {
             width:100%;
+        }
+
+        .newcartcounter {
+            border-radius: 100%;
+            background: #fff;
+            /* padding-left: 5px; */
+            /* padding-right: 5px; */
+            color: #333;
+            text-align: center;
+            /* padding-top: 10px; */
+            /* padding-top: 10px; */
+            display: inline-block;
+            /* height: 1px; */
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+            margin-bottom: 3px;
+            vertical-align: middle;
         }
         
         
@@ -357,7 +374,6 @@
             float:right;
         }
     </style>
-
     <style>
         #itemlistmodal {
             background: rgba(255,255,255,0.9);
@@ -368,7 +384,6 @@
             background-color: rgba(255,255,255,0.9);
         }
     </style>
-
     <style>
         #mysmallModal {
             top: 30%;
@@ -416,9 +431,17 @@
         }
     </style>
 
+
+    <style>
+        .bootbox
+        {
+            z-index:10000 !important;
+        }
+
+    </style>
+
 </head>
 <body data-ng-controller="indexController">
-
     <!-- Sidebar -->
     <div class="nointernet alert alert-danger">
         <h3><i class="fa fa-exclamation-triangle"></i> No Internet Connection</h3>
@@ -433,7 +456,6 @@
 
             <span style="font-size:20px;font-weight:300;color:#fafafa;" id="DataText">
                 Saved
-
             </span>
 
         </div>
@@ -505,7 +527,7 @@
     <script src="scripts/jquery-1.11.0.min.js"></script>
     <script src="scripts/jquery-ui.js"></script>
     <script src="scripts/jquery.ui.touch-punch"></script>
-    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>   
     <script src="scripts/bootstrap-switch.js"></script>
     <script src="scripts/bootstrap3-typeahead.js"></script>
     <script src="scripts/angular.min.js"></script>
@@ -583,15 +605,19 @@
         var _CurrentUrl = "Login";
         var _isOpenBootbox = false;
         var recognition;
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-            //if ($("#wrapper").hasClass("toggled")) {
-            //    $(this).find(".fa").removeClass("rotateIn fa-bars").addClass("rotateIn fa-arrow-left");
-            //}
-            //else {
-            //    $(this).find(".fa").removeClass("rotateIn fa-arrow-left").addClass("rotateIn fa-bars");
-            //}
+      
+
+
+
+        $('#menu-toggle').click(function (e) {
+            e.stopPropagation();
+            $('#wrapper').toggleClass('toggled');
+        });
+        $('#wrapper').click(function (e) {
+            e.stopPropagation();
+        });
+        $('body,html').click(function (e) {
+            $('#wrapper').removeClass('toggled');
         });
 
 

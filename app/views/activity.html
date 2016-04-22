@@ -453,7 +453,7 @@
 
 <div ng-cloak>
 
-    <div style="top: 0;" class="topheader Increase {{CurrentHeaderClass}}">
+    <div style="top: 0;" class="topheader header Increase {{CurrentHeaderClass}}">
         <div class="row">
 
             <div class="col-md-4 col-xs-3">
@@ -497,7 +497,7 @@
 
         <div class="row tabmenu">
             <div class="col-xs-4" ng-click="GoToStep(0,2)" ng-if="IsSingleMode==true" ng-class="{'active':CurrentStep<CurrentCart.length}">
-                <a>Cart Item <span style="border-radius:100%; background:#fff; padding-left:5px; padding-right:5px; color:#333;">{{CurrentCart.length}}</span> </a>
+                <a>Cart Item <span class="newcartcounter">{{CurrentCart.length}}</span> </a>
             </div>
             <div class="col-xs-4" ng-click="GoToStep(CurrentCart.length,2)" ng-if="IsSingleMode==true" ng-class="{'active':CurrentStep==CurrentCart.length}">
                 <a>Activity </a>
@@ -508,7 +508,7 @@
 
 
             <div class="col-xs-4" ng-click="GoToStep(0,2)" ng-if="IsSingleMode==false" ng-class="{'active':CurrentStep==0}">
-                <a>Cart Item <span style="border-radius:100%; background:#fff; padding-left:5px; padding-right:5px; color:#333;">{{CurrentCart.length}}</span> </a>
+                <a>Cart Item <span class="newcartcounter">{{CurrentCart.length}}</span></a>
             </div>
             <div class="col-xs-4" ng-click="GoToStep(1,2)" ng-if="IsSingleMode==false" ng-class="{'active':CurrentStep==1}">
                 <a>Activity </a>
@@ -1631,7 +1631,7 @@
                     <div ng-if="CurrentOperation!='Adjust'">
 
 
-                        <div class="form-group" style="margin-top:80px;">
+                        <div class="form-group activityfields" style="margin-top:80px;">
                             <label>Activity Date <span>*</span> </label>
                             <div class="input-group">
                                 <input type="date" class="form-control" id="itUpdateDate" />
