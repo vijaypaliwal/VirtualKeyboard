@@ -41,7 +41,7 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
     }
 
     Date.prototype.toMSJSON = function () {
-        var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
+        var date = '/Date(' + this.getTime() + '+05:00)/'; //CHANGED LINE
         return date;
     };
     $scope.GetRecentActivities = function () {
