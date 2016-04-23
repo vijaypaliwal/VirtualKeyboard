@@ -50,6 +50,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     }
 
+
     $scope.cartitem = function () {
         $(".cartitemmenu").addClass("active")
         $(".relateddatamenu").removeClass("active")
@@ -58,7 +59,13 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
         $("#menu1").hide()
 
+
+
+
     }
+
+
+
 
     $scope.relateddata = function () {
         $(".relateddatamenu").addClass("active")
@@ -68,6 +75,8 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
         $("#menu1").show()
     }
+
+
 
 
     $scope.$watch('CurrentCart', function () {
@@ -119,10 +128,10 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     }
 
-    $scope.OpenSummary = function ()
-    {
-    $scope.IsSummary = true;
-    CheckScopeBeforeApply();
+    $scope.OpenSummary = function () {
+
+        $scope.IsSummary = true;
+        CheckScopeBeforeApply();
     }
 
     $scope.CloseSummary = function () {
@@ -188,6 +197,9 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.getstatus = function () {
 
+
+
+
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -219,6 +231,8 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
 
     $scope.locationlist = function (inventoryid, locationid) {
+
+
 
 
         $scope.currentinventoryid = inventoryid
@@ -800,6 +814,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     }
 
 
+
     $scope.IsActiveTransactionField = function (cfdid) {
 
 
@@ -864,6 +879,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         CheckScopeBeforeApply();
 
     }
+
 
     function GetActionType(Action) {
         switch (Action) {
@@ -1142,6 +1158,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     }
 
+
     $scope.CheckOnAdjust = function (cfdid, IsIncrease) {
         var _data = true;
         var _CurrentCustomColumns = angular.copy($scope.CustomActivityDataList);
@@ -1279,6 +1296,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         }
     };
 
+
     $scope.FillQuantityMove = function (value, id, type) {
 
 
@@ -1329,6 +1347,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
 
     };
+
 
     $scope.FillLocation = function (value, text, id) {
 
@@ -1939,6 +1958,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
     }
 
 
+
     $scope.HasClassData = function (id) {
         id = "#" + id;
         if ($(id).hasClass("in")) {
@@ -2004,6 +2024,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
         });
     }
+
 
 
     $scope.FillLineItem = function (LineItemIndex, fieldID, value, InventoryID) {
@@ -2273,6 +2294,8 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         }
     }
 
+
+
     function CheckintoCustomData(CurrentIndex) {
         var _returnVar = false
         var _tempArray = [];
@@ -2335,6 +2358,9 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
 
     }
+
+
+
 
     $scope.ValidateObjectVM = function () {
         debugger;
@@ -2628,7 +2654,12 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         });
     }
 
+
+
+
 }]);
+
+
 
 
 app.directive('bootstrapSwitch', [

@@ -8,6 +8,7 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
     $scope.mainObjectToSend = [];
     $scope.ActivityDate = "";
     $scope.Activity = "";
+    $scope.isSearching = false;
     function init() {
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
         console.log($scope.CurrentInventory);
@@ -41,7 +42,9 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
     }
 
     Date.prototype.toMSJSON = function () {
-        var date = '/Date(' + this.getTime() + '-05:00)/'; //CHANGED LINE
+        var offset = new Date().getTimezoneOffset();
+        
+        var date = '/Date(' + this.getTime()+')/'; //CHANGED LINE
         return date;
     };
     $scope.GetRecentActivities = function () {
@@ -49,7 +52,7 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
-
+        $scope.isSearching = true;
         debugger;
         var _datestring = ""
         var _updateDateval = $scope.ActivityDate;
@@ -60,8 +63,8 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
             var dsplit1 = _updateDateval.indexOf("/") > -1 ? _updateDateval.split("/") : _updateDateval.split("-");
             var d122 = new Date(dsplit1[0], dsplit1[1] - 1, dsplit1[2]);
 
-            var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), d122.getHours(), d122.getMinutes(), d122.getSeconds(), d122.getMilliseconds()))
 
+            d122.setDate(d122.getDate() + 1);
             _datestring = d122.toMSJSON();
         }
 
@@ -69,10 +72,10 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
 
             var d122 = new Date(1970, 1, 1);
 
-            var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), d122.getHours(), d122.getMinutes(), d122.getSeconds(), d122.getMilliseconds()))
 
             _datestring = d122.toMSJSON();
         }
+
 
         $.ajax
            ({
@@ -80,12 +83,50 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
                url: serviceBase + 'GetRecentActivity',
                contentType: 'application/json; charset=utf-8',
                dataType: 'json',
-               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "id": $scope.CurrentInventory.pID, "ActivityDate": _datestring, "Activity": $scope.Activity }),
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "id": $scope.CurrentInventory.iID, "ActivityDate": _datestring, "Activity": $scope.Activity }),
                success: function (response) {
+                   $scope.isSearching = false;
                    debugger;
-                   console.log(response);
                    $scope.Recentactivities = response.GetRecentActivityResult.Payload;
                    $scope.$apply();
+
+                   if ($scope.Recentactivities.length == 0 && ((_updateDateval == "" || _updateDateval == undefined) && $scope.Activity == ""))
+                   {
+                       $location.path("/FindItems");
+
+                   }
+               },
+               error: function (err) {
+                   debugger;
+                   $scope.isSearching = false;
+                   log.error(err.Message);
+
+               }
+           });
+    }
+    $scope.Undo=function(TransID,InvID,ParentID)
+    {
+        debugger;
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+      
+
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'UndoActivity',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "TransactionID": TransID, "InventoryID": InvID, "ParentID": ParentID }),
+               success: function (response) {
+                   if (response.UndoActivityResult.Payload)
+                   {
+                       ShowSuccess('Updated');
+                       $scope.GetRecentActivities();
+                   }
                },
                error: function (err) {
                    debugger;
@@ -93,8 +134,8 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
 
                }
            });
-    }
 
+    }
     $scope.CancelEdit = function () {
         $scope.IsEditMode = false;
 

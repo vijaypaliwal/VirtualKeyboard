@@ -50,7 +50,7 @@ app.controller('profileController', ['$scope', 'ordersService', 'localStorageSer
 
                    if (response.GetUserInfoResult.Payload[0].ProfilePic != null && response.GetUserInfoResult.Payload[0].ProfilePic != "") {
 
-                       $scope.picURl = "http://dev.style.u8i9.com/Logos/" + response.GetUserInfoResult.Payload[0].ProfilePic
+                       $scope.picURl = serviceBaseUrl + "Logos/" + response.GetUserInfoResult.Payload[0].ProfilePic
                    }
 
                    else {

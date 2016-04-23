@@ -713,8 +713,10 @@
             </div>
         </div>
     </div>
-
-    <div ng-repeat="_obj in Recentactivities">
+    <div ng-if="isSearching==true">
+        <img src="/img/loader.gif"  />
+    </div>
+    <div ng-repeat="_obj in Recentactivities" ng-if="isSearching==false && Recentactivities.length>0">
 
         <div ng-if="_obj.ParentAction=='Increase'" class="activityinfo bgm-increase">
             <h5>Increase {{_obj.itQty}} {{_obj.uomUOM}} on {{_obj.itUpdateDate}}</h5>
@@ -734,10 +736,20 @@
         <div ng-if="_obj.ParentAction=='Update'" class="bgm-status activityinfo">
             <h5>Update  {{_obj.itQty}} {{_obj.uomUOM}} on {{_obj.itUpdateDate}}</h5>
         </div>
-        <span ng-if="_obj.ItemDefaultCost==1">
+
+        <div ng-if="_obj.ParentAction=='Apply'" class="bgm-apply activityinfo">
+            <h5>Tag  {{_obj.itQty}} {{_obj.uomUOM}} on {{_obj.itUpdateDate}}</h5>
+        </div>
+
+        
+        <span ng-if="_obj.CanUndo==true">
             <a class="btn btn-default" ng-click="Undo(_obj.itID,_obj.itInvID,_obj.itParentTransID)"> <i class="fa fa-refresh"></i></a>
 
         </span>
+    </div>
+    <div ng-if="Recentactivities.length==0 && isSearching==false">
+        <h4>No Data available, please update your search data and then give it another shot. </h4>
+
     </div>
 </div>
 

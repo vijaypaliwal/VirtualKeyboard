@@ -283,7 +283,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         $scope._areImagesShown = isshow;
         $scope._HasImages = isshow;
 
-
+        localStorageService.set("ShowImageRecords", $scope._areImagesShown);
 
         $("#myModal2").modal('hide');
 
@@ -1031,7 +1031,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
         }
         setZeroData();
-        
+        SetImageData();
         $scope.PopulateInventoryItems();
 
         //SetSelectedIfAny();
@@ -1049,6 +1049,22 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         }
         else {
             $scope._areZeroRecordsShown = false;
+        }
+        CheckScopeBeforeApply();
+    }
+
+    function SetImageData()
+    {
+       
+
+        var _IsImage = localStorageService.get("ShowImageRecords");
+
+        if (_IsImage != null && _IsImage != undefined) {
+            $scope._areImagesShown = _IsImage;
+
+        }
+        else {
+            $scope._areImagesShown = false;
         }
         CheckScopeBeforeApply();
     }
@@ -1096,7 +1112,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     }
 
-    $scope.Showhideimage('true');
+    // $scope.Showhideimage('true');
 }]);
 
 

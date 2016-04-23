@@ -10,6 +10,12 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         useRefreshTokens: false
     };
 
+    var _UserInfo = {
+        username: "",
+        myprofileimage: "",
+        picURl:"",
+    }
+
     var _externalAuthData = {
         provider: "",
         userName: "",
@@ -63,7 +69,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                     _authentication.userName = loginData.userName;
                     _authentication.useRefreshTokens = loginData.useRefreshTokens;
 
-
+                    _Getuserinfo();
 
                     deferred.resolve(response);
 
@@ -94,6 +100,54 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     };
 
+
+
+    var _Getuserinfo = function () {
+        var SecurityToken = "";
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + "GetUserInfo",
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": SecurityToken }),
+               success: function (response) {
+
+
+
+                   _UserInfo.username = response.GetUserInfoResult.Payload[0].UserName
+                   _UserInfo.myprofileimage = response.GetUserInfoResult.Payload[0].ProfilePic;
+
+                   if (response.GetUserInfoResult.Payload[0].ProfilePic != null && response.GetUserInfoResult.Payload[0].ProfilePic != "") {
+
+                       _UserInfo.picURl = serviceBaseUrl + "Logos/" + response.GetUserInfoResult.Payload[0].ProfilePic
+                   }
+
+                   else {
+
+                       _UserInfo.picURl = "img/dummy-user48.png";
+
+                   }
+
+                   localStorageService.set('UserInfoData', {
+                       username: _UserInfo.username,
+                       myprofileimage: _UserInfo.myprofileimage,
+                       picURl: _UserInfo.picURl,
+                   });
+
+               },
+               error: function (err) {
+
+
+               }
+           });
+
+    }
     var _logOut = function () {
 
 
@@ -198,7 +252,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     authServiceFactory.fillAuthData = _fillAuthData;
     authServiceFactory.authentication = _authentication;
     authServiceFactory.refreshToken = _refreshToken;
-
+    authServiceFactory.UserInfo = _UserInfo;
     authServiceFactory.obtainAccessToken = _obtainAccessToken;
     authServiceFactory.externalAuthData = _externalAuthData;
     authServiceFactory.registerExternal = _registerExternal;
