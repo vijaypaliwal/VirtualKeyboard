@@ -70,13 +70,13 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when("/tokens", {
-        controller: "tokensManagerController",
-        templateUrl: "app/views/tokens.html"
+     controller: "tokensManagerController",
+     templateUrl: "app/views/tokens.html"
     });
 
     $routeProvider.when("/associate", {
-        controller: "associateController",
-        templateUrl: "app/views/associate.html"
+       controller: "associateController",
+      templateUrl: "app/views/associate.html"
     });
 
     $routeProvider.otherwise({ redirectTo: "/login" });

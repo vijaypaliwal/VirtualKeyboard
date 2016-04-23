@@ -7,7 +7,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     var _authentication = {
         isAuth: false,
         userName: "",
-        useRefreshTokens: false
+        useRefreshTokens: false,
     };
 
     var _UserInfo = {
@@ -119,13 +119,14 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                success: function (response) {
 
 
-
+                   debugger;
                    _UserInfo.username = response.GetUserInfoResult.Payload[0].UserName
                    _UserInfo.myprofileimage = response.GetUserInfoResult.Payload[0].ProfilePic;
 
                    if (response.GetUserInfoResult.Payload[0].ProfilePic != null && response.GetUserInfoResult.Payload[0].ProfilePic != "") {
 
                        _UserInfo.picURl = serviceBaseUrl + "Logos/" + response.GetUserInfoResult.Payload[0].ProfilePic
+                       
                    }
 
                    else {
@@ -134,6 +135,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                    }
 
+                   console.log(_UserInfo);
                    localStorageService.set('UserInfoData', {
                        username: _UserInfo.username,
                        myprofileimage: _UserInfo.myprofileimage,
@@ -153,6 +155,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
 
         localStorageService.remove('authorizationData');
+        localStorageService.remove('UserInfoData');
 
         _authentication.isAuth = false;
         _authentication.userName = "";
@@ -248,6 +251,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     authServiceFactory.saveRegistration = _saveRegistration;
     authServiceFactory.login = _login;
+    authServiceFactory.GetuserInfo = _Getuserinfo;
     authServiceFactory.logOut = _logOut;
     authServiceFactory.fillAuthData = _fillAuthData;
     authServiceFactory.authentication = _authentication;
