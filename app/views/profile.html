@@ -1,742 +1,98 @@
 ﻿
-<style>
-    #sticky {
-        width: 100%;
-    }
 
-   
 
-        #sticky.stick {
-            position: fixed;
-            top: 0;
-            z-index: 10000;
-            background: #0083C7;
-            padding-bottom: 2px;
-            padding-top: 2px;
-            padding-right: 20px;
-            -webkit-animation: cssAnimation 1s 16 ease;
-            -moz-animation: cssAnimation 1s 16 ease;
-            -o-animation: cssAnimation 1s 16 ease;
-        }
-</style>
 
-<style>
-    .container {
-        width: 100% !important;
-        padding-left: 0px;
-        padding-right: 0px;
-    }
 
 
 
-    .btn-success {
-        background-color: #2ecc71;
-        border-color: #27ae60;
-    }
+<link href="css/profile.css" rel="stylesheet" />
 
-    .btn {
-        border: none;
-        padding: 6px 12px;
-        border-bottom: 4px solid;
-        -webkit-transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
-        transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
-        outline: none;
-    }
+<div style="display:none;" class="profilepage">
 
-    .checkbox-nice label {
-        padding-top: 3px;
-    }
+    <div class=" animated bounceIn detailmode">
+        <div class="bluearea">
+            <div style="color:#fff; text-align:left; font-size:24px; margin-top:5px; padding-left:10px;">
 
-    label {
-        font-weight: 400;
-        font-size: 0.875em;
-    }
 
-    .checkbox-nice input[type=checkbox] {
-        visibility: hidden;
-    }
+                <br />
+            </div>
 
-    .checkbox-nice {
-        position: relative;
-        padding-left: 15px;
-    }
 
-    .widget-todo .name {
-        float: left;
-    }
+            <img src="{{picURl}}" alt="Alternate Text" />
+            <div>
+                <br />
+            </div>
+        </div>
 
-    .widget-todo > li {
-        border-bottom: 1px solid #ebebeb;
-        padding: 10px 5px;
-        background: white;
-    }
+        <div style="margin-top:0px;" class="followMeBar bluearea">
 
-    .widget-todo {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
+            <table style="width:100%">
+                <tr>
+                    <td>
+                        <a href="#/mainmenu">
+                            <i class="fa fa-arrow-left"></i>
+                        </a>
+                    </td>
 
-    .widget-products li .product > .warranty > i {
-        color: #f1c40f;
-    }
+                    <td>
+                        <h4>{{firstname}} {{lastname}}</h4>
+                    </td>
 
-    .widget-products a {
-        cursor: pointer;
-        text-decoration: none !important;
-    }
-
-    .widget-products li .product > .warranty {
-        display: block;
-        text-decoration: none;
-        width: 50%;
-        float: left;
-        font-size: 0.875em;
-    }
-
-    .widget-products li .product > .price > i {
-        color: #2ecc71;
-    }
-
-    .widget-products li .product > .price {
-        display: block;
-        text-decoration: none;
-        width: 50%;
-        float: left;
-        font-size: 0.875em;
-    }
-
-    .widget-products li .product > .name {
-        display: block;
-        font-weight: 600;
-        padding-bottom: 7px;
-    }
-
-    .widget-products li .product {
-        display: block;
-        margin-left: 80px;
-        margin-top: 7px;
-        border-bottom: 1px solid #D8D8D8;
-    }
-
-    .widget-products li .img {
-        display: block;
-        float: left;
-        text-align: center;
-        width: 70px;
-        height: 68px;
-        overflow: hidden;
-        margin-top: 7px;
-    }
-
-    .widget-products li > a {
-        height: 88px;
-        display: block;
-        width: 100%;
-        color: #344644;
-        padding: 3px 10px;
-        position: relative;
-        -webkit-transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
-        transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
-    }
-
-    .widget-products li {
-        background: #f4f4f4;
-    }
-
-    .widget-products {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        min-height: 175px;
-        background: #fff;
-    }
-
-    .widget-users li {
-        border-bottom: 1px solid #ebebeb;
-        padding: 15px 0;
-        height: 96px;
-    }
-
-    .label {
-        border-radius: 3px;
-        font-size: 0.875em;
-        font-weight: 600;
-    }
-
-    .widget-users li > .details > .time {
-        color: #3498db;
-        font-size: 0.75em;
-        padding-bottom: 7px;
-    }
-
-    .widget-users li > .details > .name > a {
-        color: #344644;
-    }
-
-    .widget-users li > .details > .name {
-        font-weight: 600;
-    }
-
-    .widget-users li > .details {
-        margin-left: 60px;
-    }
-
-    .widget-users li > .img {
-        float: left;
-        margin-top: 8px;
-        width: 50px;
-        height: 50px;
-        overflow: hidden;
-        border-radius: 50%;
-    }
-
-    .widget-users {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .tabs-wrapper.tabs-no-header .tab-content {
-        padding: 0 20px 20px;
-    }
-
-    .nav-tabs > li > a {
-        border-radius: 0;
-        font-size: 1.125em;
-        font-weight: 300;
-        outline: none;
-        color: #555;
-        margin-right: 3px;
-    }
-
-    .nav > li {
-        float: left;
-    }
-
-    .tabs-wrapper .nav-tabs {
-        margin-bottom: 15px;
-    }
-
-    .nav-tabs {
-        background: #d0d8de;
-        border-color: transparent;
-        -moz-border-radius: 3px 3px 0 0;
-        -webkit-border-radius: 3px 3px 0 0;
-        border-radius: 3px 3px 0 0;
-    }
-
-    .main-box {
-        background: #FFFFFF;
-        -webkit-box-shadow: 1px 1px 2px 0 #CCCCCC;
-        -moz-box-shadow: 1px 1px 2px 0 #CCCCCC;
-        -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
-        -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
-        box-shadow: 1px 1px 2px 0 #CCCCCC;
-        margin-bottom: 16px;
-        -webikt-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-    }
-
-
-    .bottmsectop {
-        background: rgba(18, 142, 206, 0.65);
-        color: #fff;
-        width: 100%;
-        position: fixed;
-        bottom: 0;
-        left: 0px;
-        right: 0px;
-    }
-
-
-    .searchtable {
-        margin: 0 auto;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        width: 100%;
-    }
-
-    .searchlist {
-        top: initial;
-        /*bottom: 100%;*/
-    }
-
-    .transparentBtn {
-        background: transparent;
-        border: 2px solid white;
-        color: white !important;
-        margin-top: 0px;
-        margin-left: 5px;
-    }
-
-    .text {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-inline-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-        word-break: break-all;
-        margin-bottom: 0;
-        line-height: 1.3;
-    }
-
-    h5.list-group-item-heading {
-        font-size: 14px !important;
-        text-transform: uppercase;
-    }
-
-    .list-group-item-heading .pull-right {
-        font-size: 13px !important;
-    }
-
-    .list-group-item-heading {
-        margin-bottom: 0px;
-        line-height: 20px !important;
-        font-size: 14px !important;
-        font-weight: 100;
-        color: #333;
-        padding-bottom: 3px;
-        font-family: Verdana;
-    }
-
-    .list-group-item-text {
-        font-size: 12px;
-    }
-
-    .text {
-        font-size: 12px;
-    }
-
-
-
-    #btnClearSearch {
-        color: #BE0D2F;
-        background: #eaeaea;
-        padding: 7px;
-        /* padding-top: 6px; */
-        position: absolute;
-        cursor: pointer;
-        margin-top: -37px;
-        right: -2px;
-        font-size: 22px;
-    }
-
-    .img img {
-        height: 60px;
-        width: 60px;
-        border: 1px solid #ccc;
-    }
-
-    .cd-top.cd-is-visible {
-        visibility: visible;
-        opacity: 1;
-    }
-
-    .cd-top {
-        height: 47px;
-        width: 47px;
-        color: #fff !important;
-        background: #128ECE;
-        position: fixed;
-        left: 25px;
-        bottom: 25px;
-        border-radius: 100%;
-        z-index: 100;
-        font-size: 25px;
-        padding-left: 12px;
-        padding-top: 4px;
-        opacity: 1;
-        visibility: hidden;
-    }
-
-    .bootbox .modal-body {
-        padding: 15px;
-    }
-
-    .bootbox .mybootboxbody {
-        padding: 15px;
-        padding-top: 0px;
-    }
-
-    .bootbox {
-        top: 10%;
-    }
-</style>
-
-<style>
-    #myModalforlist {
-        top: 25%;
-        overflow: hidden;
-        width: 90%;
-        margin: 0 auto;
-    }
-
-        #myModalforlist ul {
-            padding: 0px;
-            margin-bottom: 0px;
-        }
-
-            #myModalforlist ul li {
-                padding: 10px;
-                border-bottom: 1px solid #ccc;
-            }
-
-                #myModalforlist ul li a {
-                    padding-left: 20px;
-                    display: block;
-                    width: 100%;
-                    text-decoration: none !important;
-                    font-size: 17px;
-                }
-
-    .increase {
-        color: #177B3D;
-    }
-
-    .decrease {
-        color: #AF2525;
-    }
-
-    .move {
-        color: #C65E28;
-    }
-
-    .convert {
-        color: #CE59A1;
-    }
-
-    .update {
-        color: #583782;
-    }
-
-    .tag {
-        color: #0D190F;
-    }
-
-    .modal-body {
-        padding: 0px;
-    }
-</style>
-
-<style>
-    .editsection .btn {
-        border: none;
-        height: 45px;
-        text-align: center;
-        width: 100%;
-        border-radius: 0px;
-        font-size: 19px;
-        line-height: 33px;
-    }
-
-    .editsection .form-control {
-        height: 47px;
-        border-radius: 0px;
-    }
-
-
-    .maincontent label {
-        color: #333;
-    }
-
-
-    #myModal2 {
-        position: fixed;
-        right: 13px;
-        font-size: 18px;
-        text-align: right;
-        bottom: 125px;
-        display: none;
-        background: transparent;
-        overflow: hidden;
-    }
-
-        #myModal2 span {
-            font-size: 14px;
-            background: #fff;
-            padding: 3px;
-            box-shadow: 0 2px 10px rgba(0,0,0,.2);
-            margin-right: 7px;
-        }
-
-
-        #myModal2 .modal-body {
-            background: transparent;
-        }
-
-
-    .Addbtn {
-        position: fixed;
-        bottom: 23px;
-        right: 13px;
-        background: #f44336 !important;
-        z-index: 13000;
-        color: #fff !important;
-        height: 50px;
-        width: 50px;
-        border-radius: 100%;
-        text-align: center;
-        line-height: 50px;
-    }
-
-        .Addbtn .fa {
-            font-size: 24px;
-            margin-top: 13px;
-            color: #fff !important;
-        }
-
-    #selectAction {
-        position: fixed;
-        bottom: 110px;
-        right: 25px;
-    }
-
-
-
-        #selectAction li {
-            list-style-type: none;
-        }
-
-
-            #selectAction li span {
-                color: #000;
-            }
-
-
-
-
-        #selectAction .btn {
-            height: 36px;
-            width: 36px;
-            padding: 0px;
-            border-radius: 100%;
-            text-align: center;
-            line-height: 35px;
-            border: transparent;
-            margin-bottom: 5px;
-            color: #fff;
-        }
-
-    .bgm-red {
-        background: #f44336;
-    }
-</style>
-<style>
-    .mystatus {
-        background: #583782 !important;
-        color: #fff;
-        font-size: 16px;
-    }
-
-    .quantity {
-        background: #177b3d !important;
-        color: #fff;
-        font-size: 16px;
-    }
-
-    .mylocation {
-        background: #C65E28 !important;
-        color: #fff;
-        font-size: 16px;
-    }
-
-    .table-bordered {
-        font-family: verdana;
-        border: 1px solid #dddddd;
-        font-size: 14px;
-    }
-
-
-    .bootbox {
-        width: 100%;
-        margin: 0 auto;
-        top: 0;
-        bottom: 0;
-        overflow: hidden;
-    }
-</style>
-<style>
-
-
-    body {
-        background: #fff;
-        font-family: Verdana;
-        text-align: center;
-    }
-
-    .bluearea img {
-        height: 100px;
-        width: 100px;
-        border-radius: 100%;
-        border: 1px solid #ccc;
-    }
-
-    .bluearea .btn {
-        border-radius: 100%;
-        border: transparent;
-        height: 60px;
-        width: 60px;
-        font-size: 30px;
-        margin-top: 28px;
-    }
-
-    .imagesection i {
-        font-size: 35px;
-    }
-
-    .imagesection {
-        text-align: center;
-        background: #eee;
-    }
-
-        .imagesection img {
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-</style>
-
-<style>
-    .form-group  label span
-    {
-        color:red;
-    }
-    
-    
-    
-     .followMeBar {
-        background-color: #0083C7;
-        position: relative;
-        z-index: 1;
-        color: #fff;
-    }
-
-        .followMeBar i
-        {
-            color:#fff;
-            font-size:24px;
-            margin-top:10px;
-        }
-        
-        
-         .followMeBar.fixed {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            box-sizing: border-box;
-            z-index: 0;
-        }
-
-            .followMeBar.fixed.absolute {
-                position: absolute;
-            }
-
-    .bluearea {
-        background: rgba(73,155,234,1);
-        background: -moz-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
-        background: -webkit-gradient(left top, right top, color-stop(0%, rgba(73,155,234,1)), color-stop(90%, rgba(22,85,157,0.94)), color-stop(97%, rgba(18,80,151,0.94)), color-stop(100%, rgba(32,124,229,0.94)));
-        background: -webkit-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
-        background: -o-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
-        background: -ms-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
-        background: linear-gradient(to right, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(41, 100, 169, 0.94) 97%, rgba(32,124,229,0.94) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5', GradientType=1 );
-        color: #fff;
-        text-align: center;
-        padding-left:12px;
-        padding-right:12px;
-        margin-top:-5px;
-     
-    }
-    /* For aesthetics only */
-
-    body {
-        margin: 0;
-        
-    }
-</style>
-
-<div class=" animated bounceIn detailmode">
-    <div class="bluearea">
-        <div style="color:#fff; text-align:left; font-size:24px; margin-top:5px; padding-left:10px;">
-
-        
-            <br />
+                    <td ng-click="Editmode()">
+                        <i class="fa fa-pencil"></i>
+                    </td>
+                </tr>
+            </table>
         </div>
 
 
-        <img src="{{picURl}}" alt="Alternate Text" />
-        <div>
-            <br />
+        <div style="margin-top:55px;" class="container">
+            <h4>  {{email}}</h4>
+            <h4> {{organization}}</h4>
+            <h4> {{phone}}</h4>
         </div>
     </div>
 
-    <div style="margin-top:0px;" class="followMeBar bluearea">
+    <div class="animated slideInLeft editmode" style="padding:15px; display:none; text-align:left">
 
-        <table style="width:100%">
-            <tr>
-                <td>
-                    <a href="#/mainmenu">
-                        <i class="fa fa-arrow-left"></i>
-                    </a>
-                </td>
 
-                <td>
-                    <h4>{{firstname}} {{lastname}}</h4>
-                </td>
 
-                <td ng-click="Editmode()">
-                    <i class="fa fa-pencil"></i>
-                </td>
-            </tr>
-        </table>
+        <h4>Update Info</h4>
+
+        <form name="myForm">
+
+            <div class="form-group">
+                <label>First Name <span>*</span></label>
+                <input class="form-control" ng-model="firstname" type="text" name="name" required />
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input class="form-control" ng-model="lastname" type="text" name="name" />
+            </div>
+            <div class="form-group">
+                <label>Email <span>*</span></label>
+                <input class="form-control" ng-model="email" type="text" name="name" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required />
+            </div>
+            <div class="form-group">
+                <label>Organization</label>
+                <input class="form-control" ng-model="organization" type="text" name="name" />
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input class="form-control" ng-model="phone" type="text" name="name" />
+            </div>
+
+
+
+
+            <a ng-if="isSaving==false" ng-disabled="myForm.$invalid" ng-click="Updateinfo()" style="" class="btn btn-primary"> <i class="fa fa-pencil"></i> Update</a>
+            <a ng-if="isSaving==true"  ng-click="Updateinfo()" style="" class="btn btn-primary disabled"> <i class="fa fa-pencil fa-spin"></i> Update</a>
+
+            <a style="width: 100%; margin-top: 12px;" ng-click="detailmode()" class="btn btn-default"> <i class="fa fa-times"></i> Cancel</a>
+        </form>
     </div>
 
-
-    <div class="container">
-        <h4>  {{email}}</h4>
-        <h4> {{organization}}</h4>
-        <h4> {{phone}}</h4>
-    </div>
 </div>
-
-<div class="animated slideInLeft editmode"  style="padding:15px; display:none; text-align:left">
-    
-
-
-    <h4>Update Info</h4>
-
-    <form name="myForm">
-
-        <div class="form-group">
-            <label>First Name <span>*</span></label>
-            <input class="form-control" ng-model="firstname" type="text" name="name" required />
-        </div>
-        <div class="form-group">
-            <label>Last Name</label>
-            <input class="form-control" ng-model="lastname" type="text" name="name" />
-        </div>
-        <div class="form-group">
-            <label>Email <span>*</span></label>
-            <input class="form-control" ng-model="email" type="text" name="name" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required />
-        </div>
-        <div class="form-group">
-            <label>Organization</label>
-            <input class="form-control" ng-model="organization" type="text" name="name" />
-        </div>
-        <div class="form-group">
-            <label>Phone</label>
-            <input class="form-control" ng-model="phone" type="text" name="name" />
-        </div>
-
-        <a style="line-height:30px;" ng-click="detailmode()" class="btn btn-primary"> <i class="fa fa-times"></i> Cancel</a>
-
-
-        <a ng-disabled="myForm.$invalid" ng-click="Updateinfo()" style="line-height:30px; margin-top:12px;" class="btn btn-primary"> <i class="fa fa-pencil"></i> update</a>
-    </form>
-</div>
-
-
 <script>
  
 

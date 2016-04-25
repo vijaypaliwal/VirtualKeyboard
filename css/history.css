@@ -1,33 +1,8 @@
-﻿
-<style>
-    #sticky {
-        width: 100%;
-    }
 
-        #sticky.stick {
-            position: fixed;
-            top: 0;
-            z-index: 10000;
-            background: #0083C7;
-            padding-bottom: 2px;
-            padding-top: 2px;
-            padding-right: 20px;
-            -webkit-animation: cssAnimation 1s 16 ease;
-            -moz-animation: cssAnimation 1s 16 ease;
-            -o-animation: cssAnimation 1s 16 ease;
-        }
-</style>
-
-<style>
     .container {
         width: 100% !important;
         padding-left: 0px;
         padding-right: 0px;
-    }
-
-    body
-    {
-        overflow-x:hidden;
     }
 
 
@@ -366,9 +341,7 @@
     .bootbox {
         top: 10%;
     }
-</style>
 
-<style>
     #myModalforlist {
         top: 25%;
         overflow: hidden;
@@ -421,9 +394,7 @@
     .modal-body {
         padding: 0px;
     }
-</style>
 
-<style>
     .editsection .btn {
         border: none;
         height: 45px;
@@ -525,8 +496,7 @@
     .bgm-red {
         background: #f44336;
     }
-</style>
-<style>
+
     .mystatus {
         background: #583782 !important;
         color: #fff;
@@ -559,12 +529,42 @@
         bottom: 0;
         overflow: hidden;
     }
-</style>
 
+    .bgm-increase {
+        background-color: #177B3D !important;
+    }
 
-<style>
+    .bgm-move {
+        background-color: #C65E28 !important;
+    }
 
-  
+    .bgm-decrease {
+        background-color: #AF2525 !important;
+    }
+
+    .bgm-convert {
+        background-color: #CE59A1 !important;
+    }
+
+    .bgm-status {
+        background-color: #583782 !important;
+    }
+
+    .bgm-apply {
+        background-color: #0D190F !important;
+    }
+    .iteminfo
+    {
+        padding:10px;
+    }
+    
+    
+    
+     .topheader i {
+        font-size: 17px;
+        margin-top: 14px;
+    }
+
 
     body {
         background: #fff;
@@ -601,169 +601,14 @@
             margin-top: 5px;
             margin-bottom: 5px;
         }
-</style>
 
-
-
-<div class="animated slideInLeft">
-
-    <div ng-if="IsEditMode==true" class="page-header">
-        <h4 style="color:#000; padding-left:12px; text-align:left;">Edit inventory details</h4>
-    </div>
-
-    <div ng-if="IsEditMode==false">
-
-        <div class="swiper-container">
-
-            <div class="swiper-wrapper">
-
-                <div ng-if="ImageList.length > 0" ng-repeat="obj in ImageList" class="swiper-slide">
-                    <table class="imagesection">
-
-                        <tr>
-                            <td>
-                                <span class="arrow-left"  ng-show="ImageList.length != 1"><i class="fa fa-angle-left"></i></span>
-                            </td>
-                            <td>
-                                <div style="text-align:center">
-                                    <img ng-click="OpenImageModal(obj)" style="height: 100px; width: 100px; border-radius: 100%; border: 1px solid #ccc;" src="{{obj.SmallImageURI}}" alt="" />
-                                </div>
-                            </td>
-                            <td>
-                                <span class="arrow-right" ng-show="ImageList.length != 1"><i class="fa fa-angle-right"></i></span>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div ng-if="ImageList.length == 0" class="swiper-slide">
-                    <table class="imagesection">
-                        <tr>
-                            <td>
-                              
-                            </td>
-                            <td>
-                                <div style="text-align:center">
-                                    <img style="height: 100px; width: 100px; border-radius: 100%; border: 1px solid #ccc;" src="img/default.png" alt="" />
-                                </div>
-                            </td>
-                            <td>
-                             
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="detailsection">
-
-            <div style="text-align:left; padding-left:15px; padding-right:15px;" class="heading">
-
-                <table style="width:100%;">
-                    <tr>
-                        <td><h4> {{CurrentInventory.pPart}}</h4></td>
-                        <td>
-                            <div style="text-align:right; font-size:20px;" ng-click="ToggleEditView()">
-                                <i class="fa fa-pencil"></i>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-
-            </div>
-
-            <div style="background: #eee; text-align: left; padding:5px 15px 5px 15px;">
-                <h5> {{CurrentInventory.iQty}} {{CurrentInventory.uomUOM}} Quantity available at   {{CurrentInventory.lLoc}} with {{CurrentInventory.iStatusValue}} Status</h5>
-            </div>
-
-            <div style="text-align:left; padding-left:15px; padding-right:15px;" class="heading">
-
-                <h5> {{CurrentInventory.pDescription}}</h5>
-
-            </div>
-
-        </div>
-    </div>
-
-    <div style="text-align:left; color:#000; padding:10px;" class="editsection maincontent" ng-if="IsEditMode==true">
-        <div class="form-group">
-            <label>Item Name</label>
-            <div class="input-group">
-                <input type="text" class="form-control" ng-model="CurrentInventory.pPart" />
-                <span style="padding:0px;" class="input-group-addon last">
-                    <a class="btn btn-primary" ng-click="Scanitem()"> <i class="fa fa-barcode"></i>&nbsp;Scan</a>
-                </span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Item Description</label>
-            <div class="input-group">
-              <input type="text" class="form-control" ng-model="CurrentInventory.pDescription" />
-              <span style="padding:0px;" class="input-group-addon last">
-              <a class="btn btn-primary" ng-click="Scandescription()"> <i class="fa fa-barcode"></i>&nbsp;Scan</a>
-              </span>
-            </div>
-            </div>
-
-        <div class="form-group">
-            <label>Unit of Measure</label>
-            <input type="text" class="form-control" disabled="disabled" ng-model="CurrentInventory.uomUOM" />
-        </div>
-
-        <div class="form-group">
-            <label>Quantity</label>
-            <input type="text" class="form-control" disabled="disabled" ng-model="CurrentInventory.iQty" />
-        </div>
-
-        <div class="form-group">
-            <label>Location</label>
-            <input type="text" class="form-control" disabled="disabled" ng-model="CurrentInventory.lLoc" />
-        </div>
-
-        <div class="row">
-            <div class="col-xs-6">
-                <button type="button" ng-click="UpdateInventory()" ng-if="SavingData==false" ng-disabled="CurrentInventory.pPart==''||CurrentInventory.pDescription==''" class="btn btn-primary"> <i class="fa fa-check"></i> Save</button>
-                <button type="button" ng-if="SavingData==true" disabled class="btn btn-primary"> <i class="fa fa-check fa-spin"></i> Save</button>
-            </div>
-            <div class="col-xs-6">
-                <a class="btn btn-default" ng-click="ToggleEditView()"><i class="fa fa-times-circle"></i> Cancel</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<div id="myModal2" class="modal bottommenu fade">
-
-    <div class="modal-body">
-        <ul class="animated bounceIn" id="selectAction">
-            <li ng-click="viewhistory()"><span>View history</span><a href="#/InventoryHistory" class="btn-info btn"> <i class="fa fa-file-text"></i> </a></li>
-            <li ng-click="showinventory()"><span>Show all Inventory</span><a href="#/FindItems" class="btn-danger btn"> <i class="fa fa-dollar"></i> </a></li>
-            <li ng-click="addtocart(CurrentInventory)"><span>Select fot cart</span><a class="btn-success btn" data-dismiss="modal"> <i class="fa fa-shopping-cart"></i> </a></li>
-            <li ng-click="ToggleEditView()"><span>Edit Item details</span><a class="btn bgm-red" data-dismiss="modal"> <i class="fa fa-pencil"></i> </a></li>
-        </ul>
-    </div>
-</div>
-
-<a style="font-size: 30px;  background: #4caf50 !important; font-family:monospace; text-decoration:none;" ng-click="OpenmenuModal()" class="Addbtn btn-info">
-    I
-</a>
-
-
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <img src="{{CurrentActiveImage.LargeImageURI}}" id="imagepreview" style="max-height:300px;width:100%;">
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-
+    .activityinfo
+    {
+        margin-bottom:7px;
+    }
+    
+    
+     .activityinfo h5 {
+        padding: 10px;
+        color: #fff;
+    }

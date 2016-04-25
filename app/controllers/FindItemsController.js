@@ -56,7 +56,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     $scope.UOM = ["box/es", "carton/s", "cup/s", "dozen", "ea.", "gallon/s", "lbs.", "pc(s)"];
 
     $scope.Locations = ["Bin 100", "In Stock", "New location", "Refridgerator one", "Refridgerator two", "Pantry, Rack 1, Shelf 1-L", "Pantry, Rack 1, Shelf 1-M", "Storage Room A"];
-
+    $scope.TotalRecords = 0;
     function ResetInvObj() {
         $scope.InvObject = {
             InventoryID: 0, CurrentQuantity: "", AvgCostPerUnit: "", Uncontrolled: "", UniqueTag: "",
@@ -316,11 +316,16 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
         if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
             if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-                _IsLazyLoadingUnderProgress = 1;
-                _PageSize = _TotalRecordsCurrent + 10;
-                $scope.myinventoryColumnLoaded = false;
-                CheckScopeBeforeApply();
-                $scope.GetInventories();
+                if (_PageSize < $scope.totalrecords) {
+                    _IsLazyLoadingUnderProgress = 1;
+                    _PageSize = _TotalRecordsCurrent + 10;
+                    $scope.myinventoryColumnLoaded = false;
+                    CheckScopeBeforeApply();
+                    $scope.GetInventories();
+                }
+                else {
+                    log.info("You have already loaded all data.")
+                }
 
             }
         }

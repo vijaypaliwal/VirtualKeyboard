@@ -1,0 +1,442 @@
+  .AdjustNetzero {
+        color: #000 !important;
+        padding: 5px;
+    }
+
+
+    .AdjustIncrease {
+        color: #177B3D !important;
+        padding: 5px;
+    }
+
+    .AdjustDecrease {
+        color: #AF2525 !important;
+        padding: 5px;
+    }
+
+    .bgm-orange {
+        background-color: #f8c217 !important;
+    }
+
+    .topheader a {
+        font-size: 18px;
+        padding: 10px;
+        font-weight: 100;
+        font-family: verdana;
+    }
+
+    .form-group label span {
+        color: red;
+    }
+
+    .errorMessage {
+        color: red;
+    }
+
+    .linkdisabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+    .bottomnavigator {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        color: #fff;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        z-index: 10;
+    }
+
+        .bottomnavigator a {
+            font-size: 17px;
+            padding: 10px;
+            font-weight: 100;
+            font-family: verdana;
+            color: #fff;
+        }
+
+    .topheader {
+        padding-bottom: 2px;
+    }
+
+    .maincontent {
+        background: #fff;
+        padding: 10px;
+        padding-top: 0px;
+        font-size: 12px;
+        color: #6D6C6C;
+        font-family: verdana;
+    }
+
+    .nav-tabs li {
+        background: #fff;
+        border: transparent;
+        border-bottom: 2px solid #ccc;
+    }
+
+        .nav-tabs li a {
+            background: #fff;
+            border: transparent;
+        }
+
+    .nav-tabs .active {
+        border-bottom: 2px solid #128ece;
+    }
+
+        .nav-tabs .active a {
+            border: transparent !important;
+        }
+
+    .laststep .btn {
+        border-radius: 100%;
+        height: 50px;
+        width: 50px;
+        padding: 0px;
+        font-size: 22px;
+        text-align: center;
+        line-height: 46px;
+    }
+
+    .laststep .row {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+        padding-top: 5px;
+    }
+
+        .laststep .row h4 {
+            margin-top: 12px;
+        }
+
+    .checkbox {
+        padding-left: 0px;
+    }
+
+    label {
+        display: block;
+    }
+
+    .rotateData {
+        padding: 0px;
+        height: 50px;
+        width: 50px;
+        background: #128ece;
+        border-radius: 100%;
+        color: #fff !important;
+        -ms-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    .movepin {
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+
+    .pull-right > .dropdown-menu {
+        right: 17px;
+    }
+
+    .panel-heading {
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+
+    .indicator {
+        color: #000;
+        margin-top: -7px;
+        font-size: 32px;
+    }
+
+      .bootbox-confirm {
+        top: 20%;
+    }
+
+    .mybootboxbody {
+        padding-left: 20px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .bootbox-confirm .btn {
+        background: transparent !important;
+        color: #000;
+        padding: 8px 10px;
+        padding-left: 2px;
+        margin-right: 20px;
+        font-weight: 200 !important;
+    }
+
+    body {
+        font-family: Verdana;
+    }
+
+    .bootbox-confirm .modal-footer {
+        margin-top: 0px;
+        padding: 10px 15px 10px;
+        background: #eee;
+        padding-top: 0px;
+        margin-top: 10px;
+        padding-bottom: 0px;
+        text-align: left;
+        border-top: transparent;
+    }
+
+    .itemcheckicon {
+        font-size: 35px;
+        color: rgb(0, 150, 136);
+        position: absolute;
+        left: 31px;
+        top: 15px;
+    }
+
+     .ViewSummary h4 {
+        font-size: 15px;
+        margin-top: 5px !important;
+    }
+
+    .ViewSummary h5 {
+        font-size: 16px;
+        margin-top: 5px;
+        margin-bottom: 7px;
+    }
+
+    .ViewSummary img {
+        margin-top: 5px;
+    }
+
+    .container {
+        margin-left: 0px;
+        margin-right: 0px;
+        width: 100%;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .page-header {
+        color: #000;
+    }
+
+    body {
+        background: #fff;
+    }
+
+    .headerdropdown img {
+        height: 30px;
+        width: 30px;
+        border-radius: 100%;
+        border: 2px solid #e5e5e5;
+        margin-top: 0px;
+    }
+
+    .form-control {
+        border-radius: 0px;
+        min-width:95%;
+    }
+
+
+    .iteminfopanel {
+        background: #EAEAEA;
+        margin-top: 80px;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+
+    .customActivityData; {
+        margin-top: 85px;
+    }
+
+    .laststep {
+        margin-top: 85px;
+    }
+
+    .bgm-purple {
+        background: #583782 !important;
+    }
+
+    .bgm-increase {
+        background-color: #177B3D !important;
+    }
+
+    .bgm-move {
+        background-color: #C65E28 !important;
+    }
+
+    .bgm-decrease {
+        background-color: #AF2525 !important;
+    }
+
+    .bgm-convert {
+        background-color: #CE59A1 !important;
+    }
+
+    .bgm-status {
+        background-color: #583782 !important;
+    }
+
+    .bgm-apply {
+        background-color: #0D190F !important;
+    }
+
+    .tabmenu {
+        text-align: center;
+        margin-top: 4px;
+    }
+
+        .tabmenu .active {
+            transition: all 1s;
+        }
+
+
+        .tabmenu a {
+            text-decoration: none;
+            font-size: 15px;
+            color: #fff !important;
+            white-space: nowrap;
+        }
+
+         #locationlistmodal {
+        background: #fff;
+        background-color: #fff;
+        width: 100%;
+        margin: 0 auto;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+    }
+
+        #locationlistmodal .modal-header {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 7px;
+        }
+
+        #locationlistmodal .modal-body {
+            overflow: auto;
+            min-height: 250px;
+            max-height: 500px;
+            padding: 7px;
+        }
+
+        #locationlistmodal .modal-header .close {
+            margin-top: 6px;
+            opacity: 1;
+        }
+
+    .searchresultlist {
+        padding-left: 0px;
+        border: 1px solid #eaeaea;
+    }
+
+
+        .searchresultlist li a {
+            color: #000;
+            padding-left: 10px;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .searchresultlist li {
+            list-style-type: none;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background: #fff;
+        }
+
+            .searchresultlist li:nth-child(odd) {
+                background: #eeeeee;
+            }
+
+            .searchresultlist li a .fa-angle-right {
+                position: absolute;
+                right: 32px;
+                font-size: 26px;
+            }
+
+              .tabmenu .col-xs-4, .innerSpan {
+        -webkit-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        position: relative;
+    }
+
+
+    .tabmenu .innerSpan {
+        position: absolute;
+        bottom: 2px;
+        display: block;
+        width: 33.33333333%;
+        height: 3px;
+        background: white;
+    }
+
+    .left0 {
+        left: 0%;
+    }
+
+    .left33 {
+        left: 33%;
+    }
+
+    .left66 {
+        left: 66%;
+    }
+
+    .changebtn {
+        height: 60px;
+        width: 60px;
+        bottom: 75px;
+        position: fixed !important;
+        border-radius: 60px;
+        font-size: 25px;
+        right: 50px;
+        color: #fff !important;
+        z-index: 1000;
+    }
+
+    .panel-default > .panel-heading {
+        color: #000;
+        background-color: #fff;
+        border-color: #ccc;
+        margin-top: 5px;
+    }
+
+    .panel-collapse .iteminfopanel {
+        margin-bottom: 0px !important;
+        margin-top: 0px !important;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .bootstrap-switch-container {
+        min-width: 135px;
+    }
+
+     .mynewlist li {
+        width: 50%;
+        text-align: center;
+    }
+
+    .cartlist {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    .layoutheader {
+        display: none;
+    }
+
+    #viewdata {
+        margin-top: 0px;
+    }
+
+    .activity
+    {
+        display:block !important;
+    }

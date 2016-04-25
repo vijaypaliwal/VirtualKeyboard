@@ -968,6 +968,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
             onSlideChangeEnd: function (swiperHere) {
 
+                $('html,body').animate({ scrollTop: 0 }, 800);
                 $scope.CurrentStep = swiperHere.activeIndex;
 
                 $scope.totalLength = $scope.IsSingleMode == true ? $scope.CurrentCart.length + 2 : 3;
@@ -2062,7 +2063,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         }
         switch (Option) {
             case 1:
-                log.error("Quantity is required field,please fill quantity in following cart items " + _itemIDs);
+                log.error("Quantity is required field or quantity is greater than original quantity,please fill quantity in following cart items " + _itemIDs);
                 break;
             case 2:
                 log.error("Convert Quantity,into this quantity and UOM are required fields,please fill proper values in following cart items " + _itemIDs);

@@ -11,7 +11,7 @@ app.controller('profileController', ['$scope', 'ordersService', 'localStorageSer
     $scope.organization = "";
     $scope.email = "";
     $scope.picURl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
-
+    $scope.isSaving = false;
     function init() {
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
         console.log($scope.CurrentInventory);
@@ -88,6 +88,7 @@ app.controller('profileController', ['$scope', 'ordersService', 'localStorageSer
 
         var _data = { "UserName": $scope.username, "FirstName": $scope.firstname, "LastName": $scope.lastname, "Email": $scope.email, "Phone": $scope.phone, "Organization": $scope.organization, "ProfilePic": $scope.myprofileimage };
 
+        $scope.isSaving = true;
         debugger;
         $.ajax({
             url: serviceBase + "UpdateUserInfo",
@@ -97,14 +98,20 @@ app.controller('profileController', ['$scope', 'ordersService', 'localStorageSer
             contentType: 'application/json',
             success: function (result) {
                 log.success("Profile information Updated.");
+                $scope.isSaving = false;
+                $scope.$apply();
 
             },
             error: function (err) {
 
                 log.error("Some thing went wrong");
+                $scope.isSaving = false;
+                $scope.$apply();
             
             },
             complete: function () {
+                $scope.isSaving = false;
+                $scope.$apply();
             }
         });
     

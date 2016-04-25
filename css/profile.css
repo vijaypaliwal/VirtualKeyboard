@@ -1,0 +1,241 @@
+
+    .editsection .btn {
+        border: none;
+        height: 45px;
+        text-align: center;
+        width: 100%;
+        border-radius: 0px;
+        font-size: 19px;
+        line-height: 33px;
+    }
+
+    .editsection .form-control {
+        height: 47px;
+        border-radius: 0px;
+    }
+
+
+    .maincontent label {
+        color: #333;
+    }
+
+
+    #myModal2 {
+        position: fixed;
+        right: 13px;
+        font-size: 18px;
+        text-align: right;
+        bottom: 125px;
+        display: none;
+        background: transparent;
+        overflow: hidden;
+    }
+
+        #myModal2 span {
+            font-size: 14px;
+            background: #fff;
+            padding: 3px;
+            box-shadow: 0 2px 10px rgba(0,0,0,.2);
+            margin-right: 7px;
+        }
+
+
+        #myModal2 .modal-body {
+            background: transparent;
+        }
+
+
+    .Addbtn {
+        position: fixed;
+        bottom: 23px;
+        right: 13px;
+        background: #f44336 !important;
+        z-index: 13000;
+        color: #fff !important;
+        height: 50px;
+        width: 50px;
+        border-radius: 100%;
+        text-align: center;
+        line-height: 50px;
+    }
+
+        .Addbtn .fa {
+            font-size: 24px;
+            margin-top: 13px;
+            color: #fff !important;
+        }
+
+    #selectAction {
+        position: fixed;
+        bottom: 110px;
+        right: 25px;
+    }
+
+
+
+        #selectAction li {
+            list-style-type: none;
+        }
+
+
+            #selectAction li span {
+                color: #000;
+            }
+
+
+
+
+        #selectAction .btn {
+            height: 36px;
+            width: 36px;
+            padding: 0px;
+            border-radius: 100%;
+            text-align: center;
+            line-height: 35px;
+            border: transparent;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+    .bgm-red {
+        background: #f44336;
+    }
+
+    .mystatus {
+        background: #583782 !important;
+        color: #fff;
+        font-size: 16px;
+    }
+
+    .quantity {
+        background: #177b3d !important;
+        color: #fff;
+        font-size: 16px;
+    }
+
+    .mylocation {
+        background: #C65E28 !important;
+        color: #fff;
+        font-size: 16px;
+    }
+
+    .table-bordered {
+        font-family: verdana;
+        border: 1px solid #dddddd;
+        font-size: 14px;
+    }
+
+
+    .bootbox {
+        width: 100%;
+        margin: 0 auto;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+    }
+
+
+    body {
+        background: #fff;
+        font-family: Verdana;
+        text-align: center;
+    }
+
+    .bluearea img {
+        height: 100px;
+        width: 100px;
+        border-radius: 100%;
+        border: 1px solid #ccc;
+    }
+
+    .bluearea .btn {
+        border-radius: 100%;
+        border: transparent;
+        height: 60px;
+        width: 60px;
+        font-size: 30px;
+        margin-top: 28px;
+    }
+
+    .imagesection i {
+        font-size: 35px;
+    }
+
+    .imagesection {
+        text-align: center;
+        background: #eee;
+    }
+
+        .imagesection img {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+    .form-group  label span
+    {
+        color:red;
+    }
+    
+    
+    
+     .followMeBar {
+        background-color: #0083C7;
+        position: relative;
+        z-index: 1;
+        color: #fff;
+    }
+
+        .followMeBar i
+        {
+            color:#fff;
+            font-size:24px;
+            margin-top:10px;
+        }
+        
+        
+         .followMeBar.fixed {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 0;
+        }
+
+            .followMeBar.fixed.absolute {
+                position: absolute;
+            }
+
+    .bluearea {
+        background: rgba(73,155,234,1);
+        background: -moz-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
+        background: -webkit-gradient(left top, right top, color-stop(0%, rgba(73,155,234,1)), color-stop(90%, rgba(22,85,157,0.94)), color-stop(97%, rgba(18,80,151,0.94)), color-stop(100%, rgba(32,124,229,0.94)));
+        background: -webkit-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
+        background: -o-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
+        background: -ms-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(18,80,151,0.94) 97%, rgba(32,124,229,0.94) 100%);
+        background: linear-gradient(to right, rgba(73,155,234,1) 0%, rgba(22,85,157,0.94) 90%, rgba(41, 100, 169, 0.94) 97%, rgba(32,124,229,0.94) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5', GradientType=1 );
+        color: #fff;
+        text-align: center;
+        padding-left:12px;
+        padding-right:12px;
+        margin-top:-5px;
+     
+    }
+    /* For aesthetics only */
+
+    body {
+        margin: 0;
+        
+    }
+
+    .container
+    {
+        width:100%;
+        padding-left:0px;
+        padding-right:0px;
+    }
+
+    .profilepage
+    {
+        display:block !important;
+    }
