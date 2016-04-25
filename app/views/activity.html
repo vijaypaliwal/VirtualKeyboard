@@ -735,7 +735,7 @@
 
                                 <span ng-if=" CurrentOperation!='Increase'&& CurrentOperation!='Adjust &&   CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
 
-                                    <span ng-if=" CurrentOperation=='Increase' ||  CurrentOperation=='Decrease'">Quantity can't be greater than original quantity</span>
+                                    <span ng-if=" CurrentOperation=='Increase' ||  CurrentOperation=='Decrease'||CurrentOperation=='Update'||CurrentOperation=='Apply'">Quantity can't be greater than original quantity</span>
                                     <span ng-if=" AllowNegative!=null &&  AllowNegative!='True' &&  CurrentOperation!='Increase' &&  CurrentOperation!='Decrease'"> Quantity can't be greater than original quantity</span>
                                 </span>
                             </div>

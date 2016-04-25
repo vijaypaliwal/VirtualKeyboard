@@ -25,8 +25,9 @@ app.controller('indexController', ['$scope', 'ordersService', 'localStorageServi
                 $scope.username = $scope.UserInfoData.username;
                 $scope.myprofileimage = $scope.UserInfoData.myprofileimage;
                 $scope.picURl = $scope.UserInfoData.picURl;
+                $scope.$apply();
             }
-        },500)
+        },1000)
        
     }
 

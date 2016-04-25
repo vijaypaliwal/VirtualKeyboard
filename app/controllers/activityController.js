@@ -85,14 +85,12 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
         if ($scope.IsSingleMode == false) {
             if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
                 for (i = 0; i < $scope.CurrentCart.length; i++) {
-
-
-                    $scope.CurrentCart[i].IncreaseDecreaseVMData = $scope.CurrentCart[0].IncreaseDecreaseVMData;
-                    $scope.CurrentCart[i].MoveTransactionData = $scope.CurrentCart[0].MoveTransactionData;
-                    $scope.CurrentCart[i].UpdateTransactionData = $scope.CurrentCart[0].UpdateTransactionData;
-                    $scope.CurrentCart[i].ApplyTransactionData = $scope.CurrentCart[0].ApplyTransactionData;
-                    $scope.CurrentCart[i].ConvertTransactionData = $scope.CurrentCart[0].ConvertTransactionData;
-                    $scope.CurrentCart[i].IsLineItemData = $scope.CurrentCart[0].IsLineItemData;
+                    $scope.CurrentCart[i].IncreaseDecreaseVMData = angular.copy($scope.CurrentCart[0].IncreaseDecreaseVMData);
+                    $scope.CurrentCart[i].MoveTransactionData = angular.copy($scope.CurrentCart[0].MoveTransactionData);
+                    $scope.CurrentCart[i].UpdateTransactionData = angular.copy($scope.CurrentCart[0].UpdateTransactionData);
+                    $scope.CurrentCart[i].ApplyTransactionData = angular.copy($scope.CurrentCart[0].ApplyTransactionData);
+                    $scope.CurrentCart[i].ConvertTransactionData = angular.copy($scope.CurrentCart[0].ConvertTransactionData);
+                    $scope.CurrentCart[i].IsLineItemData = angular.copy($scope.CurrentCart[0].IsLineItemData);
                 }
             }
 
@@ -545,7 +543,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
             });
 
         }, 0);
-        CheckScopeBeforeApply();
+        $scope.$apply();
     }
     $scope.FillQuantityToConvert = function (value, myid, Type) {
         $scope.ActionQuantityValueToConvert = value;
