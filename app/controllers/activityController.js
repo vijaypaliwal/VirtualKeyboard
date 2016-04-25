@@ -1001,7 +1001,14 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
 
     $scope.GoToStep = function (Index, _step) {
+
+
+        $('html,body').animate({ scrollTop: 0 }, 800);
+
+
         var type = GetTypeByIndex();
+
+     
 
 
         _step = _step == null || _step == undefined ? 1 : _step;

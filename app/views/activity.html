@@ -406,7 +406,7 @@
                                                     <label>Quantity</label>
 
                                                     <div class="input-group">
-                                                        <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity=='' ||  CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity ?'has-error':''">
+                                                        <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity=='' ||  CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity ?'':''">
 
                                                             <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity" />
 
@@ -432,7 +432,7 @@
 
                                                 <div class="form-group">
                                                     <label>New Quantity</label>
-                                                    <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity==''?'has-error':''">
+                                                    <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity==''?'':''">
 
                                                         <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity" />
 
@@ -456,7 +456,7 @@
 
                                                 <div class="form-group">
                                                     <label>New Unit of Measure</label>
-                                                    <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ToUOMID==''?'has-error':''">
+                                                    <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ToUOMID==''?'':''">
                                                         <div class="select">
                                                             <select class="form-control" ng-model=" CurrentActiveObject.ConvertTransactionData.ToUOMID">
                                                                 <option value="">None</option>
@@ -733,7 +733,7 @@
 
 
 
-                                <span ng-if=" CurrentOperation!='Increase'&& CurrentOperation!='Adjust &&   CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
+                                <span ng-if="CurrentOperation!='Increase'&& CurrentOperation!='Adjust' && CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
 
                                     <span ng-if=" CurrentOperation=='Increase' ||  CurrentOperation=='Decrease'||CurrentOperation=='Update'||CurrentOperation=='Apply'">Quantity can't be greater than original quantity</span>
                                     <span ng-if=" AllowNegative!=null &&  AllowNegative!='True' &&  CurrentOperation!='Increase' &&  CurrentOperation!='Decrease'"> Quantity can't be greater than original quantity</span>
@@ -752,7 +752,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a data-ng-click=" FillQuantity( CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity, CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
                                     <li><a data-ng-click=" FillQuantity( CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity, CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
-                                </ul>
+                                </ul>   
                             </div>
                         </div>
                     </div>
@@ -1001,7 +1001,7 @@
                                     <label>Quantity</label>
 
                                     <div class="input-group">
-                                        <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity=='' ||  CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity ?'has-error':''">
+                                        <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity=='' ||  CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity ?'':''">
 
                                             <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity" />
 
@@ -1042,7 +1042,7 @@
 
                                 <div class="form-group">
                                     <label>New Quantity</label>
-                                    <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity==''?'has-error':''">
+                                    <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity==''?'':''">
 
                                         <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity" />
 
@@ -1082,7 +1082,7 @@
 
                                 <div class="form-group">
                                     <label>New Unit of Measure</label>
-                                    <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ToUOMID==''?'has-error':''">
+                                    <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ToUOMID==''?'':''">
                                         <div class="select">
                                             <select class="form-control" ng-model=" CurrentActiveObject.ConvertTransactionData.ToUOMID">
                                                 <option value="">None</option>
