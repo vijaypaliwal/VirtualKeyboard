@@ -139,8 +139,9 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
     }
 
     $scope.FillQuantity = function (value, id, type) {
+         
         $scope.ActionQuantityValue = value;
-
+      
         var k = 0;
         switch (type) {
             case 1:
@@ -149,6 +150,91 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                     for (k = 0; k < $scope.CurrentCart.length; k++) {
                         $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity = $scope.ActionQuantityValue;
                         $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.ActionQuantityValue;
+                    }
+
+                    //   $("#mybutton_" + id).addClass("movepin")
+
+                    ShowSuccess('Updated');
+
+                    //  $scope.NextClickNew(2);
+                    //  $scope.CurrentActiveObject = $scope.CurrentCart[0];
+                    CheckScopeBeforeApply();;
+                }
+                else {
+                    toastr.error("Please input some valid value");
+                }
+                break;
+            case 2:
+
+                for (k = 0; k < $scope.CurrentCart.length; k++) {
+
+                    if ($scope.CurrentCart[k].InventoryDataList.oquantity > 0) {
+
+                        $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity = $scope.CurrentCart[k].InventoryDataList.oquantity;
+                        $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.CurrentCart[k].InventoryDataList.oquantity;
+                    }
+                    else {
+                        $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity = 0;
+                        $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = 0;
+                    }
+                }
+
+                //    $("#mybutton_" + id).addClass("movepin")
+
+                ShowSuccess('Updated');
+
+                CheckScopeBeforeApply();;
+
+                break;
+
+            default:
+
+        }
+
+
+    };
+    $scope.FillQuantityNew = function (value, id, type) {
+         
+        $scope.ActionQuantityValue = value;
+
+        var k = 0;
+        switch (type) {
+            case 1:
+                if ($scope.ActionQuantityValue != "" && $scope.ActionQuantityValue != undefined) {
+
+                    for (k = 0; k < $scope.CurrentCart.length; k++) {
+
+                        $scope.CurrentCart[k].AdjustCalculation = "";
+                        if ($scope.CurrentOperation == "Adjust") {
+                            if ($scope.ActionQuantityValue >$scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                value = $scope.ActionQuantityValue - $scope.CurrentCart[k].InventoryDataList.oquantity;
+                                $scope.CurrentCart[k].AdjustCalculation += $scope.CurrentCart[k].InventoryDataList.oquantity.toString() + " + " + value.toString() + "=" + $scope.ActionQuantityValue.toString();
+                            }
+                            else if ($scope.ActionQuantityValue < $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                                value =$scope.CurrentCart[k].InventoryDataList.oquantity - $scope.ActionQuantityValue;
+                                $scope.CurrentCart[k].AdjustCalculation += $scope.CurrentCart[k].InventoryDataList.oquantity.toString() + " - " + value.toString() + "=" + $scope.ActionQuantityValue.toString();
+
+                            }
+                            else {
+                                value = 0;
+                                $scope.CurrentCart[k].AdjustCalculation += $scope.CurrentCart[k].InventoryDataList.oquantity.toString() + " + " + value.toString() + "=" + $scope.ActionQuantityValue.toString();
+                            }
+
+                            $scope.IsQuantityUpdated = true;
+
+                           $scope.CurrentCart[k].AdjustActionQuantity = value;
+                           $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity = $scope.ActionQuantityValue;
+
+                           $scope.CurrentCart[k].ActionPerformed = ($scope.ActionQuantityValue ==$scope.CurrentCart[k].InventoryDataList.oquantity || $scope.ActionQuantityValue >$scope.CurrentCart[k].InventoryDataList.oquantity) ? "1" : "-1";
+
+                        }
+
+                        else {
+
+
+                            $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity = $scope.ActionQuantityValue;
+                            $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.ActionQuantityValue;
+                        }
                     }
 
                     //   $("#mybutton_" + id).addClass("movepin")
@@ -1266,7 +1352,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                     $("#mybutton_" + id).addClass("movepin")
                     ShowSuccess('Updated');
-
+                    $(".WholeNumbersOnly").trigger('change');
                     CheckScopeBeforeApply();
                 }
                 else {
@@ -1288,7 +1374,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                     }
                 }
                 ShowSuccess('Updated');
-
+                $(".WholeNumbersOnly").trigger('change');
                 $("#mybutton_" + id).addClass("movepin")
 
                 CheckScopeBeforeApply();;
@@ -2346,15 +2432,13 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         $location.path('/login');
         CheckScopeBeforeApply();
     }
-
-
     $scope.changeNav = function () {
 
         var _tempLength = $scope.totalLength - 1;
         if (_tempLength != $scope.CurrentStep) {
 
             setTimeout(function () {
-             //   $(".swiper-slide-active input:first").focus();
+                $(".swiper-slide-active input:first").focus();
                 $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
                 $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
 
@@ -2364,17 +2448,6 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
 
     }
-
-    //setTimeout(function () {
-    //    $('input').keyup(function () {
-
-    //        $(".header").css('position', 'relative');
-
-    //    }).blur(function () {
-
-    //        $(".header").css('position', 'fixed');
-    //    });
-    //}, 1000)
 
 
 
@@ -2712,3 +2785,5 @@ app.directive('bootstrapSwitch', [
             };
         }
 ]);
+
+
