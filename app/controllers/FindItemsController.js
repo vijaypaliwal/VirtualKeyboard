@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageService', 'authService', '$location', 'log', function ($scope, ordersService, localStorageService, authService, $location, log) {
+app.controller('FindItemsController', ['$scope',  'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
 
     $scope.InventoryItems = [];
     $scope.SecurityToken = "";
@@ -74,17 +74,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     var pressTimer
 
-    //$("#mylist").mouseup(function () {
-    //    clearTimeout(pressTimer)
-    //    // Clear timeout
-    //    return false;
-    //}).mousedown(function () {
-    //    // Set timeout
-    //    pressTimer = window.setTimeout(function () {
-    //        $("#myModalforlist").modal('show');
-    //    }, 700)
-    //    return false;
-    //});
+
 
 
     $scope.ShowOptionModal = function () {
@@ -105,45 +95,9 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
 
-    function GetRandomData(Type) {
-        switch (Type) {
-            case 1:
-                return $scope.Statuses[Math.floor(Math.random() * $scope.Statuses.length)];
-                break;
-            case 2:
-                return $scope.UOM[Math.floor(Math.random() * $scope.UOM.length)];
-                break;
-            case 3:
-                return $scope.Locations[Math.floor(Math.random() * $scope.Locations.length)];
-                break;
-            default:
-                return "";
+   
 
-        }
-
-
-
-    }
-
-    function makeid() {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-        for (var i = 0; i < 10; i++)
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-        return text;
-    }
-
-    function makedescription() {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-        for (var i = 0; i < 55; i++)
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-        return text;
-    }
+   
 
     $scope.GoToDetailPage = function (obj) {
         localStorageService.set("CurrentDetailObject", obj);
@@ -208,7 +162,6 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
         CheckScopeBeforeApply();
     }
 
-    $scope.authentication = authService.authentication.isAuth;
 
 
     $scope.UploadImg = function (id, _obj) {
@@ -221,17 +174,8 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
         $scope.handleFileSelect(event);
     });
-    $scope.afterlogout = function () {
-        $location.path('/login');
+ 
 
-        log.error("You are Logged Out (You can't Go back further)");
-
-    }
-
-
-    if ($scope.authentication == false) {
-        //  $scope.afterlogout();
-    }
 
 
 
@@ -311,6 +255,25 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     }
 
+
+    function getIncrementor(_Total)
+    {
+        if(_Total<=100)
+        {
+            return 10;
+        }
+        else if (_Total>100 && _Total<500)
+        {
+            return 20;
+        }
+        else if(_Total >500)
+        {
+            return 50;
+        }
+        else {
+            return 10;
+        }
+    }
     $(window).scroll(function () {
         var _SearchValue = $.trim($("#MasterSearch").val());
 
@@ -318,7 +281,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
             if ($(window).scrollTop() == $(document).height() - $(window).height()) {
                 if (_PageSize < $scope.totalrecords) {
                     _IsLazyLoadingUnderProgress = 1;
-                    _PageSize = _TotalRecordsCurrent + 10;
+                    _PageSize = _TotalRecordsCurrent + getIncrementor($scope.totalrecords);
                     $scope.myinventoryColumnLoaded = false;
                     CheckScopeBeforeApply();
                     $scope.GetInventories();
@@ -348,31 +311,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     };
 
 
-    $scope.GetActiveUnitDataField = function () {
-        var authData = localStorageService.get('authorizationData');
-        if (authData) {
-            $scope.SecurityToken = authData.token;
-        }
-
-        $.ajax
-           ({
-               type: "POST",
-               url: serviceBase + 'GetActiveUnitDataFields',
-               contentType: 'application/json; charset=utf-8',
-               dataType: 'text json',
-               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
-               success: function (response) {
-
-                   $scope.UnitDataList = response.GetActiveUnitDataFieldsResult.Payload;
-                   CheckScopeBeforeApply()
-               },
-               error: function (response) {
-
-
-
-               }
-           });
-    }
+   
     function UpdateFilterArray(Field, Value) {
 
         for (var i = 0; i < $scope.FilterArray.length; i++) {
@@ -694,9 +633,7 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
             var originalID = "#actionQty_" + obj.iID;
 
-            debugger;
 
-            //if ($(originalID).hasClass("btn-success"))
             if ($(originalID).find(".fa-check").css("color") == "rgb(0, 150, 136)") {
 
                 if (_isSelectAll != true) {
@@ -734,7 +671,6 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
 
-            //if ($(originalID).hasClass("btn-success"))
             if ($(originalID).find(".fa-check").css("color") == "rgb(0, 150, 136)") {
 
                 $(originalID).find(".fa-check").css("color", "transparent");
@@ -792,7 +728,6 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
 
     $('#mycartModal').on('hidden.bs.modal', function () {
-        // do something…
         $(".cartcrossicon").hide();
         $(".cartcounter").show();
 
@@ -809,7 +744,6 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
     });
 
     $('#mycartModal').on('shown.bs.modal', function () {
-        // do something…
         $(".cartcrossicon").show();
         $(".cartcounter").hide();
     });
@@ -1117,7 +1051,6 @@ app.controller('FindItemsController', ['$scope', 'ordersService', 'localStorageS
 
     }
 
-    // $scope.Showhideimage('true');
 }]);
 
 

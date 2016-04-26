@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('inventoryController', ['$scope', '$location', 'authService', 'ordersService', 'localStorageService', 'log', '$compile', function ($scope, $location, authService, ordersService, localStorageService, log, $compile) {
+app.controller('inventoryController', ['$scope', '$location', 'authService',  'localStorageService', 'log', '$compile', function ($scope, $location, authService, localStorageService, log, $compile) {
     ''
     $scope.orders = [];
     $scope.MyinventoryFields = [];
@@ -52,7 +52,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         CheckScopeBeforeApply()
     }
 
-    $scope.authentication = authService.authentication.isAuth;
 
     $scope.SearchItemValue = "";
     $scope.ItemSearching = "";
@@ -80,24 +79,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
         $(".iosbtn").hide()
     }
 
-    $('#switch-change').on('switchChange', function (e, data) {
-
-
-
-    });
-
-
-    $scope.afterlogout = function () {
-        $location.path('/login');
-
-        log.error("You are Logged Out (You can't Go back further)");
-
-    }
-
-
-    if ($scope.authentication == false) {
-        //  $scope.afterlogout();
-    }
+  
 
     $scope.CheckInCommonArray = function (Column) {
         for (var i = 0; i < $scope.CommonArray.length ; i++) {
@@ -481,6 +463,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
             default:
 
         }
+   
 
         for (var i = 0; i < _CustomFieldArray.length; i++) {
             if (_CustomFieldArray[i].cfdIsRequired == true && _CustomFieldArray[i].cfdID == id) {
@@ -488,30 +471,41 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
             }
         }
 
+        return false;
+
     }
     $scope.CheckRequiredField = function () {
+    
         if ($scope.InventoryObject.ItemID == "" || $scope.InventoryObject.Location == "" || $scope.InventoryObject.Uom == "") {
             return true;
+
         }
+        
+        return false;
+    }
+
+    $scope.CheckCustomRequiredFields=function()
+    {
+        console.log("part data");
+        console.log($scope.InventoryObject.CustomPartData);
 
         for (var i = 0; i < $scope.InventoryObject.CustomPartData.length; i++) {
 
-            if ($scope.IsRequired($scope.InventoryObject.CustomPartData[i].cfdID) && $scope.InventoryObject.CustomPartData[i].Value == "") {
-                return false;
+            if ($scope.IsRequired($scope.InventoryObject.CustomPartData[i].CfdID, 1) == true && $scope.InventoryObject.CustomPartData[i].Value == "") {
+                return true;
             }
 
         }
-
+        console.log("activity data");
+        console.log($scope.InventoryObject.CustomTxnData);
         for (var i = 0; i < $scope.InventoryObject.CustomTxnData.length; i++) {
-            if ($scope.IsRequired($scope.InventoryObject.CustomTxnData[i].cfdID) && $scope.InventoryObject.CustomTxnData[i].Value == "") {
-                return false;
+            if ($scope.IsActiveTransactionField($scope.InventoryObject.CustomTxnData[i].CfdID) == true && $scope.IsRequired($scope.InventoryObject.CustomTxnData[i].CfdID, 2) == true && $scope.InventoryObject.CustomTxnData[i].Value == "") {
+                return true;
             }
         }
 
         return false;
     }
-
-
     $scope.resetObject = function () {
         $scope.InventoryObject = {
             IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: 0, Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
@@ -532,7 +526,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
         var _TempObj = $scope.InventoryObject;
 
-        // $scope.InventoryObject.Location = $scope.InventoryObject.Location.length > 0 ? $scope.InventoryObject.Location[0] : ""
         var ImageData = $("#list123").find("img").attr("src");
         $.each(_TempObj, function (datakey, datavalue) {
 
@@ -921,7 +914,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
     $scope.IsActiveTransactionField = function (cfdid) {
 
-        debugger;
+        
         $scope.CurrentOperation = "Increase";
         for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
             if ($scope.CustomActivityDataList[i].cfdCustomFieldType == "Inventory" && $scope.CustomActivityDataList[i].cfdID == cfdid) {
@@ -982,7 +975,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type }),
                success: function (response) {
 
-                   debugger;
+                   
                    if (Type == 0) {
                        $scope.CustomItemDataList = response.GetCustomFieldsDataResult.Payload;
 
@@ -1122,15 +1115,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     function init() {
         $scope.GetAllData();
 
-        //$scope.GetMyinventoryColumns();
-        //$scope.GetCustomDataField(0);
-        //$scope.GetActiveUnitDataField();
-        //$scope.GetCustomDataField(1);
-        //$scope.getuom();
-        //$scope.getstatus();
-        //   $scope.getlocation();
-
-        // $scope.getitems();
+      
 
     }
 
@@ -1162,7 +1147,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
     }
 
 
-    //#region select2 options
 
 
 
@@ -1375,12 +1359,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
     $scope.changeNav = function () {
 
-        //  $("#myform .swiper-slide input").removeAttr("autofocus");
         $("#myform .swiper-slide-active input:first").focus();
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
         SoftKeyboard.show();
-        //    CheckScopeBeforeApply()
 
     }
 
@@ -1505,11 +1487,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'or
 
 
         $(".spinner").hide();
-        //   applyAutoComplete();
         setTimeout(function () {
 
             mySwiper = new Swiper('.swiper-container', {
-                //Your options here:
                 initialSlide: 0,
                 speed: 500,
                 effect: 'flip',

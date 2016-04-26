@@ -502,7 +502,7 @@
 
                 
 
-                <a ng-click="addinventory()" style="width:100%; margin-top:15px;" ng-disabled="CheckRequiredField()==true" id="addinventories" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
+                <a ng-click="addinventory()" style="width:100%; margin-top:15px;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
 
             </div>
             <div style="display: none;" class="pagination"></div>

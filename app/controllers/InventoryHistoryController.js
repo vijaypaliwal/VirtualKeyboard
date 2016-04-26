@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localStorageService', 'authService', '$location', 'log', function ($scope, ordersService, localStorageService, authService, $location, log) {
+app.controller('InventoryHistoryController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope,  localStorageService, authService, $location, log) {
     $scope.CurrentInventory = {};
     $scope.SavingData = false;
     $scope.IsEditMode = false;
@@ -37,9 +37,7 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
         }
     }
 
-    $scope.Undo = function (TransID, InvID, ParentID) {
-
-    }
+  
 
     Date.prototype.toMSJSON = function () {
         var offset = new Date().getTimezoneOffset();
@@ -53,7 +51,7 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
             $scope.SecurityToken = authData.token;
         }
         $scope.isSearching = true;
-        debugger;
+         
         var _datestring = ""
         var _updateDateval = $scope.ActivityDate;
 
@@ -86,7 +84,7 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "id": $scope.CurrentInventory.iID, "ActivityDate": _datestring, "Activity": $scope.Activity }),
                success: function (response) {
                    $scope.isSearching = false;
-                   debugger;
+                    
                    $scope.Recentactivities = response.GetRecentActivityResult.Payload;
                    $scope.$apply();
 
@@ -96,7 +94,7 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
                    }
                },
                error: function (err) {
-                   debugger;
+                    
                    $scope.isSearching = false;
                    log.error(err.Message);
 
@@ -109,7 +107,7 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
         var box = bootbox.confirm("Are you sure you want to proceed ?", function (result) {
             if (result) {
 
-                debugger;
+                 
                 var authData = localStorageService.get('authorizationData');
                 if (authData) {
                     $scope.SecurityToken = authData.token;
@@ -131,7 +129,7 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
                            }
                        },
                        error: function (err) {
-                           debugger;
+                            
                            log.error(err.Message);
 
                        }
@@ -158,7 +156,6 @@ app.controller('InventoryHistoryController', ['$scope', 'ordersService', 'localS
 
     function InitializeSwiper() {
         var mySwiper = new Swiper('.swiper-container', {
-            //Your options here:
             initialSlide: 0,
             speed: 200,
             effect: 'flip',

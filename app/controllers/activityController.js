@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('activityController', ['$scope', 'ordersService', 'localStorageService', 'authService', '$location', 'log', function ($scope, ordersService, localStorageService, authService, $location, log) {
+app.controller('activityController', ['$scope',  'localStorageService', 'authService', '$location', 'log', function ($scope,  localStorageService, authService, $location, log) {
     $scope.CurrentCart = [];
     $scope.SavingData = false;
     $scope.IsEditMode = false;
@@ -1267,9 +1267,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
                     $("#mybutton_" + id).addClass("movepin")
                     ShowSuccess('Updated');
 
-                    //  $scope.NextClickNew(2);
-                    //  $scope.CurrentActiveObject = $scope.CurrentCart[0];
-                    CheckScopeBeforeApply();;
+                    CheckScopeBeforeApply();
                 }
                 else {
                     log.error("Please input some valid value");
@@ -1734,7 +1732,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
             if (IsAdjustOnData == "True") {
 
                 var value = 0;
-                debugger;
+                 
                 if ($scope.IsQuantityUpdated == false) {
 
                     $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity = parseInt($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity);
@@ -2062,7 +2060,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
     $scope.ShowErrorMessage = function (Option) {
         var _itemIDs = "";
-        debugger;
+         
         if ($scope.AffectedItemIds.length > 0) {
             _itemIDs = $scope.AffectedItemIds.join(",");
         }
@@ -2369,7 +2367,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
 
 
     $scope.ValidateObjectVM = function () {
-        debugger;
+         
 
         var k = 0;
         var _totalLength = $scope.CurrentCart.length;
@@ -2377,6 +2375,7 @@ app.controller('activityController', ['$scope', 'ordersService', 'localStorageSe
             switch ($scope.CurrentOperation) {
                 case "Increase":
                 case "Decrease":
+                case "Adjust":
                     for (k = 0; k < _totalLength; k++) {
                         if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
                             $scope.IssueType = 1;

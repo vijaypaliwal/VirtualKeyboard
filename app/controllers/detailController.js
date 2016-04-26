@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('detailController', ['$scope', 'ordersService', 'localStorageService', 'authService', '$location', 'log', function ($scope, ordersService, localStorageService, authService, $location, log) {
+app.controller('detailController', ['$scope',  'localStorageService', 'authService', '$location', 'log', function ($scope,  localStorageService, authService, $location, log) {
     $scope.CurrentInventory = {};
     $scope.SavingData = false;
     $scope.IsEditMode = false;
@@ -63,7 +63,6 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
 
     function InitializeSwiper() {
         var mySwiper = new Swiper('.swiper-container', {
-            //Your options here:
             initialSlide: 0,
             speed: 200,
             effect: 'flip',
@@ -137,7 +136,7 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
     }
 
     $scope.UpdateInventory = function () {
-        debugger;
+         
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -166,7 +165,7 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
 
                     },
                     error: function (err) {
-                        debugger;
+                         
                         $scope.SavingData = false;
                         console.log(err);
                         log.error("Error Occurred during operation");
@@ -192,14 +191,10 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
     }
 
 
-    function addItemsToCart(object, IdToSave, originalID) {
-
-
-
-    }
+ 
 
     $scope.addtocart = function (v) {
-        debugger;
+         
 
         var _cartData = localStorageService.get("ActivityCart");
         if (_cartData == null || _cartData == undefined)
@@ -279,7 +274,7 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
                dataType: 'json',
                success: function (response) {
 
-                   debugger;
+                    
 
                    $scope.ImageList = response.GetItemImagesResult.Payload;
                    $scope.$apply();
@@ -291,7 +286,7 @@ app.controller('detailController', ['$scope', 'ordersService', 'localStorageServ
                },
                error: function (err) {
 
-                   debugger;
+                    
 
                    log.error(err.Message);
 

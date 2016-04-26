@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('profileController', ['$scope', 'ordersService', 'localStorageService', 'authService', '$location', 'log', function ($scope, ordersService, localStorageService, authService, $location, log) {
+app.controller('profileController', ['$scope',  'localStorageService', 'authService', '$location', 'log', function ($scope,  localStorageService, authService, $location, log) {
     $scope.Currentuser = {};
     $scope.SavingData = false;
     $scope.IsEditMode = false;
@@ -59,7 +59,6 @@ app.controller('profileController', ['$scope', 'ordersService', 'localStorageSer
 
                    }
 
-                   console.log(response)
 
                    $scope.$apply();
 
@@ -67,7 +66,7 @@ app.controller('profileController', ['$scope', 'ordersService', 'localStorageSer
                error: function (err) {
 
                    alert("Error");
-                   debugger;
+                    
 
                    alert(err.Message);
 
@@ -80,7 +79,7 @@ app.controller('profileController', ['$scope', 'ordersService', 'localStorageSer
 
 
     $scope.Updateinfo = function () {
-        debugger;
+         
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -89,7 +88,7 @@ app.controller('profileController', ['$scope', 'ordersService', 'localStorageSer
         var _data = { "UserName": $scope.username, "FirstName": $scope.firstname, "LastName": $scope.lastname, "Email": $scope.email, "Phone": $scope.phone, "Organization": $scope.organization, "ProfilePic": $scope.myprofileimage };
 
         $scope.isSaving = true;
-        debugger;
+         
         $.ajax({
             url: serviceBase + "UpdateUserInfo",
             type: 'POST',

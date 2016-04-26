@@ -21,7 +21,7 @@
 
                     <div class="headerdropdown dropdown">
                         <a data-toggle="dropdown" aria-expanded="true">
-                            <img src="img/dummy-user48.png" alt="">
+                            <img src="{{picURl}}" alt="">
                         </a>
                         <ul class="dropdown-menu animated slideInDown">
 
@@ -97,12 +97,13 @@
 
                     <div style="margin-top:90px">
                         <ul class="mynewlist nav nav-tabs">
-                            <li ng-click="cartitem()" class="cartitemmenu active"><a>Cart Items</a></li>
-                            <li ng-click="relateddata()" class="relateddatamenu"><a>Related data</a></li>
+                            <li ng-click="relateddata()" class="relateddatamenu active"><a>Related data</a></li>
+                            <li ng-click="cartitem()" class="cartitemmenu "><a>Cart Items</a></li>
+
                         </ul>
 
                         <div style="margin-top:10px;" class="tab-content">
-                            <div class="animated slideInLeft tab-pane" style="display:block;" id="home">
+                            <div class="animated slideInLeft tab-pane" id="home">
                                 <div class="cartlist" ng-repeat="CurrentActiveObject in CurrentCart">
                                     <div class="row">
                                         <div class="col-md-1 col-xs-3">
@@ -122,7 +123,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="menu1" class="animated slideInLeft tab-pane">
+                            <div id="menu1" class="animated slideInLeft tab-pane" style="display:block;">
                                 <div ng-repeat="CurrentActiveObject in CurrentCart" ng-if="$index==0">
 
                                     <div ng-if="CurrentOperation=='Move'">
@@ -239,7 +240,7 @@
                                                 <span ng-if=" CurrentOperation!='Increase'&& CurrentOperation!='Adjust' &&   CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
 
                                                     <span ng-if=" CurrentOperation=='Increase' ||  CurrentOperation=='Decrease' || CurrentOperation=='Update'||CurrentOperation=='Apply'">Quantity can't be greater than original quantity</span>
-                                                    <span ng-if=" AllowNegative!=null &&  AllowNegative!='True' &&  CurrentOperation!='Increase' &&  CurrentOperation!='Decrease'"> Quantity can't be greater than original quantity</span>
+                                                    <span ng-if=" AllowNegative!=null &&  AllowNegative!='True' &&  CurrentOperation!='Increase' &&  CurrentOperation!='Decrease' && CurrentOperation!='Update'&& CurrentOperation!='Apply'"> Quantity can't be greater than original quantity</span>
                                                 </span>
                                             </div>
                                         </div>
@@ -736,7 +737,7 @@
                                 <span ng-if="CurrentOperation!='Increase'&& CurrentOperation!='Adjust' && CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
 
                                     <span ng-if=" CurrentOperation=='Increase' ||  CurrentOperation=='Decrease'||CurrentOperation=='Update'||CurrentOperation=='Apply'">Quantity can't be greater than original quantity</span>
-                                    <span ng-if=" AllowNegative!=null &&  AllowNegative!='True' &&  CurrentOperation!='Increase' &&  CurrentOperation!='Decrease'"> Quantity can't be greater than original quantity</span>
+                                    <span ng-if=" AllowNegative!=null &&  AllowNegative!='True' &&  CurrentOperation!='Increase' &&  CurrentOperation!='Decrease' && CurrentOperation!='Update'&& CurrentOperation!='Apply'"> Quantity can't be greater than original quantity</span>
                                 </span>
                             </div>
                         </div>
