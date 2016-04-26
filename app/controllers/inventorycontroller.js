@@ -559,7 +559,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
             }
         });
 
-        ordersService.AddInventory(_TempObj, ImageData);
+        
         $.ajax
           ({
               type: "POST",

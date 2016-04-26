@@ -2346,13 +2346,15 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         $location.path('/login');
         CheckScopeBeforeApply();
     }
+
+
     $scope.changeNav = function () {
 
         var _tempLength = $scope.totalLength - 1;
         if (_tempLength != $scope.CurrentStep) {
 
             setTimeout(function () {
-                $(".swiper-slide-active input:first").focus();
+             //   $(".swiper-slide-active input:first").focus();
                 $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
                 $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
 
@@ -2362,6 +2364,17 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
 
     }
+
+    //setTimeout(function () {
+    //    $('input').keyup(function () {
+
+    //        $(".header").css('position', 'relative');
+
+    //    }).blur(function () {
+
+    //        $(".header").css('position', 'fixed');
+    //    });
+    //}, 1000)
 
 
 
