@@ -9,15 +9,7 @@ app.controller('mainmenuController', ['$scope', '$location', 'authService', 'ngA
 
 
     _CurrentUrl = "MainMenu";
-    $scope.logOut = function () {
-
-        localStorageService.set("ActivityCart", "");
-
-        localStorageService.set("SelectedAction", "");
-        authService.logOut();
-        $location.path('/login');
-        $scope.$apply();
-    }
+ 
 
 
     $(".modal-backdrop").remove();
