@@ -2,8 +2,6 @@
 app.controller('indexController', ['$scope',  'localStorageService', 'authService', '$location', 'log', function ($scope,  localStorageService, authService, $location, log) {
 
 
-
-
     $scope.logOut = function () {
         localStorageService.set("ActivityCart", "");
 
@@ -36,9 +34,6 @@ app.controller('indexController', ['$scope',  'localStorageService', 'authServic
         },1000)
        
     }
-
-   
-
 
 
 }]);
