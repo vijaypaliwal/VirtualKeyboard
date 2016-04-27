@@ -5,11 +5,17 @@ app.controller('indexController', ['$scope',  'localStorageService', 'authServic
 
 
     $scope.logOut = function () {
+        localStorageService.set("ActivityCart", "");
+
+        localStorageService.set("SelectedAction", "");
+
         authService.logOut();
         $location.path('/login');
     }
 
-
+    $scope.getClass = function (path) {
+        return ($location.path().substr(0, path.length) === path) ? 'active' : '';
+    }
     $scope.authentication = authService.authentication;
 
     $scope.GetProfileData=function()

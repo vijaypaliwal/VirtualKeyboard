@@ -287,7 +287,7 @@ app.controller('FindItemsController', ['$scope',  'localStorageService', 'authSe
                     $scope.GetInventories();
                 }
                 else {
-                    log.info("You have already loaded all data.")
+                   // log.info("You have already loaded all data.")
                 }
 
             }
@@ -809,6 +809,31 @@ app.controller('FindItemsController', ['$scope',  'localStorageService', 'authSe
 
 
 
+                        if (_isSelectAll != true) {
+                            setTimeout(function () {
+                                $(originalID).animate_from_to('.cartbtn', {
+                                    pixels_per_second: 400,
+                                    initial_css: {
+                                        'background': 'rgba(18,142,206,0.5)',
+                                        'border-radius': '100%'
+                                    }
+                                });
+                            }, 0);
+                         
+                        }
+                        else {
+                            setTimeout(function () {
+                                $(originalID).animate_from_to('.cartbtn', {
+                                    pixels_per_second: 350,
+                                    initial_css: {
+                                        'background': 'rgba(18,142,206,0.5)',
+                                        'border-radius': '100%'
+                                    }
+                                });
+                            }, 0);
+
+
+                        }
 
 
 
@@ -846,6 +871,8 @@ app.controller('FindItemsController', ['$scope',  'localStorageService', 'authSe
                         });
 
 
+
+
                     }
                     else {
                         var k = 0;
@@ -863,6 +890,16 @@ app.controller('FindItemsController', ['$scope',  'localStorageService', 'authSe
                 $scope.mainObjectToSend = $scope.mainObjectToSend.filter(function (el) {
                     return el.uId != IdToSave;
 
+                });
+
+               // $(".cartbtn").animate_from_to(originalID);
+
+                $('.cartbtn').animate_from_to(originalID, {
+                    pixels_per_second: 400,
+                    initial_css: {
+                        'background': 'rgba(226, 208, 208,1)',
+                        'border-radius': '100%'
+                    }
                 });
             }
 
@@ -1045,7 +1082,6 @@ app.controller('FindItemsController', ['$scope',  'localStorageService', 'authSe
         localStorageService.set("SelectedAction", "");
         localStorageService.set("SelectedAction", selectedAction);
 
-        console.log(localStorageService.get("ActivityCart"));
         $("#mycartModal").modal('hide');
         $location.path("/activity");
 

@@ -7,7 +7,7 @@
 <div style="display:none" class="activity" ng-cloak>
 
     <div style="top: 0;" class="topheader header Increase {{CurrentHeaderClass}}">
-        <div class="row">
+        <div class="row" id="headerrow">
 
             <div class="col-md-4 col-xs-3">
                 <a href="#/mainmenu"><i class="fa fa-home"></i></a>
@@ -23,7 +23,7 @@
 
 
                     <div class="headerdropdown dropdown">
-                        <a data-toggle="dropdown" aria-expanded="true">
+                        <a data-toggle="dropdown" class="dropdown-toggle" aria-expanded="true">
                             <img src="{{picURl}}" alt="">
                         </a>
                         <ul class="dropdown-menu animated slideInDown">
@@ -35,7 +35,7 @@
 
 
                             <li>
-                                <a ng-click="logOut()" title="Logout"><i class="fa fa-sign-out"></i> Log Out</a>
+                                <a ng-click="logOut()" class="logout" title="Logout"><i class="fa fa-sign-out"></i> Log Out</a>
                             </li>
                         </ul>
                     </div>
@@ -98,7 +98,7 @@
 
                 <div class="animated slideInDown swiper-slide singleSlide" ng-if="IsSingleMode==false" data-type="Cart" data-index="0">
 
-                    <div style="margin-top:90px">
+                    <div class="singlePanel">
 
                         <div class="row">
                             <div class="col-xs-9">
@@ -1729,25 +1729,55 @@
 
 </div>
 
+<div style="overflow:hidden; margin-top:50px;" id="myModal" class="modal animated bounceIn">
+        <div style="background:#fff;" class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle"></i></span></button>
+            <h5 class="modal-title" id="myModalLabel">What do you want to do about your cart? </h5>
+        </div>
+        <div style="background:#fff;" class="modal-body">
 
-<script>
-    $(init);
-
-    function init() {
-        $('.changebtn').draggable();
-        $('.changebtn').draggable();
-    }
-
-
-    function cartitem() {
-
-        $(".cartarea").slideToggle();
-
-    }
+            <div>
+                <button style="width:100%; margin-bottom:10px;" class="btn btn-success" ng-click="CartFunction(1)" id="keepCart">
+                    Keep cart &nbsp;<i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
 
 
+            <div>
+                <button style="width:100%; margin-bottom:10px;" class="btn btn-danger btnFullWidth" ng-click="CartFunction(2)">Clear Cart <i class="fa fa-times"></i></button>
+            </div>
+
+            <div>
+                <a style="width:100%; margin-bottom:10px;" data-dismiss="modal" class="btn btn-default" style="text-transform:none !important;">Return to Cart &nbsp; <i class="fa fa-arrow-right"></i></a>
+            </div>
+        
+      
+
+         
+
+               
+
+</div>
+        
+    </div>
+    <script>
+        $(init);
+
+        function init() {
+            $('.changebtn').draggable();
+            $('.changebtn').draggable();
+        }
+
+
+        function cartitem() {
+
+            $(".cartarea").slideToggle();
+
+        }
 
 
 
-</script>
+
+
+    </script>
 

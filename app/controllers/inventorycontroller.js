@@ -11,7 +11,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
     $scope.CurrentActiveField = "";
     $scope.Totalslides = 0;
     $scope.InventoryObject = {
-        IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: 0, Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
+        IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: "", Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
         UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: "/Date(1320825600000-0800)/", UnitDate2: "/Date(1320825600000-0800)/", UnitNumber1: 0, UnitNumber2: 0, UnitTag2: "",
         UnitTag3: "", CustomPartData: [], CustomTxnData: []
     };
@@ -678,7 +678,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
                   // Custom Item Field 
 
                   $scope.CustomItemDataList = response.GetAllDataResult.Payload[0].CustomItemField;
-                  CheckScopeBeforeApply()
+                  CheckScopeBeforeApply();
+                  console.log("item list");
+                  console.log($scope.CustomItemDataList);
+
                   for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
                       $scope.InventoryObject.CustomPartData.push({ CfdID: $scope.CustomItemDataList[i].cfdID, Value: $scope.CustomItemDataList[i].cfdDefaultValue, DataType: $scope.CustomItemDataList[i].cfdDataType });
                   }

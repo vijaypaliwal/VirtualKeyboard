@@ -17,6 +17,35 @@
     <link href="content/css/select2.min.css" rel="stylesheet" />
     <link href="content/css/animate.min.css" rel="stylesheet" />
     <link href="content/css/bootstrap-switch.css" rel="stylesheet" />
+    <style>
+        .btn, .btn-primary, .btn-info, .sidebar-nav a {
+            position: relative;
+            overflow: hidden;
+            outline: none !important; /* remove dotted border */
+        }
+
+            .btn:after, .btn-info:after, .btn-primary:after, .sidebar-nav a:after {
+                content: "";
+                background-color: #B7B7B7 !important;
+                display: block;
+                position: absolute;
+                padding-top: 240%;
+                padding-left: 240%;
+                margin-top: -120%;
+                margin-left: -50%;
+                opacity: 0;
+                transition: all 1s;
+            }
+
+            .btn:active:after, .btn-info:active:after, .btn-primary:active:after, .sidebar-nav a:active:after {
+                padding-top: 0;
+                padding-left: 0;
+                margin-top: 0;
+                margin-left: 0;
+                opacity: 1;
+                transition: 0s;
+            }
+    </style>
 
   
 
@@ -29,17 +58,19 @@
             width:100%;
         }
 
+        .sidebar-nav  li a.active {
+            background: #0083C7;
+            color: #fff;
+        }
+
         .newcartcounter {
             border-radius: 100%;
             background: #fff;
-            /* padding-left: 5px; */
-            /* padding-right: 5px; */
+          
             color: #333;
             text-align: center;
-            /* padding-top: 10px; */
-            /* padding-top: 10px; */
+         
             display: inline-block;
-            /* height: 1px; */
             width: 26px;
             height: 26px;
             line-height: 26px;
@@ -116,11 +147,13 @@
 
             .topheader a {
                 color: #fff !important;
+                border: transparent;
+                padding-left:0px;
             }
 
             .topheader i {
                 font-size: 17px;
-                margin-top: 12px;
+                margin-top: 7px;
             }
 
             .topheader .headerdropdown i {
@@ -426,6 +459,7 @@
          margin-top:40px;
         }
     </style>
+    
 
 
     <style>
@@ -462,7 +496,7 @@
 
 
         <div style="text-align:left;" class="col-xs-3" id="mySubjectLink">
-            <a id="menu-toggle"><i class="animated fa fa-bars"></i></a>
+            <a id="menu-toggle" class="btn"><i class="animated fa fa-bars"></i></a>
 
         </div>
         <div class="col-xs-6">
@@ -514,9 +548,9 @@
 
             <ul style="margin-top:5px;" class="sidebar-nav">
                 <li><a href="#/mainmenu"> <i class="fa fa-th-list"></i>&nbsp;Main Menu </a></li>
-                <li><a href="#/FindItems"><i class="fa fa-shopping-cart"></i>&nbsp;Find Items </a></li>
-                <li><a href="#/inventory"><i class="fa fa-plus-circle"></i>&nbsp;Add Inventory </a></li>
-                <li><a href="#/profile"><i class="fa fa-user"></i>&nbsp;My Profile</a></li>
+                <li><a ng-class="getClass('/FindItems')" href="#/FindItems"><i class="fa fa-shopping-cart"></i>&nbsp;Find Items </a></li>
+                <li><a ng-class="getClass('/inventory')" href="#/inventory"><i class="fa fa-plus-circle"></i>&nbsp;Add Inventory </a></li>
+                <li><a ng-class="getClass('/profile')" href="#/profile"><i class="fa fa-user"></i>&nbsp;My Profile</a></li>
                 <li><a href="#"> <i class="fa fa-sign-out"></i>&nbsp;Sign Out </a></li>
             </ul>
         </div>
@@ -537,7 +571,8 @@
     <script type="text/javascript" src="barcodescanner.js"></script>
     <script src="scripts/toastr.js"></script>
     <script src="scripts/bootbox.js"></script>
-
+    <script src="scripts/jquery.animate_from_to-1.0.js"></script>
+    
     <script src="scripts/idangerous.swiper.min.js"></script>
 
     <!-- Load app main script -->

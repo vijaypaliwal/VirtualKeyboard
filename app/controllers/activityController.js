@@ -22,7 +22,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
     $scope.IsQuantityUpdated = false;
     $scope.IsSingleMode = true;
     $scope.AffectedItemIds = [];
-
+    $scope.CurrentHref = "";
     function CheckScopeBeforeApply() {
         if (!$scope.$$phase) {
             $scope.$apply();
@@ -237,13 +237,10 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                         }
                     }
 
-                    //   $("#mybutton_" + id).addClass("movepin")
 
                     ShowSuccess('Updated');
 
-                    //  $scope.NextClickNew(2);
-                    //  $scope.CurrentActiveObject = $scope.CurrentCart[0];
-                    CheckScopeBeforeApply();;
+                    CheckScopeBeforeApply();
                 }
                 else {
                     toastr.error("Please input some valid value");
@@ -313,6 +310,56 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
     }
 
+    $scope.LeavePage=function()
+    {
+        $('#myModal').modal('show');
+    }
+
+    $scope.CartFunction=function(type)
+    {
+        switch (type) {
+            case 1:
+                break;
+            case 2:
+                localStorageService.set("ActivityCart", "");
+                localStorageService.set("SelectedAction", "");
+                break;
+                
+            default:
+
+        }
+
+        if ($scope.CurrentHref!="") {
+            if ($scope.CurrentHref.indexOf("#") > -1)
+            {
+                $scope.CurrentHref=$scope.CurrentHref.replace('#', '');
+
+            }
+            else {
+
+            }
+            $location.path($scope.CurrentHref);
+        }
+        else {
+            $location.path('/mainmenu');
+        }
+
+    }
+
+    $("#headerrow a").not(".dropdown-toggle").not(".logout").click(function () {
+        if ($scope.CurrentCart.length > 0) {
+            $scope.CurrentHref = $(this).attr("href");
+            $("#keepCart").attr("href", $scope.CurrentHref);
+            CheckScopeBeforeApply();
+            $scope.LeavePage();
+            return false;
+        }
+        else {
+            return true;
+        }
+
+
+    });
 
     $scope.locationlist = function (inventoryid, locationid) {
 
@@ -2449,7 +2496,22 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
     }
 
+    var $body = jQuery('body');
 
+    /* bind events */
+    $(document)
+    .on('focus', 'input', function () {
+        $('.header').css("position", "relative");
+        $('.iteminfopanel').css('margin-top', '0px');
+        $('.activityfields').css('margin-top', '0px');
+        $('.singlePanel').css('margin-top', '14px');
+    })
+    .on('blur', 'input', function () {
+        $('.header').css("position", "fixed");
+        $('.iteminfopanel').css('margin-top', '80px');
+        $('.activityfields').css('margin-top', '80px');
+        $('.singlePanel').css('margin-top', '90px');
+    });
 
 
     $scope.ValidateObjectVM = function () {
