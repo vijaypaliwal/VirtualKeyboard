@@ -320,12 +320,12 @@
 
     #btnClearSearch {
         color: #BE0D2F;
-        background: #eaeaea;
+     
         padding: 7px;
         /* padding-top: 6px; */
         position: absolute;
         cursor: pointer;
-        margin-top: -37px;
+        margin-top: -35px;
         right: -2px;
         font-size: 22px;
     }
@@ -392,11 +392,11 @@
                 }
 
     .modal-backdrop.in {
-        opacity: 0.6;
+        opacity: 0.5;
     }
 
     .modal-backdrop {
-        background: #0083C7;
+        background: #fff;
     }
 
 
@@ -447,7 +447,7 @@
 
         #myModal2 span {
             font-size: 16px;
-            color: #fff;
+          
             font-family: verdana;
             margin-right: 7px;
         }

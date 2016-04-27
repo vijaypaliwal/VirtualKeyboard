@@ -571,8 +571,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
               success: function (response) {
 
                   log.success("Inventory item added successfully.");
-
-                  movetolist();
+                  debugger;
+                   movetolist();
+                 // $location.path('/inventory');
 
                   $scope.resetObject();
                   CheckScopeBeforeApply()
@@ -647,6 +648,20 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
     }
 
+
+    $(document)
+ .on('focus', 'input', function () {
+
+    
+     $('.topheader').css("position", "absolute");
+   
+ })
+ .on('blur', 'input', function () {
+  
+     $('.topheader').css("position", "fixed");
+     $('.iteminfopanel').css('margin-top', '80px');
+   
+ });
 
 
     $scope.GetAllData = function () {
@@ -1565,14 +1580,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
 
     function onConfirmmove(buttonIndex) {
-        if (buttonIndex == 2 || buttonIndex == "2")
-        {
-         $location.path('/FindItems');
-         vibrate()
-         CheckScopeBeforeApply();
+        if (buttonIndex == 2 || buttonIndex == "2") {
+            $location.path('/FindItems');
+            vibrate()
+            CheckScopeBeforeApply();
         }
         else if (buttonIndex == 1 || buttonIndex == "1") {
-            $scope.getstep(0);
+            //$scope.getstep(0);
+            $location.path('/inventory');
         }
 
     }

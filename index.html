@@ -18,13 +18,13 @@
     <link href="content/css/animate.min.css" rel="stylesheet" />
     <link href="content/css/bootstrap-switch.css" rel="stylesheet" />
     <style>
-        .btn, .btn-primary, .btn-info, .sidebar-nav a {
+        .btn-block, .sidebar-nav a {
             position: relative;
             overflow: hidden;
             outline: none !important; /* remove dotted border */
         }
 
-            .btn:after, .btn-info:after, .btn-primary:after, .sidebar-nav a:after {
+            .btn-block:after, .sidebar-nav a:after {
                 content: "";
                 background-color: #B7B7B7 !important;
                 display: block;
@@ -37,7 +37,7 @@
                 transition: all 1s;
             }
 
-            .btn:active:after, .btn-info:active:after, .btn-primary:active:after, .sidebar-nav a:active:after {
+           .btn-block:active:after, .sidebar-nav a:active:after {
                 padding-top: 0;
                 padding-left: 0;
                 margin-top: 0;
@@ -471,6 +471,7 @@
         #menu-toggle
         {
             padding:6px 12px;
+            padding-left:0px;
         }
 
     </style>
