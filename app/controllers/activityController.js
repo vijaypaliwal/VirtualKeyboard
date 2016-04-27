@@ -375,6 +375,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         $scope.LocationSearchList = [];
         $scope.SearchLocationValue = "";
         $scope.isnolocationmsg = false
+        $('html,body').animate({ scrollTop: 0 }, 800);
 
     }
 

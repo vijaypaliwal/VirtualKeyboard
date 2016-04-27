@@ -629,6 +629,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
         $scope.UOMSearchList = [];
         $scope.SearchUOMValue = "";
         $scope.isnoUOMmsg = false
+        $('html,body').animate({ scrollTop: 0 }, 800);
 
 
     }
@@ -641,6 +642,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
         $scope.LocationSearchList = [];
         $scope.SearchLocationValue = "";
         $scope.isnolocationmsg = false
+        $('html,body').animate({ scrollTop: 0 }, 800);
 
 
     }
