@@ -60,8 +60,6 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         $("#menu1").hide()
 
 
-
-
     }
 
 

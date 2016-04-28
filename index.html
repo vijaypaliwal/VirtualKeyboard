@@ -16,8 +16,8 @@
     <link href="content/css/select2.min.css" rel="stylesheet" />
     <link href="content/css/animate.min.css" rel="stylesheet" />
     <link href="content/css/bootstrap-switch.css" rel="stylesheet" />
-    <style>
-        /*.btn-block, .sidebar-nav a {
+    <!--<style>
+        .btn-block, .sidebar-nav a {
             position: relative;
             overflow: hidden;
             outline: none !important;
@@ -43,8 +43,47 @@
                 margin-left: 0;
                 opacity: 1;
                 transition: 0s;
-            }*/
-    </style>
+            }
+    </style>-->
+
+
+    <style>
+
+        .btn {
+            position: relative;
+          
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            text-decoration: none;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+            .btn:after {
+                content: "";
+                background: #90EE90;
+                display: block;
+                position: absolute;
+                padding-top: 300%;
+                padding-left: 350%;
+                margin-left: -20px !important;
+                margin-top: -120%;
+                opacity: 0;
+                transition: all 0.8s;
+            }
+
+            .btn:active:after {
+                padding: 0;
+                margin: 0;
+                opacity: 1;
+                transition: 0s;
+            }
+
+    </style >
+
+
+
+
     <style>
         [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x- ng-cloak {
             display: none !important;
@@ -152,10 +191,17 @@
                 margin-top: 7px;
             }
 
-            .topheader .headerdropdown i {
-                font-size: 15px;
-               
-            }
+        .fa-arrow-circle-left
+        {
+            margin-top:2px !important;
+            font-size:28px !important;
+        }
+        
+        
+        
+         .topheader .headerdropdown i {
+            font-size: 15px;
+        }
 
 
         
@@ -495,7 +541,7 @@
 
 
         <div style="text-align:left;" class="col-xs-3" id="mySubjectLink">
-            <a id="menu-toggle" class="btn"><i class="animated fa fa-bars"></i></a>
+            <a id="menu-toggle" class="btn"><i id="sidebaricon" class="fa fa-bars"></i></a>
 
         </div>
         <div class="col-xs-6">
@@ -630,19 +676,62 @@
 
         $('#menu-toggle').click(function (e) {
             e.stopPropagation();
+
             $('#wrapper').toggleClass('toggled');
+
+
+            setTimeout(function () {
+
+
+
+                if ($('#wrapper').hasClass('toggled')) {
+                    $("#sidebaricon").removeClass("fa-bars").addClass("fa-arrow-circle-left")
+                }
+
+                else {
+
+                    $("#sidebaricon").removeClass("fa-arrow-circle-left").addClass("fa-bars")
+                        
+                }
+
+
+            }, 300);
+
+          
         });
         $('#wrapper').click(function (e) {
             e.stopPropagation();
+
         });
         $('body,html').click(function (e) {
             $('#wrapper').removeClass('toggled');
+
+            setTimeout(function () {
+
+
+
+                if ($('#wrapper').hasClass('toggled')) {
+                    $("#sidebaricon").removeClass("fa-bars").addClass("fa-arrow-circle-left")
+                }
+
+                else {
+
+                    $("#sidebaricon").removeClass("fa-arrow-circle-left").addClass("fa-bars")
+
+                }
+
+
+            }, 300);
+
         });
 
 
         $(".sidebar-nav li a").click(function (e) {
 
             $("#wrapper").toggleClass("toggled");
+
+            $("#sidebaricon").removeClass("fa-arrow-circle-left").addClass("fa-bars")
+
         });
 
         $(".menuclose").click(function (e) {
@@ -951,6 +1040,33 @@
         doOnOrientationChange();
 
        
+    </script>
+
+
+    <script>
+        var addRippleEffect = function (e) {
+            var target = e.target;
+            if (target.tagName !== 'a') return false;
+
+         
+            var rect = target.getBoundingClientRect();
+            var ripple = target.querySelector('.ripple');
+            if (!ripple) {
+                ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                ripple.style.height = ripple.style.width = Math.max(rect.width, rect.height) + 'px';
+                target.appendChild(ripple);
+            }
+            ripple.classList.remove('show');
+            var top = e.pageY - rect.top - ripple.offsetHeight / 2 - document.body.scrollTop;
+            var left = e.pageX - rect.left - ripple.offsetWidth / 2 - document.body.scrollLeft;
+            ripple.style.top = top + 'px';
+            ripple.style.left = left + 'px';
+            ripple.classList.add('show');
+            return false;
+        }
+
+        document.addEventListener('click', addRippleEffect, false);
     </script>
 
     
