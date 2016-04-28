@@ -194,6 +194,37 @@ app.controller('FindItemsController', ['$scope',  'localStorageService', 'authSe
     }
 
 
+    $scope.filterrecords = function () {
+
+        if (_IsFilterCartItems === 0) {
+
+            debugger;
+
+            _IsActuallySearching = 1;
+            _IsFilterCartItems = 1;
+            if ($scope.mainObjectToSend != null && $scope.mainObjectToSend.length > 0) {
+                var x = 0;
+                for (x = 0; x < $scope.mainObjectToSend.length; x++) {
+                    SelectedCartItemIds.push($scope.mainObjectToSend[x].uId);
+                }
+            }
+            $(".FilterCartItems").html("Clear Filter Cart Records");
+        }
+        else {
+            _IsActuallySearching = 1;
+            SelectedCartItemIds = [];
+            _IsFilterCartItems = 0;
+            $(".FilterCartItems").html("Filter Cart Records");
+        }
+
+        $scope.GetInventories();
+
+    
+
+    }
+
+
+
     $scope.SearchInventory = function () {
         var _Value=$.trim($('#MasterSearch').val());
         if (_Value !== "") {

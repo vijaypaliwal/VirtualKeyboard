@@ -530,7 +530,7 @@
     .selectAction {
         position: fixed;
         bottom: 75px;
-        right: 30px;
+        right: 35px;
     }
 
 
@@ -546,12 +546,12 @@
 
 
         .selectAction .btn {
-            height: 40px;
-            width: 40px;
+            height: 34px;
+            width: 34px;
             padding: 0px;
             border-radius: 100%;
             text-align: center;
-            line-height: 40px;
+            line-height: 34px;
             border: transparent;
             margin-bottom: 5px;
             color: #fff;
