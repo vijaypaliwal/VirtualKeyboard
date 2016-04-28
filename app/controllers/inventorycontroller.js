@@ -618,7 +618,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
         $scope.SearchList = [];
         $scope.SearchItemValue = "";
         $scope.isnoitemmsg = false
-
+        $('html,body').animate({ scrollTop: 0 }, 800);
 
     }
 
@@ -1545,9 +1545,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
                 }
 
-
-
-
             });
 
 
@@ -1586,8 +1583,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
             CheckScopeBeforeApply();
         }
         else if (buttonIndex == 1 || buttonIndex == "1") {
-            //$scope.getstep(0);
-            $location.path('/inventory');
+            $scope.getstep(0);
+            //$location.path('/inventory');
         }
 
     }

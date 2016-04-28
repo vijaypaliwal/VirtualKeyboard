@@ -69,7 +69,24 @@
 
 </style>
 
+<link href="content/css/introjs.css" rel="stylesheet" />
 
+
+<style>
+    .introjs-helperNumberLayer
+    {
+        height:30px;
+        width:30px;
+    }
+    .introjs-fixParent
+    {
+        position:relative !important;
+    }
+    .introjs-helperLayer
+    {
+        background-color:transparent !important;
+    }
+</style>
 
 <div style="text-align:center">
 
@@ -89,11 +106,9 @@
     <div class="row">
         <div class="col-md-12">
 
+            <a id="step1" class="btn btn-md btn-primary btn-block" href="#/inventory"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Put Items In Inventory<i class="fa fa-angle-right"></i> </a>
 
-
-            <a class="btn btn-md btn-primary btn-block" href="#/inventory"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Put Items In Inventory<i class="fa fa-angle-right"></i> </a>
-
-            <a class="btn btn-md btn-primary btn-block" href="#/FindItems"><i class="fa fa-search"></i>&nbsp;&nbsp;Find Items <i class="fa fa-angle-right"></i></a>
+            <a id="step2" class="btn btn-md btn-primary btn-block" href="#/FindItems"><i class="fa fa-search"></i>&nbsp;&nbsp;Find Items <i class="fa fa-angle-right"></i></a>
 
             <a class="btn btn-md btn-gray btn-block" ><i class="fa fa-th"></i>&nbsp;&nbsp;Pick Items <i class="fa fa-angle-right"></i></a>
 
@@ -101,10 +116,42 @@
 
             <button class="btn btn-md btn-gray btn-block"><i class="fa fa-book"></i>&nbsp;&nbsp;View Activity Log <i class="fa fa-angle-right"></i></button>
 
-            <a ng-click="logOut()" class="btn btn-md btn-primary btn-block"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Sign Out <i class="fa fa-angle-right"></i></a>
-
+            <a id="step3" ng-click="logOut()" class="btn btn-md btn-primary btn-block"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Sign Out <i class="fa fa-angle-right"></i></a>
 
         </div>
     </div>
 
 </div>
+
+<script src="scripts/intro.js"></script>
+
+<script type="text/javascript">
+    function startIntro() {
+        var intro = introJs();
+        intro.setOptions({
+            steps: [
+              {
+                  element: '#step1',
+                  intro: "Click to Add new Inventory"
+              },
+              {
+                  element: '#step2',
+                  intro: "See all Inventories with respective item and manage all activities ",
+                
+              },
+              {
+                  element: '#step3',
+                  intro: 'Click this button to sign out from app',
+                  position: 'top'
+                
+              }
+            
+            ]
+        });
+
+        intro.start();
+    }
+
+
+    startIntro();
+</script>

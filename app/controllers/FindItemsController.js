@@ -224,6 +224,28 @@ app.controller('FindItemsController', ['$scope',  'localStorageService', 'authSe
     }
 
 
+    setTimeout(function () {
+        $(document)
+.on('focus', 'input', function () {
+
+
+    $('.topheader').css("position", "absolute");
+
+    $('.topup').css("position", "absolute !important")
+
+
+
+})
+.on('blur', 'input', function () {
+
+    $('.topheader').css("position", "fixed");
+    $('.topup').css("position", "fixed !important")
+
+});
+    }, 500);
+  
+
+
 
     $scope.SearchInventory = function () {
         var _Value=$.trim($('#MasterSearch').val());

@@ -530,12 +530,8 @@
                                                 <input placeholder="fill {{_columns}}" type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
 
                                                 <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="checkbox">
-                                                    <div class="form-control FormControlType">
 
-                                                        <label>
-                                                            <input type="checkbox" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue"><i class="input-helper"></i>
-                                                        </label>
-                                                    </div>
+                                                  <input type="checkbox" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" bootstrap-switch>
 
                                                 </div>
 
@@ -1142,13 +1138,10 @@
 
                                     <input placeholder="fill {{_columns}}" type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
 
-                                    <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="checkbox">
-                                        <div class="form-control FormControlType">
+                                        <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="checkbox">
 
-                                            <label>
-                                                <input type="checkbox" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue"><i class="input-helper"></i>
-                                            </label>
-                                        </div>
+                                            <input type="checkbox" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" bootstrap-switch>
+
 
                                     </div>
 
