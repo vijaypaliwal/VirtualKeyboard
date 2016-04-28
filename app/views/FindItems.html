@@ -99,7 +99,6 @@
     <div class="animated slideInLeft" id="mylist">
 
         <div class="pageData">
-
             <ul class=" widget-products">
                 <li ng-repeat="_obj in InventoryItems" class="newlistitem">
                     <a class="">
@@ -151,19 +150,16 @@
             </ul>
         </div>
 
-
     </div>
 
 
 
 
     <div style="text-align:center; top:100px; overflow:hidden;" id="myModal1" class="modal fade " role="dialog">
-
         <div class="animated flipInY modal-body">
             <img style="max-width:250px; max-height:280px;" src="{{selectedImage}}" alt="">
             <button style="padding: 2px 7px; position: absolute; margin-left: -23px; margin-top:-5px;" class="btn-danger" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
         </div>
-
     </div>
 
 
@@ -171,7 +167,7 @@
 
         <div class="modal-body">
             <ul class="animated bounceIn selectAction">
-                <li> <span>New Inventory</span> <a href="#/inventory" class="btn-success btn"> <i class="fa fa-plus"></i> </a></li>
+                <li> <a href="#/inventory"><span class="newinv">New Inventory</span></a>  <a href="#/inventory" class="btn-success btn"> <i class="fa fa-plus"></i> </a></li>
                 <li class="bottomlink" ng-if="_areImagesShown==false" ng-click="Showhideimage('true')"> <span>Show Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
                 <li class="bottomlink" ng-if="_areImagesShown==true" ng-click="Showhideimage('false')"> <span>Hide Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
                 <li class="bottomlink" ng-if="_areZeroRecordsShown==false" ng-click=" showhidezerorecord('true')"><span>Show Zero record</span><a class="btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
