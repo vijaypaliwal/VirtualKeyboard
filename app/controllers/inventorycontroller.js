@@ -65,7 +65,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
     $scope.isnouommsg = false;
     $scope.slide = 1000;
 
-
+    var FileName = "";
+    var StreamData = "";
 
     var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
 
@@ -559,7 +560,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
             }
         });
 
-        
+        $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity == "" ? 0 : $scope.InventoryObject.Quantity;
         $.ajax
           ({
               type: "POST",
@@ -571,7 +572,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
               success: function (response) {
 
                   log.success("Inventory item added successfully.");
-                  debugger;
+                  $scope.UploadImage();
                    movetolist();
                  // $location.path('/inventory');
 
@@ -1053,7 +1054,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
     $scope.handleFileSelect = function (evt) {
         var files = evt.target.files;
-
+        FileName = "";
+        StreamData = "";
         // Loop through the FileList and render image files as thumbnails.
         for (var i = 0, f; f = files[i]; i++) {
 
@@ -1079,6 +1081,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
                 return function (e) {
                     // Render thumbnail.
+                    FileName = theFile.name;
+                    StreamData = e.target.result;
+
                     var span = document.createElement('span');
                     span.innerHTML =
                     [
@@ -1336,7 +1341,39 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
             log.error("Scanning failed: ", error);
         });
     }
+    $scope.UploadImage = function () {
 
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        StreamData = StreamData.replace(/^data:image\/(png|jpg);base64,/, "");
+
+
+        if (StreamData != null && StreamData != "" && StreamData != undefined) {
+
+            $.ajax
+              ({
+                  type: "POST",
+                  url: serviceBase + 'UploadImage',
+                  contentType: 'application/json; charset=utf-8',
+                  dataType: 'text json',
+
+                  data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "FileName": FileName, "stream": StreamData }),
+                  success: function (response) {
+                      log.success("image success");
+
+
+                      CheckScopeBeforeApply()
+                  },
+                  error: function (response) {
+                      //  log.error("Into error");
+                      console.log(response);
+
+                  }
+              });
+        }
+    }
 
     $scope.UpDownValue = function (value, IsUp) {
         switch (value) {
