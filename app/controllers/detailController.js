@@ -110,9 +110,12 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
         scanner.scan(function (result) {
 
             $scope.itemscanvalue = result.text;
-            $("#scaninfo").show();
 
             $scope.$apply();
+
+            setTimeout(function () { $("#scaninfo").show(); }, 1000);
+
+           
 
 
         }, function (error) {
