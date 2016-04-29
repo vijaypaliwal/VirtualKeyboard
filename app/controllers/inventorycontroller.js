@@ -30,7 +30,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
                            { LocationName: "BLC1009", LocationZone: "", LocationID: 123 }];
     $scope.UOMList = [];
     $scope.ItemList = [];
-
+    $scope.ImageList = [];
 
     $scope.Quantity = "N/A";
     $scope.ItemName = "N/A";
@@ -487,8 +487,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
     $scope.CheckCustomRequiredFields=function()
     {
-        console.log("part data");
-        console.log($scope.InventoryObject.CustomPartData);
+      
 
         for (var i = 0; i < $scope.InventoryObject.CustomPartData.length; i++) {
 
@@ -497,8 +496,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
             }
 
         }
-        console.log("activity data");
-        console.log($scope.InventoryObject.CustomTxnData);
         for (var i = 0; i < $scope.InventoryObject.CustomTxnData.length; i++) {
             if ($scope.IsActiveTransactionField($scope.InventoryObject.CustomTxnData[i].CfdID) == true && $scope.IsRequired($scope.InventoryObject.CustomTxnData[i].CfdID, 2) == true && $scope.InventoryObject.CustomTxnData[i].Value == "") {
                 return true;
@@ -513,6 +510,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
             UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: "/Date(1320825600000-0800)/", UnitDate2: "/Date(1320825600000-0800)/", UnitNumber1: 0, UnitNumber2: 0, UnitTag2: "",
             UnitTag3: "", CustomPartData: [], CustomTxnData: []
         };
+        $scope.ImageList = [];
+        $('#list321').html('<img id="defaultimg" ng-click="getstep(9,\&#39;Image\&#39;)" style="height:70px; width:65px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text">');
+        $('#list123').html('');
     }
 
     $scope.addinventory = function () {
@@ -561,6 +561,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
         });
 
         $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity == "" ? 0 : $scope.InventoryObject.Quantity;
+
+        for (var i = 0; i < $scope.ImageList.length; i++) {
+
+            if($scope.ImageList[i].bytestring!=null && $scope.ImageList[i].bytestring!=undefined)
+            {
+                $scope.ImageList[i].bytestring= removePaddingCharacters($scope.ImageList[i].bytestring);
+
+
+            }
+
+        }
         $.ajax
           ({
               type: "POST",
@@ -568,15 +579,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
               contentType: 'application/json; charset=utf-8',
 
               dataType: 'json',
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": $scope.ImageList }),
               success: function (response) {
 
                   log.success("Inventory item added successfully.");
                   $scope.UploadImage();
+                  $scope.resetObject();
+
                    movetolist();
                  // $location.path('/inventory');
 
-                  $scope.resetObject();
                   CheckScopeBeforeApply()
                
                   $('#addinventories').removeClass("disabled");
@@ -697,8 +709,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
                   $scope.CustomItemDataList = response.GetAllDataResult.Payload[0].CustomItemField;
                   CheckScopeBeforeApply();
-                  console.log("item list");
-                  console.log($scope.CustomItemDataList);
 
                   for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
                       $scope.InventoryObject.CustomPartData.push({ CfdID: $scope.CustomItemDataList[i].cfdID, Value: $scope.CustomItemDataList[i].cfdDefaultValue, DataType: $scope.CustomItemDataList[i].cfdDataType });
@@ -719,8 +729,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
                   // Status
                   $scope.StatusList = response.GetAllDataResult.Payload[0].Status;
                   CheckScopeBeforeApply()
-                  console.log("all Data in one call");
-                  console.log(_TempArray);
                   AfterLoadedData();
 
               },
@@ -870,7 +878,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
                    console.log(response);
 
-                   //$scope.InventoryObject.Location = 678030;
 
                }
            });
@@ -1056,6 +1063,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
         var files = evt.target.files;
         FileName = "";
         StreamData = "";
+        var _ImgObj={ImageID:0,FileName:"",bytestring:"",Size:0}
         // Loop through the FileList and render image files as thumbnails.
         for (var i = 0, f; f = files[i]; i++) {
 
@@ -1069,9 +1077,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
             // Closure to capture the file information.
             reader.onload = (function (theFile) {
 
-
+                console.log(theFile);
                 var id = theFile.lastModified;
-
+                _ImgObj.ImageID = id;
 
                 var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
                 var compilehtml = $compile(crossicon)($scope);
@@ -1083,7 +1091,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
                     // Render thumbnail.
                     FileName = theFile.name;
                     StreamData = e.target.result;
-
+                    _ImgObj.FileName = FileName;
+                    _ImgObj.bytestring = e.target.result;
+                    _ImgObj.Size = theFile.size;
                     var span = document.createElement('span');
                     span.innerHTML =
                     [
@@ -1108,6 +1118,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
         }
 
         setTimeout(function () {
+
+            $scope.ImageList.push(_ImgObj);
             $(".removeImage").bind("click", function () {
 
                 removeImage($(this).attr("altid"));
@@ -1130,7 +1142,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
             $(this).parent("span").remove();
         });
 
+        for (var i = 0; i < $scope.ImageList.length; i++) {
+            if($scope.ImageList[i].ImageID==_this)
+            {
+                $scope.ImageList.splice(i, 1);
+                break;
+            }
 
+        }
 
 
         removeImage(_this)
@@ -1207,6 +1226,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
 
     $scope.ScanNewsearch = function () {
+
 
 
         $scope.SearchItemValue = "";
@@ -1340,15 +1360,22 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
             log.error("Scanning failed: ", error);
         });
     }
+
+    function removePaddingCharacters(bytes)
+    {
+        bytes = bytes.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "");
+
+        return bytes;
+    }
     $scope.UploadImage = function () {
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
-        StreamData = StreamData.replace(/^data:image\/(png|jpg);base64,/, "");
-
-
+   
+        StreamData = StreamData.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "");
+ 
         if (StreamData != null && StreamData != "" && StreamData != undefined) {
 
             $.ajax
