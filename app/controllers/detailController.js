@@ -5,10 +5,14 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
     $scope.IsEditMode = false;
     $scope.ImageList = [];
 
+  
+
     $scope.mainObjectToSend = [];
     function init() {
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
         console.log($scope.CurrentInventory);
+    
+    
         $scope.$apply();
     }
 
@@ -101,13 +105,12 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
 
     $scope.Scanitem = function () {
 
-
-
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
         scanner.scan(function (result) {
 
-            $scope.CurrentInventory.pPart = result.text;
+            $scope.itemscanvalue = result.text;
+            $("#scaninfo").show();
 
             $scope.$apply();
 
@@ -116,6 +119,22 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
             log.error("Scanning failed: ", error);
         });
     }
+
+
+
+    $scope.Takeitem = function () {
+
+        $scope.CurrentInventory.pPart = $scope.itemscanvalue;
+
+        $("#scaninfo").hide();
+        $scope.$apply();
+
+    }
+
+
+
+
+
 
     $scope.Scandescription = function () {
 
@@ -274,7 +293,7 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
                dataType: 'json',
                success: function (response) {
 
-                    
+                
 
                    $scope.ImageList = response.GetItemImagesResult.Payload;
                    $scope.$apply();

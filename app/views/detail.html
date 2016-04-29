@@ -11,7 +11,45 @@
     .redText {
         color: red !important;
     }
+
+    .scaninfo
+    {
+        position:fixed;
+        width:100%;
+        bottom:0;
+        background:#fafafa;
+        border-top:1px solid #ccc;
+        display:none;
+        padding-top:15px;
+       
+    }
+
+    .scaninfo .btn
+    {
+        border-radius:100%;
+        padding:0px;
+        height:40px;
+        width:40px;
+        text-align:center;
+        line-height:37px;
+        margin-bottom:10px;
+    }
 </style>
+
+
+<div class="scaninfo animated bounceInUp" id="scaninfo">
+
+ 
+    <h4>Use {{itemscanvalue}} Record</h4>
+    <br />
+
+    <a class="btn btn-success" ng-click="Takeitem()"> <i class="fa fa-check"></i>  </a>
+
+    <a class="btn btn-danger"> <i class="fa fa-times-circle"></i>  </a>
+
+    <br />
+
+</div>
 
 
 <div class="animated slideInLeft">
@@ -173,6 +211,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 
 
