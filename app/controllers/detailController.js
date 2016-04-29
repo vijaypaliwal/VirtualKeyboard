@@ -113,7 +113,7 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
 
             $scope.$apply();
 
-            setTimeout(function () { $("#scaninfo").show(); }, 1000);
+            setTimeout(function () { $(".scaninfo").show(); $(".scaninfo").css("display","block"); alert("In"); }, 10);
 
            
 
