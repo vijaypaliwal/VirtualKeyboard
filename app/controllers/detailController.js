@@ -114,10 +114,7 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
             $scope.$apply();
 
             setTimeout(function () { $(".scaninfo").show(); $(".scaninfo").css("display","block"); alert("In"); }, 10);
-
-           
-
-
+         
         }, function (error) {
             log.error("Scanning failed: ", error);
         });
