@@ -21,6 +21,7 @@
         border-top:1px solid #ccc;
         display:none;
         padding-top:15px;
+        z-index:10000;
        
     }
 
@@ -34,15 +35,27 @@
         line-height:37px;
         margin-bottom:10px;
     }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        filter: alpha(opacity=50);
+        -moz-opacity: 0.5;
+        -khtml-opacity: 0.5;
+        opacity: 0.5;
+        z-index: 5000;
+    }
 </style>
 
 
 <div class="scaninfo animated bounceInUp" id="scaninfo">
 
- 
     <h4>Use {{itemscanvalue}} Record</h4>
     <br />
-
     <a class="btn btn-success" ng-click="Takeitem()"> <i class="fa fa-check"></i>  </a>
 
     <a class="btn btn-danger"> <i class="fa fa-times-circle"></i>  </a>
@@ -211,6 +224,8 @@
         </div>
     </div>
 </div>
+
+<div id="overlay"></div>
 
 
 

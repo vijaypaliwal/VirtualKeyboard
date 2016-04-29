@@ -100,13 +100,13 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
 
     $scope.showbottomarea = function () {
 
-        alert("Opendiv");
+        $("#overlay").addClass("overlay")
+
 
         $(".scaninfo").show();
         $(".scaninfo").css("display", "block");
 
     }
-
 
 
 
@@ -136,6 +136,9 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
 
         $scope.CurrentInventory.pPart = $scope.itemscanvalue;
 
+
+        $("#overlay").removeClass("overlay")
+
         $("#scaninfo").hide();
         $scope.$apply();
 
@@ -147,8 +150,6 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
 
 
     $scope.Scandescription = function () {
-
-
 
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
@@ -283,6 +284,7 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
 
     }
 
+  
 
     $scope.getitemimage = function () {
 
