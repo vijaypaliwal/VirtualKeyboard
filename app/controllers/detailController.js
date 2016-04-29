@@ -98,7 +98,14 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
     }
 
 
+    $scope.showbottomarea = function () {
 
+        alert("Opendiv");
+
+        $(".scaninfo").show();
+        $(".scaninfo").css("display", "block");
+
+    }
 
 
 
@@ -113,7 +120,10 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
 
             $scope.$apply();
 
-            setTimeout(function () { $(".scaninfo").show(); $(".scaninfo").css("display","block"); alert("In"); }, 10);
+            setTimeout(function () {
+                $scope.showbottomarea();
+              
+            }, 10);
          
         }, function (error) {
             log.error("Scanning failed: ", error);
@@ -299,6 +309,8 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
                    $scope.$apply();
 
                    setTimeout(function () { InitializeSwiper() }, 10);
+
+                 
                  
 
 
