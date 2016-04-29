@@ -103,8 +103,8 @@
                 <li ng-repeat="_obj in InventoryItems" class="newlistitem">
                     <a class="">
                         <span class="img">
-                            <img ng-if="_obj.ImagePath==''" src="img/default.png" alt="" />
-                            <img ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="" />
+                            <img ng-if="_obj.ImagePath==''" src="img/default.png" alt="loading.." />
+                            <img ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="loading.." />
                         </span>
                         <span class="product clearfix" ng-click="GoToDetailPage(_obj)" on-long-press="SetCurrentObject(_obj)" on-touch-end="ShowOptionModal()">
                             <!--<span class="product clearfix" ng-click="ShowOptionModal()">-->

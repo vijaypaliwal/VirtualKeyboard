@@ -75,11 +75,7 @@
 
         </div>
 
-
     </div>
-
-
-
 
 
 
@@ -106,41 +102,12 @@
                             </div>
 
                             <div class="col-xs-3">
-                                <div onclick="cartitem()"  style="text-align:right; font-size:17px;"><i style="margin-right:5px;" class="fa fa-list"></i></div>
+                                <div ng-click="selecteditemlist()"  style="text-align:right; font-size:22px;"><i style="margin-right:5px;" class="fa fa-list"></i></div>
                             </div>
                         </div>
 
 
-                        <div class="animated bounceInRight cartarea">
-
-                            <input style="height:40px; border:transparent; margin-top:10px; margin-bottom:10px;" placeholder="Type to search" class="form-control" type="text" ng-model="test">
-
-                            <div style="max-height:400px; overflow-x:hidden; overflow-y:auto;">
-                                <div class="cartlist" ng-repeat="CurrentActiveObject in CurrentCart | filter : test">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <i style="top:8px; left:25px;" ng-click="DeleteItem(CurrentActiveObject)" class="itemcheckicon fa fa-check"></i>
-                                            <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath==''" style="height:50px; width:50px; border:2px solid #ccc; border-radius:100%;" src="img/default.png" />
-                                            <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath!=''" style="height: 50px; width: 50px; border: 2px solid #ccc; border-radius: 100%;" src="{{CurrentActiveObject.InventoryDataList.ImageThumbPath}}" alt="" />
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <div> <span>{{CurrentActiveObject.InventoryDataList.oquantity}}  </span> <span> {{CurrentActiveObject.InventoryDataList.uomUOM }} </span>  of <span> {{CurrentActiveObject.InventoryDataList.pPart }}</span>  </div>
-                                            <div>  <span> {{CurrentActiveObject.InventoryDataList.pDescription }}  </span> </div>
-
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                    
-
-
+                        
 
                         <div ng-repeat="CurrentActiveObject in CurrentCart" ng-if="$index==0">
 
@@ -158,12 +125,7 @@
                                                 <input placeholder="Fill Quantity" type="number" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
                                                 <span class="input-group-addon" ng-click="IncreaseDecreaseValue(2,0)"><i class="fa fa-minus"></i></span>
                                             </div>
-
                                         </div>
-
-
-
-
 
 
 
@@ -247,7 +209,6 @@
                                             <span ng-if="CurrentActiveObject.ActionPerformed==1 && CurrentActiveObject.AdjustActionQuantity!=0" class="z-depth-1 AdjustIncrease">{{CurrentActiveObject.AdjustCalculation}}</span>
                                             <span ng-if="CurrentActiveObject.ActionPerformed==-1 && CurrentActiveObject.AdjustActionQuantity!=0" class="z-depth-1 AdjustDecrease">{{CurrentActiveObject.AdjustCalculation}}</span>
                                             <span ng-if="CurrentActiveObject.ActionPerformed==1 && CurrentActiveObject.AdjustActionQuantity==0" class="z-depth-1 AdjustNetzero">{{CurrentActiveObject.AdjustCalculation}}</span>
-
 
                                         </span>
                                     </div>
@@ -501,8 +462,6 @@
                                             <label>To Status</label>
                                             <div class="fg-line">
                                                 <div class="select">
-
-
                                                     <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
                                                         <option value="">None</option>
                                                         <option ng-repeat="_optionValue in StatusList" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
@@ -1623,31 +1582,14 @@
                                     </div>
                                 </div>
 
-
-
-
-
-
-
-
-
                             </div>
                         </div>
-
-
-
-
                     </div>
 
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
-
 
     <div>
         <br /><br />
@@ -1719,6 +1661,35 @@
     </div>
 
 
+    <div id="selecteditemlistmodal" class="modal animated bounceIn">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+            <h4>Selected Item list - <span>{{CurrentCart.length}}</span></h4>
+            <div style="margin-bottom:5px;" class="form-group">
+                <div class="input-group">
+                    <input style="height:40px; margin-top:10px; margin-bottom:10px;" placeholder="Type to search" class="form-control" type="text" ng-model="Selecteditemlist">
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div class="cartlist" ng-repeat="CurrentActiveObject in CurrentCart | filter : Selecteditemlist">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i style="top:8px; left:25px;" ng-click="DeleteItem(CurrentActiveObject)" class="itemcheckicon fa fa-check"></i>
+                        <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath==''" style="height:60px; width:60px; border:2px solid #ccc; border-radius:100%;" src="img/default.png" />
+                        <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath!=''" style="height: 60px; width:60px; border: 2px solid #ccc; border-radius: 100%;" src="{{CurrentActiveObject.InventoryDataList.ImageThumbPath}}" alt="" />
+                    </div>
+                    <div class="col-xs-9">
+                        <div><span>{{CurrentActiveObject.InventoryDataList.oquantity}}  </span> <span> {{CurrentActiveObject.InventoryDataList.uomUOM }} </span>  of <span> {{CurrentActiveObject.InventoryDataList.pPart }}</span>  </div>
+                        <div><span> {{CurrentActiveObject.InventoryDataList.pDescription }}  </span> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <a ng-click="changeMode()" class="btn {{CurrentHeaderClass}} btn-sm changebtn"><i class="fa fa-exchange"></i></a>
 
 </div>
@@ -1769,4 +1740,8 @@
 
 
     </script>
+
+
+
+
 

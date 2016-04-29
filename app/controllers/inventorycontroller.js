@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('inventoryController', ['$scope', '$location', 'authService',  'localStorageService', 'log', '$compile', function ($scope, $location, authService, localStorageService, log, $compile) {
+app.controller('inventoryController', ['$scope', '$location', 'authService', 'localStorageService', 'log', '$compile', function ($scope, $location, authService, localStorageService, log, $compile) {
     ''
     $scope.orders = [];
     $scope.MyinventoryFields = [];
@@ -9,6 +9,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
     $scope.StatusList = [];
     $scope.UOMSearching = false;
     $scope.CurrentActiveField = "";
+    $scope.CurrentActiveFieldDatatype = "";
     $scope.Totalslides = 0;
     $scope.InventoryObject = {
         IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: "", Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
@@ -51,7 +52,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
         $location.path('/login');
         CheckScopeBeforeApply()
     }
-
+    var _colid = "";
 
     $scope.SearchItemValue = "";
     $scope.ItemSearching = "";
@@ -80,7 +81,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
         $(".iosbtn").hide()
     }
 
-  
+
 
     $scope.CheckInCommonArray = function (Column) {
         for (var i = 0; i < $scope.CommonArray.length ; i++) {
@@ -93,7 +94,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
 
     $scope.GetLastValueCustom = function (id, Type) {
-         
+
 
 
         var field = "Inv_" + id;
@@ -135,7 +136,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
     };
     $scope.GetLastValue = function (field, id) {
 
-         
+
 
 
         var _value = "";
@@ -262,8 +263,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
     }
 
 
-    $scope.LocationSetItemData = function (obj)
-    {
+    $scope.LocationSetItemData = function (obj) {
 
         $scope.InventoryObject.Location = obj.LocationName;
 
@@ -276,7 +276,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
         CheckScopeBeforeApply()
     }
 
-    
+
 
     $scope.UOMSetItemData = function (obj) {
 
@@ -291,8 +291,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
     }
 
 
-    $scope.OnChangeUOMFunction=function()
-    {
+    $scope.OnChangeUOMFunction = function () {
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -464,7 +463,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
             default:
 
         }
-   
+
 
         for (var i = 0; i < _CustomFieldArray.length; i++) {
             if (_CustomFieldArray[i].cfdIsRequired == true && _CustomFieldArray[i].cfdID == id) {
@@ -476,18 +475,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
     }
     $scope.CheckRequiredField = function () {
-    
+
         if ($scope.InventoryObject.ItemID == "" || $scope.InventoryObject.Location == "" || $scope.InventoryObject.Uom == "") {
             return true;
 
         }
-        
+
         return false;
     }
 
-    $scope.CheckCustomRequiredFields=function()
-    {
-      
+    $scope.CheckCustomRequiredFields = function () {
+
 
         for (var i = 0; i < $scope.InventoryObject.CustomPartData.length; i++) {
 
@@ -564,9 +562,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
         for (var i = 0; i < $scope.ImageList.length; i++) {
 
-            if($scope.ImageList[i].bytestring!=null && $scope.ImageList[i].bytestring!=undefined)
-            {
-                $scope.ImageList[i].bytestring= removePaddingCharacters($scope.ImageList[i].bytestring);
+            if ($scope.ImageList[i].bytestring != null && $scope.ImageList[i].bytestring != undefined) {
+                $scope.ImageList[i].bytestring = removePaddingCharacters($scope.ImageList[i].bytestring);
 
 
             }
@@ -586,11 +583,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
                   $scope.UploadImage();
                   $scope.resetObject();
 
-                   movetolist();
-                 // $location.path('/inventory');
+                  movetolist();
+                  // $location.path('/inventory');
 
                   CheckScopeBeforeApply()
-               
+
                   $('#addinventories').removeClass("disabled");
                   $('#addinventories').find(".fa").removeClass("fa-spin");
               },
@@ -647,7 +644,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
 
     }
-    
+
     $scope.locationlist = function () {
 
         $("#itemlistmodal").modal('hide');
@@ -665,15 +662,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
     $(document)
  .on('focus', 'input', function () {
 
-    
+
      $('.topheader').css("position", "absolute");
-   
+
  })
  .on('blur', 'input', function () {
-  
+
      $('.topheader').css("position", "fixed");
      $('.iteminfopanel').css('margin-top', '80px');
-   
+
  });
 
 
@@ -942,7 +939,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
     }
     $scope.IsActiveTransactionField = function (cfdid) {
 
-        
+
         $scope.CurrentOperation = "Increase";
         for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
             if ($scope.CustomActivityDataList[i].cfdCustomFieldType == "Inventory" && $scope.CustomActivityDataList[i].cfdID == cfdid) {
@@ -1003,7 +1000,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type }),
                success: function (response) {
 
-                   
+
                    if (Type == 0) {
                        $scope.CustomItemDataList = response.GetCustomFieldsDataResult.Payload;
 
@@ -1063,7 +1060,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
         var files = evt.target.files;
         FileName = "";
         StreamData = "";
-        var _ImgObj={ImageID:0,FileName:"",bytestring:"",Size:0}
+        var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
         // Loop through the FileList and render image files as thumbnails.
         for (var i = 0, f; f = files[i]; i++) {
 
@@ -1143,8 +1140,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
         });
 
         for (var i = 0; i < $scope.ImageList.length; i++) {
-            if($scope.ImageList[i].ImageID==_this)
-            {
+            if ($scope.ImageList[i].ImageID == _this) {
                 $scope.ImageList.splice(i, 1);
                 break;
             }
@@ -1159,7 +1155,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
     function init() {
         $scope.GetAllData();
 
-      
+
 
     }
 
@@ -1275,6 +1271,29 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
             log.error("Scanning failed: ", error);
         });
     }
+
+    $scope.ScanUOMsearch = function () {
+        $scope.SearchLocationValue = "";
+        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+        scanner.scan(function (result) {
+
+            $scope.SearchUOMValue = result.text;
+
+            CheckScopeBeforeApply()
+
+            setTimeout(function () {
+                $scope.OnChangeUOMFunction();
+                CheckScopeBeforeApply()
+            }, 100);
+
+            vibrate()
+
+
+        }, function (error) {
+            log.error("Scanning failed: ", error);
+        });
+    }
     $scope.ScanNew = function () {
 
 
@@ -1329,6 +1348,27 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
                 }
 
             }
+
+            else if (ControlID == "uomUOM") {
+
+                var resultvalue = result.text
+                _id = "#UOM";
+                if (resultvalue != "") {
+
+                    $scope.InventoryObject.Uom = resultvalue;
+                    $(_id).val(resultvalue);
+                    mySwiper.swipeNext();
+
+                    CheckScopeBeforeApply();
+
+
+                }
+
+                else {
+                    //log.error("Location not found in list !!");
+                }
+
+            }
             else {
                 $scope.InventoryObject.Description = resultvalue;
 
@@ -1361,8 +1401,81 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
         });
     }
 
-    function removePaddingCharacters(bytes)
-    {
+    $scope.ScanNewCustom = function () {
+        var _id = "#" + _colid;
+
+        var _colarray = _colid.split("_");
+        var ControlID = $scope.CurrentActiveField;
+        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+        scanner.scan(function (result) {
+
+
+
+            var resultvalue = result.text;
+
+            if (resultvalue != "") {
+
+                $(_id).val(resultvalue);
+
+                var _Arraytoupdate = [];
+                var _Type = _colarray[0];
+                if (_Type != null && _Type != undefined && _Type != "") {
+
+                    if (_Type == "CustomItem") {
+
+
+                        for (var i = 0; i < $scope.InventoryObject.CustomPartData.length; i++) {
+
+                            if ($scope.InventoryObject.CustomPartData[i].CfdID == _colarray[1]) {
+                                $scope.InventoryObject.CustomPartData[i].Value = resultvalue;
+                                break;
+
+                            }
+
+                        }
+                    }
+                    else if (_Type == "CustomActivity") {
+
+
+                        for (var i = 0; i < $scope.InventoryObject.CustomTxnData.length; i++) {
+
+                            if ($scope.InventoryObject.CustomTxnData[i].CfdID == _colarray[1]) {
+                                $scope.InventoryObject.CustomTxnData[i].Value = resultvalue;
+                                break;
+
+                            }
+
+                        }
+                    }
+                }
+
+
+
+
+                mySwiper.swipeNext();
+
+                CheckScopeBeforeApply();
+
+
+            }
+
+            else {
+                //log.error("Item not found in list !!");
+            }
+
+
+
+            vibrate()
+
+
+
+        }, function (error) {
+            log.error("Scanning failed: ", error);
+        });
+
+    }
+    function removePaddingCharacters(bytes) {
         bytes = bytes.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "");
 
         return bytes;
@@ -1373,9 +1486,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
-   
+
         StreamData = StreamData.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "");
- 
+
         if (StreamData != null && StreamData != "" && StreamData != undefined) {
 
             $.ajax
@@ -1582,12 +1695,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
                 onSlideChangeEnd: function (swiperHere) {
 
-                     
+
                     $scope.slide = swiperHere.activeIndex;
-                  
+
                     $scope.Totalslides = swiperHere.slides.length - 1;
                     var _colName = $(".swiper-slide-active").attr("data-column");
+                    var _colType = $(".swiper-slide-active").attr("data-type");
+                    _colid = $(".swiper-slide-active").attr("data-id");
                     $scope.CurrentActiveField = _colName != undefined && _colName != "" ? _colName : "";
+                    $scope.CurrentActiveFieldDatatype = _colType;
                     var swiperPage = swiperHere.activeSlide();
 
 
@@ -1624,11 +1740,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
     function onConfirmInv(buttonIndex) {
 
-      
 
-        if (buttonIndex == 1 || buttonIndex == "1")
-        {
-           
+
+        if (buttonIndex == 1 || buttonIndex == "1") {
+
             $location.path('/mainmenu');
             vibrate()
             CheckScopeBeforeApply();
@@ -1674,9 +1789,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService',  'l
 
     $('.arrow-left').on('click', function (e) {
         e.preventDefault()
-         
-        if ($scope.slide == 0 || $scope.slide == 1000)
-        {
+
+        if ($scope.slide == 0 || $scope.slide == 1000) {
             showConfirmInventory();
 
         }

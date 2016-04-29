@@ -42,15 +42,13 @@
                     </div>
                 </div>
 
-                <!--<div ng-if="CheckRequiredField()==true" class="wellNew">
-                   You have missing some required fields
-                </div>-->
+          
 
 
 
                 <div class="swiper-wrapper">
 
-                    <div class="swiper-slide myCols" data-index="{{$index}}" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" ng-if="CheckInCommonArray(obj.ColumnName)==true" end-repeat>
+                    <div class="swiper-slide myCols" data-index="{{$index}}" data-type="myinventory" data-id="myinventorycols" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" ng-if="CheckInCommonArray(obj.ColumnName)==true" end-repeat>
 
                         <div class=" form-group" ng-if="obj.ColumnName=='pPart'">
 
@@ -181,9 +179,6 @@
                             <label>Select UOM <span class="redText">*</span></label>
                             <div class="input-group">
 
-                                <!--<select class="form-control" ng-model="InventoryObject.Uom" selectpicker id="UOM" required="">
-                                    <option ng-repeat="_optionValue in UOMList" value="{{_optionValue.UnitOfMeasureName}}">{{_optionValue.UnitOfMeasureName}}</option>
-                                </select>-->
 
                                 <input type="text" class="form-control" name="UOM" required ng-model="InventoryObject.Uom" id="UOM" />
                                 <span class="input-group-addon last" ng-click="UOMlist()"><i class="fa fa-search"></i></span>
@@ -286,7 +281,7 @@
 
                     </div>
 
-                    <div class="swiper-slide myCols" data-column="Image">
+                    <div class="swiper-slide myCols" data-column="Image" data-id="image" data-type="Image">
 
 
                         <div>
@@ -329,7 +324,7 @@
 
 
 
-                    <div class="swiper-slide" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
+                    <div class="swiper-slide CustomItemCols" data-id="CustomItem_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="Part" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
 
                         <div class="form-group">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
@@ -387,7 +382,7 @@
 
 
 
-                    <div ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)" class="swiper-slide" end-repeat3>
+                    <div ng-repeat="obj in CustomActivityDataList" data-id="CustomActivity_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="activity" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)" class="swiper-slide CustomActivityCols" end-repeat3>
 
                         <div class="form-group">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
@@ -476,14 +471,22 @@
                         </td>
 
 
-                        <td ng-if="CurrentActiveField=='pDescription'||CurrentActiveField=='pPart'||CurrentActiveField=='lLoc'">
+                        <td ng-if="CurrentActiveField=='pDescription'||CurrentActiveField=='pPart'||CurrentActiveField=='lLoc'||CurrentActiveField=='uomUOM'">
 
                             <div style="text-align:center">
                                 <button style="font-size:18px; line-height:42px;" class="scanbtn btn btn-primary" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> Scan Record</button>
                                 <a style="font-size:18px; line-height:42px;" class="scanbtn btn btn-primary" ng-if="CurrentActiveField!='pPart'" ng-click="ScanNew()"> Scan Record</a>
                             </div>
 
-                          
+
+                        </td>
+                        <td ng-if="CurrentActiveField.indexOf('string_')>-1 && CurrentActiveFieldDatatype=='string'">
+
+                            <div style="text-align:center">
+                                <a style="font-size:18px; line-height:42px;" class="scanbtn btn btn-primary" ng-click="ScanNewCustom()"> Scan Record</a>
+                            </div>
+
+
                         </td>
                         <td>
                             <div style="text-align:right;">
@@ -601,7 +604,7 @@
 <div id="locationlistmodal" class="modal animated bounceIn">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
-        <h4>select Location <span style="font-size:11px;" ng-if="LocationSearchList.length > 0">{{LocationSearchList.length}} Location(s) found</span></h4>
+        <h4>Select Location <span style="font-size:11px;" ng-if="LocationSearchList.length > 0">{{LocationSearchList.length}} Location(s) found</span></h4>
         <div class="form-group">
 
             <div class="input-group">
@@ -645,12 +648,14 @@
 <div id="uomlistmodal" class="modal animated bounceIn">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
-        <h4>select UOM <span style="font-size:11px;" ng-if="UOMSearchList.length > 0">{{UOMSearchList.length}} UOM(s) found</span></h4>
+        <h4>Select UOM <span style="font-size:11px;" ng-if="UOMSearchList.length > 0">{{UOMSearchList.length}} UOM(s) found</span></h4>
         <div class="form-group">
 
             <div class="input-group">
                 <input style="height:47px;" type="text" id="searchuom" placeholder="Type Keyword to find uom" ng-change="OnChangeUOMFunction()" class="form-control" ng-model="SearchUOMValue" required="" autofocus />
-
+                <span style="padding:0px;" class="input-group-addon last">
+                    <a class="btn btn-primary" ng-click="ScanUOMsearch()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
+                </span>
             </div>
         </div>
     </div>

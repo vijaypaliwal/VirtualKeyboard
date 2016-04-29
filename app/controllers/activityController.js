@@ -51,6 +51,12 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
     }
 
 
+    $scope.selecteditemlist = function () {
+
+        $("#selecteditemlistmodal").modal('show');
+    }
+
+
     $scope.cartitem = function () {
         $(".cartitemmenu").addClass("active")
         $(".relateddatamenu").removeClass("active")

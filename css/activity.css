@@ -328,6 +328,35 @@
             opacity: 1;
         }
 
+
+          #selecteditemlistmodal {
+        background: #fff;
+        background-color: #fff;
+        width: 100%;
+        margin: 0 auto;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+    }
+
+        #selecteditemlistmodal .modal-header {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 7px;
+        }
+
+        #selecteditemlistmodal .modal-body {
+            overflow: auto;
+            min-height: 250px;
+            max-height: 500px;
+            padding: 7px;
+        }
+
+        #selecteditemlistmodal .modal-header .close {
+            margin-top: 6px;
+            opacity: 1;
+        }
+
     .searchresultlist {
         padding-left: 0px;
         border: 1px solid #eaeaea;
