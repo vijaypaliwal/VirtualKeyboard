@@ -130,17 +130,21 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
         });
     }
 
-
-
     $scope.Takeitem = function () {
 
         $scope.CurrentInventory.pPart = $scope.itemscanvalue;
 
-
-        $("#overlay").removeClass("overlay")
-
+        $("#overlay").removeClass("overlay");
         $("#scaninfo").hide();
         $scope.$apply();
+
+    }
+
+    $scope.closebottoarea = function () {
+
+        $("#overlay").removeClass("overlay");
+        $("#scaninfo").hide();
+        $scope.Scanitem();
 
     }
 
