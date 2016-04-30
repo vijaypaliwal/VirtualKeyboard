@@ -121,7 +121,7 @@
                                             <label>Quantity</label>
 
                                             <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-plus" ng-click="IncreaseDecreaseValue(1,0)"></i></span>
+                                                <span class="input-group-addon" ng-click="IncreaseDecreaseValue(1,0)"><i class="fa fa-plus"></i></span>
                                                 <input placeholder="Fill Quantity" type="number" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
                                                 <span class="input-group-addon" ng-click="IncreaseDecreaseValue(2,0)"><i class="fa fa-minus"></i></span>
                                             </div>
@@ -1118,7 +1118,7 @@
                                         </div>
 
                                     </div>
-                                    <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                    <input type="date" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                     <input type="number" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                     <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
 
@@ -1434,13 +1434,20 @@
                             </div>
                             <div class="col-xs-8">
                                 <div style="text-align:right">
-                                    <h4 style="margin-top:0px; text-align:right; margin-bottom:0px; color:#000;">View summary</h4>
+                                    <h4>
+                                        View Summary
+                                    </h4>
                                 </div>
                             </div>
                         </div>
 
 
+
+
                         <div ng-show="CurrentCart.length > 0" class="card">
+
+
+
 
 
                             <div id="{{_groupRow.InventoryDataList.uId}}" data-ng-init="parentIndex = $index" data-ng-repeat="_groupRow in CurrentCart" data-toggle="tooltip" data-ng-attr-title="{{GetRowTitle(_groupRow)}}" data-ng-class="{error : _groupRow.iQty >_groupRow.oquantity}">
