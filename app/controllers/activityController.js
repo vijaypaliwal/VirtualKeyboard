@@ -45,9 +45,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
     $scope.CancelEdit = function () {
         $scope.IsEditMode = false;
-
         $scope.$apply();
-
     }
 
     $scope.ScanLineItem= function (Type, Id,index,inventoryID)
@@ -56,15 +54,15 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         var _typeString = "";
         switch (Type) {
             case 1:
-                _typeString = 'LineItem_';
+                _typeString = '#LineItem_';
                 break;
             case 2:
-                _typeString = 'CustomActivity_';
+                _typeString = '#CustomActivity_';
             case 3:
-                _typeString = 'CustomActivityIncrease_';
+                _typeString = '#CustomActivityIncrease_';
                 break;
             case 4:
-                _typeString = 'CustomActivityDecrease_';
+                _typeString = '#CustomActivityDecrease_';
                 break;
 
         }
