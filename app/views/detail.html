@@ -1,11 +1,4 @@
 ﻿
-
-
-
-
-
-
-
 <link href="css/itemdetail.css" rel="stylesheet" />
 <style>
     .redText {
@@ -52,6 +45,7 @@
 </style>
 
 
+
 <div class="scaninfo animated bounceInUp" id="scaninfo">
 
     <h4>Use <strong>{{itemscanvalue}}</strong> Record</h4>
@@ -79,8 +73,9 @@
 
                 <div ng-if="ImageList.length > 0" ng-repeat="obj in ImageList" class="swiper-slide">
 
-               
-                    <table class="imagesection">
+                    <img style="margin-top:12px;" class="loadingimage" src="img/loader.gif" alt="Alternate Text" />
+
+                    <table style="display:none;" class="imagesection">
 
                         <tr>
                             <td>
@@ -99,7 +94,11 @@
                 </div>
 
                 <div ng-if="ImageList.length == 0" class="swiper-slide">
-                    <table class="imagesection">
+
+                    <img style="margin-top:12px;" class="loadingimage" src="img/loader.gif" alt="Alternate Text" />
+
+
+                    <table style="display:none;" class="imagesection">
                         <tr>
                             <td>
                               

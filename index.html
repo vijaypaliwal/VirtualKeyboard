@@ -482,6 +482,12 @@
             padding-left:0px;
         }
 
+
+        .modal-backdrop
+        {
+            background:#fff;
+        }
+
     </style>
 
 </head>
@@ -1036,6 +1042,53 @@
         }
 
         document.addEventListener('click', addRippleEffect, false);
+    </script>
+
+
+    <script>    
+    
+        function ShowSuccessActivity(Message, Type) {
+
+            switch (Type) {
+                case -1:
+                    $(".errorcontent").css("background", "rgba(175,37,37,0.7)");
+
+                    break;
+                case 0:
+                    $(".errorcontent").css("background", "rgba(198,94,40,0.7)");
+                    break;
+                case 1:
+                    $(".errorcontent").css("background", "rgba(23,123,61,0.7)");
+                    break;
+                case 2:
+
+                    $(".errorcontent").css("background", "rgba(206,89,161,0.7)");
+
+                    break;
+                case 3:
+                    $(".errorcontent").css("background", "rgba(88,55,130,0.7)");
+                    break;
+                case 4:
+                    $(".errorcontent").css("background", "rgba(13,25,15,0.7)");
+                    break;
+
+                case 12:
+
+                    $(".errorcontent").css("background", "rgba(248,194,23,0.7)");
+
+                    break;
+                default:
+
+            }
+            Message = Message != null && Message != undefined ? Message : "Saved";
+            $("#mysmallModal").removeClass('bounceOut').addClass('bounceIn');
+            $('#mysmallModal').show();
+            $('#DataText').html(Message);
+
+            setTimeout(function () {
+                hideSuccess();
+            }, 3000)
+        }
     </script>
 
     

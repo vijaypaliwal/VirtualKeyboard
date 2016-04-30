@@ -11,8 +11,6 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
     function init() {
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
         console.log($scope.CurrentInventory);
-    
-    
         $scope.$apply();
     }
 
@@ -316,9 +314,12 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
 
                    setTimeout(function () { InitializeSwiper() }, 10);
 
-                 
-                 
 
+                   setTimeout(function () {
+                       $(".loadingimage").hide();
+                       $(".imagesection").show();
+                       
+                   }, 1000);
 
                },
                error: function (err) {

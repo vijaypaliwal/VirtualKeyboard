@@ -50,6 +50,53 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
     }
 
+    $scope.ScanLineItem= function (Type, Id,index,inventoryID)
+    {
+        debugger;
+        var _typeString = "";
+        switch (Type) {
+            case 1:
+                _typeString = 'LineItem_';
+                break;
+            case 2:
+                _typeString = 'CustomActivity_';
+            case 3:
+                _typeString = 'CustomActivityIncrease_';
+                break;
+            case 4:
+                _typeString = 'CustomActivityDecrease_';
+                break;
+
+        }
+        var _ID = _typeString + Id;
+        scanner.scan(function (result) {
+
+            $(_ID).val(result.text);
+
+            switch (Type) {
+                case 1:
+                    for (var i = 0; i < $scope.CurrentCart; i++) {
+                        if($scope.CurrentCart[i].InventoryID==inventoryID)
+                        {
+                            $scope.CurrentCart[i].IsLineItemData[index] = result.text;
+                            break;
+                        }
+                    }
+                    break;
+                case 2:
+                    break;
+                default:
+
+            }
+
+            $scope.$apply();
+
+
+        }, function (error) {
+            log.error("Scanning failed: ", error);
+        });
+   
+    }
 
     $scope.selecteditemlist = function () {
 
@@ -158,7 +205,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                     //   $("#mybutton_" + id).addClass("movepin")
 
-                    ShowSuccess('Updated');
+                    ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                     //  $scope.NextClickNew(2);
                     //  $scope.CurrentActiveObject = $scope.CurrentCart[0];
@@ -185,7 +232,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                 //    $("#mybutton_" + id).addClass("movepin")
 
-                ShowSuccess('Updated');
+                ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                 CheckScopeBeforeApply();;
 
@@ -242,7 +289,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                     }
 
 
-                    ShowSuccess('Updated');
+                    ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                     CheckScopeBeforeApply();
                 }
@@ -267,7 +314,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                 //    $("#mybutton_" + id).addClass("movepin")
 
-                ShowSuccess('Updated');
+                ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                 CheckScopeBeforeApply();;
 
@@ -571,7 +618,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
             }
 
-            ShowSuccess('Updated');
+            ShowSuccessActivity('Updated', $scope._CurrentAction);
 
             $("#uom_" + myid).addClass("movepin");
             CheckScopeBeforeApply();
@@ -597,7 +644,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                         $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity = $scope.ActionQuantityValueConvert;
 
                     }
-                    ShowSuccess('Updated');
+                    ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                     $("#convertqty_" + myid).addClass("movepin")
                 }
@@ -610,7 +657,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                     $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity = $scope.CurrentCart[k].InventoryDataList.oquantity;
 
                 }
-                ShowSuccess('Updated');
+                ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                 $("#convertqty_" + myid).addClass("movepin")
 
@@ -694,7 +741,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                     for (k = 0; k < $scope.CurrentCart.length; k++) {
                         $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity = $scope.ActionQuantityValueToConvert;
                     }
-                    ShowSuccess('Updated');
+                    ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                     $("#convertqty2_" + myid).addClass("movepin")
                 }
@@ -716,7 +763,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                             $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity = $scope.CurrentCart[k].InventoryDataList.oquantity * $scope.ActionQuantityValueToConvert;
                         }
 
-                        ShowSuccess('Updated');
+                        ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                         $("#convertqty2_" + myid).addClass("movepin")
                     }
@@ -736,7 +783,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                             $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity = _tempValue;
                         }
 
-                        ShowSuccess('Updated');
+                        ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                         $("#convertqty2_" + myid).addClass("movepin")
                     }
@@ -1403,7 +1450,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                     }
 
                     $("#mybutton_" + id).addClass("movepin")
-                    ShowSuccess('Updated');
+                    ShowSuccessActivity('Updated',type);
                     $(".WholeNumbersOnly").trigger('change');
                     CheckScopeBeforeApply();
                 }
@@ -1425,7 +1472,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                         $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = 0;
                     }
                 }
-                ShowSuccess('Updated');
+                ShowSuccessActivity('Updated', type);
                 $(".WholeNumbersOnly").trigger('change');
                 $("#mybutton_" + id).addClass("movepin")
 
@@ -1457,8 +1504,8 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                     }
                     $("#movebutton_" + id).addClass("movepin");
-                    ShowSuccess('Updated');
-
+                 
+                    ShowSuccessActivity('Updated', type);
                     CheckScopeBeforeApply();;
 
                 }
@@ -1474,7 +1521,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                 }
 
                 $("#movebutton_" + id).addClass("movepin");
-                ShowSuccess('Updated');
+                ShowSuccessActivity('Updated', type);
 
                 CheckScopeBeforeApply();;
                 toastr.success("Data updated successfully.");
@@ -1501,8 +1548,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                 $scope.CurrentCart[k].MoveTransactionData.MoveToLocation = $scope.ToLocID;
                 $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText = text;
             }
-            ShowSuccess('Updated');
-
+            ShowSuccessActivity('Updated', $scope._CurrentAction);
 
             CheckScopeBeforeApply();;
 
@@ -1533,7 +1579,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         $scope.CurrentInventoryId = -1;
 
         $("#status_" + myid).addClass("movepin")
-        ShowSuccess('Updated');
+        ShowSuccessActivity('Updated', $scope._CurrentAction);
 
     }
 
@@ -1547,7 +1593,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
             $scope.CurrentCart[k].MoveTransactionData.StatusToUpdate = $scope.StatusToUpdateLoc;
 
         }
-        ShowSuccess('Updated');
+        ShowSuccessActivity('Updated', $scope._CurrentAction);
 
         CheckScopeBeforeApply();;
 
@@ -1571,7 +1617,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                 }
 
-                ShowSuccess('Updated');
+                ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                 $("#unittag1_" + myid).addClass("movepin")
 
@@ -1583,7 +1629,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                     $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 = $scope.UnitDataTag2;
 
                 }
-                ShowSuccess('Updated');
+                ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                 $("#unittag2_" + myid).addClass("movepin")
 
@@ -1597,7 +1643,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                 }
 
-                ShowSuccess('Updated');
+                ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                 $("#unittag3_" + myid).addClass("movepin")
 
@@ -1611,7 +1657,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                 }
 
-                ShowSuccess('Updated');
+                ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                 $("#unitnumber1_" + myid).addClass("movepin")
 
@@ -1624,7 +1670,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                 }
 
-                ShowSuccess('Updated');
+                ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                 $("#unitnumber2_" + myid).addClass("movepin")
 
@@ -1637,8 +1683,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                 }
 
-                ShowSuccess('Updated');
-
+                ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                 $("#unitdate2_" + myid).addClass("movepin")
 
@@ -1651,7 +1696,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                 }
 
-                ShowSuccess('Updated');
+                ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                 $("#unitdate_" + myid).addClass("movepin")
 
@@ -2064,14 +2109,15 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                         $scope.IsProcessing = false;
                         $scope.CurrentCart = [];
-                        ShowSuccess('Saved');
+                        ShowSuccessActivity('Saved', $scope._CurrentAction);
+                    
+                            $location.path("/FindItems");
+                            localStorageService.set("ActivityCart", "");
+                            localStorageService.set("SelectedAction", "");
 
-                        $location.path("/FindItems");
 
 
-
-                        localStorageService.set("ActivityCart", "");
-                        localStorageService.set("SelectedAction", "");
+                        
 
                         $scope.$apply();
                     },
@@ -2178,7 +2224,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                 $scope.CurrentCart[k].IsLineItemData[LineItemIndex].CfValue = $scope.ActionLineItemData;
 
             }
-            ShowSuccess('Updated');
+            ShowSuccessActivity('Updated', $scope._CurrentAction);
             var _idtoPass = "#lineitem_" + fieldID.toString() + "_" + InventoryID.toString();
             $(_idtoPass).addClass("movepin");
 

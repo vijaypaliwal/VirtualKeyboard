@@ -1,71 +1,98 @@
 ﻿
 <style>
 
-    #viewdata
-    {
-        margin-top:0px;
-    }
-    
-    
-    
-     .navbar {
-        display: none;
+       #viewdata
+       {
+           margin-top:0px;
+       }
+
+
+
+        .navbar {
+           display: none;
+       }
+
+       .layoutheader {
+           display: none;
+       }
+
+
+       .loginlogo
+       {
+        width:82px;
+        margin-bottom:15px;
+       }
+       label
+       {
+        color:#fff;
+        font-size:15px;
+       }
+
+       .login-form .col-xs-5 {
+           text-align: right;
+       }
+
+       .btn-gray .fa-angle-right {
+           position: absolute;
+           right: 25px;
+           font-size: 25px;
+           margin-top: -2px;
+       }
+
+       .btn-primary
+       {
+        margin:0 auto;
+        margin-bottom:15px;
+       }
+
+           .btn-primary .fa-angle-right {
+               position: absolute;
+               right: 25px;
+               font-size: 25px;
+               margin-top: -2px;
+           }
+
+    .form-control {
+      height: 45px;
+       }
+
+       .login-form .row
+       {
+       margin-bottom:15px;
+       }
+
+       h3
+       {
+       color:#fff;
+       font-size:18px;
+       }
+
+    h1 {
+        position: relative;
+        text-align: center;
+        font-size:20px;
     }
 
-    .layoutheader {
-        display: none;
-    }
- 
-
-    .loginlogo
-    {
-     width:82px;
-     margin-bottom:15px;
-    }
-    label
-    {
-     color:#fff;
-     font-size:15px;
-    }
-
-    .login-form .col-xs-5 {
-        text-align: right;
-    }
-
-    .btn-gray .fa-angle-right {
-        position: absolute;
-        right: 25px;
-        font-size: 25px;
-        margin-top: -2px;
-    }
-
-    .btn-primary
-    {
-     margin:0 auto;
-     margin-bottom:15px;
-    }
-
-        .btn-primary .fa-angle-right {
-            position: absolute;
-            right: 25px;
-            font-size: 25px;
-            margin-top: -2px;
+        h1 span {
+            background: #128ece;
+            padding: 0 15px;
+            position: relative;
+            z-index: 1;
         }
 
- .form-control {
-   height: 45px;
-    }
+        h1:before {
+            background: #ddd;
+            content: "";
+            display: block;
+            height: 1px;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+        }
 
-    .login-form .row
-    {
-    margin-bottom:15px;
-    }
-
-    h3
-    {
-    color:#fff;
-    font-size:18px;
-    }
+        h1:before {
+            left: 0;
+        }
 
 </style>
 
@@ -86,6 +113,20 @@
     {
         background-color:transparent !important;
     }
+    .walkbutton {
+        height: 50px;
+        width: 50px;
+        bottom: 60px;
+        line-height: 50px;
+        padding: 0px;
+        position: fixed !important;
+        border-radius: 60px;
+        font-size: 34px;
+        right: 50px;
+        color: #635B5B !important;
+        z-index: 1000;
+        background: white;
+    }
 </style>
 
 <div style="text-align:center">
@@ -96,12 +137,12 @@
 
     <div class="page-header">
 
-        <h3>What do you want to do?</h3>
+        <h1><span>What do you want to do?</span></h1>
     </div>
 
 </div>
 
-<div class="animated slideInDown maincontent" >
+<div class="animated slideInDown maincontent">
 
     <div class="row">
         <div class="col-md-12">
@@ -110,9 +151,9 @@
 
             <a id="step2" class="btn btn-md btn-primary btn-block" href="#/FindItems"><i class="fa fa-search"></i>&nbsp;&nbsp;Find Items <i class="fa fa-angle-right"></i></a>
 
-            <a class="btn btn-md btn-gray btn-block" ><i class="fa fa-th"></i>&nbsp;&nbsp;Pick Items <i class="fa fa-angle-right"></i></a>
+            <a class="btn btn-md btn-gray btn-block"><i class="fa fa-th"></i>&nbsp;&nbsp;Pick Items <i class="fa fa-angle-right"></i></a>
 
-            <a class="btn btn-md btn-gray btn-block" ><i class="fa fa-th"></i>&nbsp;&nbsp;Put Items <i class="fa fa-angle-right"></i></a>
+            <a class="btn btn-md btn-gray btn-block"><i class="fa fa-th"></i>&nbsp;&nbsp;Put Items <i class="fa fa-angle-right"></i></a>
 
             <button class="btn btn-md btn-gray btn-block"><i class="fa fa-book"></i>&nbsp;&nbsp;View Activity Log <i class="fa fa-angle-right"></i></button>
 
@@ -121,11 +162,15 @@
         </div>
     </div>
 
-</div>
 
+
+</div>
+<a class="btn walkbutton" onclick="startIntro()"><i class="fa fa-info-circle"></i></a>
 <script src="scripts/intro.js"></script>
 
 <script type="text/javascript">
+    
+
     function startIntro() {
         var intro = introJs();
         intro.setOptions({
@@ -137,21 +182,23 @@
               {
                   element: '#step2',
                   intro: "See all Inventories with respective item and manage all activities ",
-                
+
               },
               {
                   element: '#step3',
                   intro: 'Click this button to sign out from app',
                   position: 'top'
-                
+
               }
-            
+
             ]
         });
 
         intro.start();
     }
-
-
-    startIntro();
+    var _FirstVisit = localStorage.getItem("FirstVisit");
+    if (_FirstVisit == null || _FirstVisit==undefined ) {
+        localStorage.setItem("FirstVisit", "Yes");
+        startIntro();
+    }
 </script>
