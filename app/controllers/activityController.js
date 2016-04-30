@@ -69,6 +69,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
         }
         var _ID = _typeString + Id;
+        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(function (result) {
 
             $(_ID).val(result.text);

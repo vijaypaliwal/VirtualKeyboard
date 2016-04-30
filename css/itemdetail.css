@@ -27,7 +27,7 @@
         right: 13px;
         font-size: 18px;
         text-align: right;
-        bottom: 125px;
+        bottom: 80px;
         display: none;
         background: transparent;
         overflow: hidden;
@@ -69,7 +69,7 @@
 
     #selectAction {
         position: fixed;
-        bottom: 110px;
+        bottom: 75px;
         right: 25px;
     }
 
