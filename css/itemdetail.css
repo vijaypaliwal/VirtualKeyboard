@@ -1,6 +1,4 @@
 
-
-
     .editsection .btn {
         border: none;
         height: 45px;
@@ -74,18 +72,14 @@
     }
 
 
-
         #selectAction li {
             list-style-type: none;
         }
 
 
             #selectAction li span {
-                color: #000;
+             color: #000;
             }
-
-
-
 
         #selectAction .btn {
             height: 36px;
@@ -103,15 +97,11 @@
         background: #f44336;
     }
 
-
-
-
     .container {
         width: 100% !important;
         padding-left: 0px;
         padding-right: 0px;
     }
-
 
     body {
         background: #fff;

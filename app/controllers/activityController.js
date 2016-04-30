@@ -60,6 +60,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                 break;
             case 2:
                 _typeString = '#CustomActivity_';
+                break;
             case 3:
                 _typeString = '#CustomActivityIncrease_';
                 break;
@@ -2557,17 +2558,14 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         $('.iteminfopanel').css('margin-top', '0px');
         $('.activityfields').css('margin-top', '0px');
         $('.singlePanel').css('margin-top', '14px');
-
-
-            $('#transactionForm1').css('margin-top', '0px');
+        $('#transactionForm1').css('margin-top', '0px');
     })
     .on('blur', 'input', function () {
         $('.header').css("position", "fixed");
         $('.iteminfopanel').css('margin-top', '80px');
         $('.activityfields').css('margin-top', '80px');
         $('.singlePanel').css('margin-top', '90px');
-
-            $('#transactionForm1').css('margin-top', '85px');
+        $('#transactionForm1').css('margin-top', '85px');
 
     });
 
