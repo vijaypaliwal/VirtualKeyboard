@@ -632,6 +632,7 @@
         }
 
         function ShowSuccess(Message) {
+            $(".errorcontent").css("background", "rgba(52, 73, 94,0.8)");
             Message = Message != null && Message != undefined ? Message : "Saved";
             $("#mysmallModal").removeClass('bounceOut').addClass('bounceIn');
             $('#mysmallModal').show();
