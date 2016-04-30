@@ -45,7 +45,9 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
     $scope.CancelEdit = function () {
         $scope.IsEditMode = false;
+
         $scope.$apply();
+
     }
 
     $scope.ScanLineItem= function (Type, Id,index,inventoryID)
@@ -66,7 +68,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                 break;
 
         }
-        var _ID = _typeString + Id;
+        var _ID = _typeString + Id.toString();
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(function (result) {
 
@@ -1449,7 +1451,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                     }
 
                     $("#mybutton_" + id).addClass("movepin")
-                    ShowSuccessActivity('Updated',type);
+                    ShowSuccessActivity('Updated', $scope._CurrentAction);
                     $(".WholeNumbersOnly").trigger('change');
                     CheckScopeBeforeApply();
                 }
@@ -1471,7 +1473,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                         $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = 0;
                     }
                 }
-                ShowSuccessActivity('Updated', type);
+                ShowSuccessActivity('Updated', $scope._CurrentAction);
                 $(".WholeNumbersOnly").trigger('change');
                 $("#mybutton_" + id).addClass("movepin")
 
@@ -1504,7 +1506,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                     }
                     $("#movebutton_" + id).addClass("movepin");
                  
-                    ShowSuccessActivity('Updated', type);
+                    ShowSuccessActivity('Updated', $scope._CurrentAction);
                     CheckScopeBeforeApply();;
 
                 }
@@ -1520,7 +1522,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                 }
 
                 $("#movebutton_" + id).addClass("movepin");
-                ShowSuccessActivity('Updated', type);
+                ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                 CheckScopeBeforeApply();;
                 toastr.success("Data updated successfully.");
@@ -2555,12 +2557,18 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         $('.iteminfopanel').css('margin-top', '0px');
         $('.activityfields').css('margin-top', '0px');
         $('.singlePanel').css('margin-top', '14px');
+
+
+            $('#transactionForm1').css('margin-top', '0px');
     })
     .on('blur', 'input', function () {
         $('.header').css("position", "fixed");
         $('.iteminfopanel').css('margin-top', '80px');
         $('.activityfields').css('margin-top', '80px');
         $('.singlePanel').css('margin-top', '90px');
+
+            $('#transactionForm1').css('margin-top', '85px');
+
     });
 
 

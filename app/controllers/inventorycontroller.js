@@ -134,6 +134,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $scope.$apply();
         }
     };
+
+    function randomString(length, chars) {
+        var result = '';
+        for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+        return result;
+    }
+    //var rString = randomString(10, '0123456789');
     $scope.GetLastValue = function (field, id) {
 
 
@@ -1074,8 +1081,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             // Closure to capture the file information.
             reader.onload = (function (theFile) {
 
-                console.log(theFile);
-                var id = theFile.lastModified;
+                var id = randomString(5, '0123456789');
                 _ImgObj.ImageID = id;
 
                 var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
