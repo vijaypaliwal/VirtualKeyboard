@@ -21,8 +21,18 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
     $scope.isLineItemColumnNames = [];
     $scope.IsQuantityUpdated = false;
     $scope.IsSingleMode = true;
+
+    $scope.CanIncrease = 'true';
+    $scope.CanDecrease = 'true';
+    $scope.CanConvert = 'true';
+    $scope.CanMove = 'true';
+    $scope.CanStatus = 'true';
+    $scope.CanApply = 'true';
+    $scope.CanCost = 'true';
+    $scope.CanPUpdateStatus = 'true';
     $scope.AffectedItemIds = [];
     $scope.CurrentHref = "";
+    $scope.ColumnList = [];
     function CheckScopeBeforeApply() {
         if (!$scope.$$phase) {
             $scope.$apply();
@@ -49,6 +59,8 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         $scope.$apply();
 
     }
+
+  
 
     $scope.ScanLineItem= function (Type, Id,index,inventoryID)
     {
@@ -116,6 +128,9 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
 
     }
+
+ 
+  
 
 
 
@@ -705,6 +720,21 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
     $scope.changeMode = function () {
         $scope.IsSingleMode = !$scope.IsSingleMode;
 
+
+        var i = 0;
+        if ($scope.IsSingleMode == false) {
+            if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
+                for (i = 0; i < $scope.CurrentCart.length; i++) {
+                    $scope.CurrentCart[i].IncreaseDecreaseVMData = angular.copy($scope.CurrentCart[0].IncreaseDecreaseVMData);
+                    $scope.CurrentCart[i].MoveTransactionData = angular.copy($scope.CurrentCart[0].MoveTransactionData);
+                    $scope.CurrentCart[i].UpdateTransactionData = angular.copy($scope.CurrentCart[0].UpdateTransactionData);
+                    $scope.CurrentCart[i].ApplyTransactionData = angular.copy($scope.CurrentCart[0].ApplyTransactionData);
+                    $scope.CurrentCart[i].ConvertTransactionData = angular.copy($scope.CurrentCart[0].ConvertTransactionData);
+                    $scope.CurrentCart[i].IsLineItemData = angular.copy($scope.CurrentCart[0].IsLineItemData);
+                }
+            }
+
+        }
         setTimeout(function () {
             InitializeSwiper();
 
@@ -804,45 +834,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
     };
 
 
-    $scope.GetMyInventoryColumns = function () {
-        var authData = localStorageService.get('authorizationData');
-        if (authData) {
-            $scope.SecurityToken = authData.token;
-        }
-        $.ajax
-          ({
-              type: "POST",
-              url: serviceBase + 'GetMyInventoryColumns',
-              contentType: 'application/json; charset=utf-8',
-
-              dataType: 'json',
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
-              success: function (response) {
-
-
-                  // MY inventory column region
-                  var _TempArrayMyInventory = response.GetMyInventoryColumnsResult.Payload;
-
-                  for (var i = 0; i < _TempArrayMyInventory.length; i++) {
-                      var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
-                      _TempArrayMyInventory[i].ColumnName = _ColName[0];
-                      if (_TempArrayMyInventory[i].Show == "True") {
-                          $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
-                      }
-                  }
-                  CheckScopeBeforeApply()
-
-
-              },
-              error: function (err) {
-                  console.log(err);
-                  log.error("Error Occurred during operation");
-
-
-              }
-          });
-    }
-    $scope.Scanitem = function () {
+        $scope.Scanitem = function () {
 
 
 
@@ -916,7 +908,16 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
         AssignFirstObject();
     }
+    function IsAvailableMyInventoryColumn(ColumnName) {
+        var i = 0;
+        for (i = 0; i < $scope.MyinventoryFields.length; i++) {
+            if ($scope.MyinventoryFields[i].ColumnName == ColumnName) {
+                return true;
+            }
+        }
 
+        return false;
+    }
     function GetMyInventoryColumns() {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -943,7 +944,10 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                           $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
                       }
                   }
-                  CheckScopeBeforeApply()
+                  CheckScopeBeforeApply();
+
+
+                  SetPermisssions();
 
 
               },
@@ -956,6 +960,28 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
           });
     }
 
+
+    function SetPermisssions()
+    {
+        $scope.CanIncrease = IsAvailableMyInventoryColumn('iQty') ? 'True' : 'False';
+        $scope.CanDecrease = IsAvailableMyInventoryColumn('iQty') ? 'True' : 'False';
+        $scope.CanConvert = IsAvailableMyInventoryColumn('uomUOM') ? 'True' : 'False';
+        $scope.CanMove = IsAvailableMyInventoryColumn('lLoc') ? 'True' : 'False';
+        $scope.CanStatus = IsAvailableMyInventoryColumn('iStatusValue') ? 'True' : 'False';
+
+        $scope.CanApply = (IsAvailableMyInventoryColumn('iReqValue') || IsAvailableMyInventoryColumn('iUniqueDate') || IsAvailableMyInventoryColumn('iUnitDate2') || IsAvailableMyInventoryColumn('iUnitNumber1') || IsAvailableMyInventoryColumn('iUnitNumber2') || IsAvailableMyInventoryColumn('iUnitTag2') || IsAvailableMyInventoryColumn('iUnitTag3')) ? 'True' : 'False';
+
+        console.log("Increase" + $scope.CanIncrease);
+        console.log("decrease" + $scope.CanDecrease);
+        console.log("convert" + $scope.CanConvert);
+        console.log("move" + $scope.CanMove);
+        console.log("status" + $scope.CanStatus);
+
+
+        console.log("apply" + $scope.CanApply);
+
+        CheckScopeBeforeApply();
+    }
     function AssignFirstObject() {
         if ($scope.CurrentCart.length > 0) {
             $scope._IsLoading = false;
@@ -1048,6 +1074,8 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
     }
 
     function init() {
+
+       
         $scope.CurrentCart = localStorageService.get("ActivityCart");
         var _CurrentAction = localStorageService.get("SelectedAction");
         _CurrentAction = _CurrentAction != null && _CurrentAction != undefined ? parseInt(_CurrentAction) : 4548;
@@ -1057,11 +1085,33 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
 
         $scope.totalLength = $scope.IsSingleMode == true ? $scope.CurrentCart.length + 2 : 3;
+
+        GetMyInventoryColumns();
+
         GetCustomDataField(1);
         getuom();
         $scope.getstatus()
-        GetMyInventoryColumns();
+
+       
         CheckScopeBeforeApply();
+
+
+    }
+
+    $scope.Operate=function(type)
+    {
+        $scope._CurrentAction = type;
+        GetActionType(type);
+        $scope.totalLength = $scope.IsSingleMode == true ? $scope.CurrentCart.length + 2 : 3;
+        $scope.$apply();
+
+    }
+
+
+
+    $scope.showallmenu = function () {
+
+        $("#mycartModal").modal('show');
 
     }
 
@@ -2564,7 +2614,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         $('.header').css("position", "fixed");
         $('.iteminfopanel').css('margin-top', '80px');
         $('.activityfields').css('margin-top', '80px');
-        $('.singlePanel').css('margin-top', '90px');
+        $('.singlePanel').css('margin-top', '55px');
         $('#transactionForm1').css('margin-top', '85px');
 
     });

@@ -42,18 +42,18 @@
                                     <span class="textData"> {{SearchFromText}} </span> <span class="caret"></span>
                                 </a>
 
-                                <ul class="dropdown-menu dm-icon searchlist">
+                                <ul class="dropdown-menu dm-icon searchlist animated slideInDown">
                                     <li><a ng-click="searchfunction('All')" alt="All">All</a></li>
                                     <li><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
                                     <li><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
                                     <li><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">Status</a></li>
                                     <li class="unitSearchFields" style="display: block;"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">Unique Tag</a></li>
                                     <!--<li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag2')" alt="iUnitTag2">Unit Tag 2</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag3')" alt="iUnitTag3">Unit Tag 3</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber1')" alt="iUnitNumber1">Unit Number</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber2')" alt="iUnitNumber2">Unit Number 2</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUniqueDate')" alt="iUniqueDate">unit date</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitDate2')" alt="iUnitDate2">Unit Date 2</a></li>-->
+        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag3')" alt="iUnitTag3">Unit Tag 3</a></li>
+        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber1')" alt="iUnitNumber1">Unit Number</a></li>
+        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber2')" alt="iUnitNumber2">Unit Number 2</a></li>
+        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUniqueDate')" alt="iUniqueDate">unit date</a></li>
+        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitDate2')" alt="iUnitDate2">Unit Date 2</a></li>-->
 
                                 </ul>
                             </li>
@@ -104,7 +104,8 @@
                     <a class="">
                         <span class="img">
                             <img ng-if="_obj.ImagePath==''" src="img/default.png" alt="loading.." />
-                            <img ng-if="_obj.ImagePath!=''" src="{{_obj.ImagePath}}" alt="loading.." />
+                            <img ng-if="_obj.ImagePath!=''" style="display:none !important;" src="{{_obj.ImagePath}}" alt="loading.." imageonload />
+                            <img ng-if="_obj.ImagePath!=''" src="img/loader.gif" class="loadingImage" alt="loading.." />
                         </span>
                         <span class="product clearfix" ng-click="GoToDetailPage(_obj)" on-long-press="SetCurrentObject(_obj)" on-touch-end="ShowOptionModal()">
                             <!--<span class="product clearfix" ng-click="ShowOptionModal()">-->
@@ -166,7 +167,7 @@
     <div id="myModal2" class="modal bottommenu fade">
 
         <div class="modal-body">
-            <ul class="animated bounceIn selectAction">
+            <ul class="animated slideInUp selectAction">
                 <li> <a href="#/inventory"><span class="newinv">New Inventory</span></a>  <a href="#/inventory" class="btn-success btn"> <i class="fa fa-plus"></i> </a></li>
                 <li class="bottomlink" ng-if="_areImagesShown==false" ng-click="Showhideimage('true')"> <span>Show Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
                 <li class="bottomlink" ng-if="_areImagesShown==true" ng-click="Showhideimage('false')"> <span>Hide Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
@@ -206,7 +207,7 @@
     <div id="mycartModal" class="modal bottommenu fade">
 
         <div class="modal-body">
-            <ul class="animated transactionbody selectAction">
+            <ul class="animated transactionbody selectAction animated slideInUp">
 
 
                 <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iQty')" ng-click="GoToNextMobile(1)"> <span>Increase</span> <a style="background-color: #177B3D;" class="btn-success btn decrease" data-dismiss="modal"> <i class="fa fa-plus"></i> </a></li>
@@ -261,15 +262,18 @@
             $('#sticky').addClass('stick');
             $('.page-header').fadeOut(1000);
 
-
         } else {
             $('#sticky').removeClass('stick');
             $('.page-header').fadeIn(1000);
         }
     }
 
+   
     $(function () {
         $(window).scroll(sticky_relocate);
         sticky_relocate();
     });
+
+
+
 </script>

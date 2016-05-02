@@ -567,14 +567,22 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity == "" ? 0 : $scope.InventoryObject.Quantity;
 
+        var _sum = 0;
         for (var i = 0; i < $scope.ImageList.length; i++) {
 
             if ($scope.ImageList[i].bytestring != null && $scope.ImageList[i].bytestring != undefined) {
                 $scope.ImageList[i].bytestring = removePaddingCharacters($scope.ImageList[i].bytestring);
+                if ($scope.ImageList[i].size != null && $scope.ImageList[i].size != undefined) {
 
-
+                    _sum = _sum + parseFloat($scope.ImageList[i].size);
+                }
             }
 
+        }
+
+        if (_sum > 5000000)
+        {
+            log.warning("You are trying to upload more than one image, it may take some time to upload, please be patient.")
         }
         $.ajax
           ({
@@ -587,7 +595,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               success: function (response) {
 
                   log.success("Inventory item added successfully.");
-                  $scope.UploadImage();
+                  
                   $scope.resetObject();
 
                   movetolist();

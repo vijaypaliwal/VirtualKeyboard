@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuthSettings', function ($scope, $location, authService, ngAuthSettings) {
+app.controller('loginController', ['$scope','localStorageService', '$location', 'authService', 'ngAuthSettings', function ($scope,localStorageService, $location, authService, ngAuthSettings) {
 
     $scope.loginData = {
         userName: "QAT9872",
@@ -12,6 +12,9 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
     $scope.message = "";
 
     $scope.login = function () {
+        localStorageService.set("ActivityCart", "");
+
+        localStorageService.set("SelectedAction", "");
 
         authService.login($scope.loginData).then(function (response) {
             $scope.GetProfileData();

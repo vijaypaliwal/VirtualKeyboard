@@ -1209,3 +1209,16 @@ app.directive('onLongPress', function ($timeout) {
 })
 
 
+app.directive('imageonload', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            element.bind('load', function () {
+                element[0].nextElementSibling.remove();
+                element[0].style.display="";
+            });
+            element.bind('error', function () {
+            });
+        }
+    };
+});
