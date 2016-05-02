@@ -717,6 +717,10 @@
 
             </div>
 
+            <div>
+                <br />
+            </div>
+
         </div>
 
         <div ng-if="IsSingleMode==true">
@@ -1517,7 +1521,7 @@
                                 </div>
                                 <div class="col-xs-4">
                                     <div style="text-align:right;">
-                                        <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-refresh"></i>
+                                        <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-check"></i>
                                     </div>
 
 
@@ -1533,7 +1537,7 @@
                                 </div>
                                 <div class="col-xs-4">
                                     <div style="text-align:right;">
-                                        <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-spin fa-refresh"></i>
+                                        <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-spin fa-check"></i>
                                     </div>
 
 
@@ -1791,16 +1795,16 @@
                 <td style="width:50%;">
                     <div ng-if="IsProcessing==false" ng-click="SubmitAllActivities()">
                         <a style="width:100%;" class="btn btn-success">
-                            <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-check"></i>
+                            <i class="fa fa-check"></i>
                         Process cart</a>
                     </div>
 
                     <div ng-if="IsProcessing==true" class="linkdisabled" ng-click="SubmitAllActivities()">
-                        <a style="width:100%;" class="btn btn-success"><i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-check"></i>Process cart</a>
+                        <a style="width:100%;" class="btn btn-success"><i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-check fa-spin"></i>Process cart</a>
                     </div>
                 </td>
                 <td style="width:50%;">
-                    <a style="width:100%;" class="btn btn-default" ng-click="LeavePage()"><i style="font-size:25px; color:#000; margin-top:10px;" class="fa fa-times" ></i> &nbsp;Cancel</a>
+                    <a style="width:100%;" class="btn btn-default" ng-click="LeavePage()"><i style="color:#000;" class="fa fa-times" ></i> &nbsp;Cancel</a>
                 </td>
             </tr>
         </table>
@@ -1893,7 +1897,7 @@
             <div class="cartlist" ng-repeat="CurrentActiveObject in CurrentCart | filter : Selecteditemlist">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i style="top:8px; left:25px;" ng-click="DeleteItem(CurrentActiveObject)" class="itemcheckicon fa fa-check"></i>
+                        <i style="top:11px; left:27px;" ng-click="DeleteItem(CurrentActiveObject)" class="itemcheckicon fa fa-check"></i>
                         <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath==''" style="height:60px; width:60px; border:2px solid #ccc; border-radius:100%;" src="img/default.png" />
                         <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath!=''" style="height: 60px; width:60px; border: 2px solid #ccc; border-radius: 100%;" src="{{CurrentActiveObject.InventoryDataList.ImageThumbPath}}" alt="" />
                     </div>

@@ -1111,7 +1111,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
     $scope.showallmenu = function () {
 
-        $("#mycartModal").modal('show');
+        $("#mycartModal").modal('toggle');
 
     }
 

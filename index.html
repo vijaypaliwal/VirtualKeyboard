@@ -531,7 +531,7 @@
                     </a>
                  
                     
-                    <ul class="dropdown-menu animated bounceInDown">
+                    <ul class="dropdown-menu animated slideInDown">
 
                         <li>
                             <a href="#/profile"><i class="fa fa-user"></i> My Profile</a>
@@ -662,17 +662,17 @@
 
 
                 if ($('#wrapper').hasClass('toggled')) {
-                    $("#sidebaricon").removeClass("fa-bars").addClass("fa-arrow-circle-left")
+                    $("#sidebaricon").removeClass("fa-bars").addClass("fa-arrow-circle-left animated rollIn")
                 }
 
                 else {
 
-                    $("#sidebaricon").removeClass("fa-arrow-circle-left").addClass("fa-bars")
+                    $("#sidebaricon").removeClass("fa-arrow-circle-left animated rollIn").addClass("fa-bars")
                         
                 }
 
 
-            }, 300);
+            }, 0);
 
           
         });
