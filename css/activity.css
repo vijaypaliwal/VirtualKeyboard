@@ -454,7 +454,7 @@ position: absolute;
     position: fixed !important;
     border-radius: 60px;
     font-size: 25px;
-    right: 50px;
+    right: 20px;
     color: #fff !important;
     z-index: 10000;
 }
@@ -538,7 +538,7 @@ position: absolute;
 .selectAction {
     position: fixed;
     bottom: 126px;
-    right: 62px;
+    right: 35px;
 }
 
 
