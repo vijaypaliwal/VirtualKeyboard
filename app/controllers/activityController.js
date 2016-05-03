@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('activityController', ['$scope',  'localStorageService', 'authService', '$location', 'log', function ($scope,  localStorageService, authService, $location, log) {
+app.controller('activityController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
     $scope.CurrentCart = [];
     $scope.SavingData = false;
     $scope.IsEditMode = false;
@@ -60,10 +60,9 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
     }
 
-  
 
-    $scope.ScanLineItem= function (Type, Id,index,inventoryID)
-    {
+
+    $scope.ScanLineItem = function (Type, Id, index, inventoryID) {
         debugger;
         var _typeString = "";
         switch (Type) {
@@ -90,8 +89,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
             switch (Type) {
                 case 1:
                     for (var i = 0; i < $scope.CurrentCart; i++) {
-                        if($scope.CurrentCart[i].InventoryID==inventoryID)
-                        {
+                        if ($scope.CurrentCart[i].InventoryID == inventoryID) {
                             $scope.CurrentCart[i].IsLineItemData[index] = result.text;
                             break;
                         }
@@ -109,7 +107,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         }, function (error) {
             log.error("Scanning failed: ", error);
         });
-   
+
     }
 
     $scope.selecteditemlist = function () {
@@ -129,8 +127,8 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
     }
 
- 
-  
+
+
 
 
 
@@ -207,9 +205,9 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
     }
 
     $scope.FillQuantity = function (value, id, type) {
-         
+
         $scope.ActionQuantityValue = value;
-      
+
         var k = 0;
         switch (type) {
             case 1:
@@ -262,7 +260,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
     };
     $scope.FillQuantityNew = function (value, id, type) {
-         
+
         $scope.ActionQuantityValue = value;
 
         var k = 0;
@@ -274,12 +272,12 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                         $scope.CurrentCart[k].AdjustCalculation = "";
                         if ($scope.CurrentOperation == "Adjust") {
-                            if ($scope.ActionQuantityValue >$scope.CurrentCart[k].InventoryDataList.oquantity) {
+                            if ($scope.ActionQuantityValue > $scope.CurrentCart[k].InventoryDataList.oquantity) {
                                 value = $scope.ActionQuantityValue - $scope.CurrentCart[k].InventoryDataList.oquantity;
                                 $scope.CurrentCart[k].AdjustCalculation += $scope.CurrentCart[k].InventoryDataList.oquantity.toString() + " + " + value.toString() + "=" + $scope.ActionQuantityValue.toString();
                             }
                             else if ($scope.ActionQuantityValue < $scope.CurrentCart[k].InventoryDataList.oquantity) {
-                                value =$scope.CurrentCart[k].InventoryDataList.oquantity - $scope.ActionQuantityValue;
+                                value = $scope.CurrentCart[k].InventoryDataList.oquantity - $scope.ActionQuantityValue;
                                 $scope.CurrentCart[k].AdjustCalculation += $scope.CurrentCart[k].InventoryDataList.oquantity.toString() + " - " + value.toString() + "=" + $scope.ActionQuantityValue.toString();
 
                             }
@@ -290,10 +288,10 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                             $scope.IsQuantityUpdated = true;
 
-                           $scope.CurrentCart[k].AdjustActionQuantity = value;
-                           $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity = $scope.ActionQuantityValue;
+                            $scope.CurrentCart[k].AdjustActionQuantity = value;
+                            $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity = $scope.ActionQuantityValue;
 
-                           $scope.CurrentCart[k].ActionPerformed = ($scope.ActionQuantityValue ==$scope.CurrentCart[k].InventoryDataList.oquantity || $scope.ActionQuantityValue >$scope.CurrentCart[k].InventoryDataList.oquantity) ? "1" : "-1";
+                            $scope.CurrentCart[k].ActionPerformed = ($scope.ActionQuantityValue == $scope.CurrentCart[k].InventoryDataList.oquantity || $scope.ActionQuantityValue > $scope.CurrentCart[k].InventoryDataList.oquantity) ? "1" : "-1";
 
                         }
 
@@ -378,13 +376,11 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
     }
 
-    $scope.LeavePage=function()
-    {
+    $scope.LeavePage = function () {
         $('#myModal').modal('show');
     }
 
-    $scope.CartFunction=function(type)
-    {
+    $scope.CartFunction = function (type) {
         switch (type) {
             case 1:
                 break;
@@ -392,15 +388,14 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                 localStorageService.set("ActivityCart", "");
                 localStorageService.set("SelectedAction", "");
                 break;
-                
+
             default:
 
         }
 
-        if ($scope.CurrentHref!="") {
-            if ($scope.CurrentHref.indexOf("#") > -1)
-            {
-                $scope.CurrentHref=$scope.CurrentHref.replace('#', '');
+        if ($scope.CurrentHref != "") {
+            if ($scope.CurrentHref.indexOf("#") > -1) {
+                $scope.CurrentHref = $scope.CurrentHref.replace('#', '');
 
             }
             else {
@@ -841,7 +836,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
     };
 
 
-        $scope.Scanitem = function () {
+    $scope.Scanitem = function () {
 
 
 
@@ -968,8 +963,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
     }
 
 
-    function SetPermisssions()
-    {
+    function SetPermisssions() {
         $scope.CanIncrease = IsAvailableMyInventoryColumn('iQty') ? 'True' : 'False';
         $scope.CanDecrease = IsAvailableMyInventoryColumn('iQty') ? 'True' : 'False';
         $scope.CanConvert = IsAvailableMyInventoryColumn('uomUOM') ? 'True' : 'False';
@@ -1082,7 +1076,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
     function init() {
 
-       
+
         $scope.CurrentCart = localStorageService.get("ActivityCart");
         var _CurrentAction = localStorageService.get("SelectedAction");
         _CurrentAction = _CurrentAction != null && _CurrentAction != undefined ? parseInt(_CurrentAction) : 4548;
@@ -1099,14 +1093,13 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         getuom();
         $scope.getstatus()
 
-       
+
         CheckScopeBeforeApply();
 
 
     }
 
-    $scope.Operate=function(type)
-    {
+    $scope.Operate = function (type) {
         $scope._CurrentAction = type;
         GetActionType(type);
         $scope.totalLength = $scope.IsSingleMode == true ? $scope.CurrentCart.length + 2 : 3;
@@ -1252,7 +1245,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
         var type = GetTypeByIndex();
 
-     
+
 
 
         _step = _step == null || _step == undefined ? 1 : _step;
@@ -1563,7 +1556,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                     }
                     $("#movebutton_" + id).addClass("movepin");
-                 
+
                     ShowSuccessActivity('Updated', $scope._CurrentAction);
                     CheckScopeBeforeApply();;
 
@@ -1974,7 +1967,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
             if (IsAdjustOnData == "True") {
 
                 var value = 0;
-                 
+
                 if ($scope.IsQuantityUpdated == false) {
 
                     $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity = parseInt($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity);
@@ -2102,11 +2095,9 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         return false;
     }
 
-    function GetCustomFieldType(fieldID)
-    {
+    function GetCustomFieldType(fieldID) {
         for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
-            if($scope.CustomActivityDataList[i].cfdID==fieldID)
-            {
+            if ($scope.CustomActivityDataList[i].cfdID == fieldID) {
                 return $scope.CustomActivityDataList[i].cfdDataType;
             }
 
@@ -2180,14 +2171,14 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                         $scope.IsProcessing = false;
                         $scope.CurrentCart = [];
                         ShowSuccessActivity('Saved', $scope._CurrentAction);
-                    
-                            $location.path("/FindItems");
-                            localStorageService.set("ActivityCart", "");
-                            localStorageService.set("SelectedAction", "");
+
+                        $location.path("/FindItems");
+                        localStorageService.set("ActivityCart", "");
+                        localStorageService.set("SelectedAction", "");
 
 
 
-                        
+
 
                         $scope.$apply();
                     },
@@ -2203,11 +2194,10 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                 var _dataIndex = $scope.IsSingleMode == true ? $scope.CurrentCart.length : 1;
                 $scope.GoToStep(_dataIndex, 1);
-                if (!CheckintoCustomData(0) == false)
-                {
+                if (!CheckintoCustomData(0) == false) {
                     $scope.IssueType = 5;
                 }
-                else if(IsDateValidated()==false) {
+                else if (IsDateValidated() == false) {
                     $scope.IssueType = 6;
                 }
                 $scope.ShowErrorMessage($scope.IssueType);
@@ -2245,7 +2235,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
     }
 
 
-  
+
     $scope.DeleteItem = function (CurrentActiveObject) {
 
 
@@ -2259,33 +2249,32 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                 var _tempArray = $scope.CurrentCart;
                 var _tempIndex = -1;
-                    for (var i = 0; i < _tempArray.length; i++) {
-                        if (_tempArray[i].InventoryID == CurrentActiveObject.InventoryID) {
-                            $(_ID).addClass("animated zoomOutDown");
-                            _tempIndex = i;
-                              //  $scope.CurrentCart.splice(i, 1);
+                for (var i = 0; i < _tempArray.length; i++) {
+                    if (_tempArray[i].InventoryID == CurrentActiveObject.InventoryID) {
+                        $(_ID).addClass("animated zoomOutDown");
+                        _tempIndex = i;
+                        //  $scope.CurrentCart.splice(i, 1);
 
-                        }
                     }
-                    setTimeout(function () {
-                        if(_tempIndex!=-1)
-                        {
-                            $scope.CurrentCart.splice(_tempIndex, 1);
-                        }
+                }
+                setTimeout(function () {
+                    if (_tempIndex != -1) {
+                        $scope.CurrentCart.splice(_tempIndex, 1);
+                    }
 
-                        localStorageService.set("ActivityCart", "")
-                        localStorageService.set("ActivityCart", $scope.CurrentCart);
+                    localStorageService.set("ActivityCart", "")
+                    localStorageService.set("ActivityCart", $scope.CurrentCart);
+                    CheckScopeBeforeApply();
+
+                    if ($scope.CurrentCart.length == 0) {
+                        log.warning("Seems like you don't have any item in your cart.")
+                        $location.path("/FindItems");
                         CheckScopeBeforeApply();
 
-                        if ($scope.CurrentCart.length == 0) {
-                            log.warning("Seems like you don't have any item in your cart.")
-                            $location.path("/FindItems");
-                            CheckScopeBeforeApply();
+                    }
+                }, 1000);
 
-                        }
-                    },1000);
 
-              
 
 
             }
@@ -2336,7 +2325,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
     $scope.ShowErrorMessage = function (Option) {
         var _itemIDs = "";
-         
+
         if ($scope.AffectedItemIds.length > 0) {
             _itemIDs = $scope.AffectedItemIds.join(",");
         }
@@ -2425,12 +2414,11 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                             }
 
-                            if ($scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == "")
-                            {
+                            if ($scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == "") {
                                 $scope.IssueType = 2;
 
                             }
-                            else if($scope.CurrentCart[k].ConvertTransactionData.ToUOMID == null || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == "") {
+                            else if ($scope.CurrentCart[k].ConvertTransactionData.ToUOMID == null || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == "") {
                                 $scope.IssueType = 21;
                             }
                             CheckScopeBeforeApply();;
@@ -2469,8 +2457,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                                 $scope.IssueType = 3;
                             }
 
-                            else if ($scope.CurrentCart[k].MoveTransactionData.MoveToLocation == null || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "")
-                            {
+                            else if ($scope.CurrentCart[k].MoveTransactionData.MoveToLocation == null || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "") {
                                 $scope.IssueType = 32;
                             }
                             CheckScopeBeforeApply();
@@ -2689,6 +2676,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
     $scope.ValidateObjectVM = function () {
         $scope.AffectedItemIds = [];
 
+        debugger;
         var k = 0;
         var _totalLength = $scope.CurrentCart.length;
         if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
@@ -2697,7 +2685,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                 case "Decrease":
                 case "Adjust":
                     for (k = 0; k < _totalLength; k++) {
-                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
+                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == undefined || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
                             $scope.IssueType = 1;
                             $scope.GoToStep(k);
                             return true;
@@ -2730,9 +2718,9 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                 case "Convert":
 
                     for (k = 0; k < _totalLength; k++) {
-                        if ($scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == "") {
+                        if ($scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == undefined || $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == undefined || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == "") {
 
-                            if ($scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == "") {
+                            if ($scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == undefined || $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == undefined || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == "") {
                                 $scope.IssueType = 2;
 
                             }
@@ -2770,7 +2758,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                 case "Move":
 
                     for (k = 0; k < _totalLength; k++) {
-                        if ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity == "" || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "") {
+                        if ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity == undefined || $scope.CurrentCart[k].MoveTransactionData.ActionQuantity == null || $scope.CurrentCart[k].MoveTransactionData.ActionQuantity == "" || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "") {
                             if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
                                 $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
 
@@ -2831,7 +2819,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                     break;
                 case "Apply":
                     for (k = 0; k < _totalLength; k++) {
-                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
+                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == undefined || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null ||$scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
                             $scope.IssueType = 1;
                             if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
                                 $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
@@ -2872,7 +2860,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                     break;
                 case "Update":
                     for (k = 0; k < _totalLength; k++) {
-                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
+                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == undefined || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
                             $scope.IssueType = 1;
                             $scope.GoToStep(k);
                             if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
@@ -3021,14 +3009,14 @@ app.directive('bootstrapSwitch', [
                             scope.$apply(function () {
                                 ngModel.$setViewValue(state);
 
-                              
+
                             });
                         }
 
                     });
 
                     scope.$watch(attrs.ngModel, function (newValue, oldValue) {
-                      
+
                         if (newValue) {
                             element.bootstrapSwitch('state', true, true);
                             element.removeClass("bootstrap-switch-off").addClass("bootstrap-switch-on");
