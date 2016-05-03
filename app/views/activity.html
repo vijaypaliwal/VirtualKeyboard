@@ -1894,7 +1894,7 @@
         </div>
 
         <div class="modal-body">
-            <div class="cartlist" ng-repeat="CurrentActiveObject in CurrentCart | filter : Selecteditemlist">
+            <div class="cartlist" id="CartData_{{CurrentActiveObject.InventoryID}}" ng-repeat="CurrentActiveObject in CurrentCart | filter : Selecteditemlist">
                 <div class="row">
                     <div class="col-xs-3">
                         <i style="top:11px; left:27px;" ng-click="DeleteItem(CurrentActiveObject)" class="itemcheckicon fa fa-check"></i>

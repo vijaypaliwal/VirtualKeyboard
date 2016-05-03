@@ -2245,35 +2245,47 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
     }
 
 
+  
     $scope.DeleteItem = function (CurrentActiveObject) {
 
 
 
 
-
+        var _ID = "#CartData_" + CurrentActiveObject.InventoryID.toString();
 
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {
 
 
-
                 var _tempArray = $scope.CurrentCart;
-                for (var i = 0; i < _tempArray.length; i++) {
-                    if (_tempArray[i].InventoryID == CurrentActiveObject.InventoryID) {
-                        $scope.CurrentCart.splice(i, 1);
+                var _tempIndex = -1;
+                    for (var i = 0; i < _tempArray.length; i++) {
+                        if (_tempArray[i].InventoryID == CurrentActiveObject.InventoryID) {
+                            $(_ID).addClass("animated zoomOutDown");
+                            _tempIndex = i;
+                              //  $scope.CurrentCart.splice(i, 1);
+
+                        }
                     }
-                }
+                    setTimeout(function () {
+                        if(_tempIndex!=-1)
+                        {
+                            $scope.CurrentCart.splice(_tempIndex, 1);
+                        }
 
-                localStorageService.set("ActivityCart", "")
-                localStorageService.set("ActivityCart", $scope.CurrentCart);
-                CheckScopeBeforeApply();
+                        localStorageService.set("ActivityCart", "")
+                        localStorageService.set("ActivityCart", $scope.CurrentCart);
+                        CheckScopeBeforeApply();
 
-                if ($scope.CurrentCart.length == 0) {
-                    log.warning("Seems like you don't have any item in your cart.")
-                    $location.path("/FindItems");
-                    CheckScopeBeforeApply();
+                        if ($scope.CurrentCart.length == 0) {
+                            log.warning("Seems like you don't have any item in your cart.")
+                            $location.path("/FindItems");
+                            CheckScopeBeforeApply();
 
-                }
+                        }
+                    },1000);
+
+              
 
 
             }
@@ -2675,7 +2687,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
 
     $scope.ValidateObjectVM = function () {
-         
+        $scope.AffectedItemIds = [];
 
         var k = 0;
         var _totalLength = $scope.CurrentCart.length;

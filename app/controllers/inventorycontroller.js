@@ -353,8 +353,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
     }
 
-    $scope.TrimValue=function(value)
-    {
+    $scope.TrimValue = function (value) {
         return $.trim(value);
     }
 
@@ -608,8 +607,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         }
 
-        if (_sum > 5000000)
-        {
+        if (_sum > 5000000) {
             log.warning("You are trying to upload more than one image, it may take some time to upload, please be patient.")
         }
         $.ajax
@@ -623,7 +621,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               success: function (response) {
 
                   log.success("Inventory item added successfully.");
-                  
+
                   $scope.resetObject();
 
                   movetolist();
@@ -1341,6 +1339,19 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             log.error("Scanning failed: ", error);
         });
     }
+
+    $scope.IsinavailableInventoryField = function (field) {
+        var _FieldArray = ["iReqValue", "iUnitTag2", "iUnitTag3", "iUniqueDate", "iUnitDate2", "iUnitNumber1", "iUnitNumber2", "pDescription", "pPart", "lLoc", "uomUOM", "iQty", "iStatusValue"]
+
+
+
+        for (var i = 0; i < _FieldArray.length; i++) {
+            if (_FieldArray[i] == field) {
+                return true;
+            }
+        }
+        return false;
+    }
     $scope.ScanNew = function () {
 
 
@@ -1352,94 +1363,80 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         scanner.scan(function (result) {
 
-
-            if (ControlID == "pPart") {
-                _id = "#ItemName";
-                var resultvalue = result.text;
-
-                if (resultvalue != "") {
-
-                    $scope.InventoryObject.ItemID = resultvalue;
-                    $(_id).val(resultvalue);
-
-                    mySwiper.swipeNext();
-
-                    CheckScopeBeforeApply();
-
+            var resultvalue = result.text;
+            if (resultvalue != "") {
+                switch (ControlID) {
+                    case "pPart":
+                        _id = "#ItemName";
+                        $scope.InventoryObject.ItemID = resultvalue;
+                        break;
+                    case "lLoc":
+                        _id = "#Location";
+                        $scope.InventoryObject.Location = resultvalue;
+                        break;
+                    case "uomUOM":
+                        _id = "#UOM";
+                        $scope.InventoryObject.Uom = resultvalue;
+                        break;
+                    case "iQty":
+                        _id = "#iQty";
+                        $scope.InventoryObject.Quantity = resultvalue;
+                        break;
+                    case "iStatusValue":
+                        break;
+                    case "pDescription":
+                        _id = "#pDescriptionForm";
+                        $scope.InventoryObject.Description = resultvalue;
+                        break;
+                    case "iReqValue":
+                        _id = "#UniqueTag";
+                        $scope.InventoryObject.UniqueTag = resultvalue;
+                        break;
+                    case "iUnitTag2":
+                        _id = "#UnitTag2";
+                        $scope.InventoryObject.UnitTag2 = resultvalue;
+                        break;
+                    case "iUnitTag3":
+                        _id = "#UnitTag3";
+                        $scope.InventoryObject.UnitTag3 = resultvalue;
+                        break;
+                    case "iUniqueDate":
+                        _id = "#UniqueDate";
+                        $scope.InventoryObject.UniqueDate = resultvalue;
+                        break;
+                    case "iUnitDate2":
+                        _id = "#UnitDate2";
+                        $scope.InventoryObject.UnitDate2 = resultvalue;
+                        break;
+                    case "iUnitNumber1":
+                        _id = "#UnitNumber1";
+                        $scope.InventoryObject.UnitNumber1 = resultvalue;
+                        break;
+                    case "iUnitNumber2":
+                        _id = "#UnitNumber2";
+                        $scope.InventoryObject.UnitNumber2 = resultvalue;
+                        break;
+                    default:
 
                 }
 
-                else {
-                    //log.error("Item not found in list !!");
-                }
+
+
+                $(_id).val(resultvalue);
+
+                mySwiper.swipeNext();
+
+                CheckScopeBeforeApply();
 
 
             }
-            else if (ControlID == "lLoc") {
 
-                var resultvalue = result.text
-                _id = "#Location";
-                if (resultvalue != "") {
-
-                    $scope.InventoryObject.Location = resultvalue;
-                    $(_id).val(resultvalue);
-                    mySwiper.swipeNext();
-
-                    CheckScopeBeforeApply();
-
-
-                }
-
-                else {
-                    //log.error("Location not found in list !!");
-                }
-
-            }
-
-            else if (ControlID == "uomUOM") {
-
-                var resultvalue = result.text
-                _id = "#UOM";
-                if (resultvalue != "") {
-
-                    $scope.InventoryObject.Uom = resultvalue;
-                    $(_id).val(resultvalue);
-                    mySwiper.swipeNext();
-
-                    CheckScopeBeforeApply();
-
-
-                }
-
-                else {
-                    //log.error("Location not found in list !!");
-                }
-
-            }
             else {
-                $scope.InventoryObject.Description = resultvalue;
-
-                var resultvalue = result.text;
-                _id = "#pDescriptionForm";
-                if (resultvalue != "") {
-
-                    $scope.InventoryObject.Description = result.text;
-
-                    $(_id).val(result.text);
-                    mySwiper.swipeNext();
-
-                    CheckScopeBeforeApply()
-
-
-                }
-
-                else {
-                    //log.error("Item not found in list !!");
-                }
-
             }
 
-            vibrate()
+
+
+            vibrate();
 
 
 
@@ -1562,13 +1559,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.UpDownValue = function (value, IsUp) {
-        if ($.trim($scope.InventoryObject.Quantity)=="")
-        {
+        if ($.trim($scope.InventoryObject.Quantity) == "") {
 
-            $scope.InventoryObject.Quantity=0;
-        
+            $scope.InventoryObject.Quantity = 0;
+
         }
-        
+
         switch (value) {
             case "Quantity":
                 if (!IsUp) {

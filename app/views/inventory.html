@@ -116,8 +116,12 @@
                         <div class="form-group" ng-if="obj.ColumnName=='iQty'">
                             <label>Quantity</label>
 
+                            <div class="input-group">
+                                <span class="input-group-addon" ng-click="UpDownValue('Quantity',true)"><i class="fa fa-plus"></i></span>
+                                <input ng-model="InventoryObject.Quantity" id="iQty" min="0" class="form-control" type="number" name="Quantity" value="" />
 
-                            <input ng-model="InventoryObject.Quantity" min="0" class="form-control" type="number" name="Quantity" value="" />
+                                <span class="input-group-addon" ng-click="UpDownValue('Quantity',false)"><i class="fa fa-minus"></i></span>
+                            </div>
 
 
 
@@ -338,7 +342,7 @@
                             <div ng-if="obj.cfdDataType=='checkbox'">
 
 
-                                <input ng-model="InventoryObject.CustomPartData[$index].Value" type="checkbox" bootstrap-switch />
+                                <input id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[$index].Value" type="checkbox" bootstrap-switch />
 
 
                             </div>
@@ -394,7 +398,7 @@
 
                             <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
 
-                                <input type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value" bootstrap-switch>
+                                <input id="CustomActivity_{{obj.cfdID}}" type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value" bootstrap-switch>
 
                             </div>
 
@@ -455,23 +459,9 @@
                             <button type="button" class="btn btn-primary arrow-left"><i class="fa fa-angle-left"></i></button>
                         </td>
 
-                        <td ng-if="CurrentActiveField=='iQty'">
-
-                            <div style="text-align:center">
-                                <button ng-click="UpDownValue('Quantity',true)" type="button" class="btn ibtn  btn-success"><i class="fa fa-plus"></i></button>
-                            </div>
-
-                     
-                        </td>
-                        <td ng-if="CurrentActiveField=='iQty'">
-
-                            <div style="text-align:center">
-                                <button ng-click="UpDownValue('Quantity',false)" type="button" class="btn dbtn  btn-danger"><i class="fa fa-minus"></i> </button>
-                            </div>
-                        </td>
 
 
-                        <td ng-if="CurrentActiveField=='pDescription'||CurrentActiveField=='pPart'||CurrentActiveField=='lLoc'||CurrentActiveField=='uomUOM'">
+                        <td ng-if="IsinavailableInventoryField(CurrentActiveField)==true">
 
                             <div style="text-align:center">
                                 <button style="font-size:18px; line-height:42px;" class="scanbtn btn btn-primary" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> Scan Record</button>
@@ -480,7 +470,7 @@
 
 
                         </td>
-                        <td ng-if="CurrentActiveField.indexOf('string_')>-1 && CurrentActiveFieldDatatype=='string'">
+                        <td ng-if="CurrentActiveField.indexOf('string_')>-1 || CurrentActiveField.indexOf('bool_')>-1 || CurrentActiveField.indexOf('number_')>-1 || CurrentActiveField.indexOf('date_')>-1 ">
 
                             <div style="text-align:center">
                                 <a style="font-size:18px; line-height:42px;" class="scanbtn btn btn-primary" ng-click="ScanNewCustom()"> Scan Record</a>
