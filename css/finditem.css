@@ -607,6 +607,8 @@
     vertical-align: middle;
 }
 
+
+
 .img .thumbimg {
     vertical-align: middle;
     height: auto !important;
@@ -614,6 +616,7 @@
     border: transparent !important;
     opacity: 1 !important;
     margin-left:-4px;
-    max-height:65px;
-    max-width:65px;
+    max-height:48px;
+    max-width:48px;
+    border-radius:0px;
 }
