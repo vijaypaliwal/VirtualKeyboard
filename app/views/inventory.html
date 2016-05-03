@@ -140,27 +140,15 @@
                             </div>
 
 
-
-
                         </div>
-
-
 
 
                         <div class="form-group" ng-if="obj.ColumnName=='lZone'">
                             <label>Location Group</label>
                             <div class="input-group">
-
                                 <input type="text" class="form-control" id="lZone" ng-model="InventoryObject.lZone" />
-
-
-
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_lZone','#lZone')"><i class="fa fa-refresh"></i></span>
                             </div>
-
-
-
-
                         </div>
 
 
@@ -489,12 +477,9 @@
                 </table>
 
 
-
-
-
              
 
-                <a ng-click="addinventory()" style="width:100%; margin-top:15px;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
+                <a ng-click="addinventory()" style="width:100%; margin-top:30px;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn btn-primary"> <i class="fa fa-plus"></i>  Add Inventory</a>
 
             </div>
             <div style="display: none;" class="pagination"></div>

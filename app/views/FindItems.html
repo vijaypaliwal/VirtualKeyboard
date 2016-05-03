@@ -106,7 +106,7 @@
                             <span class="imghelper"></span>
                             <img ng-if="_obj.ImageThumbPath==''" src="img/default.png" alt="loading.." />
                             <img class="thumbimg" ng-if="_obj.ImageThumbPath!=''" style="display:none !important;" src="{{_obj.ImageThumbPath}}" alt="loading.." imageonload />
-                            <img ng-if="_obj.ImageThumbPath!=''" src="img/loader.gif" class="loadingImage" alt="loading.." />
+                            <img style="height:32px;width:32px; border:transparent" ng-if="_obj.ImageThumbPath!=''" src="img/loader.gif" class="loadingImage" alt="loading.." />
                         </span>
                         <span class="product clearfix" ng-click="GoToDetailPage(_obj)" on-long-press="SetCurrentObject(_obj)" on-touch-end="ShowOptionModal()">
                             <!--<span class="product clearfix" ng-click="ShowOptionModal()">-->

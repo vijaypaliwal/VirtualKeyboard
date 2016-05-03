@@ -1201,7 +1201,20 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.GetAllData();
 
 
+    }
 
+    function ConvertDatetoDate(_stringDate)
+    {
+        var today = new Date(_stringDate);
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+
+        var yyyy = today.getFullYear();
+        if (dd < 10) { dd = '0' + dd }
+        if (mm < 10) { mm = '0' + mm }
+        today = yyyy + '-' + mm + '-' + dd;
+
+        return today;
     }
 
     init();
@@ -1402,10 +1415,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         break;
                     case "iUniqueDate":
                         _id = "#UniqueDate";
+                        resultvalue = ConvertDatetoDate(resultvalue);
                         $scope.InventoryObject.UniqueDate = resultvalue;
                         break;
                     case "iUnitDate2":
                         _id = "#UnitDate2";
+                        resultvalue = ConvertDatetoDate(resultvalue);
                         $scope.InventoryObject.UnitDate2 = resultvalue;
                         break;
                     case "iUnitNumber1":
@@ -1460,12 +1475,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             if (resultvalue != "") {
 
-                $(_id).val(resultvalue);
 
                 var _Arraytoupdate = [];
                 var _Type = _colarray[0];
                 if (_Type != null && _Type != undefined && _Type != "") {
 
+                    if ($scope.CurrentActiveFieldDatatype != null && $scope.CurrentActiveFieldDatatype != undefined) {
+
+                        if ($scope.CurrentActiveFieldDatatype == "date" || $scope.CurrentActiveFieldDatatype == "datetime") {
+                            resultvalue = ConvertDatetoDate(resultvalue);
+                        }
+
+                    }
                     if (_Type == "CustomItem") {
 
 
@@ -1496,6 +1517,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
+                $(_id).val(resultvalue);
 
                 mySwiper.swipeNext();
 
