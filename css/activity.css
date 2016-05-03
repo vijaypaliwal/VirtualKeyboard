@@ -42,7 +42,14 @@
     opacity: 0.7;
     cursor: not-allowed;
 }
-
+.text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    margin-bottom: 0;
+}
 .bottomnavigator {
     position: fixed;
     width: 100%;
@@ -357,6 +364,7 @@ position: absolute;
     #locationlistmodal .modal-header .close {
         margin-top: 6px;
         opacity: 1;
+        padding-right:25px;
     }
 
 

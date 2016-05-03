@@ -516,7 +516,7 @@ app.controller('FindItemsController', ['$scope',  'localStorageService', 'authSe
             contentType: 'application/json',
             dataType: 'json',
             success: function (result) {
-
+                debugger;
                 $scope._areImagesShown = result.GetInventoriesResult.Payload[0].AreImagesShown
                 $scope._areZeroRecordsShown = result.GetInventoriesResult.Payload[0].AreZeroRecords
                 console.log(result.GetInventoriesResult.Payload);

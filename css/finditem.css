@@ -118,16 +118,7 @@
         margin-top: 7px;
     }
 
-    .widget-products li .img {
-        display: block;
-        float: left;
-        text-align: center;
-        width: 70px;
-        height: 68px;
-        overflow: hidden;
-        margin-top: 7px;
-        position: fixed;
-    }
+    
 
 
     .widget-products li > a {
@@ -331,8 +322,9 @@
     }
 
     .img img {
-        height: 63px;
-        width: 63px;
+        height: 65px;
+        width: 65px;
+        margin-left:-4px;
         border: 3px solid #ccc;
         border-radius: 100%;
     }
@@ -593,3 +585,32 @@
     {
         display:block !important;
     }
+
+
+    .img {
+    height: 66px;
+    width: 67px;
+    border: 1px solid #ccc;
+    white-space: nowrap;
+    text-align: center;
+    margin: 1em 0;
+    float: left;
+    margin-top: 5px;
+    border-radius:100%;
+    position:fixed;
+}
+
+.imghelper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.img .thumbimg {
+    vertical-align: middle;
+    height: auto !important;
+    width: auto !important;
+    border: transparent !important;
+    opacity: 1 !important;
+    margin-left:-4px;
+}

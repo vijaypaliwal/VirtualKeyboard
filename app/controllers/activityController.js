@@ -454,7 +454,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
             $scope.SecurityToken = authData.token;
         }
         $scope.SearchLocationValue = $.trim($scope.SearchLocationValue);
-        if ($scope.SearchLocationValue != null && $scope.SearchLocationValue != "") {
+        if ($.trim($scope.SearchLocationValue) != "") {
 
             $scope.LocationSearching = true;
             $.ajax({
@@ -496,6 +496,7 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         }
         else {
             $scope.LocationSearching = false;
+            $scope.isnolocationmsg = true;
             $scope.LocationSearchList = [];
             CheckScopeBeforeApply();
         }
@@ -580,15 +581,21 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
     $scope.HighLightTerm = function (term, Text) {
 
-        var src_str = Text;
-        var term = term;
-        term = term.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
-        var pattern = new RegExp("(" + term + ")", "gi");
+        if ($.trim(term) != "") {
 
-        src_str = src_str.replace(pattern, "<mark>$1</mark>");
-        src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
+            var src_str = Text;
+            var term = term;
+            term = term.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
+            var pattern = new RegExp("(" + term + ")", "gi");
 
-        return src_str;
+            src_str = src_str.replace(pattern, "<mark>$1</mark>");
+            src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
+
+            return src_str;
+        }
+        else {
+            return Text;
+        }
     }
 
     $scope.LocationSetItemData = function (obj) {
@@ -2095,6 +2102,17 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
         return false;
     }
 
+    function GetCustomFieldType(fieldID)
+    {
+        for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+            if($scope.CustomActivityDataList[i].cfdID==fieldID)
+            {
+                return $scope.CustomActivityDataList[i].cfdDataType;
+            }
+
+        }
+        return "";
+    }
     function IsDateValidated() {
         var _returnVar = true;
 
@@ -2185,6 +2203,13 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                 var _dataIndex = $scope.IsSingleMode == true ? $scope.CurrentCart.length : 1;
                 $scope.GoToStep(_dataIndex, 1);
+                if (!CheckintoCustomData(0) == false)
+                {
+                    $scope.IssueType = 5;
+                }
+                else if(IsDateValidated()==false) {
+                    $scope.IssueType = 6;
+                }
                 $scope.ShowErrorMessage($scope.IssueType);
             }
         }
@@ -2269,7 +2294,10 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
     $scope.FillLineItem = function (LineItemIndex, fieldID, value, InventoryID) {
 
+        var _DataType = GetCustomFieldType(fieldID);
         $scope.ActionLineItemData = value;
+
+        $scope.ActionLineItemData = $scope.ActionLineItemData == "" && _DataType == "checkbox" ? "false" : $scope.ActionLineItemData;
         if ($scope.ActionLineItemData != "") {
             var k = 0;
             for (k = 0; k < $scope.CurrentCart.length; k++) {
@@ -2305,10 +2333,16 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                 log.error("Quantity is required field or quantity is greater than original quantity,please fill quantity in following cart items " + _itemIDs);
                 break;
             case 2:
-                log.error("Convert Quantity,into this quantity and UOM are required fields,please fill proper values in following cart items " + _itemIDs);
+                log.error("Convert Quantity and into this quantity are required fields,please fill proper values in following cart items " + _itemIDs);
+                break;
+            case 21:
+                log.error("Destination UOM is required fields,please fill proper values in following cart items " + _itemIDs);
                 break;
             case 3:
-                log.error("Moveable Quantity and location are required fields,please fill proper values in following cart items " + _itemIDs);
+                log.error("Moveable Quantity is required field,please fill proper values in following cart items " + _itemIDs);
+                break;
+            case 32:
+                log.error("Destination location is required field,please fill proper values in following cart items " + _itemIDs);
                 break;
             case 4:
             case 31:
@@ -2318,6 +2352,9 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
             case 5:
                 log.error("Seems like you haven't fill all required fields for activity data, please fill them first in following cart items " + _itemIDs)
+                break;
+            case 6:
+                log.error("Activity date is required field, please fill them first")
                 break;
             default:
 
@@ -2371,10 +2408,18 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                     for (k = 0; k < _totalLength; k++) {
                         if (k == CurrentIndex && ($scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == null || $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == "")) {
-                            $scope.IssueType = 2;
                             if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
                                 $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
 
+                            }
+
+                            if ($scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == null || $scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == "")
+                            {
+                                $scope.IssueType = 2;
+
+                            }
+                            else if($scope.CurrentCart[k].ConvertTransactionData.ToUOMID == null || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == "") {
+                                $scope.IssueType = 21;
                             }
                             CheckScopeBeforeApply();;
                             return true;
@@ -2406,8 +2451,17 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
                                 $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
 
                             }
-                            $scope.IssueType = 3;
-                            CheckScopeBeforeApply();;
+                            if ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity == null || $scope.CurrentCart[k].MoveTransactionData.ActionQuantity == "") {
+
+
+                                $scope.IssueType = 3;
+                            }
+
+                            else if ($scope.CurrentCart[k].MoveTransactionData.MoveToLocation == null || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "")
+                            {
+                                $scope.IssueType = 32;
+                            }
+                            CheckScopeBeforeApply();
                             return true;
 
                             break;
@@ -2665,7 +2719,14 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                     for (k = 0; k < _totalLength; k++) {
                         if ($scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == "") {
-                            $scope.IssueType = 2;
+
+                            if ($scope.CurrentCart[k].ConvertTransactionData.ActionToQuantity == "" || $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity == "") {
+                                $scope.IssueType = 2;
+
+                            }
+                            else if ($scope.CurrentCart[k].ConvertTransactionData.ToUOMID == null || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == "") {
+                                $scope.IssueType = 21;
+                            }
                             $scope.GoToStep(k);
                             CheckScopeBeforeApply();;
                             return true;
@@ -2698,10 +2759,19 @@ app.controller('activityController', ['$scope',  'localStorageService', 'authSer
 
                     for (k = 0; k < _totalLength; k++) {
                         if ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity == "" || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "") {
-                            $scope.IssueType = 3;
                             if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
                                 $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
 
+                            }
+
+                            if ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity == null || $scope.CurrentCart[k].MoveTransactionData.ActionQuantity == "") {
+
+
+                                $scope.IssueType = 3;
+                            }
+
+                            else if ($scope.CurrentCart[k].MoveTransactionData.MoveToLocation == null || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "") {
+                                $scope.IssueType = 32;
                             }
                             $scope.GoToStep(k);
                             CheckScopeBeforeApply();
@@ -2938,15 +3008,21 @@ app.directive('bootstrapSwitch', [
                         if (ngModel) {
                             scope.$apply(function () {
                                 ngModel.$setViewValue(state);
+
+                              
                             });
                         }
+
                     });
 
                     scope.$watch(attrs.ngModel, function (newValue, oldValue) {
+                      
                         if (newValue) {
                             element.bootstrapSwitch('state', true, true);
+                            element.removeClass("bootstrap-switch-off").addClass("bootstrap-switch-on");
                         } else {
                             element.bootstrapSwitch('state', false, true);
+                            element.removeClass("bootstrap-switch-on").addClass("bootstrap-switch-off");
                         }
                     });
                 }

@@ -116,6 +116,7 @@
     .imagesection {
         text-align: center;
         background: #eee;
+        min-height:100px;
     }
 
         .imagesection img {

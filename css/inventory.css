@@ -175,6 +175,7 @@
         #itemlistmodal .modal-header .close {
             margin-top: 6px;
             opacity: 1;
+            padding-left: 25px;
         }
 
     .searchresultlist {
@@ -233,6 +234,7 @@
         #locationlistmodal .modal-header .close {
             margin-top: 6px;
             opacity: 1;
+            padding-left: 25px;
         }
 
     #uomlistmodal {
@@ -261,6 +263,7 @@
         #uomlistmodal .modal-header .close {
             margin-top: 6px;
             opacity: 1;
+            padding-left: 25px;
         }
 
     .swiper-container table .ibtn {

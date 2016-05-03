@@ -83,7 +83,7 @@
                             </td>
                             <td>
                                 <div style="text-align:center">
-                                    <img ng-click="OpenImageModal(obj)" style="height: 100px; width: 100px; border-radius: 100%; border: 1px solid #ccc;" src="{{obj.SmallImageURI}}" alt="" />
+                                    <img style=" border: 1px solid #ccc;" ng-click="OpenImageModal(obj)" src="{{obj.SmallImageURI}}" alt="" />
                                 </div>
                             </td>
                             <td>
@@ -218,7 +218,7 @@
         <div class="modal-content">
 
             <div class="modal-body">
-                <img src="{{CurrentActiveImage.LargeImageURI}}" id="imagepreview" style="max-height:300px;width:100%;">
+                <img src="{{CurrentActiveImage.LargeImageURI}}" id="imagepreview" style="max-height:250px;max-width:250px;">
             </div>
 
         </div>

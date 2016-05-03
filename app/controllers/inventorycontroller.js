@@ -305,45 +305,58 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $scope.SecurityToken = authData.token;
         }
 
-        $scope.UOMSearching = true;
 
-        $.ajax({
+        if ($.trim($scope.SearchUOMValue) != "") {
 
-            type: "POST",
-            url: serviceBase + "SearchUOMAutoComplete",
-            contentType: 'application/json; charset=utf-8',
+            $scope.UOMSearching = true;
 
-            dataType: 'json',
+            $.ajax({
 
-            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchUOMValue }),
-            error: function () {
+                type: "POST",
+                url: serviceBase + "SearchUOMAutoComplete",
+                contentType: 'application/json; charset=utf-8',
 
-                $scope.UOMSearching = false;
-                log.error('There is a problem with the service!');
-            },
+                dataType: 'json',
 
-            success: function (data) {
+                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchUOMValue }),
+                error: function () {
 
-                if (data.SearchUOMAutoCompleteResult != null && data.SearchUOMAutoCompleteResult.Payload != null) {
                     $scope.UOMSearching = false;
-                    $scope.UOMSearchList = data.SearchUOMAutoCompleteResult.Payload;
+                    log.error('There is a problem with the service!');
+                },
+
+                success: function (data) {
+
+                    if (data.SearchUOMAutoCompleteResult != null && data.SearchUOMAutoCompleteResult.Payload != null) {
+                        $scope.UOMSearching = false;
+                        $scope.UOMSearchList = data.SearchUOMAutoCompleteResult.Payload;
 
 
-                    if ($scope.UOMSearchList.length == 0)
-                        $scope.isnouommsg = true
-                    else
-                        $scope.isnouommsg = false
+                        if ($scope.UOMSearchList.length == 0)
+                            $scope.isnouommsg = true
+                        else
+                            $scope.isnouommsg = false
 
-                    CheckScopeBeforeApply()
+                        CheckScopeBeforeApply()
+
+                    }
+
+
 
                 }
-
-
-
-            }
-        });
+            });
+        }
+        else {
+            $scope.UOMSearchList = [];
+            $scope.isnouommsg = true
+            CheckScopeBeforeApply();
+        }
     }
 
+    $scope.TrimValue=function(value)
+    {
+        return $.trim(value);
+    }
 
     $scope.OnChangeItemNameFunction = function () {
 
@@ -353,40 +366,47 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
+        if ($.trim($scope.SearchItemValue) != "") {
+            $scope.ItemSearching = true;
+            $.ajax({
 
-        $scope.ItemSearching = true;
-        $.ajax({
+                type: "POST",
+                url: serviceBase + "SearchItems",
+                contentType: 'application/json; charset=utf-8',
 
-            type: "POST",
-            url: serviceBase + "SearchItems",
-            contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
 
-            dataType: 'json',
+                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchItemValue }),
+                error: function () {
 
-            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchItemValue }),
-            error: function () {
-
-                $scope.ItemSearching = false;
-                log.error('There is a problem with the service!');
-            },
-
-            success: function (data) {
-
-                if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
                     $scope.ItemSearching = false;
-                    $scope.SearchList = data.SearchItemsResult.Payload;
+                    log.error('There is a problem with the service!');
+                },
 
-                    if ($scope.SearchList.length == 0)
-                        $scope.isnoitemmsg = true
-                    else
-                        $scope.isnoitemmsg = false
+                success: function (data) {
+
+                    if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
+                        $scope.ItemSearching = false;
+                        $scope.SearchList = data.SearchItemsResult.Payload;
+
+                        if ($scope.SearchList.length == 0)
+                            $scope.isnoitemmsg = true;
+                        else
+                            $scope.isnoitemmsg = false;
 
 
-                    CheckScopeBeforeApply()
+                        CheckScopeBeforeApply()
 
+                    }
                 }
-            }
-        });
+            });
+        }
+        else {
+            $scope.SearchList = [];
+            $scope.isnoitemmsg = true;
+
+            CheckScopeBeforeApply();
+        }
     }
 
 
@@ -399,42 +419,50 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $scope.SecurityToken = authData.token;
         }
 
-        $scope.LocationSearching = true;
-        $.ajax({
+        if ($.trim($scope.SearchLocationValue) != "") {
 
-            type: "POST",
-            url: serviceBase + "SearchLocationAutoComplete",
-            contentType: 'application/json; charset=utf-8',
+            $scope.LocationSearching = true;
+            $.ajax({
 
-            dataType: 'json',
+                type: "POST",
+                url: serviceBase + "SearchLocationAutoComplete",
+                contentType: 'application/json; charset=utf-8',
 
-            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchLocationValue }),
-            error: function () {
+                dataType: 'json',
 
-                $scope.LocationSearching = false;
-                log.error('There is a problem with the service!');
-            },
+                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchLocationValue }),
+                error: function () {
 
-            success: function (data) {
-
-                if (data.SearchLocationAutoCompleteResult != null && data.SearchLocationAutoCompleteResult.Payload != null) {
                     $scope.LocationSearching = false;
-                    $scope.LocationSearchList = data.SearchLocationAutoCompleteResult.Payload;
+                    log.error('There is a problem with the service!');
+                },
+
+                success: function (data) {
+                    debugger;
+                    if (data.SearchLocationAutoCompleteResult != null && data.SearchLocationAutoCompleteResult.Payload != null) {
+                        $scope.LocationSearching = false;
+                        $scope.LocationSearchList = data.SearchLocationAutoCompleteResult.Payload;
 
 
-                    if ($scope.LocationSearchList.length == 0)
-                        $scope.isnolocationmsg = true
-                    else
-                        $scope.isnolocationmsg = false
+                        if ($scope.LocationSearchList.length == 0)
+                            $scope.isnolocationmsg = true
+                        else
+                            $scope.isnolocationmsg = false
 
-                    CheckScopeBeforeApply()
+                        CheckScopeBeforeApply()
+
+                    }
+
+
 
                 }
-
-
-
-            }
-        });
+            });
+        }
+        else {
+            $scope.LocationSearchList = [];
+            $scope.isnolocationmsg = true
+            CheckScopeBeforeApply()
+        }
     }
 
 
@@ -823,16 +851,21 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.HighLightTerm = function (term, Text) {
+        if ($.trim(term) != "") {
 
-        var src_str = Text;
-        var term = term;
-        term = term.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
-        var pattern = new RegExp("(" + term + ")", "gi");
+            var src_str = Text;
+            var term = term;
+            term = term.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
+            var pattern = new RegExp("(" + term + ")", "gi");
 
-        src_str = src_str.replace(pattern, "<mark>$1</mark>");
-        src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
+            src_str = src_str.replace(pattern, "<mark>$1</mark>");
+            src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
 
-        return src_str;
+            return src_str;
+        }
+        else {
+            return Text;
+        }
     }
 
     $scope.getuom = function () {
@@ -1529,6 +1562,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.UpDownValue = function (value, IsUp) {
+        if ($.trim($scope.InventoryObject.Quantity)=="")
+        {
+
+            $scope.InventoryObject.Quantity=0;
+        
+        }
+        
         switch (value) {
             case "Quantity":
                 if (!IsUp) {

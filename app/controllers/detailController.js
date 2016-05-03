@@ -344,12 +344,22 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
     $scope.ToggleEditView = function () {
 
 
+        debugger;
+
+
         $("#myModal2").modal('hide');
         $(".modal-backdrop").remove();
         $("body").removeClass("modal-open");
 
+      
+
         $scope.IsEditMode = !$scope.IsEditMode;
         setTimeout(function () { InitializeSwiper() }, 10);
+
+        setTimeout(function () {
+            $(".loadingimage").hide();
+            $(".imagesection").show();
+        }, 300);
     }
 
 }]);
