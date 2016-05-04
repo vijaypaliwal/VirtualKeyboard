@@ -1542,7 +1542,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         scanner.scan(function (result) {
 
 
-            alert(resultvalue + "In custom");
             var resultvalue = result.text;
 
             var _fieldType = $scope.GetCustomDataType($scope.CurrentActiveFieldDatatype);

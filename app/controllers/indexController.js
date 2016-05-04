@@ -44,12 +44,23 @@ app.controller('indexController', ['$scope',  'localStorageService', 'authServic
         },1000)
        
     }
-
+    function TryParseInt(str, defaultValue) {
+        var retValue = defaultValue;
+        if (str !== null) {
+            if (str.length > 0) {
+                if (!isNaN(str)) {
+                    retValue = parseInt(str);
+                }
+            }
+        }
+        return retValue;
+    }
     $scope.Validation=function(value,type)
     {
         switch (type) {
             case 1:
-                if (typeof (value) === "number") {
+                value = TryParseInt(value, -9890);
+                if (value!=-9890 && typeof (value) === "number") {
                     return true;
                 }
                 else { return false; }
@@ -58,13 +69,13 @@ app.controller('indexController', ['$scope',  'localStorageService', 'authServic
                 if (typeof (value) === "boolean") {
                     return true;
                 }
-                else { return false;}
+                else { return true; }
                 break;
             case 3:
                 if (typeof (value) === "date") {
                     return true;
                 }
-                else { return false; }
+                else { return true; }
                 break;
             default:
 
