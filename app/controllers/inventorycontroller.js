@@ -1399,7 +1399,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             var resultvalue = result.text;
             var _fieldType = GetFieldType(ControlID);
-            alert(resultvalue);
             if (_fieldType != 4) {
 
                 resultvalue = $scope.Validation(resultvalue, _fieldType) == true ? resultvalue : "";
@@ -1505,6 +1504,33 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         }
     }
+    $scope.GetCustomDataType=function(Type)
+    {
+        switch (Type) {
+            case "string":
+                return 4;
+                break;
+            case "date":
+            case "datetime":
+                return 3;
+                break;
+            case "checkbox":
+                return 2;
+                break;
+            case "number":
+            case "money":
+            case "decimal":
+            case "currency":
+                return 1;
+                break;
+            default:
+                return 4;
+                break;
+
+
+           
+        }
+    }
     $scope.ScanNewCustom = function () {
         var _id = "#" + _colid;
 
@@ -1512,11 +1538,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var ControlID = $scope.CurrentActiveField;
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
+       
         scanner.scan(function (result) {
 
 
-
+            alert(resultvalue + "In custom");
             var resultvalue = result.text;
+
+            var _fieldType = $scope.GetCustomDataType($scope.CurrentActiveFieldDatatype);
+            if (_fieldType != 4) {
+
+                resultvalue = $scope.Validation(resultvalue, _fieldType) == true ? resultvalue : "";
+            }
 
             if (resultvalue != "") {
 
@@ -1572,9 +1605,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
 
             else {
-                //log.error("Item not found in list !!");
-            }
 
+                $scope.ShowScanError(_fieldType);
+            }
 
 
             vibrate()
