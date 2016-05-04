@@ -61,9 +61,19 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
 
+    function ConvertDatetoDate(_stringDate) {
+        var today = new Date(_stringDate);
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
 
+        var yyyy = today.getFullYear();
+        if (dd < 10) { dd = '0' + dd }
+        if (mm < 10) { mm = '0' + mm }
+        today = yyyy + '-' + mm + '-' + dd;
+
+        return today;
+    }
     $scope.ScanLineItem = function (Type, Id, index, inventoryID) {
-        debugger;
         var _typeString = "";
         switch (Type) {
             case 1:
@@ -84,13 +94,24 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(function (result) {
 
-            $(_ID).val(result.text);
+            var _dataType = $(_ID).attr("custom-data-type");
+            var _value = result.text;
+
+            if (_dataType != null && _dataType != undefined)
+            {
+                if(_dataType=="date" || _dataType=="datetime")
+                {
+                    _value = ConvertDatetoDate(_value);
+                }
+            }
+
+            $(_ID).val(_value);
 
             switch (Type) {
                 case 1:
                     for (var i = 0; i < $scope.CurrentCart; i++) {
                         if ($scope.CurrentCart[i].InventoryID == inventoryID) {
-                            $scope.CurrentCart[i].IsLineItemData[index] = result.text;
+                            $scope.CurrentCart[i].IsLineItemData[index] = _value;
                             break;
                         }
                     }
@@ -2709,8 +2730,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             }, 0);
 
         }
-
-
     }
 
     var $body = jQuery('body');
@@ -2723,6 +2742,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $('.activityfields').css('margin-top', '0px');
         $('.singlePanel').css('margin-top', '14px');
         $('#transactionForm1').css('margin-top', '0px');
+
+        $('.bottombutton').css("position", "relative");
+        
     })
     .on('blur', 'input', function () {
         $('.header').css("position", "fixed");
@@ -2730,6 +2752,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $('.activityfields').css('margin-top', '80px');
         $('.singlePanel').css('margin-top', '55px');
         $('#transactionForm1').css('margin-top', '85px');
+        $('.bottombutton').css("position", "fixed");
 
     });
 
@@ -2737,7 +2760,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.ValidateObjectVM = function () {
         $scope.AffectedItemIds = [];
 
-        debugger;
+    
         var k = 0;
         var _totalLength = $scope.CurrentCart.length;
         if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
