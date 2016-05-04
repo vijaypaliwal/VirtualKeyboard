@@ -60,7 +60,17 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     }
 
-
+    function TryParseInt(str, defaultValue) {
+        var retValue = defaultValue;
+        if (str !== null) {
+            if (str.length > 0) {
+                if (!isNaN(str)) {
+                    retValue = parseInt(str);
+                }
+            }
+        }
+        return retValue;
+    }
     function ConvertDatetoDate(_stringDate) {
         var today = new Date(_stringDate);
         var dd = today.getDate();
@@ -102,6 +112,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 if(_dataType=="date" || _dataType=="datetime")
                 {
                     _value = ConvertDatetoDate(_value);
+                }
+
+                if (_dataType == "number" || _dataType == "money" || _dataType == "currency") {
+                    _value = TryParseInt(_value, -9890);
+                    _value = _value == -9890 ? "" : _value;
                 }
             }
 
