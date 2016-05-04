@@ -109,9 +109,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
             switch (Type) {
                 case 1:
-                    for (var i = 0; i < $scope.CurrentCart; i++) {
+                    for (var i = 0; i < $scope.CurrentCart.length; i++) {
                         if ($scope.CurrentCart[i].InventoryID == inventoryID) {
-                            $scope.CurrentCart[i].IsLineItemData[index] = _value;
+                            $scope.CurrentCart[i].IsLineItemData[index].CfValue = _value;
                             break;
                         }
                     }

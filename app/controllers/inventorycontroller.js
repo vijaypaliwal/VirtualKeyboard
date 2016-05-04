@@ -709,7 +709,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
  })
  .on('blur', 'input', function () {
 
-     $('.topheader').css("position", "fixed");
+     $('.topheader').css("position", "absolute");
      $('.iteminfopanel').css('margin-top', '80px');
 
  });
