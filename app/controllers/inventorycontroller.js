@@ -1365,6 +1365,27 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
         return false;
     }
+
+    function GetFieldType(fieldName)
+    {
+        switch (fieldName) {
+
+
+          
+            case "iUniqueDate":
+            case "iUnitDate2":
+                return 3;
+                break;
+            case "iQty":
+            case "iUnitNumber1":
+            case "iUnitNumber2":
+                return 1;
+                break;
+            default:
+                return 4;
+                break;
+        }
+    }
     $scope.ScanNew = function () {
 
 
@@ -1377,6 +1398,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         scanner.scan(function (result) {
 
             var resultvalue = result.text;
+            var _fieldType=GetFieldType(ControlID);
+            resultvalue = $scope.Validation(resultvalue, _fieldType) == true ? resultvalue : "";
             if (resultvalue != "") {
                 switch (ControlID) {
                     case "pPart":
@@ -1447,6 +1470,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
 
             else {
+
+                $scope.ShowScanError(_fieldType);
             }
 
 
@@ -1459,7 +1484,23 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             log.error("Scanning failed: ", error);
         });
     }
+    $scope.ShowScanError=function(type)
+    {
+        switch (type) {
+            case 1:
+                log.error("Scanned value is not proper number value.");
+                break;
+            case 2:
+                log.error("Scanned value is not proper boolean value.");
+                break;
+            case 3:
+                log.error("Scanned value is not proper date value.");
+                break;
+            default:
+                break;
 
+        }
+    }
     $scope.ScanNewCustom = function () {
         var _id = "#" + _colid;
 

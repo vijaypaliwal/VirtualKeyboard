@@ -145,23 +145,23 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
 
-    $scope.$watch('CurrentCart', function () {
-        // do something here
-        var i = 0;
-        if ($scope.IsSingleMode == false) {
-            if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
-                for (i = 0; i < $scope.CurrentCart.length; i++) {
-                    $scope.CurrentCart[i].IncreaseDecreaseVMData = angular.copy($scope.CurrentCart[0].IncreaseDecreaseVMData);
-                    $scope.CurrentCart[i].MoveTransactionData = angular.copy($scope.CurrentCart[0].MoveTransactionData);
-                    $scope.CurrentCart[i].UpdateTransactionData = angular.copy($scope.CurrentCart[0].UpdateTransactionData);
-                    $scope.CurrentCart[i].ApplyTransactionData = angular.copy($scope.CurrentCart[0].ApplyTransactionData);
-                    $scope.CurrentCart[i].ConvertTransactionData = angular.copy($scope.CurrentCart[0].ConvertTransactionData);
-                    $scope.CurrentCart[i].IsLineItemData = angular.copy($scope.CurrentCart[0].IsLineItemData);
-                }
-            }
+    //$scope.$watch('CurrentCart', function () {
+    //    // do something here
+    //    var i = 0;
+    //    if ($scope.IsSingleMode == false) {
+    //        if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
+    //            for (i = 0; i < $scope.CurrentCart.length; i++) {
+    //                $scope.CurrentCart[i].IncreaseDecreaseVMData = angular.copy($scope.CurrentCart[0].IncreaseDecreaseVMData);
+    //                $scope.CurrentCart[i].MoveTransactionData = angular.copy($scope.CurrentCart[0].MoveTransactionData);
+    //                $scope.CurrentCart[i].UpdateTransactionData = angular.copy($scope.CurrentCart[0].UpdateTransactionData);
+    //                $scope.CurrentCart[i].ApplyTransactionData = angular.copy($scope.CurrentCart[0].ApplyTransactionData);
+    //                $scope.CurrentCart[i].ConvertTransactionData = angular.copy($scope.CurrentCart[0].ConvertTransactionData);
+    //                $scope.CurrentCart[i].IsLineItemData = angular.copy($scope.CurrentCart[0].IsLineItemData);
+    //            }
+    //        }
 
-        }
-    }, true);
+    //    }
+    //}, true);
 
     function getuom() {
 
@@ -724,19 +724,19 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
         var i = 0;
-        if ($scope.IsSingleMode == false) {
-            if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
-                for (i = 0; i < $scope.CurrentCart.length; i++) {
-                    $scope.CurrentCart[i].IncreaseDecreaseVMData = angular.copy($scope.CurrentCart[0].IncreaseDecreaseVMData);
-                    $scope.CurrentCart[i].MoveTransactionData = angular.copy($scope.CurrentCart[0].MoveTransactionData);
-                    $scope.CurrentCart[i].UpdateTransactionData = angular.copy($scope.CurrentCart[0].UpdateTransactionData);
-                    $scope.CurrentCart[i].ApplyTransactionData = angular.copy($scope.CurrentCart[0].ApplyTransactionData);
-                    $scope.CurrentCart[i].ConvertTransactionData = angular.copy($scope.CurrentCart[0].ConvertTransactionData);
-                    $scope.CurrentCart[i].IsLineItemData = angular.copy($scope.CurrentCart[0].IsLineItemData);
-                }
-            }
+        //if ($scope.IsSingleMode == false) {
+        //    if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
+        //        for (i = 0; i < $scope.CurrentCart.length; i++) {
+        //            $scope.CurrentCart[i].IncreaseDecreaseVMData = angular.copy($scope.CurrentCart[0].IncreaseDecreaseVMData);
+        //            $scope.CurrentCart[i].MoveTransactionData = angular.copy($scope.CurrentCart[0].MoveTransactionData);
+        //            $scope.CurrentCart[i].UpdateTransactionData = angular.copy($scope.CurrentCart[0].UpdateTransactionData);
+        //            $scope.CurrentCart[i].ApplyTransactionData = angular.copy($scope.CurrentCart[0].ApplyTransactionData);
+        //            $scope.CurrentCart[i].ConvertTransactionData = angular.copy($scope.CurrentCart[0].ConvertTransactionData);
+        //            $scope.CurrentCart[i].IsLineItemData = angular.copy($scope.CurrentCart[0].IsLineItemData);
+        //        }
+        //    }
 
-        }
+        //}
         setTimeout(function () {
             InitializeSwiper();
 
@@ -1124,7 +1124,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentOperation = "Decrease";
                 $scope.CurrentIcon = "fa-arrow-down";
                 $scope.CurrentHeaderText = "Take these items out of inventory.";
-                // StatusBar.backgroundColorByHexString("#AF2525");
+                if (_Islive)
+                {
+                    StatusBar.backgroundColorByHexString("#AF2525");
+
+                }
 
                 break;
             case 0:
@@ -1133,7 +1137,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentOperation = "Move";
                 $scope.CurrentIcon = "fa-arrow-right";
                 $scope.CurrentHeaderText = "Move these items to a different location.";
-                // StatusBar.backgroundColorByHexString("#C65E28");
+                if (_Islive) {
+                    StatusBar.backgroundColorByHexString("#C65E28");
+
+
+                }
                 break;
             case 1:
                 $scope.CurrentClass = "bgm-increase"
@@ -1141,7 +1149,12 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentOperation = "Increase";
                 $scope.CurrentIcon = "fa-arrow-up";
                 $scope.CurrentHeaderText = "Put these items in inventory.";
-                // StatusBar.backgroundColorByHexString("#177B3D");
+                if (_Islive) {
+                    StatusBar.backgroundColorByHexString("#177B3D");
+
+
+
+                }
                 break;
             case 2:
                 $scope.CurrentClass = "bgm-convert"
@@ -1150,6 +1163,13 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentIcon = "fa-sitemap";
                 $scope.CurrentHeaderText = "Convert the units of measure for these items.";
 
+                if (_Islive) {
+                    StatusBar.backgroundColorByHexString("#CE59A1");
+
+
+
+
+                }
 
                 break;
             case 3:
@@ -1158,6 +1178,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentOperation = "Update";
                 $scope.CurrentIcon = "fa-history fa-flip-horizontal";
                 $scope.CurrentHeaderText = "Update the status of these items.";
+
+                if (_Islive) {
+                    StatusBar.backgroundColorByHexString("#583782");
+
+
+
+
+
+                }
                 break;
             case 4:
                 $scope.CurrentClass = "bgm-apply"
@@ -1165,7 +1194,16 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentOperation = "Apply";
                 $scope.CurrentIcon = "fa-tag";
                 $scope.CurrentHeaderText = "Tag these items with information.";
-                //  StatusBar.backgroundColorByHexString("#0D190F");
+
+                if (_Islive) {
+                    StatusBar.backgroundColorByHexString("#0D190F");
+
+
+
+
+
+
+                }
                 break;
 
             case 12:
@@ -1178,9 +1216,31 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 $scope.CurrentIcon = "fa-arrows-v";
                 $scope.CurrentHeaderText = "Adjust the quantity of these items.";
+
+                if (_Islive) {
+                    StatusBar.backgroundColorByHexString("#f8c217");
+
+
+
+
+
+
+
+                }
                 break;
             default:
                 $scope.CurrentOperation = "";
+                if (_Islive) {
+                    StatusBar.backgroundColorByHexString("#0083C7");
+
+
+
+
+
+
+
+
+                }
                 break;
 
 
@@ -1917,7 +1977,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         for (_i = 0; _i < $scope.CurrentCart.length; _i++) {
             var _OriginalAction = $scope.CurrentCart[_i].ActionPerformed;
-            k = $scope.IsSingleMode == true ? _i : 0;
+            // k = $scope.IsSingleMode == true ? _i : 0;
+            k = _i;
             var _TempQty = $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity;
             var _TempStatus = $scope.CurrentCart[_i].InventoryDataList.iStatusValue;
             var _TempLocID = $scope.CurrentCart[_i].InventoryDataList.iLID;

@@ -34,6 +34,62 @@
     color: red;
 }
 
+.combinemodetemplate
+{
+
+}
+
+.combinemodelist
+{
+    padding:5px;
+
+}
+
+.combinemodelist .form-control
+{
+    margin-top:5px;
+}
+
+.combinemodelist .form-group
+{
+    margin-bottom:10px;
+}
+
+.combinemodelist  h5
+{
+    color:#fff;
+   
+}
+
+.cartheader
+{
+    background:#0083C7;
+    color:#fff;
+    padding:8px;
+    font-size:16px;
+    margin-top:10px;
+}
+
+.cartheader p
+{
+    margin-bottom:0px;
+}
+
+.cartitems
+{
+      -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+
+.combinemodelist:nth-child(odd) {
+ background:#F5F5F5;
+}
+.combinemodelist:nth-child(even) {
+ background:#ffffff;
+}
+
+
 .errorMessage {
     color: red;
 }
@@ -260,6 +316,7 @@ body {
     text-align: center;
     border-radius: 100%;
     line-height:27px;
+    margin-top:6px; 
 }
 
 .cart-info span
@@ -272,8 +329,14 @@ position: absolute;
     height: 23px;
     padding-bottom: 0px;
     margin-left: -21px;
-    margin-top: -6px;
+    margin-top: 3px;
     line-height: 19px;
+}
+
+.hide
+{
+    display:none;
+      -prefix-animation: slide 1s ease 3.5s forwards;
 }
 
 
@@ -519,7 +582,7 @@ position: absolute;
 }
 
 .singlePanel {
-    margin-top: 50px;
+    margin-top: 35px;
 }
 
 #mycartModal {

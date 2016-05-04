@@ -86,13 +86,16 @@
         </div>
 
 
+
+
+
         <div class="animated slideInDown singleSlide" ng-if="IsSingleMode==false" data-type="Cart" data-index="0">
 
             <div class="singlePanel">
 
                 <div class="row">
                     <div class="col-xs-9">
-                        <h4 style="margin-top:0px; font-size:16px;">Cart data</h4>
+                        <h4>Cart data</h4>
                     </div>
 
                     <div class="col-xs-3">
@@ -104,8 +107,633 @@
 
 
 
+                <div onclick="cartitems()" class="cartheader">
 
-                <div ng-repeat="CurrentActiveObject in CurrentCart" ng-if="$index==0">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <p>Cart Items - {{CurrentCart.length}}</p>
+                        </div>
+
+                        <div class="col-xs-4">
+                            <div style="text-align:right">
+                                <i class="bottomarrow fa fa-chevron-circle-down"></i>
+
+                                <i style="display:none;" class="rightarrow fa fa-chevron-circle-right"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="cartitems">
+
+                    <div class="combinemodelist" ng-if="IsSingleMode==false" data-type="Cart" ng-repeat="CurrentActiveObject in CurrentCart" data-index="{{$index}}">
+                        <div class="combinemodetemplate">
+                            <div class="row">
+                                <div class="col-md-1 col-xs-3">
+
+                                    <i style="left:29px; top:12px; font-size:25px;" ng-click="DeleteItem(CurrentActiveObject)" class="itemcheckicon fa fa-check"></i>
+
+                                    <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath==''" style="height:50px; width:50px; border:1px solid #ccc; border-radius:100%;" src="img/default.png" />
+                                    <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath!=''" style="height: 50px; width: 50px; border: 1px solid #ccc; border-radius: 100%;" src="{{CurrentActiveObject.InventoryDataList.ImageThumbPath}}" alt="" />
+                                </div>
+                                <div class="col-md-8 col-xs-9">
+                                    <div> <span style="font-size:18px;">{{CurrentActiveObject.InventoryDataList.oquantity}}  </span> <span> {{CurrentActiveObject.InventoryDataList.uomUOM }} </span>  of <span> {{CurrentActiveObject.InventoryDataList.pPart }}</span>  </div>
+
+                                    <div>
+                                        {{CurrentActiveObject.InventoryDataList.lLoc }}    {{CurrentActiveObject.InventoryDataList.iStatusValue }}
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <div ng-if="CurrentOperation=='Move'">
+
+                            <div class="row">
+                                <div class="col-xs-8 col-md-8">
+
+
+                                    <div class="form-group">
+
+                                        <div class="input-group">
+
+                                            <div class="fg-line">
+
+                                                <input placeholder="Fill Quantity" type="number" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+                                    <div ng-if="CurrentActiveObject.MoveTransactionData.ActionQuantity>CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
+                                        <span ng-if="AllowNegative!=null && AllowNegative!='True'"> Quantity can't be greater than original quantity</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+                                    <div class="pull-right">
+
+                                        <label>&nbsp;</label>
+                                        <button data-toggle="dropdown" aria-expanded="false" id="movebutton_{{CurrentActiveObject.InventoryDataList.uId}}" type="button" class="btn rotateData btnPrimary btn-icon">
+                                            <i class="fa fa-thumb-tack"></i>
+                                        </button>
+
+
+                                        <ul class="dropdown-menu">
+                                            <li><a data-ng-click="FillQuantityMove(CurrentActiveObject.MoveTransactionData.ActionQuantity,CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
+                                            <li><a data-ng-click="FillQuantityMove(CurrentActiveObject.MoveTransactionData.ActionQuantity,CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-xs-8 col-md-8">
+
+                                    <div class="form-group">
+                                        <div class="fg-line">
+
+
+
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
+
+                                                <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID)"><i class="fa fa-search"></i></span>
+                                            </div>
+
+
+
+                                            <span ng-if="CurrentActiveObject.MoveTransactionData.MoveToLocation==CurrentActiveObject.InventoryDataList.iLID" class="errorMessage">
+                                                Can't move to same location please update.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-4 col-md-4">
+                                    <div class="pull-right">
+                                        <label>&nbsp;</label>
+                                        <button id="location_{{CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click="FillLocation(CurrentActiveObject.MoveTransactionData.MoveToLocation,CurrentActiveObject.MoveTransactionData.MoveToLocationText,CurrentActiveObject.InventoryDataList.uId)">
+                                            <i class="fa fa-thumb-tack"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-8 col-md-8">
+                                    <div class="form-group">
+
+                                        <div class="fg-line">
+                                            <div class="select">
+
+
+
+                                                <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
+                                                    <option value="">None</option>
+                                                    <option ng-repeat="_optionValue in StatusList" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+
+                                    <label>&nbsp;</label>
+
+                                    <div class="pull-right">
+                                        <button id="LineItems2_{{CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click="FillStatusLineItems2(CurrentActiveObject.MoveTransactionData.StatusToUpdate,CurrentActiveObject.InventoryDataList.uId)">
+                                            <i class="fa fa-thumb-tack"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row" ng-if=" CurrentOperation!='Convert' &&  CurrentOperation!='Move'">
+                            <div class="col-xs-8 col-md-8">
+
+                                <div class="form-group">
+                                    <label>
+
+
+                                        <span ng-if="CurrentOperation=='Adjust' && TrimValue(CurrentActiveObject.AdjustCalculation)!=''" class="AdjustCalculation">
+                                            <span ng-if="CurrentActiveObject.ActionPerformed==1 && CurrentActiveObject.AdjustActionQuantity!=0" class="z-depth-1 AdjustIncrease">({{CurrentActiveObject.AdjustCalculation}})</span>
+                                            <span ng-if="CurrentActiveObject.ActionPerformed==-1 && CurrentActiveObject.AdjustActionQuantity!=0" class="z-depth-1 AdjustDecrease">({{CurrentActiveObject.AdjustCalculation}})</span>
+                                            <span ng-if="CurrentActiveObject.ActionPerformed==1 && CurrentActiveObject.AdjustActionQuantity==0" class="z-depth-1 AdjustNetzero">({{CurrentActiveObject.AdjustCalculation}})</span>
+
+                                        </span>
+
+                                    </label>
+                                    <div class="fg-line">
+                                        <input type="number" placeholder="Fill Quantity" ng-change="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-blur="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
+                                    </div>
+
+
+                                </div>
+
+
+
+                                <div>
+
+
+
+
+                                    <span ng-if="CurrentOperation!='Increase'&& CurrentOperation!='Adjust' && CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
+
+                                        <span ng-if=" CurrentOperation=='Increase' ||  CurrentOperation=='Decrease'||CurrentOperation=='Update'||CurrentOperation=='Apply'">Quantity can't be greater than original quantity</span>
+                                        <span ng-if=" AllowNegative!=null &&  AllowNegative!='True' &&  CurrentOperation!='Increase' &&  CurrentOperation!='Decrease' && CurrentOperation!='Update'&& CurrentOperation!='Apply'"> Quantity can't be greater than original quantity</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-4 col-md-4">
+
+                                <div class="pull-right">
+                                    <button data-toggle="dropdown" aria-expanded="false" id="mybutton_{{ CurrentActiveObject.InventoryDataList.uId}}" type="button" class="btn rotateData btnPrimary btn-icon">
+                                        <i class="fa fa-thumb-tack"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a data-ng-click="FillQuantityNew(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity, CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
+                                        <li><a data-ng-click="FillQuantityNew(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity, CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row" ng-if=" CurrentOperation=='Increase'&&  CanCost=='True'">
+
+                            <div class="col-xs-8 col-md-8">
+                                <div class="form-group" ng-if="_groupRow.ActionPerformed!=-1">
+
+                                    <div class="fg-line">
+
+                                        <input type="number" placeholder="Fill Cost per unit" class="form-control NumberType FormControlType" ng-model=" CurrentActiveObject.iCostPerItem" />
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-xs-4 col-md-4">
+                                <div class="pull-right">
+
+                                    <button id="mybuttonCost_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillCost( CurrentActiveObject.iCostPerItem, CurrentActiveObject.InventoryDataList.uId)">
+                                        <i class="fa fa-thumb-tack"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-if="CurrentOperation=='Update'">
+                            <div class="row">
+                                <div class="col-xs-8 col-md-8">
+                                    <div class="form-group">
+
+                                        <div class="fg-line">
+                                            <div class="select">
+
+                                                <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
+                                                    <option value="">None</option>
+                                                    <option ng-repeat="_optionValue in StatusList" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+                                    <div class="pull-right">
+
+                                        <button id="status_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click="FillStatusLineItems(CurrentActiveObject.UpdateTransactionData.StatusToUpdate, CurrentActiveObject.InventoryDataList.uId)">
+                                            <i class="fa fa-thumb-tack"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div ng-if="CurrentOperation=='Apply'">
+
+                            <div class="row" ng-if=" IsMyInventoryColumns('iReqValue')==true">
+                                <div class="col-xs-8 col-md-8">
+                                    <div class="form-group">
+
+                                        <div class="fg-line">
+
+                                            <input type="text" class="form-control" placeholder="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
+
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+
+                                    <div class="pull-right">
+                                        <button id="unittag1_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iReqValue', CurrentActiveObject.ApplyTransactionData.UnitTag1, CurrentActiveObject.InventoryDataList.uId)">
+                                            <i class="fa fa-thumb-tack"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row" ng-if=" IsMyInventoryColumns('iUnitTag2')==true">
+                                <div class="col-xs-8 col-md-8">
+                                    <div class="form-group">
+
+                                        <div class="fg-line">
+
+                                            <input type="text" class="form-control" placeholder="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+                                    <div class="pull-right">
+
+                                        <button id="unittag2_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUnitTag2', CurrentActiveObject.ApplyTransactionData.UnitTag2,  CurrentActiveObject.InventoryDataList.uId)">
+                                            <i class="fa fa-thumb-tack"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row" ng-if=" IsMyInventoryColumns('iUnitTag3')==true">
+                                <div class="col-xs-8 col-md-8">
+                                    <div class="form-group">
+
+                                        <div class="fg-line">
+
+                                            <input type="text" class="form-control" placeholder="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+                                    <div class="pull-right">
+                                        <label>&nbsp;</label>
+                                        <button id="unittag3_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUnitTag3', CurrentActiveObject.ApplyTransactionData.UnitTag3, CurrentActiveObject.InventoryDataList.uId)">
+                                            <i class="fa fa-thumb-tack"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row" ng-if=" IsMyInventoryColumns('iUniqueDate')==true">
+                                <div class="col-xs-8 col-md-8">
+                                    <div class="form-group">
+
+                                        <div class="fg-line">
+                                            <input type="date" class="form-control unitDatePicker" placeholder="{{ GetColumnLabel('iUniqueDate')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UniqueDate" />
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+                                    <div class="pull-right">
+
+                                        <button id="unitdate_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUniqueDate', CurrentActiveObject.ApplyTransactionData.UniqueDate, CurrentActiveObject.InventoryDataList.uId)">
+                                            <i class="fa fa-thumb-tack"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="row" ng-if=" IsMyInventoryColumns('iUnitDate2')==true">
+                                <div class="col-xs-8 col-md-8">
+                                    <div class="form-group">
+
+                                        <div class="fg-line">
+                                            <input type="date" class="form-control unitDatePicker" placeholder="{{ GetColumnLabel('iUnitDate2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitDate2" />
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+                                    <div class="pull-right">
+
+                                        <button id="unitdate2_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUnitDate2', CurrentActiveObject.ApplyTransactionData.UnitDate2, CurrentActiveObject.InventoryDataList.uId)">
+                                            <i class="fa fa-thumb-tack"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="row" ng-if=" IsMyInventoryColumns('iUnitNumber1')==true">
+                                <div class="col-xs-8 col-md-8">
+
+                                    <div class="form-group">
+
+                                        <div class="fg-line">
+
+                                            <input type="number" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+                                    <div class="pull-right">
+
+                                        <button id="unitnumber1_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUnitNumber1', CurrentActiveObject.ApplyTransactionData.UnitNumber1, CurrentActiveObject.InventoryDataList.uId)">
+                                            <i class="fa fa-thumb-tack"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="row" ng-if=" IsMyInventoryColumns('iUnitNumber2')==true">
+                                <div class="col-xs-8 col-md-8">
+
+                                    <div class="form-group">
+
+                                        <div class="fg-line">
+
+                                            <input type="number" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+                                    <div class="pull-right">
+
+                                        <button id="unitnumber2_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUnitNumber2', CurrentActiveObject.ApplyTransactionData.UnitNumber2, CurrentActiveObject.InventoryDataList.uId)">
+                                            <i class="fa fa-thumb-tack"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                        <div ng-if="CurrentOperation=='Convert'">
+                            <div class="row">
+                                <div class="col-xs-8 col-md-8">
+                                    <div class="form-group">
+
+
+                                        <div class="input-group">
+                                            <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity=='' ||  CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity ?'':''">
+
+                                                <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity" />
+
+                                            </div>
+
+                                            <span class="input-group-addon last text" style=" max-width: 100px; white-space: nowrap;"> {{ CurrentActiveObject.InventoryDataList.uomUOM}}</span>
+                                        </div>
+                                    </div>
+                                    <div ng-if=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
+                                        <span ng-if=" AllowNegative!=null &&  AllowNegative!='True'"> Quantity can't be greater than original quantity</span>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+                                    <div class="pull-right">
+
+
+
+                                        <button data-toggle="dropdown" aria-expanded="false" id="convertqty_{{ CurrentActiveObject.InventoryDataList.uId}}" type="button" class="btn rotateData btnPrimary btn-icon">
+                                            <i class="fa fa-thumb-tack"></i>
+                                        </button>
+
+
+                                        <ul class="dropdown-menu">
+                                            <li><a data-ng-click=" FillQuantityConvert( CurrentActiveObject.ConvertTransactionData.ActionFromQuantity, CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
+                                            <li><a data-ng-click=" FillQuantityConvert( CurrentActiveObject.ConvertTransactionData.ActionFromQuantity, CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-xs-8 col-md-8">
+
+                                    <div class="form-group">
+
+                                        <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity==''?'':''">
+
+                                            <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity" />
+
+                                        </div>
+                                    </div>
+
+
+                                    <div>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+                                    <div class="pull-right">
+
+
+                                        <button data-toggle="dropdown" aria-expanded="false" id="convertqty2_{{ CurrentActiveObject.InventoryDataList.uId}}" type="button" class="btn rotateData btnPrimary btn-icon">
+                                            <i class="fa fa-thumb-tack"></i>
+                                        </button>
+
+
+                                        <ul class="dropdown-menu">
+                                            <li><a data-ng-click=" FillQuantityToConvert( CurrentActiveObject.ConvertTransactionData.ActionToQuantity, CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
+                                            <li><a data-ng-click=" FillQuantityToConvert( CurrentActiveObject.ConvertTransactionData.ActionToQuantity, CurrentActiveObject.InventoryDataList.uId,3)"><i class="fa fa-check"></i> Multiply all by this quantity</a></li>
+                                            <li><a data-ng-click=" FillQuantityToConvert( CurrentActiveObject.ConvertTransactionData.ActionToQuantity, CurrentActiveObject.InventoryDataList.uId,4)"><i class="fa fa-check"></i> Divide quantities by this Quantity</a></li>
+                                            <li><a data-ng-click=" FillQuantityToConvert( CurrentActiveObject.ConvertTransactionData.ActionToQuantity, CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-xs-8 col-md-8">
+
+                                    <div class="form-group">
+
+                                        <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ToUOMID==''?'':''">
+                                            <div class="select">
+                                                <select class="form-control" ng-model=" CurrentActiveObject.ConvertTransactionData.ToUOMID">
+                                                    <option value="">None</option>
+                                                    <option ng-repeat="_optionValue in  UOMList" value="{{_optionValue.UnitOfMeasureID}}">{{_optionValue.UnitOfMeasureName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="col-xs-4 col-md-4">
+                                    <div class="pull-right">
+
+                                        <button id="uom_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn rotateData btnPrimary btn-icon" data-ng-click=" FillUOMLineItems( CurrentActiveObject.ConvertTransactionData.ToUOMID, CurrentActiveObject.InventoryDataList.uId)">
+                                            <i class="fa fa-thumb-tack"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" data-ng-repeat="_columns in isLineItemColumnNames">
+
+
+                            <div class="col-xs-8 col-md-8">
+                                <div class="form-group">
+                                    <label>{{_columns}} <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
+                                    <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'input-group':''}}">
+
+                                        <input placeholder="fill {{_columns}}" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+
+                                        <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='checkbox'" class="checkbox">
+
+                                            <input type="checkbox" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" bootstrap-switch>
+
+                                        </div>
+
+                                        <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='combobox'">
+                                            <div class="fg-line">
+
+                                                <div class="select">
+                                                    <select class="form-control" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
+
+                                                        <option value="{{_optionValue}}" ng-repeat="_optionValue in CurrentActiveObject.IsLineItemData[$index].cfdComboValues track by $index">{{_optionValue}}</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <input type="date" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                        <input type="number" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                        <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+
+                                        <span class="input-group-addon last" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'"><i class="fa fa-qrcode"></i></span>
+                                    </div>
+                                    <div>
+
+                                        <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)=='' " class="errorMessage">
+                                            {{CurrentActiveObject.IsLineItemData[$index].cfdName }} field is required.
+
+                                        </span>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-4 col-md-4">
+                                <div class="pull-right">
+
+                                    <button id="lineitem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}_{{CurrentActiveObject.IsLineItemData[$index].InventoryID}}" class="btn rotateData btnPrimary btn-icon" data-ng-click="FillLineItem($index,CurrentActiveObject.IsLineItemData[$index].cfdID,CurrentActiveObject.IsLineItemData[$index].CfValue,CurrentActiveObject.IsLineItemData[$index].InventoryID)">
+                                        <i class="fa fa-thumb-tack"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div style="display:none;" ng-repeat="CurrentActiveObject in CurrentCart" ng-if="$index==0">
 
                     <div ng-if="CurrentOperation=='Move'">
 
@@ -532,17 +1160,12 @@
                 </div>
 
 
-
-
-
-
-
             </div>
 
             <div class="customActivityData" data-type="Activity" data-index="{{GetProperIndex(1)}}">
 
                 <br />
-                <h4 style="margin-top:0px; font-size:16px;">Activity data</h4>
+                <h4>Activity data</h4>
                
 
                 <div ng-if="CurrentOperation!='Adjust'">
@@ -2036,9 +2659,25 @@
 
 
 
-    function cartitem() {
+    function cartitems() {
 
-        $(".cartarea").slideToggle();
+        $(".cartitems").slideToggle();
+
+       
+        setTimeout(function () {
+            if ($(".cartitems").css("display") == "none") {
+              
+                $(".bottomarrow").hide();
+                $(".rightarrow").show()
+
+            }
+            else {
+                $(".bottomarrow").show();
+                $(".rightarrow").hide()
+            }
+        }, 500);
+      
+
 
     }
 
