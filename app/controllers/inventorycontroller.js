@@ -1398,8 +1398,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         scanner.scan(function (result) {
 
             var resultvalue = result.text;
-            var _fieldType=GetFieldType(ControlID);
-            resultvalue = $scope.Validation(resultvalue, _fieldType) == true ? resultvalue : "";
+            var _fieldType = GetFieldType(ControlID);
+            alert(resultvalue);
+            if (_fieldType != 4) {
+
+                resultvalue = $scope.Validation(resultvalue, _fieldType) == true ? resultvalue : "";
+            }
             if (resultvalue != "") {
                 switch (ControlID) {
                     case "pPart":
