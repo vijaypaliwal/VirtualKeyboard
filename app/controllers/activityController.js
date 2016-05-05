@@ -71,6 +71,25 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
         return retValue;
     }
+
+
+    $scope.ShowScanError = function (type) {
+        switch (type) {
+            case 1:
+                log.error("Scanned value is not proper number value.");
+                break;
+            case 2:
+                log.error("Scanned value is not proper boolean value.");
+                break;
+            case 3:
+                log.error("Scanned value is not proper date value.");
+                break;
+            default:
+                break;
+
+        }
+    }
+
     function ConvertDatetoDate(_stringDate) {
         var today = new Date(_stringDate);
         var dd = today.getDate();
@@ -103,41 +122,50 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         var _ID = _typeString + Id.toString();
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(function (result) {
-
+            var _IsValid = true;
             var _dataType = $(_ID).attr("custom-data-type");
             var _value = result.text;
 
-            if (_dataType != null && _dataType != undefined)
-            {
-                if(_dataType=="date" || _dataType=="datetime")
-                {
+
+            if (_dataType != null && _dataType != undefined) {
+
+                if (_dataType == "date" || _dataType == "datetime") {
                     _value = ConvertDatetoDate(_value);
                 }
 
                 if (_dataType == "number" || _dataType == "money" || _dataType == "currency") {
+                    _IsValid = $scope.Validation(_value, 1);
+
                     _value = TryParseInt(_value, -9890);
                     _value = _value == -9890 ? "" : _value;
                 }
             }
 
-            $(_ID).val(_value);
 
-            switch (Type) {
-                case 1:
-                    for (var i = 0; i < $scope.CurrentCart.length; i++) {
-                        if ($scope.CurrentCart[i].InventoryID == inventoryID) {
-                            $scope.CurrentCart[i].IsLineItemData[index].CfValue = _value;
-                            break;
+            if (_IsValid) {
+
+                $(_ID).val(_value);
+
+                switch (Type) {
+                    case 1:
+                        for (var i = 0; i < $scope.CurrentCart.length; i++) {
+                            if ($scope.CurrentCart[i].InventoryID == inventoryID) {
+                                $scope.CurrentCart[i].IsLineItemData[index].CfValue = _value;
+                                break;
+                            }
                         }
-                    }
-                    break;
-                case 2:
-                    break;
-                default:
+                        break;
+                    case 2:
+                        break;
+                    default:
 
+                }
+
+                $scope.$apply();
             }
-
-            $scope.$apply();
+            else {
+                $scope.ShowScanError(1);
+            }
 
 
         }, function (error) {
@@ -1160,8 +1188,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentOperation = "Decrease";
                 $scope.CurrentIcon = "fa-arrow-down";
                 $scope.CurrentHeaderText = "Take these items out of inventory.";
-                if (_Islive)
-                {
+                if (_Islive) {
                     StatusBar.backgroundColorByHexString("#AF2525");
 
                 }
@@ -2759,7 +2786,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $('#transactionForm1').css('margin-top', '0px');
 
         $('.bottombutton').css("position", "relative");
-        
+
     })
     .on('blur', 'input', function () {
         $('.header').css("position", "fixed");
@@ -2775,7 +2802,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.ValidateObjectVM = function () {
         $scope.AffectedItemIds = [];
 
-    
+
         var k = 0;
         var _totalLength = $scope.CurrentCart.length;
         if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
@@ -2918,7 +2945,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     break;
                 case "Apply":
                     for (k = 0; k < _totalLength; k++) {
-                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == undefined || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null ||$scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
+                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == undefined || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
                             $scope.IssueType = 1;
                             if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
                                 $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
@@ -3096,35 +3123,42 @@ app.directive('bootstrapSwitch', [
                 restrict: 'A',
                 require: '?ngModel',
                 link: function (scope, element, attrs, ngModel) {
-                    var _id = element[0].id;
+                    setTimeout(function () {
 
 
-                    element.bootstrapSwitch({
-                        onText: _id == 'AutoID' ? 'Auto' : 'On',
-                        offText: _id == 'AutoID' ? 'Manual' : 'Off'
-                    });
-                    element.on('switchChange.bootstrapSwitch', function (event, state) {
-                        if (ngModel) {
-                            scope.$apply(function () {
-                                ngModel.$setViewValue(state);
+                        var _id = element[0].id;
+
+                        element.bootstrapSwitch({
+                            onText: _id == 'AutoID' ? 'Auto' : 'On',
+                            offText: _id == 'AutoID' ? 'Manual' : 'Off'
+                        });
+                        element.on('switchChange.bootstrapSwitch', function (event, state) {
+
+                            if (ngModel) {
+                                scope.$apply(function () {
+                                    ngModel.$setViewValue(state);
 
 
-                            });
-                        }
+                                });
+                            }
 
-                    });
+                        });
 
-                    scope.$watch(attrs.ngModel, function (newValue, oldValue) {
+                        scope.$watch(attrs.ngModel, function (newValue, oldValue) {
 
-                        if (newValue) {
-                            element.bootstrapSwitch('state', true, true);
-                            element.removeClass("bootstrap-switch-off").addClass("bootstrap-switch-on");
-                        } else {
-                            element.bootstrapSwitch('state', false, true);
-                            element.removeClass("bootstrap-switch-on").addClass("bootstrap-switch-off");
-                        }
-                    });
+                            newValue = newValue == "false" || newValue == false ? false : newValue;
+                            if (newValue) {
+                                element.bootstrapSwitch('state', true, true);
+                            } else {
+                                element.bootstrapSwitch('state', false, true);
+                            }
+
+                         
+
+                        });
+                    }, 0);
                 }
+
             };
         }
 ]);

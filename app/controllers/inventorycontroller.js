@@ -625,6 +625,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   $scope.resetObject();
 
                   movetolist();
+                 
                   // $location.path('/inventory');
 
                   CheckScopeBeforeApply()
@@ -1910,7 +1911,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             CheckScopeBeforeApply();
         }
         else if (buttonIndex == 1 || buttonIndex == "1") {
-            $scope.getstep(0);
+            //$scope.getstep(0);
+            window.location.reload();
             //$location.path('/inventory');
         }
 
