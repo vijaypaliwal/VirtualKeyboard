@@ -22,26 +22,29 @@
 
             <div style="display:none;" class="swiper-container">
 
-                <div class="row iteminfo">
-                    <div class="col-md-2 col-xs-3">
+                <div>
+                    <div class="iteminfo">
 
-                        <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
+                        <div class="row ">
+                            <div class="col-md-2 col-xs-3">
 
-                        <img id="defaultimg" ng-click="getstep(9,'Image')" style="height:70px; width:65px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
-                    </div>
-                    <div class="col-md-10 col-xs-9">
-                       <span style="color:#000;" ng-click="getstep(0,'pPart')">{{InventoryObject.ItemID}}</span>
-                        <span ng-click="getstep(1,'pDescription')"> {{ InventoryObject.Description }} </span> 
-                       
-                            <span ng-click="getstep(3,'lLoc')">  {{InventoryObject.Location}} </span> <span ng-click="getstep(4,'iStatusValue')"> {{InventoryObject.Status }} </span>
-                      
-                      
-                            <span ng-click="getstep(2,'iQty')"> {{ InventoryObject.Quantity }}</span> <span ng-click="getstep(4,'uomUOM')"> {{Uom}}</span>
-                       
+                                <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
+
+                                <img id="defaultimg" ng-click="getstep(9,'Image')" style="height:70px; width:65px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
+                            </div>
+                            <div class="col-md-10 col-xs-9">
+                                <span style="color:#000;" ng-click="getstep(0,'pPart')">{{InventoryObject.ItemID}}</span>
+                                <span ng-click="getstep(1,'pDescription')"> {{ InventoryObject.Description }} </span>
+
+                                <span ng-click="getstep(3,'lLoc')">  {{InventoryObject.Location}} </span> <span ng-click="getstep(4,'iStatusValue')"> {{InventoryObject.Status }} </span>
+
+
+                                <span ng-click="getstep(2,'iQty')"> {{ InventoryObject.Quantity }}</span> <span ng-click="getstep(4,'uomUOM')"> {{Uom}}</span>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-          
 
 
 

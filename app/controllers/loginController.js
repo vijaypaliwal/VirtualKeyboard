@@ -12,11 +12,15 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
     $scope.message = "";
 
     $scope.login = function () {
+
+        debugger;
         localStorageService.set("ActivityCart", "");
 
         localStorageService.set("SelectedAction", "");
 
         authService.login($scope.loginData).then(function (response) {
+
+            debugger;
             $scope.GetProfileData();
             $location.path('/mainmenu');
 

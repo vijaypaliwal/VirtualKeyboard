@@ -44,7 +44,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         $("#loginBtn").addClass("disabled");
         $("#loginBtn").find(".fa").removeClass("fa-sign-in").addClass("fa-spin fa-spinner");
         var deferred = $q.defer();
-
+        ShowLoginSuccess();
         $.ajax
         ({
             type: "POST",
@@ -55,6 +55,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
             success: function (response) {
                 $("#loginBtn").removeClass("disabled");
                 $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
+                $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
 
                 if (response.LoginResult.Success == true) {
 
@@ -75,6 +76,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                 }
                 else {
+                    $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
 
                     playBeep();
                     log.error(response.LoginResult.Message);
@@ -84,6 +86,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
             },
             error: function (err) {
+                $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
 
                 playBeep();
                 $("#loginBtn").removeClass("disabled");

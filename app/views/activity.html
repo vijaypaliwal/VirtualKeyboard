@@ -99,7 +99,7 @@
                 <ul class="collapsible checkout-header animated fadeindown delay-2" data-collapsible="accordion">
                     <li>
                         <div onclick="cartitems()" class="collapsible-header">
-                            Show Cart summary
+                            <span class="checkout-price">Show Cart summary</span>  
                             <i class="ion-android-arrow-dropdown"></i>
                             <span ng-click="selecteditemlist()" class="checkout-price right">{{CurrentCart.length}} Items</span>
                         </div>
@@ -1137,7 +1137,7 @@
 
             <div class="form-inputs customActivityData" data-type="Activity" data-index="{{GetProperIndex(1)}}">
 
-                <br />
+             
                 <h4>Activity data</h4>
 
 
@@ -2406,17 +2406,17 @@
             <tr>
                 <td style="width:50%;">
                     <div ng-if="IsProcessing==false" ng-click="SubmitAllActivities()">
-                        <a style="width:100%;" class="btn waves-effect btn-success">
+                        <a style="width:100%; margin-bottom:0px; border-radius:0px;" class="btn waves-effect btn-large btn-success">
                             <i class="fa fa-check"></i> 
-                        Process cart</a>
+                        Process</a>
                     </div>
 
                     <div ng-if="IsProcessing==true" class="linkdisabled" ng-click="SubmitAllActivities()">
-                        <a style="width:100%;" class="btn waves-effect btn-success"><i style="color:#fff;" class="fa fa-check fa-spin"></i>Process cart</a>
+                        <a style="width: 100%; margin-bottom: 0px; border-radius: 0px;" class="btn btn-large waves-effect btn-success"><i style="color:#fff;" class="fa fa-check fa-spin"></i>Process</a>
                     </div>
                 </td>
                 <td style="width:50%;">
-                    <a style="width:100%;" class="btn waves-effect btn-default" ng-click="LeavePage()"><i style="color:#000;" class="fa fa-times" ></i> &nbsp;Cancel</a>
+                    <a style="width: 100%; margin-bottom: 0px; border-radius: 0px;" class="btn btn-large waves-effect btn-default" ng-click="LeavePage()"><i style="color:#000;" class="fa fa-times"></i> &nbsp;Cancel</a>
                 </td>
             </tr>
         </table>

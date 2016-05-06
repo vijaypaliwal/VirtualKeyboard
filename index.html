@@ -278,7 +278,7 @@
 
         .iteminfo {
           
-            margin-bottom: 10px;
+            margin-bottom: 50px;
             padding: 5px;
             box-shadow: 0 1px 11px rgba(0,0,0,.27);
             font-size: 13px;
@@ -358,9 +358,20 @@
             padding: 20px !important;
             width:100%;
         }
-
-        .errorcontent {
-            background:rgba(52, 73, 94,0.8);
+        #myloginModal {
+            top: 30%;
+            overflow: hidden;
+            position: fixed;
+            z-index: 1050;
+            display: none;
+            text-align: center;
+            padding: 20px !important;
+            width: 100%;
+        }
+        
+        
+         .errorcontent {
+            background: rgba(52, 73, 94,0.8);
             padding: 10px;
             margin: 0 auto;
             width: 150px;
@@ -461,6 +472,20 @@
 
     </div>
 
+    <div class="animated" id="myloginModal">
+
+        <div class="errorcontent" style="width:122px;background:#000;">
+
+            <img src="img/loader.gif"  />
+
+            <span style="display:block;font-size:20px;font-weight:300;color:#fafafa;" >
+                Logging in..
+            </span>
+
+        </div>
+
+    </div>
+
     <!--<div style="top:0" class="topheader layoutheader">
 
 
@@ -546,8 +571,8 @@
         <!-- Tabs -->
         <li>
             <ul class="tabs">
-                <li class="tab col s3"><a class="active" href="#sidebar1">Social</a></li>
-                <li class="tab col s3"><a href="#sidebar2">Contact</a></li>
+                <li class="tab col s3"><a class="active tablink" href="#sidebar1">Social</a></li>
+                <li class="tab col s3"><a href="#sidebar2" class="tablink">Contact</a></li>
             </ul>
         </li>
         <li id="sidebar1" class="p-10">
@@ -679,7 +704,17 @@
                 hideSuccess();
             }, 3000)
         }
+        function ShowLoginSuccess() {
+            $(".errorcontent").css("background", "rgba(52, 73, 94,0.8)");
+          
+            $("#myloginModal").removeClass('bounceOut').addClass('bounceIn');
+            $('#myloginModal').show();
+        
 
+           
+        }
+
+      
 
         var _CurrentUrl = "Login";
         var _isOpenBootbox = false;
@@ -1111,7 +1146,8 @@
             infowindow.open(map, marker);
         }
 
-        google.maps.event.addDomListener(window, 'load', initialize);
+        google.maps.event.addDomListener(window, 'load', initialize);
+
     </script>
 
 

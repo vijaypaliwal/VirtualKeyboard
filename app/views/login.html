@@ -10,8 +10,10 @@
                 <img class="loginlogo" src="img/u2.png" alt="Alternate Text" />
 
                 </div>
+
+            <div class="formarea">
                 <div class="row">
-                  
+
                     <div class="col-xs-12">
 
                         <div class="form-group">
@@ -23,15 +25,15 @@
 
                         </div>
 
-                      
-                     
+
+
                     </div>
                 </div>
-             
+
 
 
                 <div class="row">
-                  
+
                     <div class="col-xs-12">
                         <div class="form-group">
                             <label>User Name</label>
@@ -42,17 +44,17 @@
                         </div>
 
 
-                       
-                      
+
+
 
                     </div>
                 </div>
 
-            
+
 
 
                 <div class="row">
-                 
+
                     <div class="col-xs-12">
 
                         <div class="form-group">
@@ -63,17 +65,24 @@
                             </div>
                         </div>
 
-                      
-                       
+
+
                     </div>
                 </div>
 
+            </div>
 
-            <button class="waves-effect waves-light btn-white btn-large width-100 animated bouncein delay-6" type="submit" ng-disabled="myform.$invalid" id="loginBtn" data-ng-click="login()">Sign In <i class="fa fa-angle-right"></i> </button>
 
-            <a onclick="vibrate()" class="waves-effect waves-light btn-large btn-white width-100 animated bouncein delay-6">I Forgot my Info Email to Me <i class="fa fa-angle-right"></i></a>
+            <button style="margin-top:8px;" class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6" type="submit" ng-disabled="myform.$invalid" id="loginBtn" data-ng-click="login()">Log In </button>
 
-            <a onclick="playBeep()" class="waves-effect waves-light btn-large btn-white width-100 animated bouncein delay-6">Create Account <i class="fa fa-angle-right"></i></a>
+          
+            <div class="bottomnavigation">
+
+                <a style="font-size:16px;" onclick="vibrate()" class="">I Forgot my Info Email to Me</a>
+
+                <a onclick="playBeep()" class="">Create Account </a>
+
+            </div>
 
 
             </div>
@@ -85,15 +94,61 @@
         display: none;
     }
 
-    .layoutheader {
+    .side-nav
+    {
+        display:none !important;
+    }
+
+     .center {
+        text-align: center;
+    }
+
+    label
+    {
+        font-size:15px;
+        color:#333;
+    }
+
+    .form-control {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius:0px;
+    }
+    
+    
+     .formarea {
+        background: #fff;
+        padding: 10px;
+        border-radius:5px;
+    }
+    
+    
+     .layoutheader {
         display: none;
     }
 
-    body {
-        background: #128ece;
-        padding-top: 7px;
-        overflow-x: hidden !important;
+    .bottomnavigation {
+        position: fixed;
+        bottom: 10px;
+        text-align: center;
+        width: 100%;
+        color: #fff;
     }
+
+        .bottomnavigation a
+        
+        {
+            color:#fff;
+            display:block;
+            margin-top:5px;
+        }
+        
+        
+        
+         body {
+            background: #128ece;
+            padding-top: 7px;
+            overflow-x: hidden !important;
+        }
 
     .loginlogo {
         width: 82px;
@@ -104,10 +159,7 @@
         margin-top: 0px;
     }
 
-    label {
-        color: #fff;
-        font-size: 15px;
-    }
+   
 
     .login-form .col-xs-5 {
         text-align: right;
@@ -128,24 +180,8 @@
             margin-top: -2px;
         }
 
-    .form-control {
-        height: 45px;
-    }
 
-
-
-    .input-group-addon {
-        padding: 6px 12px;
-        font-size: 18px;
-        font-weight: normal;
-        line-height: 1;
-        color: #000;
-        text-align: center;
-        background-color: #fff;
-        border-radius: 0;
-        border-right: 1px solid #fff;
-        cursor: pointer;
-    }
+   
 
     login-form {
         overflow: hidden !important;

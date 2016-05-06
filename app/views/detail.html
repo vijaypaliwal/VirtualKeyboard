@@ -147,7 +147,7 @@
 
         <div class="detailsection">
 
-            <div style="text-align:left; padding-left:15px; padding-right:15px;" class="heading">
+            <div style="text-align:left; padding-left:15px; padding-right:15px;" class="">
 
                 <table style="width:100%;">
                     <tr>
@@ -166,7 +166,7 @@
                 <h5> {{CurrentInventory.iQty}} {{CurrentInventory.uomUOM}} Quantity available at   {{CurrentInventory.lLoc}} with {{CurrentInventory.iStatusValue}} Status</h5>
             </div>
 
-            <div style="text-align:left; padding-left:15px; padding-right:15px;" class="heading">
+            <div style="text-align:left; padding-left:15px; padding-right:15px;" class="">
 
                 <h5> {{CurrentInventory.pDescription}}</h5>
 
@@ -181,7 +181,7 @@
             <div class="input-group">
                 <input type="text" class="form-control" ng-model="CurrentInventory.pPart" />
                 <span class="input-group-addon last">
-                    <a ng-click="Scanitem()">Scan</a>
+                    <a ng-click="Scanitem()"><i class="fa fa-barcode" style=" color: #2196F3; font-weight: 400;"></i></a>
                 </span>
             </div>
         </div>
@@ -191,7 +191,7 @@
             <div class="input-group">
               <input type="text" class="form-control" ng-model="CurrentInventory.pDescription" />
               <span class="input-group-addon last">
-                  <a ng-click="Scandescription()">Scan</a>
+                  <a ng-click="Scandescription()"><i class="fa fa-barcode" style=" color: #2196F3; font-weight: 400;"></i></a>
               </span>
             </div>
             </div>

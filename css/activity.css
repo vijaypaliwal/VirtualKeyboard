@@ -79,14 +79,17 @@
 {
       -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
+    padding-top:0px !important;
 }
 
 
-.combinemodelist:nth-child(odd) {
+.mycartitem:nth-child(odd) {
  background:#F5F5F5;
+ padding-top:10px;
 }
-.combinemodelist:nth-child(even) {
+.mycartitem:nth-child(even) {
  background:#ffffff;
+ padding-top:10px;
 }
 
 
