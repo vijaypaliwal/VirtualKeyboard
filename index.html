@@ -111,45 +111,11 @@
         }
 
 
-        .topheader {
-            width: 100%;
-            position: fixed;
-            left: 0px;
-            right: 0px;
-            font-size: 24px;
-            color: #fff;
-            background: #0083C7;
-            z-index: 100;
-        }
-
-            .topheader .col-xs-6 {
-                text-align: center;
-            }
-
-            .topheader a {
-                color: #fff !important;
-                border: transparent;
-                padding-left:0px;
-            }
-
-            .topheader i {
-                font-size: 17px;
-                margin-top: 7px;
-            }
-
-        .fa-arrow-circle-left
-        {
-            margin-top:2px !important;
-            font-size:28px !important;
+        .fa-arrow-circle-left {
+            margin-top: 2px !important;
+            font-size: 28px !important;
         }
         
-        
-        
-         .topheader .headerdropdown i {
-            font-size: 15px;
-        }
-
-
         
          .btn-md {
             text-align: left;
@@ -443,7 +409,10 @@
             background: #ffffff;
         }
 
-
+        .topheader {
+            width: 100%;
+            color: white;
+        }
 
         #toolbar {
             box-shadow: 0 3px 4px rgba(0,0,0,.3);
@@ -531,7 +500,7 @@
         </div>
     </div>-->
 
-    <div id="toolbar" class="primary-color">
+    <div id="toolbar" class="topheader primary-color">
         <div class="open-left" id="open-left" data-activates="slide-out-left">
             <i class="ion-android-menu"></i>
         </div>
@@ -589,7 +558,7 @@
             <!-- Facebook -->
             <ul>
                 <li><a href="#/profile" class="no-child"><i class="ion-android-playstore"></i> My Profile</a></li>
-                <li><a ng-click="logOut()" class="no-child"><i class="ion-android-playstore"></i> Sign out</a></li>
+                <li><a ng-click="logOut()" class="no-child signoutbtn"><i class="ion-android-playstore"></i> Sign out</a></li>
             </ul>
             <hr />
             <p style="font-size:14px; text-align:justify">
@@ -699,6 +668,12 @@
             hideSuccess();
         });
 
+
+        $(".signoutbtn").click(function () {
+            $("#sidenav-overlay").css("display","none");
+            $(".side-nav").css("display", "none");
+
+        });
         function hideSuccess() {
             $("#mysmallModal").removeClass('bounceIn').addClass('bounceOut');
         }

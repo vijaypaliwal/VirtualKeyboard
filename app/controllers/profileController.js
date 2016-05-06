@@ -96,7 +96,8 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
             dataType: 'json',
             contentType: 'application/json',
             success: function (result) {
-                log.success("Profile information Updated.");
+                // log.success("Profile information Updated.");
+                ShowSuccess("Updated");
                 $scope.isSaving = false;
                 $scope.$apply();
 
