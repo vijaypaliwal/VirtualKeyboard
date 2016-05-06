@@ -9,13 +9,13 @@
 
     <a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
 
-    <div style="margin-top:12px;" class="page-header">
+    <div class="row page-header">
 
 
-        <div style="padding-left:9px;" class="col-xs-5">
-            <h4 style="margin-top:0px; font-size:16px;">Inventory Items </h4>
+        <div class="col-xs-5">
+            <h4 style="margin-top:0px;">Inventory Items </h4>
         </div>
-        <div style="padding-right:8px; text-align:right" class="col-xs-7">
+        <div style="text-align:right" class="col-xs-7">
             <p style="font-size:13px;">{{currentrecord}} of {{totalrecords}} records shown</p>
         </div>
     </div>
@@ -35,47 +35,44 @@
         <table class="searchtable">
             <tbody>
                 <tr>
+                  
                     <td>
-                        <ul style="padding:0px; margin:auto">
-                            <li style="list-style-type:none;" class="dropdown">
-                                <a data-toggle="dropdown" class="btn transparentBtn status">
-                                    <span class="textData"> {{SearchFromText}} </span> <span class="caret"></span>
-                                </a>
 
-                                <ul class="dropdown-menu dm-icon searchlist animated slideInDown">
-                                    <li><a ng-click="searchfunction('All')" alt="All">All</a></li>
-                                    <li><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
-                                    <li><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
-                                    <li><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">Status</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">Unique Tag</a></li>
-                                    <!--<li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag2')" alt="iUnitTag2">Unit Tag 2</a></li>
-        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitTag3')" alt="iUnitTag3">Unit Tag 3</a></li>
-        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber1')" alt="iUnitNumber1">Unit Number</a></li>
-        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitNumber2')" alt="iUnitNumber2">Unit Number 2</a></li>
-        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUniqueDate')" alt="iUniqueDate">unit date</a></li>
-        <li class="unitSearchFields" style="display: block;"><a onclick="searchfunction('iUnitDate2')" alt="iUnitDate2">Unit Date 2</a></li>-->
 
+                        <div class="input-group">
+
+                            <span class="input-group-addon  primary-color">
+                                <ul style="padding:0px; margin:auto">
+                                    <li style="list-style-type:none;" class="dropdown">
+                                        <a data-toggle="dropdown" class="waves-effect waves-effect status">
+                                            <i class="fa fa-search" style="font-size:20px;"></i> <span class="caret" style="margin-top: -5px;"></span>
+                                        </a>
+
+                                        <ul class="dropdown-menu dm-icon searchlist animated slideInDown">
+                                            <li><a ng-click="searchfunction('All')" alt="All">All</a></li>
+                                            <li><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
+                                            <li><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
+                                            <li><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">Status</a></li>
+                                            <li class="unitSearchFields" style="display: block;"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">Unique Tag</a></li>
+
+
+                                        </ul>
+                                    </li>
                                 </ul>
-                            </li>
-                        </ul>
-                    </td>
-                    <td>
+                            </span>
+                            <div style="position:relative" class="fg-line">
+                                <input style="border-radius:0px;" id="MasterSearch" type="text" ng-model="SearchValue" class="form-control" placeholder="Type to Search">
+                                <i id="btnClearSearch" class="fa fa-times-circle" ng-click="ClearFilter()" ng-show="SearchValue!=''"></i>
+                            </div>
 
-
-
-                        <div style="position:relative" class="fg-line">
-                            <input style="border-radius:0px; margin-left:2px; height:37px;" id="MasterSearch" type="text" ng-model="SearchValue" class="form-control" placeholder="Type to Search">
-                            <i id="btnClearSearch" class="fa fa-times-circle" ng-click="ClearFilter()" ng-show="SearchValue!=''"></i>
+                            <a class="input-group-addon last textData primary-color" style="margin-top: 0px;  width: 37px;" id="btnMasterSearch" ng-click="SearchInventory()">Go</a>
+                            <a class="input-group-addon last"  style="margin-top: 0px;  width: 37px;  " ng-click="ScanItemSearch()" ><i class="fa fa-barcode" style=" color: #2196F3; font-weight: 400;"></i></a>
                         </div>
 
-                    </td>
-                    <td>
-                        <a style="margin-top: 0px; padding-left: 9px; margin-left: 5px; height: 37px; width: 37px;" id="btnMasterSearch" ng-click="SearchInventory()" class="btn transparentBtn"><i class="fa fa-search"></i></a>
 
-
-                    </td>
+</td>
                     <td>
-                        <a style="margin-top: 0px; padding-left: 9px; margin-left: 5px; height: 37px; width: 37px;  " ng-click="ScanItemSearch()" class="btn transparentBtn"><i class="fa fa-qrcode"></i></a>
+                        
                     </td>
                     <td></td>
                 </tr>
@@ -160,7 +157,7 @@
     <div style="text-align:center; top:100px; overflow:hidden;" id="myModal1" class="modal fade " role="dialog">
         <div class="animated flipInY modal-body">
             <img style="max-width:250px; max-height:280px;" src="{{selectedImage}}" alt="">
-            <button style="padding: 2px 7px; position: absolute; margin-left: -23px; margin-top:-5px;" class="btn-danger" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+            <button style="padding: 2px 7px; position: absolute; margin-left: -23px; margin-top:-5px;" class="btn waves-effect-danger" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
         </div>
     </div>
 
@@ -169,17 +166,17 @@
 
         <div class="modal-body">
             <ul class="animated slideInUp selectAction">
-                <li> <a href="#/inventory"><span class="newinv">New Inventory</span></a>  <a href="#/inventory" class="btn-success btn"> <i class="fa fa-plus"></i> </a></li>
-                <li class="bottomlink" ng-if="_areImagesShown==false" ng-click="Showhideimage('true')"> <span data-dismiss="modal">Show Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
-                <li class="bottomlink" ng-if="_areImagesShown==true" ng-click="Showhideimage('false')"> <span data-dismiss="modal">Hide Image</span> <a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
-                <li class="bottomlink" ng-if="_areZeroRecordsShown==false" ng-click=" showhidezerorecord('true')"><span data-dismiss="modal">Show Zero record</span><a class="btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
-                <li class="bottomlink" ng-if="_areZeroRecordsShown==true" ng-click="showhidezerorecord('false')"><span data-dismiss="modal">Hide Zero record</span><a class="btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
-                <li ng-click="SelectAll()" class="bottomlink"><span data-dismiss="modal">Select All</span><a class="btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
+                <li> <a href="#/inventory"><span class="newinv">New Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-success btn"> <i class="fa fa-plus"></i> </a></li>
+                <li class="bottomlink" ng-if="_areImagesShown==false" ng-click="Showhideimage('true')"> <span>Show Image</span> <a class="waves-effect btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
+                <li class="bottomlink" ng-if="_areImagesShown==true" ng-click="Showhideimage('false')"> <span>Hide Image</span> <a class="waves-effect btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
+                <li class="bottomlink" ng-if="_areZeroRecordsShown==false" ng-click=" showhidezerorecord('true')"><span>Show Zero record</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+                <li class="bottomlink" ng-if="_areZeroRecordsShown==true" ng-click="showhidezerorecord('false')"><span>Hide Zero record</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+                <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
             </ul>
         </div>
     </div>
 
-    <a ng-click="OpenmenuModal()" class="Addbtn btn-info" ng-if="mainObjectToSend.length==0">
+    <a ng-click="OpenmenuModal()" class="Addbtn waves-effect btn-info btn-floating" ng-if="mainObjectToSend.length==0">
         <i class="fa fa-plus"></i>
     </a>
 
@@ -211,21 +208,21 @@
             <ul class="animated transactionbody selectAction animated slideInUp">
 
 
-                <li  class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iQty')" ng-click="GoToNextMobile(1)"> <span>Increase</span> <a style="background-color: #177B3D;" class="btn-success btn decrease" data-dismiss="modal"> <i class="fa fa-plus"></i> </a></li>
-                <li  class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iQty')" ng-click="GoToNextMobile(-1)"> <span>Decrease</span> <a style="background-color: #AF2525;" class="btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-minus-circle"></i> </a></li>
-                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iQty')" ng-click="GoToNextMobile(12)"> <span>Adjust</span> <a style="background-color: #f8c217;" class="btn-danger btn adjust" data-dismiss="modal"> <i class="fa fa-arrows-v"></i> </a></li>
-                <li class="bottomlink" ng-if="IsAnyUnitDataFieldActive()==true" ng-click="GoToNextMobile(4)"><span>Tag</span><a style="background-color: #0D190F" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-tag"></i>  </a></li>
-                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('lLoc')" ng-click="GoToNextMobile(0)"><span>Move</span><a style="background-color: #C65E28;" class="btn-warning btn decrease" data-dismiss="modal"> <i class="fa fa-exchange"></i>  </a></li>
-                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('uomUOM')" ng-click="GoToNextMobile(2)"><span>Convert</span><a style="background-color: #CE59A1" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-refresh"></i>  </a></li>
-                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iStatusValue')" ng-click="GoToNextMobile(3)"><span>Update</span><a style=" background-color: #583782" class="btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-pencil"></i>  </a></li>
-                <li data-dismiss="modal" ng-click="filterrecords()" class="bottomlink"><span class="FilterCartItems">Filter cart Records</span><a class="btn-success btn decrease" data-dismiss="modal"> <i class="fa fa-filter"></i>  </a></li>
-                <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class="btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
-                <li class="bottomlink" data-dismiss="modal" ng-click="DeselectAll()"><span>Deselect All</span><a class="btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-square-o"></i>  </a></li>
+                <li  class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iQty')" ng-click="GoToNextMobile(1)"> <span>Increase</span> <a style="background-color: #177B3D;" class=" waves-effect btn-success btn decrease" data-dismiss="modal"> <i class="fa fa-plus"></i> </a></li>
+                <li  class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iQty')" ng-click="GoToNextMobile(-1)"> <span>Decrease</span> <a style="background-color: #AF2525;" class=" waves-effect btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-minus-circle"></i> </a></li>
+                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iQty')" ng-click="GoToNextMobile(12)"> <span>Adjust</span> <a style="background-color: #f8c217;" class="waves-effect btn-danger btn adjust" data-dismiss="modal"> <i class="fa fa-arrows-v"></i> </a></li>
+                <li class="bottomlink" ng-if="IsAnyUnitDataFieldActive()==true" ng-click="GoToNextMobile(4)"><span>Tag</span><a style="background-color: #0D190F" class=" waves-effect btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-tag"></i>  </a></li>
+                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('lLoc')" ng-click="GoToNextMobile(0)"><span>Move</span><a style="background-color: #C65E28;" class=" waves-effect btn-warning btn decrease" data-dismiss="modal"> <i class="fa fa-exchange"></i>  </a></li>
+                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('uomUOM')" ng-click="GoToNextMobile(2)"><span>Convert</span><a style="background-color: #CE59A1" class=" waves-effect btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-refresh"></i>  </a></li>
+                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iStatusValue')" ng-click="GoToNextMobile(3)"><span>Update</span><a style=" background-color: #583782" class="waves-effect btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-pencil"></i>  </a></li>
+                <li data-dismiss="modal" ng-click="filterrecords()" class="bottomlink"><span class="FilterCartItems">Filter cart Records</span><a class=" waves-effect btn-success btn decrease" data-dismiss="modal"> <i class="fa fa-filter"></i>  </a></li>
+                <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
+                <li class="bottomlink" data-dismiss="modal" ng-click="DeselectAll()"><span>Deselect All</span><a class=" waves-effect btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-square-o"></i>  </a></li>
             </ul>
         </div>
     </div>
 
-    <a data-backdrop="static" style="text-decoration:none;" ng-click="OpentransactionModal()" class="animated {{CurrentActiveClass}} cartbtn btn-primary" ng-if="mainObjectToSend.length>0">
+    <a data-backdrop="static" style="text-decoration:none;" ng-click="OpentransactionModal()" class="animated {{CurrentActiveClass}} cartbtn waves-effect btn-floating btn-primary" ng-if="mainObjectToSend.length>0">
         <span class="cartcounter" style="font-size:32px;"> {{mainObjectToSend.length}}</span>
         <i style="display:none;" class="cartcrossicon fa fa-times"></i>
     </a>

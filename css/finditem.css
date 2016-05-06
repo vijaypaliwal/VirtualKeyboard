@@ -6,10 +6,11 @@
             position: fixed;
             top: 0;
             z-index: 10000;
-            background: #0083C7;
+            background: #2196F3 ;
             padding-bottom: 2px;
             padding-top: 2px;
-            padding-right: 20px;
+            padding-right: 4px;
+            padding-left:4px;
             -webkit-animation: cssAnimation 1s 16 ease;
             -moz-animation: cssAnimation 1s 16 ease;
             -o-animation: cssAnimation 1s 16 ease;
@@ -27,21 +28,17 @@
         width: 100% !important;
     }
 
-
+      .textData{
+          font-size:18px;
+         
+      }
 
     .btn-success {
         background-color: #2ecc71;
         border-color: #27ae60;
     }
 
-    .btn {
-        border: none;
-        padding: 6px 12px;
-        border-bottom: 4px solid;
-        -webkit-transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
-        transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
-        outline: none;
-    }
+  
 
     .checkbox-nice label {
         padding-top: 3px;
@@ -253,9 +250,8 @@
 
     .searchtable {
         margin: 0 auto;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        width: 100%;
+       
+        width: 99%;
     }
 
     .searchlist {
@@ -269,6 +265,8 @@
         color: #fff !important;
         margin-top: 0px;
         margin-left: 5px;
+        padding-left:7px;
+        padding-right:9px;
     }
 
     .text {
@@ -310,15 +308,15 @@
     }
 
     #btnClearSearch {
-        color: #BE0D2F;
-     
-        padding: 7px;
-        /* padding-top: 6px; */
-        position: absolute;
-        cursor: pointer;
-        margin-top: -35px;
-        right: -2px;
-        font-size: 22px;
+           color: #555;
+    padding: 7px;
+    /* padding-top: 6px; */
+    position: absolute;
+    cursor: pointer;
+    margin-top: 4px;
+    right: -2px;
+    font-size: 20px;
+    z-index: 100;
     }
 
     .img img {
@@ -512,11 +510,7 @@
         line-height: 60px;
     }
 
-        .cartbtn .fa {
-            font-size: 30px;
-            margin-top: 14px;
-            color: #fff !important;
-        }
+        
 
 
     .selectAction {
@@ -562,7 +556,7 @@
     }
 
     .bgm-red {
-        background: #f44336;
+    
     }
 
     .container {

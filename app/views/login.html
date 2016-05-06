@@ -69,11 +69,11 @@
                 </div>
 
 
-                <button class="btn  btn-primary btn-block" type="submit" ng-disabled="myform.$invalid" id="loginBtn" data-ng-click="login()">Sign In <i class="fa fa-angle-right"></i> </button>
+            <button class="waves-effect waves-light btn-white btn-large width-100 animated bouncein delay-6" type="submit" ng-disabled="myform.$invalid" id="loginBtn" data-ng-click="login()">Sign In <i class="fa fa-angle-right"></i> </button>
 
-                <a onclick="vibrate()" class="btn btn-primary btn-block">I Forgot my Info Email to Me <i class="fa fa-angle-right"></i></a>
+            <a onclick="vibrate()" class="waves-effect waves-light btn-large btn-white width-100 animated bouncein delay-6">I Forgot my Info Email to Me <i class="fa fa-angle-right"></i></a>
 
-                <a onclick="playBeep()" class="btn btn-primary btn-block">Create Account <i class="fa fa-angle-right"></i></a>
+            <a onclick="playBeep()" class="waves-effect waves-light btn-large btn-white width-100 animated bouncein delay-6">Create Account <i class="fa fa-angle-right"></i></a>
 
 
             </div>
@@ -113,14 +113,15 @@
         text-align: right;
     }
 
-    .btn-primary {
+    .btn-white {
         margin: 0 auto;
         margin-bottom: 15px;
         background: #fff !important;
         color: #000 !important;
+        text-align:center
     }
 
-        .btn-primary .fa-angle-right {
+        .btn-white .fa-angle-right {
             position: absolute;
             right: 25px;
             font-size: 25px;
@@ -152,6 +153,11 @@
 
     .container {
         width: 96%;
+    }
+
+    #toolbar
+    {
+        display:none;
     }
 </style>
 

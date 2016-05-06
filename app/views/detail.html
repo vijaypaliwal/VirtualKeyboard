@@ -180,8 +180,8 @@
             <label>Item Name <span class="redText">*</span></label>
             <div class="input-group">
                 <input type="text" class="form-control" ng-model="CurrentInventory.pPart" />
-                <span style="padding:0px;" class="input-group-addon last">
-                    <a class="btn btn-primary" ng-click="Scanitem()"> <i class="fa fa-barcode"></i>&nbsp;Scan</a>
+                <span class="input-group-addon last">
+                    <a ng-click="Scanitem()">Scan</a>
                 </span>
             </div>
         </div>
@@ -190,8 +190,8 @@
             <label>Item Description<span class="redText">*</span></label>
             <div class="input-group">
               <input type="text" class="form-control" ng-model="CurrentInventory.pDescription" />
-              <span style="padding:0px;" class="input-group-addon last">
-              <a class="btn btn-primary" ng-click="Scandescription()"> <i class="fa fa-barcode"></i>&nbsp;Scan</a>
+              <span class="input-group-addon last">
+                  <a ng-click="Scandescription()">Scan</a>
               </span>
             </div>
             </div>
@@ -213,11 +213,11 @@
 
         <div class="row">
             <div class="col-xs-6">
-                <button type="button" ng-click="UpdateInventory()" ng-if="SavingData==false" ng-disabled="CurrentInventory.pPart==''||CurrentInventory.pDescription==''" class="btn btn-primary"> <i class="fa fa-check"></i> Save</button>
-                <button type="button" ng-if="SavingData==true" disabled class="btn btn-primary"> <i class="fa fa-check fa-spin"></i> Save</button>
+                <button type="button" ng-click="UpdateInventory()" ng-if="SavingData==false" ng-disabled="CurrentInventory.pPart==''||CurrentInventory.pDescription==''" class="waves-effect btn btn-primary"> <i class="fa fa-check"></i> Save</button>
+                <button type="button" ng-if="SavingData==true" disabled class="waves-effect btn btn-primary"> <i class="fa fa-check fa-spin"></i> Save</button>
             </div>
             <div class="col-xs-6">
-                <a style="width:100%;" class="btn btn-default" ng-click="ToggleEditView()"><i class="fa fa-times-circle"></i> Cancel</a>
+                <a style="width:100%;" class="waves-effect btn btn-default" ng-click="ToggleEditView()"><i class="fa fa-times-circle"></i> Cancel</a>
             </div>
         </div>
     </div>
@@ -229,7 +229,7 @@
 
     <div class="modal-body">
         <ul class="animated slideInUp" id="selectAction">
-            <li ng-click="viewhistory()"><span>View history</span><a href="#/InventoryHistory" class="btn-info btn"> <i class="fa fa-file-text"></i> </a></li>
+            <li ng-click="viewhistory()"><span>View history</span><a href="#/InventoryHistory" class="btn-primary btn"> <i class="fa fa-file-text"></i> </a></li>
             <li ng-click="showinventory()"><span>Show all Inventory</span><a href="#/FindItems" class="btn-danger btn"> <i class="fa fa-dollar"></i> </a></li>
             <li ng-click="addtocart(CurrentInventory)"><span>Select fot cart</span><a class="btn-success btn" data-dismiss="modal"> <i class="fa fa-shopping-cart"></i> </a></li>
             <li ng-click="ToggleEditView()"><span>Edit Item details</span><a class="btn bgm-red" data-dismiss="modal"> <i class="fa fa-pencil"></i> </a></li>

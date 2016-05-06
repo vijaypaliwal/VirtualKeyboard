@@ -12,14 +12,7 @@
         border-color: #27ae60;
     }
 
-    .btn {
-        border: none;
-        padding: 6px 12px;
-        border-bottom: 4px solid;
-        -webkit-transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
-        transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
-        outline: none;
-    }
+    
 
     .checkbox-nice label {
         padding-top: 3px;
