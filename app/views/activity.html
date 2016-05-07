@@ -617,7 +617,7 @@
 
                                             <div class="form-group">
 
-                                                <label>Select UOM</label>
+                                                <label>Select UOM <span>*</span></label>
 
                                                 <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ToUOMID==''?'':''">
                                                     <div class="select">
@@ -1293,7 +1293,7 @@
                             <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
 
                                 <input type="checkbox" id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
-                                <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
+                               
                             </div>
 
                             <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
@@ -2480,8 +2480,8 @@
 
                 <div class="input-group">
                     <input style="height:47px;" type="text" id="searchlocation" placeholder="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
-                    <span style="padding:0px;" class="input-group-addon last">
-                        <a class="btn waves-effect btn-primary" ng-click="ScanLocationsearch()"> <i class="fa fa-barcode"></i>&nbsp;&nbsp;Scan</a>
+                    <span class="input-group-addon last" ng-click="ScanLocationsearch()">
+                        <i class="fa fa-barcode"></i>
                     </span>
                 </div>
             </div>
@@ -2619,10 +2619,6 @@
 
 
 <a ng-click="showallmenu()" class="btn waves-effect {{CurrentHeaderClass}} btn-sm changebtn"><i class="fa fa-ellipsis-v"></i></a>
-
-
-
-
 
 <style>
     #activitymneu

@@ -179,11 +179,16 @@ app.controller('FindItemsController', ['$scope',  'localStorageService', 'authSe
 
 
 
+
     $scope.ClearFilter = function () {
 
 
         ClearFilterArray();
         $scope.SearchValue = '';
+        _IsActuallySearching = 1;
+        SelectedCartItemIds = [];
+        _IsFilterCartItems = 0;
+        $(".FilterCartItems").html("Filter Cart Records");
         $scope.PopulateInventoryItems();
         $scope.SearchFromData = "All"
         $scope.SearchFromText = "Search";

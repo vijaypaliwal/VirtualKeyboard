@@ -56,7 +56,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 $("#loginBtn").removeClass("disabled");
                 $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
                 $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
-
+                $(".side-nav").show();
                 if (response.LoginResult.Success == true) {
 
 
@@ -91,6 +91,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 playBeep();
                 $("#loginBtn").removeClass("disabled");
                 $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
+                $(".side-nav").show();
                 _logOut();
                 deferred.reject(err);
 

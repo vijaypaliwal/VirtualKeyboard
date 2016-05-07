@@ -7,7 +7,11 @@
         background: #fff;
     }
 
-   
+   .swiper-slide {
+    height: auto !important;
+    min-height: 160px;
+    padding-top: 36px;
+}
 
     #myModal1 {
         position: fixed;
