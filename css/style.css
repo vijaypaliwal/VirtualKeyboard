@@ -1108,7 +1108,7 @@ h6.promo-caption {
     margin-bottom: 32px;
 }
 .comments-list .avatar {
-    position: absolute;
+   float:left;
     left: 6px;
 }
 .comments-list .comment-body {

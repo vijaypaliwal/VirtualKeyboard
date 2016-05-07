@@ -53,10 +53,12 @@
                         </div>
                     </div>
                 </div>
-
-
+                <h5 style="text-align:center; padding-top:10px;"><span>Step {{CurrentCount+1}} of {{Totalslides+1}}</span></h5>
+                
 
                 <div class="swiper-wrapper">
+
+                    
 
                     <div class="swiper-slide myCols" data-index="{{$index}}" data-type="myinventory" data-id="myinventorycols" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" ng-if="CheckInCommonArray(obj.ColumnName)==true" end-repeat>
 
@@ -462,8 +464,8 @@
                         <td ng-if="IsinavailableInventoryField(CurrentActiveField)==true">
 
                             <div style="text-align:center">
-                                <button class="scanbtn btn btn-primary" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> Scan Record</button>
-                                <a  class="scanbtn waves-effect btn btn-primary" ng-if="CurrentActiveField!='pPart'" ng-click="ScanNew()"> Scan Record</a>
+                                <button class="scanbtn btn btn-default" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i> Scan</button>
+                                <a  class="scanbtn waves-effect btn btn-default" ng-if="CurrentActiveField!='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i> Scan</a>
                             </div>
 
 
@@ -471,7 +473,7 @@
                         <td ng-if="CurrentActiveField.indexOf('string_')>-1 || CurrentActiveField.indexOf('bool_')>-1 || CurrentActiveField.indexOf('number_')>-1 || CurrentActiveField.indexOf('date_')>-1 ">
 
                             <div style="text-align:center">
-                                <a  class="scanbtn waves-effect btn btn-primary" ng-click="ScanNewCustom()"> Scan Record</a>
+                                <a class="scanbtn waves-effect btn btn-default" ng-click="ScanNewCustom()"> <i class="fa fa-barcode" ></i> Scan</a>
                             </div>
 
 
