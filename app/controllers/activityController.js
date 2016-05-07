@@ -2747,6 +2747,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
     }
 
+
     var $body = jQuery('body');
 
     /* bind events */
@@ -2755,7 +2756,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $('.header').css("position", "relative");
         $('.iteminfopanel').css('margin-top', '0px');
         $('.activityfields').css('margin-top', '0px');
-        $('.singlePanel').css('margin-top', '14px');
+        $('.singlePanel').css('margin-top', '0px');
         $('#transactionForm1').css('margin-top', '0px');
 
         $('.bottombutton').css("position", "relative");
@@ -2765,7 +2766,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $('.header').css("position", "fixed");
         $('.iteminfopanel').css('margin-top', '80px');
         $('.activityfields').css('margin-top', '80px');
-        $('.singlePanel').css('margin-top', '55px');
+        $('.singlePanel').css('margin-top', '35px');
         $('#transactionForm1').css('margin-top', '85px');
         $('.bottombutton').css("position", "fixed");
 

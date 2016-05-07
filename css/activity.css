@@ -243,9 +243,7 @@ label {
     display:none;
 }
 
-body {
-    font-family: Verdana;
-}
+
 
 
 
@@ -257,10 +255,7 @@ body {
     top: 15px;
 }
 
-.ViewSummary h4 {
-    font-size: 15px;
-    margin-top: 5px !important;
-}
+
 
 .ViewSummary h5 {
     font-size: 16px;
@@ -284,9 +279,7 @@ body {
     color: #000;
 }
 
-body {
-    background: #fff;
-}
+
 
 .headerdropdown img {
     height: 30px;
@@ -343,7 +336,7 @@ position: absolute;
 }
 
 .laststep {
-    margin-top: 85px;
+    margin-top: 70px;
 }
 
 .bgm-purple {

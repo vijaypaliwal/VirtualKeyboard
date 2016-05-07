@@ -1,32 +1,41 @@
-﻿
-<link href="css/itemdetail.css" rel="stylesheet" />
+﻿<link href="css/itemdetail.css" rel="stylesheet" />
 <style>
     .redText {
         color: red !important;
     }
 
-    .scaninfo
-    {
-        position:fixed;
-        width:100%;
-        bottom:0;
-        background:#fafafa;
-        border-top:1px solid #ccc;
-        display:none;
-        padding-top:15px;
-        z-index:10000;
-       
+    .scaninfo {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        background: #fafafa;
+        border-top: 1px solid #ccc;
+        display: none;
+        padding-top: 15px;
+        z-index: 10000;
     }
 
-    .scaninfo .btn
-    {
-        border-radius:100%;
-        padding:0px;
-        height:40px;
-        width:40px;
-        text-align:center;
-        line-height:37px;
-        margin-bottom:10px;
+        .scaninfo .btn {
+            border-radius: 100%;
+            padding: 0px;
+            height: 40px;
+            width: 40px;
+            text-align: center;
+            line-height: 37px;
+            margin-bottom: 10px;
+        }
+
+    .parallax img {
+        position: relative;
+        left: 50%;
+        bottom: 0;
+        width: 10px !important;
+        height: 75px !important;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        transform: translateX(-50%);
+        min-height:100px !important;
+        min-width:100px !important;
     }
 
     .overlay {
@@ -45,219 +54,259 @@
 </style>
 
 
-
-<div class="scaninfo animated bounceInUp" id="scaninfo">
-
-    <h4>Use <strong>{{itemscanvalue}}</strong> Record</h4>
-    <br />
-    <a class="btn btn-success" ng-click="Takeitem()"> <i class="fa fa-check"></i>  </a>
-
-    <a class="btn btn-danger" ng-click="closebottoarea()"> <i class="fa fa-times-circle"></i>  </a>
-
-    <br />
-
-</div>
-
-
-<div class="animated slideInLeft">
-
-    <div ng-if="IsEditMode==true" class="page-header">
-        <h4 style="color:#000; padding-left:12px; text-align:left;">Edit inventory details {{itemscanvalue}}</h4>
-    </div>
-
+<div id="content" class="grey-blue" >
     <div ng-if="IsEditMode==false">
 
-        <div class="swiper-container">
+        <div class="h-banner">
+            <div class="parallax bg-9">
+                <div>
 
-            <div class="swiper-wrapper">
+                    <div class="swiper-container">
 
-                <div ng-if="ImageList.length > 0" ng-repeat="obj in ImageList" class="swiper-slide">
+                        <div class="swiper-wrapper">
+
+                            <div ng-if="ImageList.length > 0" ng-repeat="obj in ImageList" class="swiper-slide">
 
 
-                    <table style="width:100%;">
-                        <tr>
-                            <td></td>
-                            <td>
-                                <div style="text-align:center">
-                                    <img style="margin-top:12px;" class="loadingimage" src="img/loader.gif" alt="Alternate Text" />
-                                </div>
-                            </td>
-                            <td></td>
-                        </tr>
-                    </table>
-                    
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <div style="text-align:center">
+                                                <img style="margin-top:12px; width:20px !important; " class="loadingimage" src="img/loader.gif" alt="Alternate Text" />
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </table>
 
-                    <table style="display:none;" class="imagesection">
 
-                        <tr>
-                            <td>
-                                <span class="arrow-left"  ng-show="ImageList.length != 1"><i class="fa fa-angle-left"></i></span>
-                            </td>
-                            <td>
-                                <div style="text-align:center">
-                                    <img style=" border: 1px solid #ccc;" ng-click="OpenImageModal(obj)" src="{{obj.SmallImageURI}}" alt="" />
-                                </div>
-                            </td>
-                            <td>
-                                <span class="arrow-right" ng-show="ImageList.length != 1"><i class="fa fa-angle-right"></i></span>
-                            </td>
-                        </tr>
-                    </table>
+                                <table style="display:none;" class="imagesection">
+
+                                    <tr>
+                                        <td>
+                                            <span class="arrow-left" ng-show="ImageList.length != 1"><i class="fa fa-angle-left"></i></span>
+                                        </td>
+                                        <td>
+                                            <div style="text-align:center">
+                                                <img style=" border: 1px solid #ccc;" ng-click="OpenImageModal(obj)" src="{{obj.SmallImageURI}}" alt="" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="arrow-right" ng-show="ImageList.length != 1"><i class="fa fa-angle-right"></i></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div ng-if="ImageList.length == 0" class="swiper-slide">
+
+
+
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <div style="text-align:center">
+                                                <img style="margin-top:12px;" class="loadingimage" src="img/loader.gif" alt="Alternate Text" />
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+
+
+
+
+
+
+
+                                <table style="display:none;" class="imagesection">
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <div style="text-align:center">
+                                                <img style="height: 100px; width: 100px; border-radius: 100%; border: 1px solid #ccc;" src="img/default.png" alt="" />
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+                <div class="floating-button animated bouncein delay-3">
 
-                <div ng-if="ImageList.length == 0" class="swiper-slide">
-
-
-
-                    <table style="width:100%;">
-                        <tr>
-                            <td></td>
-                            <td>
-                                <div style="text-align:center">
-                                    <img style="margin-top:12px;" class="loadingimage" src="img/loader.gif" alt="Alternate Text" />
-                                </div>
-                            </td>
-                            <td></td>
-                        </tr>
-                    </table>
+                    <span class="btn-floating resize btn-large waves-effect waves-light accent-color btn z-depth-1" ng-click="ToggleEditView()">
+                        <i class="fa fa-pencil">
+                        </i>
+                    </span>
+                </div>
+                <!--<div class="banner-title" style="color:black;">{{CurrentInventory.pPart}}</div>-->
+            </div>
+        </div>
 
 
-                    
 
-                    
+        <!-- Profile Content -->
+        <div class="card m-t-40 animated fadeinup delay-1">
+            <div class="c-widget">
+                <div class="c-widget-figure primary-color">
+                    <i class="fa fa-align-justify"></i>
+                </div>
+                <div class="c-widget-body">
+                    <p class="m-0" style="color:black;"> {{CurrentInventory.pPart}} </p>
 
-
-                    <table style="display:none;" class="imagesection">
-                        <tr>
-                            <td>
-                              
-                            </td>
-                            <td>
-                             <div style="text-align:center">
-                              <img style="height: 100px; width: 100px; border-radius: 100%; border: 1px solid #ccc;" src="img/default.png" alt="" />
-                              </div>
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                    </table>
                 </div>
             </div>
         </div>
 
-        <div class="detailsection">
+        <div class="card m-t-40 animated fadeinup delay-2">
+            <div class="c-widget">
+                <div class="c-widget-figure primary-color">
+                    <i class="fa fa-list"></i>
+                </div>
+                <div class="c-widget-body">
+                    <p class="m-0"> {{CurrentInventory.iQty}} Quantity</p>
+                    <p class="small m-0">{{CurrentInventory.uomUOM}} With UOM</p>
+                </div>
+            </div>
+        </div>
 
-            <div style="text-align:left; padding-left:15px; padding-right:15px;" class="">
+        <div class="card animated fadeinup delay-3">
+            <div class="c-widget">
+                <div class="c-widget-figure accent-color">
+                    <i class="fa fa-asterisk"></i>
+                </div>
+                <div class="c-widget-body">
+                    <p class="m-0">On Location {{CurrentInventory.lLoc}} </p>
+                    <p class="small m-0">{{CurrentInventory.iStatusValue}} is Curent Status.</p>
+                </div>
+            </div>
+        </div>
 
+    </div>
+
+
+
+   
+
+
+
+
+    <div class="scaninfo animated bounceInUp" id="scaninfo">
+
+        <h4>Use <strong>{{itemscanvalue}}</strong> Record</h4>
+        <br />
+        <a class="btn btn-success" ng-click="Takeitem()"> <i class="fa fa-check"></i>  </a>
+
+        <a class="btn btn-danger" ng-click="closebottoarea()"> <i class="fa fa-times-circle"></i>  </a>
+
+        <br />
+
+    </div>
+
+
+    <div class="" ng-if="IsEditMode==true">
+
+        <div class="page-header">
+            <h4 style="color:#000; padding-left:12px; text-align:left;">Edit inventory details {{itemscanvalue}}</h4>
+        </div>
+
+
+
+        <div style="text-align:left; color:#000; padding:10px;" class="editsection maincontent" ng-if="IsEditMode==true">
+            <div class="form-group">
+                <label>Item Name <span class="redText">*</span></label>
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="CurrentInventory.pPart" />
+                    <span class="input-group-addon last">
+                        <a ng-click="Scanitem()"><i class="fa fa-barcode" style=" color: #2196F3; font-weight: 400;"></i></a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Item Description<span class="redText">*</span></label>
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="CurrentInventory.pDescription" />
+                    <span class="input-group-addon last">
+                        <a ng-click="Scandescription()"><i class="fa fa-barcode" style=" color: #2196F3; font-weight: 400;"></i></a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Unit of Measure</label>
+                <input type="text" class="form-control" disabled="disabled" ng-model="CurrentInventory.uomUOM" />
+            </div>
+
+            <div class="form-group">
+                <label>Quantity</label>
+                <input type="text" class="form-control" disabled="disabled" ng-model="CurrentInventory.iQty" />
+            </div>
+
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" class="form-control" disabled="disabled" ng-model="CurrentInventory.lLoc" />
+            </div>
+
+            <div style="position:fixed; width:100%; bottom:0; left:0; right:0;">
                 <table style="width:100%;">
                     <tr>
-                        <td><h4> {{CurrentInventory.pPart}}</h4></td>
-                        <td>
-                            <div style="text-align:right; font-size:20px;" ng-click="ToggleEditView()">
-                                <i class="fa fa-pencil"></i>
-                            </div>
+                        <td style="width:50%;">
+                            <button style="width:100%; margin-bottom:0px; border-radius:0px;" type="button" ng-click="UpdateInventory()" ng-if="SavingData==false" ng-disabled="CurrentInventory.pPart==''||CurrentInventory.pDescription==''" class="waves-effect btn btn-large btn-primary"> <i class="fa fa-check"></i> Save</button>
+                            <button style="width:100%; margin-bottom:0px; border-radius:0px;" type="button" ng-if="SavingData==true" disabled class="waves-effect btn btn-primary"> <i class="fa fa-check fa-spin"></i> Save</button>
+                        </td>
+                        <td style="width:50%;">
+                            <a style="width:100%; margin-bottom:0px; border-radius:0px;" ng-if="SavingData==false" class="waves-effect btn btn-large btn-default" ng-click="ToggleEditView()"><i class="fa fa-times-circle"></i> Cancel</a>
+
+                            <button style="width:100%; margin-bottom:0px; border-radius:0px;" ng-if="SavingData==true" disabled class="waves-effect btn btn-large btn-default"><i class="fa fa-times-circle"></i> Cancel</button>
                         </td>
                     </tr>
                 </table>
-
             </div>
 
-            <div style="background: #eee; text-align: left; padding:5px 15px 5px 15px;">
-                <h5> {{CurrentInventory.iQty}} {{CurrentInventory.uomUOM}} Quantity available at   {{CurrentInventory.lLoc}} with {{CurrentInventory.iStatusValue}} Status</h5>
-            </div>
-
-            <div style="text-align:left; padding-left:15px; padding-right:15px;" class="">
-
-                <h5> {{CurrentInventory.pDescription}}</h5>
-
-            </div>
-
+            
         </div>
     </div>
 
-    <div style="text-align:left; color:#000; padding:10px;" class="editsection maincontent" ng-if="IsEditMode==true">
-        <div class="form-group">
-            <label>Item Name <span class="redText">*</span></label>
-            <div class="input-group">
-                <input type="text" class="form-control" ng-model="CurrentInventory.pPart" />
-                <span class="input-group-addon last">
-                    <a ng-click="Scanitem()"><i class="fa fa-barcode" style=" color: #2196F3; font-weight: 400;"></i></a>
-                </span>
-            </div>
+
+
+    <div id="myModal2" class="modal bottommenu fade">
+
+        <div class="modal-body">
+            <ul class="animated slideInUp" id="selectAction">
+                <li ng-click="viewhistory()"><span>View history</span><a href="#/InventoryHistory" class="btn-primary btn"> <i class="fa fa-file-text"></i> </a></li>
+                <li ng-click="showinventory()"><span>Show all Inventory</span><a href="#/FindItems" class="btn-danger btn"> <i class="fa fa-dollar"></i> </a></li>
+                <li ng-click="addtocart(CurrentInventory)"><span>Select fot cart</span><a class="btn-success btn" data-dismiss="modal"> <i class="fa fa-shopping-cart"></i> </a></li>
+                <li ng-click="ToggleEditView()"><span>Edit Item details</span><a class="btn bgm-red" data-dismiss="modal"> <i class="fa fa-pencil"></i> </a></li>
+            </ul>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label>Item Description<span class="redText">*</span></label>
-            <div class="input-group">
-              <input type="text" class="form-control" ng-model="CurrentInventory.pDescription" />
-              <span class="input-group-addon last">
-                  <a ng-click="Scandescription()"><i class="fa fa-barcode" style=" color: #2196F3; font-weight: 400;"></i></a>
-              </span>
-            </div>
-            </div>
+    <a style="font-size: 30px;  background: #4caf50 !important; font-family:monospace; text-decoration:none;" ng-click="OpenmenuModal()" class="Addbtn btn-info">
+        I
+    </a>
 
-        <div class="form-group">
-            <label>Unit of Measure</label>
-            <input type="text" class="form-control" disabled="disabled" ng-model="CurrentInventory.uomUOM" />
-        </div>
 
-        <div class="form-group">
-            <label>Quantity</label>
-            <input type="text" class="form-control" disabled="disabled" ng-model="CurrentInventory.iQty" />
-        </div>
+    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-        <div class="form-group">
-            <label>Location</label>
-            <input type="text" class="form-control" disabled="disabled" ng-model="CurrentInventory.lLoc" />
-        </div>
+                <div class="modal-body">
+                    <img src="{{CurrentActiveImage.LargeImageURI}}" id="imagepreview" style="max-height:250px;max-width:250px;">
+                </div>
 
-        <div class="row">
-            <div class="col-xs-6">
-                <button type="button" ng-click="UpdateInventory()" ng-if="SavingData==false" ng-disabled="CurrentInventory.pPart==''||CurrentInventory.pDescription==''" class="waves-effect btn btn-primary"> <i class="fa fa-check"></i> Save</button>
-                <button type="button" ng-if="SavingData==true" disabled class="waves-effect btn btn-primary"> <i class="fa fa-check fa-spin"></i> Save</button>
-            </div>
-            <div class="col-xs-6">
-                <a style="width:100%;" class="waves-effect btn btn-default" ng-click="ToggleEditView()"><i class="fa fa-times-circle"></i> Cancel</a>
             </div>
         </div>
     </div>
 </div>
-
-
-
-<div id="myModal2" class="modal bottommenu fade">
-
-    <div class="modal-body">
-        <ul class="animated slideInUp" id="selectAction">
-            <li ng-click="viewhistory()"><span>View history</span><a href="#/InventoryHistory" class="btn-primary btn"> <i class="fa fa-file-text"></i> </a></li>
-            <li ng-click="showinventory()"><span>Show all Inventory</span><a href="#/FindItems" class="btn-danger btn"> <i class="fa fa-dollar"></i> </a></li>
-            <li ng-click="addtocart(CurrentInventory)"><span>Select fot cart</span><a class="btn-success btn" data-dismiss="modal"> <i class="fa fa-shopping-cart"></i> </a></li>
-            <li ng-click="ToggleEditView()"><span>Edit Item details</span><a class="btn bgm-red" data-dismiss="modal"> <i class="fa fa-pencil"></i> </a></li>
-        </ul>
-    </div>
-</div>
-
-<a style="font-size: 30px;  background: #4caf50 !important; font-family:monospace; text-decoration:none;" ng-click="OpenmenuModal()" class="Addbtn btn-info">
-    I
-</a>
-
-
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <div class="modal-body">
-                <img src="{{CurrentActiveImage.LargeImageURI}}" id="imagepreview" style="max-height:250px;max-width:250px;">
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<div id="overlay"></div>
+        <div id="overlay"></div>
 
 
 
 
-
-
+ 

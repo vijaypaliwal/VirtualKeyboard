@@ -669,7 +669,7 @@
                                                 <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                                 <input type="text" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
 
-                                                <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-qrcode"></i></span>
+                                                <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                             </div>
                                             <div>
 
@@ -1110,7 +1110,7 @@
                                         <input type="date" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                         <input type="number" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                         <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'"><i class="fa fa-qrcode"></i></span>
+                                        <span class="input-group-addon last" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'"><i class="fa fa-barcode"></i></span>
                                     </div>
                                     <div>
 
@@ -1158,7 +1158,7 @@
                         <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
                         <div ng-if="obj.cfdDataType=='string'" class="input-group">
                             <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control stringType" value="{{obj.CfValue}}" />
-                            <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                            <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                         </div>
 
 
@@ -1178,23 +1178,23 @@
 
                                 </select>
                             </div>
-                            <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                            <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                         </div>
 
 
                         <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
                             <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="date" class="form-control customFieldDatePicker FormDateType" />
-                            <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                            <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                         </div>
 
                         <div ng-if="obj.cfdDataType=='number'" class="input-group">
                             <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
-                            <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                            <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                         </div>
 
                         <div ng-if="obj.cfdDataType=='currency'" class="input-group">
                             <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
-                            <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                            <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                         </div>
 
                     </div>
@@ -1218,7 +1218,7 @@
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
                             <div ng-if="obj.cfdDataType=='string'" class="input-group">
                                 <input id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control stringType" value="{{obj.CfValue}}" />
-                                <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
 
@@ -1238,23 +1238,23 @@
 
                                     </select>
                                 </div>
-                                <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
                                 <input id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="date" class="form-control customFieldDatePicker FormDateType" />
-                                <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
                             <div ng-if="obj.cfdDataType=='number'" class="input-group">
                                 <input id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
-                                <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
                             <div ng-if="obj.cfdDataType=='currency'" class="input-group">
                                 <input id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
-                                <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
                         </div>
@@ -1276,14 +1276,14 @@
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
                             <div ng-if="obj.cfdDataType=='string'" class="input-group">
                                 <input id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control stringType" value="{{obj.CfValue}}" />
-                                <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
 
                             <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
 
                                 <input type="checkbox" id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" bootstrap-switch>
-                                <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
                             <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
@@ -1296,23 +1296,23 @@
 
                                     </select>
                                 </div>
-                                <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
                                 <input id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="date" class="form-control customFieldDatePicker FormDateType" />
-                                <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
                             <div ng-if="obj.cfdDataType=='number'" class="input-group">
                                 <input id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
-                                <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
                             <div ng-if="obj.cfdDataType=='currency'" class="input-group">
                                 <input id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
-                                <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
                         </div>
@@ -1911,7 +1911,7 @@
                                         <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                         <input type="text" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
 
-                                        <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-qrcode"></i></span>
+                                        <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                     </div>
                                     <div>
 
@@ -1958,7 +1958,7 @@
                                 <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
                                 <div ng-if="obj.cfdDataType=='string'" class="input-group">
                                     <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control stringType" value="{{obj.CfValue}}" />
-                                    <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                    <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
 
@@ -1978,23 +1978,23 @@
 
                                         </select>
                                     </div>
-                                    <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                    <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
 
                                 <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
                                     <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="date" class="form-control customFieldDatePicker FormDateType" />
-                                    <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                    <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='number'" class="input-group">
                                     <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
-                                    <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                    <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='currency'" class="input-group">
                                     <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
-                                    <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                    <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
                             </div>
@@ -2018,7 +2018,7 @@
                                     <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
                                     <div ng-if="obj.cfdDataType=='string'" class="input-group">
                                         <input id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control stringType" value="{{obj.CfValue}}" />
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                        <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
 
@@ -2038,23 +2038,23 @@
 
                                             </select>
                                         </div>
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                        <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
 
                                     <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
                                         <input id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="date" class="form-control customFieldDatePicker FormDateType" />
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                        <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
                                     <div ng-if="obj.cfdDataType=='number'" class="input-group">
                                         <input id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                        <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
                                     <div ng-if="obj.cfdDataType=='currency'" class="input-group">
                                         <input id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                        <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
                                 </div>
@@ -2076,7 +2076,7 @@
                                     <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
                                     <div ng-if="obj.cfdDataType=='string'" class="input-group">
                                         <input id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control stringType" value="{{obj.CfValue}}" />
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                        <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
 
@@ -2096,23 +2096,23 @@
 
                                             </select>
                                         </div>
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                        <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
 
                                     <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
                                         <input id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="date" class="form-control customFieldDatePicker FormDateType" />
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                        <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
                                     <div ng-if="obj.cfdDataType=='number'" class="input-group">
                                         <input id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                        <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
                                     <div ng-if="obj.cfdDataType=='currency'" class="input-group">
                                         <input id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="text" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-qrcode"></i></span>
+                                        <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
                                 </div>
@@ -2125,6 +2125,8 @@
                     <div class="swiper-slide form-inputs laststep" ng-if="IsSingleMode==true" data-type="LastStep" data-index="{{GetProperIndex(2)}}">
 
                         <div ng-if="IsSummary==false">
+
+                            <br />
 
                             <div ng-if="IsProcessing==false" style=" margin-left:0px; margin-right:0px;" class="row btn-success" ng-click="SubmitAllActivities()">
 
@@ -2182,7 +2184,7 @@
                             <br />
 
 
-                            <div style="margin-left:0px; margin-right:0px;" ng-click="keepcart()" class="row waves-effect btn-success">
+                            <div style="margin-left:0px; margin-right:0px;" ng-click="keepcart()" class="row waves-effect btn-success accent-color">
 
                                 <div class="col-xs-8">
                                     <h4>Keep cart</h4>
@@ -2237,151 +2239,161 @@
                             </div>
 
 
+                            
 
 
                             <div ng-show="CurrentCart.length > 0">
 
 
 
+                                <div class="comments">
+
+                                    <ul class="comments-list">
+                                        <li id="{{_groupRow.InventoryDataList.uId}}" data-ng-init="parentIndex = $index" data-ng-repeat="_groupRow in CurrentCart" data-toggle="tooltip" data-ng-attr-title="{{GetRowTitle(_groupRow)}}" data-ng-class="{error : _groupRow.iQty >_groupRow.oquantity}">
+                                            <img class="avatar circle" ng-if="_groupRow.InventoryDataList.ImageThumbPath==''" src="img/default.png" />
+                                            <img class="avatar circle" ng-if="_groupRow.InventoryDataList.ImageThumbPath!=''" src="{{_groupRow.InventoryDataList.ImageThumbPath}}" alt="" />
+                                            
+                                         
+                                            <div class="comment-body">
+                                                <span class="author uppercase">{{_groupRow.ItemID}}</span>
+                                                <span class="date"> {{_groupRow.InventoryDataList.oquantity}} {{_groupRow.InventoryDataList.uomUOM}}</span>
+                                             
+                                                    <div>
+                                                       
+
+                                                        <span ng-if="IsMyInventoryColumns('pDescription')==true">
+                                                            <span ng-show="_groupRow.InventoryDataList.pDescription!=null && _groupRow.InventoryDataList.pDescription!=''&& _groupRow.InventoryDataList.pDescription!=undefined"> of {{_groupRow.InventoryDataList.pDescription}} </span>
+                                                        </span>
+                                                        <span ng-if="IsMyInventoryColumns('lLoc')==true">
+                                                            @@ {{_groupRow.InventoryDataList.lLoc}} <br />
+                                                        </span>
+                                                        <span ng-if="IsMyInventoryColumns('iStatusValue')==true">
+                                                            <span ng-show="_groupRow.InventoryDataList.iStatusValue!=null && _groupRow.InventoryDataList.iStatusValue!=''&& _groupRow.InventoryDataList.iStatusValue!=undefined">
+                                                                Status:<b> {{_groupRow.InventoryDataList.iStatusValue}}</b>,
+                                                            </span>
+                                                        </span>
+                                                        <span ng-if="IsMyInventoryColumns('iReqValue')==true">
+                                                            <span ng-show="_groupRow.InventoryDataList.iReqValue!=null && _groupRow.InventoryDataList.iReqValue!=''&& _groupRow.InventoryDataList.iReqValue!=undefined">
+                                                                {{GetColumnLabel('iReqValue')}}:
+                                                                <b>
+                                                                    {{_groupRow.InventoryDataList.iReqValue}}
+                                                                </b>,
+                                                            </span>
+                                                        </span>
+                                                        <span ng-if="IsMyInventoryColumns('iUnitTag2')==true">
+                                                            <span ng-show="_groupRow.InventoryDataList.iUnitTag2!=null && _groupRow.InventoryDataList.iUnitTag2!=''&& _groupRow.InventoryDataList.iUnitTag2!=undefined">
+                                                                {{GetColumnLabel('iUnitTag2')}}:<b> {{_groupRow.InventoryDataList.iUnitTag2}}</b>,
+                                                            </span>
+                                                        </span>
+                                                        <span ng-if="IsMyInventoryColumns('iUnitTag3')==true">
+                                                            <span ng-show="_groupRow.InventoryDataList.iUnitTag3!=null && _groupRow.InventoryDataList.iUnitTag3!=''&& _groupRow.InventoryDataList.iUnitTag3!=undefined">
+                                                                {{GetColumnLabel('iUnitTag3')}}:<b> {{_groupRow.InventoryDataList.iUnitTag3}}</b>,
+                                                            </span>
+                                                        </span>
+                                                        <span ng-if="IsMyInventoryColumns('iUniqueDate')==true">
+                                                            <span ng-show="_groupRow.InventoryDataList.iUniqueDate!=null && _groupRow.InventoryDataList.iUniqueDate!=''&& _groupRow.InventoryDataList.iUniqueDate!=undefined">
+                                                                {{GetColumnLabel('iUniqueDate')}}:<b>{{_groupRow.InventoryDataList.iUniqueDate}}</b>,
+                                                            </span>
+                                                        </span>
+
+                                                        <span ng-if="IsMyInventoryColumns('iUnitDate2')==true">
+                                                            <span ng-show="_groupRow.InventoryDataList.iUnitDate2!=null && _groupRow.InventoryDataList.iUnitDate2!=''&& _groupRow.InventoryDataList.iUnitDate2!=undefined">
+                                                                {{GetColumnLabel('iUnitDate2')}}:<b>{{_groupRow.InventoryDataList.iUnitDate2}}</b>,
+                                                            </span>
+                                                        </span>
+                                                        <span ng-if="IsMyInventoryColumns('iUnitNumber1')==true">
+                                                            <span ng-show="_groupRow.InventoryDataList.iUnitNumber1!=null && _groupRow.InventoryDataList.iUnitNumber1!=''&& _groupRow.InventoryDataList.iUnitNumber1!=undefined">
+                                                                {{GetColumnLabel('iUnitNumber1')}}:<b>{{_groupRow.InventoryDataList.iUnitNumber1}}</b>,
+                                                            </span>
+                                                        </span>
+                                                        <span ng-if="IsMyInventoryColumns('iUnitNumber2')==true">
+                                                            <span ng-show="_groupRow.InventoryDataList.iUnitNumber2!=null && _groupRow.InventoryDataList.iUnitNumber2!=''&& _groupRow.InventoryDataList.iUnitNumber2!=undefined">
+                                                                {{GetColumnLabel('iUnitNumber2')}} :<b>{{_groupRow.InventoryDataList.iUnitNumber2}}</b>
+                                                            </span>
+                                                        </span>
 
 
-                                <div id="{{_groupRow.InventoryDataList.uId}}" data-ng-init="parentIndex = $index" data-ng-repeat="_groupRow in CurrentCart" data-toggle="tooltip" data-ng-attr-title="{{GetRowTitle(_groupRow)}}" data-ng-class="{error : _groupRow.iQty >_groupRow.oquantity}">
+                                                    </div>
+
+                                                    <span class="{{CurrentHeaderClass}}-text" style="white-space:normal;">
+
+                                                        <span ng-if="CurrentOperation=='Increase'">
+                                                            Increased by quantity <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                        </span>
 
 
-                                    <div class="row">
-                                        <div class="col-xs-8">
-                                            <div>
-                                                <h5>{{_groupRow.ItemID}}</h5>
+                                                        <span ng-if="CurrentOperation=='Decrease'">
+                                                            Decreased by quantity <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                        </span>
 
 
+                                                        <span ng-if="CurrentOperation=='Update'">
+                                                            Update
+                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                            items to
+                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.UpdateTransactionData.StatusToUpdate}}</span>
+                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].UpdateTransactionData.StatusToUpdate}}</span>
 
-                                                <span ng-if="IsMyInventoryColumns('pDescription')==true">
-                                                    <span ng-show="_groupRow.InventoryDataList.pDescription!=null && _groupRow.InventoryDataList.pDescription!=''&& _groupRow.InventoryDataList.pDescription!=undefined"> of {{_groupRow.InventoryDataList.pDescription}} </span>
-                                                </span>
-                                                <span ng-if="IsMyInventoryColumns('lLoc')==true">
-                                                    @@ {{_groupRow.InventoryDataList.lLoc}} <br />
-                                                </span>
-                                                <span ng-if="IsMyInventoryColumns('iStatusValue')==true">
-                                                    <span ng-show="_groupRow.InventoryDataList.iStatusValue!=null && _groupRow.InventoryDataList.iStatusValue!=''&& _groupRow.InventoryDataList.iStatusValue!=undefined">
-                                                        Status:<b> {{_groupRow.InventoryDataList.iStatusValue}}</b>,
+                                                            status
+                                                        </span>
+                                                        <span ng-if="CurrentOperation=='Convert'">
+                                                            Convert  From quantity
+
+                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.ConvertTransactionData.ActionFromQuantity}}</span>
+                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].ConvertTransactionData.ActionFromQuantity}}</span>
+
+
+                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.InventoryDataList.uomUOM}}</span>
+                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].InventoryDataList.uomUOM}}</span>
+                                                            to quantity
+                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.ConvertTransactionData.ActionToQuantity}}</span>
+                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].ConvertTransactionData.ActionToQuantity}}</span>
+
+
+                                                            <span ng-if="IsSingleMode==true"> {{GetUOMName(_groupRow.ConvertTransactionData.ToUOMID)}}</span>
+                                                            <span ng-if="IsSingleMode==false"> {{GetUOMName(_groupRow.CurrentCart[0].ConvertTransactionData.ToUOMID)}}</span>
+
+                                                        </span>
+                                                        <span ng-if="CurrentOperation=='Move'">
+                                                            Move
+                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.MoveTransactionData.ActionQuantity}}</span>
+                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].MoveTransactionData.ActionQuantity}}</span>
+
+                                                            item(s) @@
+
+                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.MoveTransactionData.MoveToLocationText}}</span>
+                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].MoveTransactionData.MoveToLocationText}}</span>
+                                                        </span>
+
+                                                        <span ng-if="CurrentOperation=='Apply'">
+                                                            Apply unit data to quantity
+
+                                                            <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                            <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
+                                                        </span>
+
                                                     </span>
-                                                </span>
-                                                <span ng-if="IsMyInventoryColumns('iReqValue')==true">
-                                                    <span ng-show="_groupRow.InventoryDataList.iReqValue!=null && _groupRow.InventoryDataList.iReqValue!=''&& _groupRow.InventoryDataList.iReqValue!=undefined">
-                                                        {{GetColumnLabel('iReqValue')}}:
-                                                        <b>
-                                                            {{_groupRow.InventoryDataList.iReqValue}}
-                                                        </b>,
-                                                    </span>
-                                                </span>
-                                                <span ng-if="IsMyInventoryColumns('iUnitTag2')==true">
-                                                    <span ng-show="_groupRow.InventoryDataList.iUnitTag2!=null && _groupRow.InventoryDataList.iUnitTag2!=''&& _groupRow.InventoryDataList.iUnitTag2!=undefined">
-                                                        {{GetColumnLabel('iUnitTag2')}}:<b> {{_groupRow.InventoryDataList.iUnitTag2}}</b>,
-                                                    </span>
-                                                </span>
-                                                <span ng-if="IsMyInventoryColumns('iUnitTag3')==true">
-                                                    <span ng-show="_groupRow.InventoryDataList.iUnitTag3!=null && _groupRow.InventoryDataList.iUnitTag3!=''&& _groupRow.InventoryDataList.iUnitTag3!=undefined">
-                                                        {{GetColumnLabel('iUnitTag3')}}:<b> {{_groupRow.InventoryDataList.iUnitTag3}}</b>,
-                                                    </span>
-                                                </span>
-                                                <span ng-if="IsMyInventoryColumns('iUniqueDate')==true">
-                                                    <span ng-show="_groupRow.InventoryDataList.iUniqueDate!=null && _groupRow.InventoryDataList.iUniqueDate!=''&& _groupRow.InventoryDataList.iUniqueDate!=undefined">
-                                                        {{GetColumnLabel('iUniqueDate')}}:<b>{{_groupRow.InventoryDataList.iUniqueDate}}</b>,
-                                                    </span>
-                                                </span>
 
-                                                <span ng-if="IsMyInventoryColumns('iUnitDate2')==true">
-                                                    <span ng-show="_groupRow.InventoryDataList.iUnitDate2!=null && _groupRow.InventoryDataList.iUnitDate2!=''&& _groupRow.InventoryDataList.iUnitDate2!=undefined">
-                                                        {{GetColumnLabel('iUnitDate2')}}:<b>{{_groupRow.InventoryDataList.iUnitDate2}}</b>,
-                                                    </span>
-                                                </span>
-                                                <span ng-if="IsMyInventoryColumns('iUnitNumber1')==true">
-                                                    <span ng-show="_groupRow.InventoryDataList.iUnitNumber1!=null && _groupRow.InventoryDataList.iUnitNumber1!=''&& _groupRow.InventoryDataList.iUnitNumber1!=undefined">
-                                                        {{GetColumnLabel('iUnitNumber1')}}:<b>{{_groupRow.InventoryDataList.iUnitNumber1}}</b>,
-                                                    </span>
-                                                </span>
-                                                <span ng-if="IsMyInventoryColumns('iUnitNumber2')==true">
-                                                    <span ng-show="_groupRow.InventoryDataList.iUnitNumber2!=null && _groupRow.InventoryDataList.iUnitNumber2!=''&& _groupRow.InventoryDataList.iUnitNumber2!=undefined">
-                                                        {{GetColumnLabel('iUnitNumber2')}} :<b>{{_groupRow.InventoryDataList.iUnitNumber2}}</b>
-                                                    </span>
-                                                </span>
-
-
+                                                   
+                                               
                                             </div>
+                                        </li>
 
-                                            <h4 class="{{CurrentHeaderClass}}-text" style="white-space:normal;">
+                                    </ul>
 
-                                                <span ng-if="CurrentOperation=='Increase'">
-                                                    Increased by quantity <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                    <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                </span>
+                                </div>
 
 
-                                                <span ng-if="CurrentOperation=='Decrease'">
-                                                    Decreased by quantity <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                    <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                </span>
 
 
-                                                <span ng-if="CurrentOperation=='Update'">
-                                                    Update
-                                                    <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                    <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                    items to
-                                                    <span ng-if="IsSingleMode==true"> {{_groupRow.UpdateTransactionData.StatusToUpdate}}</span>
-                                                    <span ng-if="IsSingleMode==false"> {{CurrentCart[0].UpdateTransactionData.StatusToUpdate}}</span>
 
-                                                    status
-                                                </span>
-                                                <span ng-if="CurrentOperation=='Convert'">
-                                                    Convert  From quantity
-
-                                                    <span ng-if="IsSingleMode==true"> {{_groupRow.ConvertTransactionData.ActionFromQuantity}}</span>
-                                                    <span ng-if="IsSingleMode==false"> {{CurrentCart[0].ConvertTransactionData.ActionFromQuantity}}</span>
+                                <div >
 
 
-                                                    <span ng-if="IsSingleMode==true"> {{_groupRow.InventoryDataList.uomUOM}}</span>
-                                                    <span ng-if="IsSingleMode==false"> {{CurrentCart[0].InventoryDataList.uomUOM}}</span>
-                                                    to quantity
-                                                    <span ng-if="IsSingleMode==true"> {{_groupRow.ConvertTransactionData.ActionToQuantity}}</span>
-                                                    <span ng-if="IsSingleMode==false"> {{CurrentCart[0].ConvertTransactionData.ActionToQuantity}}</span>
-
-
-                                                    <span ng-if="IsSingleMode==true"> {{GetUOMName(_groupRow.ConvertTransactionData.ToUOMID)}}</span>
-                                                    <span ng-if="IsSingleMode==false"> {{GetUOMName(_groupRow.CurrentCart[0].ConvertTransactionData.ToUOMID)}}</span>
-
-                                                </span>
-                                                <span ng-if="CurrentOperation=='Move'">
-                                                    Move
-                                                    <span ng-if="IsSingleMode==true"> {{_groupRow.MoveTransactionData.ActionQuantity}}</span>
-                                                    <span ng-if="IsSingleMode==false"> {{CurrentCart[0].MoveTransactionData.ActionQuantity}}</span>
-
-                                                    item(s) @@
-
-                                                    <span ng-if="IsSingleMode==true"> {{_groupRow.MoveTransactionData.MoveToLocationText}}</span>
-                                                    <span ng-if="IsSingleMode==false"> {{CurrentCart[0].MoveTransactionData.MoveToLocationText}}</span>
-                                                </span>
-
-                                                <span ng-if="CurrentOperation=='Apply'">
-                                                    Apply unit data to quantity
-
-                                                    <span ng-if="IsSingleMode==true"> {{_groupRow.IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                    <span ng-if="IsSingleMode==false"> {{CurrentCart[0].IncreaseDecreaseVMData.ActionQuantity}}</span>
-                                                </span>
-
-                                            </h4>
-
-                                            {{_groupRow.InventoryDataList.oquantity}} {{_groupRow.InventoryDataList.uomUOM}}
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <div style="text-align:right">
-
-                                                <img ng-if="_groupRow.InventoryDataList.ImageThumbPath==''" style="height:60px; width:60px; border:1px solid #ccc;" src="img/default.png" />
-                                                <img ng-if="_groupRow.InventoryDataList.ImageThumbPath!=''" style="height:60px; width:60px; border:1px solid #ccc;" src="{{_groupRow.InventoryDataList.ImageThumbPath}}" alt="" />
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                    
 
                                 </div>
                             </div>
@@ -2532,23 +2544,43 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle"></i></span></button>
         <h5 class="modal-title" id="myModalLabel">What do you want to do about your cart? </h5>
     </div>
-    <div style="background:#fff;" class="modal-body">
+    <div style="background:#fff; padding-top:2px;" class="modal-body">
 
-        <div>
-            <button style="width:100%; margin-bottom:10px;" class="btn waves-effect btn-success" ng-click="CartFunction(1)" id="keepCart">
-                Keep cart &nbsp;<i class="fa fa-shopping-cart"></i>
-            </button>
+        <div ng-click="CartFunction(1)" style="margin:0px; padding-left:0px;" class="card">
+            <div class="c-widget">
+                <div id="keepCart" class="c-widget-figure primary-color">
+                    <i class="fa fa-shopping-cart"></i>
+                </div>
+                <div class="c-widget-body">
+                    <p class="m-0">Keep cart</p>
+                    <p class="small m-0">Keep it so I can complete it later</p>
+                </div>
+            </div>
         </div>
 
-
-        <div>
-            <button style="width:100%; margin-bottom:10px;" class="btn waves-effect btn-danger btnFullWidth" ng-click="CartFunction(2)">Clear Cart <i class="fa fa-times"></i></button>
+        <div ng-click="CartFunction(2)" style="margin: 0px; padding-left: 0px;" class="card">
+            <div class="c-widget">
+                <div class="c-widget-figure accent-color">
+                    <i class="fa fa-times"></i>
+                </div>
+                <div class="c-widget-body">
+                    <p class="m-0">Clear cart</p>
+                    <p class="small m-0">Clear the cart of all items; I don't need it.</p>
+                </div>
+            </div>
         </div>
 
-        <div>
-            <a style="width:100%; margin-bottom:10px;" data-dismiss="modal" class="btn waves-effect btn-default">Return to Cart &nbsp; <i class="fa fa-arrow-right"></i></a>
+        <div data-dismiss="modal" style="margin: 0px; padding-left: 0px;" class="card">
+            <div class="c-widget">
+                <div class="c-widget-figure gray-color">
+                    <i class="fa fa-arrow-left"></i>
+                </div>
+                <div class="c-widget-body">
+                    <p class="m-0">Return to cart</p>
+                    <p class="small m-0">Return to Cart so I can complete it now.</p>
+                </div>
+            </div>
         </div>
-
 
     </div>
 

@@ -26,20 +26,28 @@
                     <div class="iteminfo">
 
                         <div class="row ">
-                            <div class="col-md-2 col-xs-3">
+                            <div class="col-md-2 col-xs-4" ng-click="getstep(9,'Image')">
 
                                 <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
 
-                                <img id="defaultimg" ng-click="getstep(9,'Image')" style="height:70px; width:65px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
+                                <img id="defaultimg" style="height: 100px; width: 95px; border: 1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
                             </div>
-                            <div class="col-md-10 col-xs-9">
+                            <div class="col-md-10 col-xs-8">
                                 <span style="color:#000;" ng-click="getstep(0,'pPart')">{{InventoryObject.ItemID}}</span>
+                                
+                                
+
+                                
                                 <span ng-click="getstep(1,'pDescription')"> {{ InventoryObject.Description }} </span>
+
+                                <span style="display:inline" ng-click="getstep(2,'iQty')"> {{ InventoryObject.Quantity }}</span> <span style="display:inline" ng-click="getstep(4,'uomUOM')"> {{InventoryObject.Uom}}</span>
+
 
                                 <span ng-click="getstep(3,'lLoc')">  {{InventoryObject.Location}} </span> <span ng-click="getstep(4,'iStatusValue')"> {{InventoryObject.Status }} </span>
 
+                                
 
-                                <span ng-click="getstep(2,'iQty')"> {{ InventoryObject.Quantity }}</span> <span ng-click="getstep(4,'uomUOM')"> {{Uom}}</span>
+                                
 
                             </div>
                         </div>
@@ -64,7 +72,7 @@
                                         </div>
                                         <div class="col-xs-5" style="margin-bottom:5px;">
 
-                                            <div id="label-switch" class="make-switch" data-on-label="SI" data-off-label="NO">
+                                            <div id="label-switch" class="make-switch pull-right" data-on-label="SI" data-off-label="NO">
                                                 <input data-on-label="auto" data-off-label="manual" type="checkbox" id="AutoID" ng-model="InventoryObject.AutoID" bootstrap-switch>
                                             </div>
 
@@ -481,7 +489,7 @@
 
              
 
-                <a ng-click="addinventory()" style="width:100%; margin-top:30px;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"> <i class="fa fa-plus"></i>  Add Inventory</a>
+                <a ng-click="addinventory()" style="width:100%; margin-top:30px;text-align:center;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"> <i class="fa fa-plus"></i>  Add Inventory</a>
 
 
             </div>
@@ -542,8 +550,8 @@
         <div class="form-group">
             <div class="input-group">
                 <input id="searchitem" type="text" placeholder="Type Keyword to find items" ng-change="OnChangeItemNameFunction()" class="form-control" ng-model="SearchItemValue" required="" autofocus />
-                <span style="padding:0px;" class="input-group-addon last">
-                    <a ng-click="ScanNewsearch()">Scan</a>
+                <span  class="input-group-addon last">
+                    <a ng-click="ScanNewsearch()"><i class="fa fa-barcode"></i></a>
                 </span>
             </div>
         </div>
@@ -587,8 +595,8 @@
 
             <div class="input-group">
                 <input type="text" id="searchlocation" placeholder="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
-                <span style="padding:0px;" class="input-group-addon last">
-                    <a ng-click="ScanLocationsearch()">Scan</a>
+                <span  class="input-group-addon last">
+                    <a ng-click="ScanLocationsearch()"><i class="fa fa-barcode"></i></a>
                 </span>
             </div>
         </div>
@@ -631,8 +639,8 @@
 
             <div class="input-group">
                 <input type="text" id="searchuom" placeholder="Type Keyword to find uom" ng-change="OnChangeUOMFunction()" class="form-control" ng-model="SearchUOMValue" required="" autofocus />
-                <span style="padding:0px;" class="input-group-addon last">
-                    <a  ng-click="ScanUOMsearch()">Scan</a>
+                <span  class="input-group-addon last">
+                    <a  ng-click="ScanUOMsearch()"><i class="fa fa-barcode"></i></a>
                 </span>
             </div>
         </div>

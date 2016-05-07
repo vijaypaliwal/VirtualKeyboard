@@ -186,7 +186,8 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
                     contentType: 'application/json',
                     success: function (result) {
                         if (result.UpdateInventoryResult.Payload == 1) {
-                            log.success("Inventory updated successfully.");
+                            //log.success("Inventory updated successfully.");
+                            ShowSuccess("Updated");
                             localStorageService.set("CurrentDetailObject", $scope.CurrentInventory);
                             $scope.SavingData = false;
                         }

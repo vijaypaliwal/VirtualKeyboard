@@ -91,7 +91,7 @@ app.controller('FindItemsController', ['$scope',  'localStorageService', 'authSe
         _IsOpenModal = true;
     }
 
-
+    
 
 
 

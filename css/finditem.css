@@ -255,10 +255,11 @@
     }
 
     .searchlist {
-        top: initial;
         /*bottom: 100%;*/
     }
-
+    .searchlist li a{
+        text-align:left;
+    }
     .transparentBtn {
         background: #0083C7;
         border: 2px solid #ebebeb;

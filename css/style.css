@@ -1109,18 +1109,19 @@ h6.promo-caption {
 }
 .comments-list .avatar {
     position: absolute;
-    left: 20px;
+    left: 6px;
 }
 .comments-list .comment-body {
-    padding-left: 56px;
-    margin-bottom: 30px;
+    padding-left: 45px;
+    margin-bottom: 25px;
     width: auto;
 }
 .comments-list .comment-body p {
     font-size: 1em;
 }
+
 .comments-list .author {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     display: inline-block;
 }
 .comments-list .date {
@@ -1982,7 +1983,7 @@ ul.faq {
     border-radius: 50%;
 }
 .activity .date {
-    position: absolute;
+  
     top: 18px;
     left: 0;
 }

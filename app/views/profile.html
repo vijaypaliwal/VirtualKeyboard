@@ -9,7 +9,7 @@
 
 <div style="display:none;" class="profilepage">
 
-    <div class=" animated slideInDown detailmode">
+    <div class="detailmode">
         <div class="bluearea">
             <div style="color:#fff; text-align:left; font-size:24px; margin-top:5px; padding-left:10px;">
 
@@ -30,7 +30,7 @@
                 <tr>
                     <td>
                         <a href="#/mainmenu">
-                            <i class="fa fa-long-arrow-left"></i>
+                            <img src="img/back.png" alt="Alternate Text" />
                         </a>
                     </td>
 
@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <div class="animated slideInLeft editmode" style="padding:15px; display:none; text-align:left">
+    <div class="editmode" style="padding:15px; display:none; text-align:left">
 
 
 
@@ -82,14 +82,20 @@
                 <input class="form-control" ng-model="phone" type="text" name="name" />
             </div>
 
-
-
-
-            <a ng-if="isSaving==false" ng-disabled="myForm.$invalid" ng-click="Updateinfo()" style="" class="btn btn-large btn-primary"> <i class="fa fa-pencil"></i> Update</a>
-            <a ng-if="isSaving==true" ng-click="Updateinfo()" style="" class="btn btn-large btn-primary disabled"> <i class="fa fa-pencil fa-spin"></i> Update</a>
-
-            <a style="width: 100%; margin-top: 12px;" ng-click="detailmode()" class="btn btn-large btn-default"> <i class="fa fa-times"></i> Cancel</a>
         </form>
+        <div style="position:fixed; width:100%; bottom:0; left:0; right:0;">
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:50%;">
+                        <a ng-if="isSaving==false" ng-disabled="myForm.$invalid" ng-click="Updateinfo()" style="border-radius:0px; margin-bottom:0px;" class="btn btn-large waves-effect btn-primary"> <i class="fa fa-pencil"></i> Update</a>
+                        <a ng-if="isSaving==true" ng-click="Updateinfo()" style="border-radius:0px; margin-bottom:0px;" class="btn btn-large btn-primary waves-effect disabled"> <i class="fa fa-pencil fa-spin"></i> Update</a>
+                    </td>
+                    <td style="width:50%;">
+                        <a style="border-radius:0px; margin-bottom:0px; width:100%;" ng-click="detailmode()" class="waves-effect btn btn-large btn-default"> <i class="fa fa-times"></i> Cancel</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 
 </div>

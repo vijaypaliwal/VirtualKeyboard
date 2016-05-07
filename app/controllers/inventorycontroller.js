@@ -81,7 +81,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $(".iosbtn").hide()
     }
 
-
+    
 
     $scope.CheckInCommonArray = function (Column) {
         for (var i = 0; i < $scope.CommonArray.length ; i++) {
@@ -536,6 +536,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         return false;
     }
+
+   
     $scope.resetObject = function () {
         $scope.InventoryObject = {
             IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: 0, Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
@@ -543,7 +545,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             UnitTag3: "", CustomPartData: [], CustomTxnData: []
         };
         $scope.ImageList = [];
-        $('#list321').html('<img id="defaultimg" ng-click="getstep(9,\&#39;Image\&#39;)" style="height:70px; width:65px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text">');
+
+        $("#defaultimg").remove();
+        $('#list321').html('<img id="defaultimg" ng-click="getstep(9,\&#39;Image\&#39;)" style="height:100px; width:95px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text">');
         $('#list123').html('');
     }
 
@@ -620,7 +624,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": $scope.ImageList }),
               success: function (response) {
 
-                  log.success("Inventory item added successfully.");
+                  ShowSuccess("Saved");
 
                   $scope.resetObject();
 
@@ -1147,7 +1151,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     document.getElementById('list123').insertBefore(span, null);
 
-                    var imagepath = '<span><img  id="' + id + '" style="height: 60px; width:60px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
+                    var imagepath = '<span><img  id="' + id + '" style="height: 100px;width: 95px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
 
 
                     $("#list321").append(imagepath);
@@ -1199,9 +1203,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     function init() {
         $scope.GetAllData();
-
+        
 
     }
+
+  
 
     function ConvertDatetoDate(_stringDate)
     {
@@ -1354,7 +1360,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.IsinavailableInventoryField = function (field) {
-        var _FieldArray = ["iReqValue", "iUnitTag2", "iUnitTag3", "iUniqueDate", "iUnitDate2", "iUnitNumber1", "iUnitNumber2", "pDescription", "pPart", "lLoc", "uomUOM", "iQty", "iStatusValue"]
+        var _FieldArray = ["iReqValue", "iUnitTag2", "iUnitTag3", "iUniqueDate", "iUnitDate2", "iUnitNumber1", "iUnitNumber2", "pDescription", "pPart", "lLoc", "uomUOM", "iQty", "iStatusValue","pCountFrq","lZone"]
 
 
 
@@ -1456,6 +1462,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     case "iUnitNumber2":
                         _id = "#UnitNumber2";
                         $scope.InventoryObject.UnitNumber2 = resultvalue;
+                        break;
+                    case "pCountFrq":
+                        _id = "#itemgroup";
+                        $scope.InventoryObject.ItemGroup = resultvalue;
+                        break;
+                    case "lZone":
+                        _id = "#lZone";
+                        $scope.InventoryObject.lZone = resultvalue;
                         break;
                     default:
 
@@ -1929,9 +1943,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     function movetolist() {
         navigator.notification.confirm(
-            'Do you want to add more records ?', // message
+            'Press yes to continue', // message
              onConfirmmove,            // callback to invoke with index of button pressed
-            'Are you sure',           // title
+            'Do you want to add more?',           // title
             ['Yes', 'No']         // buttonLabels
         );
     }

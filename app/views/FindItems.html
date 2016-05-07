@@ -13,7 +13,7 @@
 
 
         <div class="col-xs-5">
-            <h4 style="margin-top:0px;">Inventory Items </h4>
+            <h4 style="margin-top:0px;">Inventory </h4>
         </div>
         <div style="text-align:right" class="col-xs-7">
             <p style="font-size:13px;">{{currentrecord}} of {{totalrecords}} records shown</p>
@@ -41,24 +41,22 @@
 
                         <div class="input-group">
 
-                            <span class="input-group-addon">
-                                <ul style="padding:0px; margin:auto">
-                                    <li style="list-style-type:none;" class="dropdown">
-                                        <a data-toggle="dropdown" class="waves-effect waves-effect status">
-                                            <i class="fa fa-search" style="font-size:20px;"></i> <span class="caret" style="margin-top: -5px;"></span>
-                                        </a>
+                            <span class="input-group-addon" id="addonData">
 
-                                        <ul class="dropdown-menu dm-icon searchlist animated slideInDown">
-                                            <li><a ng-click="searchfunction('All')" alt="All">All</a></li>
-                                            <li><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
-                                            <li><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
-                                            <li><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">Status</a></li>
-                                            <li class="unitSearchFields" style="display: block;"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">Unique Tag</a></li>
+                                <a class="waves-effect waves-effect status dropdown" data-toggle="dropdown">
+                                    <i class="fa fa-search" style="font-size:20px;"></i> <span class="caret" style="margin-top: -5px;"></span>
+                                </a>
+
+                                <ul class="dropdown-menu dm-icon searchlist animated slideInDown">
+                                    <li><a ng-click="searchfunction('All')" alt="All">All</a></li>
+                                    <li><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
+                                    <li><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
+                                    <li><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">Status</a></li>
+                                    <li class="unitSearchFields" style="display: block;"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">Unique Tag</a></li>
 
 
-                                        </ul>
-                                    </li>
                                 </ul>
+
                             </span>
                             <div style="position:relative" class="fg-line">
                                 <input style="border-radius:0px;" id="MasterSearch" type="text" ng-model="SearchValue" class="form-control" placeholder="Type to Search">
