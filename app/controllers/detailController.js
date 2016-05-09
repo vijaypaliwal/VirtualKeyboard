@@ -4,7 +4,8 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
     $scope.SavingData = false;
     $scope.IsEditMode = false;
     $scope.ImageList = [];
-
+    $scope.slide = 0;
+    $scope.Totalslides = 0;
   
 
     $scope.mainObjectToSend = [];
@@ -75,23 +76,28 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
             onSlideChangeEnd: function (swiperHere) {
 
 
+                $scope.slide = swiperHere.activeIndex;
+           
+                $scope.Totalslides = swiperHere.slides.length;
+                
+                $scope.$apply();
             }
 
 
         });
 
+            $('.arrow-left').on('click', function (e) {
+                e.preventDefault()
+                mySwiper.swipePrev();
 
-        $('.arrow-left').on('click', function (e) {
-            e.preventDefault()
-            mySwiper.swipePrev();
+            })
+            $('.arrow-right').on('click', function (e) {
+                e.preventDefault()
+                mySwiper.swipeNext()
 
-        })
-        $('.arrow-right').on('click', function (e) {
+            })
 
-            e.preventDefault()
-            mySwiper.swipeNext()
-
-        })
+      
 
     }
 

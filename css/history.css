@@ -591,6 +591,17 @@
     
     
      .activityinfo h5 {
-        padding: 10px;
+         padding: 0px;
+        padding-left: 10px;
+        
         color: #fff;
     }
+
+     .btn-floating{
+          background: white !important;
+    color: #312F2F !important;
+    font-size: 33px;
+    padding-top: 4px;
+    margin-top: 4px;
+    text-align:center;
+     }

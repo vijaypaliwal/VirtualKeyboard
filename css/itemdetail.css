@@ -81,7 +81,9 @@
     .bgm-red {
         background: #f44336;
     }
-
+   .bgm-orange {
+    background-color: #f8c217 !important;
+}
     .container {
         width: 100% !important;
         padding-left: 0px;

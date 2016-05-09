@@ -89,7 +89,8 @@
 
                                     <tr>
                                         <td>
-                                            <span class="arrow-left" ng-show="ImageList.length != 1"><i class="fa fa-angle-left"></i></span>
+                                            <span class="arrow-left" ng-show="slide != 0"><i class="fa fa-angle-left"></i></span>
+                                            <span class="arrow-left" style="pointer-events:none; color:#ccc" ng-if="slide == 0"><i class="fa fa-angle-left"></i></span>
                                         </td>
                                         <td>
                                             <div style="text-align:center">
@@ -97,7 +98,8 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="arrow-right" ng-show="ImageList.length != 1"><i class="fa fa-angle-right"></i></span>
+                                            <span class="arrow-right" ng-show="slide+1 != Totalslides"><i class="fa fa-angle-right"></i></span>
+                                            <span style="pointer-events: none; color: #ccc" ng-if="slide+1 == Totalslides"><i class="fa fa-angle-right"></i></span>
                                         </td>
                                     </tr>
                                 </table>
@@ -293,7 +295,7 @@
                     <li ng-click="viewhistory()"><span>View history</span><a href="#/InventoryHistory" class="waves-effect btn-primary btn"> <i class="fa fa-file-text"></i> </a></li>
                     <li ng-click="showinventory()"><span>Show all Inventory</span><a href="#/FindItems" class="waves-effect btn-danger btn"> <i class="fa fa-dollar"></i> </a></li>
                     <li ng-click="addtocart(CurrentInventory)"><span>Select fot cart</span><a class="waves-effect btn-success btn" data-dismiss="modal"> <i class="fa fa-shopping-cart"></i> </a></li>
-                    <li ng-click="ToggleEditView()"><span>Edit Item details</span><a class="waves-effect btn bgm-red" data-dismiss="modal"> <i class="fa fa-pencil"></i> </a></li>
+                    <li ng-click="ToggleEditView()"><span>Edit Item details</span><a class="waves-effect btn bgm-orange" data-dismiss="modal"> <i class="fa fa-pencil"></i> </a></li>
                 </ul>
             </div>
         </div>
