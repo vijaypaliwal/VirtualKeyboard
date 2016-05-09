@@ -511,7 +511,7 @@
 </div>
 
 
-<a ng-click="addinventory()" style="width:100%; margin-top:20px;text-align:center;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"> <i class="fa fa-plus"></i>  Add Inventory</a>
+<a ng-click="addinventory()" ng-if="IsFormDataloaded==true" style="width:100%; margin-top:20px;text-align:center;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"> <i class="fa fa-plus"></i>  Add Inventory</a>
 
 
 <div id="myModalforlist" class="modal fade" role="dialog">

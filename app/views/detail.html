@@ -51,6 +51,10 @@
         opacity: 0.5;
         z-index: 5000;
     }
+
+    .modal-backdrop.in {
+        opacity: 0.8;
+    }
 </style>
 
 
@@ -137,7 +141,7 @@
                     </div>
 
                 </div>
-                <div class="floating-button animated bouncein delay-3">
+                <div style="bottom:3px;" class="floating-button animated bouncein delay-3">
 
                     <span class="btn-floating resize btn-large waves-effect waves-light accent-color btn z-depth-1" ng-click="ToggleEditView()">
                         <i class="fa fa-pencil">
@@ -151,10 +155,10 @@
 
 
         <!-- Profile Content -->
-        <div class="card m-t-40 animated fadeinup delay-1">
+        <div class="card m-t-10 animated fadeinup delay-1" style="padding:10px;">
             <div class="c-widget">
                 <div class="c-widget-figure primary-color">
-                    <i class="fa fa-align-justify udt"></i>
+                    <i class="fa fa-info udt"></i>
                 </div>
                 <div class="c-widget-body">
                     <p class="m-0" style="color:black;"> {{CurrentInventory.pPart}} </p>
@@ -163,7 +167,7 @@
             </div>
         </div>
 
-        <div class="card m-t-40 animated fadeinup delay-1">
+        <div class="card m-t-10 animated fadeinup delay-1" style="padding:10px;">
             <div class="c-widget">
                 <div class="c-widget-figure primary-color">
                     <i class="fa fa-list udt"></i>
@@ -175,17 +179,17 @@
             </div>
         </div>
 
-        <div class="card m-t-40 animated fadeinup delay-1">
+        <div class="card m-t-10 animated fadeinup delay-1" style="padding:10px;">
             <div class="c-widget">
                 <div class="c-widget-figure primary-color">
-                    <i class="fa fa-asterisk udt"></i>
+                    <i class="fa fa-map-marker udt"></i>
                 </div>
                 <div class="c-widget-body">
                     <p class="m-0">On Location {{CurrentInventory.lLoc}} </p>
                     <p class="small m-0">{{CurrentInventory.iStatusValue}} is Status.</p>
-                  
+
                 </div>
-              
+
             </div>
         </div><br />
 <br />
