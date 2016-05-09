@@ -82,8 +82,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $(".iosbtn").hide()
     }
 
+   
     
-
     $scope.CheckInCommonArray = function (Column) {
         for (var i = 0; i < $scope.CommonArray.length ; i++) {
             if ($scope.CommonArray[i] == Column) {
@@ -713,7 +713,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
  })
  .on('blur', 'input', function () {
-
+     $("#hiddenInput").focus();
      $('.topheader').css("position", "absolute");
      $('.iteminfopanel').css('margin-top', '80px');
 
