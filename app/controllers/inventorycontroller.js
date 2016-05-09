@@ -12,6 +12,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.CurrentActiveFieldDatatype = "";
     $scope.Totalslides = 0;
     $scope.CurrentCount = 0;
+    $scope.IsFormDataloaded = false;
     $scope.InventoryObject = {
         IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: "", Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
         UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: "/Date(1320825600000-0800)/", UnitDate2: "/Date(1320825600000-0800)/", UnitNumber1: 0, UnitNumber2: 0, UnitTag2: "",
@@ -705,19 +706,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
-    $(document)
- .on('focus', 'input', function () {
-
-
-     $('.topheader').css("position", "absolute");
-
- })
- .on('blur', 'input', function () {
-     $("#hiddenInput").focus();
-     $('.topheader').css("position", "absolute");
-     $('.iteminfopanel').css('margin-top', '80px');
-
- });
+  
 
 
     $scope.GetAllData = function () {
@@ -1895,7 +1884,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             setTimeout(function () {
                 var _TempcolName = $(".swiper-slide-active").attr("data-column");
                 $scope.CurrentActiveField = _TempcolName != undefined && _TempcolName != "" ? _TempcolName : "";
-                $scope.Totalslides= mySwiper.slides.length-1;
+                $scope.Totalslides = mySwiper.slides.length - 1;
+                $scope.IsFormDataloaded = true;
+
                 CheckScopeBeforeApply()
             }, 10)
 
