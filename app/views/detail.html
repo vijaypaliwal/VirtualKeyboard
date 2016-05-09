@@ -89,7 +89,7 @@
                                         </td>
                                         <td>
                                             <div style="text-align:center">
-                                                <img style=" border: 1px solid #ccc;" ng-click="OpenImageModal(obj)" src="{{obj.SmallImageURI}}" alt="" />
+                                                <img style=" border: 1px solid #ccc;" ng-click="OpenImageModal(obj)" src="{{obj.LargeImageURI}}" alt="" />
                                             </div>
                                         </td>
                                         <td>
@@ -286,17 +286,17 @@
 
             <div class="modal-body">
                 <ul class="animated slideInUp" id="selectAction">
-                    <li ng-click="viewhistory()"><span>View history</span><a href="#/InventoryHistory" class="btn-primary btn"> <i class="fa fa-file-text"></i> </a></li>
-                    <li ng-click="showinventory()"><span>Show all Inventory</span><a href="#/FindItems" class="btn-danger btn"> <i class="fa fa-dollar"></i> </a></li>
-                    <li ng-click="addtocart(CurrentInventory)"><span>Select fot cart</span><a class="btn-success btn" data-dismiss="modal"> <i class="fa fa-shopping-cart"></i> </a></li>
-                    <li ng-click="ToggleEditView()"><span>Edit Item details</span><a class="btn bgm-red" data-dismiss="modal"> <i class="fa fa-pencil"></i> </a></li>
+                    <li ng-click="viewhistory()"><span>View history</span><a href="#/InventoryHistory" class="waves-effect btn-primary btn"> <i class="fa fa-file-text"></i> </a></li>
+                    <li ng-click="showinventory()"><span>Show all Inventory</span><a href="#/FindItems" class="waves-effect btn-danger btn"> <i class="fa fa-dollar"></i> </a></li>
+                    <li ng-click="addtocart(CurrentInventory)"><span>Select fot cart</span><a class="waves-effect btn-success btn" data-dismiss="modal"> <i class="fa fa-shopping-cart"></i> </a></li>
+                    <li ng-click="ToggleEditView()"><span>Edit Item details</span><a class="waves-effect btn bgm-red" data-dismiss="modal"> <i class="fa fa-pencil"></i> </a></li>
                 </ul>
             </div>
         </div>
 
-        <a style="font-size: 30px; background: #4caf50 !important; margin-right: 8px; font-family: monospace; text-decoration: none;" ng-click="OpenmenuModal()" class="Addbtn btn-info">
-            I
-        </a>
+    <a style="font-size: 30px; background: #4caf50 !important; margin-right: 8px; font-family: monospace; text-decoration: none;" ng-click="OpenmenuModal()" class="waves-effect Addbtn btn-info">
+        I
+    </a>
 
 
         <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
