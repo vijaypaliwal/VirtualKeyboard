@@ -298,3 +298,8 @@
     .redText{
         color:red !important;
     }
+
+
+    #toolbar{
+        position:absolute;
+    }
