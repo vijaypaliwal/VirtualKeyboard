@@ -1711,9 +1711,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#myform .swiper-slide-active input:first").focus();
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
-        e.preventDefault(); e.stopPropagation();
-        window.scrollTo(0, 0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px. 
+      
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+
+     
+
         SoftKeyboard.show();
+
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
 
     }
 
