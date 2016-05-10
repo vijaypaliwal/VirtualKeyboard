@@ -1712,13 +1712,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
       
-        $('html, body').animate({ scrollTop: 0 }, 'fast');
+        $('html, body').animate({ scrollTop: 0 }, 600);
 
      
 
         SoftKeyboard.show();
 
-        $('html, body').animate({ scrollTop: 0 }, 'fast');
+        $('html, body').animate({ scrollTop: 0 }, 600);
 
     }
 
@@ -1728,7 +1728,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     /* bind events */
     $(document)
     .on('focus', 'input', function () {
-        $('html, body').animate({ scrollTop: 0 }, 'fast');
+        $('html, body').animate({ scrollTop: 0 }, 600);
 
     })
     .on('blur', 'input', function () {
