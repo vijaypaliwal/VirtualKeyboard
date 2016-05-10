@@ -7,7 +7,7 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
         account: "QAT9872",
         useRefreshTokens: false
     };
-    cordova.plugins.Keyboard.disableScroll(false);
+ 
  
     $scope.message = "";
 
@@ -32,5 +32,6 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
          });
     };
 
-
+    setTimeout(function () { cordova.plugins.Keyboard.disableScroll(false); }, 2000);
+   
 }]);
