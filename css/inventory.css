@@ -306,6 +306,7 @@
     #toolbar{
       
         height:40px;
+        position:fixed;
     }
     #toolbar i {
   
