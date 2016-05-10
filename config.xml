@@ -24,7 +24,7 @@
   <gap:plugin name="org.apache.cordova.dialogs"/>
   <gap:plugin name="org.apache.cordova.vibration"/>
 
-  <gap:plugin name="com.ionic-for-phonegap.keyboard" spec="0.0.1" source="pgb" />
+ 
 
 
   <feature name="http://api.phonegap.com/1.0/device" />
@@ -32,7 +32,7 @@
     <param name="domain" value="http://debug.phonegap.com"/>
     <param name="key" value="willoughby"/>
   </feature>
-
+  <preference name="DisallowOverscroll" value="true" />
   <preference name="phonegap-version" value="3.6.3" />
   <preference name="orientation"   value="default" />
   <preference name="target-device"  value="universal" />

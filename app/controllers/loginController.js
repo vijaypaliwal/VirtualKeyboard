@@ -32,6 +32,6 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
          });
     };
 
-    setTimeout(function () { cordova.plugins.Keyboard.disableScroll(false); }, 2000);
+   
    
 }]);

@@ -1697,7 +1697,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
       
      //   $('html, body').animate({ scrollTop: 0 }, 800);
 
-        cordova.plugins.Keyboard.disableScroll(true);
+      //  cordova.plugins.Keyboard.disableScroll(true);
 
         SoftKeyboard.show();
 

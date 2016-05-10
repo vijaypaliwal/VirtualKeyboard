@@ -2748,7 +2748,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
 
-    cordova.plugins.Keyboard.disableScroll(false);
+   
 
 
     var $body = jQuery('body');
