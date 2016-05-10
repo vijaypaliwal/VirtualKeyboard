@@ -803,8 +803,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               error: function (err) {
                   console.log(err);
                   log.error("Error Occurred during operation");
-
-
               }
           });
 
@@ -905,15 +903,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
 
-
-
                    $scope.LocationList = response.GetLocationsResult.Payload;
                    CheckScopeBeforeApply()
                },
                error: function (response) {
 
-
-                   console.log(response);
+                console.log(response);
 
 
                }
@@ -1162,39 +1157,27 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             });
         }, 100);
 
-
-
     }
 
 
-
-
-    function removeImage(_this) {
-
-
-
+    function removeImage(_this)
+    {
         $("#" + _this).each(function () {
-
-            $(this).parent("span").remove();
+        $(this).parent("span").remove();
         });
-
         for (var i = 0; i < $scope.ImageList.length; i++) {
             if ($scope.ImageList[i].ImageID == _this) {
-                $scope.ImageList.splice(i, 1);
-                break;
+              $scope.ImageList.splice(i, 1);
+              break;
             }
-
         }
 
-
-        removeImage(_this)
+      removeImage(_this)
 
     }
 
     function init() {
         $scope.GetAllData();
-        
-
     }
 
   
