@@ -7,10 +7,12 @@
         background: #fff;
     }
 
+
    .swiper-slide {
     height: auto !important;
-    min-height: 160px;
-    padding-top: 36px;
+    min-height: 110px;
+    max-height:120px;
+    padding-top: 10px;
 }
 
     #myModal1 {
@@ -302,4 +304,35 @@
 
     #toolbar{
         position:absolute;
+        height:45px;
     }
+    #toolbar i {
+  
+    line-height: 45px;
+  
+}
+
+.open-left {
+ 
+    height: 45px;
+    line-height: 45px;
+ 
+}
+
+#toolbar .title {
+   
+    line-height: 45px;
+  
+}
+
+.open-right {
+  
+    height: 45px;
+    line-height: 45px;
+ 
+}
+
+.iteminfo
+{
+    margin-top:0px;
+}
