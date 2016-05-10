@@ -24,6 +24,8 @@
   <gap:plugin name="org.apache.cordova.dialogs"/>
   <gap:plugin name="org.apache.cordova.vibration"/>
 
+  <gap:plugin name="com.ionic-for-phonegap.keyboard" spec="0.0.1" source="pgb" />
+
 
   <feature name="http://api.phonegap.com/1.0/device" />
   <feature name="debug-server" required="true">
