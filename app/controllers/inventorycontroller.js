@@ -549,7 +549,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.ImageList = [];
 
         $("#defaultimg").remove();
-        $('#list321').html('<img id="defaultimg" ng-click="getstep(9,\&#39;Image\&#39;)" style="height:65px; width:65px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text">');
+        $('#list321').html('<img id="defaultimg" ng-click="getstep(9,\&#39;Image\&#39;)" style="height:85px; width:80px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text">');
         $('#list123').html('');
     }
 
@@ -1141,7 +1141,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     document.getElementById('list123').insertBefore(span, null);
 
-                    var imagepath = '<span><img  id="' + id + '" style="height:65px;width: 65px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
+                    var imagepath = '<span><img  id="' + id + '" style="height:85px;width: 80px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
 
 
                     $("#list321").append(imagepath);

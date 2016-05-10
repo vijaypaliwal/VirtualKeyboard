@@ -11,9 +11,9 @@
 
    .swiper-slide {
     height: auto !important;
-    min-height: 90px;
+    min-height: 95px;
     max-height:120px;
-    padding-top:3px;
+    padding-top:8px;
 }
 
     #myModal1 {
