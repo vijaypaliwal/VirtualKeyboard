@@ -1722,6 +1722,20 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
+
+    var $body = jQuery('body');
+
+    /* bind events */
+    $(document)
+    .on('focus', 'input', function () {
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+
+    })
+    .on('blur', 'input', function () {
+     
+
+    });
+
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
 
