@@ -19,6 +19,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         UnitTag3: "", CustomPartData: [], CustomTxnData: []
     };
 
+    lockScroll();
+
+
     $scope.CommonArray = ['iUnitNumber1', 'iUnitNumber2', 'iUnitTag3', 'iUnitTag2', 'iReqValue', 'pPart', 'pDescription', 'iQty', 'lLoc', 'lZone', 'iStatusValue', 'uomUOM', 'pCountFrq', 'iCostPerUnit'];
 
     $scope.LocationList = [{ LocationName: "dhdd", LocationZone: "", LocationID: 678325 },

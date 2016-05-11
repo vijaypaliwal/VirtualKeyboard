@@ -1,7 +1,7 @@
 ﻿
 
 'use strict';
-app.controller('FindItemsController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard', function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard) {
+app.controller('FindItemsController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
 
     $scope.InventoryItems = [];
     $scope.SecurityToken = "";
@@ -1025,8 +1025,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     function init() {
 
-        $cordovaKeyboard.disableScroll(true)
-
+      
+        unlockScroll();
       
         var _myItemsList = localStorageService.get("ActivityCart");
         _myItemsList = _myItemsList != null && _myItemsList != undefined ? _myItemsList : [];
