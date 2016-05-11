@@ -33,9 +33,7 @@
     <param name="key" value="willoughby"/>
   </feature>
 
-  <feature name="Keyboard">
-    <param name="ios-package" value="IonicKeyboard" onload="true" />
-  </feature>
+  <preference name="fullscreen" value="false" />
   
   <preference name="webviewbounce" value="false" />
   <preference name="DisallowOverscroll" value="true" />
