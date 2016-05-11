@@ -1025,9 +1025,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     function init() {
 
-      
-        unlockScroll();
-      
         var _myItemsList = localStorageService.get("ActivityCart");
         _myItemsList = _myItemsList != null && _myItemsList != undefined ? _myItemsList : [];
         if (_myItemsList.length > 0) {
