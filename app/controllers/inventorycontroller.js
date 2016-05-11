@@ -1735,7 +1735,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
         SoftKeyboard.show();
-        Keyboard.shrinkView(true);
+     
 
     }
 

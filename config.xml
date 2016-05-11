@@ -2,7 +2,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.phonegap.ryanw.barcodedemo"
-        version   = "3.4.0">
+        version   = "2.0.0">
   <name>Clearly Inventory</name>
 
   <description>
@@ -12,7 +12,6 @@
   <author href="http://phonegap.com" email="support@phonegap.com">
     PhoneGap Team
   </author>
-
  
   <gap:plugin name="com.phonegap.plugins.barcodescanner"/>
   <gap:plugin name="org.apache.cordova.statusbar" spec="0.1.4" source="pgb" />
@@ -25,21 +24,15 @@
   <gap:plugin name="org.apache.cordova.dialogs"/>
   <gap:plugin name="org.apache.cordova.vibration"/>
 
+ 
 
-  
+
   <feature name="http://api.phonegap.com/1.0/device" />
   <feature name="debug-server" required="true">
     <param name="domain" value="http://debug.phonegap.com"/>
     <param name="key" value="willoughby"/>
   </feature>
-  <feature name="Keyboard">
-    <param name="ios-package" value="CDVKeyboard" onload="true" />
-  </feature>
-
-  <preference name="fullscreen" value="false" />
-  
-
-  
+  <preference name="DisallowOverscroll" value="true" />
   <preference name="phonegap-version" value="3.6.3" />
   <preference name="orientation"   value="default" />
   <preference name="target-device"  value="universal" />
