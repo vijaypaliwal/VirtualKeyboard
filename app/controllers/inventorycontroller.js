@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('inventoryController', ['$scope', '$location', 'authService', 'localStorageService', 'log', '$compile', '$cordovaKeyboard', function ($scope, $location, authService, localStorageService, log, $compile, $cordovaKeyboard) {
+app.controller('inventoryController', ['$scope', '$location', 'authService', 'localStorageService', 'log', '$compile', '$cordovaKeyboard', function ($scope, $location, authService, localStorageService, log, $compile) {
     ''
     $scope.orders = [];
     $scope.MyinventoryFields = [];
@@ -1219,14 +1219,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     function init() {
-        $cordovaKeyboard.hideAccessoryBar(true)
-
-        $cordovaKeyboard.disableScroll(true)
-
-        $cordovaKeyboard.close()
         $scope.GetAllData();
 
-        
+
     }
 
 
