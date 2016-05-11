@@ -1214,6 +1214,10 @@ app.directive('onLongPress', function ($timeout) {
 })
 
 
+cordova.plugins.Keyboard.disableScroll(false);
+
+
+
 app.directive('imageonload', function () {
     return {
         restrict: 'A',
