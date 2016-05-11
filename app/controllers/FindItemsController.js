@@ -1,5 +1,9 @@
-﻿'use strict';
+﻿
+
+'use strict';
 app.controller('FindItemsController', ['$scope',  'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
+
+    
 
     $scope.InventoryItems = [];
     $scope.SecurityToken = "";
@@ -1022,6 +1026,8 @@ app.controller('FindItemsController', ['$scope',  'localStorageService', 'authSe
     }
 
     function init() {
+        cordova.plugins.Keyboard.disableScroll(false);
+        alert("done");
         var _myItemsList = localStorageService.get("ActivityCart");
         _myItemsList = _myItemsList != null && _myItemsList != undefined ? _myItemsList : [];
         if (_myItemsList.length > 0) {
