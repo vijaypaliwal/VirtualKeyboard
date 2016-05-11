@@ -34,12 +34,8 @@
   </feature>
 
   <preference name="fullscreen" value="false" />
+  
 
-  >><preference name="DisallowOverscroll" value="false" />
-  >><preference name="EnableViewportScale" value="false" />
-  >><preference name="HideKeyboardFormAccessoryBar" value="false" />
-  >><preference name="KeyboardDisplayRequiresUserAction" value="true" />
-  >><preference name="KeyboardShrinksView" value="false" />
   
   <preference name="phonegap-version" value="3.6.3" />
   <preference name="orientation"   value="default" />
@@ -50,9 +46,9 @@
   <preference name="StatusBarOverlaysWebView" value="false" />
   <preference name="StatusBarBackgroundColor" value="#2196F3" />
   <preference name="StatusBarStyle" value="lightcontent" />
-  <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+  <preference name="KeyboardDisplayRequiresUserAction" value="false" />
 <preference name="HideKeyboardFormAccessoryBar" value="true"/>
-
+  <preference name="KeyboardShrinksView" value="true" />
 
   
   
