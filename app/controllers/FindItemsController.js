@@ -1214,7 +1214,7 @@ app.directive('onLongPress', function ($timeout) {
 })
 
 
-cordova.plugins.Keyboard.disableScroll(false);
+
 
 
 
