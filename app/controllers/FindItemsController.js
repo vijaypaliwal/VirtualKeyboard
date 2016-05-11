@@ -1026,7 +1026,7 @@ app.controller('FindItemsController', ['$scope',  'localStorageService', 'authSe
     }
 
     function init() {
-        cordova.plugins.Keyboard.disableScroll(false);
+      //  cordova.plugins.Keyboard.disableScroll(false);
         alert("done");
         var _myItemsList = localStorageService.get("ActivityCart");
         _myItemsList = _myItemsList != null && _myItemsList != undefined ? _myItemsList : [];
