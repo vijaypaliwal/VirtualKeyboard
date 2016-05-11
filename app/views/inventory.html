@@ -33,7 +33,7 @@
                                 <img id="defaultimg" style="height:80px; width: 72px; border: 1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
                             </div>
 
-                            <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==false">
+                            <div class="col-md-2 col-xs-3" ng-if="IsAvailableMyInventoryColumn('Image')==false">
 
                                 <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
 
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <h5 style="text-align:center; padding-top:10px;"><span>Step {{CurrentCount+1}} of {{Totalslides+1}}</span></h5>
+            
 
 
                 <div class="swiper-wrapper">
@@ -440,7 +440,9 @@
                     </div>
 
 
-
+                    <div class="swiper-slide">
+                        <a ng-click="addinventory()" ng-if="IsFormDataloaded==true" style="width:100%; margin-top:20px;text-align:center;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"> <i class="fa fa-plus"></i>  Add Inventory</a>
+                    </div>
 
                 </div>
 
@@ -504,7 +506,7 @@
 
 
 
-<a ng-click="addinventory()" ng-if="IsFormDataloaded==true" style="width:100%; margin-top:20px;text-align:center;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"> <i class="fa fa-plus"></i>  Add Inventory</a>
+
 
 
 <div id="myModalforlist" class="modal fade" role="dialog">
