@@ -1,11 +1,11 @@
 ﻿'use strict';
-app.controller('indexController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard', function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard) {
+app.controller('indexController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard', '$cordovaStatusbar', function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard, $cordovaStatusbar) {
     function checkurl()
     {
         var path = "activity";
         if ($location.path().substr(0, path.length) !== path) {
             console.log("not into activity");
-            StatusBar.backgroundColorByHexString("#0083C7");
+            $cordovaStatusbar.styleHex("#0083C7");
         }
         else {
             console.log("into activity");

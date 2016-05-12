@@ -315,45 +315,45 @@
 
     #toolbar{
       
-        height:40px;
+        height:45px;
         position:fixed;
     }
     #toolbar i {
   
-    line-height: 40px;
+    line-height: 45px;
   
 }
 
 .open-left {
  
-    height: 40px;
-    line-height: 40px;
+    height: 45px;
+    line-height: 45px;
  
 }
 
 #toolbar .title {
    
-    line-height: 40px;
+    line-height: 45px;
   
 }
 
 .open-right {
   
-    height: 40px;
-    line-height: 40px;
+    height: 45px;
+    line-height: 45px;
  
 }
 
 .iteminfo
 {
-    margin-top:2px;
-    padding-top:4px;
+    margin-top:1px;
+    padding-top:8px;
     min-height:initial;
-    padding-bottom:5px;
+    padding-bottom:8px;
 }
 
 #viewdata {
-    margin-top: 40px;
+    margin-top: 45px;
 }
 
 

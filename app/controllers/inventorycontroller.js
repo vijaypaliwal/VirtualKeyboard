@@ -1499,7 +1499,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                 CheckScopeBeforeApply();
 
-                $('#rotatebar').removeClass("fa-spin");
+                $('#rotatebar').find("i").removeClass("fa-spin");
             }
 
             else {
@@ -1510,7 +1510,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
             vibrate();
-
+            $('#rotatebar').find("i").removeClass("fa-spin");
 
 
         }, function (error) {
@@ -1628,7 +1628,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 mySwiper.swipeNext();
 
                 CheckScopeBeforeApply();
-                $('#rotatebar').removeClass("fa-spin");
+                $('#rotatebar').find("i").removeClass("fa-spin");
 
             }
 
