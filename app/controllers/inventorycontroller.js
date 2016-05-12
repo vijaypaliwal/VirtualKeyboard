@@ -1219,7 +1219,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     function init() {
-        $cordovaKeyboard.disableScroll(true)
+        $cordovaKeyboard.disableScroll(true);
         $scope.GetAllData();
 
 
