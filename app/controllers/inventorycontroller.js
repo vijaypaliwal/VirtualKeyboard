@@ -1133,6 +1133,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.handleFileSelect = function (evt) {
+
+        debugger;
         var files = evt.target.files;
         FileName = "";
         StreamData = "";
@@ -1931,6 +1933,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 $scope.Totalslides = mySwiper.slides.length - 1;
                 $scope.IsFormDataloaded = true;
 
+                $("#files").on('change', function (event) {
+                    $scope.handleFileSelect(event);
+                });
                 CheckScopeBeforeApply()
             }, 10)
 
