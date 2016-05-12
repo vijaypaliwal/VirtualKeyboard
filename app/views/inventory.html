@@ -453,11 +453,10 @@
                         </td>
 
 
-
                         <td ng-if="IsinavailableInventoryField(CurrentActiveField)==true">
 
                             <div style="text-align:center" ng-click="ScanNew()">
-                                <button class="scanbtn btn btn-default" id="rotatebar" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i> Scan</button>
+                                <button class="scanbtn btn btn-default" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i> Scan</button>
                                 <a class="scanbtn waves-effect btn btn-default" id="rotatebar" ng-if="CurrentActiveField!='pPart'"> <i class="fa fa-barcode"></i> Scan</a>
                             </div>
 

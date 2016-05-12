@@ -2739,8 +2739,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 CheckScopeBeforeApply();
                 return true;
             }
-
-
         }
         return false;
     }
@@ -2767,8 +2765,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
 
-   
-
 
     var $body = jQuery('body');
 
@@ -2792,7 +2788,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     })
     .on('blur', 'input', function () {
         $('.header').css("position", "fixed");
-        $('.collapsible-header').css("top", "38px");
+        $('.collapsible-header').css("top", "37px");
         $('.collapsible-header').css("position", "fixed");
         $('.collapsible-body').css('margin-top', '85px');
         $('.iteminfopanel').css('margin-top', '80px');
