@@ -1419,7 +1419,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
     $scope.ScanNew = function () {
 
-        $('#rotatebar').find(".fa").addClass("fa-spin");
+      
 
         var _id = "#";
 
@@ -1508,7 +1508,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                 CheckScopeBeforeApply();
 
-                $('#rotatebar').find("i").removeClass("fa-spin");
+               
             }
 
             else {
@@ -1519,7 +1519,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
             vibrate();
-            $('#rotatebar').find("i").removeClass("fa-spin");
+         
 
 
         }, function (error) {
@@ -1569,7 +1569,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
     }
     $scope.ScanNewCustom = function () {
-        $('#rotatebar').find(".fa").addClass("fa-spin");
+       
         var _id = "#" + _colid;
 
         var _colarray = _colid.split("_");
@@ -1637,7 +1637,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 mySwiper.swipeNext();
 
                 CheckScopeBeforeApply();
-                $('#rotatebar').find("i").removeClass("fa-spin");
+          
 
             }
 
