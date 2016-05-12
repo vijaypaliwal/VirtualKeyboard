@@ -17,11 +17,9 @@
 }
 
 
-
-
    .swiper-slide {
     height: auto !important;
-    min-height: 95px;
+    min-height:100px;
     max-height:120px;
     padding-top:8px;
 }
