@@ -23,8 +23,7 @@
   <gap:plugin name="org.apache.cordova.geolocation"/>
   <gap:plugin name="org.apache.cordova.dialogs"/>
   <gap:plugin name="org.apache.cordova.vibration"/>
-
- 
+  <gap:plugin  name="ionic-plugin-keyboard"  source="npm" version="1.0.7" />
 
 
   <feature name="http://api.phonegap.com/1.0/device" />
