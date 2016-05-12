@@ -1423,7 +1423,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         var _id = "#";
 
+
         var ControlID = $scope.CurrentActiveField;
+
+        alert(ControlID);
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
         scanner.scan(function (result) {
