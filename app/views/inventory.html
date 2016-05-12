@@ -456,17 +456,17 @@
 
                         <td ng-if="IsinavailableInventoryField(CurrentActiveField)==true">
 
-                            <div style="text-align:center">
+                            <div style="text-align:center" ng-click="ScanNew()">
                                 <button class="scanbtn btn btn-default" id="rotatebar" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i> Scan</button>
-                                <a class="scanbtn waves-effect btn btn-default" id="rotatebar" ng-if="CurrentActiveField!='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i> Scan</a>
+                                <a class="scanbtn waves-effect btn btn-default" id="rotatebar" ng-if="CurrentActiveField!='pPart'"> <i class="fa fa-barcode"></i> Scan</a>
                             </div>
 
 
                         </td>
                         <td ng-if="CurrentActiveField.indexOf('string_')>-1 || CurrentActiveField.indexOf('bool_')>-1 || CurrentActiveField.indexOf('number_')>-1 || CurrentActiveField.indexOf('date_')>-1 ">
 
-                            <div style="text-align:center">
-                                <a class="scanbtn waves-effect btn btn-default" id="rotatebar" ng-click="ScanNewCustom()"> <i class="fa fa-barcode"></i> Scan</a>
+                            <div style="text-align:center" ng-click="ScanNewCustom()">
+                                <a class="scanbtn waves-effect btn btn-default" id="rotatebar"> <i class="fa fa-barcode"></i> Scan</a>
                             </div>
 
 
