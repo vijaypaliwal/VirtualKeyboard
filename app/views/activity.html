@@ -4,6 +4,22 @@
 
 <link href=".pgbomit/activityIOS.css" rel="stylesheet" />
 
+<style>
+    .collapsible-header {
+        position: fixed;
+        width: 100%;
+        top: 38px;
+        color: #000;
+        background: #CECECE;
+        z-index: 100;
+    }
+
+    .collapsible-body
+    {
+        margin-top:85px;
+    }
+</style>
+
 <div style="display:none" class="activity" ng-cloak>
 
     <div style="top: 0;" class="topheader header Increase {{CurrentHeaderClass}}">
@@ -19,27 +35,7 @@
                 </div>
             </div>
             <div class="col-md-4 col-xs-3">
-                <div class="pull-right">
-
-
-                    <div class="headerdropdown dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" aria-expanded="true">
-                            <img src="{{picURl}}" alt="">
-                        </a>
-                        <ul class="dropdown-menu animated slideInDown">
-
-
-                            <li>
-                                <a href="#/profile"><i class="fa fa-user"></i> My Profile</a>
-                            </li>
-
-
-                            <li>
-                                <a ng-click="logOut()" class="logout" title="Logout"><i class="fa fa-sign-out"></i> Log Out</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                
             </div>
 
         </div>
@@ -74,6 +70,12 @@
 
     </div>
 
+    <div ng-if="IsSingleMode==false" onclick="cartitems()" class="collapsible-header">
+        <span class="checkout-price">Show Cart summary</span>
+        <i class="ion-android-arrow-dropdown"></i>
+        <span ng-click="selecteditemlist()" class="checkout-price right">{{CurrentCart.length}} Items</span>
+    </div>
+
 
 
     <div class="maincontent">
@@ -98,11 +100,7 @@
 
                 <ul class="collapsible checkout-header animated fadeindown delay-2" data-collapsible="accordion">
                     <li>
-                        <div onclick="cartitems()" class="collapsible-header">
-                            <span class="checkout-price">Show Cart summary</span>  
-                            <i class="ion-android-arrow-dropdown"></i>
-                            <span ng-click="selecteditemlist()" class="checkout-price right">{{CurrentCart.length}} Items</span>
-                        </div>
+                        
                         <div class="cartitems collapsible-body z-depth-1">
 
                             <div class="mycartitem" ng-if="IsSingleMode==false" data-type="Cart" ng-repeat="CurrentActiveObject in CurrentCart" data-index="{{$index}}">
@@ -113,9 +111,12 @@
                                     <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath==''" style="height:50px; width:50px; border:1px solid #ccc; border-radius:100%;" class="checkout-image" src="img/default.png" />
                                     <img ng-click="DeleteItem(CurrentActiveObject)" ng-if="CurrentActiveObject.InventoryDataList.ImageThumbPath!=''" style="height: 50px; width: 50px; border: 1px solid #ccc; border-radius: 100%;" class="checkout-image" src="{{CurrentActiveObject.InventoryDataList.ImageThumbPath}}" alt="" />
                                     <div class="checkout-product-title">
-                                        <h6>{{CurrentActiveObject.InventoryDataList.pPart }} <span class="right"><span style="font-size:18px;">{{CurrentActiveObject.InventoryDataList.oquantity}}  </span> <span> {{CurrentActiveObject.InventoryDataList.uomUOM }} </span>  </span></h6>
+                                        <button type="button" ng-click="DeleteItem(CurrentActiveObject)" class="summaryClearbtn pull-right" ><i class="fa fa-times-circle"></i> </button>
+                                        <h6><span><span style="font-size:18px;">{{CurrentActiveObject.InventoryDataList.oquantity}}  </span> <span> {{CurrentActiveObject.InventoryDataList.uomUOM }} </span>  </span> of {{CurrentActiveObject.InventoryDataList.pPart }} </h6>
                                         <span> {{CurrentActiveObject.InventoryDataList.iStatusValue }}</span>
+                                       
                                     </div>
+
                                 </div>
 
                                 <div ng-if="CurrentOperation=='Move'">
@@ -322,7 +323,6 @@
                                                 <label>Status</label>
                                                 <div class="fg-line">
                                                     <div class="select">
-
                                                         <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
                                                             <option value="">None</option>
                                                             <option ng-repeat="_optionValue in StatusList" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
@@ -1572,7 +1572,7 @@
 
                                                 <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
                                                     <option value="">None</option>
-                                                    <option ng-repeat="_optionValue in StatusList" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
+                                                    <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.UpdateTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                 </select>
                                             </div>
                                         </div>

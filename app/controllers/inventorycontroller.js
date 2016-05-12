@@ -551,7 +551,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.ImageList = [];
 
         $("#defaultimg").remove();
-        $('#list321').html('<img id="defaultimg" ng-click="getstep(9,\&#39;Image\&#39;)" style="height:80px; width:72px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text">');
+     
+        if ($scope.IsAvailableMyInventoryColumn('Image') == true) {
+
+            $('#list321').html('<img id="defaultimg" ng-click="getstep(9,\&#39;Image\&#39;)" style="height:80px; width:80px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text">');
+        }
+        else {
+            $('#list321').html('<img id="defaultimg" style="height:80px; width:80px; border:1px solid #ccc;" src="img/na.jpg" alt="Alternate Text">');
+
+        }
+
         $('#list123').html('');
     }
 

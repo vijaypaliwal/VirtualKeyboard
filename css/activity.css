@@ -1,3 +1,17 @@
+
+.summaryClearbtn
+{
+    background:transparent;
+    border: 1px solid transparent;
+    color:#d9534f;
+    box-shadow: none;
+    font-size: 20px;
+}
+
+.summaryClearbtn i{
+    font-size:29px;
+}
+
 .AdjustNetzero {
     color: #767676 !important;
  

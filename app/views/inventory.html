@@ -22,24 +22,24 @@
 
             <div style="display:none;" class="swiper-container">
 
-                <div>
+      
                     <div class="iteminfo">
 
                         <div class="row ">
-                            <div class="col-md-2 col-xs-3" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
+                            <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
 
                                 <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
 
-                                <img id="defaultimg" style="height:80px; width: 72px; border: 1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
+                                <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
                             </div>
 
-                            <div class="col-md-2 col-xs-3" ng-if="IsAvailableMyInventoryColumn('Image')==false">
+                            <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==false">
 
                                 <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
 
-                                <img id="defaultimg" style="height: 80px; width:72px; border: 1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
+                                <img id="defaultimg" style="height: 80px; width: 80px; border: 1px solid #ccc;" src="img/na.jpg" alt="Alternate Text" />
                             </div>
-                            <div class="col-md-10 col-xs-9">
+                            <div class="col-md-10 col-xs-8">
                                 <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')">{{InventoryObject.ItemID}} <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span> </span>
 
 
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+              
             
 
 
@@ -469,13 +469,11 @@
                                 <a class="scanbtn waves-effect btn btn-default" id="rotatebar"> <i class="fa fa-barcode"></i> Scan</a>
                             </div>
 
-
                         </td>
                         <td>
                             <div style="text-align:right;">
                                 <a class="btn btn-primary waves-effect arrow-right" ng-disabled="slide == Totalslides"><i class="fa fa-angle-right"></i></a>
                             </div>
-
 
                         </td>
                     </tr>
