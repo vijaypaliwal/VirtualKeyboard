@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('indexController', ['$scope',  'localStorageService', 'authService', '$location', 'log', function ($scope,  localStorageService, authService, $location, log) {
+app.controller('indexController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard', function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard) {
     function checkurl()
     {
         var path = "activity";
@@ -20,6 +20,20 @@ app.controller('indexController', ['$scope',  'localStorageService', 'authServic
         authService.logOut();
         $location.path('/login');
     }
+
+
+    $scope.$on('$locationChangeStart', function (event) {
+       
+        var _path = $location.path();
+        if(_path=="/inventory")
+        {
+            $cordovaKeyboard.disableScroll(true);
+        }
+        else
+        {
+            $cordovaKeyboard.disableScroll(false);
+        }
+    });
 
     $scope.getClass = function (path) {
         return ($location.path().substr(0, path.length) === path) ? 'active' : '';

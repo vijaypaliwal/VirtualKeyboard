@@ -47,8 +47,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     var _isExceededLimit = false;
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
-
-
     $scope.CurrentImgID = "";
     $scope.SearchFromData = "All"
     $scope.SearchFromText = "Search";
@@ -94,12 +92,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     }
 
     
-
-
-
-   
-
-   
 
     $scope.GoToDetailPage = function (obj) {
         localStorageService.set("CurrentDetailObject", obj);
@@ -1024,7 +1016,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     }
 
     function init() {
-        $cordovaKeyboard.disableScroll(false);
+     //   $cordovaKeyboard.disableScroll(false);
         var _myItemsList = localStorageService.get("ActivityCart");
         _myItemsList = _myItemsList != null && _myItemsList != undefined ? _myItemsList : [];
         if (_myItemsList.length > 0) {

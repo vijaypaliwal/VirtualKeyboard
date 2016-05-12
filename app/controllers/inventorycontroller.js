@@ -1219,7 +1219,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     function init() {
-        $cordovaKeyboard.disableScroll(true);
+      //  $cordovaKeyboard.disableScroll(true);
         $scope.GetAllData();
 
 
@@ -1410,7 +1410,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
     $scope.ScanNew = function () {
 
-
+        $('#rotatebar').find(".fa").addClass("fa-spin");
 
         var _id = "#";
 
@@ -1499,7 +1499,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                 CheckScopeBeforeApply();
 
-
+                $('#rotatebar').removeClass("fa-spin");
             }
 
             else {
@@ -1560,6 +1560,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
     }
     $scope.ScanNewCustom = function () {
+        $('#rotatebar').find(".fa").addClass("fa-spin");
         var _id = "#" + _colid;
 
         var _colarray = _colid.split("_");
@@ -1627,7 +1628,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 mySwiper.swipeNext();
 
                 CheckScopeBeforeApply();
-
+                $('#rotatebar').removeClass("fa-spin");
 
             }
 
