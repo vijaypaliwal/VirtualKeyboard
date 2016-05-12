@@ -31,6 +31,9 @@
     <param name="domain" value="http://debug.phonegap.com"/>
     <param name="key" value="willoughby"/>
   </feature>
+  <feature name="StatusBar">
+    <param name="ios-package" value="CDVStatusBar" />
+  </feature>
   <preference name="DisallowOverscroll" value="true" />
   <preference name="phonegap-version" value="3.6.3" />
   <preference name="orientation"   value="default" />
