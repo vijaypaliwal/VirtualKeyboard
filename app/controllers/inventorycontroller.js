@@ -1509,7 +1509,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                 $(_id).val(resultvalue);
 
-                mySwiper.swipeNext();
+                setTimeout(function () {
+                    mySwiper.swipeNext();
+
+                }, 10);
+
 
                 CheckScopeBeforeApply();
 
@@ -1941,7 +1945,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             $scope.SetDefaultObjects();
             $scope.laststepindex = mySwiper.slides.length;
-        }, 20)
+        }, 10)
     }
 
     function onConfirmInv(buttonIndex) {
