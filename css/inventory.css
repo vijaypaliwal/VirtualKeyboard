@@ -346,6 +346,8 @@
     padding-top:8px;
     min-height:initial;
     padding-bottom:8px;
+    display:block;
+    min-height:95px;
 }
 
 #viewdata {
