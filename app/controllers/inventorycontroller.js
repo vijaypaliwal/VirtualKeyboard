@@ -1508,11 +1508,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                 $(_id).val(resultvalue);
-
-                setTimeout(function () {
+               
+                if (deviceType == 'iPhone') {
                     mySwiper.swipeNext();
+                }
+                else {
+                    setTimeout(function () {
+                        mySwiper.swipeNext();
+                    }, 100);
+                }
 
-                }, 10);
 
 
                 CheckScopeBeforeApply();
@@ -1907,8 +1912,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     var _colName = $(".swiper-slide-active").attr("data-column");
                     var _colType = $(".swiper-slide-active").attr("data-type");
                     _colid = $(".swiper-slide-active").attr("data-id");
+                    alert("before::"+$scope.CurrentActiveField);
                     $scope.CurrentActiveField = _colName != undefined && _colName != "" ? _colName : "";
                     $scope.CurrentActiveFieldDatatype = _colType;
+                    CheckScopeBeforeApply();
+
+                    alert("after::" + $scope.CurrentActiveField);
                     var swiperPage = swiperHere.activeSlide();
 
                     $scope.slidenumber(swiperHere.activeIndex);
@@ -1940,7 +1949,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 $("#files").on('change', function (event) {
                     $scope.handleFileSelect(event);
                 });
-                CheckScopeBeforeApply()
+                CheckScopeBeforeApply();
             }, 10)
 
             $scope.SetDefaultObjects();
