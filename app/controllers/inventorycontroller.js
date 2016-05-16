@@ -1513,9 +1513,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     mySwiper.swipeNext();
                 }
                 else {
-                    setTimeout(function () {
-                        mySwiper.swipeNext();
-                    }, 100);
+                    $(".arrow-right").trigger("click");
                 }
 
 

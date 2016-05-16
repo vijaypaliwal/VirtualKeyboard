@@ -90,11 +90,12 @@
         padding-right: 0px;
     }
 
-    body {
-        background: #fff;
-        font-family: Verdana;
-        text-align: center;
-        overflow-x: hidden;
+    body 
+    {
+       background: #fff;
+       font-family: Verdana;
+       text-align: center;
+       overflow-x: hidden;
     }
     .imagesection i {
         font-size: 35px;
@@ -106,7 +107,8 @@
         min-height:100px;
     }
 
-        .imagesection img {
-            margin-top: 5px;
-            margin-bottom: 5px;
+        .imagesection img
+         {
+           margin-top: 5px;
+           margin-bottom: 5px;
         }

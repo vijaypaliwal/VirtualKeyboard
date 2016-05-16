@@ -61,11 +61,11 @@
 <div id="content" class="grey-blue" >
     <div ng-if="IsEditMode==false">
 
-        <div class="h-banner">
-            <div class="parallax bg-9">
-                <div>
+      
+         
+              
 
-                    <div class="swiper-container">
+              <div class="swiper-container">
 
                         <div class="swiper-wrapper">
 
@@ -94,7 +94,7 @@
                                         </td>
                                         <td>
                                             <div style="text-align:center">
-                                                <img style=" border: 1px solid #ccc;" ng-click="OpenImageModal(obj)" src="{{obj.LargeImageURI}}" alt="" />
+                                                <img style=" border: 1px solid #ccc; height:60px; width:60px;" ng-click="OpenImageModal(obj)" src="{{obj.LargeImageURI}}" alt="" />
                                             </div>
                                         </td>
                                         <td>
@@ -108,21 +108,17 @@
                             <div ng-if="ImageList.length == 0" class="swiper-slide">
 
 
-
                                 <table style="width:100%;">
                                     <tr>
                                         <td></td>
                                         <td>
                                             <div style="text-align:center">
-                                                <img style="margin-top:12px;" class="loadingimage" src="img/loader.gif" alt="Alternate Text" />
+                                                <img style="margin-top:12px; width:20px !important; " class="loadingimage" src="img/loader.gif" alt="Alternate Text" />
                                             </div>
                                         </td>
                                         <td></td>
                                     </tr>
                                 </table>
-
-
-
 
 
 
@@ -132,7 +128,7 @@
                                         <td></td>
                                         <td>
                                             <div style="text-align:center">
-                                                <img style="height: 100px; width: 100px; border-radius: 100%; border: 1px solid #ccc;" src="img/default.png" alt="" />
+                                                <img style="height:70px; width:70px; border: 1px solid #ccc;" src="img/default.png" alt="" />
                                             </div>
                                         </td>
                                         <td></td>
@@ -142,8 +138,8 @@
                         </div>
                     </div>
 
-                </div>
-                <div style="bottom:3px;" class="floating-button animated bouncein delay-3">
+              
+                <div style="position:absolute; margin-top:-33px; right:30px;" class="floating-button animated bouncein delay-3">
 
                     <span class="btn-floating resize btn-large waves-effect waves-light accent-color btn z-depth-1" ng-click="ToggleEditView()">
                         <i class="fa fa-pencil">
@@ -151,11 +147,8 @@
                     </span>
                 </div>
                 <!--<div class="banner-title" style="color:black;">{{CurrentInventory.pPart}}</div>-->
-            </div>
-        </div>
-
-
-
+         
+     
         <!-- Profile Content -->
         <div class="card m-t-10 animated fadeinup delay-1" style="padding:10px;">
             <div class="c-widget">

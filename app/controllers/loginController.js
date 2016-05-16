@@ -11,16 +11,16 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
  
     $scope.message = "";
 
-    $scope.login = function () {
-
-        debugger;
+    $scope.login = function ()
+    {
+        
         localStorageService.set("ActivityCart", "");
 
         localStorageService.set("SelectedAction", "");
 
-        authService.login($scope.loginData).then(function (response) {
-
-            debugger;
+        authService.login($scope.loginData).then(function (response)
+        {
+           
             $scope.GetProfileData();
             $location.path('/mainmenu');
 
@@ -28,7 +28,6 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
          function (err) {
              $scope.message = err.error_description;
              playBeep();
-
          });
     };
 
