@@ -1061,7 +1061,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $scope.SecurityToken = authData.token;
         }
 
-        alert("Custom");
+    
 
 
         $.ajax
@@ -1073,7 +1073,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type }),
                success: function (response) {
 
-                   alert("Custom fields");
+               
                    debugger;
 
 
@@ -1427,7 +1427,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         var ControlID = $scope.CurrentActiveField;
 
-        alert(ControlID);
+      
 
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
@@ -1910,12 +1910,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     var _colName = $(".swiper-slide-active").attr("data-column");
                     var _colType = $(".swiper-slide-active").attr("data-type");
                     _colid = $(".swiper-slide-active").attr("data-id");
-                    alert("before::"+$scope.CurrentActiveField);
+                 
                     $scope.CurrentActiveField = _colName != undefined && _colName != "" ? _colName : "";
                     $scope.CurrentActiveFieldDatatype = _colType;
                     CheckScopeBeforeApply();
 
-                    alert("after::" + $scope.CurrentActiveField);
+                 
                     var swiperPage = swiperHere.activeSlide();
 
                     $scope.slidenumber(swiperHere.activeIndex);
