@@ -1906,7 +1906,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     $scope.CurrentActiveField = _colName != undefined && _colName != "" ? _colName : "";
                     $scope.CurrentActiveFieldDatatype = _colType;
                     var swiperPage = swiperHere.activeSlide();
-
+                    alert("check 11-" + _colName);
 
                     $scope.slidenumber(swiperHere.activeIndex);
 
@@ -1930,6 +1930,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             setTimeout(function () {
                 var _TempcolName = $(".swiper-slide-active").attr("data-column");
+                alert("check 12-" + _TempcolName);
                 $scope.CurrentActiveField = _TempcolName != undefined && _TempcolName != "" ? _TempcolName : "";
                 $scope.Totalslides = mySwiper.slides.length - 1;
                 $scope.IsFormDataloaded = true;
