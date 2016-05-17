@@ -128,7 +128,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon" ng-click="UpDownValue('Quantity',true)"><i class="fa fa-plus"></i></span>
-                                <input inputmode="numeric" ng-model="InventoryObject.Quantity" pattern="[0-9]*" id="iQty" min="0" class="form-control" type="number" name="Quantity" value="" />
+                                <input ng-model="InventoryObject.Quantity" id="iQty"  min="0" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="Quantity" value="" />
 
                                 <span class="input-group-addon" ng-click="UpDownValue('Quantity',false)"><i class="fa fa-minus"></i></span>
                             </div>
@@ -214,7 +214,7 @@
 
                             <div class="input-group">
 
-                                <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" class="form-control" type="number" name="cost" value="" />
+                                <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="cost" value="" />
 
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Cost','#Costperunit')"><i class="fa fa-undo"></i></span>
 
@@ -301,7 +301,7 @@
                         <div ng-if="obj.ColumnName=='iUnitNumber1'" class="form-group">
                             <label>{{obj.ColumnLabel}}</label>
                             <div class="input-group">
-                                <input id="UnitNumber1" type="number" class="form-control" value="" ng-model="InventoryObject.UnitNumber1" />
+                                <input id="UnitNumber1" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" value="" ng-model="InventoryObject.UnitNumber1" />
                                 <span ng-click="GetLastValue('Inv_UnitNumber1','#UnitNumber1')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                             </div>
                         </div>
@@ -311,7 +311,7 @@
 
                             <div class="input-group">
 
-                                <input id="UnitNumber2" type="number" class="form-control" value="" ng-model="InventoryObject.UnitNumber2" />
+                                <input id="UnitNumber2" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" value="" ng-model="InventoryObject.UnitNumber2" />
                                 <span ng-click="GetLastValue('Inv_UnitNumber2','#UnitNumber2')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                             </div>
 
@@ -362,7 +362,7 @@
                             </div>
 
                             <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
+                                <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
                                 <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                             </div>
 
@@ -421,7 +421,7 @@
                             </div>
 
                             <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                <input id="CustomActivity_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
+                                <input id="CustomActivity_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
                                 <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                             </div>
 
@@ -439,7 +439,7 @@
 
 
                     <div class="swiper-slide">
-                        <a ng-click="addinventory()" ng-if="IsFormDataloaded==true" style="width:100% !important; margin-top:20px;text-align:center; z-index:1000;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"> <i style="font-size:16px;" class="fa fa-plus"></i>  Add Inventory</a>
+                        <a ng-click="addinventory()" ng-if="IsFormDataloaded==true" style="color:white !important; width:100% !important; margin-top:20px;text-align:center; z-index:1000;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"> <i style="font-size:16px;" class="fa fa-plus-circle"></i>  Add Inventory</a>
                     </div>
 
                 </div>

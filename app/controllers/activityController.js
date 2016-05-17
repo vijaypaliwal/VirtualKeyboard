@@ -254,13 +254,13 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.ActionQuantityValue;
                     }
 
-                    //   $("#mybutton_" + id).addClass("movepin")
+                       $("#mybutton_" + id).addClass("movepin")
 
                     ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                     //  $scope.NextClickNew(2);
                     //  $scope.CurrentActiveObject = $scope.CurrentCart[0];
-                    CheckScopeBeforeApply();;
+                    CheckScopeBeforeApply();
                 }
                 else {
                     toastr.error("Please input some valid value");
@@ -281,7 +281,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     }
                 }
 
-                //    $("#mybutton_" + id).addClass("movepin")
+                 $("#mybutton_" + id).addClass("movepin")
 
                 ShowSuccessActivity('Updated', $scope._CurrentAction);
 
@@ -339,7 +339,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         }
                     }
 
-
+                    $("#mybutton_" + id).addClass("movepin");
                     ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                     CheckScopeBeforeApply();
@@ -363,7 +363,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     }
                 }
 
-                //    $("#mybutton_" + id).addClass("movepin")
+                $("#mybutton_" + id).addClass("movepin");
 
                 ShowSuccessActivity('Updated', $scope._CurrentAction);
 

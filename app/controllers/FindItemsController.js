@@ -876,7 +876,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                         else {
                             setTimeout(function () {
                                 $(originalID).animate_from_to('.cartbtn', {
-                                    pixels_per_second: 350,
+                                    pixels_per_second: 400,
                                     initial_css: {
                                         'background': 'rgba(18,142,206,0.5)',
                                         'border-radius': '100%'
