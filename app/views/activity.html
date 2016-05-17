@@ -1368,22 +1368,22 @@
                         <div ng-if="CurrentOperation=='Move'">
 
                             <div class="row">
-                                <div class="col-xs-12 col-md-12">
+                                <div class="col-xs-10 col-md-10">
 
 
-                                    <div class="form-group">
+                                    <div class="form-group" >
                                         <label>Quantity <span>*</span></label>
                                         <div class="input-group">
 
                                             <div class="fg-line">
 
-                                                <input placeholder="Fill Quantity" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
+                                                <input style=" height: 53px;" placeholder="Fill Quantity" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
 
                                             </div>
 
 
-                                            <span style="background: #128ece" class="input-group-addon last">
-                                                <span style="height: auto; width: auto; " data-toggle="dropdown" aria-expanded="false" id="movebutton_{{CurrentActiveObject.InventoryDataList.uId}}" class="waves-effect rotateData btnPrimary btn-icon">
+                                            <span style="background: #128ece;padding:0px;" class="input-group-addon last" >
+                                                <span style="height: 52px; width: auto; padding: 13px; background-color: transparent" data-toggle="dropdown" aria-expanded="false" id="movebutton_{{CurrentActiveObject.InventoryDataList.uId}}" class="waves-effect rotateData btnPrimary btn-icon">
                                                     <i class="fa fa-thumb-tack"></i>
                                                 </span>
 
@@ -1405,7 +1405,7 @@
 
 
 
-                                    
+
                                 </div>
                                 
                             </div>
@@ -1413,27 +1413,27 @@
                             <br />
 
                             <div class="row">
-                                <div class="col-xs-12 col-md-12">
+                                <div class="col-xs-10 col-md-10">
 
-                                    <div class="form-group">
+                                    <div class="form-group" >
                                         <div class="fg-line">
 
                                             <label>Location <span>*</span> </label>
 
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
+                                                <input type="text" style=" height: 53px;" class="form-control" placeholder="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
 
                                                 <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID)"><i class="fa fa-search"></i></span>
 
-                                                <span style="background: #128ece" class="input-group-addon last">
-                                                    <span style="height: auto; width: auto; " id="location_{{CurrentActiveObject.InventoryDataList.uId}}" class="rotateData btnPrimary" data-ng-click="FillLocation(CurrentActiveObject.MoveTransactionData.MoveToLocation,CurrentActiveObject.MoveTransactionData.MoveToLocationText,CurrentActiveObject.InventoryDataList.uId)">
+                                                <span style="background: #128ece;padding:0px;" class="input-group-addon last">
+                                                    <span style="height: 52px; width: auto; padding: 13px; background-color: transparent; " id="location_{{CurrentActiveObject.InventoryDataList.uId}}" class="rotateData btnPrimary" data-ng-click="FillLocation(CurrentActiveObject.MoveTransactionData.MoveToLocation,CurrentActiveObject.MoveTransactionData.MoveToLocationText,CurrentActiveObject.InventoryDataList.uId)">
                                                         <i class="fa fa-thumb-tack"></i>
                                                     </span>
-                                                    </span>
+                                                </span>
 
-                                                  
 
-</div>
+
+                                            </div>
 
 
 
