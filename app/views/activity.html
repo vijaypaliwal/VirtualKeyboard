@@ -127,7 +127,7 @@
 
                                                     <div class="fg-line">
 
-                                                        <input placeholder="Fill Quantity" type="number" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
+                                                        <input placeholder="Fill Quantity" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
 
                                                     </div>
 
@@ -250,7 +250,7 @@
 
                                             </label>
                                             <div class="fg-line">
-                                                <input type="number" placeholder="Fill Quantity" ng-change="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-blur="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
+                                                <input type="number" pattern="[0-9]*" inputmode="numeric" placeholder="Fill Quantity" ng-change="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-blur="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
                                             </div>
 
 
@@ -293,7 +293,7 @@
                                             <label>Cost/unit</label>
                                             <div class="fg-line">
 
-                                                <input type="number" placeholder="Fill Cost per unit" class="form-control NumberType FormControlType" ng-model=" CurrentActiveObject.iCostPerItem" />
+                                                <input type="number" pattern="[0-9]*" inputmode="numeric" placeholder="Fill Cost per unit" class="form-control NumberType FormControlType" ng-model=" CurrentActiveObject.iCostPerItem" />
 
                                             </div>
                                         </div>
@@ -474,7 +474,7 @@
                                                 <label>{{ GetColumnLabel('iUnitNumber1')}}</label>
                                                 <div class="fg-line">
 
-                                                    <input type="number" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
+                                                    <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
 
                                                 </div>
                                             </div>
@@ -500,7 +500,7 @@
                                                 <label>{{ GetColumnLabel('iUnitNumber2')}}</label>
                                                 <div class="fg-line">
 
-                                                    <input type="number" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
+                                                    <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
 
                                                 </div>
                                             </div>
@@ -530,7 +530,7 @@
                                                 <div class="input-group">
                                                     <div class="fg-line" ng-class="CurrentActiveObject.ConvertTransactionData.ActionFromQuantity=='' ||  CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity ?'':''">
 
-                                                        <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity" />
+                                                        <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity" />
 
                                                     </div>
 
@@ -573,7 +573,7 @@
 
                                                 <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity==''?'':''">
 
-                                                    <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity" />
+                                                    <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity" />
 
                                                 </div>
                                             </div>
@@ -669,7 +669,7 @@
 
                                                 </div>
                                                 <input type="date" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                                <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                                <input type="number" pattern="[0-9]*" inputmode="numeric" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                                 <input type="text" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
 
                                                 <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
@@ -722,7 +722,7 @@
 
                                     <div class="input-group">
                                         <span class="input-group-addon" ng-click="IncreaseDecreaseValue(1,0)"><i class="fa fa-plus"></i></span>
-                                        <input placeholder="Fill Quantity" type="number" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
+                                        <input placeholder="Fill Quantity" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
                                         <span class="input-group-addon" ng-click="IncreaseDecreaseValue(2,0)"><i class="fa fa-minus"></i></span>
                                     </div>
                                 </div>
@@ -809,7 +809,7 @@
                                 </label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-plus" ng-click="IncreaseDecreaseValue(1,0)"></i></span>
-                                    <input type="number" id="commonnumber" placeholder="Fill Quantity" ng-change="UpdateQtyAll(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-blur="UpdateQtyAll(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
+                                    <input type="number" pattern="[0-9]*" inputmode="numeric" id="commonnumber" placeholder="Fill Quantity" ng-change="UpdateQtyAll(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-blur="UpdateQtyAll(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
 
                                     <span class="input-group-addon" ng-click="IncreaseDecreaseValue(2,0)"><i class="fa fa-minus"></i></span>
                                 </div>
@@ -839,7 +839,7 @@
                                 <label>Cost per unit</label>
                                 <div class="fg-line">
 
-                                    <input type="number" placeholder="Fill Cost per unit" class="form-control NumberType FormControlType" ng-model=" CurrentActiveObject.iCostPerItem" />
+                                    <input type="number" pattern="[0-9]*" inputmode="numeric" placeholder="Fill Cost per unit" class="form-control NumberType FormControlType" ng-model=" CurrentActiveObject.iCostPerItem" />
 
                                 </div>
                             </div>
@@ -950,7 +950,7 @@
                                     <label>{{ GetColumnLabel('iUnitNumber1')}}</label>
                                     <div class="fg-line">
 
-                                        <input type="number" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
+                                        <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
 
                                     </div>
                                 </div>
@@ -969,7 +969,7 @@
                                     <label>{{ GetColumnLabel('iUnitNumber2')}}</label>
                                     <div class="fg-line">
 
-                                        <input type="number" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
+                                        <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
 
                                     </div>
                                 </div>
@@ -992,7 +992,7 @@
                                     <div class="input-group">
                                         <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity=='' ||  CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity ?'':''">
 
-                                            <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity" />
+                                            <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity" />
 
                                         </div>
 
@@ -1018,7 +1018,7 @@
                                     <label>New Quantity <span>*</span></label>
                                     <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity==''?'':''">
 
-                                        <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity" />
+                                        <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity" />
 
                                     </div>
                                 </div>
@@ -1112,7 +1112,7 @@
 
                                         </div>
                                         <input type="date" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                        <input type="number" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                        <input type="number" pattern="[0-9]*" inputmode="numeric" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                         <input type="text" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                         <span class="input-group-addon last" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'"><i class="fa fa-barcode"></i></span>
                                     </div>
@@ -1192,7 +1192,7 @@
                         </div>
 
                         <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                            <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                            <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" value="{{obj.CfValue}}" />
                             <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                         </div>
 
@@ -1252,7 +1252,7 @@
                             </div>
 
                             <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                <input id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                                <input id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" value="{{obj.CfValue}}" />
                                 <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
@@ -1310,7 +1310,7 @@
                             </div>
 
                             <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                <input id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                                <input id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" value="{{obj.CfValue}}" />
                                 <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
@@ -1377,7 +1377,7 @@
 
                                             <div class="fg-line">
 
-                                                <input placeholder="Fill Quantity" type="number" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
+                                                <input placeholder="Fill Quantity" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
 
                                             </div>
 
@@ -1497,7 +1497,7 @@
 
                                     </label>
                                     <div class="fg-line">
-                                        <input type="number" placeholder="Fill Quantity" ng-change="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-blur="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
+                                        <input type="number" pattern="[0-9]*" inputmode="numeric" placeholder="Fill Quantity" ng-change="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-blur="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
                                     </div>
 
 
@@ -1540,7 +1540,7 @@
                                     <label>Cost per unit</label>
                                     <div class="fg-line">
 
-                                        <input type="number" placeholder="Fill Cost per unit" class="form-control NumberType FormControlType" ng-model=" CurrentActiveObject.iCostPerItem" />
+                                        <input type="number" pattern="[0-9]*" inputmode="numeric" placeholder="Fill Cost per unit" class="form-control NumberType FormControlType" ng-model=" CurrentActiveObject.iCostPerItem" />
 
                                     </div>
                                 </div>
@@ -1722,7 +1722,7 @@
                                         <label>{{ GetColumnLabel('iUnitNumber1')}}</label>
                                         <div class="fg-line">
 
-                                            <input type="number" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
+                                            <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
 
                                         </div>
                                     </div>
@@ -1748,7 +1748,7 @@
                                         <label>{{ GetColumnLabel('iUnitNumber2')}}</label>
                                         <div class="fg-line">
 
-                                            <input type="number" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
+                                            <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
 
                                         </div>
                                     </div>
@@ -1778,7 +1778,7 @@
                                         <div class="input-group">
                                             <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity=='' ||  CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity ?'':''">
 
-                                                <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity" />
+                                                <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity" />
 
                                             </div>
 
@@ -1819,7 +1819,7 @@
                                         <label>New Quantity <span>*</span></label>
                                         <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity==''?'':''">
 
-                                            <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity" />
+                                            <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control WholeNumbersOnly NumberType" placeholder="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity" />
 
                                         </div>
                                     </div>
@@ -1913,7 +1913,7 @@
 
                                         </div>
                                         <input type="date" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                        <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                        <input type="number" pattern="[0-9]*" inputmode="numeric" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                         <input type="text" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
 
                                         <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
@@ -1993,7 +1993,7 @@
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                    <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                                    <input id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" value="{{obj.CfValue}}" />
                                     <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
@@ -2053,7 +2053,7 @@
                                     </div>
 
                                     <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                        <input id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                                        <input id="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" value="{{obj.CfValue}}" />
                                         <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
@@ -2111,7 +2111,7 @@
                                     </div>
 
                                     <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                        <input id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                                        <input id="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" value="{{obj.CfValue}}" />
                                         <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
