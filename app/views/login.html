@@ -5,11 +5,11 @@
     <form class="login-form" role="form" name="myform">
         <div class="row">
         <div class="col-md-12">
-            <div style="text-align:center">
+            <!--<div style="text-align:center">
 
                 <img class="loginlogo" src="img/u2.png" alt="Alternate Text" />
 
-                </div>
+                </div>-->
 
             <div class="formarea">
                 <div class="row">
@@ -70,24 +70,30 @@
                     </div>
                 </div>
 
+                <div class="row">
+
+                    <div class="col-xs-12">
+                        <button style="margin-top:8px;" class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6" type="submit" ng-if="!myform.$invalid" id="loginBtn" data-ng-click="login()">Log In </button>
+                        <button style="margin-top:8px;background:#ccc;" class=" btn-large  width-100 animated center bouncein delay-6" type="button" disabled="disabled" ng-if="myform.$invalid" id="loginBtn" data-ng-click="login()">Log In </button>
+                        </div>
+                    </div>
+                    </div>
+
+
+                    <!--<button style="margin-top:8px;" class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6 loginn" type="submit" ng-if="!myform.$invalid" id="loginBtn" data-ng-click="login()">Log In </button>
+            <button style="margin-top:8px;background:#ccc;" class=" btn-large  width-100 animated center bouncein delay-6" type="button" disabled="disabled" ng-if="myform.$invalid" id="loginBtn" data-ng-click="login()">Log In </button>-->
+                    <!--#2196F3 !important-->
+                    <div class="bottomnavigation">
+
+                        <a style="font-size:16px;" onclick="vibrate()" class="">I Forgot my Info Email to Me</a>
+
+                        <a onclick="playBeep()" class="">Create Account </a>
+
+                    </div>
+
+
+                </div>
             </div>
-
-
-            <button style="margin-top:8px;" class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6" type="submit" ng-if="!myform.$invalid" id="loginBtn" data-ng-click="login()">Log In </button>
-            <button style="margin-top:8px;background:#ccc;" class=" btn-large  width-100 animated center bouncein delay-6" type="button" disabled="disabled" ng-if="myform.$invalid" id="loginBtn" data-ng-click="login()">Log In </button>
-
-          
-            <div class="bottomnavigation">
-
-                <a style="font-size:16px;" onclick="vibrate()" class="">I Forgot my Info Email to Me</a>
-
-                <a onclick="playBeep()" class="">Create Account </a>
-
-            </div>
-
-
-            </div>
-        </div>
     </form>
 
 <style>
@@ -108,6 +114,9 @@
     
      .center {
         text-align: center;
+    }
+    .loginn {
+        background: #999999 !important;
     }
 
     label
@@ -206,4 +215,3 @@
      
 </style>
 
-  

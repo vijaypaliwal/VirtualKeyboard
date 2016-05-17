@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('activityController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
+app.controller('activityController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaStatusbar', function ($scope, localStorageService, authService, $location, log, $cordovaStatusbar) {
     $scope.CurrentCart = [];
     $scope.SavingData = false;
     $scope.IsEditMode = false;
@@ -1163,7 +1163,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 if (_Islive)
                 {
                     //StatusBar.backgroundColorByHexString("#AF2525");
-                  //  $cordovaStatusbar.styleHex("#AF2525");
+                    $cordovaStatusbar.styleHex("#AF2525");
                 }
 
                 break;
@@ -1175,7 +1175,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentHeaderText = "Move these items to a different location.";
                 if (_Islive) {
                    // StatusBar.backgroundColorByHexString("#C65E28");
-                  //  $cordovaStatusbar.styleHex("#C65E28");
+                    $cordovaStatusbar.styleHex("#C65E28");
 
                 }
                 break;
@@ -1187,7 +1187,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentHeaderText = "Put these items in inventory.";
                 if (_Islive) {
                    // StatusBar.backgroundColorByHexString("#177B3D");
-                 //   $cordovaStatusbar.styleHex("#177B3D");
+                    $cordovaStatusbar.styleHex("#177B3D");
 
 
                 }
@@ -1203,7 +1203,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                    // StatusBar.backgroundColorByHexString("#CE59A1");
 
 
-                   // $cordovaStatusbar.styleHex("#CE59A1");
+                    $cordovaStatusbar.styleHex("#CE59A1");
 
                 }
 
@@ -1219,7 +1219,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                    // StatusBar.backgroundColorByHexString("#583782");
 
 
-                  //  $cordovaStatusbar.styleHex("#583782");
+                    $cordovaStatusbar.styleHex("#583782");
 
 
                 }
@@ -1234,7 +1234,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 if (_Islive) {
                     //StatusBar.backgroundColorByHexString("#0D190F");
 
-                   // $cordovaStatusbar.styleHex("#0D190F");
+                    $cordovaStatusbar.styleHex("#0D190F");
 
 
 
@@ -1257,7 +1257,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                    // StatusBar.backgroundColorByHexString("#f8c217");
 
 
-               //     $cordovaStatusbar.styleHex("#f8c217");
+                    $cordovaStatusbar.styleHex("#f8c217");
 
 
 
@@ -2739,6 +2739,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 CheckScopeBeforeApply();
                 return true;
             }
+
+
         }
         return false;
     }
@@ -2765,32 +2767,25 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
 
+   
+
 
     var $body = jQuery('body');
 
     /* bind events */
     $(document)
     .on('focus', 'input', function () {
-        $('.collapsible-header').css("position", "relative");
-
-        $('.collapsible-header').css("top", "0px");
-
-     
-
         $('.header').css("position", "relative");
         $('.iteminfopanel').css('margin-top', '0px');
-        $('.collapsible-body').css('margin-top', '0px');
         $('.activityfields').css('margin-top', '0px');
         $('.singlePanel').css('margin-top', '0px');
         $('#transactionForm1').css('margin-top', '0px');
+
         $('.bottombutton').css("position", "relative");
         
     })
     .on('blur', 'input', function () {
         $('.header').css("position", "fixed");
-        $('.collapsible-header').css("top", "37px");
-        $('.collapsible-header').css("position", "fixed");
-        $('.collapsible-body').css('margin-top', '85px');
         $('.iteminfopanel').css('margin-top', '80px');
         $('.activityfields').css('margin-top', '80px');
         $('.singlePanel').css('margin-top', '35px');

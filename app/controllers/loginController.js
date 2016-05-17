@@ -8,8 +8,24 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
         useRefreshTokens: false
     };
  
- 
     $scope.message = "";
+
+    $scope.InIt = function ()
+    {
+        var authLocalData = localStorageService.get('lastlogindata');
+
+        console.log("auth local Data");
+        console.log(authLocalData);
+        if (authLocalData != null && authLocalData != undefined)
+        {
+            $scope.loginData.account = authLocalData.AccountName;
+            $scope.loginData.userName = authLocalData.userName;
+            $scope.loginData.password = authLocalData.Password;
+        }
+
+    }
+
+    $scope.InIt();
 
     $scope.login = function ()
     {
@@ -17,6 +33,8 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
         localStorageService.set("ActivityCart", "");
 
         localStorageService.set("SelectedAction", "");
+        localStorageService.set("lastlogindata", "");
+
 
         authService.login($scope.loginData).then(function (response)
         {

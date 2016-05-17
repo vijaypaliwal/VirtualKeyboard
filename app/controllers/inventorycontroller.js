@@ -15,7 +15,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.IsFormDataloaded = false;
     $scope.InventoryObject = {
         IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: "", Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
-        UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: "/Date(1320825600000-0800)/", UnitDate2: "/Date(1320825600000-0800)/", UnitNumber1: 0, UnitNumber2: 0, UnitTag2: "",
+        UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: "/Date(1320825600000-0800)/", UnitDate2: "/Date(1320825600000-0800)/", UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
         UnitTag3: "", CustomPartData: [], CustomTxnData: []
     };
 
@@ -417,6 +417,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.OnChangeLocationNameFunction = function () {
 
+        
+       
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -424,42 +426,42 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         if ($.trim($scope.SearchLocationValue) != "") {
 
-            $scope.LocationSearching = true;
-            $.ajax({
+            //$scope.LocationSearching = true;
+            //$.ajax({
 
-                type: "POST",
-                url: serviceBase + "SearchLocationAutoComplete",
-                contentType: 'application/json; charset=utf-8',
+            //    type: "POST",
+            //    url: serviceBase + "SearchLocationAutoComplete",
+            //    contentType: 'application/json; charset=utf-8',
 
-                dataType: 'json',
+            //    dataType: 'json',
 
-                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchLocationValue }),
-                error: function () {
+            //    data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchLocationValue }),
+            //    error: function () {
 
-                    $scope.LocationSearching = false;
-                    log.error('There is a problem with the service!');
-                },
+            //        $scope.LocationSearching = false;
+            //        log.error('There is a problem with the service!');
+            //    },
 
-                success: function (data) {
-                    debugger;
-                    if (data.SearchLocationAutoCompleteResult != null && data.SearchLocationAutoCompleteResult.Payload != null) {
-                        $scope.LocationSearching = false;
-                        $scope.LocationSearchList = data.SearchLocationAutoCompleteResult.Payload;
-
-
-                        if ($scope.LocationSearchList.length == 0)
-                            $scope.isnolocationmsg = true
-                        else
-                            $scope.isnolocationmsg = false
-
-                        CheckScopeBeforeApply()
-
-                    }
+            //    success: function (data) {
+            //        debugger;
+            //        if (data.SearchLocationAutoCompleteResult != null && data.SearchLocationAutoCompleteResult.Payload != null) {
+            //            $scope.LocationSearching = false;
+            //            $scope.LocationSearchList = data.SearchLocationAutoCompleteResult.Payload;
 
 
+            //            if ($scope.LocationSearchList.length == 0)
+            //                $scope.isnolocationmsg = true
+            //            else
+            //                $scope.isnolocationmsg = false
 
-                }
-            });
+            //            CheckScopeBeforeApply()
+
+            //        }
+
+
+
+            //    }
+            //});
         }
         else {
             $scope.LocationSearchList = [];
@@ -514,7 +516,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
     $scope.CheckRequiredField = function () {
 
-        if ($scope.InventoryObject.ItemID == "" || $scope.InventoryObject.Location == "" || $scope.InventoryObject.Uom == "") {
+        if ( $scope.InventoryObject.Location == "" || $scope.InventoryObject.Uom == "") {
             return true;
 
         }
@@ -609,6 +611,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
         });
 
+
+        if ($scope.InventoryObject.ItemID == "")
+        {
+            $scope.InventoryObject.AutoID = true;
+            $scope.InventoryObject.ItemID = "Automated";
+        }
+        if ($scope.InventoryObject.UnitNumber1 == "") {
+            $scope.InventoryObject.UnitNumber1 = 0;
+        }
+        if ($scope.InventoryObject.UnitNumber2 == "") {
+            $scope.InventoryObject.UnitNumber2 = 0;
+        }
         $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity == "" ? 0 : $scope.InventoryObject.Quantity;
         
         var _sum = 0;
@@ -718,7 +732,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#itemlistmodal").modal('hide');
         $("#locationlistmodal").modal('show');
 
-        $scope.LocationSearchList = [];
+        $scope.LocationSearchList = $scope.LocationList;
+        CheckScopeBeforeApply();
         $scope.SearchLocationValue = "";
         $scope.isnolocationmsg = false
         $('html,body').animate({ scrollTop: 0 }, 800);
@@ -788,7 +803,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   CheckScopeBeforeApply()
                   // Status
                   $scope.StatusList = response.GetAllDataResult.Payload[0].Status;
-                  CheckScopeBeforeApply()
+                  CheckScopeBeforeApply();
+                  $scope.getuom();
+                  $scope.getlocation();
                   AfterLoadedData();
 
               },
@@ -909,7 +926,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-
                    $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
                    CheckScopeBeforeApply()
                },
@@ -923,7 +939,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.getlocation = function () {
-
+        $scope.LocationList = [];
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -939,8 +955,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                success: function (response) {
 
 
-
                    $scope.LocationList = response.GetLocationsResult.Payload;
+                   $scope.LocationSearchList = $scope.LocationList;
                    CheckScopeBeforeApply()
                },
                error: function (response) {
@@ -1233,7 +1249,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
       //  $cordovaKeyboard.disableScroll(true);
         $scope.GetAllData();
 
-
+        
     }
 
 
@@ -1729,6 +1745,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             default:
 
         }
+
+        vibrate();
     }
 
 

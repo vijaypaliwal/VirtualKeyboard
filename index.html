@@ -460,6 +460,19 @@
             color: #2196F3 !important;
         }
 
+
+        .onelinelabel {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            line-height: 18px;
+            max-height: 16px;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+
+      
+
     </style>
 
 </head>
@@ -488,7 +501,7 @@
 
         <div class="errorcontent" style="width:122px;background:#000;">
 
-            <img src="img/loader.gif"  />
+            <img src="img/loader1.gif"  />
 
             <span style="display:block;font-size:20px;font-weight:300;color:#fafafa;" >
                 Logging in..
@@ -522,7 +535,7 @@
     <ul id="slide-out-left" class="side-nav collapsible">
         <li>
             <div class="sidenav-header primary-color">
-                
+
                 <div class="nav-avatar">
                     <img class="circle avatar" src="{{picURl}}" alt="">
                     <div class="avatar-body">
@@ -532,11 +545,11 @@
                 </div>
             </div>
         </li>
-        <li><a href="#/mainmenu" class="no-child"><i class="ion-android-list"></i> Main menu</a></li>
-        <li><a ng-class="getClass('/FindItems')" href="#/FindItems" class="no-child"><i class="ion-ios-search"></i> Find Items</a></li>
-        <li><a ng-class="getClass('/inventory')" href="#/inventory" class="no-child"><i class="ion-ios-plus"></i> Add Inventory</a></li>
-        <li><a ng-class="getClass('/profile')" href="#/profile" class="no-child"><i class="ion-android-document"></i> My Profile</a></li>
-        <li><a href="#" class="no-child signoutbtn"><i class="ion-android-exit"></i> Sign out</a></li>
+        <!--<li><a href="#/mainmenu" class="no-child"><i class="ion-android-list"></i> Main menu</a></li>-->
+        <li><a ng-class="getClass('/FindItems')" href="#/FindItems" class="no-child"><i class="fa fa-th"></i>Go to Inventory</a></li>
+        <li><a ng-class="getClass('/inventory')" href="#/inventory" class="no-child"><i class="fa fa-plus"></i> Add Inventory</a></li>
+        <li><a ng-class="getClass('/profile')" href="#/profile" class="no-child"><i class="fa fa-user"></i> My Profile</a></li>
+        <li><a href="#" class="no-child signoutbtn"><i class="fa fa-sign-out"></i> Sign out</a></li>
     </ul>
 
 
@@ -553,7 +566,7 @@
             <!-- Facebook -->
             <ul>
              
-                <li><a ng-click="logOut()" class="no-child signoutbtn"><i class="ion-android-exit"></i> Sign out</a></li>
+                <li><a ng-click="logOut()" class="no-child signoutbtn"><i class="fa fa-sign-out"></i> Sign out</a></li>
             </ul>
             <hr />
             <p style="font-size:14px; text-align:justify">

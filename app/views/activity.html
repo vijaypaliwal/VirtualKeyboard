@@ -1368,7 +1368,7 @@
                         <div ng-if="CurrentOperation=='Move'">
 
                             <div class="row">
-                                <div class="col-xs-8 col-md-8">
+                                <div class="col-xs-12 col-md-12">
 
 
                                     <div class="form-group">
@@ -1381,40 +1381,39 @@
 
                                             </div>
 
+
+                                            <span style="background: #128ece" class="input-group-addon last">
+                                                <span style="height: auto; width: auto; " data-toggle="dropdown" aria-expanded="false" id="movebutton_{{CurrentActiveObject.InventoryDataList.uId}}" class="waves-effect rotateData btnPrimary btn-icon">
+                                                    <i class="fa fa-thumb-tack"></i>
+                                                </span>
+
+
+                                                <ul style="width:100%; text-align:left;" class="animated zoomIn dropdown-menu">
+                                                    <li><a data-ng-click="FillQuantityMove(CurrentActiveObject.MoveTransactionData.ActionQuantity,CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
+                                                    <li><a data-ng-click="FillQuantityMove(CurrentActiveObject.MoveTransactionData.ActionQuantity,CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
+                                                </ul>
+                                            </span>
+
                                         </div>
                                     </div>
-
-
-
-
-
 
 
                                     <div ng-if="CurrentActiveObject.MoveTransactionData.ActionQuantity>CurrentActiveObject.InventoryDataList.oquantity" class="errorMessage">
                                         <span ng-if="AllowNegative!=null && AllowNegative!='True'"> Quantity can't be greater than original quantity</span>
                                     </div>
+
+
+
+
+                                    
                                 </div>
-                                <div class="col-xs-4 col-md-4">
-                                    <div class="pull-right">
-
-                                        <label>&nbsp;</label>
-                                        <button data-toggle="dropdown" aria-expanded="false" id="movebutton_{{CurrentActiveObject.InventoryDataList.uId}}" type="button" class="btn waves-effect rotateData btnPrimary btn-icon">
-                                            <i class="fa fa-thumb-tack"></i>
-                                        </button>
-
-
-                                        <ul class="dropdown-menu">
-                                            <li><a data-ng-click="FillQuantityMove(CurrentActiveObject.MoveTransactionData.ActionQuantity,CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
-                                            <li><a data-ng-click="FillQuantityMove(CurrentActiveObject.MoveTransactionData.ActionQuantity,CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                
                             </div>
 
                             <br />
 
                             <div class="row">
-                                <div class="col-xs-8 col-md-8">
+                                <div class="col-xs-12 col-md-12">
 
                                     <div class="form-group">
                                         <div class="fg-line">
@@ -1425,7 +1424,16 @@
                                                 <input type="text" class="form-control" placeholder="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
 
                                                 <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID)"><i class="fa fa-search"></i></span>
-                                            </div>
+
+                                                <span style="background: #128ece" class="input-group-addon last">
+                                                    <span style="height: auto; width: auto; " id="location_{{CurrentActiveObject.InventoryDataList.uId}}" class="rotateData btnPrimary" data-ng-click="FillLocation(CurrentActiveObject.MoveTransactionData.MoveToLocation,CurrentActiveObject.MoveTransactionData.MoveToLocationText,CurrentActiveObject.InventoryDataList.uId)">
+                                                        <i class="fa fa-thumb-tack"></i>
+                                                    </span>
+                                                    </span>
+
+                                                  
+
+</div>
 
 
 
@@ -1436,14 +1444,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-xs-4 col-md-4">
-                                    <div class="pull-right">
-                                        <label>&nbsp;</label>
-                                        <button id="location_{{CurrentActiveObject.InventoryDataList.uId}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click="FillLocation(CurrentActiveObject.MoveTransactionData.MoveToLocation,CurrentActiveObject.MoveTransactionData.MoveToLocationText,CurrentActiveObject.InventoryDataList.uId)">
-                                            <i class="fa fa-thumb-tack"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                
                             </div>
                             <br />
                             <div class="row">
