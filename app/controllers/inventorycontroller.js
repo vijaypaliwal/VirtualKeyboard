@@ -1521,7 +1521,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                 $(_id).val(resultvalue);
-                setTimeout(function () {
 
                     if (deviceType == 'iPhone') {
 
@@ -1530,7 +1529,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     else {
                         $(".arrow-right").trigger("click");
                     }
-                }, 1000);
 
 
 
