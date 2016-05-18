@@ -84,13 +84,19 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "id": $scope.CurrentInventory.iID, "ActivityDate": _datestring, "Activity": $scope.Activity }),
                success: function (response) {
                    $scope.isSearching = false;
-                    
-                   $scope.Recentactivities = response.GetRecentActivityResult.Payload;
-                   $scope.$apply();
+                   debugger;
+                   var _ActualCount = parseInt(response.GetRecentActivityResult.Payload.ActualCount);
 
+                   $scope.Recentactivities = response.GetRecentActivityResult.Payload.data;
+                   $scope.$apply();
+                   if (_ActualCount==0)
+                   {
+                       $location.path("/FindItems");
+                       $scope.$apply();
+                   }
                    if ($scope.Recentactivities.length == 0 && ((_updateDateval == "" || _updateDateval == undefined) && $scope.Activity == "")) {
                        $location.path("/FindItems");
-
+                       $scope.$apply();
                    }
                },
                error: function (err) {
@@ -126,6 +132,8 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
                            if (response.UndoActivityResult.Payload) {
                                ShowSuccess('Updated');
                                $scope.GetRecentActivities();
+
+                               
                            }
                        },
                        error: function (err) {
@@ -138,7 +146,7 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
         });
 
    
-
+     
 
     }
     $scope.CancelEdit = function () {

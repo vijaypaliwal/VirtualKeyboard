@@ -79,6 +79,7 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
                 $scope.slide = swiperHere.activeIndex;
            
                 $scope.Totalslides = swiperHere.slides.length;
+
                 
                 $scope.$apply();
             }
@@ -96,8 +97,8 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
                 mySwiper.swipeNext()
 
             })
-
-      
+            $scope.Totalslides = mySwiper.slides.length;
+            $scope.$apply();
 
     }
 
@@ -194,6 +195,7 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
                         if (result.UpdateInventoryResult.Payload == 1) {
                             //log.success("Inventory updated successfully.");
                             ShowSuccess("Updated");
+                            window.location.href = "#/FindItems";
                             localStorageService.set("CurrentDetailObject", $scope.CurrentInventory);
                             $scope.SavingData = false;
                         }

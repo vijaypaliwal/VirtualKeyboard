@@ -57,6 +57,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.Locations = ["Bin 100", "In Stock", "New location", "Refridgerator one", "Refridgerator two", "Pantry, Rack 1, Shelf 1-L", "Pantry, Rack 1, Shelf 1-M", "Storage Room A"];
     $scope.TotalRecords = 0;
+    $scope.ActualTotalRecords = 0;
     function ResetInvObj() {
         $scope.InvObject = {
             InventoryID: 0, CurrentQuantity: "", AvgCostPerUnit: "", Uncontrolled: "", UniqueTag: "",
@@ -381,8 +382,35 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     }
 
     $scope.searchfunction = function (Byvalue) {
-
+        debugger;
         ClearFilterArray();
+         switch (Byvalue) {
+                case "iStatusValue":
+
+                    $scope.SearchFromText = "Status";
+                    $('#MasterSearch').attr("placeholder", "Search by Status").placeholder();
+
+                    break
+                case "lLoc":
+                    $scope.SearchFromText = "Location";
+                    $('#MasterSearch').attr("placeholder", "Search by location").placeholder();
+                    break
+                case "pPart":
+                    $scope.SearchFromText = "Items";
+                    $('#MasterSearch').attr("placeholder", "Search by item").placeholder();
+                    break
+                case "All":
+                    $scope.SearchFromText = "All";
+                    $('#MasterSearch').attr("placeholder", "Type to search").placeholder();
+                    break
+                case "iReqValue":
+                    $('#MasterSearch').attr("placeholder", "Search by Unique Tag").placeholder();
+                    $scope.SearchFromText = "Unique Tag";
+                    break
+                default:
+                    break;
+
+            }
         if ($.trim($scope.SearchValue) != "") {
             $scope.SearchFromData = Byvalue;
             var _tempArray = [];
@@ -391,23 +419,25 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
                     $scope.SearchFromText = "Status";
                     UpdateFilterArray("iStatusValue", $.trim($scope.SearchValue));
+                    $('#MasterSearch').attr("placeholder", "Search by Status").placeholder();
 
                     break
                 case "lLoc":
                     $scope.SearchFromText = "Location";
                     UpdateFilterArray("lLoc", $.trim($scope.SearchValue));
+                    $('#MasterSearch').attr("placeholder", "Search by location").placeholder();
                     break
                 case "pPart":
                     $scope.SearchFromText = "Items";
-
+                    $('#MasterSearch').attr("placeholder", "Search by item").placeholder();
                     UpdateFilterArray("pPart", $.trim($scope.SearchValue));
                     break
                 case "All":
                     $scope.SearchFromText = "All";
-
+                    $('#MasterSearch').attr("placeholder", "Type to search").placeholder();
                     break
                 case "iReqValue":
-
+                    $('#MasterSearch').attr("placeholder", "Search by Unique Tag").placeholder();
                     $scope.SearchFromText = "Unique Tag";
                     UpdateFilterArray("iReqValue", $.trim($scope.SearchValue));
                     break
@@ -495,6 +525,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     function GetFilters() {
         return $scope.FilterArray;
     }
+   
+  
     $scope.GetInventories = function () {
 
 
@@ -525,7 +557,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
                 $scope.currentrecord = _TotalRecordsCurrent;
                 $scope.totalrecords = result.GetInventoriesResult.Payload[0].TotalRercords;
-
+                $scope.ActualTotalRecords = result.GetInventoriesResult.Payload[0].ActualTotalRecords;
                 if (_TotalRecordsCurrent == 0) {
                     $(".norecords").show();
                     $(".bottomlink").hide();
@@ -537,6 +569,10 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
                 }
 
+                if ($scope.ActualTotalRecords) {
+                } else {
+                    $scope.OpenmenuModal();
+                }
                 $scope.myinventoryColumnLoaded = true;
 
                 CheckScopeBeforeApply();

@@ -98,7 +98,9 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
             success: function (result) {
                 // log.success("Profile information Updated.");
                 ShowSuccess("Updated");
-                $scope.isSaving = false;
+                $(".detailmode").show();
+                $(".editmode").hide();
+                $scope.isSaving = true;
                 $scope.$apply();
 
             },

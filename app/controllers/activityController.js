@@ -1672,7 +1672,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                 CheckScopeBeforeApply();;
-                toastr.success("Data updated successfully.");
+                 
 
                 break;
 

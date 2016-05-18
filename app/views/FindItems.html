@@ -16,7 +16,7 @@
             <h4 style="margin-top:0px;">Inventory </h4>
         </div>
         <div style="text-align:right" class="col-xs-7">
-            <p style="font-size:13px;">{{currentrecord}} of {{totalrecords}} records shown</p>
+            <p style="font-size:13px;">{{currentrecord}} of {{totalrecords}} <span ng-if="totalrecords<1">record</span> <span ng-if="totalrecords>1">records</span>  shown</p>
         </div>
     </div>
 
@@ -47,12 +47,12 @@
                                     <i class="fa fa-search" style="font-size:20px;"></i> <span class="caret" style="margin-top: -5px;"></span>
                                 </a>
 
-                                <ul class="dropdown-menu dm-icon searchlist animated slideInDown">
-                                    <li><a ng-click="searchfunction('All')" alt="All">All</a></li>
-                                    <li><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
-                                    <li><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
-                                    <li><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">Status</a></li>
-                                    <li class="unitSearchFields" style="display: block;"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">Unique Tag</a></li>
+                                <ul class="dropdown-menu dm-icon searchlist animated slideInDown" id="dynamicd">
+                                    <li class="suggestItem1"><a ng-click="searchfunction('All')" alt="All">All</a></li>
+                                    <li class="suggestItem2"><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
+                                    <li class="suggestItem3"><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
+                                    <li class="suggestItem4"><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">Status</a></li>
+                                    <li class="unitSearchFields suggestItem5" style="display: block;"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">Unique Tag</a></li>
 
 
                                 </ul>
@@ -83,10 +83,18 @@
 
     </div>
     <div style="text-align: center; color: #d9534f; display:none;" class="maincontent norecords">
-        <br />
-        <h3>No record matched your Query</h3>
-        <a style="cursor:pointer;width:auto;" class="btn btn-primary" ng-click="ClearFilter()"> <i class="fa fa-filter"></i> Clear your filters</a>
-        <br /><br />
+
+        <div ng-if="ActualTotalRecords!=0">
+
+            <h3>No record matched your Query</h3>
+            <a style="cursor:pointer;width:auto;" class="btn btn-primary" ng-click="ClearFilter()"> <i class="fa fa-filter"></i> Clear your filters</a>
+            <br /><br />
+        </div>
+        <div ng-if="ActualTotalRecords==0">
+
+            <h5>Seems like you don't have any records, please click "New inventory" button to create new record at right bottom.</h5>
+            
+        </div>
 
     </div>
 
@@ -164,10 +172,10 @@
         <div class="modal-body">
             <ul class="animated slideInUp selectAction">
                 <li> <a href="#/inventory"><span class="newinv">New Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-success btn"> <i class="fa fa-plus"></i> </a></li>
-                <li class="bottomlink" ng-if="_areImagesShown==false" ng-click="Showhideimage('true')"> <span>Show Image</span> <a class="waves-effect btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
-                <li class="bottomlink" ng-if="_areImagesShown==true" ng-click="Showhideimage('false')"> <span>Hide Image</span> <a class="waves-effect btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
-                <li class="bottomlink" ng-if="_areZeroRecordsShown==false" ng-click=" showhidezerorecord('true')"><span>Show Zero record</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
-                <li class="bottomlink" ng-if="_areZeroRecordsShown==true" ng-click="showhidezerorecord('false')"><span>Hide Zero record</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+                <li class="bottomlink" ng-if="totalrecords!=0 && _areImagesShown==false" ng-click="Showhideimage('true')"> <span>Show Image</span> <a class="waves-effect btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
+                <li class="bottomlink" ng-if="totalrecords!=0 &&_areImagesShown==true" ng-click="Showhideimage('false')"> <span>Hide Image</span> <a class="waves-effect btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
+                <li class="bottomlink" ng-if="totalrecords!=0 &&_areZeroRecordsShown==false" ng-click=" showhidezerorecord('true')"><span>Show Zero record</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+                <li class="bottomlink" ng-if="totalrecords!=0 &&_areZeroRecordsShown==true" ng-click="showhidezerorecord('false')"><span>Hide Zero record</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
                 <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
                 <li ng-click="ClearFilter()" class="bottomlink"><span data-dismiss="modal">Clear Filters</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
             </ul>

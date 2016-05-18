@@ -98,8 +98,11 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="arrow-right" ng-show="slide+1 != Totalslides"><i class="fa fa-angle-right"></i></span>
-                                            <span style="pointer-events: none; color: #ccc" ng-if="slide+1 == Totalslides"><i class="fa fa-angle-right"></i></span>
+                                            {{slide}}
+                                            <br/>
+                                            {{Totalslides}}
+                                            <span class="arrow-right" ng-show="slide != Totalslides"><i class="fa fa-angle-right"></i></span>
+                                            <span style="pointer-events: none; color: #ccc" ng-if="slide == 0"><i class="fa fa-angle-right"></i></span>
                                         </td>
                                     </tr>
                                 </table>
@@ -181,7 +184,7 @@
                 </div>
                 <div class="c-widget-body">
                     <p class="m-0">On Location {{CurrentInventory.lLoc}} </p>
-                    <p class="small m-0">{{CurrentInventory.iStatusValue}} is Status.</p>
+                    <p class="small m-0">{{CurrentInventory.iStatusValue}}  <span ng-if="CurrentInventory.iStatusValue!=''"> is Status.</span></p>
 
                 </div>
 

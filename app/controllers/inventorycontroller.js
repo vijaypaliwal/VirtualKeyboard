@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('inventoryController', ['$scope', '$location', 'authService', 'localStorageService', 'log', '$compile', '$cordovaKeyboard', function ($scope, $location, authService, localStorageService, log, $compile, $cordovaKeyboard) {
+app.controller('inventoryController', ['$scope', '$location', 'authService', 'localStorageService', 'log', '$compile', function ($scope, $location, authService, localStorageService, log, $compile) {
     ''
     $scope.orders = [];
     $scope.MyinventoryFields = [];
@@ -94,6 +94,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
         }
         return false;
+    }
+
+
+    $scope.viewall = function () {
+
+        $("#infomodal").modal('show');
+
     }
 
 
@@ -1857,7 +1864,52 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
+    $scope.getstepCustom = function (Type, ColumnName) {
+        debugger;
+   if (ColumnName != "" && ColumnName != null) {
 
+       if (Type == 1)
+       {
+           $(".CustomItemCols").each(function () {
+
+               if ($(this).attr("data-column") == ColumnName) {
+                   mySwiper.swipeTo($(this).index(), 1000, false);
+
+                   $scope.slide = $(this).index();
+                   $scope.CurrentCount = $(this).index();
+                   $scope.CurrentActiveField = ColumnName;
+                   CheckScopeBeforeApply();
+                   return false;
+               }
+
+           });
+
+       }
+       else if(Type==2)
+       {
+           $(".CustomActivityCols").each(function () {
+
+               if ($(this).attr("data-column") == ColumnName) {
+                   mySwiper.swipeTo($(this).index(), 1000, false);
+
+                   $scope.slide = $(this).index();
+                   $scope.CurrentCount = $(this).index();
+                   $scope.CurrentActiveField = ColumnName;
+                   CheckScopeBeforeApply();
+                   return false;
+               }
+
+           });
+
+       }
+          
+        }
+        else {
+            mySwiper.swipeTo(0);
+
+        }
+
+    }
 
 
     $scope.$on('ngRepeatFinished', function () {

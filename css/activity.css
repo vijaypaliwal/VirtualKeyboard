@@ -24,12 +24,12 @@
 
 
 .AdjustIncrease {
-    color: #767676 !important;
+    color: #177B3D !important;
    
 }
 
 .AdjustDecrease {
-    color: #767676 !important;
+    color: #AF2525 !important;
   
 }
 
@@ -578,9 +578,7 @@ position: absolute;
     display: block !important;
 }
 
-.singlePanel {
-    margin-top: 35px;
-}
+
 
 #mycartModal {
     position: fixed;
