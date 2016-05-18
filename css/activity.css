@@ -33,6 +33,10 @@
   
 }
 
+.singlePanel {
+    margin-top: 35px;
+}
+
 .bgm-orange {
     background-color: #f8c217 !important;
 }
