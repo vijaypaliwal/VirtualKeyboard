@@ -195,7 +195,9 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
                         if (result.UpdateInventoryResult.Payload == 1) {
                             //log.success("Inventory updated successfully.");
                             ShowSuccess("Updated");
-                            window.location.href = "#/FindItems";
+                            $scope.IsEditMode = false;
+
+                            $scope.$apply();
                             localStorageService.set("CurrentDetailObject", $scope.CurrentInventory);
                             $scope.SavingData = false;
                         }
