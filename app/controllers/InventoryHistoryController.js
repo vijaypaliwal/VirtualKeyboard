@@ -110,7 +110,7 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
     $scope.Undo = function (TransID, InvID, ParentID) {
 
 
-        var box = bootbox.confirm("Are you sure you want to proceed ?", function (result) {
+        var box = bootbox.confirm("Are you sure you want to Undo this activity?", function (result) {
             if (result) {
 
                  
@@ -146,7 +146,10 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
         });
 
    
-     
+        box.on("shown.bs.modal", function () {
+            $(".mybootboxbody").html("Once undone, this activity will be removed and cannot be restored.");
+
+        });  
 
     }
     $scope.CancelEdit = function () {
