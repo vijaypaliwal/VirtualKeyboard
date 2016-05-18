@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('activityController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaStatusbar', function ($scope, localStorageService, authService, $location, log, $cordovaStatusbar) {
+app.controller('activityController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaStatusbar', '$cordovaKeyboard', function ($scope, localStorageService, authService, $location, log, $cordovaStatusbar, $cordovaKeyboard) {
     $scope.CurrentCart = [];
     $scope.SavingData = false;
     $scope.IsEditMode = false;
@@ -2778,6 +2778,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     /* bind events */
     $(document)
     .on('focus', 'input', function () {
+
+        $cordovaKeyboard.disableScroll(true);
+
         $('.header').css("position", "relative");
         $('.iteminfopanel').css('margin-top', '0px');
         $('.activityfields').css('margin-top', '0px');
@@ -2788,6 +2791,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         
     })
     .on('blur', 'input', function () {
+
+        $cordovaKeyboard.disableScroll(false);
+
         $('.header').css("position", "fixed");
         $('.iteminfopanel').css('margin-top', '80px');
         $('.activityfields').css('margin-top', '80px');
