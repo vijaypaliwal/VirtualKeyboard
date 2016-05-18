@@ -20,7 +20,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.CollapsOpen = false;
     $scope.isLineItemColumnNames = [];
     $scope.IsQuantityUpdated = false;
-    $scope.IsSingleMode = true;
+    $scope.IsSingleMode = false;
 
     $scope.CanIncrease = 'true';
     $scope.CanDecrease = 'true';
@@ -978,10 +978,13 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                   for (var i = 0; i < _TempArrayMyInventory.length; i++) {
                       var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
                       _TempArrayMyInventory[i].ColumnName = _ColName[0];
-                      if (_TempArrayMyInventory[i].Show == "True") {
+                      if (_TempArrayMyInventory[i].mobileorder != 0) {
                           $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
                       }
                   }
+                  console.log("My inventory fields");
+
+                  console.log($scope.MyinventoryFields);
                   CheckScopeBeforeApply();
 
 
@@ -1672,7 +1675,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 ShowSuccessActivity('Updated', $scope._CurrentAction);
 
                 CheckScopeBeforeApply();;
-                 
+                toastr.success("Data updated successfully.");
 
                 break;
 

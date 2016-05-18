@@ -1861,6 +1861,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         }
 
+        $("#infomodal").modal('hide');
+
     }
 
 
@@ -1907,7 +1909,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         else {
             mySwiper.swipeTo(0);
 
-        }
+   }
+
+   $("#infomodal").modal('hide');
 
     }
 

@@ -21,6 +21,12 @@
         text-align: center;
         line-height: 66px;
     }
+
+    .mylabel
+    {
+        font-size:16px;
+        color:#767676;
+    }
 </style>
 <!--<div class="page-header">
 
@@ -744,31 +750,30 @@
             <div class="myCols" data-index="{{$index}}" data-type="myinventory" data-id="myinventorycols" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" ng-if="CheckInCommonArray(obj.ColumnName)==true" end-repeat>
 
                 <div ng-if="obj.ColumnName=='iReqValue'" ng-click="getstep(0,'iReqValue')" class="form-group">
-                    <span>{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueTag}}</span>
-
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueTag}}</span>
 
                 </div>
                 <div ng-if="obj.ColumnName=='iUnitTag2'" ng-click="getstep(0,'iUnitTag2')" class="form-group">
-                    <span>{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueTag2}}</span>
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueTag2}}</span>
                 </div>
                 <div ng-if="obj.ColumnName=='iUnitTag3'" ng-click="getstep(0,'iUnitTag3')" class="form-group">
 
-                    <span>{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueTag3}}</span>
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueTag3}}</span>
                 </div>
                 <div ng-if="obj.ColumnName=='iUniqueDate'" ng-click="getstep(0,'iUniqueDate')" class="form-group">
-                    <span>{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueDate}}</span>
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueDate}}</span>
                 </div>
                 <div ng-if="obj.ColumnName=='iUnitDate2'" ng-click="getstep(0,'iUnitDate2')" class="form-group">
 
-                    <span>{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueDate2}}</span>
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueDate2}}</span>
                 </div>
                 <div ng-if="obj.ColumnName=='iUnitNumber1'" ng-click="getstep(0,'iUnitNumber1')" class="form-group">
-                    <span>{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitNumber1}}</span>
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitNumber1}}</span>
 
                 </div>
                 <div ng-if="obj.ColumnName=='iUnitNumber2'" ng-click="getstep(0,'iUnitNumber2')" class="form-group">
 
-                    <span>{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitNumber2}}</span>
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitNumber2}}</span>
 
                 </div>
 
@@ -784,34 +789,34 @@
                 <div class="form-group">
 
                     <div ng-if="obj.cfdDataType=='string'">
-                        <span>  {{obj.cfdName}} </span> <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
+                        <span class="mylabel">  {{obj.cfdName}} </span> <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
                     </div>
 
                     <div ng-if="obj.cfdDataType=='checkbox'">
 
 
-                        <span>  {{obj.cfdName}} </span>  <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
+                        <span class="mylabel">  {{obj.cfdName}} </span>  <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
 
 
                     </div>
 
                     <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
-                        <span>  {{obj.cfdName}} </span> <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
+                        <span class="mylabel">  {{obj.cfdName}} </span> <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
 
                     </div>
 
                     <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'">
-                        <span> {{obj.cfdName}} </span>  <span> {{InventoryObject.CustomPartData[$index].Value}} </span>
+                        <span class="mylabel"> {{obj.cfdName}} </span>  <span> {{InventoryObject.CustomPartData[$index].Value}} </span>
                     </div>
 
                     <div ng-if="obj.cfdDataType=='number'">
-                        <span>  {{obj.cfdName}}</span> <span> {{InventoryObject.CustomPartData[$index].Value}} </span>
+                        <span class="mylabel">  {{obj.cfdName}}</span> <span> {{InventoryObject.CustomPartData[$index].Value}} </span>
                     </div>
 
 
                     <div ng-if="obj.cfdDataType=='currency'">
-                        <span> {{obj.cfdName}} </span> <span>   {{InventoryObject.CustomPartData[$index].Value}} </span>
+                        <span class="mylabel"> {{obj.cfdName}} </span> <span>   {{InventoryObject.CustomPartData[$index].Value}} </span>
                     </div>
                 </div>
             </div>
@@ -829,7 +834,7 @@
 
                     <div ng-if="obj.cfdDataType=='string'">
 
-                        <span>{{obj.cfdName}}</span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
+                        <span class="mylabel">{{obj.cfdName}}</span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
 
 
                     </div>
@@ -844,21 +849,21 @@
                     <div ng-if="obj.cfdDataType=='combobox'">
 
 
-                        <span>{{obj.cfdName}}</span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
+                        <span class="mylabel">{{obj.cfdName}}</span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
 
                     </div>
 
 
                     <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'">
-                        <span>{{obj.cfdName}}</span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
+                        <span class="mylabel">{{obj.cfdName}}</span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
                     </div>
 
                     <div ng-if="obj.cfdDataType=='number'">
-                        <span>{{obj.cfdName}}</span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
+                        <span class="mylabel">{{obj.cfdName}}</span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
                     </div>
 
                     <div ng-if="obj.cfdDataType=='currency'">
-                        <span>{{obj.cfdName}}</span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
+                        <span class="mylabel">{{obj.cfdName}}</span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
                     </div>
 
                 </div>
