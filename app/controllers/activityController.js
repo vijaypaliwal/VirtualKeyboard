@@ -2780,25 +2780,25 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         $cordovaKeyboard.disableScroll(true);
 
-        $('.header').css("position", "relative");
-        $('.iteminfopanel').css('margin-top', '0px');
-        $('.activityfields').css('margin-top', '0px');
-        $('.singlePanel').css('margin-top', '0px');
-        $('#transactionForm1').css('margin-top', '0px');
+    //    $('.header').css("position", "relative");
+   //     $('.iteminfopanel').css('margin-top', '0px');
+    //    $('.activityfields').css('margin-top', '0px');
+   //     $('.singlePanel').css('margin-top', '0px');
+   //     $('#transactionForm1').css('margin-top', '0px');
 
-        $('.bottombutton').css("position", "relative");
+   //     $('.bottombutton').css("position", "relative");
         
     })
     .on('blur', 'input', function () {
 
         $cordovaKeyboard.disableScroll(false);
 
-        $('.header').css("position", "fixed");
-        $('.iteminfopanel').css('margin-top', '80px');
-        $('.activityfields').css('margin-top', '80px');
-        $('.singlePanel').css('margin-top', '35px');
-        $('#transactionForm1').css('margin-top', '85px');
-        $('.bottombutton').css("position", "fixed");
+     //   $('.header').css("position", "fixed");
+     //   $('.iteminfopanel').css('margin-top', '80px');
+     //   $('.activityfields').css('margin-top', '80px');
+    //    $('.singlePanel').css('margin-top', '35px');
+    //    $('#transactionForm1').css('margin-top', '85px');
+    //    $('.bottombutton').css("position", "fixed");
 
     });
 
