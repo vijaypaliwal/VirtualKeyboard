@@ -657,11 +657,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": $scope.ImageList }),
               success: function (response) {
 
-                  ShowSuccess("Saved");
+               
+
+             
 
                   $scope.resetObject();
 
-                  movetolist();
+                  $scope.movetolist();
                   // $location.path('/inventory');
 
                   CheckScopeBeforeApply()
@@ -2047,19 +2049,21 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
-    function onConfirmmove(buttonIndex) {
-        if (buttonIndex == 2 || buttonIndex == "2") {
-            $location.path('/FindItems');
-            vibrate()
-            CheckScopeBeforeApply();
-        }
-        else if (buttonIndex == 1 || buttonIndex == "1") {
-            //  $scope.getstep(0);
-            window.location.reload();
-            //$location.path('/inventory');
-        }
+    $scope.confirmmove = function () {
+        $("#modal3").modal('hide');
+        $location.path('/FindItems');
+        vibrate()
+        CheckScopeBeforeApply();
 
     }
+
+    $scope.notmove = function () {
+        window.location.reload();
+    }
+
+
+
+ 
 
 
     function showConfirmInventory() {
@@ -2071,14 +2075,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         );
     }
 
-    function movetolist() {
-        navigator.notification.confirm(
-            'Press yes to continue', // message
-             onConfirmmove,            // callback to invoke with index of button pressed
-            'Do you want to add more?',           // title
-            ['Yes', 'No']         // buttonLabels
-        );
+
+    $scope.movetolist = function () {
+    
+        $("#modal3").modal('show');
     }
+
+   
 
 
     $('.arrow-left').on('click', function (e) {

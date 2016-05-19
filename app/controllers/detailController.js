@@ -12,6 +12,8 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
     function init() {
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
         console.log($scope.CurrentInventory);
+        $scope.itemlabel = $scope.CurrentInventory.pPart
+     
         $scope.$apply();
     }
 
@@ -200,11 +202,12 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
                             $scope.$apply();
                             localStorageService.set("CurrentDetailObject", $scope.CurrentInventory);
                             $scope.SavingData = false;
+                            init();
+                          $scope.getitemimage();
                         }
                         else {
                             log.error(Message);
                         }
-
 
                     },
                     error: function (err) {
@@ -353,9 +356,6 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
         $scope.$apply();
     }
     $scope.ToggleEditView = function () {
-
-
-        debugger;
 
 
         $("#myModal2").modal('hide');

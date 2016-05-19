@@ -37,6 +37,9 @@
     <i class="fa fa-info-circle"></i>
 </a>
 
+
+
+
 <div class="maincontent animated slideInLeft">
 
     <form id="myform" name="myform">
@@ -162,7 +165,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon" ng-click="UpDownValue('Quantity',true)"><i class="fa fa-plus"></i></span>
-                                <input ng-model="InventoryObject.Quantity" id="iQty"  min="0" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="Quantity" value="" />
+                                <input ng-model="InventoryObject.Quantity" id="iQty" min="0" class="form-control" type="number" pattern="^[0-9]\d*(\.\d+)?$" inputmode="numeric" name="Quantity" value="" />
 
                                 <span class="input-group-addon" ng-click="UpDownValue('Quantity',false)"><i class="fa fa-minus"></i></span>
                             </div>
@@ -402,7 +405,7 @@
 
 
                             <div ng-if="obj.cfdDataType=='currency'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="text" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
+                                <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
                                 <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                             </div>
 
@@ -533,6 +536,7 @@
 
 
 </div>
+
 
 
 
@@ -877,3 +881,10 @@
     </div>
 </div>
 
+<div id="modal3" class="modal bottom-sheet">
+  
+    <p ng-click="notmove()">Do you want to add more?</p>
+    <p ng-click="confirmmove()">No, move to Find items page</p>
+    
+    
+</div>
