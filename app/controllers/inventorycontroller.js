@@ -1201,10 +1201,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     document.getElementById('list123').insertBefore(span, null);
 
-                    var imagepath = '<span><img  id="' + id + '" style="height:80px;width:72px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
+                    var imagepath = '<span><img  id="' + id + '" style="height:80px;width:78px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
 
 
                     $("#list321").append(imagepath);
+                    $("#list567").append(imagepath);
 
                 };
             })(f);
@@ -1465,10 +1466,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 switch (ControlID) {
                     case "pPart":
                         _id = "#ItemName";
+                        $scope.InventoryObject.ItemID = "";
                         $scope.InventoryObject.ItemID = resultvalue;
                         break;
                     case "lLoc":
                         _id = "#Location";
+                        $scope.InventoryObject.Location = "";
                         $scope.InventoryObject.Location = resultvalue;
                         break;
                     case "uomUOM":
@@ -1480,21 +1483,27 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         $scope.InventoryObject.Quantity = resultvalue;
                         break;
                     case "iStatusValue":
+                        $scope.InventoryObject.iStatusValue = "";
+                        $scope.InventoryObject.iStatusValue = resultvalue;
                         break;
                     case "pDescription":
                         _id = "#pDescriptionForm";
+                        $scope.InventoryObject.Description = "";
                         $scope.InventoryObject.Description = resultvalue;
                         break;
                     case "iReqValue":
                         _id = "#UniqueTag";
+                        $scope.InventoryObject.UniqueTag = "";
                         $scope.InventoryObject.UniqueTag = resultvalue;
                         break;
                     case "iUnitTag2":
                         _id = "#UnitTag2";
+                        $scope.InventoryObject.UnitTag2 = "";
                         $scope.InventoryObject.UnitTag2 = resultvalue;
                         break;
                     case "iUnitTag3":
                         _id = "#UnitTag3";
+                        $scope.InventoryObject.UnitTag3 = "";
                         $scope.InventoryObject.UnitTag3 = resultvalue;
                         break;
                     case "iUniqueDate":
