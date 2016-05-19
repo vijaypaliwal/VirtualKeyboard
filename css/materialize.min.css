@@ -7972,6 +7972,15 @@ a.waves-effect .waves-ripple {
 box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
 
+
+.bottom-sheet p
+{
+    font-size: 18px;
+    margin: 7px 0 14px;
+    color: #069;
+}
+
+
 .collapsible {
     border-top: 1px solid #ddd;
     border-right: 1px solid #ddd;
