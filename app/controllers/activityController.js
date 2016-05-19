@@ -2774,7 +2774,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     /* bind events */
     $(document)
-    .on('focus', 'input', function () {
+    .on('focus', 'input,select', function () {
 
      $cordovaKeyboard.disableScroll(true);
 
@@ -2787,7 +2787,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         //$('.bottombutton').css("position", "relative");
         
     })
-    .on('blur', 'input', function () {
+    .on('blur', 'input,select', function () {
 
      $cordovaKeyboard.disableScroll(false);
 

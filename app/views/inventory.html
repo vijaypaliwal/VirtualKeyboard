@@ -165,7 +165,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon" ng-click="UpDownValue('Quantity',true)"><i class="fa fa-plus"></i></span>
-                                <input ng-model="InventoryObject.Quantity" id="iQty" min="0" class="form-control" type="number" pattern="^[0-9]\d*(\.\d+)?$" inputmode="numeric" name="Quantity" value="" />
+                                <input ng-model="InventoryObject.Quantity" id="iQty" min="0" class="form-control" type="number" pattern="\d+(\.\d*)?" step="0.01" inputmode="numeric" name="Quantity" value="" />
 
                                 <span class="input-group-addon" ng-click="UpDownValue('Quantity',false)"><i class="fa fa-minus"></i></span>
                             </div>
@@ -884,6 +884,7 @@
 <div id="modal3" class="modal bottom-sheet">
   
     <p ng-click="notmove()">Do you want to add more?</p>
+    <hr />
     <p ng-click="confirmmove()">No, move to Find items page</p>
     
     
