@@ -1467,11 +1467,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     case "pPart":
                         _id = "#ItemName";
                         $scope.InventoryObject.ItemID = "";
+                        $scope.$apply();
+                        alert("before" + $scope.InventoryObject.ItemID);
                         $scope.InventoryObject.ItemID = resultvalue;
+                        alert("after" + $scope.InventoryObject.ItemID);
+
                         break;
                     case "lLoc":
                         _id = "#Location";
-                        $scope.InventoryObject.Location = "";
                         $scope.InventoryObject.Location = resultvalue;
                         break;
                     case "uomUOM":
@@ -1483,27 +1486,22 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         $scope.InventoryObject.Quantity = resultvalue;
                         break;
                     case "iStatusValue":
-                        $scope.InventoryObject.iStatusValue = "";
                         $scope.InventoryObject.iStatusValue = resultvalue;
                         break;
                     case "pDescription":
                         _id = "#pDescriptionForm";
-                        $scope.InventoryObject.Description = "";
                         $scope.InventoryObject.Description = resultvalue;
                         break;
                     case "iReqValue":
                         _id = "#UniqueTag";
-                        $scope.InventoryObject.UniqueTag = "";
                         $scope.InventoryObject.UniqueTag = resultvalue;
                         break;
                     case "iUnitTag2":
                         _id = "#UnitTag2";
-                        $scope.InventoryObject.UnitTag2 = "";
                         $scope.InventoryObject.UnitTag2 = resultvalue;
                         break;
                     case "iUnitTag3":
                         _id = "#UnitTag3";
-                        $scope.InventoryObject.UnitTag3 = "";
                         $scope.InventoryObject.UnitTag3 = resultvalue;
                         break;
                     case "iUniqueDate":
