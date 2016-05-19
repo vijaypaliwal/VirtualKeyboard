@@ -77,15 +77,15 @@
                                 <img id="defaultimg" style="height: 80px; width: 80px; border: 1px solid #ccc;" src="img/na.jpg" alt="Alternate Text" />
                             </div>
                             <div class="col-md-10 col-xs-8">
-                                <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')"> <span ng-bind="InventoryObject.ItemID"></span> <!--<span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span>--> </span>
+                                <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')"> <span style="float:left" ng-bind="InventoryObject.ItemID"></span> <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></span>
 
 
-                                <span style="font-size:12px;" ng-click="getstep(1,'pDescription')"> {{ InventoryObject.Description }} </span>
+                                <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
 
-                                <span style="display:inline" ng-click="getstep(2,'iQty')"> {{ InventoryObject.Quantity }}</span> <span style="display:inline" ng-click="getstep(4,'uomUOM')"> {{InventoryObject.Uom}}</span>
+                                <span ng-bind="InventoryObject.Quantity" style="display:inline" ng-click="getstep(2,'iQty')"></span> <span ng-bind="InventoryObject.Uom" style="display:inline" ng-click="getstep(4,'uomUOM')"></span>
 
 
-                                <span ng-click="getstep(3,'lLoc')">  {{InventoryObject.Location}} </span> 
+                                <span ng-bind="InventoryObject.Location" ng-click="getstep(3,'lLoc')"> </span> 
 
 
 
