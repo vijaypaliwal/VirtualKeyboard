@@ -2050,8 +2050,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.confirmmove = function () {
+
+      
+
         $("#modal3").modal('hide');
         $location.path('/FindItems');
+        $(".Addbtn").show()
         vibrate()
         CheckScopeBeforeApply();
 
@@ -2059,6 +2063,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.notmove = function () {
         window.location.reload();
+        $(".Addbtn").show()
     }
 
 
@@ -2077,6 +2082,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.movetolist = function () {
+
+        $(".Addbtn").hide()
     
         $("#modal3").modal('show');
     }
