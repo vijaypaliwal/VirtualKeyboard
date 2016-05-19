@@ -1466,11 +1466,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 switch (ControlID) {
                     case "pPart":
                         _id = "#ItemName";
-                        $scope.InventoryObject.ItemID = "";
-                        $scope.$apply();
-                        alert("before" + $scope.InventoryObject.ItemID);
+                     
+                    
                         $scope.InventoryObject.ItemID = resultvalue;
-                        alert("after" + $scope.InventoryObject.ItemID);
+                     
 
                         break;
                     case "lLoc":
