@@ -25,8 +25,6 @@
   <gap:plugin name="org.apache.cordova.vibration"/>
   <gap:plugin  name="ionic-plugin-keyboard"  source="npm" version="1.0.7" />
   
-  <gap:plugin name="nl.x-services.plugins.ioswebviewcolor" />
-
 
   <feature name="http://api.phonegap.com/1.0/device" />
   <feature name="debug-server" required="true">
