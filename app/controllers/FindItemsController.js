@@ -219,7 +219,15 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     }
 
+    $('#mylist').on('swipedown', function () {
+        alert("swipe down");
+        $scope.myinventoryColumnLoaded = false;
+        CheckScopeBeforeApply();
+        $scope.GetInventories();
+    });
 
+
+   
     setTimeout(function () {
         $(document)
 .on('focus', 'input', function () {
@@ -337,25 +345,9 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
             }
         }
-        log.info($(window).scrollTop());
 
 
-        if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
-            if ($(window).scrollTop() <0) {
-                log.info("Over scrolling is on");
-                if (_PageSize < $scope.totalrecords) {
-                    _IsLazyLoadingUnderProgress = 1;
-                    _PageSize = _TotalRecordsCurrent + getIncrementor($scope.totalrecords);
-                    $scope.myinventoryColumnLoaded = false;
-                    CheckScopeBeforeApply();
-                    $scope.GetInventories();
-                }
-                else {
-                    // log.info("You have already loaded all data.")
-                }
-
-            }
-        }
+      
     });
 
 
@@ -540,7 +532,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.GetInventories = function () {
 
-
+        alert("get inventory called");
         $scope.myinventoryColumnLoaded = false;
 
         var authData = localStorageService.get('authorizationData');
@@ -814,9 +806,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     var _tempCopy = [];
     function CheckInCart(id) {
         for (var i = 0; i < _tempCopy.length; i++) {
-            if (_tempCopy[i].uId == id)
-            {
-             
+            if (_tempCopy[i].uId == id) {
+
                 return true;
             }
             else {
@@ -826,7 +817,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         }
     }
     $scope.DeselectAll = function () {
-         _tempCopy = angular.copy($scope.mainObjectToSend);
+        _tempCopy = angular.copy($scope.mainObjectToSend);
         $('#mylist .checkicon').each(function () {
             $(this).parent(".newlistitem").find(".img").css("opacity", "1")
             $(this).find(".fa-check").css("color", "transparent");
@@ -847,14 +838,14 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 }
 
             }
-         
 
-             
+
+
         });
-            $scope.mainObjectToSend = [];
-            localStorageService.set("ActivityCart", "");
-            CheckScopeBeforeApply();
-       
+        $scope.mainObjectToSend = [];
+        localStorageService.set("ActivityCart", "");
+        CheckScopeBeforeApply();
+
     }
 
 

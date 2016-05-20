@@ -596,12 +596,13 @@
  
     <!-- 3rd party libraries -->
     <script src="scripts/jquery-1.11.0.min.js"></script>
-    <script src="scripts/jquery-ui.js"></script>
-
-    <script src="scripts/bootstrap.min.js"></script>   
+  
+<script src="scripts/jquery-ui.js"></script>
+    
+    <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/bootstrap-switch.js"></script>
-    <script src="js/materialize.min.js"></script> 
-    <script src="js/functions.js"></script> 
+    <script src="js/materialize.min.js"></script>
+    <script src="js/functions.js"></script>
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/angular-sanitize.js"></script>
     <script src="scripts/angular-route.min.js"></script>
@@ -613,9 +614,9 @@
     <script src="scripts/toastr.js"></script>
     <script src="scripts/bootbox.js"></script>
     <script src="scripts/jquery.animate_from_to-1.0.js"></script>
-    
-    <script src="scripts/idangerous.swiper.min.js"></script>
 
+    <script src="scripts/idangerous.swiper.min.js"></script>
+    
     <!-- Load app main script -->
     <script src="app/app.js?v=2"></script>
 
@@ -637,6 +638,74 @@
     <!-- Load custom filters -->
     <!-- Load custom directives -->
 
+
+    <script>
+        var supportTouch = $.support.touch,
+            scrollEvent = "touchmove scroll",
+            touchStartEvent = supportTouch ? "touchstart" : "mousedown",
+            touchStopEvent = supportTouch ? "touchend" : "mouseup",
+            touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
+        $.event.special.swipeupdown = {
+            setup: function () {
+                var thisObject = this;
+                var $this = $(thisObject);
+                $this.bind(touchStartEvent, function (event) {
+                    var data = event.originalEvent.touches ?
+                            event.originalEvent.touches[0] :
+                            event,
+                            start = {
+                                time: (new Date).getTime(),
+                                coords: [data.pageX, data.pageY],
+                                origin: $(event.target)
+                            },
+                            stop;
+
+                    function moveHandler(event) {
+                        if (!start) {
+                            return;
+                        }
+                        var data = event.originalEvent.touches ?
+                                event.originalEvent.touches[0] :
+                                event;
+                        stop = {
+                            time: (new Date).getTime(),
+                            coords: [data.pageX, data.pageY]
+                        };
+
+                        // prevent scrolling
+                        if (Math.abs(start.coords[1] - stop.coords[1]) > 10) {
+                            event.preventDefault();
+                        }
+                    }
+                    $this
+                            .bind(touchMoveEvent, moveHandler)
+                            .one(touchStopEvent, function (event) {
+                                $this.unbind(touchMoveEvent, moveHandler);
+                                if (start && stop) {
+                                    if (stop.time - start.time < 1000 &&
+                                            Math.abs(start.coords[1] - stop.coords[1]) > 30 &&
+                                            Math.abs(start.coords[0] - stop.coords[0]) < 75) {
+                                        start.origin
+                                                .trigger("swipeupdown")
+                                                .trigger(start.coords[1] > stop.coords[1] ? "swipeup" : "swipedown");
+                                    }
+                                }
+                                start = stop = undefined;
+                            });
+                });
+            }
+        };
+        $.each({
+            swipedown: "swipeupdown",
+            swipeup: "swipeupdown"
+        }, function (event, sourceEvent) {
+            $.event.special[event] = {
+                setup: function () {
+                    $(this).bind(sourceEvent, $.noop);
+                }
+            };
+        });
+    </script>
     <script>
 
 
@@ -674,20 +743,20 @@
         }
         function ShowLoginSuccess() {
             $(".errorcontent").css("background", "rgba(52, 73, 94,0.8)");
-          
+
             $("#myloginModal").removeClass('bounceOut').addClass('bounceIn');
             $('#myloginModal').show();
-        
 
-           
+
+
         }
 
-      
+
 
         var _CurrentUrl = "Login";
         var _isOpenBootbox = false;
         var recognition;
-      
+
 
 
 
@@ -708,13 +777,13 @@
                 else {
 
                     $("#sidebaricon").removeClass("fa-arrow-circle-left animated rollIn").addClass("fa-bars")
-                        
+
                 }
 
 
             }, 0);
 
-          
+
         });
         $('#wrapper').click(function (e) {
             e.stopPropagation();
@@ -1043,7 +1112,7 @@
             switch (window.orientation) {
                 case -90:
                 case 90:
-                  
+
                     $("#mycartModal").addClass("activitylist")
 
                     break;
@@ -1058,7 +1127,7 @@
         // Initial execution if needed
         doOnOrientationChange();
 
-       
+
     </script>
 
 
@@ -1067,7 +1136,7 @@
             var target = e.target;
             if (target.tagName !== 'a') return false;
 
-         
+
             var rect = target.getBoundingClientRect();
             var ripple = target.querySelector('.ripple');
             if (!ripple) {
@@ -1121,8 +1190,8 @@
     </script>
 
 
-    <script>    
-    
+    <script>
+
         function ShowSuccessActivity(Message, Type) {
 
             switch (Type) {
@@ -1167,7 +1236,7 @@
         }
     </script>
 
-    
+
 </body>
 
 </html>
