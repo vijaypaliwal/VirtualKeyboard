@@ -337,11 +337,11 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
             }
         }
-        log.info(window.pageYoffset);
+        log.info($(window).scrollTop());
 
 
         if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
-            if (window.pageYoffset <= 0) {
+            if ($(window).scrollTop() <0) {
                 log.info("Over scrolling is on");
                 if (_PageSize < $scope.totalrecords) {
                     _IsLazyLoadingUnderProgress = 1;
