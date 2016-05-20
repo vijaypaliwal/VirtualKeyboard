@@ -337,6 +337,25 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
             }
         }
+        log.info(window.pageYoffset);
+
+
+        if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
+            if (window.pageYoffset <= 0) {
+                log.info("Over scrolling is on");
+                if (_PageSize < $scope.totalrecords) {
+                    _IsLazyLoadingUnderProgress = 1;
+                    _PageSize = _TotalRecordsCurrent + getIncrementor($scope.totalrecords);
+                    $scope.myinventoryColumnLoaded = false;
+                    CheckScopeBeforeApply();
+                    $scope.GetInventories();
+                }
+                else {
+                    // log.info("You have already loaded all data.")
+                }
+
+            }
+        }
     });
 
 
