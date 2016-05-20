@@ -2805,6 +2805,18 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     });
 
+    var now = new Date();
+
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+    var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+
+    setTimeout(function () { $('#itUpdateDate').val(today); }, 3000);
+
+    setTimeout(function() { $('.FormDateType').val(today); }, 3000);
+   
 
     $scope.ValidateObjectVM = function () {
         $scope.AffectedItemIds = [];
@@ -3115,9 +3127,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             log.error("Scanning failed: ", error);
         });
     }
-
-
-
 
 }]);
 
