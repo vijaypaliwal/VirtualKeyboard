@@ -216,14 +216,26 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         $scope.GetInventories();
 
 
-
     }
 
     $('#mylist').on('swipedown', function () {
-        alert("swipe down");
-        $scope.myinventoryColumnLoaded = false;
-        CheckScopeBeforeApply();
-        $scope.GetInventories();
+        
+
+        if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
+            if ($(window).scrollTop() <500) {
+                if (_PageSize < $scope.totalrecords) {
+                    _IsLazyLoadingUnderProgress = 1;
+                    $scope.myinventoryColumnLoaded = false;
+                    CheckScopeBeforeApply();
+                    $scope.GetInventories();
+                }
+                else {
+                    // log.info("You have already loaded all data.")
+                }
+
+            }
+        }
+     
     });
 
 
@@ -532,7 +544,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.GetInventories = function () {
 
-        alert("get inventory called");
+        log.info("get inventory called");
         $scope.myinventoryColumnLoaded = false;
 
         var authData = localStorageService.get('authorizationData');
