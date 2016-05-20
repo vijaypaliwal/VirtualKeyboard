@@ -544,7 +544,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.GetInventories = function () {
 
-        log.info("get inventory called");
+      
         $scope.myinventoryColumnLoaded = false;
 
         var authData = localStorageService.get('authorizationData');
@@ -839,7 +839,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 if (_tempCopy[i].uId == _invID) {
 
                     $('.cartbtn').animate_from_to(originalID, {
-                        pixels_per_second: 600,
+                        pixels_per_second:500,
                         initial_css: {
                             'background': 'rgba(226, 208, 208,1)',
                             'border-radius': '100%'
