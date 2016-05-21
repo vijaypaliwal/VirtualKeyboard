@@ -1163,11 +1163,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentOperation = "Decrease";
                 $scope.CurrentIcon = "fa-arrow-down";
                 $scope.CurrentHeaderText = "Take these items out of inventory.";
-                if (_Islive)
-                {
-                    StatusBar.backgroundColorByHexString("#AF2525");
-                  //  $cordovaStatusbar.styleHex("#AF2525");
-                }
+                UpdateStatusBar(Action);
 
                 break;
             case 0:
@@ -1176,11 +1172,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentOperation = "Move";
                 $scope.CurrentIcon = "fa-arrow-right";
                 $scope.CurrentHeaderText = "Move these items to a different location.";
-                if (_Islive) {
-                    StatusBar.backgroundColorByHexString("#C65E28");
-                  //  $cordovaStatusbar.styleHex("#C65E28");
-
-                }
+                UpdateStatusBar(Action);
                 break;
             case 1:
                 $scope.CurrentClass = "bgm-increase"
@@ -1188,12 +1180,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentOperation = "Increase";
                 $scope.CurrentIcon = "fa-arrow-up";
                 $scope.CurrentHeaderText = "Put these items in inventory.";
-                if (_Islive) {
-                   StatusBar.backgroundColorByHexString("#177B3D");
-                  //  $cordovaStatusbar.styleHex("#177B3D");
-
-
-                }
+                UpdateStatusBar(Action);
                 break;
             case 2:
                 $scope.CurrentClass = "bgm-convert"
@@ -1202,13 +1189,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentIcon = "fa-sitemap";
                 $scope.CurrentHeaderText = "Convert the units of measure for these items.";
 
-                if (_Islive) {
-                    StatusBar.backgroundColorByHexString("#CE59A1");
-
-
-                 //   $cordovaStatusbar.styleHex("#CE59A1");
-
-                }
+                UpdateStatusBar(Action);
 
                 break;
             case 3:
@@ -1218,14 +1199,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentIcon = "fa-history fa-flip-horizontal";
                 $scope.CurrentHeaderText = "Update the status of these items.";
 
-                if (_Islive) {
-                    StatusBar.backgroundColorByHexString("#583782");
-
-
-                 //   $cordovaStatusbar.styleHex("#583782");
-
-
-                }
+                UpdateStatusBar(Action);
                 break;
             case 4:
                 $scope.CurrentClass = "bgm-apply"
@@ -1234,15 +1208,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentIcon = "fa-tag";
                 $scope.CurrentHeaderText = "Tag these items with information.";
 
-                if (_Islive) {
-                    StatusBar.backgroundColorByHexString("#0D190F");
-
-                  //  $cordovaStatusbar.styleHex("#0D190F");
-
-
-
-
-                }
+                UpdateStatusBar(Action);
                 break;
 
             case 12:
@@ -1255,31 +1221,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 $scope.CurrentIcon = "fa-arrows-v";
                 $scope.CurrentHeaderText = "Adjust the quantity of these items.";
-
-                if (_Islive) {
-                    StatusBar.backgroundColorByHexString("#f8c217");
-
-
-                //    $cordovaStatusbar.styleHex("#f8c217");
-
-
-
-
-                }
+                UpdateStatusBar(Action);
                 break;
             default:
                 $scope.CurrentOperation = "";
-                if (_Islive) {
-                    StatusBar.backgroundColorByHexString("#0083C7");
-
-
-
-
-
-
-
-
-                }
+                UpdateStatusBar(55);
                 break;
 
 

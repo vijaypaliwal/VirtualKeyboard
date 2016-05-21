@@ -4,7 +4,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     {
         var path = "activity";
         if ($location.path().substr(0, path.length) !== path) {
-            StatusBar.backgroundColorByHexString("#0083C7");
+           // UpdateStatusBar(55);
         }
         else {
             console.log("into activity");

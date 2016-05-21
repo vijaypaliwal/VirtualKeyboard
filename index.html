@@ -1105,13 +1105,114 @@
             navigator.notification.beep(1);
         }
 
+        function UpdateStatusBar(Type)
+        {
+            switch (Type) {
+                case -1:
+                
+                    if (_Islive) {
+                        StatusBar.backgroundColorByHexString("#AF2525");
+                        //  $cordovaStatusbar.styleHex("#AF2525");
+                    }
+
+                    break;
+                case 0:
+                   
+                    if (_Islive) {
+                        StatusBar.backgroundColorByHexString("#C65E28");
+                        //  $cordovaStatusbar.styleHex("#C65E28");
+
+                    }
+                    break;
+                case 1:
+             
+                    if (_Islive) {
+                        StatusBar.backgroundColorByHexString("#177B3D");
+                        //  $cordovaStatusbar.styleHex("#177B3D");
+
+
+                    }
+                    break;
+                case 2:
+                   
+
+                    if (_Islive) {
+                        StatusBar.backgroundColorByHexString("#CE59A1");
+
+
+                        //   $cordovaStatusbar.styleHex("#CE59A1");
+
+                    }
+
+                    break;
+                case 3:
+                
+
+                    if (_Islive) {
+                        StatusBar.backgroundColorByHexString("#583782");
+
+
+
+
+                    }
+                    break;
+                case 4:
+                
+
+                    if (_Islive) {
+                        StatusBar.backgroundColorByHexString("#0D190F");
+
+                        //  $cordovaStatusbar.styleHex("#0D190F");
+
+
+
+
+                    }
+                    break;
+
+                case 12:
+
+                 
+
+                    if (_Islive) {
+                        StatusBar.backgroundColorByHexString("#f8c217");
+
+
+
+
+
+
+                    }
+                    break;
+                default:
+                    if (_Islive) {
+                        StatusBar.backgroundColorByHexString("#0083C7");
+
+
+
+
+
+
+
+
+                    }
+                    break;
+
+
+            }
+
+        }
+
         function onDeviceReady() {
 
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
             pictureSource = navigator.camera.PictureSourceType;
             destinationType = navigator.camera.DestinationType;
 
-           
+            if (StatusBar) {
+                alert("into Status Bar");
+
+            }
 
 
             InitializeModal();
