@@ -579,6 +579,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
+
         $('#addinventories').addClass("disabled");
         $('#addinventories').find(".fa").addClass("fa-spin");
 
@@ -619,7 +620,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         });
 
 
-        if ($scope.InventoryObject.ItemID == "") {
+        if ($.trim($scope.InventoryObject.ItemID) == "") {
             $scope.InventoryObject.AutoID = true;
             $scope.InventoryObject.ItemID = "Automated";
         }
@@ -647,6 +648,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         if (_sum > 5000000) {
             log.warning("You are trying to upload more than one image, it may take some time to upload, please be patient.")
         }
+
+        ShowWaitingInv();
         $.ajax
           ({
               type: "POST",
@@ -658,9 +661,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               success: function (response) {
 
                
-
+                  HideWaitingInv();
              
-
                   $scope.resetObject();
 
                   $scope.movetolist();
@@ -686,7 +688,43 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
+    $scope.CheckCustomFields = function (Type) {
+        var _returnVar = false;
+        switch (Type) {
+            case 1:
 
+                for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+                    if ($scope.IsAvailableMyInventoryColumn($scope.CustomItemDataList[i].ColumnMap) == true) {
+                        _returnVar = true;
+                        break;
+                    }
+                    else {
+                        _returnVar = false;
+                    }
+                }
+
+                console.log(_returnVar);
+                return _returnVar;
+                break;
+            case 2:
+                for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+
+                    if ($scope.IsActiveTransactionField($scope.CustomActivityDataList[i].cfdID) == true) {
+                        _returnVar = true;
+                        break;
+                    }
+                    else {
+                        _returnVar = false;
+                    }
+                }
+
+                return _returnVar;
+                break;
+            default:
+
+        }
+        return _returnVar;
+    }
     $scope.IsAvailableMyInventoryColumn = function (ColumnName) {
         var i = 0;
         for (i = 0; i < $scope.MyinventoryFields.length; i++) {

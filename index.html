@@ -354,7 +354,8 @@
         }
     </style>
     <style>
-        #mysmallModal {
+
+        #mysmallModalSave {
             top: 30%;
             overflow: hidden;
             position: fixed;
@@ -362,7 +363,18 @@
             display: none;
             text-align: center;
             padding: 20px !important;
-            width:100%;
+            width: 100%;
+        }
+        
+         #mysmallModal {
+            top: 30%;
+            overflow: hidden;
+            position: fixed;
+            z-index: 1050;
+            display: none;
+            text-align: center;
+            padding: 20px !important;
+            width: 100%;
         }
         #myloginModal {
             top: 30%;
@@ -497,6 +509,18 @@
 
     </div>
 
+
+    <div id="mysmallModalSave" class="animated">
+        <div class="errorcontent">
+
+            <img src="img/loader1.gif" />
+
+            <span style="display:block;font-size:20px;font-weight:300;color:#fafafa;">
+                Saving..
+            </span>
+
+        </div>
+    </div>
     <div class="animated" id="myloginModal">
 
         <div class="errorcontent" style="width:122px;background:#000;">
@@ -728,6 +752,18 @@
 
         function hideSuccess() {
             $("#mysmallModal").removeClass('bounceIn').addClass('bounceOut');
+        }
+
+        function HideWaitingInv()
+        {
+            $("#mysmallModalSave").removeClass('bounceIn').addClass('bounceOut');
+        }
+        function ShowWaitingInv() {
+            $(".errorcontent").css("background", "rgba(52, 73, 94,0.8)");
+            $("#mysmallModalSave").removeClass('bounceOut').addClass('bounceIn');
+            $('#mysmallModalSave').show();
+
+           
         }
 
         function ShowSuccess(Message) {

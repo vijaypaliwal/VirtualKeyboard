@@ -781,9 +781,9 @@
 
                 </div>
 
-                <h4 ng-if='CustomItemDataList.length > 0'>
-                    Custom Item fields
-                </h4>
+            <h4 ng-if='CheckCustomFields(1)==true'>
+                Custom Item fields
+            </h4>
 
 
             <div ng-click="getstepCustom(1,obj.ColumnMap)" data-id="CustomItem_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="Part" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
@@ -824,9 +824,9 @@
             </div>
 
 
-                <h4 ng-if='CustomActivityDataList.length > 0'>
-                    Activity fields
-                </h4>
+            <h4 ng-if='CheckCustomFields(2)==true'>
+                Activity fields
+            </h4>
 
             <div ng-repeat="obj in CustomActivityDataList" ng-click="getstepCustom(2,obj.ColumnMap)" data-id="CustomActivity_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="activity" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)"  end-repeat3>
 
@@ -842,9 +842,9 @@
                     </div>
 
 
-                    <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
+                    <div ng-if="obj.cfdDataType=='checkbox'" >
 
-                        <span>{{obj.cfdName}}</span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
+                        <span class="mylabel">{{obj.cfdName}}</span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
 
                     </div>
 

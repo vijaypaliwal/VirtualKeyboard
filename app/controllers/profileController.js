@@ -48,6 +48,14 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
                    $scope.username = response.GetUserInfoResult.Payload[0].UserName
                    $scope.myprofileimage = response.GetUserInfoResult.Payload[0].ProfilePic;
 
+
+                   $scope.firstnameLabel = response.GetUserInfoResult.Payload[0].FirstName
+                   $scope.lastnameLabel = response.GetUserInfoResult.Payload[0].LastName;
+                   $scope.emailLabel = response.GetUserInfoResult.Payload[0].Email
+                   $scope.phoneLabel = response.GetUserInfoResult.Payload[0].Phone
+                   $scope.organizationLabel = response.GetUserInfoResult.Payload[0].Organization
+                   $scope.usernameLabel = response.GetUserInfoResult.Payload[0].UserName
+
                    if (response.GetUserInfoResult.Payload[0].ProfilePic != null && response.GetUserInfoResult.Payload[0].ProfilePic != "") {
 
                        $scope.picURl = serviceBaseUrl + "Logos/" + response.GetUserInfoResult.Payload[0].ProfilePic
@@ -98,6 +106,15 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
             success: function (result) {
                 // log.success("Profile information Updated.");
                 ShowSuccess("Updated");
+
+                $scope.firstnameLabel = $scope.firstname;
+                $scope.lastnameLabel = $scope.lastname;
+                $scope.emailLabel = $scope.email;
+                $scope.phoneLabel = $scope.phone;
+                $scope.organizationLabel = $scope.organization;
+                $scope.usernameLabel = $scope.username;
+
+
                 $(".detailmode").show();
                 $(".editmode").hide();
                 $scope.isSaving = true;
