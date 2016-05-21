@@ -4,8 +4,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     {
         var path = "activity";
         if ($location.path().substr(0, path.length) !== path) {
-            console.log("not into activity");
-            $cordovaStatusbar.styleHex("#0083C7");
+            StatusBar.backgroundColorByHexString("#0083C7");
         }
         else {
             console.log("into activity");

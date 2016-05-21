@@ -1165,7 +1165,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentHeaderText = "Take these items out of inventory.";
                 if (_Islive)
                 {
-                    //StatusBar.backgroundColorByHexString("#AF2525");
+                    StatusBar.backgroundColorByHexString("#AF2525");
                   //  $cordovaStatusbar.styleHex("#AF2525");
                 }
 
@@ -1177,7 +1177,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentIcon = "fa-arrow-right";
                 $scope.CurrentHeaderText = "Move these items to a different location.";
                 if (_Islive) {
-                   // StatusBar.backgroundColorByHexString("#C65E28");
+                    StatusBar.backgroundColorByHexString("#C65E28");
                   //  $cordovaStatusbar.styleHex("#C65E28");
 
                 }
@@ -1189,7 +1189,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentIcon = "fa-arrow-up";
                 $scope.CurrentHeaderText = "Put these items in inventory.";
                 if (_Islive) {
-                   // StatusBar.backgroundColorByHexString("#177B3D");
+                   StatusBar.backgroundColorByHexString("#177B3D");
                   //  $cordovaStatusbar.styleHex("#177B3D");
 
 
@@ -1203,7 +1203,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentHeaderText = "Convert the units of measure for these items.";
 
                 if (_Islive) {
-                   // StatusBar.backgroundColorByHexString("#CE59A1");
+                    StatusBar.backgroundColorByHexString("#CE59A1");
 
 
                  //   $cordovaStatusbar.styleHex("#CE59A1");
@@ -1219,7 +1219,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentHeaderText = "Update the status of these items.";
 
                 if (_Islive) {
-                   // StatusBar.backgroundColorByHexString("#583782");
+                    StatusBar.backgroundColorByHexString("#583782");
 
 
                  //   $cordovaStatusbar.styleHex("#583782");
@@ -1235,7 +1235,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentHeaderText = "Tag these items with information.";
 
                 if (_Islive) {
-                    //StatusBar.backgroundColorByHexString("#0D190F");
+                    StatusBar.backgroundColorByHexString("#0D190F");
 
                   //  $cordovaStatusbar.styleHex("#0D190F");
 
@@ -1257,7 +1257,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentHeaderText = "Adjust the quantity of these items.";
 
                 if (_Islive) {
-                   // StatusBar.backgroundColorByHexString("#f8c217");
+                    StatusBar.backgroundColorByHexString("#f8c217");
 
 
                 //    $cordovaStatusbar.styleHex("#f8c217");
@@ -1270,7 +1270,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             default:
                 $scope.CurrentOperation = "";
                 if (_Islive) {
-                  //  StatusBar.backgroundColorByHexString("#0083C7");
+                    StatusBar.backgroundColorByHexString("#0083C7");
 
 
 
