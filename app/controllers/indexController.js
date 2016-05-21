@@ -32,6 +32,14 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         {
             $cordovaKeyboard.disableScroll(false);
         }
+
+        if(_path=="/activity")
+        {
+
+        }
+        else {
+            UpdateStatusBar(55);
+        }
     });
 
     $scope.getClass = function (path) {
