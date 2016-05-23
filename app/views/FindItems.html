@@ -61,13 +61,13 @@
                                     <li class="suggestItem2"><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
                                     <li class="suggestItem3"><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
                                     <li class="suggestItem4"><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">Status</a></li>
-                                    <li class="unitSearchFields suggestItem5" style="display: block;" ng-if="IsAvailableMyInventoryColumn('iReqValue')==true"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">{{GetAvailableColumnLabel('iReqValue')}}</a></li>
-                                    <li class="unitSearchFields suggestItem5" style="display: block;" ng-if="IsAvailableMyInventoryColumn('iUnitTag2')==true"><a ng-click="searchfunction('iUnitTag2')" alt="iUnitTag2">{{GetAvailableColumnLabel('iUnitTag2')}}</a></li>
-                                    <li class="unitSearchFields suggestItem5" style="display: block;" ng-if="IsAvailableMyInventoryColumn('iUnitTag3')==true"><a ng-click="searchfunction('iUnitTag3')" alt="iUnitTag3">{{GetAvailableColumnLabel('iUnitTag3')}}</a></li>
-                                    <li class="unitSearchFields suggestItem5" style="display: block;" ng-if="IsAvailableMyInventoryColumn('iUniqueDate')==true"><a ng-click="searchfunction('iUniqueDate')" alt="iUniqueDate">{{GetAvailableColumnLabel('iUniqueDate')}}</a></li>
-                                    <li class="unitSearchFields suggestItem5" style="display: block;" ng-if="IsAvailableMyInventoryColumn('iUnitDate2')==true"><a ng-click="searchfunction('iUnitDate2')" alt="iUnitDate2">{{GetAvailableColumnLabel('iUnitDate2')}}</a></li>
-                                    <li class="unitSearchFields suggestItem5" style="display: block;" ng-if="IsAvailableMyInventoryColumn('iUnitNumber1')==true"><a ng-click="searchfunction('iUnitNumber1')" alt="iUnitNumber1">{{GetAvailableColumnLabel('iUnitNumber1')}}</a></li>
-                                    <li class="unitSearchFields suggestItem5" style="display: block;" ng-if="IsAvailableMyInventoryColumn('iUnitNumber2')==true"><a ng-click="searchfunction('iUnitNumber2')" alt="iUnitNumber2">{{GetAvailableColumnLabel('iUnitNumber2')}}</a></li>
+                                    <li class="unitSearchFields suggestItem5" style="display: block;"><a ng-click="searchfunction('iReqValue')" alt="iReqValue">{{GetAvailableColumnLabel('iReqValue')}}</a></li>
+                                    <li class="unitSearchFields suggestItem5" style="display: block;"><a ng-click="searchfunction('iUnitTag2')" alt="iUnitTag2">{{GetAvailableColumnLabel('iUnitTag2')}}</a></li>
+                                    <li class="unitSearchFields suggestItem5" style="display: block;" ><a ng-click="searchfunction('iUnitTag3')" alt="iUnitTag3">{{GetAvailableColumnLabel('iUnitTag3')}}</a></li>
+                                    <li class="unitSearchFields suggestItem5" style="display: block;" ><a ng-click="searchfunction('iUniqueDate')" alt="iUniqueDate">{{GetAvailableColumnLabel('iUniqueDate')}}</a></li>
+                                    <li class="unitSearchFields suggestItem5" style="display: block;"><a ng-click="searchfunction('iUnitDate2')" alt="iUnitDate2">{{GetAvailableColumnLabel('iUnitDate2')}}</a></li>
+                                    <li class="unitSearchFields suggestItem5" style="display: block;"><a ng-click="searchfunction('iUnitNumber1')" alt="iUnitNumber1">{{GetAvailableColumnLabel('iUnitNumber1')}}</a></li>
+                                    <li class="unitSearchFields suggestItem5" style="display: block;"><a ng-click="searchfunction('iUnitNumber2')" alt="iUnitNumber2">{{GetAvailableColumnLabel('iUnitNumber2')}}</a></li>
 
 
                                 </ul>
@@ -135,18 +135,18 @@
 
                             <h5 class="list-group-item-heading">
 
-                                {{_obj.pPart}} <span class="pull-right"> <span> <span ng-if="IsAvailableMyInventoryColumn('iQty')">{{_obj.iQty}}</span> <span ng-if="IsAvailableMyInventoryColumn('uomUOM')"> {{_obj.uomUOM}}</span>  </span> </span>
+                                {{_obj.pPart}} <span class="pull-right"> <span> <span >{{_obj.iQty}}</span> <span > {{_obj.uomUOM}}</span>  </span> </span>
 
                             </h5>
 
                             <span class="list-group-item-text">
                                 <span class="text" style="width:30%">
-                                    <span ng-if="IsAvailableMyInventoryColumn('lLoc')">
+                                    <span >
                                         {{_obj.lLoc}}
                                     </span>
                                 </span>
                                 <span class="" style="float:right">
-                                    <span ng-if="IsAvailableMyInventoryColumn('iStatusValue')">
+                                    <span >
                                         {{_obj.iStatusValue}}
                                     </span>
                                 </span>
@@ -171,40 +171,40 @@
 
                     <div class="unitdata">
 
-                        <span ng-show="IsAvailableMyInventoryColumn('iUniqueDate')">
+                        <span >
                             {{_obj.iUniqueDate}}
                         </span>
 
-                        <span ng-show="IsAvailableMyInventoryColumn('iUnitDate')">
+                        <span >
                             {{_obj.iUnitDate}}
                         </span>
 
 
 
-                        <span ng-show="IsAvailableMyInventoryColumn('iUnitNumber2')">
+                        <span >
                             {{_obj.iUnitNumber2}}
                         </span>
 
 
-                        <span ng-show="IsAvailableMyInventoryColumn('iUnitNumber1')">
+                        <span>
                             {{_obj.iUnitNumber1}}
                         </span>
 
 
 
-                        <span ng-show="IsAvailableMyInventoryColumn('iUnitTag2')">
+                        <span >
                             {{_obj.iUnitTag2}}
                         </span>
 
 
-                        <span ng-if="IsAvailableMyInventoryColumn('iUnitTag3')">
+                        <span >
                             {{_obj.iUnitTag3}}
                         </span>
 
 
 
 
-                        <span ng-show="IsAvailableMyInventoryColumn('iReqValue')">
+                        <span>
                             {{_obj.iReqValue}}
                         </span>
                     </div>
