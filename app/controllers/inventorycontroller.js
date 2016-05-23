@@ -1844,7 +1844,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
   })
   .on('blur', 'input,select', function () {
-      $(".Addbtn").show()
+
+      setTimeout(function () { $(".Addbtn").show() }, 300);
+    
   });
 
 
