@@ -1828,7 +1828,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.changeNav = function () {
 
-        debugger;
 
         if (deviceType != "Android" && deviceType != "null") {
 
@@ -1838,17 +1837,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
         }
         else {
-            alert("into second");
 
 
-            var e1 = jQuery.Event("click");
+     
          
-            $("#myform .swiper-slide-active input").trigger(e1);
-            var e = jQuery.Event("keypress");
-           
-            $("#myform .swiper-slide-active input").trigger(e);
-         
-          //  SoftKeyboard.hide();
+         SoftKeyboard.hide();
 
         }
       
@@ -2092,19 +2085,24 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                 $("#myform .swiper-slide input").click(function () {
+                    debugger;
                      if (deviceType == "Android")
-                    {
-                        alert("clicked input");
+                     {
+                         
+                        
+                         if ($scope.CurrentActiveField != "Image") {
 
-                       // SoftKeyboard.show();
+                             SoftKeyboard.show();
+                         }
                     }
                 });
 
                 $("#myform .swiper-slide select").click(function () {
-                     if (deviceType == "Android")
-                    {
-                        alert("clicked select");
+                    if (deviceType == "Android")
+                     {
 
+                          
+                       
                        // SoftKeyboard.show();
                     }
                 });
