@@ -137,6 +137,15 @@
         background: #fff;
     }
 
+
+    .unitdata
+    {
+    
+    padding-left: 88px;
+    color: #A09D9D;
+    margin-top: -3px;
+    }
+
     .widget-products {
         list-style: none;
         margin: 0;
