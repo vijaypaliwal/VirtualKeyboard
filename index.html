@@ -826,15 +826,7 @@
 
                 }
 
-                debugger;
-
-                var padding = $('#slide-out-left').css('left');
-                var paddingright = $('#slide-out').css('right');
-                if (padding == '-250px' && paddingright == '-250px') 
-                {
-                    $("#sidenav-overlay").hide();
-                }
-
+             
               
             
 
@@ -1123,8 +1115,20 @@
             navigator.notification.beep(1);
         }
 
+        setInterval(function () {
+            if (deviceType == "Android") {
+                $("#sidenav-overlay").hide();
+            }
+        }, 100);
+
+      
+
+     
+
         function UpdateStatusBar(Type)
         {
+
+
 
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
             if (deviceType != "Android") {
