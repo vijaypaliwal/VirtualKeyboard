@@ -718,7 +718,7 @@
     <script>
 
 
-        var _Islive = true;
+        var _Islive = false;
 
 
         $("#mysmallModal").click(function () {
@@ -826,8 +826,26 @@
 
                 }
 
+                debugger;
+
+                var padding = $('#slide-out-left').css('left');
+                var paddingright = $('#slide-out').css('right');
+                if (padding != '0px' && paddingright == '0px') 
+                {
+                    $("#sidenav-overlay").hide();
+                }
+
+              
+            
+
 
             }, 300);
+
+           
+
+
+       
+            
 
         });
 
@@ -1202,10 +1220,7 @@
             pictureSource = navigator.camera.PictureSourceType;
             destinationType = navigator.camera.DestinationType;
 
-            if (StatusBar) {
-               // alert("into Status Bar");
-
-            }
+        
 
 
             InitializeModal();
