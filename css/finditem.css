@@ -264,7 +264,9 @@
     }
 
     .searchlist {
-        /*bottom: 100%;*/
+           max-height: 215px;
+    overflow: scroll;
+    overflow-x: hidden;
     }
     .searchlist li a{
         text-align:left;
