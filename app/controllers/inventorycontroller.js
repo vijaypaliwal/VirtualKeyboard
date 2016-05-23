@@ -1849,7 +1849,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 else {
 
                     if ($("#myform .swiper-slide-active input").length > 0) {
-
+                        $("#myform .swiper-slide-active input:first").focus();
                         SoftKeyboard.show();
                     }
                 }
