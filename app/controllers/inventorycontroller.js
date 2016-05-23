@@ -1268,6 +1268,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
+    $(document).ready(function () {
+       
+    });
+
     function removeImage(_this) {
 
 
@@ -1816,21 +1820,38 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         });
 
     }
+  
 
 
-
-
+   
     var mySwiper;
 
     $scope.changeNav = function () {
 
-        $("#myform .swiper-slide-active input:first").focus();
-        $("#myform .swiper-slide-active select:first").focus();
-        $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
-        $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
-    
+        debugger;
+
+        if (deviceType != "Android" && deviceType != "null") {
+
+            $("#myform .swiper-slide-active input:first").focus();
+            $("#myform .swiper-slide-active select:first").focus();
+            $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
+            $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
+        }
+        else {
+            alert("into second");
+
+
+            var e1 = jQuery.Event("click");
+         
+            $("#myform .swiper-slide-active input").trigger(e1);
+            var e = jQuery.Event("keypress");
+           
+            $("#myform .swiper-slide-active input").trigger(e);
+         
+          //  SoftKeyboard.hide();
+
+        }
       
-        SoftKeyboard.show();
 
 
     }
@@ -2067,6 +2088,25 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                 $("#files").on('change', function (event) {
                     $scope.handleFileSelect(event);
+                });
+
+
+                $("#myform .swiper-slide input").click(function () {
+                     if (deviceType == "Android")
+                    {
+                        alert("clicked input");
+
+                       // SoftKeyboard.show();
+                    }
+                });
+
+                $("#myform .swiper-slide select").click(function () {
+                     if (deviceType == "Android")
+                    {
+                        alert("clicked select");
+
+                       // SoftKeyboard.show();
+                    }
                 });
                 CheckScopeBeforeApply();
             }, 10)
