@@ -264,7 +264,7 @@
     }
 
     .searchlist {
-           max-height: 215px;
+           max-height: 400px;
     overflow: scroll;
     overflow-x: hidden;
     }
