@@ -1838,6 +1838,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         setTimeout(function () {
             $("#myform .swiper-slide-active input").trigger("click");
             $("#myform .swiper-slide-active input").trigger("keypress");
+
+            $(".swiper-slide-active .form-control").trigger("click");
+            $(".swiper-slide-active .form-control").trigger("keypress");
         }, 500);
 
          
