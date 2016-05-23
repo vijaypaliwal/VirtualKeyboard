@@ -1834,6 +1834,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
       //  cordova.plugins.Keyboard.show();
         //   SoftKeyboard.show();
 
+
         setTimeout(function () { cordova.plugins.Keyboard.show() }, 500);
 
          
