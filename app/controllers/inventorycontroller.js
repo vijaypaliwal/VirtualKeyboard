@@ -1809,15 +1809,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             if (result) {
 
                 $location.path('/mainmenu');
-
                 CheckScopeBeforeApply()
-
             }
         });
 
     }
-
-
 
 
     var mySwiper;
@@ -1828,9 +1824,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#myform .swiper-slide-active select:first").focus();
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
-    
-       
-        SoftKeyboard.show();
+           
+
+      //  SoftKeyboard.show();
         $(".Addbtn").hide()
 
     }
@@ -1845,9 +1841,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
   })
   .on('blur', 'input,select', function () {
 
-      setTimeout(function () { $(".Addbtn").show() }, 700);
+      setTimeout(function () { $(".Addbtn").show() }, 500);
   });
-
 
 
     $(".modal-backdrop").remove();
