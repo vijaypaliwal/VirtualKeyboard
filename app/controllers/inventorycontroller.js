@@ -1821,6 +1821,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.changeNav = function () {
 
 
+        cordova.plugins.Keyboard.close
+
+
       //  SoftKeyboard.hide();
 
         $("#myform .swiper-slide-active input:first").focus();
@@ -1831,7 +1834,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
       //  cordova.plugins.Keyboard.show();
         //   SoftKeyboard.show();
 
-        window.plugins.focusEventPlugin.focus([$("#myform .swiper-slide-active input:first")]);
+        cordova.plugins.Keyboard.show
 
      //   cordova.plugins.Focus.focus($("input"))
 
