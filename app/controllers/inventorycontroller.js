@@ -1821,7 +1821,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.changeNav = function () {
 
 
-        cordova.plugins.Keyboard.close
+        cordova.plugins.Keyboard.close()
 
 
       //  SoftKeyboard.hide();
@@ -1834,7 +1834,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
       //  cordova.plugins.Keyboard.show();
         //   SoftKeyboard.show();
 
-        cordova.plugins.Keyboard.show
+        cordova.plugins.Keyboard.show()
 
      //   cordova.plugins.Focus.focus($("input"))
 
