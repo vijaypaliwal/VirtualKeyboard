@@ -660,9 +660,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": $scope.ImageList }),
               success: function (response) {
 
-               
+
                   HideWaitingInv();
-             
+
                   $scope.resetObject();
 
                   $scope.movetolist();
@@ -1269,7 +1269,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $(document).ready(function () {
-       
+
     });
 
     function removeImage(_this) {
@@ -1508,10 +1508,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 switch (ControlID) {
                     case "pPart":
                         _id = "#ItemName";
-                     
-                    
+
+
                         $scope.InventoryObject.ItemID = resultvalue;
-                     
+
 
                         break;
                     case "lLoc":
@@ -1579,13 +1579,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                 $(_id).val(resultvalue);
 
-                    if (deviceType == 'iPhone') {
+                if (deviceType == 'iPhone') {
 
-                        mySwiper.swipeNext();
-                    }
-                    else {
-                        $(".arrow-right").trigger("click");
-                    }
+                    mySwiper.swipeNext();
+                }
+                else {
+                    $(".arrow-right").trigger("click");
+                }
 
 
 
@@ -1820,10 +1820,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         });
 
     }
-  
 
 
-   
+
+
     var mySwiper;
 
     $scope.changeNav = function () {
@@ -1838,13 +1838,30 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
         else {
 
+           SoftKeyboard.hide();
 
-     
-         
-         SoftKeyboard.hide();
+
+            if ($scope.CurrentActiveField != "Image") {
+
+                if ($("#myform .swiper-slide-active select").length > 0 || $("#myform .swiper-slide-active input[type = 'checkbox']").length > 0) {
+
+                }
+                else {
+
+                    if ($("#myform .swiper-slide-active input").length > 0) {
+
+                        SoftKeyboard.show();
+                    }
+                }
+            }
+
+
+
+
+            //  
 
         }
-      
+
 
 
     }
@@ -1928,50 +1945,48 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.getstepCustom = function (Type, ColumnName) {
         debugger;
-   if (ColumnName != "" && ColumnName != null) {
+        if (ColumnName != "" && ColumnName != null) {
 
-       if (Type == 1)
-       {
-           $(".CustomItemCols").each(function () {
+            if (Type == 1) {
+                $(".CustomItemCols").each(function () {
 
-               if ($(this).attr("data-column") == ColumnName) {
-                   mySwiper.swipeTo($(this).index(), 1000, false);
+                    if ($(this).attr("data-column") == ColumnName) {
+                        mySwiper.swipeTo($(this).index(), 1000, false);
 
-                   $scope.slide = $(this).index();
-                   $scope.CurrentCount = $(this).index();
-                   $scope.CurrentActiveField = ColumnName;
-                   CheckScopeBeforeApply();
-                   return false;
-               }
+                        $scope.slide = $(this).index();
+                        $scope.CurrentCount = $(this).index();
+                        $scope.CurrentActiveField = ColumnName;
+                        CheckScopeBeforeApply();
+                        return false;
+                    }
 
-           });
+                });
 
-       }
-       else if(Type==2)
-       {
-           $(".CustomActivityCols").each(function () {
+            }
+            else if (Type == 2) {
+                $(".CustomActivityCols").each(function () {
 
-               if ($(this).attr("data-column") == ColumnName) {
-                   mySwiper.swipeTo($(this).index(), 1000, false);
+                    if ($(this).attr("data-column") == ColumnName) {
+                        mySwiper.swipeTo($(this).index(), 1000, false);
 
-                   $scope.slide = $(this).index();
-                   $scope.CurrentCount = $(this).index();
-                   $scope.CurrentActiveField = ColumnName;
-                   CheckScopeBeforeApply();
-                   return false;
-               }
+                        $scope.slide = $(this).index();
+                        $scope.CurrentCount = $(this).index();
+                        $scope.CurrentActiveField = ColumnName;
+                        CheckScopeBeforeApply();
+                        return false;
+                    }
 
-           });
+                });
 
-       }
-          
+            }
+
         }
         else {
             mySwiper.swipeTo(0);
 
-   }
+        }
 
-   $("#infomodal").modal('hide');
+        $("#infomodal").modal('hide');
 
     }
 
@@ -2084,28 +2099,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 });
 
 
-                $("#myform .swiper-slide input").click(function () {
-                    debugger;
-                     if (deviceType == "Android")
-                     {
-                         
-                        
-                         if ($scope.CurrentActiveField != "Image") {
 
-                             SoftKeyboard.show();
-                         }
-                    }
-                });
-
-                $("#myform .swiper-slide select").click(function () {
-                    if (deviceType == "Android")
-                     {
-
-                          
-                       
-                       // SoftKeyboard.show();
-                    }
-                });
                 CheckScopeBeforeApply();
             }, 10)
 
@@ -2132,7 +2126,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.confirmmove = function () {
 
-      
+
 
         $("#modal3").modal('hide');
         $location.path('/FindItems');
@@ -2149,7 +2143,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
- 
+
 
 
     function showConfirmInventory() {
@@ -2165,11 +2159,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.movetolist = function () {
 
         $(".Addbtn").hide()
-    
+
         $("#modal3").modal('show');
     }
 
-   
+
 
 
     $('.arrow-left').on('click', function (e) {

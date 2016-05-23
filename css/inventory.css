@@ -317,38 +317,26 @@
 
     #toolbar{
       
-        height:45px;
+       
         position:fixed;
     }
     #toolbar i {
   
-    line-height: 45px;
+   
   
 }
 
 .open-left {
  
-    height: 45px;
-    line-height: 45px;
+ 
  
 }
 
-#toolbar .title {
-   
-    line-height: 45px;
-  
-}
 
-.open-right {
-  
-    height: 45px;
-    line-height: 45px;
- 
-}
 
 .iteminfo
 {
-    margin-top:1px;
+    margin-top:8px;
     padding-top:8px;
     min-height:initial;
     padding-bottom:8px;
