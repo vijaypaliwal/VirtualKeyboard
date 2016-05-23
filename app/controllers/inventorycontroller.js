@@ -1835,7 +1835,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         //   SoftKeyboard.show();
 
 
-        setTimeout(function () { cordova.plugins.Keyboard.show() }, 500);
+        setTimeout(function () {
+            $("#myform .swiper-slide-active input").trigger("click");
+            $("#myform .swiper-slide-active input").trigger("keypress");
+        }, 500);
 
          
 
