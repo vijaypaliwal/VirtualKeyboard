@@ -26,7 +26,7 @@
   <gap:plugin name="org.apache.cordova.vibration"/>
   <gap:plugin name="ionic-plugin-keyboard"  source="npm" version="1.0.7" />
   
-  <gap:plugin name="FocusEventPlugin" value="com.phonegap.plugin.FocusEventPlugin"/>
+  <gap:plugin name="FocusEventPlugin"/>
   
   
   
