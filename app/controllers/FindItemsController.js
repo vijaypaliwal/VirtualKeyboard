@@ -38,6 +38,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $scope.UnitDataList = [];
     $scope.CurrentActiveClass = "";
     $scope.MyinventoryFields = [];
+    $scope.MyinventoryFieldsNames = [];
     var _IsLazyLoading = 0;
     var _TotalRecordsCurrent = 0;
     var _IsLazyLoadingUnderProgress = 0;
@@ -421,43 +422,43 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 $('#MasterSearch').attr("placeholder", "Type to search");
                 break;
             case "iUnitDate2":
-                var _label = $scope.GetAvailableColumnLabel('iUnitDate2');
+                var _label = $scope.GetUnitDataLabel('iUnitDate2');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
                 break;
             case "iUniqueDate":
-                var _label = $scope.GetAvailableColumnLabel('iUniqueDate');
+                var _label = $scope.GetUnitDataLabel('iUniqueDate');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
                 break;
             case "iReqValue":
-                var _label = $scope.GetAvailableColumnLabel('iReqValue');
+                var _label = $scope.GetUnitDataLabel('iReqValue');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
                 break;
             case "iUnitTag2":
-                var _label = $scope.GetAvailableColumnLabel('iUnitTag2');
+                var _label = $scope.GetUnitDataLabel('iUnitTag2');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
                 break;
             case "iUnitTag3":
-                var _label = $scope.GetAvailableColumnLabel('iUnitTag3');
+                var _label = $scope.GetUnitDataLabel('iUnitTag3');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
                 break;
             case "iUnitNumber1":
-                var _label = $scope.GetAvailableColumnLabel('iUnitNumber1');
+                var _label = $scope.GetUnitDataLabel('iUnitNumber1');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
                 break;
             case "iUnitNumber2":
-                var _label = $scope.GetAvailableColumnLabel('iUnitNumber2');
+                var _label = $scope.GetUnitDataLabel('iUnitNumber2');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
@@ -495,7 +496,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     $scope.IsDateColumnOn = false;
                     break
                 case "iReqValue":
-                    var _label = $scope.GetAvailableColumnLabel('iReqValue');
+                    var _label = $scope.GetUnitDataLabel('iReqValue');
                     _label = _label != undefined && _label != "" ? _label : "";
                     $('#MasterSearch').attr("placeholder", "Search by " + _label);
                     $scope.SearchFromText = _label;
@@ -505,7 +506,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
                 case "iUnitDate2":
-                    var _label = $scope.GetAvailableColumnLabel('iUnitDate2');
+                    var _label = $scope.GetUnitDataLabel('iUnitDate2');
                     _label = _label != undefined && _label != "" ? _label : "";
                     $('#MasterSearch').attr("placeholder", "Search by " + _label);
                     $scope.SearchFromText = _label;
@@ -513,7 +514,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     UpdateFilterArray("iUnitDate2", $.trim($scope.SearchValue));
                     break;
                 case "iUniqueDate":
-                    var _label = $scope.GetAvailableColumnLabel('iUniqueDate');
+                    var _label = $scope.GetUnitDataLabel('iUniqueDate');
                     _label = _label != undefined && _label != "" ? _label : "";
                     $('#MasterSearch').attr("placeholder", "Search by " + _label);
                     $scope.SearchFromText = _label;
@@ -522,7 +523,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     break;
                 
                 case "iUnitTag2":
-                    var _label = $scope.GetAvailableColumnLabel('iUnitTag2');
+                    var _label = $scope.GetUnitDataLabel('iUnitTag2');
                     _label = _label != undefined && _label != "" ? _label : "";
                     $('#MasterSearch').attr("placeholder", "Search by " + _label);
                     $scope.SearchFromText = _label;
@@ -530,7 +531,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     UpdateFilterArray("iUnitTag2", $.trim($scope.SearchValue));
                     break;
                 case "iUnitTag3":
-                    var _label = $scope.GetAvailableColumnLabel('iUnitTag3');
+                    var _label = $scope.GetUnitDataLabel('iUnitTag3');
                     _label = _label != undefined && _label != "" ? _label : "";
                     $('#MasterSearch').attr("placeholder", "Search by " + _label);
                     $scope.SearchFromText = _label;
@@ -538,7 +539,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     UpdateFilterArray("iUnitTag3", $.trim($scope.SearchValue));
                     break;
                 case "iUnitNumber1":
-                    var _label = $scope.GetAvailableColumnLabel('iUnitNumber1');
+                    var _label = $scope.GetUnitDataLabel('iUnitNumber1');
                     _label = _label != undefined && _label != "" ? _label : "";
                     $('#MasterSearch').attr("placeholder", "Search by " + _label);
                     $scope.SearchFromText = _label;
@@ -546,7 +547,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     UpdateFilterArray("iUnitNumber1", $.trim($scope.SearchValue));
                     break;
                 case "iUnitNumber2":
-                    var _label = $scope.GetAvailableColumnLabel('iUnitNumber2');
+                    var _label = $scope.GetUnitDataLabel('iUnitNumber2');
                     _label = _label != undefined && _label != "" ? _label : "";
                     $('#MasterSearch').attr("placeholder", "Search by " + _label);
                     $scope.SearchFromText = _label;
@@ -701,6 +702,50 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             }
         });
     }
+
+
+    $scope.GetUnitDataColumns=function()
+    {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+
+
+        $.ajax({
+            type: "POST",
+            url: serviceBase + 'GetUnitDataColumns',
+            data: JSON.stringify({ SecurityToken: $scope.SecurityToken }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (result) {
+
+                // MY inventory column region
+                var _TempArrayMyInventory = result.GetUnitDataColumnsResult.Payload;
+
+                for (var i = 0; i < _TempArrayMyInventory.length; i++) {
+                   
+                    $scope.MyinventoryFieldsNames.push(_TempArrayMyInventory[i]);
+                    
+                }
+
+                console.log("Unit Data fields");
+                console.log($scope.MyinventoryFieldsNames);
+
+                CheckScopeBeforeApply();
+
+            },
+            error: function (req) {
+                log.error("error during get inventory columns");
+
+            },
+            complete: function () {
+
+            }
+        });
+
+    }
     $scope.GetMyinventoryColumns = function () {
 
 
@@ -726,10 +771,13 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 for (var i = 0; i < _TempArrayMyInventory.length; i++) {
                     var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
                     _TempArrayMyInventory[i].ColumnName = _ColName[0];
+                   
                     if (_TempArrayMyInventory[i].Show == "True") {
                         $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
                     }
                 }
+
+              
                 CheckScopeBeforeApply();
 
             },
@@ -768,6 +816,20 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         return "";
     }
 
+
+    $scope.GetUnitDataLabel = function (ColumnName) {
+        var i = 0;
+
+        ColumnName= ColumnName.substr(1);
+        for (i = 0; i < $scope.MyinventoryFieldsNames.length; i++) {
+            if ($scope.MyinventoryFieldsNames[i].ColumnName == ColumnName) {
+                return $scope.MyinventoryFieldsNames[i].ColumnLabel;
+            }
+        }
+
+        return "";
+    }
+
     $scope.IsAvailableMyInventoryColumn = function (ColumnName) {
         var i = 0;
         for (i = 0; i < $scope.MyinventoryFields.length; i++) {
@@ -782,7 +844,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         $scope.GetMyinventoryColumns();
 
-
+        $scope.GetUnitDataColumns();
         $scope.GetInventories();
     }
 
