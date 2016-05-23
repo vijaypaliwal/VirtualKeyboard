@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('inventoryController', ['$scope', '$location', 'authService', 'localStorageService', 'log', '$compile', '$cordovaKeyboard', function ($scope, $location, authService, localStorageService, log, $compile, $cordovaKeyboard) {
+app.controller('inventoryController', ['$scope', '$location', 'authService', 'localStorageService', 'log', '$compile', function ($scope, $location, authService, localStorageService, log, $compile) {
     ''
     $scope.orders = [];
     $scope.MyinventoryFields = [];
@@ -1809,62 +1809,31 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             if (result) {
 
                 $location.path('/mainmenu');
+
                 CheckScopeBeforeApply()
+
             }
         });
 
     }
 
 
+
+
     var mySwiper;
 
     $scope.changeNav = function () {
-
-
-        cordova.plugins.Keyboard.close()
-
-
-      //  SoftKeyboard.hide();
 
         $("#myform .swiper-slide-active input:first").focus();
         $("#myform .swiper-slide-active select:first").focus();
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
-           
-      //  cordova.plugins.Keyboard.show();
-        //   SoftKeyboard.show();
+    
+      
+        SoftKeyboard.show();
 
-
-        setTimeout(function () {
-            $("#myform .swiper-slide-active input").trigger("click");
-            $("#myform .swiper-slide-active input").trigger("keypress");
-
-            $(".swiper-slide-active .form-control").trigger("click");
-            $(".swiper-slide-active .form-control").trigger("keypress");
-        }, 500);
-
-         
-
-     //   cordova.plugins.Focus.focus($("input"))
-
-
-        $(".Addbtn").hide()
 
     }
-
-
-
-    $(document)
-  .on('focus', 'input,select', function () {
-
-      $(".Addbtn").hide()
-
-  })
-  .on('blur', 'input,select', function () {
-
-      setTimeout(function () { $(".Addbtn").show() }, 500);
-  });
-
 
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
@@ -2020,11 +1989,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.SetDefaultObjects = function () {
 
-        $scope.InventoryObject.Uom = $scope.IsAvailableMyInventoryColumn('uomUOM') == false ? "ea." : $scope.InventoryObject.Uom;
+        $scope.InventoryObject.Uom = $scope.IsAvailableMyInventoryColumn('uomUOM') == false ? "units" : $scope.InventoryObject.Uom;
         $scope.InventoryObject.Location = $scope.IsAvailableMyInventoryColumn('lLoc') == false ? "In stock" : $scope.InventoryObject.Location;
-
+        $scope.InventoryObject.Quantity = $scope.IsAvailableMyInventoryColumn('iQty') == false ? 1 : $scope.InventoryObject.Quantity;
         $scope.$apply();
-        console.log($scope.InventoryObject);
     }
 
 

@@ -21,7 +21,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     var _currentPage = 1;
     var _sortColumn = "iLastITID";
     var _sortDir = "DESC";
-    $scope._areImagesShown = false;
+    $scope._areImagesShown = true;
     $scope._HasImages = false;
     //var _areZeroRecordsShown = true;
     var _currentPage = 0;
@@ -42,7 +42,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     var _TotalRecordsCurrent = 0;
     var _IsLazyLoadingUnderProgress = 0;
     $scope._areZeroRecordsShown = false;
-
+    $scope.IsDateColumnOn = false;
     $scope.myinventoryColumnLoaded = false;
     var _isExceededLimit = false;
     $(".modal-backdrop").remove();
@@ -396,6 +396,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         CheckScopeBeforeApply();
     }
 
+
+    
     $scope.searchfunction = function (Byvalue) {
         debugger;
         ClearFilterArray();
@@ -403,24 +405,62 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             case "iStatusValue":
 
                 $scope.SearchFromText = "Status";
-                $('#MasterSearch').attr("placeholder", "Search by Status").placeholder();
+                $('#MasterSearch').attr("placeholder", "Search by Status");
 
-                break
+                break;
             case "lLoc":
                 $scope.SearchFromText = "Location";
-                $('#MasterSearch').attr("placeholder", "Search by location").placeholder();
-                break
+                $('#MasterSearch').attr("placeholder", "Search by location");
+                break;
             case "pPart":
                 $scope.SearchFromText = "Items";
-                $('#MasterSearch').attr("placeholder", "Search by item").placeholder();
-                break
+                $('#MasterSearch').attr("placeholder", "Search by item");
+                break;
             case "All":
                 $scope.SearchFromText = "All";
-                $('#MasterSearch').attr("placeholder", "Type to search").placeholder();
-                break
+                $('#MasterSearch').attr("placeholder", "Type to search");
+                break;
+            case "iUnitDate2":
+                var _label = $scope.GetAvailableColumnLabel('iUnitDate2');
+                _label = _label != undefined && _label != "" ? _label : "";
+                $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                $scope.SearchFromText = _label;
+                break;
+            case "iUniqueDate":
+                var _label = $scope.GetAvailableColumnLabel('iUniqueDate');
+                _label = _label != undefined && _label != "" ? _label : "";
+                $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                $scope.SearchFromText = _label;
+                break;
             case "iReqValue":
-                $('#MasterSearch').attr("placeholder", "Search by Unique Tag").placeholder();
-                $scope.SearchFromText = "Unique Tag";
+                var _label = $scope.GetAvailableColumnLabel('iReqValue');
+                _label = _label != undefined && _label != "" ? _label : "";
+                $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                $scope.SearchFromText = _label;
+                break;
+            case "iUnitTag2":
+                var _label = $scope.GetAvailableColumnLabel('iUnitTag2');
+                _label = _label != undefined && _label != "" ? _label : "";
+                $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                $scope.SearchFromText = _label;
+                break;
+            case "iUnitTag3":
+                var _label = $scope.GetAvailableColumnLabel('iUnitTag3');
+                _label = _label != undefined && _label != "" ? _label : "";
+                $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                $scope.SearchFromText = _label;
+                break;
+            case "iUnitNumber1":
+                var _label = $scope.GetAvailableColumnLabel('iUnitNumber1');
+                _label = _label != undefined && _label != "" ? _label : "";
+                $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                $scope.SearchFromText = _label;
+                break;
+            case "iUnitNumber2":
+                var _label = $scope.GetAvailableColumnLabel('iUnitNumber2');
+                _label = _label != undefined && _label != "" ? _label : "";
+                $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                $scope.SearchFromText = _label;
                 break
             default:
                 break;
@@ -434,27 +474,84 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
                     $scope.SearchFromText = "Status";
                     UpdateFilterArray("iStatusValue", $.trim($scope.SearchValue));
-                    $('#MasterSearch').attr("placeholder", "Search by Status").placeholder();
-
+                    $('#MasterSearch').attr("placeholder", "Search by Status");
+                    $scope.IsDateColumnOn = false;
                     break
                 case "lLoc":
                     $scope.SearchFromText = "Location";
                     UpdateFilterArray("lLoc", $.trim($scope.SearchValue));
-                    $('#MasterSearch').attr("placeholder", "Search by location").placeholder();
+                    $('#MasterSearch').attr("placeholder", "Search by location");
+                    $scope.IsDateColumnOn = false;
                     break
                 case "pPart":
                     $scope.SearchFromText = "Items";
-                    $('#MasterSearch').attr("placeholder", "Search by item").placeholder();
+                    $('#MasterSearch').attr("placeholder", "Search by item");
                     UpdateFilterArray("pPart", $.trim($scope.SearchValue));
+                    $scope.IsDateColumnOn = false;
                     break
                 case "All":
                     $scope.SearchFromText = "All";
-                    $('#MasterSearch').attr("placeholder", "Type to search").placeholder();
+                    $('#MasterSearch').attr("placeholder", "Type to search");
+                    $scope.IsDateColumnOn = false;
                     break
                 case "iReqValue":
-                    $('#MasterSearch').attr("placeholder", "Search by Unique Tag").placeholder();
-                    $scope.SearchFromText = "Unique Tag";
+                    var _label = $scope.GetAvailableColumnLabel('iReqValue');
+                    _label = _label != undefined && _label != "" ? _label : "";
+                    $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                    $scope.SearchFromText = _label;
                     UpdateFilterArray("iReqValue", $.trim($scope.SearchValue));
+                    $scope.IsDateColumnOn = false;
+                    break;
+
+
+                case "iUnitDate2":
+                    var _label = $scope.GetAvailableColumnLabel('iUnitDate2');
+                    _label = _label != undefined && _label != "" ? _label : "";
+                    $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                    $scope.SearchFromText = _label;
+                    $scope.IsDateColumnOn = true;
+                    UpdateFilterArray("iUnitDate2", $.trim($scope.SearchValue));
+                    break;
+                case "iUniqueDate":
+                    var _label = $scope.GetAvailableColumnLabel('iUniqueDate');
+                    _label = _label != undefined && _label != "" ? _label : "";
+                    $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                    $scope.SearchFromText = _label;
+                    $scope.IsDateColumnOn = true;
+                    UpdateFilterArray("iUniqueDate", $.trim($scope.SearchValue));
+                    break;
+                
+                case "iUnitTag2":
+                    var _label = $scope.GetAvailableColumnLabel('iUnitTag2');
+                    _label = _label != undefined && _label != "" ? _label : "";
+                    $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                    $scope.SearchFromText = _label;
+                    $scope.IsDateColumnOn = false;
+                    UpdateFilterArray("iUnitTag2", $.trim($scope.SearchValue));
+                    break;
+                case "iUnitTag3":
+                    var _label = $scope.GetAvailableColumnLabel('iUnitTag3');
+                    _label = _label != undefined && _label != "" ? _label : "";
+                    $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                    $scope.SearchFromText = _label;
+                    $scope.IsDateColumnOn = false;
+                    UpdateFilterArray("iUnitTag3", $.trim($scope.SearchValue));
+                    break;
+                case "iUnitNumber1":
+                    var _label = $scope.GetAvailableColumnLabel('iUnitNumber1');
+                    _label = _label != undefined && _label != "" ? _label : "";
+                    $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                    $scope.SearchFromText = _label;
+                    $scope.IsDateColumnOn = false;
+                    UpdateFilterArray("iUnitNumber1", $.trim($scope.SearchValue));
+                    break;
+                case "iUnitNumber2":
+                    var _label = $scope.GetAvailableColumnLabel('iUnitNumber2');
+                    _label = _label != undefined && _label != "" ? _label : "";
+                    $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                    $scope.SearchFromText = _label;
+                    $scope.IsDateColumnOn = false;
+                    UpdateFilterArray("iUnitNumber2", $.trim($scope.SearchValue));
                     break
                 default:
                     break;
@@ -558,7 +655,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         $.ajax({
             type: "POST",
             url: serviceBase + 'GetInventories',
-            data: JSON.stringify({ SecurityToken: $scope.SecurityToken, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray, SelectedCartIDs: SelectedCartItemIds, masterSearch: _masterSearch, showImage: $scope._areImagesShown, showZeroRecords: $scope._areZeroRecordsShown, PageSize: _PageSize }),
+            data: JSON.stringify({ SecurityToken: $scope.SecurityToken, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray, SelectedCartIDs: SelectedCartItemIds, masterSearch: _masterSearch, showImage: $scope._areImagesShown, showZeroRecords: $scope._areZeroRecordsShown, PageSize: _PageSize,IsDateColumnOn:$scope.IsDateColumnOn }),
             contentType: 'application/json',
             dataType: 'json',
             success: function (result) {
@@ -658,6 +755,17 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         }
 
         return _returnData;
+    }
+
+    $scope.GetAvailableColumnLabel = function (ColumnName) {
+        var i = 0;
+        for (i = 0; i < $scope.MyinventoryFields.length; i++) {
+            if ($scope.MyinventoryFields[i].ColumnName == ColumnName) {
+                return $scope.MyinventoryFields[i].ColumnLabel;
+            }
+        }
+
+        return "";
     }
 
     $scope.IsAvailableMyInventoryColumn = function (ColumnName) {
@@ -1171,7 +1279,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         }
         else {
-            $scope._areImagesShown = false;
+            $scope._areImagesShown = true;
         }
         CheckScopeBeforeApply();
     }
