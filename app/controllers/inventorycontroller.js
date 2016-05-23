@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('inventoryController', ['$scope', '$location', 'authService', 'localStorageService', 'log', '$compile', function ($scope, $location, authService, localStorageService, log, $compile) {
+app.controller('inventoryController', ['$scope', '$location', 'authService', 'localStorageService', 'log', '$compile', '$cordovaKeyboard', function ($scope, $location, authService, localStorageService, log, $compile, $cordovaKeyboard) {
     ''
     $scope.orders = [];
     $scope.MyinventoryFields = [];
@@ -1825,7 +1825,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
            
-
+        cordova.plugins.Keyboard.show();
       //  SoftKeyboard.show();
         $(".Addbtn").hide()
 
