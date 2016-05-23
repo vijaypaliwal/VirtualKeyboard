@@ -1821,7 +1821,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.changeNav = function () {
 
 
-        SoftKeyboard.hide();
+      //  SoftKeyboard.hide();
 
         $("#myform .swiper-slide-active input:first").focus();
         $("#myform .swiper-slide-active select:first").focus();
@@ -1829,7 +1829,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
            
       //  cordova.plugins.Keyboard.show();
-       SoftKeyboard.show();
+        //   SoftKeyboard.show();
+
+
+
+        cordova.plugins.Focus.focus($("input"))
+
+
         $(".Addbtn").hide()
 
     }
