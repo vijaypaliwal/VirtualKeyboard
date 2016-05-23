@@ -1829,11 +1829,25 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
         $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
     
-      
+       
         SoftKeyboard.show();
-
+        $(".Addbtn").hide()
 
     }
+
+
+
+    $(document)
+  .on('focus', 'input,select', function () {
+
+      $(".Addbtn").hide()
+
+  })
+  .on('blur', 'input,select', function () {
+      $(".Addbtn").show()
+  });
+
+
 
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
