@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('signupController', ['$scope', '$location', '$timeout', 'authService', function ($scope, $location, $timeout, authService) {
+app.controller('signupController', ['$scope','localStorageService', '$location', '$timeout', 'authService', 'log', function ($scope,localStorageService, $location, $timeout, authService, log) {
 
     $scope.savedSuccessfully = false;
     $scope.message = "";
@@ -15,9 +15,10 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
     };
 
     $scope.signUp = function () {
+        ShowsignupSuccess();
 
         console.log($scope.registration);
-        alert("submitting data");
+    
         $.ajax
         ({
             type: "POST",
@@ -27,13 +28,28 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
             dataType: 'json',
             data: JSON.stringify({ "_signup": $scope.registration }),
             success: function (response) {
+                debugger;
+                $("#mysignupModal").removeClass('bounceIn').addClass('bounceOut');
+                $('#mysignupModal').hide();
+
+                if (response.SignupResult.Success == true) {
+
+                    log.success("You are successfully registered");
 
 
+                    localStorageService.set('lastlogindata', { userName: response.SignupResult.Payload.UserName, Password: response.SignupResult.Payload.Password, AccountName: response.SignupResult.Payload.Account });
+                    $location.path('/login');
+                    $scope.$apply();
+                }
+                else {
+                    log.error(response.SignupResult.Message);
+                }
             
             },
             error: function (err) {
-
-
+                debugger;
+                $("#mysignupModal").removeClass('bounceIn').addClass('bounceOut');
+                $('#mysignupModal').hide();
                 console.log(err);
                 log.error("Error Occurred during operation");
 

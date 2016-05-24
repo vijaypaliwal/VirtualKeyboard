@@ -1116,7 +1116,44 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $scope._CurrentAction = _CurrentAction;
         GetActionType(_CurrentAction);
 
+        for (var i = 0; i < $scope.CurrentCart.length; i++) {
+            //   UniqueDate
+            if ($scope.CurrentCart[i].ApplyTransactionData.UnitDate2 != undefined && $scope.CurrentCart[i].ApplyTransactionData.UnitDate2 != null && $.trim($scope.CurrentCart[i].ApplyTransactionData.UnitDate2) != "") {
 
+                var _date = angular.copy($scope.CurrentCart[i].ApplyTransactionData.UnitDate2);
+
+                var dsplit1 = _date.split("/");
+
+
+
+
+                var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
+
+                var day = ("0" + now.getDate()).slice(-2);
+                var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+                var today = now.getFullYear() + "-" + (month) + "-" + (day);
+                $scope.CurrentCart[i].ApplyTransactionData.UnitDate2 = today;
+
+            }
+
+
+            if ($scope.CurrentCart[i].ApplyTransactionData.UniqueDate != undefined && $scope.CurrentCart[i].ApplyTransactionData.UniqueDate != null && $.trim($scope.CurrentCart[i].ApplyTransactionData.UniqueDate) != "") {
+
+                var _date = angular.copy($scope.CurrentCart[i].ApplyTransactionData.UniqueDate);
+
+                var dsplit1 = _date.split("/");
+                var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
+
+                var day = ("0" + now.getDate()).slice(-2);
+                var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+                var today = now.getFullYear() + "-" + (month) + "-" + (day);
+                $scope.CurrentCart[i].ApplyTransactionData.UniqueDate = today;
+
+            }
+
+        }
         $scope.totalLength = $scope.IsSingleMode == true ? $scope.CurrentCart.length + 2 : 3;
 
         GetMyInventoryColumns();

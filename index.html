@@ -521,6 +521,21 @@
     </div>
 
 
+    <div style="display:none;" class="animated" id="mysignupModal">
+
+        <div class="errorcontent" style="width:122px;background:#000;">
+
+            <img style="max-height:50px; max-width:50px;" src="img/loader1.gif" />
+
+            <span style="display:block;font-size:20px;font-weight:300;color:#fafafa;">
+                Registering....
+            </span>
+
+        </div>
+
+    </div>
+
+
     <div id="toolbar" class="primary-color">
         <div class="open-left" id="open-left" data-activates="slide-out-left">
             <i class="ion-android-menu"></i>
@@ -765,6 +780,17 @@
 
             $("#myloginModal").removeClass('bounceOut').addClass('bounceIn');
             $('#myloginModal').show();
+
+
+
+        }
+
+
+        function ShowsignupSuccess() {
+            $(".errorcontent").css("background", "rgba(52, 73, 94,0.8)");
+
+            $("#mysignupModal").removeClass('bounceOut').addClass('bounceIn');
+            $('#mysignupModal').show();
 
 
 

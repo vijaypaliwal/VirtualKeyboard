@@ -1,7 +1,27 @@
 ﻿
-<div class="topheader"></div>
+<div style="top: 0;" class="topheader header Increase bgm-decrease">
+    <div style="padding-left:10px; padding-right:10px; padding-top:3px; padding-bottom:3px;" class="row" id="headerrow">
 
-<div class="formarea">
+        <div class="col-md-4 col-xs-3">
+            <a style="padding:4px;" href="#/login"><i class="fa fa-arrow-circle-left"></i></a>
+        </div>
+        <div class="col-md-4 col-xs-6">
+            <div style="text-align:center">
+                <h5>  Sign Up </h5>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-3">
+
+        </div>
+
+    </div>
+
+
+    <!-- ngIf: IsSingleMode==true -->
+
+</div>
+
+<form name="signup">
 
     <h4>Personal Info</h4>
     <div class="row">
@@ -9,7 +29,7 @@
         <div class="col-xs-12">
 
             <div class="form-group">
-                <label>Your Name</label>
+             
                 <div class="input-group">
                     <span class="input-group-addon"> <i class="fa fa-male"></i></span>
                     <input type="text" class="form-control" placeholder="Your Name" data-ng-model="registration.Name" required autofocus>
@@ -28,7 +48,7 @@
 
         <div class="col-xs-12">
             <div class="form-group">
-                <label>Company Name</label>
+               
                 <div class="input-group">
                     <span class="input-group-addon"> <i class="fa fa-globe"></i></span>
                     <input type="text" class="form-control" placeholder="Company Name" data-ng-model="registration.Company" required>
@@ -46,10 +66,10 @@
 
         <div class="col-xs-12">
             <div class="form-group">
-                <label>Email Address</label>
+             
                 <div class="input-group">
                     <span class="input-group-addon"> <i class="fa fa-envelope"></i></span>
-                    <input type="text" class="form-control" placeholder="Email Address" data-ng-model="registration.Email" required>
+                    <input type="text" class="form-control" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" placeholder="Email Address" data-ng-model="registration.Email" required>
                 </div>
             </div>
 
@@ -64,7 +84,7 @@
 
         <div class="col-xs-12">
             <div class="form-group">
-                <label>Account Name</label>
+            
                 <div class="input-group">
                     <span class="input-group-addon"> <i class="fa fa-briefcase"></i></span>
                     <input type="text" class="form-control" placeholder="Account Name" data-ng-model="registration.Account" required>
@@ -85,17 +105,11 @@
 
         <div class="col-xs-12">
             <div class="form-group">
-                <label>User Name</label>
                 <div class="input-group">
                     <span class="input-group-addon"> <i class="fa fa-user"></i></span>
                     <input type="text" class="form-control" placeholder="Username" data-ng-model="registration.UserName" required>
                 </div>
             </div>
-
-
-
-
-
         </div>
     </div>
     <div class="row">
@@ -103,7 +117,7 @@
         <div class="col-xs-12">
 
             <div class="form-group">
-                <label>Password</label>
+              
                 <div class="input-group">
                     <span class="input-group-addon"> <i class="fa fa-key"></i></span>
                     <input type="password" class="form-control" placeholder="Password" data-ng-model="registration.Password" required>
@@ -115,14 +129,21 @@
         </div>
     </div>
 
-    <div class="row">
+    <table class="bottombtn">
+        <tr>
+           
+            <td>
+                <button class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6" type="button" id="signUpBtn" ng-disabled="signup.$invalid" data-ng-click="signUp()">Sign Up&nbsp;<i class="fa fa-sign-in"></i> </button>
+                
+            </td>
+            <td>
+                <button class="waves-effect waves-light gray-color btn-large width-100 animated center bouncein delay-6" type="reset" data-ng-click="reset()"><i class="fa fa-refresh"></i>&nbsp;Reset </button>
+            </td>
+        </tr>
+    </table>
 
-        <div class="col-xs-12">
-            <button style="margin-top:8px;" ng-if="CheckIsRequiredfields()==false" class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6" type="button"  id="signUpBtn" data-ng-click="signUp()">Sign Up </button>
-            <button style="margin-top:8px;" ng-if="CheckIsRequiredfields()==true" class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6 disabled" type="button" id="signUpBtn"  disabled>Sign Up </button>
-        </div>
-    </div>
-</div>
+    
+</form>
 
 <style>
     .navbar {
@@ -182,7 +203,7 @@
 
     body {
     
-        padding-top: 7px;
+        padding-top: 40px;
         overflow-x: hidden !important;
     }
 
@@ -193,6 +214,10 @@
 
     #viewdata {
         margin-top: 0px;
+    }
+    .container
+    {
+        width:100%;
     }
 
 
@@ -218,16 +243,50 @@
 
 
 
-
     login-form {
         overflow: hidden !important;
     }
 
-    .container {
-        width: 98%;
-    }
+  
 
     #toolbar {
         display: none;
     }
+
+    .bottombtn
+    {
+        position:fixed;
+        bottom:0;
+        left:0;
+        z-index:10;
+        right:0;
+        width:100%;
+    }
+
+        .bottombtn .btn-large {
+            margin-bottom: 0px;
+            border-radius: 0px;
+            z-index:10;
+        }
+
+    .btn-large i
+    {
+        font-size:16px;
+    }
+
+    .btn-large:disabled
+    {
+        color:#fff  !important;
+        opacity:0.7;
+    }
+
+    #mysignupModal {
+        text-align: center;
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        margin-top: 100px;
+    }
+
+
 </style>
