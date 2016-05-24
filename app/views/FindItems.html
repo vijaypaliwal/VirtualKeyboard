@@ -119,6 +119,11 @@
         <div class="pageData">
             <ul class=" widget-products">
                 <li ng-repeat="_obj in InventoryItems" class="newlistitem">
+                    <a class="checkicon" id="actionQty_{{_obj.iID}}" inv-id="{{_obj.iID}}" ng-click="AddToCart(_obj)">
+
+                        <i style="font-size: 35px; color:transparent;" class="fa fa-check"></i>
+
+                    </a>
                     <a class="">
                         <span class="img">
                             <span class="imghelper"></span>
@@ -130,7 +135,6 @@
                             <!--<span class="product clearfix" ng-click="ShowOptionModal()">-->
                             <!--<span class="name">
 
-
                             </span>-->
 
                             <h5 class="list-group-item-heading">
@@ -141,75 +145,65 @@
 
                             <span class="list-group-item-text">
                                 <span class="text" style="width:30%">
-                                    <span >
+
+                                    <span ng-if="IsAvailableMyInventoryColumn('pDescription')">
+                                        {{_obj.pDescription}}
+                                    </span>
+
+                                 
+                                </span>
+                                <span class="text" style="float:right">
+                                    <span>
                                         {{_obj.lLoc}}
                                     </span>
                                 </span>
-                                <span class="" style="float:right">
-                                    <span >
-                                        {{_obj.iStatusValue}}
-                                    </span>
-                                </span>
                             </span>
-                           
+                            <div class="unitdata">
+
+                                <span ng-if="_obj.iStatusValue != ''">
+                                    {{_obj.iStatusValue}},
+                                </span>
+
+                                <span ng-if="_obj.iReqValue != ''">
+                                    US1:{{_obj.iReqValue}},
+                                </span>
+                                <span ng-if="_obj.iUnitTag2 != ''">
+                                    US2:{{_obj.iUnitTag2}},
+                                </span>
+
+                                <span ng-if="_obj.iUnitTag3 != ''">
+                                    US3:{{_obj.iUnitTag3}},
+                                </span>
+
+
+                                <span ng-if="_obj.iUniqueDate != ''">
+                                    UD1:{{_obj.iUniqueDate}},
+                                </span>
+
+                                <span ng-if="_obj.iUnitDate2 != ''">
+                                    UD2:{{_obj.iUnitDate2}}
+                                </span>
+
+                                <span ng-if="_obj.iUnitNumber1 != 0">
+                                    UN1:{{_obj.iUnitNumber1}},
+                                </span>
+
+                                <span ng-if="_obj.iUnitNumber2 != 0">
+                                    UN2:{{_obj.iUnitNumber2}}
+                                </span>
+
+
+
+                            </div>
                             
-                            <br />
-                           <span class="text">
-                                <span ng-if="IsAvailableMyInventoryColumn('pDescription')">
-                                    {{_obj.pDescription}}
-                                </span>
-                            </span>
+                         
+                        
 
                         </span>
                     </a>
 
-                    <a class="checkicon" id="actionQty_{{_obj.iID}}" inv-id="{{_obj.iID}}" ng-click="AddToCart(_obj)">
+                    
 
-                        <i style="font-size: 35px; color:transparent;" class="fa fa-check"></i>
-
-                    </a>
-
-                    <div class="unitdata">
-
-                        <span >
-                            {{_obj.iUniqueDate}}
-                        </span>
-
-                        <span >
-                            {{_obj.iUnitDate}}
-                        </span>
-
-
-
-                        <span >
-                            {{_obj.iUnitNumber2}}
-                        </span>
-
-
-                        <span>
-                            {{_obj.iUnitNumber1}}
-                        </span>
-
-
-
-                        <span >
-                            {{_obj.iUnitTag2}}
-                        </span>
-
-
-                        <span >
-                            {{_obj.iUnitTag3}}
-                        </span>
-
-
-
-
-                        <span>
-                            {{_obj.iReqValue}}
-                        </span>
-                    </div>
-                 
-                          
                    
 
                 </li>

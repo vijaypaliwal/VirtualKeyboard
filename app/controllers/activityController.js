@@ -1011,14 +1011,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         $scope.CanApply = (IsAvailableMyInventoryColumn('iReqValue') || IsAvailableMyInventoryColumn('iUniqueDate') || IsAvailableMyInventoryColumn('iUnitDate2') || IsAvailableMyInventoryColumn('iUnitNumber1') || IsAvailableMyInventoryColumn('iUnitNumber2') || IsAvailableMyInventoryColumn('iUnitTag2') || IsAvailableMyInventoryColumn('iUnitTag3')) ? 'True' : 'False';
 
-        console.log("Increase" + $scope.CanIncrease);
-        console.log("decrease" + $scope.CanDecrease);
-        console.log("convert" + $scope.CanConvert);
-        console.log("move" + $scope.CanMove);
-        console.log("status" + $scope.CanStatus);
-
-
-        console.log("apply" + $scope.CanApply);
+  
 
         CheckScopeBeforeApply();
     }

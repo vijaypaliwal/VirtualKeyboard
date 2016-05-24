@@ -670,6 +670,8 @@
                                                 <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='combobox'">
                                                     <div class="fg-line">
 
+
+                                                        selected value :: {{CurrentActiveObject.IsLineItemData[$index].CfValue}}
                                                         <div class="select">
                                                             <select class="form-control" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
 
@@ -2632,7 +2634,7 @@
             <li class="bottomlink" data-dismiss="modal" data-ng-show="CanApply=='True'" data-ng-click=" Operate(4)"><span>Tag</span><a style="background-color: #0D190F" class="btn waves-effect-info btn decrease"> <i class="fa fa-tag"></i>  </a></li>
             <li class="bottomlink" data-dismiss="modal" data-ng-show="CanStatus=='True'" data-ng-click=" Operate(3)"><span>Update</span><a style=" background-color: #583782" class="btn waves-effect-info btn decrease"> <i class="fa fa-pencil"></i>  </a></li>
             <li class="bottomlink" data-dismiss="modal" data-ng-show=" CanConvert=='True'" data-ng-click=" Operate(2)"><span>Convert</span><a style="background-color: #CE59A1" class="btn waves-effect-info btn decrease"> <i class="fa fa-refresh"></i>  </a></li>
-            <li class="bottomlink" data-dismiss="modal" data-ng-show=" CanConvert=='True'" data-ng-click=" changeMode()"><span>Switch mode</span><a style="background-color: #616161" class="btn waves-effect-info btn decrease"> <i class="fa fa-undo"></i>  </a></li>
+            <li class="bottomlink" data-dismiss="modal"  data-ng-click=" changeMode()"><span>Switch mode</span><a style="background-color: #616161" class="btn waves-effect-info btn decrease"> <i class="fa fa-undo"></i>  </a></li>
 
         </ul>
     </div>

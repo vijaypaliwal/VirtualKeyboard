@@ -1,0 +1,233 @@
+﻿
+<div class="topheader"></div>
+
+<div class="formarea">
+
+    <h4>Personal Info</h4>
+    <div class="row">
+
+        <div class="col-xs-12">
+
+            <div class="form-group">
+                <label>Your Name</label>
+                <div class="input-group">
+                    <span class="input-group-addon"> <i class="fa fa-male"></i></span>
+                    <input type="text" class="form-control" placeholder="Your Name" data-ng-model="registration.Name" required autofocus>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label>Company Name</label>
+                <div class="input-group">
+                    <span class="input-group-addon"> <i class="fa fa-globe"></i></span>
+                    <input type="text" class="form-control" placeholder="Company Name" data-ng-model="registration.Company" required>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label>Email Address</label>
+                <div class="input-group">
+                    <span class="input-group-addon"> <i class="fa fa-envelope"></i></span>
+                    <input type="text" class="form-control" placeholder="Email Address" data-ng-model="registration.Email" required>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label>Account Name</label>
+                <div class="input-group">
+                    <span class="input-group-addon"> <i class="fa fa-briefcase"></i></span>
+                    <input type="text" class="form-control" placeholder="Account Name" data-ng-model="registration.Account" required>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+    <h4>Login Info</h4>
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label>User Name</label>
+                <div class="input-group">
+                    <span class="input-group-addon"> <i class="fa fa-user"></i></span>
+                    <input type="text" class="form-control" placeholder="Username" data-ng-model="registration.UserName" required>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-xs-12">
+
+            <div class="form-group">
+                <label>Password</label>
+                <div class="input-group">
+                    <span class="input-group-addon"> <i class="fa fa-key"></i></span>
+                    <input type="password" class="form-control" placeholder="Password" data-ng-model="registration.Password" required>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <button style="margin-top:8px;" ng-if="CheckIsRequiredfields()==false" class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6" type="button"  id="signUpBtn" data-ng-click="signUp()">Sign Up </button>
+            <button style="margin-top:8px;" ng-if="CheckIsRequiredfields()==true" class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6 disabled" type="button" id="signUpBtn"  disabled>Sign Up </button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .navbar {
+        display: none;
+    }
+
+    .side-nav {
+        display: none !important;
+    }
+
+    #sidenav-overlay {
+        display: none !important;
+    }  
+
+
+    .center {
+        text-align: center;
+    }
+
+    .loginn {
+        background: #999999 !important;
+    }
+
+    label {
+        font-size: 15px;
+        color: #333;
+    }
+
+    .form-control {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+
+  
+
+
+    .layoutheader {
+        display: none;
+    }
+
+    .bottomnavigation {
+        position: fixed;
+        bottom: 10px;
+        text-align: center;
+        width: 100%;
+        color: #fff;
+    }
+
+        .bottomnavigation a {
+            color: #fff;
+            display: block;
+            margin-top: 5px;
+        }
+
+
+
+    body {
+    
+        padding-top: 7px;
+        overflow-x: hidden !important;
+    }
+
+    .loginlogo {
+        width: 82px;
+        margin-bottom: 15px;
+    }
+
+    #viewdata {
+        margin-top: 0px;
+    }
+
+
+
+    .login-form .col-xs-5 {
+        text-align: right;
+    }
+
+    .btn-white {
+        margin: 0 auto;
+        margin-bottom: 15px;
+        background: #fff !important;
+        color: #000 !important;
+        text-align: center;
+    }
+
+        .btn-white .fa-angle-right {
+            position: absolute;
+            right: 25px;
+            font-size: 25px;
+            margin-top: -2px;
+        }
+
+
+
+
+    login-form {
+        overflow: hidden !important;
+    }
+
+    .container {
+        width: 98%;
+    }
+
+    #toolbar {
+        display: none;
+    }
+</style>

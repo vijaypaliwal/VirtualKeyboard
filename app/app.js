@@ -19,7 +19,7 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when("/signup", {
-        controller: "mainmenuController",
+        controller: "signupController",
         templateUrl: "app/views/signup.html"
     });
 
