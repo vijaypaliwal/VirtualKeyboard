@@ -20,8 +20,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     };
 
 
-
-    $scope.CommonArray = ['Image', 'iUnitNumber1', 'iUnitNumber2', 'iUnitTag3', 'iUnitTag2', 'iReqValue', 'pPart', 'pDescription', 'iQty', 'lLoc', 'lZone', 'iStatusValue', 'uomUOM', 'pCountFrq', 'iCostPerUnit'];
+    $scope.CommonArray = ['Image', 'iUnitNumber1', 'iUnitNumber2', 'iUniqueDate', 'iUnitDate2', 'iUnitTag3', 'iUnitTag2', 'iReqValue', 'pPart', 'pDescription', 'iQty', 'lLoc', 'lZone', 'iStatusValue', 'uomUOM', 'pCountFrq', 'iCostPerUnit'];
 
     $scope.LocationList = [{ LocationName: "dhdd", LocationZone: "", LocationID: 678325 },
                            { LocationName: "Here", LocationZone: "", LocationID: 678323 },
@@ -74,7 +73,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     var StreamData = "";
 
     var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
-
+    Date.prototype.toMSJSON = function () {
+        var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
+        return date;
+    };
 
     if (deviceType == 'iPhone') {
         $(".iosbtn").show()
@@ -631,7 +633,40 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $scope.InventoryObject.UnitNumber2 = 0;
         }
         $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity == "" ? 0 : $scope.InventoryObject.Quantity;
+        var _updateDateval = $scope.InventoryObject.UniqueDate;
 
+
+        if (_updateDateval != null) {
+            var wcfDateStr123 = null;
+            var dsplit1 = _updateDateval.split("-");
+
+            var d122 = new Date(dsplit1[0], dsplit1[1] - 1, dsplit1[2]);
+
+            var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), d122.getHours(), d122.getMinutes(), d122.getSeconds(), d122.getMilliseconds()))
+
+            wcfDateStr123 = d122.toMSJSON();
+
+            $scope.InventoryObject.UniqueDate = wcfDateStr123;
+        }
+
+
+
+        var _updateDateval1 = $scope.InventoryObject.UnitDate2;
+
+
+        if (_updateDateval1 != null) {
+
+            var wcfDateStr1234 = null;
+            var dsplit12 = _updateDateval1.split("-");
+
+            var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
+
+            var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), d1222.getHours(), d1222.getMinutes(), d1222.getSeconds(), d1222.getMilliseconds()))
+
+            wcfDateStr1234 = d1122.toMSJSON();
+
+            $scope.InventoryObject.UnitDate2 = wcfDateStr1234;
+        }
         var _sum = 0;
         for (var i = 0; i < $scope.ImageList.length; i++) {
 
