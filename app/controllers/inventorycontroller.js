@@ -636,7 +636,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var _updateDateval = $scope.InventoryObject.UniqueDate;
 
 
-        if (_updateDateval != null) {
+        if (_updateDateval != null && _updateDateval != "") {
             var wcfDateStr123 = null;
             var dsplit1 = _updateDateval.split("-");
 
@@ -648,13 +648,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             $scope.InventoryObject.UniqueDate = wcfDateStr123;
         }
-
+        else {
+            $scope.InventoryObject.UniqueDate = null;
+        }
 
 
         var _updateDateval1 = $scope.InventoryObject.UnitDate2;
 
 
-        if (_updateDateval1 != null) {
+        if (_updateDateval1 != null && _updateDateval1 != "") {
 
             var wcfDateStr1234 = null;
             var dsplit12 = _updateDateval1.split("-");
@@ -666,6 +668,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             wcfDateStr1234 = d1122.toMSJSON();
 
             $scope.InventoryObject.UnitDate2 = wcfDateStr1234;
+        }
+        else {
+            $scope.InventoryObject.UnitDate2 = null;
         }
         var _sum = 0;
         for (var i = 0; i < $scope.ImageList.length; i++) {
