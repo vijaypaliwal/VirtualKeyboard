@@ -522,9 +522,9 @@
                 
                 
 
-                <div class="requiredfields" ng-show="slide == Totalslides">
+                <div ng-if="CheckRequiredField()==true || CheckCustomRequiredFields()==true" class="requiredfields" ng-show="slide == Totalslides">
 
-                    <p ng-show="CheckRequiredField()==true || CheckCustomRequiredFields()==true">Please fill below required fields</p>
+                    <p>Please fill below required fields</p>
 
 
                     <a ng-if="InventoryObject.Uom == ''" ng-click="getstep(4,'uomUOM')">

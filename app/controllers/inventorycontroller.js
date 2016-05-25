@@ -2226,10 +2226,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.notmove = function () {
-        //  window.location.reload();
-        $scope.getstep(0);
+        window.location.reload();
+      //  $scope.getstep(0);
 
-        $("#modal3").modal('hide');
+     //   $("#modal3").modal('hide');
 
         $(".Addbtn").show()
     }
