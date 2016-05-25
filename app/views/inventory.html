@@ -3,26 +3,36 @@
 <link href="css/inventory.css" rel="stylesheet" />
 
 <style>
-    .allfields
-    {
-    padding:8px;
+    .allfields {
+        padding: 8px;
     }
 
-    .Addbtn
-     {
-      position: fixed !important;
-      bottom:2px;
-      color: #0083C7 !important;
-      text-align: center;
-      width:100%;
-      left:0px;
-      right:0px;
+    .Addbtn {
+        position: fixed !important;
+        bottom: 2px;
+        color: #0083C7 !important;
+        text-align: center;
+        width: 100%;
+        left: 0px;
+        right: 0px;
     }
 
-    .mylabel
-    {
-        font-size:16px;
-        color:#767676;
+    .mylabel {
+        font-size: 16px;
+        color: #767676;
+    }
+
+    .requiredfields {
+        background: #DEC8C8;
+      
+        padding: 5px;
+    }
+    
+    
+    
+    .requiredfields a {
+        color: brown;
+        margin-right: 5px;
     }
 </style>
 <!--<div class="page-header">
@@ -31,7 +41,7 @@
 </div>-->
 
 <a class="Addbtn animated fadeIn" ng-click="viewall()">
- View all details
+    View all details
 </a>
 
 
@@ -54,45 +64,45 @@
             <div style="display:none;" class="swiper-container">
 
 
-               
-
-      
-                    <div class="iteminfo">
-
-                        <div class="row ">
-                            <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
-
-                                <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
-
-                                <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
-                            </div>
-
-                            <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==false">
-
-                                <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
-
-                                <img id="defaultimg" style="height: 80px; width: 80px; border: 1px solid #ccc;" src="img/na.jpg" alt="Alternate Text" />
-                            </div>
-                            <div class="col-md-10 col-xs-8">
-                                <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')"> <span style="display:inline-block" ng-bind="InventoryObject.ItemID"></span> <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></span>
-
-
-                                <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
-
-                                <span ng-bind="InventoryObject.Quantity" style="display:inline" ng-click="getstep(2,'iQty')"></span> <span ng-bind="InventoryObject.Uom" style="display:inline" ng-click="getstep(4,'uomUOM')"></span>
-
-
-                                <span ng-bind="InventoryObject.Location" ng-click="getstep(3,'lLoc')"> </span> 
 
 
 
+                <div class="iteminfo">
+
+                    <div class="row ">
+                        <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
+
+                            <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
+
+                            <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
+                        </div>
+
+                        <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==false">
+
+                            <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list321"></output>
+
+                            <img id="defaultimg" style="height: 80px; width: 80px; border: 1px solid #ccc;" src="img/na.jpg" alt="Alternate Text" />
+                        </div>
+                        <div class="col-md-10 col-xs-8">
+                            <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')"> <span style="display:inline-block" ng-bind="InventoryObject.ItemID"></span> <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></span>
 
 
-                            </div>
+                            <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
+
+                            <span ng-bind="InventoryObject.Quantity" style="display:inline" ng-click="getstep(2,'iQty')"></span> <span ng-bind="InventoryObject.Uom" style="display:inline" ng-click="getstep(4,'uomUOM')"></span>
+
+
+                            <span ng-bind="InventoryObject.Location" ng-click="getstep(3,'lLoc')"> </span>
+
+
+
+
+
                         </div>
                     </div>
-              
-            
+                </div>
+
+
 
 
                 <div class="swiper-wrapper">
@@ -111,7 +121,7 @@
                                         <div class="col-xs-6">
                                             <label>Item Name  </label>
                                         </div>
-                                      
+
                                     </div>
 
                                     <div ng-if="InventoryObject.AutoID==false" class="input-group">
@@ -168,7 +178,7 @@
                             </div>
 
                         </div>
-                     
+
 
 
                         <div class="form-group" ng-if="obj.ColumnName=='lLoc'">
@@ -370,7 +380,7 @@
                             <div ng-if="obj.cfdDataType=='checkbox'">
 
 
-                                <input id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[$index].Value" type="checkbox" bootstrap-switch />
+                                <input id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[$index].Value" ng-checked="InventoryObject.CustomPartData[$index].Value" type="checkbox" bootstrap-switch />
 
 
                             </div>
@@ -403,13 +413,7 @@
                                 <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
                                 <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                             </div>
-
-
                         </div>
-
-
-
-
                     </div>
 
 
@@ -428,7 +432,7 @@
 
                             <div ng-if="obj.cfdDataType=='checkbox'" class="checkbox">
 
-                                <input id="CustomActivity_{{obj.cfdID}}" type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value" bootstrap-switch>
+                                <input id="CustomActivity_{{obj.cfdID}}" ng-checked="InventoryObject.CustomTxnData[$index].Value" type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value" bootstrap-switch>
 
                             </div>
 
@@ -465,14 +469,17 @@
                         </div>
 
 
-
-
                     </div>
-
 
                     <div class="swiper-slide">
+
+
+
+
+
                         <a ng-click="addinventory()" ng-if="IsFormDataloaded==true" style="color:white !important; width:100% !important; margin-top:20px;text-align:center; z-index:1000;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"> <i style="font-size:16px;" class="fa fa-plus-circle"></i>  Add Inventory</a>
                     </div>
+                    
 
                 </div>
 
@@ -512,8 +519,39 @@
                 </table>
 
 
+                
+                
+
+                <div class="requiredfields" ng-disabled="slide == Totalslides">
+
+                    <p ng-show="CheckRequiredField()==true || CheckCustomRequiredFields()==true">Please fill below required fields</p>
 
 
+                    <a ng-if="InventoryObject.Uom == ''" ng-click="getstep(4,'uomUOM')">
+                        UOM
+                    </a>
+
+                    <a ng-if="InventoryObject.Location == ''" ng-click="getstep(3,'lLoc')">
+                        LOC
+                    </a>
+
+                    <a ng-click="getstepCustom(1,obj.ColumnMap)" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true && obj.cfdIsRequired==true && (InventoryObject.CustomPartData[$index].Value==null || InventoryObject.CustomPartData[$index].Value==undefined || InventoryObject.CustomPartData[$index].Value=='')">
+
+
+                        {{obj.cfdName}}
+
+
+                    </a>
+                    <a ng-click="getstepCustom(2,obj.ColumnMap)" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)==true && obj.cfdIsRequired==true && (InventoryObject.CustomTxnData[$index].Value==null || InventoryObject.CustomTxnData[$index].Value==undefined || InventoryObject.CustomTxnData[$index].Value=='')">
+
+
+
+                        {{obj.cfdName}}
+
+
+
+                    </a>
+                </div>
 
 
             </div>
@@ -705,9 +743,9 @@
 
     <div style="padding:5px;" class="modal-body">
 
-        <div  style="box-shadow:none; margin-bottom:0px;" class="">
+        <div style="box-shadow:none; margin-bottom:0px;" class="">
 
-            <div style="text-align:center;"  ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
+            <div style="text-align:center;" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
 
                 <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list567"></output>
 
@@ -740,7 +778,7 @@
                     LOC:<span class="redText">*</span> <span>  {{InventoryObject.Location}} </span>
                 </div>
 
-              
+
                 <div ng-click="getstep(1,'pDescription')" class="col-md-12 col-xs-12">
 
                     <span style="font-size:12px;"> {{ InventoryObject.Description }} </span>
@@ -749,10 +787,10 @@
                 </div>
             </div>
 
-         
+
 
         </div>
-     
+
         <div class="allfields">
 
             <div class="myCols" data-index="{{$index}}" data-type="myinventory" data-id="myinventorycols" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" ng-if="CheckInCommonArray(obj.ColumnName)==true" end-repeat>
@@ -785,7 +823,7 @@
 
                 </div>
 
-                </div>
+            </div>
 
             <h4 ng-if='CheckCustomFields(1)==true'>
                 Custom Item fields
@@ -834,7 +872,7 @@
                 Activity fields
             </h4>
 
-            <div ng-repeat="obj in CustomActivityDataList" ng-click="getstepCustom(2,obj.ColumnMap)" data-id="CustomActivity_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="activity" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)"  end-repeat3>
+            <div ng-repeat="obj in CustomActivityDataList" ng-click="getstepCustom(2,obj.ColumnMap)" data-id="CustomActivity_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="activity" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)" end-repeat3>
 
 
 
@@ -842,20 +880,19 @@
 
                     <div ng-if="obj.cfdDataType=='string'">
 
+
                         <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
 
 
                     </div>
 
 
-                    <div ng-if="obj.cfdDataType=='checkbox'" >
-
+                    <div ng-if="obj.cfdDataType=='checkbox'">
                         <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
 
                     </div>
 
                     <div ng-if="obj.cfdDataType=='combobox'">
-
 
                         <span class="mylabel">{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span>{{InventoryObject.CustomTxnData[$index].Value}}</span>
 
@@ -878,14 +915,14 @@
 
             </div>
 
-            </div>
+        </div>
     </div>
 </div>
 
 <div id="modal3" class="modal bottom-sheet">
-  
+
     <p ng-click="notmove()">Click to add more Inventory</p>
     <hr />
     <p ng-click="confirmmove()">No, move to Inventory</p>
-    
+
 </div>

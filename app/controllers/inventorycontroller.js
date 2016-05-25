@@ -15,7 +15,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.IsFormDataloaded = false;
     $scope.InventoryObject = {
         IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: "", Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
-        UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: null, UnitDate2:null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
+        UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
         UnitTag3: "", CustomPartData: [], CustomTxnData: []
     };
 
@@ -697,7 +697,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               contentType: 'application/json; charset=utf-8',
 
               dataType: 'json',
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": $scope.ImageList }),
+              // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": $scope.ImageList }),
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
 
 
@@ -733,6 +734,21 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
+
+    function ConverttoMsJsonDate(_DateValue) {
+       
+        var _date = angular.copy(_DateValue);
+
+        var dsplit1 = _date.split("/");
+        var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
+
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+        return today;
+    }
     $scope.CheckCustomFields = function (Type) {
         var _returnVar = false;
         switch (Type) {
@@ -873,6 +889,23 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   CheckScopeBeforeApply();
 
                   for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+                      var _defaultValue = angular.copy($scope.CustomItemDataList[i].cfdDefaultValue);
+                      if ($scope.CustomItemDataList[i].cfdDataType == "datetime") {
+                          if(_defaultValue!=null && _defaultValue!="")
+                          {
+                              $scope.CustomItemDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
+                          }
+                      }
+                      else if ($scope.CustomItemDataList[i].cfdDataType == "currency" || $scope.CustomItemDataList[i].cfdDataType == "number") {
+                          if (_defaultValue != null && _defaultValue != "") {
+                              var _myDefault = parseFloat(_defaultValue);
+                              if (!isNaN(_myDefault))
+                              {
+                                  $scope.CustomItemDataList[i].cfdDefaultValue = _myDefault;
+
+                              }
+                          }
+                      }
                       $scope.InventoryObject.CustomPartData.push({ CfdID: $scope.CustomItemDataList[i].cfdID, Value: $scope.CustomItemDataList[i].cfdDefaultValue, DataType: $scope.CustomItemDataList[i].cfdDataType });
                   }
                   CheckScopeBeforeApply()
@@ -884,6 +917,22 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   CheckScopeBeforeApply()
 
                   for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+
+                      var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
+                      if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
+                          if (_defaultValue != null && _defaultValue != "") {
+                              $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
+                          }
+                      }
+                      else if ($scope.CustomActivityDataList[i].cfdDataType == "currency" || $scope.CustomActivityDataList[i].cfdDataType == "number") {
+                          if (_defaultValue != null && _defaultValue != "") {
+                              var _myDefault = parseFloat(_defaultValue);
+                              if (!isNaN(_myDefault)) {
+                                  $scope.CustomActivityDataList[i].cfdDefaultValue = _myDefault;
+
+                              }
+                          }
+                      }
                       $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomActivityDataList[i].cfdID, Value: $scope.CustomActivityDataList[i].cfdDefaultValue, DataType: $scope.CustomActivityDataList[i].cfdDataType });
                   }
                   CheckScopeBeforeApply()
@@ -1883,7 +1932,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
         else {
 
-           SoftKeyboard.hide();
+            SoftKeyboard.hide();
 
 
             if ($scope.CurrentActiveField != "Image") {

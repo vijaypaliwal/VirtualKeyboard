@@ -1026,6 +1026,21 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
         CheckScopeBeforeApply();
     }
+
+    function ConverttoMsJsonDate(_DateValue) {
+
+        var _date = angular.copy(_DateValue);
+
+        var dsplit1 = _date.split("/");
+        var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
+
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+        return today;
+    }
     function GetCustomDataField(Type) {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -1044,7 +1059,24 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                    $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
 
+                   for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
 
+                       var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
+                       if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
+                           if (_defaultValue != null && _defaultValue != "") {
+                               $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
+                           }
+                       }
+                       else if ($scope.CustomActivityDataList[i].cfdDataType == "currency" || $scope.CustomActivityDataList[i].cfdDataType == "number") {
+                           if (_defaultValue != null && _defaultValue != "") {
+                               var _myDefault = parseFloat(_defaultValue);
+                               if (!isNaN(_myDefault)) {
+                                   $scope.CustomActivityDataList[i].cfdDefaultValue = _myDefault;
+
+                               }
+                           }
+                       }
+                   }
 
                    CheckScopeBeforeApply();
                    UpdateCartWithCustomFields();
@@ -2243,7 +2275,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $location.path("/FindItems");
     }
 
-
     $scope.SubmitAllActivities = function () {
 
 
@@ -3154,5 +3185,30 @@ app.directive('bootstrapSwitch', [
             };
         }
 ]);
+
+
+
+app.directive('selectpicker', function () {
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function (scope, element, attrs, ctrl) {
+
+            element.select2();
+
+
+            var refreshSelect = function () {
+
+                element.trigger('change');
+            };
+
+
+            scope.$watch(attrs.ngModel, refreshSelect);
+
+
+        }
+    };
+});
+
 
 

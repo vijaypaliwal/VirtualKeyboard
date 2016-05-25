@@ -109,44 +109,62 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             $scope.SecurityToken = authData.token;
         }
 
+
+       
+        cordova.plugins.backgroundMode.enable();
+
+
         log.info("Image upload processing started at backend side, please be patient .")
-        $.ajax
-         ({
-             type: "POST",
-             url: serviceBase + 'UploadImage',
-             contentType: 'application/json; charset=utf-8',
-
-             dataType: 'json',
-             data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": ImageList, "txnID": txnID }),
-             success: function (response) {
-                 if (response.UploadImageResult.Success == true) {
-
-                     log.success("Image uploaded successfully please refresh grid to see the uploaded image.")
-
-                 }
-                 else {
-                     log.error(response.UploadImageResult.Message);
-                 }
 
 
+        // Called when background mode has been activated
+        cordova.plugins.backgroundMode.onactivate = function (SecurityToken, ImageList, txnID) {
+            // if track was playing resume it
 
-             },
-             error: function (err) {
-                 alert(err.status);
-                 if (err.status == 200 || err.status == "200")
-                 {
-                     log.success("Image uploaded successfully please refresh grid to see the uploaded image.")
-                 }
-                 else {
-                     console.log(err);
-                     log.error("Error Occurred during operation");
-                 }
-              
+            alert("background mode activated.");
+            $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'UploadImage',
+               contentType: 'application/json; charset=utf-8',
+
+               dataType: 'json',
+               data: JSON.stringify({ "SecurityToken": SecurityToken, "ImageList": ImageList, "txnID": txnID }),
+               success: function (response) {
+                   if (response.UploadImageResult.Success == true) {
+
+                       log.success("Image uploaded successfully please refresh grid to see the uploaded image.")
+
+                   }
+                   else {
+                       log.error(response.UploadImageResult.Message);
+                   }
+
+                   // disable application if we're still in background and audio is no longer playing
+                   cordova.plugins.backgroundMode.disable();
+
+               },
+               error: function (err) {
+                   alert(err.status);
+                   if (err.status == 200 || err.status == "200") {
+                       log.success("Image uploaded successfully please refresh grid to see the uploaded image.")
+                   }
+                   else {
+                       console.log(err);
+                       log.error("Error Occurred during operation");
+                   }
+                   // disable application if we're still in background and audio is no longer playing
+                   cordova.plugins.backgroundMode.disable();
 
 
-             }
-         });
+               }
+           });
+        }
+       
     }
+
+
+    
 
     if (_Islive)
     {

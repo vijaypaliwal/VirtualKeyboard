@@ -805,6 +805,62 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         return _returnData;
     }
 
+
+    $scope.TrimFirstThreeLetter=function(ColumnName)
+    {
+        var _defaultValue = "";
+        var ColumnLabel = "";
+        
+
+        ColumnLabel = $scope.GetUnitDataLabel(ColumnName);
+        ColumnLabel = ColumnLabel == undefined || ColumnLabel == null ? "" : ColumnLabel
+        var _TrimmedValue = $.trim(ColumnLabel);
+        var _toReturnvalue = "";
+        switch (ColumnName) {
+            case "iUnitNumber1":
+                _defaultValue = "UN1";
+                break;
+            case "iUnitNumber2":
+                _defaultValue = "UN2";
+                break;
+            case "iUniqueDate":
+                _defaultValue = "UD1";
+                break;
+            case "iUnitDate2":
+                _defaultValue = "UD2";
+                break;
+            case "iUnitTag3":
+                _defaultValue = "US3";
+                break;
+            case "iUnitTag2":
+                _defaultValue = "US2";
+                break;
+            case "iReqValue":
+                _defaultValue = "US1";
+                break;
+
+            default:
+
+        }
+
+        if (ColumnLabel != null && ColumnLabel != undefined && _TrimmedValue != "" )
+        {
+            if (ColumnLabel.length > 3)
+            {
+                _toReturnvalue = ColumnLabel.substr(0, 3);
+
+            }
+            else {
+                _toReturnvalue = ColumnLabel;
+            }
+        }
+        else {
+            _toReturnvalue = _defaultValue;
+        }
+
+        return _toReturnvalue;
+    }
+
     $scope.GetAvailableColumnLabel = function (ColumnName) {
         var i = 0;
         for (i = 0; i < $scope.MyinventoryFields.length; i++) {
