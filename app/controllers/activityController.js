@@ -2261,19 +2261,21 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _mdata }),
                     success: function (response) {
 
+                        localStorageService.set("ActivityCart", "");
+                        localStorageService.set("SelectedAction", "");
 
                         $scope.IsProcessing = false;
                         $scope.CurrentCart = [];
                         ShowSuccessActivity('Saved', $scope._CurrentAction);
 
+                        localStorageService.set("ActivityCart", "");
+                        localStorageService.set("SelectedAction", "");
+
                         $location.path("/FindItems");
                         localStorageService.set("ActivityCart", "");
                         localStorageService.set("SelectedAction", "");
 
-
-
-
-
+                        $scope.CartFunction(2);
                         $scope.$apply();
                     },
                     error: function (err) {

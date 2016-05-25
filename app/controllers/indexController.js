@@ -103,6 +103,51 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         }
     }
 
+    $scope.SaveImages = function (txnID, ImageList) {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        log.info("Image upload processing started at backend side, please be patient .")
+        $.ajax
+         ({
+             type: "POST",
+             url: serviceBase + 'UploadImage',
+             contentType: 'application/json; charset=utf-8',
+
+             dataType: 'json',
+             data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": ImageList, "txnID": txnID }),
+             success: function (response) {
+                 if (response.UploadImageResult.Success == true) {
+
+                     log.success("Image uploaded successfully please refresh grid to see the uploaded image.")
+
+                 }
+                 else {
+                     log.error(response.UploadImageResult.Message);
+                 }
+
+
+
+             },
+             error: function (err) {
+                 alert(err.status);
+                 if (err.status == 200 || err.status == "200")
+                 {
+                     log.success("Image uploaded successfully please refresh grid to see the uploaded image.")
+                 }
+                 else {
+                     console.log(err);
+                     log.error("Error Occurred during operation");
+                 }
+              
+
+
+             }
+         });
+    }
+
     if (_Islive)
     {
         checkurl();

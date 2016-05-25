@@ -555,8 +555,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.resetObject = function () {
         $scope.InventoryObject = {
-            IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: 0, Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
-            UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: "/Date(1320825600000-0800)/", UnitDate2: "/Date(1320825600000-0800)/", UnitNumber1: 0, UnitNumber2: 0, UnitTag2: "",
+            IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: "", Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
+            UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
             UnitTag3: "", CustomPartData: [], CustomTxnData: []
         };
         $scope.ImageList = [];
@@ -701,6 +701,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               success: function (response) {
 
 
+                  if ($scope.ImageList.length > 0) {
+
+                      var txnID = response.AddInventoryDataResult.Payload;
+                      $scope.SaveImages(txnID, $scope.ImageList)
+                  }
                   HideWaitingInv();
 
                   $scope.resetObject();
@@ -2177,7 +2182,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.notmove = function () {
-        window.location.reload();
+        //  window.location.reload();
+        $scope.getstep(0);
+
+        $("#modal3").modal('hide');
+
         $(".Addbtn").show()
     }
 
