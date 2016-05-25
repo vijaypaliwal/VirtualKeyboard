@@ -2236,6 +2236,14 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         return _returnVar
     }
+
+    $scope.clearCartFunction = function() {
+        localStorageService.set("ActivityCart", "");
+        localStorageService.set("SelectedAction", "");
+        $location.path("/FindItems");
+    }
+
+
     $scope.SubmitAllActivities = function () {
 
 
@@ -2268,14 +2276,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         $scope.CurrentCart = [];
                         ShowSuccessActivity('Saved', $scope._CurrentAction);
 
-                        localStorageService.set("ActivityCart", "");
-                        localStorageService.set("SelectedAction", "");
-
                         $location.path("/FindItems");
                         localStorageService.set("ActivityCart", "");
                         localStorageService.set("SelectedAction", "");
 
-                        $scope.CartFunction(2);
+                        $scope.clearCartFunction();
                         $scope.$apply();
                     },
                     error: function (err) {
