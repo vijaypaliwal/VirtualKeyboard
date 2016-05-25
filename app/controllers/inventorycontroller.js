@@ -697,18 +697,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               contentType: 'application/json; charset=utf-8',
 
               dataType: 'json',
-              // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": $scope.ImageList }),
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": $scope.ImageList }),
+             // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
 
 
-                  if ($scope.ImageList.length > 0) {
-
-                      var txnID = response.AddInventoryDataResult.Payload;
-
-                      backgroundtask.start($scope.SaveImages(txnID, $scope.ImageList));
-                      
-                  }
                   HideWaitingInv();
 
                   $scope.resetObject();
