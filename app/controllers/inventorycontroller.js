@@ -705,7 +705,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   if ($scope.ImageList.length > 0) {
 
                       var txnID = response.AddInventoryDataResult.Payload;
-                      $scope.SaveImages(txnID, $scope.ImageList)
+
+                      backgroundtask.start($scope.SaveImages(txnID, $scope.ImageList));
+                      
                   }
                   HideWaitingInv();
 
