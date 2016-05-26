@@ -1393,7 +1393,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 break;
             }
         }
-        CheckScopeBeforeApply()
+    
         
         if ($scope.ImageList.length == 0) {
             $("#imagemodal").modal('hide');
