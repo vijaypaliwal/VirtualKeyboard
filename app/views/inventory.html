@@ -269,30 +269,43 @@
                         <div ng-if="obj.ColumnName=='Image'">
 
 
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="iosbtn">
+                                        <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBox()">
+                                            <div><i class="fa fa-plus-circle"></i></div>
+                                            <span>Add Image</span>
 
-                            <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list123"></output>
+                                            <input type="file" style="visibility:hidden" id="files" accept="image/*;capture=camera" />
+                                        </div>
+                                    </div>
 
 
-                            <div class="iosbtn">
-                                <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBox()">
-                                    <div><i class="fa fa-plus-circle"></i></div>
-                                    <span>Add Image</span>
+                                    <div class="androidbtn">
 
-                                    <input type="file" style="visibility:hidden" id="files" accept="image/*;capture=camera" />
+                                        <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBoxAndroid()">
+                                            <div><i class="fa fa-plus-circle"></i></div>
+                                            <span>Add Image</span>
+                                            <input type="file" style="visibility:hidden" id="files" accept="image/*;capture=camera" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="col-xs-6">
 
+                                    <div  class="fileUpload viewimage btn btn-primary" style="float:right; display:none" ng-click="viewimages()">
+                                        <div>{{ImageList.length}}</div>
+                                        <span>Selected</span>
 
-
-                            <div class="androidbtn">
-
-                                <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBoxAndroid()">
-                                    <div><i class="fa fa-plus-circle"></i></div>
-                                    <span>Add Image</span>
-                                    <input type="file" style="visibility:hidden" id="files" accept="image/*;capture=camera" />
+                                    </div>
+                                  
                                 </div>
-                            </div>
 
+
+                             
+                                
+
+                               
+                            </div>
 
 
                             <div>
@@ -919,6 +932,8 @@
     </div>
 </div>
 
+
+
 <div id="modal3" class="modal bottom-sheet">
 
     <p ng-click="notmove()">Click to add more Inventory</p>
@@ -926,3 +941,24 @@
     <p ng-click="confirmmove()">No, move to Inventory</p>
 
 </div>
+
+
+<div style="background:#fff;" id="imagemodal" class="modal animated bounceIn">
+    <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
+        <button style="padding:10px; margin-top:-15px;" type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+        <h4>Uploaded images</h4>
+    </div>
+
+    <div style="padding:5px;" class="modal-body">
+        <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list123"></output>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+

@@ -1328,6 +1328,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     document.getElementById('list123').insertBefore(span, null);
 
+
+                    $(".viewimage").show();
+
                     var imagepath = '<span><img  id="' + id + '" style="height:80px;width:78px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
 
 
@@ -1344,13 +1347,27 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         setTimeout(function () {
 
             $scope.ImageList.push(_ImgObj);
+            CheckScopeBeforeApply();
+
+            debugger;
+
             $(".removeImage").bind("click", function () {
 
                 removeImage($(this).attr("altid"));
             });
+
+            $(".iteminfo").trigger("click;");
+
         }, 100);
 
 
+
+    }
+
+
+    $scope.viewimages = function () {
+
+        $("#imagemodal").modal('show');
 
     }
 
@@ -1378,7 +1395,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         }
 
+        
+        if ($scope.ImageList.length == 0) {
+           $("#imagemodal").modal('hide');
 
+            $(".viewimage").hide();
+            
+          
+        }
+
+     
         removeImage(_this)
 
     }
@@ -2294,6 +2320,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         CheckScopeBeforeApply()
 
     });
+
+ 
+
 
 
 }]);
