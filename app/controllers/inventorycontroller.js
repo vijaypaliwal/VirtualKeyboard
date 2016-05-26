@@ -1393,7 +1393,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 break;
             }
         }
-    
+        removeImage(_this)
         
         if ($scope.ImageList.length == 0) {
             $("#imagemodal").modal('hide');
@@ -1404,7 +1404,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
       
    
-        removeImage(_this)
+      
 
     }
 
