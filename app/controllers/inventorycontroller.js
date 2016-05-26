@@ -1392,9 +1392,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 $scope.ImageList.splice(i, 1);
                 break;
             }
-
         }
-
+        CheckScopeBeforeApply()
         
         if ($scope.ImageList.length == 0) {
             $("#imagemodal").modal('hide');
@@ -1403,7 +1402,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             
             CheckScopeBeforeApply()
         }
-        CheckScopeBeforeApply()
+      
    
         removeImage(_this)
 
