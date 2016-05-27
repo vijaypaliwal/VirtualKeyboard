@@ -11,7 +11,11 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
     $scope.mainObjectToSend = [];
     function init() {
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
-        console.log($scope.CurrentInventory);
+
+        $scope.MyinventoryFieldsNames = localStorageService.get("unitdatafieldsobject");
+
+        
+        console.log($scope.MyinventoryFieldsNames);
         $scope.itemlabel = $scope.CurrentInventory.pPart
      
         $scope.$apply();
@@ -60,10 +64,7 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
     }
 
 
-    
-
     init();
-
 
 
     function InitializeSwiper() {
@@ -115,6 +116,19 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
 
     }
 
+
+    $scope.GetUnitDataLabel = function (ColumnName) {
+        var i = 0;
+
+        ColumnName = ColumnName.substr(1);
+        for (i = 0; i < $scope.MyinventoryFieldsNames.length; i++) {
+            if ($scope.MyinventoryFieldsNames[i].ColumnName == ColumnName) {
+                return $scope.MyinventoryFieldsNames[i].ColumnLabel;
+            }
+        }
+
+        return "";
+    }
 
 
     $scope.Scanitem = function () {

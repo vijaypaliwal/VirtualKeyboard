@@ -55,6 +55,21 @@
     .modal-backdrop.in {
         opacity: 0.8;
     }
+
+    .c-widget-body
+    {
+        text-align:left;
+    }
+
+    .m-0 span
+    {
+        color:#808080;
+    }
+
+    .m-0
+    {
+        text-transform:capitalize;
+    }
 </style>
 
 
@@ -157,7 +172,8 @@
                     <i class="fa fa-info udt"></i>
                 </div>
                 <div class="c-widget-body">
-                    <p class="m-0" style="color:black;"> {{itemlabel}} </p>
+                    <p class="m-0" style="color:black;"> <span>Name:</span> {{itemlabel}} </p>
+                    <p class="m-0" style="color:black;"> <span>Description:</span> {{CurrentInventory.pDescription}} </p>
 
                 </div>
             </div>
@@ -169,8 +185,8 @@
                     <i class="fa fa-list udt"></i>
                 </div>
                 <div class="c-widget-body">
-                    <p class="m-0"> {{CurrentInventory.iQty}} Quantity</p>
-                    <p class="small m-0">{{CurrentInventory.uomUOM}} of UOM</p>
+                    <p class="m-0"> <span>Quantity:</span> {{CurrentInventory.iQty}} {{CurrentInventory.uomUOM}} </p>
+                    <p class="m-0"> <span>Location:</span> {{CurrentInventory.lLoc}} </p>
                 </div>
             </div>
         </div>
@@ -181,9 +197,38 @@
                     <i class="fa fa-map-marker udt"></i>
                 </div>
                 <div class="c-widget-body">
-                    <p class="m-0">On Location {{CurrentInventory.lLoc}} </p>
-                    <p class="small m-0" ng-if="CurrentInventory.iStatusValue!=''">{{CurrentInventory.iStatusValue}}  is Status.</p>
+                  
+                    <p class="m-0" ng-if="CurrentInventory.iStatusValue!=''"> <span>Status:</span> {{CurrentInventory.iStatusValue}} </p>
+                
 
+                        <p class="m-0" ng-if="CurrentInventory.iReqValue != ''">
+                            <span> {{GetUnitDataLabel('iReqValue')}}:</span>{{CurrentInventory.iReqValue}}
+                        </p>
+                        <p class="m-0" ng-if="CurrentInventory.iUnitTag2 != ''">
+                            <span> {{GetUnitDataLabel('iUnitTag2')}}:</span>{{CurrentInventory.iUnitTag2}}
+                        </p>
+
+                        <p class="m-0" ng-if="CurrentInventory.iUnitTag3 != ''">
+                            <span>{{GetUnitDataLabel('iUnitTag3')}}:</span>{{CurrentInventory.iUnitTag3}}
+                        </p>
+
+
+                        <p class="m-0" ng-if="CurrentInventory.iUniqueDate != null">
+                            <span> {{GetUnitDataLabel('iUniqueDate')}}:</span>{{CurrentInventory.iUniqueDate}}
+                        </p>
+
+                        <p class="m-0" ng-if="CurrentInventory.iUnitDate2 != null">
+                            <span> {{GetUnitDataLabel('iUnitDate2')}}:</span>{{CurrentInventory.iUnitDate2}}
+                        </p>
+
+                        <p class="m-0" ng-if="CurrentInventory.iUnitNumber1 != 0">
+                            <span> {{GetUnitDataLabel('iUnitNumber1')}}:</span>{{CurrentInventory.iUnitNumber1}}
+                        </p>
+
+                        <p class="m-0" ng-if="CurrentInventory.iUnitNumber2 != 0">
+                            <span> {{GetUnitDataLabel('iUnitNumber2')}}:</span>{{CurrentInventory.iUnitNumber2}}
+                        </p>
+                  
                 </div>
 
             </div>

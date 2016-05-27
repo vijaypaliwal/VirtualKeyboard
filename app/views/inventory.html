@@ -28,23 +28,16 @@
         padding: 5px;
     }
     
-    
-    
     .requiredfields a {
         color: brown;
         margin-right: 5px;
     }
 </style>
-<!--<div class="page-header">
 
-    <h4 style="font-size:16px; color:#000; padding-left:9px;">Add Inventory</h4>
-</div>-->
 
 <a class="Addbtn animated fadeIn" ng-click="viewall()">
     View all details
 </a>
-
-
 
 
 <div class="maincontent animated slideInLeft">
@@ -58,15 +51,7 @@
                 <img src="img/loader.gif" alt="Alternate Text" />
             </div>
 
-
-
-
             <div style="display:none;" class="swiper-container">
-
-
-
-
-
                 <div class="iteminfo">
 
                     <div class="row ">
@@ -86,17 +71,11 @@
                         <div class="col-md-10 col-xs-8">
                             <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')"> <span style="display:inline-block" ng-bind="InventoryObject.ItemID"></span> <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></span>
 
-
                             <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
 
                             <span ng-bind="InventoryObject.Quantity" style="display:inline" ng-click="getstep(2,'iQty')"></span> <span ng-bind="InventoryObject.Uom" style="display:inline" ng-click="getstep(4,'uomUOM')"></span>
 
-
                             <span ng-bind="InventoryObject.Location" ng-click="getstep(3,'lLoc')"> </span>
-
-
-
-
 
                         </div>
                     </div>
@@ -184,14 +163,10 @@
                         <div class="form-group" ng-if="obj.ColumnName=='lLoc'">
                             <label>Select Location <span class="redText">*</span></label>
                             <div class="input-group">
-                                <!--<input type="text" class="form-control" id="Location" ng-model="InventoryObject.Location" ng-change="OnChangeLocationNameFunction()" />-->
-
                                 <select class="form-control" id="Location" ng-model="InventoryObject.Location">
-                                    <option value="{{obj.LocationName}}" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
+                                    <option value="{{obj.LocationName}}" ng-selected="CheckSelectedValues(InventoryObject.Location,obj.LocationName)?true:false" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
                                 </select>
-
                                 <span class="input-group-addon last" ng-click="locationlist()"><i class="fa fa-search"></i></span>
-
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Location','#Location')"><i class="fa fa-undo"></i></span>
                             </div>
 
@@ -211,12 +186,9 @@
                         <div class="form-group" ng-if="obj.ColumnName=='iStatusValue'">
                             <label>Status</label>
                             <div class="input-group">
-
                                 <select class="form-control" id="Status" ng-model="InventoryObject.Status">
                                     <option value="{{obj.StatusValue}}" ng-repeat="obj in StatusList">{{obj.StatusValue}}</option>
                                 </select>
-
-
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Status','#Status')"><i class="fa fa-undo"></i></span>
                             </div>
                         </div>
@@ -228,7 +200,7 @@
                             <div class="input-group">
 
                                 <select class="form-control" ng-model="InventoryObject.Uom" id="UOM">
-                                    <option value="{{obj.UnitOfMeasureName}}" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
+                                    <option value="{{obj.UnitOfMeasureName}}" ng-selected="CheckSelectedValues(InventoryObject.Uom,obj.UnitOfMeasureName)?true:false" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                 </select>
 
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Uom','#UOM')"><i class="fa fa-undo"></i></span>
@@ -238,12 +210,7 @@
                         <div class="form-group" ng-if="obj.ColumnName=='pCountFrq'">
                             <label>Item Group</label>
                             <div class="input-group">
-
-
-
                                 <input class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
-
-
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemGroup','#itemgroup')"><i class="fa fa-undo"></i></span>
                             </div>
                         </div>
@@ -255,11 +222,8 @@
                             <label>Cost per unit</label>
 
                             <div class="input-group">
-
                                 <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="cost" value="" />
-
                                 <span class="input-group-addon last" ng-click="GetLastValue('Inv_Cost','#Costperunit')"><i class="fa fa-undo"></i></span>
-
                             </div>
 
 
@@ -584,12 +548,6 @@
 </div>
 
 
-
-
-
-
-
-
 <div id="myModalforlist" class="modal fade" role="dialog">
     <!-- Modal content-->
 
@@ -616,6 +574,8 @@
 
 
 </div>
+
+
 <div id="itemlistmodal" class="modal animated bounceIn">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
@@ -933,13 +893,18 @@
 </div>
 
 
+<div style="background:#fff;" id="modal3" class="modal animated bounceIn">
+    <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
+      
+        <h4>All Done!  What Next?</h4>
+    </div>
 
-<div id="modal3" class="modal bottom-sheet">
+    <div style="padding:5px;" class="modal-body">
+        <p style="padding-left:15px; margin-top:20px;" ng-click="notmove()">Put other things in inventory.</p>
+        <hr />
+        <p style="padding-left:15px;" ng-click="confirmmove()">Go to inventory.</p>
 
-    <p ng-click="notmove()">Click to add more Inventory</p>
-    <hr />
-    <p ng-click="confirmmove()">No, move to Inventory</p>
-
+    </div>
 </div>
 
 

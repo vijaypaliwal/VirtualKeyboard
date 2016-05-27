@@ -54,6 +54,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $scope.SearchValue = "";
     $scope.Statuses = ["For Production", "Damaged", "On Order", "Sold", "Reserved"];
     $scope.CurrentObj = {};
+    $scope.SearchNumberValue = "";
+    $scope.SearchDateValue = "";
     $scope.UOM = ["box/es", "carton/s", "cup/s", "dozen", "ea.", "gallon/s", "lbs.", "pc(s)"];
 
     $scope.Locations = ["Bin 100", "In Stock", "New location", "Refridgerator one", "Refridgerator two", "Pantry, Rack 1, Shelf 1-L", "Pantry, Rack 1, Shelf 1-M", "Storage Room A"];
@@ -73,7 +75,11 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $scope.searchstring = "";
 
 
+    
 
+    $scope.CurrentActiveSearchType = 1;
+    $scope.CurrentActiveSearchOperator = "img/filter/Contains.gif";
+    $scope.CurrentActiveSearchField = "All";
     var pressTimer
 
 
@@ -92,10 +98,14 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
     $scope.GoToDetailPage = function (obj) {
+
+        localStorageService.set("unitdatafieldsobject", $scope.MyinventoryFieldsNames);
         localStorageService.set("CurrentDetailObject", obj);
         $location.path("/detail");
         console.log(localStorageService.get("CurrentDetailObject"));
     }
+
+
     $scope.handleFileSelect = function (evt) {
 
         var files = evt.target.files;
@@ -176,17 +186,22 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
         ClearFilterArray();
-        $scope.SearchValue = '';
+        $scope.SearchValue = "";
         _IsActuallySearching = 1;
         SelectedCartItemIds = [];
         _IsFilterCartItems = 0;
         $(".FilterCartItems").html("Filter Cart Records");
-        $scope.PopulateInventoryItems();
         $scope.SearchFromData = "All"
         $scope.SearchFromText = "Search";
         $(".norecords").hide();
+        $("#MasterSearch").val('');
+        $("#MasterSearchNumber").val('');
+        $("#MasterSearchDate").val('');
         $("#btnMasterSearch").removeClass("bgm-red");
 
+        $scope.$apply();
+
+        $scope.GetInventories();
 
     }
 
@@ -195,7 +210,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         if (_IsFilterCartItems === 0) {
 
-            debugger;
+             
 
             _IsActuallySearching = 1;
             _IsFilterCartItems = 1;
@@ -266,6 +281,23 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.SearchInventory = function () {
         var _Value = $.trim($('#MasterSearch').val());
+
+        switch ($scope.CurrentActiveSearchType) {
+            case 1:
+                _Value = $.trim($('#MasterSearch').val());
+                break;
+            case 2:
+                _Value = $.trim($('#MasterSearchNumber').val());
+                break;
+            case 3:
+                _Value = $.trim($('#MasterSearchDate').val());
+                break;
+
+            default:
+                _Value = $.trim($('#MasterSearch').val());
+                break;
+        }
+        
         if (_Value !== "") {
             $scope.myinventoryColumnLoaded = false;
             CheckScopeBeforeApply();
@@ -380,6 +412,42 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     };
 
 
+    $scope.UpdateFilterData=function(Operator,Field)
+    {
+        for (var i = 0; i < $scope.FilterArray.length; i++) {
+            if ($scope.FilterArray[i].ColumnName == Field) {
+                $scope.FilterArray[i].FilterOperator = Operator;
+                break;
+            }
+
+        }
+        var path = "img/filter/";
+        switch(Operator)
+        {
+            case "eq":
+            case "num-eq":
+            case "date-eq":
+                $scope.CurrentActiveSearchOperator = path + "EqualTo.gif";
+                break;
+            case "date-before":
+                $scope.CurrentActiveSearchOperator = path + "OnOrBefore.gif";
+                break;
+            case "cn":
+                $scope.CurrentActiveSearchOperator = path + "Contains.gif";
+                break;
+            case "date-after":
+                $scope.CurrentActiveSearchOperator = path + "OnOrAfter.gif";
+                break;
+            case "num-lte":
+                $scope.CurrentActiveSearchOperator = path + "LessThanOrEqualTo.gif";
+                break;
+            case "date-gte":
+                $scope.CurrentActiveSearchOperator = path + "GreaterThanOrEqualTo.gif";
+                break;
+        }
+
+        CheckScopeBeforeApply();
+    }
 
     function UpdateFilterArray(Field, Value) {
 
@@ -398,66 +466,132 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     }
 
 
+
+    $scope.$watch('CurrentActiveSearchField', function () {
+        switch ($scope.CurrentActiveSearchField) {
+            case "iStatusValue":
+            case "lLoc":
+            case "pPart":
+            case "All":
+            case "iReqValue":
+            case "iUnitTag2":
+            case "iUnitTag3":
+                $scope.CurrentActiveSearchOperator = "img/filter/Contains.gif";
+                break
+            case "iUniqueDate":
+            case "iUnitDate2":
+            case "iUnitNumber1":
+            case "iUnitNumber2":
+                $scope.CurrentActiveSearchOperator = "img/filter/EqualTo.gif";
+                break;
+            default:
+
+        }
+
+        console.log($scope.CurrentActiveSearchOperator);
+        $scope.$apply();
+    }, true);
     
+
     $scope.searchfunction = function (Byvalue) {
-        debugger;
+         
         ClearFilterArray();
+
+        switch ($scope.CurrentActiveSearchType) {
+            case 1:
+                break;
+            case 2:
+                $scope.SearchValue = $scope.SearchNumberValue;
+                break;
+            case 3:
+                $scope.SearchValue = $scope.SearchDateValue;
+                break;
+
+            default:
+                break;
+        }
+        CheckScopeBeforeApply();
         switch (Byvalue) {
             case "iStatusValue":
-
+                $scope.CurrentActiveSearchType = 1;
                 $scope.SearchFromText = "Status";
                 $('#MasterSearch').attr("placeholder", "Search by Status");
+                $scope.CurrentActiveSearchField = "iStatusValue";
 
                 break;
             case "lLoc":
+                $scope.CurrentActiveSearchField = "lLoc";
+
+                $scope.CurrentActiveSearchType = 1;
                 $scope.SearchFromText = "Location";
                 $('#MasterSearch').attr("placeholder", "Search by location");
                 break;
             case "pPart":
+                $scope.CurrentActiveSearchField = "pPart";
+
+                $scope.CurrentActiveSearchType = 1;
                 $scope.SearchFromText = "Items";
                 $('#MasterSearch').attr("placeholder", "Search by item");
                 break;
             case "All":
+                $scope.CurrentActiveSearchField = "All";
+
+                $scope.CurrentActiveSearchType = 1;
                 $scope.SearchFromText = "All";
                 $('#MasterSearch').attr("placeholder", "Type to search");
                 break;
             case "iUnitDate2":
+                $scope.CurrentActiveSearchField = "iUnitDate2";
+                $scope.CurrentActiveSearchType = 3;
                 var _label = $scope.GetUnitDataLabel('iUnitDate2');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
                 break;
             case "iUniqueDate":
+                $scope.CurrentActiveSearchField = "iUniqueDate";
+                $scope.CurrentActiveSearchType = 3;
                 var _label = $scope.GetUnitDataLabel('iUniqueDate');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
                 break;
             case "iReqValue":
+                $scope.CurrentActiveSearchField = "iReqValue";
+
+                $scope.CurrentActiveSearchType = 1;
                 var _label = $scope.GetUnitDataLabel('iReqValue');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
                 break;
             case "iUnitTag2":
+                $scope.CurrentActiveSearchField = "iUnitTag2";
+
+                $scope.CurrentActiveSearchType = 1;
                 var _label = $scope.GetUnitDataLabel('iUnitTag2');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
                 break;
             case "iUnitTag3":
+                $scope.CurrentActiveSearchField = "iUnitTag3";
                 var _label = $scope.GetUnitDataLabel('iUnitTag3');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
                 break;
             case "iUnitNumber1":
+                $scope.CurrentActiveSearchField = "iUnitNumber1";
+                $scope.CurrentActiveSearchType = 2;
                 var _label = $scope.GetUnitDataLabel('iUnitNumber1');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
                 break;
             case "iUnitNumber2":
+                $scope.CurrentActiveSearchField = "iUnitNumber2";
+                $scope.CurrentActiveSearchType = 2;
                 var _label = $scope.GetUnitDataLabel('iUnitNumber2');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
@@ -467,6 +601,14 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 break;
 
         }
+        console.log("Date value");
+        console.log($scope.SearchDateValue);
+
+        console.log("Number value");
+        console.log($scope.SearchNumberValue);
+
+        console.log("String value");
+        console.log($scope.SearchValue);
         if ($.trim($scope.SearchValue) != "") {
             $scope.SearchFromData = Byvalue;
             var _tempArray = [];
@@ -496,7 +638,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     $scope.IsDateColumnOn = false;
                     break
                 case "iReqValue":
-                    var _label = $scope.GetUnitDataLabel('iReqValue');
                     _label = _label != undefined && _label != "" ? _label : "";
                     $('#MasterSearch').attr("placeholder", "Search by " + _label);
                     $scope.SearchFromText = _label;
@@ -523,6 +664,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     break;
                 
                 case "iUnitTag2":
+
                     var _label = $scope.GetUnitDataLabel('iUnitTag2');
                     _label = _label != undefined && _label != "" ? _label : "";
                     $('#MasterSearch').attr("placeholder", "Search by " + _label);
@@ -642,7 +784,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.GetInventories = function () {
 
-      
+        console.log($scope.FilterArray)
         $scope.myinventoryColumnLoaded = false;
 
         var authData = localStorageService.get('authorizationData');
@@ -651,7 +793,35 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         }
 
 
+        switch ($scope.CurrentActiveSearchType) {
+            case 1:
+                $scope.SearchValue = $("#MasterSearch").val();
+                $scope.IsDateColumnOn = false;
+                break;
+            case 2:
+                $scope.SearchValue = $("#MasterSearchNumber").val();
+                $scope.IsDateColumnOn = false;
+                break;
+            case 3:
+                $scope.SearchValue = $("#MasterSearchDate").val();
+                $scope.IsDateColumnOn = true;
+                break;
+
+            default:
+                break;
+        }
+        if ($scope.SearchValue == undefined || $scope.SearchValue == null)
+        {
+            $scope.SearchValue = "";
+        }
+
+        UpdateFilterArray($scope.CurrentActiveSearchField,$scope.SearchValue);
+
+
         var _masterSearch = $scope.SearchFromData == "All" ? $scope.SearchValue : "";
+
+
+
 
         $.ajax({
             type: "POST",
@@ -660,7 +830,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             contentType: 'application/json',
             dataType: 'json',
             success: function (result) {
-                debugger;
+                 
                 $scope._areImagesShown = result.GetInventoriesResult.Payload[0].AreImagesShown
                 $scope._areZeroRecordsShown = result.GetInventoriesResult.Payload[0].AreZeroRecords
                 console.log(result.GetInventoriesResult.Payload);
@@ -730,8 +900,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     
                 }
 
-                console.log("Unit Data fields");
-                console.log($scope.MyinventoryFieldsNames);
+           
 
                 CheckScopeBeforeApply();
 
