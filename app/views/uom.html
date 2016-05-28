@@ -35,6 +35,30 @@
         overflow-x:hidden !important;
     }
 
+    .list
+    {
+        padding-left:0px;
+        margin-left:0px;
+    }
+
+    .list-group-item {
+        list-style-type: none;
+        padding:15px !important;
+        min-height:65px;
+    }
+
+    .list-group-item a {
+      font-size:22px;
+    }
+
+        .list li a{
+            padding:10px;
+            font-size:20px;
+            color:#000;
+            background:#fff;
+            border-bottom:1px solid #ccc;
+        }
+
 
 </style>
 
@@ -60,40 +84,20 @@
 
     <a class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6">
 
-        <i class="fa fa-check-circle-o"></i> Add new UOM
+        <i class="fa fa-plus-circle"></i> Add new UOM
 
 
     </a>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>
-                    Unit of measure
-                </th>
-                <th>
-                    Action
-                    </th>
-            </tr>  
-            
-            </thead>
+
+<ul class="list-group">
+    <li class="list-group-item" ng-repeat="obj in UOMList">
+        <a>{{obj.UnitOfMeasureName}}</a>
+        <a style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:100%;" class="btn btn-danger pull-right">
+            <i class="fa fa-pencil"></i>
+        </a>
+    </li>
+</ul>
 
 
-        <tbody>
-
-            <tr ng-repeat="obj in UOMList">
-                <td>{{obj.UnitOfMeasureName}}</td>
-
-
-            <td>
-                <a class="btn btn-danger">
-                    <i class="fa fa-pencil"></i>
-                </a>
-            </td>  
-
-            </tbody>
-
-    <tr>
-        <td></td>
-    </tr>
-</table>
+    
