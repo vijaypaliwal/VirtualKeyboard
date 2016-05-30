@@ -38,6 +38,16 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/uom.html"
     });
 
+    $routeProvider.when("/status", {
+        controller: "statusController",
+        templateUrl: "app/views/status.html"
+    });
+
+    $routeProvider.when("/Location", {
+        controller: "LocationController",
+        templateUrl: "app/views/Location.html"
+    });
+
     $routeProvider.when("/profile", {
         controller: "profileController",
         templateUrl: "app/views/profile.html"

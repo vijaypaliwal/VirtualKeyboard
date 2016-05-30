@@ -237,9 +237,7 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
                 });
             }
 
-            else {
-
-            }
+         
 
         });
 
