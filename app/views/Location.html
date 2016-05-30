@@ -19,11 +19,12 @@
         width:100%;
     }
 
-    .btn-large
-    {
-        text-align:center;
-        height:auto;
-        margin-top:8px;
+    .btn-large {
+        text-align: center;
+        height: auto;
+        margin-top: 8px;
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
 
@@ -60,7 +61,7 @@
     }
 
     .list-group-item a {
-      font-size:22px;
+      font-size:14px;
     }
 
         .list li a{
@@ -156,14 +157,25 @@
 
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="obj in Locations" ng-if="obj.LocationName != ''">
-            <a>{{obj.LocationName}}</a>
 
-            <a ng-click="deletelocation(obj)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-danger pull-right">
-                <i class="fa fa-trash-o"></i>
-            </a>
-            <a ng-click="editlocation(obj)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-warning pull-right">
-                <i class="fa fa-pencil"></i>
-            </a>
+            <div class="row">
+                <div class="col-xs-7">
+                    <a>{{obj.LocationName}}</a>
+                </div>
+
+                <div class="col-xs-5">
+                    <a ng-click="deletelocation(obj)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-danger pull-right">
+                        <i class="fa fa-trash-o"></i>
+                    </a>
+                    <a ng-click="editlocation(obj)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-warning pull-right">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </div>
+            </div>
+
+          
+
+          
         </li>
     </ul>
 

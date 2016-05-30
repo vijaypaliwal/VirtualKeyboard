@@ -4,6 +4,8 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
     $scope.mode = 1;
     $scope.UomID = 0;
     $scope.UOMToCreate = "";
+
+    $scope.LocationsLoaded = false;
   
 
     $scope.mainObjectToSend = [];
@@ -35,6 +37,8 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
 
     $scope.getuom = function () {
 
+        $scope.LocationsLoaded = false;
+
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -49,13 +53,13 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-
+                   $scope.LocationsLoaded = true;
                    debugger;
                    $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
                    $scope.$apply();
                },
                error: function (err) {
-
+                   $scope.LocationsLoaded = true;
                    log.error(err.Message);
 
                }

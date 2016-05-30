@@ -11,6 +11,8 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
     $scope.mode = 1;
     $scope.StatusToCreate = "";
 
+    $scope.LocationsLoaded = false;
+
 
 
     $scope.mainObjectToSend = [];
@@ -37,6 +39,9 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
     $scope.getstatus = function () {
 
 
+        $scope.LocationsLoaded = false;
+
+
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -50,14 +55,14 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-
+                   $scope.LocationsLoaded = true;
                    debugger;
 
                    $scope.StatusList = response.GetStatusResult.Payload;
                    $scope.$apply();
                },
                error: function (err) {
-
+                   $scope.LocationsLoaded = true;
                    log.error(err.Message);
 
                }
