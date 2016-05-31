@@ -56,7 +56,7 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
                    $scope.LocationsLoaded = true;
-                   debugger;
+                    
 
                    $scope.StatusList = response.GetStatusResult.Payload;
                    $scope.$apply();
@@ -74,14 +74,15 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
     $scope.addstatus = function () {
         $scope.StatusToCreate = "";
         $scope.mode = 2;
-        $scope.$apply();
+        $scope.StatusID = 0;
 
+        $scope.$apply();
     }
 
 
     $scope.editstatus = function (obj) {
 
-        debugger;
+         
 
         $scope.mode = 3;
 
@@ -103,7 +104,7 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
             if (authData) {
                 $scope.SecurityToken = authData.token;
             }
-
+            $scope.IsProcessing = true;
             var datatosend = { "StatusId": $scope.StatusID, "StatusValue": $scope.StatusToCreate };
 
             console.log(datatosend);
@@ -116,24 +117,37 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
                 contentType: 'application/json',
                 success: function (result) {
 
-                    if ($scope.mode == 2) {
-                        ShowSuccess("Added");
+                    $scope.IsProcessing = false;
+                    if (result.CreateEditStatusResult.Payload == 1) {
+                        if ($scope.mode == 2) {
+                            ShowSuccess("Added");
+                        }
+
+                        if ($scope.mode == 3) {
+                            ShowSuccess("Updated");
+                        }
+
+                        $scope.getstatus();
+
+                        $scope.mode = 1;
+
                     }
 
-                    if ($scope.mode == 3) {
-                        ShowSuccess("Updated");
+                    if (result.CreateEditStatusResult.Payload == 0) {
+
+                        log.warning("Already exist");
+
                     }
+                   
 
                  
-                    $scope.getstatus();
-
-                    $scope.mode = 1;
+                   
 
                 },
                 error: function (err) {
-
+                    $scope.IsProcessing = false;
                     alert("Error");
-                    debugger;
+                     
 
                 },
                 complete: function () {
@@ -150,11 +164,11 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
 
 
         var id = obj.StatusId;
-        debugger;
-
+         
+        var _id = "#Delete_" + id;
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {
-
+                $(_id).find("i").addClass("fa-spin");
                 $.ajax({
                     url: serviceBase + "DeleteStatus",
                     type: 'POST',
@@ -163,7 +177,7 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
                     contentType: 'application/json',
                     success: function (result) {
 
-                        debugger;
+                        $(_id).find("i").removeClass("fa-spin");
 
                         if (result.DeleteStatusResult.Payload == 1) {
                             ShowSuccess("Deleted");
@@ -192,9 +206,9 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
 
                     },
                     error: function (err) {
-
+                        $(_id).find("i").removeClass("fa-spin");
                         alert("Error");
-                        debugger;
+                         
 
                     },
                     complete: function () {

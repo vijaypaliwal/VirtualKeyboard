@@ -1,0 +1,320 @@
+﻿
+
+
+<style>
+    .navbar-toggle
+    {
+        display:block !important;
+    }
+
+
+    .disablednew {
+        cursor: not-allowed;
+        pointer-events: none;
+        opacity: 0.65;
+        filter: alpha(opacity=65);
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+
+
+
+    #myModal1 {
+        position: fixed;
+        right: 13px;
+        font-size: 18px;
+        text-align: right;
+        bottom: 125px;
+        display: none;
+        background: transparent;
+        overflow:hidden;
+    }
+
+        #myModal1 span {
+            font-size: 14px;
+            background: #fff;
+            padding: 3px;
+            box-shadow: 0 2px 10px rgba(0,0,0,.2);
+            margin-right: 7px;
+        }
+
+
+        #myModal1 .modal-body {
+            background: transparent;
+        }
+
+    .Addbtn {
+        position: fixed;
+        bottom: 20px;
+        right: 10px;
+        background: #fff !important;
+        z-index: 13000;
+        color: #128ece !important;
+        height: 65px;
+        width: 65px;
+        border-radius: 100%;
+        text-align: center;
+        line-height: 65px;
+      
+    }
+
+        .Addbtn .fa{
+            font-size:24px;
+            margin-top:22px;
+        }
+        
+         #selectAction {
+            position: fixed;
+            bottom: 120px;
+            right: 25px;
+        }
+
+
+
+    #selectAction li {
+       list-style-type:none;
+    }
+
+
+
+        #selectAction .btn {
+            height: 50px;
+            width: 50px;
+            padding: 0px;
+            border-radius: 100%;
+            text-align: center;
+            line-height: 48px;
+            border: transparent;
+            margin-bottom: 5px;
+        }
+</style>
+
+
+<div class="topheader">
+    <div class="col-xs-3">
+        <a href="#/mainmenu"><i class="fa fa-home"></i></a>
+
+    </div>
+    <div class="col-xs-6">
+        <img style="width:150px; margin-top:-2px;" src="img/logo.png" alt="Alternate Text" />
+    </div>
+    <div class="col-xs-3">
+        <div style="text-align:right;">
+            <a><i class="fa fa-chevron-circle-right"></i></a>
+
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <br /><br />
+</div>
+
+<div ng-if="IsActivityOn==false">
+
+
+
+
+
+    <div class="page-header">
+
+        <h3>Cart Activities</h3>
+    </div>
+
+   
+        <div class="row">
+
+            <div class="col-md-8 col-xs-8">
+                <input class="form-control" type="text" name="name" data-ng-model="scannerText" required="" value=" " />
+
+
+            </div>
+            <div class="col-md-4 col-xs-4">
+                <div style="text-align:right">
+                    <a class="btn btn-primary topcoat-button" ng-click="Scan()" id="scan"> <i class="fa fa-search"></i> Scan</a>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div>
+            <br />
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a style="width:100%;" class="btn btn-primary topcoat-button" ng-click="AddtoCart()" id="AddtoCart"><i class="fa fa-plus"></i> Add to Cart</a>
+            </div>
+        </div>
+        <br />
+        <!--Work For apply a remove cart button-->
+        <div class="row">
+            <div class="col-md-12">
+                <a style="width:100%;" class="btn btn-warning topcoat-button" ng-disabled="InventoryItems.length==0" ng-click="Clearcart()" id="clearcart"><i class="fa fa-times"></i> Clear Cart</a>
+            </div>
+        </div>
+        <div>
+            <br />
+        </div>
+     
+    <div ng-if="InventoryItems.length!=0">
+        <h4>Cart Items - {{ InventoryItems.length}} </h4>
+        <hr />
+    </div>
+    
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="_obj in InventoryItems">
+                <div class="row" style="border-bottom:1px solid #ccc;">
+                    <div class="col-xs-12">
+                        <div class="col-xs-6">
+                            <h4> {{_obj.ItemNumber}} </h4>
+                        </div>
+                        <div class="col-xs-6">
+                            <a class="btn btn-sm btn-default pull-right" ng-click="removeThisItem(_obj.InventoryID)"><i class="fa fa-trash-o"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+
+
+
+
+                <p>Quantity - {{_obj.CurrentQuantity}} <span>UOM - {{_obj.UOM}}</span></p>
+                <p>Location - {{_obj.Location}} <span>Status - {{_obj.StatusValue}}</span></p>
+                <p>{{_obj.ItemDescription}}</p>
+            </li>
+
+        </ul>
+   
+            <!--div class="row">
+            <div ng-repeat="_obj in InventoryItems" class="col-xs-12" >
+                <div style="width: 100%; margin-bottom: 5px; text-align: left; padding: 10px;"  class="btn btn-primary">
+
+
+
+                </div>
+            </div>
+        </!--div-->
+            <!-- Activity Modal start -->
+
+            <div style="" id="myModal1" class="modal bottommenu fade" role="dialog">
+
+
+                <div class="modal-body">
+                    <ul class="animated bounceIn" id="selectAction">
+                        <li><a class="btn-info btn increase" style="background-color: #177B3D;" data-dismiss="modal" ng-click="Proceed()"> <i class="fa fa-plus"></i> </a></li>
+                        <li><a class="btn-info btn decrease" style="background-color: #AF2525;" data-dismiss="modal" ng-click="Proceedfordecrease()"> <i class="fa fa-minus"></i> </a></li>
+                        <li><a class="btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal" ng-click="Proceedformove()"> <i class="fa fa-exchange"></i> </a></li>
+                        <li><a class="btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal" ng-click="Proceedforupdate()"> <i class="fa fa-history fa-flip-horizontal"></i> </a></li>
+                    </ul>
+                </div>
+
+
+            </div>
+
+    <a data-toggle="modal" data-target="#myModal1" id="AvailableTransactions" ng-click=" OpenCloseModal()" class="Addbtn btn-info" ng-class="InventoryItems.length==0?'disablednew':''">
+        <i class="fa fa-shopping-cart"></i>
+    </a>
+</div>
+
+
+
+
+<div ng-if="IsActivityOn==true">
+    <div style="padding-bottom:5px; margin-top:15px;" class="page-header">
+
+        <div class="row">
+            <div class="col-xs-3">
+                <div style="text-align:left">
+                    <a class="btn btn-primary" ng-click="GoToBackItem()" ng-class="TotalLength == 0 ||CurrentIndex==1 ? 'disabled' :''" style="padding: 6px;"><i class="fa fa-chevron-left"></i> Back</a>
+                </div>
+
+            </div>
+            <div class="col-xs-6">
+                <div style="text-align:center">
+                    <p>Activity of {{CurrentIndex}}/{{InventoryItems.length}}</p>
+                </div>
+
+            </div>
+            <div class="col-xs-3">
+                <div style="text-align:right">
+                    <a class="btn btn-primary" ng-class="TotalLength == 0 ||TotalLength==CurrentIndex ? 'disabled' :''" style="padding: 6px;" ng-click="GoToNextItem()">Next <i class="fa fa-chevron-right"></i></a>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+    <div>
+        <br />
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-5">
+            <img src="img/default.png" alt="Alternate Text" />
+        </div>
+
+        <div class="col-xs-7">
+            <p>Item Number::{{CurrentObject.ItemNumber}} </p>
+            <p>Location::{{CurrentObject.Location}}</p>
+            <p>Status::{{CurrentObject.Status}}</p>
+        </div>
+
+    </div>
+
+    <div>
+        <br />
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label>Quantity</label>
+                <input class="form-control" ng-model="CurrentObject.Quantity" type="text" name="Quantity"  />
+            </div>
+
+            <div class="form-group" ng-if="IsUpdateActivity==false">
+                <label>Cost per unit</label>
+                <input class="form-control" type="text" ng-model="CurrentObject.CostPerUnit" name="cpu" />
+            </div>
+            <div class="form-group" ng-if="IsUpdateActivity==true">
+                <label>Status</label>
+                <select class="form-control" ng-model="CurrentObject.Status">
+                    <option value="{{_obj.StatusValue}}" ng-repeat="_obj in Statuses">{{_obj.StatusValue}}</option>
+                </select>
+            </div>
+            <a ng-if="IsIncreaseActivity==true" style="width:100%;background-color: #177B3D !important;" ng-click="ApplyTransaction()" ng-class="CurrentObject.Quantity==''||_IsActivityInProcess==1?'disabled':''" class="btn btn-primary">Increase activity <i class="fa fa-plus" ng-class="_IsActivityInProcess==1?'fa-spin':''"></i></a>
+
+            <a ng-if="IsDecreaseActivity==true" style="width: 100%; background-color: #AF2525 !important;" ng-click="ApplyDecreaseTransaction()" ng-class="CurrentObject.Quantity==''||_IsActivityInProcess==1?'disabled':''" class="btn btn-primary">Decrease activity <i class="fa fa-minus" ng-class="_IsActivityInProcess==1?'fa-spin':''"></i></a>
+
+            <a ng-if="IsMoveActivity==true" style="width: 100%; background-color: #C65E28 !important;" ng-click="ApplyMoveTransaction()" ng-class="CurrentObject.Quantity==''||_IsActivityInProcess==1?'disabled':''" class="btn btn-primary">Move activity <i class="fa fa-exchange" ng-class="_IsActivityInProcess==1?'fa-spin':''"></i></a>
+            <a ng-if="IsUpdateActivity==true" style="width: 100%; background-color: #583782 !important;" ng-click="ApplyUpdateTransaction()" ng-class="CurrentObject.Quantity==''||_IsActivityInProcess==1?'disabled':''" class="btn btn-primary">Update activity <i class="fa fa-history fa-flip-horizontal" ng-class="_IsActivityInProcess==1?'fa-spin':''"></i></a>
+            
+        </div>
+    </div>
+
+    <div>
+        <br />
+        <br />
+    </div>
+</div>
+<!-- Activity Modal end -->
+
+
+
+<script>
+       
+
+</script>

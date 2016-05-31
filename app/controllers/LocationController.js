@@ -13,9 +13,9 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
     var _IsLazyLoadingUnderProgress = 0;
     var _TotalRecordsCurrent = 0;
     $scope.CurrentActiveSearchField = "lLoc";
-    $scope.SearchValue = "";
+    $scope.SearchData = { SearchValue: "" };
  
-
+    $scope.IsProcessing = false;
 
     $scope.locationdata = {
      LocationName:"",
@@ -90,19 +90,27 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
     $scope.ClearFilter = function () {
 
+        debugger;
+
+        
 
         for (var i = 0; i < $scope.FilterArray.length; i++) {
             $scope.FilterArray[i].SearchValue = "";
-
+            
         }
-        CheckScopeBeforeApply();
-        $scope.SearchValue = "";
+
        
         $("#MasterSearch").val('');
-       
-        $scope.$apply();
+        $scope.SearchData.SearchValue = $("#MasterSearch").val();
+
+        CheckScopeBeforeApply();
 
         $scope.GetLocations();
+
+     
+
+        
+
 
     }
 
@@ -116,17 +124,17 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
         }
 
 
-        $scope.SearchValue = $("#MasterSearch").val();
+        $scope.SearchData.SearchValue = $("#MasterSearch").val();
 
-        if ($scope.SearchValue != null && $.trim($scope.SearchValue)) {
+        if ($scope.SearchData.SearchValue != null && $.trim($scope.SearchData.SearchValue)) {
 
             if ($scope.CurrentActiveSearchField == "lLoc") {
 
-                $scope.FilterArray[0].SearchValue = $scope.SearchValue;
+                $scope.FilterArray[0].SearchValue = $scope.SearchData.SearchValue;
 
             }
             else if ($scope.CurrentActiveSearchField == "lZone") {
-                $scope.FilterArray[2].SearchValue = $scope.SearchValue;
+                $scope.FilterArray[2].SearchValue = $scope.SearchData.SearchValue;
             }
         }
 
@@ -223,7 +231,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
             var datatosend = { "LocationID": $scope.locationdata.LocationID, "LocationName": $scope.locationdata.LocationName, "LocationZone": $scope.locationdata.LocationZone, "LocationDescription": $scope.locationdata.LocationDescription };
 
-            console.log(datatosend);
+            $scope.IsProcessing = true;
 
             $.ajax({
                 url: serviceBase + "CreateEditLocation",
@@ -232,23 +240,35 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function (result) {
+                    $scope.IsProcessing = false;
+                    if (result.CreateEditLocationResult.Payload == 1) {
+                        if ($scope.mode == 2) {
+                            ShowSuccess("Added");
+                        }
 
-                    if ($scope.mode == 2) {
-                        ShowSuccess("Added");
+                        if ($scope.mode == 3) {
+                            ShowSuccess("Updated");
+                        }
+
+
+                        $scope.GetLocations();
+
+                        $scope.mode = 1;
+
                     }
 
-                    if ($scope.mode == 3) {
-                        ShowSuccess("Updated");
+                    if (result.CreateEditLocationResult.Payload == 0) {
+
+                        log.warning("Already exist");
+
                     }
+                  
 
 
-                    $scope.GetLocations();
-
-                    $scope.mode = 1;
 
                 },
                 error: function (err) {
-
+                    $scope.IsProcessing = false;
                     alert("Error");
                     debugger;
 
@@ -268,10 +288,10 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
         var id = obj.LocationID;
         debugger;
-
+        var _id = "#Delete_" + id;
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {
-
+                $(_id).find("i").addClass("fa-spin");
                 $.ajax({
                     url: serviceBase + "DeleteLocation",
                     type: 'POST',
@@ -281,7 +301,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                     success: function (result) {
 
                         debugger;
-
+                        $(_id).find("i").removeClass("fa-spin");
                         if (result.DeleteLocationResult.Payload == 1) {
                             ShowSuccess("Deleted");
                             $scope.GetLocations();
@@ -310,7 +330,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
                     },
                     error: function (err) {
-
+                        $(_id).find("i").removeClass("fa-spin");
                         alert("Error");
                         debugger;
 
@@ -334,6 +354,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
     function init() {
 
         $scope.GetLocations();
+        $scope.SearchData.SearchValue = "";
         $scope.$apply();
     }
 

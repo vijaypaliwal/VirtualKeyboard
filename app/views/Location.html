@@ -29,7 +29,7 @@
 
 
         .btn-large p {
-           
+
             margin: 0 0 10px;
             text-transform: capitalize;
             margin-top:-5px;
@@ -120,19 +120,16 @@
 
 
 
-
-
-
-
                             <div style="position:relative" class="fg-line">
 
 
-                                <input style="border-radius:0px;" id="MasterSearch" type="text" ng-model="SearchValue" class="form-control" placeholder="Type location to Search">
+                                <input style="border-radius:0px;" id="MasterSearch" type="text" ng-model="SearchData.SearchValue" class="form-control" placeholder="Type location to Search">
 
 
-                                <i id="btnClearSearch" class="fa fa-times-circle" ng-click="ClearFilter()" ng-show="SearchValue!=''"></i>
+                                <i></i>
                             </div>
-
+                            <a class="input-group-addon last" ng-if="SearchData.SearchValue!=''" id="btnClearSearchNew" ng-click="ClearFilter()"> <i class="fa fa-times-circle"></i> </a>
+                            
                             <a class="input-group-addon last textData" style="margin-top: 0px;  width: 37px;" id="btnMasterSearch" ng-click="GetLocations()"><i class="fa fa-search" style="font-size:20px;"></i> </a>
                         </div>
 
@@ -164,7 +161,7 @@
                 </div>
 
                 <div class="col-xs-5">
-                    <a ng-click="deletelocation(obj)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-danger pull-right">
+                    <a ng-click="deletelocation(obj)" id="Delete_{{obj.LocationID}}" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-danger pull-right">
                         <i class="fa fa-trash-o"></i>
                     </a>
                     <a ng-click="editlocation(obj)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-warning pull-right">
@@ -173,9 +170,9 @@
                 </div>
             </div>
 
-          
 
-          
+
+
         </li>
     </ul>
 
@@ -203,46 +200,46 @@
 
     <form name="locationform">
 
-    <div style="background:#fff;padding:10px; margin-top:7px;">
+        <div style="background:#fff;padding:10px; margin-top:7px;">
 
-        <div class="row">
-            <div class="col-md-12">
-                <h4 ng-if="mode == 2">Fill below value to add new</h4>
-                <h4 ng-if="mode == 3">Update below value to update Location</h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 ng-if="mode == 2">Fill below value to add new</h4>
+                    <h4 ng-if="mode == 3">Update below value to update Location</h4>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label>Location <span>*</span></label>
+                <input class="form-control" type="text" ng-model="locationdata.LocationName" required />
+            </div>
+
+            <div class="form-group">
+                <label>Location Zone</label>
+                <input class="form-control" type="text" ng-model="locationdata.LocationZone" />
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <input class="form-control" type="text" ng-model="locationdata.LocationDescription" />
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savelocation()" ng-if="mode == 2" class="btn-large btn-primary"> <i class="fa fa-plus-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Add</button>
+                    <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savelocation()" ng-if="mode == 3" class="btn-large btn-primary"> <i class="fa fa-check-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Update</button>
+                </div>
+                <div class="col-xs-6">
+                    <a style="width:100%" ng-click="leaveform()" class="btn btn-large gray-color"> <i class="fa fa-times"></i> Cancel</a>
+                </div>
             </div>
         </div>
 
-       
-        <div class="form-group">
-            <label>Location <span>*</span></label>
-            <input class="form-control" type="text" ng-model="locationdata.LocationName" required />
-        </div>
-
-        <div class="form-group">
-            <label>Location Zone</label>
-            <input class="form-control" type="text" ng-model="locationdata.LocationZone" />
-        </div>
-
-        <div class="form-group">
-            <label>Description</label>
-            <input class="form-control" type="text" ng-model="locationdata.LocationDescription" />
-        </div>
-
-     
-
-
-        <div class="row">
-            <div class="col-xs-6">
-                <button type="button" ng-disabled="locationform.$invalid" ng-click="savelocation()" ng-if="mode == 2" class="btn-large btn-primary"> <i class="fa fa-plus-circle"></i> Add</button>
-                <button type="button" ng-disabled="locationform.$invalid" ng-click="savelocation()" ng-if="mode == 3" class="btn-large btn-primary"> <i class="fa fa-check-circle"></i> Update</button>
-            </div>
-            <div class="col-xs-6">
-                <a style="width:100%" ng-click="leaveform()" class="btn btn-large gray-color"> <i class="fa fa-times"></i> Cancel</a>
-            </div>
-        </div>
-    </div>
-
-        </form>
+    </form>
 
 
 

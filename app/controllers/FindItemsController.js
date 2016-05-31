@@ -1664,7 +1664,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         $scope.PopulateInventoryItems();
 
         $scope.getuom();
-
+       
         //SetSelectedIfAny();
 
     }

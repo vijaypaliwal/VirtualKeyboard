@@ -4,14 +4,16 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
     $scope.mode = 1;
     $scope.UomID = 0;
     $scope.UOMToCreate = "";
-
+    $scope.IsProcessing = false;
     $scope.LocationsLoaded = false;
   
-
+    $scope.CurrentID = "";
     $scope.mainObjectToSend = [];
     function init() {
         $scope.getuom();
         $scope.$apply();
+
+       
     }
 
     $(".modal-backdrop").remove();
@@ -27,7 +29,7 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
     }
 
     $scope.addUOM = function () {
-
+        $scope.UomID = 0;
         $scope.UOMToCreate = "";
         $scope.mode = 2;
         $scope.$apply();
@@ -95,8 +97,7 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
             }
 
             var datatosend = { "UomID": $scope.UomID, "UOM": $scope.UOMToCreate };
-
-            console.log(datatosend);
+            $scope.IsProcessing = true;
 
             $.ajax({
                 url: serviceBase + "CreateEditUOM",
@@ -105,23 +106,34 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function (result) {
+                    $scope.IsProcessing = false;
+                    if (result.CreateEditUOMResult.Payload == 1) {
+                        if ($scope.mode == 2) {
+                            ShowSuccess("Added");
+                        }
 
-                    if ($scope.mode == 2) {
-                        ShowSuccess("Added");
+                        if ($scope.mode == 3) {
+                            ShowSuccess("Updated");
+                        }
+
+                        $scope.getuom();
+
+                        $scope.mode = 1;
+
                     }
 
-                    if ($scope.mode == 3) {
-                        ShowSuccess("Updated");
+                    if (result.CreateEditUOMResult.Payload == 0) {
+
+                        log.warning("Already exist");
+
                     }
 
 
-                    $scope.getuom();
-
-                    $scope.mode = 1;
+                
 
                 },
                 error: function (err) {
-
+                    $scope.IsProcessing = false;
                     alert("Error");
                     debugger;
 
@@ -142,9 +154,12 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
         var id = obj.UnitOfMeasureID;
         debugger;
 
+        var _id = "#Delete_" + id;
+
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {
 
+                $(_id).find("i").addClass("fa-spin");
                 $.ajax({
                     url: serviceBase + "DeleteUOM",
                     type: 'POST',
@@ -152,7 +167,7 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (result) {
-
+                        $(_id).find("i").removeClass("fa-spin");
                         debugger;
 
                         if (result.DeleteUOMResult.Payload == 1) {
@@ -182,7 +197,7 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
 
                     },
                     error: function (err) {
-
+                        $(_id).find("i").removeClass("fa-spin");
                         alert("Error");
                         debugger;
 

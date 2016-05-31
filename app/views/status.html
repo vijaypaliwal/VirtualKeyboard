@@ -111,7 +111,7 @@
                     <a>{{obj.StatusValue}}</a>
                 </div>
                 <div class="col-xs-5">
-                    <a ng-click="deletestatus(obj)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-danger pull-right">
+                    <a ng-click="deletestatus(obj)" id="Delete_{{obj.StatusId}}" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-danger pull-right">
                         <i class="fa fa-trash-o"></i>
                     </a>
                     <a ng-click="editstatus(obj)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-warning pull-right">
@@ -144,8 +144,8 @@
 
             <div class="row">
                 <div class="col-xs-6">
-                    <button ng-disabled="status.$invalid" type="button" ng-click="savestatus()" ng-if="mode == 2" class="btn-large btn-primary"> <i class="fa fa-plus-circle"></i> Add</button>
-                    <button ng-disabled="status.$invalid" type="button" ng-click="savestatus()" ng-if="mode == 3" class="btn-large btn-primary"> <i class="fa fa-check-circle"></i> Update</button>
+                    <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savestatus()" ng-if="mode == 2" class="btn-large btn-primary"> <i class="fa fa-plus-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Add</button>
+                    <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savestatus()" ng-if="mode == 3" class="btn-large btn-primary"> <i class="fa fa-check-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Update</button>
                 </div>
                 <div class="col-xs-6">
                     <a style="width:100%" ng-click="leaveform()" class="btn btn-large gray-color"> <i class="fa fa-times"></i> Cancel</a>

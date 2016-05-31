@@ -59,6 +59,25 @@ app.controller('signupController', ['$scope','localStorageService', '$location',
        
     };
 
+    $scope.showpassword = function () {
+        $(".dotfield").hide();
+        $(".textfield").show();
+        $(".showbtn").hide();
+        $(".hidebtn").show();
+       
+    }
+
+
+    $scope.hidepassword = function () {
+        $(".dotfield").show();
+        $(".textfield").hide();
+        $(".showbtn").show();
+        $(".hidebtn").hide();
+
+    }
+
+    
+
 
     $scope.CheckIsRequiredfields=function()
     {

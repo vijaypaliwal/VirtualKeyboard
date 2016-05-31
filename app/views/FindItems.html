@@ -92,13 +92,13 @@
 
                         <div class="input-group">
 
-                            <span class="input-group-addon" id="addonData">
+                            <span class="input-group-addon" id="addonData" style="padding:0px">
 
-                                <a class="waves-effect waves-effect status dropdown" data-toggle="dropdown">
-                                   <span class="caret" ></span>
+                                <a class="waves-effect waves-effect status dropdown" style="padding:11px" data-toggle="dropdown">
+                                    <span class="caret"></span>
                                 </a>
 
-                                <ul class="dropdown-menu dm-icon searchlist animated slideInDown" id="dynamicd">
+                                <ul class="dropdown-menu dm-icon searchlist" id="dynamicd">
                                     <li class="suggestItem1"><a ng-click="searchfunction('All')" alt="All">All</a></li>
                                     <li class="suggestItem2"><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
                                     <li class="suggestItem3"><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
@@ -443,9 +443,7 @@
     });
 
 
-    $('#addonData').click(function () {
-        $(this).find(".dropdown-menu").toggle();
-    });
+  
   
    
 
