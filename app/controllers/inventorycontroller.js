@@ -1153,15 +1153,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
 
-
-
                    $scope.ItemList = response.GetItemsResult.Payload;
                    CheckScopeBeforeApply()
                },
-               error: function (err) {
-
-                   log.error(err.Message);
-
+               error: function (err)
+               {
+                log.error(err.Message);
                }
            });
 
@@ -1285,11 +1282,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                    CheckScopeBeforeApply()
                },
-               error: function (response) {
-
-                   //     $scope.InventoryObject.Location = 678030;
-
-               }
+               error: function (response)
+               {
+               //$scope.InventoryObject.Location = 678030;
+             }
            });
     }
 
