@@ -90,11 +90,6 @@
                     <input type="text" class="form-control" placeholder="Account Name" data-ng-model="registration.Account" required>
                 </div>
             </div>
-
-
-
-
-
         </div>
     </div>
 
@@ -121,14 +116,11 @@
                 <div class="input-group">
                     <span class="input-group-addon"> <i class="fa fa-key"></i></span>
                     <input type="password" ng-minlength="7" class="dotfield form-control" placeholder="Password" data-ng-model="registration.Password" required>
-                    <input style="display:none" type="text" class="textfield form-control"  placeholder="Password" data-ng-model="registration.Password" required>
+                    <input ng-minlength="7" style="display:none" type="text" class="textfield form-control" placeholder="Password" data-ng-model="registration.Password" required>
                     <span ng-click="showpassword();" class="showbtn input-group-addon last">Show</span>
                     <span ng-click="hidepassword();" style="display:none; min-width:67px;" class="hidebtn input-group-addon last">Hide</span>
                 </div>
             </div>
-
-
-
         </div>
     </div>
     <div>
@@ -225,8 +217,6 @@
     {
         width:100%;
     }
-
-
 
     .login-form .col-xs-5 {
         text-align: right;

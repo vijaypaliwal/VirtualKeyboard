@@ -475,6 +475,40 @@
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
         }
+
+        .top-menu {
+            left: -114px;
+            text-align: left;
+        }
+
+
+            .top-menu:before {
+                position: absolute;
+                top: -7px;
+                right: 9px;
+                display: inline-block;
+                border-right: 7px solid transparent;
+                border-bottom: 7px solid #ccc;
+                border-left: 7px solid transparent;
+                border-bottom-color: rgba(0, 0, 0, 0.2);
+                content: '';
+            }
+
+            .top-menu:after {
+                position: absolute;
+                top: -6px;
+                right: 10px;
+                display: inline-block;
+                border-right: 6px solid transparent;
+                border-bottom: 6px solid #ffffff;
+                border-left: 6px solid transparent;
+                content: '';
+            }
+
+            .top-menu i {
+                line-height: initial !important;
+                color: #333 !important;
+            }
     </style>
 
 </head>
@@ -527,9 +561,7 @@
 
 
     <div style="display:none;" class="animated" id="mysignupModal">
-
         <div class="errorcontent" style="width:122px;background:#000;">
-
             <img style="max-height:50px; max-width:50px;" src="img/loader1.gif" />
 
             <span style="display:block;font-size:20px;font-weight:300;color:#fafafa;">
@@ -546,8 +578,12 @@
             <i class="ion-android-menu"></i>
         </div>
         <span class="title">Clearly Inventory</span>
-        <div class="open-right" id="open-right" data-activates="slide-out">
-            <i class="ion-android-person"></i>
+        <div class="dropdown open-right">
+            <a data-toggle="dropdown" class="dropdown-toggle "><i class="ion-android-person"></i></a>
+            <ul class="top-menu dropdown-menu">
+                <li><a ng-class="getClass('/profile')" href="#/profile"><i class="fa fa-user"></i> My Profile</a></li>
+                <li><a href="#"><i class="fa fa-sign-out"></i> Sign out</a></li>
+            </ul>
         </div>
     </div>
 
@@ -1255,6 +1291,7 @@
             destinationType = navigator.camera.DestinationType;
 
             InitializeModal();
+            window.plugins.webviewcolor.change('#FF0000');
 
 
         }
