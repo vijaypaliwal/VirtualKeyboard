@@ -16,9 +16,17 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
        
     }
 
+    $scope.FilterRecordsLength = {length:0};
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
 
+
+    $scope.SearchData = { test: "" };
+
+    $scope.ClearFilter = function () {
+        $scope.SearchData = { test: "" };
+        $scope.$apply();
+    }
 
     $scope.logOut = function () {
 

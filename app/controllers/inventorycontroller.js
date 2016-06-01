@@ -275,6 +275,21 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.InventoryObject.UomID = obj.DefaultUomID;
         $scope.InventoryObject.Uom = obj.DefaultUom;
 
+    
+
+        if ($scope.InventoryObject.CustomPartData.length > 0 && obj.CustomData.length > 0) {
+
+            for (var i = 0; i < $scope.InventoryObject.CustomPartData.length; i++) {
+                for (var j = 0; j < obj.CustomData.length; j++) {
+                    if (obj.CustomData[j].cfdID == $scope.InventoryObject.CustomPartData[i].CfdID) {
+                        $scope.InventoryObject.CustomPartData[i].Value = obj.CustomData[j].CustomFieldValue;
+                    }
+                }
+
+            }
+        }
+
+
         $("#itemlistmodal").modal('hide');
 
         $("#locationlistmodal").modal('hide');
@@ -675,6 +690,21 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $scope.InventoryObject.UnitDate2 = null;
         }
         var _sum = 0;
+
+
+        if (ImageListAndroid.length > 0) {
+            for (var i = 0; i < ImageListAndroid.length; i++) {
+
+                if (ImageListAndroid[i].bytestring != null && ImageListAndroid[i].bytestring != undefined) {
+                    ImageListAndroid[i].bytestring = removePaddingCharacters(ImageListAndroid[i].bytestring);
+
+                    $scope.ImageList.push(ImageListAndroid[i]);
+                }
+
+            }
+            CheckScopeBeforeApply();
+        }
+
         for (var i = 0; i < $scope.ImageList.length; i++) {
 
             if ($scope.ImageList[i].bytestring != null && $scope.ImageList[i].bytestring != undefined) {
@@ -699,14 +729,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               contentType: 'application/json; charset=utf-8',
 
               dataType: 'json',
-               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": $scope.ImageList }),
-             // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": $scope.ImageList }),
+              // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
 
 
                   HideWaitingInv();
 
-                 // $scope.resetObject();
+                  // $scope.resetObject();
 
                   $scope.movetolist();
                   // $location.path('/inventory');
@@ -733,7 +763,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     function ConverttoMsJsonDate(_DateValue) {
-       
+
         var _date = angular.copy(_DateValue);
 
         var dsplit1 = _date.split("/");
@@ -887,16 +917,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
                       var _defaultValue = angular.copy($scope.CustomItemDataList[i].cfdDefaultValue);
                       if ($scope.CustomItemDataList[i].cfdDataType == "datetime") {
-                          if(_defaultValue!=null && _defaultValue!="")
-                          {
+                          if (_defaultValue != null && _defaultValue != "") {
                               $scope.CustomItemDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
                           }
                       }
                       else if ($scope.CustomItemDataList[i].cfdDataType == "currency" || $scope.CustomItemDataList[i].cfdDataType == "number") {
                           if (_defaultValue != null && _defaultValue != "") {
                               var _myDefault = parseFloat(_defaultValue);
-                              if (!isNaN(_myDefault))
-                              {
+                              if (!isNaN(_myDefault)) {
                                   $scope.CustomItemDataList[i].cfdDefaultValue = _myDefault;
 
                               }
@@ -941,7 +969,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   $scope.getuom();
                   $scope.getlocation();
 
-                
+
                   AfterLoadedData();
 
               },
@@ -1398,16 +1426,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 break;
             }
         }
-      
-        
+
+
         if ($scope.ImageList.length == 0) {
             $("#imagemodal").modal('hide');
 
             $(".viewimage").hide();
-          
+
         }
-      
-   
+
+
         removeImage(_this)
 
     }
@@ -2142,7 +2170,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         //$scope.UOMList
         //$scope.StatusList
-       
+
         $scope.$apply();
     }
 
@@ -2328,9 +2356,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.notmove = function () {
         window.location.reload();
-      //  $scope.getstep(0);
+        //  $scope.getstep(0);
 
-     //   $("#modal3").modal('hide');
+        //   $("#modal3").modal('hide');
 
         $(".Addbtn").show()
     }
@@ -2396,7 +2424,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     });
 
- 
+
 
 
 

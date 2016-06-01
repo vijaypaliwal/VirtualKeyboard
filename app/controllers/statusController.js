@@ -10,10 +10,17 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
     $scope.StatusID = 0;
     $scope.mode = 1;
     $scope.StatusToCreate = "";
-
     $scope.LocationsLoaded = false;
+    $scope.FilterRecordsLength = { length: 0 };
+    $scope.filteredBars = [];
+    $scope.SearchData = { test: "" };
 
 
+    $scope.ClearFilter=function()
+    {
+        $scope.SearchData = { test: "" };
+        $scope.$apply();
+    }
 
     $scope.mainObjectToSend = [];
     function init() {

@@ -72,14 +72,14 @@
 <div style="margin-top:12px;" class="page-header">
 
     <div class="row">
-        <div class="col-xs-5">
-            <a class="waves-effect" href="#/setting">
-                <img src="img/back.png" alt="Alternate Text">
-            </a>
+        <div class="row">
+
+            <div class="col-xs-7">
+                <h4 style="margin-top:0px;line-height:34px; margin-bottom:0px; color:#000;">Manage UOM</h4>
+            </div>
         </div>
-        <div class="col-xs-7">
-            <h4 style="margin-top:0px;line-height:34px; text-align:right; margin-bottom:0px; color:#000;">Manage UOM</h4>
-        </div>
+        
+        
     </div>
 </div>
 
@@ -99,10 +99,13 @@
     </a>
 
 
-    <input style="border-radius:0px; border-bottom:transparent;" class="form-control" placeholder="Type to search" type="text" ng-model="test">
+    <div class="input-group">
+        <input style="border-radius:0px; border-bottom:transparent;" ng-change="FilterRecordsLength.length=(UOMList | filter:SearchData.test).length" class="form-control" placeholder="Type to search" type="text" ng-model="SearchData.test">
+        <a class="input-group-addon last" ng-if="SearchData.test!=''" id="btnClearSearch" ng-click="ClearFilter()"> <i class="fa fa-times-circle"></i> </a>
+    </div>
 
     <ul class="list-group">
-        <li class="list-group-item" ng-repeat="obj in UOMList | filter : test" ng-if="obj.UnitOfMeasureName != ''">
+        <li class="list-group-item" ng-init="FilterRecordsLength.length=(UOMList | filter:SearchData.test).length" ng-repeat="obj in filteredBars = (UOMList | filter:SearchData.test)" ng-if="obj.UnitOfMeasureName != ''">
 
             <div class="row">
                 <div class="col-xs-7">
@@ -110,7 +113,7 @@
                 </div>
 
                 <div class="col-xs-5">
-                    <a ng-click="deleteUOM(obj)" id="Delete_{{obj.UnitOfMeasureID}}"  style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-danger pull-right btnUom">
+                    <a ng-click="deleteUOM(obj)" id="Delete_{{obj.UnitOfMeasureID}}" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-danger pull-right btnUom">
                         <i class="fa fa-trash-o"></i>
                     </a>
                     <a ng-click="editUOM(obj)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-warning pull-right">
@@ -120,14 +123,24 @@
             </div>
 
 
-           
-          
 
-           
+
+
+
         </li>
     </ul>
     </div>
+<div ng-if="FilterRecordsLength.length==0" style="text-align: center; color: #d9534f;" class="maincontent norecords">
 
+    <div>
+
+        <h3>No record matched your Query</h3>
+        <a style="cursor:pointer;width:auto;" class="btn btn-primary" ng-click="ClearFilter()"> <i class="fa fa-filter"></i> Clear your filters</a>
+        <br /><br />
+    </div>
+
+
+</div>
   
 
 <div class="animated zoomIn" ng-if="mode == 2 || mode == 3 ">
