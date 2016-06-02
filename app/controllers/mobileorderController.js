@@ -6,6 +6,7 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
     $scope.ImageList = [];
     $scope.slide = 0;
     $scope.Totalslides = 0;
+    $scope.isallowdrag = false;
   
 
     $scope.mainObjectToSend = [];
@@ -17,6 +18,23 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
     }
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
+
+
+    $scope.allowdrag = function () {
+
+        debugger;
+        $scope.isallowdrag = true;
+        $scope.$apply();
+    }
+
+
+    $scope.disallowdrag = function () {
+
+        debugger;
+        $scope.isallowdrag = false;
+        $scope.$apply();
+    }
+
 
 
   
