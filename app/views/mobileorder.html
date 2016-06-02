@@ -1,0 +1,169 @@
+﻿
+<style>
+
+
+    .container
+    {
+        width:100%;
+    }
+
+    .btn-large {
+        text-align: center;
+        height: auto;
+        padding-left: 12px;
+        padding-right: 12px;
+        margin-top: 8px;
+    }
+
+
+        .btn-large p {
+           
+            margin: 0 0 10px;
+            text-transform: capitalize;
+            margin-top:-5px;
+            margin-bottom:8px;
+        }
+
+    .btn-large h4
+    {
+        font-size:50px;
+        text-align:right;
+    }
+
+    body
+    {
+        background:#eaeaea;
+        overflow-x:hidden !important;
+    }
+
+    .list
+    {
+        padding-left:0px;
+        margin-left:0px;
+    }
+
+    .list-group-item {
+        list-style-type: none;
+        padding:15px !important;
+        min-height:65px;
+    }
+
+    .list-group-item a {
+      font-size:14px;
+      font-family:Verdana;
+    }
+
+        .list li a{
+            padding:10px;
+            font-size:20px;
+            color:#000;
+            background:#fff;
+            border-bottom:1px solid #ccc;
+        }
+
+        .form-group label span
+        {
+            color:red;
+        }
+
+    .btn-large:disabled {
+        color: #fff !important;
+        opacity: 0.7 !important;
+    }
+
+    .operator
+    {
+        margin-left:-80px;
+        max-height:250px;
+        overflow-y:auto;
+    }
+
+
+    .operator li
+    {
+        background:#fff;
+    }
+
+
+    li.disabled {
+        background: #E2E2E2;
+        text-decoration: line-through;
+    }
+
+    .operator li a {
+        color: #000 !important;
+    }
+
+
+   
+</style>
+
+<div style="margin-top:12px;" class="page-header">
+
+    <div class="row">
+        
+        <div class="col-xs-12">
+            <h4 style="margin-top:0px;line-height:34px; margin-bottom:0px; color:#000;">Manange MyInventory Columns</h4>
+        </div>
+    </div>
+</div>
+
+<ul class="list-group" class="dragarea" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
+    <li ng-repeat="obj in MyInventorycolumns" class="list-group-item">
+
+        <div class="row">
+            <div class="col-xs-6">
+                <a>{{obj.ColumnLabel}}</a>
+            </div>
+
+            <div class="col-xs-6">
+
+                <div class="pull-right">
+                    <div ng-disabled="obj.Show==false" class="btn-group custombtnGroup">
+                        <button ng-disabled="obj.Show==false" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                            <span ng-if="obj.mobileorder!=0" class="pull-left">
+                                {{obj.mobileorder}} &nbsp;
+                            </span>
+                            <span ng-if="obj.mobileorder==0" class="pull-left">
+                                Off &nbsp;
+                            </span>
+                            <i class="caret"></i>
+
+                        </button>
+                        <ul class="dropdown-menu operator" role="menu" aria-labelledby="dropdownMenu">
+                            <li ng-if="!obj.Required">
+                                <a ng-click="obj.mobileorder=0">
+                                    Off
+                                </a>
+                            </li>
+
+                            <li ng-repeat="opt in MyInventorycolumns" ng-class="{'disabled':AlreadyTaken(obj.RowID,$index+1)==true}">
+                                <a ng-click="obj.mobileorder=$index+1" ng-if="AlreadyTaken(obj.RowID,$index+1)==false">
+
+                                    {{$index+1}}
+
+                                </a>
+
+                                <a ng-if="AlreadyTaken(obj.RowID,$index+1)==true">{{$index+1}}</a>
+
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </li>
+</ul>
+
+<button type="button" title="Save" class="btn btn-large primary-color btn-primary" ng-click="saveColumns();"><i class="fa fa-check"></i> Save</button>
+
+
+  
+
+
+
+
+    
