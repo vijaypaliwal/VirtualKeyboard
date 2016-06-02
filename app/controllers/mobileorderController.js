@@ -21,7 +21,7 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
 
 
     $scope.allowdrag = function () {
-
+        ShowSuccess("Updated");
         debugger;
         $scope.isallowdrag = true;
         $scope.$apply();
@@ -29,7 +29,7 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
 
 
     $scope.disallowdrag = function () {
-
+        ShowSuccess("Updated");
         debugger;
         $scope.isallowdrag = false;
         $scope.$apply();

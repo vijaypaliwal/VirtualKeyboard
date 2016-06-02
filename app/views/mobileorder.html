@@ -94,6 +94,12 @@
         color: #000 !important;
     }
 
+    .dropdown-toggle {
+        padding-left: 13px;
+        padding-right: 13px;
+        min-width: 75px;
+    }
+
 
    
 </style>
@@ -102,13 +108,13 @@
 
     <div class="row">
         <div class="col-xs-7">
-            <h4 style="margin-top:0px;line-height:34px; margin-bottom:0px; color:#000;">Inventory Columns</h4>
+            <h4 style="margin-top:0px; font-size:16px; line-height:34px; margin-bottom:0px; color:#000;">Inventory Columns</h4>
         </div>
 
         <div class="col-xs-5">
             <div style="text-align:right;">
-                <a class="btn" ng-if="isallowdrag==false" ng-click="allowdrag()">Enable drag</a>
-                <a class="btn" ng-if="isallowdrag==true" ng-click="disallowdrag()">Disable drag</a>
+                <a style="color:#069; line-height:34px;" ng-if="isallowdrag==false" ng-click="allowdrag()">Enable drag</a>
+                <a style="color:#069; line-height:34px;" ng-if="isallowdrag==true" ng-click="disallowdrag()">Disable drag</a>
             </div>
           
         </div>

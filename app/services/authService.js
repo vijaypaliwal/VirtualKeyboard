@@ -53,6 +53,9 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
             dataType: 'text json',
             data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),
             success: function (response) {
+
+                debugger;
+
                 $("#loginBtn").removeClass("disabled");
                 $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
                 $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
@@ -89,6 +92,9 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
             },
             error: function (err) {
+
+                debugger;
+
                 $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
 
                 playBeep();
