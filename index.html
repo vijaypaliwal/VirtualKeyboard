@@ -682,7 +682,7 @@
     <script src="scripts/angular-sanitize.js"></script>
     <script src="scripts/angular-route.min.js"></script>
     <script src="scripts/angular-local-storage.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ 
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 
@@ -1162,7 +1162,8 @@
             // Take picture using device camera and retrieve image as base64-encoded string
             navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
                 quality: 50,
-                destinationType: destinationType.DATA_URL
+                destinationType: destinationType.DATA_URL,
+                correctOrientation: true
             });
         }
 
@@ -1172,7 +1173,8 @@
             // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
             navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
                 quality: 20, allowEdit: true,
-                destinationType: destinationType.DATA_URL
+                destinationType: destinationType.DATA_URL,
+                correctOrientation: true
             });
         }
 
@@ -1183,7 +1185,8 @@
             navigator.camera.getPicture(onPhotoURISuccess, onFail, {
                 quality: 50,
                 destinationType: destinationType.FILE_URI,
-                sourceType: source
+                sourceType: source,
+                correctOrientation: true
             });
         }
 
