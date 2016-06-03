@@ -119,10 +119,21 @@
     </div>
 </div>
 
-<button type="button" title="Save" class="btn btn-large primary-color btn-primary" ng-click="saveColumns();"><i class="fa fa-check"></i> Save</button>
+<button ng-if="Isbuttonshow==true" type="button" title="Save" class="btn btn-large primary-color btn-primary" ng-click="saveColumns();"><i class="fa fa-check"></i> Save</button>
+
+<button ng-if="loadingbutton==true" type="button" title="Save" class="btn btn-large primary-color btn-primary" ng-click="saveColumns();"><i class="fa fa-check  fa-spin"></i> Save</button>
+
+<div ng-if="LocationsLoaded==false">
+
+    <div class="modal-backdrop fade in"></div>
+    <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
+        <img src="img/loader.gif" alt="Alternate Text" />
+
+    </div>
+</div>
 
 <ul ng-if="isallowdrag==true" class="list-group" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
-    <li ng-repeat="obj in MyInventorycolumns" class="list-group-item">
+    <li ng-repeat="obj in MyInventorycolumns" ng-if="obj.ColumnName != 'ActionQty'" class="list-group-item">
 
         <div class="row">
             <div class="col-xs-6">
@@ -172,7 +183,7 @@
 </ul>
 
 <ul ng-if="isallowdrag==false" class="list-group">
-    <li ng-repeat="obj in MyInventorycolumns" class="list-group-item">
+    <li ng-repeat="obj in MyInventorycolumns" ng-if="obj.ColumnName != 'ActionQty'" class="list-group-item">
 
         <div class="row">
             <div class="col-xs-6">
@@ -221,9 +232,9 @@
     </li>
 </ul>
 
-<button type="button" title="Save" class="btn btn-large primary-color btn-primary" ng-click="saveColumns();"><i class="fa fa-check"></i> Save</button>
+<button ng-if="Isbuttonshow==true" type="button" title="Save" class="btn btn-large primary-color btn-primary" ng-click="saveColumns();"><i class="fa fa-check"></i> Save</button>
 
-
+<button ng-if="loadingbutton==true" type="button" title="Save" class="btn btn-large primary-color btn-primary" ng-click="saveColumns();"><i class="fa fa-check  fa-spin"></i> Save</button>
   
 
 

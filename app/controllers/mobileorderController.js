@@ -7,6 +7,12 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
     $scope.slide = 0;
     $scope.Totalslides = 0;
     $scope.isallowdrag = false;
+
+    $scope.LocationsLoaded = false;
+
+    $scope.Isbuttonshow = false;
+
+    $scope.loadingbutton == false;
   
 
     $scope.mainObjectToSend = [];
@@ -41,7 +47,7 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
 
     $scope.GetMyinventoryColumns = function () {
 
-
+        $scope.LocationsLoaded = false;
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -60,6 +66,9 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
 
                   $scope.MyInventorycolumns = response.GetMyInventoryColumnsResult.Payload;
 
+                  $scope.LocationsLoaded = true;
+                  $scope.Isbuttonshow = true;
+
                   $scope.$apply();
 
                  console.log($scope.MyInventorycolumns);
@@ -67,7 +76,7 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
               error: function (err) {
                   console.log(err);
                   log.error("Error Occurred during operation");
-
+                  $scope.LocationsLoaded = true;
 
               }
           });
@@ -112,7 +121,9 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
 
     $scope.saveColumns = function () {
 
+        $scope.LocationsLoaded = false;
 
+        $scope.loadingbutton == true;
 
         for (var i = 0; i < $scope.MyInventorycolumns.length; i++) {
           //  $scope.MyInventorycolumns[i].mobileorder = i + 1;
@@ -137,10 +148,17 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
 
                   debugger;
 
+                  $scope.LocationsLoaded = true;
+                  $scope.loadingbutton == false
+
                   ShowSuccess("Updated");
+                  $scope.$apply();
               },
               error: function (err) {
                   console.log(err);
+                  $scope.LocationsLoaded = true;
+                  $scope.loadingbutton == false;
+                  $scope.$apply();
                   log.error("Error Occurred during operation");
 
 
