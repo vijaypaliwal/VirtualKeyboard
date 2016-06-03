@@ -15,7 +15,7 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
     <!-- Icons -->
-    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" media="all" rel="stylesheet" type="text/css">
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" media="all" rel="stylesheet" type="text/css">
 
 
     <link href="content/css/loading-bar.css" rel="stylesheet" />
@@ -1369,38 +1369,7 @@
         document.addEventListener('click', addRippleEffect, false);
     </script>
 
-    <script src="http://maps.googleapis.com/maps/api/js"></script>
-
-
-    <script>
-        var myCenter = new google.maps.LatLng(38.5737822, -90.3928599);
-
-        function initialize() {
-            var mapProp = {
-                center: myCenter,
-                zoom: 17,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-
-            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
-            var marker = new google.maps.Marker({
-                position: myCenter,
-            });
-
-            marker.setMap(map);
-
-            var infowindow = new google.maps.InfoWindow({
-                content: "Clearly Inventory"
-            });
-
-            infowindow.open(map, marker);
-        }
-
-        google.maps.event.addDomListener(window, 'load', initialize);
-
-    </script>
-
+  
 
     <script>
 
