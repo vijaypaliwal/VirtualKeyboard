@@ -133,7 +133,7 @@
 </div>
 
 <ul ng-if="isallowdrag==true" class="list-group" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
-    <li ng-repeat="obj in MyInventorycolumns" ng-if="obj.ColumnName != 'ActionQty'" class="list-group-item">
+    <li ng-repeat="obj in MyInventorycolumns" ng-if="obj.ColumnLabel != 'Select for Cart'" class="list-group-item">
 
         <div class="row">
             <div class="col-xs-6">
@@ -183,7 +183,7 @@
 </ul>
 
 <ul ng-if="isallowdrag==false" class="list-group">
-    <li ng-repeat="obj in MyInventorycolumns" ng-if="obj.ColumnName != 'ActionQty'" class="list-group-item">
+    <li ng-repeat="obj in MyInventorycolumns" ng-if="obj.ColumnLabel != 'Select for Cart'" class="list-group-item">
 
         <div class="row">
             <div class="col-xs-6">
