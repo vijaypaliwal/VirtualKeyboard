@@ -692,7 +692,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var _sum = 0;
 
 
-      
+     
+
         for (var i = 0; i < $scope.ImageList.length; i++) {
 
             if ($scope.ImageList[i].bytestring != null && $scope.ImageList[i].bytestring != undefined) {
@@ -735,7 +736,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   $('#addinventories').find(".fa").removeClass("fa-spin");
               },
               error: function (err) {
-
 
                   console.log(err);
                   log.error("Error Occurred during operation");

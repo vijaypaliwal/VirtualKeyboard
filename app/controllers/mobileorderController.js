@@ -126,11 +126,17 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
         $scope.loadingbutton == true;
 
         for (var i = 0; i < $scope.MyInventorycolumns.length; i++) {
-          //  $scope.MyInventorycolumns[i].mobileorder = i + 1;
+            if ($scope.MyInventorycolumns[i].mobileorder != 0)
+            {
+                $scope.MyInventorycolumns[i].mobileorder = i + 1;
+
+            }
+            
         }
 
+        console.log($scope.MyInventorycolumns);
         debugger;
-
+        $scope.$apply();
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {

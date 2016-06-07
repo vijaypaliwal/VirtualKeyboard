@@ -44,14 +44,17 @@
 
     .list-group-item {
         list-style-type: none;
-        padding:15px !important;
-        min-height:65px;
+        padding:7px !important;
+        text-align:center;
+     
     }
 
-    .list-group-item a {
-      font-size:14px;
-      font-family:Verdana;
-    }
+        .list-group-item a {
+            font-size: 12px;
+            font-family: Verdana;
+            width:100%;
+          
+        }
 
         .list li a{
             padding:10px;
@@ -59,6 +62,7 @@
             color:#000;
             background:#fff;
             border-bottom:1px solid #ccc;
+        
         }
 
         .form-group label span
@@ -97,7 +101,20 @@
     .dropdown-toggle {
         padding-left: 13px;
         padding-right: 13px;
-        min-width: 75px;
+        height:30px;
+        line-height:30px;
+      
+    }
+
+    .text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-inline-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+        margin-bottom: 0;
+        line-height: 1.3;
     }
        
 </style>
@@ -128,30 +145,25 @@
     <div class="modal-backdrop fade in"></div>
     <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
         <img src="img/loader.gif" alt="Alternate Text" />
-
     </div>
 </div>
 
-<ul ng-if="isallowdrag==true" class="list-group" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
-    <li ng-repeat="obj in MyInventorycolumns" ng-if="obj.ColumnLabel != 'Select for Cart'" class="list-group-item">
+<ul ng-if="isallowdrag==true" class="list-group row" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
+    <li ng-repeat="obj in MyInventorycolumns" ng-if="obj.ColumnLabel != 'Select for Cart'" class="col-xs-4 list-group-item" >
 
         <div class="row">
-            <div class="col-xs-6">
-                <a>{{obj.ColumnLabel}}</a>
-            </div>
-
-            <div class="col-xs-6">
-
-                <div class="pull-right">
+            <div class="col-xs-12">
+                <a class="text">{{obj.ColumnLabel}}</a>
+             
                     <div ng-disabled="obj.Show==false" class="btn-group custombtnGroup">
                         <button ng-disabled="obj.Show==false" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" title="(click to change)">
-                            <span ng-if="obj.mobileorder!=0" class="pull-left">
-                                {{obj.mobileorder}} &nbsp;
+                            <span ng-if="obj.mobileorder!=0" >
+                                {{obj.mobileorder}}
                             </span>
-                            <span ng-if="obj.mobileorder==0" class="pull-left">
-                                Off &nbsp;
+                            <span ng-if="obj.mobileorder==0">
+                                Off
                             </span>
-                            <i class="caret"></i>
+
 
                         </button>
                         <ul class="dropdown-menu operator" role="menu" aria-labelledby="dropdownMenu">
@@ -174,58 +186,57 @@
 
                         </ul>
                     </div>
-                </div>
+              
             </div>
+
+          
         </div>
 
 
     </li>
 </ul>
 
-<ul ng-if="isallowdrag==false" class="list-group">
-    <li ng-repeat="obj in MyInventorycolumns" ng-if="obj.ColumnLabel != 'Select for Cart'" class="list-group-item">
+<ul ng-if="isallowdrag==false" class="list-group row">
+    <li ng-repeat="obj in MyInventorycolumns" ng-if="obj.ColumnLabel != 'Select for Cart'" class="list-group-item col-xs-4">
 
         <div class="row">
-            <div class="col-xs-6">
-                <a>{{obj.ColumnLabel}}</a>
-            </div>
+            <div class="col-xs-12">
+                <a class="text">{{obj.ColumnLabel}}</a>
+                <div ng-disabled="obj.Show==false" class="btn-group custombtnGroup">
+                    <button ng-disabled="obj.Show==false" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" title="(click to change)">
+                        <span ng-if="obj.mobileorder!=0">
+                            {{obj.mobileorder}}
+                        </span>
+                        <span ng-if="obj.mobileorder==0">
+                            Off
+                        </span>
 
-            <div class="col-xs-6">
 
-                <div class="pull-right">
-                    <div ng-disabled="obj.Show==false" class="btn-group custombtnGroup">
-                        <button ng-disabled="obj.Show==false" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" title="(click to change)">
-                            <span ng-if="obj.mobileorder!=0" class="pull-left">
-                                {{obj.mobileorder}} &nbsp;
-                            </span>
-                            <span ng-if="obj.mobileorder==0" class="pull-left">
-                                Off &nbsp;
-                            </span>
-                            <i class="caret"></i>
+                    </button>
+                    <ul class="dropdown-menu operator" role="menu" aria-labelledby="dropdownMenu">
+                        <li ng-if="!obj.Required">
+                            <a ng-click="obj.mobileorder=0">
+                                Off
+                            </a>
+                        </li>
 
-                        </button>
-                        <ul class="dropdown-menu operator" role="menu" aria-labelledby="dropdownMenu">
-                            <li ng-if="!obj.Required">
-                                <a ng-click="obj.mobileorder=0">
-                                    Off
-                                </a>
-                            </li>
+                        <li ng-repeat="opt in MyInventorycolumns" ng-class="{'disabled':AlreadyTaken(obj.RowID,$index+1)==true}">
+                            <a ng-click="obj.mobileorder=$index+1" ng-if="AlreadyTaken(obj.RowID,$index+1)==false">
 
-                            <li ng-repeat="opt in MyInventorycolumns" ng-class="{'disabled':AlreadyTaken(obj.RowID,$index+1)==true}">
-                                <a ng-click="obj.mobileorder=$index+1" ng-if="AlreadyTaken(obj.RowID,$index+1)==false">
+                                {{$index+1}}
 
-                                    {{$index+1}}
+                            </a>
 
-                                </a>
+                            <a ng-if="AlreadyTaken(obj.RowID,$index+1)==true">{{$index+1}}</a>
 
-                                <a ng-if="AlreadyTaken(obj.RowID,$index+1)==true">{{$index+1}}</a>
+                        </li>
 
-                            </li>
-
-                        </ul>
-                    </div>
+                    </ul>
                 </div>
+
             </div>
+
+            
         </div>
 
 

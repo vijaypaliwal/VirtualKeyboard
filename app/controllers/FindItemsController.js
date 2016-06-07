@@ -1065,6 +1065,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             dataType: 'json',
             success: function (result) {
 
+                debugger;
+
                 // MY inventory column region
                 var _TempArrayMyInventory = result.GetMyInventoryColumnsResult.Payload;
 
