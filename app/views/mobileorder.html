@@ -173,7 +173,7 @@
 
 
     <tbody class="dragarea" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
-        <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" ng-class="{'unsortable':isallowdrag==false}">
+        <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" ng-if="obj.ColumnName != 'ActionQty'&& obj.ColumnName != 'HasConversion'" ng-class="{'unsortable':isallowdrag==false}">
             <td>
                 <a class="text">{{obj.ColumnLabel}}</a>
                 <div ng-disabled="obj.Show==false" class="btn-group custombtnGroup">
