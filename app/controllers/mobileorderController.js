@@ -1,22 +1,22 @@
 ﻿'use strict';
-app.controller('mobileorderController', ['$scope',  'localStorageService', 'authService', '$location', 'log', function ($scope,  localStorageService, authService, $location, log) {
+app.controller('mobileorderController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
     $scope.CurrentInventory = {};
     $scope.SavingData = false;
     $scope.IsEditMode = false;
     $scope.ImageList = [];
     $scope.slide = 0;
     $scope.Totalslides = 0;
-    $scope.isallowdrag = false;
+    $scope.isallowdrag = true;
 
     $scope.LocationsLoaded = false;
 
     $scope.Isbuttonshow = false;
 
     $scope.loadingbutton == false;
-  
+
 
     $scope.mainObjectToSend = [];
-   
+
     function init() {
         $scope.GetMyinventoryColumns();
 
@@ -42,8 +42,12 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
     }
 
 
+    function SortByOrder(a, b) {
+        var aName = a.mobileorder;
+        var bName = b.mobileorder;
+        return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+    }
 
-  
 
     $scope.GetMyinventoryColumns = function () {
 
@@ -68,10 +72,10 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
 
                   $scope.LocationsLoaded = true;
                   $scope.Isbuttonshow = true;
-
+                  $scope.MyInventorycolumns.sort(SortByOrder);
                   $scope.$apply();
 
-                 console.log($scope.MyInventorycolumns);
+                  console.log($scope.MyInventorycolumns);
               },
               error: function (err) {
                   console.log(err);
@@ -85,9 +89,8 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
 
 
     $scope.sortableOptions = {
-        items: "li:not(.unsortable)",
+        items: "tr",
         update: function (e, ui) {
-           
         },
         cancel: ".unsortable",
         stop: function (e, ui) {
@@ -117,7 +120,7 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
         $scope.$apply();
     }
 
-   
+
 
     $scope.saveColumns = function () {
 
@@ -125,14 +128,13 @@ app.controller('mobileorderController', ['$scope',  'localStorageService', 'auth
 
         $scope.loadingbutton == true;
 
-        //for (var i = 0; i < $scope.MyInventorycolumns.length; i++) {
-        //    if ($scope.MyInventorycolumns[i].mobileorder != 0)
-        //    {
-        //        $scope.MyInventorycolumns[i].mobileorder = i + 1;
+        for (var i = 0; i < $scope.MyInventorycolumns.length; i++) {
+            if ($scope.MyInventorycolumns[i].mobileorder != 0) {
+                $scope.MyInventorycolumns[i].mobileorder = i + 1;
 
-        //    }
-            
-        //}
+            }
+
+        }
 
         console.log($scope.MyInventorycolumns);
         debugger;
