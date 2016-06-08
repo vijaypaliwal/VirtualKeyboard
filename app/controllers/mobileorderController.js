@@ -97,10 +97,10 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         },
         placeholder: "alert alert-info",
         cancel: ".unsortable",
-        stop: function (e, ui) {
+        stop: function (e, ui)
+        {
          
-            $cordovaKeyboard.disableScroll(false);
-
+        $cordovaKeyboard.disableScroll(false);
 
         }
     };
