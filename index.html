@@ -592,21 +592,24 @@
     </div>
 
 
+    <div class="animated" id="myloadingModal" style="display: block !important; top: 30%; overflow: hidden;left:0%;right:10%; position: fixed; z-index: 1050; text-align: center; padding: 20px !important; width: 100%;">
+
+        <div class="errorcontent" style="width:250px;">
+
+            <img style="max-height:50px; max-width:50px;" src="img/loader1.gif" />
+
+            <span style="display:block;font-size:20px;font-weight:300;color:#fafafa;">
+                Please Wait..
+            </span>
+
+        </div>
+
+    </div>
+
+
     <div class="container" id="viewdata">
         <div data-ng-view="">
-            <div class="animated" id="myloadingModal" style="display: block !important; top: 30%; overflow: hidden;left:0%;right:10%; position: fixed; z-index: 1050; text-align: center; padding: 20px !important; width: 100%;">
-
-                <div class="errorcontent" style="width:250px;">
-
-                    <img style="max-height:50px; max-width:50px;" src="img/loader1.gif" />
-
-                    <span style="display:block;font-size:20px;font-weight:300;color:#fafafa;">
-                        Please Wait..
-                    </span>
-
-                </div>
-
-            </div>
+            
         </div>
 
     </div>
@@ -989,6 +992,19 @@
                 'Game Over',           // title
                 ['Restart', 'Exit']         // buttonLabels
             );
+        }
+
+
+        document.onreadystatechange = function () {
+            var state = document.readyState
+            if (state == 'interactive') {
+            } else if (state == 'complete') {
+                setTimeout(function () {
+                    $('#myloadingModal').remove();
+                    // document.getElementById('LoadingDiv').style.visibility = "hidden";
+                    //document.getElementById('LoadingDiv').style.display = "none";
+                }, 700);
+            }
         }
 
         var exitApp = false, intval = setInterval(function () { exitApp = false; }, 1000);
