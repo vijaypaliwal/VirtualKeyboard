@@ -90,20 +90,24 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
     $scope.sortableOptions = {
         start: function (evt, ui) {
-        $cordovaKeyboard.disableScroll(true);
+      //  $cordovaKeyboard.disableScroll(true);
         },
         items: "tr",
         update: function (e, ui) {
         },
         placeholder: "alert alert-info",
         cancel: ".unsortable",
-        stop: function (e, ui)
-        {
-         
-        $cordovaKeyboard.disableScroll(false);
+        stop: function (e, ui) {
+          
+         //   $cordovaKeyboard.disableScroll(false);
+
 
         }
     };
+
+    $scope.offmobileorder = function() {
+
+    }
 
 
 

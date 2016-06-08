@@ -128,15 +128,11 @@
 
     .onbtn {
         color: #fff;
-        /* height: 60px; */
-        /* width: 34px; */
+    
         padding: 10px;
+        padding-top:7px;
+        padding-bottom:7px;
         background: #0094ff;
-        border-radius: 100%;
-        /* line-height: 34px; */
-        padding-top: 12px;
-        padding-bottom: 12px;
-        /* margin-top: 17px; */
     }
 
     .alert-info {
@@ -150,6 +146,40 @@
     {
         height:64px;
     }
+
+    .Addbtn {
+        position: fixed;
+        bottom: 23px;
+        right: 13px;
+        z-index: 13000;
+        color: #fff !important;
+        height: 50px;
+        width: 50px;
+        border-radius: 100%;
+        text-align: center;
+        line-height: 55px;
+    }
+
+    .save-btn {
+        margin-bottom: 4px;
+        padding-left: 5px ;
+        padding-right: 5px;
+        width: 100px;
+        text-transform:capitalize;
+    }
+
+    .ordernumber {
+        position: absolute;
+        padding: 5px;
+        background: #e99002;
+        height: 25px;
+        width: 25px;
+        padding: 0px;
+        font-size: 12px;
+        border-radius: 100%;
+        line-height: 25px;
+        margin-top: -6px;
+    }
 </style>
 
 <div style="margin-top:12px;" class="page-header">
@@ -159,20 +189,19 @@
             <h4 style="margin-top:0px; font-size:16px; line-height:34px; margin-bottom:0px; color:#000;">Inventory Columns</h4>
         </div>
 
-        <div class="col-xs-5">
-            <div style="text-align:right; color:#000; margin-top:8px;">
-                Drag
-                <a style="padding-left:11px; padding-right:11px;" class="onbtn" ng-if="isallowdrag==false" ng-click="allowdrag()">ON </a>
-                <a class="onbtn" ng-if="isallowdrag==true" ng-click="disallowdrag()">OFF </a>
-            </div>
-
+        <div style="text-align:right" class="col-xs-5">
+            <a class="btn save-btn btn-primary" ng-click="saveColumns();"><i class="fa fa-check"></i> Save</a>
         </div>
     </div>
 </div>
 
-<button ng-if="Isbuttonshow==true" type="button" title="Save" class="btn btn-large primary-color btn-primary" ng-click="saveColumns();"><i class="fa fa-check"></i> Save</button>
 
-<button ng-if="loadingbutton==true" type="button" title="Save" class="btn btn-large primary-color btn-primary" ng-click="saveColumns();"><i class="fa fa-check  fa-spin"></i> Save</button>
+<a ng-click="saveColumns();" class="waves-effect Addbtn btn-success">
+    <i class="fa fa-check"></i>
+</a>
+
+
+
 
 <div ng-if="LocationsLoaded==false">
 
@@ -192,35 +221,21 @@
                 <div class="infoareas">
                     <a class="text">{{obj.ColumnLabel}}</a>
                     <div ng-disabled="obj.Show==false" class="btn-group custombtnGroup">
-                        <button ng-disabled="obj.Show==false" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" title="(click to change)">
-                            <span ng-if="obj.mobileorder!=0">
-                                {{obj.mobileorder}}
+                        <button ng-click="obj.mobileorder=0" ng-if="obj.mobileorder!=0" ng-disabled="obj.Show==false" class="btn btn-success dropdown-toggle" title="(click to change)">
+                           ON
+                             <span class="ordernumber">
+                                {{$index+1}}
                             </span>
-                            <span ng-if="obj.mobileorder==0">
-                                Off
-                            </span>
-
 
                         </button>
-                        <ul class="dropdown-menu operator" role="menu" aria-labelledby="dropdownMenu">
-                            <li ng-if="!obj.Required">
-                                <a ng-click="obj.mobileorder=0">
-                                    Off
-                                </a>
-                            </li>
 
-                            <li ng-repeat="opt in MyInventorycolumns" ng-class="{'disabled':AlreadyTaken(obj.RowID,$index+1)==true}">
-                                <a ng-click="obj.mobileorder=$index+1" ng-if="AlreadyTaken(obj.RowID,$index+1)==false">
+                        <button ng-click="obj.mobileorder=$index+1" ng-if="obj.mobileorder==0" ng-disabled="obj.Show==false" class="btn btn-primary dropdown-toggle" title="(click to change)">
+                            <span>
+                                OFF
+                            </span>
 
-                                    {{$index+1}}
-
-                                </a>
-
-                                <a ng-if="AlreadyTaken(obj.RowID,$index+1)==true">{{$index+1}}</a>
-
-                            </li>
-
-                        </ul>
+                        </button>
+                        
                     </div>
                 </div>
             </td>
@@ -235,9 +250,9 @@
 
 
 
-<button ng-if="Isbuttonshow==true" type="button" title="Save" class="btn btn-large primary-color btn-primary" ng-click="saveColumns();"><i class="fa fa-check"></i> Save</button>
 
-<button ng-if="loadingbutton==true" type="button" title="Save" class="btn btn-large primary-color btn-primary" ng-click="saveColumns();"><i class="fa fa-check  fa-spin"></i> Save</button>
+
+
 
 
 
