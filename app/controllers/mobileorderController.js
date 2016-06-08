@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('mobileorderController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
+app.controller('mobileorderController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard', function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard) {
     $scope.CurrentInventory = {};
     $scope.SavingData = false;
     $scope.IsEditMode = false;
@@ -89,11 +89,20 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
 
     $scope.sortableOptions = {
+        start: function (evt, ui) {
+        $cordovaKeyboard.disableScroll(true);
+        },
         items: "tr",
         update: function (e, ui) {
         },
+        placeholder: "alert alert-info",
         cancel: ".unsortable",
         stop: function (e, ui) {
+
+        
+            $scope.saveColumns();
+            $cordovaKeyboard.disableScroll(false);
+
 
         }
     };
