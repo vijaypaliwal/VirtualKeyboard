@@ -98,9 +98,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         placeholder: "alert alert-info",
         cancel: ".unsortable",
         stop: function (e, ui) {
-
-        
-            $scope.saveColumns();
+         
             $cordovaKeyboard.disableScroll(false);
 
 
