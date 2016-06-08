@@ -115,7 +115,7 @@
         width: 33.33%;
         float: left;
         background: #fff;
-        margin-bottom: 1px;
+        margin-bottom:2px;
         border: 1px solid #ccc;
         border-right: transparent;
     }
@@ -124,9 +124,10 @@
         background: transparent;
         border: none !important;
         background-color: transparent !important;
-        padding-top:2px !important;
-        padding-bottom:0px !important;
+        padding-top: 2px !important;
+        padding-bottom: 0px !important;
     }
+
 
     .onbtn {
         color: #fff;
@@ -141,13 +142,14 @@
         background-color: #5bc0de;
         border-color: #3db5d8;
         color: #ffffff;
-        height: 83px;
+        height: 68px;
         margin-bottom: 5px;
     }
     .infoareas
     {
-        height:62px;
+        height:61px;
     }
+
 
     .Addbtn {
         position: fixed;
@@ -218,14 +220,14 @@
 
 
     <tbody class="dragarea" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
-        <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" ng-if="obj.ColumnLabel != 'Select for Cart'&& obj.ColumnLabel != 'Links'" ng-class="{'unsortable':isallowdrag==false}">
+        <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" ng-if="obj.ColumnName != 'ActionQty'&& obj.ColumnName != 'HasConversion'" ng-class="{'unsortable':isallowdrag==false}">
             <td>
                 <div class="infoareas">
                     <a class="text">{{obj.ColumnLabel}}</a>
                     <div ng-disabled="obj.Show==false" class="btn-group custombtnGroup">
                         <button ng-click="obj.mobileorder=0" ng-if="obj.mobileorder!=0" ng-disabled="obj.Show==false" class="btn btn-success dropdown-toggle" title="(click to change)">
-                            ON
-                            <span class="ordernumber">
+                           ON
+                             <span class="ordernumber">
                                 {{$index+1}}
                             </span>
 
@@ -237,7 +239,7 @@
                             </span>
 
                         </button>
-
+                        
                     </div>
                 </div>
             </td>
