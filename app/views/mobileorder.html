@@ -102,7 +102,7 @@
         -webkit-box-orient: vertical;
         word-break: break-all;
         margin-bottom: 0;
-        min-height:24px;
+        min-height:21px;
       
     }
 
@@ -115,15 +115,17 @@
         width: 33.33%;
         float: left;
         background: #fff;
-        margin-bottom: 5px;
+        margin-bottom: 1px;
         border: 1px solid #ccc;
         border-right: transparent;
     }
 
     table td {
         background: transparent;
-        border: none;
+        border: none !important;
         background-color: transparent !important;
+        padding-top:2px !important;
+        padding-bottom:0px !important;
     }
 
     .onbtn {
@@ -144,7 +146,7 @@
     }
     .infoareas
     {
-        height:64px;
+        height:62px;
     }
 
     .Addbtn {
@@ -216,14 +218,14 @@
 
 
     <tbody class="dragarea" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
-        <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" ng-if="obj.ColumnName != 'ActionQty'&& obj.ColumnName != 'HasConversion'" ng-class="{'unsortable':isallowdrag==false}">
+        <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" ng-if="obj.ColumnLabel != 'Select for Cart'&& obj.ColumnLabel != 'Links'" ng-class="{'unsortable':isallowdrag==false}">
             <td>
                 <div class="infoareas">
                     <a class="text">{{obj.ColumnLabel}}</a>
                     <div ng-disabled="obj.Show==false" class="btn-group custombtnGroup">
                         <button ng-click="obj.mobileorder=0" ng-if="obj.mobileorder!=0" ng-disabled="obj.Show==false" class="btn btn-success dropdown-toggle" title="(click to change)">
-                           ON
-                             <span class="ordernumber">
+                            ON
+                            <span class="ordernumber">
                                 {{$index+1}}
                             </span>
 
@@ -235,7 +237,7 @@
                             </span>
 
                         </button>
-                        
+
                     </div>
                 </div>
             </td>

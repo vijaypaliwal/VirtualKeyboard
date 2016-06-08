@@ -24,7 +24,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     $scope.$on('$locationChangeStart', function (event) {
        
         var _path = $location.path();
-        if(_path=="/inventory")
+        if (_path == "/inventory" || _path == "/mobileorder")
         {
             $cordovaKeyboard.disableScroll(true);
         }
