@@ -81,6 +81,8 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
                   console.log(err);
                   log.error("Error Occurred during operation");
                   $scope.LocationsLoaded = true;
+                  $scope.Isbuttonshow = true;
+                  $scope.$apply();
 
               }
           });
@@ -90,7 +92,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
     $scope.sortableOptions = {
         start: function (evt, ui) {
-      //  $cordovaKeyboard.disableScroll(true);
+        $cordovaKeyboard.disableScroll(true);
         },
         items: "tr",
         update: function (e, ui) {
@@ -99,7 +101,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         cancel: ".unsortable",
         stop: function (e, ui) {
           
-         //   $cordovaKeyboard.disableScroll(false);
+        $cordovaKeyboard.disableScroll(false);
 
 
         }

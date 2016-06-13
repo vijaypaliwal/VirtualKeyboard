@@ -28,6 +28,12 @@
     body {
         background: #eaeaea;
         overflow-x: hidden !important;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
     .list {
@@ -102,8 +108,8 @@
         -webkit-box-orient: vertical;
         word-break: break-all;
         margin-bottom: 0;
-        min-height:21px;
-      
+       font-size:17px;
+
     }
 
     table a {
@@ -112,8 +118,7 @@
 
 
     table tr {
-        width: 33.33%;
-        float: left;
+      
         background: #fff;
         margin-bottom:2px;
         border: 1px solid #ccc;
@@ -147,7 +152,8 @@
     }
     .infoareas
     {
-        height:61px;
+        padding-top:14px;
+        padding-bottom:14px;
     }
 
 
@@ -183,6 +189,10 @@
         border-radius: 100%;
         line-height: 25px;
         margin-top: -6px;
+    }
+    .custombtnGroup
+    {
+       float:right;
     }
 </style>
 
@@ -223,24 +233,30 @@
         <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" ng-if="obj.ColumnName != 'ActionQty'&& obj.ColumnName != 'HasConversion'" ng-class="{'unsortable':isallowdrag==false}">
             <td>
                 <div class="infoareas">
-                    <a class="text">{{obj.ColumnLabel}}</a>
-                    <div ng-disabled="obj.Show==false" class="btn-group custombtnGroup">
-                        <button ng-click="obj.mobileorder=0" ng-if="obj.mobileorder!=0" ng-disabled="obj.Show==false" class="btn btn-success dropdown-toggle" title="(click to change)">
-                           ON
-                             <span class="ordernumber">
-                                {{$index+1}}
-                            </span>
+                    <div class="row">
+                        <div class="col-xs-7">
+                            <a class="text">{{obj.ColumnLabel}}</a>
+                        </div>
+                        <div class="col-xs-5">
+                            <div ng-disabled="obj.Show==false" class="btn-group custombtnGroup">
+                                <button ng-click="obj.mobileorder=0" ng-if="obj.mobileorder!=0" ng-disabled="obj.Show==false" class="btn btn-success dropdown-toggle" title="(click to change)">
+                                    ON
+                                    <span class="ordernumber">
+                                        {{$index+1}}
+                                    </span>
+                                </button>
 
-                        </button>
+                                <button ng-click="obj.mobileorder=$index+1" ng-if="obj.mobileorder==0" ng-disabled="obj.Show==false" class="btn btn-primary dropdown-toggle" title="(click to change)">
+                                     OFF
+                                </button>
 
-                        <button ng-click="obj.mobileorder=$index+1" ng-if="obj.mobileorder==0" ng-disabled="obj.Show==false" class="btn btn-primary dropdown-toggle" title="(click to change)">
-                            <span>
-                                OFF
-                            </span>
-
-                        </button>
-                        
+                            </div>
+                        </div>
                     </div>
+                   
+
+                  
+                    
                 </div>
             </td>
         </tr>
