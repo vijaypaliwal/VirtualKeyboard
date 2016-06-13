@@ -249,7 +249,7 @@
 
 
     <tbody class="dragarea" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
-        <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" ng-if="obj.ColumnName != 'ActionQty'&& obj.ColumnName != 'HasConversion'" ng-class="{'unsortable':isallowdrag==false}">
+        <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" ng-class="{'unsortable':isallowdrag==false}">
             <td>
                 <div class="infoareas">
 
@@ -283,6 +283,12 @@
                 </div>
             </td>
         </tr>
+        <tr style="border:transparent !important; height:15px;">
+            <td>
+                <a></a>
+            </td>
+            </tr>
+
     </tbody>
 
 
