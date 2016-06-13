@@ -93,14 +93,8 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
     $scope.sortableOptions = {
         start: function (evt, ui) {
 
-            debugger;
-            $("body").removeClass("oauto")
-            $("body").addClass("ohidden");
-       
 
-            
-
-      //  $cordovaKeyboard.disableScroll(true);
+      $cordovaKeyboard.disableScroll(true);
         },
         items: "tr",
         update: function (e, ui) {
@@ -109,10 +103,9 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         cancel: ".unsortable",
         stop: function (e, ui) {
 
-            $("body").removeClass("ohidden")
-            $("body").addClass("oauto");
           
-     //   $cordovaKeyboard.disableScroll(false);
+          
+      $cordovaKeyboard.disableScroll(false);
 
 
         }
