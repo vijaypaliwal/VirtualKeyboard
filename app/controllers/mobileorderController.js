@@ -81,7 +81,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
                   console.log(err);
                   log.error("Error Occurred during operation");
                   $scope.LocationsLoaded = true;
-                  $scope.Isbuttonshow = true;
+                  $(".save-btn").hide();
                   $scope.$apply();
 
               }
