@@ -143,11 +143,12 @@
         background: #0094ff;
     }
 
+
     .alert-info {
         background-color: #5bc0de;
         border-color: #3db5d8;
         color: #ffffff;
-        height: 62px;
+        height: 50px;
         margin-bottom: 5px;
     }
     .infoareas
@@ -206,10 +207,11 @@
         transform-origin: left top 0;
         color: #333;
         text-transform: uppercase;
-        white-space:nowrap;
-        position:fixed;
-        left:96%;
-        margin-top:50px;
+        white-space: nowrap;
+        position: fixed;
+      
+        left: 96%;
+        top: 30%;
     }
 </style>
 
@@ -243,50 +245,53 @@
 </div>
 
 
-<div class="row">
-    <div class="col-xs-10">
-        <table class="table gridTable table-striped bs-item">
+<table style="width:86%;" class="table gridTable table-striped bs-item">
 
 
-            <tbody class="dragarea" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
-                <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" ng-if="obj.ColumnName != 'ActionQty'&& obj.ColumnName != 'HasConversion'" ng-class="{'unsortable':isallowdrag==false}">
-                    <td>
-                        <div class="infoareas">
-                            <div class="row">
-                                <div class="col-xs-7">
-                                    <a class="text">{{obj.ColumnLabel}}</a>
-                                </div>
-                                <div class="col-xs-5">
-                                    <div ng-disabled="obj.Show==false" class="btn-group custombtnGroup">
-                                        <button ng-click="obj.mobileorder=0" ng-if="obj.mobileorder!=0" ng-disabled="obj.Show==false" class="btn btn-success dropdown-toggle" title="(click to change)">
-                                            ON
-                                            <span class="ordernumber">
-                                                {{$index+1}}
-                                            </span>
-                                        </button>
-
-                                        <button ng-click="obj.mobileorder=$index+1" ng-if="obj.mobileorder==0" ng-disabled="obj.Show==false" class="btn btn-primary dropdown-toggle" title="(click to change)">
-                                            OFF
-                                        </button>
-
-                                    </div>
-                                </div>
-                            </div>
+    <tbody class="dragarea" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
+        <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" ng-if="obj.ColumnName != 'ActionQty'&& obj.ColumnName != 'HasConversion'" ng-class="{'unsortable':isallowdrag==false}">
+            <td>
+                <div class="infoareas">
 
 
 
 
+                    <div class="row">
+                        <div class="col-xs-7">
+                            <a class="text">{{obj.ColumnLabel}}</a>
                         </div>
-                    </td>
-                </tr>
-            </tbody>
+                        <div class="col-xs-5">
+                            <div ng-disabled="obj.Show==false" class="btn-group custombtnGroup">
+                                <button ng-click="obj.mobileorder=0" ng-if="obj.mobileorder!=0" ng-disabled="obj.Show==false" class="btn btn-success dropdown-toggle" title="(click to change)">
+                                    ON
+                                    <span class="ordernumber">
+                                        {{$index+1}}
+                                    </span>
+                                </button>
+
+                                <button ng-click="obj.mobileorder=$index+1" ng-if="obj.mobileorder==0" ng-disabled="obj.Show==false" class="btn btn-primary dropdown-toggle" title="(click to change)">
+                                    OFF
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
 
 
-        </table>
-    </div>
-    <div class="col-xs-2">
-        <div class="vertical-text">Scroll from here!</div>
-    </div>
+
+
+                </div>
+            </td>
+        </tr>
+    </tbody>
+
+
+</table>
+
+<div class="vertical-text">
+
+    Scroll from here !!
+
 </div>
 
 
