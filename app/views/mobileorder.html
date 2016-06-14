@@ -255,19 +255,17 @@
 
                     <div class="row">
                         <div class="col-xs-7">
-                            <a class="text">{{obj.ColumnLabel}}</a>
+                            <a class="text">{{$index+1}}. {{obj.ColumnLabel}}</a>
                         </div>
                         <div class="col-xs-5">
                             <div ng-disabled="obj.Show==false" class="btn-group custombtnGroup">
                                 <button ng-click="obj.mobileorder=0" ng-if="obj.mobileorder!=0" ng-disabled="obj.Show==false" class="btn btn-success dropdown-toggle" title="(click to change)">
-                                    ON
-                                    <span class="ordernumber">
-                                        {{$index+1}}
-                                    </span>
+                                      ON
+                                    
                                 </button>
 
                                 <button ng-click="obj.mobileorder=$index+1" ng-if="obj.mobileorder==0" ng-disabled="obj.Show==false" class="btn btn-primary dropdown-toggle" title="(click to change)">
-                                    OFF
+                                      OFF
                                 </button>
 
                             </div>
