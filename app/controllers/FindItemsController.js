@@ -1,7 +1,7 @@
 ﻿
 
 'use strict';
-app.controller('FindItemsController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
+app.controller('FindItemsController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard', function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard) {
 
     $scope.InventoryItems = [];
     $scope.SecurityToken = "";
@@ -1658,8 +1658,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     iReqValue: v.iReqValue,
                     iCostPerUnit: v.pDefaultCost,
 
-
-
                 });
             }
 
@@ -1672,6 +1670,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         $scope.PopulateInventoryItems();
 
         $scope.getuom();
+
+        $cordovaKeyboard.disableScroll(false);
        
         //SetSelectedIfAny();
 
