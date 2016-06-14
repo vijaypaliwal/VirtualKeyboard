@@ -985,12 +985,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     $scope.OpenmenuModal();
                 }
 
-                
                 $scope.myinventoryColumnLoaded = true;
                 $cordovaKeyboard.disableScroll(false);
-
-                alert("Disablescroll");
-
                 CheckScopeBeforeApply();
             },
             error: function (req) {
