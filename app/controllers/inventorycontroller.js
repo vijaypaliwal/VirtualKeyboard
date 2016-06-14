@@ -1278,7 +1278,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.OpenBox = function () {
+        alert("Click");
         $("#files").trigger("click");
+        alert("Clickafter");
     }
 
     $scope.triggerFileClick = function () {
