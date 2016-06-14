@@ -984,18 +984,25 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 } else {
                     $scope.OpenmenuModal();
                 }
+
+                
                 $scope.myinventoryColumnLoaded = true;
+                $cordovaKeyboard.disableScroll(false);
+
+                alert("Disablescroll");
 
                 CheckScopeBeforeApply();
             },
             error: function (req) {
                 log.error("error during get inventory Success");
                 $scope.myinventoryColumnLoaded = true;
+                $cordovaKeyboard.disableScroll(false);
                 CheckScopeBeforeApply();
                 console.log(req);
             },
             complete: function () {
                 _IsLazyLoadingUnderProgress = 0;
+                $cordovaKeyboard.disableScroll(false);
                 SetSelectedIfAny();
             }
         });
@@ -1671,7 +1678,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         $scope.getuom();
 
-        $cordovaKeyboard.disableScroll(false);
+
        
         //SetSelectedIfAny();
 
