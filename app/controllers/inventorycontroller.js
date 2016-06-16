@@ -260,8 +260,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
-
-
     $scope.SetItemData = function (obj) {
 
         $scope.InventoryObject.ItemID = obj.ItemID;
@@ -310,7 +308,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#uomlistmodal").modal('hide');
         CheckScopeBeforeApply()
     }
-
 
 
     $scope.UOMSetItemData = function (obj) {
@@ -692,7 +689,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var _sum = 0;
 
 
-     
+        if (ImageListAndroid.length > 0) {
+            for (var i = 0; i < ImageListAndroid.length; i++) {
+
+                if (ImageListAndroid[i].bytestring != null && ImageListAndroid[i].bytestring != undefined) {
+                    ImageListAndroid[i].bytestring = removePaddingCharacters(ImageListAndroid[i].bytestring);
+
+                    $scope.ImageList.push(ImageListAndroid[i]);
+                }
+
+            }
+            CheckScopeBeforeApply();
+        }
 
         for (var i = 0; i < $scope.ImageList.length; i++) {
 
@@ -736,6 +744,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   $('#addinventories').find(".fa").removeClass("fa-spin");
               },
               error: function (err) {
+
 
                   console.log(err);
                   log.error("Error Occurred during operation");

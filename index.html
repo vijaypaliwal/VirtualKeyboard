@@ -1089,14 +1089,17 @@
 
         function onPhotoDataSuccess(imageData) {
 
-
+            var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
             var _length = 0;
             if ($('#list123').html() != undefined && $('#list123').html() != "" && $('#list123').children("span") != undefined) {
                 _length = $('#list123').children("span").length;
             }
 
 
-            var id = _length + 1;
+            //var id = _length + 1;
+            //_ImgObj.ImageID = id;
+            var id = randomStringNew(5, '0123456789');
+            _ImgObj.ImageID = id;
             var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImageNew(' + id + ')"><i class="fa fa-times"></i></a>';
             var compilehtml = crossicon;
 
@@ -1106,19 +1109,23 @@
             document.getElementById('list123').innerHTML = document.getElementById('list123').innerHTML + _htmltoRender;
 
             document.getElementById('list321').innerHTML = _htmltoRender;
-
+            $(".viewimage").show();
             $("#myModalforlist").modal("hide");
 
             $("#defaultimg").hide();
 
+            _ImgObj.FileName = "AndroidCapture";
+            _ImgObj.bytestring = imageData;
+
             setTimeout(function () {
+                ImageListAndroid.push(_ImgObj);
                 $(".removeImage").bind("click", function () {
 
                     removeImageNew($(this).attr("altid"));
                 });
             }, 100);
 
-
+            $(".viewimage").find("div").html(ImageListAndroid.length);
 
 
         }
@@ -1132,6 +1139,14 @@
 
                 $(this).parent("span").remove();
             });
+
+
+            for (var i = 0; i < ImageListAndroid.length; i++) {
+                if (ImageListAndroid[i].ImageID == _this) {
+                    ImageListAndroid.splice(i, 1);
+                    break;
+                }
+            }
 
 
 
@@ -1174,8 +1189,8 @@
             // Take picture using device camera and retrieve image as base64-encoded string
             navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
                 quality: 50,
-                destinationType: destinationType.DATA_URL,
-                correctOrientation: true
+                correctOrientation: true,
+                destinationType: destinationType.DATA_URL
             });
         }
 
@@ -1185,8 +1200,8 @@
             // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
             navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
                 quality: 20, allowEdit: true,
-                destinationType: destinationType.DATA_URL,
-                correctOrientation: true
+                correctOrientation: true,
+                destinationType: destinationType.DATA_URL
             });
         }
 
@@ -1197,8 +1212,8 @@
             navigator.camera.getPicture(onPhotoURISuccess, onFail, {
                 quality: 50,
                 destinationType: destinationType.FILE_URI,
-                sourceType: source,
-                correctOrientation: true
+                correctOrientation: true,
+                sourceType: source
             });
         }
 
