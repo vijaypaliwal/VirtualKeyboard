@@ -1303,7 +1303,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.handleFileSelect = function (evt) {
     
-
         debugger;
         var files = evt.target.files;
         FileName = "";
@@ -1390,6 +1389,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         alert("2");
         navigator.camera.getPicture($scope.handleFileSelect, onFail, {
             quality: 50,
+            encodingType: encodingType.PNG,
+            targetWidth: 120,
+            targeHeight: 120,
             correctOrientation: true,
             destinationType: destinationType.DATA_URL
         });
