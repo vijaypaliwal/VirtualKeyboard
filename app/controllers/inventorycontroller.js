@@ -692,6 +692,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var _sum = 0;
 
 
+        alert("One");
+
+
         if (ImageListAndroid.length > 0) {
             for (var i = 0; i < ImageListAndroid.length; i++) {
 
@@ -704,6 +707,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
             CheckScopeBeforeApply();
         }
+
+        alert("two");
 
         for (var i = 0; i < $scope.ImageList.length; i++) {
 
@@ -733,7 +738,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
 
-
+                  alert("3");
                   HideWaitingInv();
 
                   // $scope.resetObject();
