@@ -1302,7 +1302,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.handleFileSelect = function (evt) {
-        alert("3");
+    
 
         debugger;
         var files = evt.target.files;
@@ -1347,8 +1347,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     document.getElementById('list123').insertBefore(span, null);
 
-
+                  
                     $(".viewimage").show();
+
+                    alert("3");
 
                     var imagepath = '<span><img  id="' + id + '" style="height:80px;width:78px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
 
