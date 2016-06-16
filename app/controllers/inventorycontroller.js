@@ -1389,7 +1389,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         alert("2");
         navigator.camera.getPicture($scope.handleFileSelect, onFail, {
             quality: 50,
-            encodingType: encodingType.PNG,
+            //encodingType: encodingType.PNG,
             targetWidth: 120,
             targeHeight: 120,
             correctOrientation: true,
