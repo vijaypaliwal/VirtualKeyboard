@@ -1398,14 +1398,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
-
     $scope.viewimages = function ()
     {
 
      $("#imagemodal").modal('show');
 
     }
-
 
 
 
