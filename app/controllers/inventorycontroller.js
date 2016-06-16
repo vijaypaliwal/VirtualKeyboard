@@ -1309,7 +1309,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.handleFileSelect = function (evt) {
 
-
         debugger;
         var files = evt.target.files;
         FileName = "";
@@ -1334,7 +1333,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
                 var compilehtml = $compile(crossicon)($scope);
 
-               
+
+
+
                 return function (e) {
                     // Render thumbnail.
                     FileName = theFile.name;
@@ -1384,6 +1385,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $(".iteminfo").trigger("click;");
 
         }, 100);
+
+
 
     }
 
