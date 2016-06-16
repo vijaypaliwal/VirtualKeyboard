@@ -260,6 +260,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
+
+
     $scope.SetItemData = function (obj) {
 
         $scope.InventoryObject.ItemID = obj.ItemID;
@@ -273,7 +275,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.InventoryObject.UomID = obj.DefaultUomID;
         $scope.InventoryObject.Uom = obj.DefaultUom;
 
-    
+
 
         if ($scope.InventoryObject.CustomPartData.length > 0 && obj.CustomData.length > 0) {
 
@@ -308,6 +310,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#uomlistmodal").modal('hide');
         CheckScopeBeforeApply()
     }
+
 
 
     $scope.UOMSetItemData = function (obj) {
@@ -1150,12 +1153,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
 
+
+
                    $scope.ItemList = response.GetItemsResult.Payload;
                    CheckScopeBeforeApply()
                },
-               error: function (err)
-               {
-                log.error(err.Message);
+               error: function (err) {
+
+                   log.error(err.Message);
+
                }
            });
 
@@ -1279,10 +1285,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                    CheckScopeBeforeApply()
                },
-               error: function (response)
-               {
-               //$scope.InventoryObject.Location = 678030;
-             }
+               error: function (response) {
+
+                   //     $scope.InventoryObject.Location = 678030;
+
+               }
            });
     }
 
@@ -1391,10 +1398,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
-    $scope.viewimages = function ()
-    {
+    $scope.viewimages = function () {
 
-     $("#imagemodal").modal('show');
+        $("#imagemodal").modal('show');
 
     }
 
