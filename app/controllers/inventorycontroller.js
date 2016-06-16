@@ -1422,16 +1422,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
 
 
+
         if ($scope.ImageList.length == 0) {
             $("#imagemodal").modal('hide');
 
             $(".viewimage").hide();
 
         }
-
+        _ImageCounter = $scope.ImageList.length + ImageListAndroid.length;
+        $(".viewimage").find("div").html(_ImageCounter);
 
         removeImage(_this)
-
     }
 
     function init() {
