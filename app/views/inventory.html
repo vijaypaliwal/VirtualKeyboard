@@ -49,7 +49,7 @@
 
 <div class="maincontent animated slideInLeft">
                   
-  <form id="myform" name="myform">
+    <form id="myform" name="myform">
 
         <div class="device">
 
@@ -242,17 +242,22 @@
 
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBoxAndroid()">
-                                        <div><i class="fa fa-plus-circle"></i></div>
-                                        <span>Add Image</span>
-                                        <input type="file" style="visibility:hidden" id="files"/>
+                                    <div class="iosbtn">
+                                        <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBox()">
+                                            <div><i class="fa fa-plus-circle"></i></div>
+                                            <span>Add Image</span>
+
+                                            <input type="file" style="visibility:hidden" id="files" accept="image/*;capture=camera" />
+                                        </div>
                                     </div>
+
 
                                 </div>
                                 <div class="col-xs-6">
 
                                     <div  class="fileUpload viewimage btn btn-primary" style="float:right; display:none" ng-click="viewimages()">
-                                        <span>Selected <br /> Images </span>
+                                        <div>{{ImageList.length}}</div>
+                                        <span>Selected</span>
 
                                     </div>
                                   
@@ -536,6 +541,8 @@
 
 
     </form>
+
+
 
 </div>
 

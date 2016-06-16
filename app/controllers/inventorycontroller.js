@@ -275,7 +275,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.InventoryObject.UomID = obj.DefaultUomID;
         $scope.InventoryObject.Uom = obj.DefaultUom;
 
-
+    
 
         if ($scope.InventoryObject.CustomPartData.length > 0 && obj.CustomData.length > 0) {
 
@@ -692,23 +692,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var _sum = 0;
 
 
-        alert("One");
-
-
-        if (ImageListAndroid.length > 0) {
-            for (var i = 0; i < ImageListAndroid.length; i++) {
-
-                if (ImageListAndroid[i].bytestring != null && ImageListAndroid[i].bytestring != undefined) {
-                    ImageListAndroid[i].bytestring = removePaddingCharacters(ImageListAndroid[i].bytestring);
-
-                    $scope.ImageList.push(ImageListAndroid[i]);
-                }
-
-            }
-            CheckScopeBeforeApply();
-        }
-
-        alert("two");
+     
 
         for (var i = 0; i < $scope.ImageList.length; i++) {
 
@@ -738,7 +722,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
 
-                  alert("3");
+
                   HideWaitingInv();
 
                   // $scope.resetObject();
@@ -752,7 +736,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   $('#addinventories').find(".fa").removeClass("fa-spin");
               },
               error: function (err) {
-
 
                   console.log(err);
                   log.error("Error Occurred during operation");
@@ -1158,15 +1141,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
 
-
-
                    $scope.ItemList = response.GetItemsResult.Payload;
                    CheckScopeBeforeApply()
                },
-               error: function (err) {
-
-                   log.error(err.Message);
-
+               error: function (err)
+               {
+                log.error(err.Message);
                }
            });
 
@@ -1290,15 +1270,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                    CheckScopeBeforeApply()
                },
-               error: function (response) {
-
-                   //     $scope.InventoryObject.Location = 678030;
-
-               }
+               error: function (response)
+               {
+               //$scope.InventoryObject.Location = 678030;
+             }
            });
     }
 
     $scope.OpenBox = function () {
+
+        alert("1");
+        $scope.capturePhoto();
         $("#files").trigger("click");
     }
 
@@ -1320,6 +1302,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.handleFileSelect = function (evt) {
+        alert("3");
 
         debugger;
         var files = evt.target.files;
@@ -1345,9 +1328,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
                 var compilehtml = $compile(crossicon)($scope);
 
-
-
-
+               
                 return function (e) {
                     // Render thumbnail.
                     FileName = theFile.name;
@@ -1398,14 +1379,26 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         }, 100);
 
-
-
     }
 
 
-    $scope.viewimages = function () {
 
-        $("#imagemodal").modal('show');
+    $scope.capturePhoto = function () {
+
+        alert("2");
+        navigator.camera.getPicture($scope.handleFileSelect, onFail, {
+            quality: 50,
+            correctOrientation: true,
+            destinationType: destinationType.DATA_URL
+        });
+    }
+
+
+
+    $scope.viewimages = function ()
+    {
+
+     $("#imagemodal").modal('show');
 
     }
 
@@ -1433,17 +1426,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
 
 
-
         if ($scope.ImageList.length == 0) {
             $("#imagemodal").modal('hide');
 
             $(".viewimage").hide();
 
         }
-        _ImageCounter = $scope.ImageList.length + ImageListAndroid.length;
-        $(".viewimage").find("div").html(_ImageCounter);
+
 
         removeImage(_this)
+
     }
 
     function init() {
