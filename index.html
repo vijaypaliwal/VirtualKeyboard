@@ -1095,7 +1095,7 @@
 
         function onPhotoDataSuccess(imageData) {
 
-            alert("one");
+            
 
             var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
             var _length = 0;
@@ -1103,8 +1103,7 @@
                 _length = $('#list123').children("span").length;
             }
 
-            alert("two");
-
+          
 
             //var id = _length + 1;
             //_ImgObj.ImageID = id;
@@ -1131,7 +1130,7 @@
 
             setTimeout(function () {
 
-                alert("four");
+              
                 ImageListAndroid.push(_ImgObj);
                 $(".removeImage").bind("click", function () {
 
@@ -1139,7 +1138,7 @@
                 });
             }, 100);
 
-            alert("five");
+        
 
             $(".viewimage").find("div").html(ImageListAndroid.length);
 

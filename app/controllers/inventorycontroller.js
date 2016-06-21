@@ -1279,7 +1279,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.OpenBox = function () {
 
-        alert("1");
+      
         $scope.capturePhoto();
         $("#files").trigger("click");
     }
@@ -1346,13 +1346,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     document.getElementById('list123').insertBefore(span, null);
 
-                  
                     $(".viewimage").show();
-
-                    alert("3");
-
                     var imagepath = '<span><img  id="' + id + '" style="height:80px;width:78px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
-
 
                     $("#list321").append(imagepath);
                     $("#list567").append(imagepath);
@@ -1369,7 +1364,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $scope.ImageList.push(_ImgObj);
             CheckScopeBeforeApply();
 
-            debugger;
 
             $(".removeImage").bind("click", function () {
 
@@ -1382,38 +1376,24 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
-
-
-    $scope.capturePhoto = function () {
-
-        alert("2");
+    $scope.capturePhoto = function ()
+    {
         navigator.camera.getPicture($scope.handleFileSelect, onFail, {
             quality: 50,
-            //encodingType: encodingType.PNG,
             targetWidth: 120,
             targeHeight: 120,
             correctOrientation: true,
             destinationType: destinationType.DATA_URL
         });
     }
-
-
+    
     $scope.viewimages = function ()
     {
-
-     $("#imagemodal").modal('show');
-
+    $("#imagemodal").modal('show');
     }
 
 
-
-    $(document).ready(function () {
-
-    });
-
     function removeImage(_this) {
-
-
 
         $("#" + _this).each(function () {
 
