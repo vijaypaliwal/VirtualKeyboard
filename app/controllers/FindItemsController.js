@@ -990,7 +990,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 CheckScopeBeforeApply();
             },
             error: function (req) {
-                log.error("error during get inventory Success");
+              
                 $scope.myinventoryColumnLoaded = true;
                 $cordovaKeyboard.disableScroll(false);
                 CheckScopeBeforeApply();
@@ -1039,7 +1039,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
                 debugger;
 
-                log.error("error during get inventory columns");
+            
 
             },
             complete: function () {
@@ -1089,7 +1089,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             error: function (req) {
 
                 debugger;
-                log.error("error during get inventory columns");
+              
 
             },
             complete: function () {
