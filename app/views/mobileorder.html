@@ -173,9 +173,9 @@
 
     .save-btn {
         margin-bottom: 4px;
-        padding-left: 5px ;
-        padding-right: 5px;
-        width: 100px;
+        padding-left: 3px ;
+        padding-right: 3px;
+        width:85px;
         text-transform:capitalize;
     }
 
@@ -210,16 +210,46 @@
         white-space: nowrap;
         position: fixed;
         left: 96%;
-        top: 30%;
+        top: 35%;
     }
+
+    .myLinkToTop {
+        position: fixed;
+       
+        top: 23%;
+        right:6px;
+        width: 40px;
+       
+        padding: 0px;
+        text-align: center;
+        border-radius:0px;
+    }
+
+
+    .myMenuLink {
+        position: fixed;
+        top: 16%;
+        right:6px;
+        width: 40px;
+        padding: 0px;
+        text-align: center;
+        border-radius: 0px;
+    }
+    .btn-primary.dropdown-toggle
+    {
+        opacity:0.5;
+    }
+
 
 </style>
 
-<div style="margin-top:12px;" class="page-header">
+<div style="margin-top: 12px; width:86%;" class ="page-header">
 
-    <div class="row">
+
+
+    <div  class="row">
         <div class="col-xs-7">
-            <h4 style="margin-top:0px; font-size:16px; line-height:34px; margin-bottom:0px; color:#000;">Inventory Columns</h4>
+            <h4 style="margin-top:0px; font-size:15px; line-height:34px; margin-bottom:0px; color:#000;">Inventory Columns</h4>
         </div>
 
         <div style="text-align:right" class="col-xs-5">
@@ -260,12 +290,12 @@
                         <div class="col-xs-5">
                             <div ng-disabled="obj.Show==false" class="btn-group custombtnGroup">
                                 <button ng-click="obj.mobileorder=0" ng-if="obj.mobileorder!=0" ng-disabled="obj.Show==false" class="btn btn-success dropdown-toggle" title="(click to change)">
-                                      ON
+                                  ON
                                     
                                 </button>
 
                                 <button ng-click="obj.mobileorder=$index+1" ng-if="obj.mobileorder==0" ng-disabled="obj.Show==false" class="btn btn-primary dropdown-toggle" title="(click to change)">
-                                      OFF
+                                 OFF
                                 </button>
 
                             </div>
@@ -291,6 +321,28 @@
     Scroll from here !!
 
 </div>
+
+<div></div>
+
+<a class="myLinkToTop btn btn-primary">
+    <i class="fa fa-arrow-circle-o-down"></i>
+</a>
+
+<a class="myMenuLink btn btn-primary">
+    <i class="fa fa-arrow-circle-o-up"></i>
+</a>
+
+<script>    
+    $('.myLinkToTop').click(function () {
+        $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
+        return false;
+    });
+
+    $('.myMenuLink').click(function () {
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
+        return false;
+    });
+</script>
 
 
 
