@@ -19,8 +19,7 @@ Primary use: App & Mobile Website
 -------------------------------------------------------------------*/
 
 body {
-    font-family: 'Open Sans', sans-serif !important;
-  
+    font-family:Verdana;
     overflow-x: hidden;
 }
 [class^="mdi-"],
@@ -644,7 +643,7 @@ footer.page-footer {
     color: #fff;
 }
 #toolbar .title {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 300;
     color: #fff;
     line-height: 56px;

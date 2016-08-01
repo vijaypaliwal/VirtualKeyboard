@@ -287,8 +287,8 @@ html {
 }
 
 body {
-    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 15px;
+    
+    font-size: 14px;
     line-height: 1.42857143;
     color: #222222;
     background-color: #ffffff;
@@ -6581,6 +6581,7 @@ label, .control-label, .help-block, .checkbox, .radio {
 
     .dropdown-menu > li > a {
         padding: 12px 15px;
+        font-size:14px;
     }
 
 .dropdown-header {

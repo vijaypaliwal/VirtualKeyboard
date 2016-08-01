@@ -1,0 +1,108 @@
+﻿
+<div style="margin-top:12px;" class="page-header ng-scope">
+
+    <div class="row">
+
+        <div class="col-xs-7">
+            <h4 style="margin-top:0px;line-height:34px; margin-bottom:0px; color:#000;">Help </h4>
+        </div>
+    </div>
+
+
+</div>
+
+<div style="background:#fff; margin-top:10px;" class="ng-scope">
+    <ul class="collapsible animated fadeinright delay-1" data-collapsible="accordion">
+        <li>
+            <div class="collapsible-header" onclick="Toggle('#firstDiv')"><i class="ion-android-arrow-dropdown right"></i> 1.Why can't i scan ? </div>
+            <div class="collapsible-body" id="firstDiv">
+                <p class="fontsize2">
+                    If you’re having problems "scan", then please check camera permissions at below place.
+                    <br /><br /> <b> Go to settings > Clearly Invetory > Turn on camera</b>
+
+                </p>
+            </div>
+        </li>
+
+        <li>
+            <div class="collapsible-header" onclick="Toggle('#SecondDiv')"><i class="ion-android-arrow-dropdown right"></i>2. Unable to select any picture ?</div>
+            <div class="collapsible-body" id="SecondDiv">
+                <p>
+                    If you’re having problems chossing picture, please check photos permissions at below place
+
+                    <br />
+
+                    <br />
+                    <b> Go to settings > Clearly Invetory > Turn on photos</b>
+                </p>
+            </div>
+        </li>
+
+        <li>
+
+            <div class="collapsible-header" onclick="Toggle('#ThirdDiv')" style=" color: brown;"><i class="ion-android-arrow-dropdown right"></i>3. If you’re still having  then..</div>
+            <div class="collapsible-body" id="ThirdDiv">
+                <p>
+                    Please contact to administrator at below email
+
+                    <br />
+
+                   <a style="color:#069;text-decoration: underline;" href="mailto:info@clearlyinventory.com">info@clearlyinventory.com</a>
+                </p>
+            </div>
+        </li>
+
+    </ul>
+</div>
+<!--<div style="background:#fff; margin-top:10px; padding:10px;" class="ng-scope">
+    <h4> 1. why can't i scan in Clearly Inventory</h4>
+    <p> If you’re having problems "scan", first make sure you’re using the latest version of Clearly Inventory.If you’re still having  then please check camera permissions at below place</p>
+    <p> <b> Go to settings > Clearly Invetory > Turn on camera</b> </p>
+    <p>  This usually solves most <b> "scan" </b>issues. </p>
+    <hr />
+    <h4>  2. why i am unable to select any picture from my photo library</h4>
+
+    <p>   If you’re having problems chossing picture, please check photos permissions at below place</p>
+
+
+
+    <p>
+        <b> Go to settings > Clearly Invetory > Turn on photos</b>
+    </p>
+
+    <hr />
+
+
+</div>-->
+
+<style>
+    .container {
+        width: 100%;
+    }
+
+    body {
+        background: #eaeaea;
+        overflow-x: hidden !important;
+    }
+
+    .collapsible-body p {
+        font-size: 14px;
+        padding: 12px;
+    
+    }
+    .collapsible-header {
+        font-size: 18px !important;
+    }
+</style>
+<script>
+    function Toggle(ID) {
+        $(ID).toggle("slow");
+    }
+
+    Toggle('#firstDiv');
+
+</script>
+
+
+
+

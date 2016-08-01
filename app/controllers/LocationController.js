@@ -250,10 +250,16 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                             ShowSuccess("Updated");
                         }
 
+                      
+
 
                         $scope.GetLocations();
 
                         $scope.mode = 1;
+
+                        $scope.SearchData.SearchValue = "";
+
+                      
 
                     }
 
@@ -274,6 +280,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
                 },
                 complete: function () {
+                    $scope.IsProcessing = false;
                 }
 
             });

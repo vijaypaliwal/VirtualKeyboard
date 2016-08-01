@@ -960,6 +960,10 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             dataType: 'json',
             success: function (result) {
 
+                $(".searchtable").removeClass("disablepointer")
+
+                
+
                 $scope._areImagesShown = result.GetInventoriesResult.Payload[0].AreImagesShown
                 $scope._areZeroRecordsShown = result.GetInventoriesResult.Payload[0].AreZeroRecords
                 $scope.InventoryItems = result.GetInventoriesResult.Payload[0].Data;
@@ -969,6 +973,9 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 $scope.currentrecord = _TotalRecordsCurrent;
                 $scope.totalrecords = result.GetInventoriesResult.Payload[0].TotalRercords;
                 $scope.ActualTotalRecords = result.GetInventoriesResult.Payload[0].ActualTotalRecords;
+
+                $(".paginationtext").show();
+
                 if (_TotalRecordsCurrent == 0) {
                     $(".norecords").show();
                     $(".bottomlink").hide();
@@ -983,6 +990,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 if ($scope.ActualTotalRecords) {
                 } else {
                     $scope.OpenmenuModal();
+                    $(".searchtable").addClass("disablepointer");
                 }
 
                 $scope.myinventoryColumnLoaded = true;
@@ -990,6 +998,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 CheckScopeBeforeApply();
             },
             error: function (req) {
+                $(".paginationtext").show();
               
                 $scope.myinventoryColumnLoaded = true;
                 $cordovaKeyboard.disableScroll(false);

@@ -67,9 +67,15 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
               success: function (response) {
 
                   debugger;
+                  $scope.MyInventorycolumns = [];
 
-                  $scope.MyInventorycolumns = response.GetMyInventoryColumnsResult.Payload;
-
+                  var _myinventorycols = response.GetMyInventoryColumnsResult.Payload;
+                  for (var i = 0; i <_myinventorycols.length; i++) {
+                      if (_myinventorycols[i].ColumnName != "HasConversion" && _myinventorycols[i].ColumnName != "ActionQty")
+                      {
+                          $scope.MyInventorycolumns.push(_myinventorycols[i]);
+                      }
+                  }
                   $scope.LocationsLoaded = true;
                   $scope.Isbuttonshow = true;
                   $scope.MyInventorycolumns.sort(SortByOrder);
@@ -94,7 +100,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         start: function (evt, ui) {
             $(this).attr("style", "cursor:move")
 
-            $cordovaKeyboard.disableScroll(true);
+          //  $cordovaKeyboard.disableScroll(true);
         },
         items: "tr",
         update: function (e, ui) {
@@ -105,7 +111,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
             debugger;
           
-           $cordovaKeyboard.disableScroll(false);
+        //   $cordovaKeyboard.disableScroll(false);
 
 
         }

@@ -133,6 +133,7 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
                     if (result.CreateEditUOMResult.Payload == 0) {
 
                         log.warning("Already exist");
+                       
 
                     }
 
@@ -147,6 +148,7 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
 
                 },
                 complete: function () {
+                    $scope.IsProcessing = false;
                 }
 
             });

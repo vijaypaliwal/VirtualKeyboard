@@ -321,14 +321,7 @@
                 cursor: pointer;
             }
 
-        body {
-            font-family: "Myriad Set Pro", "Lucida Grande", "Helvetica Neue", "Helvetica", "Arial", "Verdana", "sans-serif";
-            overflow: auto !important;
-        }
-
-        .btn {
-            font-size: 16px;
-        }
+     
 
         .arrow-right {
             border-left: 1px solid #fff !important;
@@ -393,8 +386,9 @@
             background: rgba(52, 73, 94,0.8);
             padding: 10px;
             margin: 0 auto;
-            width: 150px;
+            width: 160px;
             z-index: 1050;
+            text-align:center;
         }
 
 
@@ -551,7 +545,7 @@
     </div>
     <div class="animated" id="myloginModal">
 
-        <div class="errorcontent" style="width:122px;background:#000;">
+        <div class="errorcontent" style="background:#000;">
 
             <img style="max-height:50px; max-width:50px;" src="img/loader1.gif" />
 
@@ -565,7 +559,7 @@
 
 
     <div style="display:none;" class="animated" id="mysignupModal">
-        <div class="errorcontent" style="width:122px;background:#000;">
+        <div class="errorcontent" style="background:#000;">
             <img style="max-height:50px; max-width:50px;" src="img/loader1.gif" />
 
             <span style="display:block;font-size:20px;font-weight:300;color:#fafafa;">
@@ -716,6 +710,7 @@
     <script src="app/controllers/indexController.js?v=2"></script>
     <script src="app/controllers/loginController.js?v=2"></script>
     <script src="app/controllers/mainmenuController.js?v=2"></script>
+    <script src="app/controllers/helpController.js?v=2"></script>
     <script src="app/controllers/signupController.js?v=2"></script>
     <script src="app/controllers/inventorycontroller.js?v=2"></script>
     <script src="app/controllers/FindItemsController.js?v=2"></script>
@@ -809,9 +804,7 @@
             return result;
         }
 
-
         var _Islive = true;
-
 
         $("#mysmallModal").click(function () {
             hideSuccess();
@@ -1366,10 +1359,13 @@
                 case -90:
                 case 90:
 
+                    alert(window.orientation);
+
                     $("#mycartModal").addClass("activitylist")
 
                     break;
                 default:
+                    alert(window.orientation);
                     $("#mycartModal").removeClass("activitylist")
                     break;
             }
