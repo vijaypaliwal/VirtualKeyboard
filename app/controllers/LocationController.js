@@ -266,7 +266,8 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                     if (result.CreateEditLocationResult.Payload == 0) {
 
                         log.warning("Already exist");
-
+                        $scope.IsProcessing = false;
+                        $scope.$apply();
                     }
                   
 

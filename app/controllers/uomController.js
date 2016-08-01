@@ -130,10 +130,13 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
 
                     }
 
+                    debugger;
+
                     if (result.CreateEditUOMResult.Payload == 0) {
 
                         log.warning("Already exist");
-                       
+                        $scope.IsProcessing = false;
+                        $scope.$apply();
 
                     }
 
