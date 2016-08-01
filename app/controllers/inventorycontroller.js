@@ -672,14 +672,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
         var dateObj = new Date();
-        var month = dateObj.getUTCMonth(); //months from 1-12
-        var day = dateObj.getUTCDate()-1;
+        var month = dateObj.getUTCMonth()+1; //months from 1-12
+        var day = dateObj.getUTCDate();
         var year = dateObj.getUTCFullYear();
 
         
         var _updatedate = new Date(year, month, day);
         _updatedate.setDate(_updatedate.getDate() + 1);
-        var _d1122 = new Date(Date.UTC(_updatedate.getFullYear(), _updatedate.getMonth(), _updatedate.getDate(), 0, 0, 0, 0))
+        var _d1122 = new Date(Date.UTC(_updatedate.getFullYear(), _updatedate.getMonth()-1, _updatedate.getDate(), 0, 0, 0, 0))
 
        var wcfDateStrUpd = _d1122.toMSJSON();
 
