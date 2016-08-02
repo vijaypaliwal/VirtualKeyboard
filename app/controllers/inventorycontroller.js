@@ -650,16 +650,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity == "" ? 0 : $scope.InventoryObject.Quantity;
         var _updateDateval = $scope.InventoryObject.UniqueDate;
 
-
         if (_updateDateval != null && _updateDateval != "") {
             var wcfDateStr123 = null;
             var dsplit1 = _updateDateval.split("-");
 
             var d122 = new Date(dsplit1[0], dsplit1[1] - 1, dsplit1[2]);
 
-            var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), d122.getHours(), d122.getMinutes(), d122.getSeconds(), d122.getMilliseconds()))
+            var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
 
             d122.setDate(d122.getDate() + 1);
+            var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate() - 1, 0, 0, 0, 0))
             wcfDateStr123 = d122.toMSJSON();
 
             $scope.InventoryObject.UniqueDate = wcfDateStr123;
@@ -669,8 +669,23 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
 
 
+
+        var dateObj = new Date();
+        var month = dateObj.getUTCMonth() + 1; //months from 1-12
+        var day = dateObj.getUTCDate();
+        var year = dateObj.getUTCFullYear();
+
+
+        var _updatedate = new Date(year, month, day);
+        _updatedate.setDate(_updatedate.getDate() + 1);
+        var _d1122 = new Date(Date.UTC(_updatedate.getFullYear(), _updatedate.getMonth() - 1, _updatedate.getDate(), 0, 0, 0, 0))
+
+        var wcfDateStrUpd = _d1122.toMSJSON();
+
+
         var _updateDateval1 = $scope.InventoryObject.UnitDate2;
 
+        $scope.InventoryObject.UpdateDate = wcfDateStrUpd;
 
         if (_updateDateval1 != null && _updateDateval1 != "") {
 
@@ -680,9 +695,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
 
             d1222.setDate(d1222.getDate() + 1);
-            var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), d1222.getHours(), d1222.getMinutes(), d1222.getSeconds(), d1222.getMilliseconds()))
+            var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate() - 1, 0, 0, 0, 0))
 
-            wcfDateStr1234 = d1122.toMSJSON();
+            wcfDateStr1234 = d1222.toMSJSON();
 
             $scope.InventoryObject.UnitDate2 = wcfDateStr1234;
         }

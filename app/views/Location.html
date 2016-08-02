@@ -80,7 +80,7 @@
     }
 
     .list-group-item a {
-      font-size:15px;
+      font-size:14px;
     }
 
         .list li a{
@@ -193,7 +193,7 @@
 
     <div style="text-align: center; color: #d9534f; display:none;" class="maincontent norecords">
 
-        <div ng-if="ActualTotalRecords!=0">
+        <div ng-if="ActualTotalRecords!=0 && LocationsLoaded==true">
 
             <h3>No record matched your Query</h3>
             <a style="cursor:pointer;width:auto;" class="btn btn-primary" ng-click="ClearFilter()"> <i class="fa fa-filter"></i> Clear your filters</a>
