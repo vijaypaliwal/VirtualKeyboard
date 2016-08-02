@@ -1318,13 +1318,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     function uploadPics(UploadObject) {
-        //console.log("Ok, going to upload " + $scope.ImageList.length + " images.");
+        HideWaitingInv();
+        alert("Ok, going to upload " + $scope.ImageList.length + " images.");
+       // ShowWaitingInv();
         var defs = [];
 
         $scope.ImageList.forEach(function (i) {
             //console.log('processing ' + i);
             var def = $.Deferred();
-
+            alert('processing ' + i);
             function win(r) {
                 console.log("thing done");
                 if ($.trim(r.response) === "0") {
