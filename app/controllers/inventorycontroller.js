@@ -1326,12 +1326,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.ImageList.forEach(function (i) {
             //console.log('processing ' + i);
             var def = $.Deferred();
-            alert('processing ' + i);
+            
             function win(r) {
                 console.log("thing done");
                 if ($.trim(r.response) === "0") {
                     console.log("this one failed");
-                    HideWaitingInv();
+                  
                     alert("this one failed");
                    
                     def.resolve(0);
@@ -1342,7 +1342,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
 
             function fail(error) {                
-                HideWaitingInv();
+                
                 alert("upload error source " + error.source);
                 alert("upload error target " + error.target);
                 def.resolve(0);
@@ -1360,8 +1360,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             params.ImageList = [];
             params.ImageList.push(i);
             options.params = params;
+            alert('processing ' + i);
             var ft = new FileTransfer();
             ft.upload(i, uri, win, fail, options);
+            alert('processing started');
             defs.push(def.promise());
 
         });
