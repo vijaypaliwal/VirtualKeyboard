@@ -1350,10 +1350,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             var uri = encodeURI(serviceBase + "/UploadImage");
 
-            var options = new FileUploadOptions();
-            options.fileKey = "file";
-            options.fileName = i.substr(i.lastIndexOf('/') + 1);
-            options.mimeType = "image/jpeg";
+            var options = new Object();
+            //options.fileKey = "file";
+            //options.fileName = i.substr(i.lastIndexOf('/') + 1);
+            //options.mimeType = "image/jpeg";
             var params = new Object();
             params.SecurityToken = UploadObject.SecurityToken;
             params.txnID = UploadObject.txnID;
