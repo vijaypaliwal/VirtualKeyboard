@@ -1305,7 +1305,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.handleFileSelect = function (evt) {
     
-        alert("I am in handle");
+        //alert("I am in handle");
         var files = evt.target.files;
         FileName = "";
         StreamData = "";
@@ -1381,7 +1381,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.capturePhoto = function ()
     {
-        alert("I capturing photo");
+        
         navigator.camera.getPicture($scope.handleFileSelect, onFail, {
             quality: 50,
             targetWidth: 120,
