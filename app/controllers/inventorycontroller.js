@@ -719,13 +719,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               contentType: 'application/json; charset=utf-8',
 
               dataType: 'json',
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": [] }),
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": $scope.ImageList }),
               // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
 
 
-                  //HideWaitingInv();
-                  uploadPics({ "SecurityToken": $scope.SecurityToken, "ImageList": $scope.ImageList, "txnID": response.Payload });
+                  HideWaitingInv();
+                  //uploadPics({ "SecurityToken": $scope.SecurityToken, "ImageList": $scope.ImageList, "txnID": response.Payload });
 
                   // $scope.resetObject();
 
@@ -1317,64 +1317,64 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
-    function uploadPics(UploadObject) {
-        HideWaitingInv();
-        alert("Ok, going to upload " + $scope.ImageList.length + " images.");
-       // ShowWaitingInv();
-        var defs = [];
+    //function uploadPics(UploadObject) {
+    //    HideWaitingInv();
+    //    alert("Ok, going to upload " + $scope.ImageList.length + " images.");
+    //   // ShowWaitingInv();
+    //    var defs = [];
 
-        $scope.ImageList.forEach(function (i) {
-            //console.log('processing ' + i);
-            var def = $.Deferred();
+    //    $scope.ImageList.forEach(function (i) {
+    //        //console.log('processing ' + i);
+    //        var def = $.Deferred();
             
-            function win(r) {
-                console.log("thing done");
-                if ($.trim(r.response) === "0") {
-                    console.log("this one failed");
+    //        function win(r) {
+    //            console.log("thing done");
+    //            if ($.trim(r.response) === "0") {
+    //                console.log("this one failed");
                   
-                    alert("this one failed");
+    //                alert("this one failed");
                    
-                    def.resolve(0);
-                } else {
+    //                def.resolve(0);
+    //            } else {
                     
-                    def.resolve(1);
-                }
-            }
+    //                def.resolve(1);
+    //            }
+    //        }
 
-            function fail(error) {                
+    //        function fail(error) {                
                 
-                alert("upload error source " + error.source);
-                alert("upload error target " + error.target);
-                def.resolve(0);
-            }
+    //            alert("upload error source " + error.source);
+    //            alert("upload error target " + error.target);
+    //            def.resolve(0);
+    //        }
 
-            var uri = encodeURI(serviceBase + "/UploadImage");
+    //        var uri = encodeURI(serviceBase + "/UploadImage");
 
-            var options = new Object();
-            //options.fileKey = "file";
-            //options.fileName = i.substr(i.lastIndexOf('/') + 1);
-            //options.mimeType = "image/jpeg";
-            var params = new Object();
-            params.SecurityToken = UploadObject.SecurityToken;
-            params.txnID = UploadObject.txnID;
-            params.ImageList = [];
-            params.ImageList.push(i);
-            options.params = params;
-            alert('processing ' + i);
-            var ft = new FileTransfer();
-            ft.upload(i, uri, win, fail, options);
-            alert('processing started');
-            defs.push(def.promise());
+    //        var options = new Object();
+    //        //options.fileKey = "file";
+    //        //options.fileName = i.substr(i.lastIndexOf('/') + 1);
+    //        //options.mimeType = "image/jpeg";
+    //        var params = new Object();
+    //        params.SecurityToken = UploadObject.SecurityToken;
+    //        params.txnID = UploadObject.txnID;
+    //        params.ImageList = [];
+    //        params.ImageList.push(i);
+    //        options.params = params;
+    //        alert('processing ' + i);
+    //        var ft = new FileTransfer();
+    //        ft.upload(i, uri, win, fail, options);
+    //        alert('processing started');
+    //        defs.push(def.promise());
 
-        });
+    //    });
 
-        $.when.apply($, defs).then(function () {
+    //    $.when.apply($, defs).then(function () {
              
-            HideWaitingInv();
-            console.dir(arguments);
-        });
+    //        HideWaitingInv();
+    //        console.dir(arguments);
+    //    });
 
-    }
+    //}
 
      
 
