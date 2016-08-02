@@ -28,7 +28,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
     $scope.allowdrag = function () {
         ShowSuccess("Updated");
-        debugger;
+         
         $scope.isallowdrag = true;
         $scope.$apply();
     }
@@ -36,7 +36,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
     $scope.disallowdrag = function () {
         ShowSuccess("Updated");
-        debugger;
+         
         $scope.isallowdrag = false;
         $scope.$apply();
     }
@@ -66,12 +66,12 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
               success: function (response) {
 
-                  debugger;
+                   
                   $scope.MyInventorycolumns = [];
 
                   var _myinventorycols = response.GetMyInventoryColumnsResult.Payload;
                   for (var i = 0; i <_myinventorycols.length; i++) {
-                      if (_myinventorycols[i].ColumnName != "HasConversion" && _myinventorycols[i].ColumnName != "ActionQty")
+                     // if (_myinventorycols[i].ColumnName != "HasConversion" && _myinventorycols[i].ColumnName != "ActionQty")
                       {
                           $scope.MyInventorycolumns.push(_myinventorycols[i]);
                       }
@@ -100,7 +100,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         start: function (evt, ui) {
             $(this).attr("style", "cursor:move")
 
-          //  $cordovaKeyboard.disableScroll(true);
+            $cordovaKeyboard.disableScroll(true);
         },
         items: "tr",
         update: function (e, ui) {
@@ -109,9 +109,9 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         cancel: ".unsortable",
         stop: function (e, ui) {
 
-            debugger;
+             
           
-        //   $cordovaKeyboard.disableScroll(false);
+           $cordovaKeyboard.disableScroll(false);
 
 
         }
@@ -161,7 +161,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         }
 
         console.log($scope.MyInventorycolumns);
-        debugger;
+         
         $scope.$apply();
 
         var authData = localStorageService.get('authorizationData');
@@ -178,7 +178,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Columns": $scope.MyInventorycolumns }),
               success: function (response) {
 
-                  debugger;
+                   
 
                   $scope.LocationsLoaded = true;
                   $scope.loadingbutton == false
