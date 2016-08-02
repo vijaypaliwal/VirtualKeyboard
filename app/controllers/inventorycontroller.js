@@ -678,7 +678,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         var _updatedate = new Date(year, month, day);
         _updatedate.setDate(_updatedate.getDate() + 1);
-        var _d1122 = new Date(Date.UTC(_updatedate.getFullYear(), _updatedate.getMonth() - 1, _updatedate.getDate(), 0, 0, 0, 0))
+        var _d1122 = new Date(Date.UTC(_updatedate.getFullYear(), _updatedate.getMonth() - 1, _updatedate.getDate()-1, 0, 0, 0, 0))
 
         var wcfDateStrUpd = _d1122.toMSJSON();
 
