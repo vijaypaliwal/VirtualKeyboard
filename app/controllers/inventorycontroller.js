@@ -1471,7 +1471,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     //    });
     //}
     $scope.capturePhoto = function () {
-
+        alert(" Capture photo");
         navigator.camera.getPicture(function (f) {
             var newHtml = "<img src='" + f + "'>";
             $imagesDiv.append(newHtml);
@@ -1481,7 +1481,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
              
         }, onFail, {
             quality: 50,
-            targetWidth: 120,
+            targetWidth: 50,
             targeHeight: 120,
             correctOrientation: true,
             destinationType: navigator.camera.DestinationType.FILE_URI,
