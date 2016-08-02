@@ -1481,11 +1481,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
              
         }, onFail, {
             quality: 50,
-            targetWidth: 50,
-            targeHeight: 120,
-            correctOrientation: true,
-            destinationType: navigator.camera.DestinationType.FILE_URI,
-            sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+            destinationType: destinationType.FILE_URI,
+            correctOrientation: true
         });
     }
     
