@@ -692,7 +692,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var _sum = 0;
 
 
-     
+        if (ImageListAndroid.length > 0) {
+            for (var i = 0; i < ImageListAndroid.length; i++) {
+
+                if (ImageListAndroid[i].bytestring != null && ImageListAndroid[i].bytestring != undefined) {
+                    ImageListAndroid[i].bytestring = removePaddingCharacters(ImageListAndroid[i].bytestring);
+
+                    $scope.ImageList.push(ImageListAndroid[i]);
+                }
+
+            }
+            CheckScopeBeforeApply();
+        }
 
         for (var i = 0; i < $scope.ImageList.length; i++) {
 
@@ -722,7 +733,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
 
-
+                  ImageListAndroid = [];
                   HideWaitingInv();
 
                   // $scope.resetObject();
@@ -1338,7 +1349,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     var span = document.createElement('span');
                     span.innerHTML =
                     [
-                      '<img id="' + id + '" style="height: 75px; width:75px; border: 1px solid #ccc; margin:10px; margin-top:0px;" src="',
+                      '<img id="' + id + '" style="height: 75px; width:75px; border: 1px solid #ccc; margin:0px; margin-top:0px;" src="',
                       e.target.result,
                       '" title="', escape(theFile.name),
                       '"/> ' + compilehtml[0].outerHTML + ''
