@@ -719,12 +719,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               contentType: 'application/json; charset=utf-8',
 
               dataType: 'json',
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": $scope.ImageList }),
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": [] }),
               // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
 
 
-                  HideWaitingInv();
+                  //HideWaitingInv();
+                  uploadPics({ "SecurityToken": $scope.SecurityToken, "ImageList": $scope.ImageList, "txnID": response.Payload });
 
                   // $scope.resetObject();
 
@@ -1303,6 +1304,76 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     });
 
 
+    function getImage() {
+        // Retrieve image file location from specified source
+        navigator.camera.getPicture(uploadPhoto, function (message) {
+            alert('get picture failed');
+        }, {
+            quality: 50,
+            destinationType: navigator.camera.DestinationType.FILE_URI,
+            sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+        }
+        );
+
+    }
+
+    function uploadPics(UploadObject) {
+        console.log("Ok, going to upload " + $scope.ImageList.length + " images.");
+        var defs = [];
+
+        $scope.ImageList.forEach(function (i) {
+            console.log('processing ' + i);
+            var def = $.Deferred();
+
+            function win(r) {
+                console.log("thing done");
+                if ($.trim(r.response) === "0") {
+                    console.log("this one failed");
+                    def.resolve(0);
+                } else {
+                    console.log("this one passed");
+                    def.resolve(1);
+                }
+            }
+
+            function fail(error) {
+                console.log("upload error source " + error.source);
+                console.log("upload error target " + error.target);
+                def.resolve(0);
+            }
+
+            var uri = encodeURI(serviceBase + "/UploadImage");
+
+            var options = new FileUploadOptions();
+            options.fileKey = "file";
+            options.fileName = i.substr(i.lastIndexOf('/') + 1);
+            options.mimeType = "image/jpeg";
+            var params = new Object();
+            params.SecurityToken = UploadObject.SecurityToken;
+            params.txnID = UploadObject.txnID;
+            params.ImageList = [];
+            params.ImageList.push(i);
+            options.params = params;
+            var ft = new FileTransfer();
+            ft.upload(i, uri, win, fail, options);
+            defs.push(def.promise());
+
+        });
+
+        $.when.apply($, defs).then(function () {
+             
+            HideWaitingInv();
+            console.dir(arguments);
+        });
+
+    }
+
+     
+
+    function fail(error) {
+        alert("An error has occurred: Code = " = error.code);
+    }
+
     $scope.handleFileSelect = function (evt) {
     
         //alert("I am in handle");
@@ -1379,15 +1450,34 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
-    $scope.capturePhoto = function ()
-    {
+    //$scope.capturePhoto = function ()
+    //{
         
-        navigator.camera.getPicture($scope.handleFileSelect, onFail, {
+    //    navigator.camera.getPicture($scope.handleFileSelect, onFail, {
+    //        quality: 50,
+    //        targetWidth: 120,
+    //        targeHeight: 120,
+    //        correctOrientation: true,            
+    //        destinationType: navigator.camera.DestinationType.FILE_URI,
+    //        sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+    //    });
+    //}
+    $scope.capturePhoto = function () {
+
+        navigator.camera.getPicture(function (f) {
+            var newHtml = "<img src='" + f + "'>";
+            $imagesDiv.append(newHtml);
+            $("#list321").append(newHtml);
+            $("#list567").append(newHtml);
+            $scope.ImageList.push(f);
+             
+        }, onFail, {
             quality: 50,
             targetWidth: 120,
             targeHeight: 120,
             correctOrientation: true,
-            destinationType: destinationType.DATA_URL
+            destinationType: navigator.camera.DestinationType.FILE_URI,
+            sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
         });
     }
     
