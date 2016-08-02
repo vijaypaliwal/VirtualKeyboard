@@ -1318,27 +1318,31 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     function uploadPics(UploadObject) {
-        console.log("Ok, going to upload " + $scope.ImageList.length + " images.");
+        //console.log("Ok, going to upload " + $scope.ImageList.length + " images.");
         var defs = [];
 
         $scope.ImageList.forEach(function (i) {
-            console.log('processing ' + i);
+            //console.log('processing ' + i);
             var def = $.Deferred();
 
             function win(r) {
                 console.log("thing done");
                 if ($.trim(r.response) === "0") {
                     console.log("this one failed");
+                    HideWaitingInv();
+                    alert("this one failed");
+                   
                     def.resolve(0);
                 } else {
-                    console.log("this one passed");
+                    
                     def.resolve(1);
                 }
             }
 
-            function fail(error) {
-                console.log("upload error source " + error.source);
-                console.log("upload error target " + error.target);
+            function fail(error) {                
+                HideWaitingInv();
+                alert("upload error source " + error.source);
+                alert("upload error target " + error.target);
                 def.resolve(0);
             }
 
