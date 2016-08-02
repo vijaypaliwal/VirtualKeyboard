@@ -693,7 +693,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
      
-        $scope.ImageList = ImageListAndroid;
+        // $scope.ImageList = ImageListAndroid;
+        alert("got images : "+ $scope.ImageList.length )
         for (var i = 0; i < $scope.ImageList.length; i++) {
 
             if ($scope.ImageList[i].bytestring != null && $scope.ImageList[i].bytestring != undefined) {
@@ -1298,13 +1299,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $("#files").on('change', function (event) {
         //$scope.handleFileSelect(event);
-        capturePhoto();
+       // capturePhoto();
     });
 
 
     $scope.handleFileSelect = function (evt) {
     
-        debugger;
+        alert("I am in handle");
         var files = evt.target.files;
         FileName = "";
         StreamData = "";
@@ -1380,6 +1381,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.capturePhoto = function ()
     {
+        alert("I capturing photo");
         navigator.camera.getPicture($scope.handleFileSelect, onFail, {
             quality: 50,
             targetWidth: 120,
