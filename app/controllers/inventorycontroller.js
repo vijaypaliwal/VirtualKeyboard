@@ -1364,7 +1364,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     var span = document.createElement('span');
                     span.innerHTML =
                     [
-                      '<img id="' + id + '" style="height: 80px; width:80px; border: 1px solid #ccc; margin:0px; margin-top:0px;position:absolute;" src="',
+                      '<img id="' + id + '" style="height: 80px; width:80px; border: 1px solid #ccc; margin:0px; margin-top:0px;" src="',
                       e.target.result,
                       '" title="', escape(theFile.name),
                       '"/> ' + compilehtml[0].outerHTML + ''
@@ -1373,7 +1373,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     document.getElementById('list123').insertBefore(span, null);
 
                     $(".viewimage").show();
-                    var imagepath = '<span><img  id="' + id + '" style="height:80px;width:78px; border: 1px solid #ccc; margin:0px; margin-top:0px; position:absolute;" src="' + e.target.result + '"></span>'
+                    var imagepath = '<span><img  id="' + id + '" style="height:80px;width:78px; border: 1px solid #ccc; margin:0px; margin-top:0px; " src="' + e.target.result + '"></span>'
+                  
 
                     $("#list321").append(imagepath);
                     $("#list567").append(imagepath);
