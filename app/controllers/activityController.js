@@ -181,23 +181,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
 
-    //$scope.$watch('CurrentCart', function () {
-    //    // do something here
-    //    var i = 0;
-    //    if ($scope.IsSingleMode == false) {
-    //        if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
-    //            for (i = 0; i < $scope.CurrentCart.length; i++) {
-    //                $scope.CurrentCart[i].IncreaseDecreaseVMData = angular.copy($scope.CurrentCart[0].IncreaseDecreaseVMData);
-    //                $scope.CurrentCart[i].MoveTransactionData = angular.copy($scope.CurrentCart[0].MoveTransactionData);
-    //                $scope.CurrentCart[i].UpdateTransactionData = angular.copy($scope.CurrentCart[0].UpdateTransactionData);
-    //                $scope.CurrentCart[i].ApplyTransactionData = angular.copy($scope.CurrentCart[0].ApplyTransactionData);
-    //                $scope.CurrentCart[i].ConvertTransactionData = angular.copy($scope.CurrentCart[0].ConvertTransactionData);
-    //                $scope.CurrentCart[i].IsLineItemData = angular.copy($scope.CurrentCart[0].IsLineItemData);
-    //            }
-    //        }
 
-    //    }
-    //}, true);
 
     function getuom() {
 
@@ -1908,7 +1892,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     function BuildMultipleData() {
         var dt = new Date();
-        var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), 0,0,0,0));
+        var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate()-1, 0,0,0,0));
         var wcfDateStr = dt1.toMSJSON();
         var wcfDateStr123 = dt1.toMSJSON();
 
@@ -1919,7 +1903,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         var d122 = new Date(dsplit1[0], dsplit1[1] - 1, dsplit1[2]);
 
-        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
+        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate()-1, 0, 0, 0, 0))
 
         wcfDateStr123 = d122.toMSJSON();
 
@@ -2073,7 +2057,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
 
-                var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0))
+                var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate()-1, 0, 0, 0, 0))
 
                 wcfDateStr1 = d11.toMSJSON();
             }
@@ -2084,7 +2068,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
 
-                var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate(), 0, 0, 0, 0))
+                var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate()-1, 0, 0, 0, 0))
 
                 wcfDateStr2 = d21.toMSJSON();
 
