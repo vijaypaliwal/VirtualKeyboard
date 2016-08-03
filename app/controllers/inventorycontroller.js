@@ -1364,7 +1364,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     var span = document.createElement('span');
                     span.innerHTML =
                     [
-                      '<img id="' + id + '" style="height: 75px; width:75px; border: 1px solid #ccc; margin:0px; margin-top:0px;" src="',
+                      '<img id="' + id + '" style="height: 80px; width:80px; border: 1px solid #ccc; margin:0px; margin-top:0px;position:absolute;" src="',
                       e.target.result,
                       '" title="', escape(theFile.name),
                       '"/> ' + compilehtml[0].outerHTML + ''

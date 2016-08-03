@@ -242,7 +242,7 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
         });
 
         box.on("shown.bs.modal", function () {
-            $(".mybootboxbody").html("This operation is going to change your item name and item description. ");
+            $(".mybootboxbody").html("This operation is going to change your item details. ");
 
         });
 

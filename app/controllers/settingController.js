@@ -23,7 +23,9 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
 
-
+    $scope.GoTo = function (url) {
+        $location.path(url);
+    }
     $scope.logOut = function () {
 
 

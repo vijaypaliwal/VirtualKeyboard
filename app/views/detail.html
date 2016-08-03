@@ -239,7 +239,6 @@
 
         </div>
 
-        <a style="width:92%; height:45px; line-height:45px; text-transform:capitalize" class="btn btn-primary" >Go to details for {{itemlabel}}</a>
 <br /><br />
 
     </div>
@@ -331,7 +330,7 @@
 
         </div>
 
-        <div id="myModal2" class="modal bottommenu fade">
+        <div id="myModal2" class="modal fade bottommenu" >
 
             <div class="modal-body">
                 <ul class="animated slideInUp" id="selectAction">
@@ -348,17 +347,17 @@
     </a>
 
 
-        <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
+    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-                    <div class="modal-body">
-                        <img src="{{CurrentActiveImage.LargeImageURI}}" id="imagepreview" style="max-height:250px;max-width:250px;">
-                    </div>
-
+                <div class="modal-body">
+                    <img src="{{CurrentActiveImage.LargeImageURI}}" id="imagepreview" style="max-height:250px;max-width:250px;">
                 </div>
+
             </div>
         </div>
+    </div>
     </div>
         <div id="overlay"></div>
 

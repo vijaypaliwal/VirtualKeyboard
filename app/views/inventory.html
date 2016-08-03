@@ -9,12 +9,17 @@
 
     .Addbtn {
         position: fixed !important;
-        bottom: 2px;
+        bottom: 0px;
         color: #0083C7 !important;
         text-align: center;
-        width: 100%;
+        width: 125px;
         left: 0px;
+        line-height: 8px;
         right: 0px;
+        padding-top: 0px;
+        height: 18px;
+        z-index: 1000 !important;
+        margin: 0 auto;
     }
 
     .mylabel {
@@ -247,7 +252,7 @@
                                             <div><i class="fa fa-plus-circle"></i></div>
                                             <span>Add Image</span>
 
-                                            <input type="file" style="visibility:hidden" id="files" accept="image/*;capture=camera" />
+                                            <input type="file" style="visibility:hidden" id="files" accept="image/*;" />
                                         </div>
                                     </div>
 
@@ -256,8 +261,7 @@
                                 <div class="col-xs-6">
 
                                     <div  class="fileUpload viewimage btn btn-primary" style="float:right; display:none" ng-click="viewimages()">
-                                        <div>{{ImageList.length}}</div>
-                                        <span>Selected</span>
+                                        <span>Show Images</span>
 
                                     </div>
                                   

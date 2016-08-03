@@ -460,7 +460,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     });
 
-    $scope.locationlist = function (inventoryid, locationid) {
+    $scope.locationlist = function (inventoryid, locationid, locationtext) {
 
 
 
@@ -473,6 +473,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $("#locationlistmodal").modal('show');
         $scope.LocationSearchList = [];
         $scope.SearchLocationValue = "";
+        $scope.SearchLocationValue = locationtext;
+        $scope.OnChangeLocationNameFunction();
         $scope.isnolocationmsg = false
         $('html,body').animate({ scrollTop: 0 }, 800);
 

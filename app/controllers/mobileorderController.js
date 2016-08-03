@@ -79,6 +79,22 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
                   $scope.LocationsLoaded = true;
                   $scope.Isbuttonshow = true;
                   $scope.MyInventorycolumns.sort(SortByOrder);
+
+                  var _data = $scope.MyInventorycolumns;
+
+                  $scope.MyInventorycolumns = [];
+                  for (var i = 0; i < _data.length; i++) {
+                      if (_data[i].mobileorder != 0 )
+                      {
+                          $scope.MyInventorycolumns.push(_data[i]);
+                      }
+                  }
+
+                  for (var i = 0; i < _data.length; i++) {
+                      if (_data[i].mobileorder == 0) {
+                          $scope.MyInventorycolumns.push(_data[i]);
+                      }
+                  }
                   $scope.$apply();
 
                   console.log($scope.MyInventorycolumns);
@@ -100,7 +116,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         start: function (evt, ui) {
             $(this).attr("style", "cursor:move")
 
-            $cordovaKeyboard.disableScroll(true);
+           $cordovaKeyboard.disableScroll(true);
         },
         items: "tr",
         update: function (e, ui) {
@@ -110,8 +126,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         stop: function (e, ui) {
 
              
-          
-           $cordovaKeyboard.disableScroll(false);
+        $cordovaKeyboard.disableScroll(false);
 
 
         }
@@ -184,6 +199,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
                   $scope.loadingbutton == false
 
                   ShowSuccess("Updated");
+                  $scope.GetMyinventoryColumns();
                   $scope.$apply();
               },
               error: function (err) {
