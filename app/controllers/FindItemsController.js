@@ -557,7 +557,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                },
                error: function (err) {
 
-                   log.error(err.Message);
+                   log.error("Error occurred during operation.")
+                   log.error(err.statusText);
 
                }
            });
@@ -586,7 +587,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                },
                error: function (err) {
 
-                   log.error(err.Message);
+                   log.error("Error occurred during operation.")
+                   log.error(err.statusText);
 
                }
            });
@@ -999,7 +1001,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             },
             error: function (req) {
                 $(".paginationtext").show();
-              
+                log.error("Error occurred during operation.")
+                log.error(req.statusText);
                 $scope.myinventoryColumnLoaded = true;
                 $cordovaKeyboard.disableScroll(false);
                 CheckScopeBeforeApply();
@@ -1048,7 +1051,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
                 debugger;
 
-            
+                log.error("Error occurred during operation.")
+                log.error(req.statusText);
 
             },
             complete: function () {
@@ -1098,7 +1102,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             error: function (req) {
 
                 debugger;
-              
+                log.error("Error occurred during operation.")
+                log.error(req.statusText);
 
             },
             complete: function () {

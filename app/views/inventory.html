@@ -3,6 +3,12 @@
 <link href="css/inventory.css" rel="stylesheet" />
 
 <style>
+
+    .createNewLabel {
+        font-size: 17px;
+        color: #069;
+        text-decoration: underline;
+    }
     .allfields {
         padding: 8px;
     }
@@ -188,7 +194,7 @@
 
 
                         <div class="form-group" ng-if="obj.ColumnName=='lLoc'">
-                            <label>Select Location <span class="redText">*</span></label>
+                            <label>Select Location <span class="redText">*</span></label> <a class="createNewLabel pull-right" ng-click="CreateNew(1)">Add new</a>
                             <div class="input-group">
                                 <select class="form-control" id="Location" ng-model="InventoryObject.Location">
                                     <option value="{{obj.LocationName}}" ng-selected="CheckSelectedValues(InventoryObject.Location,obj.LocationName)?true:false" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
@@ -223,7 +229,7 @@
 
 
                         <div class="form-group" ng-if="obj.ColumnName=='uomUOM'">
-                            <label>Select UOM <span class="redText">*</span></label>
+                            <label>Select UOM <span class="redText">*</span></label> <a class="createNewLabel pull-right" ng-click="CreateNew(2)">Add new</a>
                             <div class="input-group">
 
                                 <select class="form-control" ng-model="InventoryObject.Uom" id="UOM">
@@ -932,7 +938,29 @@
     </div>
 </div>
 
+<div style="background:#fff;" id="createnewlabel" class="modal animated bounceIn">
+    <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
+        <button style="padding:10px; margin-top:-15px;" type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+        <h4>Create new <span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of measure</span></h4>
+    </div>
 
+    <div style="padding:5px;" class="modal-body">
+        <br />
+        <div class="form-group">
+            <label>Enter new <span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of measure</span> </label>
+
+            <div class="input-group">
+                <input type="text" ng-model="CreateNewLabel" class="form-control" value="" />
+
+            </div>
+            <br />
+
+            <button ng-disabled="CreateNewLabel==''" ng-click="SaveLabel(CreateType)" class="btn waves-effect waves-light primary-color"><i class="fa fa-plus"></i> Add</button>
+            <a href="#" data-dismiss="modal" class="btn waves-effect waves-light gray-color"> <i class="fa fa-times"></i> Cancel</a>
+        </div>
+
+    </div>
+</div>
 
 
 

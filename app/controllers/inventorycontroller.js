@@ -68,7 +68,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.isnolocationmsg = false;
     $scope.isnouommsg = false;
     $scope.slide = 1000;
-
+    $scope.CreateType = 0;
+    $scope.CreateNewLabel = "";
     var FileName = "";
     var StreamData = "";
 
@@ -98,7 +99,58 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         return false;
     }
 
+    $scope.CreateNew = function (Type) {
+        $scope.CreateType = Type;
+        $("#createnewlabel").modal('show');
+    }
 
+
+    $scope.checkDuplicate = function (type) {
+        if (type == 1) {
+            for (var i = 0; i < $scope.LocationList.length; i++) {
+                if ($scope.LocationList[i].LocationName == $scope.CreateNewLabel) {
+                    return false;
+                }
+            }
+        }
+
+        if (type == 2) {
+            for (var i = 0; i < $scope.UOMList.length; i++) {
+                if ($scope.UOMList[i].UnitOfMeasureName == $scope.CreateNewLabel) {
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
+    }
+
+    $scope.SaveLabel = function (Type) {
+        if ($scope.checkDuplicate(Type)) {
+
+
+            if (Type == 1) {
+                var _locationobj = { LocationID: 0, LocationZone: "", LocationName: $scope.CreateNewLabel };
+                $scope.LocationSearchList.push(_locationobj);
+                $scope.LocationList.push(_locationobj);
+                $scope.InventoryObject.Location = $scope.CreateNewLabel;
+
+            }
+
+            if (Type == 2) {
+                var _uomobj = { UnitOfMeasureName: $scope.CreateNewLabel, UnitOfMeasureID: 0 };
+                $scope.UOMList.push(_uomobj);
+                $scope.InventoryObject.Uom = $scope.CreateNewLabel;
+            }
+            $scope.CreateNewLabel = "";
+            CheckScopeBeforeApply();
+            $("#createnewlabel").modal('hide');
+        }
+        else {
+            log.error("This value already exist.");
+        }
+    }
     $scope.viewall = function () {
 
         $("#infomodal").modal('show');
@@ -275,7 +327,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.InventoryObject.UomID = obj.DefaultUomID;
         $scope.InventoryObject.Uom = obj.DefaultUom;
 
-    
+
 
         if ($scope.InventoryObject.CustomPartData.length > 0 && obj.CustomData.length > 0) {
 
@@ -678,7 +730,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         var _updatedate = new Date(year, month, day);
         _updatedate.setDate(_updatedate.getDate() + 1);
-        var _d1122 = new Date(Date.UTC(_updatedate.getFullYear(), _updatedate.getMonth() - 1, _updatedate.getDate()-1, 0, 0, 0, 0))
+        var _d1122 = new Date(Date.UTC(_updatedate.getFullYear(), _updatedate.getMonth() - 1, _updatedate.getDate() - 1, 0, 0, 0, 0))
 
         var wcfDateStrUpd = _d1122.toMSJSON();
 
@@ -735,7 +787,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         if (_sum > 5000000) {
             log.warning("You are trying to upload more than one image, it may take some time to upload, please be patient.")
         }
-
+        
         ShowWaitingInv();
         $.ajax
           ({
@@ -761,10 +813,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   $('#addinventories').removeClass("disabled");
                   $('#addinventories').find(".fa").removeClass("fa-spin");
               },
-              error: function (err) {
+              fail: function (jqXHR, textStatus, errorThrown) {
+                  console.log("jqxhr");
+                  console.log(jqXHR);
+              },
+              error: function (err, textStatus, errorThrown) {
+                  HideWaitingInv();
 
                   console.log(err);
                   log.error("Error Occurred during operation");
+                  log.error(errorThrown);
 
                   $('#addinventories').removeClass("disabled");
                   $('#addinventories').find(".fa").removeClass("fa-spin");
@@ -877,7 +935,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#itemlistmodal").modal('hide');
         $("#locationlistmodal").modal('show');
 
-        $scope.LocationSearchList = $scope.LocationList;
+        $scope.LocationSearchList = angular.copy($scope.LocationList);
         CheckScopeBeforeApply();
         $scope.SearchLocationValue = "";
         $scope.isnolocationmsg = false
@@ -990,7 +1048,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               error: function (err) {
                   console.log(err);
                   log.error("Error Occurred during operation");
-
+                  log.error(err.statusText);
 
               }
           });
@@ -1031,7 +1089,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               error: function (err) {
                   console.log(err);
                   log.error("Error Occurred during operation");
-
+                  log.error(err.statusText);
 
               }
           });
@@ -1060,7 +1118,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                },
                error: function (err) {
 
-                   log.error(err.Message);
+                   log.error(err.statusText);
 
                }
            });
@@ -1109,7 +1167,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                },
                error: function (err) {
 
-                   log.error(err.Message);
+                   log.error(err.statusText);
 
                }
            });
@@ -1134,7 +1192,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                    $scope.LocationList = response.GetLocationsResult.Payload;
-                   $scope.LocationSearchList = $scope.LocationList;
+                   $scope.LocationSearchList = angular.copy($scope.LocationList);
 
                    $scope.UpdateLocationAndUOMList();
                    CheckScopeBeforeApply()
@@ -1143,7 +1201,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                    console.log(response);
-
+                   log.error(response.statusText);
 
                }
            });
@@ -1170,9 +1228,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                    $scope.ItemList = response.GetItemsResult.Payload;
                    CheckScopeBeforeApply()
                },
-               error: function (err)
-               {
-                log.error(err.Message);
+               error: function (err) {
+                   log.error(err.statusText);
                }
            });
 
@@ -1197,7 +1254,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                    CheckScopeBeforeApply()
                },
                error: function (response) {
-
+                   log.error(response.statusText);
                }
            });
     }
@@ -1296,18 +1353,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                    CheckScopeBeforeApply()
                },
-               error: function (response)
-               {
-               //$scope.InventoryObject.Location = 678030;
-             }
+               error: function (response) {
+                   log.error(response.statusText);
+                   //$scope.InventoryObject.Location = 678030;
+               }
            });
     }
 
     $scope.OpenBox = function () {
 
         $("#myModalforlist").modal("show");
-       // $scope.capturePhoto();
-      //  $("#files").trigger("click");
+        // $scope.capturePhoto();
+        //  $("#files").trigger("click");
     }
 
     $scope.triggerFileClick = function () {
@@ -1328,7 +1385,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.handleFileSelect = function (evt) {
-    
+
         debugger;
         var files = evt.target.files;
         FileName = "";
@@ -1353,7 +1410,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
                 var compilehtml = $compile(crossicon)($scope);
 
-               
+
                 return function (e) {
                     // Render thumbnail.
                     FileName = theFile.name;
@@ -1374,7 +1431,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     $(".viewimage").show();
                     var imagepath = '<span><img  id="' + id + '" style="height:80px;width:78px; border: 1px solid #ccc; margin:0px; margin-top:0px; " src="' + e.target.result + '"></span>'
-                  
+
 
                     $("#list321").append(imagepath);
                     $("#list567").append(imagepath);
@@ -1403,8 +1460,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
-    $scope.capturePhoto = function ()
-    {
+    $scope.capturePhoto = function () {
         navigator.camera.getPicture($scope.handleFileSelect, onFail, {
             quality: 50,
             targetWidth: 120,
@@ -1413,10 +1469,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             destinationType: destinationType.DATA_URL
         });
     }
-    
-    $scope.viewimages = function ()
-    {
-    $("#imagemodal").modal('show');
+
+    $scope.viewimages = function () {
+        $("#imagemodal").modal('show');
     }
 
 
@@ -1925,7 +1980,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   error: function (response) {
                       //  log.error("Into error");
                       console.log(response);
-
+                      log.error(response.statusText);
                   }
               });
         }
@@ -2256,7 +2311,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $(".androidbtn").hide();
         //if (deviceType == 'iPhone') {
         //    $(".iosbtn").show()
-           
+
         //}
         //else {
         //    $(".androidbtn").show()
