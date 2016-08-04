@@ -92,14 +92,14 @@
 
                             <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321"></output>
 
-                            <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
+                            <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;display:block !important;" src="img/default.png" alt="Alternate Text" />
                         </div>
 
                         <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==false">
 
                             <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321"></output>
 
-                            <img id="defaultimg" style="height: 80px; width: 80px; border: 1px solid #ccc;" src="img/na.jpg" alt="Alternate Text" />
+                            <img id="defaultimg" style="height: 80px; width: 80px; border: 1px solid #ccc; display: block !important;" src="img/na.jpg" alt="Alternate Text" />
                         </div>
                         <div class="col-md-10 col-xs-8">
                             <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')"> <span style="display:inline-block" ng-bind="InventoryObject.ItemID"></span> <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></span>
