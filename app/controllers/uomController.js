@@ -12,8 +12,6 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
     function init() {
         $scope.getuom();
         $scope.$apply();
-
-       
     }
 
     $scope.FilterRecordsLength = {length:0};
@@ -137,27 +135,19 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
                         log.warning("Already exist");
                         $scope.IsProcessing = false;
                         $scope.$apply();
-
                     }
-
-
-                
-
                 },
                 error: function (err) {
                     $scope.IsProcessing = false;
-                    alert("Error");
+                    $scope.errorbox(err);
                     debugger;
 
                 },
                 complete: function () {
                     $scope.IsProcessing = false;
                 }
-
             });
-
         }
-
     }
 
 

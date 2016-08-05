@@ -104,6 +104,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
                   log.error("Error Occurred during operation");
                   $scope.LocationsLoaded = true;
                   $(".save-btn").hide();
+                  $scope.errorbox(err);
                   $scope.$apply();
 
               }
@@ -188,28 +189,23 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
               type: "POST",
               url: serviceBase + 'SaveMyInventoryColumn',
               contentType: 'application/json; charset=utf-8',
-
-              dataType: 'json',
+               dataType: 'json',
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Columns": $scope.MyInventorycolumns }),
               success: function (response) {
-
-                   
-
                   $scope.LocationsLoaded = true;
                   $scope.loadingbutton == false
-
                   ShowSuccess("Updated");
                   $scope.GetMyinventoryColumns();
                   $scope.$apply();
               },
-              error: function (err) {
+              error: function (err)
+              {
                   console.log(err);
                   $scope.LocationsLoaded = true;
                   $scope.loadingbutton == false;
                   $scope.$apply();
+                  $scope.errorbox(err);
                   log.error("Error Occurred during operation");
-
-
               }
           });
 

@@ -124,6 +124,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
             error: function (err) {
 
                 log.error("Some thing went wrong");
+                $scope.errorbox(err);
                 $scope.isSaving = false;
                 $scope.$apply();
             

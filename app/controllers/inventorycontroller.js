@@ -787,7 +787,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         if (_sum > 5000000) {
             log.warning("You are trying to upload more than one image, it may take some time to upload, please be patient.")
         }
-        $scope.InventoryObject.UnitDate2 = "54test"
+       
         ShowWaitingInv();
         $.ajax
           ({
