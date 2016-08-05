@@ -86,7 +86,12 @@
                     <div class="row ">
                         <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
 
-                            <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321"></output>
+                            <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321">
+                                <span ng-repeat="_obj in ImageList" class="pull-left" ng-if="ImageList.length>0">
+
+                                    <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
+                                </span>
+                            </output>
 
                             <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;display:block !important;" src="img/default.png" alt="Alternate Text" />
                         </div>
@@ -559,11 +564,7 @@
 
 </div>
 
-<div ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
-    {{_obj.bytestring}}
-    <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
-    <a class="btn btn-danger removeImage" altid="{{_obj.ImageID}}" ng-click="RemoveFromImageList(_obj.ImageID)"><i class="fa fa-times"></i></a>
-</div>
+
 
 <div id="myModalforlist" class="modal fade" role="dialog">
     <!-- Modal content-->
@@ -737,7 +738,12 @@
 
             <div style="text-align:center;" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
 
-                <output style="margin-top: 0px;" id="list567"></output>
+                <output style="margin-top: 0px;" id="list567">
+                    <span ng-repeat="_obj in ImageList"  ng-if="ImageList.length>0">
+
+                        <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
+                    </span>
+                </output>
 
                 <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
             </div>
@@ -934,10 +940,11 @@
     <div style="padding:5px;" class="modal-body">
 
         <br />
-        <div ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
+        <span ng-repeat="_obj in ImageList" class="pull-left" ng-if="ImageList.length>0">
+
             <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
             <a class="btn btn-danger removeImage" altid="{{_obj.ImageID}}" ng-click="RemoveFromImageList(_obj.ImageID)"><i class="fa fa-times"></i></a>
-        </div>
+        </span>
 
     </div>
 </div>

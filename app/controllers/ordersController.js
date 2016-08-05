@@ -759,26 +759,15 @@ app.controller('ordersController', ['$scope', '$location', 'authService', 'local
         var _sum = 0;
 
 
-        if (ImageListAndroid.length > 0) {
-            for (var i = 0; i < ImageListAndroid.length; i++) {
+        var _toSendImages =angular.copy($scope.ImageList);
 
-                if (ImageListAndroid[i].bytestring != null && ImageListAndroid[i].bytestring != undefined) {
-                    ImageListAndroid[i].bytestring = removePaddingCharacters(ImageListAndroid[i].bytestring);
+        for (var i = 0; i < _toSendImages.length; i++) {
 
-                    $scope.ImageList.push(ImageListAndroid[i]);
-                }
+            if (_toSendImages[i].bytestring != null && _toSendImages[i].bytestring != undefined) {
+                _toSendImages[i].bytestring = removePaddingCharacters(_toSendImages[i].bytestring);
+                if (_toSendImages[i].size != null && _toSendImages[i].size != undefined) {
 
-            }
-            CheckScopeBeforeApply();
-        }
-
-        for (var i = 0; i < $scope.ImageList.length; i++) {
-
-            if ($scope.ImageList[i].bytestring != null && $scope.ImageList[i].bytestring != undefined) {
-                $scope.ImageList[i].bytestring = removePaddingCharacters($scope.ImageList[i].bytestring);
-                if ($scope.ImageList[i].size != null && $scope.ImageList[i].size != undefined) {
-
-                    _sum = _sum + parseFloat($scope.ImageList[i].size);
+                    _sum = _sum + parseFloat(_toSendImages[i].size);
                 }
             }
 
@@ -788,6 +777,7 @@ app.controller('ordersController', ['$scope', '$location', 'authService', 'local
             log.warning("You are trying to upload more than one image, it may take some time to upload, please be patient.")
         }
 
+   
         ShowWaitingInv();
         $.ajax
           ({
@@ -796,7 +786,7 @@ app.controller('ordersController', ['$scope', '$location', 'authService', 'local
               contentType: 'application/json; charset=utf-8',
 
               dataType: 'json',
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": $scope.ImageList }),
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": _toSendImages }),
               // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
 
@@ -1429,23 +1419,23 @@ app.controller('ordersController', ['$scope', '$location', 'authService', 'local
                     _ImgObj.FileName = FileName;
                     _ImgObj.bytestring = e.target.result;
                     _ImgObj.Size = theFile.size;
-                    var span = document.createElement('span');
-                    span.innerHTML =
-                    [
-                      '<img id="' + id + '" style="height: 80px; width:80px; border: 1px solid #ccc; margin:0px; margin-top:0px;" src="',
-                      e.target.result,
-                      '" title="', escape(theFile.name),
-                      '"/> ' + compilehtml[0].outerHTML + ''
-                    ].join('');
+                   // var span = document.createElement('span');
+                    //span.innerHTML =
+                    //[
+                    //  '<img id="' + id + '" style="height: 80px; width:80px; border: 1px solid #ccc; margin:0px; margin-top:0px;" src="',
+                    //  e.target.result,
+                    //  '" title="', escape(theFile.name),
+                    //  '"/> ' + compilehtml[0].outerHTML + ''
+                    //].join('');
 
-                    document.getElementById('list123').insertBefore(span, null);
+                   // document.getElementById('list123').insertBefore(span, null);
 
-                    $(".viewimage").show();
-                    var imagepath = '<span><img  id="' + id + '" style="height:80px;width:78px; border: 1px solid #ccc; margin:0px; margin-top:0px; " src="' + e.target.result + '"></span>'
+                   // $(".viewimage").show();
+                   // var imagepath = '<span><img  id="' + id + '" style="height:80px;width:78px; border: 1px solid #ccc; margin:0px; margin-top:0px; " src="' + e.target.result + '"></span>'
 
 
-                    $("#list321").append(imagepath);
-                    $("#list567").append(imagepath);
+                   // $("#list321").append(imagepath);
+                   // $("#list567").append(imagepath);
 
                 };
             })(f);
@@ -1460,11 +1450,6 @@ app.controller('ordersController', ['$scope', '$location', 'authService', 'local
             CheckScopeBeforeApply();
 
 
-            $(".removeImage").bind("click", function () {
-
-                removeImage($(this).attr("altid"));
-            });
-
             $(".iteminfo").trigger("click;");
 
         }, 100);
@@ -1472,13 +1457,10 @@ app.controller('ordersController', ['$scope', '$location', 'authService', 'local
     }
 
     $scope.onPhotoDataSuccessNew=function(imageData) {
-        log.info("into photo success");
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
     
         imageData = "data:image/jpeg;base64," + imageData;
 
-        //var id = _length + 1;
-        //_ImgObj.ImageID = id;
         var id = randomStringNew(5, '0123456789');
         _ImgObj.ImageID = id;
        
@@ -1498,7 +1480,6 @@ app.controller('ordersController', ['$scope', '$location', 'authService', 'local
         log.error('Failed because: ' + message);
     }
     $scope.capturePhotoNew = function () {
-        log.info("into capture");
         navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
             quality: 50,
             targetWidth: 120,
