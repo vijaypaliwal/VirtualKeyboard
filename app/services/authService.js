@@ -32,9 +32,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     };
 
-    var _login = function (loginData) {
-
-
+    var _login = function (loginData)
+    {
 
         var data = "UserName=" + loginData.userName + "&Password=" + loginData.password + "&AccountName=" + loginData.account;
 
@@ -75,15 +74,13 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                     _authentication.isAuth = true;
                     _authentication.userName = loginData.userName;
                     _authentication.useRefreshTokens = loginData.useRefreshTokens;
-
                     _Getuserinfo();
-
                     deferred.resolve(response);
 
                 }
                 else {
+                    log.error("log in to error");
                     $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
-
                     playBeep();
                     log.error(response.LoginResult.Message);
 
