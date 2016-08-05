@@ -1475,7 +1475,7 @@ app.controller('ordersController', ['$scope', '$location', 'authService', 'local
         log.info("into photo success");
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
     
-
+        imageData = "data:image/jpeg;base64," + imageData;
 
         //var id = _length + 1;
         //_ImgObj.ImageID = id;
