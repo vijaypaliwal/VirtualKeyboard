@@ -759,26 +759,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var _sum = 0;
 
 
-        if (ImageListAndroid.length > 0) {
-            for (var i = 0; i < ImageListAndroid.length; i++) {
+        var _toSendImages = angular.copy($scope.ImageList);
 
-                if (ImageListAndroid[i].bytestring != null && ImageListAndroid[i].bytestring != undefined) {
-                    ImageListAndroid[i].bytestring = removePaddingCharacters(ImageListAndroid[i].bytestring);
+        for (var i = 0; i < _toSendImages.length; i++) {
 
-                    $scope.ImageList.push(ImageListAndroid[i]);
-                }
+            if (_toSendImages[i].bytestring != null && _toSendImages[i].bytestring != undefined) {
+                _toSendImages[i].bytestring = removePaddingCharacters(_toSendImages[i].bytestring);
+                if (_toSendImages[i].size != null && _toSendImages[i].size != undefined) {
 
-            }
-            CheckScopeBeforeApply();
-        }
-
-        for (var i = 0; i < $scope.ImageList.length; i++) {
-
-            if ($scope.ImageList[i].bytestring != null && $scope.ImageList[i].bytestring != undefined) {
-                $scope.ImageList[i].bytestring = removePaddingCharacters($scope.ImageList[i].bytestring);
-                if ($scope.ImageList[i].size != null && $scope.ImageList[i].size != undefined) {
-
-                    _sum = _sum + parseFloat($scope.ImageList[i].size);
+                    _sum = _sum + parseFloat(_toSendImages[i].size);
                 }
             }
 
@@ -796,7 +785,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               contentType: 'application/json; charset=utf-8',
 
               dataType: 'json',
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": $scope.ImageList }),
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": _toSendImages }),
               // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
 
@@ -1386,6 +1375,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     });
 
 
+    $scope.RemoveFromImageList = function (ID) {
+        for (var i = 0; i < $scope.ImageList.length; i++) {
+            if ($scope.ImageList[i].ImageID == ID) {
+                $scope.ImageList.splice(i, 1);
+                break;
+            }
+        }
+
+    }
+
     $scope.handleFileSelect = function (evt) {
 
         debugger;
@@ -1420,23 +1419,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     _ImgObj.FileName = FileName;
                     _ImgObj.bytestring = e.target.result;
                     _ImgObj.Size = theFile.size;
-                    var span = document.createElement('span');
-                    span.innerHTML =
-                    [
-                      '<img id="' + id + '" style="height: 80px; width:80px; border: 1px solid #ccc; margin:0px; margin-top:0px;" src="',
-                      e.target.result,
-                      '" title="', escape(theFile.name),
-                      '"/> ' + compilehtml[0].outerHTML + ''
-                    ].join('');
-
-                    document.getElementById('list123').insertBefore(span, null);
-
-                    $(".viewimage").show();
-                    var imagepath = '<span><img  id="' + id + '" style="height:80px;width:78px; border: 1px solid #ccc; margin:0px; margin-top:0px; " src="' + e.target.result + '"></span>'
-
-
-                    $("#list321").append(imagepath);
-                    $("#list567").append(imagepath);
+                  
 
                 };
             })(f);
@@ -1451,19 +1434,37 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             CheckScopeBeforeApply();
 
 
-            $(".removeImage").bind("click", function () {
-
-                removeImage($(this).attr("altid"));
-            });
-
             $(".iteminfo").trigger("click;");
 
         }, 100);
 
     }
 
-    $scope.capturePhoto = function () {
-        navigator.camera.getPicture($scope.handleFileSelect, onFail, {
+    $scope.onPhotoDataSuccessNew = function (imageData) {
+        var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
+
+        imageData = "data:image/jpeg;base64," + imageData;
+
+        var id = randomStringNew(5, '0123456789');
+        _ImgObj.ImageID = id;
+
+        $(".viewimage").show();
+        $("#myModalforlist").modal("hide");
+
+
+        _ImgObj.FileName = "IphoneCapture";
+        _ImgObj.bytestring = imageData;
+        $scope.ImageList.push(_ImgObj);
+        CheckScopeBeforeApply();
+
+    }
+
+    $scope.onFail = function (message) {
+        log.error("into fail");
+        log.error('Failed because: ' + message);
+    }
+    $scope.capturePhotoNew = function () {
+        navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
             quality: 50,
             targetWidth: 120,
             targeHeight: 120,
