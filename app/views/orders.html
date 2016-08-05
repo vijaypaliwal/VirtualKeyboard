@@ -60,6 +60,31 @@
     #list567 .removeImage {
         display: none !important;
     }
+
+    .swiper-container {
+        padding: 7px;
+        box-shadow: 0 1px 11px rgba(0,0,0,.27);
+        padding-top: 0px;
+        padding-bottom: 10px;
+        background: white;
+    }
+
+    .swiper-slide {
+        min-height: 90px;
+        padding-right: 12px;
+    }
+
+        .swiper-slide .form-group {
+            margin-bottom: 0px;
+        }
+
+    #myform h4 {
+        font-size: 15px;
+    }
+
+    #list321 a {
+        display: none !important;
+    }
 </style>
 
 
@@ -78,42 +103,9 @@
                 <br /><br /><br />
                 <img src="img/loader.gif" alt="Alternate Text" />
             </div>
-
+            <h4 style="margin-top:21px;">Fill below info <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></h4>
             <div style="display:none;" class="swiper-container">
-                <div class="iteminfo">
 
-
-                    <div class="row ">
-                        <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
-
-                            <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321">
-                                <span ng-repeat="_obj in ImageList" class="pull-left" ng-if="ImageList.length>0">
-
-                                    <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
-                                </span>
-                            </output>
-
-                            <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;display:block !important;" src="img/default.png" alt="Alternate Text" />
-                        </div>
-
-                        <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==false">
-
-                            <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321"></output>
-
-                            <img id="defaultimg" style="height: 80px; width: 80px; border: 1px solid #ccc; display: block !important;" src="img/na.jpg" alt="Alternate Text" />
-                        </div>
-                        <div class="col-md-10 col-xs-8">
-                            <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')"> <span style="display:inline-block" ng-bind="InventoryObject.ItemID"></span> <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></span>
-
-                            <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
-
-                            <span ng-bind="InventoryObject.Quantity" style="display:inline" ng-click="getstep(2,'iQty')"></span> <span ng-bind="InventoryObject.Uom" style="display:inline" ng-click="getstep(4,'uomUOM')"></span>
-
-                            <span ng-bind="InventoryObject.Location" ng-click="getstep(3,'lLoc')"> </span>
-
-                        </div>
-                    </div>
-                </div>
 
 
 
@@ -467,17 +459,13 @@
 
                     <div class="swiper-slide">
 
-
-
-
-
                         <a ng-click="addinventory()" ng-if="IsFormDataloaded==true" style="color:white !important; width:100% !important; margin-top:20px;text-align:center; z-index:1000;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"> <i style="font-size:16px;" class="fa fa-plus-circle"></i>  Add Inventory</a>
                     </div>
 
 
                 </div>
 
-                <table style="width:100%;margin-bottom:20px;">
+                <table style="width:100%;">
                     <tr>
                         <td>
                             <button type="button" class="waves-effect btn btn-primary arrow-left bknext"><i class="fa fa-angle-left"></i> Back</button>
@@ -512,6 +500,39 @@
                     </tr>
                 </table>
 
+                <br />
+
+                <table style="width:100%; text-align:center">
+                    <tr>
+                        <td>
+                            <a style="font-size:17px; color:#069; text-decoration:underline" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> Scan</a>
+                        </td>
+                        <td>
+                            <a class="scanbtn btn btn-default" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i> Scan</a>
+                        </td>
+
+                        <td>
+                            <p style="font-size:17px; color:#069; text-decoration:underline" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()">  Scan</p>
+                        </td>
+                    </tr>
+                </table>
+
+                <br />
+                <table style="width:100%; text-align:center">
+                    <tr>
+                        <td>
+                            <span style="font-size:17px; color:#069; text-decoration:underline" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> Scan</span>
+                        </td>
+                        <td>
+                            <button type="button"  ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> Scan</button>
+                        </td>
+                      
+
+                        <td>
+                            <div style="font-size:17px; color:#069; text-decoration:underline" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()">  Scan</div>
+                        </td>
+                    </tr>
+                </table>
 
 
 
@@ -549,12 +570,44 @@
 
 
             </div>
-            <div style="display: none;" class="pagination"></div>
 
+            <div style="display:none">
 
+                <h4>Item information</h4>
+                <div class="iteminfo">
 
+                    <div class="row ">
+                        <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
 
+                            <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321">
+                                <span ng-repeat="_obj in ImageList" class="pull-left" ng-if="ImageList.length>0">
 
+                                    <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
+                                </span>
+                            </output>
+
+                            <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;display:block !important;" src="img/default.png" alt="Alternate Text" />
+                        </div>
+
+                        <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==false">
+
+                            <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321"></output>
+
+                            <img id="defaultimg" style="height: 80px; width: 80px; border: 1px solid #ccc; display: block !important;" src="img/na.jpg" alt="Alternate Text" />
+                        </div>
+                        <div class="col-md-10 col-xs-8">
+                            <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')"> <span style="display:inline-block" ng-bind="InventoryObject.ItemID"></span> <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></span>
+
+                            <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
+
+                            <span ng-bind="InventoryObject.Quantity" style="display:inline" ng-click="getstep(2,'iQty')"></span> <span ng-bind="InventoryObject.Uom" style="display:inline" ng-click="getstep(4,'uomUOM')"></span>
+
+                            <span ng-bind="InventoryObject.Location" ng-click="getstep(3,'lLoc')"> </span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
@@ -563,7 +616,6 @@
 
 
 </div>
-
 
 
 <div id="myModalforlist" class="modal fade" role="dialog">
@@ -739,7 +791,7 @@
             <div style="text-align:center;" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
 
                 <output style="margin-top: 0px;" id="list567">
-                    <span ng-repeat="_obj in ImageList"  ng-if="ImageList.length>0">
+                    <span ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
 
                         <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
                     </span>
