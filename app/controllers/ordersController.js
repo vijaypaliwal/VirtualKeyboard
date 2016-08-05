@@ -1384,6 +1384,17 @@ app.controller('ordersController', ['$scope', '$location', 'authService', 'local
     });
 
 
+    $scope.RemoveFromImageList=function(ID)
+    {
+        for (var i = 0; i < $scope.ImageList.length; i++) {
+            if ($scope.ImageList[i].ImageID == ID) {
+                $scope.ImageList.splice(i, 1);
+                break;
+            }
+        }
+
+    }
+
     $scope.handleFileSelect = function (evt) {
 
         debugger;
@@ -1461,7 +1472,7 @@ app.controller('ordersController', ['$scope', '$location', 'authService', 'local
     }
 
     $scope.onPhotoDataSuccessNew=function(imageData) {
-        alert("into photo success");
+        log.info("into photo success");
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
     
 
@@ -1478,16 +1489,16 @@ app.controller('ordersController', ['$scope', '$location', 'authService', 'local
         _ImgObj.FileName = "IphoneCapture";
         _ImgObj.bytestring = imageData;
         $scope.ImageList.push(_ImgObj);
-
+        CheckScopeBeforeApply();
        
     }
 
     $scope.onFail = function (message) {
-        alert("into fail");
-        alert('Failed because: ' + message);
+        log.error("into fail");
+        log.error('Failed because: ' + message);
     }
     $scope.capturePhotoNew = function () {
-        alert("into capture");
+        log.info("into capture");
         navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
             quality: 50,
             targetWidth: 120,
