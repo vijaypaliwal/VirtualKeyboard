@@ -2,9 +2,9 @@
 app.controller('loginController', ['$scope','localStorageService', '$location', 'authService', 'ngAuthSettings', function ($scope,localStorageService, $location, authService, ngAuthSettings) {
 
     $scope.loginData = {
-        userName: "QAT9872",
-        password: "QAT9872",
-        account: "QAT9872",
+        userName: "",
+        password: "",
+        account: "",
         useRefreshTokens: false
     };
  
