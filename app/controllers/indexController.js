@@ -15,9 +15,23 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
         localStorageService.set("SelectedAction", "");
        
-        
         authService.logOut();
+        $("#modal3").modal('hide');
+
         $location.path('/login');
+    }
+
+    $scope.reload = function () {
+
+        window.location.reload();
+
+    }
+
+    $scope.errorbox = function (error) {
+
+        $("#modalerror").modal('show');
+        $("#errortext").html(error)
+
     }
 
 

@@ -557,6 +557,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                },
                error: function (err) {
 
+                   $scope.errorbox(err);
+
                    log.error(err.Message);
 
                }
