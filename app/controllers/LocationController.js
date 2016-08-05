@@ -271,8 +271,6 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                     }
                   
 
-
-
                 },
                 error: function (err) {
                     $scope.IsProcessing = false;

@@ -184,16 +184,6 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
 
                         }
 
-                
-              
-
-             
-          
-             
-
-             
-
-
                         $scope.getuom();
 
                         $scope.mode = 1;
@@ -201,7 +191,7 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
                     },
                     error: function (err) {
                         $(_id).find("i").removeClass("fa-spin");
-                        alert("Error");
+                        $scope.errorbox(err);
                         debugger;
 
                     },
