@@ -2244,13 +2244,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var _defaultUOM = { UnitOfMeasureID: "", UnitOfMeasureName: "units" };
 
 
-
         var _defaultLocation = { LocationName: "In Stock", LocationZone: "", LocationID: "" };
         if ($scope.UOMList.length > 0) {
-            var _isAvailableUOM = true;
+            var _isAvailableUOM = false;
             for (var i = 0; i < $scope.UOMList.length; i++) {
-                if ($.trim($scope.UOMList[i].UnitOfMeasureName) != "" && $scope.UOMList[i].UnitOfMeasureName.toLowerCase() != "units") {
-                    _isAvailableUOM = false;
+                if ($.trim($scope.UOMList[i].UnitOfMeasureName) != "" && $scope.UOMList[i].UnitOfMeasureName.toLowerCase() == "units") {
+                    _isAvailableUOM = true;
                     break;
                 }
             }
@@ -2270,10 +2269,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
         if ($scope.LocationList.length > 0) {
-            var _isAvailableLocation = true;
+            var _isAvailableLocation = false;
             for (var i = 0; i < $scope.LocationList.length; i++) {
-                if ($.trim($scope.LocationList[i].LocationName) != "" && $scope.LocationList[i].LocationName.toLowerCase() != "in stock") {
-                    _isAvailableLocation = false;
+                if ($.trim($scope.LocationList[i].LocationName) != "" && $scope.LocationList[i].LocationName.toLowerCase() == "in stock") {
+                    _isAvailableLocation = true;
                     break;
                 }
             }

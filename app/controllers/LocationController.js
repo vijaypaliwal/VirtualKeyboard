@@ -253,13 +253,17 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                       
 
 
-                        $scope.GetLocations();
 
                         $scope.mode = 1;
 
                         $scope.SearchData.SearchValue = "";
+                        $scope.FilterArray[0].SearchValue = "";
+                        $scope.FilterArray[1].SearchValue = "";
+                        $scope.FilterArray[2].SearchValue = "";
 
-                      
+                        CheckScopeBeforeApply();
+
+                        $scope.GetLocations();
 
                     }
 
@@ -271,10 +275,12 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                     }
                   
 
+
+
                 },
                 error: function (err) {
                     $scope.IsProcessing = false;
-                    $scope.errorbox(err);
+                    alert("Error");
                     debugger;
 
                 },

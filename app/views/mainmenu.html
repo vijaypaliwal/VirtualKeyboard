@@ -166,17 +166,17 @@
     <div class="row">
         <div class="col-md-12">
 
-            <a id="step2" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6" href="#/FindItems"><i class="fa fa-bars"></i>&nbsp;&nbsp;Go to Inventory </a>
+            <a id="step1" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6" href="#/FindItems"><i class="fa fa-bars"></i>&nbsp;&nbsp;Go to Inventory </a>
             
-            <a id="step1" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6" href="#/inventory"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Put Items In Inventory </a>
+            <a id="step2" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6" href="#/inventory"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Put Items In Inventory </a>
 
             <a class="waves-effect waves-light btn-large gray-color width-100 animated bouncein delay-6"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;Coming Soon </a>
 
             <a class="waves-effect waves-light btn-large gray-color width-100 animated bouncein delay-6 " ><i class="fa fa-clock-o"></i>&nbsp;&nbsp;Coming Soon </a>
 
-            <a class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6" href="#/setting"><i class="fa fa-cog"></i>&nbsp;&nbsp;Settings</a>
+            <a id="step3" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6" href="#/setting"><i class="fa fa-cog"></i>&nbsp;&nbsp;Settings</a>
 
-            <a id="step3" ng-click="logOut()" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Sign Out </a>
+            <a id="step4" ng-click="logOut()" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Sign Out </a>
 
         </div>
     </div>
@@ -196,17 +196,25 @@
         var intro = introJs();
         intro.setOptions({
             steps: [
+             
               {
                   element: '#step1',
-                  intro: "Click to Add new Inventory"
-              },
-              {
-                  element: '#step2',
                   intro: "See all Inventories with respective item and manage all activities ",
 
               },
+               {
+                   element: '#step2',
+                   intro: "Click to Add new Inventory"
+               },
+              
               {
                   element: '#step3',
+                  intro: 'Manage all libraries and arrange your inventory columns.',
+                  position: 'top'
+
+              },
+              {
+                  element: '#step4',
                   intro: 'Click this button to sign out from app',
                   position: 'top'
 
