@@ -92,6 +92,47 @@
     {
         display:none !important;
     }
+
+
+    
+
+    .roundbutton
+    {
+        height:50px;
+        width:50px !important;
+        border-radius:100%;
+        padding:0px;
+        line-height:50px;
+    }
+
+        .roundbutton  i
+        {
+            font-size:17px;
+        }
+        
+        
+         .fa-barcode {
+            color: #fff !important;
+        }
+
+    .form-control
+    {
+        border-radius:5px !important;
+    }
+
+    .iteminfo {
+        margin-top: 0px;
+        padding-top: 8px;
+        min-height: initial;
+        padding-bottom: 8px;
+        display: block;
+        box-shadow: none;
+        min-height: 95px;
+        margin-bottom: 0px;
+        background: transparent;
+    }
+
+
 </style>
 
 
@@ -110,7 +151,7 @@
                 <br /><br /><br />
                 <img src="img/loader.gif" alt="Alternate Text" />
             </div>
-            <h4 style="margin-top:21px;">Fill below info <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></h4>
+            <h4 style="margin-top:21px;">Add Inventory <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></h4>
             <div style="display:none;" class="swiper-container">
                 
 
@@ -139,9 +180,6 @@
                                         <div ng-if="InventoryObject.AutoID==false" class="input-group">
 
                                             <div>
-
-
-
 
                                                 <input type="text" id="ItemName" class="form-control" ng-model="InventoryObject.ItemID" required="" />
 
@@ -194,7 +232,7 @@
 
 
                             <div class="form-group" ng-if="obj.ColumnName=='lLoc'">
-                                <label>Select Location <span class="redText">*</span></label> <a class="createNewLabel pull-right" ng-click="CreateNew(1)">Add new</a>
+                                <label>Select Location <span class="redText">*</span></label> 
                                 <div class="input-group">
                                     <select class="form-control" id="Location" ng-model="InventoryObject.Location">
                                         <option value="{{obj.LocationName}}" ng-selected="CheckSelectedValues(InventoryObject.Location,obj.LocationName)?true:false" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
@@ -229,7 +267,7 @@
 
 
                             <div class="form-group" ng-if="obj.ColumnName=='uomUOM'">
-                                <label>Select UOM <span class="redText">*</span></label> <a class="createNewLabel pull-right" ng-click="CreateNew(2)">Add new</a>
+                                <label>Select UOM <span class="redText">*</span></label> 
                                 <div class="input-group">
 
                                     <select class="form-control" ng-model="InventoryObject.Uom" id="UOM">
@@ -472,10 +510,28 @@
 
                     </div>
 
-                    <table style="width:100%;">
+            
+
+                    <table style="width:100%; margin-top:-15px;">
                         <tr>
                             <td>
-                                <button type="button" class="waves-effect btn btn-primary arrow-left bknext"><i class="fa fa-angle-left"></i> Back</button>
+                                <button type="button" class="waves-effect roundbutton btn btn-default arrow-left bknext"><i class="fa fa-angle-left"></i></button>
+                            </td>
+
+                            <td ng-if="CurrentActiveField=='lLoc'">
+
+                                <div style="text-align:center;">
+                                    <a class="scanbtn btn btn-success roundbutton" ng-click="CreateNew(1)"><i class="fa fa-plus"></i></a>
+                                </div>
+                              
+                            </td>
+
+                            <td ng-if="CurrentActiveField=='uomUOM'">
+                                <div style="text-align:center">
+                                    <a class="scanbtn btn btn-success roundbutton" ng-click="CreateNew(2)"><i class="fa fa-plus"></i></a>
+                                </div>
+
+                                
                             </td>
 
 
@@ -483,8 +539,14 @@
                             <td ng-if="IsinavailableInventoryField(CurrentActiveField)==true">
 
                                 <div style="text-align:center">
-                                    <button class="scanbtn btn btn-default" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i> Scan</button>
-                                    <a class="scanbtn waves-effect btn btn-default" ng-if="CurrentActiveField!='pPart'&& CurrentActiveField!='iQty' && CurrentActiveField!='uomUOM'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i> Scan</a>
+
+                                  
+
+                                
+                                   
+                                 
+                                    <button class="scanbtn btn btn-primary roundbutton" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i></button>
+                                    <a class="scanbtn waves-effect btn btn-primary roundbutton" ng-if="CurrentActiveField!='pPart'&& CurrentActiveField!='iQty' && CurrentActiveField!='uomUOM'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i></a>
                                 </div>
 
 
@@ -492,14 +554,14 @@
                             <td ng-if="CurrentActiveField.indexOf('string_')>-1 || CurrentActiveField.indexOf('bool_')>-1 || CurrentActiveField.indexOf('number_')>-1 || CurrentActiveField.indexOf('date_')>-1 ">
 
                                 <div style="text-align:center">
-                                    <a class="scanbtn waves-effect btn btn-default" ng-click="ScanNewCustom()"> <i class="fa fa-barcode"></i> Scan</a>
+                                    <a class="scanbtn waves-effect btn btn-primary roundbutton" ng-click="ScanNewCustom()"> <i class="fa fa-barcode"></i></a>
                                 </div>
 
 
                             </td>
                             <td>
                                 <div style="text-align:right;">
-                                    <a class="btn btn-primary waves-effect arrow-right bknext" ng-disabled="slide == Totalslides">Next <i class="fa fa-angle-right"></i> </a>
+                                    <a class="btn btn-default waves-effect arrow-right bknext roundbutton" ng-disabled="slide == Totalslides"><i class="fa fa-angle-right"></i> </a>
                                 </div>
 
 
@@ -543,41 +605,56 @@
 
 
             </div>
+
+
+
+            <ul class="collapsible animated fadeinright delay-1" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header" onclick="Toggle()"><i class="ion-android-arrow-dropdown right"></i>Item information </div>
+                    <div class="collapsible-body" id="iteminfo">
+                        <div class="iteminfo">
+
+                            <div class="row ">
+                                <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
+
+                                    <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321">
+                                        <span ng-repeat="_obj in ImageList" class="pull-left" ng-if="ImageList.length>0">
+
+                                            <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
+                                        </span>
+                                    </output>
+
+                                    <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;display:block !important;" src="img/default.png" alt="Alternate Text" />
+                                </div>
+
+                                <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==false">
+
+                                    <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321"></output>
+
+                                    <img id="defaultimg" style="height: 80px; width: 80px; border: 1px solid #ccc; display: block !important;" src="img/na.jpg" alt="Alternate Text" />
+                                </div>
+                                <div class="col-md-10 col-xs-8">
+                                    <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')"> <span style="display:inline-block" ng-bind="InventoryObject.ItemID"></span> <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></span>
+
+                                    <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
+
+                                    <span ng-bind="InventoryObject.Quantity" style="display:inline" ng-click="getstep(2,'iQty')"></span> <span ng-bind="InventoryObject.Uom" style="display:inline" ng-click="getstep(4,'uomUOM')"></span>
+
+                                    <span ng-bind="InventoryObject.Location" ng-click="getstep(3,'lLoc')"> </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+             
+
+            </ul>
+
          
-            <h4>Item information</h4>
-            <div class="iteminfo">
-
-                <div class="row ">
-                    <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
-
-                        <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321">
-                            <span ng-repeat="_obj in ImageList" class="pull-left" ng-if="ImageList.length>0">
-
-                                <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
-                            </span>
-                        </output>
-
-                        <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;display:block !important;" src="img/default.png" alt="Alternate Text" />
-                    </div>
-
-                    <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==false">
-
-                        <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321"></output>
-
-                        <img id="defaultimg" style="height: 80px; width: 80px; border: 1px solid #ccc; display: block !important;" src="img/na.jpg" alt="Alternate Text" />
-                    </div>
-                    <div class="col-md-10 col-xs-8">
-                        <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')"> <span style="display:inline-block" ng-bind="InventoryObject.ItemID"></span> <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></span>
-
-                        <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
-
-                        <span ng-bind="InventoryObject.Quantity" style="display:inline" ng-click="getstep(2,'iQty')"></span> <span ng-bind="InventoryObject.Uom" style="display:inline" ng-click="getstep(4,'uomUOM')"></span>
-
-                        <span ng-bind="InventoryObject.Location" ng-click="getstep(3,'lLoc')"> </span>
-
-                    </div>
-                </div>
-            </div>
+      
+            
 
         </div>
 
@@ -995,6 +1072,14 @@
 
     </div>
 </div>
+<script>
+    function Toggle() {
+        $("#iteminfo").toggle("slow");
+    }
+
+    Toggle();
+
+</script>
 
 
 
