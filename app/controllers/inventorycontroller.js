@@ -776,6 +776,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         if (_sum > 5000000) {
             log.warning("You are trying to upload more than one image, it may take some time to upload, please be patient.")
         }
+
+      
        
         ShowWaitingInv();
         $.ajax
@@ -807,13 +809,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   console.log(jqXHR);
               },
               error: function (err, textStatus, errorThrown) {
+
+                  debugger;
                   HideWaitingInv();
 
                   console.log(err);
                   log.error("Error Occurred during operation");
                   log.error(errorThrown);
 
-                  $scope.errorbox(errorThrown);
+                  $scope.Inventoryerrorbox(errorThrown);
 
                   $('#addinventories').removeClass("disabled");
                   $('#addinventories').find(".fa").removeClass("fa-spin");
@@ -822,6 +826,20 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
           });
 
 
+    }
+
+    $scope.Inventoryerrorbox = function (error) {
+
+        $("#Inventoryerror").modal('show');
+        $("#errortext").html(error)
+
+    }
+
+    $scope.MylogOut = function () {
+      
+        $("#modalerror").modal('hide');
+        $("#Inventoryerror").modal('hide');
+        $location.path('/login');
     }
 
 

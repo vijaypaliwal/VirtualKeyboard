@@ -17,6 +17,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
        
         authService.logOut();
         $("#modalerror").modal('hide');
+        $("#Inventoryerror").modal('hide');
         $location.path('/login');
     }
 

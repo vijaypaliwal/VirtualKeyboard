@@ -9,14 +9,14 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
     $scope.IsUOMLoading = false;
     $scope.IsStatusLoading = false;
     $scope.IsLocationLoading = false;
+    $scope.Iscolumnloading = false;
 
     $scope.mainObjectToSend = [];
     function init() {
         $scope.getuom();
         $scope.getstatus();
-
         $scope.getlocation();
-     
+        $scope.GetMyinventoryColumns();
         $scope.$apply();
     }
 
@@ -128,6 +128,48 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
 
                }
            });
+
+    }
+
+    $scope.GetMyinventoryColumns = function () {
+
+        $scope.Iscolumnloading = true;
+
+    
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'GetMyInventoryColumns',
+              contentType: 'application/json; charset=utf-8',
+
+              dataType: 'json',
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+              success: function (response) {
+
+                 
+
+                  $scope.Iscolumnloading = false;
+
+                  $scope.columnlist = response.GetMyInventoryColumnsResult.Payload;
+                
+                  $scope.$apply();
+
+                  console.log($scope.MyInventorycolumns);
+              },
+              error: function (err) {
+                  console.log(err);
+                  log.error("Error Occurred during operation");
+                  $scope.LocationsLoaded = true;
+                  $(".save-btn").hide();
+                  $scope.errorbox(err);
+                  $scope.$apply();
+
+              }
+          });
 
     }
 

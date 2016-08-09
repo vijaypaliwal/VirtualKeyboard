@@ -164,6 +164,8 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
     $scope.saveColumns = function () {
 
+        $(".fa-check").addClass("fa-spin");
+
         $scope.LocationsLoaded = false;
 
         $scope.loadingbutton == true;
@@ -195,6 +197,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
                   $scope.LocationsLoaded = true;
                   $scope.loadingbutton == false
                   ShowSuccess("Updated");
+                  $(".fa-check").removeClass("fa-spin");
                   $scope.GetMyinventoryColumns();
                   $scope.$apply();
               },
@@ -202,15 +205,13 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
               {
                   console.log(err);
                   $scope.LocationsLoaded = true;
+                  $(".fa-check").removeClass("fa-spin");
                   $scope.loadingbutton == false;
                   $scope.$apply();
                   $scope.errorbox(err);
                   log.error("Error Occurred during operation");
               }
           });
-
-
-
     };
 
 

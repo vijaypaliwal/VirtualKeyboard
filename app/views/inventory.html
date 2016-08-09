@@ -153,7 +153,18 @@
         width:100%;
     }
 
-
+    .imgcounter {
+        font-size: 18px;
+        padding: 8px;
+        padding-left: 13px;
+        padding-right: 5px;
+        background: white;
+        padding-top: 5px;
+        color: #333;
+        margin-top: 13px;
+        border-radius: 100%;
+        text-align: left;
+    }
 
 
 </style>
@@ -343,11 +354,12 @@
                                     <div class="col-xs-6">
 
                                         <div class="fileUpload viewimage btn btn-primary" style="float:right;" ng-if="ImageList.length>0" ng-click="viewimages()">
-                                            <span>Show <br /> Images</span>
+                                            <span>
+                                                <span class="imgcounter"> {{ImageList.length}} </span>
+                                             <br /> Images</span>
                                         </div>
                                     </div>
                                 </div>
-
 
                                 <div>
                                     <br />
@@ -410,14 +422,9 @@
                                     <input id="UnitNumber2" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" value="" ng-model="InventoryObject.UnitNumber2" />
                                     <span ng-click="GetLastValue('Inv_UnitNumber2','#UnitNumber2')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                                 </div>
-
                             </div>
 
-
                         </div>
-
-
-
 
 
                         <div class="swiper-slide CustomItemCols" data-id="CustomItem_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="Part" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
@@ -1061,11 +1068,10 @@
     </div>
 
     <div style="padding:5px;" class="modal-body">
-
         <br />
         <span ng-repeat="_obj in ImageList" class="pull-left" ng-if="ImageList.length>0">
 
-            <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
+            <img style="border:1px solid #ccc;" src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
             <a class="btn btn-danger removeImage" altid="{{_obj.ImageID}}" ng-click="RemoveFromImageList(_obj.ImageID)"><i class="fa fa-times"></i></a>
         </span>
 
@@ -1095,6 +1101,34 @@
 
     </div>
 </div>
+
+<div style="background:#fff; padding:0px;" id="Inventoryerror" class="modal bottom-sheet animated bounceIn">
+    <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
+
+        <h4 style="color:brown; font-size:14px;">Opps some thing went wrong !!</h4>
+
+    </div>
+
+    <div style="padding:5px;" class="modal-body">
+        <h4 style="padding-left: 15px; color: brown; font-size:20px; margin-top:10px" id="errortext">Time out</h4>
+
+        
+
+        <a ng-click="addinventory()" style="padding-left:15px; margin-top:20px; font-size:16px;">Retry</a>
+        <br /><br />
+
+
+        <a ng-click="MylogOut()" style="padding-left:15px; margin-top:20px; font-size:16px;">Log out</a>
+        <br /><br />
+
+        <a ng-click="reload()" style="padding-left: 15px; font-size: 16px;">Refresh page</a>
+
+        <div><br /></div>
+
+
+    </div>
+</div>
+
 <script>
     function Toggle() {
         $("#iteminfo").toggle("slow");
