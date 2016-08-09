@@ -71,7 +71,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
                   var _myinventorycols = response.GetMyInventoryColumnsResult.Payload;
                   for (var i = 0; i <_myinventorycols.length; i++) {
-                     // if (_myinventorycols[i].ColumnName != "HasConversion" && _myinventorycols[i].ColumnName != "ActionQty")
+                      if (_myinventorycols[i].ColumnName != "HasConversion" && _myinventorycols[i].ColumnName != "ActionQty")
                       {
                           $scope.MyInventorycolumns.push(_myinventorycols[i]);
                       }
