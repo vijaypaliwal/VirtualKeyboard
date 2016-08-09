@@ -168,7 +168,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
         $scope.LocationsLoaded = false;
 
-        $scope.loadingbutton == true;
+        $scope.loadingbutton = true;
 
         for (var i = 0; i < $scope.MyInventorycolumns.length; i++) {
             if ($scope.MyInventorycolumns[i].mobileorder != 0) {
