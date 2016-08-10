@@ -16,6 +16,11 @@
         padding-bottom:2px;
     }
 
+    .btn-warning
+    {
+        border-radius:0px !important;
+    }
+
     .cartitems
     {
         display:block;
@@ -2457,7 +2462,7 @@
                 </div>
 
                 <div ng-if="IsProcessing==true" class="linkdisabled" ng-click="SubmitAllActivities()">
-                    <a class="btn width-100 btn-large waves-effect btn-primary"><i style="color:#fff;" class="fa fa-check fa-spin"></i>Process</a>
+                    <a class="btn width-100 waves-effect  btn-primary"><i style="color:#fff;" class="fa fa-check fa-spin"></i>Process</a>
                 </div>
             </div>
 
@@ -2470,7 +2475,11 @@
 
     </div>
 
-    <br />
+    <div>
+        <br />
+    </div>
+
+    
 
     <div ng-if="IsSingleMode==true" class="bottomnavigator {{CurrentHeaderClass}}">
         <div class="row">
