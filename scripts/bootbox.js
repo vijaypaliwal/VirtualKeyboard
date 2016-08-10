@@ -177,9 +177,9 @@
             if (!button.className) {
                 if (total <= 2 && index === total - 1) {
                     // always add a primary to the main option in a two-button dialog
-                    button.className = "btn-clearlyInventory btnPrimary";
+                    button.className = "btn-clearlyInventory btn-primary";
                 } else {
-                    button.className = "btn-clearlyInventory btnSecondry";
+                    button.className = "btn-clearlyInventory btn-gray";
                 }
             }
         });
@@ -597,14 +597,14 @@
             // can just become a template too
 
             if (button.label == "OK") {
-                buttonStr += "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'>" + button.label + "</button>";
+                buttonStr += "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'><i class='fa fa-check'></i> " + button.label + "</button>";
             }
             else if (button.label == "Cancel") {
-                buttonStr += "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'>" + button.label + "</button>";
+                buttonStr += "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'><i class='fa fa-times'></i> " + button.label + "</button>";
             }
             else {
 
-                buttonStr += "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'>" + button.label + "</button>";
+                buttonStr += "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'><i class='fa fa-times'></i> " + button.label + "</button>";
             }
             callbacks[key] = button.callback;
         });
