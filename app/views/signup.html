@@ -133,20 +133,12 @@
         <br /><br />
     </div>
 
-    <table class="bottombtn">
-        <tr>
-           
-            <td>
-                <button class="waves-effect waves-light primary-color btn-large width-100 animated center bouncein delay-6" type="button" id="signUpBtn" ng-disabled="signup.$invalid" data-ng-click="signUp()">Sign Up&nbsp;<i class="fa fa-sign-in"></i> </button>
-                
-            </td>
-            <td>
-                <button class="waves-effect waves-light gray-color btn-large width-100 animated center bouncein delay-6" type="reset" data-ng-click="reset()"><i class="fa fa-refresh"></i>&nbsp;Reset </button>
-            </td>
-        </tr>
-    </table>
-
-    
+    <div class="row">
+        <div class="col-md-6">
+            <button class="waves-effect waves-light btn btn-primary width-100" type="button" id="signUpBtn" ng-disabled="signup.$invalid" data-ng-click="signUp()">Sign Up&nbsp;<i class="fa fa-sign-in"></i> </button>
+        </div>
+        <div class="col-md-6"><button class="waves-effect waves-light btn-gray btn width-100" type="reset" data-ng-click="reset()"><i class="fa fa-refresh"></i>&nbsp;Reset </button></div>
+    </div>
 </form>
 
 <style>
@@ -280,32 +272,7 @@
         display: none;
     }
 
-    .bottombtn
-    {
-        position:fixed;
-        bottom:0;
-        left:0;
-        z-index:10;
-        right:0;
-        width:100%;
-    }
-
-        .bottombtn .btn-large {
-            margin-bottom: 0px;
-            border-radius: 0px;
-            z-index:10;
-        }
-
-    .btn-large i
-    {
-        font-size:16px;
-    }
-
-    .btn-large:disabled
-    {
-        color:#fff  !important;
-        opacity:0.7;
-    }
+  
 
     #mysignupModal {
         text-align: center;

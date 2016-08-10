@@ -69,6 +69,16 @@
         color: #fff !important;
         opacity: 0.7 !important;
     }
+
+    .list-group .btn-warning {
+        border-radius: 100% !important;
+        margin-right: 5px;
+    }
+
+    .list-group .btn-danger {
+        border-radius: 100% !important;
+        margin-right: 5px;
+    }
 </style>
 
 <div style="margin-top:12px;" class="page-header">
@@ -89,7 +99,7 @@
 
 
 <div ng-if="mode == 1" class="listview animated zoomIn">
-    <a ng-click="addstatus()" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6">
+    <a style="margin-bottom:10px;" ng-click="addstatus()" class="waves-effect width-100 btn btn-primary">
         <i class="fa fa-plus-circle"></i> Add new Status
     </a>
 
@@ -160,18 +170,14 @@
 
             <div class="row">
                 <div class="col-xs-6">
-                    <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savestatus()" ng-if="mode == 2" class="btn-large btn-primary"> <i class="fa fa-plus-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Add</button>
-                    <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savestatus()" ng-if="mode == 3" class="btn-large btn-primary"> <i class="fa fa-check-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Update</button>
+                    <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savestatus()" ng-if="mode == 2" class="btn width-100 btn-primary"> <i class="fa fa-plus-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Add</button>
+                    <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savestatus()" ng-if="mode == 3" class="btn width-100 btn-primary"> <i class="fa fa-check-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Update</button>
                 </div>
                 <div class="col-xs-6">
-                    <a style="width:100%" ng-click="leaveform()" class="btn btn-large gray-color"> <i class="fa fa-times"></i> Cancel</a>
+                    <a style="width:100%" ng-click="leaveform()" class="btn btn-gray width-100"> <i class="fa fa-times"></i> Cancel</a>
                 </div>
             </div>
             
-
-         
-
-
 
         </div>
 

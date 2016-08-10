@@ -1,0 +1,118 @@
+.btn-primary {
+    background-color: #2196F3  !important;
+    border: transparent !important;
+    border-radius: 100%;
+    font-size: 17px;
+    height: 45px;
+    line-height:45px;
+    border-radius: 18px;
+    padding-left:8px; 
+    padding-right:8px;
+}
+
+.btn-gray {
+    background: #949494 !important;
+    color: #fff !important;
+    opacity: 0.7;
+    height: 45px;
+    margin-bottom: 15px;
+    line-height:45px;
+    border: transparent !important;
+    border-radius: 18px;
+    font-size: 17px;
+       padding-left:8px; 
+    padding-right:8px;
+}
+
+.cartitems .input-group-addon
+{
+    background:transparent !important;
+}
+
+.myicon
+{
+   background:transparent !important;
+}
+
+.myicon .fa-thumb-tack
+{
+    padding-left:15px !important;
+    padding-right:15px !important;
+}
+
+.input-group-addon .fa-thumb-tack
+{
+    padding-left:15px !important;
+    padding-right:15px !important;
+}
+
+
+.input-group-addon .fa-undo
+ {
+    padding-left:13px !important;
+    padding-right:13px !important;
+ }
+
+.input-group-addon .fa-thumb-tack
+{
+    padding-left:15px !important;
+    padding-right:15px !important;
+}
+
+.c-widget-figure {
+    margin-right: 20px;
+    width: 48px;
+    height: 48px;
+    color: #fff;
+    border-radius: 50%;
+    line-height: 51px;
+    text-align: center;
+}
+
+.waves-effect.btn-warning
+{
+    border-radius:18px;
+}
+
+
+.input-group-addon .fa-plus
+{
+    padding-left:14px !important;
+    padding-right:14px !important;
+
+}
+
+.input-group-addon .fa-minus
+{
+    padding-left:14px !important;
+      padding-right:14px !important;
+
+}
+
+.input-group-addon .fa-barcode {
+    padding-left: 10px !important;
+    padding-right: 14px !important;
+}
+
+
+  .collapsible-header i {
+        width: 2rem;
+        font-size: 1.6rem;
+        line-height: 30px;
+        display: block;
+        float: left;
+        text-align: center;
+        margin-top: 8px;
+        margin-right: 1rem;
+        background: #ccc;
+        border-radius: 100%;
+       
+    }
+
+
+
+  .fileUpload.btn-primary
+  {
+      font-size:15px;
+      line-height:32px;
+  }

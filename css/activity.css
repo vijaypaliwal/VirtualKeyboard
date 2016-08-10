@@ -525,10 +525,11 @@ position: absolute;
     bottom: 75px;
     position: fixed !important;
     border-radius: 60px;
-   line-height:60px;
+    line-height:60px;
     right: 20px;
     color: #fff !important;
     z-index: 10000;
+    padding:0px;
 }
 
 .panel-default > .panel-heading {

@@ -31,29 +31,7 @@
          overflow-x:hidden !important;
      }
 
-    .input-group-addon {
-        padding: 6px 12px;
-        font-size: 16px;
-        font-weight: normal;
-        line-height: 1;
-        color: #6f6f6f;
-        text-align: center;
-        background-color: #eeeeee !important;
-        border: 1px solid #cccccc;
-        border-radius: 0;
-    }
-
-        .input-group-addon i {
-            padding: 6px 12px !important;
-            font-size: initial;
-            font-weight: normal;
-            line-height: 1;
-            color: #6f6f6f !important;
-            text-align: center;
-            background-color: #eeeeee;
-            font-size: 16px !important;
-            border-radius: 0;
-        }
+  
 </style>
 
 <div style="display:none" class="activity" ng-cloak>
@@ -1416,13 +1394,13 @@
 
                                             <div class="fg-line">
 
-                                                <input style=" height: 53px;" placeholder1="Fill Quantity" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
+                                                <input placeholder1="Fill Quantity" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
 
                                             </div>
 
 
-                                            <span style="background: #128ece;padding:0px;" class="input-group-addon last" >
-                                                <span style="height: 52px; width: auto; padding: 13px; background-color: transparent" data-toggle="dropdown" aria-expanded="false" id="movebutton_{{CurrentActiveObject.InventoryDataList.uId}}" class="waves-effect rotateData btnPrimary btn-icon">
+                                            <span class="input-group-addon last" >
+                                                <span data-toggle="dropdown" aria-expanded="false" id="movebutton_{{CurrentActiveObject.InventoryDataList.uId}}" class="waves-effect myicon rotateData btnPrimary btn-icon">
                                                     <i class="fa fa-thumb-tack"></i>
                                                 </span>
 
@@ -1460,12 +1438,12 @@
                                             <label>Location <span>*</span> </label>
 
                                             <div class="input-group">
-                                                <input type="text" style=" height: 53px;" class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
+                                                <input type="text"  class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
 
                                                 <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID)"><i class="fa fa-search"></i></span>
 
-                                                <span style="background: #128ece;padding:0px;" class="input-group-addon last">
-                                                    <span style="height: 52px; width: auto; padding: 13px; background-color: transparent; " id="location_{{CurrentActiveObject.InventoryDataList.uId}}" class="rotateData btnPrimary" data-ng-click="FillLocation(CurrentActiveObject.MoveTransactionData.MoveToLocation,CurrentActiveObject.MoveTransactionData.MoveToLocationText,CurrentActiveObject.InventoryDataList.uId)">
+                                                <span  class="input-group-addon last">
+                                                    <span id="location_{{CurrentActiveObject.InventoryDataList.uId}}" class="rotateData btnPrimary" data-ng-click="FillLocation(CurrentActiveObject.MoveTransactionData.MoveToLocation,CurrentActiveObject.MoveTransactionData.MoveToLocationText,CurrentActiveObject.InventoryDataList.uId)">
                                                         <i class="fa fa-thumb-tack"></i>
                                                     </span>
                                                 </span>
@@ -2471,30 +2449,26 @@
 
     <div ng-if="IsSingleMode==false">
 
+        <div class="row">
+            <div class="col-xs-6">
+                <div ng-if="IsProcessing==false" ng-click="SubmitAllActivities()">
+                    <a class="btn width-100 waves-effect  btn-primary">
+                        <i class="fa fa-check"></i>
+                        Process
+                    </a>
+                </div>
 
-        <table class="bottombutton" style="width:100%; position:fixed; bottom:0">
-            <tr>
-                <td style="width:50%;">
-                    <div ng-if="IsProcessing==false" ng-click="SubmitAllActivities()">
-                        <a style="width:100%; margin-bottom:0px; border-radius:0px;" class="btn waves-effect btn-large btn-success">
-                            <i class="fa fa-check"></i> 
-                        Process</a>
-                    </div>
+                <div ng-if="IsProcessing==true" class="linkdisabled" ng-click="SubmitAllActivities()">
+                    <a class="btn width-100 btn-large waves-effect btn-primary"><i style="color:#fff;" class="fa fa-check fa-spin"></i>Process</a>
+                </div>
+            </div>
 
-                    <div ng-if="IsProcessing==true" class="linkdisabled" ng-click="SubmitAllActivities()">
-                        <a style="width: 100%; margin-bottom: 0px; border-radius: 0px;" class="btn btn-large waves-effect btn-success"><i style="color:#fff;" class="fa fa-check fa-spin"></i>Process</a>
-                    </div>
-                </td>
-                <td style="width:50%;">
-                    <a style="width: 100%; margin-bottom: 0px; border-radius: 0px;" class="btn btn-large waves-effect btn-default" ng-click="LeavePage()"><i style="color:#000;" class="fa fa-times"></i> &nbsp;Cancel</a>
-                </td>
-            </tr>
-        </table>
+            <div class="col-xs-6">
 
+                <a class="btn width-100 waves-effect btn-gray" ng-click="LeavePage()"><i class="fa fa-times"></i>&nbsp;Cancel</a>
 
-
-
-
+            </div>
+        </div>
 
     </div>
 
@@ -2527,7 +2501,7 @@
             <div class="form-group">
 
                 <div class="input-group">
-                    <input style="height:47px;" type="text" id="searchlocation" placeholder1="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
+                    <input  type="text" id="searchlocation" placeholder1="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
                     <span class="input-group-addon last" ng-click="ScanLocationsearch()">
                         <i class="fa fa-barcode"></i>
                     </span>
@@ -2570,7 +2544,7 @@
             <h4>Selected Item list - <span>{{CurrentCart.length}}</span></h4>
             <div style="margin-bottom:5px;" class="form-group">
                 <div class="input-group">
-                    <input style="height:40px; margin-top:10px; margin-bottom:10px;" placeholder1="Type to search" class="form-control" type="text" ng-model="Selecteditemlist">
+                    <input style="margin-top:10px; margin-bottom:10px;" placeholder1="Type to search" class="form-control" type="text" ng-model="Selecteditemlist">
                 </div>
             </div>
         </div>

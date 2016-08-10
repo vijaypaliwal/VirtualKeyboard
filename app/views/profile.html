@@ -81,19 +81,19 @@
         <div>
             <br /><br />
         </div>
-        <div style="position:fixed; width:100%; bottom:0; left:0; right:0;">
-            <table style="width:100%;">
-                <tr>
-                    <td style="width:50%;">
-                        <a ng-if="isSaving==false" ng-disabled="myForm.$invalid" ng-click="Updateinfo()" style="border-radius:0px; margin-bottom:0px;" class="btn btn-large waves-effect btn-primary"> <i class="fa fa-pencil"></i> Update</a>
-                        <a ng-if="isSaving==true" ng-click="Updateinfo()" style="border-radius:0px; margin-bottom:0px;" class="btn btn-large btn-primary waves-effect disabled"> <i class="fa fa-pencil fa-spin"></i> Update</a>
-                    </td>
-                    <td style="width:50%;">
-                        <a style="border-radius:0px; margin-bottom:0px; width:100%;" ng-click="detailmode()" class="waves-effect btn btn-large btn-default"> <i class="fa fa-times"></i> Cancel</a>
-                    </td>
-                </tr>
-            </table>
+
+
+        <div class="row">
+            <div class="col-xs-6">
+                <a ng-if="isSaving==false" ng-disabled="myForm.$invalid" ng-click="Updateinfo()" class="btn width-100 waves-effect btn-primary"> <i class="fa fa-pencil"></i> Update</a>
+                <a ng-if="isSaving==true" ng-click="Updateinfo()" class="btn width-100 btn-primary waves-effect disabled"> <i class="fa fa-pencil fa-spin"></i> Update</a>
+            </div>
+
+            <div class="col-xs-6">
+                <a ng-click="detailmode()" class="waves-effect width-100 btn btn-gray"> <i class="fa fa-times"></i> Cancel</a>
+            </div>
         </div>
+        
     </div>
 
 </div>

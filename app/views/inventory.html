@@ -107,11 +107,6 @@
        
     }
 
-        .roundbutton  i
-        {
-            font-size:17px;
-        }
-        
         
          .fa-barcode {
             color: #fff !important;
@@ -134,19 +129,7 @@
         background: transparent;
     }
 
-    .collapsible-header i {
-        width: 2rem;
-        font-size: 1.6rem;
-        line-height: 35px;
-        display: block;
-        float: left;
-        text-align: center;
-        margin-top: 5px;
-        margin-right: 1rem;
-        background: #ccc;
-        border-radius: 100%;
-       
-    }
+  
 
     .collapsible-header
     {
@@ -221,8 +204,8 @@
 
 
 
-                                            <span class="input-group-addon last" ng-click="itemlist()"><i class="fa fa-search"></i></span>
-                                            <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemID','#ItemName')"><i class="fa fa-undo"></i></span>
+                                            <span class="input-group-addon waves-effect waves-effect last" ng-click="itemlist()"><i class="fa fa-search"></i></span>
+                                            <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_ItemID','#ItemName')"><i class="fa fa-undo"></i></span>
                                         </div>
 
 
@@ -246,7 +229,7 @@
                                 <div class="input-group">
                                     <input type="text" id="pDescriptionForm" ng-model="InventoryObject.Description" name="name" class="form-control" value="" />
 
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_Description','#pDescriptionForm')"><i class="fa fa-undo"></i></span>
+                                    <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_Description','#pDescriptionForm')"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
 
@@ -255,10 +238,10 @@
                                 <label>Quantity</label>
 
                                 <div class="input-group">
-                                    <span class="input-group-addon" ng-click="UpDownValue('Quantity',true)"><i class="fa fa-plus"></i></span>
+                                    <span class="input-group-addon waves-effect waves-effect" ng-click="UpDownValue('Quantity',true)"><i class="fa fa-plus"></i></span>
                                     <input ng-model="InventoryObject.Quantity" id="iQty" min="0" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="Quantity" value="" />
 
-                                    <span class="input-group-addon" ng-click="UpDownValue('Quantity',false)"><i class="fa fa-minus"></i></span>
+                                    <span class="input-group-addon waves-effect waves-effect" ng-click="UpDownValue('Quantity',false)"><i class="fa fa-minus"></i></span>
                                 </div>
 
                             </div>
@@ -271,8 +254,8 @@
                                     <select class="form-control" id="Location" ng-model="InventoryObject.Location">
                                         <option value="{{obj.LocationName}}" ng-selected="CheckSelectedValues(InventoryObject.Location,obj.LocationName)?true:false" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
                                     </select>
-                                    <span class="input-group-addon last" ng-click="locationlist()"><i class="fa fa-search"></i></span>
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_Location','#Location')"><i class="fa fa-undo"></i></span>
+                                    <span class="input-group-addon waves-effect  waves-effect last" ng-click="locationlist()"><i class="fa fa-search"></i></span>
+                                    <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_Location','#Location')"><i class="fa fa-undo"></i></span>
                                 </div>
 
 
@@ -283,7 +266,7 @@
                                 <label>Location Group</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="lZone" ng-model="InventoryObject.lZone" />
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_lZone','#lZone')"><i class="fa fa-undo"></i></span>
+                                    <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_lZone','#lZone')"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
 
@@ -294,7 +277,7 @@
                                     <select class="form-control" id="Status" ng-model="InventoryObject.Status">
                                         <option value="{{obj.StatusValue}}" ng-repeat="obj in StatusList">{{obj.StatusValue}}</option>
                                     </select>
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_Status','#Status')"><i class="fa fa-undo"></i></span>
+                                    <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_Status','#Status')"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
 
@@ -308,7 +291,7 @@
                                         <option value="{{obj.UnitOfMeasureName}}" ng-selected="CheckSelectedValues(InventoryObject.Uom,obj.UnitOfMeasureName)?true:false" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                     </select>
 
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_Uom','#UOM')"><i class="fa fa-undo"></i></span>
+                                    <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_Uom','#UOM')"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
 
@@ -316,7 +299,7 @@
                                 <label>Item Group</label>
                                 <div class="input-group">
                                     <input class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_ItemGroup','#itemgroup')"><i class="fa fa-undo"></i></span>
+                                    <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_ItemGroup','#itemgroup')"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
 
@@ -328,7 +311,7 @@
 
                                 <div class="input-group">
                                     <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="cost" value="" />
-                                    <span class="input-group-addon last" ng-click="GetLastValue('Inv_Cost','#Costperunit')"><i class="fa fa-undo"></i></span>
+                                    <span class="input-group-addon waves-effect last" ng-click="GetLastValue('Inv_Cost','#Costperunit')"><i class="fa fa-undo"></i></span>
                                 </div>
 
 
@@ -371,14 +354,14 @@
 
                                 <div class="input-group">
                                     <input id="UniqueTag" type="text" ng-model="InventoryObject.UniqueTag" class="form-control" value="" />
-                                    <span ng-click="GetLastValue('Inv_UniqueTag','#UniqueTag')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValue('Inv_UniqueTag','#UniqueTag')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
                             <div ng-if="obj.ColumnName=='iUnitTag2'" class="form-group">
                                 <label>{{obj.ColumnLabel}}</label>
                                 <div class="input-group">
                                     <input id="UnitTag2" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
-                                    <span ng-click="GetLastValue('Inv_UnitTag2','#UnitTag2')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValue('Inv_UnitTag2','#UnitTag2')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
                             <div ng-if="obj.ColumnName=='iUnitTag3'" class="form-group">
@@ -386,7 +369,7 @@
                                 <label>{{obj.ColumnLabel}}</label>
                                 <div class="input-group">
                                     <input id="UnitTag3" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />
-                                    <span ng-click="GetLastValue('Inv_UnitTag3','#UnitTag3')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValue('Inv_UnitTag3','#UnitTag3')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
                             <div ng-if="obj.ColumnName=='iUniqueDate'" class="form-group">
@@ -394,7 +377,7 @@
 
                                 <div class="input-group">
                                     <input id="UniqueDate" type="date" ng-model="InventoryObject.UniqueDate" class="form-control" value="" />
-                                    <span ng-click="GetLastValue('Inv_UniqueDate','#UniqueDate')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValue('Inv_UniqueDate','#UniqueDate')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
                             <div ng-if="obj.ColumnName=='iUnitDate2'" class="form-group">
@@ -403,14 +386,14 @@
 
                                 <div class="input-group">
                                     <input id="UnitDate2" type="date" ng-model="InventoryObject.UnitDate2" class="form-control" value="" />
-                                    <span ng-click="GetLastValue('Inv_UnitDate2','#UnitDate2')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValue('Inv_UnitDate2','#UnitDate2')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
                             <div ng-if="obj.ColumnName=='iUnitNumber1'" class="form-group">
                                 <label>{{obj.ColumnLabel}}</label>
                                 <div class="input-group">
                                     <input id="UnitNumber1" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" value="" ng-model="InventoryObject.UnitNumber1" />
-                                    <span ng-click="GetLastValue('Inv_UnitNumber1','#UnitNumber1')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValue('Inv_UnitNumber1','#UnitNumber1')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
                             <div ng-if="obj.ColumnName=='iUnitNumber2'" class="form-group">
@@ -420,7 +403,7 @@
                                 <div class="input-group">
 
                                     <input id="UnitNumber2" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" value="" ng-model="InventoryObject.UnitNumber2" />
-                                    <span ng-click="GetLastValue('Inv_UnitNumber2','#UnitNumber2')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValue('Inv_UnitNumber2','#UnitNumber2')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
 
@@ -435,7 +418,7 @@
                                 <div ng-if="obj.cfdDataType=='string'" class="input-group">
                                     <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{obj.CfValue}}" />
 
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='checkbox'">
@@ -455,24 +438,24 @@
 
                                         </select>
                                     </div>
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
 
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
                                     <input id="CustomItem_{{obj.cfdID}}" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='number'" class="input-group">
                                     <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
 
 
                                 <div ng-if="obj.cfdDataType=='currency'" class="input-group">
                                     <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,1)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -487,7 +470,7 @@
                                 <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
                                 <div ng-if="obj.cfdDataType=='string'" class="input-group">
                                     <input id="CustomActivity_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control stringType" value="{{obj.CfValue}}" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
 
 
@@ -507,24 +490,24 @@
 
                                         </select>
                                     </div>
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
 
                                 </div>
 
 
                                 <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
                                     <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control customFieldDatePicker FormDateType" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='number'" class="input-group">
                                     <input id="CustomActivity_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='currency'" class="input-group">
                                     <input id="CustomActivity_{{obj.cfdID}}" type="text" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
                                 </div>
 
                             </div>
@@ -534,7 +517,7 @@
 
                         <div class="swiper-slide">
 
-                            <a ng-click="addinventory()" ng-if="IsFormDataloaded==true" style="color:white !important; width:100% !important; margin-top:20px;text-align:center; z-index:1000;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"> <i style="font-size:16px;" class="fa fa-plus-circle"></i>  Add Inventory</a>
+                            <a ng-click="addinventory()" ng-if="IsFormDataloaded==true" style="color:white !important; width:100% !important; margin-top:20px;text-align:center; z-index:1000;" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect btn btn-primary width-100"> <i style="font-size:16px;" class="fa fa-plus-circle"></i>  Add Inventory</a>
                         </div>
 
 
@@ -731,7 +714,7 @@
         <div class="form-group">
             <div class="input-group">
                 <input id="searchitem" type="text" placeholder="Type Keyword to find items" ng-change="OnChangeItemNameFunction()" class="form-control" ng-model="SearchItemValue" required="" autofocus />
-                <span class="input-group-addon last">
+                <span class="input-group-addon waves-effect last">
                     <a ng-click="ScanNewsearch()"><i class="fa fa-barcode"></i></a>
                 </span>
             </div>
@@ -776,7 +759,7 @@
 
             <div class="input-group">
                 <input type="text" id="searchlocation" placeholder="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
-                <span class="input-group-addon last">
+                <span class="input-group-addon waves-effect last">
                     <a ng-click="ScanLocationsearch()"><i class="fa fa-barcode"></i></a>
                 </span>
             </div>
@@ -820,7 +803,7 @@
 
             <div class="input-group">
                 <input type="text" id="searchuom" placeholder="Type Keyword to find uom" ng-change="OnChangeUOMFunction()" class="form-control" ng-model="SearchUOMValue" required="" autofocus />
-                <span class="input-group-addon last">
+                <span class="input-group-addon waves-effect last">
                     <a ng-click="ScanUOMsearch()"><i class="fa fa-barcode"></i></a>
                 </span>
             </div>
