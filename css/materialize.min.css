@@ -7767,7 +7767,8 @@ button.btn-floating {
  */
 
 .waves-effect {
-  
+    position: relative;
+    cursor: pointer;
     overflow: hidden;
     -webkit-user-select: none;
     -moz-user-select: none;
