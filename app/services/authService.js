@@ -41,7 +41,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
             data = data + "&client_id=" + ngAuthSettings.clientId;
         }
         $("#loginBtn").addClass("disabled");
-        $("#loginBtn").find(".fa").removeClass("fa-sign-in").addClass("fa-spin fa-spinner");
+        $(".fa-sign-in").addClass("fa-spin");
         var deferred = $q.defer();
         ShowLoginSuccess();
         $.ajax
@@ -56,7 +56,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 debugger;
 
                 $("#loginBtn").removeClass("disabled");
-                $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
+                $(".fa-sign-in").removeClass("fa-spin");
                 $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
                 $(".side-nav").show();
                 if (response.LoginResult.Success == true) {
@@ -93,7 +93,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 debugger;
 
                 $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
-
+                $(".fa-sign-in").removeClass("fa-spin");
                 playBeep();
                 $("#loginBtn").removeClass("disabled");
                 $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");

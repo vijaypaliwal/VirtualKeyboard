@@ -109,6 +109,18 @@ app.config(function ($routeProvider) {
       templateUrl: "app/views/associate.html"
     });
 
+    $routeProvider.when("/reportmenu", {
+        controller: "reportmenuController",
+        templateUrl: "app/views/reportmenu.html"
+    });
+
+    $routeProvider.when("/currentinventory", {
+        controller: "currentinventoryController",
+        templateUrl: "app/views/currentinventory.html"
+    });
+
+    
+
     $routeProvider.otherwise({ redirectTo: "/login" });
 
 });

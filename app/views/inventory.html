@@ -1078,8 +1078,18 @@
             </div>
             <br />
 
-            <button ng-disabled="CreateNewLabel==''" ng-click="SaveLabel(CreateType)" class="btn waves-effect waves-light primary-color"><i class="fa fa-plus"></i> Add</button>
-            <a href="#" data-dismiss="modal" class="btn waves-effect waves-light gray-color"> <i class="fa fa-times"></i> Cancel</a>
+            <div class="row">
+                <div class="col-xs-6">
+                    <button ng-disabled="CreateNewLabel==''" ng-click="SaveLabel(CreateType)" class="btn btn-primary width-100"><i class="fa fa-plus"></i> Add</button>
+                </div>
+
+                <div class="col-xs-6">
+                    <a href="#" data-dismiss="modal" class="btn btn-gray width-100"> <i class="fa fa-times"></i> Cancel</a>
+                </div>
+            </div>
+
+          
+         
         </div>
 
     </div>
