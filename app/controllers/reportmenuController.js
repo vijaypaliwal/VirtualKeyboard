@@ -20,6 +20,7 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
 
 
     $scope.GoTo = function (url) {
+
         $location.path(url);
     }
 
