@@ -173,9 +173,7 @@
 
     .save-btn {
         margin-bottom: 4px;
-        padding-left: 3px ;
-        padding-right: 3px;
-        width:85px;
+        width:88px;
         height:35px;
         line-height:35px;
         text-transform:capitalize;
@@ -269,7 +267,9 @@
         </div>
 
         <div style="text-align:right" class="col-xs-3">
-            <a class="btn save-btn btn-primary" ng-click="saveColumns();"><i class="fa fa-check"></i> Save</a>
+            <a ng-if="loadingbutton==false" class="btn save-btn btn-primary" ng-click="saveColumns();"><i class="fa fa-check"></i> Save</a>
+
+            <a ng-if="loadingbutton==true" disabled class="btn save-btn btn-primary"><i class="fa fa-check fa-spin"></i> Save</a>
         </div>
     </div>
 </div>

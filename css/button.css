@@ -125,6 +125,7 @@
 
   .fileUpload.btn-primary
   {
-      font-size:15px;
-      line-height:32px;
+     font-size: 14px;
+    line-height: 30px;
+    padding-top: 10px;
   }
