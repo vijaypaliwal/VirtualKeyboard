@@ -75,7 +75,7 @@
         margin-left: -50px;
         max-height: 250px;
         overflow-y: auto;
-        text-align:center;
+        text-align: center;
     }
 
 
@@ -108,38 +108,18 @@
         -webkit-box-orient: vertical;
         word-break: break-all;
         margin-bottom: 0;
-       font-size:17px;
-       line-height:32px;
+        font-size: 17px;
+        line-height: 32px;
     }
 
-    table a {
-        width: 100%;
-    }
-
-
-
-    table tr {
-      
-        background: #fff;
-        margin-bottom:2px;
-        border: 1px solid #ccc;
-        border-right: transparent;
-    }
-
-    table td {
-        background: transparent;
-        border: none !important;
-        background-color: transparent !important;
-        padding-top: 2px !important;
-        padding-bottom: 0px !important;
-    }
+  
 
 
     .onbtn {
         color: #fff;
         padding: 10px;
-        padding-top:7px;
-        padding-bottom:7px;
+        padding-top: 7px;
+        padding-bottom: 7px;
         background: #0094ff;
     }
 
@@ -151,10 +131,10 @@
         height: 50px;
         margin-bottom: 5px;
     }
-    .infoareas
-    {
-        padding-top:10px;
-        padding-bottom:10px;
+
+    .infoareas {
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 
 
@@ -173,11 +153,11 @@
 
     .save-btn {
         margin-bottom: 4px;
-        width:88px;
-        height:35px;
-        line-height:35px;
-        text-transform:capitalize;
-        border-radius:18px;
+        width: 88px;
+        height: 35px;
+        line-height: 35px;
+        text-transform: capitalize;
+        border-radius: 18px;
     }
 
     .ordernumber {
@@ -192,9 +172,9 @@
         line-height: 25px;
         margin-top: -6px;
     }
-    .custombtnGroup
-    {
-       float:right;
+
+    .custombtnGroup {
+        float: right;
     }
 
     .vertical-text {
@@ -240,14 +220,15 @@
         border-radius: 100%;
         padding: 0px;
     }
-    .btn-primary.dropdown-toggle
-    {
-        opacity:0.5;
+
+    .btn-primary.dropdown-toggle {
+        opacity: 0.5;
     }
 
     .btn-success.dropdown-toggle {
         border-radius: 16px;
     }
+
     .btn-primary {
         background-color: #2196F3 !important;
         border: transparent !important;
@@ -270,28 +251,25 @@
         z-index: 10;
     }
 
-     .report-header  h4,small
-     {
-         color:#fff !important;
-     }
+        .report-header h4, small {
+            color: #fff !important;
+        }
 
-        .report-header h4
-        {
-         padding-left:50px;
+        .report-header h4 {
+            padding-left: 50px;
         }
 
         .report-header small {
-          font-size:12px !important;
+            font-size: 12px !important;
         }
 
 
-         .container {
-            padding: 0px;
-        }
+    .container {
+        padding: 0px;
+    }
 
-    #toolbar
-    {
-        box-shadow:none;
+    #toolbar {
+        box-shadow: none;
     }
 
     .roundbtn {
@@ -311,60 +289,75 @@
     .contentsection {
         padding-top: 85px;
         padding-left: 12px;
-    }
-    .contentsection .date
-    {
-        margin-left:50px;
+        padding-right:12px;
     }
 
-    .btn-white
-    {
-        height:40px;
-        width:40px;
-        padding:0px;
-        border-radius:40px;
-        text-align:center;
-        line-height:40px;
+        .contentsection .date {
+            margin-left: 50px;
+        }
+
+    .btn-white {
+        height: 40px;
+        width: 40px;
+        padding: 0px;
+        border-radius: 40px;
+        text-align: center;
+        line-height: 40px;
     }
 
-    .infoareas .row
-    {
-        padding:10px;
-        padding-left:0px;
+    .infoareas .row {
+        padding: 10px;
+        padding-left: 0px;
     }
 
-    .infoareas .col-xs-10
-    {
-        border-bottom:1px solid #ccc;
+    .infoareas .col-xs-10 {
+        border-bottom: 1px solid #ccc;
     }
 
-    .infoareas p
-    {
-        font-size:12px;
+    .infoareas p {
+        font-size: 12px;
     }
 
-    .infoareas i
-    {
-        color:#069;
-        margin-top:7px;
+    .infoareas i {
+        color: #069;
+        margin-top: 7px;
     }
 
+    .table > tbody > tr > td
+    {
+        white-space:normal !important;
+    }
+    code
+    {
+        color:#000;
+    }
+
+    body
+    {
+    overflow-x:hidden !important;
+    }
+
+    .contentsection {
+        overflow-x: hidden !important;
+    }
 </style>
 
-<div class ="report-header">
+<div class="report-header">
 
-    <div  class="row">
-        
+    <div class="row">
+
         <div class="col-xs-12">
-            <h4>Current Inventory <small>Reports</small></h4>
+            <h4>{{CurrentView}} <small>Reports</small></h4>
         </div>
 
-        
+
     </div>
 </div>
 
 
-<a class="waves-effect roundbtn btn btn-success" >+ </a>
+<a ng-if="isviewload==false" class="waves-effect roundbtn btn btn-success">+ </a>
+
+<a ng-if="isviewload==true" ng-click="showview()" class="waves-effect roundbtn btn btn-success"> <i class="fa fa-th-list"></i> </a>
 
 
 
@@ -382,10 +375,10 @@
 <div class="contentsection">
 
     <div class="date">
-       Aug 12 2016
+        Aug 12 2016
     </div>
 
-    <div class="infoareas">
+    <div ng-if="isviewload==false" class="infoareas">
 
         <div ng-repeat="_obj in InventoryViews" class=" row" ng-click="AssignCurrentView(_obj)">
 
@@ -395,7 +388,7 @@
                 </a>
             </div>
 
-            <div class="col-xs-10">
+            <div ng-click="viewdetail(_obj.Name)" class="col-xs-10">
 
                 <div style="padding-top:0px;" class="row">
                     <div class="col-xs-9">
@@ -423,6 +416,40 @@
 
     </div>
 
+
+    <div ng-if="isviewload==true" class="table-responsive">
+        <table class="table table-striped">
+
+            <tbody>
+                <tr>
+                    <td><code class="w3-codespan">Item name</code></td>
+                    <td>BLC23654</td>
+                </tr>
+                <tr>
+                    <td><code class="w3-codespan">Item Description</code></td>
+                    <td>Indicates a successful or positive action Indicates a successful or positive actionIndicates a successful or positive action</td>
+                </tr>
+                <tr>
+                    <td><code class="w3-codespan">Quantity</code></td>
+                    <td>180</td>
+                </tr>
+                <tr>
+                    <td><code class="w3-codespan">Unit of measure</code></td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td><code class="w3-codespan">Status</code></td>
+                    <td>Indicates a dangerous or potentially negative action</td>
+                </tr>
+
+                <tr>
+                    <td><code class="w3-codespan">Expiration date</code></td>
+                    <td>25/11/2015</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 
@@ -430,7 +457,7 @@
 
 
 
-<script>    
+<script>
     $('.myLinkToTop').click(function () {
         $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
         return false;
