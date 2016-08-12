@@ -117,6 +117,7 @@
     }
 
 
+
     table tr {
       
         background: #fff;
@@ -136,7 +137,6 @@
 
     .onbtn {
         color: #fff;
-    
         padding: 10px;
         padding-top:7px;
         padding-bottom:7px;
@@ -261,21 +261,110 @@
         padding-right: 9px;
     }
 
+    .report-header {
+        background-color: #2196F3;
+        color: #fff;
+        padding-bottom: 15px;
+        position: fixed;
+        width: 100%;
+        z-index: 10;
+    }
+
+     .report-header  h4,small
+     {
+         color:#fff !important;
+     }
+
+        .report-header h4
+        {
+         padding-left:50px;
+        }
+
+        .report-header small {
+          font-size:12px !important;
+        }
+
+
+         .container {
+            padding: 0px;
+        }
+
+    #toolbar
+    {
+        box-shadow:none;
+    }
+
+    .roundbtn {
+        height: 40px;
+        width: 40px;
+        border-radius: 100%;
+        position: fixed;
+        padding: 0px;
+        margin-top: 44px;
+        margin-left: 17px;
+        line-height: 37px;
+        z-index: 100;
+        color: #fff;
+        font-size: 25px;
+    }
+
+    .contentsection {
+        padding-top: 85px;
+        padding-left: 12px;
+    }
+    .contentsection .date
+    {
+        margin-left:50px;
+    }
+
+    .btn-white
+    {
+        height:40px;
+        width:40px;
+        padding:0px;
+        border-radius:40px;
+        text-align:center;
+        line-height:40px;
+    }
+
+    .infoareas .row
+    {
+        padding:10px;
+        padding-left:0px;
+    }
+
+    .infoareas .col-xs-10
+    {
+        border-bottom:1px solid #ccc;
+    }
+
+    .infoareas p
+    {
+        font-size:12px;
+    }
+
+    .infoareas i
+    {
+        color:#069;
+        margin-top:7px;
+    }
+
 </style>
 
-<div style="margin-top: 12px;" class ="page-header">
-
-
+<div class ="report-header">
 
     <div  class="row">
         
         <div class="col-xs-12">
-            <h4 style="margin-top:0px;  line-height:34px; margin-bottom:0px; color:#000;">Report-{{CurrentView.Name}}</h4>
+            <h4>Current Inventory <small>Reports</small></h4>
         </div>
 
         
     </div>
 </div>
+
+
+<a class="waves-effect roundbtn btn btn-success" >+ </a>
 
 
 
@@ -290,38 +379,54 @@
     </ul>
 </div>-->
 
+<div class="contentsection">
 
-<table  class="table gridTable table-striped bs-item">
- <tbody>
-     <tr ng-repeat="_obj in InventoryViews">
-         <td>
-             <div class="infoareas">
+    <div class="date">
+       Aug 12 2016
+    </div>
 
-                 <div class="row" ng-click="AssignCurrentView(_obj)">
-                     <div class="col-xs-8">
-                         <a class="text">{{_obj.Name}} </a>
-                     </div>
-                     <div class="col-xs-4">
-                         <div>
+    <div class="infoareas">
+
+        <div ng-repeat="_obj in InventoryViews" class=" row" ng-click="AssignCurrentView(_obj)">
+
+            <div class="col-xs-2">
+                <a class="btn btn-white">
+                    {{$index+1}}
+                </a>
+            </div>
+
+            <div class="col-xs-10">
+
+                <div style="padding-top:0px;" class="row">
+                    <div class="col-xs-9">
+                        <a class="text">{{_obj.Name}} </a>
+                        <p>{{_obj.Description}}</p>
+                    </div>
+                    <div style="text-align:right;" class="col-xs-3">
+                        <span>
+                            <i class="fa fa-pencil"></i>
+                        </span>
+                    </div>
+                </div>
 
 
-                             <button class="btn btn-primary">
-                                 <i class="fa fa-info-circle"></i>
-                             </button>
 
-                         </div>
-                     </div>
-                 </div>
 
-             </div>
-         </td>
-     </tr>
-     
-        
-        
 
-    </tbody>
-</table>
+
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
 
 
 

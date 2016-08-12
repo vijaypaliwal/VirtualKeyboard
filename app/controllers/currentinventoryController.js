@@ -20,6 +20,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
               dataType: 'json',
               success: function (response) {
 
+                  debugger;
+
 
                   $scope.InventoryViews = response.GetAllViewsResult.Payload;
 
@@ -54,10 +56,15 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
     }
 
+    
+
     function init() {
         $scope.GetInventoryViews();
 
+     
         CheckScopeBeforeApply();
+      
+    
     }
 
     init();
