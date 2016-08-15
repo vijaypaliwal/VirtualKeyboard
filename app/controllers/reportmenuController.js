@@ -1,8 +1,11 @@
-﻿'use strict';
+﻿ 'use strict';
 app.controller('reportmenuController', ['$scope',  'localStorageService', 'authService', '$location', 'log', function ($scope,  localStorageService, authService, $location, log) {
  
 
     $scope.mainObjectToSend = [];
+
+    $scope.currentinvloaded = false;
+
     function init() {
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
 
@@ -11,6 +14,8 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
         
         console.log($scope.MyinventoryFieldsNames);
         $scope.itemlabel = $scope.CurrentInventory.pPart
+
+        $scope.GetInventoryViews()
      
         $scope.$apply();
     }
@@ -23,5 +28,53 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
 
         $location.path(url);
     }
+
+    $scope.GetInventoryViews = function () {
+
+      
+
+        $scope.currentinvloaded = false;
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'GetAllViews',
+              data: JSON.stringify({ SecurityToken: $scope.SecurityToken, Type: 1 }),
+              contentType: 'application/json',
+              dataType: 'json',
+              success: function (response) {
+
+              
+
+                  $scope.InventoryViews = response.GetAllViewsResult.Payload;
+                
+                  $scope.currentinvloaded = true;
+
+                  $scope.$apply();
+
+              },
+              error: function (err) {
+                  $scope.currentinvloaded = true;
+                  $scope.errorbox(err);
+                  $scope.$apply();
+
+              }
+          });
+
+    }
+
+    function init() {
+       
+
+
+        $scope.GetInventoryViews()
+
+        $scope.$apply();
+    }
+    init()
 
 }]);
