@@ -148,7 +148,27 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.ScanTagItem = function (Type, Id, index, inventoryID) {
         var _typeString = "";
 
+        switch (Type) {
+            case "iReqValue":
+                _typeString = "#unittext1_" + Id.toString();
+                break;
+            case "iUnitTag2":
+                _typeString = "#unittext2_" + Id.toString();
+                break;
+            case "iUnitTag3":
+                _typeString = "#unittext3_" + Id.toString();
+                break;
+            case "iUnitNumber1":
+                _typeString = "#unitnumbertext1_" + Id.toString();
+                break;
+            case "iUnitNumber2":
+                _typeString = "#unitnumbertext2_" + Id.toString();
+                break;
 
+            default:
+
+        }
+        var _ID = _typeString;
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
         scanner.scan(function (result) {
 
@@ -165,30 +185,25 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     _value = _value == -9890 ? "" : _value;
                 }
             }
-
+            $(_ID).val(_value);
 
 
             for (var i = 0; i < $scope.CurrentCart.length; i++) {
                 if ($scope.CurrentCart[i].InventoryID == inventoryID) {
                     switch (Type) {
                         case "iReqValue":
-                            _typeString = "#unittext1_" + Id.toString();
                             $scope.CurrentCart[i].ApplyTransactionData.UnitTag1 = _value;
                             break;
                         case "iUnitTag2":
-                            _typeString = "#unittext2_" + Id.toString();
                             $scope.CurrentCart[i].ApplyTransactionData.UnitTag2 = _value;
                             break;
                         case "iUnitTag3":
-                            _typeString = "#unittext3_" + Id.toString();
                             $scope.CurrentCart[i].ApplyTransactionData.UnitTag3 = _value;
                             break;
                         case "iUnitNumber1":
-                            _typeString = "#unitnumbertext1_" + Id.toString();
                             $scope.CurrentCart[i].ApplyTransactionData.UnitNumber1 = _value;
                             break;
                         case "iUnitNumber2":
-                            _typeString = "#unitnumbertext2_" + Id.toString();
                             $scope.CurrentCart[i].ApplyTransactionData.UnitNumber2 = _value;
                             break;
 

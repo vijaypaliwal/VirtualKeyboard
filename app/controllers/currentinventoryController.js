@@ -43,6 +43,10 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     }
 
 
+    $scope.showfilter = function() {
+        $("#modalfilter").modal('show');
+    }
+
     $scope.viewdetail = function(viewname) {
         $scope.isviewload = true;
         $scope.CurrentView = viewname;

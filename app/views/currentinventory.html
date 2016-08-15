@@ -360,24 +360,10 @@
 
 <a ng-if="isviewload==true" ng-click="showview()" class="waves-effect roundbtn btn btn-success"> <i class="fa fa-th-list"></i> </a>
 
-
-
-
-
-
-
-<!--<div class="dropdown">
-    <a data-toggle="dropdown" class="dropdown-toggle ">Reports</a>
-    <ul class="top-menu dropdown-menu">
-        <li ng-repeat="_obj in InventoryViews"><a  href="#/profile"><i class="fa fa-list"></i>{{_obj.Name}}</a></li>
-    </ul>
-</div>-->
+<a style="right:20px;" ng-if="isviewload==true" ng-click="showfilter()" class="waves-effect roundbtn btn btn-warning"> <i class="fa fa-filter"></i> </a>
 
 <div class="contentsection">
-
-    <div class="date">
-        Aug 12 2016
-    </div>
+    
 
     <div ng-if="isviewload==false" class="infoareas">
 
@@ -402,14 +388,6 @@
                         </span>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
 
             </div>
 
@@ -454,7 +432,21 @@
 </div>
 
 
+<div style="background:#fff; padding:0px;" id="modalfilter" class="modal animated bounceIn">
+    <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
 
+        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times-circle"></i> </span></button>
+        <h4>Apply filters</h4>
+    </div>
+
+    <div style="padding:5px;" class="modal-body">
+       
+
+        <div><br /></div>
+
+
+    </div>
+</div>
 
 
 
