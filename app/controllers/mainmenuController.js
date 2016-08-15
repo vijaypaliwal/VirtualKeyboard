@@ -8,9 +8,6 @@ app.controller('mainmenuController', ['$scope', '$location', 'authService', 'ngA
     $("body").removeClass("modal-open");
 
     $(document).ready(function () {
-
-        alert("in");
-
         getAppVersion(function (version) {
 
             $(".versiontextlabel").html(version)
