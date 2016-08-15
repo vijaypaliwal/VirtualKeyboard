@@ -27,9 +27,10 @@
   <gap:plugin name="ionic-plugin-keyboard"  source="npm" version="1.0.7" />
   
   <gap:plugin name="org.apache.cordova.splashscreen" />
+  
 
-
-
+  
+  
 
   <feature name="http://api.phonegap.com/1.0/device" />
   <feature name="debug-server" required="true">

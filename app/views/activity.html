@@ -366,11 +366,16 @@
                                         <div class="col-xs-8 col-md-8">
                                             <div class="form-group">
                                                 <label>{{ GetColumnLabel('iReqValue')}}</label>
-                                                <div class="fg-line">
+                                                <div class="input-group">
 
-                                                    <input type="text" class="form-control" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
+                                                    <div class="fg-line">
 
+                                                        <input id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" type="text" data-type="string" class="form-control" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
+
+                                                    </div>
+                                                    <span class="input-group-addon last" ng-click="ScanTagItem('iReqValue',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                                 </div>
+
                                             </div>
 
 
@@ -394,12 +399,17 @@
                                         <div class="col-xs-8 col-md-8">
                                             <div class="form-group">
                                                 <label>{{ GetColumnLabel('iUnitTag2')}}</label>
-                                                <div class="fg-line">
+                                                
 
-                                                    <input type="text" class="form-control" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
+                                                <div class="input-group">
 
+                                                    <div class="fg-line">
+
+                                                        <input id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" type="text" data-type="string" class="form-control" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
+
+                                                    </div>
+                                                    <span class="input-group-addon last" ng-click="ScanTagItem('iUnitTag2',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                                 </div>
-
                                             </div>
 
 
@@ -419,10 +429,16 @@
                                         <div class="col-xs-8 col-md-8">
                                             <div class="form-group">
                                                 <label>{{ GetColumnLabel('iUnitTag3')}}</label>
-                                                <div class="fg-line">
+                   
 
-                                                    <input type="text" class="form-control" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
+                                                <div class="input-group">
 
+                                                    <div class="fg-line">
+
+                                                        <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" type="text" data-type="string" class="form-control" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
+
+                                                    </div>
+                                                    <span class="input-group-addon last" ng-click="ScanTagItem('iUnitTag3',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                                 </div>
                                             </div>
 
@@ -440,7 +456,7 @@
 
                                     </div>
 
-                                    <div class="row" ng-if=" IsMyInventoryColumns('iUniqueDate')==true">
+                                    <div class="row" ng-if="IsMyInventoryColumns('iUniqueDate')==true">
                                         <div class="col-xs-8 col-md-8">
                                             <div class="form-group">
                                                 <label>{{ GetColumnLabel('iUniqueDate')}}</label>
@@ -491,10 +507,16 @@
 
                                             <div class="form-group">
                                                 <label>{{ GetColumnLabel('iUnitNumber1')}}</label>
-                                                <div class="fg-line">
+                                                
 
-                                                    <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
+                                                <div class="input-group">
 
+                                                    <div class="fg-line">
+
+                                                        <input id="unitnumbertext1_{{ CurrentActiveObject.InventoryDataList.uId}}" type="number" data-type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
+
+                                                    </div>
+                                                    <span class="input-group-addon last" ng-click="ScanTagItem('iUnitNumber1',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                                 </div>
                                             </div>
 
@@ -517,10 +539,16 @@
 
                                             <div class="form-group">
                                                 <label>{{ GetColumnLabel('iUnitNumber2')}}</label>
-                                                <div class="fg-line">
+                                                
+                                                
+                                                <div class="input-group">
 
-                                                    <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
+                                                    <div class="fg-line">
 
+                                                        <input id="unitnumbertext2_{{ CurrentActiveObject.InventoryDataList.uId}}" type="number" data-type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
+
+                                                    </div>
+                                                    <span class="input-group-addon last" ng-click="ScanTagItem('iUnitNumber2',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                                 </div>
                                             </div>
 
@@ -1617,10 +1645,14 @@
                                 <div class="col-xs-8 col-md-8">
                                     <div class="form-group">
                                         <label>{{ GetColumnLabel('iReqValue')}}</label>
-                                        <div class="fg-line">
+                                        <div class="input-group">
 
-                                            <input type="text" class="form-control" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
+                                            <div class="fg-line">
 
+                                                <input id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" type="text" data-type="string" class="form-control" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
+
+                                            </div>
+                                            <span class="input-group-addon last" ng-click="ScanTagItem('iReqValue',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                         </div>
                                     </div>
 
@@ -1645,10 +1677,14 @@
                                 <div class="col-xs-8 col-md-8">
                                     <div class="form-group">
                                         <label>{{ GetColumnLabel('iUnitTag2')}}</label>
-                                        <div class="fg-line">
+                                        <div class="input-group">
 
-                                            <input type="text" class="form-control" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
+                                            <div class="fg-line">
 
+                                                <input id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" type="text" data-type="string" class="form-control" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
+
+                                            </div>
+                                            <span class="input-group-addon last" ng-click="ScanTagItem('iUnitTag2',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                         </div>
 
                                     </div>
@@ -1670,10 +1706,14 @@
                                 <div class="col-xs-8 col-md-8">
                                     <div class="form-group">
                                         <label>{{ GetColumnLabel('iUnitTag3')}}</label>
-                                        <div class="fg-line">
+                                        <div class="input-group">
 
-                                            <input type="text" class="form-control" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
+                                            <div class="fg-line">
 
+                                                <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" type="text" data-type="string" class="form-control" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
+
+                                            </div>
+                                            <span class="input-group-addon last" ng-click="ScanTagItem('iUnitTag3',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                         </div>
                                     </div>
 
@@ -1742,10 +1782,14 @@
 
                                     <div class="form-group">
                                         <label>{{ GetColumnLabel('iUnitNumber1')}}</label>
-                                        <div class="fg-line">
+                                        <div class="input-group">
 
-                                            <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
+                                            <div class="fg-line">
 
+                                                <input id="unitnumbertext1_{{ CurrentActiveObject.InventoryDataList.uId}}" type="number" data-type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
+
+                                            </div>
+                                            <span class="input-group-addon last" ng-click="ScanTagItem('iUnitNumber1',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                         </div>
                                     </div>
 
@@ -1768,10 +1812,14 @@
 
                                     <div class="form-group">
                                         <label>{{ GetColumnLabel('iUnitNumber2')}}</label>
-                                        <div class="fg-line">
+                                        <div class="input-group">
 
-                                            <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
+                                            <div class="fg-line">
 
+                                                <input id="unitnumbertext2_{{ CurrentActiveObject.InventoryDataList.uId}}" type="number" data-type="number" pattern="[0-9]*" inputmode="numeric" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
+
+                                            </div>
+                                            <span class="input-group-addon last" ng-click="ScanTagItem('iUnitNumber2',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                         </div>
                                     </div>
 

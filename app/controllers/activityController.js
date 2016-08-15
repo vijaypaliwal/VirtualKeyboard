@@ -107,10 +107,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             var _dataType = $(_ID).attr("custom-data-type");
             var _value = result.text;
 
-            if (_dataType != null && _dataType != undefined)
-            {
-                if(_dataType=="date" || _dataType=="datetime")
-                {
+            if (_dataType != null && _dataType != undefined) {
+                if (_dataType == "date" || _dataType == "datetime") {
                     _value = ConvertDatetoDate(_value);
                 }
 
@@ -146,6 +144,72 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     }
 
+
+    $scope.ScanTagItem = function (Type, Id, index, inventoryID) {
+        var _typeString = "";
+
+
+        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        scanner.scan(function (result) {
+
+            var _dataType = $(_ID).attr("data-type");
+            var _value = result.text;
+
+            if (_dataType != null && _dataType != undefined) {
+                if (_dataType == "date" || _dataType == "datetime") {
+                    _value = ConvertDatetoDate(_value);
+                }
+
+                if (_dataType == "number" || _dataType == "money" || _dataType == "currency") {
+                    _value = TryParseInt(_value, -9890);
+                    _value = _value == -9890 ? "" : _value;
+                }
+            }
+
+
+
+            for (var i = 0; i < $scope.CurrentCart.length; i++) {
+                if ($scope.CurrentCart[i].InventoryID == inventoryID) {
+                    switch (Type) {
+                        case "iReqValue":
+                            _typeString = "#unittext1_" + Id.toString();
+                            $scope.CurrentCart[i].ApplyTransactionData.UnitTag1 = _value;
+                            break;
+                        case "iUnitTag2":
+                            _typeString = "#unittext2_" + Id.toString();
+                            $scope.CurrentCart[i].ApplyTransactionData.UnitTag2 = _value;
+                            break;
+                        case "iUnitTag3":
+                            _typeString = "#unittext3_" + Id.toString();
+                            $scope.CurrentCart[i].ApplyTransactionData.UnitTag3 = _value;
+                            break;
+                        case "iUnitNumber1":
+                            _typeString = "#unitnumbertext1_" + Id.toString();
+                            $scope.CurrentCart[i].ApplyTransactionData.UnitNumber1 = _value;
+                            break;
+                        case "iUnitNumber2":
+                            _typeString = "#unitnumbertext2_" + Id.toString();
+                            $scope.CurrentCart[i].ApplyTransactionData.UnitNumber2 = _value;
+                            break;
+
+                        default:
+
+                    }
+                    break;
+                }
+            }
+
+
+
+
+            $scope.$apply();
+
+
+        }, function (error) {
+            log.error("Scanning failed: ", error);
+        });
+
+    }
     $scope.selecteditemlist = function () {
 
         $("#selecteditemlistmodal").modal('show');
@@ -238,7 +302,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.ActionQuantityValue;
                     }
 
-                       $("#mybutton_" + id).addClass("movepin")
+                    $("#mybutton_" + id).addClass("movepin")
 
                     ShowSuccessActivity('Updated', $scope._CurrentAction);
 
@@ -265,7 +329,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     }
                 }
 
-                 $("#mybutton_" + id).addClass("movepin")
+                $("#mybutton_" + id).addClass("movepin")
 
                 ShowSuccessActivity('Updated', $scope._CurrentAction);
 
@@ -997,7 +1061,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         $scope.CanApply = (IsAvailableMyInventoryColumn('iReqValue') || IsAvailableMyInventoryColumn('iUniqueDate') || IsAvailableMyInventoryColumn('iUnitDate2') || IsAvailableMyInventoryColumn('iUnitNumber1') || IsAvailableMyInventoryColumn('iUnitNumber2') || IsAvailableMyInventoryColumn('iUnitTag2') || IsAvailableMyInventoryColumn('iUnitTag3')) ? 'True' : 'False';
 
-  
+
 
         CheckScopeBeforeApply();
     }
@@ -1706,10 +1770,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     }
 
-    $scope.CheckStatusValues=function(firstValue,secondValue)
-    {
-        if(firstValue!=undefined && firstValue!=null && firstValue!="")
-        {
+    $scope.CheckStatusValues = function (firstValue, secondValue) {
+        if (firstValue != undefined && firstValue != null && firstValue != "") {
             firstValue = firstValue.toLowerCase();
         }
 
@@ -1717,8 +1779,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             secondValue = secondValue.toLowerCase();
         }
 
-        if(firstValue== secondValue)
-        {
+        if (firstValue == secondValue) {
             return true;
         }
 
@@ -1892,7 +1953,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     function BuildMultipleData() {
         var dt = new Date();
-        var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate()-1, 0,0,0,0));
+        var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate() - 1, 0, 0, 0, 0));
         var wcfDateStr = dt1.toMSJSON();
         var wcfDateStr123 = dt1.toMSJSON();
 
@@ -1903,7 +1964,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         var d122 = new Date(dsplit1[0], dsplit1[1] - 1, dsplit1[2]);
         d122.setDate(d122.getDate() + 1);
-        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate()-1, 0, 0, 0, 0))
+        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate() - 1, 0, 0, 0, 0))
 
         wcfDateStr123 = d122.toMSJSON();
 
@@ -2057,7 +2118,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
                 d1.setDate(d1.getDate() + 1);
-                var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate()-1, 0, 0, 0, 0))
+                var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate() - 1, 0, 0, 0, 0))
 
                 wcfDateStr1 = d11.toMSJSON();
             }
@@ -2068,7 +2129,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
                 d2.setDate(d2.getDate() + 1);
-                var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate()-1, 0, 0, 0, 0))
+                var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate() - 1, 0, 0, 0, 0))
 
                 wcfDateStr2 = d21.toMSJSON();
 
@@ -2199,6 +2260,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         var j = 0;
         for (j = 0; j < $scope.MyinventoryFields.length; j++) {
             if ($scope.MyinventoryFields[j].ColumnName == ColumnID) {
+
                 return true;
                 break;
             }
@@ -2255,7 +2317,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         return _returnVar
     }
 
-    $scope.clearCartFunction = function() {
+    $scope.clearCartFunction = function () {
         localStorageService.set("ActivityCart", "");
         localStorageService.set("SelectedAction", "");
         $location.path("/FindItems");
@@ -2780,7 +2842,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         //  $cordovaKeyboard.disableScroll(true);
 
 
-        
+
         $('.collapsible-header').css("position", "absolute");
         $('.collapsible-body').css('margin-top', '49px');
         $('.header').css("position", "relative");
@@ -2789,7 +2851,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $('.singlePanel').css('margin-top', '0px');
         $('#transactionForm1').css('margin-top', '0px');
         $('.bottombutton').css("position", "relative");
-        
+
     })
     .on('blur', 'input,select', function () {
 
@@ -2816,13 +2878,13 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     setTimeout(function () { $('#itUpdateDate').val(today); }, 1000);
 
-    setTimeout(function() { $('.FormDateType').val(today); }, 1000);
-   
+    setTimeout(function () { $('.FormDateType').val(today); }, 1000);
+
 
     $scope.ValidateObjectVM = function () {
         $scope.AffectedItemIds = [];
 
-    
+
         var k = 0;
         var _totalLength = $scope.CurrentCart.length;
         if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
@@ -2965,7 +3027,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     break;
                 case "Apply":
                     for (k = 0; k < _totalLength; k++) {
-                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == undefined || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null ||$scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
+                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == undefined || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
                             $scope.IssueType = 1;
                             if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
                                 $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
