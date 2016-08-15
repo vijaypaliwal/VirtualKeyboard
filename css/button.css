@@ -1,11 +1,10 @@
 .btn-primary {
     background-color: #2196F3  !important;
     border: transparent !important;
-    border-radius: 100%;
     font-size: 17px;
     height: 45px;
     line-height:45px;
-    border-radius: 18px;
+    border-radius: 45px;
     padding-left:9px; 
     padding-right:9px;
 }
@@ -17,9 +16,9 @@
     height: 45px;
     line-height:45px;
     border: transparent !important;
-    border-radius: 18px;
+    border-radius: 45px;
     font-size: 17px;
-       padding-left:9px; 
+    padding-left:9px; 
     padding-right:9px;
 }
 
@@ -81,7 +80,7 @@
 
 .waves-effect.btn-warning
 {
-    border-radius:18px;
+    border-radius:45px;
 }
 
 
