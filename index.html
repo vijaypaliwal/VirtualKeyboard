@@ -1358,11 +1358,19 @@
         function onDeviceReady() {
 
             navigator.splashscreen.hide();
-           // FastClick.attach(document.body);
+            alert("1");
+
+            cordova.getAppVersion(function (version) {
+                alert("2");
+                alert(version);
+            });
+            alert("3")
            
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
             pictureSource = navigator.camera.PictureSourceType;
             destinationType = navigator.camera.DestinationType;
+
+          
 
             $cordovaSplashscreen.hide();
 
