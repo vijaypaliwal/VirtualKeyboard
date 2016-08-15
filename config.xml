@@ -28,6 +28,8 @@
   
   <gap:plugin name="org.apache.cordova.splashscreen" />
   
+  <gap:plugin name="net.bgta.phonegap.plugin.appversion" source="pgb"/>
+  
 
   
   
