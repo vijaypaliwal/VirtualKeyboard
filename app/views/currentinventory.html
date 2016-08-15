@@ -327,10 +327,9 @@
     {
         white-space:normal !important;
     }
-    code
-    {
-      color:#000;
-      float:right;
+    code {
+        color: #000;
+        float: right;
     }
 
     body
@@ -341,6 +340,21 @@
     .contentsection {
         overflow-x: hidden !important;
     }
+    .table-striped
+    {
+        padding:10px;
+        background:#fff;
+        margin-bottom:10px;
+    }
+    .table > tbody > tr > td
+    {
+        border:transparent !important;
+    }
+    .well
+    {
+        padding:10px;
+        margin-bottom:7px;
+    }
 </style>
 
 <div class="report-header">
@@ -348,7 +362,7 @@
     <div class="row">
 
         <div class="col-xs-12">
-            <h4 class="text">{{CurrentView}} <small>Reports</small></h4>
+            <h4 class="text">{{CurrentView.Name}} <small>Reports</small></h4>
         </div>
 
 
@@ -360,10 +374,15 @@
 
 <a ng-if="isviewload==true" ng-click="showview()" class="waves-effect roundbtn btn btn-success"> <i class="fa fa-th-list"></i> </a>
 
+
 <a style="right:20px;" ng-if="isviewload==true" ng-click="showfilter()" class="waves-effect roundbtn btn btn-warning"> <i class="fa fa-filter"></i> </a>
 
+
+
+
+
 <div class="contentsection">
-    
+
 
     <div ng-if="isviewload==false" class="infoareas">
 
@@ -375,7 +394,7 @@
                 </a>
             </div>
 
-            <div ng-click="viewdetail(_obj.Name)" class="col-xs-10">
+            <div  class="col-xs-10">
 
                 <div style="padding-top:0px;" class="row">
                     <div class="col-xs-9">
@@ -389,6 +408,14 @@
                     </div>
                 </div>
 
+
+
+
+
+
+
+
+
             </div>
 
         </div>
@@ -397,36 +424,37 @@
 
 
     <div ng-if="isviewload==true" class="table-responsive">
-        <table class="table table-striped">
+        <div style="text-align:right; display:none;" class="col-xs-7 paginationtext">
+            <p style="font-size:13px;">{{currentrecord}} of {{totalrecords}} <span ng-if="totalrecords<1">record</span> <span ng-if="totalrecords>1">records</span>  shown</p>
+        </div>
+        <div class="well" ng-repeat="_obj in InventoryList">
+            <table class="table table-striped">
 
-            <tbody>
-                <tr>
-                    <td><code class="w3-codespan">Item name</code></td>
-                    <td>BLC23654</td>
-                </tr>
-                <tr>
-                    <td><code class="w3-codespan">Item Description</code></td>
-                    <td>Indicates a successful or positive action Indicates a successful or positive actionIndicates a successful or positive action</td>
-                </tr>
-                <tr>
-                    <td><code class="w3-codespan">Quantity</code></td>
-                    <td>180</td>
-                </tr>
-                <tr>
-                    <td><code class="w3-codespan">Unit of measure</code></td>
-                    <td>Active</td>
-                </tr>
-                <tr>
-                    <td><code class="w3-codespan">Status</code></td>
-                    <td>Indicates a dangerous or potentially negative action</td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td width="50%"><code class="w3-codespan">Item name</code></td>
+                        <td width="50%">{{_obj.pPart}}</td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><code class="w3-codespan">Item Description</code></td>
+                        <td width="50%">{{_obj.pDescription}}</td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><code class="w3-codespan">Quantity</code></td>
+                        <td width="50%">{{_obj.iQty}}</td>
+                    </tr>
+                    <tr>
+                        <td width="50%"><code class="w3-codespan">Unit of measure</code></td>
+                        <td width="50%">{{_obj.uomUOM}}</td>
+                    </tr>
 
-                <tr>
-                    <td><code class="w3-codespan">Expiration date</code></td>
-                    <td>25/11/2015</td>
-                </tr>
-            </tbody>
-        </table>
+
+
+                </tbody>
+            </table>
+        </div>
+
+        
     </div>
 
 </div>
@@ -440,7 +468,7 @@
     </div>
 
     <div style="padding:5px;" class="modal-body">
-       
+
 
         <div><br /></div>
 
