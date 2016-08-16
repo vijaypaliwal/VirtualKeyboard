@@ -329,6 +329,7 @@
     code {
         color: #000;
         float: right;
+        font-weight:800;
     }
 
     body
@@ -474,7 +475,7 @@
 
 
     <div ng-if="isviewload==true" class="paginationtext">
-        <span style="font-size:13px;">{{currentrecord}} of {{totalrecords}} <span>records shown </span> </span>
+        <span style="font-size:13px;">{{currentrecord}} of {{totalrecords}} <span>records shown <span class="pull-right" ng-click="clearfilterArray()"></span> </span> </span>
     </div>
 
 
@@ -484,20 +485,17 @@
         <div style="margin-top:10px;" class="input-group">
 
             <span style="padding:5px; border:1px solid #ccc; border-right:transparent" class="input-group-addon">
-                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                <a class="dropdown-toggle"  aria-expanded="true">
                     <img src="img/filter/Contains.gif" alt="">
                 </a>
-                <ul class="dropdown-menu operator" role="menu" aria-labelledby="dropdownMenu">
-                    <li style="text-align: left"><a tabindex="-1"><img src="img/filter/Contains.gif" alt=""> Contains</a></li>
-                    <li style="text-align: left"><a tabindex="-1"><img src="img/filter/EqualTo.gif" alt=""> Exact</a></li>
-                </ul>
+              
             </span>
 
 
 
             <input type="text" ng-model="FilterData.SearchValue" class="form-control ng-pristine ng-valid" placeholder="Type to Search">
 
-            <a ng-if="applyfilter==true" class="input-group-addon last textData" ng-click="clearfilter()" style="margin-top: 0px;"><i class="fa fa-times" style="font-size:20px; padding-left:14px; padding-right:14px; background:brown"></i> </a>
+            <a ng-if="FilterData.SearchValue!=''" class="input-group-addon last textData" ng-click="clearfilter()" style="margin-top: 0px;"><i class="fa fa-times" style="font-size:20px; padding-left:14px; padding-right:14px; background:brown"></i> </a>
 
             <a class="input-group-addon last textData" ng-click="GetInventoryDataAccordingToView()" style="margin-top: 0px;"><i class="fa fa-search" style="font-size:20px;"></i> </a>
             <a ng-click="showfilter()" class="input-group-addon last textData" style="margin-top: 0px;"><i class="fa fa-filter" style="font-size:20px;"></i> </a>
@@ -536,13 +534,13 @@
 
     <div style="padding:10px;" class="modal-body">
 
-        <div class="row" ng-repeat="_obj in FilterArray">
+        <div class="row" ng-repeat="_obj in FilterArray" ng-if="_obj.ColumnName!='Button1' && _obj.ColumnName!='Button2'&& _obj.ColumnName!='ImagePath'">
             <div class="col-xs-6">
-                <h4>{{GetDisplayLabel(_obj.ColumnName) }}</h4>
+                <h6>{{GetDisplayLabel(_obj.ColumnName) }}</h6>
             </div>
+          
             <div class="col-xs-6">
 
-            
                 <input class="form-control" type="text" name="name" ng-if="GetColumnDataType(_obj.ColumnName)=='string'" ng-model="_obj.SearchValue" value="" />
                 <input class="form-control" type="date" name="name" ng-if="GetColumnDataType(_obj.ColumnName)=='date'||GetColumnDataType(_obj.ColumnName)=='datetime'" ng-model="_obj.SearchValue" value="" />
                 <input class="form-control" type="number" data-type="number" pattern="[0-9]*" inputmode="numeric" name="name" ng-if="GetColumnDataType(_obj.ColumnName)=='number'||GetColumnDataType(_obj.ColumnName)=='decimal' ||GetColumnDataType(_obj.ColumnName)=='money' || GetColumnDataType(_obj.ColumnName)=='currency'" ng-model="_obj.SearchValue" value="" />
@@ -550,7 +548,10 @@
                     <option ng-repeat="_data in GetComboData(_obj.ColumnName)" value="{{_data}}">{{_data}}</option>
                 </select>
             </div>
-            <br />
+            <div class="col-xs-12">
+                <br />
+
+            </div>
         </div>
 
         
@@ -560,6 +561,7 @@
 
     <div class="modal-footer">
         <a class="btn btn-primary pull-left" ng-click="GetInventoryDataAccordingToView()"><i style="padding-left:5px !important; padding-right:5px !important;" class="fa fa-filter"></i>Filter</a>
+        <a class="btn btn-danger pull-left" style="border-radius:45px;" ng-click="clearfilterArray()"><i style="padding-left:5px !important; padding-right:5px !important;" class="fa fa-times"></i>Clear Filter</a>
     </div>
 
 </div>

@@ -2,7 +2,7 @@
 app.controller('currentinventoryController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
 
 
-    $scope.CurrentView = {}
+    $scope.CurrentView = { Name: "Current Inventory" };
     $scope.InventoryViews = [];
     $scope.InventoryList = [];
     $scope.CustomItemDataList = [];
@@ -64,7 +64,19 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 return "cn";
         }
     }
-
+    $scope.clearfilterArray = function () {
+        for (var i = 0; i < $scope.FilterArray.length; i++) {
+            $scope.FilterArray[i].SearchValue = "";
+        }
+        CheckScopeBeforeApply();
+        $scope.GetInventoryDataAccordingToView();
+    }
+    $scope.clearfilter=function()
+    {
+        $scope.FilterData.SearchValue = "";
+        CheckScopeBeforeApply();
+        $scope.GetInventoryDataAccordingToView();
+    }
     $scope.GetComboData=function(ColumnName)
     {
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
@@ -548,7 +560,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
     $scope.showview = function() {
         $scope.isviewload = false;
-        $scope.CurrentView = {};
+        $scope.CurrentView = { Name: "Current Inventory" };
     }
 
 
