@@ -498,7 +498,7 @@
             <a ng-if="FilterData.SearchValue!=''" class="input-group-addon last textData" ng-click="clearfilter()" style="margin-top: 0px;"><i class="fa fa-times" style="font-size:20px; padding-left:14px; padding-right:14px; background:brown"></i> </a>
 
             <a class="input-group-addon last textData" ng-click="GetInventoryDataAccordingToView()" style="margin-top: 0px;"><i class="fa fa-search" style="font-size:20px;"></i> </a>
-            <a ng-click="showfilter()" class="input-group-addon last textData" style="margin-top: 0px;"><i class="fa fa-filter" style="font-size:20px;"></i> </a>
+            <a ng-click="showfilter()" class="input-group-addon last textData" style="margin-top: 0px;"><i class="fa fa-filter" style="font-size: 20px; background: #f04124;"></i> </a>
 
         </div>
         <div class="well" ng-repeat="_obj in InventoryList" ng-init="parentIndex=$index">
@@ -560,8 +560,16 @@
     </div>
 
     <div class="modal-footer">
-        <a class="btn btn-primary pull-left" ng-click="GetInventoryDataAccordingToView()"><i style="padding-left:5px !important; padding-right:5px !important;" class="fa fa-filter"></i>Filter</a>
-        <a class="btn btn-danger pull-left" style="border-radius:45px;" ng-click="clearfilterArray()"><i style="padding-left:5px !important; padding-right:5px !important;" class="fa fa-times"></i>Clear Filter</a>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <a class="btn btn-primary width-100 pull-left" ng-click="GetInventoryDataAccordingToView()"><i style="padding-left:5px !important; padding-right:5px !important;" class="fa fa-filter"></i>Filter</a>
+            </div>
+            <div class="col-xs-6">
+                <a class="btn btn-danger width-100 pull-left" style="border-radius:45px; padding-left:10px; padding-right:10px;" ng-click="clearfilterArray()"><i style="padding-left:5px !important; padding-right:5px !important;" class="fa fa-times"></i>Clear</a>
+            </div>
+        </div>
+        
     </div>
 
 </div>
