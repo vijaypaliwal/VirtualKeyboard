@@ -541,9 +541,14 @@
                 <h4>{{GetDisplayLabel(_obj.ColumnName) }}</h4>
             </div>
             <div class="col-xs-6">
+
+            
                 <input class="form-control" type="text" name="name" ng-if="GetColumnDataType(_obj.ColumnName)=='string'" ng-model="_obj.SearchValue" value="" />
                 <input class="form-control" type="date" name="name" ng-if="GetColumnDataType(_obj.ColumnName)=='date'||GetColumnDataType(_obj.ColumnName)=='datetime'" ng-model="_obj.SearchValue" value="" />
                 <input class="form-control" type="number" data-type="number" pattern="[0-9]*" inputmode="numeric" name="name" ng-if="GetColumnDataType(_obj.ColumnName)=='number'||GetColumnDataType(_obj.ColumnName)=='decimal' ||GetColumnDataType(_obj.ColumnName)=='money' || GetColumnDataType(_obj.ColumnName)=='currency'" ng-model="_obj.SearchValue" value="" />
+                <select class="form-control" ng-if="GetColumnDataType(_obj.ColumnName)=='combobox'" ng-model="_obj.SearchValue">
+                    <option ng-repeat="_data in GetComboData(_obj.ColumnName)" value="{{_data}}">{{_data}}</option>
+                </select>
             </div>
             <br />
         </div>

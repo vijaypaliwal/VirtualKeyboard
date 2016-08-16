@@ -65,34 +65,53 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
     }
 
-    $scope.GetDisplayLabel = function (ColumnName) {
-        for (var i = 0; i < $scope.Columns.length; i++) {
-            if( $scope.Columns[i].ColumnID==ColumnName)
-            {
-                return $scope.Columns[i].DisplayLabel;
+    $scope.GetComboData=function(ColumnName)
+    {
+        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            if ($scope.CustomItemDataList[i].ColumnMap == ColumnName) {
+                console.log($scope.CustomItemDataList[i].cfdComboValues);
+                return $scope.CustomItemDataList[i].cfdComboValues;
             }
 
+        }
+        
+    }
+    $scope.GetDisplayLabel = function (ColumnName) {
+        var DataType=""
+        
+
+        DataType = $scope.GetCustomFieldNameByMap(ColumnName);
+        if (DataType == "N/A") {
+            for (var i = 0; i < $scope.Columns.length; i++) {
+                if ($scope.Columns[i].ColumnID == ColumnName) {
+                    return $scope.Columns[i].DisplayLabel;
+                }
+
+            }
+        }
+        else {
+            return DataType;
         }
     }
 
     $scope.GetColumnDataType=function(ColumnName)
     {
-        var _ID = TryParseInt(ColumnName, 0);
         var DataType=""
-        if(_ID!=0)
-        {
-            DataType = $scope.GetCustomFieldTypeByID(_ID);
-            return DataType;
-        }
-        else {
-                
-                for (var i = 0; i < $scope.Columns.length; i++) {
-                    if ($scope.Columns[i].ColumnID == ColumnName) {
-                        DataType = $scope.Columns[i].ColumnDataType.toLowerCase();
-                        return DataType;
-                    }
+        
+
+            DataType = $scope.GetCustomFieldTypeByID(ColumnName);
+        if(DataType=="N/A") {
+
+            for (var i = 0; i < $scope.Columns.length; i++) {
+                if ($scope.Columns[i].ColumnID == ColumnName) {
+                    DataType = $scope.Columns[i].ColumnDataType.toLowerCase();
+                    return DataType;
+                }
 
             }
+        }
+        else {
+            return DataType;
         }
     }
     function FillFilterArray()
@@ -212,14 +231,29 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
     }
 
+    $scope.GetCustomFieldNameByMap = function (ID) {
+        var _return = "N/A";
+        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            if ($scope.CustomItemDataList[i].ColumnMap == ID) {
+                return $scope.CustomItemDataList[i].cfdName;
+            }
+
+        }
+
+        return _return;
+    }
+
     $scope.GetCustomFieldTypeByID=function(ID)
     {
+        var _return = "N/A";
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
-            if ($scope.CustomItemDataList[i].cfdID == ID) {
+            if ($scope.CustomItemDataList[i].ColumnMap == ID) {
                 return $scope.CustomItemDataList[i].cfdDataType;
             }
 
         }
+
+        return _return;
     }
    $scope.GetCellData=function(columnName, Index) {
        var _ID = TryParseInt(columnName, 0);
