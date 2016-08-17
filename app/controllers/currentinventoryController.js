@@ -188,7 +188,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
     $(window).scroll(function () {
         //var _SearchValue = $.trim($("#MasterSearch").val());
-        if (isviewload == true) {
+        if ($scope.isviewload == true) {
 
             if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
                 if ($(window).scrollTop() == $(document).height() - $(window).height()) {
@@ -643,8 +643,6 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     $scope.showfilter = function () {
         $("#filtermodal").modal("show")
     }
-
-
 
     $scope.GetInventoryDataAccordingToView=function()
     {
