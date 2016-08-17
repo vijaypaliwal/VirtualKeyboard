@@ -64,6 +64,21 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 return "cn";
         }
     }
+
+    $scope.isFurtherCalculatedColumn=function(ColumnName)
+    {
+        for (var i = 0; i < $scope.Columns.length; i++) {
+            if ($scope.Columns[i].ColumnID == ColumnName) {
+                if ($scope.Columns[i].isFirstFurtherCalculated == true || $scope.Columns[i].isSecondFurtherCalculated == true)
+                {
+                    return true;
+
+                }
+            }
+
+        }
+        return false;
+    }
     $scope.clearfilterArray = function () {
         for (var i = 0; i < $scope.FilterArray.length; i++) {
             $scope.FilterArray[i].SearchValue = "";
@@ -267,14 +282,42 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
         return _return;
     }
-   $scope.GetCellData=function(columnName, Index) {
+   $scope.GetCellData=function(columnName, Index,isCalculated) {
        var _ID = TryParseInt(columnName, 0);
        if (_ID != 0)
        {
            columnName = $scope.GetCustomFieldByID(_ID);
        }
+       var _Tempcolumnname = columnName;
+       if (isCalculated == true)
+       {
+           columnName="Calculated"
+       }
 
-        switch (columnName) {
+       switch (columnName) {
+           case "Calculated":
+               var _valueData = "";
+               if ($scope.InventoryList[Index].CustomData != null && $scope.InventoryList[Index].CustomData != undefined)
+                   for (var i = 0; i < $scope.InventoryList[Index].CustomData.length; i++) {
+                       if( $scope.InventoryList[Index].CustomData[i].Key==_Tempcolumnname)
+                       {
+                           
+                           _valueData = $scope.InventoryList[Index].CustomData[i].Value;
+                           break;
+                       }
+               }
+               return _valueData;
+               break;
+           case "pTargetQty":
+               return $scope.InventoryList[Index].pTargetQty != null ? $scope.InventoryList[Index].pTargetQty : "";
+               break;
+           case "pReorderQty":
+               return $scope.InventoryList[Index].pReorderQty != null ? $scope.InventoryList[Index].pReorderQty : "";
+               break;
+           case "ExtendedCost":
+
+               return $scope.InventoryList[Index].ExtendedCost != null ? $scope.InventoryList[Index].ExtendedCost : "";
+               break;
             case "pPart":
 
                 return $scope.InventoryList[Index].pPart != null ? $scope.InventoryList[Index].pPart : "";
@@ -446,9 +489,6 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 return $scope.InventoryList[Index].number_12 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_12) : "";
                 break;
 
-
-
-
             case "bool_1":
                 return $scope.InventoryList[Index].bool_1 != null ? $scope.InventoryList[Index].bool_1 : "";
                 break;
@@ -467,8 +507,6 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
             case "bool_6":
                 return $scope.InventoryList[Index].bool_6 != null ? $scope.InventoryList[Index].bool_6 : "";
                 break;
-
-
 
             case "date_1":
                 return $scope.InventoryList[Index].date_1 != null ? $scope.InventoryList[Index].date_1 : "";
@@ -489,7 +527,6 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 return $scope.InventoryList[Index].date_6 != null ? $scope.InventoryList[Index].date_6 : "";
                 break;
 
-
             case "pCountFrq":
                 return $scope.InventoryList[Index].pCountFrq != null ? $scope.InventoryList[Index].pCountFrq : "";
                 break;
@@ -509,9 +546,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
        var _iconID = "#icon_" + id.toString();
        if ($(_iconID).hasClass("fa-chevron-up"))
        {
-           $(_iconID).removeClass("fa-chevron-up").addClass("fa-chevron-down");
-
-       }
+        $(_iconID).removeClass("fa-chevron-up").addClass("fa-chevron-down");
+        }
        else {
            $(_iconID).removeClass("fa-chevron-down").addClass("fa-chevron-up");
        }
@@ -531,21 +567,16 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
               data: JSON.stringify({ SecurityToken: $scope.SecurityToken, Type: 1 }),
               contentType: 'application/json',
               dataType: 'json',
-              success: function (response) {
-
-                  
-
-
-                  $scope.InventoryViews = response.GetAllViewsResult.Payload;
-
-                  $scope.$apply();
-
+              success: function (response)
+              {
+              $scope.InventoryViews = response.GetAllViewsResult.Payload;
+              $scope.$apply();
               },
               error: function (err) {
-                  console.log(err);
-                  log.error("Error Occurred during operation");
-                  $scope.errorbox(err);
-                  $scope.$apply();
+                 console.log(err);
+                 log.error("Error Occurred during operation");
+                 $scope.errorbox(err);
+                 $scope.$apply();
 
               }
           });
@@ -562,8 +593,6 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         $scope.isviewload = false;
         $scope.CurrentView = { Name: "Current Inventory" };
     }
-
-
 
     function CheckScopeBeforeApply() {
         if (!$scope.$$phase) {
@@ -591,7 +620,6 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
         $("#filtermodal").modal('hide');
 
-
         if ($scope.CurrentView != undefined) {
 
 
@@ -612,6 +640,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                   success: function (response) {
                       $scope.isDataLoading = true;
                       $scope.isviewload = true;
+
+                      debugger;
                       
                       _TotalRecordsCurrent = response.GetCurrentInventoriesNewResult.Payload[0].Data.length;
                       $scope.currentrecord = response.GetCurrentInventoriesNewResult.Payload[0].Data.length;
@@ -633,14 +663,118 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                       $scope.isDataLoading = true;
                   }
               });
+             }
+         }
+
+    $scope.IsAvailableColumn=function(column)
+    {
+        for (var i = 0; i < $scope.Columns.length; i++) {
+            if ($scope.Columns[i].ColumnID == column) {
+                
+                return true;
+            }
+
         }
-        
+        return false;
+    }
+    $scope.getuom = function () {
+
+        $scope.LocationsLoaded = false;
+
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetUnitsOfMeasure',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+
+                   $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
+                   $scope.$apply();
+               },
+               error: function (err) {
+
+                   log.error(err.Message);
+
+               }
+           });
 
     }
 
-    
+    $scope.getstatus = function () {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetStatus',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+
+                   $scope.StatusList = response.GetStatusResult.Payload;
+                   $scope.$apply();
+               },
+               error: function (err) {
+
+               }
+           });
+
+    }
+
+    $scope.OpenmenuModal = function () {
+
+        if ($("body").hasClass("modal-open")) {
+            $("#myModal2").modal('hide');
+
+            $(".Addbtn .fa").removeClass('rotate');
+
+
+        }
+        else {
+            $("#myModal2").modal('show');
+            $(".Addbtn .fa").addClass('rotate');
+        }
+    }
+
+    function ToggleSortDir(Dir) {
+        if (Dir == "DESC") {
+            return "ASC"
+        }
+        else if (Dir == "ASC") {
+            return "DESC"
+        }
+        else {
+            return "ASC";
+        }
+    }
+    $scope.applysorting = function (sortby) {
+
+        var _tempCol = _sortColumn;
+
+        _sortColumn = sortby;
+        if (_tempCol == _sortColumn) {
+            _sortDir = ToggleSortDir(_sortDir);
+
+        }
+        $scope.GetInventoryDataAccordingToView()
+    }
 
     function init() {
+        $scope.getuom();
+        $scope.getstatus();
         $scope.GetInventoryViews();
         $scope.GetCustomDataField(0);
         CheckScopeBeforeApply();
