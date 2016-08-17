@@ -6,6 +6,8 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
 
     $scope.currentinvloaded = false;
 
+    $scope.loadcounter = false;
+
     function init() {
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
 
@@ -31,7 +33,7 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
 
     $scope.GetInventoryViews = function () {
 
-      
+        $scope.loadcounter = false;
 
         $scope.currentinvloaded = false;
 
@@ -46,15 +48,11 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
               data: JSON.stringify({ SecurityToken: $scope.SecurityToken, Type: 1 }),
               contentType: 'application/json',
               dataType: 'json',
-              success: function (response) {
-
-              
-
-                  $scope.InventoryViews = response.GetAllViewsResult.Payload;
-                
-                  $scope.currentinvloaded = true;
-
-                  $scope.$apply();
+              success: function (response)
+              {
+               $scope.InventoryViews = response.GetAllViewsResult.Payload;
+               $scope.loadcounter = true;
+               $scope.$apply();
 
               },
               error: function (err) {

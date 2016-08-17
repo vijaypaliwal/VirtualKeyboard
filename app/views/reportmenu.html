@@ -86,19 +86,20 @@
  
 
     <a href="#/currentinventory" ng-click="GoTo('/currentinventory')" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6">
-
         <div class="row">
             <div class="col-xs-2">
                 <i class="fa fa-th-list"></i>
             </div>
             <div class="col-xs-7">
-
                 <h5>Current Inventory</h5>
             </div>
 
             <div class="col-xs-3">
+                <div ng-if="loadcounter==false">
+                    <img style="height:35px; width:35px;" src="img/loader1.gif" alt="Alternate Text" />
+                </div>
               
-                <span>
+                <span ng-if="loadcounter==true">
                     {{InventoryViews.length}}
                 </span>
                
