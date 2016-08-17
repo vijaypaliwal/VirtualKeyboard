@@ -141,6 +141,26 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
             return DataType;
         }
     }
+
+    function UpdateFilterArray()
+    {
+
+        for (var i = 0; i < $scope.FilterArray.length; i++) {
+
+            var _datatype = $scope.GetColumnDataType($scope.FilterArray[i].ColumnName);
+
+            if(_datatype=="number"||_datatype=="decimal"||_datatype=="money")
+            {
+                if($scope.FilterArray[i].SearchValue!=null && $scope.FilterArray[i].SearchValue!=undefined && $.trim($scope.FilterArray[i].SearchValue)!="")
+                {
+                    var _value = angular.copy($scope.FilterArray[i].SearchValue);
+                    $scope.FilterArray[i].SearchValue = parseFloat(_value);
+                }
+
+            }
+        }
+        CheckScopeBeforeApply();
+    }
     function FillFilterArray()
     {
         $scope.FilterArray = [];
@@ -152,7 +172,6 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 var _ID = TryParseInt(_obj.ColumnName, 0);
                 if (_ID != 0)
                 {
-                    debugger;
                   
                     _obj.ColumnName = $scope.GetCustomFieldByID(_ID);
                 }
@@ -163,26 +182,30 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
         }
 
-        console.log($scope.FilterArray);
+        
         CheckScopeBeforeApply();
     }
 
     $(window).scroll(function () {
         //var _SearchValue = $.trim($("#MasterSearch").val());
-        if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
-            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-                if (_PageSize < $scope.totalrecords) {
-                    
-                    _IsLazyLoadingUnderProgress = 1;
-                    $scope.isDataLoading = false;
-                    _PageSize = _TotalRecordsCurrent + getIncrementor($scope.totalrecords);
-                    CheckScopeBeforeApply();
-                    $scope.GetInventoryDataAccordingToView();
-                }
-                else {
-                    // log.info("You have already loaded all data.")
-                }
+        if (isviewload == true) {
 
+            if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
+                if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                    if (_PageSize < $scope.totalrecords) {
+
+
+                        _IsLazyLoadingUnderProgress = 1;
+                        $scope.isDataLoading = false;
+                        _PageSize = _TotalRecordsCurrent + getIncrementor($scope.totalrecords);
+                        CheckScopeBeforeApply();
+                        $scope.GetInventoryDataAccordingToView();
+                    }
+                    else {
+                        // log.info("You have already loaded all data.")
+                    }
+
+                }
             }
         }
 
@@ -308,6 +331,10 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                }
                return _valueData;
                break;
+               
+           case "iLastAction":
+               return $scope.InventoryList[Index].iLastAction != null ? $scope.InventoryList[Index].iLastAction : "";
+               break;
            case "pTargetQty":
                return $scope.InventoryList[Index].pTargetQty != null ? $scope.InventoryList[Index].pTargetQty : "";
                break;
@@ -358,7 +385,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 break;
 
             case "iCostPerUnit":
-                return $scope.InventoryList[Index].iCostPerUnit != null ? $scope.InventoryList[Index].iCostPerUnit : "";
+                return $scope.InventoryList[Index].AvgCostPerUnit != null ? $scope.InventoryList[Index].AvgCostPerUnit : "";
 
                 break;
             case "iUnitTag3":
@@ -555,7 +582,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
        $(_id).find(".ExtraTr").toggle("slow");
    }
     $scope.GetInventoryViews = function () {
-
+        $scope.isDataLoading = false;
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -569,10 +596,12 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
               dataType: 'json',
               success: function (response)
               {
+                  $scope.isDataLoading = true;
               $scope.InventoryViews = response.GetAllViewsResult.Payload;
               $scope.$apply();
               },
               error: function (err) {
+                  $scope.isDataLoading = true;
                  console.log(err);
                  log.error("Error Occurred during operation");
                  $scope.errorbox(err);
@@ -587,6 +616,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     $scope.viewdetail = function(viewname) {
         $scope.isviewload = true;
         $scope.CurrentView = viewname;
+        $scope.FilterArray = [];
+        CheckScopeBeforeApply();
     }
 
     $scope.showview = function() {
@@ -603,12 +634,17 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     $scope.AssignCurrentView=function(view)
     {
         $scope.CurrentView = view;
+        $scope.FilterArray = [{ ColumnName: "", FilterOperator: "", SearchValue: "" }];
         CheckScopeBeforeApply();
         $scope.GetInventoryDataAccordingToView();
     }
+
+
     $scope.showfilter = function () {
         $("#filtermodal").modal("show")
     }
+
+
 
     $scope.GetInventoryDataAccordingToView=function()
     {
@@ -649,8 +685,10 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                       $scope.totalrecords = response.GetCurrentInventoriesNewResult.Payload[0].TotalRercords;
                       $scope.Columns = response.GetCurrentInventoriesNewResult.Payload[0].Columns;
                       $scope.ActualTotalRecords = response.GetCurrentInventoriesNewResult.Payload[0].ActualTotalRecords;
+                      $scope.FilterArray = response.GetCurrentInventoriesNewResult.Payload[0].Filters;
                       CheckScopeBeforeApply();
-                      FillFilterArray();
+                      // FillFilterArray();
+                      UpdateFilterArray();
 
                   },
                   error: function (err) {
