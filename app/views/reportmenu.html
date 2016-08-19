@@ -109,7 +109,7 @@
 
     </a>
 
-    <button style="color:#fff"  type="button"  class="waves-effect waves-light btn-large accent-color width-100 animated bouncein delay-6">
+    <a style="color:#fff"  class="waves-effect waves-light btn-large accent-color width-100 animated bouncein delay-6">
 
 
         <div class="row">
@@ -117,60 +117,64 @@
                 <i class="fa fa-th-list"></i>
 
             </div>
-            <div class="col-xs-8">
+            <div class="col-xs-7">
 
                 <h5> Inventory summary</h5>
 
             </div>
 
-            <div class="col-xs-2">
+            <div class="col-xs-3">
               
 
             </div>
 
         </div>
 
+    </a>
 
-
-    </button>
-
-    <button type="button"  class="waves-effect waves-light btn-large btn-danger width-100 animated bouncein delay-6">
+    <a href="#/inventoryactivity" class="waves-effect waves-light btn-large btn-danger width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-2">
                 <i class="fa fa-th-list"></i>
 
             </div>
-            <div class="col-xs-8">
+            <div class="col-xs-7">
 
-                <h5>Activity</h5>
+                <h5>Inventory Activity</h5>
 
             </div>
 
-            <div class="col-xs-2">
+            <div class="col-xs-3">
+                <div ng-if="loadcounter==false">
+                    <img style="height:35px; width:35px;" src="img/loader1.gif" alt="Alternate Text" />
+                </div>
 
-           
+                <span ng-if="loadcounter==true">
+                    9
+                </span>
+
             </div>
 
         </div>
 
 
 
-    </button>
+    </a>
 
 
-    <button type="button"  class="waves-effect btn-large waves-light btn-info  width-100 animated bouncein delay-6">
+    <a class="waves-effect btn-large waves-light btn-info  width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-2">
                 <i class="fa fa-th-list"></i>
 
             </div>
-            <div class="col-xs-8">
+            <div class="col-xs-7">
 
                 <h5> Global Restock</h5>
 
             </div>
 
-            <div class="col-xs-2">
+            <div class="col-xs-3">
 
                
              
@@ -180,52 +184,38 @@
 
 
 
-    </button>
+    </a>
 
-    <button type="button"  class="waves-effect btn-large waves-light btn-info  width-100 animated bouncein delay-6">
+    <a class="waves-effect btn-large waves-light btn-info  width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-2">
-                <i class="fa fa-th-list"></i>
+             <i class="fa fa-th-list"></i>
             </div>
-            <div class="col-xs-8">
+            <div class="col-xs-7">
 
-                <h5>Local Restock</h5>
+            <h5>Local Restock</h5>
 
             </div>
 
-            <div class="col-xs-2">
+            <div class="col-xs-3">
             
-
-
             </div>
-
         </div>
+    </a>
 
-
-
-    </button>
-
-    <button type="button"  class="waves-effect waves-light btn-large btn-success width-100 animated bouncein delay-6">
+    <a  class="waves-effect waves-light btn-large btn-success width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-2">
                 <i class="fa fa-th-list"></i>
             </div>
-            <div class="col-xs-8">
-
-                <h5>Items</h5>
-
+            <div class="col-xs-7">
+            <h5>All Items</h5>
             </div>
 
-            <div class="col-xs-2">
+            <div class="col-xs-3">
 
-
-             
             </div>
-
         </div>
-
-
-
-    </button>
+    </a>
 
 </div>

@@ -119,6 +119,10 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/currentinventory.html"
     });
 
+    $routeProvider.when("/inventoryactivity", {
+        controller: "inventoryactivityController",
+        templateUrl: "app/views/inventoryactivity.html"
+    });
     
 
     $routeProvider.otherwise({ redirectTo: "/login" });

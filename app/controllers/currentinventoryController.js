@@ -8,7 +8,9 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     $scope.CustomItemDataList = [];
     $scope.FilterData = {SearchValue:""};
     $scope.isDataLoading = true;
-    $scope.FilterArray = [{ColumnName :"" ,FilterOperator:"",SearchValue :""}];
+    $scope.FilterArray = [{ ColumnName: "", FilterOperator: "", SearchValue: "" }];
+    $scope.sortColumn = "iLastITID";
+    $scope.sortDir = "DESC";
     var _sortColumn = "iLastITID";
     var _sortDir = "DESC";
     $scope.isviewload = false;
@@ -83,14 +85,17 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         for (var i = 0; i < $scope.FilterArray.length; i++) {
             $scope.FilterArray[i].SearchValue = "";
         }
+
+        $scope.FilterData.SearchValue = "";
         CheckScopeBeforeApply();
         $scope.GetInventoryDataAccordingToView();
     }
     $scope.clearfilter=function()
     {
-        $scope.FilterData.SearchValue = "";
-        CheckScopeBeforeApply();
-        $scope.GetInventoryDataAccordingToView();
+        $scope.clearfilterArray();
+      
+      //  CheckScopeBeforeApply();
+      //  $scope.GetInventoryDataAccordingToView();
     }
     $scope.GetComboData=function(ColumnName)
     {
@@ -305,6 +310,48 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
         return _return;
     }
+
+    $scope.GetImagePath=function(Operator)
+    {
+        debugger;
+        var path = "img/filter/";
+        var _returnPath = "img/filter/EqualTo.gif"
+        switch (Operator) {
+            case "eq":
+            case "num-eq":
+            case "date-eq":
+                _returnPath = path + "EqualTo.gif";
+                break;
+            case "num-ne":
+            case "ne":
+                _returnPath = path + "NotEqualTo.gif";
+                break;
+            case "date-before":
+                _returnPath = path + "OnOrBefore.gif";
+                break;
+            case "cn":
+                _returnPath = path + "Contains.gif";
+                break;
+            case "date-after":
+                _returnPath = path + "OnOrAfter.gif";
+                break;
+            case "bw":
+                _returnPath = path + "BeginsWith.gif";
+                break;
+            case "num-lte":
+                _returnPath = path + "LessThanOrEqualTo.gif";
+                break;
+            case "num-gte":
+                _returnPath = path + "GreaterThanOrEqualTo.gif";
+                break;
+            case "date-gte":
+                _returnPath = path + "GreaterThanOrEqualTo.gif";
+                break;
+        }
+        return _returnPath;
+    }
+
+    
    $scope.GetCellData=function(columnName, Index,isCalculated) {
        var _ID = TryParseInt(columnName, 0);
        if (_ID != 0)
@@ -638,8 +685,6 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         CheckScopeBeforeApply();
         $scope.GetInventoryDataAccordingToView();
     }
-
-
     $scope.showfilter = function () {
         $("#filtermodal").modal("show")
     }
@@ -801,11 +846,16 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         var _tempCol = _sortColumn;
 
         _sortColumn = sortby;
+      
         if (_tempCol == _sortColumn) {
             _sortDir = ToggleSortDir(_sortDir);
+            $scope.sortDir = _sortDir;
 
         }
+        $scope.sortColumn = sortby;
+        CheckScopeBeforeApply();
         $scope.GetInventoryDataAccordingToView()
+
     }
 
     function init() {
