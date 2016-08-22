@@ -639,16 +639,16 @@
                                 <div style="text-align:center">
                                     <a class="scanbtn btn btn-success roundbutton" ng-click="CreateNew(2)"><i class="fa fa-plus"></i></a>
                                 </div>
-
                                 
                             </td>
 
                             <td style="text-align:center;" ng-if="CurrentActiveField=='Image'">
-                                <div class="scanbtn btn btn-success roundbutton" ng-click="OpenBox()">
-                                    <div><i class="fa fa-picture-o"></i></div>
+                                <a class="scanbtn btn btn-success roundbutton" ng-click="OpenBox()">
+                                    <i class="fa fa-picture-o"></i>
+                                  
+                                </a>
 
-                                    <input type="file" style="visibility:hidden" id="files" accept="image/*;" />
-                                </div>
+                                <input type="file" style="visibility:hidden" id="files" accept="image/*;" />
                             </td>  
 
                             <td ng-if="IsinavailableInventoryField(CurrentActiveField)==true">
