@@ -102,22 +102,38 @@
     }
 
     #myModalforlist {
-        top: 25%;
-        overflow: hidden;
-        width: 95%;
-        margin: 0 auto;
+     padding: 0px;
+     background:transparent;
+    border: none;
+    box-shadow: none;
+   
     }
 
+    #myModalforlist .modal-body
+    {
+        padding:0px;
+         border-radius:10px;
+           background:transparent;
+    }
+
+
         #myModalforlist ul {
-            padding: 0px;
-            margin-bottom: 0px;
+      padding: 15px;
+    margin-bottom: 0px;
+    border-radius: 10px;
+    width: 95%;
+    background: #fff;
+    margin: 0 auto;
+    border: 1px solid #ccc;
         }
 
             #myModalforlist ul li {
-                padding: 14px;
-                border-bottom: 1px solid #ccc;
-                background: #fff;
-                list-style-type: none;
+              padding: 14px;
+    border: 1px solid #ccc;
+    background: #fff;
+    list-style-type: none;
+    margin-bottom: 10px;
+    border-radius: 20px;
             }
 
                 #myModalforlist ul li a {
@@ -128,6 +144,22 @@
                     background: #fff;
                     color: #000;
                 }
+
+
+                #myModalforlist .modal-footer
+                {
+                    margin-top:0px;
+                }
+
+                .modal.bottom-sheet
+                {
+                    z-index:25000;
+                }
+
+                .modal-backdrop {
+    background: #fff;
+    z-index: 20000;
+}
 
 
     .select2-container--default.select2-container--focus .select2-selection--multiple {

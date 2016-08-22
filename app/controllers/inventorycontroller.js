@@ -1521,7 +1521,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.onFail = function (message) {
-        log.error("into fail");
+       
         log.error('Failed because: ' + message);
     }
     $scope.capturePhotoNew = function () {
@@ -1570,6 +1570,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         //  $cordovaKeyboard.disableScroll(true);
         $scope.GetAllData();
 
+      
 
     }
 
@@ -2550,7 +2551,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#myModalforlist").modal("hide");
 
 
-        _ImgObj.FileName = "IphoneCapture";
+        _ImgObj.FileName = "IphoneLibrary";
         _ImgObj.bytestring = imageData;
         $scope.ImageList.push(_ImgObj);
         CheckScopeBeforeApply();

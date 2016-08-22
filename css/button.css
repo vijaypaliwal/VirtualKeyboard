@@ -9,10 +9,12 @@
     padding-right:9px;
 }
 
+
+
 .btn-gray {
     background: #949494 !important;
     color: #fff !important;
-    opacity: 0.7;
+    opacity: 0.9;
     height: 45px;
     line-height:45px;
     border: transparent !important;
