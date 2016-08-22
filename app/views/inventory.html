@@ -645,10 +645,8 @@
                             <td style="text-align:center;" ng-if="CurrentActiveField=='Image'">
                                 <a class="scanbtn btn btn-success roundbutton" ng-click="OpenBox()">
                                     <i class="fa fa-picture-o"></i>
-                                  
+                                    <input type="file" style="visibility:hidden" id="files" accept="image/*;" />
                                 </a>
-
-                                <input type="file" style="visibility:hidden" id="files" accept="image/*;" />
                             </td>  
 
                             <td ng-if="IsinavailableInventoryField(CurrentActiveField)==true">
