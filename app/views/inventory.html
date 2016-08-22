@@ -407,7 +407,7 @@
                                         <div class="iosbtn">
                                             <div class="fileUpload btn btn-primary" style="float:left;" ng-click="OpenBox()">
                                                 <div><i class="fa fa-plus-circle"></i></div>
-                                                <span>Add Image</span>
+                                                <span>Add</span>
 
                                                 <input type="file" style="visibility:hidden" id="files" accept="image/*;" />
                                             </div>
@@ -417,10 +417,15 @@
                                     </div>
                                     <div class="col-xs-6">
 
-                                        <div class="fileUpload viewimage btn btn-primary" style="float:right;" ng-if="ImageList.length>0" ng-click="viewimages()">
-                                            <span>
+                                        <div class="viewimage " style="float:right;" ng-if="ImageList.length>0" ng-click="viewimages()">
+
+                                            <span ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
+
+                                                <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
+                                            </span>
+                                            <!--<span>
                                                 <span class="imgcounter"> {{ImageList.length}} </span>
-                                             <br /> Images</span>
+                                             <br /> Images</span>-->
                                         </div>
                                     </div>
                                 </div>
@@ -805,7 +810,7 @@
                 <a ng-click="capturePhotoNew();"> <i class="fa fa-camera"></i> Capture Photo</a>
             </li>
             <li>
-                <a ng-click="triggerFileClick()"><i class="fa fa-picture-o"></i> From Photo Library</a>
+                <a ng-click="getPhoto()"><i class="fa fa-picture-o"></i> From Photo Library</a>
             </li>
         </ul>
 

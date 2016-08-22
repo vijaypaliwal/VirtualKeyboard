@@ -2537,6 +2537,36 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     })
 
 
+
+    $scope.onPhotoURISuccessNew = function (imageData) {
+        var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
+
+        imageData = "data:image/jpeg;base64," + imageData;
+
+        var id = randomStringNew(5, '0123456789');
+        _ImgObj.ImageID = id;
+
+        $(".viewimage").show();
+        $("#myModalforlist").modal("hide");
+
+
+        _ImgObj.FileName = "IphoneCapture";
+        _ImgObj.bytestring = imageData;
+        $scope.ImageList.push(_ImgObj);
+        CheckScopeBeforeApply();
+
+    }
+
+    $scope.getPhoto = function (source) {
+        // Retrieve image file location from specified source
+        navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
+            quality: 50,
+            destinationType: destinationType.FILE_URI,
+            correctOrientation: true,
+            sourceType: pictureSource.PHOTOLIBRARY
+        });
+    }
+
     $scope.$watch("InventoryObject.AutoID", function () {
         if ($scope.InventoryObject.AutoID) {
             $scope.InventoryObject.ItemID = "Automated";
@@ -2662,14 +2692,13 @@ app.directive('myEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {
 
-            alert("Which" + event.which);
-            alert("Code" + event.keyCode);
+          
             var key = event.which || event.keyCode || 0;
-            alert(key);
+           
 
             if (event.which === 13) {
 
-                alert("In");
+        
 
                 scope.$apply(function () {
                     

@@ -109,8 +109,12 @@
 
   .fileUpload.btn-primary
   {
-     font-size: 14px;
-    line-height: 30px;
-    padding-top: 10px;
-    border-radius:100%;
+    font-size: 14px;
+    line-height: 18px;
+    padding-top: 18px !important;
+    text-transform: capitalize;
+    height: 75px;
+    border-radius: 100%;
+    padding-top:9px;
+    width: 75px;
   }
