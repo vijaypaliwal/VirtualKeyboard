@@ -139,7 +139,6 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                     DataType = $scope.Columns[i].ColumnDataType.toLowerCase();
                     return DataType;
                 }
-
             }
         }
         else {

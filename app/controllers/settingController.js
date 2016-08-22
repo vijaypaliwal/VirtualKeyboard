@@ -10,7 +10,7 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
     $scope.IsStatusLoading = false;
     $scope.IsLocationLoading = false;
     $scope.Iscolumnloading = false;
-
+    $scope.columnlist = [];
     $scope.mainObjectToSend = [];
     function init() {
         $scope.getuom();
@@ -51,7 +51,7 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
                    $scope.IsStatusLoading = false;
-                   debugger;
+               
 
                    $scope.StatusList = response.GetStatusResult.Payload;
                    $scope.$apply();
@@ -84,7 +84,7 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
                    $scope.IsUOMLoading = false;
-                   debugger;
+               
                    $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
                    $scope.$apply();
                },
@@ -112,7 +112,7 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-                   debugger;
+               
                    $scope.IsLocationLoading = false;
                    $scope.LocationList = response.GetLocationsResult.Payload;
                    $scope.LocationSearchList = $scope.LocationList;
@@ -150,11 +150,18 @@ app.controller('settingController', ['$scope',  'localStorageService', 'authServ
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
               success: function (response) {
 
-                 
-
+                  debugger;
                   $scope.Iscolumnloading = false;
 
-                  $scope.columnlist = response.GetMyInventoryColumnsResult.Payload;
+                  var _myinventorycols = response.GetMyInventoryColumnsResult.Payload;
+                  for (var i = 0; i < _myinventorycols.length; i++) {
+                      if (_myinventorycols[i].ColumnName != "HasConversion" && _myinventorycols[i].ColumnName != "ActionQty") {
+                          $scope.columnlist.push(_myinventorycols[i]);
+                      }
+                  }
+
+                  console.log($scope.columnlist);
+                 // $scope.columnlist = response.GetMyInventoryColumnsResult.Payload;
                 
                   $scope.$apply();
 
