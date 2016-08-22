@@ -2661,8 +2661,14 @@ app.directive('bootstrapSwitch', [
 app.directive('myEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {
+
+            alert("Out");
             if (event.which === 13) {
+
+                alert("In");
+
                 scope.$apply(function () {
+                    
                     scope.$eval(attrs.myEnter);
                 });
 
