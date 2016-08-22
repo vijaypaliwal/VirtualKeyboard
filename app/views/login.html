@@ -69,8 +69,9 @@
                 <div class="row">
 
                     <div class="col-xs-12">
-                        <button type="button" style="margin-top:8px;" class="waves-effect waves-light btn-primary width-100 animated center bouncein delay-6"  ng-if="!myform.$invalid" id="loginBtn" data-ng-click="login()">LOG IN <i class="fa fa-sign-in"></i></button>
-                        <a style="margin-top:8px;" class="btn btn-gray width-100 animated center bouncein delay-6"  disabled="disabled" ng-if="myform.$invalid" id="loginBtn" data-ng-click="login()">LOG IN <i class="fa fa-sign-in"></i></a>
+                        <button type="button"  class="waves-effect waves-light btn-primary animated center bouncein delay-6"  ng-if="!myform.$invalid" id="loginBtn" data-ng-click="login()"><i class="fa fa-sign-in"></i> Login</button>
+                        <a  class="btn btn-gray animated center bouncein delay-6"  disabled="disabled" ng-if="myform.$invalid" id="loginBtn" data-ng-click="login()"><i class="fa fa-sign-in"></i> Login </a>
+                        <a class="waves-effect waves-light btn btn-primary animated center bouncein delay-6" href="#/signup"> <i class="fa fa-user"></i> Register </a>
                      
                         </div>
                     </div>
@@ -227,6 +228,19 @@
     #toolbar
     {
         display:none;
+    }
+
+    .btn-primary
+    {
+        text-transform:capitalize;
+        padding-left:15px;
+        padding-right:15px;
+    }
+
+    .btn-gray {
+        text-transform: capitalize;
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
      

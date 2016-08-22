@@ -211,7 +211,7 @@
         text-transform: uppercase;
         white-space: nowrap;
         position: fixed;
-        left: 96%;
+        left: 98%;
         top: 42%;
     }
 
@@ -268,7 +268,7 @@
         </div>
 
         <div style="text-align:right" class="col-xs-3">
-            <a ng-if="loadingbutton==false" class="btn save-btn btn-primary" ng-click="saveColumns();"><i class="fa fa-check"></i> Save</a>
+            <a ng-if="loadingbutton==false" class="functionkeys btn save-btn btn-primary" ng-click="saveColumns();"><i class="fa fa-check"></i> Save</a>
 
             <a ng-if="loadingbutton==true" disabled class="btn save-btn btn-primary"><i class="fa fa-check fa-spin"></i> Save</a>
         </div>
@@ -292,7 +292,7 @@
 </div>
 
 
-<table style="width:86%;" class="table gridTable table-striped bs-item">
+<table style="width:93%;" class="table gridTable table-striped bs-item">
 
 
     <tbody class="dragarea" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
@@ -341,13 +341,13 @@
 
 <div></div>
 
-<a class="myLinkToTop btn btn-primary">
+<!--<a class="myLinkToTop btn btn-primary">
     <i class="fa fa-arrow-circle-o-down"></i>
 </a>
 
 <a class="myMenuLink btn btn-primary">
     <i class="fa fa-arrow-circle-o-up"></i>
-</a>
+</a>-->
 
 <script>    
     $('.myLinkToTop').click(function () {

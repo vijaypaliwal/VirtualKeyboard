@@ -153,13 +153,13 @@
 
                 .modal.bottom-sheet
                 {
-                    z-index:25000;
+                  
                 }
 
                 .modal-backdrop {
-    background: #fff;
-    z-index: 20000;
-}
+                background: #fff;
+  
+                }
 
 
     .select2-container--default.select2-container--focus .select2-selection--multiple {
