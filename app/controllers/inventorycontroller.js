@@ -2662,7 +2662,11 @@ app.directive('myEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {
 
-            alert("Out");
+            alert("Which" + event.which);
+            alert("Code" + event.keyCode);
+            var key = event.which || event.keyCode || 0;
+            alert(key);
+
             if (event.which === 13) {
 
                 alert("In");
