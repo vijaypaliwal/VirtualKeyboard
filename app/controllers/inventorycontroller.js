@@ -104,6 +104,32 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#createnewlabel").modal('show');
     }
 
+    $scope.GoToNext = function () {
+        mySwiper.swipeNext();
+    }
+
+
+
+    $('#myModal2').on('hidden.bs.modal', function () {
+        $(".Addbtn .fa").removeClass('rotate');
+    });
+
+
+    $scope.OpenmenuModal = function () {
+
+        if ($("body").hasClass("modal-open")) {
+            $("#myModal2").modal('hide');
+
+            $(".Addbtn .fa").removeClass('rotate');
+
+
+        }
+        else {
+            $("#myModal2").modal('show');
+            $(".Addbtn .fa").addClass('rotate');
+        }
+    }
+
 
     $scope.checkDuplicate = function (type) {
         if (type == 1) {
@@ -117,6 +143,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         if (type == 2) {
             for (var i = 0; i < $scope.UOMList.length; i++) {
                 if ($scope.UOMList[i].UnitOfMeasureName == $scope.CreateNewLabel) {
+                    return false;
+                }
+            }
+
+        }
+
+
+        if (type == 3) {
+            for (var i = 0; i < $scope.StatusList.length; i++) {
+                if ($scope.StatusList[i].StatusValue == $scope.CreateNewLabel) {
                     return false;
                 }
             }
@@ -142,6 +178,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 var _uomobj = { UnitOfMeasureName: $scope.CreateNewLabel, UnitOfMeasureID: 0 };
                 $scope.UOMList.push(_uomobj);
                 $scope.InventoryObject.Uom = $scope.CreateNewLabel;
+            }
+
+
+            if (Type == 3) {
+                var _statusobj = { StatusValue: $scope.CreateNewLabel};
+                $scope.StatusList.push(_statusobj);
+                $scope.InventoryObject.Status = $scope.CreateNewLabel;
             }
             $scope.CreateNewLabel = "";
             CheckScopeBeforeApply();
@@ -2614,4 +2657,18 @@ app.directive('bootstrapSwitch', [
             };
         }
 ]);
+
+app.directive('myEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if (event.which === 13) {
+                scope.$apply(function () {
+                    scope.$eval(attrs.myEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
 
