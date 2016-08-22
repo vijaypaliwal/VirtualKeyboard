@@ -2561,7 +2561,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         // Retrieve image file location from specified source
         navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
             quality: 50,
-            destinationType: destinationType.FILE_URI,
+            destinationType: destinationType.DATA_URL,
             correctOrientation: true,
             sourceType: pictureSource.PHOTOLIBRARY
         });
