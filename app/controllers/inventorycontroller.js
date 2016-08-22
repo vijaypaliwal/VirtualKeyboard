@@ -2541,7 +2541,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.onPhotoURISuccessNew = function (imageData) {
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
 
-        imageData = "data:image/jpeg;base64," + imageData;
+        //imageData = "data:image/jpeg;base64," + imageData;
 
         var id = randomStringNew(5, '0123456789');
         _ImgObj.ImageID = id;
