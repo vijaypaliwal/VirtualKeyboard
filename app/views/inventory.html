@@ -420,7 +420,7 @@
                                         <div class="viewimage " style="float:right;" ng-if="ImageList.length>0" ng-click="viewimages()">
 
                                             <span ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
-
+                                                {{_obj.bytestring}}
                                                 <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
                                             </span>
                                             <!--<span>
