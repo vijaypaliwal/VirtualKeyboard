@@ -24,9 +24,6 @@
 <form name="signup">
 
     <h4>Personal Info</h4>
-    <div class="row">
-
-        <div class="col-xs-12">
 
             <div class="form-group">
              
@@ -36,17 +33,6 @@
                 </div>
 
             </div>
-
-
-
-        </div>
-    </div>
-
-
-
-    <div class="row">
-
-        <div class="col-xs-12">
             <div class="form-group">
                
                 <div class="input-group">
@@ -54,17 +40,6 @@
                     <input type="text" class="form-control" placeholder="Company Name" data-ng-model="registration.Company" required>
                 </div>
             </div>
-
-
-
-
-
-        </div>
-    </div>
-
-    <div class="row">
-
-        <div class="col-xs-12">
             <div class="form-group">
              
                 <div class="input-group">
@@ -72,17 +47,6 @@
                     <input type="text" class="form-control" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" placeholder="Email Address" data-ng-model="registration.Email" required>
                 </div>
             </div>
-
-
-
-
-
-        </div>
-    </div>
-
-    <div class="row">
-
-        <div class="col-xs-12">
             <div class="form-group">
             
                 <div class="input-group">
@@ -90,27 +54,14 @@
                     <input type="text" class="form-control" placeholder="Account Name" data-ng-model="registration.Account" required>
                 </div>
             </div>
-        </div>
-    </div>
-
-
-    <h4>Login Info</h4>
-
-    <div class="row">
-
-        <div class="col-xs-12">
+    
+           <h4>Login Info</h4>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"> <i class="fa fa-user"></i></span>
                     <input type="text" class="form-control" placeholder="Username" data-ng-model="registration.UserName" required>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-
-        <div class="col-xs-12">
-
             <div class="form-group">
               
                 <div class="input-group">
@@ -127,8 +78,6 @@
                     Minimum 7 characters required.
                 </span>
             </div>
-        </div>
-    </div>
  
     <div class="row">
         <div class="col-xs-6">
@@ -140,7 +89,13 @@
 
 <style>
 
-    .input-group-addon {
+    form
+    {
+        overflow-x:hidden !important;
+    }
+    
+    
+     .input-group-addon {
         padding: 6px 12px;
         font-size: 16px;
         font-weight: normal;
@@ -150,7 +105,7 @@
         background-color: #eeeeee !important;
         border: 1px solid #cccccc;
         border-radius: 0;
-        min-width:50px;
+        min-width: 50px;
     }
 
         .input-group-addon i {

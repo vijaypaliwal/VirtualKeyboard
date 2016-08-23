@@ -92,6 +92,9 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                 debugger;
 
+                log.error("Error occurred due to error::" + err.statusText);
+                log.error(err.responseText);
+
                 $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
                 $(".fa-sign-in").removeClass("fa-spin");
                 playBeep();

@@ -83,7 +83,25 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
 
     }
 
-    
+    $('#bottommenumodal').on('hidden.bs.modal', function () {
+        $(".menubtn .fa").removeClass('rotate');
+    });
+
+
+    $scope.Openbottommenu = function () {
+
+        if ($("body").hasClass("modal-open")) {
+            $("#bottommenumodal").modal('hide');
+
+            $(".menubtn .fa").removeClass('rotate');
+
+
+        }
+        else {
+            $("#bottommenumodal").modal('show');
+            $(".menubtn .fa").addClass('rotate');
+        }
+    }
 
 
     $scope.Updateinfo = function () {

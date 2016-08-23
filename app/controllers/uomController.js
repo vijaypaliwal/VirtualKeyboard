@@ -41,6 +41,28 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
         $scope.$apply();
 
     }
+
+
+    $('#bottommenumodal').on('hidden.bs.modal', function () {
+        $(".menubtn .fa").removeClass('rotate');
+    });
+
+
+    $scope.Openbottommenu = function () {
+
+        if ($("body").hasClass("modal-open")) {
+            $("#bottommenumodal").modal('hide');
+
+            $(".menubtn .fa").removeClass('rotate');
+
+
+        }
+        else {
+            $("#bottommenumodal").modal('show');
+            $(".menubtn .fa").addClass('rotate');
+        }
+    }
+
   
 
     $scope.getuom = function () {

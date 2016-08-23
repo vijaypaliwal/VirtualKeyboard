@@ -81,6 +81,28 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
         return false;
     }
+
+
+    $('#bottommenumodal').on('hidden.bs.modal', function () {
+        $(".menubtn .fa").removeClass('rotate');
+    });
+
+
+    $scope.Openbottommenu = function () {
+
+        if ($("body").hasClass("modal-open")) {
+            $("#bottommenumodal").modal('hide');
+
+            $(".menubtn .fa").removeClass('rotate');
+
+
+        }
+        else {
+            $("#bottommenumodal").modal('show');
+            $(".menubtn .fa").addClass('rotate');
+        }
+    }
+
     $scope.clearfilterArray = function () {
         for (var i = 0; i < $scope.FilterArray.length; i++) {
             $scope.FilterArray[i].SearchValue = "";
@@ -177,7 +199,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 if (_ID != 0)
                 {
                   
-                    _obj.ColumnName = $scope.GetCustomFieldByID(_ID);
+                 _obj.ColumnName = $scope.GetCustomFieldByID(_ID);
                 }
                 _obj.FilterOperator = GetFilterOperator($scope.Columns[i].ColumnDataType);
                 _obj.SearchValue = "";

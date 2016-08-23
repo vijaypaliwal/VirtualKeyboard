@@ -1,12 +1,12 @@
 .btn-primary {
-    background-color: #2196F3  !important;
+    background-color: #2196F3 !important;
     border: transparent !important;
     font-size: 17px;
     height: 45px;
-    line-height:45px;
+    line-height: 45px;
     border-radius: 45px;
-    padding-left:9px; 
-    padding-right:9px;
+    padding-left: 9px;
+    padding-right: 9px;
 }
 
 
@@ -16,58 +16,52 @@
     color: #fff !important;
     opacity: 0.9;
     height: 45px;
-    line-height:45px;
+    line-height: 45px;
     border: transparent !important;
     border-radius: 45px;
     font-size: 17px;
-    padding-left:9px; 
-    padding-right:9px;
+    padding-left: 9px;
+    padding-right: 9px;
 }
 
 .bootbox .modal-body {
     padding: 15px;
-    text-align:left;
+    text-align: left;
 }
 
 .bootbox .mybootboxbody {
     padding: 15px;
     padding-top: 0px;
-    text-align:left;
+    text-align: left;
 }
 
-.cartitems .input-group-addon
-{
-    background:transparent !important;
+.cartitems .input-group-addon {
+    background: transparent !important;
 }
 
-.myicon
-{
-   background:transparent !important;
+.myicon {
+    background: transparent !important;
 }
 
-.myicon .fa-thumb-tack
-{
-    padding-left:15px !important;
-    padding-right:15px !important;
-}
+    .myicon .fa-thumb-tack {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
 
-.input-group-addon .fa-thumb-tack
-{
-    padding-left:15px !important;
-    padding-right:15px !important;
+.input-group-addon .fa-thumb-tack {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
 }
 
 
-.input-group-addon .fa-undo
- {
-    padding-left:13px !important;
-    padding-right:13px !important;
- }
+.input-group-addon .fa-undo {
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+}
 
-.input-group-addon .fa-thumb-tack
-{
-    padding-left:15px !important;
-    padding-right:15px !important;
+.input-group-addon .fa-thumb-tack {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
 }
 
 .c-widget-figure {
@@ -80,24 +74,19 @@
     text-align: center;
 }
 
-.waves-effect.btn-warning
-{
-    border-radius:45px;
+.waves-effect.btn-warning {
+    border-radius: 45px;
 }
 
 
-.input-group-addon .fa-plus
-{
-    padding-left:14px !important;
-    padding-right:14px !important;
-
+.input-group-addon .fa-plus {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
 }
 
-.input-group-addon .fa-minus
-{
-    padding-left:14px !important;
-      padding-right:14px !important;
-
+.input-group-addon .fa-minus {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
 }
 
 .input-group-addon .fa-barcode {
@@ -109,14 +98,148 @@
 
 
 
-  .fileUpload.btn-primary
-  {
+.fileUpload.btn-primary {
     font-size: 14px;
     line-height: 18px;
     padding-top: 18px !important;
     text-transform: capitalize;
     height: 75px;
     border-radius: 100%;
-    padding-top:9px;
+    padding-top: 9px;
     width: 75px;
-  }
+}
+
+.bottom-modal {
+    padding: 0px !important;
+    background: transparent;
+    border: none !important;
+    box-shadow: none !important;
+    max-height: initial !important;
+}
+
+    .bottom-modal .modal-body {
+        padding: 0px;
+        border-radius: 10px;
+        background: transparent;
+    }
+
+
+    .bottom-modal ul {
+        padding: 15px;
+        margin-bottom: 0px;
+        border-radius: 10px;
+        width: 95%;
+        background: #fff;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+    }
+
+        .bottom-modal ul li {
+            padding: 14px;
+            border: 1px solid #ccc;
+            background: #fff;
+            list-style-type: none;
+            margin-bottom: 10px;
+            border-radius: 20px;
+        }
+
+            .bottom-modal ul li a {
+                padding-left: 20px;
+                display: block;
+                width: 100%;
+                text-decoration: none !important;
+                background: #fff;
+                color: #000;
+            }
+
+                .bottom-modal ul li a i {
+                    font-size: 16px;
+                    margin-right: 7px;
+                }
+
+
+    .bottom-modal .modal-footer {
+        margin-top: 0px;
+    }
+
+
+
+.menubtn {
+    position: fixed;
+    bottom: 23px;
+    right: 25px;
+    background: #f44336 !important;
+    z-index: 13000;
+    color: #fff !important;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 57px;
+    cursor: pointer;
+}
+
+#bottommenumodal {
+    position: fixed;
+  
+    right: 25px;
+}
+
+     #bottommenumodal .selectAction {
+        position: fixed;
+        bottom: 75px;
+        right: 35px;
+    }
+
+
+
+       #bottommenumodal .selectAction li {
+            list-style-type: none;
+        }
+
+
+           #bottommenumodal .selectAction li span {
+                color: #000;
+            }
+
+
+       #bottommenumodal .selectAction .btn {
+            height: 34px;
+            width: 34px;
+            padding: 0px;
+            border-radius: 100%;
+            text-align: center;
+            line-height: 34px;
+            border: transparent;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+          #bottommenumodal {
+        position: fixed;
+        right: 13px;
+        font-size: 18px;
+        text-align: right;
+        display: none;
+        background: transparent;
+        overflow: hidden;
+    }
+
+        #bottommenumodal span {
+            font-size: 16px;
+            font-family: verdana;
+            margin-right: 7px;
+        }
+
+
+        #bottommenumodal .modal-body {
+            background: transparent;
+        }
+
+
+
+     .rotate {
+        -ms-transform: rotate(42deg);
+        -webkit-transform: rotate(42deg);
+        transform: rotate(42deg);
+    }

@@ -668,24 +668,32 @@
         </li>
     </ul>
 
-    <div style="background:#fff; padding:0px;" id="modalerror" class="modal bottom-sheet animated bounceIn">
+    <div class="modal bottom-sheet bottom-modal animated bounceIn">
         <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
 
             <h4 style="color:brown; font-size:14px;">Opps some thing went wrong !!</h4>
-          
+
         </div>
 
-        <div style="padding:5px;" class="modal-body">
+        <div class="modal-body">
             <h4 style="padding-left: 15px; color: brown; font-size: 14px; " id="errortext">Time out</h4>
 
-         
-            <a ng-click="logOut()" style="padding-left:15px; margin-top:20px; font-size:16px;" >Log out</a>
-            <br /><br />
-         
-            <a ng-click="reload()" style="padding-left: 15px; font-size: 16px;" >Refresh page</a>
+            <ul>
+                <li>
+                    <a ng-click="logOut()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</a>
+                </li>
+                
+                <li>
 
-            <div><br /></div>
-          
+                    <a ng-click="reload()"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh page</a>
+                </li>
+
+            </ul>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn width-100 btn-gray" data-dismiss="modal">Cancel</button>
+            </div>
 
         </div>
     </div>

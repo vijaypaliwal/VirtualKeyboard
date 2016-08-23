@@ -42,6 +42,79 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
     }
 
 
+    var counter = 0;
+
+    $scope.saveColumnsNew = function () {
+
+
+        // $scope.LocationsLoaded = false;
+
+        counter = 1;
+        for (var i = 0; i < $scope.MyInventorycolumns.length; i++) {
+            if ($scope.MyInventorycolumns[i].mobileorder != 0) {
+                $scope.MyInventorycolumns[i].mobileorder = i + 1;
+
+            }
+
+        }
+
+
+        $scope.$apply();
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'SaveMyInventoryColumn',
+              contentType: 'application/json; charset=utf-8',
+              dataType: 'json',
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Columns": $scope.MyInventorycolumns }),
+              success: function (response) {
+
+                  $scope.LocationsLoaded = true;
+                  $scope.loadingbutton = false
+                  $scope.GetMyinventoryColumns();
+                  $scope.$apply();
+              },
+              error: function (err) {
+              }
+          });
+    };
+    $scope.$on('$locationChangeStart', function (event) {
+
+        if (counter == 0) {
+
+            $scope.saveColumnsNew();
+        }
+
+
+    });
+
+
+    $('#bottommenumodal').on('hidden.bs.modal', function () {
+        $(".menubtn .fa").removeClass('rotate');
+    });
+
+
+    $scope.Openbottommenu = function () {
+
+        if ($("body").hasClass("modal-open")) {
+            $("#bottommenumodal").modal('hide');
+
+            $(".menubtn .fa").removeClass('rotate');
+
+
+        }
+        else {
+            $("#bottommenumodal").modal('show');
+            $(".menubtn .fa").addClass('rotate');
+        }
+    }
+
+
     function SortByOrder(a, b) {
         var aName = a.mobileorder;
         var bName = b.mobileorder;

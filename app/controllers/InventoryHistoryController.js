@@ -37,6 +37,27 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
         }
     }
 
+
+    $('#bottommenumodal').on('hidden.bs.modal', function () {
+        $(".menubtn .fa").removeClass('rotate');
+    });
+
+
+    $scope.Openbottommenu = function () {
+
+        if ($("body").hasClass("modal-open")) {
+            $("#bottommenumodal").modal('hide');
+
+            $(".menubtn .fa").removeClass('rotate');
+
+
+        }
+        else {
+            $("#bottommenumodal").modal('show');
+            $(".menubtn .fa").addClass('rotate');
+        }
+    }
+
   
 
     Date.prototype.toMSJSON = function () {

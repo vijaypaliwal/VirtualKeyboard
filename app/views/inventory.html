@@ -233,6 +233,18 @@
         transform: rotate(42deg);
     }
 
+    .lessOpacity {
+        opacity: 0.4;
+    }
+
+    .moreCounter {
+        margin-left: -45px;
+        font-size: 22px;
+        color: #696565;
+        position: absolute;
+        margin-top: 12px;
+    }
+
 
 </style>
 
@@ -424,12 +436,11 @@
 
 
                                             <span ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
-                                              
-                                                <img src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
+
+                                                <img src="{{_obj.bytestring}}" ng-if="$index<4" height="60" width="60" ng-class="{'lessOpacity':$index==3}" alt="Alternate Text" />
+                                                <span class="moreCounter" ng-if="ImageList.length>3 && $index==3">3+</span>
                                             </span>
-                                            <!--<span>
-                                                <span class="imgcounter"> {{ImageList.length}} </span>
-                                             <br /> Images</span>-->
+                                          
                                         </div>
                                     </div>
                                 </div>
@@ -805,12 +816,8 @@
 </a>
 
 
-<div id="myModalforlist" class="modal bottom-sheet fade" role="dialog">
+<div id="myModalforlist" class="modal bottom-sheet bottom-modal fade" role="dialog">
     <!-- Modal content-->
-
-
-
-
     <div class="modal-body">
 
         <ul>
@@ -1222,31 +1229,42 @@
     </div>
 </div>
 
-<div style="background:#fff; padding:0px;" id="Inventoryerror" class="modal bottom-sheet animated bounceIn">
+<div id="Inventoryerror" class="modal bottom-modal bottom-sheet animated bounceIn">
     <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
 
         <h4 style="color:brown; font-size:14px;">Opps some thing went wrong !!</h4>
 
     </div>
 
-    <div style="padding:5px;" class="modal-body">
+    <div class="modal-body">
         <h4 style="padding-left: 15px; color: brown; font-size:20px; margin-top:10px" id="errortext">Time out</h4>
 
-        
 
-        <a ng-click="addinventory()" style="padding-left:15px; margin-top:20px; font-size:16px;">Retry</a>
-        <br /><br />
+        <ul>
+            <li>
+                <a ng-click="addinventory()" ><i class="fa fa-repeat" aria-hidden="true"></i> Retry</a>
+            </li>
+            <li>
 
+                <a ng-click="MylogOut()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</a>
+            </li>
 
-        <a ng-click="MylogOut()" style="padding-left:15px; margin-top:20px; font-size:16px;">Log out</a>
-        <br /><br />
+            <li>
 
-        <a ng-click="reload()" style="padding-left: 15px; font-size: 16px;">Refresh page</a>
+                <a ng-click="reload()"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh page</a>
+            </li>
 
-        <div><br /></div>
+        </ul>
+
 
 
     </div>
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn width-100 btn-gray" data-dismiss="modal">Cancel</button>
+    </div>
+
 </div>
 
 <script>
