@@ -79,9 +79,13 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                 }
                 else {
+
+
                     log.error("log in to error");
                     $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
                     playBeep();
+
+                    alert(response.LoginResult.Message);
                     log.error(response.LoginResult.Message);
 
                 }
