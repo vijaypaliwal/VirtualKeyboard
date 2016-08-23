@@ -116,17 +116,21 @@
         background: transparent;
     }
 
-
-
-    .collapsible-header {
-        width: 100% !important;
-        min-height: 46px !important;
-        display:block !important;
-        position:relative;
-        padding-left:0px;
-        padding-right:0px;
-        border:transparent;
-    }
+        .iteminfo .row
+        {
+            display:block;
+        }
+        
+        
+         .collapsible-header {
+            width: 100% !important;
+            min-height: 46px !important;
+            display: block !important;
+            position: relative;
+            padding-left: 0px;
+            padding-right: 0px;
+            border: transparent;
+        }
 
     .imgcounter {
         font-size: 18px;
@@ -731,18 +735,20 @@
             </div>
 
             <br />
-            <div style="background:#fff; margin-left:0px; margin-right:0px;" class="row">
-                <div class="col-xs-6">
+            
 
-                    <div class="collapsible-header">Item Detail</div>
+            <table style="background:#fff;">
+                <tr>
+                    <td>
+                    
+                        <div style="padding:7px; font-size:14px;"> Item Detail</div>
 
-                </div>
-                <div class="col-xs-6">
-                    <div style="text-align:right">
-                        <div class="collapsible-header" style="color:#0083C7" ng-click="viewall()">All details</div>
-                    </div>
-                </div>
-            </div>
+                   </td>
+
+                    <td><div style="color:#0083C7; padding:7px; text-align:right; font-size:14px;" ng-click="viewall()">All details</div></td>
+                </tr>
+            </table>
+
 
 
             <div style="background:#fff; margin-left:0px; margin-right:0px; border-top:1px solid #ccc" class="row">
@@ -750,7 +756,7 @@
                     <div class="iteminfo">
 
                         <div class="row ">
-                            <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
+                            <div class="col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
 
                                 <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321">
                                     <span ng-repeat="_obj in ImageList" class="pull-left" ng-if="ImageList.length>0">
@@ -762,13 +768,13 @@
                                 <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;display:block !important;" src="img/default.png" alt="Alternate Text" />
                             </div>
 
-                            <div class="col-md-2 col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==false">
+                            <div class="col-xs-4" ng-if="IsAvailableMyInventoryColumn('Image')==false">
 
                                 <output style="padding-top: 0px; position:absolute; margin-top: 0px;" id="list321"></output>
 
                                 <img id="defaultimg" style="height: 80px; width: 80px; border: 1px solid #ccc; display: block !important;" src="img/na.jpg" alt="Alternate Text" />
                             </div>
-                            <div class="col-md-10 col-xs-8">
+                            <div class="col-xs-8">
                                 <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')"> <span style="display:inline-block" ng-bind="InventoryObject.ItemID"></span> <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></span>
 
                                 <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
