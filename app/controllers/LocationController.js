@@ -348,17 +348,6 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                         }
 
 
-
-
-
-
-
-
-
-
-
-                      
-
                         $scope.mode = 1;
 
                     },
