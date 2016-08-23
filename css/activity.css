@@ -412,11 +412,7 @@ position: absolute;
     overflow: hidden;
 }
 
-    #locationlistmodal .modal-header {
-        padding-top: 5px;
-        padding-bottom: 5px;
-        padding-left: 7px;
-    }
+ 
 
     #locationlistmodal .modal-body {
         overflow: auto;
@@ -425,11 +421,6 @@ position: absolute;
         padding: 7px;
     }
 
-    #locationlistmodal .modal-header .close {
-        margin-top: 6px;
-        opacity: 1;
-        padding-right:25px;
-    }
 
 
 #selecteditemlistmodal {

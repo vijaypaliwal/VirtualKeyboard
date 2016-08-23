@@ -162,11 +162,7 @@
         overflow: hidden;
     }
 
-        #itemlistmodal .modal-header {
-            padding-top: 5px;
-            padding-bottom: 5px;
-            padding-left: 7px;
-        }
+     
 
         #itemlistmodal .modal-body {
             overflow: auto;
@@ -175,11 +171,7 @@
             padding: 7px;
         }
 
-        #itemlistmodal .modal-header .close {
-            margin-top: 6px;
-            opacity: 1;
-            padding-left: 25px;
-        }
+      
 
     .searchresultlist {
         padding-left: 0px;
@@ -221,11 +213,7 @@
         overflow: hidden;
     }
 
-        #locationlistmodal .modal-header {
-            padding-top: 5px;
-            padding-bottom: 5px;
-            padding-left: 7px;
-        }
+        
 
         #locationlistmodal .modal-body {
             overflow: auto;
@@ -234,11 +222,7 @@
             padding: 7px;
         }
 
-        #locationlistmodal .modal-header .close {
-            margin-top: 6px;
-            opacity: 1;
-            padding-left: 25px;
-        }
+     
 
     #uomlistmodal {
         background: #fff;
@@ -250,11 +234,7 @@
         overflow: hidden;
     }
 
-        #uomlistmodal .modal-header {
-            padding-top: 5px;
-            padding-bottom: 5px;
-            padding-left: 7px;
-        }
+      
 
         #uomlistmodal .modal-body {
             overflow: auto;
@@ -263,11 +243,7 @@
             padding: 7px;
         }
 
-        #uomlistmodal .modal-header .close {
-            margin-top: 6px;
-            opacity: 1;
-            padding-left: 25px;
-        }
+     
 
     .swiper-container table .ibtn {
         border-radius: 100% !important;

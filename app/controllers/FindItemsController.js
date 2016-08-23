@@ -1088,11 +1088,10 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
                     _TempArrayMyInventory[i].ColumnName = _ColName[0];
 
-                    if (_TempArrayMyInventory[i].Show == "True") {
+                    if (_TempArrayMyInventory[i].mobileorder != 0) {
                         $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
                     }
                 }
-
 
                 CheckScopeBeforeApply();
 

@@ -310,17 +310,7 @@
         font-size: 12px;
     }
 
-    #btnClearSearch {
-           color: #555;
-    padding: 7px;
-    /* padding-top: 6px; */
-    position: absolute;
-    cursor: pointer;
-    margin-top: 4px;
-    right: -2px;
-    font-size: 20px;
-    z-index: 100;
-    }
+  
 
     .img img {
         height: 65px;

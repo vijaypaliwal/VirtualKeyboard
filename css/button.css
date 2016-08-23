@@ -243,3 +243,46 @@
         -webkit-transform: rotate(42deg);
         transform: rotate(42deg);
     }
+
+     .filtercross
+     {
+       font-size: 35px;
+    color: brown;
+    padding: 6px;
+    margin-top: 3px;
+    padding-top: 0px;
+    z-index: 10;
+    position: absolute;
+    right: 0px;
+    cursor:pointer;
+     }
+
+     .right47
+     {
+         right:47px;
+     }
+
+.close {
+    opacity:1;
+}
+
+.modal-header
+{
+    padding:10px;
+}
+
+.modal-header h4
+{
+    line-height:5px;
+}
+
+     .close i
+     {
+         color:brown;
+         font-size:40px;
+     }
+
+     .lesstop12
+     {
+         margin-top:-12px;
+     }

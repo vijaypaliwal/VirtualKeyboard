@@ -9,6 +9,8 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     $scope.FilterData = {SearchValue:""};
     $scope.isDataLoading = true;
     $scope.FilterArray = [{ ColumnName: "", FilterOperator: "", SearchValue: "" }];
+    $scope.IsWrongDate = false;
+    $scope.datesGlobalforquery = { startDate: "", endDate: "" }
     $scope.sortColumn = "itTransDate";
     $scope.sortDir = "DESC";
     var _sortColumn = "itTransDate";
@@ -81,6 +83,66 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
         return false;
     }
+
+
+    $scope.$watch("datesGlobalforquery.endDate", function () {
+        var _dateStart = new Date();
+        var _dateEnd = new Date();
+        var _isDate1Ok = false;
+        var _isDate2Ok = false;
+        if ($.trim($scope.datesGlobalforquery.startDate) != "") {
+            _isDate1Ok = true;
+            _dateStart = new Date($scope.datesGlobalforquery.startDate);
+        }
+
+        if ($.trim($scope.datesGlobalforquery.endDate) != "") {
+            _isDate2Ok = true;
+            _dateEnd = new Date($scope.datesGlobalforquery.endDate);
+        }
+
+        if (_isDate1Ok && _isDate2Ok) {
+
+            if (_dateStart >= _dateEnd) {
+                $scope.IsWrongDate = true;
+
+            }
+            else {
+                $scope.IsWrongDate = false;
+            }
+        }
+        CheckScopeBeforeApply()
+
+    });
+    $scope.$watch("datesGlobalforquery.startDate", function () {
+        var _dateStart = new Date();
+        var _dateEnd = new Date();
+        var _isDate1Ok = false;
+        var _isDate2Ok = false;
+        if ($.trim($scope.datesGlobalforquery.startDate) != "") {
+            _isDate1Ok = true;
+            _dateStart = new Date($scope.datesGlobalforquery.startDate);
+        }
+
+        if ($.trim($scope.datesGlobalforquery.endDate) != "") {
+            _isDate2Ok = true;
+            _dateEnd = new Date($scope.datesGlobalforquery.endDate);
+        }
+
+        if (_isDate1Ok && _isDate2Ok) {
+
+            if (_dateStart >= _dateEnd) {
+                $scope.IsWrongDate = true;
+
+            }
+            else {
+                $scope.IsWrongDate = false;
+            }
+        }
+        CheckScopeBeforeApply()
+
+    });
+   
+    
     $scope.clearfilterArray = function () {
         for (var i = 0; i < $scope.FilterArray.length; i++) {
             $scope.FilterArray[i].SearchValue = "";
@@ -107,28 +169,6 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
         
     }
-
-
-    $('#bottommenumodal').on('hidden.bs.modal', function () {
-        $(".menubtn .fa").removeClass('rotate');
-    });
-
-
-    $scope.Openbottommenu = function () {
-
-        if ($("body").hasClass("modal-open")) {
-            $("#bottommenumodal").modal('hide');
-
-            $(".menubtn .fa").removeClass('rotate');
-
-
-        }
-        else {
-            $("#bottommenumodal").modal('show');
-            $(".menubtn .fa").addClass('rotate');
-        }
-    }
-
     $scope.GetDisplayLabel = function (ColumnName) {
         var DataType=""
         
@@ -928,6 +968,13 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         $("#filtermodal").modal("show")
     }
 
+    $scope.computedTwoDatesforquery = function (date1, date2) {
+
+
+        return date1 + " to " + date2;
+
+    }
+
     $scope.GetActivityDataAccordingToView=function()
     {
         
@@ -938,19 +985,73 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
         $("#filtermodal").modal('hide');
 
+        $scope.filterVal = "";
+        debugger;
         if ($scope.CurrentView != undefined) {
 
+            console.log("Search value")
+            console.log($scope.FilterData.SearchValue)
+            console.log("start date")
+            console.log($scope.datesGlobalforquery.startDate)
+            console.log("end date")
+            console.log($scope.datesGlobalforquery.endDate)
 
+            console.log($scope.CurrentView.SearchValue);
+            debugger;
+            if ($scope.CurrentView.SearchValue.indexOf("****") > -1) {
+
+                $scope.CurrentView.SearchValue = $scope.CurrentView.SearchValue.replace("****","");
+            }
+            if ($scope.CurrentView.SearchValue.indexOf("####") > -1) {
+                $scope.CurrentView.SearchValue = $scope.CurrentView.SearchValue.replace("####", "");
+
+            }
+            CheckScopeBeforeApply();
+            console.log($scope.CurrentView.SearchValue);
             if ($scope.FilterData.SearchValue != undefined && $.trim($scope.FilterData.SearchValue) != "")
             {
+                //$scope.filterVal = $scope.FilterData.SearchValue + "####" + $scope.computedTwoDatesforquery($scope.datesGlobalforquery.startDate, $scope.datesGlobalforquery.endDate);
+                
 
+                //$scope.filterVal = $scope.filterVal + "****" + $scope.CurrentView.SearchValue;
+                //CheckScopeBeforeApply();
             }
             else {
                 $scope.FilterData.SearchValue = "";
+               
             }
 
+            var _isDate = false;
+            if ($scope.datesGlobalforquery.startDate != null && $scope.datesGlobalforquery.endDate != null) {
+
+                if ($.trim($scope.datesGlobalforquery.startDate) != "" && $.trim($scope.datesGlobalforquery.endDate) != "") {
+
+                    if (!$scope.IsWrongDate) {
+
+                        _isDate = true;
+                        $scope.filterVal = $scope.FilterData.SearchValue + "####" + $scope.computedTwoDatesforquery($scope.datesGlobalforquery.startDate, $scope.datesGlobalforquery.endDate);
+                    }
+                    else {
+                        log.error("Start date must be lower from end date, please correct.")
+                    }
+                }
+            }
+
+            if (_isDate) {
+                $scope.CurrentView.SearchValue = "";
+                $scope.filterVal = $scope.filterVal + "****" + $scope.CurrentView.SearchValue;
+
+            }
+            else {
+                $scope.filterVal = $scope.FilterData.SearchValue + "####" + "****" + $scope.CurrentView.SearchValue;
+
+            }
+            CheckScopeBeforeApply();
+
+
+
             
-            var _searchParameter= $scope.CurrentView.SearchValue + $scope.FilterData.SearchValue;
+            var _searchParameter = $scope.filterVal;
             $.ajax
               ({
                   type: "POST",
@@ -976,7 +1077,8 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                       UpdateFilterArray();
 
                   },
-                  error: function (err) {
+                  error: function (requestObject, err, errorThrown) {
+                      debugger;
                       console.log(err);
                       log.error(err.Message);
                       $scope.isDataLoading = true;

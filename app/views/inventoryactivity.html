@@ -659,11 +659,10 @@
 
             <input style="border-left:transparent" type="text" ng-model="FilterData.SearchValue" class="form-control ng-pristine ng-valid" placeholder="Type to Search">
 
-            <a style="border:1px solid #ccc; border-left:transparent;" ng-if="FilterData.SearchValue!=''" class="input-group-addon last textData" ng-click="clearfilter()" ><i class="fa fa-times" style="font-size:30px !important; padding-left:10px; padding-right:10px; padding-top:0px; padding-bottom:0px; color:#6b6b6b !important; background:transparent"></i> </a>
+            <i ng-if="FilterData.SearchValue!=''" ng-click="clearfilter()" class="fa fa-times filtercross right47"></i> 
 
-            <a class="input-group-addon last textData"  style="margin-top: 0px;"><i class="fa fa-search" style="font-size:20px;"></i> </a>
+            <a ng-click="GetActivityDataAccordingToView()" class="input-group-addon last textData" style="margin-top: 0px;"><i class="fa fa-search" style="font-size:20px;"></i> </a>
           
-
         </div>
 
         <div ng-if="ActivityList.length==0" style="text-align:center;" class="well">
@@ -731,6 +730,24 @@
     </div>
 
     <div style="padding:10px;" class="modal-body">
+        <div class="row">
+            <div class="col-xs-6">
+                <h6>Start Date</h6>
+                <input type="date" class="form-control" ng-model="datesGlobalforquery.startDate" name="name" value="" />
+            </div>
+            <div class="col-xs-6">
+                <h6>End Date</h6>
+                <input type="date" class="form-control" ng-model="datesGlobalforquery.endDate" name="name" value="" />
+            </div>
+
+        </div>
+        <div class="row error" ng-if="IsWrongDate==true">
+            <div class="col-xs-12" style="color:red;">
+                Start date cannot be greater than end date, please fill proper date.
+
+            </div>
+
+        </div>
 
         <div class="row" ng-repeat="_obj in FilterArray" ng-if="_obj.ColumnName!='Button1' && _obj.ColumnName!='Button2'&& _obj.ColumnName!='ImagePath' && isFurtherCalculatedColumn(_obj.ColumnName)==false">
             
