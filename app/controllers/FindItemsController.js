@@ -76,7 +76,15 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.searchstring = "";
 
+    $scope.isshowsearch = false;
 
+    $scope.showsearch = function () {
+        $scope.isshowsearch = true;
+    }
+
+    $scope.hidesearch = function () {
+        $scope.isshowsearch = false;
+    }
 
 
     $scope.CurrentActiveSearchType = 1;
@@ -298,7 +306,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         var _Value = $.trim($('#MasterSearch').val());
 
 
-        debugger;
+         
 
         switch ($scope.CurrentActiveSearchType) {
             case 1:
@@ -339,13 +347,14 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         if ($("body").hasClass("modal-open")) {
             $("#myModal2").modal('hide');
 
-            $(".Addbtn .fa").removeClass('rotate');
 
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
 
         }
         else {
             $("#myModal2").modal('show');
-            $(".Addbtn .fa").addClass('rotate');
+            $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
+
         }
     }
 
@@ -551,15 +560,20 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-
-                   $scope.StatusList = response.GetStatusResult.Payload;
-                   CheckScopeBeforeApply()
+                   if (response.GetStatusResult.Success == true) {
+                       $scope.StatusList = response.GetStatusResult.Payload;
+                       CheckScopeBeforeApply()
+                   }
+                   else {
+                       $scope.ShowErrorMessage("status list", 1, 1, response.GetStatusResult.Message);
+                       
+                   }
+                 
                },
                error: function (err) {
 
                    $scope.errorbox(err);
-
-                   log.error(err.Message);
+                   $scope.ShowErrorMessage("status list", 2, 1, err.statusText);
 
                }
            });
@@ -583,12 +597,19 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-                   $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
-                   CheckScopeBeforeApply()
+                   if (response.GetUnitsOfMeasureResult.Success == true) {
+                       $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
+                       CheckScopeBeforeApply()
+                   }
+                   else {
+                       $scope.ShowErrorMessage("unit of measure list", 1, 1, response.GetUnitsOfMeasureResult.Message);
+                   }
+
+                   
                },
                error: function (err) {
-
-                   log.error(err.Message);
+                   $scope.ShowErrorMessage("unit of measure list", 2, 1, err.statusText);
+                   
 
                }
            });
@@ -961,7 +982,9 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             contentType: 'application/json',
             dataType: 'json',
             success: function (result) {
-
+               
+                if (result.GetInventoriesResult.Success == true) {
+               
                 $(".searchtable").removeClass("disablepointer")
 
                 
@@ -995,17 +1018,26 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     $(".searchtable").addClass("disablepointer");
                 }
 
+                
+                }
+                else {
+                    
+                    $scope.ShowErrorMessage("current inventories", 1, 1, result.GetInventoriesResult.Message)
+                }
+
                 $scope.myinventoryColumnLoaded = true;
                 $cordovaKeyboard.disableScroll(false);
                 CheckScopeBeforeApply();
-            },
+            
+                },
             error: function (req) {
                 $(".paginationtext").show();
-              
+              //
+
                 $scope.myinventoryColumnLoaded = true;
                 $cordovaKeyboard.disableScroll(false);
                 CheckScopeBeforeApply();
-                console.log(req);
+                $scope.ShowErrorMessage("current inventories", 2, 1, req.statusText);
             },
             complete: function () {
                 _IsLazyLoadingUnderProgress = 0;
@@ -1031,7 +1063,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             contentType: 'application/json',
             dataType: 'json',
             success: function (result) {
-
+                if (result.GetUnitDataColumnsResult.Success == true) {
+               
                 // MY inventory column region
                 var _TempArrayMyInventory = result.GetUnitDataColumnsResult.Payload;
 
@@ -1044,11 +1077,16 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
                 CheckScopeBeforeApply();
+                }
+                else {
 
+                    $scope.ShowErrorMessage("unit data columns", 1, 1, result.GetUnitDataColumnsResult.Message);
+                    
+                }
             },
             error: function (req) {
 
-                debugger;
+                $scope.ShowErrorMessage("unit data columns", 2, 1, req.statusText);
 
             
 
@@ -1079,8 +1117,9 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             dataType: 'json',
             success: function (result) {
 
-                debugger;
-
+                 
+                if (result.GetMyInventoryColumnsResult.Success == true) {
+                
                 // MY inventory column region
                 var _TempArrayMyInventory = result.GetMyInventoryColumnsResult.Payload;
 
@@ -1094,11 +1133,17 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 }
 
                 CheckScopeBeforeApply();
+                }
+                else {
+                    $scope.ShowErrorMessage("my inventory columns", 1, 1, result.GetMyInventoryColumnsResult.Message);
 
+                    
+                }
             },
             error: function (req) {
 
-                debugger;
+                $scope.ShowErrorMessage("my inventory columns", 2, 1, req.statusText);
+
               
 
             },
@@ -1406,12 +1451,17 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     });
 
 
+  
+
     $('#myModal2').on('shown.bs.modal', function () {
-        $(".Addbtn .fa").addClass('rotate');
+        $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
+
     });
 
     $('#myModal2').on('hidden.bs.modal', function () {
-        $(".Addbtn .fa").removeClass('rotate');
+        
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
+
     });
 
     $('#mycartModal').on('shown.bs.modal', function () {

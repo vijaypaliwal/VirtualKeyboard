@@ -50,7 +50,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
     function GetFilterOperator(ColumnName)
     {
-        debugger;
+         
         
         switch (ColumnName.toLowerCase()) {
             case "date":
@@ -141,6 +141,26 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         CheckScopeBeforeApply()
 
     });
+
+    $('#bottommenumodal').on('hidden.bs.modal', function () {
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
+    });
+
+
+    $scope.Openbottommenu = function () {
+
+        if ($("body").hasClass("modal-open")) {
+            $("#bottommenumodal").modal('hide');
+
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
+
+
+        }
+        else {
+            $("#bottommenumodal").modal('show');
+            $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
+        }
+    }
    
     
     $scope.clearfilterArray = function () {
@@ -319,7 +339,8 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type }),
                success: function (response) {
 
-
+                   if (response.GetCustomFieldsDataResult.Success == true) {
+                  
                    
                    if (Type == 0)
                    {
@@ -333,13 +354,18 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
                    }
                   
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Custom Fields data", 1, 1, response.GetCustomFieldsDataResult.Message)
 
+                   }
                       
 
                    CheckScopeBeforeApply()
                },
                error: function (response) {
-                   log.error(response.statusText);
+                   $scope.ShowErrorMessage("Custom Fields data", 2, 1, response.statusText);
+
                    //$scope.InventoryObject.Location = 678030;
                }
            });
@@ -390,7 +416,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
     $scope.GetImagePath=function(Operator)
     {
-        debugger;
+         
         var path = "img/filter/";
         var _returnPath = "img/filter/EqualTo.gif"
         switch (Operator) {
@@ -922,15 +948,25 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
               dataType: 'json',
               success: function (response)
               {
+
+                  if (response.GetAllViewsResult.Success == true) {
+              
+                      $scope.ActivityViews = response.GetAllViewsResult.Payload;
+
+           
+                  }
+              else {
+                      $scope.ShowErrorMessage("Get activitiy reports", 1, 1, response.GetAllViewsResult.Message)
+
+                  }
                   $scope.isDataLoading = true;
-              $scope.ActivityViews = response.GetAllViewsResult.Payload;
-              $scope.$apply();
+                  $scope.$apply();
               },
               error: function (err) {
                   $scope.isDataLoading = true;
                  console.log(err);
-                 log.error("Error Occurred during operation");
-                 $scope.errorbox(err);
+                 $scope.ShowErrorMessage("Get activitiy reports", 2, 1, err.statusText);
+
                  $scope.$apply();
 
               }
@@ -949,6 +985,8 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     $scope.showview = function() {
         $scope.isviewload = false;
         $scope.CurrentView = { Name: "Inventory Activity" };
+
+        console.log($scope.ActivityViews);
     }
 
     function CheckScopeBeforeApply() {
@@ -986,18 +1024,13 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         $("#filtermodal").modal('hide');
 
         $scope.filterVal = "";
-        debugger;
+         
         if ($scope.CurrentView != undefined) {
 
-            console.log("Search value")
-            console.log($scope.FilterData.SearchValue)
-            console.log("start date")
-            console.log($scope.datesGlobalforquery.startDate)
-            console.log("end date")
-            console.log($scope.datesGlobalforquery.endDate)
 
-            console.log($scope.CurrentView.SearchValue);
-            debugger;
+
+    
+             
             if ($scope.CurrentView.SearchValue.indexOf("****") > -1) {
 
                 $scope.CurrentView.SearchValue = $scope.CurrentView.SearchValue.replace("****","");
@@ -1007,7 +1040,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
             }
             CheckScopeBeforeApply();
-            console.log($scope.CurrentView.SearchValue);
+            
             if ($scope.FilterData.SearchValue != undefined && $.trim($scope.FilterData.SearchValue) != "")
             {
                 //$scope.filterVal = $scope.FilterData.SearchValue + "####" + $scope.computedTwoDatesforquery($scope.datesGlobalforquery.startDate, $scope.datesGlobalforquery.endDate);
@@ -1063,7 +1096,13 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                       $scope.isDataLoading = true;
                       $scope.isviewload = true;
 
-                      debugger;
+                       
+
+                      if (response.GetInventoryActivitiesResult.Success == true) {
+
+
+
+                    
                       
                       _TotalRecordsCurrent = response.GetInventoryActivitiesResult.Payload[0].Data.length;
                       $scope.currentrecord = response.GetInventoryActivitiesResult.Payload[0].Data.length;
@@ -1072,15 +1111,20 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                       $scope.Columns = response.GetInventoryActivitiesResult.Payload[0].Columns;
                       $scope.ActualTotalRecords = response.GetInventoryActivitiesResult.Payload[0].ActualTotalRecords;
                       $scope.FilterArray = response.GetInventoryActivitiesResult.Payload[0].Filters;
-                      CheckScopeBeforeApply();
                       // FillFilterArray();
                       UpdateFilterArray();
+                      }
+                      else {
+                          $scope.ShowErrorMessage("Get activitiy data", 1, 1, response.GetInventoryActivitiesResult.Message)
+
+                      }
+                      CheckScopeBeforeApply();
 
                   },
                   error: function (requestObject, err, errorThrown) {
-                      debugger;
+                       
                       console.log(err);
-                      log.error(err.Message);
+                      $scope.ShowErrorMessage("Get activitiy data", 2, 1, err.statusText);
                       $scope.isDataLoading = true;
                   },
                   complete: function () {
@@ -1120,13 +1164,20 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
+                   if (response.GetUnitsOfMeasureResult.Success == true) {
+                       $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
 
-                   $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Unit of Measure list", 1, 1, response.GetUnitsOfMeasureResult.Message)
+
+                   }
                    $scope.$apply();
                },
                error: function (err) {
 
-                   log.error(err.Message);
+                   $scope.ShowErrorMessage("Unit of Measure list", 2, 1, err.statusText);
+
 
                }
            });
@@ -1148,11 +1199,18 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
+                   if (response.GetStatusResult.Success == true) {
+                       $scope.StatusList = response.GetStatusResult.Payload;
 
-                   $scope.StatusList = response.GetStatusResult.Payload;
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Status list", 1, 1, response.GetStatusResult.Message)
+
+                   }
                    $scope.$apply();
                },
                error: function (err) {
+                   $scope.ShowErrorMessage("Status list", 2, 1, err.statusText);
 
                }
            });

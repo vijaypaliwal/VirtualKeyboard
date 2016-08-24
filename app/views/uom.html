@@ -79,7 +79,26 @@
     }
 </style>
 
-<div style="margin-top:12px;" class="page-header">
+
+
+<div class="title-header">
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <h4 class="titletext">Manage <small>Unit of measure</small> </h4>
+        </div>
+    </div>
+</div>
+
+<a href="#/setting" class="waves-effect newbackbtn ng-scope"> <i class="fa fa-arrow-left"></i> </a>
+
+<a ng-click="addUOM()" class="btn btn-danger roundbtntitle"> <i class="fa fa-plus"></i> </a>
+
+
+
+
+<!--<div style="margin-top:12px;" class="page-header">
 
     <div class="row">
         <div class="row">
@@ -95,102 +114,106 @@
         
         
     </div>
-</div>
+</div>-->
 
-<div ng-if="LocationsLoaded==false">
+<div class="top50">
 
-    <div class="modal-backdrop fade in"></div>
-    <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
-        <img src="img/loader.gif" alt="Alternate Text" />
+    <div ng-if="LocationsLoaded==false">
 
-        <!--<i style="font-size: 100px; color: #0083C7; " class="fa fa-spin fa-spinner"></i>-->
-    </div>
-</div>
+        <div class="modal-backdrop fade in"></div>
+        <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
+            <img src="img/loader.gif" alt="Alternate Text" />
 
-<div ng-if="mode == 1" class="listview">
-    <a style="margin-bottom:10px;" ng-click="addUOM()" class="waves-effect width-100 btn btn-primary">
-        <i class="fa fa-plus-circle"></i> Add new UOM
-    </a>
-
-    <div class="input-group">
-        <input style="border-radius:0px; border-bottom:transparent;" ng-change="FilterRecordsLength.length=(UOMList | filter:SearchData.test).length" class="form-control" placeholder="Type to search" type="text" ng-model="SearchData.test">
-        <i ng-if="SearchData.test!=''" id="btnClearSearch" ng-click="ClearFilter()" class="fa filtercross fa-times"></i>
-    </div>
-
-    <ul class="list-group">
-        <li class="list-group-item" ng-init="FilterRecordsLength.length=(UOMList | filter:SearchData.test).length" ng-repeat="obj in filteredBars = (UOMList | filter:SearchData.test)" ng-if="obj.UnitOfMeasureName != ''">
-
-            <div class="row">
-                <div class="col-xs-7">
-                    <a>{{obj.UnitOfMeasureName}}</a>
-                </div>
-
-                <div class="col-xs-5">
-                    <a ng-click="deleteUOM(obj)" id="Delete_{{obj.UnitOfMeasureID}}" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-danger pull-right btnUom">
-                        <i class="fa fa-trash-o"></i>
-                    </a>
-                    <a ng-click="editUOM(obj)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-warning pull-right">
-                        <i class="fa fa-pencil"></i>
-                    </a>
-                </div>
-            </div>
-
-
-
-
-
-
-        </li>
-    </ul>
-    </div>
-<div ng-if="FilterRecordsLength.length==0 && LocationsLoaded==true" style="text-align: center; color: #d9534f;" class="maincontent norecords">
-
-    <div>
-
-        <h3>No record matched your Query</h3>
-        <a style="cursor:pointer;width:auto;" class="btn btn-primary" ng-click="ClearFilter()"> <i class="fa fa-filter"></i> Clear your filters</a>
-        <br /><br />
-    </div>
-
-
-</div>
-  
-
-<div class="animated zoomIn" ng-if="mode == 2 || mode == 3 ">
-
-    <form name="uom">
-        <div style="background:#fff;padding:10px; margin-top:7px;">
-            <h4 ng-if="mode == 2">Fill below value to add new</h4>
-            <h4 ng-if="mode == 3">Update below value to update UOM</h4>
-            <div class="form-group">
-                <label>Uom <span>*</span></label>
-                <input class="form-control" type="text" id="UOMToCreate" ng-model="UOMToCreate" required />
-            </div>
-
-            <div class="row">
-                <div class="col-xs-6">
-
-                    <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="saveUOM()" ng-if="mode == 2" class="btn width-100 btn-primary"> <i class="fa fa-plus-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Add</button>
-                    <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="saveUOM()" ng-if="mode == 3" class="btn width-100 btn-primary"> <i class="fa fa-check-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Update</button>
-                </div>
-                <div class="col-xs-6">
-                    <a style="width:100%" ng-click="leaveform()" class="btn width-100 btn-gray"> <i class="fa fa-times"></i> Cancel</a>
-                </div>
-            </div>
-
-          
-
+            <!--<i style="font-size: 100px; color: #0083C7; " class="fa fa-spin fa-spinner"></i>-->
         </div>
-    </form>
+    </div>
 
-    
+    <div ng-if="mode == 1" class="listview">
+        <!--<a style="margin-bottom:10px;"  class="waves-effect width-100 btn btn-primary">
+            <i class="fa fa-plus-circle"></i> Add new UOM
+        </a>-->
+
+        <div class="input-group">
+            <input style="border-radius:0px; border-bottom:transparent;" ng-change="FilterRecordsLength.length=(UOMList | filter:SearchData.test).length" class="form-control" placeholder="Type to search" type="text" ng-model="SearchData.test">
+            <i ng-if="SearchData.test!=''" id="btnClearSearch" ng-click="ClearFilter()" class="fa filtercross fa-times"></i>
+        </div>
+
+        <ul class="list-group">
+            <li class="list-group-item" ng-init="FilterRecordsLength.length=(UOMList | filter:SearchData.test).length" ng-repeat="obj in filteredBars = (UOMList | filter:SearchData.test)" ng-if="obj.UnitOfMeasureName != ''">
+
+                <div class="row">
+                    <div class="col-xs-7">
+                        <a>{{obj.UnitOfMeasureName}}</a>
+                    </div>
+
+                    <div class="col-xs-5">
+                        <a ng-click="deleteUOM(obj)" id="Delete_{{obj.UnitOfMeasureID}}" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-danger pull-right btnUom">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                        <a ng-click="editUOM(obj)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-warning pull-right">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </div>
+                </div>
 
 
+
+
+
+
+            </li>
+        </ul>
+    </div>
+    <div ng-if="FilterRecordsLength.length==0 && LocationsLoaded==true" style="text-align: center; color: #d9534f;" class="maincontent norecords">
+
+        <div>
+
+            <h3>No record matched your Query</h3>
+            <a style="cursor:pointer;width:auto;" class="btn btn-primary" ng-click="ClearFilter()"> <i class="fa fa-filter"></i> Clear your filters</a>
+            <br /><br />
+        </div>
+
+
+    </div>
+
+
+    <div class="animated zoomIn" ng-if="mode == 2 || mode == 3 ">
+
+        <form name="uom">
+            <div style="background:#fff;padding:10px; margin-top:7px;">
+                <h4 ng-if="mode == 2">Fill below value to add new</h4>
+                <h4 ng-if="mode == 3">Update below value to update UOM</h4>
+                <div class="form-group">
+                    <label>Uom <span>*</span></label>
+                    <input class="form-control" type="text" id="UOMToCreate" ng-model="UOMToCreate" required />
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6">
+
+                        <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="saveUOM()" ng-if="mode == 2" class="btn width-100 btn-primary"> <i class="fa fa-plus-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Add</button>
+                        <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="saveUOM()" ng-if="mode == 3" class="btn width-100 btn-primary"> <i class="fa fa-check-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Update</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <a style="width:100%" ng-click="leaveform()" class="btn width-100 btn-gray"> <i class="fa fa-times"></i> Cancel</a>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </form>
+
+
+
+
+
+    </div>
 
 </div>
 
 <a ng-click="Openbottommenu()" class="menubtn waves-effect btn-info">
-    <i class="fa fa-plus"></i>
+    <i class="fa fa-bars"></i>
 </a>
 
 <div id="bottommenumodal" class="modal bottommenu fade">

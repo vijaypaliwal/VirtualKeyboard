@@ -168,7 +168,7 @@
     position: fixed;
     bottom: 23px;
     right: 25px;
-    background: #f44336 !important;
+    background: #FF4081 !important;
     z-index: 13000;
     color: #fff !important;
     height: 50px;
@@ -181,11 +181,10 @@
 
 #bottommenumodal {
     position: fixed;
-  
     right: 25px;
 }
 
-     #bottommenumodal .selectAction {
+    #bottommenumodal .selectAction {
         position: fixed;
         bottom: 75px;
         right: 35px;
@@ -193,17 +192,17 @@
 
 
 
-       #bottommenumodal .selectAction li {
+        #bottommenumodal .selectAction li {
             list-style-type: none;
         }
 
 
-           #bottommenumodal .selectAction li span {
+            #bottommenumodal .selectAction li span {
                 color: #000;
             }
 
 
-       #bottommenumodal .selectAction .btn {
+        #bottommenumodal .selectAction .btn {
             height: 34px;
             width: 34px;
             padding: 0px;
@@ -215,38 +214,37 @@
             color: #fff;
         }
 
-          #bottommenumodal {
-        position: fixed;
-        right: 13px;
-        font-size: 18px;
-        text-align: right;
-        display: none;
+#bottommenumodal {
+    position: fixed;
+    right: 13px;
+    font-size: 18px;
+    text-align: right;
+    display: none;
+    background: transparent;
+    overflow: hidden;
+}
+
+    #bottommenumodal span {
+        font-size: 16px;
+        font-family: verdana;
+        margin-right: 7px;
+    }
+
+
+    #bottommenumodal .modal-body {
         background: transparent;
-        overflow: hidden;
     }
 
-        #bottommenumodal span {
-            font-size: 16px;
-            font-family: verdana;
-            margin-right: 7px;
-        }
 
 
-        #bottommenumodal .modal-body {
-            background: transparent;
-        }
+.rotate {
+    -ms-transform: rotate(42deg);
+    -webkit-transform: rotate(42deg);
+    transform: rotate(42deg);
+}
 
-
-
-     .rotate {
-        -ms-transform: rotate(42deg);
-        -webkit-transform: rotate(42deg);
-        transform: rotate(42deg);
-    }
-
-     .filtercross
-     {
-       font-size: 35px;
+.filtercross {
+    font-size: 35px;
     color: brown;
     padding: 6px;
     margin-top: 3px;
@@ -254,35 +252,102 @@
     z-index: 10;
     position: absolute;
     right: 0px;
-    cursor:pointer;
-     }
+    cursor: pointer;
+}
 
-     .right47
-     {
-         right:47px;
-     }
+.right47 {
+    right: 47px;
+}
 
 .close {
-    opacity:1;
+    opacity: 1;
 }
 
-.modal-header
+.modal-header {
+    padding: 10px;
+}
+
+    .modal-header h4 {
+        line-height: 5px;
+    }
+
+.close i {
+    color: brown;
+    font-size: 40px;
+}
+
+.lesstop12 {
+    margin-top: -12px;
+}
+
+
+.title-header {
+    background-color: #2196F3;
+    color: #fff;
+    padding-bottom: 5px;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    left:0;
+    right:0;
+}
+
+    .title-header h4, small {
+        color: #fff !important;
+    }
+
+    .title-header h4 {
+        padding-left: 50px;
+    }
+
+    .title-header small {
+        font-size: 12px !important;
+    }
+
+.titletext {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-inline-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    margin-bottom: 0;
+    font-size: 17px;
+    line-height: 25px;
+    margin-top: 5px;
+}
+
+.roundbtntitle {
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    position: fixed;
+    padding: 0px;
+    margin-top: 18px;
+    background: #f44336;
+    color: #fff;
+    line-height: 34px;
+    z-index: 100;
+    color: #fff;
+    font-size: 25px;
+    right: 15px;
+}
+
+
+.top50
 {
-    padding:10px;
+    padding-top:50px;
 }
-
-.modal-header h4
-{
-    line-height:5px;
-}
-
-     .close i
-     {
-         color:brown;
-         font-size:40px;
-     }
-
-     .lesstop12
-     {
-         margin-top:-12px;
-     }
+ .newbackbtn {
+      height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    position: fixed;
+    padding: 0px;
+    margin-top: 0px;
+    margin-left: 7px;
+    line-height: 37px;
+    z-index: 100;
+    color: #fff;
+    font-size: 25px;
+    }

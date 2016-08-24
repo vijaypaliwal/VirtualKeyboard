@@ -39,7 +39,8 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-
+                   if (response.GetUserInfoResult.Success == true) {
+                   
                    $scope.firstname = response.GetUserInfoResult.Payload[0].FirstName
                    $scope.lastname = response.GetUserInfoResult.Payload[0].LastName;
                    $scope.email = response.GetUserInfoResult.Payload[0].Email
@@ -67,16 +68,18 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
 
                    }
 
+                   }
+                   else {
+                       $scope.ShowErrorMessage("User Info", 1, 1, response.GetUserInfoResult.Message)
 
+                   }
                    $scope.$apply();
 
                },
                error: function (err) {
 
-                   alert("Error");
-                    
+                   $scope.ShowErrorMessage("User Info", 2, 1, err.statusText);
 
-                   alert(err.Message);
 
                }
            });
@@ -84,7 +87,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
     }
 
     $('#bottommenumodal').on('hidden.bs.modal', function () {
-        $(".menubtn .fa").removeClass('rotate');
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
     });
 
 
@@ -93,13 +96,13 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         if ($("body").hasClass("modal-open")) {
             $("#bottommenumodal").modal('hide');
 
-            $(".menubtn .fa").removeClass('rotate');
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
 
 
         }
         else {
             $("#bottommenumodal").modal('show');
-            $(".menubtn .fa").addClass('rotate');
+            $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
         }
     }
 
@@ -123,6 +126,9 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
             contentType: 'application/json',
             success: function (result) {
                 // log.success("Profile information Updated.");
+
+                if (result.UpdateUserInfoResult.Success == true) {
+               
                 ShowSuccess("Updated");
 
                 $scope.firstnameLabel = $scope.firstname;
@@ -138,11 +144,17 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
                 $scope.isSaving = true;
                 $scope.$apply();
 
+                }
+                else {
+                    $scope.ShowErrorMessage("Updating user info", 3, 1, result.UpdateUserInfoResult.Message)
+
+                }
+
             },
             error: function (err) {
 
-                log.error("Some thing went wrong");
-                $scope.errorbox(err);
+                $scope.ShowErrorMessage("Updating user info", 2, 1, err.statusText);
+
                 $scope.isSaving = false;
                 $scope.$apply();
             

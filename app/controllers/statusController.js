@@ -64,13 +64,19 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
                success: function (response) {
                    $scope.LocationsLoaded = true;
                     
+                   if (response.GetStatusResult.Success == true) {
+                       $scope.StatusList = response.GetStatusResult.Payload;
 
-                   $scope.StatusList = response.GetStatusResult.Payload;
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Get Statues", 1, 1, response.GetStatusResult.Message)
+
+                   }
                    $scope.$apply();
                },
                error: function (err) {
                    $scope.LocationsLoaded = true;
-                   log.error(err.Message);
+                   $scope.ShowErrorMessage("Get Statues", 2, 1, err.statusText);
 
                }
            });
@@ -89,7 +95,7 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
 
 
     $('#bottommenumodal').on('hidden.bs.modal', function () {
-        $(".menubtn .fa").removeClass('rotate');
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
     });
 
 
@@ -98,13 +104,13 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
         if ($("body").hasClass("modal-open")) {
             $("#bottommenumodal").modal('hide');
 
-            $(".menubtn .fa").removeClass('rotate');
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
 
 
         }
         else {
             $("#bottommenumodal").modal('show');
-            $(".menubtn .fa").addClass('rotate');
+            $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
         }
     }
 
@@ -148,6 +154,9 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
                 success: function (result) {
 
                     $scope.IsProcessing = false;
+
+                    if (result.CreateEditStatusResult.Success == true) {
+                   
                     if (result.CreateEditStatusResult.Payload == 1) {
                         if ($scope.mode == 2) {
                             ShowSuccess("Added");
@@ -168,12 +177,17 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
                         $scope.IsProcessing = false;
                         $scope.$apply();
                     }
+                    }
+                    else {
+                        $scope.ShowErrorMessage("Updating status", 3, 1, result.CreateEditStatusResult.Message)
+
+                    }
                    
                 },
                 error: function (err) {
                     $scope.IsProcessing = false;
-                    alert("Error");
-                    $scope.errorbox(err);
+                    $scope.ShowErrorMessage("Updating Status", 2, 1, err.statusText);
+
 
                 },
                 complete: function () {
@@ -208,6 +222,9 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
 
                         $(_id).find("i").removeClass("fa-spin");
 
+                        if (result.DeleteStatusResult.Success == true) {
+                       
+
                         if (result.DeleteStatusResult.Payload == 1) {
                             ShowSuccess("Deleted");
 
@@ -219,24 +236,29 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
 
                         }
 
-
-
-
-
-
-
-
-
-
-
                         $scope.getstatus();
+
+
+                        }
+                        else {
+                            $scope.ShowErrorMessage("Deleting status", 1, 1, result.DeleteStatusResult.Message)
+
+                        }
+
+
+
+
+
+
+                     
 
                         $scope.mode = 1;
 
                     },
                     error: function (err) {
                         $(_id).find("i").removeClass("fa-spin");
-                        alert("Error");
+                        $scope.ShowErrorMessage("Deleting status", 2, 1, err.statusText);
+
                          
 
                     },

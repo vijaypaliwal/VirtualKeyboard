@@ -81,31 +81,28 @@
     }
 </style>
 
-<div style="margin-top:12px;" class="page-header">
+<div class="title-header">
 
     <div class="row">
-        
-        <div class="col-xs-2">
-            <a class="waves-effect" href="#/setting">
-                <img src="img/back.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="col-xs-7">
-            <h4 style="margin-top:0px;line-height:34px; margin-bottom:0px; color:#000;">Manage Status</h4>
+
+        <div class="col-xs-12">
+            <h4 class="titletext">Manage <small>Status</small> </h4>
         </div>
     </div>
 </div>
 
+<a href="#/setting" class="waves-effect newbackbtn ng-scope"> <i class="fa fa-arrow-left"></i> </a>
+
+<a ng-click="addstatus()" class="btn btn-danger roundbtntitle"> <i class="fa fa-plus"></i> </a>
 
 
-<div ng-if="mode == 1" class="listview animated zoomIn">
-    <a style="margin-bottom:10px;" ng-click="addstatus()" class="waves-effect width-100 btn btn-primary">
-        <i class="fa fa-plus-circle"></i> Add new Status
-    </a>
+<div class="top50">
+    <div ng-if="mode == 1" class="listview animated zoomIn">
 
-    <div class="input-group">
-        <input style="border-radius:0px; border-bottom:transparent;" ng-change="FilterRecordsLength.length=(StatusList | filter:SearchData.test).length" class="form-control" placeholder="Type to search" type="text" ng-model="SearchData.test">
-        <i ng-if="SearchData.test!=''" id="btnClearSearch" ng-click="ClearFilter()" class="fa fa-times filtercross"></i> 
+
+        <div class="input-group">
+            <input style="border-radius:0px; border-bottom:transparent;" ng-change="FilterRecordsLength.length=(StatusList | filter:SearchData.test).length" class="form-control" placeholder="Type to search" type="text" ng-model="SearchData.test">
+            <i ng-if="SearchData.test!=''" id="btnClearSearch" ng-click="ClearFilter()" class="fa fa-times filtercross"></i>
         </div>
         <div ng-if="LocationsLoaded==false">
 
@@ -142,52 +139,56 @@
         </ul>
 
 
-    <div ng-if="FilterRecordsLength.length==0 && LocationsLoaded==true" style="text-align: center; color: #d9534f;" class="maincontent norecords">
+        <div ng-if="FilterRecordsLength.length==0 && LocationsLoaded==true" style="text-align: center; color: #d9534f;" class="maincontent norecords">
 
-        <div>
+            <div>
 
-            <h3>No record matched your Query</h3>
-            <a style="cursor:pointer;width:auto;" class="btn btn-primary" ng-click="ClearFilter()"> <i class="fa fa-filter"></i> Clear your filters</a>
-            <br /><br />
-        </div>
-
-
-    </div>
-    </div>
-
-<div class="animated zoomIn" ng-if="mode == 2 || mode == 3 ">
-
-
-    <form name="status">
-
-        <div style="background:#fff;padding:10px; margin-top:7px;">
-            <h4 ng-if="mode == 2">Fill below value to add new</h4>
-            <h4 ng-if="mode == 3">Update below value to update status</h4>
-            <div class="form-group">
-                <label>Status <span>*</span></label>
-                <input class="form-control" type="text" id="StatusToCreate" ng-model="StatusToCreate" required />
+                <h3>No record matched your Query</h3>
+                <a style="cursor:pointer;width:auto;" class="btn btn-primary" ng-click="ClearFilter()"> <i class="fa fa-filter"></i> Clear your filters</a>
+                <br /><br />
             </div>
 
-            <div class="row">
-                <div class="col-xs-6">
-                    <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savestatus()" ng-if="mode == 2" class="btn width-100 btn-primary"> <i class="fa fa-plus-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Add</button>
-                    <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savestatus()" ng-if="mode == 3" class="btn width-100 btn-primary"> <i class="fa fa-check-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Update</button>
-                </div>
-                <div class="col-xs-6">
-                    <a style="width:100%" ng-click="leaveform()" class="btn btn-gray width-100"> <i class="fa fa-times"></i> Cancel</a>
-                </div>
-            </div>
-            
 
         </div>
+    </div>
 
-    </form>
+    <div class="animated zoomIn" ng-if="mode == 2 || mode == 3 ">
 
+
+        <form name="status">
+
+            <div style="background:#fff;padding:10px; margin-top:7px;">
+                <h4 ng-if="mode == 2">Fill below value to add new</h4>
+                <h4 ng-if="mode == 3">Update below value to update status</h4>
+                <div class="form-group">
+                    <label>Status <span>*</span></label>
+                    <input class="form-control" type="text" id="StatusToCreate" ng-model="StatusToCreate" required />
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savestatus()" ng-if="mode == 2" class="btn width-100 btn-primary"> <i class="fa fa-plus-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Add</button>
+                        <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savestatus()" ng-if="mode == 3" class="btn width-100 btn-primary"> <i class="fa fa-check-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Update</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <a style="width:100%" ng-click="leaveform()" class="btn btn-gray width-100"> <i class="fa fa-times"></i> Cancel</a>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </form>
+
+    </div>
 </div>
 
 
+
+
+
 <a ng-click="Openbottommenu()" class="menubtn waves-effect btn-info">
-    <i class="fa fa-plus"></i>
+    <i class="fa fa-bars"></i>
 </a>
 
 <div id="bottommenumodal" class="modal bottommenu fade">

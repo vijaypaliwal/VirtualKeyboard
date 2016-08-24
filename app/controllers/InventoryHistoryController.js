@@ -105,7 +105,10 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "id": $scope.CurrentInventory.iID, "ActivityDate": _datestring, "Activity": $scope.Activity }),
                success: function (response) {
                    $scope.isSearching = false;
-                   debugger;
+                   
+
+                   if (response.GetRecentActivityResult.Success == true) {
+                  
                    var _ActualCount = parseInt(response.GetRecentActivityResult.Payload.ActualCount);
 
                    $scope.Recentactivities = response.GetRecentActivityResult.Payload.data;
@@ -119,11 +122,16 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
                        $location.path("/FindItems");
                        $scope.$apply();
                    }
+                   }
+                   else {
+
+                       $scope.ShowErrorMessage("Recent Activities", 1, 1, response.GetRecentActivityResult.Message)
+                   }
                },
                error: function (err) {
                     
                    $scope.isSearching = false;
-                   log.error(err.Message);
+                   $scope.ShowErrorMessage("Recent Activities", 2, 1, err.statusText)
 
                }
            });
@@ -150,16 +158,25 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
                        dataType: 'json',
                        data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "TransactionID": TransID, "InventoryID": InvID, "ParentID": ParentID }),
                        success: function (response) {
-                           if (response.UndoActivityResult.Payload) {
-                               ShowSuccess('Updated');
-                               $scope.GetRecentActivities();
 
-                               
+                           if (response.UndoActivityResult.Success == true) {
+
+                               if (response.UndoActivityResult.Payload) {
+                                   ShowSuccess('Updated');
+                                   $scope.GetRecentActivities();
+
+
+                               }
                            }
+                           else {
+                               $scope.ShowErrorMessage("Undo Activity", 1, 1, result.UndoActivityResult.Message)
+
+                              
+                           }
+                          
                        },
                        error: function (err) {
-                            
-                           log.error(err.Message);
+                           $scope.ShowErrorMessage("Undo Activity", 2, 1, err.statusText);
 
                        }
                    });

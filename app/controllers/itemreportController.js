@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('currentinventoryController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
+app.controller('itemreportController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
 
 
     $scope.CurrentView = { Name: "Current Inventory" };
@@ -669,7 +669,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
           ({
               type: "POST",
               url: serviceBase + 'GetAllViews',
-              data: JSON.stringify({ SecurityToken: $scope.SecurityToken, Type: 1 }),
+              data: JSON.stringify({ SecurityToken: $scope.SecurityToken, Type: 4 }),
               contentType: 'application/json',
               dataType: 'json',
               success: function (response)

@@ -73,13 +73,22 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
               dataType: 'json',
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Columns": $scope.MyInventorycolumns }),
               success: function (response) {
-
                   $scope.LocationsLoaded = true;
                   $scope.loadingbutton = false
-                  $scope.GetMyinventoryColumns();
+                  if (response.SaveMyInventoryColumnResult.Success == true) {
+                      $scope.GetMyinventoryColumns();
+
+                  }
+                  else {
+                      $scope.ShowErrorMessage("Updating my inventory columns", 1, 1, response.SaveMyInventoryColumnResult.Message)
+
+                  }
+                  
                   $scope.$apply();
               },
               error: function (err) {
+                  $scope.ShowErrorMessage("Updating my inventory columns", 2, 1, err.statusText);
+
               }
           });
     };
@@ -95,7 +104,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
 
     $('#bottommenumodal').on('hidden.bs.modal', function () {
-        $(".menubtn .fa").removeClass('rotate');
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
     });
 
 
@@ -104,13 +113,13 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         if ($("body").hasClass("modal-open")) {
             $("#bottommenumodal").modal('hide');
 
-            $(".menubtn .fa").removeClass('rotate');
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
 
 
         }
         else {
             $("#bottommenumodal").modal('show');
-            $(".menubtn .fa").addClass('rotate');
+            $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
         }
     }
 
@@ -139,7 +148,8 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
               success: function (response) {
 
-                   
+                  if (response.GetMyInventoryColumnsResult.Success == true) {
+                 
                   $scope.MyInventorycolumns = [];
 
                   var _myinventorycols = response.GetMyInventoryColumnsResult.Payload;
@@ -170,11 +180,15 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
                   }
                   $scope.$apply();
 
-                  console.log($scope.MyInventorycolumns);
+                  }
+                  else {
+                      $scope.ShowErrorMessage("Getting My inventory columns", 1, 1, response.GetMyInventoryColumnsResult.Message)
+
+                  }
               },
               error: function (err) {
-                  console.log(err);
-                  log.error("Error Occurred during operation");
+                  $scope.ShowErrorMessage("Getting Myinventory columns", 2, 1, err.statusText);
+
                   $scope.LocationsLoaded = true;
                   $(".save-btn").hide();
                   $scope.errorbox(err);
@@ -267,11 +281,19 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
                dataType: 'json',
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Columns": $scope.MyInventorycolumns }),
               success: function (response) {
+
+                  if (response.SaveMyInventoryColumnResult.Success == true) {
+                 
                   $scope.LocationsLoaded = true;
                   $scope.loadingbutton = false
                   ShowSuccess("Updated");
                   $(".fa-check").removeClass("fa-spin");
                   $scope.GetMyinventoryColumns();
+                  }
+                  else {
+                      $scope.ShowErrorMessage("Updating Myinventory columns", 1, 1, response.SaveMyInventoryColumnResult.Message)
+
+                  }
                   $scope.$apply();
               },
               error: function (err)
@@ -281,8 +303,8 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
                   $(".fa-check").removeClass("fa-spin");
                   $scope.loadingbutton = false;
                   $scope.$apply();
-                  $scope.errorbox(err);
-                  log.error("Error Occurred during operation");
+                  $scope.ShowErrorMessage("Updating Myinventory columns", 2, 1, err.statusText);
+
               }
           });
     };

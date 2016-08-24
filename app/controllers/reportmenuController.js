@@ -50,15 +50,23 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
               dataType: 'json',
               success: function (response)
               {
-               $scope.InventoryViews = response.GetAllViewsResult.Payload;
-               $scope.loadcounter = true;
-               $scope.$apply();
 
+                  if (response.GetAllViewsResult.Success == true) {
+                      $scope.InventoryViews = response.GetAllViewsResult.Payload;
+                      $scope.loadcounter = true;
+                      $scope.$apply();
+
+                  }
+                  else {
+                      $scope.ShowErrorMessage("Inventory reports counter", 1, 1, response.GetAllViewsResult.Message)
+
+                  }
+            
               },
               error: function (err) {
                   $scope.currentinvloaded = true;
-                  $scope.errorbox(err);
-                  $scope.$apply();
+                  $scope.ShowErrorMessage("Inventory  reports counter", 2, 1, err.statusText);
+
 
               }
           });
@@ -83,14 +91,23 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
               contentType: 'application/json',
               dataType: 'json',
               success: function (response) {
-                  $scope.ActivityViews = response.GetAllViewsResult.Payload;
-                  $scope.loadcounter = true;
-                  $scope.$apply();
+
+                  if (response.GetAllViewsResult.Success == true) {
+
+                      $scope.ActivityViews = response.GetAllViewsResult.Payload;
+                      $scope.loadcounter = true;
+                      $scope.$apply();
+
+                  }
+                  else {
+                      $scope.ShowErrorMessage("Activity Views counter", 1, 1, response.GetAllViewsResult.Message)
+
+                  }
 
               },
               error: function (err) {
                   $scope.currentinvloaded = true;
-                  $scope.errorbox(err);
+                  $scope.ShowErrorMessage("Activity  reports counter", 2, 1, err.statusText);
                   $scope.$apply();
 
               }

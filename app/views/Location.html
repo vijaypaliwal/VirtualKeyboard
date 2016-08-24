@@ -114,171 +114,168 @@
 </style>
 
 
-<div style="margin-top:12px;" class="page-header">
+
+<div class="title-header">
 
     <div class="row">
-        
-        <div class="col-xs-2">
-            <a class="waves-effect" href="#/setting">
-                <img src="img/back.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="col-xs-7">
-            <h4 style="margin-top:0px;line-height:34px;  margin-bottom:0px; color:#000;">Manage Locations</h4>
+
+        <div class="col-xs-12">
+            <h4 class="titletext">Manage <small>Location</small> </h4>
         </div>
     </div>
 </div>
 
-<div ng-if="mode == 1" class="listview animated zoomIn">
+<a href="#/setting" class="waves-effect newbackbtn ng-scope"> <i class="fa fa-arrow-left"></i> </a>
 
+<a ng-click="addlocation()" class="btn btn-danger roundbtntitle"> <i class="fa fa-plus"></i> </a>
 
-    <a style="margin-bottom:10px;" ng-click="addlocation()" class="waves-effect width-100 btn btn-primary">
+<div class="top50">
 
-        <i class="fa fa-plus-circle"></i> Add Location
-
-
-    </a>
-    <div id="sticky-anchor"></div>
-    <div id="sticky" class="topup">
-        <table class="searchtable">
-            <tbody>
-                <tr>
-
-                    <td>
-
-
-                        <div class="input-group">
+    <div ng-if="mode == 1" class="listview animated zoomIn">
 
 
 
-                            <div style="position:relative" class="fg-line">
+        <div id="sticky-anchor"></div>
+        <div id="sticky" class="topup">
+            <table class="searchtable">
+                <tbody>
+                    <tr>
+
+                        <td>
 
 
-                                <input style="border-radius:0px;" id="MasterSearch" type="text" ng-model="SearchData.SearchValue" class="form-control" placeholder="Type location to Search">
+                            <div class="input-group">
 
 
-                                <i></i>
+
+                                <div style="position:relative" class="fg-line">
+
+
+                                    <input style="border-radius:0px;" id="MasterSearch" type="text" ng-model="SearchData.SearchValue" class="form-control" placeholder="Type location to Search">
+
+
+                                    <i></i>
+                                </div>
+                                <i ng-if="SearchData.SearchValue!=''" id="btnClearSearchNew" ng-click="ClearFilter()" class="fa right47 filtercross fa-times"></i>
+
+                                <a class="input-group-addon last textData" style="margin-top: 0px;  width: 37px;" id="btnMasterSearch" ng-click="GetLocations()"><i class="fa fa-search" style="font-size:20px;"></i> </a>
                             </div>
-                            <i ng-if="SearchData.SearchValue!=''" id="btnClearSearchNew" ng-click="ClearFilter()" class="fa right47 filtercross fa-times"></i> 
-                            
-                            <a class="input-group-addon last textData" style="margin-top: 0px;  width: 37px;" id="btnMasterSearch" ng-click="GetLocations()"><i class="fa fa-search" style="font-size:20px;"></i> </a>
-                        </div>
 
 
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div ng-if="LocationsLoaded==false">
-
-        <div class="modal-backdrop fade in"></div>
-        <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
-            <img src="img/loader.gif" alt="Alternate Text" />
-
-            <!--<i style="font-size: 100px; color: #0083C7; " class="fa fa-spin fa-spinner"></i>-->
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </div>
+        <div ng-if="LocationsLoaded==false">
+
+            <div class="modal-backdrop fade in"></div>
+            <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
+                <img src="img/loader.gif" alt="Alternate Text" />
+
+                <!--<i style="font-size: 100px; color: #0083C7; " class="fa fa-spin fa-spinner"></i>-->
+            </div>
+        </div>
 
 
-    <ul class="list-group">
-        <li class="list-group-item" ng-repeat="obj in Locations" ng-if="obj.LocationName != ''">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="obj in Locations" ng-if="obj.LocationName != ''">
 
-            <div class="row">
-                <div class="col-xs-7">
-                    <a>{{obj.LocationName}}</a>
+                <div class="row">
+                    <div class="col-xs-7">
+                        <a>{{obj.LocationName}}</a>
+                    </div>
+
+                    <div class="col-xs-5">
+                        <a ng-click="deletelocation(obj)" id="Delete_{{obj.LocationID}}" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-danger pull-right">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                        <a ng-click="editlocation(obj)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-warning pull-right">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <div class="col-xs-5">
-                    <a ng-click="deletelocation(obj)" id="Delete_{{obj.LocationID}}" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-danger pull-right">
-                        <i class="fa fa-trash-o"></i>
-                    </a>
-                    <a ng-click="editlocation(obj)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-warning pull-right">
-                        <i class="fa fa-pencil"></i>
-                    </a>
+
+
+
+            </li>
+        </ul>
+
+        <div style="text-align: center; color: #d9534f; display:none;" class="maincontent norecords">
+
+            <div ng-if="ActualTotalRecords!=0 && LocationsLoaded==true">
+
+                <h3>No record matched your Query</h3>
+                <a style="cursor:pointer;width:auto;" class="btn btn-primary" ng-click="ClearFilter()"> <i class="fa fa-filter"></i> Clear your filters</a>
+                <br /><br />
+            </div>
+            <div style="position:relative; z-index:100000;" ng-if="ActualTotalRecords==0">
+                <br />
+                <h5>You don't have any location records yet. Click the "Add location".</h5>
+                <br />
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="animated zoomIn" ng-if="mode == 2 || mode == 3 ">
+
+        <form name="locationform">
+
+            <div style="background:#fff;padding:10px; margin-top:7px;">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 ng-if="mode == 2">Fill below value to add new</h4>
+                        <h4 ng-if="mode == 3">Update below value to update Location</h4>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Location <span>*</span></label>
+                    <input class="form-control" type="text" ng-model="locationdata.LocationName" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Location Group</label>
+                    <input class="form-control" type="text" ng-model="locationdata.LocationZone" />
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <input class="form-control" type="text" ng-model="locationdata.LocationDescription" />
+                </div>
+
+
+
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savelocation()" ng-if="mode == 2" class="btn width-100 btn-primary"> <i class="fa fa-plus-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Add</button>
+                        <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savelocation()" ng-if="mode == 3" class="btn width-100 btn-primary"> <i class="fa fa-check-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Update</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <a style="width:100%" ng-click="leaveform()" class="btn width-100 btn-gray"> <i class="fa fa-times"></i> Cancel</a>
+                    </div>
                 </div>
             </div>
 
+        </form>
 
 
-
-        </li>
-    </ul>
-
-    <div style="text-align: center; color: #d9534f; display:none;" class="maincontent norecords">
-
-        <div ng-if="ActualTotalRecords!=0 && LocationsLoaded==true">
-
-            <h3>No record matched your Query</h3>
-            <a style="cursor:pointer;width:auto;" class="btn btn-primary" ng-click="ClearFilter()"> <i class="fa fa-filter"></i> Clear your filters</a>
-            <br /><br />
-        </div>
-        <div style="position:relative; z-index:100000;" ng-if="ActualTotalRecords==0">
-            <br />
-            <h5>You don't have any location records yet. Click the "Add location".</h5>
-            <br />
-        </div>
 
     </div>
-
-
 </div>
-
-
-<div class="animated zoomIn" ng-if="mode == 2 || mode == 3 ">
-
-    <form name="locationform">
-
-        <div style="background:#fff;padding:10px; margin-top:7px;">
-
-            <div class="row">
-                <div class="col-md-12">
-                    <h4 ng-if="mode == 2">Fill below value to add new</h4>
-                    <h4 ng-if="mode == 3">Update below value to update Location</h4>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <label>Location <span>*</span></label>
-                <input class="form-control" type="text" ng-model="locationdata.LocationName" required />
-            </div>
-
-            <div class="form-group">
-                <label>Location Group</label>
-                <input class="form-control" type="text" ng-model="locationdata.LocationZone" />
-            </div>
-
-            <div class="form-group">
-                <label>Description</label>
-                <input class="form-control" type="text" ng-model="locationdata.LocationDescription" />
-            </div>
-
-
-
-
-            <div class="row">
-                <div class="col-xs-6">
-                    <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savelocation()" ng-if="mode == 2" class="btn width-100 btn-primary"> <i class="fa fa-plus-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Add</button>
-                    <button type="button" ng-disabled="locationform.$invalid || IsProcessing==true" ng-click="savelocation()" ng-if="mode == 3" class="btn width-100 btn-primary"> <i class="fa fa-check-circle" ng-class="{'fa-spin':IsProcessing==true}"></i> Update</button>
-                </div>
-                <div class="col-xs-6">
-                    <a style="width:100%" ng-click="leaveform()" class="btn width-100 btn-gray"> <i class="fa fa-times"></i> Cancel</a>
-                </div>
-            </div>
-        </div>
-
-    </form>
-
-
-
-</div>
-
 
  <a ng-click="Openbottommenu()" class="menubtn waves-effect btn-info">
-    <i class="fa fa-plus"></i>
+    <i class="fa fa-bars"></i>
 </a>
 
 <div id="bottommenumodal" class="modal bottommenu fade">

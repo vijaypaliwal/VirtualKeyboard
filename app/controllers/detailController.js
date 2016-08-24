@@ -1,12 +1,12 @@
 ﻿'use strict';
-app.controller('detailController', ['$scope',  'localStorageService', 'authService', '$location', 'log', function ($scope,  localStorageService, authService, $location, log) {
+app.controller('detailController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
     $scope.CurrentInventory = {};
     $scope.SavingData = false;
     $scope.IsEditMode = false;
     $scope.ImageList = [];
     $scope.slide = 0;
     $scope.Totalslides = 0;
-  
+
 
     $scope.mainObjectToSend = [];
     function init() {
@@ -14,10 +14,10 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
 
         $scope.MyinventoryFieldsNames = localStorageService.get("unitdatafieldsobject");
 
-        
+
         console.log($scope.MyinventoryFieldsNames);
         $scope.itemlabel = $scope.CurrentInventory.pPart
-     
+
         $scope.$apply();
     }
 
@@ -80,28 +80,28 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
 
 
                 $scope.slide = swiperHere.activeIndex;
-           
+
                 $scope.Totalslides = swiperHere.slides.length;
 
-                
+
                 $scope.$apply();
             }
 
 
         });
 
-            $('.arrow-left').on('click', function (e) {
-                e.preventDefault()
-                mySwiper.swipePrev();
+        $('.arrow-left').on('click', function (e) {
+            e.preventDefault()
+            mySwiper.swipePrev();
 
-            })
-            $('.arrow-right').on('click', function (e) {
-                e.preventDefault()
-                mySwiper.swipeNext()
+        })
+        $('.arrow-right').on('click', function (e) {
+            e.preventDefault()
+            mySwiper.swipeNext()
 
-            })
-            $scope.Totalslides = mySwiper.slides.length;
-            $scope.$apply();
+        })
+        $scope.Totalslides = mySwiper.slides.length;
+        $scope.$apply();
 
     }
 
@@ -143,9 +143,9 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
 
             setTimeout(function () {
                 $scope.showbottomarea();
-              
+
             }, 10);
-         
+
         }, function (error) {
             log.error("Scanning failed: ", error);
         });
@@ -191,7 +191,7 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
     }
 
     $scope.UpdateInventory = function () {
-         
+
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -208,28 +208,36 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (result) {
-                        if (result.UpdateInventoryResult.Payload == 1) {
-                            //log.success("Inventory updated successfully.");
-                            ShowSuccess("Updated");
-                            $scope.IsEditMode = false;
 
-                            $scope.$apply();
-                            localStorageService.set("CurrentDetailObject", $scope.CurrentInventory);
-                            $scope.SavingData = false;
-                            init();
-                          $scope.getitemimage();
+                        if (result.UpdateInventoryResult.Success == true) {
+
+                            if (result.UpdateInventoryResult.Payload == 1) {
+                                //log.success("Inventory updated successfully.");
+                                ShowSuccess("Updated");
+                                $scope.IsEditMode = false;
+
+                                $scope.$apply();
+                                localStorageService.set("CurrentDetailObject", $scope.CurrentInventory);
+                                $scope.SavingData = false;
+                                init();
+                                $scope.getitemimage();
+                            }
+                            else {
+                                log.error(Message);
+                            }
+
                         }
                         else {
-                            log.error(Message);
+
+                            $scope.ShowErrorMessage("Update Inventory Detail", 3, 1, result.GetInventoriesResult.Message);
                         }
 
                     },
                     error: function (err) {
-                         
-                        $scope.SavingData = false;
-                        console.log(err);
-                        log.error("Error Occurred during operation");
 
+                        $scope.SavingData = false;
+                   
+                        $scope.ShowErrorMessage("Update Inventory Detail", 1, 2, err.statusText);
 
                     },
                     complete: function () {
@@ -237,7 +245,7 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
                 });
             }
 
-         
+
 
         });
 
@@ -249,14 +257,13 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
     }
 
 
- 
+
 
     $scope.addtocart = function (v) {
-         
+
 
         var _cartData = localStorageService.get("ActivityCart");
-        if (_cartData == null || _cartData == undefined)
-        {
+        if (_cartData == null || _cartData == undefined) {
             _cartData = [];
         }
         var mainObjectToSend = {
@@ -308,11 +315,11 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
 
         setTimeout(function () { $("#myModal2").modal('hide'); }, 1000);
 
-      
+
 
     }
 
-  
+
 
     $scope.getitemimage = function () {
 
@@ -333,8 +340,9 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
                dataType: 'json',
                success: function (response) {
 
-                
 
+                   if (response.GetItemImagesResult.Success == true) {
+                   
                    $scope.ImageList = response.GetItemImagesResult.Payload;
                    $scope.$apply();
 
@@ -344,15 +352,17 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
                    setTimeout(function () {
                        $(".loadingimage").hide();
                        $(".imagesection").show();
-                       
-                   }, 1000);
 
+                   }, 1000);
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Item Images", 1, 1, response.GetItemImagesResult.Message)
+                   }
                },
                error: function (err) {
 
-                    
+                   $scope.ShowErrorMessage("Item Images", 2, 1, err.statusText);
 
-                   log.error(err.Message);
 
                }
            });
@@ -374,7 +384,7 @@ app.controller('detailController', ['$scope',  'localStorageService', 'authServi
         $(".modal-backdrop").remove();
         $("body").removeClass("modal-open");
 
-      
+
 
         $scope.IsEditMode = !$scope.IsEditMode;
         setTimeout(function () { InitializeSwiper() }, 10);

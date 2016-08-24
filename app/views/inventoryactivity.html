@@ -281,7 +281,7 @@
         border-radius: 100%;
         position: fixed;
         padding: 0px;
-        margin-top: 44px;
+        margin-top: 20px;
         margin-left: 17px;
         line-height: 37px;
         z-index: 100;
@@ -411,10 +411,7 @@
         overflow-x: hidden !important;
     }
 
-    .fa-filter {
-        padding-left: 14px !important;
-        padding-right: 14px !important;
-    }
+
 
     input[type=text]:focus
     {
@@ -560,12 +557,12 @@
     }
 </style>
 
-<div class="report-header">
+<div class="title-header">
 
     <div class="row">
 
         <div class="col-xs-12">
-            <h4 class="text">{{CurrentView.Name}} <small>Reports</small></h4>
+            <h4 class="titletext">{{CurrentView.Name}} <small>Reports</small></h4>
         </div>
 
 
@@ -583,28 +580,10 @@
 
 <a ng-if="isviewload==false" class="waves-effect roundbtn btn btn-success">+ </a>
 
-<a ng-if="isviewload==true" ng-click="showview()" class="waves-effect newroundbtn"> <i class="fa fa-arrow-circle-left"></i> </a>
+<a ng-if="isviewload==true" ng-click="showview()" class="waves-effect newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
 
-<a ng-if="isviewload==true" ng-click="showfilter()" class="btn roundbtn" style="right: 12px; background: #f04124;"><i class="fa fa-filter" style="font-size: 17px; color:#fff "></i> </a>
+<a ng-if="isviewload==true" ng-click="showfilter()" class="btn roundbtntitle"><i class="fa fa-filter"></i> </a>
 
-
-<!--<a ng-click="OpenmenuModal()" class="Addbtn waves-effect btn-info btn-floating" ng-if="isviewload==true">
-    <i class="fa fa-plus"></i>
-</a>
-
-
-<div id="myModal2" class="modal bottommenu fade">
-
-    <div class="modal-body">
-        <ul class="animated slideInUp selectAction">
-            <li ng-click="applysorting()" class="bottomlink"> <span>Apply sorting</span> <a class="waves-effect btn-success btn decrease"  data-dismiss="modal"> <i class="fa fa-sort-alpha-asc"></i> </a></li>
-            <li class="bottomlink"> <span>Advanced search</span> <a class="waves-effect btn-warning btn decrease"  data-dismiss="modal"> <i style="padding-left:10px !important;" class="fa fa-filter"></i> </a></li>
-            <li class="bottomlink" > <span>Show Filter</span> <a class="waves-effect btn-success btn decrease"  data-dismiss="modal"> <i style="padding-left:10px !important;" class="fa fa-filter"></i> </a></li>
-            <li class="bottomlink"> <span>Close</span> <a class="waves-effect btn-gray btn decrease" data-dismiss="modal"> <i  class="fa fa-times"></i> </a></li>
-          
-        </ul>
-    </div>
-</div>-->
 
 <a class="Addbtn cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
 
@@ -934,7 +913,7 @@
 
 
 <a ng-click="Openbottommenu()" class="menubtn waves-effect btn-info">
-    <i class="fa fa-plus"></i>
+    <i class="fa fa-bars"></i>
 </a>
 
 <div id="bottommenumodal" class="modal bottommenu fade">

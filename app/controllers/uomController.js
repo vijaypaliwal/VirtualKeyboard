@@ -1,12 +1,12 @@
 ﻿'use strict';
-app.controller('uomController', ['$scope',  'localStorageService', 'authService', '$location', 'log', function ($scope,  localStorageService, authService, $location, log) {
+app.controller('uomController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
     $scope.CurrentInventory = {};
     $scope.mode = 1;
     $scope.UomID = 0;
     $scope.UOMToCreate = "";
     $scope.IsProcessing = false;
     $scope.LocationsLoaded = false;
-  
+
     $scope.CurrentID = "";
     $scope.mainObjectToSend = [];
     function init() {
@@ -14,7 +14,7 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
         $scope.$apply();
     }
 
-    $scope.FilterRecordsLength = {length:0};
+    $scope.FilterRecordsLength = { length: 0 };
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
 
@@ -31,7 +31,7 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
 
         authService.logOut();
         $location.path('/login');
-      
+
     }
 
     $scope.addUOM = function () {
@@ -44,7 +44,7 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
 
 
     $('#bottommenumodal').on('hidden.bs.modal', function () {
-        $(".menubtn .fa").removeClass('rotate');
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
     });
 
 
@@ -53,17 +53,17 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
         if ($("body").hasClass("modal-open")) {
             $("#bottommenumodal").modal('hide');
 
-            $(".menubtn .fa").removeClass('rotate');
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
 
 
         }
         else {
             $("#bottommenumodal").modal('show');
-            $(".menubtn .fa").addClass('rotate');
+            $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
         }
     }
 
-  
+
 
     $scope.getuom = function () {
 
@@ -84,24 +84,33 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
                    $scope.LocationsLoaded = true;
-                   debugger;
-                   $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
+
+
+                   if (response.GetUnitsOfMeasureResult.Success == true) {
+                       $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
+
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Get uoms", 1, 1, response.GetUnitsOfMeasureResult.Message)
+
+                   }
                    $scope.$apply();
                },
                error: function (err) {
                    $scope.LocationsLoaded = true;
-                   log.error(err.Message);
+                   $scope.ShowErrorMessage("Get uoms", 2, 1, err.statusText);
+
 
                }
            });
 
     }
 
-   
+
 
     $scope.editUOM = function (obj) {
 
-        debugger;
+
 
         $scope.mode = 3;
 
@@ -135,34 +144,43 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
                 contentType: 'application/json',
                 success: function (result) {
                     $scope.IsProcessing = false;
-                    if (result.CreateEditUOMResult.Payload == 1) {
-                        if ($scope.mode == 2) {
-                            ShowSuccess("Added");
+
+                    if (result.CreateEditUOMResult.Success == true) {
+
+                        if (result.CreateEditUOMResult.Payload == 1) {
+                            if ($scope.mode == 2) {
+                                ShowSuccess("Added");
+                            }
+
+                            if ($scope.mode == 3) {
+                                ShowSuccess("Updated");
+                            }
+
+                            $scope.getuom();
+
+                            $scope.mode = 1;
+
                         }
 
-                        if ($scope.mode == 3) {
-                            ShowSuccess("Updated");
+
+
+                        if (result.CreateEditUOMResult.Payload == 0) {
+
+                            log.warning("Already exist");
+                            $scope.IsProcessing = false;
+                            $scope.$apply();
                         }
-
-                        $scope.getuom();
-
-                        $scope.mode = 1;
-
                     }
+                    else {
+                        $scope.ShowErrorMessage("Updating UOM", 1, 1, result.CreateEditUOMResult.Message)
 
-                    debugger;
-
-                    if (result.CreateEditUOMResult.Payload == 0) {
-
-                        log.warning("Already exist");
-                        $scope.IsProcessing = false;
-                        $scope.$apply();
                     }
                 },
                 error: function (err) {
                     $scope.IsProcessing = false;
-                    $scope.errorbox(err);
-                    debugger;
+                    $scope.ShowErrorMessage("Updating UOM", 2, 1, err.statusText);
+
+
 
                 },
                 complete: function () {
@@ -175,9 +193,9 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
 
     $scope.deleteUOM = function (obj) {
 
-     
+
         var id = obj.UnitOfMeasureID;
-        debugger;
+
 
         var _id = "#Delete_" + id;
 
@@ -192,29 +210,38 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (result) {
-                        $(_id).find("i").removeClass("fa-spin");
-                        debugger;
 
-                        if (result.DeleteUOMResult.Payload == 1) {
-                            ShowSuccess("Deleted");
+                        if (result.DeleteUOMResult.Success == true) {
+
+                            $(_id).find("i").removeClass("fa-spin");
+
+
+                            if (result.DeleteUOMResult.Payload == 1) {
+                                ShowSuccess("Deleted");
+
+                            }
+
+                            if (result.DeleteUOMResult.Payload == 0) {
+
+                                log.info("unable to delete, this value used by system")
+
+                            }
+
+                            $scope.getuom();
+
+                            $scope.mode = 1;
+                        }
+                        else {
+                            $scope.ShowErrorMessage("Deleting UOM", 1, 1, result.DeleteUOMResult.Message)
 
                         }
-
-                        if (result.DeleteUOMResult.Payload == 0) {
-
-                            log.info("unable to delete, this value used by system")
-
-                        }
-
-                        $scope.getuom();
-
-                        $scope.mode = 1;
 
                     },
                     error: function (err) {
                         $(_id).find("i").removeClass("fa-spin");
-                        $scope.errorbox(err);
-                        debugger;
+                        $scope.ShowErrorMessage("Deleting UOM", 2, 1, err.statusText);
+
+
 
                     },
                     complete: function () {
@@ -234,6 +261,6 @@ app.controller('uomController', ['$scope',  'localStorageService', 'authService'
 
 
 
- 
+
 
 }]);

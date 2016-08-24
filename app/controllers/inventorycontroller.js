@@ -111,7 +111,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $('#myModal2').on('hidden.bs.modal', function () {
-        $(".Addbtn .fa").removeClass('rotate');
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
     });
 
 
@@ -120,13 +120,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         if ($("body").hasClass("modal-open")) {
             $("#myModal2").modal('hide');
 
-            $(".Addbtn .fa").removeClass('rotate');
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
 
 
         }
         else {
             $("#myModal2").modal('show');
-            $(".Addbtn .fa").addClass('rotate');
+            $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
         }
     }
 
@@ -182,7 +182,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
             if (Type == 3) {
-                var _statusobj = { StatusValue: $scope.CreateNewLabel};
+                var _statusobj = { StatusValue: $scope.CreateNewLabel };
                 $scope.StatusList.push(_statusobj);
                 $scope.InventoryObject.Status = $scope.CreateNewLabel;
             }
@@ -445,22 +445,30 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 error: function () {
 
                     $scope.UOMSearching = false;
-                    log.error('There is a problem with the service!');
+                    $scope.ShowErrorMessage("Unit of measure search", 2, 1, err.statusText);
                 },
 
                 success: function (data) {
 
-                    if (data.SearchUOMAutoCompleteResult != null && data.SearchUOMAutoCompleteResult.Payload != null) {
-                        $scope.UOMSearching = false;
-                        $scope.UOMSearchList = data.SearchUOMAutoCompleteResult.Payload;
+                    if (data.SearchUOMAutoCompleteResult.Success == true) {
+
+                        if (data.SearchUOMAutoCompleteResult != null && data.SearchUOMAutoCompleteResult.Payload != null) {
+                            $scope.UOMSearching = false;
+                            $scope.UOMSearchList = data.SearchUOMAutoCompleteResult.Payload;
 
 
-                        if ($scope.UOMSearchList.length == 0)
-                            $scope.isnouommsg = true
-                        else
-                            $scope.isnouommsg = false
+                            if ($scope.UOMSearchList.length == 0)
+                                $scope.isnouommsg = true
+                            else
+                                $scope.isnouommsg = false
 
-                        CheckScopeBeforeApply()
+                            CheckScopeBeforeApply()
+
+                        }
+                    }
+                    else {
+                        $scope.ShowErrorMessage("Unit of measure search", 1, 1, data.SearchUOMAutoCompleteResult.Message)
+
 
                     }
 
@@ -502,24 +510,31 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 error: function () {
 
                     $scope.ItemSearching = false;
-                    log.error('There is a problem with the service!');
+                    $scope.ShowErrorMessage("Search Items", 2, 1, err.statusText);
+
                 },
 
                 success: function (data) {
+                    if (data.SearchItemsResult.Success == true) {
+                        if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
+                            $scope.ItemSearching = false;
+                            $scope.SearchList = data.SearchItemsResult.Payload;
 
-                    if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
-                        $scope.ItemSearching = false;
-                        $scope.SearchList = data.SearchItemsResult.Payload;
-
-                        if ($scope.SearchList.length == 0)
-                            $scope.isnoitemmsg = true;
-                        else
-                            $scope.isnoitemmsg = false;
+                            if ($scope.SearchList.length == 0)
+                                $scope.isnoitemmsg = true;
+                            else
+                                $scope.isnoitemmsg = false;
 
 
-                        CheckScopeBeforeApply()
+                            CheckScopeBeforeApply()
+
+                        }
+                    }
+                    else {
+                        $scope.ShowErrorMessage("Search Items", 1, 1, data.SearchItemsResult.Message)
 
                     }
+
                 }
             });
         }
@@ -562,7 +577,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             //    },
 
             //    success: function (data) {
-            //        debugger;
+            //         
             //        if (data.SearchLocationAutoCompleteResult != null && data.SearchLocationAutoCompleteResult.Payload != null) {
             //            $scope.LocationSearching = false;
             //            $scope.LocationSearchList = data.SearchLocationAutoCompleteResult.Payload;
@@ -820,8 +835,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             log.warning("You are trying to upload more than one image, it may take some time to upload, please be patient.")
         }
 
-      
-       
+
+
         ShowWaitingInv();
         $.ajax
           ({
@@ -833,16 +848,23 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": _toSendImages }),
               // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
+                  if (response.AddInventoryDataResult.Success == true) {
 
-                  ImageListAndroid = [];
+                      ImageListAndroid = [];
+
+                      // $scope.resetObject();
+
+                      $scope.movetolist();
+                      // $location.path('/inventory');
+
+                      CheckScopeBeforeApply()
+                  }
+                  else {
+                      $scope.ShowErrorMessage("New Inventory", 3, 1, response.AddInventoryDataResult.Message)
+
+
+                  }
                   HideWaitingInv();
-
-                  // $scope.resetObject();
-
-                  $scope.movetolist();
-                  // $location.path('/inventory');
-
-                  CheckScopeBeforeApply()
 
                   $('#addinventories').removeClass("disabled");
                   $('#addinventories').find(".fa").removeClass("fa-spin");
@@ -853,12 +875,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               },
               error: function (err, textStatus, errorThrown) {
 
-                  debugger;
+                   
                   HideWaitingInv();
 
-                  console.log(err);
-                  log.error("Error Occurred during operation");
-                  log.error(errorThrown);
+                  $scope.ShowErrorMessage("New Inventory", 2, 1, err.statusText);
 
                   $scope.Inventoryerrorbox(errorThrown);
 
@@ -879,7 +899,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.MylogOut = function () {
-      
+
         $("#modalerror").modal('hide');
         $("#Inventoryerror").modal('hide');
         $location.path('/login');
@@ -1015,92 +1035,98 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
               success: function (response) {
 
+                  if (response.GetAllDataResult.Success == true) {
 
 
 
-                  debugger;
+                       
 
-                  var _TempArray = response.GetAllDataResult.Payload;
+                      var _TempArray = response.GetAllDataResult.Payload;
 
-                  // MY inventory column region
-                  var _TempArrayMyInventory = response.GetAllDataResult.Payload[0].MyInventoryColumns;
+                      // MY inventory column region
+                      var _TempArrayMyInventory = response.GetAllDataResult.Payload[0].MyInventoryColumns;
 
-                  for (var i = 0; i < _TempArrayMyInventory.length; i++) {
-                      var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
-                      _TempArrayMyInventory[i].ColumnName = _ColName[0];
-                      $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
-                  }
-
-                  CheckScopeBeforeApply()
-
-
-                  // Custom Item Field 
-                  $scope.CustomItemDataList = response.GetAllDataResult.Payload[0].CustomItemField;
-                  CheckScopeBeforeApply();
-
-                  for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
-                      var _defaultValue = angular.copy($scope.CustomItemDataList[i].cfdDefaultValue);
-                      if ($scope.CustomItemDataList[i].cfdDataType == "datetime") {
-                          if (_defaultValue != null && _defaultValue != "") {
-                              $scope.CustomItemDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
-                          }
+                      for (var i = 0; i < _TempArrayMyInventory.length; i++) {
+                          var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
+                          _TempArrayMyInventory[i].ColumnName = _ColName[0];
+                          $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
                       }
-                      else if ($scope.CustomItemDataList[i].cfdDataType == "currency" || $scope.CustomItemDataList[i].cfdDataType == "number") {
-                          if (_defaultValue != null && _defaultValue != "") {
-                              var _myDefault = parseFloat(_defaultValue);
-                              if (!isNaN(_myDefault)) {
-                                  $scope.CustomItemDataList[i].cfdDefaultValue = _myDefault;
 
+                      CheckScopeBeforeApply()
+
+
+                      // Custom Item Field 
+                      $scope.CustomItemDataList = response.GetAllDataResult.Payload[0].CustomItemField;
+                      CheckScopeBeforeApply();
+
+                      for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+                          var _defaultValue = angular.copy($scope.CustomItemDataList[i].cfdDefaultValue);
+                          if ($scope.CustomItemDataList[i].cfdDataType == "datetime") {
+                              if (_defaultValue != null && _defaultValue != "") {
+                                  $scope.CustomItemDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
                               }
                           }
-                      }
-                      $scope.InventoryObject.CustomPartData.push({ CfdID: $scope.CustomItemDataList[i].cfdID, Value: $scope.CustomItemDataList[i].cfdDefaultValue, DataType: $scope.CustomItemDataList[i].cfdDataType });
-                  }
-                  CheckScopeBeforeApply()
-                  // Custom Activity Field 
+                          else if ($scope.CustomItemDataList[i].cfdDataType == "currency" || $scope.CustomItemDataList[i].cfdDataType == "number") {
+                              if (_defaultValue != null && _defaultValue != "") {
+                                  var _myDefault = parseFloat(_defaultValue);
+                                  if (!isNaN(_myDefault)) {
+                                      $scope.CustomItemDataList[i].cfdDefaultValue = _myDefault;
 
-                  debugger;
-
-                  $scope.CustomActivityDataList = response.GetAllDataResult.Payload[0].CustomActivityField;
-                  CheckScopeBeforeApply()
-
-                  for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
-
-                      var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
-                      if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
-                          if (_defaultValue != null && _defaultValue != "") {
-                              $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
-                          }
-                      }
-                      else if ($scope.CustomActivityDataList[i].cfdDataType == "currency" || $scope.CustomActivityDataList[i].cfdDataType == "number") {
-                          if (_defaultValue != null && _defaultValue != "") {
-                              var _myDefault = parseFloat(_defaultValue);
-                              if (!isNaN(_myDefault)) {
-                                  $scope.CustomActivityDataList[i].cfdDefaultValue = _myDefault;
-
+                                  }
                               }
                           }
+                          $scope.InventoryObject.CustomPartData.push({ CfdID: $scope.CustomItemDataList[i].cfdID, Value: $scope.CustomItemDataList[i].cfdDefaultValue, DataType: $scope.CustomItemDataList[i].cfdDataType });
                       }
-                      $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomActivityDataList[i].cfdID, Value: $scope.CustomActivityDataList[i].cfdDefaultValue, DataType: $scope.CustomActivityDataList[i].cfdDataType });
+                      CheckScopeBeforeApply()
+                      // Custom Activity Field 
+
+                       
+
+                      $scope.CustomActivityDataList = response.GetAllDataResult.Payload[0].CustomActivityField;
+                      CheckScopeBeforeApply()
+
+                      for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+
+                          var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
+                          if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
+                              if (_defaultValue != null && _defaultValue != "") {
+                                  $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
+                              }
+                          }
+                          else if ($scope.CustomActivityDataList[i].cfdDataType == "currency" || $scope.CustomActivityDataList[i].cfdDataType == "number") {
+                              if (_defaultValue != null && _defaultValue != "") {
+                                  var _myDefault = parseFloat(_defaultValue);
+                                  if (!isNaN(_myDefault)) {
+                                      $scope.CustomActivityDataList[i].cfdDefaultValue = _myDefault;
+
+                                  }
+                              }
+                          }
+                          $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomActivityDataList[i].cfdID, Value: $scope.CustomActivityDataList[i].cfdDefaultValue, DataType: $scope.CustomActivityDataList[i].cfdDataType });
+                      }
+                      CheckScopeBeforeApply()
+                      // Unit Of Measure
+                      $scope.UOMList = response.GetAllDataResult.Payload[0].UnitOfMeasure;
+                      CheckScopeBeforeApply()
+                      // Status
+                      $scope.StatusList = response.GetAllDataResult.Payload[0].Status;
+                      CheckScopeBeforeApply();
+                      $scope.getuom();
+                      $scope.getlocation();
+
+
+                      AfterLoadedData();
                   }
-                  CheckScopeBeforeApply()
-                  // Unit Of Measure
-                  $scope.UOMList = response.GetAllDataResult.Payload[0].UnitOfMeasure;
-                  CheckScopeBeforeApply()
-                  // Status
-                  $scope.StatusList = response.GetAllDataResult.Payload[0].Status;
-                  CheckScopeBeforeApply();
-                  $scope.getuom();
-                  $scope.getlocation();
+                  else {
+                      $scope.ShowErrorMessage("Get All look ups", 1, 1, response.GetAllDataResult.Message)
 
-
-                  AfterLoadedData();
+                  }
 
               },
               error: function (err) {
                   console.log(err);
-                  log.error("Error Occurred during operation");
-                  log.error(err.statusText);
+                  $scope.ShowErrorMessage("Getting look ups", 2, 1, err.statusText);
+
 
               }
           });
@@ -1124,8 +1150,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
               success: function (response) {
 
-                  debugger;
-
+                   
+                  if (response.GetMyInventoryColumnsResult.Success == true) {
+                
                   var _TempArray = response.GetMyInventoryColumnsResult.Payload;
 
                   for (var i = 0; i < _TempArray.length; i++) {
@@ -1136,12 +1163,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                       }
                   }
                   CheckScopeBeforeApply()
+                  }
+                  else {
+                      $scope.ShowErrorMessage("My inventory Columns", 1, 1, response.GetMyInventoryColumnsResult.Message)
+
+                  }
 
               },
               error: function (err) {
                   console.log(err);
-                  log.error("Error Occurred during operation");
-                  log.error(err.statusText);
+                  $scope.ShowErrorMessage("My inventory Columns", 2, 1, err.statusText);
+
 
               }
           });
@@ -1164,13 +1196,19 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
+                   if (response.LoginResult.Success == true) {
+                       $scope.StatusList = response.GetStatusResult.Payload;
+                       CheckScopeBeforeApply()
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Getting Status", 1, 1, response.GetStatusResult.Message)
 
-                   $scope.StatusList = response.GetStatusResult.Payload;
-                   CheckScopeBeforeApply()
+                   }
+       
                },
                error: function (err) {
+                   $scope.ShowErrorMessage("Getting Status", 2, 1, err.statusText);
 
-                   log.error(err.statusText);
 
                }
            });
@@ -1214,12 +1252,21 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
-                   $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
-                   CheckScopeBeforeApply()
+
+                   if (response.GetUnitsOfMeasureResult.Success == true) {
+
+                       $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
+                       CheckScopeBeforeApply()
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Getting UOMs", 1, 1, response.GetUnitsOfMeasureResult.Message)
+
+                   }
+                
                },
                error: function (err) {
+                   $scope.ShowErrorMessage("Getting UOMs", 2, 1, err.statusText);
 
-                   log.error(err.statusText);
 
                }
            });
@@ -1241,19 +1288,27 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
+                   if (response.GetLocationsResult.Success == true) {
+                       $scope.LocationList = response.GetLocationsResult.Payload;
+                       $scope.LocationSearchList = angular.copy($scope.LocationList);
 
+                       $scope.UpdateLocationAndUOMList();
+                       CheckScopeBeforeApply()
+                   }
 
-                   $scope.LocationList = response.GetLocationsResult.Payload;
-                   $scope.LocationSearchList = angular.copy($scope.LocationList);
+                   else {
+                       $scope.ShowErrorMessage("Getting locations", 1, 1, response.GetLocationsResult.Message)
 
-                   $scope.UpdateLocationAndUOMList();
-                   CheckScopeBeforeApply()
+                   }
+
+                   
                },
                error: function (response) {
 
 
                    console.log(response);
-                   log.error(response.statusText);
+                   $scope.ShowErrorMessage("Getting locations", 2, 1, response.statusText);
+
 
                }
            });
@@ -1301,12 +1356,20 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
+                   if (response.GetActiveUnitDataFieldsResult.Success == true) {
+                       $scope.UnitDataList = response.GetActiveUnitDataFieldsResult.Payload;
+                       CheckScopeBeforeApply()
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Active unit data columns", 1, 1, response.GetActiveUnitDataFieldsResult.Message)
 
-                   $scope.UnitDataList = response.GetActiveUnitDataFieldsResult.Payload;
-                   CheckScopeBeforeApply()
+                   }
+               
                },
                error: function (response) {
-                   log.error(response.statusText);
+                   //log.error(response.statusText);
+                   $scope.ShowErrorMessage("Active unit data columns", 2, 1, err.statusText);
+
                }
            });
     }
@@ -1375,8 +1438,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type }),
                success: function (response) {
 
-
-                   debugger;
+                   if (response.LoginResult.Success == true) {
+                  
+                    
 
 
                    if (Type == 0) {
@@ -1404,9 +1468,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                    }
 
                    CheckScopeBeforeApply()
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Custom Field's data", 1, 1, response.GetCustomFieldsDataResult.Message)
+
+                   }
                },
                error: function (response) {
-                   log.error(response.statusText);
+                   $scope.ShowErrorMessage("Custom Field's data", 2, 1, err.statusText);
+
                    //$scope.InventoryObject.Location = 678030;
                }
            });
@@ -1448,7 +1518,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.handleFileSelect = function (evt) {
 
-        debugger;
+         
         var files = evt.target.files;
         FileName = "";
         StreamData = "";
@@ -1480,7 +1550,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     _ImgObj.FileName = FileName;
                     _ImgObj.bytestring = e.target.result;
                     _ImgObj.Size = theFile.size;
-                  
+
 
                 };
             })(f);
@@ -1521,7 +1591,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.onFail = function (message) {
-       
+
         log.error('Failed because: ' + message);
     }
     $scope.capturePhotoNew = function () {
@@ -1570,7 +1640,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         //  $cordovaKeyboard.disableScroll(true);
         $scope.GetAllData();
 
-      
+
 
     }
 
@@ -2217,7 +2287,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.getstepCustom = function (Type, ColumnName) {
-        debugger;
+         
         if (ColumnName != "" && ColumnName != null) {
 
             if (Type == 1) {
@@ -2693,16 +2763,16 @@ app.directive('myEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {
 
-          
+
             var key = event.which || event.keyCode || 0;
-           
+
 
             if (event.which === 13) {
 
-        
+
 
                 scope.$apply(function () {
-                    
+
                     scope.$eval(attrs.myEnter);
                 });
 

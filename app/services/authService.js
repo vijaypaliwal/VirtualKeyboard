@@ -53,7 +53,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
             data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),
             success: function (response) {
 
-                debugger;
+                 
 
                 $("#loginBtn").removeClass("disabled");
                 $(".fa-sign-in").removeClass("fa-spin");
@@ -81,11 +81,10 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 else {
 
 
-                    log.error("log in to error");
+                    
                     $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
                     playBeep();
 
-                    alert(response.LoginResult.Message);
                     log.error(response.LoginResult.Message);
 
                 }
@@ -94,7 +93,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
             },
             error: function (err) {
 
-                debugger;
+                 
 
                 log.error("Error occurred due to error::" + err.statusText);
                 log.error(err.responseText);
@@ -136,7 +135,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                success: function (response) {
 
 
-                   debugger;
+                    
                    _UserInfo.username = response.GetUserInfoResult.Payload[0].UserName
                    _UserInfo.myprofileimage = response.GetUserInfoResult.Payload[0].ProfilePic;
 

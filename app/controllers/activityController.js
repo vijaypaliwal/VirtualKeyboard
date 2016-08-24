@@ -278,13 +278,20 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
+                   if (response.GetUnitsOfMeasureResult.Success == true) {
+                       $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
 
-                   $scope.UOMList = response.GetUnitsOfMeasureResult.Payload;
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Getting UOM list", 1, 1, response.GetUnitsOfMeasureResult.Message)
+
+                   }
                    CheckScopeBeforeApply()
                },
                error: function (err) {
 
-                   log.error(err.Message);
+                   $scope.ShowErrorMessage("Getting UOM list", 2, 1, err.statusText);
+
 
                }
            });
@@ -460,15 +467,22 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
 
+                   if (response.GetStatusResult.Success == true) {
+                       $scope.StatusList = response.GetStatusResult.Payload;
 
 
-                   $scope.StatusList = response.GetStatusResult.Payload;
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Getting Status list", 1, 1, response.GetStatusResult.Message)
+
+                   }
+
                    CheckScopeBeforeApply()
                },
                error: function (err) {
 
 
-                   log.error(err.Message);
+                   $scope.ShowErrorMessage("Getting Status list", 2, 1, err.statusText)
 
                }
            });
@@ -565,12 +579,14 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 error: function () {
 
                     $scope.LocationSearching = false;
-                    log.error('There is a problem with the service!');
+                    $scope.ShowErrorMessage("Searching location", 2, 1, err.statusText);
+
                 },
 
                 success: function (data) {
 
-
+                    if (data.SearchLocationAutoCompleteResult.Success == true) {
+                    
 
                     if (data.SearchLocationAutoCompleteResult != null && data.SearchLocationAutoCompleteResult.Payload != null) {
                         $scope.LocationSearching = false;
@@ -582,6 +598,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         else
                             $scope.isnolocationmsg = false
 
+
+                    }
+                    }
+                    else {
+                        $scope.ShowErrorMessage("Searching location", 1, 1, data.SearchLocationAutoCompleteResult.Message)
 
                     }
 
@@ -1036,7 +1057,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
               success: function (response) {
 
-
+                  if (response.GetMyInventoryColumnsResult.Success == true) {
+                 
                   // MY inventory column region
                   var _TempArrayMyInventory = response.GetMyInventoryColumnsResult.Payload;
 
@@ -1047,9 +1069,12 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                           $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
                       }
                   }
-                  console.log("My inventory fields");
 
-                  console.log($scope.MyinventoryFields);
+                  }
+                  else {
+                      $scope.ShowErrorMessage("Getting myinventory columns", 1, 1, response.GetMyInventoryColumnsResult.Message)
+
+                  }
                   CheckScopeBeforeApply();
 
 
@@ -1059,7 +1084,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
               },
               error: function (err) {
                   console.log(err);
-                  log.error("Error Occurred during operation");
+                  $scope.ShowErrorMessage("Getting myinventory columns", 2, 1, err.statusText);
+
 
 
               }
@@ -1121,7 +1147,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type }),
                success: function (response) {
-
+                   if (response.GetCustomFieldsDataResult.Success == true) {
+                  
                    $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
 
                    for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
@@ -1145,11 +1172,17 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                    CheckScopeBeforeApply();
                    UpdateCartWithCustomFields();
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Getting custom data", 1, 1, response.GetCustomFieldsDataResult.Message)
+
+                   }
                    CheckScopeBeforeApply();
                },
                error: function (response) {
 
-                   log.error(response.GetCustomFieldsDataResult.Errors[0]);
+                   $scope.ShowErrorMessage("Getting custom data", 2, 1, err.statusText);
+
                }
            });
     }
@@ -2362,7 +2395,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     dataType: 'json',
                     data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _mdata }),
                     success: function (response) {
-
+                        if (response.MultipleActivityResult.Success == true) {
+                       
                         localStorageService.set("ActivityCart", "");
                         localStorageService.set("SelectedAction", "");
 
@@ -2376,12 +2410,17 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                         $scope.clearCartFunction();
                         $scope.$apply();
+
+                        }
+                        else {
+                            $scope.ShowErrorMessage("Multiple activity", 1, 1, response.MultipleActivityResult.Message)
+
+                        }
                     },
                     error: function (err) {
 
-                        $scope.errorbox(err);
-                        log.error("Some error occurred");
-                        console.log(err.responseText);
+                        $scope.ShowErrorMessage("Multiple activity", 2, 1, err.statusText);
+
 
                     }
                 });

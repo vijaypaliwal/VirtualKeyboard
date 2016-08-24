@@ -70,10 +70,39 @@
     {
         text-transform:capitalize;
     }
+
+    .title-header
+    {
+        text-align:left;
+    }
+
+    .newbackbtn
+    {
+        left:0px;
+    }
+    .top50 {
+        padding-top: 35px;
+    }
 </style>
 
 
-<div id="content" class="grey-blue" >
+<div class="title-header">
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <h4 class="titletext">Details</h4>
+        </div>
+    </div>
+</div>
+
+<a href="#/FindItems" class="waves-effect newbackbtn ng-scope"> <i class="fa fa-arrow-left"></i> </a>
+
+<a  class="btn btn-danger roundbtntitle"> <i class="fa fa-plus"></i> </a>
+
+
+
+<div id="content" class="top50 grey-blue" >
     <div ng-if="IsEditMode==false">
 
       

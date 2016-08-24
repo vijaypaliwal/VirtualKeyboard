@@ -14,21 +14,21 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
     var _TotalRecordsCurrent = 0;
     $scope.CurrentActiveSearchField = "lLoc";
     $scope.SearchData = { SearchValue: "" };
- 
+
     $scope.IsProcessing = false;
 
     $scope.locationdata = {
-     LocationName:"",
-     LocationID: 0,
-     LocationZone:"",
-     LocationDescription:""
+        LocationName: "",
+        LocationID: 0,
+        LocationZone: "",
+        LocationDescription: ""
     };
 
     $scope.mode = 1;
 
 
     $('#bottommenumodal').on('hidden.bs.modal', function () {
-        $(".menubtn .fa").removeClass('rotate');
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
     });
 
 
@@ -37,17 +37,17 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
         if ($("body").hasClass("modal-open")) {
             $("#bottommenumodal").modal('hide');
 
-            $(".menubtn .fa").removeClass('rotate');
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
 
 
         }
         else {
             $("#bottommenumodal").modal('show');
-            $(".menubtn .fa").addClass('rotate');
+            $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
         }
     }
 
-    
+
 
 
 
@@ -111,16 +111,16 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
     $scope.ClearFilter = function () {
 
-        debugger;
 
-        
+
+
 
         for (var i = 0; i < $scope.FilterArray.length; i++) {
             $scope.FilterArray[i].SearchValue = "";
-            
+
         }
 
-       
+
         $("#MasterSearch").val('');
         $scope.SearchData.SearchValue = $("#MasterSearch").val();
 
@@ -128,15 +128,15 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
         $scope.GetLocations();
 
-     
 
-        
+
+
 
 
     }
 
     $scope.GetLocations = function () {
-        debugger;
+
         $scope.LocationsLoaded = false;
 
         var authData = localStorageService.get('authorizationData');
@@ -169,38 +169,45 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
             dataType: 'json',
             success: function (result) {
 
-                $scope.LocationsLoaded = true;
-                $scope.Locations = result.LoadLocationsResult.Payload[0].Data;
 
-                _TotalRecordsCurrent = result.LoadLocationsResult.Payload[0].Data.length;
+                if (result.LoadLocationsResult.Success == true) {
 
-                $scope.currentrecord = _TotalRecordsCurrent;
-                $scope.totalrecords = result.LoadLocationsResult.Payload[0].TotalRercords;
-                $scope.ActualTotalRecords = result.LoadLocationsResult.Payload[0].ActualTotalRecords;
-                if (_TotalRecordsCurrent == 0) {
-                    $(".norecords").show();
-                    
+                    $scope.LocationsLoaded = true;
+                    $scope.Locations = result.LoadLocationsResult.Payload[0].Data;
 
+                    _TotalRecordsCurrent = result.LoadLocationsResult.Payload[0].Data.length;
+
+                    $scope.currentrecord = _TotalRecordsCurrent;
+                    $scope.totalrecords = result.LoadLocationsResult.Payload[0].TotalRercords;
+                    $scope.ActualTotalRecords = result.LoadLocationsResult.Payload[0].ActualTotalRecords;
+                    if (_TotalRecordsCurrent == 0) {
+                        $(".norecords").show();
+
+
+                    }
+                    else {
+                        $(".norecords").hide();
+
+
+                    }
+
+                    if ($scope.ActualTotalRecords) {
+                    } else {
+                        $scope.OpenmenuModal();
+                    }
                 }
                 else {
-                    $(".norecords").hide();
-               
+                    $scope.ShowErrorMessage("Get locations", 1, 1, result.LoadLocationsResult.Message)
 
                 }
-
-                if ($scope.ActualTotalRecords) {
-                } else {
-                    $scope.OpenmenuModal();
-                }
-
 
                 CheckScopeBeforeApply();
             },
             error: function (req) {
-                log.error("error during get inventory Success");
+                $scope.ShowErrorMessage("Get locations", 2, 1, req.statusText);
+
                 $scope.LocationsLoaded = true;
                 CheckScopeBeforeApply();
-                console.log(req);
             },
             complete: function () {
                 _IsLazyLoadingUnderProgress = 0;
@@ -209,7 +216,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
         });
     }
 
-    
+
 
 
     $scope.addlocation = function () {
@@ -229,7 +236,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
     $scope.editlocation = function (obj) {
 
-        debugger;
+
 
         $scope.mode = 3;
 
@@ -237,31 +244,34 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
         $scope.locationdata.LocationID = obj.LocationID;
         $scope.locationdata.LocationZone = obj.LocationZone;
         $scope.locationdata.LocationDescription = obj.LocationDescription;
-    
+
         $scope.$apply();
 
     }
 
     $scope.savelocation = function () {
 
-       
-            var authData = localStorageService.get('authorizationData');
-            if (authData) {
-                $scope.SecurityToken = authData.token;
-            }
 
-            var datatosend = { "LocationID": $scope.locationdata.LocationID, "LocationName": $scope.locationdata.LocationName, "LocationZone": $scope.locationdata.LocationZone, "LocationDescription": $scope.locationdata.LocationDescription };
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
 
-            $scope.IsProcessing = true;
+        var datatosend = { "LocationID": $scope.locationdata.LocationID, "LocationName": $scope.locationdata.LocationName, "LocationZone": $scope.locationdata.LocationZone, "LocationDescription": $scope.locationdata.LocationDescription };
 
-            $.ajax({
-                url: serviceBase + "CreateEditLocation",
-                type: 'POST',
-                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "_Location": datatosend }),
-                dataType: 'json',
-                contentType: 'application/json',
-                success: function (result) {
-                    $scope.IsProcessing = false;
+        $scope.IsProcessing = true;
+
+        $.ajax({
+            url: serviceBase + "CreateEditLocation",
+            type: 'POST',
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "_Location": datatosend }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (result) {
+                $scope.IsProcessing = false;
+
+                if (result.CreateEditLocationResult.Success == true) {
+
                     if (result.CreateEditLocationResult.Payload == 1) {
                         if ($scope.mode == 2) {
                             ShowSuccess("Added");
@@ -271,7 +281,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                             ShowSuccess("Updated");
                         }
 
-                      
+
 
 
 
@@ -294,24 +304,29 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                         $scope.IsProcessing = false;
                         $scope.$apply();
                     }
-                  
 
 
+                }
+                else {
+                    $scope.ShowErrorMessage("Updating location", 1, 1, result.CreateEditLocationResult.Message)
 
-                },
-                error: function (err) {
-                    $scope.IsProcessing = false;
-                    alert("Error");
-                    debugger;
-
-                },
-                complete: function () {
-                    $scope.IsProcessing = false;
                 }
 
-            });
+            },
+            error: function (err) {
+                $scope.IsProcessing = false;
+                $scope.ShowErrorMessage("Updating location", 2, 1, err.statusText);
 
-      
+
+
+            },
+            complete: function () {
+                $scope.IsProcessing = false;
+            }
+
+        });
+
+
 
     }
 
@@ -320,7 +335,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
 
         var id = obj.LocationID;
-        debugger;
+
         var _id = "#Delete_" + id;
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {
@@ -332,8 +347,9 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (result) {
+                        if (result.DeleteLocationResult.Success == true) {
+                       
 
-                        debugger;
                         $(_id).find("i").removeClass("fa-spin");
                         if (result.DeleteLocationResult.Payload == 1) {
                             ShowSuccess("Deleted");
@@ -349,12 +365,17 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
 
                         $scope.mode = 1;
+                        }
+                        else {
+                            $scope.ShowErrorMessage("Deleting location", 1, 1, result.DeleteLocationResult.Message)
 
+                        }
                     },
                     error: function (err) {
                         $(_id).find("i").removeClass("fa-spin");
-                        alert("Error");
-                        debugger;
+                        $scope.ShowErrorMessage("Deleting location", 2, 1, err.statusText);
+
+
 
                     },
                     complete: function () {
@@ -367,7 +388,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
     }
 
 
-    
+
     $scope.leaveform = function () {
         $scope.mode = 1;
         $scope.$apply();

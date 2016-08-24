@@ -13,8 +13,6 @@
         padding: 8px;
     }
 
-   
-
     .mylabel {
         font-size: 16px;
         color: #767676;
@@ -249,11 +247,32 @@
         margin-top: 12px;
     }
 
+    .maincontent
+    {
+        padding-top:50px;
+    }
+    .newbackbtn
+    {
+        margin-left:15px;
+    }
+
 
 </style>
 
 
+<div class="title-header">
 
+    <div class="row">
+
+        <div class="col-xs-12">
+            <h4 class="titletext">Add Inventory <small> {{CurrentCount+1}} / {{Totalslides+1}}</small> </h4>
+        </div>
+    </div>
+</div>
+
+
+<a ng-click="viewall()" class="btn btn-danger roundbtntitle"> <i class="fa fa-info"></i> </a>
+<a href="#/mainmenu" class="waves-effect newbackbtn ng-scope"> <i class="fa fa-arrow-left"></i> </a>
 
 <div class="maincontent animated slideInLeft">
                   
@@ -265,12 +284,9 @@
                 <br /><br /><br />
                 <img src="img/loader.gif" alt="Alternate Text" />
             </div>
-            <h4 style="margin-top:21px;">Add Inventory <span style="float: right;  font-size:11px;"> {{CurrentCount+1}} / {{Totalslides+1}}</span></h4>
+       
             <div style="display:none;" class="swiper-container">
                 
-
-            
-
 
                     <div class="swiper-wrapper">
 
@@ -344,7 +360,6 @@
                             </div>
 
 
-
                             <div class="form-group" ng-if="obj.ColumnName=='lLoc'">
                                 <label>Select Location <span class="redText">*</span></label> 
                                 <div class="input-group">
@@ -399,9 +414,6 @@
                                     <span class="input-group-addon waves-effect  waves-effect last" ng-click="GetLastValue('Inv_ItemGroup','#itemgroup')"><i class="fa fa-undo"></i></span>
                                 </div>
                             </div>
-
-
-
 
                             <div class="form-group" ng-if="obj.ColumnName=='iCostPerUnit'">
                                 <label>Cost per unit</label>
@@ -802,8 +814,8 @@
     </div>
 </div>
 
-<a ng-click="OpenmenuModal()" class="Addbtn waves-effect btn-info">
-    <i class="fa fa-plus"></i>
+<a ng-click="OpenmenuModal()" class="menubtn waves-effect btn-info">
+    <i class="fa fa-bars"></i>
 </a>
 
 
@@ -1154,17 +1166,30 @@
 </div>
 
 
-<div style="background:#fff;" id="modal3" class="modal animated bounceIn">
+<div style="background:#fff;" id="modal3" class="modal bottom-modal bottom-sheet animated bounceInUp">
     <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
-      
-        <h4>All Done!  What Next?</h4>
+
+        <h4> All Done!  What Next?</h4>
     </div>
 
-    <div style="padding:5px;" class="modal-body">
-        <p style="padding-left:15px; margin-top:20px;" ng-click="notmove()">Add more inventory.</p>
-        <hr />
-        <p style="padding-left:15px;" ng-click="confirmmove()">Go to inventory.</p>
+    <div class="modal-body">
+        <ul>
+            <li>
+                <a ng-click="notmove()"> <i class="fa fa-plus"></i> Add more inventory.</a>
+            </li>
+            <li>
 
+                <a ng-click="confirmmove()"> <i class="fa fa-shopping-cart"></i> Go to inventory.</a>
+            </li>
+
+         
+        </ul>
+      
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn width-100 btn-gray" data-dismiss="modal">Cancel</button>
     </div>
 </div>
 

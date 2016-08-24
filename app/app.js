@@ -123,13 +123,17 @@ app.config(function ($routeProvider) {
         controller: "inventoryactivityController",
         templateUrl: "app/views/inventoryactivity.html"
     });
+
+    $routeProvider.when("/itemreport", {
+        controller: "itemreportController",
+        templateUrl: "app/views/itemreport.html"
+    });
     
 
     $routeProvider.otherwise({ redirectTo: "/login" });
 
 });
 
-//var serviceBase = 'http://localhost:7440/API/ClearlyInventoryAPI.svc/';
 //var serviceBaseUrl = 'http://localhost:7440/';
 var serviceBaseUrl = 'https://test.inventory4.com/';
 var serviceBase = 'https://test.inventory4.com/API/ClearlyInventoryAPI.svc/';
