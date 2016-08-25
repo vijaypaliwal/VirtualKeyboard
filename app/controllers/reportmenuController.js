@@ -25,6 +25,27 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
 
+    $('#bottommenumodal').on('hidden.bs.modal', function () {
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
+    });
+
+
+    $scope.Openbottommenu = function () {
+
+        if ($("body").hasClass("modal-open")) {
+            $("#bottommenumodal").modal('hide');
+
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
+
+
+        }
+        else {
+            $("#bottommenumodal").modal('show');
+            $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
+        }
+    }
+
+
 
     $scope.GoTo = function (url) {
 

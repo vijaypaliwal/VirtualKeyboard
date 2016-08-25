@@ -5,25 +5,11 @@
         width:100%;
     }
 
-    .btn-large
-    {
-        text-align:center;
-        height:auto;
-      padding:12px;
-    }
-
-    .btn-large h5 {
-       text-transform:capitalize;
-       line-height:25px;
-    }
+ 
+  
 
 
-    .btn-large i
-    {
-        display:block;
-        font-size:40px;
-
-    }
+  
 
 
         .btn-large p {
@@ -45,33 +31,29 @@
 
 </style>
 
-<div style="margin-top:12px;" class="page-header">
-
+<div class="title-header">
     <div class="row">
-        
-        <div class="col-xs-7">
-            <h4 style="margin-top:0px;line-height:34px; margin-bottom:0px; color:#000;">Settings</h4>
+        <div class="col-xs-12">
+            <h4 class="titletext">Manage setting</h4>
         </div>
     </div>
-
-
 </div>
+<a href="#/mainmenu" class="waves-effect newbackbtn ng-scope"> <i class="fa fa-arrow-left"></i> </a>
 
 
-<div style="background:#fff; margin-top:10px; padding:10px;">
 
 
+<div class="top50">
+
+    <br />
 
     <button type="button" ng-click="GoTo('/uom')" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6">
 
         <div class="row">
-            <div class="col-xs-2">
-                <i class="fa fa-cog"></i>
+            <div class="col-xs-10">
+                <i class="fa fa-cog"></i> Manage UOM
             </div>
-            <div class="col-xs-8">
-              
-                <h5 >Manage UOM</h5>
-            </div>
+            
 
             <div class="col-xs-2">
 
@@ -93,15 +75,11 @@
 
 
         <div class="row">
-            <div class="col-xs-2">
-                <i class="fa fa-map-marker"></i>
+            <div class="col-xs-10">
+                <i class="fa fa-map-marker"></i>  Manage Location
 
             </div>
-            <div class="col-xs-8">
-
-                <h5>  Manage Location </h5>
-
-            </div>
+          
 
             <div class="col-xs-2">
                 <span ng-if="IsLocationLoading == true"> <img height="30" width="30" src="img/loader1.gif" alt="Alternate Text" /></span>
@@ -119,15 +97,11 @@
 
     <button type="button" ng-click="GoTo('/status')" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6">
         <div class="row">
-            <div class="col-xs-2">
-                <i class="fa fa-check-circle-o"></i>
+            <div class="col-xs-10">
+                <i class="fa fa-check-circle-o"> </i> Manage Status
 
             </div>
-            <div class="col-xs-8">
-
-                <h5> Manage Status</h5>
-
-            </div>
+         
 
             <div class="col-xs-2">
 
@@ -146,15 +120,11 @@
 
     <button type="button" ng-click="GoTo('/mobileorder')" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6">
         <div class="row">
-            <div class="col-xs-2">
-                <i class="fa fa-sort-alpha-asc"></i>
+            <div class="col-xs-10">
+                <i class="fa fa-sort-alpha-asc"></i> Arrange Inventory Columns
 
             </div>
-            <div class="col-xs-8">
-
-                <h5> Arrange Inventory Columns</h5>
-
-            </div>
+          
 
             <div class="col-xs-2">
 
@@ -170,4 +140,19 @@
 
     </button>
 
+</div>
+
+<a ng-click="Openbottommenu()" class="menubtn waves-effect">
+    <i class="fa fa-bars"></i>
+</a>
+
+<div id="bottommenumodal" class="modal bottommenu fade">
+    <div class="modal-body">
+        <ul class="animated slideInUp selectAction">
+            <li> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
+            <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-map-marker"></i> </a></li>
+            <li> <a href="#/reportmenu"><span class="newinv">Go to Report</span></a>  <a href="#/Go to Report" class=" waves-effect btn-primary btn"> <i class="fa fa-check-circle-o"></i> </a></li>
+            <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
+        </ul>
+    </div>
 </div>

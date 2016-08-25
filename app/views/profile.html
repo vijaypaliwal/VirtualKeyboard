@@ -74,20 +74,13 @@
 
         </form>
         <div>
-            <br /><br />
+        <br />
         </div>
 
-
-        <div class="row">
-            <div class="col-xs-6">
-                <a ng-if="isSaving==false" ng-disabled="myForm.$invalid" ng-click="Updateinfo()" class="btn width-100 waves-effect btn-primary"> <i class="fa fa-pencil"></i> Update</a>
-                <a ng-if="isSaving==true" ng-click="Updateinfo()" class="btn width-100 btn-primary waves-effect disabled"> <i class="fa fa-pencil fa-spin"></i> Update</a>
-            </div>
-
-            <div class="col-xs-6">
-                <a ng-click="detailmode()" class="waves-effect width-100 btn btn-gray"> <i class="fa fa-times"></i> Cancel</a>
-            </div>
-        </div>
+        <a ng-if="isSaving==false" ng-disabled="myForm.$invalid" ng-click="Updateinfo()" class="btn waves-effect btn-primary"> <i class="fa fa-pencil"></i> Update</a>
+        <a ng-if="isSaving==true" ng-click="Updateinfo()" class="btn btn-primary waves-effect disabled"> <i class="fa fa-pencil fa-spin"></i> Update</a>
+        <a ng-click="detailmode()" class="waves-effect btn btn-gray"> <i class="fa fa-times"></i> Cancel</a>
+        
         
     </div>
 

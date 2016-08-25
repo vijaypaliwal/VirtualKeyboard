@@ -16,10 +16,7 @@
         padding-bottom:2px;
     }
 
-    .btn-warning
-    {
-        border-radius:0px !important;
-    }
+  
 
     .cartitems
     {
@@ -2210,7 +2207,7 @@
                                 </div>
                                 <div class="col-xs-4">
                                     <div style="text-align:right;">
-                                        <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-check"></i>
+                                        <i style="font-size:25px; color:#fff; margin-top:17px;" class="fa fa-check"></i>
                                     </div>
 
 
@@ -2226,7 +2223,7 @@
                                 </div>
                                 <div class="col-xs-4">
                                     <div style="text-align:right;">
-                                        <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-spin fa-check"></i>
+                                        <i style="font-size:25px; color:#fff; margin-top:17px;" class="fa fa-spin fa-check"></i>
                                     </div>
 
 
@@ -2247,7 +2244,7 @@
                                 <div class="col-xs-4">
 
                                     <div style="text-align:right">
-                                        <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-info-circle"></i>
+                                        <i style="font-size:25px; color:#fff; margin-top:17px;" class="fa fa-info-circle"></i>
                                     </div>
 
 
@@ -2266,7 +2263,7 @@
                                 </div>
                                 <div class="col-xs-4">
                                     <div style="text-align:right">
-                                        <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-shopping-cart"></i>
+                                        <i style="font-size:25px; color:#fff; margin-top:17px;" class="fa fa-shopping-cart"></i>
                                     </div>
 
 
@@ -2283,10 +2280,8 @@
                                 <div class="col-xs-4">
 
                                     <div style="text-align:right;">
-                                        <i style="font-size:25px; color:#fff; margin-top:10px;" class="fa fa-times"></i>
+                                        <i style="font-size:25px; color:#fff; margin-top:17px;" class="fa fa-times"></i>
                                     </div>
-
-
 
                                 </div>
 
@@ -2500,26 +2495,28 @@
 
     <div ng-if="IsSingleMode==false">
 
+
         <div class="row">
-            <div class="col-xs-6">
-                <div ng-if="IsProcessing==false" ng-click="SubmitAllActivities()">
-                    <a class="btn width-100 waves-effect  btn-primary">
-                        <i class="fa fa-check"></i>
-                        Process
-                    </a>
-                </div>
+            <div class="col-xs-12">
 
-                <div ng-if="IsProcessing==true" class="linkdisabled" ng-click="SubmitAllActivities()">
-                    <a class="btn width-100 waves-effect  btn-primary"><i style="color:#fff;" class="fa fa-check fa-spin"></i>Process</a>
-                </div>
-            </div>
+                <a ng-if="IsProcessing==false" ng-click="SubmitAllActivities()" class="btn  waves-effect  btn-primary">
+                    <i class="fa fa-check"></i>
+                    Process
+                </a>
 
-            <div class="col-xs-6">
-
-                <a class="btn width-100 waves-effect btn-gray" ng-click="LeavePage()"><i class="fa fa-times"></i>&nbsp;Cancel</a>
-
+                <a ng-if="IsProcessing==true" ng-click="SubmitAllActivities()" class="linkdisabled btn waves-effect  btn-primary"><i style="color:#fff;" class="fa fa-check fa-spin"></i> Process</a>
+                <a class="btn waves-effect btn-gray" ng-click="LeavePage()"><i class="fa fa-times"></i> Cancel</a>
             </div>
         </div>
+
+
+        
+
+        <div >
+           
+        </div>
+
+       
 
     </div>
 

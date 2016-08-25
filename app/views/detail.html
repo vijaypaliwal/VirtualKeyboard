@@ -333,21 +333,12 @@
                     <input type="text" class="form-control" disabled="disabled" ng-model="CurrentInventory.lLoc" />
                 </div>
                 <br/>
-                <br />
-                <br />
+                
+                <button type="button" ng-click="UpdateInventory()" ng-if="SavingData==false" ng-disabled="CurrentInventory.pPart==''||CurrentInventory.pDescription==''" class="waves-effect btn btn-primary"> <i class="fa fa-check"></i> Save</button>
+                <button type="button" ng-if="SavingData==true" disabled class="waves-effect btn btn-primary"> <i class="fa fa-check fa-spin"></i> Save</button>
+                <button ng-if="SavingData==false" class="waves-effect  btn btn-gray" ng-click="ToggleEditView()"><i class="fa fa-times-circle"></i> Cancel</button>
 
-
-                <div class="row">
-                    <div class="col-xs-6">
-                        <button type="button" ng-click="UpdateInventory()" ng-if="SavingData==false" ng-disabled="CurrentInventory.pPart==''||CurrentInventory.pDescription==''" class="waves-effect btn width-100 btn-primary"> <i class="fa fa-check"></i> Save</button>
-                        <button type="button" ng-if="SavingData==true" disabled class="waves-effect btn btn-primary"> <i class="fa fa-check fa-spin"></i> Save</button>
-                    </div>
-                    <div class="col-xs-6">
-                        <button ng-if="SavingData==false" class="waves-effect width-100 btn btn-gray" ng-click="ToggleEditView()"><i class="fa fa-times-circle"></i> Cancel</button>
-
-                        <button ng-if="SavingData==true" disabled class="waves-effect btn width-100 btn-gray"><i class="fa fa-times-circle"></i> Cancel</button>
-                    </div>
-                </div>
+                <button ng-if="SavingData==true" disabled class="waves-effect btn btn-gray"><i class="fa fa-times-circle"></i> Cancel</button>
 
 
                 

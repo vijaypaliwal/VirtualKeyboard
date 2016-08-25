@@ -5,11 +5,10 @@
     height: 45px;
     line-height: 45px;
     border-radius: 45px;
-    padding-left: 9px;
-    padding-right: 9px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-transform:capitalize;
 }
-
-
 
 .btn-gray {
     background: #949494 !important;
@@ -20,8 +19,9 @@
     border: transparent !important;
     border-radius: 45px;
     font-size: 17px;
-    padding-left: 9px;
-    padding-right: 9px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-transform:capitalize;
 }
 
 .bootbox .modal-body {
@@ -348,3 +348,12 @@
     color: #fff;
     font-size: 25px;
     }
+
+ .btn-large
+ {
+     border-radius:50px;
+ }
+
+ .btn-large i {
+    font-size: 17px;
+}

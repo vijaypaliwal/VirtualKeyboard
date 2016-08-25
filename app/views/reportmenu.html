@@ -5,12 +5,7 @@
         width:100%;
     }
 
-    .btn-large
-    {
-        text-align:center;
-        height:auto;
-      padding:5px;
-    }
+   
 
     .btn-large h5 {
        text-transform:capitalize;
@@ -18,12 +13,7 @@
     }
 
 
-    .btn-large i
-    {
-        display:block;
-        font-size:25px;
-
-    }
+ 
 
 
         .btn-large p {
@@ -45,15 +35,13 @@
       
     }
 
-   
-
     body
     {
         background:#eaeaea;
         overflow-x:hidden !important;
     }
 
-    .col-xs-3 span {
+       .col-xs-3 span {
         padding: 10px;
         background: #fff;
         color: #000;
@@ -61,38 +49,42 @@
         border-radius: 100%;
         padding-left: 15px;
         padding-right: 15px;
-    }
-    .col-xs-7
-    {
-        text-align:left;
-    }
+        }
+      .col-xs-9
+      {
+       text-align:left;
+       padding-left:25px;
+       white-space:nowrap;
+      }
 
+
+    .col-xs-3
+    {
+        text-align:center;
+    }
 
 </style>
 
-<div style="margin-top:12px;" class="page-header">
-
+<div class="title-header">
     <div class="row">
-        
-        <div class="col-xs-7">
-            <h4 style="margin-top:0px;line-height:34px; margin-bottom:0px; color:#000;">Reports</h4>
+        <div class="col-xs-12">
+            <h4 class="titletext">All Reports</h4>
         </div>
     </div>
 </div>
 
+<a href="#/mainmenu" class="waves-effect newbackbtn ng-scope"> <i class="fa fa-arrow-left"></i> </a>
 
-<div style="background:#fff; margin-top:10px; padding:10px;">
+<div class="top50">
 
- 
+    <br />
 
     <a href="#/currentinventory" ng-click="GoTo('/currentinventory')" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6">
         <div class="row">
-            <div class="col-xs-2">
-                <i class="fa fa-th-list"></i>
+            <div class="col-xs-9">
+                <i class="fa fa-th-list"></i> Current Inventory
             </div>
-            <div class="col-xs-7">
-                <h5>Current Inventory</h5>
-            </div>
+          
 
             <div class="col-xs-3">
                 <div ng-if="loadcounter==false">
@@ -113,15 +105,11 @@
 
 
         <div class="row">
-            <div class="col-xs-2">
-                <i class="fa fa-th-list"></i>
+            <div class="col-xs-9">
+                <i class="fa fa-th-list"></i> Inventory summary
 
             </div>
-            <div class="col-xs-7">
-
-                <h5> Inventory summary</h5>
-
-            </div>
+          
 
             <div class="col-xs-3">
               
@@ -134,15 +122,11 @@
 
     <a href="#/inventoryactivity" class="waves-effect waves-light btn-large btn-danger width-100 animated bouncein delay-6">
         <div class="row">
-            <div class="col-xs-2">
-                <i class="fa fa-th-list"></i>
+            <div class="col-xs-9">
+                <i class="fa fa-th-list"></i> Inventory Activity
 
             </div>
-            <div class="col-xs-7">
-
-                <h5>Inventory Activity</h5>
-
-            </div>
+           
 
             <div class="col-xs-3">
                 <div ng-if="loadcounter==false">
@@ -164,15 +148,11 @@
 
     <a class="waves-effect btn-large waves-light btn-info  width-100 animated bouncein delay-6">
         <div class="row">
-            <div class="col-xs-2">
-                <i class="fa fa-th-list"></i>
+            <div class="col-xs-9">
+                <i class="fa fa-th-list"></i>  Restock
 
             </div>
-            <div class="col-xs-7">
-
-                <h5> Global Restock</h5>
-
-            </div>
+          
 
             <div class="col-xs-3">
 
@@ -188,15 +168,10 @@
 
     <a class="waves-effect btn-large waves-light btn-info  width-100 animated bouncein delay-6">
         <div class="row">
-            <div class="col-xs-2">
-             <i class="fa fa-th-list"></i>
+            <div class="col-xs-9">
+             <i class="fa fa-th-list"></i> Local Restock
             </div>
-            <div class="col-xs-7">
-
-            <h5>Local Restock</h5>
-
-            </div>
-
+          
             <div class="col-xs-3">
             
             </div>
@@ -205,17 +180,30 @@
 
     <a href="#/itemreport" class="waves-effect waves-light btn-large btn-success width-100 animated bouncein delay-6">
         <div class="row">
-            <div class="col-xs-2">
-                <i class="fa fa-th-list"></i>
+            <div class="col-xs-9">
+                <i class="fa fa-th-list"></i> All Items
             </div>
-            <div class="col-xs-7">
-                <h5>All Items</h5>
-            </div>
-
+           
             <div class="col-xs-3">
 
             </div>
         </div>
     </a>
 
+</div>
+
+
+<a ng-click="Openbottommenu()" class="menubtn waves-effect">
+    <i class="fa fa-bars"></i>
+</a>
+
+<div id="bottommenumodal" class="modal bottommenu fade">
+    <div class="modal-body">
+        <ul class="animated slideInUp selectAction">
+            <li> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
+            <li> <a href="#/Location"><span class="newinv">Manage Location</span></a>  <a href="#/Location" class=" waves-effect btn-success btn"> <i class="fa fa-map-marker"></i> </a></li>
+            <li> <a href="#/status"><span class="newinv">Manage status</span></a>  <a href="#/status" class=" waves-effect btn-primary btn"> <i class="fa fa-check-circle-o"></i> </a></li>
+            <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
+        </ul>
+    </div>
 </div>
