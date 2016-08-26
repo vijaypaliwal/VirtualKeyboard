@@ -2589,14 +2589,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         e.preventDefault()
 
         if ($scope.slide == 0 || $scope.slide == 1000) {
-            showConfirmInventory();
+           // showConfirmInventory();
 
         }
         else {
             mySwiper.swipePrev();
 
         }
-
 
 
     })

@@ -10,6 +10,11 @@
     text-transform:capitalize;
 }
 
+.btn-primary i
+{
+    font-size:18px;
+}
+
 .btn-gray {
     background: #949494 !important;
     color: #fff !important;
@@ -22,6 +27,11 @@
     padding-left: 15px;
     padding-right: 15px;
     text-transform:capitalize;
+}
+
+.btn-gray i
+{
+    font-size:18px;
 }
 
 .bootbox .modal-body {
@@ -137,7 +147,7 @@
         .bottom-modal ul li {
             padding: 14px;
             border: 1px solid #ccc;
-            background: #fff;
+            background: #2196F3;
             list-style-type: none;
             margin-bottom: 10px;
             border-radius: 20px;
@@ -148,8 +158,8 @@
                 display: block;
                 width: 100%;
                 text-decoration: none !important;
-                background: #fff;
-                color: #000;
+            
+                color: #fff;
             }
 
                 .bottom-modal ul li a i {
@@ -284,7 +294,7 @@
     padding-bottom: 9px;
     position: fixed;
     width: 100%;
-    z-index: 10;
+    z-index: 100;
     left:0;
     right:0;
 }
@@ -349,6 +359,11 @@
     font-size: 25px;
     }
 
+ .newbackbtn i
+ {
+     color:#fff !important;
+ }
+
  .btn-large
  {
      border-radius:50px;
@@ -357,3 +372,8 @@
  .btn-large i {
     font-size: 17px;
 }
+
+ .left15
+ {
+     margin-left:15px !important;
+ }

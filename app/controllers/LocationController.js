@@ -193,13 +193,15 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
                     if ($scope.ActualTotalRecords) {
                     } else {
-                        $scope.OpenmenuModal();
+                    
                     }
                 }
                 else {
                     $scope.ShowErrorMessage("Get locations", 1, 1, result.LoadLocationsResult.Message)
 
                 }
+
+                $scope.LocationsLoaded = true;
 
                 CheckScopeBeforeApply();
             },
