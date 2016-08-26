@@ -94,19 +94,23 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
             error: function (err) {
 
                  
-
+                if (err.readyState == 0 || err.status == 0) {
+                    log.error("Seems like some issue in network, please try again.")
+                }
+                else {
                 log.error("Error occurred due to error::" + err.statusText);
                 log.error(err.responseText);
 
+               
+                _logOut();
+                deferred.reject(err);
+                }
                 $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
                 $(".fa-sign-in").removeClass("fa-spin");
-                playBeep();
+
                 $("#loginBtn").removeClass("disabled");
                 $("#loginBtn").find(".fa").removeClass("fa-spin fa-spinner").addClass("fa-sign-in");
                 $(".side-nav").show();
-                _logOut();
-                deferred.reject(err);
-
             }
         });
 
