@@ -1673,7 +1673,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
     $scope.capturePhotoNew = function () {
         navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
-            quality: 50,
+            quality: 10,
             targetWidth: 120,
             targeHeight: 120,
             correctOrientation: true,
@@ -2712,7 +2712,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.getPhoto = function (source) {
         // Retrieve image file location from specified source
         navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
-            quality: 50,
+            quality: 10,
             destinationType: destinationType.DATA_URL,
             correctOrientation: true,
             sourceType: pictureSource.PHOTOLIBRARY

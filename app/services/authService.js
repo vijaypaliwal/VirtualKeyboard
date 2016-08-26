@@ -81,7 +81,6 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 else {
 
 
-                    
                     $("#myloginModal").removeClass('bounceIn').addClass('bounceOut');
                     playBeep();
 
