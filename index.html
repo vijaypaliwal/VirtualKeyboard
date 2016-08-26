@@ -35,7 +35,13 @@
             display: none !important;
         }
 
-        .input-group {
+        .side-nav
+        {
+            z-index:1500;
+        }
+        
+        
+         .input-group {
             width: 100%;
         }
 
@@ -843,13 +849,14 @@
     </script>
     <script>
 
+
         function randomStringNew(length, chars) {
             var result = '';
             for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
             return result;
         }
 
-        var _Islive = false;
+        var _Islive = true;
 
         $("#mysmallModal").click(function () {
             hideSuccess();
