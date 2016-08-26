@@ -442,10 +442,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 dataType: 'json',
 
                 data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchUOMValue }),
-                error: function () {
+                error: function (err, textStatus, errorThrown) {
+                       $scope.UOMSearching = false;
+                    if (textStatus != "timeout") {
 
-                    $scope.UOMSearching = false;
-                    $scope.ShowErrorMessage("Unit of measure search", 2, 1, err.statusText);
+                     
+                        $scope.ShowErrorMessage("Unit of measure search", 2, 1, err.statusText);
+                    }
                 },
 
                 success: function (data) {
@@ -507,10 +510,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 dataType: 'json',
 
                 data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchItemValue }),
-                error: function () {
-
+                error: function (err, textStatus, errorThrown) {
                     $scope.ItemSearching = false;
-                    $scope.ShowErrorMessage("Search Items", 2, 1, err.statusText);
+                    if (textStatus != "timeout") {
+
+
+                        $scope.ShowErrorMessage("Search Items", 2, 1, err.statusText);
+                    }
 
                 },
 
@@ -836,7 +842,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
 
 
-
         ShowWaitingInv();
         $.ajax
           ({
@@ -875,13 +880,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               },
               error: function (err, textStatus, errorThrown) {
 
+                  if (textStatus != "timeout") {
+
+                      HideWaitingInv();
+
+                      $scope.ShowErrorMessage("New Inventory", 2, 1, err.statusText);
+
+                      $scope.Inventoryerrorbox(errorThrown);
+
                    
-                  HideWaitingInv();
-
-                  $scope.ShowErrorMessage("New Inventory", 2, 1, err.statusText);
-
-                  $scope.Inventoryerrorbox(errorThrown);
-
+                  }
                   $('#addinventories').removeClass("disabled");
                   $('#addinventories').find(".fa").removeClass("fa-spin");
 
@@ -1123,9 +1131,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   }
 
               },
-              error: function (err) {
-                  console.log(err);
-                  $scope.ShowErrorMessage("Getting look ups", 2, 1, err.statusText);
+              error: function (err, textStatus, errorThrown) {
+
+                  if (textStatus != "timeout") {
+                      $scope.ShowErrorMessage("Getting look ups", 2, 1, err.statusText);
+                  }
 
 
               }
@@ -1170,9 +1180,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   }
 
               },
-              error: function (err) {
-                  console.log(err);
-                  $scope.ShowErrorMessage("My inventory Columns", 2, 1, err.statusText);
+              error: function (err, textStatus, errorThrown) {
+
+                  if (textStatus != "timeout") {
+                      console.log(err);
+                      $scope.ShowErrorMessage("My inventory Columns", 2, 1, err.statusText);
+                  }
 
 
               }
@@ -1206,8 +1219,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                    }
        
                },
-               error: function (err) {
-                   $scope.ShowErrorMessage("Getting Status", 2, 1, err.statusText);
+               error: function (err, textStatus, errorThrown) {
+
+                   if (textStatus != "timeout") {
+                       $scope.ShowErrorMessage("Getting Status", 2, 1, err.statusText);
+                   }
 
 
                }
@@ -1264,8 +1280,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                    }
                 
                },
-               error: function (err) {
-                   $scope.ShowErrorMessage("Getting UOMs", 2, 1, err.statusText);
+               error: function (err, textStatus, errorThrown) {
+
+                   if (textStatus != "timeout") {
+                       $scope.ShowErrorMessage("Getting UOMs", 2, 1, err.statusText);
+                   }
 
 
                }
@@ -1303,11 +1322,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                    
                },
-               error: function (response) {
+               error: function (err, textStatus, errorThrown) {
+
+                   if (textStatus != "timeout") {
 
 
-                   console.log(response);
-                   $scope.ShowErrorMessage("Getting locations", 2, 1, response.statusText);
+                       console.log(err);
+                       $scope.ShowErrorMessage("Getting locations", 2, 1, err.statusText);
+                   }
 
 
                }
@@ -1335,8 +1357,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                    $scope.ItemList = response.GetItemsResult.Payload;
                    CheckScopeBeforeApply()
                },
-               error: function (err) {
-                   log.error(err.statusText);
+               error: function (err, textStatus, errorThrown) {
+
+                   if (textStatus != "timeout") {
+                       log.error(err.statusText);
+                   }
                }
            });
 
@@ -1366,9 +1391,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                    }
                
                },
-               error: function (response) {
-                   //log.error(response.statusText);
-                   $scope.ShowErrorMessage("Active unit data columns", 2, 1, err.statusText);
+               error: function (err, textStatus, errorThrown) {
+
+                   if (textStatus != "timeout") {
+                       //log.error(response.statusText);
+                       $scope.ShowErrorMessage("Active unit data columns", 2, 1, err.statusText);
+                   }
 
                }
            });
@@ -1474,8 +1502,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                    }
                },
-               error: function (response) {
-                   $scope.ShowErrorMessage("Custom Field's data", 2, 1, err.statusText);
+               error: function (err, textStatus, errorThrown) {
+
+                   if (textStatus != "timeout") {
+                       $scope.ShowErrorMessage("Custom Field's data", 2, 1, err.statusText);
+                   }
 
                    //$scope.InventoryObject.Location = 678030;
                }
@@ -2112,10 +2143,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                       CheckScopeBeforeApply()
                   },
-                  error: function (response) {
-                      //  log.error("Into error");
-                      console.log(response);
-                      log.error(response.statusText);
+                  error: function (err, textStatus, errorThrown) {
+
+                      if (textStatus != "timeout") {
+                          log.error(response.statusText);
+                      }
                   }
               });
         }
