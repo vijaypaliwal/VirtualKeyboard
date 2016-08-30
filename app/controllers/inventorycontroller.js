@@ -2172,51 +2172,51 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         return bytes;
     }
-    $scope.UploadImage = function (txnID,ImageList) {
+    //$scope.UploadImage = function (txnID,ImageList) {
 
-        var authData = localStorageService.get('authorizationData');
-        if (authData) {
-            $scope.SecurityToken = authData.token;
-        }
-
-
-            $.ajax
-              ({
-                  type: "POST",
-                  url: serviceBase + 'UploadImage',
-                  contentType: 'application/json; charset=utf-8',
-                  dataType: 'text json',
-                  async: true,
-                  data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": ImageList, "txnID": txnID }),
-                  success: function (response) {
-
-                      if (response.UploadImageResult.Success == true)
-                      {
-
-                      log.success("Image has been uploaded success fully for last inventory record.");
+    //    var authData = localStorageService.get('authorizationData');
+    //    if (authData) {
+    //        $scope.SecurityToken = authData.token;
+    //    }
 
 
-                      CheckScopeBeforeApply()
-                      }
-                      else {
+    //        $.ajax
+    //          ({
+    //              type: "POST",
+    //              url: serviceBase + 'UploadImage',
+    //              contentType: 'application/json; charset=utf-8',
+    //              dataType: 'text json',
+    //              async: true,
+    //              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": ImageList, "txnID": txnID }),
+    //              success: function (response) {
 
-                          $scope.ShowErrorMessage("Upload image", 1, 1, response.UploadImageResult.Message)
-                      }
+    //                  if (response.UploadImageResult.Success == true)
+    //                  {
 
-                  },
-                  error: function (err, textStatus, errorThrown) {
-                      if (err.readyState == 0 || err.status == 0) {
+    //                  log.success("Image has been uploaded success fully for last inventory record.");
 
-                      }
-                      else {
-                          if (textStatus != "timeout") {
-                              log.error(err.statusText);
-                          }
-                      }
-                  }
-              });
+
+    //                  CheckScopeBeforeApply()
+    //                  }
+//else {
+
+//                          $scope.ShowErrorMessage("Upload image", 1, 1, response.UploadImageResult.Message)
+//}
+
+    //              },
+    //              error: function (err, textStatus, errorThrown) {
+    //                  if (err.readyState == 0 || err.status == 0) {
+
+    //                  }
+    //                  else {
+    //                      if (textStatus != "timeout") {
+    //                          log.error(err.statusText);
+    //                      }
+    //                  }
+    //              }
+    //          });
         
-    }
+    //}
 
     $scope.UpDownValue = function (value, IsUp) {
         if ($.trim($scope.InventoryObject.Quantity) == "") {
