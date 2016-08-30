@@ -698,24 +698,25 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.resetObject = function () {
         $scope.InventoryObject = {
-            IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: "", Uom: "", UomID: 0, Location: "", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
+            IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: "", Uom: "units", UomID: 0, Location: "In Stock", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
             UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
             UnitTag3: "", CustomPartData: [], CustomTxnData: []
         };
         $scope.ImageList = [];
 
-        $("#defaultimg").remove();
+       // $("#defaultimg").remove();
 
-        if ($scope.IsAvailableMyInventoryColumn('Image') == true) {
+        //if ($scope.IsAvailableMyInventoryColumn('Image') == true) {
 
-            $('#list321').html('<img id="defaultimg" ng-click="getstep(9,\&#39;Image\&#39;)" style="height:80px; width:80px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text">');
-        }
-        else {
-            $('#list321').html('<img id="defaultimg" style="height:80px; width:80px; border:1px solid #ccc;" src="img/na.jpg" alt="Alternate Text">');
+        //    $('#list321').html('<img id="defaultimg" ng-click="getstep(9,\&#39;Image\&#39;)" style="height:80px; width:80px; border:1px solid #ccc;" src="img/default.png" alt="Alternate Text">');
+        //}
+        //else {
+        //    $('#list321').html('<img id="defaultimg" style="height:80px; width:80px; border:1px solid #ccc;" src="img/na.jpg" alt="Alternate Text">');
 
-        }
+        //}
 
-        $('#list123').html('');
+        //$('#list123').html('');
+        CheckScopeBeforeApply();
     }
 
     $scope.addinventory = function () {
@@ -2650,9 +2651,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.notmove = function () {
         //window.location.reload();
+        $scope.resetObject();
           $scope.getstep(0);
 
-        //   $("#modal3").modal('hide');
+          $("#modal3").modal('hide');
 
         $(".Addbtn").show()
     }
