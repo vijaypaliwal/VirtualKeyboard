@@ -862,7 +862,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               contentType: 'application/json; charset=utf-8',
 
               dataType: 'json',
-              async: true,
+             
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": [] }),
               // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
@@ -2186,7 +2186,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   url: serviceBase + 'UploadImage',
                   contentType: 'application/json; charset=utf-8',
                   dataType: 'text json',
-
+                  async: true,
                   data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": ImageList, "txnID": txnID }),
                   success: function (response) {
 
