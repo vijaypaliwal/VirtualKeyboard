@@ -136,6 +136,49 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
 
     }
 
+
+    $scope.GetItemViews = function () {
+
+        $scope.currentitemloaded = false;
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'GetAllViews',
+              data: JSON.stringify({ SecurityToken: $scope.SecurityToken, Type: 4 }),
+              contentType: 'application/json',
+              dataType: 'json',
+              success: function (response) {
+
+                  if (response.GetAllViewsResult.Success == true) {
+
+                      alert($scope.ActivityViews.length);
+
+                      $scope.ActivityViews = response.GetAllViewsResult.Payload;
+                      $scope.currentitemloaded = true;
+                      $scope.$apply();
+
+                  }
+                  else {
+                      $scope.ShowErrorMessage("Activity Views counter", 1, 1, response.GetAllViewsResult.Message)
+
+                  }
+
+              },
+              error: function (err) {
+                  $scope.currentitemloaded = true;
+                  $scope.ShowErrorMessage("Item  reports counter", 2, 1, err.statusText);
+                  $scope.$apply();
+
+              }
+          });
+
+    }
+
     function init() {
        
 
@@ -143,6 +186,7 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
         $scope.GetInventoryViews()
 
         $scope.GetActivityViews()
+        $scope.GetItemViews();
         
         $scope.$apply();
     }

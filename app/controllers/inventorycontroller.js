@@ -862,11 +862,19 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               contentType: 'application/json; charset=utf-8',
 
               dataType: 'json',
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": _toSendImages }),
+              async: true,
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": [] }),
               // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
               success: function (response) {
                   if (response.AddInventoryDataResult.Success == true) {
 
+                      log.success("New Inventory Added Successfully.")
+
+                      if (_toSendImages.length > 0)
+                      {
+                          log.info("Image upload started it will continue in backend you can do other work.")
+                          $scope.UploadImage(response.AddInventoryDataResult.Payload, _toSendImages);
+                      }
                       ImageListAndroid = [];
 
                       // $scope.resetObject();
@@ -912,7 +920,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               }
           });
 
-
+        
     }
 
     $scope.Inventoryerrorbox = function (error) {
@@ -2164,16 +2172,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         return bytes;
     }
-    $scope.UploadImage = function () {
+    $scope.UploadImage = function (txnID,ImageList) {
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
 
-        StreamData = StreamData.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "");
-
-        if (StreamData != null && StreamData != "" && StreamData != undefined) {
 
             $.ajax
               ({
@@ -2182,12 +2187,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   contentType: 'application/json; charset=utf-8',
                   dataType: 'text json',
 
-                  data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "FileName": FileName, "stream": StreamData }),
+                  data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": ImageList, "txnID": txnID }),
                   success: function (response) {
-                      log.success("image success");
+
+                      if (response.ImageUploadResponse.Success == true)
+                      {
+
+                      log.success("Image has been uploaded success fully for last inventory record.");
 
 
                       CheckScopeBeforeApply()
+                      }
+
                   },
                   error: function (err, textStatus, errorThrown) {
                       if (err.readyState == 0 || err.status == 0) {
@@ -2200,7 +2211,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                       }
                   }
               });
-        }
+        
     }
 
     $scope.UpDownValue = function (value, IsUp) {
@@ -2634,8 +2645,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.notmove = function () {
-        window.location.reload();
-        //  $scope.getstep(0);
+        //window.location.reload();
+          $scope.getstep(0);
 
         //   $("#modal3").modal('hide');
 
