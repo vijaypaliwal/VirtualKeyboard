@@ -2190,13 +2190,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": ImageList, "txnID": txnID }),
                   success: function (response) {
 
-                      if (response.ImageUploadResponse.Success == true)
+                      if (response.UploadImageResult.Success == true)
                       {
 
                       log.success("Image has been uploaded success fully for last inventory record.");
 
 
                       CheckScopeBeforeApply()
+                      }
+                      else {
+
+                          $scope.ShowErrorMessage("Upload image", 1, 1, response.UploadImageResult.Message)
                       }
 
                   },
@@ -2206,7 +2210,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                       }
                       else {
                           if (textStatus != "timeout") {
-                              log.error(response.statusText);
+                              log.error(err.statusText);
                           }
                       }
                   }
