@@ -41,15 +41,19 @@
         overflow-x:hidden !important;
     }
 
-       .col-xs-3 span {
-        padding: 10px;
+    .col-xs-3 div {
         background: #fff;
         color: #000;
         font-size: 20px;
         border-radius: 100%;
         padding-left: 15px;
         padding-right: 15px;
-        }
+        height: 50px;
+        width: 50px;
+        padding: 0px;
+        float: right;
+        margin-right: -32px;
+    }
       .col-xs-9
       {
        text-align:left;
@@ -91,9 +95,9 @@
                     <img style="height:35px; width:35px;" src="img/loader1.gif" alt="Alternate Text" />
                 </div>
               
-                <span ng-if="loadcounter1==true">
+                <div ng-if="loadcounter1==true">
                     {{InventoryViews.length}}
-                </span>
+                </div>
                
             </div>
 
@@ -133,9 +137,9 @@
                     <img style="height:35px; width:35px;" src="img/loader1.gif" alt="Alternate Text" />
                 </div>
 
-                <span ng-if="loadcounter2==true">
+                <div ng-if="loadcounter2==true">
                     {{ActivityViews.length}}
-                </span>
+                </div>
 
             </div>
 
@@ -160,9 +164,9 @@
                     <img style="height:35px; width:35px;" src="img/loader1.gif" alt="Alternate Text" />
                 </div>
 
-                <span ng-if="loadcounter4==true">
+                <div ng-if="loadcounter4==true">
                     {{GlobalViews.length}}
-                </span>
+                </div>
              
             </div>
 
@@ -183,9 +187,9 @@
                     <img style="height:35px; width:35px;" src="img/loader1.gif" alt="Alternate Text" />
                 </div>
 
-                <span ng-if="loadcounter5==true">
+                <div ng-if="loadcounter5==true">
                     {{LocalViews.length}}
-                </span>
+                </div>
             </div>
         </div>
     </a>
@@ -201,9 +205,9 @@
                     <img style="height:35px; width:35px;" src="img/loader1.gif" alt="Alternate Text" />
                 </div>
 
-                <span ng-if="loadcounter3==true">
+                <div ng-if="loadcounter3==true">
                     {{ItemViews.length}}
-                </span>
+                </div>
             </div>
         </div>
     </a>
