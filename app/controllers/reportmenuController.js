@@ -6,21 +6,12 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
 
     $scope.currentinvloaded = false;
 
-    $scope.loadcounter = false;
+    $scope.loadcounter1 = false;
+    $scope.loadcounter2 = false;
+    $scope.loadcounter3 = false;
+    $scope.loadcounter4 = false;
+    $scope.loadcounter5 = false;
 
-    function init() {
-        $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
-
-        $scope.MyinventoryFieldsNames = localStorageService.get("unitdatafieldsobject");
-
-        
-        console.log($scope.MyinventoryFieldsNames);
-        $scope.itemlabel = $scope.CurrentInventory.pPart
-
-        $scope.GetInventoryViews()
-     
-        $scope.$apply();
-    }
 
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
@@ -54,7 +45,7 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
 
     $scope.GetInventoryViews = function () {
 
-        $scope.loadcounter = false;
+        $scope.loadcounter1 = false;
 
         $scope.currentinvloaded = false;
 
@@ -74,7 +65,7 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
 
                   if (response.GetAllViewsResult.Success == true) {
                       $scope.InventoryViews = response.GetAllViewsResult.Payload;
-                      $scope.loadcounter = true;
+                      $scope.loadcounter1 = true;
                       $scope.$apply();
 
                   }
@@ -96,7 +87,7 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
 
     $scope.GetActivityViews = function () {
 
-        $scope.loadcounter = false;
+        $scope.loadcounter2 = false;
 
         $scope.currentinvloaded = false;
 
@@ -116,7 +107,7 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
                   if (response.GetAllViewsResult.Success == true) {
 
                       $scope.ActivityViews = response.GetAllViewsResult.Payload;
-                      $scope.loadcounter = true;
+                      $scope.loadcounter2 = true;
                       $scope.$apply();
 
                   }
@@ -140,7 +131,7 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
     $scope.GetItemViews = function () {
 
         $scope.currentitemloaded = false;
-
+        $scope.loadcounter3= false;
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -156,10 +147,11 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
 
                   if (response.GetAllViewsResult.Success == true) {
 
-                      alert($scope.ActivityViews.length);
+                
 
-                      $scope.ActivityViews = response.GetAllViewsResult.Payload;
+                      $scope.ItemViews = response.GetAllViewsResult.Payload;
                       $scope.currentitemloaded = true;
+                      $scope.loadcounter3 = true;
                       $scope.$apply();
 
                   }
@@ -179,14 +171,99 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
 
     }
 
+
+    $scope.GetGlobalRestockViews=function()
+    {
+        $scope.currentitemloaded = false;
+        $scope.loadcounter4 = false;
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'GetAllViews',
+              data: JSON.stringify({ SecurityToken: $scope.SecurityToken, Type:5 }),
+              contentType: 'application/json',
+              dataType: 'json',
+              success: function (response) {
+
+                  if (response.GetAllViewsResult.Success == true) {
+
+
+
+                      $scope.GlobalViews = response.GetAllViewsResult.Payload;
+                      $scope.currentitemloaded = true;
+                      $scope.loadcounter4 = true;
+                      $scope.$apply();
+
+                  }
+                  else {
+                      $scope.ShowErrorMessage("Global reports counter", 1, 1, response.GetAllViewsResult.Message)
+
+                  }
+
+              },
+              error: function (err) {
+                  $scope.currentitemloaded = true;
+                  $scope.ShowErrorMessage("Global reports counter", 2, 1, err.statusText);
+                  $scope.$apply();
+
+              }
+          });
+
+    }
+    $scope.GetLocalRestockViews = function () {
+        $scope.currentitemloaded = false;
+        $scope.loadcounter5 = false;
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'GetAllViews',
+              data: JSON.stringify({ SecurityToken: $scope.SecurityToken, Type: 6 }),
+              contentType: 'application/json',
+              dataType: 'json',
+              success: function (response) {
+
+                  if (response.GetAllViewsResult.Success == true) {
+
+
+
+                      $scope.LocalViews = response.GetAllViewsResult.Payload;
+                      $scope.currentitemloaded = true;
+                      $scope.loadcounter5 = true;
+                      $scope.$apply();
+
+                  }
+                  else {
+                      $scope.ShowErrorMessage("Local reports counter", 1, 1, response.GetAllViewsResult.Message)
+
+                  }
+
+              },
+              error: function (err) {
+                  $scope.currentitemloaded = true;
+                  $scope.ShowErrorMessage("Local reports counter", 2, 1, err.statusText);
+                  $scope.$apply();
+
+              }
+          });
+    }
     function init() {
        
 
 
         $scope.GetInventoryViews()
 
-        $scope.GetActivityViews()
+        $scope.GetActivityViews();
         $scope.GetItemViews();
+        $scope.GetGlobalRestockViews();
+        $scope.GetLocalRestockViews();
         
         $scope.$apply();
     }

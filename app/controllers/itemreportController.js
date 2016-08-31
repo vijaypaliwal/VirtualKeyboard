@@ -3,15 +3,15 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
 
 
     $scope.CurrentView = { Name: "Current Inventory" };
-    $scope.InventoryViews = [];
-    $scope.InventoryList = [];
+    $scope.ItemViews = [];
+    $scope.ItemList = [];
     $scope.CustomItemDataList = [];
     $scope.FilterData = {SearchValue:""};
     $scope.isDataLoading = true;
     $scope.FilterArray = [{ ColumnName: "", FilterOperator: "", SearchValue: "" }];
-    $scope.sortColumn = "iLastITID";
+    $scope.sortColumn = "pPart";
     $scope.sortDir = "DESC";
-    var _sortColumn = "iLastITID";
+    var _sortColumn = "pPart";
     var _sortDir = "DESC";
     $scope.isviewload = false;
     var _IsLazyLoadingUnderProgress = 0;
@@ -110,14 +110,14 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
 
         $scope.FilterData.SearchValue = "";
         CheckScopeBeforeApply();
-        $scope.GetInventoryDataAccordingToView();
+        $scope.GetItemsDataAccordingToView();
     }
     $scope.clearfilter=function()
     {
         $scope.clearfilterArray();
       
       //  CheckScopeBeforeApply();
-      //  $scope.GetInventoryDataAccordingToView();
+      //  $scope.GetItemViews();
     }
     $scope.GetComboData=function(ColumnName)
     {
@@ -220,13 +220,14 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
             if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
                 if ($(window).scrollTop() == $(document).height() - $(window).height()) {
                     if (_PageSize < $scope.totalrecords) {
+                        debugger;
 
 
                         _IsLazyLoadingUnderProgress = 1;
                         $scope.isDataLoading = false;
                         _PageSize = _TotalRecordsCurrent + getIncrementor($scope.totalrecords);
                         CheckScopeBeforeApply();
-                        $scope.GetInventoryDataAccordingToView();
+                        $scope.GetItemsDataAccordingToView();
                     }
                     else {
                         // log.info("You have already loaded all data.")
@@ -398,157 +399,138 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
        switch (columnName) {
            case "Calculated":
                var _valueData = "";
-               if ($scope.InventoryList[Index].CustomData != null && $scope.InventoryList[Index].CustomData != undefined)
-                   for (var i = 0; i < $scope.InventoryList[Index].CustomData.length; i++) {
-                       if( $scope.InventoryList[Index].CustomData[i].Key==_Tempcolumnname)
+               if ($scope.ItemList[Index].CustomData != null && $scope.ItemList[Index].CustomData != undefined)
+                   for (var i = 0; i < $scope.ItemList[Index].CustomData.length; i++) {
+                       if( $scope.ItemList[Index].CustomData[i].Key==_Tempcolumnname)
                        {
                            
-                           _valueData = $scope.InventoryList[Index].CustomData[i].Value;
+                           _valueData = $scope.ItemList[Index].CustomData[i].Value;
                            break;
                        }
                }
                return _valueData;
                break;
                
-           case "iLastAction":
-               return $scope.InventoryList[Index].iLastAction != null ? $scope.InventoryList[Index].iLastAction : "";
+           case "ItemGroup":
+               return $scope.ItemList[Index].ItemGroup != null ? $scope.ItemList[Index].ItemGroup : "";
                break;
            case "pTargetQty":
-               return $scope.InventoryList[Index].pTargetQty != null ? $scope.InventoryList[Index].pTargetQty : "";
+               return $scope.ItemList[Index].pTargetQty != null ? $scope.ItemList[Index].pTargetQty : "";
                break;
            case "pReorderQty":
-               return $scope.InventoryList[Index].pReorderQty != null ? $scope.InventoryList[Index].pReorderQty : "";
+               return $scope.ItemList[Index].pReorderQty != null ? $scope.ItemList[Index].pReorderQty : "";
                break;
-           case "ExtendedCost":
+           case "pSupplier":
 
-               return $scope.InventoryList[Index].ExtendedCost != null ? $scope.InventoryList[Index].ExtendedCost : "";
+               return $scope.ItemList[Index].pSupplier != null ? $scope.ItemList[Index].pSupplier : "";
                break;
             case "pPart":
 
-                return $scope.InventoryList[Index].pPart != null ? $scope.InventoryList[Index].pPart : "";
+                return $scope.ItemList[Index].pPart != null ? $scope.ItemList[Index].pPart : "";
                 break;
-            case "iQty":
-                return $scope.InventoryList[Index].iQty;
+           case "iOrgName":
+               return $scope.ItemList[Index].iOrgName;
                 break;
             case "pDescription":
-                return $scope.InventoryList[Index].pDescription != null ? $scope.InventoryList[Index].pDescription : "";
+                return $scope.ItemList[Index].pDescription != null ? $scope.ItemList[Index].pDescription : "";
 
                 break;
             case "uomUOM":
-                return $scope.InventoryList[Index].uomUOM != null ? $scope.InventoryList[Index].uomUOM : "";
+                return $scope.ItemList[Index].uomUOM != null ? $scope.ItemList[Index].uomUOM : "";
                 break;
-            case "iUniqueDate":
-                return $scope.InventoryList[Index].iUniqueDate != null ? $scope.InventoryList[Index].iUniqueDate : "";
+           case "ItemDefaultLocationGroup":
+               return $scope.ItemList[Index].ItemDefaultLocationGroup != null ? $scope.ItemList[Index].ItemDefaultLocationGroup : "";
                 break;
             case "lLoc":
-                return $scope.InventoryList[Index].lLoc != null ? $scope.InventoryList[Index].lLoc : "";
+                return $scope.ItemList[Index].lLoc != null ? $scope.ItemList[Index].lLoc : "";
                 break;
-            case "lZone":
-                return $scope.InventoryList[Index].lZone != null ? $scope.InventoryList[Index].lZone : "";
-                break;
-
-            case "iStatusValue":
-                return $scope.InventoryList[Index].iStatusValue != null ? $scope.InventoryList[Index].iStatusValue : "";
+           case "ItemDefaultLocation":
+               return $scope.ItemList[Index].ItemDefaultLocation != null ? $scope.ItemList[Index].ItemDefaultLocation : "";
                 break;
 
-            case "iUnitNumber2":
-                return $scope.InventoryList[Index].iUnitNumber2 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].iUnitNumber2) : "";
+           case "ItemDefaultUOM":
+               return $scope.ItemList[Index].ItemDefaultUOM != null ? $scope.ItemList[Index].ItemDefaultUOM : "";
+                break;
+
+           case "pDefaultCost":
+               return $scope.ItemList[Index].pDefaultCost != null ? ChangeIntoNumberFormat($scope.ItemList[Index].pDefaultCost) : "";
                 break;
             case "iUnitNumber1":
-                return $scope.InventoryList[Index].iUnitNumber1 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].iUnitNumber1) : "";
+                return $scope.ItemList[Index].iUnitNumber1 != null ? ChangeIntoNumberFormat($scope.ItemList[Index].iUnitNumber1) : "";
                 break;
-            case "iUnitDate2":
-
-                return $scope.InventoryList[Index].iUnitDate2 != null ? $scope.InventoryList[Index].iUnitDate2 : "";
-                break;
-
-            case "iCostPerUnit":
-                return $scope.InventoryList[Index].AvgCostPerUnit != null ? $scope.InventoryList[Index].AvgCostPerUnit : "";
-
-                break;
-            case "iUnitTag3":
-                return $scope.InventoryList[Index].iUnitTag3 != null ? $scope.InventoryList[Index].iUnitTag3 : "";
-                break;
-            case "iUnitTag2":
-                return $scope.InventoryList[Index].iUnitTag2 != null ? $scope.InventoryList[Index].iUnitTag2 : "";
-                break;
-
-            case "HasConversion":
-                return $scope.InventoryList[Index].HasConversion;
-                break;
-
+           
             case "string_1":
-                return $scope.InventoryList[Index].string_1 != null ? $scope.InventoryList[Index].string_1 : "";
+                return $scope.ItemList[Index].string_1 != null ? $scope.ItemList[Index].string_1 : "";
                 break;
             case "string_2":
-                return $scope.InventoryList[Index].string_2 != null ? $scope.InventoryList[Index].string_2 : "";
+                return $scope.ItemList[Index].string_2 != null ? $scope.ItemList[Index].string_2 : "";
                 break;
             case "string_3":
-                return $scope.InventoryList[Index].string_3 != null ? $scope.InventoryList[Index].string_3 : "";
+                return $scope.ItemList[Index].string_3 != null ? $scope.ItemList[Index].string_3 : "";
                 break;
             case "string_4":
-                return $scope.InventoryList[Index].string_4 != null ? $scope.InventoryList[Index].string_4 : "";
+                return $scope.ItemList[Index].string_4 != null ? $scope.ItemList[Index].string_4 : "";
                 break;
             case "string_5":
-                return $scope.InventoryList[Index].string_5 != null ? $scope.InventoryList[Index].string_5 : "";
+                return $scope.ItemList[Index].string_5 != null ? $scope.ItemList[Index].string_5 : "";
                 break;
             case "string_6":
-                return $scope.InventoryList[Index].string_6 != null ? $scope.InventoryList[Index].string_6 : "";
+                return $scope.ItemList[Index].string_6 != null ? $scope.ItemList[Index].string_6 : "";
                 break;
             case "string_7":
-                return $scope.InventoryList[Index].string_7 != null ? $scope.InventoryList[Index].string_7 : "";
+                return $scope.ItemList[Index].string_7 != null ? $scope.ItemList[Index].string_7 : "";
                 break;
             case "string_8":
-                return $scope.InventoryList[Index].string_8 != null ? $scope.InventoryList[Index].string_8 : "";
+                return $scope.ItemList[Index].string_8 != null ? $scope.ItemList[Index].string_8 : "";
                 break;
             case "string_9":
-                return $scope.InventoryList[Index].string_9 != null ? $scope.InventoryList[Index].string_9 : "";
+                return $scope.ItemList[Index].string_9 != null ? $scope.ItemList[Index].string_9 : "";
                 break;
             case "string_10":
-                return $scope.InventoryList[Index].string_10 != null ? $scope.InventoryList[Index].string_10 : "";
+                return $scope.ItemList[Index].string_10 != null ? $scope.ItemList[Index].string_10 : "";
                 break;
 
             case "string_11":
-                return $scope.InventoryList[Index].string_11 != null ? $scope.InventoryList[Index].string_11 : "";
+                return $scope.ItemList[Index].string_11 != null ? $scope.ItemList[Index].string_11 : "";
                 break;
             case "string_12":
-                return $scope.InventoryList[Index].string_12 != null ? $scope.InventoryList[Index].string_12 : "";
+                return $scope.ItemList[Index].string_12 != null ? $scope.ItemList[Index].string_12 : "";
                 break;
             case "string_13":
-                return $scope.InventoryList[Index].string_13 != null ? $scope.InventoryList[Index].string_13 : "";
+                return $scope.ItemList[Index].string_13 != null ? $scope.ItemList[Index].string_13 : "";
                 break;
             case "string_14":
-                return $scope.InventoryList[Index].string_14 != null ? $scope.InventoryList[Index].string_14 : "";
+                return $scope.ItemList[Index].string_14 != null ? $scope.ItemList[Index].string_14 : "";
                 break;
             case "string_15":
-                return $scope.InventoryList[Index].string_15 != null ? $scope.InventoryList[Index].string_15 : "";
+                return $scope.ItemList[Index].string_15 != null ? $scope.ItemList[Index].string_15 : "";
                 break;
             case "string_16":
-                return $scope.InventoryList[Index].string_16 != null ? $scope.InventoryList[Index].string_16 : "";
+                return $scope.ItemList[Index].string_16 != null ? $scope.ItemList[Index].string_16 : "";
                 break;
             case "string_17":
-                return $scope.InventoryList[Index].string_17 != null ? $scope.InventoryList[Index].string_17 : "";
+                return $scope.ItemList[Index].string_17 != null ? $scope.ItemList[Index].string_17 : "";
                 break;
             case "string_18":
-                return $scope.InventoryList[Index].string_18 != null ? $scope.InventoryList[Index].string_18 : "";
+                return $scope.ItemList[Index].string_18 != null ? $scope.ItemList[Index].string_18 : "";
                 break;
             case "string_19":
-                return $scope.InventoryList[Index].string_19 != null ? $scope.InventoryList[Index].string_19 : "";
+                return $scope.ItemList[Index].string_19 != null ? $scope.ItemList[Index].string_19 : "";
                 break;
             case "string_20":
-                return $scope.InventoryList[Index].string_20 != null ? $scope.InventoryList[Index].string_20 : "";
+                return $scope.ItemList[Index].string_20 != null ? $scope.ItemList[Index].string_20 : "";
                 break;
             case "string_21":
-                return $scope.InventoryList[Index].string_21 != null ? $scope.InventoryList[Index].string_21 : "";
+                return $scope.ItemList[Index].string_21 != null ? $scope.ItemList[Index].string_21 : "";
                 break;
             case "string_22":
-                return $scope.InventoryList[Index].string_22 != null ? $scope.InventoryList[Index].string_22 : "";
+                return $scope.ItemList[Index].string_22 != null ? $scope.ItemList[Index].string_22 : "";
                 break;
             case "string_23":
-                return $scope.InventoryList[Index].string_23 != null ? $scope.InventoryList[Index].string_23 : "";
+                return $scope.ItemList[Index].string_23 != null ? $scope.ItemList[Index].string_23 : "";
                 break;
             case "string_24":
-                return $scope.InventoryList[Index].string_24 != null ? $scope.InventoryList[Index].string_24 : "";
+                return $scope.ItemList[Index].string_24 != null ? $scope.ItemList[Index].string_24 : "";
                 break;
 
 
@@ -557,90 +539,82 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
 
 
             case "number_1":
-                return $scope.InventoryList[Index].number_1 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_1) : "";
+                return $scope.ItemList[Index].number_1 != null ? ChangeIntoNumberFormat($scope.ItemList[Index].number_1) : "";
                 break;
             case "number_2":
-                return $scope.InventoryList[Index].number_2 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_2) : "";
+                return $scope.ItemList[Index].number_2 != null ? ChangeIntoNumberFormat($scope.ItemList[Index].number_2) : "";
                 break;
             case "number_3":
-                return $scope.InventoryList[Index].number_3 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_3) : "";
+                return $scope.ItemList[Index].number_3 != null ? ChangeIntoNumberFormat($scope.ItemList[Index].number_3) : "";
                 break;
             case "number_4":
-                return $scope.InventoryList[Index].number_4 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_4) : "";
+                return $scope.ItemList[Index].number_4 != null ? ChangeIntoNumberFormat($scope.ItemList[Index].number_4) : "";
                 break;
             case "number_5":
-                return $scope.InventoryList[Index].number_5 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_5) : "";
+                return $scope.ItemList[Index].number_5 != null ? ChangeIntoNumberFormat($scope.ItemList[Index].number_5) : "";
                 break;
             case "number_6":
-                return $scope.InventoryList[Index].number_6 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_6) : "";
+                return $scope.ItemList[Index].number_6 != null ? ChangeIntoNumberFormat($scope.ItemList[Index].number_6) : "";
                 break;
             case "number_7":
-                return $scope.InventoryList[Index].number_7 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_7) : "";
+                return $scope.ItemList[Index].number_7 != null ? ChangeIntoNumberFormat($scope.ItemList[Index].number_7) : "";
                 break;
             case "number_8":
-                return $scope.InventoryList[Index].number_8 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_8) : "";
+                return $scope.ItemList[Index].number_8 != null ? ChangeIntoNumberFormat($scope.ItemList[Index].number_8) : "";
                 break;
             case "number_9":
-                return $scope.InventoryList[Index].number_9 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_9) : "";
+                return $scope.ItemList[Index].number_9 != null ? ChangeIntoNumberFormat($scope.ItemList[Index].number_9) : "";
                 break;
             case "number_10":
-                return $scope.InventoryList[Index].number_10 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_10) : "";
+                return $scope.ItemList[Index].number_10 != null ? ChangeIntoNumberFormat($scope.ItemList[Index].number_10) : "";
                 break;
 
             case "number_11":
-                return $scope.InventoryList[Index].number_11 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_11) : "";
+                return $scope.ItemList[Index].number_11 != null ? ChangeIntoNumberFormat($scope.ItemList[Index].number_11) : "";
                 break;
             case "number_12":
-                return $scope.InventoryList[Index].number_12 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_12) : "";
+                return $scope.ItemList[Index].number_12 != null ? ChangeIntoNumberFormat($scope.ItemList[Index].number_12) : "";
                 break;
 
             case "bool_1":
-                return $scope.InventoryList[Index].bool_1 != null ? $scope.InventoryList[Index].bool_1 : "";
+                return $scope.ItemList[Index].bool_1 != null ? $scope.ItemList[Index].bool_1 : "";
                 break;
             case "bool_2":
-                return $scope.InventoryList[Index].bool_2 != null ? $scope.InventoryList[Index].bool_2 : "";
+                return $scope.ItemList[Index].bool_2 != null ? $scope.ItemList[Index].bool_2 : "";
                 break;
             case "bool_3":
-                return $scope.InventoryList[Index].bool_3 != null ? $scope.InventoryList[Index].bool_3 : "";
+                return $scope.ItemList[Index].bool_3 != null ? $scope.ItemList[Index].bool_3 : "";
                 break;
             case "bool_4":
-                return $scope.InventoryList[Index].bool_4 != null ? $scope.InventoryList[Index].bool_4 : "";
+                return $scope.ItemList[Index].bool_4 != null ? $scope.ItemList[Index].bool_4 : "";
                 break;
             case "bool_5":
-                return $scope.InventoryList[Index].bool_5 != null ? $scope.InventoryList[Index].bool_5 : "";
+                return $scope.ItemList[Index].bool_5 != null ? $scope.ItemList[Index].bool_5 : "";
                 break;
             case "bool_6":
-                return $scope.InventoryList[Index].bool_6 != null ? $scope.InventoryList[Index].bool_6 : "";
+                return $scope.ItemList[Index].bool_6 != null ? $scope.ItemList[Index].bool_6 : "";
                 break;
 
             case "date_1":
-                return $scope.InventoryList[Index].date_1 != null ? $scope.InventoryList[Index].date_1 : "";
+                return $scope.ItemList[Index].date_1 != null ? $scope.ItemList[Index].date_1 : "";
                 break;
             case "date_2":
-                return $scope.InventoryList[Index].date_2 != null ? $scope.InventoryList[Index].date_2 : "";
+                return $scope.ItemList[Index].date_2 != null ? $scope.ItemList[Index].date_2 : "";
                 break;
             case "date_3":
-                return $scope.InventoryList[Index].date_3 != null ? $scope.InventoryList[Index].date_3 : "";
+                return $scope.ItemList[Index].date_3 != null ? $scope.ItemList[Index].date_3 : "";
                 break;
             case "date_4":
-                return $scope.InventoryList[Index].date_4 != null ? $scope.InventoryList[Index].date_4 : "";
+                return $scope.ItemList[Index].date_4 != null ? $scope.ItemList[Index].date_4 : "";
                 break;
             case "date_5":
-                return $scope.InventoryList[Index].date_5 != null ? $scope.InventoryList[Index].date_5 : "";
+                return $scope.ItemList[Index].date_5 != null ? $scope.ItemList[Index].date_5 : "";
                 break;
             case "date_6":
-                return $scope.InventoryList[Index].date_6 != null ? $scope.InventoryList[Index].date_6 : "";
+                return $scope.ItemList[Index].date_6 != null ? $scope.ItemList[Index].date_6 : "";
                 break;
 
-            case "pCountFrq":
-                return $scope.InventoryList[Index].pCountFrq != null ? $scope.InventoryList[Index].pCountFrq : "";
-                break;
-            case "lZone":
-                return $scope.InventoryList[Index].lZone != null ? $scope.InventoryList[Index].lZone : "";
-                break;
-            case "iReqValue":
-                return $scope.InventoryList[Index].iReqValue != null ? $scope.InventoryList[Index].iReqValue : "";
-                break;
+        
             default:
                 return "N/A";
         }
@@ -659,7 +633,7 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
       
        $(_id).find(".ExtraTr").toggle("slow");
    }
-    $scope.GetInventoryViews = function () {
+    $scope.GetItemViews = function () {
         $scope.isDataLoading = false;
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -675,11 +649,11 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
               success: function (response)
               {
                   if (response.GetAllViewsResult.Success == true) {
-                      $scope.InventoryViews = response.GetAllViewsResult.Payload;
+                      $scope.ItemViews = response.GetAllViewsResult.Payload;
 
                   }
                   else {
-                      $scope.ShowErrorMessage("Getting current inventory reports", 1, 1, response.GetAllViewsResult.Message)
+                      $scope.ShowErrorMessage("Getting Item reports", 1, 1, response.GetAllViewsResult.Message)
 
                   }
                   $scope.isDataLoading = true;
@@ -687,7 +661,7 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
               },
               error: function (err) {
                   $scope.isDataLoading = true;
-                  $scope.ShowErrorMessage("Getting current inventory reports", 2, 1, err.statusText);
+                  $scope.ShowErrorMessage("Getting Item reports", 2, 1, err.statusText);
 
                  $scope.$apply();
 
@@ -706,7 +680,7 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
 
     $scope.showview = function() {
         $scope.isviewload = false;
-        $scope.CurrentView = { Name: "Current Inventory" };
+        $scope.CurrentView = { Name: "Items" };
     }
 
     function CheckScopeBeforeApply() {
@@ -720,13 +694,13 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
         $scope.CurrentView = view;
         $scope.FilterArray = [{ ColumnName: "", FilterOperator: "", SearchValue: "" }];
         CheckScopeBeforeApply();
-        $scope.GetInventoryDataAccordingToView();
+        $scope.GetItemsDataAccordingToView();
     }
     $scope.showfilter = function () {
         $("#filtermodal").modal("show")
     }
 
-    $scope.GetInventoryDataAccordingToView=function()
+    $scope.GetItemsDataAccordingToView=function()
     {
         
         $scope.isDataLoading = false;
@@ -749,38 +723,38 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
             $.ajax
               ({
                   type: "POST",
-                  url: serviceBase + 'GetCurrentInventoriesNew',
-                  data: JSON.stringify({ SecurityToken: $scope.SecurityToken, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray, SelectedCartIDs: [], masterSearch: $scope.FilterData.SearchValue, showImage: "True", showZeroRecords: "True", PageSize: _PageSize, IsDateColumnOn: false, ViewID: $scope.CurrentView.GridLayoutID }),
+                  url: serviceBase + 'GetAllItems',
+                  data: JSON.stringify({ SecurityToken: $scope.SecurityToken, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray,  masterSearch: $scope.FilterData.SearchValue,  PageSize: _PageSize, ViewID: $scope.CurrentView.GridLayoutID }),
                   contentType: 'application/json',
                   dataType: 'json',
                   success: function (response) {
                       $scope.isDataLoading = true;
                       $scope.isviewload = true;
 
-                      if (response.GetCurrentInventoriesNewResult.Success == true) {
+                      if (response.GetAllItemsResult.Success == true) {
                      
                       
-                      _TotalRecordsCurrent = response.GetCurrentInventoriesNewResult.Payload[0].Data.length;
-                      $scope.currentrecord = response.GetCurrentInventoriesNewResult.Payload[0].Data.length;
-                      $scope.InventoryList = response.GetCurrentInventoriesNewResult.Payload[0].Data;
-                      $scope.totalrecords = response.GetCurrentInventoriesNewResult.Payload[0].TotalRercords;
-                      $scope.Columns = response.GetCurrentInventoriesNewResult.Payload[0].Columns;
-                      $scope.ActualTotalRecords = response.GetCurrentInventoriesNewResult.Payload[0].ActualTotalRecords;
-                      $scope.FilterArray = response.GetCurrentInventoriesNewResult.Payload[0].Filters;
+                      _TotalRecordsCurrent = response.GetAllItemsResult.Payload[0].Data.length;
+                      $scope.currentrecord = response.GetAllItemsResult.Payload[0].Data.length;
+                      $scope.ItemList = response.GetAllItemsResult.Payload[0].Data;
+                      $scope.totalrecords = response.GetAllItemsResult.Payload[0].TotalRercords;
+                      $scope.Columns = response.GetAllItemsResult.Payload[0].Columns;
+                      $scope.ActualTotalRecords = response.GetAllItemsResult.Payload[0].ActualTotalRecords;
+                      $scope.FilterArray = response.GetAllItemsResult.Payload[0].Filters;
                       CheckScopeBeforeApply();
                       // FillFilterArray();
                       UpdateFilterArray();
 
                       }
                       else {
-                          $scope.ShowErrorMessage("Current Inventory Data", 1, 1, response.GetCurrentInventoriesNewResult.Message)
+                          $scope.ShowErrorMessage("Item Data", 1, 1, response.GetAllItemsResult.Message)
 
                       }
 
                   },
                   error: function (err) {
                       console.log(err);
-                      $scope.ShowErrorMessage("Current Inventory Data", 2, 1, err.statusText);
+                      $scope.ShowErrorMessage("Item Data", 2, 1, err.statusText);
 
                       $scope.isDataLoading = true;
                   },
@@ -841,38 +815,7 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
 
     }
 
-    $scope.getstatus = function () {
-
-        var authData = localStorageService.get('authorizationData');
-        if (authData) {
-            $scope.SecurityToken = authData.token;
-        }
-
-        $.ajax
-           ({
-               type: "POST",
-               url: serviceBase + 'GetStatus',
-               contentType: 'application/json; charset=utf-8',
-               dataType: 'json',
-               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
-               success: function (response) {
-                   if (response.GetStatusResult.Success == true) {
-                       $scope.StatusList = response.GetStatusResult.Payload;
-
-                   }
-                   else {
-                       $scope.ShowErrorMessage("Status list", 1, 1, response.GetStatusResult.Message)
-
-                   }
-                   $scope.$apply();
-               },
-               error: function (err) {
-                   $scope.ShowErrorMessage("Status list", 2, 1, err.statusText);
-
-               }
-           });
-
-    }
+   
 
     $scope.OpenmenuModal = function () {
 
@@ -913,14 +856,13 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
         }
         $scope.sortColumn = sortby;
         CheckScopeBeforeApply();
-        $scope.GetInventoryDataAccordingToView()
+        $scope.GetItemsDataAccordingToView()
 
     }
 
     function init() {
         $scope.getuom();
-        $scope.getstatus();
-        $scope.GetInventoryViews();
+        $scope.GetItemViews();
         $scope.GetCustomDataField(0);
         CheckScopeBeforeApply();
       
