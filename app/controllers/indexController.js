@@ -155,7 +155,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             $scope.SecurityToken = authData.token;
         }
 
-        log.info("Image upload processing started at backend side, please be patient .")
+      //  log.info("Image upload processing started at backend side, please be patient .")
         $.ajax
           ({
               type: "POST",
@@ -165,7 +165,6 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
               async: true,
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": ImageList, "txnID": txnID }),
               success: function (response) {
-                  alert("into success");
                   if (response.UploadImageResult.Success == true) {
 
                       log.success("Image has been uploaded success fully for last inventory record.");
@@ -191,7 +190,6 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                       if (textStatus != "timeout") {
                           if (err.status == 200)
                           {
-                              alert("into 200 status");
                               log.success("Image has been uploaded success fully for last inventory record.");
                               var _path = $location.path();
                               if (_path == "/inventory") {
@@ -200,7 +198,6 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
                           }
                           else {
-                              alert("into Actual Error");
                               log.error(err.statusText);
 
                           }
