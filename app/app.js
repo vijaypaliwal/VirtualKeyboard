@@ -128,6 +128,11 @@ app.config(function ($routeProvider) {
         controller: "itemreportController",
         templateUrl: "app/views/itemreport.html"
     });
+
+    $routeProvider.when("/LocalRestock", {
+        controller: "LocalrestockController",
+        templateUrl: "app/views/LocalRestock.html"
+    });
     
 
     $routeProvider.otherwise({ redirectTo: "/login" });
