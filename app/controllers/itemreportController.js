@@ -623,15 +623,39 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
    {
        var _id = "#row_" + id.toString();
        var _iconID = "#icon_" + id.toString();
+       var _beforePos = $(_id).css("height").replace("px", "");
+       var _afterPos = $(_id).css("height").replace("px", "");
+       var _isOpen = false;
        if ($(_iconID).hasClass("fa-chevron-up"))
        {
+           _isOpen = true;
         $(_iconID).removeClass("fa-chevron-up").addClass("fa-chevron-down");
         }
        else {
+           _isOpen = false;
            $(_iconID).removeClass("fa-chevron-down").addClass("fa-chevron-up");
        }
       
        $(_id).find(".ExtraTr").toggle("slow");
+       _afterPos = $(_id).css("height");
+
+ 
+       var _afterPosPx = parseInt(_afterPos);
+       var _beforePosPx = parseInt(_beforePos);
+       var _currentIconpos = $(_iconID).parent().css("margin-top").replace("px", "");
+       var _currentPosition = parseInt(_currentIconpos) + (_afterPosPx - _beforePosPx);
+       if (_isOpen)
+       {
+           $(_iconID).parent().css("margin-top", _currentPosition.toString() + "px");
+
+       }
+       else {
+           setTimeout(function () {
+               $(_iconID).parent().css("margin-top", "70px");
+
+           }, 370);
+
+       }
    }
     $scope.GetItemViews = function () {
         $scope.isDataLoading = false;
