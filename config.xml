@@ -13,7 +13,7 @@
     PhoneGap Team
   </author>
  
-  <gap:plugin name="com.phonegap.plugins.barcodescanner"/>
+  <!--<gap:plugin name="com.phonegap.plugins.barcodescanner"/>-->
   <!--gap:plugin name="org.apache.cordova.statusbar" spec="0.1.4" source="pgb" /-->
   <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
   <gap:plugin name="org.apache.cordova.camera" />
@@ -24,9 +24,9 @@
   <gap:plugin name="org.apache.cordova.geolocation"/>
   <gap:plugin name="org.apache.cordova.dialogs"/>
   <gap:plugin name="org.apache.cordova.vibration"/>
-  <gap:plugin name="ionic-plugin-keyboard"  source="npm" version="1.0.7" />
+  <!--<gap:plugin name="ionic-plugin-keyboard"  source="npm" version="1.0.7" />-->
   
-  <gap:plugin name="org.apache.cordova.splashscreen" />
+  <!--<gap:plugin name="org.apache.cordova.splashscreen" />-->
   
   <gap:plugin name="net.bgta.phonegap.plugin.appversion" source="pgb"/>
   
@@ -55,7 +55,7 @@
 <preference name="HideKeyboardFormAccessoryBar" value="true"/>
   <preference name="KeyboardShrinksView" value="true" />
     <!-- Do not auto hide splash on iOS -->
-<preference name="AutoHideSplashScreen" value="false" />
+<preference name="AutoHideSplashScreen" value="true" />
 <!-- Do not auto hide splash on Android -->
 <preference name="SplashScreenDelay" value="10000"/>
 
