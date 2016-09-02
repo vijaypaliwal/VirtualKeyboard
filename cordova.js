@@ -19,25 +19,7 @@
  *
 */
 
-var require = function (id) {
-    if (!modules[id]) {
-        throw "module " + id + " not found";
-    } else if (id in inProgressModules) {
-        var cycle = requireStack.slice(inProgressModules[id]).join('->') + '->' + id;
-        throw "Cycle in require graph: " + cycle;
-    }
-    if (modules[id].factory) {
-        try {
-            inProgressModules[id] = requireStack.length;
-            requireStack.push(id);
-            return build(modules[id]);
-        } finally {
-            delete inProgressModules[id];
-            requireStack.pop();
-        }
-    }
-    return modules[id].exports;
-};
+
 
 var channel = require('cordova/channel');
 var platform = require('cordova/platform');
