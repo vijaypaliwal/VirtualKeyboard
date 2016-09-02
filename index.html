@@ -29,7 +29,11 @@
     <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
     <link href="css/button.css" rel="stylesheet" type="text/css">
-
+    <script>
+        window.onerror = function (error, file, line) {
+            alert(error + ", " + file + ", " + line);
+        }
+    </script>
     <style>
         [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x- ng-cloak {
             display: none !important;
@@ -518,11 +522,7 @@
                 padding-right:13px;
             }
     </style>
-    <script>
-        window.onerror = function (error, file, line) {
-            alert(error + ", " + file + ", " + line);
-        }
-    </script>
+
 </head>
 <body data-ng-controller="indexController">
     <!-- Sidebar -->
@@ -726,7 +726,6 @@
 
     <script src="js/materialize.min.js"></script>
     <script src="js/functions.js"></script>
-    <script type="text/javascript" src="cordova.js"></script>
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/angular-sanitize.js"></script>
     <script src="scripts/angular-route.min.js"></script>
@@ -738,7 +737,7 @@
     <script src="js/sortableUI.js"></script>
     
     <script src="scripts/loading-bar.min.js"></script>
-    
+    <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="scripts/ng-cordova.js"></script>
     <script type="text/javascript" src="barcodescanner.js"></script>
     <script src="scripts/toastr.js"></script>
@@ -862,7 +861,7 @@
             return result;
         }
 
-        var _Islive = false;
+        var _Islive = true;
 
         $("#mysmallModal").click(function () {
             hideSuccess();
@@ -1383,7 +1382,7 @@
 
         function onDeviceReady() {
 
-          navigator.splashscreen.hide();
+            navigator.splashscreen.hide();
 
            
             getAppVersion(function (version) {
