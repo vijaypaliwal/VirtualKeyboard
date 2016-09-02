@@ -55,7 +55,7 @@
 <preference name="HideKeyboardFormAccessoryBar" value="true"/>
   <preference name="KeyboardShrinksView" value="true" />
     <!-- Do not auto hide splash on iOS -->
-<preference name="AutoHideSplashScreen" value="true" />
+<preference name="AutoHideSplashScreen" value="false" />
 <!-- Do not auto hide splash on Android -->
 <preference name="SplashScreenDelay" value="10000"/>
 
