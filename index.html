@@ -518,7 +518,11 @@
                 padding-right:13px;
             }
     </style>
-
+    <script>
+        window.onerror = function (error, file, line) {
+            alert(error + ", " + file + ", " + line);
+        }
+    </script>
 </head>
 <body data-ng-controller="indexController">
     <!-- Sidebar -->
