@@ -332,10 +332,9 @@
     padding: 0px;
     margin-top: 18px;
     background: #f44336;
-    color: #fff;
+    color: #fff !important;
     line-height: 33px;
     z-index: 100;
-    color: #fff;
     font-size: 25px;
     right: 15px;
 }
