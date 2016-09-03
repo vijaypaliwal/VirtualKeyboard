@@ -9,6 +9,8 @@
 
 var exec = require("cordova/exec");
 
+var scanInProgress = false;
+
 /**
  * Constructor.
  *
@@ -57,25 +59,26 @@ function BarcodeScanner() {
         "upc_E": 32768,
         "upc_EAN_EXTENSION": 65536
     };
-};
+}
 
 /**
  * Read code from scanner.
  *
  * @param {Function} successCallback This function will recieve a result object: {
- *        text : '12345-mock',    // The code that was scanned.
- *        format : 'FORMAT_NAME', // Code format.
- *        cancelled : true/false, // Was canceled.
- *    }
+         *        text : '12345-mock',    // The code that was scanned.
+         *        format : 'FORMAT_NAME', // Code format.
+         *        cancelled : true/false, // Was canceled.
+         *    }
  * @param {Function} errorCallback
+ * @param config
  */
 BarcodeScanner.prototype.scan = function (successCallback, errorCallback, config) {
 
-    if(config instanceof Array) {
+    if (config instanceof Array) {
         // do nothing
     } else {
-        if(typeof(config) === 'object') {
-            config = [ config ];
+        if (typeof (config) === 'object') {
+            config = [config];
         } else {
             config = [];
         }
@@ -96,7 +99,26 @@ BarcodeScanner.prototype.scan = function (successCallback, errorCallback, config
         return;
     }
 
-    exec(successCallback, errorCallback, 'BarcodeScanner', 'scan', config);
+    if (scanInProgress) {
+        errorCallback('Scan is already in progress');
+        return;
+    }
+
+    scanInProgress = true;
+
+    exec(
+        function (result) {
+            scanInProgress = false;
+            successCallback(result);
+        },
+        function (error) {
+            scanInProgress = false;
+            errorCallback(error);
+        },
+        'BarcodeScanner',
+        'scan',
+        config
+    );
 };
 
 //-------------------------------------------------------------------
@@ -117,7 +139,7 @@ BarcodeScanner.prototype.encode = function (type, data, successCallback, errorCa
     }
 
     exec(successCallback, errorCallback, 'BarcodeScanner', 'encode', [
-        {"type": type, "data": data, "options": options}
+        { "type": type, "data": data, "options": options }
     ]);
 };
 
