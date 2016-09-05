@@ -695,6 +695,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
               dataType: 'json',
               success: function (response)
               {
+                  debugger;
+
                   if (response.GetAllViewsResult.Success == true) {
                       $scope.InventoryViews = response.GetAllViewsResult.Payload;
 

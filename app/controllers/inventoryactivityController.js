@@ -1143,10 +1143,21 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
                   },
                   error: function (requestObject, err, errorThrown) {
-                       
-                      console.log(err);
-                      $scope.ShowErrorMessage("Get activitiy data", 2, 1, err.statusText);
-                      $scope.isDataLoading = true;
+
+                      debugger;
+                      if (requestObject.readyState == 0 || requestObject.status == 0) {
+                          log.error("Seems like some issue in network, please try again.")
+                      }
+                      else {
+
+
+                          console.log(err);
+                          log.error(requestObject.responseText);
+                          var err = eval("(" + requestObject.responseText + ")");
+                          alert(err.Message);
+                          $scope.ShowErrorMessage("Get activitiy data", 2, 1, err.statusText);
+                          $scope.isDataLoading = true;
+                      }
                   },
                   complete: function () {
                       _IsLazyLoadingUnderProgress = 0;
