@@ -133,7 +133,11 @@ app.config(function ($routeProvider) {
         controller: "LocalrestockController",
         templateUrl: "app/views/LocalRestock.html"
     });
-    
+
+    $routeProvider.when("/GlobalRestock", {
+        controller: "GlobalrestockController",
+        templateUrl: "app/views/GlobalRestock.html"
+    });
 
     $routeProvider.otherwise({ redirectTo: "/login" });
 

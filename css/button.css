@@ -8,6 +8,7 @@
     padding-left: 15px;
     padding-right: 15px;
     text-transform:capitalize;
+    color:#fff !important;
 }
 
 .btn-primary i
@@ -27,6 +28,11 @@
     padding-left: 15px;
     padding-right: 15px;
     text-transform:capitalize;
+}
+
+.primary-color
+{
+   color:#fff !important;
 }
 
 .btn-gray i

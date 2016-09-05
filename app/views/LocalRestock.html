@@ -366,7 +366,7 @@
     .well {
         padding: 10px;
         margin-bottom: 15px;
-        box-shadow: 5px 7px 5px #a3a3a3 !important;
+        box-shadow: 5px 7px 5px #ccc !important;
     }
 
     .morebtn {
@@ -535,7 +535,7 @@
 
 <a ng-if="isviewload==false" class="waves-effect roundbtn btn btn-success"> <i class="fa fa-plus"></i> </a>
 
-<a ng-if="isviewload==true" ng-click="showview()" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
+<a ng-if="isviewload==true" ng-click="showview()" class="left15 newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
 
 <a ng-if="isviewload==true" ng-click="showfilter()" class="waves-effect btn roundbtntitle"><i class="fa fa-filter"></i> </a>
 
@@ -588,7 +588,7 @@
 
             <i ng-if="FilterData.SearchValue!=''" ng-click="clearfilter()" class="fa fa-times filtercross right47"></i> 
 
-            <a class="input-group-addon last textData" ng-click="GetItemsDataAccordingToView()" style="margin-top: 0px;"><i class="fa fa-search" style="font-size:20px;"></i> </a>
+            <a class="input-group-addon last textData" ng-click="GetLocalDataAccordingToView()" style="margin-top: 0px;"><i class="fa fa-search" style="font-size:20px;"></i> </a>
           
 
         </div>
@@ -768,7 +768,7 @@
 
         <div class="row">
             <div class="col-xs-6">
-                <a class="btn btn-primary width-100 pull-left" ng-click="GetItemsDataAccordingToView()"><i style="padding-left:5px !important; padding-right:5px !important;" class="fa fa-filter"></i>Filter</a>
+                <a class="btn btn-primary width-100 pull-left" ng-click="GetLocalDataAccordingToView()"><i style="padding-left:5px !important; padding-right:5px !important;" class="fa fa-filter"></i>Filter</a>
             </div>
             <div class="col-xs-6">
                 <a class="btn btn-danger width-100 pull-left" style="border-radius:45px; padding-left:10px; padding-right:10px;" ng-click="clearfilterArray()"><i style="padding-left:5px !important; padding-right:5px !important;" class="fa fa-times"></i>Clear</a>
