@@ -139,6 +139,11 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/GlobalRestock.html"
     });
 
+    $routeProvider.when("/inventorysummary", {
+        controller: "inventorysummaryController",
+        templateUrl: "app/views/inventorysummary.html"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/login" });
 
 });

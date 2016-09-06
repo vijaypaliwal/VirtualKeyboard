@@ -1114,6 +1114,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                   contentType: 'application/json',
                   dataType: 'json',
                   success: function (response) {
+
                       $scope.isDataLoading = true;
                       $scope.isviewload = true;
 

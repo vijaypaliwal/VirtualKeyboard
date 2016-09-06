@@ -171,6 +171,49 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
 
     }
 
+    $scope.GetsummaryViews = function () {
+
+        $scope.currentsummaryloaded = false;
+        $scope.loadcounter6 = false;
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'GetAllViews',
+              data: JSON.stringify({ SecurityToken: $scope.SecurityToken, Type: 2 }),
+              contentType: 'application/json',
+              dataType: 'json',
+              success: function (response) {
+
+                  if (response.GetAllViewsResult.Success == true) {
+
+
+
+                      $scope.SummaryViews = response.GetAllViewsResult.Payload;
+                      $scope.currentsummaryloaded = true;
+                      $scope.loadcounter6 = true;
+                      $scope.$apply();
+
+                  }
+                  else {
+                      $scope.ShowErrorMessage("Activity Views counter", 1, 1, response.GetAllViewsResult.Message)
+
+                  }
+
+              },
+              error: function (err) {
+                  $scope.currentitemloaded = true;
+                  $scope.ShowErrorMessage("Item  reports counter", 2, 1, err.statusText);
+                  $scope.$apply();
+
+              }
+          });
+
+    }
+
 
     $scope.GetGlobalRestockViews=function()
     {
@@ -264,7 +307,7 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
         $scope.GetItemViews();
         $scope.GetGlobalRestockViews();
         $scope.GetLocalRestockViews();
-        
+        $scope.GetsummaryViews();
         $scope.$apply();
     }
     init()
