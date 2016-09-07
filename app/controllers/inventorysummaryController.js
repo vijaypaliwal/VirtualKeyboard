@@ -366,9 +366,7 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
         }
         return _returnPath;
     }
-
-
-    $scope.GetCellData = function (columnName, Index, isCalculated) {
+    $scope.GetInnerData = function (columnName,parentIndex, Index, isCalculated) {
         var _ID = TryParseInt(columnName, 0);
         if (_ID != 0) {
             columnName = $scope.GetCustomFieldByID(_ID);
@@ -377,8 +375,275 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
         if (isCalculated == true) {
             columnName = "Calculated"
         }
+     
+        switch (columnName) {
+          
+            case "Calculated":
+                var _valueData = "";
+                if ($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].CustomData != null && $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].CustomData != undefined)
+                    for (var i = 0; i < $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].CustomData.length; i++) {
+                        if ($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].CustomData[i].Key == _Tempcolumnname) {
+
+                            _valueData = $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].CustomData[i].Value;
+                            break;
+                        }
+                    }
+                return _valueData;
+                break;
+
+            case "iLastAction":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iLastAction != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iLastAction : "";
+                break;
+            case "pTargetQty":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].pTargetQty != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].pTargetQty : "";
+                break;
+            case "pReorderQty":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].pReorderQty != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].pReorderQty : "";
+                break;
+            case "ExtendedCost":
+
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].ExtendedCost != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].ExtendedCost : "";
+                break;
+            case "pPart":
+
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].pPart != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].pPart : "";
+                break;
+            case "iQty":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iQty;
+                break;
+            case "pDescription":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].pDescription != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].pDescription : "";
+
+                break;
+            case "uomUOM":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].uomUOM != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].uomUOM : "";
+                break;
+            case "iUniqueDate":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iUniqueDate != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iUniqueDate : "";
+                break;
+            case "lLoc":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].lLoc != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].lLoc : "";
+                break;
+            case "lZone":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].lZone != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].lZone : "";
+                break;
+
+            case "iStatusValue":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iStatusValue != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iStatusValue : "";
+                break;
+
+            case "iUnitNumber2":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iUnitNumber2 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iUnitNumber2) : "";
+                break;
+            case "iUnitNumber1":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iUnitNumber1 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iUnitNumber1) : "";
+                break;
+            case "iUnitDate2":
+
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iUnitDate2 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iUnitDate2 : "";
+                break;
+
+            case "iCostPerUnit":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].AvgCostPerUnit != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].AvgCostPerUnit : "";
+
+                break;
+            case "iUnitTag3":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iUnitTag3 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iUnitTag3 : "";
+                break;
+            case "iUnitTag2":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iUnitTag2 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iUnitTag2 : "";
+                break;
+
+            case "HasConversion":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].HasConversion;
+                break;
+
+            case "string_1":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_1 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_1 : "";
+                break;
+            case "string_2":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_2 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_2 : "";
+                break;
+            case "string_3":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_3 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_3 : "";
+                break;
+            case "string_4":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_4 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_4 : "";
+                break;
+            case "string_5":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_5 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_5 : "";
+                break;
+            case "string_6":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_6 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_6 : "";
+                break;
+            case "string_7":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_7 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_7 : "";
+                break;
+            case "string_8":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_8 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_8 : "";
+                break;
+            case "string_9":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_9 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_9 : "";
+                break;
+            case "string_10":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_10 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_10 : "";
+                break;
+
+            case "string_11":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_11 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_11 : "";
+                break;
+            case "string_12":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_12 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_12 : "";
+                break;
+            case "string_13":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_13 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_13 : "";
+                break;
+            case "string_14":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_14 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_14 : "";
+                break;
+            case "string_15":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_15 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_15 : "";
+                break;
+            case "string_16":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_16 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_16 : "";
+                break;
+            case "string_17":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_17 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_17 : "";
+                break;
+            case "string_18":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_18 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_18 : "";
+                break;
+            case "string_19":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_19 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_19 : "";
+                break;
+            case "string_20":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_20 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_20 : "";
+                break;
+            case "string_21":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_21 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_21 : "";
+                break;
+            case "string_22":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_22 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_22 : "";
+                break;
+            case "string_23":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_23 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_23 : "";
+                break;
+            case "string_24":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_24 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].string_24 : "";
+                break;
+
+
+
+
+
+
+            case "number_1":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_1 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_1) : "";
+                break;
+            case "number_2":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_2 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_2) : "";
+                break;
+            case "number_3":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_3 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_3) : "";
+                break;
+            case "number_4":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_4 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_4) : "";
+                break;
+            case "number_5":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_5 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_5) : "";
+                break;
+            case "number_6":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_6 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_6) : "";
+                break;
+            case "number_7":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_7 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_7) : "";
+                break;
+            case "number_8":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_8 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_8) : "";
+                break;
+            case "number_9":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_9 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_9) : "";
+                break;
+            case "number_10":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_10 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_10) : "";
+                break;
+
+            case "number_11":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_11 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_11) : "";
+                break;
+            case "number_12":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_12 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].number_12) : "";
+                break;
+
+            case "bool_1":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].bool_1 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].bool_1 : "";
+                break;
+            case "bool_2":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].bool_2 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].bool_2 : "";
+                break;
+            case "bool_3":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].bool_3 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].bool_3 : "";
+                break;
+            case "bool_4":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].bool_4 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].bool_4 : "";
+                break;
+            case "bool_5":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].bool_5 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].bool_5 : "";
+                break;
+            case "bool_6":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].bool_6 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].bool_6 : "";
+                break;
+
+            case "date_1":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].date_1 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].date_1 : "";
+                break;
+            case "date_2":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].date_2 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].date_2 : "";
+                break;
+            case "date_3":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].date_3 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].date_3 : "";
+                break;
+            case "date_4":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].date_4 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].date_4 : "";
+                break;
+            case "date_5":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].date_5 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].date_5 : "";
+                break;
+            case "date_6":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].date_6 != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].date_6 : "";
+                break;
+
+            case "pCountFrq":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].pCountFrq != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].pCountFrq : "";
+                break;
+            case "lZone":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].lZone != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].lZone : "";
+                break;
+            case "iReqValue":
+                return $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iReqValue != null ? $scope.InventoryListGrouped[parentIndex].OtherPrespectives[Index].iReqValue : "";
+                break;
+            default:
+                return "N/A";
+        }
+    }
+
+    $scope.GetCellData = function (columnName, parentIndex, Index, isCalculated, isGrouped) {
+        var _ID = TryParseInt(columnName, 0);
+        if (_ID != 0) {
+            columnName = $scope.GetCustomFieldByID(_ID);
+        }
+        var _Tempcolumnname = columnName;
+        if (isCalculated == true) {
+            columnName = "Calculated"
+        }
+        if (isGrouped == true) {
+            columnName = "Grouped"
+        }
 
         switch (columnName) {
+            case "Grouped":
+                return $scope.GetInnerData(_Tempcolumnname, parentIndex, Index, isCalculated);
+                break;
             case "Calculated":
                 var _valueData = "";
                 if ($scope.InventoryListGrouped[Index].CustomData != null && $scope.InventoryListGrouped[Index].CustomData != undefined)
