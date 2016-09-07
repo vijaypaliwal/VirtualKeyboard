@@ -382,3 +382,76 @@
  {
      margin-left:15px !important;
  }
+
+    #filtermodal img
+    {
+        background:#fff;
+        border-radius:100%;
+    }
+
+    #filtermodal .input-group-addon
+    {
+        background:#2196F3;
+        padding-left:0px !important;
+        padding-right:0px !important;
+    }
+
+
+    #filtermodal .dropdown-menu img {
+        background: transparent;
+        border:1px solid #ccc;
+    }
+
+       #filtermodal .form-control
+    {
+      border-top-left-radius:0px;
+      border-bottom-left-radius:0px;
+      border-left:transparent;
+    }
+
+      #filtermodal #firstDiv .fa-calendar
+      {
+          padding:6px !important;
+          color:#000 !important;
+          background:#fff !important;
+          border-radius:100% !important;
+      }
+
+       #filtermodal #firstDiv .input-group-addon
+      {
+        padding-left:12px !important;
+        padding-right:12px !important;
+      }
+
+       .finditems img
+    {
+        background:#fff;
+        border-radius:100%;
+    }
+
+      .finditems.input-group-addon
+    {
+        background:#2196F3;
+        padding-left:8px !important;
+        padding-right:8px !important;
+        border-right:1px solid #fff;
+    }
+
+
+         .finditems .dropdown-menu img
+          {
+        background: transparent;
+        border:1px solid #ccc;
+    }
+
+         
+         .finditems .fa-caret-down {
+          background: #fff;
+    color: #000 !important;
+    padding: 7px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    }
+
+
+      

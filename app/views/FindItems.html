@@ -120,10 +120,10 @@
 
                         <div class="input-group">
 
-                            <span class="input-group-addon" id="addonData" style="padding:0px; border:1px solid #ccc">
+                            <span class="input-group-addon finditems" id="addonData" >
 
-                                <a class="waves-effect waves-effect status dropdown" style="padding:11px" data-toggle="dropdown">
-                                    <span class="caret"></span>
+                                <a class="waves-effect waves-effect status dropdown"  data-toggle="dropdown">
+                                    <i class="fa fa-caret-down"></i>
                                 </a>
 
                                 <ul class="dropdown-menu dm-icon searchlist" id="dynamicd">
@@ -149,7 +149,7 @@
 
                             </span>
 
-                            <span style="padding:5px; border:1px solid #ccc; border-right:transparent" class="input-group-addon">
+                            <span class="input-group-addon finditems">
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 
                                     <img src="{{CurrentActiveSearchOperator}}" alt="">
@@ -183,22 +183,21 @@
                                 </ul>
                             </span>
 
-
-
+                            
                             <div style="position:relative" class="fg-line">
 
                                 <span ng-if="CurrentActiveSearchType==1">
 
-                                    <input style="border-radius:0px;" id="MasterSearch" type="text" ng-model="SearchValue" class="form-control" placeholder="Type to Search">
+                                    <input style="border-radius:0px; border-left:transparent" id="MasterSearch" type="text" ng-model="SearchValue" class="form-control" placeholder="Type to Search">
                                 </span>
 
                                 <span ng-if="CurrentActiveSearchType==3">
 
-                                    <input style="border-radius:0px;" id="MasterSearchDate" type="date" ng-model="SearchDateValue" class="form-control" placeholder="Type to Search">
+                                    <input style="border-radius: 0px; border-left: transparent"" id="MasterSearchDate" type="date" ng-model="SearchDateValue" class="form-control" placeholder="Type to Search">
                                 </span>
                                 <span ng-if="CurrentActiveSearchType==2">
 
-                                    <input style="border-radius:0px;" id="MasterSearchNumber" type="number" ng-model="SearchNumberValue" class="form-control" placeholder="Type to Search">
+                                    <input style="border-radius: 0px; border-left: transparent"" id="MasterSearchNumber" type="number" ng-model="SearchNumberValue" class="form-control" placeholder="Type to Search">
                                 </span>
                                 <span ng-if="CurrentActiveSearchType==4">
 
