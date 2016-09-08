@@ -7,14 +7,13 @@
     border-radius: 45px;
     padding-left: 15px;
     padding-right: 15px;
-    text-transform:capitalize;
-    color:#fff !important;
+    text-transform: capitalize;
+    color: #fff !important;
 }
 
-.btn-primary i
-{
-    font-size:18px;
-}
+    .btn-primary i {
+        font-size: 18px;
+    }
 
 .btn-gray {
     background: #949494 !important;
@@ -27,17 +26,15 @@
     font-size: 17px;
     padding-left: 15px;
     padding-right: 15px;
-    text-transform:capitalize;
+    text-transform: capitalize;
 }
 
-.primary-color
-{
-   color:#fff !important;
+.primary-color {
+    color: #fff !important;
 }
 
-.btn-gray i
-{
-    font-size:18px;
+.btn-gray i {
+    font-size: 18px;
 }
 
 .bootbox .modal-body {
@@ -164,7 +161,6 @@
                 display: block;
                 width: 100%;
                 text-decoration: none !important;
-            
                 color: #fff;
             }
 
@@ -294,6 +290,7 @@
 .lesstop12 {
     margin-top: -12px;
 }
+
 .title-header {
     background-color: #2196F3;
     color: #fff;
@@ -301,8 +298,8 @@
     position: fixed;
     width: 100%;
     z-index: 100;
-    left:0;
-    right:0;
+    left: 0;
+    right: 0;
 }
 
     .title-header h4, small {
@@ -346,12 +343,12 @@
 }
 
 
-.top50
-{
-    padding-top:50px;
+.top50 {
+    padding-top: 50px;
 }
- .newbackbtn {
-      height: 40px;
+
+.newbackbtn {
+    height: 40px;
     width: 40px;
     border-radius: 100%;
     position: fixed;
@@ -362,114 +359,97 @@
     z-index: 100;
     color: #fff;
     font-size: 25px;
-    }
-
- .newbackbtn i
- {
-     color:#fff !important;
- }
-
- .btn-large
- {
-     border-radius:50px;
- }
-
- .btn-large i {
-    font-size: 17px;
 }
 
- .left15
- {
-     margin-left:15px !important;
- }
-
-    #filtermodal img
-    {
-        background:#fff;
-        border-radius:100%;
+    .newbackbtn i {
+        color: #fff !important;
     }
 
-    #filtermodal .input-group-addon
-    {
-        background:#2196F3;
-        padding-left:0px !important;
-        padding-right:0px !important;
+.btn-large {
+    border-radius: 50px;
+}
+
+    .btn-large i {
+        font-size: 17px;
     }
 
+.left15 {
+    margin-left: 15px !important;
+}
 
-    #filtermodal .dropdown-menu img {
-        background: transparent;
-        border:1px solid #ccc;
-    }
+#filtermodal img {
+    background: #fff;
+    border-radius: 100%;
+}
 
-       #filtermodal .form-control
-    {
-      border-top-left-radius:0px;
-      border-bottom-left-radius:0px;
-      border-left:transparent;
-    }
-
-      #filtermodal #firstDiv .fa-calendar
-      {
-          padding:6px !important;
-          color:#000 !important;
-          background:#fff !important;
-          border-radius:100% !important;
-      }
-
-       #filtermodal #firstDiv .input-group-addon
-      {
-        padding-left:12px !important;
-        padding-right:12px !important;
-      }
-
-       .finditems img
-    {
-        background:#fff;
-        border-radius:100%;
-    }
-
-      .finditems.input-group-addon
-    {
-        background:#2196F3;
-        padding-left:8px !important;
-        padding-right:8px !important;
-        border-right:1px solid #fff;
-    }
+#filtermodal .input-group-addon {
+    background: #2196F3;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
 
 
-         .finditems .dropdown-menu img
-          {
-        background: transparent;
-        border:1px solid #ccc;
-    }
+#filtermodal .dropdown-menu img {
+    background: transparent;
+    border: 1px solid #ccc;
+}
 
-         
-         .finditems .fa-caret-down {
-          background: #fff;
+#filtermodal .form-control {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: transparent;
+}
+
+#filtermodal #firstDiv .fa-calendar {
+    padding: 6px !important;
+    color: #000 !important;
+    background: #fff !important;
+    border-radius: 100% !important;
+}
+
+#filtermodal #firstDiv .input-group-addon {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+}
+
+.finditems img {
+    background: #fff;
+    border-radius: 100%;
+}
+
+.finditems.input-group-addon {
+    background: #2196F3;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    border-right: 1px solid #fff;
+}
+
+
+.finditems .dropdown-menu img {
+    background: transparent;
+    border: 1px solid #ccc;
+}
+
+
+.finditems .fa-caret-down {
+    background: #fff;
     color: #000 !important;
     padding: 7px !important;
     padding-left: 10px !important;
     padding-right: 10px !important;
-    }
-
-         #toast-container {
-  position: fixed !important; 
-  z-index: 999999;
-  width:100%;
-  bottom:0;
-  left:0;
-  right:0;
-  top:0;
-
 }
-         .toast-success
-         {
-             background:#3CB371;
-             color:#fff !important;
-         }
 
-      
+#toast-container {
+    position: fixed !important;
+    z-index: 999999;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+}
 
-
-      
+.toast-success {
+    background: #3CB371;
+    color: #fff !important;
+}

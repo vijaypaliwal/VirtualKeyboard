@@ -869,7 +869,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               success: function (response) {
                   if (response.AddInventoryDataResult.Success == true) {
 
-                      log.success("New Inventory Added Successfully.")
+                      //  log.success("New Inventory Added Successfully.")
+
+                      ShowSuccess("Saved");
 
                       if (_toSendImages.length > 0)
                       {
