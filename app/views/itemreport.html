@@ -533,14 +533,13 @@
     </div>
 </div>
 
-<a ng-if="isviewload==false" class="waves-effect roundbtn btn btn-success"> <i class="fa fa-plus"></i> </a>
+<a href="#/reportmenu" ng-if="isviewload==false" class="newbackbtn left15"> <i class="fa fa-arrow-left"></i> </a>
 
-<a ng-if="isviewload==true" ng-click="showview()" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
+<a ng-if="isviewload==true" ng-click="showview()" class="newbackbtn left15"> <i class="fa fa-arrow-left"></i> </a>
 
 <a ng-if="isviewload==true" ng-click="showfilter()" class="btn roundbtntitle waves-effect "><i class="fa fa-filter"></i> </a>
 
 <a class="Addbtn cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
-
 
 
 <div class="contentsection">
@@ -554,15 +553,11 @@
 
             <div class="col-xs-10">
                 <div style="padding-top:0px;" class="row">
-                    <div class="col-xs-9">
+                    <div class="col-xs-12">
                         <a class="text">{{_obj.Name}} </a>
                         <p>{{_obj.Description}}</p>
                     </div>
-                    <div style="text-align:right;" class="col-xs-3">
-                        <span>
-                            <i class="fa fa-pencil"></i>
-                        </span>
-                    </div>
+                    
                 </div>
             </div>
         </div>

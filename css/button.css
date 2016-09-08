@@ -453,5 +453,23 @@
     padding-right: 10px !important;
     }
 
+         #toast-container {
+  position: fixed !important; 
+  z-index: 999999;
+  width:100%;
+  bottom:0;
+  left:0;
+  right:0;
+  top:0;
+
+}
+         .toast-success
+         {
+             background:#3CB371;
+             color:#fff !important;
+         }
+
+      
+
 
       
