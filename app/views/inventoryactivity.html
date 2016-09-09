@@ -910,7 +910,7 @@
 
 
                                 <div class="row">
-                                    <div class="col-xs-6" ng-click="_obj.SearchValue='Increase';_obj.FilterOperator='eq'">
+                                    <div class="col-xs-6" ng-click="UpdateParentAction($index,'Increase')">
 
                                         <div class="bgm-increase">
 
@@ -921,7 +921,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-xs-6" ng-click="_obj.SearchValue='Decrease';_obj.FilterOperator='eq'">
+                                    <div class="col-xs-6" ng-click="UpdateParentAction($index,'Decrease')">
                                         <div class="bgm-decrease">
 
                                             <div class="deccarrow"><i class="fa fa-arrow-down"></i> </div>
@@ -929,7 +929,7 @@
                                             <i ng-if="_obj.SearchValue=='Decrease' && _obj.ColumnName=='ParentAction'" class="fa fa-check"></i>
                                         </div>
                                     </div>
-                                    <div class="col-xs-6" ng-click="_obj.SearchValue='Move';_obj.FilterOperator='eq'">
+                                    <div class="col-xs-6" ng-click="UpdateParentAction($index,'Move')">
                                         <div class="bgm-move">
                                             <div class="movarrow"><i class="fa fa-arrow-right"></i></div>
 
@@ -937,21 +937,21 @@
                                             <i ng-if="_obj.SearchValue=='Move' && _obj.ColumnName=='ParentAction'" class="fa fa-check"></i>
                                         </div>
                                     </div>
-                                    <div class="col-xs-6" ng-click="_obj.SearchValue='Update';_obj.FilterOperator='eq'">
+                                    <div class="col-xs-6" ng-click="UpdateParentAction($index,'Update')">
                                         <div class="bgm-purple">
                                             <div class="uparrow"><i class="fa fa-history fa-flip-horizontal"></i> </div>
                                             <span>Update </span>
                                             <i ng-if="_obj.SearchValue=='Update' && _obj.ColumnName=='ParentAction'" class="fa fa-check"></i>
                                         </div>
                                     </div>
-                                    <div class="col-xs-6" ng-click="_obj.SearchValue='Apply';_obj.FilterOperator='eq'">
+                                    <div class="col-xs-6" ng-click="UpdateParentAction($index,'Apply')">
                                         <div class="bgm-apply">
                                             <div class="tagarrow"><i class="fa fa-tag"></i></div>
                                             <span> Tag </span>
                                             <i ng-if="_obj.SearchValue=='Apply' && _obj.ColumnName=='ParentAction'" class="fa fa-check"></i>
                                         </div>
                                     </div>
-                                    <div class="col-xs-6" ng-click="_obj.SearchValue='Convert';_obj.FilterOperator='eq'">
+                                    <div class="col-xs-6" ng-click="UpdateParentAction($index,'Convert')">
                                         <div class="bgm-convert">
                                             <div class="conarrow"><i class="fa fa-sitemap"></i></div>
                                             <span>Convert</span>

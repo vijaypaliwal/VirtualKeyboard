@@ -1034,6 +1034,20 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
     }
 
+
+    $scope.UpdateParentAction = function (index, Action) {
+        if ($scope.FilterArray[index].SearchValue == Action) {
+            $scope.FilterArray[index].SearchValue = "";
+        }
+        else {
+            $scope.FilterArray[index].SearchValue = Action;
+
+        }
+        $scope.FilterArray[index].FilterOperator = "eq";
+        CheckScopeBeforeApply();
+    }
+
+
     $scope.GetActivityDataAccordingToView=function()
     {
         
@@ -1102,7 +1116,32 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
             }
             CheckScopeBeforeApply();
 
+            ShowGlobalWaitingDiv();
+            var count = 0;
+            var timer = setInterval(function () {
+                count = count + 1;
 
+
+                if (count > 7) {
+
+
+                    $("#mysmallModalWaiting span").html("Server still processing, almost there..");
+
+                }
+                else if (count > 5) {
+
+                    $("#mysmallModalWaiting span").html("Please wait a bit more...");
+
+                }
+                else if (count > 1) {
+                    $("#mysmallModalWaiting span").html("Backend processing in progress..");
+
+                }
+
+
+
+
+            }, 1000);
 
             
             var _searchParameter = $scope.filterVal;
@@ -1161,8 +1200,12 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                       }
                   },
                   complete: function () {
+
+                   
                       _IsLazyLoadingUnderProgress = 0;
                       $scope.isDataLoading = true;
+                      HideGlobalWaitingDiv();
+                      clearInterval(timer);
                   }
               });
              }
