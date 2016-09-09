@@ -34,8 +34,8 @@
     <param name="key" value="willoughby"/>
   </feature>
 
-  <preference name="webviewbounce" value="true" />
-  <preference name="UIWebViewBounce" value="true" />
+  <preference name="webviewbounce" value="false" />
+  <preference name="UIWebViewBounce" value="false" />
   <preference name="DisallowOverscroll" value="false" />
   <preference name="phonegap-version" value="3.6.3" />
   <preference name="orientation"   value="all" />
