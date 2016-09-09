@@ -54,6 +54,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $scope.SearchValue = "";
     $scope.StatusList = [];
 
+    $scope.loadingblock = false;
+
     $scope.UOMList = [];
     $scope.CurrentObj = {};
     $scope.SearchNumberValue = "";
@@ -263,8 +265,11 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
             if ($(window).scrollTop() < 500) {
                 if (_PageSize < $scope.totalrecords) {
+
+                    $scope.loadingblock = true;
+
                     _IsLazyLoadingUnderProgress = 1;
-                    $scope.myinventoryColumnLoaded = false;
+                   // $scope.myinventoryColumnLoaded = false;
                     CheckScopeBeforeApply();
                     $scope.GetInventories();
                 }
@@ -924,7 +929,14 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.GetInventories = function () {
 
-        $scope.myinventoryColumnLoaded = false;
+
+        if ($scope.loadingblock == false) {
+
+            $scope.myinventoryColumnLoaded = false;
+
+        }
+
+      
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -1027,6 +1039,9 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
                 $scope.myinventoryColumnLoaded = true;
                 $cordovaKeyboard.disableScroll(false);
+
+                $scope.loadingblock = false;
+
                 CheckScopeBeforeApply();
             
                 },
