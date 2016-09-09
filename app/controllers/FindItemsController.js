@@ -264,7 +264,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
             if ($(window).scrollTop() < 500) {
-                if (_PageSize < $scope.totalrecords) {
+                //if (_PageSize < $scope.totalrecords)
+              //  {
 
                     $scope.loadingblock = true;
 
@@ -272,10 +273,10 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                    // $scope.myinventoryColumnLoaded = false;
                     CheckScopeBeforeApply();
                     $scope.GetInventories();
-                }
-                else {
+              //  }
+                //else {
                     // log.info("You have already loaded all data.")
-                }
+             //   }
 
             }
         }
@@ -932,7 +933,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         if ($scope.loadingblock == false) {
 
-            $scope.myinventoryColumnLoaded = false;
+              $scope.myinventoryColumnLoaded = false;
 
         }
 
