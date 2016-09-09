@@ -939,7 +939,11 @@
         {
             $("#mysmallModalWaiting").removeClass('fadeIn').addClass('fadeOut');
 
-            $("#mysmallModalWaiting span").html("Loading..");
+            setTimeout(function () {
+                $("#mysmallModalWaiting").hide();
+                $("#mysmallModalWaiting span").html("Loading..");
+
+            }, 500);
 
         }
 
