@@ -2,7 +2,7 @@
 app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
 
 
-    $scope.CurrentView = { Name: "Current Inventory" };
+    $scope.CurrentView = { Name: "Global Restock" };
     $scope.GlobalRestockViews = [];
     $scope.GlobalRestockList = [];
     $scope.CustomItemDataList = [];
@@ -706,7 +706,7 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
 
     $scope.showview = function() {
         $scope.isviewload = false;
-        $scope.CurrentView = { Name: "Items" };
+        $scope.CurrentView = { Name: "Global Restock" };
     }
 
     function CheckScopeBeforeApply() {

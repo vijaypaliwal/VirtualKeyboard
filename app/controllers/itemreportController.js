@@ -2,7 +2,7 @@
 app.controller('itemreportController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
 
 
-    $scope.CurrentView = { Name: "Current Inventory" };
+    $scope.CurrentView = { Name: "Item" };
     $scope.ItemViews = [];
     $scope.ItemList = [];
     $scope.CustomItemDataList = [];

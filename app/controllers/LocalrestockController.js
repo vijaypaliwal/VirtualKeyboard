@@ -2,7 +2,7 @@
 app.controller('LocalrestockController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
 
 
-    $scope.CurrentView = { Name: "Current Inventory" };
+    $scope.CurrentView = { Name: "Local Restock" };
     $scope.LocalRestockViews = [];
     $scope.LocalRestockList = [];
     $scope.CustomItemDataList = [];
@@ -701,7 +701,7 @@ app.controller('LocalrestockController', ['$scope', 'localStorageService', 'auth
 
     $scope.showview = function() {
         $scope.isviewload = false;
-        $scope.CurrentView = { Name: "Items" };
+        $scope.CurrentView = { Name: "Local Restock" };
     }
 
     function CheckScopeBeforeApply() {

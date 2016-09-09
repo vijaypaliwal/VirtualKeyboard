@@ -751,7 +751,32 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
     $scope.GetInventoryDataAccordingToView=function()
     {
-        
+        ShowGlobalWaitingDiv();
+        var count = 0;
+        var timer = setInterval(function () {
+            count = count + 1;
+
+
+            if (count > 7) {
+
+
+                $("#mysmallModalWaiting span").html("Server still processing, almost there..");
+
+            }
+            else if (count > 5) {
+
+                $("#mysmallModalWaiting span").html("Please wait a bit more...");
+
+            }
+            else if (count > 1) {
+                $("#mysmallModalWaiting span").html("Backend processing in progress..");
+
+            }
+
+
+
+
+        }, 1000);
         $scope.isDataLoading = false;
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -810,6 +835,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                   complete: function () {
                       _IsLazyLoadingUnderProgress = 0;
                       $scope.isDataLoading = true;
+                      HideGlobalWaitingDiv();
+                      clearInterval(timer);
                   }
               });
              }

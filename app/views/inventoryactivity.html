@@ -561,12 +561,13 @@
         background: #CE59A1 !important;
     }
 
+
     #activitytype .col-xs-6 div {
         margin: 0 auto;
         height: 45px;
         margin-bottom: 7px;
         line-height: 45px;
-        width: 150px;
+        width: 135px;
         text-align: center;
         color: #fff;
         cursor: pointer;
@@ -574,13 +575,21 @@
     }
 
 
-        #activitytype .col-xs-6 div i {
-            font-size: 21px;
-        }
+    #activitytype .col-xs-6
+    {
+        padding-left:3px;
+        padding-right:3px;
+    }
+    
+    
+     #activitytype .col-xs-6 div i {
+        font-size: 21px;
+    }
 
 
         #activitytype .col-xs-6 div span {
-            margin-left: 10px;
+            margin-left: 12px;
+            font-size: 12px;
         }
 
 
@@ -757,7 +766,7 @@
             <div class="col-xs-10">
                 <div style="padding-top:0px;" class="row">
                     <div class="col-xs-12">
-                        <a class="text">{{_obj.Name}} </a>
+                        <a class="text">{{_obj.Name}} <span ng-if="_obj.GridLayoutID==-1" style="font-size: 11px; color: #2196F3;">System view</span> </a>
                         <p>{{_obj.Description}}</p>
                        
                     </div>

@@ -580,7 +580,7 @@
             <div class="col-xs-10">
                 <div style="padding-top:0px;" class="row">
                     <div class="col-xs-12">
-                        <a class="text">{{_obj.Name}} </a>
+                        <a class="text">{{_obj.Name}} <span ng-if="_obj.GridLayoutID==-1" style="font-size: 11px; color: #2196F3;">System view</span></a>
                         <p>{{_obj.Description}}</p>
                     </div>
                     
@@ -588,7 +588,6 @@
             </div>
         </div>
     </div>
-
 
     <div ng-if="isviewload==true" class="paginationtext">
         <span style="font-size:13px;">{{currentrecord}} of {{totalrecords}} <span>records shown <span class="pull-right" ng-click="clearfilterArray()"></span> </span> </span>
