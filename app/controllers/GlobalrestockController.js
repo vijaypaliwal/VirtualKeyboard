@@ -770,7 +770,6 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
 
 
 
-
             }, 1000);
             $.ajax
               ({
@@ -794,7 +793,7 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
                       $scope.ActualTotalRecords = response.GetGlobalRestockResult.Payload[0].ActualTotalRecords;
                       $scope.FilterArray = response.GetGlobalRestockResult.Payload[0].Filters;
                       CheckScopeBeforeApply();
-                      // FillFilterArray();
+                    
                       UpdateFilterArray();
 
                       }

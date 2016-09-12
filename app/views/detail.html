@@ -104,7 +104,9 @@
 
 <a href="#/FindItems" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
 
-<a ng-click="ToggleEditView()" class="btn waves-effect btn-danger roundbtntitle"> <i class="fa fa-pencil"></i> </a>
+<a ng-if="IsEditMode==false" ng-click="ToggleEditView()" class="btn waves-effect btn-danger roundbtntitle"> <i class="fa fa-pencil"></i> </a>
+
+<a ng-if="IsEditMode==true" ng-click="ToggleEditView()" class="btn waves-effect btn-danger roundbtntitle"> <i class="fa fa-times"></i> </a>
 
 
 
@@ -337,19 +339,12 @@
                 </div>
                 <br/>
                 
-                <button type="button" ng-click="UpdateInventory()" ng-if="SavingData==false" ng-disabled="CurrentInventory.pPart==''||CurrentInventory.pDescription==''" class="waves-effect btn btn-primary"> <i class="fa fa-check"></i> Save</button>
-                <button type="button" ng-if="SavingData==true" disabled class="waves-effect btn btn-primary"> <i class="fa fa-check fa-spin"></i> Save</button>
-                <button ng-if="SavingData==false" class="waves-effect  btn btn-gray" ng-click="ToggleEditView()"><i class="fa fa-times-circle"></i> Cancel</button>
-
-                <button ng-if="SavingData==true" disabled class="waves-effect btn btn-gray"><i class="fa fa-times-circle"></i> Cancel</button>
-
-
-                
-
-
+                <button type="button" ng-click="UpdateInventory()" ng-if="SavingData==false" ng-disabled="CurrentInventory.pPart==''||CurrentInventory.pDescription==''" class="waves-effect btn btn-primary"> <i class="fa fa-pencil"></i> Update</button>
+                <button type="button" ng-if="SavingData==true" disabled class="waves-effect btn btn-primary"> <i class="fa fa-pencil fa-spin"></i> Update</button>
+                <button ng-if="SavingData==false" class="waves-effect  btn btn-gray" ng-click="ToggleEditView()"><i class="fa fa-times"></i> Cancel</button>
+                <button ng-if="SavingData==true" disabled class="waves-effect btn btn-gray"><i class="fa fa-times"></i> Cancel</button>
             </div>
         </div>
-
 
         </div>
 

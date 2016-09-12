@@ -714,6 +714,17 @@
         padding-bottom:10px;
     }
 
+    .mainfilter .head {
+        background: #ccc;
+        padding: 10px;
+        border: 1px solid #e4e4e4;
+    }
+
+    .main-body
+    {
+        background:#ececec;
+         }
+
 </style>
 
 <div class="title-header">
@@ -869,10 +880,10 @@
 
     <div style="padding:10px;" class="modal-body">
 
-        <ul class="collapsible animated fadeinright delay-1" data-collapsible="accordion">
+        <ul class="mainfilter">
             <li>
-                <div class="collapsible-header" onclick="Toggle('#firstDiv')"><i class="ion-android-arrow-dropdown right"></i>Date & Type Filter </div>
-                <div class="collapsible-body" id="firstDiv">
+                <div class="head" onclick="Toggle('#firstDiv')"><i class="fa fa-caret-down right"></i>Date & Type Filter </div>
+                <div class="main-body" id="firstDiv">
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <h6>Start Date</h6>
@@ -965,8 +976,8 @@
                 </div>
             </li>
             <li>
-                <div class="collapsible-header" onclick="Toggle('#SecondDiv')"><i class="ion-android-arrow-dropdown right"></i>Column filter</div>
-                <div class="collapsible-body" id="SecondDiv">
+                <div class="head" onclick="Toggle('#SecondDiv')"><i class="fa fa-caret-down right"></i>Column filter</div>
+                <div class="main-body" id="SecondDiv">
                     <div class="row" ng-repeat="_obj in FilterArray" ng-if="_obj.ColumnName!='Button1' && _obj.ColumnName!='Button2'&& _obj.ColumnName!='ImagePath' && isFurtherCalculatedColumn(_obj.ColumnName)==false">
 
 
@@ -1033,12 +1044,7 @@
 
                                         <img src="{{GetImagePath(_obj.FilterOperator)}}" alt="">
                                     </a>
-                                    <ul class="dropdown-menu operator shadow-z-5 ng-scope" role="menu" aria-labelledby="dropdownMenu">
-                                        <li style="text-align: left"><a tabindex="-1" ng-click="_obj.FilterOperator='cn'"><img src="img/filter/Contains.gif" alt=""> Contains</a></li>
-                                        <li style="text-align: left"><a tabindex="-1" ng-click="_obj.FilterOperator='eq'"><img src="img/filter/EqualTo.gif" alt=""> Exact</a></li>
-                                        <li style="text-align: left"><a tabindex="-1" ng-click="_obj.FilterOperator='ne'"><img src="img/filter/NotEqualTo.gif" alt=""> does not equals</a></li>
-                                        <li style="text-align: left"><a tabindex="-1" ng-click="_obj.FilterOperator='bw'"><img src="img/filter/BeginsWith.gif" alt=""> Begins With</a></li>
-                                    </ul>
+                                 
                                     <ul class="dropdown-menu operator" role="menu" aria-labelledby="dropdownMenu">
                                         <li><a tabindex="-1" data-ng-click="_obj.FilterOperator='date-eq'"><img src="img/filter/EqualTo.gif" alt=""> Equals</a></li>
                                         <li><a tabindex="-1" data-ng-click="_obj.FilterOperator='date-before'"><img src="img/filter/OnOrBefore.gif" alt="">On OR Before</a></li>
@@ -1098,11 +1104,6 @@
             
         </ul>
 
-
-   
-
-            
-
         </div>
 
     <div class="modal-footer">
@@ -1119,7 +1120,6 @@
     </div>
 
 </div>
-
 
 <a ng-click="Openbottommenu()" class="menubtn waves-effect btn-info">
     <i class="fa fa-bars"></i>

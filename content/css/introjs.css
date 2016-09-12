@@ -91,20 +91,14 @@ tr.introjs-showElement > th {
   top: -16px;
   left: -16px;
   z-index: 9999999999 !important;
-  padding: 2px;
+  padding-top: 2px;
   font-family: Arial, verdana, tahoma;
   font-size: 13px;
   font-weight: bold;
   color: white;
   text-align: center;
   text-shadow: 1px 1px 1px rgba(0,0,0,.3);
-  background: #ff3019; /* Old browsers */
-  background: -webkit-linear-gradient(top, #ff3019 0%, #cf0404 100%); /* Chrome10+,Safari5.1+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff3019), color-stop(100%, #cf0404)); /* Chrome,Safari4+ */
-  background:    -moz-linear-gradient(top, #ff3019 0%, #cf0404 100%); /* FF3.6+ */
-  background:     -ms-linear-gradient(top, #ff3019 0%, #cf0404 100%); /* IE10+ */
-  background:      -o-linear-gradient(top, #ff3019 0%, #cf0404 100%); /* Opera 11.10+ */
-  background:         linear-gradient(to bottom, #ff3019 0%, #cf0404 100%);  /* W3C */
+  background:#2196F3;
   width: 20px;
   height:20px;
   line-height: 20px;
@@ -213,47 +207,26 @@ tr.introjs-showElement > th {
   position: relative;
   overflow: visible;
   display: inline-block;
-  padding: 0.3em 0.8em;
-  border: 1px solid #d4d4d4;
-  margin: 0;
+  padding: 0.4em 0.9em;
+  margin-right:5px;
+ 
   text-decoration: none;
-  text-shadow: 1px 1px 0 #fff;
-  font: 11px/normal sans-serif;
-  color: #333;
+  
+  font-size:11px;
+  color: #fff !important;
   white-space: nowrap;
   cursor: pointer;
   outline: none;
-  background-color: #ececec;
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#ececec));
-  background-image: -moz-linear-gradient(#f4f4f4, #ececec);
-  background-image: -o-linear-gradient(#f4f4f4, #ececec);
-  background-image: linear-gradient(#f4f4f4, #ececec);
-  -webkit-background-clip: padding;
-  -moz-background-clip: padding;
-  -o-background-clip: padding-box;
-  /*background-clip: padding-box;*/ /* commented out due to Opera 11.10 bug */
-  -webkit-border-radius: 0.2em;
-  -moz-border-radius: 0.2em;
-  border-radius: 0.2em;
+  background-color: #2196F3;
+
+  border-radius:10px;
   /* IE hacks */
   zoom: 1;
   *display: inline;
   margin-top: 10px;
 }
 
-.introjs-button:hover {
-  border-color: #bcbcbc;
-  text-decoration: none;
-  box-shadow: 0px 1px 1px #e3e3e3;
-}
 
-.introjs-button:focus,
-.introjs-button:active {
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ececec), to(#f4f4f4));
-  background-image: -moz-linear-gradient(#ececec, #f4f4f4);
-  background-image: -o-linear-gradient(#ececec, #f4f4f4);
-  background-image: linear-gradient(#ececec, #f4f4f4);
-}
 
 /* overrides extra padding on button elements in Firefox */
 .introjs-button::-moz-focus-inner {
@@ -263,30 +236,24 @@ tr.introjs-showElement > th {
 
 .introjs-skipbutton {
   margin-right: 5px;
-  color: #7a7a7a;
+  color: #fff;
 }
 
 .introjs-prevbutton {
-  -webkit-border-radius: 0.2em 0 0 0.2em;
-  -moz-border-radius: 0.2em 0 0 0.2em;
-  border-radius: 0.2em 0 0 0.2em;
-  border-right: none;
+
 }
 
 .introjs-nextbutton {
-  -webkit-border-radius: 0 0.2em 0.2em 0;
-  -moz-border-radius: 0 0.2em 0.2em 0;
-  border-radius: 0 0.2em 0.2em 0;
+
 }
 
 .introjs-disabled, .introjs-disabled:hover, .introjs-disabled:focus {
-  color: #9a9a9a;
+  color: #fff;
   border-color: #d4d4d4;
   box-shadow: none;
   cursor: default;
-  background-color: #f4f4f4;
-  background-image: none;
-  text-decoration: none;
+  background-color: #2196F3;
+
 }
 
 .introjs-bullets {
@@ -314,10 +281,10 @@ tr.introjs-showElement > th {
   text-decoration: none;
 }
 .introjs-bullets ul li a:hover {
-  background: #999;
+  background: #2196F3;
 }
 .introjs-bullets ul li a.active {
-  background: #999;
+  background: #2196F3;
 }
 
 .introjs-progress {
