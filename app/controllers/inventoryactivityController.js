@@ -543,10 +543,10 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                 break;
 
             case "itUnitNumber2":
-                return $scope.ActivityList[Index].itUnitNumber2 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].itUnitNumber2) : "";
+                return $scope.ActivityList[Index].itUnitNumber2 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].itUnitNumber2) : "";
                 break;
             case "itUnitNumber1":
-                return $scope.ActivityList[Index].itUnitNumber1 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].itUnitNumber1) : "";
+                return $scope.ActivityList[Index].itUnitNumber1 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].itUnitNumber1) : "";
                 break;
            case "ItemDefaultCost":
 
@@ -755,81 +755,81 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
 
             case "number_1":
-                return $scope.ActivityList[Index].number_1 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_1) : "";
+                return $scope.ActivityList[Index].number_1 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].number_1) : "";
                 break;
             case "number_2":
-                return $scope.ActivityList[Index].number_2 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_2) : "";
+                return $scope.ActivityList[Index].number_2 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].number_2) : "";
                 break;
             case "number_3":
-                return $scope.ActivityList[Index].number_3 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_3) : "";
+                return $scope.ActivityList[Index].number_3 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].number_3) : "";
                 break;
             case "number_4":
-                return $scope.ActivityList[Index].number_4 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_4) : "";
+                return $scope.ActivityList[Index].number_4 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].number_4) : "";
                 break;
             case "number_5":
-                return $scope.ActivityList[Index].number_5 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_5) : "";
+                return $scope.ActivityList[Index].number_5 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].number_5) : "";
                 break;
             case "number_6":
-                return $scope.ActivityList[Index].number_6 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_6) : "";
+                return $scope.ActivityList[Index].number_6 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].number_6) : "";
                 break;
             case "number_7":
-                return $scope.ActivityList[Index].number_7 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_7) : "";
+                return $scope.ActivityList[Index].number_7 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].number_7) : "";
                 break;
             case "number_8":
-                return $scope.ActivityList[Index].number_8 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_8) : "";
+                return $scope.ActivityList[Index].number_8 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].number_8) : "";
                 break;
             case "number_9":
-                return $scope.ActivityList[Index].number_9 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_9) : "";
+                return $scope.ActivityList[Index].number_9 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].number_9) : "";
                 break;
             case "number_10":
-                return $scope.ActivityList[Index].number_10 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_10) : "";
+                return $scope.ActivityList[Index].number_10 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].number_10) : "";
                 break;
 
             case "number_11":
-                return $scope.ActivityList[Index].number_11 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_11) : "";
+                return $scope.ActivityList[Index].number_11 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].number_11) : "";
                 break;
             case "number_12":
-                return $scope.ActivityList[Index].number_12 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_12) : "";
+                return $scope.ActivityList[Index].number_12 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].number_12) : "";
                 break;
 
 
 
            case "i_number_1":
-               return $scope.ActivityList[Index].i_number_1 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].i_number_1) : "";
+               return $scope.ActivityList[Index].i_number_1 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].i_number_1) : "";
                break;
            case "i_number_2":
-               return $scope.ActivityList[Index].i_number_2 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].i_number_2) : "";
+               return $scope.ActivityList[Index].i_number_2 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].i_number_2) : "";
                break;
            case "i_number_3":
-               return $scope.ActivityList[Index].i_number_3 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].i_number_3) : "";
+               return $scope.ActivityList[Index].i_number_3 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].i_number_3) : "";
                break;
            case "i_number_4":
-               return $scope.ActivityList[Index].i_number_4 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].i_number_4) : "";
+               return $scope.ActivityList[Index].i_number_4 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].i_number_4) : "";
                break;
            case "i_number_5":
-               return $scope.ActivityList[Index].i_number_5 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].i_number_5) : "";
+               return $scope.ActivityList[Index].i_number_5 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].i_number_5) : "";
                break;
            case "i_number_6":
-               return $scope.ActivityList[Index].i_number_6 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].i_number_6) : "";
+               return $scope.ActivityList[Index].i_number_6 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].i_number_6) : "";
                break;
            case "i_number_7":
-               return $scope.ActivityList[Index].i_number_7 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].i_number_7) : "";
+               return $scope.ActivityList[Index].i_number_7 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].i_number_7) : "";
                break;
            case "i_number_8":
-               return $scope.ActivityList[Index].i_number_8 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].i_number_8) : "";
+               return $scope.ActivityList[Index].i_number_8 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].i_number_8) : "";
                break;
            case "i_number_9":
-               return $scope.ActivityList[Index].i_number_9 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].i_number_9) : "";
+               return $scope.ActivityList[Index].i_number_9 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].i_number_9) : "";
                break;
            case "i_number_10":
-               return $scope.ActivityList[Index].i_number_10 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].i_number_10) : "";
+               return $scope.ActivityList[Index].i_number_10 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].i_number_10) : "";
                break;
 
            case "i_number_11":
-               return $scope.ActivityList[Index].i_number_11 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].i_number_11) : "";
+               return $scope.ActivityList[Index].i_number_11 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].i_number_11) : "";
                break;
            case "i_number_12":
-               return $scope.ActivityList[Index].i_number_12 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].i_number_12) : "";
+               return $scope.ActivityList[Index].i_number_12 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].i_number_12) : "";
                break;
 
             case "bool_1":
