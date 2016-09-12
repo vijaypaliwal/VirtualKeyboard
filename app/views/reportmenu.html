@@ -1,73 +1,5 @@
 ﻿
-<style>
-    .container
-    {
-        width:100%;
-    }
-
-   
-
-    .btn-large h5 {
-       text-transform:capitalize;
-       line-height:25px;
-    }
-
-
- 
-
-
-        .btn-large p {
-           
-            margin: 0 0 10px;
-            text-transform: capitalize;
-            margin-top:-5px;
-            margin-bottom:8px;
-        }
-
-        .col-xs-8
-        {
-            text-align:left;
-        }
-
-    .btn-info {
-        color: #ffffff !important;
-        background-color: #5bc0de !important;
-      
-    }
-
-    body
-    {
-        background:#eaeaea;
-        overflow-x:hidden !important;
-    }
-
-    .col-xs-3 div {
-        background: #fff;
-        color: #000;
-        font-size: 20px;
-        border-radius: 100%;
-        padding-left: 15px;
-        padding-right: 15px;
-        height: 50px;
-        width: 50px;
-        padding: 0px;
-        float: right;
-        margin-right: -32px;
-    }
-      .col-xs-9
-      {
-       text-align:left;
-       padding-left:25px;
-       white-space:nowrap;
-      }
-
-
-    .col-xs-3
-    {
-        text-align:center;
-    }
-
-</style>
+<link href="css/setting.css" rel="stylesheet" />
 
 <div class="title-header">
     <div class="row">
@@ -80,16 +12,13 @@
 <a href="#/mainmenu" class="newbackbtn ng-scope"> <i class="fa fa-arrow-left"></i> </a>
 
 <div class="top50">
-
     <br />
-
     <a href="#/currentinventory" ng-click="GoTo('/currentinventory')" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-9">
                 <i class="fa fa-th-list"></i> Current Inventory
             </div>
           
-
             <div class="col-xs-3">
                 <div ng-if="loadcounter1==false">
                     <img style="height:35px; width:35px;" src="img/loader1.gif" alt="Alternate Text" />
@@ -154,7 +83,7 @@
     </a>
 
 
-    <a href="#/GlobalRestock"  class="waves-effect btn-large waves-light btn-info  width-100 animated bouncein delay-6">
+    <a href="#/GlobalRestock" class="waves-effect btn-large waves-light accent-color width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-9">
                 <i class="fa fa-th-list"></i> Global Restock

@@ -112,3 +112,92 @@
            margin-top: 5px;
            margin-bottom: 5px;
         }
+
+        .redText {
+        color: red !important;
+    }
+
+    .scaninfo {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        background: #fafafa;
+        border-top: 1px solid #ccc;
+        display: none;
+        padding-top: 15px;
+        z-index: 10000;
+    }
+
+        .scaninfo .btn {
+            border-radius: 100%;
+            padding: 0px;
+            height: 40px;
+            width: 40px;
+            text-align: center;
+            line-height: 37px;
+            margin-bottom: 10px;
+        }
+
+    .parallax img {
+        position: relative;
+        left: 50%;
+        bottom: 0;
+        width: 10px !important;
+        height: 75px !important;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        transform: translateX(-50%);
+        min-height:100px !important;
+        min-width:100px !important;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        filter: alpha(opacity=50);
+        -moz-opacity: 0.5;
+        -khtml-opacity: 0.5;
+        opacity: 0.5;
+        z-index: 5000;
+    }
+
+    .modal-backdrop.in {
+        opacity: 0.8;
+    }
+
+    .c-widget-body
+    {
+        text-align:left;
+    }
+
+    .m-0 span
+    {
+        color:#808080;
+    }
+
+    .m-0
+    {
+        text-transform:capitalize;
+    }
+
+    .title-header
+    {
+        text-align:left;
+    }
+
+    .newbackbtn
+    {
+        left:0px;
+    }
+    .top50 {
+        padding-top: 35px;
+    }
+
+    .swiper-slide
+    {
+        height:auto !important;
+    }

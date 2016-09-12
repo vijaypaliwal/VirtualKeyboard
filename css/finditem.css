@@ -615,3 +615,67 @@
     pointer-events:none;
 }
 
+  .newbackbtn {
+        margin-left: 15px;
+    }
+
+    .cartImage
+    {
+        font-size: 35px;
+        color: #fff;
+        margin: 15px;
+        margin-left: 6px;
+    }
+    .drag-target
+    {
+        display:none;
+    }
+
+    .btn-group
+    {
+        width:100%;
+    }
+
+    .multiselect {
+        width: 100% !important;
+        background: #fff !important;
+        text-align: left !important;
+        height: 42px !important;
+        border-top: 1px solid #ccc !important;
+        border-bottom: 1px solid #ccc !important;
+        box-shadow:none !important;
+        padding-left:3px;
+        font-size:13px;
+    }
+
+    .multiselect-container
+    {
+        width:100%;
+    }
+    
+    
+     .multiselect-container > li {
+        padding: 0;
+        background: #fff;
+        border-bottom: 1px solid #ECECEC;
+    }
+
+    #btnClearSearch
+    {
+        top:0px;
+    }
+
+    .active label
+    {
+        color:#fff;
+    }
+
+    .multiselect-container .active a:hover {
+        background: #2196F3 !important;
+        color:#fff;
+    }
+
+    #mylist
+    {
+        -webkit-overflow-scrolling: touch;
+    }
