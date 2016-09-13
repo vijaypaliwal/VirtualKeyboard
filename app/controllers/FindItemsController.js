@@ -1747,10 +1747,49 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         $scope.getuom();
 
-
+        $scope.SendEmail();
        
         //SetSelectedIfAny();
 
+    }
+
+    $scope.SendEmail = function () {
+        var _Latestsignup = localStorageService.get("LatestSignUp");
+        
+        if(_Latestsignup=="true")
+        {
+            var authData = localStorageService.get('authorizationData');
+            if (authData) {
+                $scope.SecurityToken = authData.token;
+            }
+
+            $.ajax
+               ({
+                   type: "POST",
+                   url: serviceBase + 'SendEmail',
+                   contentType: 'application/json; charset=utf-8',
+                   dataType: 'json',
+                   data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+                   success: function (response) {
+                       if (response.SendEmailResult.Success == true) {
+                           localStorageService.set("LatestSignUp", false);
+                           CheckScopeBeforeApply()
+                       }
+                       else {
+                           $scope.ShowErrorMessage("Sending Email", 1, 1, response.SendEmailResult.Message);
+
+                       }
+
+                   },
+                   error: function (err) {
+
+                       $scope.errorbox(err);
+                       $scope.ShowErrorMessage("Sending Email", 2, 1, err.statusText);
+
+                   }
+               });
+
+        }
     }
 
     function setZeroData() {

@@ -55,6 +55,18 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         }
     }
 
+
+    $(document).ajaxError(function (event, jqxhr, settings, exception) {
+
+        if (jqxhr.status != 200) {
+            $(".modal").modal("hide");
+            HideGlobalWaitingDiv();
+            $("#modalerror").modal('show');
+            $("#errortext").html(exception)
+        }
+    });
+
+
     $scope.reload = function () {
 
         window.location.reload();
