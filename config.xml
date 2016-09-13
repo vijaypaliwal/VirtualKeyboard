@@ -72,8 +72,6 @@
   <icon src=".pgbomit/res/icon/webos/icon-64.png"          gap:platform="webos" />
   <icon src=".pgbomit/res/icon/windows-phone/icon-48.png"  gap:platform="winphone" />
   <icon src=".pgbomit/res/icon/windows-phone/icon-173.png" gap:platform="winphone"   gap:role="background" />
-
-
   <gap:splash src=".pgbomit/res/screen/android/screen-ldpi-portrait.png"  gap:platform="android" gap:density="ldpi" />
   <gap:splash src=".pgbomit/res/screen/android/screen-mdpi-portrait.png"  gap:platform="android" gap:density="mdpi" />
   <gap:splash src=".pgbomit/res/screen/android/screen-hdpi-portrait.png"  gap:platform="android" gap:density="hdpi" />
@@ -83,13 +81,12 @@
   <gap:splash src=".pgbomit/res/screen/ios/screen-iphone-portrait-2x.png" gap:platform="ios"     width="640" height="1136" />
   <gap:splash src=".pgbomit/res/screen/ios/screen-ipad-portrait.png"      gap:platform="ios"     width="768" height="1024" />
   <gap:splash src=".pgbomit/res/screen/ios/screen-ipad-landscape.png"     gap:platform="ios"     width="1024" height="768" />
-
+  <gap:splash src=".pgbomit/res/screen/ios/Splash-1920x1080.png"     gap:platform="ios"     height="1920" width="1080" />
   <gap:splash src=".pgbomit/res/screen/ios/Splash-750x1334.png"     gap:platform="ios"     width="750" height="1334" />
   <gap:splash src=".pgbomit/res/screen/ios/Splash-2208x1242.png"     gap:platform="ios"     width="1242" height="2208" />
   <gap:splash src=".pgbomit/res/screen/ios/Splash-1242x2208.png"     gap:platform="ios"     width="2208" height="1242" />
 
   <gap:splash src=".pgbomit/res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone" />
-
   <!-- content src="http://www.w3.org/2010/05/video/mediaevents.html" / -->
   <access origin="*"/>
 
