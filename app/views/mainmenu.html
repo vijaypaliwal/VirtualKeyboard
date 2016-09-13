@@ -1,140 +1,9 @@
 ﻿
-<style>
 
-       #viewdata
-       {
-           margin-top:0px;
-       }
-
-    .side-nav {
-        display: none !important;
-    }
-
-    #sidenav-overlay {
-        display: none !important;
-    }
-
-        .navbar {
-           display: none;
-       }
-
-       .layoutheader {
-           display: none;
-       }
-
-
-       .loginlogo
-       {
-        width:82px;
-        margin-bottom:15px;
-       }
-       label
-       {
-        color:#fff;
-        font-size:15px;
-       }
-
-       .login-form .col-xs-5 {
-           text-align: right;
-       }
-
-       .btn-gray .fa-angle-right {
-           position: absolute;
-           right: 25px;
-           font-size: 25px;
-           margin-top: -2px;
-       }
-
-       .btn-primary
-       {
-        margin:0 auto;
-        margin-bottom:15px;
-       }
-
-           .btn-primary .fa-angle-right {
-               position: absolute;
-               right: 25px;
-               font-size: 25px;
-               margin-top: -2px;
-           }
-
-    .form-control {
-      height: 45px;
-       }
-
-       .login-form .row
-       {
-       margin-bottom:15px;
-       }
-
-       h3
-       {
-       color:#fff;
-       font-size:18px;
-       }
-
-    h1 {
-        position: relative;
-        text-align: center;
-        font-size:20px;
-        color:#fff;
-    }
-
-        h1 span {
-            background: #2196F3;
-            padding: 0 15px;
-            position: relative;
-            z-index: 1;
-        }
-
-        h1:before {
-            background: #ddd;
-            content: "";
-            display: block;
-            height: 1px;
-            position: absolute;
-            top: 50%;
-            width: 100%;
-        }
-
-        h1:before {
-            left: 0;
-        }
-
-</style>
-
-<link href="content/css/introjs.css" rel="stylesheet" />
 
 
 <style>
-    .introjs-helperNumberLayer
-    {
-        height:30px;
-        width:30px;
-    }
-    .introjs-fixParent
-    {
-        position:relative !important;
-    }
-    .introjs-helperLayer
-    {
-        background-color:transparent !important;
-    }
-    .walkbutton {
-        height: 50px;
-        width: 50px;
-        bottom: 50px;
-        line-height: 50px;
-        padding: 0px;
-        position: fixed !important;
-        border-radius: 60px;
-        font-size: 34px;
-        right: 50px;
-        color: #635B5B !important;
-        z-index: 1000;
-        background: white;
-    }
-
+  
     body {
         background: #2196F3;
     }
@@ -147,15 +16,18 @@
        color: rgba(136, 136, 136, 0.5) !important;
     }
 
-    .page-header
+    .maincontent
     {
-        margin-top:17px;
+        background:#fff;
     }
 
-    .versiontext {
-        display: block;
-        color: #fff;
-        font-size: 13px;
+    .modal
+    {
+        background:#fff;
+    }
+    .modal-footer
+    {
+        text-align:left;
     }
 
 </style>
@@ -164,33 +36,33 @@
 
 
     <img style="height:75px; width:75px;" src="img/u2.png" alt="Alternate Text" />
-
-    <span class="versiontext">App version - <span class="versiontextlabel"></span></span>
-
-    <div class="page-header">
-
-        <h4 style="line-height:7px;"><span>What do you want to do?</span></h4>
-    </div>
+  
 
 </div>
 
 <div class="animated slideInDown maincontent">
 
-    <div class="row">
+    <div style="text-align:center;" class="row">
         <div class="col-md-12">
+             
+            <h4>Add Inventories</h4>
 
-            <a id="step1" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6" href="#/FindItems"><i class="fa fa-bars"></i>&nbsp;&nbsp;Go to Inventory </a>
-            
-            <a id="step2" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6" href="#/inventory"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;Put Items In Inventory </a>
+            <hr />
 
-            <a id="step3" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6" href="#/reportmenu"><i class="fa fa-th-list"></i>&nbsp;&nbsp;Reports</a>
+            <a ng-click="addinv()" class="waves-effect waves-light btn-large primary-color animated bouncein delay-6"><i class="fa fa-plus"></i> Add Inventory</a>
 
-            <a class="waves-effect waves-light btn-large gray-color width-100 animated bouncein delay-6 " ><i class="fa fa-clock-o"></i>&nbsp;&nbsp;Coming Soon </a>
 
-            <a id="step4" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6" href="#/setting"><i class="fa fa-cog"></i>&nbsp;&nbsp;Settings</a>
+            <div>
 
-            <a id="step5" ng-click="logOut()" class="waves-effect waves-light btn-large primary-color width-100 animated bouncein delay-6"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Sign Out </a>
+                <ul class="list-group">
 
+                
+                    <li ng-repeat="obj in inventorylist track by $index" class="list-group-item">{{obj.name}} </li>
+                 
+                </ul>
+
+            </div>
+            <a ng-if="inventorylist.length>0" class="waves-effect waves-light btn-large primary-color animated bouncein delay-6"><i class="fa fa-plus"></i> Create (<i class="fa fa-dollar"></i>)</a>
         </div>
     </div>
 
@@ -198,56 +70,42 @@
 
 </div>
 
-<h1 onclick="startIntro()"><span>Need Help?</span></h1>
 
-<script src="scripts/intro.js"></script>
+<div id="invmodal" class="modal animated bounceIn">
+    <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
 
-<script type="text/javascript">
-    
+        <h4>Add Inventory</h4>
 
-    function startIntro() {
-        var intro = introJs();
-        intro.setOptions({
-            steps: [
-             
-              {
-                  element: '#step1',
-                  intro: "See all Inventories with respective item and manage all activities ",
+    </div>
 
-              },
-               {
-                   element: '#step2',
-                   intro: "Click to Add new Inventory"
-               },
-                 {
-                     element: '#step3',
-                     intro: 'View report summary',
-                     position: 'top'
+    <div class="modal-body">
+     
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="inventory.name" placeholder="Type Inventory" name="name" value="" />
+        </div>
 
-                 },
-              
-              {
-                  element: '#step4',
-                  intro: 'Manage all libraries and arrange your inventory columns.',
-                  position: 'top'
+    </div>
 
-              },
-              {
-                  element: '#step5',
-                  intro: 'Click this button to sign out from app',
-                  position: 'top'
+    <div class="modal-footer">
+        <button ng-click="saveinv()" type="button" class="btn btn-primary"> <i class="fa fa-check"></i> Save</button>
+        <button type="button" class="btn btn-gray" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+    </div>
+</div>
 
-              },
-              
 
-            ]
-        });
+<a ng-click="Openbottommenu()" class="menubtn waves-effect">
+    <i class="fa fa-bars"></i>
+</a>
 
-        intro.start();
-    }
-    var _FirstVisit = localStorage.getItem("FirstVisit");
-    if (_FirstVisit == null || _FirstVisit==undefined ) {
-        localStorage.setItem("FirstVisit", "Yes");
-        startIntro();
-    }
-</script>
+<div id="bottommenumodal" class="modal bottommenu fade">
+    <div class="modal-body">
+        <ul class="animated slideInUp selectAction">
+            <li> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
+            <li> <a href="#/FindItems"><span class="newinv">Go to inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-shopping-cart"></i> </a></li>
+            <li> <a href="#/status"><span class="newinv">Manage status</span></a>  <a href="#/status" class=" waves-effect btn-primary btn"> <i class="fa fa-check-circle-o"></i> </a></li>
+            <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
+        </ul>
+    </div>
+</div>
+
+

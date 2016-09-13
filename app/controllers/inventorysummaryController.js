@@ -11,6 +11,7 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
     $scope.FilterArray = [{ ColumnName: "", FilterOperator: "", SearchValue: "" }];
     $scope.sortColumn = "iLastITID";
     $scope.sortDir = "DESC";
+    $scope.ShowGroupedData = false;
     var _sortColumn = "iLastITID";
     var _sortDir = "DESC";
     $scope.isviewload = false;
@@ -1053,11 +1054,34 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
 
                       if (response.GetCurrentInventoriesGroupedResult.Success == true) {
 
-
+                          
                           _TotalRecordsCurrent = response.GetCurrentInventoriesGroupedResult.Payload[0].Data.length;
                           $scope.currentrecord = response.GetCurrentInventoriesGroupedResult.Payload[0].Data.length;
-                          $scope.InventoryListGrouped = response.GetCurrentInventoriesGroupedResult.Payload[0].Data;
-                          $scope.totalrecords = response.GetCurrentInventoriesGroupedResult.Payload[0].TotalRercords;
+                          if ($scope.ShowGroupedData == true)
+                          {
+                              $scope.InventoryListGrouped = [];
+                              var _data=response.GetCurrentInventoriesGroupedResult.Payload[0].Data;
+                              if (_data.length > 0) {
+
+
+                                  for (var i = 0; i < _data.length; i++) {
+                                      if (_data[i].OtherPrespectives.length > 1) {
+
+                                          $scope.InventoryListGrouped.push(_data[i]);
+                                      }
+
+
+                                  }
+                              }
+                              $scope.totalrecords = $scope.InventoryListGrouped.length;
+                              $scope.currentrecord = $scope.totalrecords;
+                          }
+                          else {
+                              $scope.InventoryListGrouped = response.GetCurrentInventoriesGroupedResult.Payload[0].Data;
+                              $scope.totalrecords = response.GetCurrentInventoriesGroupedResult.Payload[0].TotalRercords;
+                          }
+                       
+
                           $scope.Columns = response.GetCurrentInventoriesGroupedResult.Payload[0].Columns;
                           $scope.ActualTotalRecords = response.GetCurrentInventoriesGroupedResult.Payload[0].ActualTotalRecords;
                           $scope.FilterArray = response.GetCurrentInventoriesGroupedResult.Payload[0].Filters;
@@ -1224,3 +1248,44 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
 
     init();
 }]);
+
+
+
+app.directive('bootstrapSwitch', [
+        function () {
+            return {
+                restrict: 'A',
+                require: '?ngModel',
+                link: function (scope, element, attrs, ngModel) {
+                    var _id = element[0].id;
+
+
+                    element.bootstrapSwitch({
+                        onText: _id == 'AutoID' ? 'Auto' : 'On',
+                        offText: _id == 'AutoID' ? 'Manual' : 'Off'
+                    });
+                    element.on('switchChange.bootstrapSwitch', function (event, state) {
+                        if (ngModel) {
+                            scope.$apply(function () {
+                                ngModel.$setViewValue(state);
+
+
+                            });
+                        }
+
+                    });
+
+                    scope.$watch(attrs.ngModel, function (newValue, oldValue) {
+
+                        if (newValue) {
+                            element.bootstrapSwitch('state', true, true);
+                            element.removeClass("bootstrap-switch-off").addClass("bootstrap-switch-on");
+                        } else {
+                            element.bootstrapSwitch('state', false, true);
+                            element.removeClass("bootstrap-switch-on").addClass("bootstrap-switch-off");
+                        }
+                    });
+                }
+            };
+        }
+]);
