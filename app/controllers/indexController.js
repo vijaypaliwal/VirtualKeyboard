@@ -56,18 +56,18 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     }
 
 
-    $(document).ajaxError(function (event, jqxhr, settings, exception) {
+    //$(document).ajaxError(function (event, jqxhr, settings, exception) {
 
-        if (jqxhr.status != 200 && (jqxhr.readyState != 0 || jqxhr.status != 0)) {
-            if (exception != "timeout") {
+    //    if (jqxhr.status != 200 && (jqxhr.readyState != 0 || jqxhr.status != 0)) {
+    //        if (exception != "timeout") {
 
-                $(".modal").modal("hide");
-                HideGlobalWaitingDiv();
-                $("#modalerror").modal('show');
-                $("#errortext").html(exception);
-            }
-        }
-    });
+    //            $(".modal").modal("hide");
+    //            HideGlobalWaitingDiv();
+    //            $("#modalerror").modal('show');
+    //            $("#errortext").html(exception);
+    //        }
+    //    }
+    //});
 
 
     $scope.reload = function () {
