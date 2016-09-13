@@ -591,10 +591,11 @@
         font-size: 13px;
         height: 35px;
         line-height: 35px;
-        padding-left: 7px;
-        padding-right: 7px;
+        padding-left:8px;
+        padding-right:8px;
         max-width:200px;
     }
+
 
     .btnarea .btn i {
         font-size: 13px;
