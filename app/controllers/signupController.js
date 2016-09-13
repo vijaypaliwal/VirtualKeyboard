@@ -11,7 +11,7 @@ app.controller('signupController', ['$scope','localStorageService', '$location',
     Account:"",
     UserName:"",
     Password:"",
-    TAndC:true
+    TAndC:false
     };
 
     $scope.signUp = function () {
@@ -35,7 +35,7 @@ app.controller('signupController', ['$scope','localStorageService', '$location',
                 if (response.SignupResult.Success == true) {
 
                     log.success("You are successfully registered");
-
+                    localStorageService.set("LatestSignUp", true);
 
                     localStorageService.set('lastlogindata', { userName: response.SignupResult.Payload.UserName, Password: response.SignupResult.Payload.Password, AccountName: response.SignupResult.Payload.Account });
                     $location.path('/login');

@@ -40,7 +40,7 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
         {
            
             $scope.GetProfileData();
-            $location.path('/mainmenu');
+            $location.path('/FindItems');
 
         },
          function (err) {
