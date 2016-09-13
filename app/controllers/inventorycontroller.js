@@ -9,6 +9,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.StatusList = [];
     $scope.UOMSearching = false;
     $scope.CurrentActiveField = "";
+    $scope.CurrentActiveFieldType = "";
     $scope.CurrentActiveFieldDatatype = "";
     $scope.Totalslides = 0;
     $scope.CurrentCount = 0;
@@ -2403,6 +2404,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         $scope.slide = $(this).index();
                         $scope.CurrentCount = $(this).index();
                         $scope.CurrentActiveField = ColumnName;
+                        $scope.CurrentActiveFieldType = "Inventory";
                         CheckScopeBeforeApply();
                         return false;
                     }
@@ -2419,6 +2421,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         $scope.slide = $(this).index();
                         $scope.CurrentCount = $(this).index();
                         $scope.CurrentActiveField = ColumnName;
+                        $scope.CurrentActiveFieldType = "Activity";
                         CheckScopeBeforeApply();
                         return false;
                     }
@@ -2579,9 +2582,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     var _colName = $(".swiper-slide-active").attr("data-column");
                     var _colType = $(".swiper-slide-active").attr("data-type");
                     _colid = $(".swiper-slide-active").attr("data-id");
+                    var _fieldType = $(".swiper-slide-active").attr("field-type");
 
                     $scope.CurrentActiveField = _colName != undefined && _colName != "" ? _colName : "";
                     $scope.CurrentActiveFieldDatatype = _colType;
+                    $scope.CurrentActiveFieldType = _fieldType == "activity" ? "Activity" : "Inventory";
                     CheckScopeBeforeApply();
 
 
