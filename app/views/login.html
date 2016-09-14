@@ -47,10 +47,7 @@
                     </div>
                 </div>
 
-
-
                 <div class="row">
-
                     <div class="col-xs-12">
 
                         <div class="form-group">
@@ -60,9 +57,6 @@
                                 <input type="password" class="form-control" placeholder="Password" data-ng-model="loginData.password" required>
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
 
@@ -71,7 +65,7 @@
                     <div class="col-xs-12">
                         <button type="button"  class="waves-effect waves-light btn-primary animated center bouncein delay-6"  ng-if="!myform.$invalid" id="loginBtn" data-ng-click="login()"><i class="fa fa-sign-in"></i> Sign In</button>
                         <a  class="btn btn-gray animated center bouncein delay-6"  disabled="disabled" ng-if="myform.$invalid" id="loginBtn" data-ng-click="login()"><i class="fa fa-sign-in"></i> Sign In </a>
-                        <a class="pull-right waves-effect waves-light btn btn-primary animated center bouncein delay-6" href="#/signup"> <i class="fa fa-user"></i> Sign Up </a>
+                        <a class="pull-right signuplink" href="#/signup">Sign Up </a>
                      
                         </div>
                     </div>
@@ -230,6 +224,13 @@
         text-transform: capitalize;
         padding-left: 15px;
         padding-right: 15px;
+    }
+
+    .signuplink
+    {
+        color:#2196F3;
+        line-height:40px;
+        padding-right:3px;
     }
 
      
