@@ -517,7 +517,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             $location.path($scope.CurrentHref);
         }
         else {
-            $location.path('/mainmenu');
+            $location.path('/FindItems');
         }
 
     }
