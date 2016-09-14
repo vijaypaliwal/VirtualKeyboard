@@ -249,7 +249,7 @@
                                 <label>{{obj.ColumnLabel}}</label>
                                 <div class="input-group">
                                     <input id="UnitTag3" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />
-                                    <span ng-click="GetLastValue('Inv_UnitTag3','#UnitTag3')" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
+                                 
                                 </div>
                             </div>
                             <div ng-if="obj.ColumnName=='iUniqueDate'" class="form-group">
@@ -345,7 +345,7 @@
                                 <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
                                 <div ng-if="obj.cfdDataType=='string'" class="input-group">
                                     <input id="CustomActivity_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control stringType" value="{{obj.CfValue}}" />
-                                    <span ng-click="GetLastValueCustom(obj.cfdID,2)" class="input-group-addon waves-effect last"><i class="fa fa-undo"></i></span>
+                                  
                                 </div>
 
 
