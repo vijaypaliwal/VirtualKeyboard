@@ -65,7 +65,7 @@
                                     <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
                                     <span ng-bind="InventoryObject.Quantity" style="display:inline" ng-click="getstep(2,'iQty')"></span> <span ng-bind="InventoryObject.Uom" style="display:inline" ng-click="getstep(4,'uomUOM')"></span>
                                     <span ng-bind="InventoryObject.Location" ng-click="getstep(3,'lLoc')"> </span>
-                                    <span class="pull-right" style="color:#0083C7; padding:7px; text-align:right; font-size:14px;" ng-click="viewall()">View all details</span>
+                                    <span class="pull-right" style="color:#0083C7; padding:7px; text-align:right; font-size:14px;" ng-if="slide != Totalslides" ng-click="viewall()">View all details</span>
                                     <!--<span class="pull-right" style="color:#069;text-decoration:underline;font-size:11px" ng-if="slide == Totalslides"> <a ng-if="Isopendiv==false" ng-click="SetIsOpen(true)"> Show more </a><a ng-if="Isopendiv==true" ng-click="SetIsOpen(false)"> Show less </a> </span>-->
                                 </div>
                             </div>

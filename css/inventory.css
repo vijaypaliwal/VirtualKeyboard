@@ -387,6 +387,7 @@ max-height:240px !important;
         padding: 0px;
        
         background: white;
+       margin:-5px;
     }
 
     .swiper-slide
