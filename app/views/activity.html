@@ -718,7 +718,7 @@
                                                 <input type="number" pattern="[0-9]*" inputmode="numeric" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                                 <input type="number" pattern="[0-9]*" inputmode="numeric" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
 
-                                                <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
+                                                <span class="input-group-addon last"  ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i style="margin-left:10px;" class="fa fa-barcode"></i></span>
                                             </div>
                                             <div>
 
@@ -1160,7 +1160,7 @@
                                         <input type="date" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                         <input type="number" pattern="[0-9]*" inputmode="numeric" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                         <input type="number" pattern="[0-9]*" inputmode="numeric" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'"><i class="fa fa-barcode"></i></span>
+                                        <span class="input-group-addon last" style="margin-left:10px;" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='string'"><i class="fa fa-barcode"></i></span>
                                     </div>
                                     <div>
 
@@ -1235,7 +1235,7 @@
                         <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
                             
                             <input id="CustomActivity_{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="date" class="form-control customFieldDatePicker FormDateType" />
-                            <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
+                            <span class="input-group-addon last" style="margin-left:10px;" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                         </div>
 
                         <div ng-if="obj.cfdDataType=='number'" class="input-group">
@@ -1983,7 +1983,7 @@
                                         <input type="number" pattern="[0-9]*" inputmode="numeric" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                         <input type="number" pattern="[0-9]*" inputmode="numeric" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
 
-                                        <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
+                                        <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" style="margin-left:10px;" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                     </div>
                                     <div>
 
@@ -2056,7 +2056,7 @@
 
                                 <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
                                     <input id="CustomActivity_{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="date" class="form-control customFieldDatePicker FormDateType" />
-                                    <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
+                                    <span class="input-group-addon last" style="margin-left:10px;" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='number'" class="input-group">
@@ -2530,7 +2530,7 @@
         <div class="row">
 
             <div class="col-md-4 col-xs-3" data-ng-click="GoToStep(CurrentStep-1,2)">
-                <a class="" ng-if="IsSingleMode==true"><i class="fa fa-long-arrow-left"></i></a>
+                <a class="" ng-if="IsSingleMode==true"><i class="fa fa-angle-left"></i></a>
             </div>
             <div class="col-md-4 col-xs-6">
                 <div style="text-align:center">
@@ -2541,7 +2541,7 @@
             <div class="col-md-4 col-xs-3" data-ng-click="GoToStep(CurrentStep+1,1)">
                 <div class="pull-right">
 
-                    <a class="" ng-if="IsSingleMode==true" ng-class="{'adisabled': CurrentCart.length==0|| CurrentActiveStep==3}" > <i class="fa fa-long-arrow-right"></i></a>
+                    <a class="" ng-if="IsSingleMode==true" ng-class="{'adisabled': CurrentCart.length==0|| CurrentActiveStep==3}" > <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
 

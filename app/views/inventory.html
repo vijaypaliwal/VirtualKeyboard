@@ -33,7 +33,7 @@
             <div style="display:none;" class="swiper-container">
 
 
-                <table style="background:#fff;">
+                <!--<table style="background:#fff;">
                     <tr>
                         <td>
                             <div style="padding:7px; font-size:14px;">Inventory Details</div>
@@ -43,7 +43,8 @@
                 </table>
 
 
-                <div style="background:#fff; margin-left:0px; margin-right:0px; border-top:1px solid #ccc" class="row">
+                <div style="background:#fff; margin-left:0px; margin-right:0px; border-top:1px solid #ccc" class="row">-->
+                <div style="background:#fff; margin-left:0px; margin-right:0px;" class="row">
                     <div style="padding-left: 0px; padding-right: 0px; background: #eee;" class="col-xs-12">
                         <div class="iteminfo">
                             <div class="row ">
@@ -64,12 +65,13 @@
                                     <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
                                     <span ng-bind="InventoryObject.Quantity" style="display:inline" ng-click="getstep(2,'iQty')"></span> <span ng-bind="InventoryObject.Uom" style="display:inline" ng-click="getstep(4,'uomUOM')"></span>
                                     <span ng-bind="InventoryObject.Location" ng-click="getstep(3,'lLoc')"> </span>
-                                    <span class="pull-right" ng-if="slide == Totalslides"> <a ng-if="Isopendiv==false" ng-click="SetIsOpen(true)"> Show more </a><a ng-if="Isopendiv==true" ng-click="SetIsOpen(false)"> Show less </a> </span>
+                                    <span class="pull-right" style="color:#0083C7; padding:7px; text-align:right; font-size:14px;" ng-click="viewall()">View all details</span>
+                                    <!--<span class="pull-right" style="color:#069;text-decoration:underline;font-size:11px" ng-if="slide == Totalslides"> <a ng-if="Isopendiv==false" ng-click="SetIsOpen(true)"> Show more </a><a ng-if="Isopendiv==true" ng-click="SetIsOpen(false)"> Show less </a> </span>-->
                                 </div>
                             </div>
 
 
-                            
+
                         </div>
                     </div>
                 </div>
@@ -395,7 +397,7 @@
                         </div>
 
 
-                        <div class="swiper-slide" ng-show="Isopendiv==true" style="height:150px;overflow-y:scroll;background:#eee;">
+                        <div class="swiper-slide" ng-show="Isopendiv==true" style="height:160px;overflow-y:scroll;background:#eee;">
                             <div class="allfields">
 
                                 <div class="myCols innerCols" data-index="{{$index}}" data-type="myinventory" data-id="myinventorycols" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" ng-if="CheckInCommonArray(obj.ColumnName)==true" end-repeat>
@@ -708,11 +710,11 @@
 
                     
 
-                <div class="actionbtnarea">
+                <div class="actionbtnarea" ng-class="{'mtm5':slide==Totalslides}">
 
                     <table style="width:100%;">
                         <tr>
-                            <td >
+                            <td>
                                 <button type="button" class="waves-effect btn btn-primary arrow-left bknext"><i class="fa fa-angle-left"></i> Back</button>
                             </td>
                             <td style="text-align:center;" ng-hide=" slide==Totalslides">
@@ -729,12 +731,12 @@
                     <div ng-if="slide == Totalslides">
                         <hr />
                         <a ng-show="slide == Totalslides" ng-click="addinventory()" ng-if="IsFormDataloaded==true" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn waves-effect btn btn-primary"> <i class="fa fa-plus-circle"></i> Add Inventory</a>
-                        <a ng-click="movetoback()" ng-show="slide == Totalslides" class="btn btn-gray"> <i class="fa fa-times"></i> Cancel</a> 
+                        <a ng-click="movetoback()" ng-show="slide == Totalslides" class="btn btn-gray"> <i class="fa fa-times"></i> Cancel</a>
                     </div>
 
-                
 
-                  
+
+
                 </div>
 
                  

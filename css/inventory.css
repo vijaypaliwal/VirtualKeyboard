@@ -18,6 +18,10 @@
     width:50%;
     float:left;
 }
+.mtm5
+{
+    margin-top:-5px !important;
+}
 .noneMax
 {
 max-height:240px !important;
@@ -378,8 +382,8 @@ max-height:240px !important;
     }
 
     .swiper-container {
-       
-        box-shadow: 0 1px 11px rgba(0,0,0,.27);
+       box-shadow: 0 5px 2px 1px #DBDBDB;
+        
         padding: 0px;
        
         background: white;
@@ -618,7 +622,7 @@ max-height:240px !important;
 
 
     .btnarea .btn i {
-        font-size: 13px;
+        font-size: 17px;
         margin-right:2px;
     }
 
