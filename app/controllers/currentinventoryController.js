@@ -10,6 +10,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     $scope.isDataLoading = true;
     $scope.FilterArray = [{ ColumnName: "", FilterOperator: "", SearchValue: "" }];
     $scope.sortColumn = "iLastITID";
+    $scope.loadingblock = false;
     $scope.sortDir = "DESC";
     var _sortColumn = "iLastITID";
     var _sortDir = "DESC";
@@ -82,7 +83,25 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         return false;
     }
 
+    function onSwipeDown()
+    {
+        $('#mylist').on('swipedown', function () {
 
+            if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
+                if ($(window).scrollTop() < 500) {
+
+                    $scope.loadingblock = true;
+
+                    _IsLazyLoadingUnderProgress = 1;
+                    CheckScopeBeforeApply();
+                    $scope.GetInventoryDataAccordingToView();
+
+
+                }
+            }
+
+        });
+    }
     $('#bottommenumodal').on('hidden.bs.modal', function () {
         $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
     });
@@ -837,6 +856,9 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                       $scope.isDataLoading = true;
                       HideGlobalWaitingDiv();
                       clearInterval(timer);
+                      $scope.loadingblock = false;
+                      CheckScopeBeforeApply();
+                      onSwipeDown();
                   }
               });
              }

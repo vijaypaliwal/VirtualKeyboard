@@ -1800,7 +1800,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         }
         else {
-            $scope._areZeroRecordsShown = false;
+            $scope._areZeroRecordsShown = true;
         }
         CheckScopeBeforeApply();
     }

@@ -21,6 +21,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     $scope.Columns = [];
     var _TotalRecordsCurrent = 0;
     var _masterSearch = "";
+    $scope.loadingblock = false;
     function getIncrementor(_Total) {
         if (_Total <= 100) {
             return 10;
@@ -69,6 +70,24 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
     }
 
+    function onSwipeDown() {
+        $('#mylist').on('swipedown', function () {
+
+            if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
+                if ($(window).scrollTop() < 500) {
+
+                    $scope.loadingblock = true;
+
+                    _IsLazyLoadingUnderProgress = 1;
+                    CheckScopeBeforeApply();
+                    $scope.GetActivityDataAccordingToView();
+
+
+                }
+            }
+
+        });
+    }
     $scope.isFurtherCalculatedColumn=function(ColumnName)
     {
         for (var i = 0; i < $scope.Columns.length; i++) {
@@ -1051,7 +1070,6 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     $scope.GetActivityDataAccordingToView=function()
     {
         
-        $scope.isDataLoading = false;
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -1143,7 +1161,8 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
             }, 1000);
 
-            
+            $scope.isDataLoading = false;
+
             var _searchParameter = $scope.filterVal;
             $.ajax
               ({
@@ -1206,6 +1225,9 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                       $scope.isDataLoading = true;
                       HideGlobalWaitingDiv();
                       clearInterval(timer);
+                      $scope.loadingblock = false;
+                      CheckScopeBeforeApply();
+                      onSwipeDown();
                   }
               });
              }

@@ -5,6 +5,24 @@
     padding-right: 6px;
 }*/
 
+.innerCols
+{
+   background: #eeeeee;
+}
+.innerCols div span{
+    font-size:12px !important;
+    float:left;
+    margin-right:5px;
+}
+.innerCols div{
+    width:50%;
+    float:left;
+}
+.noneMax
+{
+max-height:240px !important;
+}
+
     .navbar-toggle {
         display: block !important;
     }
@@ -561,7 +579,7 @@
 
     .maincontent
     {
-        padding-top:50px;
+        padding-top:20px;
     }
     .newbackbtn
     {
@@ -589,11 +607,12 @@
 
 
      .btnarea .btn {
-        font-size: 13px;
-        height: 35px;
-        line-height: 35px;
-        padding-left:10px;
-        padding-right:10px;
+      font-size: 15px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 45px;
+    padding-left: 10px;
+    padding-right: 10px;
         max-width:200px;
     }
 

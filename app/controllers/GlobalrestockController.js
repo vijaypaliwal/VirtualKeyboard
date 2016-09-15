@@ -19,6 +19,7 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
     $scope.Columns = [];
     var _TotalRecordsCurrent = 0;
     var _masterSearch = "";
+    $scope.loadingblock = false;
     function getIncrementor(_Total) {
         if (_Total <= 100) {
             return 10;
@@ -33,7 +34,24 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
             return 10;
         }
     }
+    function onSwipeDown() {
+        $('#mylist').on('swipedown', function () {
 
+            if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
+                if ($(window).scrollTop() < 500) {
+
+                    $scope.loadingblock = true;
+
+                    _IsLazyLoadingUnderProgress = 1;
+                    CheckScopeBeforeApply();
+                    $scope.GetGlobalDataAccordingToView();
+
+
+                }
+            }
+
+        });
+    }
     function TryParseInt(str, defaultValue) {
         var retValue = defaultValue;
         if (str !== null) {
@@ -815,6 +833,9 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
 
                       HideGlobalWaitingDiv();
                       clearInterval(timer);
+                      $scope.loadingblock = false;
+                      CheckScopeBeforeApply();
+                      onSwipeDown();
                   }
               });
              }

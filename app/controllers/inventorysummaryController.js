@@ -19,6 +19,7 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
     var _PageSize = 30;
     $scope.Columns = [];
     var _TotalRecordsCurrent = 0;
+    $scope.loadingblock = false;
     var _masterSearch = "";
     function getIncrementor(_Total) {
         if (_Total <= 100) {
@@ -34,7 +35,24 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
             return 10;
         }
     }
+    function onSwipeDown() {
+        $('#mylist').on('swipedown', function () {
 
+            if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
+                if ($(window).scrollTop() < 500) {
+
+                    $scope.loadingblock = true;
+
+                    _IsLazyLoadingUnderProgress = 1;
+                    CheckScopeBeforeApply();
+                    $scope.GetInventoryGroupedDataAccordingToView();
+
+
+                }
+            }
+
+        });
+    }
     function TryParseInt(str, defaultValue) {
         var retValue = defaultValue;
         if (str !== null) {
@@ -1107,6 +1125,9 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
                       $scope.isDataLoading = true;
                       HideGlobalWaitingDiv();
                       clearInterval(timer);
+                      $scope.loadingblock = false;
+                      CheckScopeBeforeApply();
+                      onSwipeDown();
                   }
               });
         }

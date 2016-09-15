@@ -14,12 +14,20 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.Totalslides = 0;
     $scope.CurrentCount = 0;
     $scope.IsFormDataloaded = false;
+    $scope.Isopendiv = false;
     $scope.InventoryObject = {
         IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: "", Uom: "units", UomID: 0, Location: "In Stock", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
         UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
         UnitTag3: "", CustomPartData: [], CustomTxnData: []
     };
 
+
+    $scope.SetIsOpen=function(_bool)
+    {
+        $scope.Isopendiv = _bool;
+        CheckScopeBeforeApply();
+
+    }
 
     $scope.CommonArray = ['Image', 'iUnitNumber1', 'iUnitNumber2', 'iUniqueDate', 'iUnitDate2', 'iUnitTag3', 'iUnitTag2', 'iReqValue', 'pPart', 'pDescription', 'iQty', 'lLoc', 'lZone', 'iStatusValue', 'uomUOM', 'pCountFrq', 'iCostPerUnit'];
 
@@ -295,6 +303,39 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
+    $scope.GetAllLastValue=function()
+    {
+        $scope.GetLastValue('Inv_ItemID', '#ItemName');
+        $scope.GetLastValue('Inv_Description', '#pDescriptionForm');
+        $scope.GetLastValue('Inv_lZone', '#lZone');
+        $scope.GetLastValue('Inv_ItemGroup', '#itemgroup');
+        $scope.GetLastValue('Inv_Status', '#Status');
+        $scope.GetLastValue('Inv_Location', '#Location');
+        $scope.GetLastValue('Inv_Uom', '#UOM');
+        $scope.GetLastValue('Inv_Cost', '#Costperunit');
+        $scope.GetLastValue('Inv_UniqueTag', '#UniqueTag');
+        $scope.GetLastValue('Inv_UnitTag2', '#UnitTag2');
+        $scope.GetLastValue('Inv_UnitTag3', '#UnitTag3');
+        $scope.GetLastValue('Inv_UniqueDate', '#UniqueDate');
+        $scope.GetLastValue('Inv_UnitDate2', '#UnitDate2');
+        $scope.GetLastValue('Inv_UnitNumber1', '#UnitNumber1');
+        $scope.GetLastValue('Inv_UnitNumber2', '#UnitNumber2');
+        if ($scope.CustomItemDataList.length > 0) {
+
+            for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+                var obj = $scope.CustomItemDataList[i];
+                $scope.GetLastValueCustom(obj.cfdID, 1);
+            }
+        }
+
+        if ($scope.CustomActivityDataList.length > 0) {
+
+            for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+                var obj = $scope.CustomActivityDataList[i];
+                $scope.GetLastValueCustom(obj.cfdID, 2);
+            }
+        }
+    }
     $scope.$watch('InventoryObject', function () {
 
 

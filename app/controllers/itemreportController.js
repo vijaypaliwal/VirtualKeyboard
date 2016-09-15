@@ -19,6 +19,7 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
     $scope.Columns = [];
     var _TotalRecordsCurrent = 0;
     var _masterSearch = "";
+    $scope.loadingblock = false;
     function getIncrementor(_Total) {
         if (_Total <= 100) {
             return 10;
@@ -33,6 +34,25 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
             return 10;
         }
     }
+    function onSwipeDown() {
+        $('#mylist').on('swipedown', function () {
+
+            if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
+                if ($(window).scrollTop() < 500) {
+
+                    $scope.loadingblock = true;
+
+                    _IsLazyLoadingUnderProgress = 1;
+                    CheckScopeBeforeApply();
+                    $scope.GetItemsDataAccordingToView();
+
+
+                }
+            }
+
+        });
+    }
+
 
     function TryParseInt(str, defaultValue) {
         var retValue = defaultValue;
@@ -727,7 +747,6 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
     $scope.GetItemsDataAccordingToView=function()
     {
         
-        $scope.isDataLoading = false;
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -770,7 +789,8 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
 
 
             }, 1000);
-         
+            $scope.isDataLoading = false;
+
 
             $.ajax
               ({
@@ -815,6 +835,9 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
                       $scope.isDataLoading = true;
                       HideGlobalWaitingDiv();
                       clearInterval(timer);
+                      $scope.loadingblock = false;
+                      CheckScopeBeforeApply();
+                      onSwipeDown();
                   }
               });
              }

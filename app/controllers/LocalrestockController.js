@@ -14,10 +14,12 @@ app.controller('LocalrestockController', ['$scope', 'localStorageService', 'auth
     var _sortColumn = "ItemID";
     var _sortDir = "DESC";
     $scope.isviewload = false;
+    $scope.loadingblock = false;
     var _IsLazyLoadingUnderProgress = 0;
     var _PageSize = 30;
     $scope.Columns = [];
     var _TotalRecordsCurrent = 0;
+
     var _masterSearch = "";
     function getIncrementor(_Total) {
         if (_Total <= 100) {
@@ -34,6 +36,25 @@ app.controller('LocalrestockController', ['$scope', 'localStorageService', 'auth
         }
     }
 
+
+    function onSwipeDown() {
+        $('#mylist').on('swipedown', function () {
+
+            if (_IsLazyLoadingUnderProgress === 0 && _TotalRecordsCurrent != 0) {
+                if ($(window).scrollTop() < 500) {
+
+                    $scope.loadingblock = true;
+
+                    _IsLazyLoadingUnderProgress = 1;
+                    CheckScopeBeforeApply();
+                    $scope.GetLocalDataAccordingToView();
+
+
+                }
+            }
+
+        });
+    }
     function TryParseInt(str, defaultValue) {
         var retValue = defaultValue;
         if (str !== null) {
@@ -724,7 +745,6 @@ app.controller('LocalrestockController', ['$scope', 'localStorageService', 'auth
     $scope.GetLocalDataAccordingToView=function()
     {
         
-        $scope.isDataLoading = false;
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -768,6 +788,7 @@ app.controller('LocalrestockController', ['$scope', 'localStorageService', 'auth
 
 
             }, 1000);
+            $scope.isDataLoading = false;
 
             $.ajax
               ({
@@ -812,6 +833,9 @@ app.controller('LocalrestockController', ['$scope', 'localStorageService', 'auth
                       $scope.isDataLoading = true;
                       HideGlobalWaitingDiv();
                       clearInterval(timer);
+                      $scope.loadingblock = false;
+                      CheckScopeBeforeApply();
+                      onSwipeDown();
                   }
               });
              }

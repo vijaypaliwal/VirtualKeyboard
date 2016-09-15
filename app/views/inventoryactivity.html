@@ -68,7 +68,10 @@
 
 
     <div ng-if="isviewload==true" class="table-responsive">
-        
+        <div ng-if="loadingblock==true" style="background:#ECECEC; text-align:center; margin-top:-5px; padding-top:12px; padding-bottom:12px;">
+            <img style="height:30px;" src="img/loader.gif" alt="Alternate Text">
+        </div>
+
 
         <div style="margin-top:10px;" class="input-group">
 
@@ -111,35 +114,35 @@
 
         </div>
 
+        <div id="mylist">
+            <div ng-class="_obj.ParentAction" class="well" ng-repeat="_obj in ActivityList" ng-init="parentIndex=$index">
 
-        <div ng-class="_obj.ParentAction" class="well" ng-repeat="_obj in ActivityList" ng-init="parentIndex=$index">
+                <table class="table table-striped">
 
-            <table class="table table-striped">
+                    <tbody ng-class="_obj.ParentAction" id="row_{{_obj.itID}}">
 
-                <tbody ng-class="_obj.ParentAction" id="row_{{_obj.itID}}">
+                        <tr ng-if="IsAvailableColumn('ImagePath')">
+                            <td style="text-align:center;" colspan="2">
+                                <img ng-if="_obj.ImagePath !=''" style="height:55px; width:55px; border-radius:55px;" src="{{_obj.ImagePath}}" alt="Alternate Text" />
 
-                    <tr ng-if="IsAvailableColumn('ImagePath')">
-                        <td style="text-align:center;" colspan="2">
-                            <img ng-if="_obj.ImagePath !=''" style="height:55px; width:55px; border-radius:55px;" src="{{_obj.ImagePath}}" alt="Alternate Text" />
+                                <img ng-if="_obj.ImagePath ==''" style="height:55px; width:55px; border-radius:55px;" src="img/default.png" alt="Alternate Text" />
+                            </td>
 
-                            <img ng-if="_obj.ImagePath ==''" style="height:55px; width:55px; border-radius:55px;" src="img/default.png" alt="Alternate Text" />
-                        </td>
+                        </tr>
 
-                    </tr>
+                        <tr ng-repeat="_obj2 in Columns" ng-class="{'ExtraTr':$index > 2}" ng-if="_obj2.ColumnID!='LeaveBlank' && _obj2.Visible!=false && _obj2.ColumnID != 'Button1' && _obj2.ColumnID != 'Button2' && _obj2.ColumnID != 'ImagePath' ">
 
-                    <tr ng-repeat="_obj2 in Columns" ng-class="{'ExtraTr':$index > 2}" ng-if="_obj2.ColumnID!='LeaveBlank' && _obj2.Visible!=false && _obj2.ColumnID != 'Button1' && _obj2.ColumnID != 'Button2' && _obj2.ColumnID != 'ImagePath' ">
-
-                        <td width="50%">
-                            <code ng-if="_obj2.isFirstFurtherCalculated == true || _obj2.isSecondFurtherCalculated == true" class="w3-codespan">{{_obj2.DisplayLabel}}</code>
-                            <code ng-if="_obj2.isFirstFurtherCalculated == false && _obj2.isSecondFurtherCalculated == false" ng-click="applysorting(_obj2.ColumnID)" class="w3-codespan">{{_obj2.DisplayLabel}} <i ng-if="_obj2.ColumnID==sortColumn && sortDir=='DESC'" class=" sortIcon fa fa-chevron-down"></i> <i ng-if="_obj2.ColumnID==sortColumn && sortDir=='ASC'" class="sortIcon fa fa-chevron-up"></i></code>
-                            <a ng-class="_obj.ParentAction" class="morebtn" ng-click="ShowHideDiv(_obj.itID)" ng-if="$index==0"><i class="fa fa-chevron-up" id="icon_{{_obj.itID}}"></i></a>
-                        </td>
-                        <td width="50%">{{GetCellData(_obj2.ColumnID,parentIndex,_obj2.isCalculated) }}</td>
-                    </tr>
-                </tbody>
-            </table>
+                            <td width="50%">
+                                <code ng-if="_obj2.isFirstFurtherCalculated == true || _obj2.isSecondFurtherCalculated == true" class="w3-codespan">{{_obj2.DisplayLabel}}</code>
+                                <code ng-if="_obj2.isFirstFurtherCalculated == false && _obj2.isSecondFurtherCalculated == false" ng-click="applysorting(_obj2.ColumnID)" class="w3-codespan">{{_obj2.DisplayLabel}} <i ng-if="_obj2.ColumnID==sortColumn && sortDir=='DESC'" class=" sortIcon fa fa-chevron-down"></i> <i ng-if="_obj2.ColumnID==sortColumn && sortDir=='ASC'" class="sortIcon fa fa-chevron-up"></i></code>
+                                <a ng-class="_obj.ParentAction" class="morebtn" ng-click="ShowHideDiv(_obj.itID)" ng-if="$index==0"><i class="fa fa-chevron-up" id="icon_{{_obj.itID}}"></i></a>
+                            </td>
+                            <td width="50%">{{GetCellData(_obj2.ColumnID,parentIndex,_obj2.isCalculated) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 </div>
 
 
