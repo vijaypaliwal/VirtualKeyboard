@@ -14,7 +14,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.Totalslides = 0;
     $scope.CurrentCount = 0;
     $scope.IsFormDataloaded = false;
-    $scope.Isopendiv = false;
+    $scope.Isopendiv = true;
     $scope.InventoryObject = {
         IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", Quantity: "", Uom: "units", UomID: 0, Location: "In Stock", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
         UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
