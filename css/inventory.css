@@ -673,13 +673,13 @@ max-height:240px !important;
 
         #infomodal
         {
-            overflow-x:hidden;
-            left:initial;
-            position:fixed;
-            right:0;
-            width:270px;
-            font-size:13px;
-                box-shadow: 0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12),0 8px 10px -5px rgba(0,0,0,.2);
+         overflow-x:hidden !important;
+          left:initial !important;
+          position:fixed;
+          right:0 !important;
+          width:270px;
+          font-size:13px;
+          box-shadow: 0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12),0 8px 10px -5px rgba(0,0,0,.2); 
         }
 
         #infomodal .modal-header
