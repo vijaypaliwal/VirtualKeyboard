@@ -2,7 +2,13 @@
 
 <link href="css/inventory.css" rel="stylesheet" />
 
-
+<style>
+    .detailheight {
+        height: 150px !important;
+        overflow-y: auto;
+        max-height: 145px;
+    }
+</style>
 
 
 <!--<div class="title-header">
@@ -65,7 +71,7 @@
                                     <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
                                     <span ng-bind="InventoryObject.Quantity" style="display:inline" ng-click="getstep(2,'iQty')"></span> <span ng-bind="InventoryObject.Uom" style="display:inline" ng-click="getstep(4,'uomUOM')"></span>
                                     <span ng-bind="InventoryObject.Location" ng-click="getstep(3,'lLoc')"> </span>
-                                    <span class="pull-right" style="color:#0083C7; padding:7px; text-align:right; font-size:14px;" ng-if="slide != Totalslides" ng-click="viewall()">View all details</span>
+                                    <span class="pull-right" style="color:#0083C7;text-align:right; font-size:14px;" ng-if="slide != Totalslides" ng-click="viewall()">View all details</span>
                                     <!--<span class="pull-right" style="color:#069;text-decoration:underline;font-size:11px" ng-if="slide == Totalslides"> <a ng-if="Isopendiv==false" ng-click="SetIsOpen(true)"> Show more </a><a ng-if="Isopendiv==true" ng-click="SetIsOpen(false)"> Show less </a> </span>-->
                                 </div>
                             </div>
@@ -135,10 +141,10 @@
                                 <label>Quantity</label>
 
                                 <div class="input-group">
-                                    <span class="input-group-addon waves-effect waves-effect" ng-click="UpDownValue('Quantity',true)"><i class="fa fa-plus"></i></span>
+                                 
                                     <input ng-model="InventoryObject.Quantity" id="iQty" min="0" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="Quantity" value="" />
 
-                                    <span class="input-group-addon waves-effect waves-effect" ng-click="UpDownValue('Quantity',false)"><i class="fa fa-minus"></i></span>
+                                 
                                 </div>
 
                             </div>
@@ -390,16 +396,13 @@
                                     <input id="CustomActivity_{{obj.cfdID}}" type="text" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
                                   
                                 </div>
-
                             </div>
-
-
                         </div>
 
 
-                        <div class="swiper-slide" ng-show="Isopendiv==true" style="height:160px;overflow-y:scroll;background:#eee;">
-                            <div class="allfields">
 
+                        <div ng-class="{'detailheight': slide==Totalslides }"  class="swiper-slide" ng-show="Isopendiv==true">
+                            <div ng-if="slide==Totalslides" class="allfields">
                                 <div class="myCols innerCols" data-index="{{$index}}" data-type="myinventory" data-id="myinventorycols" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" ng-if="CheckInCommonArray(obj.ColumnName)==true" end-repeat>
 
                                     <div ng-if="obj.ColumnName=='iReqValue'" ng-click="getstep(0,'iReqValue')" class="form-group">
@@ -537,6 +540,24 @@
                                 </div>
                             </td>
 
+
+
+                            <td ng-if="CurrentActiveField=='iQty'">
+
+                                <div>
+                                    <a ng-click="UpDownValue('Quantity',true)" class="btn btn-primary"><i class="fa fa-plus"></i>Increase</a>
+                                </div>
+                            </td>
+
+
+                            <td ng-if="CurrentActiveField=='iQty'">
+
+                                <div class="alignright">
+                                    <a ng-click="UpDownValue('Quantity',false)" class="btn btn-primary"><i class="fa fa-minus"></i>Decrease</a>
+                                </div>
+                            </td>
+
+
                             <td ng-if="CurrentActiveField=='pPart'">
 
                                 <div class="aligncenter">
@@ -546,14 +567,7 @@
 
                             </td>
 
-                            <td ng-if="CurrentActiveField=='iQty'">
-
-                                <div style="height:40px;" >
-                                    
-                                </div>
-
-
-                            </td>
+                            
                           
                             <td ng-if="CurrentActiveField=='lLoc'">
 
@@ -964,7 +978,7 @@
 </div>
 
 
-<div style="background:#fff;" id="infomodal" class="modal animated bounceIn">
+<div style="background:#fff;" id="infomodal" class="modal animated slideInRight">
     <div  class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
         <h4>View all summary</h4>
@@ -974,7 +988,7 @@
 
         <div style="box-shadow:none; margin-bottom:0px;" class="">
 
-            <div style="text-align:center;" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
+            <div class="imgsection" ng-if="IsAvailableMyInventoryColumn('Image')==true" ng-click="getstep(9,'Image')">
 
                 <output style="margin-top: 0px;" id="list567">
                     <span ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
@@ -986,41 +1000,40 @@
                 <img id="defaultimg" style="height:80px; width: 80px; border: 1px solid #ccc;" src="img/default.png" alt="Alternate Text" />
             </div>
 
-            <div style="text-align:center;" ng-if="IsAvailableMyInventoryColumn('Image')==false">
+            <div class="imgsection" ng-if="IsAvailableMyInventoryColumn('Image')==false">
 
                 <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list567"></output>
 
                 <img id="defaultimg" style="height: 80px; width: 80px; border: 1px solid #ccc;" src="img/na.jpg" alt="Alternate Text" />
             </div>
 
-            <div style="margin-top:10px;" class="row ">
 
-                <div ng-click="getstep(0,'pPart')" class="col-xs-6">
-                    ITEM: <span style="color: #000; font-weight:700">{{InventoryObject.ItemID}} </span>
+            <div style="margin-top:15px;" class="row ">
+
+                <div ng-click="getstep(0,'pPart')" class="col-xs-12 form-group">
+                    <span class="mylabel">Item name</span> <span>  {{InventoryObject.ItemID}} </span>
                 </div>
 
-                <div ng-click="getstep(2,'iQty')" class="col-xs-6">
-                    QTY: <span style="display:inline"> {{ InventoryObject.Quantity }}</span>
-                </div>
-
-
-                <div ng-click="getstep(4,'uomUOM')" class="col-xs-6">
-                    UOM:<span class="redText">*</span> <span style="display:inline"> {{InventoryObject.Uom}}</span>
-                </div>
-
-                <div ng-click="getstep(3,'lLoc')" class="col-xs-6">
-                    LOC:<span class="redText">*</span> <span>  {{InventoryObject.Location}} </span>
+                <div ng-click="getstep(2,'iQty')" class="col-xs-12 form-group">
+                    <span class="mylabel"> Quantity </span> <span> {{ InventoryObject.Quantity }}</span>
                 </div>
 
 
-                <div ng-click="getstep(1,'pDescription')" class="col-md-12 col-xs-12">
+                <div ng-click="getstep(4,'uomUOM')" class="col-xs-12 form-group">
+                    <span class="mylabel"> Unit of measure </span>  <span class="redText">*</span> <span> {{InventoryObject.Uom}}</span>
+                </div>
 
-                    <span style="font-size:12px;"> {{ InventoryObject.Description }} </span>
+                <div ng-click="getstep(3,'lLoc')" class="col-xs-12 form-group">
+                    <span class="mylabel">Location</span> <span class="redText">*</span> <span>  {{InventoryObject.Location}} </span>
+                </div>
 
+
+                <div ng-click="getstep(1,'pDescription')" class="col-md-12 col-xs-12  form-group">
+
+                    <span class="mylabel"> {{ InventoryObject.Description }} </span>
 
                 </div>
             </div>
-
 
 
         </div>

@@ -14,11 +14,11 @@ app.controller('signupController', ['$scope','localStorageService', '$location',
     TAndC:false
     };
 
+    $scope.IsProcessing = false;
     $scope.signUp = function () {
         ShowsignupSuccess();
 
-        console.log($scope.registration);
-    
+        $scope.IsProcessing = true;
         $.ajax
         ({
             type: "POST",
@@ -31,7 +31,8 @@ app.controller('signupController', ['$scope','localStorageService', '$location',
                 debugger;
                 $("#mysignupModal").removeClass('bounceIn').addClass('bounceOut');
                 $('#mysignupModal').hide();
-
+                $scope.IsProcessing = false;
+                $scope.$apply();
                 if (response.SignupResult.Success == true) {
 
                     log.success("You are successfully registered");

@@ -2,9 +2,7 @@
 <link href="css/settingmenu.css" rel="stylesheet" />
 
 <div class="title-header">
-
     <div class="row">
-
         <div class="col-xs-12">
             <h4 class="titletext">Manage <small>Location</small> </h4>
         </div>
@@ -13,7 +11,8 @@
 
 <a href="#/setting" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
 
-<a ng-click="addlocation()" class="btn btn-danger waves-effect roundbtntitle"> <i class="fa fa-plus"></i> </a>
+<a ng-if="mode == 1" ng-click="addlocation()" class="btn btn-danger waves-effect roundbtntitle"> <i class="fa fa-plus"></i> </a>
+<a ng-if="mode == 2 || mode == 3 " ng-click="leaveform()" class="btn btn-danger waves-effect roundbtntitle"> <i class="fa fa-times"></i> </a>
 
 <div class="top50">
 

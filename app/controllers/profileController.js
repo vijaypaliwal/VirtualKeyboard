@@ -31,6 +31,8 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
             $scope.SecurityToken = authData.token;
         }
 
+        $scope.phoneLabel = "";
+
         $.ajax
            ({
                type: "POST",
@@ -108,6 +110,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
 
 
     $scope.Updateinfo = function () {
+
          
         var authData = localStorageService.get('authorizationData');
         if (authData) {

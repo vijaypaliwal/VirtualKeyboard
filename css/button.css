@@ -43,9 +43,12 @@
 }
 
 .bootbox .mybootboxbody {
-    padding: 15px;
     padding-top: 0px;
     text-align: left;
+    padding-left: 13px;
+    background: #d6d6d6;
+    padding-bottom: 7px;
+    color: brown;
 }
 
 .cartitems .input-group-addon {
@@ -100,6 +103,7 @@
 .input-group-addon .fa-minus {
     padding-left: 14px !important;
     padding-right: 14px !important;
+    padding-top:14px !important;
 }
 
 .input-group-addon .fa-barcode {
@@ -453,3 +457,56 @@
     background: #3CB371;
     color: #fff !important;
 }
+
+.bootbox .modal-dialog
+{
+    width:94%;
+      border-radius:10px;
+}
+
+.bootbox .modal-content
+{
+   background:#fff;
+   box-shadow:none;
+   border:transparent;
+ 
+}
+
+.bootbox .modal-body
+{
+ background: #d6d6d6;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    padding-bottom:5px;
+}
+
+.bootbox
+{
+    position:fixed;
+    bottom:0;
+    top:initial;
+}
+
+
+.bootbox .modal-footer {
+    background: #fff;
+    padding: 0px;
+    margin-top: 0px;
+    border: transparent;
+    padding-bottom: 10px;
+    margin-top:10px;
+    padding-left:7px;
+    padding-right:7px;
+}
+
+
+.bootbox .btn {
+  width:100%;
+  margin-bottom:10px;
+  margin-left:0px !important;
+  text-align:left;
+}
+
+
+
+

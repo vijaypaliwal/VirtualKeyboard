@@ -1127,7 +1127,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         $.ajax({
             type: "POST",
             url: serviceBase + 'GetMyInventoryColumns',
-            timeout: 5000,
             data: JSON.stringify({ SecurityToken: $scope.SecurityToken }),
             contentType: 'application/json',
             dataType: 'json',
@@ -1157,9 +1156,10 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 }
             },
             error: function (req) {
+                if (req.statusText != "timeout") {
 
-                $scope.ShowErrorMessage("my inventory columns", 2, 1, req.statusText);
-
+                    $scope.ShowErrorMessage("my inventory columns", 2, 1, req.statusText);
+                }
               
 
             },

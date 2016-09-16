@@ -129,6 +129,8 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
 
     }
 
+    
+
     $scope.savestatus = function () {
 
         var _StatusValue = $.trim($("#StatusToCreate").val());

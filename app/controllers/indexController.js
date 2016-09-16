@@ -19,7 +19,14 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $("#Inventoryerror").modal('hide');
         $location.path('/login');
     }
+    $scope.GetTrimmedString = function (id) {
+        var _string = $(id).val();
+        if (_string != null && _string != undefined) {
+            _string = $.trim(_string);
+        }
 
+        return _string==""?true:false;
+    }
 
     $scope.ShowErrorMessage = function (Place, TextType, Type, Message) {
         var _returnError = ""

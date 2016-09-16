@@ -29,7 +29,7 @@
     // the base DOM structure needed to create a modal
     var templates = {
         dialog:
-          "<div style='z-index:100000; overflow:auto;' class='bootbox modal' tabindex='-1' role='dialog'>" +
+          "<div style='z-index:100000; overflow:auto;' class='bootbox animated bounceInUp modal' tabindex='-1' role='dialog'>" +
             "<div class='modal-dialog'>" +
               "<div class='modal-content'>" +
                 "<div class='modal-body'><div class='bootbox-body'></div></div>" +

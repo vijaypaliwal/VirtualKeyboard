@@ -1,7 +1,7 @@
 ﻿
 
 
-<table style="width: 100%; top: 0; left:0; background: #2196F3; color:#fff; position:fixed">
+<table style=" z-index: 999; width: 100%; top: 0; left: 0; background: #2196F3; color: #fff; position: fixed">
     <tr>
         <td style="width:33.33%">
             <a style="padding:4px;color:white !important;" href="#/login"><i class="fa fa-arrow-left"></i></a>
@@ -73,7 +73,7 @@
                 </span>
             </div>
  
-    <button class="waves-effect waves-light btn btn-primary" type="button" id="signUpBtn" ng-disabled="signup.$invalid" data-ng-click="signUp()"><i class="fa fa-sign-in"></i> Sign Up</button>
+    <button class="waves-effect waves-light btn btn-primary" type="button" id="signUpBtn" ng-disabled="signup.$invalid" data-ng-click="signUp()"><i class="fa fa-sign-in" ng-class="{'fa-spin':IsProcessing==true}"></i> Sign Up</button>
     <a class="waves-effect waves-light btn-gray btn" href="#/login"><i class="fa fa-times"></i> Cancel</a>
 </form>
 
