@@ -348,6 +348,7 @@ max-height:240px !important;
     .mylabel {
         font-size: 13px;
         color: #767676;
+        margin-left:2px;
     }
 
     .requiredfields {
@@ -680,6 +681,25 @@ max-height:240px !important;
             font-size:13px;
                 box-shadow: 0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12),0 8px 10px -5px rgba(0,0,0,.2);
         }
+
+        #infomodal .modal-header
+        {
+      background: #2196F3;
+      color: #fff;
+      
+        }
+
+            #infomodal .modal-header i
+        {
+    font-size:22px;
+    margin-top:10px;
+    color:#fff !important;
+      
+        }
+
+
+     
+
 
         #infomodal h4
         {
