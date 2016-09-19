@@ -50,6 +50,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
             url: serviceBase + 'Login',
             contentType: 'application/json; charset=utf-8',
             dataType: 'text json',
+            timeout:10000,
             data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),
             success: function (response) {
 
@@ -96,8 +97,16 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                  
                 if (err.readyState == 0 || err.status == 0) {
-                    log.error("Seems like some issue in network, please try again.")
+                    if (err.statusText == "timeout")
+                    {
+                        log.error("Request has been discarded due to time out issue, please try again.")
+                    }
+                    else {
+                        log.error("Seems like some issue in network, please try again.")
+
+                    }
                 }
+                
                 else {
                 log.error("Error occurred due to error::" + err.statusText);
                 log.error(err.responseText);
