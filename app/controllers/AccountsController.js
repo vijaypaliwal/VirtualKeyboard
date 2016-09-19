@@ -29,14 +29,13 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
             data: JSON.stringify({ "SecurityToken": $scope.SecurityToken}),
             error: function (err, textStatus, errorThrown) {
                 $scope.IsLoading = false;
-                if (err.readyState == 0 || err.status == 0) {
+                if (err.readyState == 0 || err.status == 0)
+                {
 
                 }
                 else {
 
-
                     if (textStatus != "timeout") {
-
 
                         $scope.ShowErrorMessage("Get user Accounts", 2, 1, err.statusText);
                     }
@@ -49,10 +48,6 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
 
                     if (data.GetUserAccountsResult != null && data.GetUserAccountsResult.Payload != null) {
                         $scope.AccountsList = data.GetUserAccountsResult.Payload;
-
-
-            
-
                     }
                 }
                 else {
