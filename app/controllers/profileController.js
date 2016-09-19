@@ -15,7 +15,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
     function init() {
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
         console.log($scope.CurrentInventory);
-
+        $scope.CurrentAccount = localStorageService.get('AccountID');
         $scope.Getuserinfo();
         $scope.$apply();
     }
@@ -42,8 +42,9 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
                    if (response.GetUserInfoResult.Success == true) {
-                   
-                   $scope.firstname = response.GetUserInfoResult.Payload[0].FirstName
+                       
+                       
+                       $scope.firstname = response.GetUserInfoResult.Payload[0].FirstName
                    $scope.lastname = response.GetUserInfoResult.Payload[0].LastName;
                    $scope.email = response.GetUserInfoResult.Payload[0].Email
                    $scope.phone = response.GetUserInfoResult.Payload[0].Phone
