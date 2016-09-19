@@ -494,6 +494,11 @@
     top: 0;
 }
 
+.tagarrow .fa-tag
+{
+    margin-top:13px !important;
+}
+
 .toast-success {
     background: #3CB371;
     color: #fff !important;
