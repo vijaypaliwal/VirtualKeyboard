@@ -65,17 +65,19 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                     if (loginData.useRefreshTokens) {
                         localStorageService.set('authorizationData', { token: response.LoginResult.Payload, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
                         localStorageService.set('lastlogindata', { userName: loginData.userName, Password: loginData.password, AccountName: loginData.account });
-
+                        localStorageService.set('AccountID', loginData.account);
                     }
                     else {
                         localStorageService.set('authorizationData', { token: response.LoginResult.Payload, userName: loginData.userName, refreshToken: "", useRefreshTokens: false });
                         localStorageService.set('lastlogindata', { userName: loginData.userName, Password: loginData.password, AccountName: loginData.account });
+                        localStorageService.set('AccountID', loginData.account);
                     }
                     _authentication.isAuth = true;
                     _authentication.userName = loginData.userName;
                     _authentication.useRefreshTokens = loginData.useRefreshTokens;
                     _Getuserinfo();
                     deferred.resolve(response);
+                    
 
                 }
                 else {

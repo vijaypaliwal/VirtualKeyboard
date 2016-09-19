@@ -8,9 +8,11 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
     $scope.AccountsList = [];
+    $scope.IsLoading = false;
+    $scope.CurrentAccount = "";
     $scope.GetUserAccounts=function()
     {
-
+        $scope.IsLoading = true;
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -26,7 +28,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
 
             data: JSON.stringify({ "SecurityToken": $scope.SecurityToken}),
             error: function (err, textStatus, errorThrown) {
-                $scope.UOMSearching = false;
+                $scope.IsLoading = false;
                 if (err.readyState == 0 || err.status == 0) {
 
                 }
@@ -48,8 +50,8 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
                     if (data.GetUserAccountsResult != null && data.GetUserAccountsResult.Payload != null) {
                         $scope.AccountsList = data.GetUserAccountsResult.Payload;
 
-                        console.log($scope.AccountsList);
-                        $scope.$apply();
+
+            
 
                     }
                 }
@@ -58,20 +60,31 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
 
 
                 }
+                $scope.IsLoading = false;
 
-
-
+                $scope.$apply();
             }
         });
     }
+   
 
-    $scope.UpdateSecurityToken = function (AccountID) {
+    $scope.CheckCurrentAccount=function(Account)
+    {
+        if($scope.CurrentAccount==Account)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    $scope.UpdateSecurityToken = function (AccountID,AccountName) {
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
-
+        
         $.ajax({
 
             type: "POST",
@@ -106,7 +119,8 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
                         var _token = data.UpdateSecurityTokenResult.Payload;
 
                         localStorageService.set('authorizationData', { token: _token});
-
+                        $scope.CurrentAccount = AccountName;
+                        localStorageService.set('AccountID', AccountName);
                         $location.path("/FindItems");
 
                         $scope.$apply();
@@ -128,6 +142,12 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
     }
     function init()
     {
+        var _accountID = localStorageService.get('AccountID');
+        
+        if (_accountID != null && _accountID != undefined)
+        {
+              $scope.CurrentAccount=_accountID;
+        }
 
         $scope.GetUserAccounts();
 
