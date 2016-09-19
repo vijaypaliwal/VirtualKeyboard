@@ -1,0 +1,119 @@
+﻿
+
+
+
+<style>
+  
+    body {
+        background: #2196F3;
+    }
+
+    #toolbar
+    {
+        display:none;
+    }
+    .gray-color {
+       color: rgba(136, 136, 136, 0.5) !important;
+    }
+
+    .maincontent
+    {
+        background:#fff;
+    }
+
+    .modal
+    {
+        background:#fff;
+    }
+    .modal-footer
+    {
+        text-align:left;
+    }
+
+    .list-group-item
+    {
+        border:transparent;
+        border-bottom:2px solid #eee;
+    }
+
+    .btn-warning
+    {
+        height:50px;
+        width:50px;
+        line-height:50px;
+        border-radius:100%;
+        padding:0px;
+        text-align:center;
+    }
+
+    .list-group h4 {
+        margin-top: 0px;
+        font-size: 15px;
+        color: #333;
+        margin-bottom: 4px;
+    }
+
+    .list-group p {
+        color: #8e8e8e;
+        font-size:11px;
+        margin-bottom:1px;
+    }
+
+
+    .list-group .fa-angle-right {
+        font-size: 50px;
+        position: absolute;
+        right: 0px;
+        top: 0;
+        color: #ccc;
+    }
+
+</style>
+
+<div style="text-align:center">
+
+
+    <img style="height:75px; width:75px;" src="img/u2.png" alt="Alternate Text" />
+  
+
+</div>
+
+<div class="animated slideInDown maincontent">
+
+    <p>My Accounts</p>
+    <p style="color:#615a5a; font-size:13px;">Click on account you want to enter</p>
+
+
+    <ul class="list-group" >
+        <li ng-repeat="_obj in AccountsList" class="list-group-item">
+
+            <div ng-click="UpdateSecurityToken(_obj.AccountID)" class="row">
+                <div class="col-xs-3">
+
+                    <a ng-class="{'accent-color': $index % 2 === 0 }" class="btn btn-warning"> {{$index+1}} </a>
+
+                </div>
+                <div class="col-xs-9">
+                    <h4>{{_obj.AccountName}} </h4>
+                    <p>{{_obj.AccountID}}</p>
+                    <p>{{_obj.Email}}</p>
+
+                    <i class="fa fa-angle-right"></i>
+                </div>
+            </div>
+
+
+
+        </li>
+    </ul>
+    
+
+
+
+</div>
+
+
+<a href="#" class="menubtn waves-effect btn-info">
+    <i class="fa fa-sign-out"></i>
+</a>
+

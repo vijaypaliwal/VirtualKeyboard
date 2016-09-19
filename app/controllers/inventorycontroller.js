@@ -29,6 +29,26 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
+    $("body").on("click", function (e) {
+
+        if ($(e.target).hasClass('modal-backdrop')) {
+
+            $('#infomodal').removeClass('bounceInRight');
+
+            $('#infomodal').addClass('bounceOutRight');
+
+            setTimeout(function () {
+
+                $('#infomodal').removeClass('bounceOutRight');
+                
+                $('#infomodal').addClass('bounceInRight');
+
+                $('#infomodal').modal('hide');
+              
+            },500)
+        }
+    });
+
     $scope.CommonArray = ['Image', 'iUnitNumber1', 'iUnitNumber2', 'iUniqueDate', 'iUnitDate2', 'iUnitTag3', 'iUnitTag2', 'iReqValue', 'pPart', 'pDescription', 'iQty', 'lLoc', 'lZone', 'iStatusValue', 'uomUOM', 'pCountFrq', 'iCostPerUnit'];
 
     $scope.LocationList = [{ LocationName: "dhdd", LocationZone: "", LocationID: 678325 },

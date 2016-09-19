@@ -39,17 +39,7 @@
             <div style="display:none;" class="swiper-container">
 
 
-                <!--<table style="background:#fff;">
-                    <tr>
-                        <td>
-                            <div style="padding:7px; font-size:14px;">Inventory Details</div>
-                        </td>
-                        <td><div style="color:#0083C7; padding:7px; text-align:right; font-size:14px;" ng-click="viewall()">View all details</div></td>
-                    </tr>
-                </table>
-
-
-                <div style="background:#fff; margin-left:0px; margin-right:0px; border-top:1px solid #ccc" class="row">-->
+              
                 <div style="background:#fff; margin-left:0px; margin-right:0px;" class="row">
                     <div style="padding-left: 0px; padding-right: 0px; background: #eee;" class="col-xs-12">
                         <div class="iteminfo">
@@ -749,7 +739,7 @@
                                 <button type="button" class="waves-effect btn btn-primary arrow-left bknext"><i class="fa fa-angle-left"></i> Back</button>
                             </td>
                             <td style="text-align:center;" ng-hide=" slide==Totalslides">
-                                <a class="btn btn-primary waves-effect" ng-click="GetAllLastValue()"> <i class="fa fa-undo"></i> Repeat  </a>
+                                <a class="btn btn-primary waves-effect" ng-click="GetAllLastValue()"> <i style="font-size:14px;" class="fa fa-undo"></i> Repeat  </a>
                             </td>
                             <td>
                                 <div style="text-align:right;">
@@ -1051,7 +1041,7 @@
 
         </div>
 
-        <div class="allfields">
+        <div style="padding-left:6px;padding-top:0px;" class="allfields">
 
             <div class="myCols" data-index="{{$index}}" data-type="myinventory" data-id="myinventorycols" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" ng-if="CheckInCommonArray(obj.ColumnName)==true" end-repeat>
 

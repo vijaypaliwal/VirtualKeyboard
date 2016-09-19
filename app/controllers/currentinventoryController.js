@@ -336,6 +336,26 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
     }
 
+    $("body").on("click", function (e) {
+
+        if ($(e.target).hasClass('modal-backdrop')) {
+
+            $('#filtermodal').removeClass('bounceInRight');
+
+            $('#filtermodal').addClass('bounceOutRight');
+
+            setTimeout(function () {
+
+                $('#filtermodal').removeClass('bounceOutRight');
+
+                $('#filtermodal').addClass('bounceInRight');
+
+                $('#filtermodal').modal('hide');
+
+            }, 500)
+        }
+    });
+
     $scope.GetCustomFieldNameByMap = function (ID) {
         var _return = "N/A";
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
