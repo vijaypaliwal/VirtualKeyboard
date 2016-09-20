@@ -620,6 +620,7 @@ max-height:240px !important;
     padding-left: 10px;
     padding-right: 10px;
         max-width:200px;
+        text-transform: capitalize;
     }
 
 
@@ -635,10 +636,10 @@ max-height:240px !important;
 
     .actionbtnarea
     {
-        background:#eeeeee;
+        background:#f5f5f5;
         padding-top:10px;
         padding-bottom:10px;
-        margin-top:10px;
+        margin-top:5px;
         padding-left:5px;
         padding-right:5px;
     }

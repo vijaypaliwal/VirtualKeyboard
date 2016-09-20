@@ -2,12 +2,14 @@
 
 <link href="css/mobileorder.css" rel="stylesheet" />
 
+
+
 <div class="title-header">
 
     <div class="row">
 
         <div class="col-xs-12">
-            <h4 class="titletext">Arrange <small>Inventory Columns</small> </h4>
+            <h4 class="titletext">Select <small>Inventory Columns</small> </h4>
         </div>
     </div>
 </div>
@@ -27,24 +29,35 @@
     </div>
 
 
-    <table style="width:93%;" class="table gridTable table-striped bs-item">
+    <table class="table gridTable table-striped bs-item">
 
 
-        <tbody class="dragarea" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
-            <tr data-ng-repeat="obj in MyInventorycolumns" ng-if="obj.mobileorder!=0" class="MoveCursor" ng-class="{'unsortable':isallowdrag==false}">
+        <tbody class="dragarea"  ng-model="MyInventorycolumns">
+            <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" >
                 <td>
                     <div class="infoareas">
 
                         <div class="row">
 
                             <div class="col-xs-2">
-                                <a class="btn text btn-warning" >{{$index+1}}</a>
+                                <a class="btn text btn-warning">{{$index+1}} </a>
                             </div>
 
-                            <div class="col-xs-7">
-                                <a class="text"> {{obj.ColumnLabel}} </a>
+                            <div class="col-xs-6">
+                                <a class="text">{{obj.ColumnLabel}} </a>
                             </div>
-                       
+                            <div class="col-xs-4">
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+                                        <input type="checkbox" ng-model="obj.originalMobileOrder">
+                                        <div class="slider round"></div>
+                                    </label>
+                                    
+                                    <!--<input ng-model="obj.originalMobileOrder"  type="checkbox" bootstrap-switch />-->
+                                    
+
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -61,11 +74,7 @@
 
     </table>
 </div>
-<div class="vertical-text">
 
-    Scroll from here !!
-
-</div>
 
 <div></div>
 

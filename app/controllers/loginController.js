@@ -9,6 +9,51 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
     };
  
     $scope.message = "";
+    $scope.DefaultAccount = function () {
+
+
+        $.ajax({
+
+            type: "POST",
+            url: serviceBase + "DefaultAccount",
+            contentType: 'application/json; charset=utf-8',
+
+            dataType: 'json',
+
+            error: function (err, textStatus, errorThrown) {
+                $scope.IsLoading = false;
+                if (err.readyState == 0 || err.status == 0) {
+
+                }
+                else {
+
+                    if (textStatus != "timeout") {
+
+                        // $scope.ShowErrorMessage("Get default Accounts", 2, 1, err.statusText);
+                    }
+                }
+            },
+
+            success: function (data) {
+
+                if (data.DefaultAccountResult.Success == true) {
+
+                    if (data.DefaultAccountResult != null && data.DefaultAccountResult.Payload != null) {
+                        var _data = data.DefaultAccountResult.Payload;
+                        
+                        
+                    }
+                }
+                else {
+                    //   $scope.ShowErrorMessage("Get user Accounts", 1, 1, data.GetUserAccountsResult.Message)
+
+
+                }
+
+                $scope.$apply();
+            }
+        });
+    }
 
     $scope.InIt = function ()
     {
@@ -23,9 +68,12 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
             $scope.loginData.password = authLocalData.Password;
         }
 
+        $scope.DefaultAccount();
     }
 
     $scope.InIt();
+
+    
 
     $scope.login = function ()
     {

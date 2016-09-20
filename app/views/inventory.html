@@ -10,10 +10,10 @@
         background:#eee;
     }
 
-    .laststepbtn
-    {
-        margin-top:5px;
+    .darkblue {
+        background-color:rgb(0, 99, 177) !important;
     }
+ 
 </style>
 
 <!--<div class="title-header">
@@ -524,14 +524,14 @@
 
                             <td ng-if="IsinavailableInventoryField(CurrentActiveField)==true">
                                 <div>
-                                    <button class="scanbtn btn btn-primary" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i>Scan</button>
-                                    <a class="scanbtn waves-effect btn btn-primary" ng-if="CurrentActiveField!='pPart'&& CurrentActiveField!='iQty'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i>Scan</a>
+                                    <button class="scanbtn btn btn-gray" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i>Scan</button>
+                                    <a class="scanbtn waves-effect btn btn-gray" ng-if="CurrentActiveField!='pPart'&& CurrentActiveField!='iQty'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i>Scan</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField.indexOf('string_')>-1 || CurrentActiveField.indexOf('bool_')>-1 || CurrentActiveField.indexOf('number_')>-1 || CurrentActiveField.indexOf('date_')>-1 ">
                                 <div>
-                                    <a class="scanbtn waves-effect btn btn-primary" ng-click="ScanNewCustom()"> <i class="fa fa-barcode"></i>Scan</a>
+                                    <a class="scanbtn waves-effect btn btn-gray" ng-click="ScanNewCustom()"> <i class="fa fa-barcode"></i>Scan</a>
                                 </div>
                             </td>
 
@@ -540,7 +540,7 @@
                             <td ng-if="CurrentActiveField=='iQty'">
 
                                 <div>
-                                    <a ng-click="UpDownValue('Quantity',true)" class="btn btn-primary"><i class="fa fa-plus"></i>Increase</a>
+                                    <a ng-click="UpDownValue('Quantity',true)" class="btn btn-gray"><i class="fa fa-plus"></i>Increase</a>
                                 </div>
                             </td>
 
@@ -548,7 +548,7 @@
                             <td ng-if="CurrentActiveField=='iQty'">
 
                                 <div class="alignright">
-                                    <a ng-click="UpDownValue('Quantity',false)" class="btn btn-primary"><i class="fa fa-minus"></i>Decrease</a>
+                                    <a ng-click="UpDownValue('Quantity',false)" class="btn btn-gray"><i class="fa fa-minus"></i>Decrease</a>
                                 </div>
                             </td>
 
@@ -556,7 +556,7 @@
                             <td ng-if="CurrentActiveField=='pPart'">
 
                                 <div class="aligncenter">
-                                    <a ng-click="itemlist()" class="btn btn-primary"><i class="fa fa-search"></i>Find</a>
+                                    <a ng-click="itemlist()" class="btn btn-gray"><i class="fa fa-search"></i>Find</a>
                                 </div>
 
 
@@ -567,7 +567,7 @@
                             <td ng-if="CurrentActiveField=='lLoc'">
 
                                 <div class="aligncenter">
-                                    <a ng-click="locationlist()" class="btn btn-primary"><i class="fa fa-search"></i>Find</a>
+                                    <a ng-click="locationlist()" class="btn btn-gray"><i class="fa fa-search"></i>Find</a>
                                 </div>
 
 
@@ -576,24 +576,24 @@
 
                             <td ng-if="CurrentActiveField=='iStatusValue'">
                                 <div class="aligncenter">
-                                    <a class="scanbtn btn btn-primary" ng-click="CreateNew(3)"><i class="fa fa-plus"></i>Add</a>
+                                    <a class="scanbtn btn btn-gray" ng-click="CreateNew(3)"><i class="fa fa-plus"></i>Add</a>
                                 </div>
                             </td>
                             <td ng-if="CurrentActiveField=='lLoc'">
                                 <div class="aligncenter">
-                                    <a class="scanbtn btn btn-primary" ng-click="CreateNew(1)"><i class="fa fa-plus"></i>Add</a>
+                                    <a class="scanbtn btn btn-gray" ng-click="CreateNew(1)"><i class="fa fa-plus"></i>Add</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='uomUOM'">
                                 <div class="aligncenter">
-                                    <a class="scanbtn btn btn-primary" ng-click="CreateNew(2)"><i class="fa fa-plus"></i>Add</a>
+                                    <a class="scanbtn btn btn-gray" ng-click="CreateNew(2)"><i class="fa fa-plus"></i>Add</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='Image'">
                                 <div style="text-align:center;">
-                                    <a class="btn btn btn-primary" ng-click="OpenBox()">
+                                    <a class="btn btn btn-gray" ng-click="OpenBox()">
                                         <i class="fa fa-picture-o"></i> Add Image
                                         <input type="file" style="visibility:hidden" id="files" accept="image/*;" />
                                     </a>
@@ -604,39 +604,39 @@
 
                             <td ng-if="CurrentActiveField=='pPart'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_ItemID','#ItemName')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_ItemID','#ItemName')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
 
                             <td ng-if="CurrentActiveField=='pDescription'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_Description','#pDescriptionForm')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_Description','#pDescriptionForm')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
 
                             <td ng-if="CurrentActiveField=='lZone'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_lZone','#lZone')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_lZone','#lZone')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='pCountFrq'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_ItemGroup','#itemgroup')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_ItemGroup','#itemgroup')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='iStatusValue'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_Status','#Status')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_Status','#Status')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='lLoc'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_Location','#Location')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_Location','#Location')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
@@ -644,78 +644,78 @@
 
                             <td ng-if="CurrentActiveField=='uomUOM'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_Uom','#UOM')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_Uom','#UOM')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
 
                             <td ng-if="CurrentActiveField=='iCostPerUnit'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_Cost','#Costperunit')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_Cost','#Costperunit')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='iReqValue'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_UniqueTag','#UniqueTag')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_UniqueTag','#UniqueTag')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='iUnitTag2'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_UnitTag2','#UnitTag2')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_UnitTag2','#UnitTag2')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='iUnitTag3'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_UnitTag3','#UnitTag3')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_UnitTag3','#UnitTag3')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
 
                             <td ng-if="CurrentActiveField=='iUniqueDate'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_UniqueDate','#UniqueDate')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_UniqueDate','#UniqueDate')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='iUnitDate2'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_UnitDate2','#UnitDate2')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_UnitDate2','#UnitDate2')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='iUnitNumber1'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_UnitNumber1','#UnitNumber1')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_UnitNumber1','#UnitNumber1')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='iUnitNumber2'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValue('Inv_UnitNumber2','#UnitNumber2')" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValue('Inv_UnitNumber2','#UnitNumber2')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
 
                             <td ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true && obj.ColumnMap==CurrentActiveField && CurrentActiveFieldType=='Inventory'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValueCustom(obj.cfdID,1)" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValueCustom(obj.cfdID,1)" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
 
                             </td>
                             <td ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)==true && obj.ColumnMap==CurrentActiveField && CurrentActiveFieldType=='Activity'">
                                 <div class="alignright">
-                                    <a ng-click="GetLastValueCustom(obj.cfdID,2)" class="btn btn-primary"><i class="fa fa-undo"></i>Reuse</a>
+                                    <a ng-click="GetLastValueCustom(obj.cfdID,2)" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
 
                             <td ng-if="slide == Totalslides">
 
-                                <a ng-click="addinventory()" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn laststepbtn waves-effect btn-primary animated fadeInUp"> <i class="fa fa-plus-circle"></i>Add Inventory</a>
+                                <a ng-click="addinventory()" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn laststepbtn waves-effect btn-success animated fadeInUp"> <i class="fa fa-plus-circle"></i>Add Inventory</a>
 
                             </td>
 
@@ -743,9 +743,9 @@
                             <td>
                                 <button type="button" class="waves-effect btn btn-primary arrow-left bknext"><i class="fa fa-angle-left"></i> Back</button>
                             </td>
-                            <td style="text-align:center;" ng-hide=" slide==Totalslides">
+                            <!--<td style="text-align:center;" ng-hide=" slide==Totalslides">
                                 <a class="btn btn-primary waves-effect" ng-click="GetAllLastValue()"> <i style="font-size:14px;" class="fa fa-undo"></i> Repeat  </a>
-                            </td>
+                            </td>-->
                             <td>
                                 <div style="text-align:right;">
                                     <a class="btn btn-primary waves-effect arrow-right bknext" ng-hide="slide == Totalslides">Next <i class="fa fa-angle-right"></i> </a>

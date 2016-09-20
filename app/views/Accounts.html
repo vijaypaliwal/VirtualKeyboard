@@ -71,6 +71,13 @@
         color: #ccc;
     }
 
+    .loaderanimation {
+        text-align: center;
+        position: fixed;
+        top: 22%;
+        z-index: 10;
+        width: 100%;
+    }
 </style>
 
 <div style="text-align:center; margin-bottom:15px;">
@@ -84,36 +91,31 @@
     <p>My Accounts</p>
     <p style="color:#615a5a; font-size:13px;">Click on account you want to enter</p>
 
-    <div ng-if="IsLoading==true" style="text-align:center;">
-        
+    <div ng-if="IsLoading==true" class="loaderanimation">
+
         <img src="img/loader.gif" alt="Alternate Text" />
     </div>
 
-    <ul class="list-group" ng-if="IsLoading==false">
-        <li ng-repeat="_obj in AccountsList" ng-click="UpdateSecurityToken(_obj.AccountID,_obj.AccountName)" class="list-group-item" ng-class="{'selected':CheckCurrentAccount(_obj.AccountName)==true}">
-            <div class="row">
-                <div class="col-xs-3">
 
-                    <a ng-class="{'accent-color': $index % 2 === 0 }" class="btn btn-warning"> {{$index+1}} </a>
+    <ul class="list-group">
+        <li ng-repeat="_obj in AccountsList"  class="list-group-item" ng-class="{'selected':CheckCurrentAccount(_obj.AccountName)==true}">
+            <a style="display:block" ng-click="UpdateSecurityToken(_obj.AccountID,_obj.AccountName)">
 
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div ng-class="{'accent-color': $index % 2 === 0 }" class="btn btn-warning"> {{$index+1}} </div>
+                    </div>
+                    <div ng-click="UpdateSecurityToken(_obj.AccountID,_obj.AccountName)" class="col-xs-9">
+                        <h4>{{_obj.AccountName}} </h4>
+                        <p>{{_obj.AccountID}}</p>
+                        <p>{{_obj.Email}}</p>
+
+                        <i class="fa fa-angle-right"></i>
+                    </div>
                 </div>
-                <div class="col-xs-9">
-                    <h4>{{_obj.AccountName}} </h4>
-                    <p>{{_obj.AccountID}}</p>
-                    <p>{{_obj.Email}}</p>
-
-                    <i class="fa fa-angle-right"></i>
-                </div>
-            </div>
-
-
-
+            </a>
         </li>
     </ul>
-    
-
-
-
 </div>
 
 

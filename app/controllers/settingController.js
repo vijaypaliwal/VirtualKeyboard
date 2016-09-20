@@ -11,6 +11,7 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
     $scope.IsLocationLoading = false;
     $scope.Iscolumnloading = false;
     $scope.columnlist = [];
+    $scope.columnlist2 = [];
     $scope.mainObjectToSend = [];
     function init() {
         $scope.getuom();
@@ -212,6 +213,9 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
                       for (var i = 0; i < _myinventorycols.length; i++) {
                           if (_myinventorycols[i].ColumnName != "HasConversion" && _myinventorycols[i].ColumnName != "ActionQty") {
                               $scope.columnlist.push(_myinventorycols[i]);
+                              if (_myinventorycols[i].mobileorder != 0) {
+                                  $scope.columnlist2.push(_myinventorycols[i]);
+                              }
                           }
                       }
 

@@ -2636,6 +2636,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                 onSlideChangeEnd: function (swiperHere) {
 
+                    $(".bknext").removeClass("darkblue");
+
+                    setTimeout(function () {
+                        $(".bknext").addClass("darkblue");
+                    }, 300)
+
 
                     $scope.slide = swiperHere.activeIndex;
                     $scope.CurrentCount = swiperHere.activeIndex;
@@ -2668,9 +2674,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     }
 
+                  
+
                 }
 
             });
+
+         
 
 
             setTimeout(function () {

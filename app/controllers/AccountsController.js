@@ -73,7 +73,9 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
             return false;
         }
     }
-    $scope.UpdateSecurityToken = function (AccountID,AccountName) {
+    $scope.UpdateSecurityToken = function (AccountID, AccountName) {
+
+        $scope.IsLoading = true;
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -91,6 +93,9 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
             data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "AccountID": AccountID }),
             error: function (err, textStatus, errorThrown) {
                 $scope.UOMSearching = false;
+
+                $scope.IsLoading = false;
+
                 if (err.readyState == 0 || err.status == 0) {
 
                 }
@@ -116,6 +121,8 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
                         localStorageService.set('authorizationData', { token: _token});
                         $scope.CurrentAccount = AccountName;
                         localStorageService.set('AccountID', AccountName);
+
+                        $scope.IsLoading = false;
                         $location.path("/FindItems");
 
                         $scope.$apply();
@@ -125,6 +132,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
                     }
                 }
                 else {
+                    $scope.IsLoading = false;
                     $scope.ShowErrorMessage("update security token", 1, 1, data.UpdateSecurityTokenResult.Message)
 
 
