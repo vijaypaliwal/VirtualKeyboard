@@ -64,7 +64,7 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
             $scope.loginData.password = authLocalData.Password;
         }
 
-        $scope.DefaultAccount();
+       // $scope.DefaultAccount();
     }
 
     $scope.InIt();
