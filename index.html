@@ -1431,7 +1431,7 @@
 
 
         function GetDefaultAccount() {
-            alert("default called");
+       
             $.ajax({
 
                 type: "POST",
@@ -1454,7 +1454,7 @@
                 },
 
                 success: function (data) {
-                    alert("default success");
+               
                     if (data.DefaultAccountResult.Success == true) {
 
                         if (data.DefaultAccountResult != null && data.DefaultAccountResult.Payload != null) {
