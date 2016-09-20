@@ -1476,6 +1476,7 @@
         function onDeviceReady() {
 
             navigator.splashscreen.hide();
+            GetDefaultAccount();
            
             getAppVersion(function (version) {
              
@@ -1490,7 +1491,7 @@
             destinationType = navigator.camera.DestinationType;
             $cordovaSplashscreen.hide();
             InitializeModal();
-            GetDefaultAccount();
+           
         }
 
         function onOffline() {
