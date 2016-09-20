@@ -75,27 +75,7 @@
     </button>
 
 
-    <button type="button" ng-click="GoTo('/mobileorder')" class="waves-effect waves-light btn-large btn-warning width-100 animated bouncein delay-6">
-        <div class="row">
-            <div class="col-xs-9">
-                <i class="fa fa-sort-alpha-asc"></i> Arrange Inventory Columns
-
-            </div>
-          
-
-            <div class="col-xs-3">
-
-                <div ng-if="Iscolumnloading == true"> <img height="30" width="30" src="img/loader1.gif" alt="Alternate Text" /></div>
-                <div ng-if="Iscolumnloading == false">
-                    {{ columnlist2.length}}
-                </div>
-            </div>
-
-        </div>
-
-
-
-    </button>
+    
     <button type="button" ng-click="GoTo('/selectcolumns')" class="waves-effect waves-light btn-large btn-success width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-9">
@@ -109,6 +89,28 @@
                 <div ng-if="Iscolumnloading == true"> <img height="30" width="30" src="img/loader1.gif" alt="Alternate Text" /></div>
                 <div ng-if="Iscolumnloading == false">
                     {{columnlist.length}}
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </button>
+
+    <button type="button" ng-click="GoTo('/mobileorder')" class="waves-effect waves-light btn-large btn-warning width-100 animated bouncein delay-6">
+        <div class="row">
+            <div class="col-xs-9">
+                <i class="fa fa-sort-alpha-asc"></i> Arrange Inventory Columns
+
+            </div>
+
+
+            <div class="col-xs-3">
+
+                <div ng-if="Iscolumnloading == true"> <img height="30" width="30" src="img/loader1.gif" alt="Alternate Text" /></div>
+                <div ng-if="Iscolumnloading == false">
+                    {{ columnlist2.length}}
                 </div>
             </div>
 
