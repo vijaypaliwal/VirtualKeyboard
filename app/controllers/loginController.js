@@ -11,6 +11,8 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
     $scope.message = "";
     $scope.DefaultAccount = function () {
 
+        alert("call");
+
 
         $.ajax({
 
@@ -35,6 +37,8 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
             },
 
             success: function (data) {
+
+                alert("Success");
 
                 if (data.DefaultAccountResult.Success == true) {
 
