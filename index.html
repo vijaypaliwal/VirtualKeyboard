@@ -735,7 +735,8 @@
     <script src="scripts/jquery-1.11.0.min.js"></script>
 
     <script src="scripts/jquery-ui.js"></script>
-
+    <script src="scripts/jquery.mobile.custom.min.js"></script>
+    
    <!--<script src="scripts/jquery.ui.touch-punch.js"></script>
 
    <script src="scripts/fastclick.js"></script>-->
@@ -873,7 +874,8 @@
         };
         $.each({
             swipedown: "swipeupdown",
-            swipeup: "swipeupdown"
+            swipeup: "swipeupdown",
+            swipeleft: "swipeupdown"
         }, function (event, sourceEvent) {
             $.event.special[event] = {
                 setup: function () {
@@ -1427,6 +1429,50 @@
             }
         }
 
+
+        function GetDefaultAccount() {
+            alert("default called");
+            $.ajax({
+
+                type: "POST",
+                url: "https://test.inventory4.com/API/ClearlyInventoryAPI.svc/DefaultAccount",
+                contentType: 'application/json; charset=utf-8',
+
+                dataType: 'json',
+
+                error: function (err, textStatus, errorThrown) {
+                    $scope.IsLoading = false;
+                    if (err.readyState == 0 || err.status == 0) {
+
+                    }
+                    else {
+
+                        if (textStatus != "timeout") {
+
+                        }
+                    }
+                },
+
+                success: function (data) {
+                    alert("default success");
+                    if (data.DefaultAccountResult.Success == true) {
+
+                        if (data.DefaultAccountResult != null && data.DefaultAccountResult.Payload != null) {
+                            var _data = data.DefaultAccountResult.Payload;
+
+
+                        }
+                    }
+                    else {
+
+
+                    }
+
+                    $scope.$apply();
+                }
+            });
+        }
+
         function onDeviceReady() {
 
             navigator.splashscreen.hide();
@@ -1444,6 +1490,7 @@
             destinationType = navigator.camera.DestinationType;
             $cordovaSplashscreen.hide();
             InitializeModal();
+            GetDefaultAccount();
         }
 
         function onOffline() {
@@ -1558,6 +1605,8 @@
     </script>
 
     <script>
+
+        
     </script>
 
 

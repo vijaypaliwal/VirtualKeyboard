@@ -1,6 +1,28 @@
 ﻿
 <link href="css/settingmenu.css" rel="stylesheet" />
+<style>
+    .cd-top.cd-is-visible {
+        visibility: visible;
+        opacity: 0.7;
+    }
 
+    .cd-top {
+        height: 47px;
+        width: 47px;
+        color: #fff !important;
+        background: #b39a99;
+        position: fixed;
+        left: 25px;
+        bottom: 25px;
+        border-radius: 100%;
+        z-index: 100;
+        font-size: 25px;
+        padding-left: 12px;
+        padding-top: 4px;
+        opacity: 1;
+        visibility: hidden;
+    }
+</style>
 <div class="title-header">
     <div class="row">
         <div class="col-xs-12">
@@ -16,8 +38,10 @@
 
 <div class="top50">
 
-    <div ng-if="mode == 1" class="listview animated zoomIn">
-
+    <div ng-show="mode == 1" class="listview animated zoomIn" id="mylist">
+        <div ng-if="loadingblock==true" style="background:#ECECEC; text-align:center; margin-top:-5px; padding-top:12px; padding-bottom:12px;">
+            <img style="height:30px;" src="img/loader.gif" alt="Alternate Text">
+        </div>
 
         <div id="sticky-anchor"></div>
         <div id="sticky" class="topup">
@@ -70,6 +94,8 @@
                 <div class="row">
                     <div class="col-xs-7">
                         <a>{{obj.LocationName}}</a>
+                        <p style="font-size: 12px; color: #a69a9a;"><span ng-if="GetTrimmedStringLoc(obj.LocationDescription)!=''">{{obj.LocationDescription}},</span><span ng-if="GetTrimmedStringLoc(obj.LocationZone)!=''">{{obj.LocationZone}}</span></p>
+                       
                     </div>
 
                     <div class="col-xs-5">
@@ -151,7 +177,7 @@
 
     </div>
 </div>
-
+<a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
  <a ng-click="Openbottommenu()" class="menubtn waves-effect btn-info">
     <i class="fa fa-bars"></i>
 </a>
@@ -166,3 +192,27 @@
         </ul>
     </div>
 </div>
+<script>
+
+    var offset = 50;
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    var offset_opacity = 1200;
+    //duration of the top scrolling animation (in ms)
+    var scroll_top_duration = 700;
+    //grab the "back to top" link
+    var $back_to_top = $('.cd-top');
+
+    function scrollToTop() {
+
+        $('html, body').animate({ scrollTop: 0 }, 500, 'linear');
+    }
+
+
+
+    $(window).scroll(function () {
+        ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if ($(this).scrollTop() > offset_opacity) {
+            $back_to_top.addClass('cd-fade-out');
+        }
+    });
+</script>

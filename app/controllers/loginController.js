@@ -11,6 +11,7 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
     $scope.message = "";
     $scope.DefaultAccount = function () {
 
+
         $.ajax({
 
             type: "POST",
@@ -39,10 +40,13 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
 
                     if (data.DefaultAccountResult != null && data.DefaultAccountResult.Payload != null) {
                         var _data = data.DefaultAccountResult.Payload;
+                        
+                        
                     }
                 }
                 else {
                     //   $scope.ShowErrorMessage("Get user Accounts", 1, 1, data.GetUserAccountsResult.Message)
+
 
                 }
 
@@ -64,7 +68,7 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
             $scope.loginData.password = authLocalData.Password;
         }
 
-        $scope.DefaultAccount();
+      //  $scope.DefaultAccount();
     }
 
     $scope.InIt();

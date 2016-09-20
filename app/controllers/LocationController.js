@@ -14,7 +14,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
     var _TotalRecordsCurrent = 0;
     $scope.CurrentActiveSearchField = "lLoc";
     $scope.SearchData = { SearchValue: "" };
-
+    $scope.loadingblock = false;
     $scope.IsProcessing = false;
 
     $scope.locationdata = {
@@ -31,6 +31,24 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
         $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
     });
 
+
+    $('#mylist').on('swipedown', function () {
+
+
+        if (_IsLazyLoadingUnderProgress === 0) {
+            if ($(window).scrollTop() < 500) {
+                
+
+                $scope.loadingblock = true;
+
+                _IsLazyLoadingUnderProgress = 1;
+                CheckScopeBeforeApply();
+                $scope.GetLocations();
+              
+            }
+        }
+
+    });
 
     $scope.Openbottommenu = function () {
 
@@ -137,7 +155,6 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
     $scope.GetLocations = function () {
 
-        $scope.LocationsLoaded = false;
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -158,6 +175,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                 $scope.FilterArray[2].SearchValue = $scope.SearchData.SearchValue;
             }
         }
+        $scope.LocationsLoaded = false;
 
         CheckScopeBeforeApply();
 
@@ -213,7 +231,8 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
             },
             complete: function () {
                 _IsLazyLoadingUnderProgress = 0;
-
+                $scope.loadingblock = false;
+                CheckScopeBeforeApply();
             }
         });
     }
@@ -390,7 +409,13 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
     }
 
 
+    $scope.GetTrimmedStringLoc = function (_string) {
+        if (_string != null && _string != undefined) {
+            _string = $.trim(_string);
+        }
 
+        return _string;
+    }
     $scope.leaveform = function () {
         $scope.mode = 1;
         $scope.$apply();
@@ -406,3 +431,6 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
     init();
 
 }]);
+
+app.directive()
+
