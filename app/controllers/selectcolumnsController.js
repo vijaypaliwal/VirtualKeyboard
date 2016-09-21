@@ -333,6 +333,8 @@ app.directive('customSwipe', [
 
                                 }
 
+                                element.find("input").trigger("change");
+
                             },10)
                         },
                         threshold: 10
