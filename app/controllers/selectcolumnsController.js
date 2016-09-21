@@ -316,8 +316,13 @@ app.directive('customSwipe', [
                     $(element).swipe({
                         swipe: function (event, direction, distance, duration, fingerCount) {
                             //This only fires when the user swipes left
+
                             
+                            alert(direction);
                             setTimeout(function () {
+
+                               
+
                                 if (direction == "right" || direction == "up") {
 
                                     element.find("input").attr("checked", "checked");
@@ -332,7 +337,7 @@ app.directive('customSwipe', [
 
                             },10)
                         },
-                        threshold: 10
+                        threshold: 50
                     });
                 }
             };
