@@ -142,7 +142,7 @@
     </div>
 </div>
 <a href="#/setting" class="newbackbtn ng-scope"> <i class="fa fa-arrow-left"></i> </a>
-<a ng-click="saveColumns()" class="waves-effect btn btn-danger roundbtntitle"> <i class="fa fa-info-circle"></i> </a>
+<a  class="waves-effect btn btn-danger roundbtntitle"> <i class="fa fa-info-circle"></i> </a>
 <div style="display:none;" class="top50 ng-scope">
 
     <h4>String and Number</h4>
@@ -419,7 +419,7 @@
 </div>
 
 
-<div class="top50">
+<div style="display:none;" class="top50">
     <h4>Data Type properties</h4>
     <div class="well">
         <div class="form-group">
@@ -540,6 +540,66 @@
 <a class="myMenuLink btn btn-primary">
     <i class="fa fa-arrow-circle-o-up"></i>
 </a>-->
+
+<div class="maincontent">
+    <div id="mask"></div>
+
+    <div class="mcontent">
+
+        <h1>Masking</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam maiores, placeat. Est unde provident placeat deleniti, modi ea. Corporis iste dolorem ullam culpa. Asperiores illum harum, possimus cum ad doloribus.</p>
+        <p>Ab soluta quidem quibusdam ullam error sapiente officiis, dolorum unde dolore corporis maiores delectus voluptate assumenda veniam? Nostrum eius ad sequi, nemo eos porro libero, nam, magni, perspiciatis fuga soluta!</p>
+        <p>Blanditiis maxime unde perspiciatis repudiandae ipsum, in nihil possimus officiis? Minus, perferendis debitis doloribus sint repellendus accusamus recusandae pariatur quisquam asperiores temporibus optio in. Quia quas nihil fugiat omnis hic?</p>
+        <p>Error cum tenetur cupiditate dolore, possimus vitae. Optio fuga ipsam sit amet modi unde, officia quo, tempore obcaecati quis, nihil. Natus, ducimus deserunt, minus consequuntur accusamus minima mollitia voluptatum optio.</p>
+        <p>Quibusdam, dolor deserunt. Quia quo, deleniti saepe perspiciatis. Delectus dolorum labore quidem debitis excepturi facilis assumenda magni ex. Architecto illum tenetur, harum nulla consequatur debitis aut sint officiis praesentium similique.</p>
+    </div>
+</div>
+<style>
+  
+
+    .maincontent {
+        padding: 2em;
+        font-family: sans-serif;
+        line-height: 1.5;
+        background: #2196F3;
+        color: #FFF;
+        box-sizing: border-box;
+      
+    }
+
+    .show {
+        display:block;
+    }
+
+    h1 {
+        color: yellow;
+    }
+
+    #mask {
+        position: fixed;
+        top: 16%;
+        right: 35px;
+      
+        width: 0px;
+        height: 0px;
+        border-radius: 100%;
+        z-index: 99;
+        transform: translateY(-50%) scale(1);
+        box-shadow: 0 0 0 100em #FFF;
+        transition: 1s;
+    }
+
+    .reveal #mask {
+        width: 100vw;
+        height: 100vw;
+        transform: translateY(-50%) scale(1.5);
+        pointer-events: none;
+    }
+
+  
+
+</style>
+
 <script>
     $('.myLinkToTop').click(function () {
         $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
@@ -550,6 +610,16 @@
         $('html, body').animate({ scrollTop: 0 }, 'slow');
         return false;
     });
+
+    $('.roundbtntitle').on("click", function () {
+
+     
+
+        $('.maincontent').toggleClass('reveal');
+    })
+
+
+    
 </script>
 
 
