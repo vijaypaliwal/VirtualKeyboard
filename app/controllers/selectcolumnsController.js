@@ -321,16 +321,14 @@ app.directive('customSwipe', [
                             alert(direction);
                             setTimeout(function () {
 
-                               
-
                                 if (direction == "right" || direction == "up") {
 
-                                    element.find("input").attr("checked", "checked");
-                                    element.find("input").attr("checked", true);
+                                    element.find("input").prop("checked", "checked");
+                                    element.find("input").prop("checked", true);
+
                                 }
-                                else if (direction == "left" || direction == "down")
-                                {
-                                    element.find("input").attr("checked", false);
+                                else if (direction == "left" || direction == "down") {
+                                    element.find("input").prop("checked", false);
                                     element.find("input").removeAttr("checked");
 
                                 }
