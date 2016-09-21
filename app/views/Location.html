@@ -23,6 +23,46 @@
         visibility: hidden;
     }
 </style>
+
+<style>
+    .text.btn-warning {
+        height: 35px;
+        width: 35px;
+        line-height: 35px;
+        border-radius: 100%;
+        padding: 0px;
+        text-align: center;
+    }
+
+    .list-group-item {
+        background-color: #e2e2e2;
+    }
+
+    .list-group-item {
+        padding: 12px !important;
+        border: transparent;
+        border-bottom: 2px solid #d8d8d8;
+        border-left: 3px solid #2196F3;
+    }
+
+        .list-group-item a {
+            font-size: 17px;
+        }
+    .text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-inline-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+        margin-bottom: 0;
+        font-size: 17px;
+    }
+
+    .left-border {
+        border-left: 3px solid #FF4081;
+    }
+</style>
 <div class="title-header">
     <div class="row">
         <div class="col-xs-12">
@@ -89,13 +129,18 @@
 
 
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="obj in Locations" ng-if="obj.LocationName != ''">
+            <li ng-class="{'left-border': $index % 2 === 0 }" class="list-group-item" ng-repeat="obj in Locations" ng-if="obj.LocationName != ''">
 
                 <div class="row">
-                    <div class="col-xs-7">
-                        <a>{{obj.LocationName}}</a>
-                        <p style="font-size: 12px; color: #a69a9a;"><span ng-if="GetTrimmedStringLoc(obj.LocationDescription)!=''">{{obj.LocationDescription}},</span><span ng-if="GetTrimmedStringLoc(obj.LocationZone)!=''">{{obj.LocationZone}}</span></p>
-                       
+                    <div class="col-xs-2">
+                        <a class="btn text btn-warning">{{$index+1}}</a>
+                    </div>
+
+                    <div class="col-xs-5">
+                        <a class="text">{{obj.LocationName}}</a>
+                        <br />
+                        <a class="text" style="font-size: 12px; color: #a69a9a;"><span ng-if="GetTrimmedStringLoc(obj.LocationDescription)!=''">{{obj.LocationDescription}},</span><span ng-if="GetTrimmedStringLoc(obj.LocationZone)!=''">{{obj.LocationZone}}</span></a>
+
                     </div>
 
                     <div class="col-xs-5">

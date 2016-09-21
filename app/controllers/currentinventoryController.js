@@ -1,25 +1,31 @@
 ﻿'use strict';
 app.controller('currentinventoryController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
 
-
+    //#region variable declaration
     $scope.CurrentView = { Name: "Current Inventory" };
     $scope.InventoryViews = [];
     $scope.InventoryList = [];
     $scope.CustomItemDataList = [];
     $scope.FilterData = {SearchValue:""};
-    $scope.isDataLoading = true;
     $scope.FilterArray = [{ ColumnName: "", FilterOperator: "", SearchValue: "" }];
+
     $scope.sortColumn = "iLastITID";
     $scope.loadingblock = false;
     $scope.sortDir = "DESC";
-    var _sortColumn = "iLastITID";
-    var _sortDir = "DESC";
     $scope.isviewload = false;
+    $scope.isDataLoading = true;
+    $scope.Columns = [];
+
+
     var _IsLazyLoadingUnderProgress = 0;
     var _PageSize = 30;
-    $scope.Columns = [];
+    var _sortColumn = "iLastITID";
+    var _sortDir = "DESC";
     var _TotalRecordsCurrent = 0;
     var _masterSearch = "";
+    //#endregion
+
+    // Method to get incrementer count according to page size
     function getIncrementor(_Total) {
         if (_Total <= 100) {
             return 10;
@@ -35,6 +41,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
     }
 
+    // try parse int javascript version
     function TryParseInt(str, defaultValue) {
         var retValue = defaultValue;
         if (str !== null) {
@@ -47,6 +54,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         return retValue;
     }
 
+    // this function is giving filter operator according to column name
     function GetFilterOperator(ColumnName)
     {
          
@@ -68,6 +76,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
     }
 
+    // check whether the column is further calculated column or not
     $scope.isFurtherCalculatedColumn=function(ColumnName)
     {
         for (var i = 0; i < $scope.Columns.length; i++) {
@@ -83,6 +92,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         return false;
     }
 
+    // pull to refresh function 
     function onSwipeDown()
     {
         $('#mylist').on('swipedown', function () {
@@ -102,11 +112,14 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
         });
     }
+
+    // on modal hidden
     $('#bottommenumodal').on('hidden.bs.modal', function () {
         $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
     });
 
 
+    // bottom menu modal 
     $scope.Openbottommenu = function () {
 
         if ($("body").hasClass("modal-open")) {
@@ -122,6 +135,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
     }
 
+    // clears filter array which is using by list 
     $scope.clearfilterArray = function () {
         for (var i = 0; i < $scope.FilterArray.length; i++) {
             $scope.FilterArray[i].SearchValue = "";
@@ -131,6 +145,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         CheckScopeBeforeApply();
         $scope.GetInventoryDataAccordingToView();
     }
+
     $scope.clearfilter=function()
     {
         $scope.clearfilterArray();
@@ -138,6 +153,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
       //  CheckScopeBeforeApply();
       //  $scope.GetInventoryDataAccordingToView();
     }
+
+    // Get custom dropdown's column available data
     $scope.GetComboData=function(ColumnName)
     {
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
@@ -149,6 +166,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
         
     }
+
+    // Get display label according to column name
     $scope.GetDisplayLabel = function (ColumnName) {
         var DataType=""
         
@@ -167,6 +186,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
     }
 
+    // Get data type according to column name
     $scope.GetColumnDataType=function(ColumnName)
     {
         var DataType=""
@@ -187,6 +207,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
     }
 
+    // Update filter's array after getting from server side
     function UpdateFilterArray()
     {
 
@@ -207,6 +228,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
         CheckScopeBeforeApply();
     }
+
+    // fill filter's array
     function FillFilterArray()
     {
         $scope.FilterArray = [];
@@ -232,6 +255,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         CheckScopeBeforeApply();
     }
 
+    // on scroll load function 
     $(window).scroll(function () {
         //var _SearchValue = $.trim($("#MasterSearch").val());
         if ($scope.isviewload == true) {
@@ -258,6 +282,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
 
     });
+
+    // text to number conversion
     function ChangeIntoNumberFormat(number) {
         if (number != undefined && number != null && number != "") {
 
@@ -281,6 +307,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
             return number;
         }
     }
+
+    // get custom data field's list according to type
     $scope.GetCustomDataField = function (Type) {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -325,6 +353,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                }
            });
     }
+
+    // get custom field according to given id
     $scope.GetCustomFieldByID = function (ID) {
         
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
@@ -336,6 +366,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
     }
 
+    // on body click filter modal open and close animation
     $("body").on("click", function (e) {
 
         if ($(e.target).hasClass('modal-backdrop')) {
@@ -356,6 +387,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
     });
 
+
+    // Get custom column name by map
     $scope.GetCustomFieldNameByMap = function (ID) {
         var _return = "N/A";
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
@@ -368,6 +401,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         return _return;
     }
 
+    // Get custom column name by ID
     $scope.GetCustomFieldTypeByID=function(ID)
     {
         var _return = "N/A";
@@ -381,6 +415,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         return _return;
     }
 
+    // Get image path of operator
     $scope.GetImagePath=function(Operator)
     {
          
@@ -421,7 +456,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         return _returnPath;
     }
 
-    
+    // Get cell's data according to column name and index
    $scope.GetCellData=function(columnName, Index,isCalculated) {
        var _ID = TryParseInt(columnName, 0);
        if (_ID != 0)
@@ -683,7 +718,9 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
             default:
                 return "N/A";
         }
-    }
+   }
+
+    // show and hide more div
    $scope.ShowHideDiv = function (id) {
        var _id = "#row_" + id.toString();
        var _iconID = "#icon_" + id.toString();
@@ -719,6 +756,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
        }
    }
+
+    // get inventory view's list
     $scope.GetInventoryViews = function () {
         $scope.isDataLoading = false;
         var authData = localStorageService.get('authorizationData');
@@ -758,7 +797,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
     }
 
-
+    // get view detail
     $scope.viewdetail = function(viewname) {
         $scope.isviewload = true;
         $scope.CurrentView = viewname;
@@ -766,16 +805,20 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         CheckScopeBeforeApply();
     }
 
+    // show view
     $scope.showview = function() {
         $scope.isviewload = false;
         $scope.CurrentView = { Name: "Current Inventory" };
     }
 
+    // This is an angular function to check whether any scope is under progress before applying scope.
     function CheckScopeBeforeApply() {
         if (!$scope.$$phase) {
             $scope.$apply();
         }
     };
+
+    // This function assign selected view to load accordingly
 
     $scope.AssignCurrentView=function(view)
     {
@@ -784,10 +827,13 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         CheckScopeBeforeApply();
         $scope.GetInventoryDataAccordingToView();
     }
+
+    
     $scope.showfilter = function () {
         $("#filtermodal").modal("show")
     }
 
+    // get data according to selected view 
     $scope.GetInventoryDataAccordingToView=function()
     {
         ShowGlobalWaitingDiv();
@@ -884,6 +930,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
              }
          }
 
+    // whether the column is available or not according to columnid
     $scope.IsAvailableColumn=function(column)
     {
         for (var i = 0; i < $scope.Columns.length; i++) {
@@ -895,6 +942,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
         return false;
     }
+
+    // Gets unit of measure list
     $scope.getuom = function () {
 
         $scope.LocationsLoaded = false;
@@ -933,6 +982,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
     }
 
+    // Gets status list
     $scope.getstatus = function () {
 
         var authData = localStorageService.get('authorizationData');
@@ -965,7 +1015,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
            });
 
     }
-
+    
     $scope.OpenmenuModal = function () {
 
         if ($("body").hasClass("modal-open")) {
@@ -981,6 +1031,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
     }
 
+    // toggles sort direction
     function ToggleSortDir(Dir) {
         if (Dir == "DESC") {
             return "ASC"
@@ -992,6 +1043,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
             return "ASC";
         }
     }
+
+    // apply sorting according to selected column
     $scope.applysorting = function (sortby) {
 
         var _tempCol = _sortColumn;
@@ -1017,6 +1070,12 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         CheckScopeBeforeApply();
       
     
+    }
+
+    $scope.OpenImageModal = function (Object, Name) {
+        $("#imagemodal").modal('show');
+        $("#modalheader").find("h4").html(Name);
+        $("#imagepreview").attr("src", Object);
     }
 
     init();

@@ -1,6 +1,6 @@
 ﻿'use strict';
 app.controller('inventoryactivityController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
-
+    //#region variable declaration
     $scope.CurrentView = { Name: "Inventory Activity" };
     $scope.ActivityViews = [];
     $scope.ActivityList = [];
@@ -13,15 +13,21 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     $scope.datesGlobalforquery = { startDate: "", endDate: "" }
     $scope.sortColumn = "itTransDate";
     $scope.sortDir = "DESC";
-    var _sortColumn = "itTransDate";
-    var _sortDir = "DESC";
     $scope.isviewload = false;
+    $scope.Columns = [];
+    $scope.loadingblock = false;
+
+
     var _IsLazyLoadingUnderProgress = 0;
     var _PageSize = 30;
-    $scope.Columns = [];
+    var _sortColumn = "itTransDate";
+    var _sortDir = "DESC";
     var _TotalRecordsCurrent = 0;
     var _masterSearch = "";
-    $scope.loadingblock = false;
+
+    //#endregion
+
+    // Method to get incrementer count according to page size
     function getIncrementor(_Total) {
         if (_Total <= 100) {
             return 10;
@@ -37,6 +43,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
     }
 
+    // try parse int javascript version
     function TryParseInt(str, defaultValue) {
         var retValue = defaultValue;
         if (str !== null) {
@@ -49,6 +56,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         return retValue;
     }
 
+    // this function is giving filter operator according to column name
     function GetFilterOperator(ColumnName)
     {
          
@@ -70,6 +78,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
     }
 
+    // pull to refresh function 
     function onSwipeDown() {
         $('#mylist').on('swipedown', function () {
 
@@ -88,6 +97,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
         });
     }
+    // check whether the column is further calculated column or not
     $scope.isFurtherCalculatedColumn=function(ColumnName)
     {
         for (var i = 0; i < $scope.Columns.length; i++) {
@@ -103,7 +113,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         return false;
     }
 
-
+    // check date comparison
     $scope.$watch("datesGlobalforquery.endDate", function () {
         var _dateStart = new Date();
         var _dateEnd = new Date();
@@ -161,11 +171,13 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
     });
 
+
+    // function for hidden modal
     $('#bottommenumodal').on('hidden.bs.modal', function () {
         $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
     });
 
-
+    // open bottom menu modal
     $scope.Openbottommenu = function () {
 
         if ($("body").hasClass("modal-open")) {
@@ -181,7 +193,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
     }
    
-    
+    // clear complete filter array
     $scope.clearfilterArray = function () {
         for (var i = 0; i < $scope.FilterArray.length; i++) {
             $scope.FilterArray[i].SearchValue = "";
@@ -191,13 +203,15 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         CheckScopeBeforeApply();
         $scope.GetActivityDataAccordingToView();
     }
+    // clear complete filter array
     $scope.clearfilter=function()
     {
         $scope.clearfilterArray();
       
-      //  CheckScopeBeforeApply();
-      //  $scope.GetActivityDataAccordingToView();
+     
     }
+
+    // get custom dropdown data 
     $scope.GetComboData=function(ColumnName)
     {
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
@@ -208,6 +222,8 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
         
     }
+
+    // get display label according to column name
     $scope.GetDisplayLabel = function (ColumnName) {
         var DataType=""
         
@@ -226,6 +242,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
     }
 
+    // get data type according to column name
     $scope.GetColumnDataType=function(ColumnName)
     {
         var DataType=""
@@ -247,6 +264,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
     }
 
+    // update filter's array according to server side filters
     function UpdateFilterArray()
     {
 
@@ -266,6 +284,8 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
         CheckScopeBeforeApply();
     }
+
+    // update filter's array according to server side filters
     function FillFilterArray()
     {
         $scope.FilterArray = [];
@@ -291,6 +311,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         CheckScopeBeforeApply();
     }
 
+    // on scroll function to load data
     $(window).scroll(function () {
         //var _SearchValue = $.trim($("#MasterSearch").val());
         if ($scope.isviewload == true) {
@@ -317,6 +338,8 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
 
     });
+
+    // change string to number 
     function ChangeIntoNumberFormat(number) {
         if (number != undefined && number != null && number != "") {
 
@@ -340,14 +363,13 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
             return number;
         }
     }
+
+    // get custom data according to type ( Item/Activity)
     $scope.GetCustomDataField = function (Type) {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
-
-
-
 
         $.ajax
            ({
@@ -389,6 +411,8 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                }
            });
     }
+
+    // get custom column according to ID 
     $scope.GetCustomFieldByID = function (ID) {
         
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
@@ -408,6 +432,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
     }
 
+    // get custom column by column map
     $scope.GetCustomFieldNameByMap = function (ID) {
         var _return = "N/A";
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
@@ -420,6 +445,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         return _return;
     }
 
+    // get custom column by ID
     $scope.GetCustomFieldTypeByID=function(ID)
     {
         var _return = "N/A";
@@ -433,6 +459,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         return _return;
     }
 
+    // get image path according to operator
     $scope.GetImagePath=function(Operator)
     {
          
@@ -473,7 +500,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         return _returnPath;
     }
 
-    
+    // get column data according to column name and index of data
    $scope.GetCellData=function(columnName, Index,isCalculated) {
        var _ID = TryParseInt(columnName, 0);
        if (_ID != 0)
@@ -937,7 +964,9 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
             default:
                 return "N/A";
         }
-    }
+   }
+
+    // show  and hide div according to given instruction 
    $scope.ShowHideDiv = function (id) {
        var _id = "#row_" + id.toString();
        var _iconID = "#icon_" + id.toString();
@@ -973,6 +1002,8 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
        }
    }
+
+    // get activity views according to logged in user
     $scope.GetActivityViews = function () {
         $scope.isDataLoading = false;
         var authData = localStorageService.get('authorizationData');
@@ -1014,7 +1045,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
     }
 
-
+    // assign current view according to selected view 
     $scope.viewdetail = function(viewname) {
         $scope.isviewload = true;
         $scope.CurrentView = viewname;
@@ -1022,6 +1053,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         CheckScopeBeforeApply();
     }
 
+   
     $scope.showview = function() {
         $scope.isviewload = false;
         $scope.CurrentView = { Name: "Inventory Activity" };
@@ -1046,6 +1078,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         $("#filtermodal").modal("show")
     }
 
+    // get concatenated date string "date1 and date2"
     $scope.computedTwoDatesforquery = function (date1, date2) {
 
 
@@ -1054,6 +1087,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     }
 
 
+    // update parent action
     $scope.UpdateParentAction = function (index, Action) {
         if ($scope.FilterArray[index].SearchValue == Action) {
             $scope.FilterArray[index].SearchValue = "";
@@ -1066,7 +1100,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         CheckScopeBeforeApply();
     }
 
-
+    // Get activity data according to selected view 
     $scope.GetActivityDataAccordingToView=function()
     {
         
@@ -1233,6 +1267,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
              }
          }
 
+    // checking of column whether the column is available or not
     $scope.IsAvailableColumn=function(column)
     {
         for (var i = 0; i < $scope.Columns.length; i++) {
@@ -1243,6 +1278,12 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
         }
         return false;
+    }
+
+    $scope.OpenImageModal = function (Object, Name) {
+        $("#imagemodal").modal('show');
+        $("#modalheader").find("h4").html(Name);
+        $("#imagepreview").attr("src", Object);
     }
     $scope.getuom = function () {
 

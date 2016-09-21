@@ -44,6 +44,8 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
 
             success: function (data) {
 
+                debugger;
+
                 if (data.GetUserAccountsResult.Success == true) {
 
                     if (data.GetUserAccountsResult != null && data.GetUserAccountsResult.Payload != null) {

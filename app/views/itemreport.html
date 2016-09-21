@@ -45,7 +45,7 @@
                         <a class="text">{{_obj.Name}} <span ng-if="_obj.GridLayoutID==-1" style="font-size: 11px; color: #2196F3;">System view</span> </a>
                         <p>{{_obj.Description}}</p>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -58,24 +58,24 @@
 
 
     <div ng-if="isviewload==true" class="table-responsive">
-        
+
         <div ng-if="loadingblock==true" style="background:#ECECEC; text-align:center; margin-top:-5px; padding-top:12px; padding-bottom:12px;">
             <img style="height:30px;" src="img/loader.gif" alt="Alternate Text">
         </div>
         <div style="margin-top:10px;" class="input-group">
 
             <span style="padding:5px; border:1px solid #ccc; border-right:transparent" class="input-group-addon">
-                <a class="dropdown-toggle"  aria-expanded="true">
+                <a class="dropdown-toggle" aria-expanded="true">
                     <i style="padding:0px; background:transparent; color:#afaeae !important; font-size:16px !important;" class="fa fa-search"></i>
                 </a>
             </span>
 
             <input style="border-left:transparent" type="text" ng-model="FilterData.SearchValue" class="form-control ng-pristine ng-valid" placeholder="Type to Search">
 
-            <i ng-if="FilterData.SearchValue!=''" ng-click="clearfilter()" class="fa fa-times filtercross right47"></i> 
+            <i ng-if="FilterData.SearchValue!=''" ng-click="clearfilter()" class="fa fa-times filtercross right47"></i>
 
             <a class="input-group-addon last textData" ng-click="GetItemsDataAccordingToView()" style="margin-top: 0px;"><i class="fa fa-search" style="font-size:20px;"></i> </a>
-          
+
 
         </div>
 
@@ -112,7 +112,7 @@
 
                         <tr ng-if="IsAvailableColumn('ImageFileName')">
                             <td style="text-align:center;" colspan="2">
-                                <img ng-if="_obj.ImageFileName !=''" style="height:55px; width:55px; border-radius:55px;" src="{{_obj.ImagePath}}" alt="Alternate Text" />
+                                <img ng-if="_obj.ImageFileName !=''" style="height:55px; width:55px; border-radius:55px;" ng-click="OpenImageModal(_obj.ImagePath,_obj.iOrgName)" src="{{_obj.ImagePath}}" alt="Alternate Text" />
 
                                 <img ng-if="_obj.ImageFileName ==''" style="height:55px; width:55px; border-radius:55px;" src="img/default.png" alt="Alternate Text" />
                             </td>
@@ -132,7 +132,7 @@
                 </table>
             </div>
         </div>
-</div>
+    </div>
 
 
     <div id="filtermodal" class="modal animated bounceInRight">
@@ -270,59 +270,59 @@
 
 
 
-<a ng-click="Openbottommenu()" class="menubtn waves-effect btn-info">
-    <i class="fa fa-bars"></i>
-</a>
+    <a ng-click="Openbottommenu()" class="menubtn waves-effect btn-info">
+        <i class="fa fa-bars"></i>
+    </a>
 
-<div id="bottommenumodal" class="modal bottommenu fade">
-    <div class="modal-body">
-        <ul class="animated slideInUp selectAction">
-            <li> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
-            <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-shopping-cart"></i> </a></li>
-            <li> <a href="#/reportmenu"><span class="newinv">All Reports</span></a>  <a href="#/reportmenu" class=" waves-effect accent-color btn"> <i class="fa fa-th-list"></i> </a></li>
-            <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
-        </ul>
+    <div id="bottommenumodal" class="modal bottommenu fade">
+        <div class="modal-body">
+            <ul class="animated slideInUp selectAction">
+                <li> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
+                <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-shopping-cart"></i> </a></li>
+                <li> <a href="#/reportmenu"><span class="newinv">All Reports</span></a>  <a href="#/reportmenu" class=" waves-effect accent-color btn"> <i class="fa fa-th-list"></i> </a></li>
+                <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
+            </ul>
+        </div>
     </div>
-</div>
 
 
 
 
-<script>
-    $('.myLinkToTop').click(function () {
-        $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
-        return false;
-    });
+    <script>
+        $('.myLinkToTop').click(function () {
+            $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
+            return false;
+        });
 
-    $('.myMenuLink').click(function () {
-        $('html, body').animate({ scrollTop: 0 }, 'slow');
-        return false;
-    });
-</script>
-<script>
+        $('.myMenuLink').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 'slow');
+            return false;
+        });
+    </script>
+    <script>
 
-    var offset = 50;
-    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
-    var offset_opacity = 1200;
-    //duration of the top scrolling animation (in ms)
-    var scroll_top_duration = 700;
-    //grab the "back to top" link
-    var $back_to_top = $('.cd-top');
+        var offset = 50;
+        //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+        var offset_opacity = 1200;
+        //duration of the top scrolling animation (in ms)
+        var scroll_top_duration = 700;
+        //grab the "back to top" link
+        var $back_to_top = $('.cd-top');
 
-    function scrollToTop() {
+        function scrollToTop() {
 
-        $('html, body').animate({ scrollTop: 0 }, 500, 'linear');
-    }
-
-
-
-    $(window).scroll(function () {
-        ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
-        if ($(this).scrollTop() > offset_opacity) {
-            $back_to_top.addClass('cd-fade-out');
+            $('html, body').animate({ scrollTop: 0 }, 500, 'linear');
         }
-    });
-</script>
+
+
+
+        $(window).scroll(function () {
+            ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+            if ($(this).scrollTop() > offset_opacity) {
+                $back_to_top.addClass('cd-fade-out');
+            }
+        });
+    </script>
 
 
 
@@ -341,3 +341,15 @@
 
 
 
+
+
+    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div style="background:#fff;" class="modal-header" id="modalheader">
+            <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
+            <h4>Image</h4>
+        </div>
+        <div class="modal-body" style="text-align:center">
+            <img src="" id="imagepreview" style="max-height:250px;max-width:250px;">
+        </div>
+
+    </div>

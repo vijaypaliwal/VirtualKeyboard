@@ -87,6 +87,13 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
         }
     }
 
+
+    $scope.OpenImageModal = function (Object,Name) {
+        $("#imagemodal").modal('show');
+        $("#modalheader").find("h4").html(Name);
+        $("#imagepreview").attr("src", Object);
+    }
+
     $scope.isFurtherCalculatedColumn=function(ColumnName)
     {
         for (var i = 0; i < $scope.Columns.length; i++) {

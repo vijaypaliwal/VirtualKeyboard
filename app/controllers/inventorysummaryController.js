@@ -1257,6 +1257,12 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
 
     }
 
+    $scope.OpenImageModal = function (Object, Name) {
+        $("#imagemodal").modal('show');
+        $("#modalheader").find("h4").html(Name);
+        $("#imagepreview").attr("src", Object);
+    }
+
     function init() {
         $scope.getuom();
         $scope.getstatus();

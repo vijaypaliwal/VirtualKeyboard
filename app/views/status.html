@@ -1,6 +1,48 @@
 ﻿
 <link href="css/settingmenu.css" rel="stylesheet" />
 
+<style>
+    .text.btn-success {
+        height: 35px;
+        width: 35px;
+        line-height: 35px;
+        border-radius: 100%;
+        padding: 0px;
+        text-align: center;
+    }
+    .list-group-item {
+        background-color: #e2e2e2;
+    }
+
+    .list-group-item {
+        padding: 12px !important;
+        border: transparent;
+        border-bottom: 2px solid #d8d8d8;
+        border-left: 3px solid #2196F3;
+    }
+
+
+        .list-group-item a {
+            font-size: 17px;
+        }
+
+    .text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-inline-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+        margin-bottom: 0;
+        font-size: 17px;
+        line-height: 33px;
+    }
+
+    .left-border {
+        border-left: 3px solid #FF4081;
+    }
+</style>
+
 <div class="title-header">
 
     <div class="row">
@@ -31,16 +73,21 @@
             <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
                 <img src="img/loader.gif" alt="Alternate Text" />
 
-                <!--<i style="font-size: 100px; color: #0083C7; " class="fa fa-spin fa-spinner"></i>-->
+           
             </div>
         </div>
 
         <ul class="list-group">
-            <li class="list-group-item" ng-init="FilterRecordsLength.length=(StatusList | filter:SearchData.test).length" ng-repeat="obj in filteredBars = (StatusList | filter:SearchData.test)" ng-if="obj.StatusValue != ''">
+            <li ng-class="{'left-border': $index % 2 === 0 }" class="list-group-item" ng-init="FilterRecordsLength.length=(StatusList | filter:SearchData.test).length" ng-repeat="obj in filteredBars = (StatusList | filter:SearchData.test)" ng-if="obj.StatusValue != ''">
 
                 <div class="row">
-                    <div class="col-xs-7">
-                        <a>{{obj.StatusValue}}</a>
+                    <div class="col-xs-2">
+                        <a class="btn text btn-success">{{$index+1}}</a>
+                    </div>
+
+
+                    <div class="col-xs-5">
+                        <a class="text">{{obj.StatusValue}}</a>
                     </div>
                     <div class="col-xs-5">
                         <a ng-click="deletestatus(obj)" id="Delete_{{obj.StatusId}}" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:0px;" class="btn btn-danger pull-right">
