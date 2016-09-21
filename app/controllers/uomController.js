@@ -38,6 +38,8 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
         $scope.UomID = 0;
         $scope.UOMToCreate = "";
         $scope.mode = 2;
+        $(".clickable-button").addClass("clicked");
+        $(".layered-content").addClass("active");
         $scope.$apply();
 
     }
@@ -254,6 +256,8 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
     }
 
     $scope.leaveform = function () {
+        $(".clickable-button").removeClass("clicked");
+        $(".layered-content").removeClass("active");
         $scope.mode = 1;
         $scope.$apply();
     }
