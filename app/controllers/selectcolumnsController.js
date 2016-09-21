@@ -316,7 +316,7 @@ app.directive('customSwipe', [
                     $(element).swipe({
                         swipe: function (event, direction, distance, duration, fingerCount) {
                             //This only fires when the user swipes left
-
+                            alert("Swipe");
                             
                             alert(direction);
                             setTimeout(function () {
