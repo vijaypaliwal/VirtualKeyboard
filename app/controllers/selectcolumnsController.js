@@ -337,7 +337,7 @@ app.directive('customSwipe', [
 
                             },10)
                         },
-                        threshold: 50
+                        threshold: 10
                     });
                 }
             };
