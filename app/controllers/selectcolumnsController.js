@@ -320,20 +320,20 @@ app.directive('customSwipe', [
                             
                             alert(direction);
                             setTimeout(function () {
+                                element.find("input").trigger("click");
+                                //if (direction == "right" || direction == "up") {
 
-                                if (direction == "right" || direction == "up") {
+                                //    element.find("input").prop("checked", "checked");
+                                //    element.find("input").prop("checked", true);
 
-                                    element.find("input").prop("checked", "checked");
-                                    element.find("input").prop("checked", true);
+                                //}
+                                //else if (direction == "left" || direction == "down") {
+                                //    element.find("input").prop("checked", false);
+                                //    element.find("input").removeAttr("checked");
 
-                                }
-                                else if (direction == "left" || direction == "down") {
-                                    element.find("input").prop("checked", false);
-                                    element.find("input").removeAttr("checked");
+                                //}
 
-                                }
-
-                                element.find("input").trigger("change");
+                                //element.find("input").trigger("change");
 
                             },10)
                         },
