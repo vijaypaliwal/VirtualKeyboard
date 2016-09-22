@@ -80,7 +80,7 @@
         </div>
 
         <ul class="list-group">
-            <li ng-class="{'left-border': $index % 2 === 0 }" class="list-group-item" ng-init="FilterRecordsLength.length=(UOMList | filter:SearchData.test).length" ng-repeat="obj in filteredBars = (UOMList | filter:SearchData.test)" ng-if="obj.UnitOfMeasureName != ''">
+            <li id="Dlt_{{obj.UnitOfMeasureID}}" ng-class="{'left-border': $index % 2 === 0 }" class="list-group-item" ng-init="FilterRecordsLength.length=(UOMList | filter:SearchData.test).length" ng-repeat="obj in filteredBars = (UOMList | filter:SearchData.test)" ng-if="obj.UnitOfMeasureName != ''">
                 <div class="row">
                     <div class="col-xs-2">
                         <a class="btn text btn-success accent-color">{{$index+1}}</a>
@@ -97,9 +97,6 @@
                         </a>
                     </div>
                 </div>
-
-
-
             </li>
         </ul>
     </div>

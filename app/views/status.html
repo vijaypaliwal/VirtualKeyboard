@@ -78,7 +78,7 @@
         </div>
 
         <ul class="list-group">
-            <li ng-class="{'left-border': $index % 2 === 0 }" class="list-group-item" ng-init="FilterRecordsLength.length=(StatusList | filter:SearchData.test).length" ng-repeat="obj in filteredBars = (StatusList | filter:SearchData.test)" ng-if="obj.StatusValue != ''">
+            <li id="Dlt_{{obj.StatusId}}" ng-class="{'left-border': $index % 2 === 0 }" class="list-group-item" ng-init="FilterRecordsLength.length=(StatusList | filter:SearchData.test).length" ng-repeat="obj in filteredBars = (StatusList | filter:SearchData.test)" ng-if="obj.StatusValue != ''">
 
                 <div class="row">
                     <div class="col-xs-2">

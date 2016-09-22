@@ -1133,7 +1133,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               contentType: 'application/json; charset=utf-8',
 
               dataType: 'json',
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken,"ConsidermobileOrder":true }),
               success: function (response) {
 
                   if (response.GetAllDataResult.Success == true) {

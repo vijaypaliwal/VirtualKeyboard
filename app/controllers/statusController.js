@@ -211,6 +211,9 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
         var id = obj.StatusId;
          
         var _id = "#Delete_" + id;
+
+        var dlID = "#Dlt_" + id;
+
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {
                 $(_id).find("i").addClass("fa-spin");
@@ -227,8 +230,9 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
                         if (result.DeleteStatusResult.Success == true) {
                        
 
-                        if (result.DeleteStatusResult.Payload == 1) {
-                            ShowSuccess("Deleted");
+                            if (result.DeleteStatusResult.Payload == 1) {
+                                $(dlID).addClass("animated fadeOutRight")
+                                 ShowSuccess("Deleted");
 
                         }
 
@@ -246,11 +250,6 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
                             $scope.ShowErrorMessage("Deleting status", 1, 1, result.DeleteStatusResult.Message)
 
                         }
-
-
-
-
-
 
                      
 

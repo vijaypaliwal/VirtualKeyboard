@@ -16,7 +16,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     $scope.isDataLoading = true;
     $scope.Columns = [];
 
-
+    $scope.HasImage = "";
     var _IsLazyLoadingUnderProgress = 0;
     var _PageSize = 30;
     var _sortColumn = "iLastITID";
@@ -140,7 +140,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         for (var i = 0; i < $scope.FilterArray.length; i++) {
             $scope.FilterArray[i].SearchValue = "";
         }
-
+        $scope.ClearImageFilter();
         $scope.FilterData.SearchValue = "";
         CheckScopeBeforeApply();
         $scope.GetInventoryDataAccordingToView();
@@ -833,6 +833,14 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         $("#filtermodal").modal("show")
     }
 
+    $scope.ClearImageFilter=function()
+    {
+        $scope.HasImage = "";
+
+        CheckScopeBeforeApply();
+    }
+
+
     // get data according to selected view 
     $scope.GetInventoryDataAccordingToView=function()
     {
@@ -883,7 +891,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
               ({
                   type: "POST",
                   url: serviceBase + 'GetCurrentInventoriesNew',
-                  data: JSON.stringify({ SecurityToken: $scope.SecurityToken, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray, SelectedCartIDs: [], masterSearch: $scope.FilterData.SearchValue, showImage: "True", showZeroRecords: "True", PageSize: _PageSize, IsDateColumnOn: false, ViewID: $scope.CurrentView.GridLayoutID }),
+                  data: JSON.stringify({ SecurityToken: $scope.SecurityToken,HasImage:$scope.HasImage, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray, SelectedCartIDs: [], masterSearch: $scope.FilterData.SearchValue, showImage: "True", showZeroRecords: "True", PageSize: _PageSize, IsDateColumnOn: false, ViewID: $scope.CurrentView.GridLayoutID }),
                   contentType: 'application/json',
                   dataType: 'json',
                   success: function (response) {

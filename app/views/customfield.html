@@ -1,0 +1,262 @@
+﻿<link href="css/setting.css" rel="stylesheet" />
+<link href="css/mobileorder.css" rel="stylesheet" />
+
+<style>
+
+    .infoareas
+    {
+        background:white;
+    }
+    .infoareas {
+        padding-top: 5px ;
+        padding-bottom: 5px;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 33px;
+            width: 35px;
+            left: -1px;
+            border: 1px solid #ccc;
+            bottom: 0px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+     .unitbadge {
+        height: 15px;
+        width: 15px;
+        background-color: #e99002;
+        float: left;
+        margin-right: 3px;
+        margin-bottom: 3px;
+    }
+
+    .activitybadge {
+        height: 15px;
+        width: 15px;
+        background-color: #FF4081;
+        float: left;
+        margin-right: 3px;
+        margin-bottom: 3px;
+    }
+
+    .decreasebadge {
+        height: 15px;
+        width: 15px;
+        background-color: #f04124;
+        float: left;
+        margin-right: 3px;
+        margin-bottom: 3px;
+    }
+
+    .increasebadge {
+        height: 15px;
+        width: 15px;
+        background-color: #43ac6a;
+        float: left;
+        margin-right: 3px;
+        margin-bottom: 3px;
+    }
+
+    .top45 {
+        padding-top: 45px;
+    }
+
+    .activityinfo {
+        background: #f1f1f1;
+        padding: 7px;
+        color: #5d5a5a;
+        font-size: 12px;
+    }
+    table tr
+    {
+        border-bottom:transparent;
+    }
+    .switch1
+    {
+        margin-bottom:0px;
+    }
+
+    .text
+    {
+      line-height:32px;
+    }
+</style>
+
+
+<div class="title-header">
+    <div class="row">
+        <div class="col-xs-12">
+            <h4 class="titletext">Manage Custom Fields</h4>
+        </div>
+    </div>
+</div>
+<a href="#/setting" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
+
+<div class="top45">
+
+    <div class="activityinfo">
+
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="unitbadge"></div> Unit data fields
+            </div>
+            <div class="col-xs-6">
+             
+                    <div class="decreasebadge"></div> Decrease fields
+           
+              
+            </div>
+        </div>
+
+        <div class="row">
+            
+            <div class="col-xs-6">
+                <div class="activitybadge"></div> Activity fields
+               
+            </div>
+            <div class="col-xs-6">
+             
+                    <div class="increasebadge"></div> Increase fields
+             
+             
+            </div>
+        </div>
+    </div>
+
+    <table class="table gridTable table-striped bs-item">
+
+
+        <tbody>
+            <tr>
+                <td>
+                    <h5>Unit Data Columns </h5>
+                </td>
+            </tr>
+            <tr ng-repeat="_obj in UnitDataColumns">
+                <td>
+                    <div class="infoareas">
+
+                        <div class="row">
+
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning ng-binding">{{$index+1}} </a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ng-binding">{{_obj.ColumnLabel}} </a>
+                            </div>
+                            <div class="col-xs-4" custom-swipe>
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+
+                                        <input type="checkbox" ng-change="UpdateUnitData(_obj.RowID,_obj.originalMobileOrder)" ng-model="_obj.originalMobileOrder">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>Custom Item Columns </h5>
+                </td>
+            </tr>
+
+            <tr ng-repeat="_obj in LocalItemFieldsList" ng-if="_obj.CustomFieldType=='Part'">
+                <td>
+                    <div class="infoareas">
+
+                        <div class="row">
+
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning {{GetClass($index)}}">{{$index +3 }} </a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ng-binding">{{_obj.Name}} </a>
+                            </div>
+                            <div class="col-xs-4" custom-swipe>
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+                                        <input type="checkbox" ng-model="_obj.IsActive">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h5>Custom Activity Columns </h5>
+                </td>
+            </tr>
+            <tr ng-repeat="_obj in LocalItemFieldsList" ng-if="_obj.CustomFieldType=='Inventory'">
+               
+                <td>
+                    <div class="infoareas">
+
+                        <div class="row">
+
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning {{GetClass($index)}}">{{$index +3 }} </a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ng-binding">{{_obj.Name}} </a>
+                            </div>
+                            <div class="col-xs-4" custom-swipe>
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+                                        <input type="checkbox" ng-model="_obj.IsActive">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+            
+        </tbody>
+
+
+    </table>
+</div>
+
+<a ng-click="Openbottommenu()" class="menubtn waves-effect">
+    <i class="fa fa-bars"></i>
+</a>
+
+<div id="bottommenumodal" class="modal bottommenu fade">
+    <div class="modal-body">
+        <ul class="animated slideInUp selectAction">
+            <li> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
+            <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-map-marker"></i> </a></li>
+            <li> <a href="#/reportmenu"><span class="newinv">Go to Report</span></a>  <a href="#/Go to Report" class=" waves-effect btn-primary btn"> <i class="fa fa-check-circle-o"></i> </a></li>
+            <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
+        </ul>
+    </div>
+</div>

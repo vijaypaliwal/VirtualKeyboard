@@ -358,6 +358,9 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
         var id = obj.LocationID;
 
         var _id = "#Delete_" + id;
+
+        var dlID = "#Dlt_" + id;
+
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {
                 $(_id).find("i").addClass("fa-spin");
@@ -373,8 +376,16 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
                         $(_id).find("i").removeClass("fa-spin");
                         if (result.DeleteLocationResult.Payload == 1) {
+
+                            $(dlID).addClass("animated fadeOutRight")
+
                             ShowSuccess("Deleted");
-                            $scope.GetLocations();
+
+                            setTimeout(function () {
+                                $scope.GetLocations();
+                            }, 400)
+
+                         
 
                         }
 

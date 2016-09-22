@@ -565,7 +565,7 @@
         margin-bottom: 7px;
         line-height: 45px;
         width: 135px;
-        text-align: center;
+    
         color: #fff;
         cursor: pointer;
         border-radius: 45px;
@@ -581,12 +581,14 @@
     
      #activitytype .col-xs-6 div i {
         font-size: 21px;
+        margin-left:11px;
     }
 
 
         #activitytype .col-xs-6 div span {
             margin-left: 12px;
             font-size: 12px;
+            margin-left:47px;
         }
 
 

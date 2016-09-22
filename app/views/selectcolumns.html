@@ -47,16 +47,18 @@
                                 <a class="text">{{obj.ColumnLabel}} </a>
                             </div>
                             <div class="col-xs-4" custom-swipe>
-                                <div class="btn-group custombtnGroup">
+                                <div ng-if="obj.ColumnLabel != 'Item Name'" class="btn-group custombtnGroup">
 
                                     <label class="switch1">
                                         <input type="checkbox" ng-model="obj.originalMobileOrder">
                                         <div class="slider round"></div>
                                     </label>
-
                                     <!--<input ng-model="obj.originalMobileOrder"  type="checkbox" bootstrap-switch />-->
 
+                                </div>
 
+                                <div class="pull-right" ng-if="obj.ColumnLabel == 'Item Name'">
+                                    <p style="color:brown;">*Required</p>
                                 </div>
                             </div>
                         </div>

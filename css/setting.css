@@ -41,3 +41,49 @@
         background: #eaeaea;
         overflow-x: hidden !important;
     }
+
+       .unitbadge {
+        height: 15px;
+        width: 15px;
+        background-color: #e99002;
+        float: left;
+        margin-right: 3px;
+        margin-bottom: 3px;
+    }
+    .activitybadge {
+        height: 15px;
+        width: 15px;
+        background-color: #FF4081;
+        float: left;
+        margin-right: 3px;
+        margin-bottom: 3px;
+    }
+
+    .decreasebadge {
+        height: 15px;
+        width: 15px;
+        background-color: #f04124;
+        float: left;
+        margin-right: 3px;
+        margin-bottom: 3px;
+    }
+
+    .increasebadge {
+        height: 15px;
+        width: 15px;
+        background-color: #43ac6a;
+        float: left;
+        margin-right: 3px;
+        margin-bottom: 3px;
+    }
+    .top45
+    {
+        padding-top:45px;
+    }
+    .activityinfo {
+        background: #f1f1f1;
+        padding: 7px;
+        color: #5d5a5a;
+         font-size:12px;
+
+    }

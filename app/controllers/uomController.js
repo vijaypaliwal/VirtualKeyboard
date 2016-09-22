@@ -38,8 +38,7 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
         $scope.UomID = 0;
         $scope.UOMToCreate = "";
         $scope.mode = 2;
-        $(".clickable-button").addClass("clicked");
-        $(".layered-content").addClass("active");
+       
         $scope.$apply();
 
     }
@@ -147,6 +146,9 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
                 success: function (result) {
                     $scope.IsProcessing = false;
 
+
+                    debugger;
+
                     if (result.CreateEditUOMResult.Success == true) {
 
                         if (result.CreateEditUOMResult.Payload == 1) {
@@ -201,6 +203,8 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
 
         var _id = "#Delete_" + id;
 
+        var dlID = "#Dlt_" + id;
+
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {
 
@@ -219,6 +223,9 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
 
 
                             if (result.DeleteUOMResult.Payload == 1) {
+
+                                $(dlID).addClass("animated fadeOutRight")
+
                                 ShowSuccess("Deleted");
 
                             }
@@ -229,9 +236,13 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
 
                             }
 
-                            $scope.getuom();
+                            setTimeout(function() {
+                                $scope.getuom();
 
-                            $scope.mode = 1;
+                                $scope.mode = 1;
+                            },400)
+
+                        
                         }
                         else {
                             $scope.ShowErrorMessage("Deleting UOM", 1, 1, result.DeleteUOMResult.Message)
@@ -256,8 +267,7 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
     }
 
     $scope.leaveform = function () {
-        $(".clickable-button").removeClass("clicked");
-        $(".layered-content").removeClass("active");
+        
         $scope.mode = 1;
         $scope.$apply();
     }
