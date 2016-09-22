@@ -20,6 +20,7 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
     var _TotalRecordsCurrent = 0;
     var _masterSearch = "";
     $scope.loadingblock = false;
+    $scope.HasImage = "";
     function getIncrementor(_Total) {
         if (_Total <= 100) {
             return 10;
@@ -129,12 +130,16 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
             $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
         }
     }
+    $scope.ClearImageFilter = function () {
+        $scope.HasImage = "";
 
+        CheckScopeBeforeApply();
+    }
     $scope.clearfilterArray = function () {
         for (var i = 0; i < $scope.FilterArray.length; i++) {
             $scope.FilterArray[i].SearchValue = "";
         }
-
+        $scope.ClearImageFilter();
         $scope.FilterData.SearchValue = "";
         CheckScopeBeforeApply();
         $scope.GetItemsDataAccordingToView();
@@ -803,7 +808,7 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
               ({
                   type: "POST",
                   url: serviceBase + 'GetAllItems',
-                  data: JSON.stringify({ SecurityToken: $scope.SecurityToken, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray,  masterSearch: $scope.FilterData.SearchValue,  PageSize: _PageSize, ViewID: $scope.CurrentView.GridLayoutID }),
+                  data: JSON.stringify({ SecurityToken: $scope.SecurityToken,HasImage:$scope.HasImage, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray,  masterSearch: $scope.FilterData.SearchValue,  PageSize: _PageSize, ViewID: $scope.CurrentView.GridLayoutID }),
                   contentType: 'application/json',
                   dataType: 'json',
                   success: function (response) {
@@ -955,3 +960,37 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
 
     init();
 }]);
+
+
+app.directive('bootstrapSwitch', [
+        function () {
+            return {
+                restrict: 'A',
+                require: '?ngModel',
+                link: function (scope, element, attrs, ngModel) {
+                    var _id = element[0].id;
+
+
+                    element.bootstrapSwitch({
+                        onText: _id == 'AutoID' ? 'Auto' : 'On',
+                        offText: _id == 'AutoID' ? 'Manual' : 'Off'
+                    });
+                    element.on('switchChange.bootstrapSwitch', function (event, state) {
+                        if (ngModel) {
+                            scope.$apply(function () {
+                                ngModel.$setViewValue(state);
+                            });
+                        }
+                    });
+
+                    scope.$watch(attrs.ngModel, function (newValue, oldValue) {
+                        if (newValue) {
+                            element.bootstrapSwitch('state', true, true);
+                        } else {
+                            element.bootstrapSwitch('state', false, true);
+                        }
+                    });
+                }
+            };
+        }
+]);
