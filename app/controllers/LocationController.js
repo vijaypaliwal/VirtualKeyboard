@@ -25,6 +25,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
     };
 
     $scope.mode = 1;
+    $scope.check = false;
 
 
     $('#bottommenumodal').on('hidden.bs.modal', function () {
@@ -66,6 +67,12 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
     }
 
 
+    $scope.keepformopen = function (check) {
+
+
+        $scope.check = check;
+        $scope.$apply();
+    }
 
 
 
@@ -296,17 +303,37 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                     if (result.CreateEditLocationResult.Payload == 1) {
                         if ($scope.mode == 2) {
                             ShowSuccess("Added");
+
+                            if ($scope.check == true || $scope.check == "true") {
+                                $scope.mode = 2;
+                                $scope.IsProcessing = false;
+                                $scope.locationdata.LocationName = "";
+                                $scope.locationdata.LocationZone = "";
+                                $scope.locationdata.LocationDescription = "";
+                                $('#loc').focus();
+                                $scope.$apply();
+                            
+                                $('#loc').focus();
+
+                            }
+                            else {
+                                $scope.mode = 1;
+                                $scope.GetLocations();
+                            }
+
                         }
 
                         if ($scope.mode == 3) {
                             ShowSuccess("Updated");
+                            $scope.mode = 1;
+                            $scope.GetLocations();
                         }
 
 
 
 
 
-                        $scope.mode = 1;
+                      
 
                         $scope.SearchData.SearchValue = "";
                         $scope.FilterArray[0].SearchValue = "";
@@ -315,7 +342,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
                         CheckScopeBeforeApply();
 
-                        $scope.GetLocations();
+                      
 
                     }
 
@@ -429,6 +456,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
     }
     $scope.leaveform = function () {
         $scope.mode = 1;
+        $scope.GetLocations();
         $scope.$apply();
     }
 

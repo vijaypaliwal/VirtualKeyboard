@@ -8,6 +8,8 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
     $scope.LocationsLoaded = false;
 
     $scope.CurrentID = "";
+    $scope.check = false;
+
     $scope.mainObjectToSend = [];
     function init() {
         $scope.getuom();
@@ -25,6 +27,14 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
         $scope.SearchData = { test: "" };
         $scope.$apply();
     }
+
+    $scope.keepformopen = function (check) {
+
+     
+        $scope.check = check;
+        $scope.$apply();
+    }
+
 
     $scope.logOut = function () {
 
@@ -147,22 +157,38 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
                     $scope.IsProcessing = false;
 
 
-                    debugger;
-
                     if (result.CreateEditUOMResult.Success == true) {
 
                         if (result.CreateEditUOMResult.Payload == 1) {
                             if ($scope.mode == 2) {
                                 ShowSuccess("Added");
+
+
+                                if ($scope.check == true || $scope.check == "true") {
+                                    $scope.mode = 2;
+                                    $scope.IsProcessing = false;
+                                    $('#UOMToCreate').val("");
+                                    $('#UOMToCreate').focus();
+                                    $scope.$apply();
+                                    $('#UOMToCreate').val("");
+                                    $('#UOMToCreate').focus();
+                                 
+                                }
+                                else {
+                                    $scope.getuom();
+                                    $scope.mode = 1;
+                                }
                             }
+
+                      
 
                             if ($scope.mode == 3) {
                                 ShowSuccess("Updated");
+                                $scope.getuom();
+                                $scope.mode = 1;
                             }
 
-                            $scope.getuom();
-
-                            $scope.mode = 1;
+                        
 
                         }
 
@@ -269,6 +295,7 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
     $scope.leaveform = function () {
         
         $scope.mode = 1;
+        $scope.getuom();
         $scope.$apply();
     }
     init();

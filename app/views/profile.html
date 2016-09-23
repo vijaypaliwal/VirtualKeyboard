@@ -41,7 +41,7 @@
         </div>
 
 
-        <div style="margin-top:55px;" class="container">
+        <div class="container">
             <h4>Active account - {{CurrentAccount}} </h4>
             <h4>  {{emailLabel}}</h4>
             <h4>{{organizationLabel}}</h4>
@@ -49,11 +49,22 @@
         </div>
     </div>
 
-    <div class="editmode" style="padding:15px; display:none; text-align:left">
+    <div class="editmode" style="padding:10px; padding-top:0px; display:none; text-align:left">
 
-        <h4>Update Profile</h4>
+        <div class="title-header">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4 class="titletext">Update <small>Profile details</small> </h4>
+                </div>
+            </div>
+        </div>
+
+        <a ng-click="detailmode()" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
+
+      
 
         <form name="myForm">
+            <br /><br /><br />
 
             <div class="form-group">
                 <label>Name <span>*</span></label>

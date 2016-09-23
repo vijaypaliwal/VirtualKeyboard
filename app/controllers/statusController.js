@@ -14,6 +14,7 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
     $scope.FilterRecordsLength = { length: 0 };
     $scope.filteredBars = [];
     $scope.SearchData = { test: "" };
+    $scope.check = false;
 
 
     $scope.ClearFilter=function()
@@ -34,6 +35,14 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
 
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
+
+
+    $scope.keepformopen = function (check) {
+
+
+        $scope.check = check;
+        $scope.$apply();
+    }
 
 
     $scope.logOut = function () {
@@ -162,14 +171,29 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
                     if (result.CreateEditStatusResult.Payload == 1) {
                         if ($scope.mode == 2) {
                             ShowSuccess("Added");
+                            if ($scope.check == true || $scope.check == "true") {
+                                $scope.mode = 2;
+                                $scope.IsProcessing = false;
+                                $('#StatusToCreate').val("");
+                                $('#StatusToCreate').focus();
+                                $scope.$apply();
+                                $('#StatusToCreate').val("");
+                                $('#StatusToCreate').focus();
+
+                            }
+                            else {
+                                $scope.getstatus();
+                                $scope.mode = 1;
+                            }
                         }
 
                         if ($scope.mode == 3) {
                             ShowSuccess("Updated");
+                            $scope.getstatus();
+                            $scope.mode = 1;
                         }
 
-                        $scope.getstatus();
-                        $scope.mode = 1;
+                    
 
                     }
 
@@ -274,6 +298,7 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
 
     $scope.leaveform = function() {
         $scope.mode = 1;
+        $scope.getstatus();
         $scope.$apply();
     }
 
