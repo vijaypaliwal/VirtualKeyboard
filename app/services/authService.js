@@ -50,7 +50,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
             url: serviceBase + 'Login',
             contentType: 'application/json; charset=utf-8',
             dataType: 'text json',
-            timeout:10000,
+           
             data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),
             success: function (response) {
 
