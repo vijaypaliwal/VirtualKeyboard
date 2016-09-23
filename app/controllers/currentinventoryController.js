@@ -891,7 +891,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
               ({
                   type: "POST",
                   url: serviceBase + 'GetCurrentInventoriesNew',
-                  data: JSON.stringify({ SecurityToken: $scope.SecurityToken,HasImage:$scope.HasImage, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray, SelectedCartIDs: [], masterSearch: $scope.FilterData.SearchValue, showImage: "True", showZeroRecords: "True", PageSize: _PageSize, IsDateColumnOn: false, ViewID: $scope.CurrentView.GridLayoutID }),
+                  data: JSON.stringify({ SecurityToken: $scope.SecurityToken, HasImage:$scope.HasImage, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray, SelectedCartIDs: [], masterSearch: $scope.FilterData.SearchValue, showImage: "True", showZeroRecords: "True", PageSize: _PageSize, IsDateColumnOn: false, ViewID: $scope.CurrentView.GridLayoutID }),
                   contentType: 'application/json',
                   dataType: 'json',
                   success: function (response) {

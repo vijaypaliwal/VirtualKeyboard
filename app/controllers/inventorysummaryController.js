@@ -1064,9 +1064,6 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
 
                 }
 
-
-
-
             }, 1000);
 
             $.ajax
@@ -1320,6 +1317,39 @@ app.directive('bootstrapSwitch', [
                         } else {
                             element.bootstrapSwitch('state', false, true);
                             element.removeClass("bootstrap-switch-on").addClass("bootstrap-switch-off");
+                        }
+                    });
+                }
+            };
+        }
+]);
+
+app.directive('bootstrapSwitch', [
+        function () {
+            return {
+                restrict: 'A',
+                require: '?ngModel',
+                link: function (scope, element, attrs, ngModel) {
+                    var _id = element[0].id;
+
+
+                    element.bootstrapSwitch({
+                        onText: _id == 'AutoID' ? 'Auto' : 'On',
+                        offText: _id == 'AutoID' ? 'Manual' : 'Off'
+                    });
+                    element.on('switchChange.bootstrapSwitch', function (event, state) {
+                        if (ngModel) {
+                            scope.$apply(function () {
+                                ngModel.$setViewValue(state);
+                            });
+                        }
+                    });
+
+                    scope.$watch(attrs.ngModel, function (newValue, oldValue) {
+                        if (newValue) {
+                            element.bootstrapSwitch('state', true, true);
+                        } else {
+                            element.bootstrapSwitch('state', false, true);
                         }
                     });
                 }
