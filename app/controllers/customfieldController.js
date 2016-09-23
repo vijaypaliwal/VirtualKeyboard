@@ -134,7 +134,8 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
     function CheckIntoAvailableActivityColumns(cmap) {
         for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
             if ($scope.CustomActivityDataList[i].ColumnMap == cmap) {
-                if ($scope.MyinventoryFields[i].cfdmobileorder != 0) {
+                if ($scope.CustomActivityDataList[i].cfdmobileorder != 0) {
+                    console.log(cmap);
                     return true;
                 }
                 else { return false; }
@@ -149,6 +150,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
             $scope.LocalItemFieldsList[0].columnmap = _itemField.ColumnMap;
             $scope.LocalItemFieldsList[0].cfdid = _itemField.cfdID;
             $scope.LocalItemFieldsList[0].IsActive = CheckIntoAvailableMyinventoryColumns(_itemField.ColumnMap);
+            CheckScopeBeforeApply();
         }
         else {
             $scope.LocalItemFieldsList[0].columnmap = GetColumnMap("string", 1);
@@ -160,7 +162,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
             $scope.LocalItemFieldsList[1].columnmap = _ActivityField1.ColumnMap;
             $scope.LocalItemFieldsList[1].cfdid = _ActivityField1.cfdID;
             $scope.LocalItemFieldsList[1].IsActive = CheckIntoAvailableActivityColumns(_ActivityField1.ColumnMap);
-
+            CheckScopeBeforeApply();
         }
         else {
             $scope.LocalItemFieldsList[1].columnmap = GetColumnMap("string", 2);
@@ -173,6 +175,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
             $scope.LocalItemFieldsList[2].columnmap = _ActivityField2.ColumnMap;
             $scope.LocalItemFieldsList[2].cfdid = _ActivityField2.cfdID;
             $scope.LocalItemFieldsList[2].IsActive = CheckIntoAvailableActivityColumns(_ActivityField2.ColumnMap);
+            CheckScopeBeforeApply();
         }
         else {
             $scope.LocalItemFieldsList[2].columnmap = GetColumnMap("number", 2);
@@ -185,6 +188,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
             $scope.LocalItemFieldsList[3].columnmap = _ActivityField3.ColumnMap;
             $scope.LocalItemFieldsList[3].cfdid = _ActivityField3.cfdID;
             $scope.LocalItemFieldsList[3].IsActive = CheckIntoAvailableActivityColumns(_ActivityField3.ColumnMap);
+            CheckScopeBeforeApply();
         }
         else {
             $scope.LocalItemFieldsList[3].columnmap = GetColumnMap("string", 2);
@@ -195,6 +199,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
             $scope.LocalItemFieldsList[4].columnmap = _ActivityField4.ColumnMap;
             $scope.LocalItemFieldsList[4].cfdid = _ActivityField4.cfdID;
             $scope.LocalItemFieldsList[4].IsActive = CheckIntoAvailableActivityColumns(_ActivityField4.ColumnMap);
+            CheckScopeBeforeApply();
         }
         else {
             $scope.LocalItemFieldsList[4].columnmap = GetColumnMap("string", 2);
@@ -262,6 +267,65 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
     }
 
 
+
+    $scope.UpdateCustomField = function (Obj) {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        var _TempObj=angular.copy(Obj);
+        var _toSendObj={
+            CustomFieldType:_TempObj.CustomFieldType,
+            Mobileorder:_TempObj.IsActive==false?0:_TempObj.mobileorder,
+            ColumnMap:_TempObj.columnmap,
+            cfdDataType:_TempObj.Datatype,
+            Name:_TempObj.Name,
+            Description: _TempObj.description,
+            CanIncrease:_TempObj.canincrease,
+            CanDecrease:_TempObj.candecrease,
+            CanTag:_TempObj.cantag,
+            CanConvert:_TempObj.canconvert,
+            CanMove:_TempObj.canmove,
+            CanUpdate:_TempObj.canupdate,
+            cfdID:_TempObj.cfdid
+        }
+
+
+        $.ajax
+     ({
+         type: "POST",
+         url: serviceBase + 'UpdateCustomColumn',
+         contentType: 'application/json; charset=utf-8',
+         dataType: 'json',
+         data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Model": _toSendObj }),
+         success: function (response) {
+             debugger;
+             if (response.UpdateCustomColumnResult.Success == true) {
+                 setTimeout(function () {
+                     $scope.GetAllData();
+
+                 },1000);
+             }
+             else {
+                 $scope.ShowErrorMessage("Getting unit data columns", 1, 1, response.UpdateCustomColumnResult.Message)
+
+             }
+
+
+
+             CheckScopeBeforeApply();
+         },
+         error: function (err) {
+             $scope.ShowErrorMessage("Getting unit data columns", 2, 1, err.statusText);
+
+
+         }
+     });
+
+
+    }
 
     function ConverttoMsJsonDate(_DateValue) {
 
@@ -452,7 +516,9 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
                       }
                       CheckScopeBeforeApply();
 
-         
+                      console.log("Custom Data");
+                      console.log($scope.CustomActivityDataList);
+
                       updateLocalArray();
                   }
                   else {
