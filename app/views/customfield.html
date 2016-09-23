@@ -194,10 +194,7 @@
                             <div class="col-xs-6">
                                 <a class="text ng-binding">{{_obj.Name}} </a>
                             </div>
-                            <div class="col-xs-4" >
-
-                                <!--<button class="btn btn-success" ng-click="UpdateCustomField(_obj)" ng-if="_obj.IsActive==true">On</button>
-                                <button class="btn btn-danger" ng-click="UpdateCustomField(_obj)" ng-if="_obj.IsActive==false" >Off</button>-->
+                            <div class="col-xs-4" custom-swipe>
 
                                 <div class="btn-group custombtnGroup">
                                     <label class="switch1">
@@ -230,10 +227,8 @@
                             <div class="col-xs-6">
                                 <a class="text ng-binding">{{_obj.Name}} </a>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-xs-4" custom-swipe>
 
-                                <!--<button class="btn btn-success" ng-click="UpdateCustomField(_obj)" ng-if="_obj.IsActive==true">On</button>
-                                <button class="btn btn-danger" ng-click="UpdateCustomField(_obj)" ng-if="_obj.IsActive==false">Off</button>-->
                                 <div class="btn-group custombtnGroup">
                                     <label class="switch1">
                                         <input type="checkbox" ng-change="UpdateCustomField(_obj)" ng-model="_obj.IsActive">
@@ -251,6 +246,8 @@
 
 
     </table>
+
+    
 </div>
 
 <a ng-click="Openbottommenu()" class="menubtn waves-effect">

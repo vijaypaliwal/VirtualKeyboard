@@ -163,7 +163,18 @@
         </div>
 
         <div style="padding:10px;" class="modal-body">
+            <div class="row" ng-if="IsAvailableColumn('ImagePath')">
+                <div class="col-xs-12">
 
+                    Has Image
+                    <div class="checkbox">
+                        <input type="checkbox" ng-model="HasImage" bootstrap-switch>
+                    </div>
+                    <a ng-click="ClearImageFilter()" ng-if="HasImage!=''" style="text-decoration:underline">Clear Image filter</a>
+                </div>
+
+
+            </div>
             <div class="row">
                 <div class="col-xs-12">
 

@@ -121,6 +121,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
     function CheckIntoAvailableMyinventoryColumns(cmap) {
         for (var i = 0; i < $scope.MyinventoryFields.length; i++) {
             if ($scope.MyinventoryFields[i].ColumnName == cmap) {
+                
                 if ($scope.MyinventoryFields[i].mobileorder != 0) {
                     return true;
                 }
@@ -275,7 +276,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
             $scope.SecurityToken = authData.token;
         }
 
-        var _TempObj=angular.copy(Obj);
+        var _TempObj = angular.copy(Obj);
         var _toSendObj={
             CustomFieldType:_TempObj.CustomFieldType,
             Mobileorder:_TempObj.IsActive==false?0:_TempObj.mobileorder,
@@ -457,14 +458,14 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
 
                       // MY inventory column region
                       var _TempArrayMyInventory = response.GetAllDataResult.Payload[0].MyInventoryColumns;
-
+                      $scope.MyinventoryFields = [];
                       for (var i = 0; i < _TempArrayMyInventory.length; i++) {
-                          var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
-                          _TempArrayMyInventory[i].ColumnName = _ColName[0];
+                          //var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
+                          //_TempArrayMyInventory[i].ColumnName = _ColName[0];
                           $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
                       }
 
-                      CheckScopeBeforeApply()
+                      CheckScopeBeforeApply();
 
 
                       // Custom Item Field 
@@ -488,7 +489,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
                               }
                           }
                       }
-                      CheckScopeBeforeApply()
+                      CheckScopeBeforeApply();
                       // Custom Activity Field 
 
 
@@ -517,7 +518,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
                       CheckScopeBeforeApply();
 
                       console.log("Custom Data");
-                      console.log($scope.CustomActivityDataList);
+                      console.log($scope.MyinventoryFields);
 
                       updateLocalArray();
                   }

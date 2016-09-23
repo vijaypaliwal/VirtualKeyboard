@@ -18,6 +18,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     $scope.loadingblock = false;
 
 
+    $scope.HasImage = "";
     var _IsLazyLoadingUnderProgress = 0;
     var _PageSize = 30;
     var _sortColumn = "itTransDate";
@@ -192,13 +193,17 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
             $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
         }
     }
-   
+    $scope.ClearImageFilter = function () {
+        $scope.HasImage = "";
+
+        CheckScopeBeforeApply();
+    }
     // clear complete filter array
     $scope.clearfilterArray = function () {
         for (var i = 0; i < $scope.FilterArray.length; i++) {
             $scope.FilterArray[i].SearchValue = "";
         }
-
+        $scope.ClearImageFilter();
         $scope.FilterData.SearchValue = "";
         CheckScopeBeforeApply();
         $scope.GetActivityDataAccordingToView();
@@ -1202,7 +1207,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
               ({
                   type: "POST",
                   url: serviceBase + 'GetInventoryActivities',
-                  data: JSON.stringify({ SecurityToken: $scope.SecurityToken, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray, masterSearch: _searchParameter, PageSize: _PageSize, ViewID: $scope.CurrentView.GridLayoutID }),
+                  data: JSON.stringify({ SecurityToken: $scope.SecurityToken,HasImage:$scope.HasImage, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray, masterSearch: _searchParameter, PageSize: _PageSize, ViewID: $scope.CurrentView.GridLayoutID }),
                   contentType: 'application/json',
                   dataType: 'json',
                   success: function (response) {

@@ -439,11 +439,9 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                     },
                     complete: function () {
                     }
-
                 });
             }
         });
-
     }
 
 
@@ -451,7 +449,6 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
         if (_string != null && _string != undefined) {
             _string = $.trim(_string);
         }
-
         return _string;
     }
     $scope.leaveform = function () {
@@ -460,8 +457,8 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
         $scope.$apply();
     }
 
-    function init() {
-
+    function init()
+    {
         $scope.GetLocations();
         $scope.SearchData.SearchValue = "";
         $scope.$apply();

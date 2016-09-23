@@ -15,6 +15,7 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
     var _sortColumn = "iLastITID";
     var _sortDir = "DESC";
     $scope.isviewload = false;
+    $scope.HasImage = "";
     var _IsLazyLoadingUnderProgress = 0;
     var _PageSize = 30;
     $scope.Columns = [];
@@ -85,6 +86,8 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
         }
     }
 
+
+
     $scope.isFurtherCalculatedColumn = function (ColumnName) {
         for (var i = 0; i < $scope.Columns.length; i++) {
             if ($scope.Columns[i].ColumnID == ColumnName) {
@@ -119,12 +122,19 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
         }
     }
 
+    $scope.ClearImageFilter = function () {
+        $scope.HasImage = "";
+
+        CheckScopeBeforeApply();
+    }
+
     $scope.clearfilterArray = function () {
         for (var i = 0; i < $scope.FilterArray.length; i++) {
             $scope.FilterArray[i].SearchValue = "";
         }
 
         $scope.FilterData.SearchValue = "";
+        $scope.ClearImageFilter();
         CheckScopeBeforeApply();
         $scope.GetInventoryGroupedDataAccordingToView();
     }
@@ -1063,7 +1073,7 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
               ({
                   type: "POST",
                   url: serviceBase + 'GetCurrentInventoriesGrouped',
-                  data: JSON.stringify({ SecurityToken: $scope.SecurityToken, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray, SelectedCartIDs: [], masterSearch: $scope.FilterData.SearchValue, showImage: "True", showZeroRecords: "True", PageSize: _PageSize, IsDateColumnOn: false, ViewID: $scope.CurrentView.GridLayoutID }),
+                  data: JSON.stringify({ SecurityToken: $scope.SecurityToken, HasImage: $scope.HasImage, pageToReturn: 1, sortCol: _sortColumn, sortDir: _sortDir, filterArray: $scope.FilterArray, SelectedCartIDs: [], masterSearch: $scope.FilterData.SearchValue, showImage: "True", showZeroRecords: "True", PageSize: _PageSize, IsDateColumnOn: false, ViewID: $scope.CurrentView.GridLayoutID }),
                   contentType: 'application/json',
                   dataType: 'json',
                   success: function (response) {
