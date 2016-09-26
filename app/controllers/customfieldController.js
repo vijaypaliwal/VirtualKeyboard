@@ -86,14 +86,14 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
 
     $scope.searchData = function (item) {
         debugger;
-        if (!$scope.SearchString || (item.ColumnLabel.toLowerCase().indexOf($scope.SearchString) != -1) || (item.Show.toLowerCase().indexOf($scope.SearchString.toLowerCase()) != -1)) {
+        if (!$scope.SearchString || (item.ColumnLabel.toLowerCase().indexOf($scope.SearchString.toLowerCase()) != -1) || (item.Show.toLowerCase().indexOf($scope.SearchString.toLowerCase()) != -1)) {
             return true;
         }
         return false;
     };
 
     $scope.searchData1 = function (item) {
-        if (!$scope.SearchString || (item.Name.toLowerCase().indexOf($scope.SearchString) != -1) || (item.Datatype.toLowerCase().indexOf($scope.SearchString.toLowerCase()) != -1)) {
+        if (!$scope.SearchString || (item.Name.toLowerCase().indexOf($scope.SearchString.toLowerCase()) != -1) || (item.Datatype.toLowerCase().indexOf($scope.SearchString.toLowerCase()) != -1)) {
             return true;
         }
         return false;
