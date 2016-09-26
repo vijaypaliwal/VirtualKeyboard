@@ -141,7 +141,10 @@
 
 
             <div class="col-xs-3">
-                <div>7</div>
+
+                <div ng-if="IsCustomfieldLoading == true"> <img height="30" width="30" src="img/loader1.gif" alt="Alternate Text" /></div>
+
+                <div ng-if="IsCustomfieldLoading == false">{{customfiledcounter}}</div>
                 
           
             </div>

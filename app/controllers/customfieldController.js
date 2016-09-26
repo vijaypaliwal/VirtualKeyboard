@@ -4,7 +4,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
     $scope.CustomActivityDataList = [];
     $scope.MyinventoryFields = [];
     $scope.UnitDataColumns = [];
-
+    $scope.SearchString = "";
     $scope.IsLoading = false;
     $scope.LocalItemFieldsList = [];
 
@@ -22,6 +22,32 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
 
     }
 
+    $scope.Issearch = false;
+
+
+    $scope.openClosePanel=function(Type)
+    {
+        switch (Type) {
+            case 1:
+                $scope.IsUnitDataOpen = !$scope.IsUnitDataOpen;
+                $scope.IsItemOpen = false;
+                $scope.IsActivityOpen = false;
+                break;
+            case 2:
+                $scope.IsUnitDataOpen = false;
+                $scope.IsActivityOpen = false;
+                $scope.IsItemOpen = !$scope.IsItemOpen;
+                break;
+            case 3:
+                $scope.IsUnitDataOpen = false;
+                $scope.IsActivityOpen = !$scope.IsActivityOpen;
+                $scope.IsItemOpen = false;
+                break;
+            default:
+
+        }
+        CheckScopeBeforeApply();
+    }
     $scope.GetClass = function (index) {
         if (index == 0 || index == 1) {
             return "accent-color";
@@ -34,6 +60,44 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
         }
     }
 
+    $scope.FilterDataColumns=function()
+    {
+        if(IsItemOpen==true)
+        {
+          
+
+        }
+        if(IsActivityOpen==true)
+        {
+
+        }
+        if(IsUnitDataOpen==true)
+        {
+
+        }
+    }
+
+    $scope.ClearFilter=function()
+    {
+    
+        $scope.SearchString = "";
+        CheckScopeBeforeApply();
+    }
+
+    $scope.searchData = function (item) {
+        debugger;
+        if (!$scope.SearchString || (item.ColumnLabel.toLowerCase().indexOf($scope.SearchString) != -1) || (item.Show.toLowerCase().indexOf($scope.SearchString.toLowerCase()) != -1)) {
+            return true;
+        }
+        return false;
+    };
+
+    $scope.searchData1 = function (item) {
+        if (!$scope.SearchString || (item.Name.toLowerCase().indexOf($scope.SearchString) != -1) || (item.Datatype.toLowerCase().indexOf($scope.SearchString.toLowerCase()) != -1)) {
+            return true;
+        }
+        return false;
+    };
 
     function CheckCustomField(type, map) {
         var _returnVar = false;
@@ -55,7 +119,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
             return _returnVar;
         }
         else if (type == 2) {
-            for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
                 if ($scope.CustomActivityDataList[i].ColumnMap == map) {
                     _returnVar = true;
                     return _returnVar;
@@ -507,7 +571,13 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
     });
 
     $scope.showfilter = function () {
-        $("#filtermodal").modal("show")
+        $scope.Issearch = true;
+        $scope.$apply();
+    }
+
+    $scope.hidefilter = function() {
+        $scope.Issearch = false;
+        $scope.$apply();
     }
 
 

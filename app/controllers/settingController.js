@@ -18,6 +18,7 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
         $scope.getstatus();
         $scope.getlocation();
         $scope.GetMyinventoryColumns();
+        $scope.GetAllData();
         $scope.$apply();
     }
 
@@ -239,6 +240,49 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
               }
           });
 
+    }
+
+
+    $scope.GetAllData = function () {
+
+        $scope.IsCustomfieldLoading = true;
+      
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+          ({
+              type: "POST",
+              url: serviceBase + 'GetAllData',
+              contentType: 'application/json; charset=utf-8',
+
+              dataType: 'json',
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ConsidermobileOrder": false }),
+              success: function (response) {
+
+                  $scope.customfiledcounter = response.GetAllDataResult.Payload[0].CustomActivityField.length + response.GetAllDataResult.Payload[0].CustomItemField.length + 7;
+                  $scope.IsCustomfieldLoading = false;
+                  $scope.$apply();
+
+              },
+              error: function (err, textStatus, errorThrown) {
+                  $scope.IsCustomfieldLoading = false;
+                  if (err.readyState == 0 || err.status == 0) {
+
+                  }
+                  else {
+                      $scope.IsCustomfieldLoading = false;
+                      if (textStatus != "timeout") {
+                          $scope.IsCustomfieldLoading = false;
+                          $scope.ShowErrorMessage("Getting look ups", 2, 1, err.statusText);
+                      }
+                  }
+
+
+              }
+          });
     }
 
 

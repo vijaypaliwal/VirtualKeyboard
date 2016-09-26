@@ -202,8 +202,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                 $scope.SavingData = true;
                 $scope.$apply();
 
-                alert("in");
-
                 var _data = { "IID": $scope.CurrentInventory.iID, "pID": $scope.CurrentInventory.pID, "pPart": $scope.CurrentInventory.pPart, "pDescription": $scope.CurrentInventory.pDescription };
                 $.ajax({
                     url: serviceBase + "UpdateInventory",

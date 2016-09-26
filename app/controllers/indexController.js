@@ -28,6 +28,14 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         return _string==""?true:false;
     }
 
+    $scope.GetTrimmedStringData = function (_string) {
+        if (_string != null && _string != undefined) {
+            _string = $.trim(_string);
+        }
+
+        return _string;
+    }
+
     $scope.ShowErrorMessage = function (Place, TextType, Type, Message) {
         var _returnError = ""
         if (Message != undefined && Message != null) {
