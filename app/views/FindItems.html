@@ -3,9 +3,6 @@
 <link href="css/finditem.css" rel="stylesheet" />
 
 
-
-
-
 <div class="title-header">
 
     <div class="row">
@@ -25,16 +22,7 @@
 
     <a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
 
-    <!--<div class="page-header">
-
-
-        <div style="padding-left:2px;" class="col-xs-5">
-            <h4 style="margin-top:0px;"> </h4>
-        </div>
-        <div style="text-align:right; display:none;" class="col-xs-7 paginationtext">
-            <p style="font-size:13px;"></p>
-        </div>
-    </div>-->
+  
 
 
     <div ng-if="myinventoryColumnLoaded==false">
@@ -351,6 +339,7 @@
                 <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('uomUOM')" ng-click="GoToNextMobile(2)"><span>Convert</span><a style="background-color: #CE59A1" class=" waves-effect btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-refresh"></i>  </a></li>
                 <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iStatusValue')" ng-click="GoToNextMobile(3)"><span>Update</span><a style=" background-color: #583782" class="waves-effect btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-pencil"></i>  </a></li>
                 <li data-dismiss="modal" ng-click="filterrecords()" class="bottomlink"><span class="FilterCartItems">Filter cart Records</span><a class=" waves-effect btn-success btn decrease" data-dismiss="modal"> <i class="fa fa-filter"></i>  </a></li>
+                <li data-dismiss="modal" ng-if="SelectedZeroRecordIDs.length!=0"  ng-click="Clearzerorecords()" class="bottomlink"><span >Clear Zero records</span><a class=" waves-effect btn-warning btn decrease" data-dismiss="modal"> <i class="fa fa-trash-o"></i>  </a></li>
                 <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
                 <li class="bottomlink" data-dismiss="modal" ng-click="DeselectAll()"><span>Deselect All</span><a class=" waves-effect btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-square-o"></i>  </a></li>
             </ul>
