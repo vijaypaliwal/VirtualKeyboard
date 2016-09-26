@@ -3,10 +3,30 @@
 
 <style>
 
-    .infoareas
-    {
-        background:white;
+    .smallText {
+        color: #958d8d !important;
+        position: absolute;
+        display: block;
+        margin-top: -10px;
+        font-size: 95% !important;
     }
+    
+     .infoareas {
+        background: white;
+    }
+
+    .columnHeader {
+        padding-left: 5px;
+        background: #d6d6d6;
+    }
+
+        .columnHeader .fa {
+            font-size: 16px;
+            margin-top: -25px;
+            margin-right: 14px;
+        }
+
+
     .infoareas {
         padding-top: 5px ;
         padding-bottom: 5px;
@@ -108,6 +128,8 @@
 </div>
 <a href="#/setting" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
 
+<a ng-click="showfilter()" class="waves-effect btn roundbtntitle"><i class="fa fa-filter"></i> </a>
+
 <div class="top45">
 
     <div class="activityinfo">
@@ -155,10 +177,15 @@
         <tbody>
             <tr>
                 <td>
-                    <h5>Unit Data Columns </h5>
-                </td>
+                    <div class="infoareas columnHeader" ng-click="IsUnitDataOpen=!IsUnitDataOpen;IsItemOpen=false;IsActivityOpen=false;">
+                        <h5>Unit Data Columns </h5>
+                        <i class="fa fa-chevron-up pull-right" ng-if="IsUnitDataOpen==true"></i>
+                        <i class="fa fa-chevron-down pull-right" ng-if="IsUnitDataOpen==false"></i>
+                    </div>
+                    
+</td>
             </tr>
-            <tr ng-repeat="_obj in UnitDataColumns">
+            <tr ng-repeat="_obj in UnitDataColumns" ng-show="IsUnitDataOpen==true">
                 <td>
                     <div class="infoareas">
 
@@ -170,6 +197,7 @@
 
                             <div class="col-xs-6">
                                 <a class="text ng-binding">{{_obj.ColumnLabel}} </a>
+                                <small class="smallText">{{_obj.Show}}</small>
                             </div>
                             <div class="col-xs-4" custom-swipe>
                                 <div class="btn-group custombtnGroup">
@@ -187,11 +215,16 @@
             </tr>
             <tr>
                 <td>
-                    <h5>Custom Item Columns </h5>
+                    <div class="infoareas columnHeader" ng-click="IsUnitDataOpen=false;IsActivityOpen=false;IsItemOpen=!IsItemOpen">
+                        <h5>Custom Item Columns </h5>
+                        <i class="fa fa-chevron-up pull-right" ng-if="IsItemOpen==true"></i>
+                        <i class="fa fa-chevron-down pull-right" ng-if="IsItemOpen==false"></i>
+                    </div>
+                    
                 </td>
             </tr>
 
-            <tr ng-repeat="_obj in LocalCustomItemFieldsList">
+            <tr ng-repeat="_obj in LocalCustomItemFieldsList" ng-show="IsItemOpen==true">
                 <td>
                     <div class="infoareas">
 
@@ -202,7 +235,9 @@
                             </div>
 
                             <div class="col-xs-6">
-                                <a class="text ng-binding">{{_obj.Name}} </a>
+                                <a class="text">
+                                    {{_obj.Name}}
+                                </a><small class="smallText">{{_obj.Datatype}}</small>
                             </div>
                             <div class="col-xs-4" custom-swipe>
 
@@ -220,10 +255,14 @@
             </tr>
             <tr>
                 <td>
-                    <h5>Custom Activity Columns </h5>
+                    <div class="infoareas columnHeader" ng-click="IsUnitDataOpen=false;IsItemOpen=false;IsActivityOpen=!IsActivityOpen">
+                        <h5>Custom Activity Columns </h5>
+                        <i class="fa fa-chevron-up pull-right" ng-if="IsActivityOpen==true"></i>
+                        <i class="fa fa-chevron-down pull-right" ng-if="IsActivityOpen==false"></i>
+                    </div>
                 </td>
             </tr>
-            <tr ng-repeat="_obj in LocalCustomActivityFieldsList" >
+            <tr ng-repeat="_obj in LocalCustomActivityFieldsList" ng-show="IsActivityOpen==true">
 
                 <td>
                     <div class="infoareas">
@@ -235,7 +274,9 @@
                             </div>
 
                             <div class="col-xs-6">
-                                <a class="text ng-binding">{{_obj.Name}} </a>
+                                <a class="text">{{_obj.Name}}
+                                   
+                                 </a> <small class="smallText">{{_obj.Datatype}}</small>
                             </div>
                             <div class="col-xs-4" custom-swipe>
 
@@ -273,4 +314,55 @@
             <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
         </ul>
     </div>
+</div>
+
+<div id="filtermodal" class="modal animated bounceInRight">
+    <div class="modal-header">
+        <span class="close">
+            <i data-dismiss="modal" class="fa fa-times"></i>
+        </span>
+        <h4>Apply filters</h4>
+    </div>
+
+    <div style="padding:5px;" class="modal-body">
+
+        <h4>Unit data columns</h4>
+
+        <div class="input-group">
+            <span style="background: #e99002;" class="input-group-addon"><i style="background: #e99002;" class="fa fa-th-list"></i></span>
+            <input  type="text" name="name" value="" class="form-control" />
+        </div>
+
+
+        <h4>Custom Item columns</h4>
+
+        <div class="input-group">
+            <span class="input-group-addon accent-color"><i class="accent-color fa fa-th-list"></i></span>
+            <input type="text" name="name" value="" class="form-control" />
+        </div>
+
+
+        <h4>Custom Activity columns</h4>
+
+        <div class="input-group">
+            <span class="input-group-addon accent-color"><i class="accent-color fa fa-th-list"></i></span>
+            <input type="text" name="name" value="" class="form-control" />
+        </div>
+    
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <div class="col-xs-6">
+                <a class="btn btn-primary" ><i  class="fa fa-filter"></i> Filter</a>
+            </div>
+            <div class="col-xs-6">
+                <a class="btn btn-gray" ><i class="fa fa-times"></i> Clear</a>
+            </div>
+        </div>
+
+    </div>
+
 </div>

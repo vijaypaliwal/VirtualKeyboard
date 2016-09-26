@@ -8,6 +8,9 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
     $scope.IsLoading = false;
     $scope.LocalItemFieldsList = [];
 
+    $scope.IsActivityOpen = false;
+    $scope.IsItemOpen = false;
+    $scope.IsUnitDataOpen = true;
     $scope.LocalCustomItemFieldsList = [];
     $scope.LocalCustomActivityFieldsList = [];
     function init() {
@@ -162,6 +165,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
         }
     }
     function updateLocalArray() {
+       
         var _itemField = CheckCustomFieldAvailable(1, "Item Notes");
         if (_itemField != undefined) {
             $scope.LocalItemFieldsList[0].columnmap = _itemField.ColumnMap;
@@ -502,6 +506,10 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
         $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
     });
 
+    $scope.showfilter = function () {
+        $("#filtermodal").modal("show")
+    }
+
 
     $scope.Openbottommenu = function () {
 
@@ -605,9 +613,13 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
                       }
                       $scope.IsLoading = false;
 
+                      $scope.LocalItemFieldsList = [];
+
+                      $scope.LocalCustomItemFieldsList = [];
+                      $scope.LocalCustomActivityFieldsList = [];
                       CheckScopeBeforeApply();
 
-                     
+                      FillLocalArray();
                       updateLocalArray();
                   }
                   else {
@@ -643,17 +655,20 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
                     $(element).swipe({
                         swipe: function (event, direction, distance, duration, fingerCount) {
                             //This only fires when the user swipes left
+                            debugger;
+                            if (direction == "left" || direction == "right") {
 
-                            setTimeout(function () {
-                                
+                                setTimeout(function () {
+
                                     element.find("input").trigger("click");
 
-                                
-                               
 
-                            }, 10)
+
+
+                                }, 10)
+                            }
                         },
-                        threshold: 10
+                        threshold: 100
                     });
                 }
             };
