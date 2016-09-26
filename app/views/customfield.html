@@ -139,7 +139,17 @@
         </div>
     </div>
 
-    <table class="table gridTable table-striped bs-item">
+
+    <div ng-if="IsLoading==true">
+
+        <div class="modal-backdrop fade in"></div>
+        <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
+            <img src="img/loader.gif" alt="Alternate Text" />
+
+            <!--<i style="font-size: 100px; color: #0083C7; " class="fa fa-spin fa-spinner"></i>-->
+        </div>
+    </div>
+    <table class="table gridTable table-striped bs-item" ng-if="IsLoading==false">
 
 
         <tbody>
@@ -181,14 +191,14 @@
                 </td>
             </tr>
 
-            <tr ng-repeat="_obj in LocalItemFieldsList" ng-if="_obj.CustomFieldType=='Part'">
+            <tr ng-repeat="_obj in LocalCustomItemFieldsList">
                 <td>
                     <div class="infoareas">
 
                         <div class="row">
 
                             <div class="col-xs-2">
-                                <a class="btn text btn-warning {{GetClass($index)}}">{{$index +3 }} </a>
+                                <a class="btn text btn-warning accent-color">{{$index +1 }} </a>
                             </div>
 
                             <div class="col-xs-6">
@@ -213,15 +223,15 @@
                     <h5>Custom Activity Columns </h5>
                 </td>
             </tr>
-            <tr ng-repeat="_obj in LocalItemFieldsList" ng-if="_obj.CustomFieldType=='Inventory'">
-               
+            <tr ng-repeat="_obj in LocalCustomActivityFieldsList" >
+
                 <td>
                     <div class="infoareas">
 
                         <div class="row">
 
                             <div class="col-xs-2">
-                                <a class="btn text btn-warning {{GetClass($index)}}">{{$index +3 }} </a>
+                                <a class="btn text btn-warning accent-color">{{$index +1 }} </a>
                             </div>
 
                             <div class="col-xs-6">
@@ -241,7 +251,7 @@
                     </div>
                 </td>
             </tr>
-            
+
         </tbody>
 
 

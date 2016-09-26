@@ -200,6 +200,10 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         var box = bootbox.confirm("Do you want to proceed ?", function (result) {
             if (result) {
                 $scope.SavingData = true;
+                $scope.$apply();
+
+                alert("in");
+
                 var _data = { "IID": $scope.CurrentInventory.iID, "pID": $scope.CurrentInventory.pID, "pPart": $scope.CurrentInventory.pPart, "pDescription": $scope.CurrentInventory.pDescription };
                 $.ajax({
                     url: serviceBase + "UpdateInventory",

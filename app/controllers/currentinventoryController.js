@@ -1121,3 +1121,29 @@ app.directive('bootstrapSwitch', [
             };
         }
 ]);
+
+app.directive('customSwipe', [
+      function () {
+          return {
+              restrict: 'A',
+              require: '?ngModel',
+              link: function (scope, element, attrs, ngModel) {
+                  $(element).swipe({
+                      swipe: function (event, direction, distance, duration, fingerCount) {
+                          //This only fires when the user swipes left
+
+                          setTimeout(function () {
+
+                              element.find("input").trigger("click");
+
+
+
+
+                          }, 10)
+                      },
+                      threshold: 10
+                  });
+              }
+          };
+      }
+]);
