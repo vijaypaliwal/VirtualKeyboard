@@ -62,17 +62,17 @@
                         <i class="fa fa-chevron-up pull-right" ng-if="IsUnitDataOpen==true"></i>
                         <i class="fa fa-chevron-down pull-right" ng-if="IsUnitDataOpen==false"></i>
                     </div>
-                    
-</td>
+
+                </td>
             </tr>
-            <tr ng-repeat="_obj in UnitDataColumns | filter: searchData" ng-show="IsUnitDataOpen==true">
+            <tr ng-repeat="_obj in  _UnitDataColumns= (UnitDataColumns |  filter: searchData)" ng-show="_UnitDataColumns.length!=0 && IsUnitDataOpen==true">
                 <td>
                     <div class="infoareas">
 
                         <div class="row">
 
                             <div class="col-xs-2">
-                                <a class="btn text btn-warning ng-binding">{{$index+1}} </a>
+                                <a class="btn text btn-warning ng-binding"> {{$index+1}} </a>
                             </div>
 
                             <div class="col-xs-6">
@@ -93,6 +93,15 @@
                     </div>
                 </td>
             </tr>
+            <tr ng-show="_UnitDataColumns.length==0 && IsUnitDataOpen==true">
+
+                <td>
+                    <div class="infoareas">
+                        <a class="NoDataAnchor">  No unit data column found with searched string</a>
+                    </div>
+                </td>
+            </tr>
+
             <tr>
                 <td>
                     <div class="infoareas columnHeader" ng-click="openClosePanel(2)">
@@ -100,11 +109,11 @@
                         <i class="fa fa-chevron-up pull-right" ng-if="IsItemOpen==true"></i>
                         <i class="fa fa-chevron-down pull-right" ng-if="IsItemOpen==false"></i>
                     </div>
-                    
+
                 </td>
             </tr>
 
-            <tr ng-repeat="_obj in LocalCustomItemFieldsList | filter: searchData1" ng-show="IsItemOpen==true">
+            <tr ng-repeat="_obj in  _LocalCustomItemFieldsList= (LocalCustomItemFieldsList |  filter: searchData1)" ng-show="IsItemOpen==true">
                 <td>
                     <div class="infoareas">
 
@@ -133,6 +142,15 @@
                     </div>
                 </td>
             </tr>
+
+            <tr ng-show="_LocalCustomItemFieldsList.length==0 && IsItemOpen==true">
+
+                <td>
+                    <div class="infoareas">
+                        <a class="NoDataAnchor">  No Custom Item data column found with searched string</a>
+                    </div>
+                </td>
+            </tr>
             <tr>
                 <td>
                     <div class="infoareas columnHeader" ng-click="openClosePanel(3)">
@@ -142,7 +160,8 @@
                     </div>
                 </td>
             </tr>
-            <tr ng-repeat="_obj in LocalCustomActivityFieldsList | filter: searchData1" ng-show="IsActivityOpen==true">
+
+            <tr ng-repeat="_obj in  _LocalCustomActivityFieldsList= (LocalCustomActivityFieldsList | filter: searchData1)" ng-show="IsActivityOpen==true">
 
                 <td>
                     <div class="infoareas">
@@ -173,7 +192,17 @@
                     </div>
                 </td>
             </tr>
+            <tr ng-show="_LocalCustomActivityFieldsList.length==0 && IsActivityOpen==true">
+
+                <td>
+                    <div class="infoareas">
+                        <a class="NoDataAnchor">  No Custom Activity data column found with searched string</a>
+                    </div>
+                </td>
+            </tr>
         </tbody>
+
+
     </table>
 </div>
 

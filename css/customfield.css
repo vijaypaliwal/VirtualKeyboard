@@ -146,3 +146,10 @@
         opacity: 1;
         visibility: hidden;
     }
+
+     .NoDataAnchor {
+        font-size: 14px;
+        color: brown;
+        padding-left: 5px;
+    }
+
