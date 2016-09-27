@@ -1893,7 +1893,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 CheckScopeBeforeApply()
             }, 500);
 
-            vibrate()
+        //    vibrate()
 
 
 
@@ -1918,7 +1918,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 CheckScopeBeforeApply()
             }, 100);
 
-            vibrate()
+           // vibrate()
 
 
         }, function (error) {
@@ -1941,7 +1941,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 CheckScopeBeforeApply()
             }, 100);
 
-            vibrate()
+          //  vibrate()
 
 
         }, function (error) {
@@ -2083,11 +2083,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 else {
                     $(".arrow-right").trigger("click");
                 }
-
-
-
                 CheckScopeBeforeApply();
-
 
             }
 
@@ -2097,9 +2093,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
 
 
-
-            vibrate();
-
+          //  vibrate();
 
 
         }, function (error) {
@@ -2143,8 +2137,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             default:
                 return 4;
                 break;
-
-
         }
     }
     $scope.ScanNewCustom = function () {
@@ -2226,7 +2218,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
 
 
-            vibrate()
+          //  vibrate()
 
 
 
@@ -2309,8 +2301,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         }
 
-        vibrate();
-        playBeep();
+     //   vibrate();
+     //   playBeep();
     }
 
 
@@ -2709,7 +2701,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         if (buttonIndex == 1 || buttonIndex == "1") {
 
             $location.path('/mainmenu');
-            vibrate()
+          //  vibrate()
             CheckScopeBeforeApply();
         }
         else {
@@ -2725,7 +2717,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#modal3").modal('hide');
         $location.path('/FindItems');
         $(".Addbtn").show()
-        vibrate()
+       // vibrate()
         CheckScopeBeforeApply();
 
     }
@@ -2739,10 +2731,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         $(".Addbtn").show()
     }
-
-
-
-
 
 
     function showConfirmInventory() {
@@ -2777,12 +2765,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         }
 
-
     })
     $('.arrow-right').on('click', function (e) {
 
         e.preventDefault()
         mySwiper.swipeNext()
+       
 
     })
 

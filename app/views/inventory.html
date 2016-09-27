@@ -1050,6 +1050,18 @@
 
             <div class="myCols" data-index="{{$index}}" data-type="myinventory" data-id="myinventorycols" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" ng-if="CheckInCommonArray(obj.ColumnName)==true" end-repeat>
 
+                <div ng-if="obj.ColumnName=='pCountFrq'" ng-click="getstep(0,'pCountFrq')" class="form-group">
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.ItemGroup}}</span>
+                </div>
+
+                <div ng-if="obj.ColumnName=='lZone'" ng-click="getstep(0,'lZone')" class="form-group">
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.lZone}}</span>
+                </div>
+                <div ng-if="obj.ColumnName=='iStatusValue'" ng-click="getstep(0,'iStatusValue')" class="form-group">
+
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.Status}}</span>
+                </div>
+
                 <div ng-if="obj.ColumnName=='iReqValue'" ng-click="getstep(0,'iReqValue')" class="form-group">
                     <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueTag}}</span>
 
