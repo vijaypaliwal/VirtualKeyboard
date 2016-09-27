@@ -1,7 +1,7 @@
 ﻿
 
 
-<table style=" z-index: 999; width: 100%; top: 0; left: 0; background: #2196F3; color: #fff; position: fixed">
+<table style=" z-index: 999; width: 100%; top: 0; left: 0; background: #2196F3; color: #fff;">
     <tr>
         <td style="width:33.33%">
             <a style="padding:4px;color:white !important;" href="#/login"><i class="fa fa-arrow-left"></i></a>
@@ -37,7 +37,6 @@
                 </div>
             </div>
             <div class="form-group">
-             
                 <div class="input-group">
                     <span class="input-group-addon"> <i class="fa fa-envelope"></i></span>
                     <input type="text" class="form-control" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" placeholder="Email Address" data-ng-model="registration.Email" required>
@@ -82,6 +81,8 @@
     form
     {
         overflow-x:hidden !important;
+        padding-left:8px;
+        padding-right:8px;
     }
     
     
@@ -180,6 +181,8 @@
     .container
     {
         width:100%;
+        padding-left:0px;
+        padding-right:0px;
     }
 
     .login-form .col-xs-5 {
@@ -221,6 +224,11 @@
         z-index: 100;
         width: 100%;
         margin-top: 100px;
+    }
+
+    body
+    {
+        padding-top:0px;
     }
 
 

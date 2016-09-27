@@ -1,7 +1,4 @@
 ﻿
-
-
-
 <style>
   
     body {
@@ -95,7 +92,6 @@
         <img src="img/loader.gif" alt="Alternate Text" />
     </div>
 
-
     <ul class="list-group">
         <li ng-repeat="_obj in AccountsList"  class="list-group-item" ng-class="{'selected':CheckCurrentAccount(_obj.AccountName)==true}">
             <a style="display:block" ng-click="UpdateSecurityToken(_obj.AccountID,_obj.AccountName)">
@@ -103,13 +99,12 @@
                 <div class="row">
                     <div class="col-xs-3">
                         <div ng-class="{'accent-color': $index % 2 === 0 }" class="btn btn-warning"> {{$index+1}} </div>
-                   
                     </div>
+
                     <div ng-click="UpdateSecurityToken(_obj.AccountID,_obj.AccountName)" class="col-xs-9">
                         <h4>{{_obj.AccountName}} <small style="color:brown !important; font-size:11px !important;"> - {{_obj.CustomerType}}</small> </h4>
                         <p>{{_obj.FirstName}} {{_obj.LastName}}</p>
                         <p>{{_obj.Email}}</p>
-
                         <i class="fa fa-angle-right"></i>
                     </div>
                 </div>

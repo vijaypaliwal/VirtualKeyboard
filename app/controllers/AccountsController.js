@@ -122,6 +122,8 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
 
                         localStorageService.set('authorizationData', { token: _token});
                         $scope.CurrentAccount = AccountName;
+
+                        $scope.currentactiveaccount(AccountName);
                         localStorageService.set('AccountID', AccountName);
 
                         $scope.IsLoading = false;

@@ -9,6 +9,21 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             console.log("into activity");
         }
     }
+
+    $scope.currentactiveaccount = function (AccountName)
+    {
+        localStorageService.set("ActivityCart", "");
+        localStorageService.set("SelectedAction", "");
+        localStorageService.set('AccountID', AccountName);
+        $scope.CurrentAccount = localStorageService.get('AccountID');
+        $scope.$apply();
+    }
+
+
+
+
+    $scope.CurrentAccount = localStorageService.get('AccountID');
+
     $scope.logOut = function () {
         localStorageService.set("ActivityCart", "");
 

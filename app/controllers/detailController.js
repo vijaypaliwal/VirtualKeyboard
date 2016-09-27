@@ -141,10 +141,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
             $scope.$apply();
 
-            setTimeout(function () {
-                $scope.showbottomarea();
-
-            }, 10);
+         
 
         }, function (error) {
             log.error("Scanning failed: ", error);

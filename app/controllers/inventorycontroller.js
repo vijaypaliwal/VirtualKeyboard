@@ -2145,7 +2145,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 break;
 
 
-
         }
     }
     $scope.ScanNewCustom = function () {
