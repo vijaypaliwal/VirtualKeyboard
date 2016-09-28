@@ -220,6 +220,9 @@ app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'aut
                 $scope.MyInventorycolumns[i].mobileorder = i + 1;
 
             }
+            else if ($scope.MyInventorycolumns[i].ColumnName == "pPart" && $scope.MyInventorycolumns[i].mobileorder == 0) {
+                $scope.MyInventorycolumns[i].mobileorder = i + 1;
+            }
 
         }
 

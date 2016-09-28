@@ -6,20 +6,10 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     $scope.ImageList = [];
     $scope.slide = 0;
     $scope.Totalslides = 0;
-
+    $scope.CanAddIntoCart = false;
 
     $scope.mainObjectToSend = [];
-    function init() {
-        $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
-
-        $scope.MyinventoryFieldsNames = localStorageService.get("unitdatafieldsobject");
-
-
-        console.log($scope.MyinventoryFieldsNames);
-        $scope.itemlabel = $scope.CurrentInventory.pPart
-
-        $scope.$apply();
-    }
+    
 
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
@@ -186,7 +176,46 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
             log.error("Scanning failed: ", error);
         });
     }
+    $scope.UpdateCartItems = function () {
+        var v = angular.copy($scope.CurrentInventory);
+        var mainObjectToSend = {
+            uId: v.iID,
+            pID: v.pID,
+            pPart: v.pPart,
+            iLID: v.iLID,
+            iUOMID: v.iUOMID,
+            iQty: 1,
+            oquantity: v.iQty,
+            uomUOM: v.uomUOM,
+            lLoc: v.lLoc,
+            iStatusValue: v.iStatusValue,
+            pDescription: v.pDescription,
+            Action: '',
+            iUniqueDate_date: v.iUniqueDate,
+            iUnitNumber2: v.iUnitNumber2,
+            iUnitNumber1: v.iUnitNumber1,
+            iUnitDate2_date: v.iUnitDate2,
+            iUnitTag3: v.iUnitTag3,
+            iUnitTag2: v.iUnitTag2,
+            pCountFrq: v.pCountFrq,
+            lZone: v.lZone,
+            ImageThumbPath: v.ImageThumbPath,
+            ImageDisplayName: v.ImageDisplayName,
+            iReqValue: v.iReqValue,
+            iCostPerUnit: v.pDefaultCost,
+        }
+        var _cartData = localStorageService.get("ActivityCart");
+        for (var i = 0; i < _cartData.length; i++) {
+            if (_cartData[i].InventoryID == $scope.CurrentInventory.iID) {
+                _cartData[i].InventoryDataList = mainObjectToSend;
+                _cartData[i].ItemID = mainObjectToSend.pPart;
+                break;
+            }
+        }
 
+        localStorageService.set("ActivityCart", "");
+        localStorageService.set("ActivityCart", _cartData);
+    }
     $scope.UpdateInventory = function () {
 
         var authData = localStorageService.get('authorizationData');
@@ -220,6 +249,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                                 $scope.SavingData = false;
                                 init();
                                 $scope.getitemimage();
+                                $scope.UpdateCartItems();
                             }
                             else {
                                 log.error(Message);
@@ -256,6 +286,8 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     }
 
 
+
+   
 
 
     $scope.addtocart = function (v) {
@@ -314,11 +346,67 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
         setTimeout(function () { $("#myModal2").modal('hide'); }, 1000);
 
-
+        CheckIntoCartData();
 
     }
 
+    function CheckScopeBeforeApply() {
+        if (!$scope.$$phase) {
+            $scope.$apply();
+        }
+    };
+    function CheckIntoCartData ()
+    {
+        $scope.CanAddIntoCart = false;
+       
+        var _CartData = localStorageService.get("ActivityCart");
+        if (_CartData != null && _CartData != undefined) {
 
+            for (var i = 0; i < _CartData.length; i++) {
+                if(_CartData[i].InventoryID== $scope.CurrentInventory.iID)
+                {
+                    $scope.CanAddIntoCart = true;
+                }
+            }
+        }
+        CheckScopeBeforeApply();
+
+        
+    }
+
+    $scope.removecart=function()
+    {
+        var _cartData = localStorageService.get("ActivityCart");
+        var _newCart = _cartData;
+        for (var i = 0; i < _newCart.length; i++) {
+            if (_cartData[i].InventoryID == $scope.CurrentInventory.iID)
+            {
+                _cartData.splice(i, 1);
+                break;
+            }
+        }
+
+        localStorageService.set("ActivityCart", "");
+        localStorageService.set("ActivityCart", _cartData);
+      
+        ShowSuccess('Removed');
+
+        setTimeout(function () { $("#myModal2").modal('hide'); }, 1000);
+
+        CheckIntoCartData();
+
+    }
+
+    function init() {
+        $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
+
+        $scope.MyinventoryFieldsNames = localStorageService.get("unitdatafieldsobject");
+
+
+        $scope.itemlabel = $scope.CurrentInventory.pPart
+        CheckIntoCartData();
+        CheckScopeBeforeApply();
+    }
 
     $scope.getitemimage = function () {
 

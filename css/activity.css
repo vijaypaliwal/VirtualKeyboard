@@ -429,7 +429,11 @@ position: absolute;
     margin: 0 auto;
     top: 0;
     bottom: 0;
-    overflow: hidden;
+  
+}
+.checkout-price
+{
+    color:#069;
 }
 
     #selecteditemlistmodal .modal-header {

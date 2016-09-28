@@ -255,7 +255,8 @@
             <ul class="animated slideInUp" id="selectAction">
                 <li ng-click="viewhistory()"><span>View history</span><a href="#/InventoryHistory" class="waves-effect btn-primary btn"> <i class="fa fa-file-text"></i> </a></li>
                 <li ng-click="showinventory()"><span>Show all Inventory</span><a href="#/FindItems" class="waves-effect btn-danger btn"> <i class="fa fa-dollar"></i> </a></li>
-                <li ng-click="addtocart(CurrentInventory)"><span>Select for cart</span><a class="waves-effect btn-success btn" data-dismiss="modal"> <i class="fa fa-shopping-cart"></i> </a></li>
+                <li ng-click="addtocart(CurrentInventory)" ng-show="CanAddIntoCart==false"><span>Select for cart</span><a class="waves-effect btn-success btn" data-dismiss="modal"> <i class="fa fa-shopping-cart"></i> </a></li>
+                <li ng-click="removecart(CurrentInventory)" ng-show="CanAddIntoCart==true"><span>Remove from cart</span><a class="waves-effect btn-danger btn" data-dismiss="modal"> <i class="fa fa-trash-o"></i> </a></li>
                 <li ng-click="ToggleEditView()"><span>Edit Item details</span><a class="waves-effect btn bgm-orange" data-dismiss="modal"> <i class="fa fa-pencil"></i> </a></li>
             </ul>
         </div>
