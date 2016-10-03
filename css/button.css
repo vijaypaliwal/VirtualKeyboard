@@ -83,6 +83,7 @@
 .c-widget-figure {
     margin-right: 20px;
     width: 48px;
+    min-width:48px;
     height: 48px;
     color: #fff;
     border-radius: 50%;
