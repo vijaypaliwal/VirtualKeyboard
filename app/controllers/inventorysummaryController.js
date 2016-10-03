@@ -124,7 +124,6 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
 
     $scope.ClearImageFilter = function () {
         $scope.HasImage = "";
-
         CheckScopeBeforeApply();
     }
 
@@ -134,6 +133,7 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
         }
 
         $scope.FilterData.SearchValue = "";
+        $scope.ShowGroupedData = false;
         $scope.ClearImageFilter();
         CheckScopeBeforeApply();
         $scope.GetInventoryGroupedDataAccordingToView();

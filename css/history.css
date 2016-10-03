@@ -322,18 +322,7 @@
         visibility: hidden;
     }
 
-    .bootbox .modal-body {
-        padding: 15px;
-    }
-
-    .bootbox .mybootboxbody {
-        padding: 15px;
-        padding-top: 0px;
-    }
-
-    .bootbox {
-        top: 10%;
-    }
+  
 
     #myModalforlist {
         top: 25%;
@@ -515,14 +504,7 @@
     }
 
 
-    .bootbox {
-        width: 100%;
-        margin: 0 auto;
-        top: 0;
-        bottom: 0;
-        overflow: hidden;
-    }
-
+   
     .bgm-increase {
         background-color: #177B3D !important;
     }
