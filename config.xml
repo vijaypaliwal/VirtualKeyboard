@@ -33,7 +33,7 @@
     <param name="domain" value="http://debug.phonegap.com"/>
     <param name="key" value="willoughby"/>
   </feature>
-  <preference name="orientation" value="portrait" />
+   
   <preference name="webviewbounce" value="false" />
   <preference name="UIWebViewBounce" value="false" />
   <preference name="DisallowOverscroll" value="true" />
@@ -41,7 +41,7 @@
   <preference name="orientation"   value="all" />
   <preference name="target-device"  value="universal" />
   <preference name="fullscreen" value="false" />
-  <preference name="Orientation" value="landscape" />
+  
   <preference name="StatusBarOverlaysWebView" value="false" />
   <preference name="StatusBarBackgroundColor" value="#2196F3" />
   <preference name="StatusBarStyle" value="lightcontent" />
