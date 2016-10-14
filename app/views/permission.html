@@ -1,0 +1,503 @@
+﻿<link href="css/setting.css" rel="stylesheet" />
+<link href="css/mobileorder.css" rel="stylesheet" />
+
+<link href="css/customfield.css" rel="stylesheet" />
+
+
+<div class="title-header">
+    <div class="row">
+        <div class="col-xs-12">
+            <h4 class="titletext">Permissions - {{CurrentAccount}}</h4>
+        </div>
+    </div>
+</div>
+<a href="#/setting" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
+
+<a ng-if="Issearch==false" ng-click="showfilter()" class="waves-effect btn roundbtntitle"><i class="fa fa-search"></i> </a>
+
+<a ng-if="Issearch==true" ng-click="hidefilter()" class="waves-effect btn roundbtntitle"><i class="fa fa-times"></i> </a>
+
+<div class="top45">
+
+    <div ng-show="Issearch==true" class="row rowMargin">
+        <input type="text" placeholder="Type Name" ng-model="SearchString" class="form-control" name="name" value=" " />
+        <i class="fa fa-times clearicon" ng-if="GetTrimmedStringData(SearchString)!=''" ng-click="ClearFilter()"></i>
+    </div>
+
+
+    <div ng-if="IsLoading==true">
+
+        <div class="modal-backdrop fade in"></div>
+        <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
+            <img src="img/loader.gif" alt="Alternate Text" />
+        </div>
+    </div>
+    <table class="table gridTable table-striped bs-item" ng-if="IsLoading==false">
+
+
+        <tbody>
+            <tr>
+                <td>
+                    <div class="infoareas columnHeader" ng-click="openClosePanel(1)">
+                        <h5>Library - {{IsLibrarydataopen}} </h5>
+                        <i class="fa fa-chevron-up pull-right" ng-if="IsLibrarydataopen==true"></i>
+                        <i class="fa fa-chevron-down pull-right" ng-if="IsLibrarydataopen==false"></i>
+                    </div>
+
+                </td>
+            </tr>
+            <tr ng-if="IsLibrarydataopen==true">
+                <td>
+                    <div class="infoareas">
+
+                        <div class="row">
+
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning ng-binding"> 1 </a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ng-binding">Unit of measure </a>
+
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+
+                                        <input type="checkbox">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+            <tr ng-if="IsLibrarydataopen==true">
+<td>
+                    <div class="infoareas">
+
+                        <div class="row">
+
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning ng-binding"> 2 </a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ng-binding">Locations </a>
+
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+
+                                        <input type="checkbox">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+            <tr ng-if="IsLibrarydataopen==true">
+                <td>
+                    <div class="infoareas">
+
+                        <div class="row">
+
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning ng-binding"> 3 </a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ng-binding">Status </a>
+
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+
+                                        <input type="checkbox">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="infoareas columnHeader" ng-click="openClosePanel(2)">
+                        <h5>Views </h5>
+                        <i class="fa fa-chevron-up pull-right" ng-if="IsViewOpen==true"></i>
+                        <i class="fa fa-chevron-down pull-right" ng-if="IsViewOpen==false"></i>
+                    </div>
+
+                </td>
+            </tr>
+
+            <tr ng-if="IsViewOpen==true">
+                <td>
+                    <div class="infoareas">
+
+                        <div class="row">
+
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning accent-color ng-binding"> 1 </a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ng-binding">Current Inventory </a>
+
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+
+                                        <input type="checkbox">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+            <tr ng-if="IsViewOpen==true">
+                <td>
+                    <div class="infoareas">
+
+                        <div class="row">
+
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning accent-color"> 2</a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ">Inventory Summary </a>
+
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+
+                                        <input type="checkbox">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr ng-if="IsViewOpen==true">
+                <td>
+                    <div class="infoareas">
+
+                        <div class="row">
+
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning accent-color"> 3</a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ng-binding">Inventory Activity </a>
+
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+
+                                        <input type="checkbox">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr ng-if="IsViewOpen==true">
+                <td>
+                    <div class="infoareas">
+
+                        <div class="row">
+
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning accent-color"> 4</a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ng-binding">Local Restock </a>
+
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+
+                                        <input type="checkbox">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr ng-if="IsViewOpen==true">
+                <td>
+                    <div class="infoareas">
+
+                        <div class="row">
+
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning accent-color"> 5</a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ng-binding">Global Restock </a>
+
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+
+                                        <input type="checkbox">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+            <tr ng-if="IsViewOpen==true">
+                <td>
+                    <div class="infoareas">
+
+                        <div class="row">
+
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning accent-color"> 6</a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ng-binding">All Items</a>
+
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+
+                                        <input type="checkbox">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="infoareas columnHeader" ng-click="openClosePanel(3)">
+                        <h5>Admin </h5>
+                        <i class="fa fa-chevron-up pull-right" ng-if="IsAdminopen==true"></i>
+                        <i class="fa fa-chevron-down pull-right" ng-if="IsAdminopen==false"></i>
+                    </div>
+
+                </td>
+            </tr>
+
+            <tr ng-if="IsAdminopen==true">
+                <td>
+                    <div class="infoareas">
+
+                        <div class="row">
+
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning btn-danger"> 1</a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ng-binding">Inventory</a>
+
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+
+                                        <input type="checkbox">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr ng-if="IsAdminopen==true">
+                <td>
+                    <div class="infoareas">
+
+                        <div class="row">
+
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning btn-danger"> 2</a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ng-binding">My Inventory Columns</a>
+
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="btn-group custombtnGroup">
+                                    <label class="switch1">
+
+                                        <input type="checkbox">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+
+        </tbody>
+
+
+    </table>
+    <br /><br />
+
+</div>
+
+<a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
+
+
+<a ng-click="Openbottommenu()" class="menubtn waves-effect">
+    <i class="fa fa-bars"></i>
+</a>
+
+<div id="bottommenumodal" class="modal bottommenu fade">
+    <div class="modal-body">
+        <ul class="animated slideInUp selectAction">
+            <li> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
+            <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-map-marker"></i> </a></li>
+            <li> <a href="#/reportmenu"><span class="newinv">Go to Report</span></a>  <a href="#/Go to Report" class=" waves-effect btn-primary btn"> <i class="fa fa-check-circle-o"></i> </a></li>
+            <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="filtermodal" class="modal animated bounceInRight">
+    <div class="modal-header">
+        <span class="close">
+            <i data-dismiss="modal" class="fa fa-times"></i>
+        </span>
+        <h4>Apply filters</h4>
+    </div>
+
+    <div style="padding:5px;" class="modal-body">
+
+        <div ng-show="IsUnitDataOpen==true">
+
+            <h4>Unit data columns</h4>
+
+            <div class="input-group">
+                <span style="background: #e99002;" class="input-group-addon"><i style="background: #e99002;" class="fa fa-th-list"></i></span>
+                <input type="text" name="name" ng-model="UnitDataSearch" value="" class="form-control" />
+            </div>
+        </div>
+
+        <div ng-show="IsItemOpen==true">
+            <h4>Custom Item columns</h4>
+
+            <div class="input-group">
+                <span class="input-group-addon accent-color"><i class="accent-color fa fa-th-list"></i></span>
+                <input type="text" name="name" ng-model="CustomItemSearch" value="" class="form-control" />
+            </div>
+        </div>
+
+        <div ng-show="IsActivityOpen==true">
+            <h4>By Name</h4>
+
+            <div class="input-group">
+                <span class="input-group-addon accent-color"><i class="accent-color fa fa-th-list"></i></span>
+                <input type="text" name="name" ng-model="CustomActivitySearch" value="" class="form-control" />
+            </div>
+
+            <h4>By Datatype</h4>
+
+            <div class="input-group">
+                <span class="input-group-addon accent-color"><i class="accent-color fa fa-th-list"></i></span>
+                <select class="form-control" ng-model="CustomActivityDatatype">
+                    <option>Choose</option>
+                    <option value="string">String</option>
+                    <option value="currency">Currency</option>
+                    <option value="datetime">Date</option>
+                    <option value="number">Number</option>
+                    <option value="checkbox">Boolean</option>
+                    <option value="combobox">Dropdown</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+
+        <div class="row">
+            <div class="col-xs-6">
+                <a class="btn btn-primary" ng-click="FilterDataColumns()" ><i  class="fa fa-filter"></i> Filter</a>
+            </div>
+            <div class="col-xs-6">
+                <a class="btn btn-gray" ><i class="fa fa-times"></i> Clear</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    var offset = 50;
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    var offset_opacity = 1200;
+    //duration of the top scrolling animation (in ms)
+    var scroll_top_duration = 700;
+    //grab the "back to top" link
+    var $back_to_top = $('.cd-top');
+
+    function scrollToTop() {
+
+        $('html, body').animate({ scrollTop: 0 }, 500, 'linear');
+    }
+
+
+
+    $(window).scroll(function () {
+        ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+        if ($(this).scrollTop() > offset_opacity) {
+            $back_to_top.addClass('cd-fade-out');
+        }
+    });
+</script>
