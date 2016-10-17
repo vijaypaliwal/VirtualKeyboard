@@ -13,10 +13,144 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
     $scope.IsLibrarydataopen = true;
     $scope.LocalCustomItemFieldsList = [];
     $scope.LocalCustomActivityFieldsList = [];
-    function init() {
-      
+    $scope.Permissions1 = [];
+    $scope.Permissions2 = [];
+    $scope.Permissions3 = [];
+
+    $scope.showpermission = false;
+
+
+    $scope.ManagePermission = function (userkey) {
+
+        debugger;
+
+        $scope.showpermission = true;
+        $scope.GetPermission(3,userkey);
+        $scope.GetPermission(4, userkey);
+        $scope.GetPermission(5, userkey);
+
+        $scope.userkey = userkey;
+        CheckScopeBeforeApply();
 
     }
+
+
+    $scope.GetPermission=function(Type, Key)
+    {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+
+
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetUserPermissions',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type,"UserKey": Key}),
+               success: function (response) {
+
+
+
+
+                   if (response.GetUserPermissionsResult.Success == true) {
+                       if (Type == 4) {
+
+                           $scope.Permissions1 = response.GetUserPermissionsResult.Payload;
+                       
+                       }
+
+                       if (Type == 3) {
+
+                           $scope.Permissions2 = response.GetUserPermissionsResult.Payload;
+                       }
+
+                       if (Type == 5) {
+
+                           $scope.Permissions3 = response.GetUserPermissionsResult.Payload;
+                       }
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Custom column's data", 1, 1, response.GetUserPermissionsResult.Message)
+
+                   }
+
+
+                   console.log($scope.Permissions1);
+
+                   CheckScopeBeforeApply();
+               },
+               error: function (response) {
+                   log.error(response.statusText);
+                   $scope.ShowErrorMessage("Custom column's data", 2, 1, response.statusText);
+
+                   //$scope.InventoryObject.Location = 678030;
+               }
+           });
+
+    }
+
+    $scope.UpdatePermission = function (Permissioncode, Type, Action) {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $.ajax
+        ({
+         type: "POST",
+         url: serviceBase + 'SaveUserPermissions',
+         contentType: 'application/json; charset=utf-8',
+         dataType: 'json',
+         data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type, "UserKey": $scope.userkey, "PermissionCode": Permissioncode, "Action": Action }),
+         success: function (response) {
+             setTimeout(function () {
+                 ShowSuccess("Saved");
+             }, 100)
+         },
+         error: function (err) {
+          
+
+         }
+     });
+    }
+
+
+
+    $scope.GetAccountuser = function (Type) {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetUserList',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+                 
+                   $scope.Userlist = response.GetUserListResult.Payload;
+
+                   debugger;
+
+                   CheckScopeBeforeApply();
+
+               },
+               error: function (response) {
+                   alert("Error");
+                  
+               }
+           });
+
+    }
+
 
     $scope.Issearch = false;
 
@@ -97,7 +231,14 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
     }
 
 
-  
+    function init() {
+
+        $scope.GetPermission(3);
+        $scope.GetPermission(4);
+        $scope.GetPermission(5);
+
+        $scope.GetAccountuser();
+    }
 
 
     init();
