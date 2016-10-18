@@ -13,7 +13,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     var _UserInfo = {
         username: "",
         myprofileimage: "",
-        picURl:"",
+        picURl: "",
+        UserKey:""
     }
 
     var _externalAuthData = {
@@ -53,6 +54,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
            
             data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),
             success: function (response) {
+
+                debugger;
 
                  
 
@@ -149,9 +152,16 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                success: function (response) {
 
 
+                   debugger;
+
+
                     
                    _UserInfo.username = response.GetUserInfoResult.Payload[0].UserName
                    _UserInfo.myprofileimage = response.GetUserInfoResult.Payload[0].ProfilePic;
+
+
+                   localStorageService.set('UserKey', response.GetUserInfoResult.Payload[0].UserKey);
+
 
                    if (response.GetUserInfoResult.Payload[0].ProfilePic != null && response.GetUserInfoResult.Payload[0].ProfilePic != "") {
 

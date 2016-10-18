@@ -86,7 +86,13 @@
                     <a style="font-size:12px; margin-top:-13px; color:#656565; " class="text">{{obj.Email}}</a>
                 </div>
                 <div class="col-xs-2">
-                    <a ng-click="ManagePermission(obj.UserKey)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:100%;" class="btn btn-danger pull-right btnUom">
+
+                    
+                    <a ng-if="obj.AccountOwner==true" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:100%;" class="btn btn-success pull-right btnUom">
+                        <i class="fa fa-users"></i>
+                    </a>
+
+                    <a ng-if="obj.AccountOwner==false" ng-click="ManagePermission(obj.UserKey)" style="height:40px; width:40px; padding:0px; line-height:40px; border-radius:100%;" class="btn btn-danger pull-right btnUom">
                         <i class="fa fa-gears"></i>
                     </a>
                 </div>

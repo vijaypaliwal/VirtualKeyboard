@@ -43,8 +43,6 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
         }
 
 
-
-
         $.ajax
            ({
                type: "POST",
@@ -53,9 +51,6 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type,"UserKey": Key}),
                success: function (response) {
-
-
-
 
                    if (response.GetUserPermissionsResult.Success == true) {
                        if (Type == 4) {
@@ -111,6 +106,9 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
              setTimeout(function () {
                  ShowSuccess("Saved");
              }, 100)
+
+             $scope.getactivepermission();
+
          },
          error: function (err) {
           

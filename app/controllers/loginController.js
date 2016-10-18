@@ -88,6 +88,10 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
         {
            
             $scope.GetProfileData();
+
+           
+                $scope.getactivepermission();
+           
             //$location.path('/FindItems');
             $location.path('/Accounts');
             

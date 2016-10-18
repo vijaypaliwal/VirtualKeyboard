@@ -23,17 +23,18 @@
 
 <div class="top50">
     <br />
-    <button type="button" ng-click="GoTo('/uom')" class="waves-effect waves-light btn-large btn-success width-100 animated bouncein delay-6">
+    My uoms-{{checkpermission('URL:Manage/Location')}}
+    <button ng-if="checkpermission('URL:Manage/UnitOfMeasure')==true" type="button" ng-click="GoTo('/uom')" class="waves-effect waves-light btn-large btn-success width-100 animated bouncein delay-6">
 
         <div class="row">
             <div class="col-xs-9">
                 <i class="fa fa-cog"></i> Manage UOM
             </div>
-            
+
 
             <div class="col-xs-3">
 
-                <div ng-if="IsUOMLoading == true"> <img height="30" width="30"  src="img/loader1.gif" alt="Alternate Text" /></div>
+                <div ng-if="IsUOMLoading == true"> <img height="30" width="30" src="img/loader1.gif" alt="Alternate Text" /></div>
                 <div ng-if="IsUOMLoading == false">
                     {{UOMList.length}}
                 </div>
@@ -43,8 +44,8 @@
 
     </button>
 
-
-    <button type="button" ng-click="GoTo('/Location')" class="waves-effect waves-light btn-large btn-danger width-100 animated bouncein delay-6">
+    My locations-{{checkpermission('URL:Manage/Location')}}
+    <button ng-if="checkpermission('URL:Manage/Location')==true" type="button" ng-click="GoTo('/Location')" class="waves-effect waves-light btn-large btn-danger width-100 animated bouncein delay-6">
 
         <div class="row">
             <div class="col-xs-9">
@@ -62,14 +63,14 @@
 
     </button>
 
-
-    <button type="button" ng-click="GoTo('/status')" class="waves-effect waves-light btn-large accent-color width-100 animated bouncein delay-6">
+    My status-{{checkpermission('URL:Manage/Status')}}
+    <button ng-if="checkpermission('URL:Manage/Status')==true" type="button" ng-click="GoTo('/status')" class="waves-effect waves-light btn-large accent-color width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-9">
                 <i class="fa fa-check-circle-o"> </i> Manage Status
 
             </div>
-         
+
 
             <div class="col-xs-3">
 
@@ -78,16 +79,12 @@
                     {{StatusList.length}}
                 </div>
             </div>
-
         </div>
-
-
-
     </button>
 
 
-    
-    <button type="button" ng-click="GoTo('/selectcolumns')" class="waves-effect waves-light btn-large btn-indigo width-100 animated bouncein delay-6">
+    My inventory-{{checkpermission('URL:Admin/MyInventoryColumn')}}
+    <button ng-if="checkpermission('URL:Admin/MyInventoryColumn')==true" type="button" ng-click="GoTo('/selectcolumns')" class="waves-effect waves-light btn-large btn-indigo width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-9">
                 <i class="fa fa-check"></i> Select Inventory Columns
@@ -108,8 +105,8 @@
 
 
     </button>
-
-    <button type="button" ng-click="GoTo('/mobileorder')" class="waves-effect waves-light btn-large btn-warning width-100 animated bouncein delay-6">
+    My inventory-{{checkpermission('URL:Admin/MyInventoryColumn')}}
+    <button type="button" ng-if="checkpermission('URL:Admin/MyInventoryColumn')==true" ng-click="GoTo('/mobileorder')" class="waves-effect waves-light btn-large btn-warning width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-9">
                 <i class="fa fa-sort-alpha-asc"></i> Arrange Inventory Columns
@@ -132,7 +129,7 @@
     </button>
 
 
-    <button type="button" ng-click="GoTo('/customfield')" class="waves-effect waves-light btn-large btn-purple width-100 animated bouncein delay-6">
+    <button  type="button" ng-click="GoTo('/customfield')" class="waves-effect waves-light btn-large btn-purple width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-9">
                 <i class="fa fa-eye-slash"></i>    Manage Custom fields
@@ -145,8 +142,8 @@
                 <div ng-if="IsCustomfieldLoading == true"> <img height="30" width="30" src="img/loader1.gif" alt="Alternate Text" /></div>
 
                 <div ng-if="IsCustomfieldLoading == false">{{customfiledcounter}}</div>
-                
-          
+
+
             </div>
 
         </div>

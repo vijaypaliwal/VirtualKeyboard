@@ -308,6 +308,9 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
         $scope.GetGlobalRestockViews();
         $scope.GetLocalRestockViews();
         $scope.GetsummaryViews();
+
+        $scope.getactivepermission();
+
         $scope.$apply();
     }
     init()

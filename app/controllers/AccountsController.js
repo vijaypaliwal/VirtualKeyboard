@@ -114,7 +114,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
 
             success: function (data) {
 
-          
+
                 if (data.UpdateSecurityTokenResult.Success == true) {
 
                     if (data.UpdateSecurityTokenResult != null && data.UpdateSecurityTokenResult.Payload != null) {
@@ -127,6 +127,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
                         localStorageService.set('AccountID', AccountName);
 
                         $scope.IsLoading = false;
+                        $scope.getactivepermission();
                         $location.path("/FindItems");
 
                         $scope.$apply();
