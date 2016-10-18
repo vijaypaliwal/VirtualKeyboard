@@ -118,6 +118,12 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
     }
 
 
+    $scope.showuserlist = function () {
+        $scope.showpermission = false;
+        $scop.$apply();
+    }
+
+
 
     $scope.GetAccountuser = function (Type) {
         var authData = localStorageService.get('authorizationData');

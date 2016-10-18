@@ -55,9 +55,14 @@
         </div>
     </div>
 </div>
-<a ng-click="showpermission=false" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
 
 
+<div ng-if="showpermission==true">
+    <a ng-click="showuserlist()" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
+</div>
+
+
+<a href="#/Accounts" ng-if="showpermission==false" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
 
 <div class="top45">
 
