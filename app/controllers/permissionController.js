@@ -18,6 +18,7 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
     $scope.Permissions3 = [];
 
     $scope.showpermission = false;
+    $scope.IsLoading = true;
 
 
     $scope.ManagePermission = function (userkey) {
@@ -37,6 +38,7 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
 
     $scope.GetPermission=function(Type, Key)
     {
+        $scope.IsLoading = true;
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -67,6 +69,7 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
                        if (Type == 5) {
 
                            $scope.Permissions3 = response.GetUserPermissionsResult.Payload;
+                           $scope.IsLoading = false;
                        }
                    }
                    else {
@@ -142,13 +145,13 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
                  
                    $scope.Userlist = response.GetUserListResult.Payload;
 
-                   debugger;
+                   $scope.IsLoading = false;
 
                    CheckScopeBeforeApply();
 
                },
                error: function (response) {
-                   alert("Error");
+                   $scope.IsLoading = false;
                   
                }
            });

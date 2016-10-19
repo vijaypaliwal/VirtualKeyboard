@@ -80,6 +80,16 @@
         </div>
     </div>
 
+    <div ng-if="IsLoading==true">
+
+        <div class="modal-backdrop fade in"></div>
+        <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
+            <img src="img/loader.gif" alt="Alternate Text" />
+
+        </div>
+    </div>
+
+
     <ul ng-if="showpermission==false" class="list-group">
         <li class="list-group-item" ng-repeat="obj in Userlist" ng-if="obj.UnitOfMeasureName != ''">
             <div class="row">
