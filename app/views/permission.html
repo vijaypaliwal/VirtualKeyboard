@@ -137,7 +137,9 @@
                         <div class="row">
 
                             <div class="col-xs-2">
-                                <a class="btn text btn-warning ng-binding">{{$index + 1}} </a>
+                                <a ng-if="_obj.PermissionName=='Location Library'" class="btn text btn-warning">1 </a>
+                                <a ng-if="_obj.PermissionName=='Units of Measure Library'" class="btn text btn-warning">2 </a>
+                                <a ng-if="_obj.PermissionName=='Status Library'" class="btn text btn-warning">3 </a>
                             </div>
 
                             <div class="col-xs-6">
@@ -187,7 +189,7 @@
                         <div class="row">
 
                             <div class="col-xs-2">
-                                <a class="btn text btn-warning ng-binding">{{$index}} </a>
+                                <a class="btn text btn-warning accent-color">{{$index}} </a>
                             </div>
 
 
@@ -285,7 +287,7 @@
         <ul class="animated slideInUp selectAction">
             <li> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
             <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-map-marker"></i> </a></li>
-            <li> <a href="#/reportmenu"><span class="newinv">Go to Report</span></a>  <a href="#/Go to Report" class=" waves-effect btn-primary btn"> <i class="fa fa-check-circle-o"></i> </a></li>
+            <li> <a href="#/reportmenu"><span class="newinv">Go to Report</span></a>  <a href="#/reportmenu" class=" waves-effect btn-primary btn"> <i class="fa fa-check-circle-o"></i> </a></li>
             <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
         </ul>
     </div>
@@ -373,8 +375,6 @@
 
         $('html, body').animate({ scrollTop: 0 }, 500, 'linear');
     }
-
-
 
     $(window).scroll(function () {
         ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
