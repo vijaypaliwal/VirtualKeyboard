@@ -22,18 +22,14 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     $scope.Permission1 = [];
     $scope.Permission2 = [];
     $scope.Permission3 = [];
-
+    $scope.Permission4 = [];
     $scope.IsActivePermission = false;
-
-
 
 
     $scope.CurrentAccount = localStorageService.get('AccountID');
 
 
     $scope.CurrentUserKey = localStorageService.get('UserKey');
-
-
 
     $scope.GetPermission = function (Type, Key) {
         var authData = localStorageService.get('authorizationData');
@@ -55,6 +51,13 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
 
                    if (response.GetUserPermissionsResult.Success == true) {
+
+                       if (Type == 1) {
+
+                           $scope.Permissions4 = response.GetUserPermissionsResult.Payload;
+
+
+                       }
                        if (Type == 4) {
 
                            $scope.Permissions1 = response.GetUserPermissionsResult.Payload;
@@ -117,6 +120,10 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         setTimeout(function () {
             $scope.GetPermission(5, $scope.CurrentUserKey);
         }, 10);
+
+        setTimeout(function () {
+            $scope.GetPermission(1, $scope.CurrentUserKey);
+        }, 10);
         $scope.$apply();
         setTimeout(function () {
 
@@ -130,17 +137,16 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             for (var i = 0; i < $scope.Permissions3.length; i++) {
                 $scope.Permission.push($scope.Permissions3[i]);
             }
+
+            for (var i = 0; i < $scope.Permissions4.length; i++) {
+                $scope.Permission.push($scope.Permissions4[i]);
+            }
             $scope.$apply();
             $scope.IsActivePermissionLink();
         }, 500);
      
 
     }
-
-
-    
-
-
 
     $scope.checkpermission = function (permissioncode) {
 

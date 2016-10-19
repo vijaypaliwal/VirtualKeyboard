@@ -265,8 +265,52 @@
                     </div>
                 </td>
             </tr>
-           
 
+            <tr>
+                <td>
+                    <div class="infoareas columnHeader" ng-click="openClosePanel(4)">
+                        <h5>Global</h5>
+                        <i class="fa fa-chevron-up pull-right" ng-if="IsGlobalopen==true"></i>
+                        <i class="fa fa-chevron-down pull-right" ng-if="IsGlobalopen==false"></i>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-repeat="_obj in Permissions4" ng-if="IsGlobalopen==true && (_obj.PermissionName == 'Increase Item Quantities' || _obj.PermissionName == 'Decrease  Item Quantities' || _obj.PermissionName == 'Move Items Among Locations' || _obj.PermissionName == 'Convert Items to Different Units of Measure' || _obj.PermissionName == 'Apply Unique Tags to Items' || _obj.PermissionName == 'Can Change Inventory Status' || _obj.PermissionName == 'Can Edit/Undo Transactions')">
+                <td>
+                    <div class="infoareas">
+
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning ng-binding">{{$index}} </a>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <a class="text ng-binding">{{_obj.PermissionName }} </a>
+                            </div>
+                            <div class="col-xs-4">
+                                <div ng-if="_obj.IsTurnedOn==false" class="btn-group custombtnGroup">
+                                    <label class="switch1">
+
+                                        <input ng-change="UpdatePermission(_obj.PermissionCode,1,'See')" type="checkbox" ng-model="_obj.IsTurnedOn">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+
+                                <div ng-if="_obj.IsTurnedOn==true" class="btn-group custombtnGroup">
+                                    <label class="switch1">
+
+                                        <input ng-change="UpdatePermission(_obj.PermissionCode,1,'Hide')" type="checkbox" ng-model="_obj.IsTurnedOn">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+           
+         
         </tbody>
 
 
@@ -285,7 +329,7 @@
 <div id="bottommenumodal" class="modal bottommenu fade">
     <div class="modal-body">
         <ul class="animated slideInUp selectAction">
-            <li> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
+            <li ng-if="checkpermission('ACTION:CanAddInventory')==true"> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
             <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-map-marker"></i> </a></li>
             <li> <a href="#/reportmenu"><span class="newinv">Go to Report</span></a>  <a href="#/reportmenu" class=" waves-effect btn-primary btn"> <i class="fa fa-check-circle-o"></i> </a></li>
             <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>

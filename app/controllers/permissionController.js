@@ -11,6 +11,11 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
     $scope.IsAdminopen = true;
     $scope.IsViewOpen = true;
     $scope.IsLibrarydataopen = true;
+
+    $scope.IsGlobalopen = true;
+
+    
+
     $scope.LocalCustomItemFieldsList = [];
     $scope.LocalCustomActivityFieldsList = [];
     $scope.Permissions1 = [];
@@ -23,9 +28,8 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
 
     $scope.ManagePermission = function (userkey) {
 
-        debugger;
-
         $scope.showpermission = true;
+        $scope.GetPermission(1, userkey);
         $scope.GetPermission(3,userkey);
         $scope.GetPermission(4, userkey);
         $scope.GetPermission(5, userkey);
@@ -59,6 +63,11 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
 
                            $scope.Permissions1 = response.GetUserPermissionsResult.Payload;
                        
+                       }
+
+                       if (Type == 1) {
+
+                           $scope.Permissions4 = response.GetUserPermissionsResult.Payload;
                        }
 
                        if (Type == 3) {
@@ -167,15 +176,24 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
                 $scope.IsLibrarydataopen = !$scope.IsLibrarydataopen;
                 $scope.IsViewOpen = false;
                 $scope.IsAdminopen = false;
+                $scope.IsGlobalopen = false;
                 break;
             case 2:
                 $scope.IsLibrarydataopen = false;
                 $scope.IsAdminopen = false;
                 $scope.IsViewOpen = !$scope.IsViewOpen;
+                $scope.IsGlobalopen = false;
                 break;
             case 3:
                 $scope.IsLibrarydataopen = false;
                 $scope.IsAdminopen = !$scope.IsAdminopen;
+                $scope.IsViewOpen = false;
+                $scope.IsGlobalopen = false;
+                break;
+
+            case 4:
+                $scope.IsLibrarydataopen = false;
+                $scope.IsGlobalopen = !$scope.IsGlobalopen;
                 $scope.IsViewOpen = false;
                 break;
             default:
@@ -239,6 +257,8 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
 
 
     function init() {
+
+        $scope.GetPermission(1);
 
         $scope.GetPermission(3);
         $scope.GetPermission(4);

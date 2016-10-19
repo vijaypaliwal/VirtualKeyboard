@@ -127,8 +127,6 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
             }
         });
 
-
-
         return deferred.promise;
 
     };
