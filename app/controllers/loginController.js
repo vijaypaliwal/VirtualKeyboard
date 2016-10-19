@@ -103,5 +103,4 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
     };
 
    
-   
 }]);

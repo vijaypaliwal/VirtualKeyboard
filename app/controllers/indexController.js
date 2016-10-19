@@ -75,7 +75,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                        }
                    }
                    else {
-                       $scope.ShowErrorMessage("Custom column's data", 1, 1, response.GetUserPermissionsResult.Message)
+                    //   $scope.ShowErrorMessage("Custom column's data", 1, 1, response.GetUserPermissionsResult.Message)
 
                    }
 
@@ -87,8 +87,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
                    alert("Error");
 
-                   log.error(response.statusText);
-                   $scope.ShowErrorMessage("Custom column's data", 2, 1, response.statusText);
+                //   log.error(response.statusText);
+               //    $scope.ShowErrorMessage("Custom column's data", 2, 1, response.statusText);
 
                    //$scope.InventoryObject.Location = 678030;
                },
