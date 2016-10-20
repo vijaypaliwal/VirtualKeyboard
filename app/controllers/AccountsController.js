@@ -128,6 +128,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
 
                         $scope.IsLoading = false;
                         $scope.getactivepermission();
+                        authService.GetuserInfo();
                         $location.path("/FindItems");
 
                         $scope.$apply();
