@@ -94,11 +94,11 @@
         <li class="list-group-item" ng-repeat="obj in Userlist" ng-if="obj.UnitOfMeasureName != ''">
             <div class="row">
                 <div class="col-xs-2">
-                    <a class="btn text btn-success accent-color">{{$index+1}}</a>
+                 <a class="btn text btn-success accent-color">{{$index+1}}</a>
                 </div>
                 <div class="col-xs-8">
-                    <a class="text">{{obj.FirstName}}</a>
-                    <a style="font-size:12px; margin-top:-13px; color:#656565; " class="text">{{obj.Email}}</a>
+                 <a class="text">{{obj.FirstName}}</a>
+                 <a style="font-size:12px; margin-top:-13px; color:#656565; " class="text">{{obj.Email}}</a>
                 </div>
                 <div class="col-xs-2">
 
@@ -281,7 +281,7 @@
 
                         <div class="row">
                             <div class="col-xs-2">
-                                <a class="btn text btn-warning ng-binding">{{$index}} </a>
+                                <a class="btn text btn-warning ng-binding">{{$index}}  {{_obj.PermissionCode }}</a>
                             </div>
 
                             <div class="col-xs-6">

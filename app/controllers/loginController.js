@@ -50,6 +50,9 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
 
                 }
 
+             
+
+
                 $scope.$apply();
             }
         });
@@ -90,7 +93,15 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
             $scope.GetProfileData();
 
            
-                $scope.getactivepermission();
+            $scope.getactivepermission();
+
+            $scope.IsOwner = localStorageService.get('IsOwner');
+
+       
+            debugger;
+
+
+         
            
             //$location.path('/FindItems');
             $location.path('/Accounts');

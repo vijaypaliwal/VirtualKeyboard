@@ -579,18 +579,18 @@
                             </td>
 
 
-                            <td ng-if="CurrentActiveField=='iStatusValue'">
+                            <td ng-if="CurrentActiveField=='iStatusValue' && checkpermission('URL:Manage/Status')==true">
                                 <div class="aligncenter">
                                     <a class="scanbtn btn btn-gray" ng-click="CreateNew(3)"><i class="fa fa-plus"></i>Add</a>
                                 </div>
                             </td>
-                            <td ng-if="CurrentActiveField=='lLoc'">
+                            <td ng-if="CurrentActiveField=='lLoc' && checkpermission('URL:Manage/Location')==true">
                                 <div class="aligncenter">
                                     <a class="scanbtn btn btn-gray" ng-click="CreateNew(1)"><i class="fa fa-plus"></i>Add</a>
                                 </div>
 
                             </td>
-                            <td ng-if="CurrentActiveField=='uomUOM'">
+                            <td ng-if="CurrentActiveField=='uomUOM' && checkpermission('URL:Manage/UnitOfMeasure')==true">
                                 <div class="aligncenter">
                                     <a class="scanbtn btn btn-gray" ng-click="CreateNew(2)"><i class="fa fa-plus"></i>Add</a>
                                 </div>

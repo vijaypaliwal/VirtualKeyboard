@@ -23,7 +23,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     $scope.Permission2 = [];
     $scope.Permission3 = [];
     $scope.Permission4 = [];
-    $scope.IsActivePermission = false;
+ 
+
 
 
     $scope.CurrentAccount = localStorageService.get('AccountID');
@@ -104,10 +105,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     }
 
-    $scope.IsActivePermissionLink = function () {
-        $scope.IsActivePermission = $scope.checkpermission('URL:configure/users/userlist.aspx');
-        $scope.$apply();
-    }
+
 
     $scope.getactivepermission = function () {
         $scope.CurrentUserKey=localStorageService.get('UserKey');
@@ -142,7 +140,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                 $scope.Permission.push($scope.Permissions4[i]);
             }
             $scope.$apply();
-            $scope.IsActivePermissionLink();
+          
         }, 500);
      
 

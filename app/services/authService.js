@@ -160,6 +160,18 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                    localStorageService.set('UserKey', response.GetUserInfoResult.Payload[0].UserKey);
 
+                   localStorageService.set('IsOwner', response.GetUserInfoResult.Payload[0].IsOwner);
+
+                   if (response.GetUserInfoResult.Payload[0].IsOwner == "true" || response.GetUserInfoResult.Payload[0].IsOwner == true)
+                   {
+                       $("#Permissionlink").show();
+                   }
+                   else {
+                       $("#Permissionlink").hide();
+                   }
+
+
+
 
                    if (response.GetUserInfoResult.Payload[0].ProfilePic != null && response.GetUserInfoResult.Payload[0].ProfilePic != "") {
 
