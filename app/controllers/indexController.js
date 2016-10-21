@@ -148,11 +148,10 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.checkpermission = function (permissioncode) {
 
-
+        console.log($scope.Permission);
 
         for (var i = 0; i < $scope.Permission.length; i++) {
             if ($scope.Permission[i].PermissionCode == permissioncode) {
-
 
                 return $scope.Permission[i].IsTurnedOn;
 
@@ -160,6 +159,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         }
 
     }
+
+
 
 
     $scope.logOut = function () {
@@ -172,6 +173,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $("#Inventoryerror").modal('hide');
         $location.path('/login');
     }
+
+
     $scope.GetTrimmedString = function (id) {
         var _string = $(id).val();
         if (_string != null && _string != undefined) {
