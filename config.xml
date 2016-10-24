@@ -26,7 +26,7 @@
   
   <gap:plugin name="org.apache.cordova.splashscreen" />
   
-  <gap:plugin name="net.bgta.phonegap.plugin.appversion" source="pgb"/>
+  <!--<gap:plugin name="net.bgta.phonegap.plugin.appversion" source="pgb"/>-->
   
   <feature name="http://api.phonegap.com/1.0/device" />
   <feature name="debug-server" required="true">
