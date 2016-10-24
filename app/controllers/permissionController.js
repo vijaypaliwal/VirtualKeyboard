@@ -128,7 +128,7 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
 
     $scope.showuserlist = function () {
         $scope.showpermission = false;
-        $scop.$apply();
+        $scope.$apply();
     }
 
 
