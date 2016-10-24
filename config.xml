@@ -20,13 +20,13 @@
     <gap:plugin name="org.apache.cordova.file" />
     <gap:plugin name="org.apache.cordova.file-transfer" />
     <gap:plugin name="org.apache.cordova.network-information" />
-   <gap:plugin name="de.phonostar.softkeyboard-custom" spec="0.1.1" source="npm" />
+   <gap:plugin name="de.phonostar.softkeyboard-custom" spec="0.1.1" source="pgb" />
 
   <gap:plugin name="ionic-plugin-keyboard"  source="npm" version="1.0.7" />
   
   <gap:plugin name="org.apache.cordova.splashscreen" />
   
-  <gap:plugin name="net.bgta.phonegap.plugin.appversion" source="npm"/>
+  <gap:plugin name="net.bgta.phonegap.plugin.appversion" source="pgb"/>
   
   <feature name="http://api.phonegap.com/1.0/device" />
   <feature name="debug-server" required="true">
