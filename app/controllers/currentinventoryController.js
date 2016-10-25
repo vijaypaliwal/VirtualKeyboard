@@ -984,7 +984,6 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
                    $scope.ShowErrorMessage("Unit of Measure list", 2, 1, err.statusText);
 
-
                }
            });
 
@@ -1122,6 +1121,7 @@ app.directive('bootstrapSwitch', [
         }
 ]);
 
+
 app.directive('customSwipe', [
       function () {
           return {
@@ -1130,14 +1130,10 @@ app.directive('customSwipe', [
               link: function (scope, element, attrs, ngModel) {
                   $(element).swipe({
                       swipe: function (event, direction, distance, duration, fingerCount) {
-                          //This only fires when the user swipes left
-
+                         
                           setTimeout(function () {
 
                               element.find("input").trigger("click");
-
-
-
 
                           }, 10)
                       },

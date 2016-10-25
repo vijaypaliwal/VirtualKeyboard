@@ -161,7 +161,7 @@
 
 
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
+                                                        <input ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveTransactionData.MoveToLocationText)" type="text" class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
 
                                                         <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveTransactionData.MoveToLocationText)"><i class="fa fa-search"></i></span>
                                                     </div>

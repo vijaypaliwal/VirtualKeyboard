@@ -189,6 +189,75 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         return true;
     }
 
+
+
+    $scope.savestatus = function (Statusvalue) {
+
+        var _StatusValue = $.trim(Statusvalue);
+
+        if (_StatusValue != "") {
+
+            $scope.StatusToCreate = Statusvalue;
+            var authData = localStorageService.get('authorizationData');
+            if (authData) {
+                $scope.SecurityToken = authData.token;
+            }
+            $scope.IsProcessing = true;
+            var datatosend = { "StatusId": 0, "StatusValue": $scope.StatusToCreate };
+
+
+            $.ajax({
+                url: serviceBase + "CreateEditStatus",
+                type: 'POST',
+                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "_StatusVM": datatosend }),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (result) {
+
+                    $scope.IsProcessing = false;
+
+                    if (result.CreateEditStatusResult.Success == true) {
+
+                        if (result.CreateEditStatusResult.Payload == 1) {
+                            if ($scope.mode == 2) {
+                                ShowSuccess("Added");
+                              
+                            }
+
+
+
+
+                        }
+
+                        if (result.CreateEditStatusResult.Payload == 0) {
+
+                            log.warning("Already exist");
+                            $scope.$apply();
+                        }
+                    }
+                    else {
+                        $scope.ShowErrorMessage("Updating status", 3, 1, result.CreateEditStatusResult.Message)
+
+                    }
+
+                },
+                error: function (err) {
+                    $scope.IsProcessing = false;
+                    $scope.ShowErrorMessage("Updating Status", 2, 1, err.statusText);
+
+
+                },
+                complete: function () {
+                    $scope.IsProcessing = false;
+                }
+
+            });
+
+            $scope.$apply();
+
+        }
+
+    }
     $scope.SaveLabel = function (Type) {
         if ($scope.checkDuplicate(Type)) {
 
@@ -212,6 +281,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 var _statusobj = { StatusValue: $scope.CreateNewLabel };
                 $scope.StatusList.push(_statusobj);
                 $scope.InventoryObject.Status = $scope.CreateNewLabel;
+                $scope.savestatus($scope.InventoryObject.Status);
             }
             $scope.CreateNewLabel = "";
             CheckScopeBeforeApply();
