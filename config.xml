@@ -16,8 +16,8 @@
   <!--<gap:plugin name="com.phonegap.plugins.barcodescanner"/>-->
   <!--gap:plugin name="org.apache.cordova.statusbar" spec="0.1.4" source="pgb" /-->
   <!--<gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />-->
-  <!--<gap:plugin name="org.apache.cordova.camera" />-->
-    <!--<gap:plugin name="org.apache.cordova.file" />-->
+  <gap:plugin name="org.apache.cordova.camera" />
+    <gap:plugin name="org.apache.cordova.file" />
     <gap:plugin name="org.apache.cordova.file-transfer" />
     <gap:plugin name="org.apache.cordova.network-information" />
    <!--<gap:plugin name="de.phonostar.softkeyboard-custom" spec="0.1.1"  />
@@ -25,7 +25,7 @@
   <gap:plugin name="ionic-plugin-keyboard"  source="npm" version="1.0.7" />
   <gap:plugin name="net.bgta.phonegap.plugin.appversion" />-->
   
-  <gap:plugin name="org.apache.cordova.splashscreen" />
+  <!--<gap:plugin name="org.apache.cordova.splashscreen" />-->
   
   
   <feature name="http://api.phonegap.com/1.0/device" />
