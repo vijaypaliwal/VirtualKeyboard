@@ -2403,6 +2403,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $("#myform .swiper-slide-active select:first").focus();
             $("#myform .swiper-slide-active input:first").not("input[type='file']").trigger("click");
             $("#myform .swiper-slide-active input:first").not("input[type='file']").trigger("keypress");
+
+            $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
+            $("#myform .swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
         }
         else {
 
