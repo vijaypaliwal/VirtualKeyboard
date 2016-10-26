@@ -38,7 +38,7 @@
   <plugin name="org.apache.cordova.network-information" source="npm"/>
   <plugin name="org.apache.cordova.splashscreen" source="npm"/>
   <plugin name="ionic-plugin-keyboard" source="npm"/>
-  <plugin name="net.bgta.phonegap.plugin.appversion" source="npm"/>
+  
   <plugin name="cordova-plugin-appversion" source="npm"/>
   
   
