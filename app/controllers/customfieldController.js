@@ -457,7 +457,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
                  setTimeout(function () {
                      ShowSuccess("Saved");
 
-                     $scope.GetAllData(false);
+                   //  $scope.GetAllData(false);
 
                  },1000);
              }
