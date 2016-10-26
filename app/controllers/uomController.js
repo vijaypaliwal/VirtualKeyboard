@@ -138,6 +138,8 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
 
         if (_StatusValue != "") {
 
+           
+
             $scope.UOMToCreate = $("#UOMToCreate").val();
             var authData = localStorageService.get('authorizationData');
             if (authData) {
@@ -156,10 +158,10 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
                 success: function (result) {
                     $scope.IsProcessing = false;
 
-
+                    debugger;
                     if (result.CreateEditUOMResult.Success == true) {
 
-                        if (result.CreateEditUOMResult.Payload == 1) {
+                        if (result.CreateEditUOMResult.Payload.ID == 1) {
                             if ($scope.mode == 2) {
                                 ShowSuccess("Added");
 
@@ -194,9 +196,62 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
 
 
 
-                        if (result.CreateEditUOMResult.Payload == 0) {
+                        if (result.CreateEditUOMResult.Payload.ID == 0) {
 
-                            log.warning("Already exist");
+                            if ($scope.mode == 3) {
+
+                                var _headerText = result.CreateEditUOMResult.Payload.OldUOM + " into " + result.CreateEditUOMResult.Payload.NewUOM + " ?"
+                                var _OldUOM = result.CreateEditUOMResult.Payload.OldUOM;
+                                var _NewUOM = result.CreateEditUOMResult.Payload.NewUOM;
+                                var box = bootbox.confirm(_headerText, function (result) {
+                                    if (result) {
+
+                                        $.ajax({
+                                            url: serviceBase + "MergeUOM",
+                                            type: 'POST',
+                                            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "OldUOM": _OldUOM, "NewUOM": _NewUOM }),
+                                            dataType: 'json',
+                                            contentType: 'application/json',
+                                            success: function (result) {
+
+                                                if (result.MergeUOMResult.Success == true) {
+
+                                                    ShowSuccess("Merged");
+                                                    $scope.getuom();
+
+                                                    $scope.mode = 1;
+
+                                                }
+                                                else {
+                                                    $scope.ShowErrorMessage("Merging UOM", 1, 1, result.MergeUOMResult.Message)
+
+                                                }
+
+                                            },
+                                            error: function (err) {
+                                                $scope.ShowErrorMessage("Merging UOM", 2, 1, err.statusText);
+
+
+
+                                            },
+                                            complete: function () {
+                                            }
+
+                                        });
+                                    }
+                                });
+
+                                var _msg = "The new unit of measure name you have chosen is already in use.  If you like, you may merge all existing records at the unit of measure, " + _OldUOM + ", into the existing unit of measure called " + _NewUOM + ".<br /><br />If you proceed, all existing references to " + _OldUOM + " will be removed.  <strong>This may take up to a minute, and the action cannot be undone.</strong><br /><br /> Would you like to proceed?"
+
+                                box.on("shown.bs.modal", function () {
+                                    $(".mybootboxbody").html(_msg);
+
+                                });
+                            }
+
+                            if ($scope.mode == 2) {
+                                log.warning("Already Exist, please update");
+                            }
                             $scope.IsProcessing = false;
                             $scope.$apply();
                         }
