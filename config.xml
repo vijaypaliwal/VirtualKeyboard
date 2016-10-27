@@ -12,9 +12,18 @@
   <author href="http://www.clearlyinventory.com/" email="support@clearlyinventory.com">
    SHIVAM ITCS Team
   </author>
+  
+   <plugin name="phonegap-plugin-barcodescanner" source="npm"/>
+  <plugin name="cordova-plugin-statusbar" source="npm"/>
+  <plugin name="cordova-plugin-camera" source="npm"/>
+  <plugin name="cordova-plugin-file" source="npm"/>
+  <plugin name="cordova-plugin-file-transfer" source="npm"/>
+  <plugin name="org.apache.cordova.network-information" source="npm"/>
+  <plugin name="org.apache.cordova.splashscreen" source="npm"/>
+  <plugin name="ionic-plugin-keyboard" source="npm"/>
  
-  <gap:plugin name="com.phonegap.plugins.barcodescanner"/>
-  <!--gap:plugin name="org.apache.cordova.statusbar" spec="0.1.4" source="pgb" /-->
+  <!--gap:plugin name="com.phonegap.plugins.barcodescanner"/>
+  <gap:plugin name="org.apache.cordova.statusbar" spec="0.1.4" source="pgb" />
   <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
   <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.file" />
@@ -26,7 +35,7 @@
   
   <gap:plugin name="org.apache.cordova.splashscreen" />
   
-  <gap:plugin name="net.bgta.phonegap.plugin.appversion" source="pgb"/>
+  <gap:plugin name="net.bgta.phonegap.plugin.appversion" source="pgb"/ -->
   
   <feature name="http://api.phonegap.com/1.0/device" />
   <feature name="debug-server" required="true">
@@ -38,10 +47,12 @@
   <preference name="UIWebViewBounce" value="false" />
   <preference name="DisallowOverscroll" value="true" />
   
-  <preference name="phonegap-version" value="3.6.3" />
+ <preference name="phonegap-version" value="cli-6.3.0" />
   <preference name="orientation"   value="all" />
   <preference name="target-device"  value="universal" />
   <preference name="fullscreen" value="false" />
+  
+  
   
   <preference name="StatusBarOverlaysWebView" value="false" />
   <preference name="StatusBarBackgroundColor" value="#2196F3" />
@@ -55,7 +66,6 @@
 <preference name="SplashScreenDelay" value="10000"/>
 
   <icon src="icon.png" />
-
   <icon src=".pgbomit/res/icon/android/icon-36-ldpi.png"   gap:platform="android"    gap:density="ldpi" />
   <icon src=".pgbomit/res/icon/android/icon-48-mdpi.png"   gap:platform="android"    gap:density="mdpi" />
   <icon src=".pgbomit/res/icon/android/icon-72-hdpi.png"   gap:platform="android"    gap:density="hdpi" />
@@ -82,9 +92,6 @@
   <gap:splash src=".pgbomit/res/screen/ios/screen-iphone-portrait-2x.png" gap:platform="ios"     width="640" height="1136" />
   <gap:splash src=".pgbomit/res/screen/ios/screen-ipad-portrait.png"      gap:platform="ios"     width="768" height="1024" />
   <gap:splash src=".pgbomit/res/screen/ios/screen-ipad-landscape.png"     gap:platform="ios"     width="1024" height="768" />
-  
-  
- 
   
   <gap:splash src=".pgbomit/res/screen/ios/Splash-1920x1080.png"     gap:platform="ios" height="1920" width="1080" />
   <gap:splash src=".pgbomit/res/screen/ios/Splash-1080x1920.png"     gap:platform="ios" height="1080" width="1920" />
