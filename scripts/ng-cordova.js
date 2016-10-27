@@ -4708,6 +4708,7 @@ angular.module('ngCordova.plugins.keyboard', [])
 
     return {
         hideAccessoryBar: function (bool) {
+            alert("called" +bool);
             //bool = false;
         return cordova.plugins.Keyboard.hideKeyboardAccessoryBar(bool);
       },
