@@ -269,7 +269,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
         var _path = $location.path();
 
-  
+        $cordovaKeyboard.hideAccessoryBar(false);
+
 
         if (_path == "/inventory") {
             $scope.changepage();
