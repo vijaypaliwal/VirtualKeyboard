@@ -235,7 +235,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.onPhotoURISuccessNew = function (imageData) {
 
-
+        $(".viewimage").show();
         $("#bottommenumodal").modal('hide');
 
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
