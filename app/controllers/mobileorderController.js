@@ -208,6 +208,15 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
                 cordova.plugins.Keyboard.disableScroll(true);
 
+                if($cordovaKeyboard!=undefined)
+                {
+                    $cordovaKeyboard.disableScroll(true);
+
+                }
+                else {
+                    alert("Keyboard not defined")
+                }
+
             }
             catch (err) {
                 // alert("into Error");
@@ -222,8 +231,14 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         stop: function (e, ui) {
 
             try{
+                if ($cordovaKeyboard != undefined) {
+                    $cordovaKeyboard.disableScroll(true);
 
-            cordova.plugins.Keyboard.disableScroll(false);
+                }
+                else {
+                    alert("Keyboard not defined")
+                }
+            //cordova.plugins.Keyboard.disableScroll(false);
 
         }
         catch (err) {
