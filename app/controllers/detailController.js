@@ -58,6 +58,8 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.OpenBox = function () {
 
+        $("#bottommenumodal").modal('hide');
+
         $("#myModalforlist").modal("show");
 
     }
