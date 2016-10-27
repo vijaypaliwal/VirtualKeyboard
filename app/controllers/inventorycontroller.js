@@ -2057,8 +2057,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
-            var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-
+            //var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+            var scanner = cordova.plugins.barcodeScanner;
             scanner.scan(function (result) {
 
                 var resultvalue = result.text;
