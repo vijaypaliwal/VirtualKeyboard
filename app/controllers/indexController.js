@@ -354,7 +354,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
 
 
-    $scope.UploadImage = function (txnID, ImageList) {
+    $scope.UploadImage = function (txnID, ImageList,pID) {
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -369,7 +369,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
               contentType: 'application/json; charset=utf-8',
               dataType: 'text json',
               async: true,
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": ImageList, "txnID": txnID }),
+              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ImageList": ImageList, "txnID": txnID, "pID": pID }),
               success: function (response) {
                   if (response.UploadImageResult.Success == true) {
 

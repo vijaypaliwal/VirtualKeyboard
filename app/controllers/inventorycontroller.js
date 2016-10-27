@@ -1007,7 +1007,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                       if (_toSendImages.length > 0) {
                           // log.info("Image upload started it will continue in backend you can do other work.")
-                          $scope.UploadImage(response.AddInventoryDataResult.Payload, _toSendImages);
+                          $scope.UploadImage(response.AddInventoryDataResult.Payload, _toSendImages,0);
                       }
                       ImageListAndroid = [];
 

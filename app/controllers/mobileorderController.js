@@ -204,7 +204,15 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         start: function (evt, ui) {
             $(this).attr("style", "cursor:move")
 
-           $cordovaKeyboard.disableScroll(true);
+            try {
+
+                cordova.plugins.Keyboard.disableScroll(true);
+
+            }
+            catch (err) {
+                // alert("into Error");
+                alert("Error Occurred" + err);
+            }
         },
         items: "tr",
         update: function (e, ui) {
@@ -213,8 +221,15 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         cancel: ".unsortable",
         stop: function (e, ui) {
 
-             
-        $cordovaKeyboard.disableScroll(false);
+            try{
+
+            cordova.plugins.Keyboard.disableScroll(false);
+
+        }
+        catch (err) {
+           // alert("into Error");
+            alert("Error Occurred"+err);
+}
 
 
         }
