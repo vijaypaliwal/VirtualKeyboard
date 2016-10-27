@@ -150,6 +150,9 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     }
 
     $scope.onPhotoDataSuccessNew = function (imageData) {
+
+        $("#bottommenumodal").modal('hide');
+
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
 
         imageData = "data:image/jpeg;base64," + imageData;
@@ -226,6 +229,29 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
             correctOrientation: true,
             sourceType: pictureSource.PHOTOLIBRARY
         });
+    }
+
+    $scope.onPhotoURISuccessNew = function (imageData) {
+
+
+        $("#bottommenumodal").modal('hide');
+
+        var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
+
+        imageData = "data:image/jpeg;base64," + imageData;
+
+        var id = randomStringNew(5, '0123456789');
+        _ImgObj.ImageID = id;
+
+     
+        $("#myModalforlist").modal("hide");
+
+
+        _ImgObj.FileName = "IphoneLibrary";
+        _ImgObj.bytestring = imageData;
+        $scope.ImageList.push(_ImgObj);
+        CheckScopeBeforeApply();
+
     }
 
 
@@ -486,9 +512,13 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
         $scope.UploadImage(0, _toSendImages, $scope.CurrentInventory.pID);
 
+        log.success("Image save process running, Please wait")
+
+       
         $(".viewimage").hide();
 
-        setTimeout(function() {
+        setTimeout(function ()
+        {
             $scope.ImageList = [];
         },2000)
 

@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <h4 class="titletext">Details</h4>
+            <h4 ng-click="getitemimage()" class="titletext">Details</h4>
         </div>
     </div>
 </div>
@@ -86,14 +86,14 @@
                         </div>
                     </div>
 
-        <div style="display:none;" class="viewimage">
-            <div style="margin-top:22px;" ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
+        <div style="display:none; margin-top:20px;" class="viewimage">
+            <span  ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
 
                 <img src="{{_obj.bytestring}}" height="60" width="60" alt="Alternate Text" />
                 <a class="btn btn-danger removeImage" altid="{{_obj.ImageID}}" ng-click="RemoveFromImageList(_obj.ImageID)"><i class="fa fa-trash-o"></i></a>
 
-            </div>
-            <a ng-click="saveimage()" class="btn btn-success" style="width:90%; margin-top:7px;"> <i class="fa fa-upload"></i> Upload</a>
+            </span>
+            <a ng-if="ImageList.length>0" ng-click="saveimage()" class="btn btn-success" style="width:90%; margin-top:7px;"> <i class="fa fa-upload"></i> Upload</a>
 
         </div>
 
@@ -277,7 +277,7 @@
 
             <ul>
                 <li>
-                    <!--<input id="files" type="file" name="name" value=" " />-->
+                   <input id="files" type="file" name="name" value=" " />
                     <a ng-click="capturePhotoNew();"> <i class="fa fa-camera"></i> Capture Photo</a>
                 </li>
                 <li>
