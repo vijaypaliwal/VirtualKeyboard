@@ -23,13 +23,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     $scope.Permission2 = [];
     $scope.Permission3 = [];
     $scope.Permission4 = [];
- 
-    if ($cordovaKeyboard != undefined) {
-        $cordovaKeyboard.hideAccessoryBar(false);
 
-    }
-    else {
-    }
 
 
     $scope.CurrentAccount = localStorageService.get('AccountID');
