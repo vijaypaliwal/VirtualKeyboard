@@ -15,12 +15,19 @@
   
    <plugin name="phonegap-plugin-barcodescanner" source="npm"/>
   <plugin name="cordova-plugin-statusbar" source="npm"/>
-  <plugin name="org.apache.cordova.camera" source="npm"/>
-  <plugin name="cordova-plugin-file" source="npm"/>
-  <plugin name="cordova-plugin-file-transfer" source="npm"/>
+  <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1"/>
+
+  <plugin name="cordova-plugin-file" source="npm" spec="~4.1.1"/>
+
+  <plugin name="cordova-plugin-file-transfer" source="npm" spec="~1.5.0"/>
+
   <plugin name="org.apache.cordova.network-information" source="npm"/>
   <plugin name="org.apache.cordova.splashscreen" source="npm"/>
   <plugin name="ionic-plugin-keyboard" source="npm"/>
+
+  <feature name="camera">
+    <param name="ios-package" value="cordova-plugin-camera" />
+  </feature>
  
   <!--gap:plugin name="com.phonegap.plugins.barcodescanner"/>
   <gap:plugin name="org.apache.cordova.statusbar" spec="0.1.4" source="pgb" />
