@@ -2168,9 +2168,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
         catch (err) {
             alert("into Error");
-            alert(err.message);
+            alert(err);
         }
     }
+
+    window.onerror = function (error, file, line) {
+        alert("into inventory file Data");
+        alert(error + ", " + file + ", " + line);
+    }
+
     $scope.ShowScanError = function (type) {
         switch (type) {
             case 1:

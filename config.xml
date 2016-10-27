@@ -13,7 +13,10 @@
    SHIVAM ITCS Team
   </author>
   
-   <plugin name="phonegap-plugin-barcodescanner" source="npm"/>
+   <!--<plugin name="phonegap-plugin-barcodescanner" source="npm"/>-->
+
+  <plugin name="https://github.com/phonegap/phonegap-plugin-barcodescanner.git" source="git"/>
+  
   <plugin name="cordova-plugin-statusbar" source="npm"/>
   <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1"/>
 
