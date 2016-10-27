@@ -232,7 +232,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
             try{
                 if ($cordovaKeyboard != undefined) {
-                    $cordovaKeyboard.disableScroll(true);
+                    $cordovaKeyboard.disableScroll(false);
 
                 }
                 else {
