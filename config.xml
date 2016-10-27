@@ -24,10 +24,8 @@
   <plugin name="org.apache.cordova.network-information" source="npm"/>
   <plugin name="org.apache.cordova.splashscreen" source="npm"/>
   <plugin name="ionic-plugin-keyboard" source="npm"/>
-
-  <feature name="camera">
-    <param name="ios-package" value="cordova-plugin-camera" />
-  </feature>
+  <plugin name="cordova.plugins.diagnostic" source="npm" />
+  
  
   <!--gap:plugin name="com.phonegap.plugins.barcodescanner"/>
   <gap:plugin name="org.apache.cordova.statusbar" spec="0.1.4" source="pgb" />
