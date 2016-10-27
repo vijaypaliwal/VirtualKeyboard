@@ -1945,8 +1945,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
         $scope.SearchItemValue = "";
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-
+        //var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
         scanner.scan(function (result) {
 
             $scope.SearchItemValue = result.text;
@@ -1970,8 +1970,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.ScanLocationsearch = function () {
         $scope.SearchLocationValue = "";
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-
+        //var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
         scanner.scan(function (result) {
 
             $scope.SearchLocationValue = result.text;
@@ -1993,8 +1993,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.ScanUOMsearch = function () {
         $scope.SearchLocationValue = "";
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-
+        //var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
         scanner.scan(function (result) {
 
             $scope.SearchUOMValue = result.text;
@@ -2167,15 +2167,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             });
         }
         catch (err) {
-            alert("into Error");
-            alert(err);
+           // alert("into Error");
+            alert("Error Occurred"+err);
         }
     }
 
-    window.onerror = function (error, file, line) {
-        alert("into inventory file Data");
-        alert(error + ", " + file + ", " + line);
-    }
+    //window.onerror = function (error, file, line) {
+    //    alert("into inventory file Data");
+    //    alert(error + ", " + file + ", " + line);
+    //}
 
     $scope.ShowScanError = function (type) {
         switch (type) {
@@ -2222,8 +2222,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         var _colarray = _colid.split("_");
         var ControlID = $scope.CurrentActiveField;
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-
+        //var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
 
         scanner.scan(function (result) {
 

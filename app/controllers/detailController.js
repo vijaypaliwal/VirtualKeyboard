@@ -123,7 +123,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.Scanitem = function () {
 
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
 
         scanner.scan(function (result) {
 
@@ -163,7 +163,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.Scandescription = function () {
 
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
 
         scanner.scan(function (result) {
 

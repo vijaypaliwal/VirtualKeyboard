@@ -65,8 +65,8 @@
   <preference name="StatusBarBackgroundColor" value="#2196F3" />
   <preference name="StatusBarStyle" value="lightcontent" />
   <preference name="KeyboardDisplayRequiresUserAction" value="false" />
-<preference name="HideKeyboardFormAccessoryBar" value="false"/>
-  <preference name="KeyboardShrinksView" value="false" />
+<!--<preference name="HideKeyboardFormAccessoryBar" value="false"/>
+  <preference name="KeyboardShrinksView" value="false" />-->
     <!-- Do not auto hide splash on iOS -->
 <preference name="AutoHideSplashScreen" value="false" />
 <!-- Do not auto hide splash on Android -->

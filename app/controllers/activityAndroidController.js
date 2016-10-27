@@ -101,7 +101,7 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
 
         }
         var _ID = _typeString + Id.toString();
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
         scanner.scan(function (result) {
 
             var _dataType = $(_ID).attr("custom-data-type");
@@ -876,7 +876,7 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
 
 
 
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
 
         scanner.scan(function (result) {
 
@@ -894,7 +894,7 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
 
 
 
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
 
         scanner.scan(function (result) {
 
@@ -3121,7 +3121,7 @@ app.controller('activityAndroidController', ['$scope', 'localStorageService', 'a
 
     $scope.ScanLocationsearch = function () {
         $scope.SearchLocationValue = "";
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+        var scanner = cordova.plugins.barcodeScanner;
 
         scanner.scan(function (result) {
 
