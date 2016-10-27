@@ -22,8 +22,7 @@
 
                         <div class="swiper-wrapper">
 
-                            <div ng-if="ImageList.length > 0" ng-repeat="obj in ImageList" class="swiper-slide">
-
+                            <div ng-if="ImageListdetail.length > 0" ng-repeat="obj in ImageListdetail" class="swiper-slide">
 
                                 <table style="width:100%;">
                                     <tr>
@@ -37,9 +36,7 @@
                                     </tr>
                                 </table>
 
-
                                 <table style="display:none;" class="imagesection">
-
                                     <tr>
                                         <td>
                                             <span class="arrow-left" ng-show="slide != 0"><i class="fa fa-angle-left"></i></span>
@@ -51,7 +48,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            
+
                                             <span class="arrow-right" ng-show="slide+1 != Totalslides"><i class="fa fa-angle-right"></i></span>
                                             <span style="pointer-events: none; color: #ccc" ng-if="slide+1 == Totalslides"><i class="fa fa-angle-right"></i></span>
                                         </td>
@@ -59,8 +56,7 @@
                                 </table>
                             </div>
 
-                            <div ng-if="ImageList.length == 0" class="swiper-slide">
-
+                            <div ng-if="ImageListdetail.length == 0" class="swiper-slide">
 
                                 <table style="width:100%;">
                                     <tr>
@@ -73,8 +69,6 @@
                                         <td></td>
                                     </tr>
                                 </table>
-
-
 
 
                                 <table style="display:none;" class="imagesection">
@@ -91,6 +85,19 @@
                             </div>
                         </div>
                     </div>
+
+        <div style="display:none;" class="viewimage">
+            <div style="margin-top:22px;" ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
+
+                <img src="{{_obj.bytestring}}" height="60" width="60" alt="Alternate Text" />
+                <a class="btn btn-danger removeImage" altid="{{_obj.ImageID}}" ng-click="RemoveFromImageList(_obj.ImageID)"><i class="fa fa-trash-o"></i></a>
+
+            </div>
+            <a ng-click="saveimage()" class="btn btn-success" style="width:90%; margin-top:7px;"> <i class="fa fa-upload"></i> Upload</a>
+
+        </div>
+
+        
 
               
                 <div style="position:absolute; margin-top:-33px; right:30px;" class="floating-button animated bouncein delay-3">
@@ -253,6 +260,7 @@
 
         <div class="modal-body">
             <ul class="animated slideInUp" id="selectAction">
+                <li ng-click="OpenBox()"><span>Upload Image</span><a class="waves-effect btn-danger btn"> <i class="fa fa-picture-o"></i> </a></li>
                 <li ng-click="viewhistory()"><span>View history</span><a href="#/InventoryHistory" class="waves-effect btn-primary btn"> <i class="fa fa-file-text"></i> </a></li>
                 <li ng-click="showinventory()"><span>Show all Inventory</span><a href="#/FindItems" class="waves-effect btn-danger btn"> <i class="fa fa-dollar"></i> </a></li>
                 <li ng-click="addtocart(CurrentInventory)" ng-show="CanAddIntoCart==false"><span>Select for cart</span><a class="waves-effect btn-success btn" data-dismiss="modal"> <i class="fa fa-shopping-cart"></i> </a></li>
@@ -262,12 +270,57 @@
         </div>
     </div>
 
+
+    <div id="myModalforlist" class="modal bottom-sheet bottom-modal fade" role="dialog">
+        <!-- Modal content-->
+        <div class="modal-body">
+
+            <ul>
+                <li>
+                    <!--<input id="files" type="file" name="name" value=" " />-->
+                    <a ng-click="capturePhotoNew();"> <i class="fa fa-camera"></i> Capture Photo</a>
+                </li>
+                <li>
+
+                    <!--<a ng-click="triggerFileClick()"><i class="fa fa-picture-o"></i> From Photo Library</a>-->
+                    <a ng-click="getPhoto()"><i class="fa fa-picture-o"></i> From Photo Library</a>
+                </li>
+            </ul>
+
+
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn width-100 btn-gray" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+        </div>
+
+    </div>
+
+
+    <div style="background:#fff;" id="imagemodal" class="modal animated bounceIn">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
+            <h4>Uploaded images</h4>
+        </div>
+
+        <div style="padding:5px;" class="modal-body">
+            <br />
+            <span ng-repeat="_obj in ImageList" class="pull-left" ng-if="ImageList.length>0">
+
+                <img style="border:1px solid #ccc;" src="{{_obj.bytestring}}" height="80" width="80" alt="Alternate Text" />
+                <a class="btn btn-danger removeImage" altid="{{_obj.ImageID}}" ng-click="RemoveFromImageList(_obj.ImageID)"><i class="fa fa-trash-o"></i></a>
+            </span>
+
+        </div>
+    </div>
+
+
     <a ng-click="Openbottommenu()" class="waves-effect menubtn btn-info">
         <i class="fa fa-bars"></i>
     </a>
 
 
-    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="imagemodaldetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div style="background:#fff;" class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
                 <h4>Image</h4>

@@ -206,7 +206,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
             try {
 
-                cordova.plugins.Keyboard.disableScroll(true);
+                
 
                 if($cordovaKeyboard!=undefined)
                 {
@@ -214,7 +214,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
                 }
                 else {
-                    alert("Keyboard not defined")
+                    //alert("Keyboard not defined")
                 }
 
             }
@@ -236,7 +236,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
 
                 }
                 else {
-                    alert("Keyboard not defined")
+                    //alert("Keyboard not defined")
                 }
             //cordova.plugins.Keyboard.disableScroll(false);
 

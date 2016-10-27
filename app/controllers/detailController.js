@@ -1,8 +1,9 @@
 ﻿'use strict';
-app.controller('detailController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
+app.controller('detailController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$compile', function ($scope, localStorageService, authService, $location, log, $compile) {
     $scope.CurrentInventory = {};
     $scope.SavingData = false;
     $scope.IsEditMode = false;
+    $scope.ImageListdetail = [];
     $scope.ImageList = [];
     $scope.slide = 0;
     $scope.Totalslides = 0;
@@ -52,6 +53,182 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         $scope.$apply();
 
     }
+
+
+
+    $scope.OpenBox = function () {
+
+        $("#myModalforlist").modal("show");
+
+    }
+
+    $scope.triggerFileClick = function () {
+        $("#files").trigger("click");
+        $("#myModalforlist").modal("hide");
+    }
+
+
+    $scope.OpenBoxAndroid = function () {
+        $("#myModalforlist").modal("show");
+    }
+
+
+
+    $("#files").on('change', function (event) {
+        $scope.handleFileSelect(event);
+    });
+
+
+    $scope.RemoveFromImageList = function (ID) {
+        for (var i = 0; i < $scope.ImageList.length; i++) {
+            if ($scope.ImageList[i].ImageID == ID) {
+                $scope.ImageList.splice(i, 1);
+                break;
+            }
+        }
+    }
+
+    function randomString(length, chars) {
+        var result = '';
+        for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+        return result;
+    }
+
+    $scope.handleFileSelect = function (evt) {
+
+
+        var files = evt.target.files;
+       var FileName = "";
+      var  StreamData = "";
+        var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
+        // Loop through the FileList and render image files as thumbnails.
+        for (var i = 0, f; f = files[i]; i++) {
+
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            // Closure to capture the file information.
+            reader.onload = (function (theFile) {
+
+                var id = randomString(5, '0123456789');
+                _ImgObj.ImageID = id;
+
+                var crossicon = '<a class="btn btn-danger removeImage" altid="' + id + '" onclick="removeImage(' + id + ')"><i class="fa fa-times"></i></a>';
+                var compilehtml = $compile(crossicon)($scope);
+
+                $(".viewimage").show();
+                return function (e) {
+                    // Render thumbnail.
+                    FileName = theFile.name;
+                    StreamData = e.target.result;
+                    _ImgObj.FileName = FileName;
+                    _ImgObj.bytestring = e.target.result;
+                    _ImgObj.Size = theFile.size;
+
+
+                };
+            })(f);
+
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(f);
+        }
+
+        setTimeout(function () {
+
+            $scope.ImageList.push(_ImgObj);
+            CheckScopeBeforeApply();
+
+
+            $(".iteminfo").trigger("click;");
+
+        }, 100);
+
+    }
+
+    $scope.onPhotoDataSuccessNew = function (imageData) {
+        var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
+
+        imageData = "data:image/jpeg;base64," + imageData;
+
+        var id = randomStringNew(5, '0123456789');
+        _ImgObj.ImageID = id;
+        $(".viewimage").show();
+     
+        $("#myModalforlist").modal("hide");
+
+
+        _ImgObj.FileName = "IphoneCapture";
+        _ImgObj.bytestring = imageData;
+        $scope.ImageList.push(_ImgObj);
+        CheckScopeBeforeApply();
+
+    }
+
+    $scope.onFail = function (message) {
+
+        log.error('Failed because: ' + message);
+    }
+
+
+    $scope.capturePhotoNew = function () {
+        navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
+            quality: 50,
+            targetWidth: 120,
+            targeHeight: 120,
+            correctOrientation: true,
+            destinationType: destinationType.DATA_URL
+        });
+    }
+
+    $scope.viewimages = function () {
+        $("#imagemodal").modal('show');
+    }
+
+
+    function removeImage(_this) {
+
+        $("#" + _this).each(function () {
+
+            $(this).parent("span").remove();
+        });
+
+        for (var i = 0; i < $scope.ImageList.length; i++) {
+            if ($scope.ImageList[i].ImageID == _this) {
+                $scope.ImageList.splice(i, 1);
+                break;
+            }
+        }
+
+
+        if ($scope.ImageList.length == 0) {
+            $("#imagemodal").modal('hide');
+
+            $(".viewimage").hide();
+
+        }
+
+
+        removeImage(_this)
+
+    }
+
+
+    $scope.getPhoto = function (source)
+    {
+      
+        navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
+            quality: 50,
+            destinationType: destinationType.DATA_URL,
+            correctOrientation: true,
+            sourceType: pictureSource.PHOTOLIBRARY
+        });
+    }
+
+
 
 
     init();
@@ -287,6 +464,38 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
 
 
+    function removePaddingCharacters(bytes) {
+        bytes = bytes.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "");
+
+        return bytes;
+    }
+
+    $scope.saveimage = function () {
+
+        var _toSendImages = angular.copy($scope.ImageList);
+
+        for (var i = 0; i < _toSendImages.length; i++) {
+
+            if (_toSendImages[i].bytestring != null && _toSendImages[i].bytestring != undefined) {
+                _toSendImages[i].bytestring = removePaddingCharacters(_toSendImages[i].bytestring);
+               
+            }
+
+        }
+
+
+        $scope.UploadImage(0, _toSendImages, $scope.CurrentInventory.pID);
+
+        $(".viewimage").hide();
+
+        setTimeout(function() {
+            $scope.ImageList = [];
+        },2000)
+
+    }
+
+
+  
    
 
 
@@ -430,7 +639,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
                    if (response.GetItemImagesResult.Success == true) {
                    
-                   $scope.ImageList = response.GetItemImagesResult.Payload;
+                       $scope.ImageListdetail = response.GetItemImagesResult.Payload;
                    $scope.$apply();
 
                    setTimeout(function () { InitializeSwiper() }, 10);
@@ -480,7 +689,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
 
     $scope.OpenImageModal = function (Object) {
-        $("#imagemodal").modal('show');
+        $("#imagemodaldetail").modal('show');
         $scope.CurrentActiveImage = Object;
         $scope.$apply();
     }
