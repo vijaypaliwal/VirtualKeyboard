@@ -24,11 +24,9 @@
   <plugin name="org.apache.cordova.network-information" source="npm"/>
   <plugin name="org.apache.cordova.splashscreen" source="npm"/>
   <plugin name="ionic-plugin-keyboard" source="npm"/>
-
-
-  <feature name="BarcodeScanner">
-    <param name="ios-package" value="com.phonegap.plugins.barcodescanner.BarcodeScanner" />
-  </feature>
+  
+  
+  
   
  
   <!--gap:plugin name="com.phonegap.plugins.barcodescanner"/>
