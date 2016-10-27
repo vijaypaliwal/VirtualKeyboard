@@ -1488,12 +1488,15 @@
             // $(".versiontextlabel").html(version)
             //});
 
-
-            cordova.plugins.diagnostic.isCameraAvailable(function (available) {
-                alert("Camera is " + (available ? "available" : "not available"));
-            }, function (error) {
-                alert("The following error occurred: " + error);
-            });
+            if (!navigator.camera)
+            {
+                alert("camera not available")
+            }
+            else {
+                alert("Yippi camera is available");
+                alert(navigator.camera);
+            }
+          
            
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
             pictureSource = navigator.camera.PictureSourceType;

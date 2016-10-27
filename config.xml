@@ -24,7 +24,7 @@
   <plugin name="org.apache.cordova.network-information" source="npm"/>
   <plugin name="org.apache.cordova.splashscreen" source="npm"/>
   <plugin name="ionic-plugin-keyboard" source="npm"/>
-  <plugin name="cordova.plugins.diagnostic" source="npm" />
+  
   
  
   <!--gap:plugin name="com.phonegap.plugins.barcodescanner"/>
