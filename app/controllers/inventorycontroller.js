@@ -1009,6 +1009,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                       if (_toSendImages.length > 0)
                       {
+                          alert("image data for save" + _toSendImages.length);
                          // log.info("Image upload started it will continue in backend you can do other work.")
                           $scope.UploadImage(response.AddInventoryDataResult.Payload, _toSendImages);
                       }
@@ -1794,6 +1795,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.onPhotoDataSuccessNew = function (imageData) {
+
+        alert("capture  image success");
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
 
         imageData = "data:image/jpeg;base64," + imageData;
@@ -2846,6 +2849,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.onPhotoURISuccessNew = function (imageData) {
+        alert("Library image success ");
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
 
         imageData = "data:image/jpeg;base64," + imageData;
