@@ -334,6 +334,8 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
             $scope.itemscanvalue = result.text;
 
+            
+            $scope.CurrentInventory.pPart = result.text;
             $scope.$apply();
 
          
