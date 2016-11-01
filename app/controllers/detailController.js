@@ -439,7 +439,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                 $.ajax({
                     url: serviceBase + "UpdateInventory",
                     type: 'POST',
-                    data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _data }),
+                    data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _data, "ImageList": [] }),
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (result) {
