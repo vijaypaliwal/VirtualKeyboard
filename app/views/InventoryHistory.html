@@ -15,10 +15,6 @@
 
 <a href="#/detail" class="newbackbtn left15"> <i class="fa fa-arrow-left"></i> </a>
 
-
-
-
-
 <div style="text-align:left; padding-left:12px; padding-right:12px;" class="top50 container" >
 
 
@@ -89,8 +85,6 @@
     <div ng-repeat="_obj in Recentactivities" ng-if="isSearching==false && Recentactivities.length>0">
 
 
-
-
         <div ng-if="_obj.ParentAction=='Increase'" class="activityinfo bgm-increase">
             <div class="row">
                 <div class="col-xs-2">
@@ -99,7 +93,7 @@
                     </span>
                 </div>
                 <div class="col-xs-7">
-                    <h5>Increase {{_obj.itQty}} {{_obj.uomUOM}} on {{_obj.itUpdateDate}}</h5>
+                    <h5>Increase {{_obj.itQtyChange}} {{_obj.uomUOM}} on {{_obj.itUpdateDate}}</h5>
                 </div>
                 <div class="col-xs-3">
                     <div style="text-align:right; margin-right:5px; margin-top:12px;" ng-if="_obj.CanUndo==true">

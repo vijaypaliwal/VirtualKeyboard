@@ -331,11 +331,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
 
 
-
-
-                      
-
-                        $scope.SearchData.SearchValue = "";
+                      //  $scope.SearchData.SearchValue = "";
                         $scope.FilterArray[0].SearchValue = "";
                         $scope.FilterArray[1].SearchValue = "";
                         $scope.FilterArray[2].SearchValue = "";
