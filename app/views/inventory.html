@@ -304,13 +304,10 @@
                                     </label>
                                 </div>
 
-
-
                             </div>
 
                             <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
-                                {{InventoryObject.CustomPartData[$index].Value}}
                                 <div class="select">
                                     <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[$index].Value">
 
@@ -341,7 +338,6 @@
                     </div>
 
 
-               
 
                     <div ng-repeat="obj in CustomActivityDataList" data-id="CustomActivity_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="activity" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)" class="swiper-slide CustomActivityCols" end-repeat3>
 
