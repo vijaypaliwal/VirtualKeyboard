@@ -440,6 +440,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
         }
     }
+
     $scope.$watch('InventoryObject', function () {
 
 
@@ -2530,15 +2531,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             default:
                 $scope.scanfieldID = "";
                 break;
-
-        }
+                }
 
         CheckScopeBeforeApply()
     }
 
 
     $scope.getstep = function (currentstep, ColumnName) {
-
 
         if (ColumnName != "" && ColumnName != null) {
             $(".myCols").each(function () {
@@ -2555,8 +2554,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             });
         }
-        else {
-            mySwiper.swipeTo(currentstep);
+        else
+        {
+         mySwiper.swipeTo(currentstep);
 
         }
 
@@ -2739,10 +2739,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 initialSlide: 0,
                 speed: 500,
                 effect: 'flip',
-
                 allowSwipeToPrev: false,
-
-
                 onSlideChangeEnd: function (swiperHere) {
 
                     $(".bknext").removeClass("darkblue");
