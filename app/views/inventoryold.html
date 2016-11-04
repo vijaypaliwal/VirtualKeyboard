@@ -2,19 +2,17 @@
 
 <link href="css/inventory.css" rel="stylesheet" />
 
-<style>
-    .detailheight {
-        height: 93px !important;
-        overflow-y: auto;
-        max-height: 93px;
-        background:#eee;
-    }
 
-    .darkblue {
-        background-color:rgb(0, 99, 177) !important;
-    }
- 
-</style>
+
+<!--<div class="title-header">
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <h4 class="titletext">Add Inventory <small> Step {{CurrentCount+1}} of {{Totalslides+1}}</small> </h4>
+        </div>
+    </div>
+</div>-->
 
 
 <a ng-click="viewall()" class="btn btn-danger waves-effect roundbtntitle"> <i class="fa fa-info"></i> </a>
@@ -71,7 +69,7 @@
                 <div class="swiper-wrapper">
 
 
-                    <div class="swiper-slide myCols"  data-index="{{$index}}" data-type="myinventory" data-id="myinventorycols" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" end-repeat>
+                    <div class="swiper-slide myCols" data-index="{{$index}}" data-type="myinventory" data-id="myinventorycols" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" ng-if="CheckInCommonArray(obj.ColumnName)==true" end-repeat>
 
                         <div class=" form-group" ng-if="obj.ColumnName=='pPart'">
 
@@ -284,10 +282,12 @@
                             </div>
                         </div>
 
+                    </div>
 
 
+                    <div class="swiper-slide CustomItemCols" data-id="CustomItem_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="Part" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
 
-                        <div class="form-group" ng-if="CheckInCommonArray(obj.ColumnName)!=true">
+                        <div class="form-group">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
 
                             <div ng-if="obj.cfdDataType=='string'" class="input-group">
@@ -297,7 +297,7 @@
 
                             <div ng-if="obj.cfdDataType=='checkbox'">
 
-                                <div class="btn-group custombtnGroup">
+                                <div custom-swipe class="btn-group custombtnGroup">
                                     <label class="switch1">
                                         <input id="CustomItem_{{obj.cfdID}}" ng-checked="InventoryObject.CustomPartData[$index].Value" type="checkbox" ng-model="InventoryObject.CustomPartData[$index].Value">
                                         <div class="slider round"></div>
@@ -305,12 +305,13 @@
                                 </div>
 
 
+                                <!--<input id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[$index].Value" ng-checked="InventoryObject.CustomPartData[$index].Value" type="checkbox" bootstrap-switch />-->
+
 
                             </div>
 
                             <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
-                                {{InventoryObject.CustomPartData[$index].Value}}
                                 <div class="select">
                                     <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[$index].Value">
 
@@ -340,9 +341,6 @@
                         </div>
                     </div>
 
-
-               
-
                     <div ng-repeat="obj in CustomActivityDataList" data-id="CustomActivity_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="activity" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)" class="swiper-slide CustomActivityCols" end-repeat3>
 
                         <div class="form-group">
@@ -353,15 +351,19 @@
                             </div>
 
 
-                            <div ng-if="obj.cfdDataType=='checkbox'" class="">
+                            <div ng-if="obj.cfdDataType=='checkbox'">
 
-                                <div class="btn-group custombtnGroup">
+                             
+
+                                <div custom-swipe class="btn-group custombtnGroup">
                                     <label class="switch1">
                                         <input id="CustomActivity_{{obj.cfdID}}" ng-checked="InventoryObject.CustomTxnData[$index].Value" type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value">
                                         <div class="slider round"></div>
                                     </label>
                                 </div>
 
+
+                                <!--<input id="CustomActivity_{{obj.cfdID}}" ng-checked="InventoryObject.CustomTxnData[$index].Value" type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value" bootstrap-switch>-->
 
                             </div>
 
@@ -401,7 +403,7 @@
 
                     <div ng-class="{'detailheight': slide==Totalslides }" class="swiper-slide" ng-show="Isopendiv==true">
                         <div ng-if="slide==Totalslides" class="allfields">
-                            <div class="myCols innerCols" data-index="{{$index}}" data-type="myinventory" data-id="myinventorycols" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields"  end-repeat>
+                            <div class="myCols innerCols" data-index="{{$index}}" data-type="myinventory" data-id="myinventorycols" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" ng-if="CheckInCommonArray(obj.ColumnName)==true" end-repeat>
 
                                 <div ng-if="obj.ColumnName=='iReqValue'" ng-click="getstep(0,'iReqValue')" class="form-group">
                                     <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueTag}}</span>
@@ -431,20 +433,12 @@
 
                                 </div>
 
-                                
-
-                                <div ng-if="CheckInCommonArray(obj.ColumnName)!=true" ng-click="getstep(0,obj.ColumnName)" class="form-group">
-
-                                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.CustomPartData[$index].Value}}</span>
-
-                                </div>
-
                             </div>
 
 
 
 
-                            <!--<div class="innerCols" ng-click="getstepCustom(1,obj.ColumnMap)" data-id="CustomItem_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="Part" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
+                            <div class="innerCols" ng-click="getstepCustom(1,obj.ColumnMap)" data-id="CustomItem_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="Part" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
 
 
 
@@ -479,7 +473,7 @@
                                     <span class="mylabel"> {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span> <span>   {{InventoryObject.CustomPartData[$index].Value}} </span>
                                 </div>
 
-                            </div>-->
+                            </div>
 
 
 
@@ -1046,8 +1040,6 @@
                     <span class="mylabel">Location</span> <span class="redText">*</span> <span>  {{InventoryObject.Location}} </span>
                 </div>
 
-             
-
 
                 <div ng-click="getstep(1,'pDescription')" class="col-md-12 col-xs-12  form-group">
 
@@ -1061,8 +1053,7 @@
 
         <div style="padding-left:6px;padding-top:0px;" class="allfields">
 
-            <div class="myCols" data-index="{{$index}}" data-type="myinventory" data-id="myinventorycols" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields"  end-repeat>
-
+            <div class="myCols" data-index="{{$index}}" data-type="myinventory" data-id="myinventorycols" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" ng-if="CheckInCommonArray(obj.ColumnName)==true" end-repeat>
 
                 <div ng-if="obj.ColumnName=='pCountFrq'" ng-click="getstep(0,'pCountFrq')" class="form-group">
                     <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.ItemGroup}}</span>
@@ -1076,11 +1067,10 @@
                     <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.Status}}</span>
                 </div>
 
-
                 <div ng-if="obj.ColumnName=='iReqValue'" ng-click="getstep(0,'iReqValue')" class="form-group">
                     <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UniqueTag}}</span>
-                </div>
 
+                </div>
                 <div ng-if="obj.ColumnName=='iUnitTag2'" ng-click="getstep(0,'iUnitTag2')" class="form-group">
                     <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.UnitTag2}}</span>
                 </div>
@@ -1105,14 +1095,9 @@
 
                 </div>
 
-                <div ng-if="CheckInCommonArray(obj.ColumnName)!=true" ng-click="getstep(0,obj.ColumnName)" class="form-group">
-
-                    <span class="mylabel">{{obj.ColumnLabel}}</span><span>{{InventoryObject.CustomPartData[$index].Value}}</span> 
-                </div>
-
             </div>
 
-            <!--<h4 ng-if='CheckCustomFields(1)==true'>
+            <h4 ng-if='CheckCustomFields(1)==true'>
                 Custom Item fields
             </h4>
 
@@ -1152,7 +1137,7 @@
                         <span class="mylabel"> {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span> <span>   {{InventoryObject.CustomPartData[$index].Value}} </span>
                     </div>
                 </div>
-            </div>-->
+            </div>
 
 
             <h4 ng-if='CheckCustomFields(2)==true'>
