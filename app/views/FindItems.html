@@ -22,7 +22,7 @@
 
     <a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
 
-  
+
 
 
     <div ng-if="myinventoryColumnLoaded==false">
@@ -35,7 +35,7 @@
         </div>
     </div>
     <div id="sticky-anchor"></div>
-    <div class="" style="margin-bottom:7px;" ng-if="isshowsearch==true" id="" >
+    <div class="" style="margin-bottom:7px;" ng-if="isshowsearch==true" id="">
         <table class="searchtable">
             <tbody>
                 <tr>
@@ -45,9 +45,9 @@
 
                         <div class="input-group">
 
-                            <span class="input-group-addon finditems" id="addonData" >
+                            <span class="input-group-addon finditems" id="addonData">
 
-                                <a class="waves-effect waves-effect status dropdown"  data-toggle="dropdown">
+                                <a class="waves-effect waves-effect status dropdown" data-toggle="dropdown">
                                     <i class="fa fa-caret-down"></i>
                                 </a>
 
@@ -108,7 +108,7 @@
                                 </ul>
                             </span>
 
-                            
+
                             <div style="position:relative" class="fg-line">
 
                                 <span ng-if="CurrentActiveSearchType==1">
@@ -168,7 +168,7 @@
         </div>
 
     </div>
-    
+
 
     <div class="animated slideInLeft" id="mylist">
 
@@ -176,8 +176,8 @@
         <div ng-if="loadingblock==true" style="background:#ECECEC; text-align:center; margin-top:-5px; padding-top:12px; padding-bottom:12px;">
             <img style="height:30px;" src="img/loader.gif" alt="Alternate Text">
         </div>
-        
-      
+
+
         <div class="pageData">
             <ul class=" widget-products">
                 <li ng-repeat="_obj in InventoryItems" class="newlistitem">
@@ -201,7 +201,7 @@
 
                             <h5 class="list-group-item-heading">
 
-                                {{_obj.pPart}} <span class="pull-right"> <span> <span >{{_obj.iQty}}</span> <span > {{_obj.uomUOM}}</span>  </span> </span>
+                                {{_obj.pPart}} <span class="pull-right"> <span> <span>{{_obj.iQty}}</span> <span> {{_obj.uomUOM}}</span>  </span> </span>
 
                             </h5>
 
@@ -212,7 +212,7 @@
                                         {{_obj.pDescription}}
                                     </span>
 
-                                 
+
                                 </span>
                                 <span class="text" style="float:right">
                                     <span>
@@ -238,35 +238,35 @@
                                 </span>
 
 
-                                <span ng-if="_obj.iUniqueDate != null">
+                                <span ng-if="_obj.iUniqueDate != null && _obj.iUniqueDate!=''">
                                     {{TrimFirstThreeLetter('iUniqueDate')}}:{{_obj.iUniqueDate}},
                                 </span>
 
-                                <span ng-if="_obj.iUnitDate2 != null">
+                                <span ng-if="_obj.iUnitDate2 != null && _obj.iUnitDate2!=''">
                                     {{TrimFirstThreeLetter('iUnitDate2')}}:{{_obj.iUnitDate2}}
                                 </span>
 
-                                <span ng-if="_obj.iUnitNumber1 != 0">
+                                <span ng-if="_obj.iUnitNumber1 != '' && _obj.iUnitNumber1!=null">
                                     {{TrimFirstThreeLetter('iUnitNumber1')}}:{{_obj.iUnitNumber1}},
                                 </span>
 
-                                <span ng-if="_obj.iUnitNumber2 != 0">
+                                <span ng-if="_obj.iUnitNumber2 != '' && _obj.iUnitNumber2!=null">
                                     {{TrimFirstThreeLetter('iUnitNumber2')}}:{{_obj.iUnitNumber2}}
                                 </span>
 
 
 
                             </div>
-                            
-                         
-                        
+
+
+
 
                         </span>
                     </a>
 
-                    
 
-                   
+
+
 
                 </li>
             </ul>
@@ -321,7 +321,7 @@
                         <i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Add to cart
                     </a>
                 </li>
-               
+
 
 
             </ul>
@@ -343,7 +343,7 @@
                 <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('uomUOM') && checkpermission('ACTION:CanConvertInventory')==true" ng-click="GoToNextMobile(2)"><span>Convert</span><a style="background-color: #CE59A1" class=" waves-effect btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-refresh"></i>  </a></li>
                 <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iStatusValue') && checkpermission('ACTION:CanStatusInventory')==true" ng-click="GoToNextMobile(3)"><span>Update</span><a style=" background-color: #583782" class="waves-effect btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-pencil"></i>  </a></li>
                 <li data-dismiss="modal" ng-click="filterrecords()" class="bottomlink"><span class="FilterCartItems">Filter cart Records</span><a class=" waves-effect btn-success btn decrease" data-dismiss="modal"> <i class="fa fa-filter"></i>  </a></li>
-                <li data-dismiss="modal" ng-if="SelectedZeroRecordIDs.length!=0"  ng-click="Clearzerorecords()" class="bottomlink"><span >Clear Zero records</span><a class=" waves-effect btn-warning btn decrease" data-dismiss="modal"> <i class="fa fa-trash-o"></i>  </a></li>
+                <li data-dismiss="modal" ng-if="SelectedZeroRecordIDs.length!=0" ng-click="Clearzerorecords()" class="bottomlink"><span>Clear Zero records</span><a class=" waves-effect btn-warning btn decrease" data-dismiss="modal"> <i class="fa fa-trash-o"></i>  </a></li>
                 <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
                 <li class="bottomlink" data-dismiss="modal" ng-click="DeselectAll()"><span>Deselect All</span><a class=" waves-effect btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-square-o"></i>  </a></li>
             </ul>
@@ -395,15 +395,15 @@
         }
     }
 
-   
+
     $(function () {
         $(window).scroll(sticky_relocate);
         sticky_relocate();
     });
 
 
-  
-  
-   
+
+
+
 
 </script>

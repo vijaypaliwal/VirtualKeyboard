@@ -163,7 +163,10 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/permission.html"
     });
 
-    
+    $routeProvider.when("/contact", {
+        controller: "contactController",
+        templateUrl: "app/views/contact.html"
+    });
 
 
     

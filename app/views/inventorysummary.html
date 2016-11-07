@@ -17,8 +17,6 @@
     <div class="modal-backdrop fade in"></div>
     <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
         <img src="img/loader.gif" alt="Alternate Text" />
-
-
     </div>
 </div>
 
@@ -164,10 +162,10 @@
         </div>
 
         <div style="padding:10px; padding-top:0px;" class="modal-body">
-            <div class="row" ng-show="IsAvailableColumn('ImagePath')">
+            <div class="row" >
                 <div class="col-xs-12 imgfilterarea">
 
-                    <div class="row">
+                    <div ng-show="IsAvailableColumn('ImagePath')" class="row">
                         <div class="col-xs-7">
                             <p> Has Image</p>
                             <a ng-click="ClearImageFilter()" ng-if="HasImage!=''">Clear Image filter</a>
@@ -347,7 +345,7 @@
 
     </div>
 
-
+    </div>
 
 <a ng-click="Openbottommenu()" class="menubtn waves-effect btn-info">
     <i class="fa fa-bars"></i>

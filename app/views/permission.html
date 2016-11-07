@@ -85,21 +85,20 @@
                     </div>
                 </td>
             </tr>
-            <tr ng-repeat="_obj in Permissions1" ng-if="IsLibrarydataopen==true && (_obj.PermissionName=='Location Library' || _obj.PermissionName=='Units of Measure Library' || _obj.PermissionName=='Status Library')">
+            <tr ng-repeat="_obj in Permissions1" ng-if="IsLibrarydataopen==true && (_obj.PermissionName=='Location Library' || _obj.PermissionName=='Units of Measure Library' || _obj.PermissionName=='Status Library' || _obj.PermissionName=='Item Library')">
                 <td>
                     <div class=" infoareas">
-
                         <div class="row">
 
                             <div class="col-xs-2">
-                                <a ng-if="_obj.PermissionName=='Location Library'" class="btn text btn-warning">1 </a>
-                                <a ng-if="_obj.PermissionName=='Units of Measure Library'" class="btn text btn-warning">2 </a>
-                                <a ng-if="_obj.PermissionName=='Status Library'" class="btn text btn-warning">3 </a>
+                                <a ng-if="_obj.PermissionName=='Item Library'" class="btn text btn-warning"> 1 </a>
+                                <a ng-if="_obj.PermissionName=='Location Library'" class="btn text btn-warning"> 2 </a>
+                                <a ng-if="_obj.PermissionName=='Units of Measure Library'" class="btn text btn-warning"> 3 </a>
+                                <a ng-if="_obj.PermissionName=='Status Library'" class="btn text btn-warning"> 4 </a>
                             </div>
 
                             <div class="col-xs-6">
-                                <a class="text ng-binding">{{_obj.PermissionName }} </a>
-
+                             <a class="text ng-binding">{{_obj.PermissionName }}</a>
                             </div>
                             <div class="col-xs-4">
                                 <div ng-if="_obj.IsTurnedOn==false" class="btn-group custombtnGroup">
@@ -269,7 +268,7 @@
     <div class="modal-body">
         <ul class="animated slideInUp selectAction">
             <li ng-if="checkpermission('ACTION:CanAddInventory')==true"> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
-            <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-map-marker"></i> </a></li>
+            <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-shopping-cart"></i> </a></li>
             <li> <a href="#/reportmenu"><span class="newinv">Go to Report</span></a>  <a href="#/reportmenu" class=" waves-effect btn-primary btn"> <i class="fa fa-check-circle-o"></i> </a></li>
             <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
         </ul>

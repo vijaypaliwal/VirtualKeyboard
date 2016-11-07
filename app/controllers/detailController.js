@@ -729,11 +729,11 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     }
     $scope.ToggleEditView = function () {
 
-
+        
         $("#myModal2").modal('hide');
+        $("#bottommenumodal").modal('hide');
         $(".modal-backdrop").remove();
         $("body").removeClass("modal-open");
-
 
 
         $scope.IsEditMode = !$scope.IsEditMode;
