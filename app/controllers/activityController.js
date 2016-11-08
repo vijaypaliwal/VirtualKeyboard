@@ -2010,6 +2010,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         var _updateDateval = $("#itUpdateDate").val();
 
+        alert(_TimeZone);
+        alert(_updateDateval);
 
         var dsplit1 = _updateDateval.split("-");
 
