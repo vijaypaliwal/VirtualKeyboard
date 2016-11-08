@@ -1998,7 +1998,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
     Date.prototype.toMSJSON = function () {
-        var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
+        var date = '/Date(' + this.getTime() + this.getTimezoneOffset() * 60 * 1000 + ')/'; //CHANGED LINE
         return date;
     };
 
@@ -2021,7 +2021,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         wcfDateStr123 = d122.toMSJSON();
 
-
+        alert("after updating date");
+        alert(wcfDateStr123);
 
 
 
