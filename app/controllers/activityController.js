@@ -2169,7 +2169,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
                 d1.setDate(d1.getDate() + _genVar);
-                var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate() - 1, 0, 0, 0, 0))
+                var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0))
 
                 wcfDateStr1 = d11.toMSJSON();
             }
@@ -2180,7 +2180,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
                 d2.setDate(d2.getDate() + _genVar);
-                var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate() - 1, 0, 0, 0, 0))
+                var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate() , 0, 0, 0, 0))
 
                 wcfDateStr2 = d21.toMSJSON();
 

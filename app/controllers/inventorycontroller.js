@@ -952,7 +952,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
 
             d122.setDate(d122.getDate() + _genVar);
-            var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate() - 1, 0, 0, 0, 0))
+            var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate() , 0, 0, 0, 0))
             wcfDateStr123 = d122.toMSJSON();
 
             $scope.InventoryObject.UniqueDate = wcfDateStr123;
@@ -971,7 +971,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         var _updatedate = new Date(year, month, day);
         _updatedate.setDate(_updatedate.getDate() + _genVar);
-        var _d1122 = new Date(Date.UTC(_updatedate.getFullYear(), _updatedate.getMonth() - 1, _updatedate.getDate() - 1, 0, 0, 0, 0))
+        var _d1122 = new Date(Date.UTC(_updatedate.getFullYear(), _updatedate.getMonth() - 1, _updatedate.getDate() , 0, 0, 0, 0))
 
         var wcfDateStrUpd = _d1122.toMSJSON();
 
@@ -988,7 +988,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
 
             d1222.setDate(d1222.getDate() + _genVar);
-            var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate() - 1, 0, 0, 0, 0))
+            var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), 0, 0, 0, 0))
 
             wcfDateStr1234 = d1222.toMSJSON();
 
