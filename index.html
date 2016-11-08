@@ -907,7 +907,9 @@
     <script>
         var myDate = new Date();
         var _genVar = 0;
-        if (myDate.getTimezoneOffset() == -330) {
+        var _timeZone = myDate.getTimezoneOffset();
+        alert(_timeZone);
+        if (_timeZone == -330) {
             _genVar = 1;
         }
 
