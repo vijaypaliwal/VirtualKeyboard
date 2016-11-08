@@ -27,7 +27,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var element = $("#Location");
         var myTag = $('option:selected', element).attr('mytag');
 
-        $scope.InventoryObject.lZone = myTag;
+        if (myTag != undefined && myTag != null) {
+            $scope.InventoryObject.lZone = myTag;
+        }
+        else {
+            $scope.InventoryObject.lZone = "";
+        }
 
 
     }
@@ -2668,7 +2673,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             var _isAvailableUOM = false;
             for (var i = 0; i < $scope.UOMList.length; i++) {
                 if ($.trim($scope.UOMList[i].UnitOfMeasureName) != "" && $scope.UOMList[i].UnitOfMeasureName.toLowerCase() == "units") {
-                    $scope.InventoryObject.lZone = $scope.LocationList[i].LocationZone;
+                   var myTag = $scope.LocationList[i].LocationZone;
+                   if (myTag != undefined && myTag != null) {
+                       $scope.InventoryObject.lZone = myTag;
+                   }
+                   else {
+                       $scope.InventoryObject.lZone = "";
+                   }
                     _isAvailableUOM = true;
                     break;
                 }
