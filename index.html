@@ -48,7 +48,7 @@
                 text-align: center;
                 color: #fff;
                 font-size: 15px;
-
+            
             }*/
 
 
@@ -61,8 +61,8 @@
         {
             z-index:1500;
         }
-
-
+        
+        
          .input-group {
             width: 100%;
         }
@@ -99,7 +99,7 @@
             position: absolute;
         }
 
-
+       
 
 
 
@@ -189,7 +189,7 @@
             text-align: center;
             padding-left: 5px !important;
             padding-right: 5px !important;
-
+        
             margin-top: 0px !important;
         }
 
@@ -266,7 +266,7 @@
             display: inline-block;
         }
 
-
+      
 
 
         .scanbtn {
@@ -329,7 +329,7 @@
                 color: #6683DA;
                 cursor: pointer;
             }
-
+      
 
         .bootstrap-switch-primary {
             background: #0083C7 !important;
@@ -422,7 +422,7 @@
             z-index: 1050;
             text-align: center;
         }
-
+        
          .bgColorTransparent {
             background-color: transparent !important;
         }
@@ -441,7 +441,7 @@
         }
     </style>
     <style>
-
+      
         #menu-toggle {
             padding: 6px 12px;
             padding-left: 0px;
@@ -651,7 +651,7 @@
 
     <div class="container" id="viewdata">
         <div data-ng-view="">
-
+            
         </div>
 
     </div>
@@ -673,10 +673,10 @@
             </div>
         </li>
         <!--<li><a href="#/mainmenu" class="no-child"><i class="ion-android-list"></i> Main menu</a></li>-->
-
-        <li> <a style="background:#e2e2e2;" class="no-child"> <i style="color: #1fa67a; font-size:15px; margin-top:5px;" class="fa fa-circle"> </i> {{CurrentAccount}} </a> </li>
+       
+       <li> <a style="background:#e2e2e2;" class="no-child"> <i style="color: #1fa67a; font-size:15px; margin-top:5px;" class="fa fa-circle"> </i> {{CurrentAccount}} </a> </li>
         <li><a ng-class="getClass('/Accounts')" href="#/Accounts" class="no-child"><i class="fa fa-briefcase"></i> My Accounts</a></li>
-        <li id="Permissionlink"><a ng-class="getClass('/permission')" href="#/permission" class="no-child"><i class="fa fa-gears"></i> Permissions</a></li>
+        <li id="Permissionlink" ><a ng-class="getClass('/permission')" href="#/permission" class="no-child"><i class="fa fa-gears"></i> Permissions</a></li>
         <li><a ng-class="getClass('/FindItems')" href="#/FindItems" class="no-child"><i class="fa fa-shopping-cart"></i>Go to Inventory</a></li>
         <li ng-if="checkpermission('ACTION:CanAddInventory')==true"><a ng-class="getClass('/inventory')" href="#/inventory" class="no-child"><i class="fa fa-plus-circle"></i> Add Inventory</a></li>
         <li><a ng-class="getClass('/reportmenu')" href="#/reportmenu" class="no-child"><i class="fa fa-th-list"></i> Reports</a></li>
@@ -711,7 +711,7 @@
         </li>
         <li id="sidebar2" class="p-10">
             <!-- Chat -->
-
+            
         </li>
     </ul>
 
@@ -751,10 +751,10 @@
     <script src="scripts/jquery-ui.js"></script>
     <script src="scripts/jquery.touchSwipe.min.js"></script>
 
+    
+   <!--<script src="scripts/jquery.ui.touch-punch.js"></script>
 
-    <!--<script src="scripts/jquery.ui.touch-punch.js"></script>
-
-    <script src="scripts/fastclick.js"></script>-->
+   <script src="scripts/fastclick.js"></script>-->
 
 
     <script src="scripts/bootstrap.min.js"></script>
@@ -770,12 +770,12 @@
     <script src="scripts/angular-sanitize.js"></script>
     <script src="scripts/angular-route.min.js"></script>
     <script src="scripts/angular-local-storage.min.js"></script>
-
+ 
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 
     <script src="js/sortableUI.js"></script>
-
+    
     <script src="scripts/loading-bar.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="scripts/ng-cordova.js"></script>
@@ -905,7 +905,11 @@
         });
     </script>
     <script>
-
+        var myDate = new Date();
+        var _genVar = 0;
+        if (myDate.getTimezoneOffset() == -330) {
+            _genVar = 1;
+        }
 
         function randomStringNew(length, chars) {
             var result = '';
@@ -915,7 +919,7 @@
 
 
         var _Islive = true;
-        var _TimeZone = "";
+
         $("#mysmallModal").click(function () {
             hideSuccess();
         });
@@ -932,8 +936,8 @@
 
         function hideSuccess() {
             $("#mysmallModal").removeClass('bounceIn').addClass('bounceOut');
-
-
+            
+            
         }
 
         function HideWaitingInv() {
@@ -947,11 +951,13 @@
 
         }
 
-        function ShowGlobalWaitingDiv() {
+        function ShowGlobalWaitingDiv()
+        {
             $("#mysmallModalWaiting").removeClass('fadeOut').addClass('fadeIn');
             $('#mysmallModalWaiting').show();
         }
-        function HideGlobalWaitingDiv() {
+        function HideGlobalWaitingDiv()
+        {
             $("#mysmallModalWaiting").removeClass('fadeIn').addClass('fadeOut');
 
             setTimeout(function () {
@@ -1114,7 +1120,7 @@
         }
 
 
-
+   
 
         var exitApp = false, intval = setInterval(function () { exitApp = false; }, 1000);
         document.addEventListener("backbutton", function (e) {
@@ -1322,7 +1328,7 @@
             });
         }
 
-
+ 
 
         // A button will call this function
         //
@@ -1355,7 +1361,7 @@
 
 
         function vibrate() {
-            // navigator.notification.vibrate(2000);
+           // navigator.notification.vibrate(2000);
         }
 
 
@@ -1450,7 +1456,7 @@
 
 
         function GetDefaultAccount() {
-
+       
             $.ajax({
 
                 type: "POST",
@@ -1473,7 +1479,7 @@
                 },
 
                 success: function (data) {
-
+               
                     if (data.DefaultAccountResult.Success == true) {
 
                         if (data.DefaultAccountResult != null && data.DefaultAccountResult.Payload != null) {
@@ -1496,16 +1502,16 @@
 
             navigator.splashscreen.hide();
             GetDefaultAccount();
-
+           
             //getAppVersion(function (version)
 
             //{
             // $(".versiontextlabel").html(version)
             //});
 
-
-
-
+       
+          
+           
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
             pictureSource = navigator.camera.PictureSourceType;
             destinationType = navigator.camera.DestinationType;
@@ -1515,15 +1521,8 @@
 
             try {
 
-                navigator.globalization.getLocaleName(
-    function (locale) {
-        alert('locale: ' + locale.value + '\n');
-        _TimeZone = locale.value;
 
-    },
-    function () { alert('Error getting locale\n'); }
-);
-
+           
 
 
 
@@ -1556,7 +1555,7 @@
 
                     break;
                 default:
-                    // alert(window.orientation);
+                   // alert(window.orientation);
                     $("#mycartModal").removeClass("activitylist")
                     break;
             }
@@ -1601,7 +1600,7 @@
         document.addEventListener('click', addRippleEffect, false);
     </script>
 
-
+  
 
 
     <script>
@@ -1650,8 +1649,8 @@
         }
     </script>
 
-
-
+ 
+    
 </body>
 
 </html>

@@ -137,8 +137,8 @@
                         <div class="form-group" ng-if="obj.ColumnName=='lLoc'">
                             <label>Select Location <span class="redText">*</span></label>
                             <div class="input-group">
-                                <select class="form-control" id="Location" ng-model="InventoryObject.Location">
-                                    <option value="{{obj.LocationName}}" ng-selected="CheckSelectedValues(InventoryObject.Location,obj.LocationName)?true:false" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
+                                <select ng-change="changelocation()" class="form-control" id="Location" ng-model="InventoryObject.Location">
+                                    <option mytag="{{obj.LocationZone}}" value="{{obj.LocationName}}" ng-selected="CheckSelectedValues(InventoryObject.Location,obj.LocationName)?true:false" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
                                 </select>
 
                             </div>

@@ -586,20 +586,20 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 success: function (data) {
 
                     if (data.SearchLocationAutoCompleteResult.Success == true) {
-                    
-
-                    if (data.SearchLocationAutoCompleteResult != null && data.SearchLocationAutoCompleteResult.Payload != null) {
-                        $scope.LocationSearching = false;
-                        $scope.LocationSearchList = data.SearchLocationAutoCompleteResult.Payload;
 
 
-                        if ($scope.LocationSearchList.length == 0)
-                            $scope.isnolocationmsg = true
-                        else
-                            $scope.isnolocationmsg = false
+                        if (data.SearchLocationAutoCompleteResult != null && data.SearchLocationAutoCompleteResult.Payload != null) {
+                            $scope.LocationSearching = false;
+                            $scope.LocationSearchList = data.SearchLocationAutoCompleteResult.Payload;
 
 
-                    }
+                            if ($scope.LocationSearchList.length == 0)
+                                $scope.isnolocationmsg = true
+                            else
+                                $scope.isnolocationmsg = false
+
+
+                        }
                     }
                     else {
                         $scope.ShowErrorMessage("Searching location", 1, 1, data.SearchLocationAutoCompleteResult.Message)
@@ -1058,17 +1058,17 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
               success: function (response) {
 
                   if (response.GetMyInventoryColumnsResult.Success == true) {
-                 
-                  // MY inventory column region
-                  var _TempArrayMyInventory = response.GetMyInventoryColumnsResult.Payload;
 
-                  for (var i = 0; i < _TempArrayMyInventory.length; i++) {
-                      var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
-                      _TempArrayMyInventory[i].ColumnName = _ColName[0];
-                      if (_TempArrayMyInventory[i].mobileorder != 0) {
-                          $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
+                      // MY inventory column region
+                      var _TempArrayMyInventory = response.GetMyInventoryColumnsResult.Payload;
+
+                      for (var i = 0; i < _TempArrayMyInventory.length; i++) {
+                          var _ColName = _TempArrayMyInventory[i].ColumnName.split("#");
+                          _TempArrayMyInventory[i].ColumnName = _ColName[0];
+                          if (_TempArrayMyInventory[i].mobileorder != 0) {
+                              $scope.MyinventoryFields.push(_TempArrayMyInventory[i]);
+                          }
                       }
-                  }
 
                   }
                   else {
@@ -1094,7 +1094,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
           });
     }
 
-    
+
     function SetPermisssions() {
         debugger;
         $scope.CanIncrease = IsAvailableMyInventoryColumn('iQty') && $scope.checkpermission('ACTION:CanAddInventory') ? 'True' : 'False';
@@ -1151,30 +1151,30 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type }),
                success: function (response) {
                    if (response.GetCustomFieldsDataResult.Success == true) {
-                  
-                   $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
 
-                   for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+                       $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
 
-                       var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
-                       if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
-                           if (_defaultValue != null && _defaultValue != "") {
-                               $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
+                       for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+
+                           var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
+                           if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
+                               if (_defaultValue != null && _defaultValue != "") {
+                                   $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
+                               }
                            }
-                       }
-                       else if ($scope.CustomActivityDataList[i].cfdDataType == "currency" || $scope.CustomActivityDataList[i].cfdDataType == "number") {
-                           if (_defaultValue != null && _defaultValue != "") {
-                               var _myDefault = parseFloat(_defaultValue);
-                               if (!isNaN(_myDefault)) {
-                                   $scope.CustomActivityDataList[i].cfdDefaultValue = _myDefault;
+                           else if ($scope.CustomActivityDataList[i].cfdDataType == "currency" || $scope.CustomActivityDataList[i].cfdDataType == "number") {
+                               if (_defaultValue != null && _defaultValue != "") {
+                                   var _myDefault = parseFloat(_defaultValue);
+                                   if (!isNaN(_myDefault)) {
+                                       $scope.CustomActivityDataList[i].cfdDefaultValue = _myDefault;
 
+                                   }
                                }
                            }
                        }
-                   }
 
-                   CheckScopeBeforeApply();
-                   UpdateCartWithCustomFields();
+                       CheckScopeBeforeApply();
+                       UpdateCartWithCustomFields();
                    }
                    else {
                        $scope.ShowErrorMessage("Getting custom data", 1, 1, response.GetCustomFieldsDataResult.Message)
@@ -1998,6 +1998,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
     Date.prototype.toMSJSON = function () {
+        this.setHours(this.getHours() - this.getTimezoneOffset() / 60);
         var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
         return date;
     };
@@ -2010,15 +2011,14 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         var _updateDateval = $("#itUpdateDate").val();
 
-
         var dsplit1 = _updateDateval.split("-");
 
         var d122 = new Date(dsplit1[0], dsplit1[1] - 1, dsplit1[2]);
-        d122.setDate(d122.getDate() + 1);
-        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate() - 1, 0, 0, 0, 0))
+        d122.setDate(d122.getDate() + _genVar);
+        //d122.setHours(d122.getHours() - d122.getTimezoneOffset() / 60);
+        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
 
         wcfDateStr123 = d122.toMSJSON();
-
 
 
 
@@ -2168,7 +2168,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
 
                 var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
-                d1.setDate(d1.getDate() + 1);
+                d1.setDate(d1.getDate() + _genVar);
                 var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate() - 1, 0, 0, 0, 0))
 
                 wcfDateStr1 = d11.toMSJSON();
@@ -2179,7 +2179,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
                 var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
-                d2.setDate(d2.getDate() + 1);
+                d2.setDate(d2.getDate() + _genVar);
                 var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate() - 1, 0, 0, 0, 0))
 
                 wcfDateStr2 = d21.toMSJSON();
@@ -2399,20 +2399,20 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _mdata }),
                     success: function (response) {
                         if (response.MultipleActivityResult.Success == true) {
-                       
-                        localStorageService.set("ActivityCart", "");
-                        localStorageService.set("SelectedAction", "");
 
-                        $scope.IsProcessing = false;
-                        $scope.CurrentCart = [];
-                        ShowSuccessActivity('Saved', $scope._CurrentAction);
+                            localStorageService.set("ActivityCart", "");
+                            localStorageService.set("SelectedAction", "");
 
-                        $location.path("/FindItems");
-                        localStorageService.set("ActivityCart", "");
-                        localStorageService.set("SelectedAction", "");
+                            $scope.IsProcessing = false;
+                            $scope.CurrentCart = [];
+                            ShowSuccessActivity('Saved', $scope._CurrentAction);
 
-                        $scope.clearCartFunction();
-                        $scope.$apply();
+                            $location.path("/FindItems");
+                            localStorageService.set("ActivityCart", "");
+                            localStorageService.set("SelectedAction", "");
+
+                            $scope.clearCartFunction();
+                            $scope.$apply();
 
                         }
                         else {
