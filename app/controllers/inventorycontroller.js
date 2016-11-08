@@ -969,8 +969,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var year = dateObj.getUTCFullYear();
 
 
+     
+
         var _updatedate = new Date(year, month, day);
-        _updatedate.setDate(_updatedate.getDate() + _genVar);
+        if (_genVar == 0) {
+
+            _updatedate.setDate(_updatedate.getDate() + 1);
+        }
+        else{
+
+            _updatedate.setDate(_updatedate.getDate());
+        }
         var _d1122 = new Date(Date.UTC(_updatedate.getFullYear(), _updatedate.getMonth() - 1, _updatedate.getDate() , 0, 0, 0, 0))
 
         var wcfDateStrUpd = _d1122.toMSJSON();
@@ -993,6 +1002,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             wcfDateStr1234 = d1222.toMSJSON();
 
             $scope.InventoryObject.UnitDate2 = wcfDateStr1234;
+
+
+              
+
         }
         else {
             $scope.InventoryObject.UnitDate2 = null;
