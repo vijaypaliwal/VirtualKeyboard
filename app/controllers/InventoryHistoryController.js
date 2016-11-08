@@ -61,8 +61,7 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
   
 
     Date.prototype.toMSJSON = function () {
-        var offset = new Date().getTimezoneOffset();
-
+        this.setHours(this.getHours() - this.getTimezoneOffset() / 60);
         var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
         return date;
     };
@@ -83,7 +82,7 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
             var d122 = new Date(dsplit1[0], dsplit1[1] - 1, dsplit1[2]);
 
 
-            d122.setDate(d122.getDate() + 1);
+            d122.setDate(d122.getDate() + _genVar);
             _datestring = d122.toMSJSON();
         }
 

@@ -2673,13 +2673,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             var _isAvailableUOM = false;
             for (var i = 0; i < $scope.UOMList.length; i++) {
                 if ($.trim($scope.UOMList[i].UnitOfMeasureName) != "" && $scope.UOMList[i].UnitOfMeasureName.toLowerCase() == "units") {
-                   var myTag = $scope.LocationList[i].LocationZone;
-                   if (myTag != undefined && myTag != null) {
-                       $scope.InventoryObject.lZone = myTag;
-                   }
-                   else {
-                       $scope.InventoryObject.lZone = "";
-                   }
+                 
                     _isAvailableUOM = true;
                     break;
                 }
@@ -2703,6 +2697,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             var _isAvailableLocation = false;
             for (var i = 0; i < $scope.LocationList.length; i++) {
                 if ($.trim($scope.LocationList[i].LocationName) != "" && $scope.LocationList[i].LocationName.toLowerCase() == "in stock") {
+                    var myTag = $scope.LocationList[i].LocationZone;
+                    if (myTag != undefined && myTag != null) {
+                        $scope.InventoryObject.lZone = myTag;
+                    }
+                    else {
+                        $scope.InventoryObject.lZone = "";
+                    }
                     _isAvailableLocation = true;
                     break;
                 }
