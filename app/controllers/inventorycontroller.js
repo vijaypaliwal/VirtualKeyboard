@@ -987,7 +987,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
 
-            d1222.setDate(d1222.getDate() + _genVar);
+              d1222.setDate(d1222.getDate() + _genVar);
             var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), 0, 0, 0, 0))
 
             wcfDateStr1234 = d1222.toMSJSON();
