@@ -519,8 +519,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
-
-
     $scope.SetItemData = function (obj) {
 
         $scope.InventoryObject.ItemID = obj.ItemID;
@@ -534,6 +532,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.InventoryObject.UomID = obj.DefaultUomID;
         $scope.InventoryObject.Uom = obj.DefaultUom;
 
+        $scope.InventoryObject.lZone = obj.DefaultLocationGroup;
+        $scope.InventoryObject.ItemGroup = obj.ItemGroup;
 
 
         if ($scope.InventoryObject.CustomPartData.length > 0 && obj.CustomData.length > 0) {
