@@ -649,10 +649,12 @@ app.controller('LocalrestockController', ['$scope', 'localStorageService', 'auth
        if ($(_iconID).hasClass("fa-chevron-up")) {
            _isOpen = true;
            $(_iconID).removeClass("fa-chevron-up").addClass("fa-chevron-down");
+           $(_id).find(".Celldata").removeClass("overflowtext");
        }
        else {
            _isOpen = false;
            $(_iconID).removeClass("fa-chevron-down").addClass("fa-chevron-up");
+           $(_id).find(".Celldata").addClass("overflowtext");
        }
 
        $(_id).find(".ExtraTr").toggle("slow");
