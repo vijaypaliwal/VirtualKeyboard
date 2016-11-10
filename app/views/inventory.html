@@ -160,6 +160,7 @@
                             <label>Status </label>
                             <div class="input-group">
                                 <select class="form-control" id="Status" ng-model="InventoryObject.Status">
+                                    <option value="">None</option>
                                     <option value="{{obj.StatusValue}}" ng-selected="obj.StatusValue==InventoryObject.Status" ng-repeat="obj in StatusList">{{obj.StatusValue}}</option>
                                 </select>
 
