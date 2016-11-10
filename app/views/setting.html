@@ -10,6 +10,11 @@
         background-color: #9c27b0 !important;
         color: #fff !important;
     }
+
+    .restricted {
+        color: brown !important;
+        background-color: pink !important;
+    }
 </style>
 
 <div class="title-header">
@@ -43,6 +48,17 @@
         </div>
 
     </button>
+    <button ng-if="checkpermission('URL:Manage/UnitOfMeasure')==false" type="button" ng-click="restricted()" class="waves-effect waves-light btn-large btn-success width-100 animated bouncein delay-6 restricted">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <i class="fa fa-ban"></i> Manage UOM
+            </div>
+
+
+        </div>
+
+    </button>
 
     <button ng-if="checkpermission('URL:Manage/Location')==true" type="button" ng-click="GoTo('/Location')" class="waves-effect waves-light btn-large btn-danger width-100 animated bouncein delay-6">
 
@@ -61,7 +77,18 @@
         </div>
 
     </button>
+    <button ng-if="checkpermission('URL:Manage/Location')==false" type="button" ng-click="restricted()" class="waves-effect waves-light btn-large btn-danger width-100 animated bouncein delay-6 restricted">
 
+        <div class="row">
+            <div class="col-xs-12">
+                <i class="fa fa-ban"></i>  Manage Location
+
+            </div>
+
+
+        </div>
+
+    </button>
  
     <button ng-if="checkpermission('URL:Manage/Status')==true" type="button" ng-click="GoTo('/status')" class="waves-effect waves-light btn-large accent-color width-100 animated bouncein delay-6">
         <div class="row">
@@ -80,7 +107,17 @@
             </div>
         </div>
     </button>
+    <button ng-if="checkpermission('URL:Manage/Status')==false" type="button" ng-click="restricted()" class="waves-effect waves-light btn-large accent-color width-100 animated bouncein delay-6 restricted">
+        <div class="row">
+            <div class="col-xs-9">
+                <i class="fa fa-ban"> </i> Manage Status
 
+            </div>
+
+
+            
+        </div>
+    </button>
 
   
     <button ng-if="checkpermission('URL:Admin/MyInventoryColumn')==true" type="button" ng-click="GoTo('/selectcolumns')" class="waves-effect waves-light btn-large btn-indigo width-100 animated bouncein delay-6">
@@ -98,6 +135,21 @@
                     {{columnlist.length}}
                 </div>
             </div>
+
+        </div>
+
+
+
+    </button>
+    <button ng-if="checkpermission('URL:Admin/MyInventoryColumn')==false" type="button" ng-click="restricted()" class="waves-effect waves-light btn-large btn-indigo width-100 animated bouncein delay-6 restricted">
+        <div class="row">
+            <div class="col-xs-12">
+                <i class="fa fa-ban"></i> Select Inventory Columns
+
+            </div>
+
+
+
 
         </div>
 
@@ -126,7 +178,17 @@
 
 
     </button>
+    <button type="button" ng-if="checkpermission('URL:Admin/MyInventoryColumn')==false" ng-click="restricted()" class="waves-effect waves-light btn-large btn-warning width-100 animated bouncein delay-6 restricted">
+        <div class="row">
+            <div class="col-xs-12">
+                <i class="fa fa-ban"></i> Arrange Inventory Columns
 
+            </div>
+
+        </div>
+
+
+    </button>
 
     <button ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true && checkpermission('URL:configure/CustomFieldItemList.aspx')==true" type="button" ng-click="GoTo('/customfield')" class="waves-effect waves-light btn-large btn-purple width-100 animated bouncein delay-6">
         <div class="row">
@@ -150,6 +212,18 @@
 
 
     </button>
+    <button ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==false || checkpermission('URL:configure/CustomFieldItemList.aspx')==false" type="button" ng-click="restricted()" class="waves-effect waves-light btn-large btn-purple width-100 animated bouncein delay-6 restricted">
+        <div class="row">
+            <div class="col-xs-9">
+                <i class="fa fa-ban"></i>    Manage Custom fields
+
+            </div>
+
+        </div>
+
+
+
+    </button>
 </div>
 
 <a ng-click="Openbottommenu()" class="menubtn waves-effect">
@@ -161,7 +235,7 @@
         <ul class="animated slideInUp selectAction">
             <li ng-if="checkpermission('ACTION:CanAddInventory')==true"> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
             <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-shopping-cart"></i> </a></li>
-            <li> <a href="#/reportmenu"><span class="newinv">Go to Report</span></a>  <a href="#/reportmenu" class=" waves-effect btn-primary btn"> <i class="fa fa-check-circle-o"></i> </a></li>
+            <li> <a href="#/reportmenu"><span class="newinv">Go to Report</span></a>  <a href="#/reportmenu" class=" waves-effect btn-primary btn"> <i class="fa fa-th-list"></i> </a></li>
             <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
         </ul>
     </div>

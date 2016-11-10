@@ -10,6 +10,11 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         }
     }
 
+
+    $scope.restricted = function () {
+        log.error("You are Not Authorize to access")
+    }
+
     $scope.currentactiveaccount = function (AccountName) {
         localStorageService.set("ActivityCart", "");
         localStorageService.set("SelectedAction", "");
