@@ -81,11 +81,12 @@
                                     <div class="row">
                                         <div class="col-xs-6">
                                             <label>Item Name  </label>
+                                          
                                         </div>
 
                                     </div>
 
-                                    <div ng-if="InventoryObject.AutoID==false" class="input-group">
+                                    <div ng-if="InventoryObject.AutoID==false && IsItemLibrary==true" class="input-group">
                                         <div>
 
                                             <input type="text" id="ItemName" class="form-control" my-enter="GoToNext()" ng-model="InventoryObject.ItemID" required="" />
@@ -96,8 +97,23 @@
 
                                     </div>
 
+                                    <div ng-if="IsItemLibrary==false">
+                                        <div class="row requiredfields" ng-if="IsItemLibrary==false && IsItemChose==false">
+                                            <div class="col-md-12">
 
-                                    <div ng-if="InventoryObject.AutoID==true" class="input-group">
+                                                <a>
+                                                    You are not permitted to add new item so please select item from item list.
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <label>{{InventoryObject.ItemID}}</label>
+
+                                    </div>
+
+
+                                    <div ng-if="InventoryObject.AutoID==true && IsItemLibrary==true" class="input-group">
 
                                         <div>
                                             <input placeholder="Automated" my-enter="GoToNext()" type="text" ng-model="InventoryObject.ItemID" id="ItemName" disabled="disabled" class="form-control" />
@@ -173,7 +189,7 @@
                             <label>Select UOM <span class="redText">*</span></label>
                             <div class="input-group">
 
-                                <select class="form-control" ng-model="InventoryObject.Uom" id="UOM">
+                                <select class="form-control" ng-change="InventoryObject.UomID=0" ng-model="inventoryobject.uom" id="UOM">
                                     <option value="{{obj.UnitOfMeasureName}}" ng-selected="CheckSelectedValues(InventoryObject.Uom,obj.UnitOfMeasureName)?true:false" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                 </select>
 

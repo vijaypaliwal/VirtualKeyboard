@@ -33,7 +33,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         else {
             $scope.InventoryObject.lZone = "";
         }
+        $scope.InventoryObject.LocationID = 0;
 
+        CheckScopeBeforeApply();
 
     }
 
@@ -114,6 +116,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.slide = 1000;
     $scope.CreateType = 0;
     $scope.CreateNewLabel = "";
+    $scope.IsItemLibrary = true;
+    $scope.IsItemChose = false;
     var FileName = "";
     var StreamData = "";
 
@@ -553,6 +557,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         $("#locationlistmodal").modal('hide');
         $("#uomlistmodal").modal('hide');
+        $scope.IsItemChose = true;
         CheckScopeBeforeApply()
     }
 
@@ -884,221 +889,225 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.addinventory = function () {
-
-        var authData = localStorageService.get('authorizationData');
-        if (authData) {
-            $scope.SecurityToken = authData.token;
-        }
-
-        $('#addinventories').addClass("disabled");
-        $('#addinventories').find(".fa").addClass("fa-spin");
-
-
-        var _TempObj = $scope.InventoryObject;
-
-        var ImageData = $("#list123").find("img").attr("src");
-        $.each(_TempObj, function (datakey, datavalue) {
-
-            if (datakey != "CustomPartData" && datakey != "CustomTxnData") {
-                if (datakey == "ItemID" && _TempObj.AutoID == true) {
-
-
-                    datakey = "Inv_" + datakey;
-                    localStorageService.set(datakey, "");
-
-                }
-                else {
-                    datakey = "Inv_" + datakey;
-                    localStorageService.set(datakey, "");
-                    localStorageService.set(datakey, datavalue);
-                }
-
+        if ($scope.IsItemChose == true) {
+            var authData = localStorageService.get('authorizationData');
+            if (authData) {
+                $scope.SecurityToken = authData.token;
             }
 
-            else {
-                if (datavalue.length > 0) {
-                    for (var i = 0; i < datavalue.length; i++) {
+            $('#addinventories').addClass("disabled");
+            $('#addinventories').find(".fa").addClass("fa-spin");
 
-                        datakey = "Inv_" + datavalue[i].CfdID;
+
+            var _TempObj = $scope.InventoryObject;
+
+            var ImageData = $("#list123").find("img").attr("src");
+            $.each(_TempObj, function (datakey, datavalue) {
+
+                if (datakey != "CustomPartData" && datakey != "CustomTxnData") {
+                    if (datakey == "ItemID" && _TempObj.AutoID == true) {
+
+
+                        datakey = "Inv_" + datakey;
                         localStorageService.set(datakey, "");
-                        localStorageService.set(datakey, datavalue[i].Value);
 
+                    }
+                    else {
+                        datakey = "Inv_" + datakey;
+                        localStorageService.set(datakey, "");
+                        localStorageService.set(datakey, datavalue);
                     }
 
                 }
-            }
-        });
 
+                else {
+                    if (datavalue.length > 0) {
+                        for (var i = 0; i < datavalue.length; i++) {
 
-        if ($.trim($scope.InventoryObject.ItemID) == "") {
-            $scope.InventoryObject.AutoID = true;
-            $scope.InventoryObject.ItemID = "Automated";
-        }
-        if ($scope.InventoryObject.UnitNumber1 == "") {
-           $scope.InventoryObject.UnitNumber1 = null;
-        }
-        if ($scope.InventoryObject.UnitNumber2 == "") {
-            $scope.InventoryObject.UnitNumber2 = null;
-        }
-        $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity == "" ? 0 : $scope.InventoryObject.Quantity;
-        var _updateDateval = $scope.InventoryObject.UniqueDate;
+                            datakey = "Inv_" + datavalue[i].CfdID;
+                            localStorageService.set(datakey, "");
+                            localStorageService.set(datakey, datavalue[i].Value);
 
-        if (_updateDateval != null && _updateDateval != "") {
-            var wcfDateStr123 = null;
-            var dsplit1 = _updateDateval.split("-");
+                        }
 
-            var d122 = new Date(dsplit1[0], dsplit1[1] - 1, dsplit1[2]);
-
-            var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
-
-            d122.setDate(d122.getDate() + _genVar);
-            var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate() , 0, 0, 0, 0))
-            wcfDateStr123 = d122.toMSJSON();
-
-            $scope.InventoryObject.UniqueDate = wcfDateStr123;
-        }
-        else {
-            $scope.InventoryObject.UniqueDate = null;
-        }
-
-
-
-        var dateObj = new Date();
-        var month = dateObj.getUTCMonth() + 1; //months from 1-12
-        var day = dateObj.getUTCDate();
-        var year = dateObj.getUTCFullYear();
-
-
-     
-
-        var _updatedate = new Date(year, month, day);
-        if (_genVar == 0) {
-
-            _updatedate.setDate(_updatedate.getDate() + 1);
-        }
-        else{
-
-            _updatedate.setDate(_updatedate.getDate());
-        }
-        var _d1122 = new Date(Date.UTC(_updatedate.getFullYear(), _updatedate.getMonth() - 1, _updatedate.getDate() , 0, 0, 0, 0))
-
-        var wcfDateStrUpd = _d1122.toMSJSON();
-
-
-        var _updateDateval1 = $scope.InventoryObject.UnitDate2;
-
-        $scope.InventoryObject.UpdateDate = wcfDateStrUpd;
-
-        if (_updateDateval1 != null && _updateDateval1 != "") {
-
-            var wcfDateStr1234 = null;
-            var dsplit12 = _updateDateval1.split("-");
-
-            var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
-
-              d1222.setDate(d1222.getDate() + _genVar);
-            var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), 0, 0, 0, 0))
-
-            wcfDateStr1234 = d1222.toMSJSON();
-
-            $scope.InventoryObject.UnitDate2 = wcfDateStr1234;
-
-
-              
-
-        }
-        else {
-            $scope.InventoryObject.UnitDate2 = null;
-        }
-        var _sum = 0;
-
-
-        var _toSendImages = angular.copy($scope.ImageList);
-
-        for (var i = 0; i < _toSendImages.length; i++) {
-
-            if (_toSendImages[i].bytestring != null && _toSendImages[i].bytestring != undefined) {
-                _toSendImages[i].bytestring = removePaddingCharacters(_toSendImages[i].bytestring);
-                if (_toSendImages[i].size != null && _toSendImages[i].size != undefined) {
-
-                    _sum = _sum + parseFloat(_toSendImages[i].size);
+                    }
                 }
+            });
+
+
+            if ($.trim($scope.InventoryObject.ItemID) == "") {
+                $scope.InventoryObject.AutoID = true;
+                $scope.InventoryObject.ItemID = "Automated";
+            }
+            if ($scope.InventoryObject.UnitNumber1 == "") {
+                $scope.InventoryObject.UnitNumber1 = null;
+            }
+            if ($scope.InventoryObject.UnitNumber2 == "") {
+                $scope.InventoryObject.UnitNumber2 = null;
+            }
+            $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity == "" ? 0 : $scope.InventoryObject.Quantity;
+            var _updateDateval = $scope.InventoryObject.UniqueDate;
+
+            if (_updateDateval != null && _updateDateval != "") {
+                var wcfDateStr123 = null;
+                var dsplit1 = _updateDateval.split("-");
+
+                var d122 = new Date(dsplit1[0], dsplit1[1] - 1, dsplit1[2]);
+
+                var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
+
+                d122.setDate(d122.getDate() + _genVar);
+                var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
+                wcfDateStr123 = d122.toMSJSON();
+
+                $scope.InventoryObject.UniqueDate = wcfDateStr123;
+            }
+            else {
+                $scope.InventoryObject.UniqueDate = null;
             }
 
-        }
-
-        if (_sum > 5000000) {
-            log.warning("You are trying to upload more than one image, it may take some time to upload, please be patient.")
-        }
 
 
-        ShowWaitingInv();
-        $.ajax
-          ({
-              type: "POST",
-              url: serviceBase + 'AddInventoryData',
-              contentType: 'application/json; charset=utf-8',
+            var dateObj = new Date();
+            var month = dateObj.getUTCMonth() + 1; //months from 1-12
+            var day = dateObj.getUTCDate();
+            var year = dateObj.getUTCFullYear();
 
-              dataType: 'json',
 
-              data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": [] }),
-              // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
-              success: function (response) {
-                  if (response.AddInventoryDataResult.Success == true) {
 
-                      //  log.success("New Inventory Added Successfully.")
 
-                      ShowSuccess("Saved");
+            var _updatedate = new Date(year, month, day);
+            if (_genVar == 0) {
 
-                      if (_toSendImages.length > 0) {
-                          // log.info("Image upload started it will continue in backend you can do other work.")
-                          $scope.UploadImage(response.AddInventoryDataResult.Payload, _toSendImages, 0);
+                _updatedate.setDate(_updatedate.getDate() + 1);
+            }
+            else {
+
+                _updatedate.setDate(_updatedate.getDate());
+            }
+            var _d1122 = new Date(Date.UTC(_updatedate.getFullYear(), _updatedate.getMonth() - 1, _updatedate.getDate(), 0, 0, 0, 0))
+
+            var wcfDateStrUpd = _d1122.toMSJSON();
+
+
+            var _updateDateval1 = $scope.InventoryObject.UnitDate2;
+
+            $scope.InventoryObject.UpdateDate = wcfDateStrUpd;
+
+            if (_updateDateval1 != null && _updateDateval1 != "") {
+
+                var wcfDateStr1234 = null;
+                var dsplit12 = _updateDateval1.split("-");
+
+                var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
+
+                d1222.setDate(d1222.getDate() + _genVar);
+                var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), 0, 0, 0, 0))
+
+                wcfDateStr1234 = d1222.toMSJSON();
+
+                $scope.InventoryObject.UnitDate2 = wcfDateStr1234;
+
+
+
+
+            }
+            else {
+                $scope.InventoryObject.UnitDate2 = null;
+            }
+            var _sum = 0;
+
+
+
+            var _toSendImages = angular.copy($scope.ImageList);
+
+            for (var i = 0; i < _toSendImages.length; i++) {
+
+                if (_toSendImages[i].bytestring != null && _toSendImages[i].bytestring != undefined) {
+                    _toSendImages[i].bytestring = removePaddingCharacters(_toSendImages[i].bytestring);
+                    if (_toSendImages[i].size != null && _toSendImages[i].size != undefined) {
+
+                        _sum = _sum + parseFloat(_toSendImages[i].size);
+                    }
+                }
+
+            }
+
+            if (_sum > 5000000) {
+                log.warning("You are trying to upload more than one image, it may take some time to upload, please be patient.")
+            }
+
+
+            ShowWaitingInv();
+            $.ajax
+              ({
+                  type: "POST",
+                  url: serviceBase + 'AddInventoryData',
+                  contentType: 'application/json; charset=utf-8',
+
+                  dataType: 'json',
+
+                  data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject, "ImageList": [] }),
+                  // data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Data": $scope.InventoryObject }),
+                  success: function (response) {
+                      if (response.AddInventoryDataResult.Success == true) {
+
+                          //  log.success("New Inventory Added Successfully.")
+
+                          ShowSuccess("Saved");
+
+                          if (_toSendImages.length > 0) {
+                              // log.info("Image upload started it will continue in backend you can do other work.")
+                              $scope.UploadImage(response.AddInventoryDataResult.Payload, _toSendImages, 0);
+                          }
+                          ImageListAndroid = [];
+
+                          // $scope.resetObject();
+
+                          $scope.movetolist();
+                          // $location.path('/inventory');
+
+                          CheckScopeBeforeApply()
                       }
-                      ImageListAndroid = [];
-
-                      // $scope.resetObject();
-
-                      $scope.movetolist();
-                      // $location.path('/inventory');
-
-                      CheckScopeBeforeApply()
-                  }
-                  else {
-                      $scope.ShowErrorMessage("New Inventory", 3, 1, response.AddInventoryDataResult.Message)
-
-
-                  }
-                  HideWaitingInv();
-
-                  $('#addinventories').removeClass("disabled");
-                  $('#addinventories').find(".fa").removeClass("fa-spin");
-              },
-              fail: function (jqXHR, textStatus, errorThrown) {
-                  console.log("jqxhr");
-                  console.log(jqXHR);
-              },
-              error: function (err, textStatus, errorThrown) {
-                  if (err.readyState == 0 || err.status == 0) {
-
-                  }
-                  else {
-                      if (textStatus != "timeout") {
-
-                          HideWaitingInv();
-
-                          $scope.ShowErrorMessage("New Inventory", 2, 1, err.statusText);
-
-                          $scope.Inventoryerrorbox(errorThrown);
+                      else {
+                          $scope.ShowErrorMessage("New Inventory", 3, 1, response.AddInventoryDataResult.Message)
 
 
                       }
+                      HideWaitingInv();
+
+                      $('#addinventories').removeClass("disabled");
+                      $('#addinventories').find(".fa").removeClass("fa-spin");
+                  },
+                  fail: function (jqXHR, textStatus, errorThrown) {
+                      console.log("jqxhr");
+                      console.log(jqXHR);
+                  },
+                  error: function (err, textStatus, errorThrown) {
+                      if (err.readyState == 0 || err.status == 0) {
+
+                      }
+                      else {
+                          if (textStatus != "timeout") {
+
+                              HideWaitingInv();
+
+                              $scope.ShowErrorMessage("New Inventory", 2, 1, err.statusText);
+
+                              $scope.Inventoryerrorbox(errorThrown);
+
+
+                          }
+                      }
+                      $('#addinventories').removeClass("disabled");
+                      $('#addinventories').find(".fa").removeClass("fa-spin");
+
                   }
-                  $('#addinventories').removeClass("disabled");
-                  $('#addinventories').find(".fa").removeClass("fa-spin");
-
-              }
-          });
-
+              });
+        }
+        else {
+            log.error("Please select an item from available items list, you are not authorized to create new item.")
+        }
 
     }
 
@@ -1903,8 +1912,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             targeHeight: 120,
             correctOrientation: true,
             destinationType: destinationType.DATA_URL,
-            allowEdit:true,
-            saveToPhotoAlbum:true,
+            allowEdit: true,
+            saveToPhotoAlbum: true,
         });
     }
 
@@ -1943,8 +1952,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     function init() {
         //  $cordovaKeyboard.disableScroll(true);
         $scope.GetAllData();
-
-
+        $scope.IsItemLibrary = $scope.checkpermission('URL:Manage/Item');
+        $scope.IsItemChose = $scope.IsItemLibrary;
+        CheckScopeBeforeApply();
 
     }
 
@@ -2559,7 +2569,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             default:
                 $scope.scanfieldID = "";
                 break;
-                }
+        }
 
         CheckScopeBeforeApply()
     }
@@ -2582,9 +2592,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             });
         }
-        else
-        {
-         mySwiper.swipeTo(currentstep);
+        else {
+            mySwiper.swipeTo(currentstep);
 
         }
 
@@ -2686,7 +2695,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             var _isAvailableUOM = false;
             for (var i = 0; i < $scope.UOMList.length; i++) {
                 if ($.trim($scope.UOMList[i].UnitOfMeasureName) != "" && $scope.UOMList[i].UnitOfMeasureName.toLowerCase() == "units") {
-                 
+
                     _isAvailableUOM = true;
                     break;
                 }
