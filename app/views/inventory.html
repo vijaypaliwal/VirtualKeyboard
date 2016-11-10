@@ -743,7 +743,8 @@
                     <table style="width:100%;">
                         <tr>
                             <td>
-                                <button type="button" class="waves-effect btn btn-primary arrow-left bknext"><i class="fa fa-angle-left"></i> Back</button>
+
+                                <button type="button" ng-disabled="slide==0 || slide==1000" class="waves-effect btn btn-primary arrow-left bknext"><i class="fa fa-angle-left"></i> Back</button>
                             </td>
                             <!--<td style="text-align:center;" ng-hide=" slide==Totalslides">
                                 <a class="btn btn-primary waves-effect" ng-click="GetAllLastValue()"> <i style="font-size:14px;" class="fa fa-undo"></i> Repeat  </a>
@@ -1098,7 +1099,7 @@
 
                 <div ng-if="CheckInCommonArray(obj.ColumnName)!=true" ng-click="getstep(0,obj.ColumnName)" class="form-group">
 
-                    <span class="mylabel">{{obj.ColumnLabel}}</span><span>{{InventoryObject.CustomPartData[$index].Value}}</span>
+                    <span class="mylabel">{{obj.ColumnLabel}}</span>&nbsp;<span>{{InventoryObject.CustomPartData[$index].Value}}</span>
                 </div>
 
             </div>

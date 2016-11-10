@@ -12,7 +12,7 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
     $scope.IsViewOpen = false;
     $scope.IsLibrarydataopen = true;
     $scope.IsGlobalopen = false;
-
+    $scope.CurrentUser= $scope.CurrentAccount;
 
     $scope.LocalCustomItemFieldsList = [];
     $scope.LocalCustomActivityFieldsList = [];
@@ -24,7 +24,7 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
     $scope.IsLoading = true;
 
 
-    $scope.ManagePermission = function (userkey)
+    $scope.ManagePermission = function (userkey, Name)
     {
         $scope.showpermission = true;
         $scope.GetPermission(1, userkey);
@@ -32,6 +32,7 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
         $scope.GetPermission(4, userkey);
         $scope.GetPermission(5, userkey);
         $scope.userkey = userkey;
+        $scope.CurrentUser = Name;
         CheckScopeBeforeApply();
     }
 
@@ -127,6 +128,7 @@ app.controller('permissionController', ['$scope', 'localStorageService', 'authSe
 
 
     $scope.showuserlist = function () {
+        $scope.CurrentUser = $scope.CurrentAccount;
         $scope.showpermission = false;
         $scope.$apply();
     }
