@@ -344,6 +344,7 @@
 
 
                             <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+
                                 <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
 
                             </div>
@@ -544,7 +545,7 @@
 
                             <td ng-if="IsinavailableInventoryField(CurrentActiveField)==true">
                                 <div>
-                                    <button class="scanbtn btn btn-gray" type="button" ng-disabled="InventoryObject.AutoID==true" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i>Scan</button>
+                                    <button class="scanbtn btn btn-gray" type="button" ng-disabled="InventoryObject.AutoID==true || IsItemLibrary==false" ng-if="CurrentActiveField=='pPart'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i>Scan</button>
                                     <a class="scanbtn waves-effect btn btn-gray" ng-if="CurrentActiveField!='pPart'&& CurrentActiveField!='iQty'" ng-click="ScanNew()"> <i class="fa fa-barcode"></i>Scan</a>
                                 </div>
 
