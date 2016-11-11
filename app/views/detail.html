@@ -127,7 +127,7 @@
                     <i class="fa fa-map-marker udt"></i>
                 </div>
                 <div class="c-widget-body">
-                    <p > <span>Quantity:</span> {{CurrentInventory.iQty}} {{CurrentInventory.uomUOM}} </p>
+                    <p class="m-0" style="color:black;"><span>Quantity:</span> {{CurrentInventory.iQty}} {{CurrentInventory.uomUOM}} </p>
                     <p class="m-0"> <span>Location:</span> {{CurrentInventory.lLoc}} </p>
                 </div>
             </div>
@@ -144,31 +144,31 @@
                 
 
                         <p class="m-0" ng-if="CurrentInventory.iReqValue != ''">
-                            <span> {{GetUnitDataLabel('iReqValue')}}:</span>{{CurrentInventory.iReqValue}}
+                            <span> {{GetUnitDataLabel('iReqValue')}}:</span> {{CurrentInventory.iReqValue}}
                         </p>
                         <p class="m-0" ng-if="CurrentInventory.iUnitTag2 != ''">
-                            <span> {{GetUnitDataLabel('iUnitTag2')}}:</span>{{CurrentInventory.iUnitTag2}}
+                            <span> {{GetUnitDataLabel('iUnitTag2')}}:</span> {{CurrentInventory.iUnitTag2}}
                         </p>
 
                         <p class="m-0" ng-if="CurrentInventory.iUnitTag3 != ''">
-                            <span>{{GetUnitDataLabel('iUnitTag3')}}:</span>{{CurrentInventory.iUnitTag3}}
+                            <span>{{GetUnitDataLabel('iUnitTag3')}}:</span> {{CurrentInventory.iUnitTag3}}
                         </p>
 
 
                         <p class="m-0" ng-if="CurrentInventory.iUniqueDate != null">
-                            <span> {{GetUnitDataLabel('iUniqueDate')}}:</span>{{CurrentInventory.iUniqueDate}}
+                            <span> {{GetUnitDataLabel('iUniqueDate')}}:</span> {{CurrentInventory.iUniqueDate}}
                         </p>
 
                         <p class="m-0" ng-if="CurrentInventory.iUnitDate2 != null">
-                            <span> {{GetUnitDataLabel('iUnitDate2')}}:</span>{{CurrentInventory.iUnitDate2}}
+                            <span> {{GetUnitDataLabel('iUnitDate2')}}: </span>{{CurrentInventory.iUnitDate2}}
                         </p>
 
                         <p class="m-0" ng-if="CurrentInventory.iUnitNumber1 != null">
-                            <span> {{GetUnitDataLabel('iUnitNumber1')}}:</span>{{CurrentInventory.iUnitNumber1}}
+                            <span> {{GetUnitDataLabel('iUnitNumber1')}}: </span>{{CurrentInventory.iUnitNumber1}}
                         </p>
 
                         <p class="m-0" ng-if="CurrentInventory.iUnitNumber2 != null">
-                            <span> {{GetUnitDataLabel('iUnitNumber2')}}:</span>{{CurrentInventory.iUnitNumber2}}
+                            <span> {{GetUnitDataLabel('iUnitNumber2')}}: </span>{{CurrentInventory.iUnitNumber2}}
                         </p>
                   
                 </div>
@@ -208,14 +208,22 @@
         <div class="" ng-if="IsEditMode==true">
 
             <div class="page-header">
-                <h4 style="color:#000; padding-left:12px; text-align:left;">Edit Item details</h4>
+                <h4 style="color:#000; padding-left:12px; text-align:left;">Edit Item -
+
+                    <small style=" color: #000 !important; font-size: 12px !important;">
+                        {{CurrentInventory.iQty}} Of {{CurrentInventory.pPart}} {{CurrentInventory.uomUOM}} @@ {{CurrentInventory.lLoc}}
+                    </small>
+                </h4>
+
+                
+
             </div>
 
 
 
             <div style="text-align:left; color:#000; padding:10px;" class="editsection maincontent" ng-if="IsEditMode==true">
                 <div class="form-group">
-                    <label>Item Name <span class="redText">*</span></label>
+                    <label>Item Name  <span class="redText">*</span></label>
                     <div class="input-group">
                         <input type="text" class="form-control" ng-model="CurrentInventory.pPart" />
                         <span class="input-group-addon last">
@@ -234,17 +242,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Unit of Measure</label>
-                    <input type="text" class="form-control" disabled="disabled" ng-model="CurrentInventory.uomUOM" />
-                </div>
-
-                
-
-                <div class="form-group">
-                    <label>Location</label>
-                    <input type="text" class="form-control" disabled="disabled" ng-model="CurrentInventory.lLoc" />
-                </div>
+              
                 <br/>
                 
                 <button type="button" ng-click="UpdateInventory()" ng-if="SavingData==false" ng-disabled="CurrentInventory.pPart==''" class="waves-effect btn btn-primary"> <i class="fa fa-pencil"></i> Update</button>
@@ -265,7 +263,7 @@
                 <li ng-click="showinventory()"><span>Show all Inventory</span><a href="#/FindItems" class="waves-effect btn-danger btn"> <i class="fa fa-dollar"></i> </a></li>
                 <li ng-click="addtocart(CurrentInventory)" ng-show="CanAddIntoCart==false"><span>Select for cart</span><a class="waves-effect btn-success btn" data-dismiss="modal"> <i class="fa fa-shopping-cart"></i> </a></li>
                 <li ng-click="removecart(CurrentInventory)" ng-show="CanAddIntoCart==true"><span>Remove from cart</span><a class="waves-effect btn-danger btn" data-dismiss="modal"> <i class="fa fa-trash-o"></i> </a></li>
-                <li ng-if="IsEditMode==false && checkpermission('URL:Manage/Item')==true" ng-click=" toggleeditview()" data-dismiss="modal"><span>Edit Item details</span><a class="waves-effect btn bgm-orange" data-dismiss="modal"> <i class="fa fa-pencil"></i> </a></li>
+                <li ng-if="IsEditMode==false && checkpermission('URL:Manage/Item')==true" ng-click="ToggleEditView()" data-dismiss="modal"><span>Edit Item details</span><a class="waves-effect btn bgm-orange" data-dismiss="modal"> <i class="fa fa-pencil"></i> </a></li>
                 <li ng-if="IsEditMode==true && checkpermission('URL:Manage/Item')==true" ng-click="ToggleEditView()" data-dismiss="modal"><span>Show Item details</span><a class="waves-effect btn bgm-orange" data-dismiss="modal"> <i class="fa fa-info"></i> </a></li>
             </ul>
         </div>

@@ -312,7 +312,7 @@
 
                                 <div class="btn-group custombtnGroup">
                                     <label class="switch1">
-                                        <input id="CustomItem_{{obj.cfdID}}" ng-checked="InventoryObject.CustomPartData[$index].Value" type="checkbox" ng-model="InventoryObject.CustomPartData[$index].Value">
+                                        <input id="CustomItem_{{obj.cfdID}}" ng-checked="InventoryObject.CustomPartData[$index].Value==true" type="checkbox" ng-model="InventoryObject.CustomPartData[$index].Value">
                                         <div class="slider round"></div>
                                     </label>
                                 </div>
@@ -367,7 +367,7 @@
 
                                 <div class="btn-group custombtnGroup">
                                     <label class="switch1">
-                                        <input id="CustomActivity_{{obj.cfdID}}" ng-checked="InventoryObject.CustomTxnData[$index].Value" type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value">
+                                        <input id="CustomActivity_{{obj.cfdID}}" ng-checked="InventoryObject.CustomTxnData[$index].Value==true" type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value">
                                         <div class="slider round"></div>
                                     </label>
                                 </div>
