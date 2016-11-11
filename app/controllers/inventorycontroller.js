@@ -2839,7 +2839,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 $scope.CurrentActiveField = _TempcolName != undefined && _TempcolName != "" ? _TempcolName : "";
                 $scope.Totalslides = mySwiper.slides.length - 1;
                 $scope.IsFormDataloaded = true;
-
+                $scope.CurrentActiveFieldType = "Inventory";
                 $("#files").on('change', function (event) {
                     $scope.handleFileSelect(event);
                 });
