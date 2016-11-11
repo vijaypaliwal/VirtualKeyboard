@@ -441,9 +441,13 @@
 }
 
 #filtermodal .form-control {
-    border-top-left-radius: 0px;
+ border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
+    height: 41px;
     border-left: transparent;
+    display: block;
+    z-index: 1000;
+    position: relative;
 }
 
 #filtermodal #firstDiv .fa-calendar {
