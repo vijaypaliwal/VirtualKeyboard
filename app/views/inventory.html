@@ -189,7 +189,7 @@
                             <label>Select UOM <span class="redText">*</span></label>
                             <div class="input-group">
 
-                                <select class="form-control" ng-change="InventoryObject.UomID=0" ng-model="inventoryobject.uom" id="UOM">
+                                <select class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.Uom" id="UOM">
                                     <option value="{{obj.UnitOfMeasureName}}" ng-selected="CheckSelectedValues(InventoryObject.Uom,obj.UnitOfMeasureName)?true:false" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                 </select>
 

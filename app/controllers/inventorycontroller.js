@@ -560,7 +560,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.IsItemChose = true;
         CheckScopeBeforeApply()
     }
+    $scope.onChangeUOMData = function () {
+        $scope.InventoryObject.UomID = 0;
+        CheckScopeBeforeApply();
 
+    }
 
     $scope.LocationSetItemData = function (obj) {
 
