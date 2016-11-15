@@ -156,10 +156,10 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                     
                    _UserInfo.username = response.GetUserInfoResult.Payload[0].UserName
                    _UserInfo.myprofileimage = response.GetUserInfoResult.Payload[0].ProfilePic;
-                   localStorageService.remove('LockLibrary');
-                   localStorageService.set('LockLibrary', response.GetUserInfoResult.Payload[0]);
+
+
                    localStorageService.set('UserKey', response.GetUserInfoResult.Payload[0].UserKey);
-                   console.log( localStorageService.get('LockLibrary'))
+
                    localStorageService.set('IsOwner', response.GetUserInfoResult.Payload[0].IsOwner);
 
                    if (response.GetUserInfoResult.Payload[0].IsOwner == "true" || response.GetUserInfoResult.Payload[0].IsOwner == true)
@@ -185,6 +185,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                    }
 
+                   console.log(_UserInfo);
                    localStorageService.set('UserInfoData', {
                        username: _UserInfo.username,
                        myprofileimage: _UserInfo.myprofileimage,
@@ -194,7 +195,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                },
                error: function (err) {
 
-                   log.error(err.statusText);
+
                }
            });
 

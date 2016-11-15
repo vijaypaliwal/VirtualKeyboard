@@ -125,7 +125,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         $.ajax({
             url: serviceBase + "UpdateUserInfo",
             type: 'POST',
-            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _data,"IsUserInfo":true }),
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _data }),
             dataType: 'json',
             contentType: 'application/json',
             success: function (result) {
