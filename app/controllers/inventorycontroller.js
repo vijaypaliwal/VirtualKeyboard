@@ -2158,123 +2158,142 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
         var ControlID = $scope.CurrentActiveField;
+        var _IsActiveScan = true;
+        switch (ControlID) {
+            case "iStatusValue":
+                _IsActiveScan = $scope.IsActiveStatusLibrary;
+                break;
+            case "lLoc":
+                _IsActiveScan = $scope.IsActiveLocationLibrary;
+                break;
+            case "uomUOM":
+                _IsActiveScan = $scope.IsActiveUOMLibrary;
+                break;
+            default:
+                _IsActiveScan = true;
+
+        }
+
+        if (_IsActiveScan == true) {
+
+            var scanner = cordova.plugins.barcodeScanner;
+
+            scanner.scan(function (result) {
+
+                var resultvalue = result.text;
+                var _fieldType = GetFieldType(ControlID);
+                if (_fieldType != 4) {
+
+                    resultvalue = $scope.Validation(resultvalue, _fieldType) == true ? resultvalue : "";
+                }
+                if (resultvalue != "") {
+                    switch (ControlID) {
+                        case "pPart":
+                            _id = "#ItemName";
+
+
+                            $scope.InventoryObject.ItemID = resultvalue;
+
+
+                            break;
+                        case "lLoc":
+                            _id = "#Location";
+                            $scope.InventoryObject.Location = resultvalue;
+                            break;
+                        case "uomUOM":
+                            _id = "#UOM";
+                            $scope.InventoryObject.Uom = resultvalue;
+                            break;
+                        case "iQty":
+                            _id = "#iQty";
+                            $scope.InventoryObject.Quantity = resultvalue;
+                            break;
+                        case "iStatusValue":
+                            $scope.InventoryObject.iStatusValue = resultvalue;
+                            break;
+                        case "pDescription":
+                            _id = "#pDescriptionForm";
+                            $scope.InventoryObject.Description = resultvalue;
+                            break;
+                        case "iReqValue":
+                            _id = "#UniqueTag";
+                            $scope.InventoryObject.UniqueTag = resultvalue;
+                            break;
+                        case "iUnitTag2":
+                            _id = "#UnitTag2";
+                            $scope.InventoryObject.UnitTag2 = resultvalue;
+                            break;
+                        case "iUnitTag3":
+                            _id = "#UnitTag3";
+                            $scope.InventoryObject.UnitTag3 = resultvalue;
+                            break;
+                        case "iUniqueDate":
+                            _id = "#UniqueDate";
+                            resultvalue = ConvertDatetoDate(resultvalue);
+                            $scope.InventoryObject.UniqueDate = resultvalue;
+                            break;
+                        case "iUnitDate2":
+                            _id = "#UnitDate2";
+                            resultvalue = ConvertDatetoDate(resultvalue);
+                            $scope.InventoryObject.UnitDate2 = resultvalue;
+                            break;
+                        case "iUnitNumber1":
+                            _id = "#UnitNumber1";
+                            $scope.InventoryObject.UnitNumber1 = resultvalue;
+                            break;
+                        case "iUnitNumber2":
+                            _id = "#UnitNumber2";
+                            $scope.InventoryObject.UnitNumber2 = resultvalue;
+                            break;
+                        case "pCountFrq":
+                            _id = "#itemgroup";
+                            $scope.InventoryObject.ItemGroup = resultvalue;
+                            break;
+                        case "lZone":
+                            _id = "#lZone";
+                            $scope.InventoryObject.lZone = resultvalue;
+                            break;
+                        default:
+
+                    }
 
 
 
-        var scanner = cordova.plugins.barcodeScanner;
+                    $(_id).val(resultvalue);
 
-        scanner.scan(function (result) {
+                    if (deviceType == 'iPhone') {
 
-            var resultvalue = result.text;
-            var _fieldType = GetFieldType(ControlID);
-            if (_fieldType != 4) {
-
-                resultvalue = $scope.Validation(resultvalue, _fieldType) == true ? resultvalue : "";
-            }
-            if (resultvalue != "") {
-                switch (ControlID) {
-                    case "pPart":
-                        _id = "#ItemName";
+                        mySwiper.swipeNext();
+                    }
+                    else {
+                        $(".arrow-right").trigger("click");
+                    }
 
 
-                        $scope.InventoryObject.ItemID = resultvalue;
 
+                    CheckScopeBeforeApply();
 
-                        break;
-                    case "lLoc":
-                        _id = "#Location";
-                        $scope.InventoryObject.Location = resultvalue;
-                        break;
-                    case "uomUOM":
-                        _id = "#UOM";
-                        $scope.InventoryObject.Uom = resultvalue;
-                        break;
-                    case "iQty":
-                        _id = "#iQty";
-                        $scope.InventoryObject.Quantity = resultvalue;
-                        break;
-                    case "iStatusValue":
-                        $scope.InventoryObject.iStatusValue = resultvalue;
-                        break;
-                    case "pDescription":
-                        _id = "#pDescriptionForm";
-                        $scope.InventoryObject.Description = resultvalue;
-                        break;
-                    case "iReqValue":
-                        _id = "#UniqueTag";
-                        $scope.InventoryObject.UniqueTag = resultvalue;
-                        break;
-                    case "iUnitTag2":
-                        _id = "#UnitTag2";
-                        $scope.InventoryObject.UnitTag2 = resultvalue;
-                        break;
-                    case "iUnitTag3":
-                        _id = "#UnitTag3";
-                        $scope.InventoryObject.UnitTag3 = resultvalue;
-                        break;
-                    case "iUniqueDate":
-                        _id = "#UniqueDate";
-                        resultvalue = ConvertDatetoDate(resultvalue);
-                        $scope.InventoryObject.UniqueDate = resultvalue;
-                        break;
-                    case "iUnitDate2":
-                        _id = "#UnitDate2";
-                        resultvalue = ConvertDatetoDate(resultvalue);
-                        $scope.InventoryObject.UnitDate2 = resultvalue;
-                        break;
-                    case "iUnitNumber1":
-                        _id = "#UnitNumber1";
-                        $scope.InventoryObject.UnitNumber1 = resultvalue;
-                        break;
-                    case "iUnitNumber2":
-                        _id = "#UnitNumber2";
-                        $scope.InventoryObject.UnitNumber2 = resultvalue;
-                        break;
-                    case "pCountFrq":
-                        _id = "#itemgroup";
-                        $scope.InventoryObject.ItemGroup = resultvalue;
-                        break;
-                    case "lZone":
-                        _id = "#lZone";
-                        $scope.InventoryObject.lZone = resultvalue;
-                        break;
-                    default:
 
                 }
 
-
-
-                $(_id).val(resultvalue);
-
-                if (deviceType == 'iPhone') {
-
-                    mySwiper.swipeNext();
-                }
                 else {
-                    $(".arrow-right").trigger("click");
+
+                    $scope.ShowScanError(_fieldType);
                 }
 
 
 
-                CheckScopeBeforeApply();
-
-
-            }
-
-            else {
-
-                $scope.ShowScanError(_fieldType);
-            }
+                vibrate();
 
 
 
-            vibrate();
-
-
-
-        }, function (error) {
-            log.error("Scanning failed: ", error);
-        });
+            }, function (error) {
+                log.error("Scanning failed: ", error);
+            });
+        }
+        else {
+            $scope.locked();
+        }
     }
     $scope.ShowScanError = function (type) {
         switch (type) {
