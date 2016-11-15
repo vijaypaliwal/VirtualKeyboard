@@ -611,6 +611,6 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     }
 
 
-  
+    initIndex();
 
 }]);
