@@ -1957,7 +1957,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         //  $cordovaKeyboard.disableScroll(true);
         $scope.GetAllData();
         $scope.IsItemLibrary = $scope.checkpermission('URL:Manage/Item');
-        $scope.IsItemChose = $scope.IsItemLibrary;
+        if($scope.IsItemLibrary==true && $scope.IsActiveItemLibrary==true)
+        {
+
+            $scope.IsItemChose = true;
+        }
+        else{
+            $scope.IsItemChose = false;
+        }
         CheckScopeBeforeApply();
 
     }

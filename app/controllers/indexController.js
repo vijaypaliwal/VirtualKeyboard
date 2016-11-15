@@ -12,7 +12,11 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
 
     $scope.restricted = function () {
-        log.error("You are Not Authorize to access")
+        log.error("You are Not Authorize to access");
+    }
+
+    $scope.locked = function () {
+        log.error("This Library is locked");
     }
 
     $scope.currentactiveaccount = function (AccountName) {
@@ -28,6 +32,12 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     $scope.Permission2 = [];
     $scope.Permission3 = [];
     $scope.Permission4 = [];
+
+    $scope.IsActiveLocationLibrary = false;
+    $scope.IsActiveStatusLibrary = false;
+    $scope.IsActiveUOMLibrary = false;
+    $scope.IsActiveItemLibrary = false;
+    $scope.IsActiveItemGroupLibrary = false;
 
 
 
@@ -52,7 +62,6 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type, "UserKey": Key }),
                success: function (response) {
 
-                   debugger;
 
 
                    if (response.GetUserPermissionsResult.Success == true) {
@@ -152,7 +161,6 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.checkpermission = function (permissioncode) {
 
-        console.log($scope.Permission);
 
         for (var i = 0; i < $scope.Permission.length; i++) {
             if ($scope.Permission[i].PermissionCode == permissioncode) {
@@ -164,14 +172,136 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     }
 
+    function UpdateLockData(IsLocked,Type) {
+        switch (Type) {
+            case 1:
+                $scope.IsActiveLocationLibrary = IsLocked;
 
+                break;
+            case 2:
+                $scope.IsActiveStatusLibrary = IsLocked;
+
+                break;
+            case 3:
+                $scope.IsActiveUOMLibrary = IsLocked;
+
+                break;
+            default:
+
+        }
+
+        $scope.$apply();
+    }
+    $scope.LockOrUnlockLibrary = function (IsLocked, Type) {
+
+        var _Heading = "";
+        var _InnerText = "";
+        switch (Type) {
+            case 1:
+                _Heading = "Lock location library ?";
+                _InnerText = "Locking a library prevents all users from creating new locations or changing data about locations. Do you want to do this?";
+
+                break;
+            case 2:
+                _Heading = "Lock Status library ?";
+                _InnerText = "Locking a library prevents all users from creating new statuses or changing data about statuses. Do you want to do this?";
+                break;
+            case 3:
+                _Heading = "Lock Unit Of measure library ?";
+                _InnerText = "Locking a library prevents all users from creating new units of measure or changing data about Units of measure. Do you want to do this?";
+
+                break;
+            default:
+
+        }
+
+        if (IsLocked==false)
+        {
+
+            var box = bootbox.confirm(_Heading, function (result) {
+                if (result) {
+
+                    UpdateLockData(IsLocked, Type);
+                    $scope.UpdateLockLibrary();
+                }
+            });
+
+
+            box.on("shown.bs.modal", function () {
+                $(".mybootboxbody").html(_InnerText);
+
+            });
+
+        }
+        else if (IsLocked == true) {
+            UpdateLockData(IsLocked, Type);
+            $scope.UpdateLockLibrary();
+        }
+      
+    
+        $('#bottommenumodal').modal('hide');
+      
+    }
+    $scope.UpdateLockLibrary = function () {
+
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        var _LockLibrary = localStorageService.get('LockLibrary');
+
+        var _data = {
+            "UserName": _LockLibrary.username, "FirstName": _LockLibrary.firstname, "LastName": _LockLibrary.lastname, "Email": _LockLibrary.email, "Phone": _LockLibrary.phone, "Organization": _LockLibrary.organization, "ProfilePic": _LockLibrary.myprofileimage
+         , "IsActiveLocationLibrary": $scope.IsActiveLocationLibrary
+        , "IsActiveStatusLibrary": $scope.IsActiveStatusLibrary
+        , "IsActiveUOMLibrary": $scope.IsActiveUOMLibrary
+        };
+
+
+        $.ajax({
+            url: serviceBase + "UpdateUserInfo",
+            type: 'POST',
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _data, "IsUserInfo": false }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (result) {
+
+                if (result.UpdateUserInfoResult.Success == true) {
+
+                    ShowSuccess("Updated");
+                    authService.GetuserInfo();
+
+                    $scope.$apply();
+
+                }
+                else {
+                    $scope.ShowErrorMessage("Updating user info", 3, 1, result.UpdateUserInfoResult.Message)
+
+                }
+
+            },
+            error: function (err) {
+
+                $scope.ShowErrorMessage("Updating user info", 2, 1, err.statusText);
+
+                $scope.$apply();
+
+            },
+            complete: function () {
+                $scope.$apply();
+            }
+        });
+
+    }
 
 
     $scope.logOut = function () {
         localStorageService.set("ActivityCart", "");
 
         localStorageService.set("SelectedAction", "");
-
+        localStorageService.set('LockLibrary', null);
         authService.logOut();
         $("#modalerror").modal('hide');
         $("#Inventoryerror").modal('hide');
@@ -294,7 +424,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         }
 
    
-
+        initIndex();
      
     });
 
@@ -464,6 +594,29 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         checkurl();
 
     }
+
+
+    function initIndex() {
+
+
+        var _LockLibrary = localStorageService.get('LockLibrary');
+        if (_LockLibrary != null && _LockLibrary != undefined)
+        {
+            $scope.IsActiveLocationLibrary = _LockLibrary.IsActiveLocationLibrary;
+            $scope.IsActiveStatusLibrary = _LockLibrary.IsActiveStatusLibrary;
+            $scope.IsActiveUOMLibrary = _LockLibrary.IsActiveUOMLibrary;
+            $scope.IsActiveItemLibrary = _LockLibrary.IsActiveItemLibrary;
+            $scope.IsActiveItemGroupLibrary = _LockLibrary.IsActiveItemGroupLibrary;
+
+
+        }
+
+        $scope.$apply();
+     
+    }
+
+    initIndex();
+
 
 
   

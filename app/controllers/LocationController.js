@@ -67,6 +67,8 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
     }
 
 
+
+   
     $scope.keepformopen = function (check) {
 
 
@@ -81,6 +83,8 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
             $scope.$apply();
         }
     };
+
+   
     $scope.FilterArray = [
        { ColumnName: 'lLoc', FilterOperator: 'cn', SearchValue: $('#lLoc-filter').val() },
         { ColumnName: 'lDescription', FilterOperator: 'cn', SearchValue: $('#lDescription-filter').val() },
