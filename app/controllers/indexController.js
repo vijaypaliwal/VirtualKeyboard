@@ -102,9 +102,9 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                },
                error: function (response) {
 
-                   alert("Error");
+                   //alert("Error");
 
-                //   log.error(response.statusText);
+                   log.error(response.statusText);
                //    $scope.ShowErrorMessage("Custom column's data", 2, 1, response.statusText);
 
                    //$scope.InventoryObject.Location = 678030;
