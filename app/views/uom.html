@@ -79,7 +79,7 @@
 <a href="#/setting" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
 
 <a ng-if="mode == 1 && IsActiveUOMLibrary==true" ng-click="addUOM()" class="btn btn-danger waves-effect roundbtntitle"> <i class="fa fa-plus"></i> </a>
-<a ng-if="IsActiveUOMLibrary==false" class="btn btn-danger waves-effect roundbtntitle"> <i class="fa fa-lock"></i> </a>
+<a ng-if="IsActiveUOMLibrary==false" ng-click="locked()" class="btn btn-danger waves-effect roundbtntitle"> <i class="fa fa-lock"></i> </a>
 
 <a ng-if="mode == 2 || mode == 3 " ng-click="leaveform()" class="btn btn-danger waves-effect roundbtntitle"> <i class="fa fa-times"></i> </a>
 

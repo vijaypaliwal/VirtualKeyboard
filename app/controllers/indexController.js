@@ -9,7 +9,23 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             console.log("into activity");
         }
     }
+    function initIndex() {
 
+
+        var _LockLibrary = localStorageService.get('LockLibrary');
+        if (_LockLibrary != null && _LockLibrary != undefined) {
+            $scope.IsActiveLocationLibrary = _LockLibrary.IsActiveLocationLibrary;
+            $scope.IsActiveStatusLibrary = _LockLibrary.IsActiveStatusLibrary;
+            $scope.IsActiveUOMLibrary = _LockLibrary.IsActiveUOMLibrary;
+            $scope.IsActiveItemLibrary = _LockLibrary.IsActiveItemLibrary;
+            $scope.IsActiveItemGroupLibrary = _LockLibrary.IsActiveItemGroupLibrary;
+
+
+        }
+
+        $scope.$apply();
+
+    }
 
     $scope.restricted = function () {
         log.error("You are Not Authorize to access")
@@ -29,11 +45,11 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     $scope.Permission3 = [];
     $scope.Permission4 = [];
 
-    $scope.IsActiveLocationLibrary = false;
-    $scope.IsActiveStatusLibrary = false;
-    $scope.IsActiveUOMLibrary = false;
-    $scope.IsActiveItemLibrary = false;
-    $scope.IsActiveItemGroupLibrary = false;
+    $scope.IsActiveLocationLibrary = true;
+    $scope.IsActiveStatusLibrary = true;
+    $scope.IsActiveUOMLibrary = true;
+    $scope.IsActiveItemLibrary = true;
+    $scope.IsActiveItemGroupLibrary = true;
 
     $scope.CurrentAccount = localStorageService.get('AccountID');
 
@@ -113,6 +129,9 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     }
 
+    $scope.locked = function () {
+        log.error("This Library is locked");
+    }
 
     function UpdateLockData(IsLocked, Type) {
         switch (Type) {
@@ -420,7 +439,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         }
 
    
-
+        initIndex();
      
     });
 
