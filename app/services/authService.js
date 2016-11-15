@@ -158,6 +158,13 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                    _UserInfo.myprofileimage = response.GetUserInfoResult.Payload[0].ProfilePic;
                    localStorageService.set('LockLibrary', response.GetUserInfoResult.Payload[0]);
 
+
+                   IsActiveLocationLibrary = response.GetUserInfoResult.Payload[0].IsActiveLocationLibrary;
+                   IsActiveStatusLibrary = response.GetUserInfoResult.Payload[0].IsActiveStatusLibrary;
+                   IsActiveUOMLibrary = response.GetUserInfoResult.Payload[0].IsActiveUOMLibrary;
+                   IsActiveItemLibrary = response.GetUserInfoResult.Payload[0].IsActiveItemLibrary;
+                   IsActiveItemGroupLibrary = response.GetUserInfoResult.Payload[0].IsActiveItemGroupLibrary;
+
                    localStorageService.set('UserKey', response.GetUserInfoResult.Payload[0].UserKey);
 
                    localStorageService.set('IsOwner', response.GetUserInfoResult.Payload[0].IsOwner);

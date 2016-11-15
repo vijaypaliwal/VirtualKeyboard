@@ -30,9 +30,9 @@
 
     <link href="css/button.css" rel="stylesheet" type="text/css">
     <script>
-        window.onerror = function (error, file, line) {
-            alert(error + ", " + file + ", " + line);
-        }
+        //window.onerror = function (error, file, line) {
+        //    alert(error + ", " + file + ", " + line);
+        //}
     </script>
     <style>
 
@@ -938,6 +938,12 @@
 
 
         var _Islive = true;
+
+        var IsActiveLocationLibrary = true;
+        var IsActiveStatusLibrary = true;
+        var IsActiveUOMLibrary = true;
+        var IsActiveItemLibrary = true;
+        var IsActiveItemGroupLibrary = true;
 
         $("#mysmallModal").click(function () {
             hideSuccess();
