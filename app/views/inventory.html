@@ -951,7 +951,7 @@
             <div style="text-align: center; border: 1px solid #eeeeee;">
                 <h4 style="font-size:20px;"><i class="fa fa-frown-o"></i> We're sorry !</h4>
                 <h4 style="font-size:15px;">We can't find the location you're looking for</h4>
-                <h5 ng-if="TrimValue(SearchLocationValue)!=''">click to <span ng-click="filllocation()" style="cursor:pointer; color:#0083C7; font-size:20px;">{{SearchLocationValue}}</span>  for add in your list.</h5>
+                <h5 ng-if="TrimValue(SearchLocationValue)!='' && IsActiveLocationLibrary==true">click to <span ng-click="filllocation()" style="cursor:pointer; color:#0083C7; font-size:20px;">{{SearchLocationValue}}</span>  for add in your list.</h5>
             </div>
         </div>
 
