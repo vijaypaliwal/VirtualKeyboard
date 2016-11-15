@@ -466,6 +466,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         var path = "img/filter/";
         switch (Operator) {
             case "eq":
+            case "in":
             case "num-eq":
             case "date-eq":
                 $scope.CurrentActiveSearchOperator = path + "EqualTo.gif";
