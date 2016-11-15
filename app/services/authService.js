@@ -194,7 +194,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                },
                error: function (err) {
 
-
+                   log.error(err.statusText);
                }
            });
 
