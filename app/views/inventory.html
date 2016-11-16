@@ -203,29 +203,33 @@
                         </div>
 
                         <div class="form-group" ng-if="obj.ColumnName=='pCountFrq'">
-                            <label>Item Group </label>
-                            <div class="input-group" ng-if="IsItemGroupLibrary==true && IsActiveItemGroupLibrary==true">
-                                <input class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label>Item Group </label>
+                                    <div class="input-group" ng-if="IsItemGroupLibrary==true && IsActiveItemGroupLibrary==true">
+                                        <input class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
 
-                            </div>
-
-
-                            <div ng-if="IsItemGroupLibrary==false || IsActiveItemGroupLibrary==false">
-                                <div class="row requiredfields" ng-if="(IsItemGroupLibrary==false|| IsActiveItemGroupLibrary==false) && IsItemGroupChose==false">
-                                    <div class="col-md-12">
-
-                                        <a ng-if="IsItemGroupLibrary==false">
-                                            You are not permitted to add new item so please select item from item list.
-                                        </a>
-                                        <a ng-if="IsActiveItemGroupLibrary==false">
-                                            Your item library is locked so please select item from item list.
-                                        </a>
                                     </div>
 
+
+                                    <div ng-if="IsItemGroupLibrary==false || IsActiveItemGroupLibrary==false">
+                                        <div class="row requiredfields" ng-if="(IsItemGroupLibrary==false|| IsActiveItemGroupLibrary==false) && IsItemGroupChose==false">
+                                            <div class="col-md-12">
+
+                                                <a ng-if="IsItemGroupLibrary==false">
+                                                    You are not permitted to add new item so please select item from item list.
+                                                </a>
+                                                <a ng-if="IsActiveItemGroupLibrary==false">
+                                                    Your item library is locked so please select item from item list.
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <label>{{InventoryObject.ItemGroup}}</label>
+
+                                    </div>
                                 </div>
-
-                                <label>{{InventoryObject.ItemGroup}}</label>
-
                             </div>
                         </div>
 
