@@ -118,6 +118,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.CreateType = 0;
     $scope.CreateNewLabel = "";
     $scope.IsItemLibrary = true;
+
+    $scope.IsLocationLibrary = true;
+    $scope.IsUOMLibrary = true;
+    $scope.IsStatusLibrary = true;
+
+
     $scope.IsItemChose = false;
     $scope.IsItemGroupChose = false;
     var FileName = "";
@@ -2051,6 +2057,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         else {
             $scope.IsItemGroupChose = false;
         }
+
+
+        $scope.IsLocationLibrary = $scope.checkpermission('URL:Manage/Location');
+        $scope.IsUOMLibrary = $scope.checkpermission('URL:Manage/UnitOfMeasure');
+        $scope.IsStatusLibrary = $scope.checkpermission('URL:Manage/Status');
+
         CheckScopeBeforeApply();
 
 
