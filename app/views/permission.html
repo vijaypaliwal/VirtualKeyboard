@@ -85,40 +85,35 @@
                     </div>
                 </td>
             </tr>
-            <tr ng-repeat="_obj in Permissions1" ng-if="IsLibrarydataopen==true && (_obj.PermissionName=='Location Library' || _obj.PermissionName=='Units of Measure Library' || _obj.PermissionName=='Status Library' || _obj.PermissionName=='Item Library')">
+            <tr ng-repeat="_obj in Permissions1" ng-if="IsLibrarydataopen==true && (_obj.PermissionName=='Location Library' || _obj.PermissionName=='Units of Measure Library' || _obj.PermissionName=='Status Library' || _obj.PermissionName=='Item Library' || _obj.PermissionName=='Item Group Library')">
                 <td>
                     <div class=" infoareas">
                         <div class="row">
-
                             <div class="col-xs-2">
                                 <a ng-if="_obj.PermissionName=='Item Library'" class="btn text btn-warning"> 1 </a>
-                                <a ng-if="_obj.PermissionName=='Location Library'" class="btn text btn-warning"> 2 </a>
-                                <a ng-if="_obj.PermissionName=='Units of Measure Library'" class="btn text btn-warning"> 3 </a>
-                                <a ng-if="_obj.PermissionName=='Status Library'" class="btn text btn-warning"> 4 </a>
+                                <a ng-if="_obj.PermissionName=='Item Group Library'" class="btn text btn-warning"> 2 </a>
+                                <a ng-if="_obj.PermissionName=='Location Library'" class="btn text btn-warning"> 3 </a>
+                                <a ng-if="_obj.PermissionName=='Units of Measure Library'" class="btn text btn-warning"> 4 </a>
+                                <a ng-if="_obj.PermissionName=='Status Library'" class="btn text btn-warning"> 5 </a>
                             </div>
-
                             <div class="col-xs-6">
-                             <a class="text ng-binding">{{_obj.PermissionName }}</a>
+                                <a class="text ng-binding">{{_obj.PermissionName }}</a>
                             </div>
                             <div class="col-xs-4">
                                 <div ng-if="_obj.IsTurnedOn==false" class="btn-group custombtnGroup">
                                     <label class="switch1">
-
                                         <input ng-change="UpdatePermission(_obj.PermissionCode,4,'See')" type="checkbox" ng-model="_obj.IsTurnedOn">
                                         <div class="slider round"></div>
                                     </label>
                                 </div>
-
                                 <div ng-if="_obj.IsTurnedOn==true" class="btn-group custombtnGroup">
                                     <label class="switch1">
-
                                         <input ng-change="UpdatePermission(_obj.PermissionCode,4,'Hide')" type="checkbox" ng-model="_obj.IsTurnedOn">
                                         <div class="slider round"></div>
                                     </label>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </td>
             </tr>

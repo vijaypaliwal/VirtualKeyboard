@@ -203,9 +203,28 @@
                         </div>
 
                         <div class="form-group" ng-if="obj.ColumnName=='pCountFrq'">
-                            <label>Item Group</label>
-                            <div class="input-group">
+                            <label>Item Group </label>
+                            <div class="input-group" ng-if="IsItemGroupLibrary==true && IsActiveItemGroupLibrary==true">
                                 <input class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
+
+                            </div>
+
+
+                            <div ng-if="IsItemGroupLibrary==false || IsActiveItemGroupLibrary==false">
+                                <div class="row requiredfields" ng-if="(IsItemGroupLibrary==false|| IsActiveItemGroupLibrary==false) && IsItemGroupChose==false">
+                                    <div class="col-md-12">
+
+                                        <a ng-if="IsItemGroupLibrary==false">
+                                            You are not permitted to add new item so please select item from item list.
+                                        </a>
+                                        <a ng-if="IsActiveItemGroupLibrary==false">
+                                            Your item library is locked so please select item from item list.
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                                <label>{{InventoryObject.ItemGroup}}</label>
 
                             </div>
                         </div>
@@ -597,6 +616,15 @@
 
                             </td>
 
+                            <td ng-if="CurrentActiveField=='pCountFrq'">
+
+                                <div class="aligncenter">
+                                    <a ng-click="Itemgrouplistmodal()" class="btn btn-gray"><i class="fa fa-search"></i>Find</a>
+                                </div>
+
+
+                            </td>
+
 
                             <td ng-if="CurrentActiveField=='iStatusValue' && checkpermission('URL:Manage/Status')==true">
                                 <div class="aligncenter">
@@ -959,6 +987,39 @@
             <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList| filter : SearchLocationValue">
                 <a>
                     <span ng-bind-html="HighLightTerm(SearchLocationValue,obj.LocationName)"></span>
+
+
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+
+<div style="background:#fff;" id="Itemgrouplistmodal" class="modal animated bounceIn">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
+        <h4>Select Item group</h4>
+        <div class="form-group">
+
+            <div class="input-group">
+                <input type="text" id="searchlocation" placeholder="Type Keyword to find Item group" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchItemgroupValue" required="" autofocus />
+              
+            </div>
+        </div>
+    </div>
+
+    <div style="background:#fff;" class="modal-body">
+
+
+
+        <ul class="searchresultlist">
+            <li ng-click="SetItemGroup(obj)" ng-repeat="obj in ItemgroupSearchlist| filter : SearchItemgroupValue">
+                <a>
+                    <span ng-bind-html="HighLightTerm(SearchItemgroupValue,obj.pcfCountFrq)">
+                    </span>
 
 
                     <i class="fa fa-angle-right"></i>

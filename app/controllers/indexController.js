@@ -126,7 +126,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $scope.IsActiveItemLibrary = IsActiveItemLibrary;
         $scope.IsActiveItemGroupLibrary = IsActiveItemGroupLibrary;
 
-
+        $scope.$apply();
 
 
     }
@@ -144,9 +144,13 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                 $scope.IsActiveUOMLibrary = IsLocked;
 
                 break;
+            case 4:
+                $scope.IsActiveItemGroupLibrary = IsLocked;
+
+                break;
             default:
 
-        }
+        } 
 
         $scope.$apply();
     }
@@ -167,6 +171,11 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             case 3:
                 _Heading = "Lock Unit Of measure library ?";
                 _InnerText = "Locking a library prevents all users from creating new units of measure or changing data about Units of measure. Do you want to do this?";
+
+                break;
+            case 4:
+                _Heading = "Lock Item Group library ?";
+                _InnerText = "Locking a library prevents all users from creating new Item group or changing data about Item group. Do you want to do this?";
 
                 break;
             default:
@@ -214,6 +223,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
          , "IsActiveLocationLibrary": $scope.IsActiveLocationLibrary
         , "IsActiveStatusLibrary": $scope.IsActiveStatusLibrary
         , "IsActiveUOMLibrary": $scope.IsActiveUOMLibrary
+        , "IsActiveItemGroupLibrary": $scope.IsActiveItemGroupLibrary
         };
 
 

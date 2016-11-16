@@ -167,7 +167,10 @@ app.config(function ($routeProvider) {
         controller: "contactController",
         templateUrl: "app/views/contact.html"
     });
-
+    $routeProvider.when("/itemgroup", {
+        controller: "itemgroupController",
+        templateUrl: "app/views/itemgroup.html"
+    });
 
     
 

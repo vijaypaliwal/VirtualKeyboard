@@ -19,6 +19,7 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
         $scope.getlocation();
         $scope.GetMyinventoryColumns();
         $scope.GetAllData();
+        $scope.getItemgroup();
         $scope.$apply();
     }
 
@@ -283,6 +284,49 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
 
               }
           });
+    }
+
+
+    $scope.getItemgroup = function () {
+
+        $scope.ItemgroupLoaded = false;
+
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetItemGroup',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+                   $scope.ItemgroupLoaded = true;
+
+
+                   if (response.GetItemGroupResult.Success == true) {
+
+                     
+                       $scope.Itemgrouplist = response.GetItemGroupResult.Payload;
+                   
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Get Item group", 1, 1, response.GetItemGroupResult.Message)
+
+                   }
+                   $scope.$apply();
+               },
+               error: function (err) {
+                   $scope.ItemgroupLoaded = true;
+                   $scope.ShowErrorMessage("Get Item group", 2, 1, err.statusText);
+
+               }
+           });
+
     }
 
 

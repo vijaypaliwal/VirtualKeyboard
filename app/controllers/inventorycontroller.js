@@ -43,8 +43,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.SetIsOpen = function (_bool) {
         $scope.Isopendiv = _bool;
         CheckScopeBeforeApply();
-
     }
+
+
 
     $("body").on("click", function (e) {
 
@@ -118,6 +119,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.CreateNewLabel = "";
     $scope.IsItemLibrary = true;
     $scope.IsItemChose = false;
+    $scope.IsItemGroupChose = false;
     var FileName = "";
     var StreamData = "";
 
@@ -201,14 +203,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
         }
 
+
         if (type == 2) {
             for (var i = 0; i < $scope.UOMList.length; i++) {
                 if ($scope.UOMList[i].UnitOfMeasureName == $scope.CreateNewLabel) {
                     return false;
                 }
             }
-
         }
+
 
 
         if (type == 3) {
@@ -520,6 +523,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#uomlistmodal").modal('hide');
         CheckScopeBeforeApply()
 
+    }
+
+    $scope.SetItemGroup = function (obj)
+    {
+        $scope.InventoryObject.ItemGroup = obj.pcfCountFrq;
+        $("#itemlistmodal").modal('hide');
+
+        $("#locationlistmodal").modal('hide');
+        $("#uomlistmodal").modal('hide');
+        $("#Itemgrouplistmodal").modal('hide')
+        $scope.IsItemGroupChose = true;
+        CheckScopeBeforeApply()
     }
 
 
@@ -1242,6 +1257,22 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
+    $scope.Itemgrouplistmodal = function () {
+        
+
+        $("#itemlistmodal").modal('hide');
+        $("#Itemgrouplistmodal").modal('show');
+
+        $scope.ItemgroupSearchlist = $scope.Itemgrouplist;
+        CheckScopeBeforeApply();
+      
+        $('html,body').animate({ scrollTop: 0 }, 800);
+
+
+    }
+
+
+
 
 
     $scope.GetAllData = function () {
@@ -1374,7 +1405,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                       $scope.getuom();
                       $scope.getlocation();
 
-
+                      $scope.getItemgroup();
                       AfterLoadedData();
                   }
                   else {
@@ -1636,6 +1667,52 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                            log.error(err.statusText);
                        }
                    }
+               }
+           });
+
+    }
+
+    $scope.getItemgroup = function () {
+
+        $scope.ItemgroupLoaded = false;
+
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetItemGroup',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+                   $scope.ItemgroupLoaded = true;
+
+
+                   if (response.GetItemGroupResult.Success == true) {
+
+                     
+
+                       $scope.Itemgrouplist = response.GetItemGroupResult.Payload;
+
+
+                       $scope.ItemgroupSearchlist = angular.copy($scope.Itemgrouplist);
+
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Get Item group", 1, 1, response.GetItemGroupResult.Message)
+
+                   }
+                   $scope.$apply();
+               },
+               error: function (err) {
+                   $scope.ItemgroupLoaded = true;
+                   $scope.ShowErrorMessage("Get Item group", 2, 1, err.statusText);
+
                }
            });
 
@@ -1964,7 +2041,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         else {
             $scope.IsItemChose = false;
         }
+
+        $scope.IsItemGroupLibrary = $scope.checkpermission('URL:Manage/ItemGroup');
+        if ($scope.IsItemGroupLibrary == true && $scope.IsActiveItemGroupLibrary == true) {
+
+            $scope.IsItemGroupChose = true;
+        }
+        else {
+            $scope.IsItemGroupChose = false;
+        }
         CheckScopeBeforeApply();
+
 
     }
 
@@ -2168,6 +2255,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 break;
             case "uomUOM":
                 _IsActiveScan = $scope.IsActiveUOMLibrary;
+                break;
+            case "pCountFrq":
+                _IsActiveScan = $scope.IsActiveItemGroupLibrary;
                 break;
             default:
                 _IsActiveScan = true;
