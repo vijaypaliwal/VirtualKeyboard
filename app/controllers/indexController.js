@@ -9,7 +9,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             console.log("into activity");
         }
     }
-    
+
 
     $scope.restricted = function () {
         log.error("You are Not Authorize to access")
@@ -87,7 +87,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                        }
                    }
                    else {
-                    //   $scope.ShowErrorMessage("Custom column's data", 1, 1, response.GetUserPermissionsResult.Message)
+                       //   $scope.ShowErrorMessage("Custom column's data", 1, 1, response.GetUserPermissionsResult.Message)
 
                    }
 
@@ -99,8 +99,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
                    alert("Error");
 
-                //   log.error(response.statusText);
-               //    $scope.ShowErrorMessage("Custom column's data", 2, 1, response.statusText);
+                   //   log.error(response.statusText);
+                   //    $scope.ShowErrorMessage("Custom column's data", 2, 1, response.statusText);
 
                    //$scope.InventoryObject.Location = 678030;
                },
@@ -126,7 +126,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $scope.IsActiveItemLibrary = IsActiveItemLibrary;
         $scope.IsActiveItemGroupLibrary = IsActiveItemGroupLibrary;
 
-        $scope.$apply();
+
 
 
     }
@@ -150,7 +150,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                 break;
             default:
 
-        } 
+        }
 
         $scope.$apply();
     }
@@ -223,7 +223,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
          , "IsActiveLocationLibrary": $scope.IsActiveLocationLibrary
         , "IsActiveStatusLibrary": $scope.IsActiveStatusLibrary
         , "IsActiveUOMLibrary": $scope.IsActiveUOMLibrary
-        , "IsActiveItemGroupLibrary": $scope.IsActiveItemGroupLibrary
+            , "IsActiveItemGroupLibrary": $scope.IsActiveItemGroupLibrary
         };
 
 
@@ -264,7 +264,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     }
 
     $scope.getactivepermission = function () {
-        $scope.CurrentUserKey=localStorageService.get('UserKey');
+        $scope.CurrentUserKey = localStorageService.get('UserKey');
         setTimeout(function () {
             $scope.GetPermission(3, $scope.CurrentUserKey);
         }, 10);
@@ -296,9 +296,9 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                 $scope.Permission.push($scope.Permissions4[i]);
             }
             $scope.$apply();
-          
+
         }, 500);
-     
+
 
     }
 
@@ -422,7 +422,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.$on('$locationChangeStart', function (event) {
 
-     
+
 
         var _path = $location.path();
 
@@ -435,7 +435,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         }
         else {
             $scope.changepage();
-           $cordovaKeyboard.disableScroll(false);
+            $cordovaKeyboard.disableScroll(false);
         }
 
         if (_path == "/activity") {
@@ -445,9 +445,9 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             UpdateStatusBar(55);
         }
 
-   
+
         initIndex();
-     
+
     });
 
     $scope.getClass = function (path) {
@@ -511,7 +511,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
 
 
-    $scope.UploadImage = function (txnID, ImageList,pID) {
+    $scope.UploadImage = function (txnID, ImageList, pID) {
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
