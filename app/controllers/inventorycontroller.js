@@ -527,6 +527,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.SetItemGroup = function (obj)
     {
+        $scope.InventoryObject.ItemGroup = "";
         $scope.InventoryObject.ItemGroup = obj.pcfCountFrq;
         $("#itemlistmodal").modal('hide');
 
