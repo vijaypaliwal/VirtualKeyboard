@@ -204,7 +204,7 @@
 
                         <div class="form-group" ng-if="obj.ColumnName=='pCountFrq'">
                             <div class="row">
-                                <div class="col-xs-12">
+                                <div class="col-xs-12" >
                                     <label>Item Group </label>
                                     <div class="input-group" ng-if="IsItemGroupLibrary==true && IsActiveItemGroupLibrary==true">
                                         <input class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
@@ -213,7 +213,7 @@
 
 
                                     <div ng-if="IsItemGroupLibrary==false || IsActiveItemGroupLibrary==false">
-                                        <div class="row requiredfields" ng-if="(IsItemGroupLibrary==false|| IsActiveItemGroupLibrary==false) && IsItemGroupChose==false">
+                                        <div class="row requiredfields" style="font-size:12px;padding:2px;" ng-if="(IsItemGroupLibrary==false|| IsActiveItemGroupLibrary==false) && IsItemGroupChose==false">
                                             <div class="col-md-12">
 
                                                 <a ng-if="IsItemGroupLibrary==false">
