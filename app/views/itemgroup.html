@@ -134,11 +134,11 @@
             </li>
         </ul>
     </div>
-    <div ng-if="FilterRecordsLength.length==0 && ItemgroupLoaded==true" style="text-align: center; color: #d9534f;" class="maincontent norecords">
+    <div ng-if="mode == 1 && FilterRecordsLength.length==0 && ItemgroupLoaded==true" style="text-align: center; color: #d9534f;" class="maincontent norecords">
 
         <div>
 
-            <h3>No record matched your Query</h3>
+            <h3>No record matched your Query Or you may not have any record.</h3>
             <a style="cursor:pointer;width:auto;" class="btn btn-primary" ng-click="ClearFilter()"> <i class="fa fa-filter"></i> Clear your filters</a>
             <br /><br />
         </div>
@@ -152,7 +152,7 @@
         <form name="uom">
             <div style="background:#fff;padding:10px; margin-top:7px;">
                 <h4 ng-if="mode == 2">Fill below value to add new</h4>
-                <h4 ng-if="mode == 3">Update below value to update Item group</h4>
+                <h4 ng-if="mode == 3">Update below value to update UOM</h4>
                 <div class="form-group">
                     <label>Item group <span>*</span></label>
                     <input class="form-control" type="text" id="ItemGroupToCreate" ng-model="ItemGroupToCreate" required />
