@@ -1998,7 +1998,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
     Date.prototype.toMSJSON = function () {
-        this.setHours(this.getHours() - this.getTimezoneOffset() / 60);
+       // this.setHours(this.getHours() - this.getTimezoneOffset() / 60);
         var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
         return date;
     };
