@@ -418,6 +418,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             else if (id == "#Location") {
                 $scope.InventoryObject.Location = _value;
             }
+
+            else if (id == "#Status") {
+                $(id).val(_value);
+                $scope.InventoryObject.Status = _value;
+            }
             else {
                 $(id).val(_value);
 
@@ -2261,19 +2266,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var _IsActiveScan = true;
         switch (ControlID) {
             case "iStatusValue":
-                _IsActiveScan = $scope.IsActiveStatusLibrary && $scope.IsStatusLibrary;
-
-
-
+                _IsActiveScan = $scope.IsActiveStatusLibrary;
                 break;
             case "lLoc":
-                _IsActiveScan = $scope.IsActiveLocationLibrary && $scope.IsLocationLibrary;
+                _IsActiveScan = $scope.IsActiveLocationLibrary;
                 break;
             case "uomUOM":
-                _IsActiveScan = $scope.IsActiveUOMLibrary && $scope.IsUOMLibrary;
+                _IsActiveScan = $scope.IsActiveUOMLibrary;
                 break;
             case "pCountFrq":
-                _IsActiveScan = $scope.IsActiveItemGroupLibrary && $scope.IsItemGroupLibrary;
+                _IsActiveScan = $scope.IsActiveItemGroupLibrary;
                 break;
             default:
                 _IsActiveScan = true;

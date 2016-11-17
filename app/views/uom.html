@@ -134,11 +134,11 @@
             </li>
         </ul>
     </div>
-    <div ng-if="FilterRecordsLength.length==0 && LocationsLoaded==true" style="text-align: center; color: #d9534f;" class="maincontent norecords">
+    <div ng-if="mode==1 && FilterRecordsLength.length==0 && LocationsLoaded==true" style="text-align: center; color: #d9534f;" class="maincontent norecords">
 
         <div>
 
-            <h3>No record matched your Query</h3>
+            <h3>No record matched your Query Or you may not have any record.</h3>
             <a style="cursor:pointer;width:auto;" class="btn btn-primary" ng-click="ClearFilter()"> <i class="fa fa-filter"></i> Clear your filters</a>
             <br /><br />
         </div>
@@ -199,7 +199,7 @@
     </div>
 </div>
 
-<a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
+<a class="cd-top" ng-show="mode==1" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
 
 <script>
 

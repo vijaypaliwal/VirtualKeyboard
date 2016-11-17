@@ -82,7 +82,7 @@
 <a ng-if="mode == 2 || mode == 3 " ng-click="leaveform()" class="btn btn-danger waves-effect roundbtntitle"> <i class="fa fa-times"></i> </a>
 
 <div class="top50">
-    <div ng-if="mode == 1" class="listview animated zoomIn">
+    <div ng-show="mode == 1" class="listview animated zoomIn">
 
 
         <div class="input-group">
@@ -95,7 +95,7 @@
             <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
                 <img src="img/loader.gif" alt="Alternate Text" />
 
-           
+
             </div>
         </div>
 
@@ -141,7 +141,7 @@
         </ul>
 
 
-        <div ng-if="FilterRecordsLength.length==0 && LocationsLoaded==true" style="text-align: center; color: #d9534f;" class="maincontent norecords">
+        <div ng-if="mode==1 && FilterRecordsLength.length==0 && LocationsLoaded==true" style="text-align: center; color: #d9534f;" class="maincontent norecords">
 
             <div>
 
@@ -233,13 +233,3 @@
         }
     });
 </script>
-
-
-
-
-  
-
-
-
-
-    
