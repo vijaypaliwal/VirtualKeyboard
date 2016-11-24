@@ -192,19 +192,74 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 if ($scope.CurrentCart[i].InventoryID == inventoryID) {
                     switch (Type) {
                         case "iReqValue":
-                            $scope.CurrentCart[i].ApplyTransactionData.UnitTag1 = _value;
+                            
+
+                            if ($scope.CurrentOperation == "MoveTagUpdate") {
+                                $scope.CurrentCart[i].MoveUpdateTagTransactionData.UnitTag1 = _value;
+                            }
+                            if ($scope.CurrentOperation == "Apply") {
+                                $scope.CurrentCart[i].ApplyTransactionData.UnitTag1 = _value;
+
+
+                            }
+                            
                             break;
                         case "iUnitTag2":
-                            $scope.CurrentCart[i].ApplyTransactionData.UnitTag2 = _value;
+
+                            if ($scope.CurrentOperation == "MoveTagUpdate") {
+                                $scope.CurrentCart[i].MoveUpdateTagTransactionData.UnitTag2 = _value;
+
+                            }
+                            if ($scope.CurrentOperation == "Apply") {
+                                $scope.CurrentCart[i].ApplyTransactionData.UnitTag2 = _value;
+
+
+                            }
                             break;
                         case "iUnitTag3":
-                            $scope.CurrentCart[i].ApplyTransactionData.UnitTag3 = _value;
+                            if ($scope.CurrentOperation == "MoveTagUpdate") {
+                                $scope.CurrentCart[i].MoveUpdateTagTransactionData.UnitTag3 = _value;
+
+
+                            }
+                            if ($scope.CurrentOperation == "Apply") {
+                                $scope.CurrentCart[i].ApplyTransactionData.UnitTag3 = _value;
+
+
+
+                            }
                             break;
                         case "iUnitNumber1":
-                            $scope.CurrentCart[i].ApplyTransactionData.UnitNumber1 = _value;
+                            if ($scope.CurrentOperation == "MoveTagUpdate") {
+                                $scope.CurrentCart[i].MoveUpdateTagTransactionData.UnitNumber1 = _value;
+
+
+
+                            }
+                            if ($scope.CurrentOperation == "Apply") {
+                                $scope.CurrentCart[i].ApplyTransactionData.UnitNumber1 = _value;
+
+
+
+
+                            }
                             break;
                         case "iUnitNumber2":
-                            $scope.CurrentCart[i].ApplyTransactionData.UnitNumber2 = _value;
+                            if ($scope.CurrentOperation == "MoveTagUpdate") {
+                                $scope.CurrentCart[i].MoveUpdateTagTransactionData.UnitNumber1 = _value;
+
+
+
+
+                            }
+                            if ($scope.CurrentOperation == "Apply") {
+                                $scope.CurrentCart[i].ApplyTransactionData.UnitNumber2 = _value;
+
+
+
+
+
+                            }
                             break;
 
                         default:
@@ -723,17 +778,25 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         for (k = 0; k < $scope.CurrentCart.length; k++) {
             if ($scope.CurrentCart[k].InventoryDataList.uId == $scope.currentinventoryid) {
+                if ($scope.CurrentOperation == "Move") {
 
-                if ($scope.CurrentCart[k].InventoryDataList.iLID !== obj.LocationID) {
+                    if ($scope.CurrentCart[k].InventoryDataList.iLID !== obj.LocationID) {
 
-                    $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText = obj.LocationName;
-                    $scope.CurrentCart[k].MoveTransactionData.MoveToLocation = obj.LocationID;
-                    break;
+                        $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText = obj.LocationName;
+                        $scope.CurrentCart[k].MoveTransactionData.MoveToLocation = obj.LocationID;
+                        break;
+                    }
+                    else {
+                        $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText = "";
+                        $scope.CurrentCart[k].MoveTransactionData.MoveToLocation = "";
+                        log.error("Please select other location, you can't move item to same location.")
+                        break;
+                    }
                 }
                 else {
-                    $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText = "";
-                    $scope.CurrentCart[k].MoveTransactionData.MoveToLocation = "";
-                    log.error("Please select other location, you can't move item to same location.")
+                    debugger;
+                    $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocationText = obj.LocationName;
+                    $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation = obj.LocationID;
                     break;
                 }
             }
@@ -1230,6 +1293,12 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         }
                         break;
 
+                    case "MoveTagUpdate":
+                        if ($scope.CustomActivityDataList[i].cfdIncludeOnMoveTagUpdate) {
+                            return true;
+                        }
+                        break;
+
                     default:
                         return true;
                         break;
@@ -1370,6 +1439,16 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.CurrentOperation = "Apply";
                 $scope.CurrentIcon = "fa-tag";
                 $scope.CurrentHeaderText = "Tag these items with information.";
+
+                UpdateStatusBar(Action);
+                break;
+
+            case 5:
+                $scope.CurrentClass = "bgm-MoveTagUpdate"
+                $scope.CurrentHeaderClass = "bgm-MoveTagUpdate";
+                $scope.CurrentOperation = "MoveTagUpdate";
+                $scope.CurrentIcon = "fa-list-ul";
+                $scope.CurrentHeaderText = "Move,Tag,Update these items with information.";
 
                 UpdateStatusBar(Action);
                 break;
@@ -1760,7 +1839,14 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 if ($scope.ActionQuantityValueMove != "" && $scope.ActionQuantityValueMove != undefined) {
 
                     for (k = 0; k < $scope.CurrentCart.length; k++) {
-                        $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.ActionQuantityValueMove;
+
+                        if ($scope.CurrentOperation == "MoveTagUpdate") {
+                            $scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity = $scope.ActionQuantityValueMove;
+                        }
+                        if ($scope.CurrentOperation == "Move") {
+                            $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.ActionQuantityValueMove;
+
+                        }
 
                     }
                     $("#movebutton_" + id).addClass("movepin");
@@ -1777,7 +1863,14 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             case 2:
 
                 for (k = 0; k < $scope.CurrentCart.length; k++) {
-                    $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.CurrentCart[k].InventoryDataList.oquantity;
+
+                    if ($scope.CurrentOperation == "MoveTagUpdate") {
+                        $scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity = $scope.CurrentCart[k].InventoryDataList.oquantity;
+                    }
+                    if ($scope.CurrentOperation == "Move") {
+                        $scope.CurrentCart[k].MoveTransactionData.ActionQuantity = $scope.CurrentCart[k].InventoryDataList.oquantity;
+
+                    }
                 }
 
                 $("#movebutton_" + id).addClass("movepin");
@@ -1804,8 +1897,19 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         if ($scope.ToLocID != 0) {
             var k = 0;
             for (k = 0; k < $scope.CurrentCart.length; k++) {
-                $scope.CurrentCart[k].MoveTransactionData.MoveToLocation = $scope.ToLocID;
-                $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText = text;
+
+                if ($scope.CurrentOperation == "MoveTagUpdate")
+                {
+                    $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation = $scope.ToLocID;
+                    $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocationText = text;
+                }
+
+                if ($scope.CurrentOperation == "Move") {
+                    $scope.CurrentCart[k].MoveTransactionData.MoveToLocation = $scope.ToLocID;
+                    $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText = text;
+                }
+
+                
             }
             ShowSuccessActivity('Updated', $scope._CurrentAction);
 
@@ -1865,7 +1969,17 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         var k = 0;
         for (k = 0; k < $scope.CurrentCart.length; k++) {
-            $scope.CurrentCart[k].MoveTransactionData.StatusToUpdate = $scope.StatusToUpdateLoc;
+
+            if ($scope.CurrentOperation == "MoveTagUpdate") {
+                $scope.CurrentCart[k].MoveUpdateTagTransactionData.StatusToUpdate = $scope.StatusToUpdateLoc;
+
+            }
+
+            if ($scope.CurrentOperation == "Move") {
+                $scope.CurrentCart[k].MoveTransactionData.StatusToUpdate = $scope.StatusToUpdateLoc;
+
+            }
+
 
         }
         ShowSuccessActivity('Updated', $scope._CurrentAction);
@@ -1888,7 +2002,17 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.UnitDataTag1 = value;
 
                 for (k = 0; k < $scope.CurrentCart.length; k++) {
-                    $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 = $scope.UnitDataTag1;
+
+                    if ($scope.CurrentOperation == "MoveTagUpdate") {
+                        $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag1 = $scope.UnitDataTag1;
+                    }
+
+                    if ($scope.CurrentOperation == "Apply") {
+                        $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 = $scope.UnitDataTag1;
+
+
+                    }
+
 
                 }
 
@@ -1901,7 +2025,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.UnitDataTag2 = value;
 
                 for (k = 0; k < $scope.CurrentCart.length; k++) {
-                    $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 = $scope.UnitDataTag2;
+                    if ($scope.CurrentOperation == "MoveTagUpdate") {
+                        $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag2 = $scope.UnitDataTag2;
+                    }
+
+                    if ($scope.CurrentOperation == "Apply") {
+                        $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 = $scope.UnitDataTag2;
+
+
+                    }
 
                 }
                 ShowSuccessActivity('Updated', $scope._CurrentAction);
@@ -1914,7 +2046,17 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.UnitDataTag3 = value;
 
                 for (k = 0; k < $scope.CurrentCart.length; k++) {
-                    $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 = $scope.UnitDataTag3;
+
+
+                    if ($scope.CurrentOperation == "MoveTagUpdate") {
+                        $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag3 = $scope.UnitDataTag3;
+                    }
+
+                    if ($scope.CurrentOperation == "Apply") {
+                        $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 = $scope.UnitDataTag3;
+
+
+                    }
 
                 }
 
@@ -1928,7 +2070,16 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.UnitDataNumber1 = value;
 
                 for (k = 0; k < $scope.CurrentCart.length; k++) {
-                    $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 = $scope.UnitDataNumber1;
+
+                    if ($scope.CurrentOperation == "MoveTagUpdate") {
+                        $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDataNumber1 = $scope.UnitDataNumber1;
+                    }
+
+                    if ($scope.CurrentOperation == "Apply") {
+                        $scope.CurrentCart[k].ApplyTransactionData.UnitDataNumber1 = $scope.UnitDataNumber1;
+
+
+                    }
 
                 }
 
@@ -1941,7 +2092,17 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.UnitDataNumber2 = value;
 
                 for (k = 0; k < $scope.CurrentCart.length; k++) {
-                    $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 = $scope.UnitDataNumber2;
+
+                    if ($scope.CurrentOperation == "MoveTagUpdate") {
+                        $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 = $scope.UnitNumber2;
+                    }
+
+                    if ($scope.CurrentOperation == "Apply") {
+                        $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 = $scope.UnitNumber2;
+
+
+                    }
+
 
                 }
 
@@ -1954,7 +2115,17 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.UnitDataDate2 = value;
 
                 for (k = 0; k < $scope.CurrentCart.length; k++) {
-                    $scope.CurrentCart[k].ApplyTransactionData.UnitDate2 = $scope.UnitDataDate2;
+
+                    if ($scope.CurrentOperation == "MoveTagUpdate") {
+                        $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 = $scope.UnitDataDate2;
+                    }
+
+                    if ($scope.CurrentOperation == "Apply") {
+                        $scope.CurrentCart[k].ApplyTransactionData.UnitDate2 = $scope.UnitDataDate2;
+
+
+                    }
+
 
                 }
 
@@ -1967,7 +2138,16 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.UnitDataDate1 = value;
 
                 for (k = 0; k < $scope.CurrentCart.length; k++) {
-                    $scope.CurrentCart[k].ApplyTransactionData.UniqueDate = $scope.UnitDataDate1;
+
+                    if ($scope.CurrentOperation == "MoveTagUpdate") {
+                        $scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate = $scope.UnitDataDate1;
+                    }
+
+                    if ($scope.CurrentOperation == "Apply") {
+                        $scope.CurrentCart[k].ApplyTransactionData.UniqueDate = $scope.UnitDataDate1;
+
+
+                    }
 
                 }
 
@@ -2026,6 +2206,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         var wcfDateStr1 = null;
         var wcfDateStr2 = null;
+
+        var wcfDateStr1New = null;
+        var wcfDateStr2New = null;
 
         var k = 0;
         var _i = 0;
@@ -2158,6 +2341,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
             }
 
+
+            if ($scope.CurrentOperation == "MoveTagUpdate") {
+
+                _TempQty = $scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity;
+                _TempStatus = $scope.CurrentCart[k].MoveUpdateTagTransactionData.StatusToUpdate;
+                _TempLocID = $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation;
+
+            }
+
             if ($scope.CurrentOperation == "Adjust") {
                 IsAdjustOnData = "True";
             }
@@ -2201,6 +2393,49 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate() , 0, 0, 0, 0))
 
                 wcfDateStr2 = d21.toMSJSON();
+
+            }
+
+
+            if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate != undefined && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate != "") {
+
+                var dateVar = $scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate;
+                var dsplit = dateVar.split("-");
+
+                //var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
+
+                var d1 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
+                if (_genVar == 1) {
+
+
+                    d1.setDate(d1.getDate());
+                }
+                else {
+                    d1.setDate(d1.getDate() + 1);
+                }
+                var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0))
+
+                wcfDateStr1New = d11.toMSJSON();
+            }
+            if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != undefined && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != "") {
+                var dateVar = $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2;
+                var dsplit = dateVar.split("-");
+
+
+                //  var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
+                var d2 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
+
+                if (_genVar == 1) {
+
+
+                    d2.setDate(d2.getDate());
+                }
+                else {
+                    d2.setDate(d2.getDate() + 1);
+                }
+                var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate(), 0, 0, 0, 0))
+
+                wcfDateStr2New = d21.toMSJSON();
 
             }
 
@@ -2268,6 +2503,16 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     UnitDate2: wcfDateStr2,
                     UnitNumber1: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == undefined ? 0 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1,
                     UnitNumber2: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 == undefined ? 0 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2,
+                    NewToStatusValue: _TempStatus,
+                    NewLocationID: _TempLocID,
+                    NewUnitTag1: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag1,
+                    NewUnitTag2: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag2,
+                    NewUnitTag3: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag3,
+                    NewUniqueDate: wcfDateStr1New,
+                    NewUnitDate2: wcfDateStr2New,
+
+                    NewUnitNumber1: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1 == undefined || $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1 == null ? "" : $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1,
+                    NewUnitNumber2: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 == undefined || $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 == null ? "" : $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2,
                     myPostObj: _MyObjdata1, myPostObj2: _MyObjdata2, IsLineItem: $scope.CurrentCart[k].IsLineItemData
                 });
             }
@@ -2290,6 +2535,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     UnitDate2: wcfDateStr2,
                     UnitNumber1: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == undefined ? 0 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1,
                     UnitNumber2: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 == undefined ? 0 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2,
+                    NewToStatusValue: _TempStatus,
+                    NewLocationID: _TempLocID,
+                    NewUnitTag1: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag1,
+                    NewUnitTag2: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag2,
+                    NewUnitTag3: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag3,
+                    NewUniqueDate: wcfDateStr1New,
+                    NewUnitDate2: wcfDateStr2New,
+                    NewUnitNumber1: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1 == undefined || $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1 == null ? 0: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1,
+                    NewUnitNumber2: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 == undefined || $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 == null ? 0 : $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2,
                     myPostObj: _MyObjdata, IsLineItem: $scope.CurrentCart[k].IsLineItemData
                 });
             }
@@ -2407,7 +2661,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 var _mdata = BuildMultipleData();
 
-
+                console.log(_mdata);
                 $.ajax({
                     type: "POST",
                     url: serviceBase + 'MultipleActivity',
@@ -2750,9 +3004,62 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                     }
                     break;
-                case "Apply":
+
+
+                case "Move":
+
                     for (k = 0; k < _totalLength; k++) {
-                        if (k == CurrentIndex && ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "" || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null)) {
+                        if (k == CurrentIndex && ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity == null || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == null || $scope.CurrentCart[k].MoveTransactionData.ActionQuantity == "" || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "")) {
+                            if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                            }
+                            if ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity == null || $scope.CurrentCart[k].MoveTransactionData.ActionQuantity == "") {
+
+
+                                $scope.IssueType = 3;
+                            }
+
+                            else if ($scope.CurrentCart[k].MoveTransactionData.MoveToLocation == null || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "") {
+                                $scope.IssueType = 32;
+                            }
+                            CheckScopeBeforeApply();
+                            return true;
+
+                            break;
+                        }
+                        else if (k == CurrentIndex && $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == $scope.CurrentCart[k].InventoryDataList.iLID) {
+                            if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                            }
+
+                            $scope.IssueType = 31;
+                            CheckScopeBeforeApply();;
+                            return true;
+
+                            break;
+                        }
+                        else if (_AllowNegative != null && _AllowNegative != "True") {
+                            if (k == CurrentIndex && ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity)) {
+                                if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                    $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                                }
+
+                                return true;
+                                break;
+                            }
+                            else {
+
+                            }
+                        }
+
+                    }
+                    break;
+                case "MoveTagUpdate":
+                    for (k = 0; k < _totalLength; k++) {
+                        if (k == CurrentIndex && ($scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity == "" || $scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity == null)) {
                             if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
                                 $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
 
@@ -2764,7 +3071,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             break;
                         }
                         else if (_AllowNegative != null && _AllowNegative != "True") {
-                            if (k == CurrentIndex && $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                            if (k == CurrentIndex && $scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
                                 if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
                                     $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
 
@@ -3076,6 +3383,59 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         }
                         else if (_AllowNegative != null && _AllowNegative != "True") {
                             if ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+
+                                if ($scope.IsSingleMode == false) {
+                                    $scope.GoToStep(0);
+                                    log.error("Seems like " + $scope.CurrentCart[k].ItemID + " item is having more than original quantity for activity, please update");
+                                }
+                                else {
+                                    if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                        $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                                    }
+                                    $scope.GoToStep(k);
+
+                                }
+
+                                return true;
+                                break;
+                            }
+                            else {
+
+                            }
+                        }
+
+                    }
+                    break;
+
+
+                case "MoveTagUpdate":
+
+                    for (k = 0; k < _totalLength; k++) {
+                        if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity == undefined || $scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity == null || $scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity == "" || $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation == "") {
+                            if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                            }
+
+                            if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity == null || $scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity == "") {
+
+
+                                $scope.IssueType = 3;
+                            }
+
+                            else if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation == null || $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation == "") {
+                                $scope.IssueType = 32;
+                            }
+                            $scope.GoToStep(k);
+                            CheckScopeBeforeApply();
+                            return true;
+
+                            break;
+                        }
+                       
+                        else if (_AllowNegative != null && _AllowNegative != "True") {
+                            if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
 
                                 if ($scope.IsSingleMode == false) {
                                     $scope.GoToStep(0);

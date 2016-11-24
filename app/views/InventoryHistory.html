@@ -189,6 +189,24 @@
                 </div>
             </div>
         </div>
+
+        <div ng-if="_obj.ParentAction=='MoveTagUpdate'" class="bgm-movetagupdate activityinfo">
+            <div class="row">
+                <div class="col-xs-2">
+                    <span class="btn-floating resize btn-large waves-effect waves-light accent-color btn z-depth-1">
+                        M
+                    </span>
+                </div>
+                <div class="col-xs-7">
+                    <h5>Move,Tag,Update {{_obj.itQtyChange}} {{_obj.uomUOM}} on {{_obj.itUpdateDate}}</h5>
+                </div>
+                <div class="col-xs-3">
+                    <div style="text-align:right; margin-right:5px; margin-top:12px;" ng-if="_obj.CanUndo==true">
+                        <a style="height:30px; width:30px; background:#fff; border-radius:100%; border:transparent; padding:0px; line-height:30px; text-align:center;" class="btn waves-effect" ng-click="Undo(_obj.itID,_obj.itInvID,_obj.itParentTransID)"> <i class="fa fa-undo"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div ng-if="Recentactivities.length==0 && isSearching==false">
         <h4>No Data available, please update your search data and then give it another shot. </h4>
