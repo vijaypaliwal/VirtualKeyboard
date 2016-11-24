@@ -2072,11 +2072,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 for (k = 0; k < $scope.CurrentCart.length; k++) {
 
                     if ($scope.CurrentOperation == "MoveTagUpdate") {
-                        $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDataNumber1 = $scope.UnitDataNumber1;
+                        $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1 = $scope.UnitDataNumber1;
                     }
 
                     if ($scope.CurrentOperation == "Apply") {
-                        $scope.CurrentCart[k].ApplyTransactionData.UnitDataNumber1 = $scope.UnitDataNumber1;
+                        $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 = $scope.UnitDataNumber1;
 
 
                     }
@@ -2319,7 +2319,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             },
             CustomData: BuildCustomArrayDataSelector("#transactionForm2")
         };
-
 
         for (_i = 0; _i < $scope.CurrentCart.length; _i++) {
             var _OriginalAction = $scope.CurrentCart[_i].ActionPerformed;
@@ -2661,7 +2660,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 var _mdata = BuildMultipleData();
 
-                console.log(_mdata);
                 $.ajax({
                     type: "POST",
                     url: serviceBase + 'MultipleActivity',
