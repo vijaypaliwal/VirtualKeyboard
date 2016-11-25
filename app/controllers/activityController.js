@@ -26,6 +26,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.CanDecrease = 'true';
     $scope.CanConvert = 'true';
     $scope.CanMove = 'true';
+    $scope.CanMoveTagUpdate = 'true';
     $scope.CanStatus = 'true';
     $scope.CanApply = 'true';
     $scope.CanCost = 'true';
@@ -1157,7 +1158,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
           });
     }
 
-
+    function IsAnyUnitDataFieldActive()
+    {
+        return IsAvailableMyInventoryColumn('iReqValue') || IsAvailableMyInventoryColumn('iUniqueDate') || IsAvailableMyInventoryColumn('iUnitDate2') || IsAvailableMyInventoryColumn('iUnitNumber1') || IsAvailableMyInventoryColumn('iUnitNumber2') || IsAvailableMyInventoryColumn('iUnitTag2') || IsAvailableMyInventoryColumn('iUnitTag3');
+    }
     function SetPermisssions() {
         debugger;
         $scope.CanIncrease = IsAvailableMyInventoryColumn('iQty') && $scope.checkpermission('ACTION:CanAddInventory') ? 'True' : 'False';
@@ -1165,8 +1169,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $scope.CanConvert = IsAvailableMyInventoryColumn('uomUOM') && $scope.checkpermission('ACTION:CanConvertInventory') ? 'True' : 'False';
         $scope.CanMove = IsAvailableMyInventoryColumn('lLoc') && $scope.checkpermission('ACTION:CanMoveInventory') ? 'True' : 'False';
         $scope.CanStatus = IsAvailableMyInventoryColumn('iStatusValue') && $scope.checkpermission('ACTION:CanStatusInventory') ? 'True' : 'False';
-
-        $scope.CanApply = (IsAvailableMyInventoryColumn('iReqValue') || IsAvailableMyInventoryColumn('iUniqueDate') || IsAvailableMyInventoryColumn('iUnitDate2') || IsAvailableMyInventoryColumn('iUnitNumber1') || IsAvailableMyInventoryColumn('iUnitNumber2') || IsAvailableMyInventoryColumn('iUnitTag2') || IsAvailableMyInventoryColumn('iUnitTag3')) && $scope.checkpermission('ACTION:UniqueTag') ? 'True' : 'False';
+        $scope.CanMoveTagUpdate = (IsAvailableMyInventoryColumn('lLoc') || IsAvailableMyInventoryColumn('iStatusValue') || IsAnyUnitDataFieldActive()) && $scope.checkpermission('ACTION:CanMoveTagUpdate') ? 'True' : 'False';
+        $scope.CanApply = (IsAnyUnitDataFieldActive()) && $scope.checkpermission('ACTION:UniqueTag') ? 'True' : 'False';
 
 
 
@@ -2094,11 +2098,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 for (k = 0; k < $scope.CurrentCart.length; k++) {
 
                     if ($scope.CurrentOperation == "MoveTagUpdate") {
-                        $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 = $scope.UnitNumber2;
+                        $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 = $scope.UnitDataNumber2;
                     }
 
                     if ($scope.CurrentOperation == "Apply") {
-                        $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 = $scope.UnitNumber2;
+                        $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 = $scope.UnitDataNumber2;
 
 
                     }
@@ -2356,11 +2360,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             if ($scope.CurrentCart[k].ApplyTransactionData.UniqueDate != undefined && $scope.CurrentCart[k].ApplyTransactionData.UniqueDate != "") {
 
                 var dateVar = $scope.CurrentCart[k].ApplyTransactionData.UniqueDate;
-                var dsplit =dateVar.split("-");
+                var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
 
-                //var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
+                var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0] - 1, dsplit[1]);
 
-                var d1 =  new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
+               // var d1 =  new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
                 if (_genVar == 1) {
 
 
@@ -2375,11 +2379,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             }
             if ($scope.CurrentCart[k].ApplyTransactionData.UnitDate2 != undefined && $scope.CurrentCart[k].ApplyTransactionData.UnitDate2 != "") {
                 var dateVar = $scope.CurrentCart[k].ApplyTransactionData.UnitDate2;
-                var dsplit = dateVar.split("-");
+                var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
 
-
-              //  var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
-                var d2 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
+                var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0] - 1, dsplit[1]);
+               // var d2 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
 
                 if (_genVar == 1) {
 
@@ -2395,15 +2398,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
             }
 
+            debugger;
 
             if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate != undefined && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate != "") {
 
                 var dateVar = $scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate;
-                var dsplit = dateVar.split("-");
+                var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
+                var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0] - 1, dsplit[1]);
 
-                //var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
-
-                var d1 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
+                //var d1 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
                 if (_genVar == 1) {
 
 
@@ -2418,14 +2421,13 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             }
             if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != undefined && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != "") {
                 var dateVar = $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2;
-                var dsplit = dateVar.split("-");
+                var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
 
-
-                //  var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[1] - 1, dsplit[0]);
-                var d2 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
+                  var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0]-1, dsplit[1]);
+                //var d2 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
 
                 if (_genVar == 1) {
-
+                    
 
                     d2.setDate(d2.getDate());
                 }
