@@ -2502,8 +2502,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     UnitTag3: $scope.CurrentCart[k].ApplyTransactionData.UnitTag3,
                     UniqueDate: wcfDateStr1,
                     UnitDate2: wcfDateStr2,
-                    UnitNumber1: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == undefined ? 0 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1,
-                    UnitNumber2: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 == undefined ? 0 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2,
+                    UnitNumber1: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == undefined || $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == null ||  $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == "" ? -1500 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1,
+                    UnitNumber2: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 == undefined || $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 == null || $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 == "" ? -1500 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2,
                     NewToStatusValue: _TempStatus,
                     NewLocationID: _TempLocID,
                     NewUnitTag1: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag1,
@@ -2512,8 +2512,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     NewUniqueDate: wcfDateStr1New,
                     NewUnitDate2: wcfDateStr2New,
 
-                    NewUnitNumber1: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1 == undefined || $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1 == null ? "" : $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1,
-                    NewUnitNumber2: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 == undefined || $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 == null ? "" : $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2,
+                    NewUnitNumber1: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1 == undefined || $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1 == null || $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1 == "" ? -1500 : $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1,
+                    NewUnitNumber2: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 == undefined || $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 == null || $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 == "" ? -1500 : $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2,
                     myPostObj: _MyObjdata1, myPostObj2: _MyObjdata2, IsLineItem: $scope.CurrentCart[k].IsLineItemData
                 });
             }
@@ -2534,8 +2534,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     UnitTag3: $scope.CurrentCart[k].ApplyTransactionData.UnitTag3,
                     UniqueDate: wcfDateStr1,
                     UnitDate2: wcfDateStr2,
-                    UnitNumber1: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == undefined ? 0 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1,
-                    UnitNumber2: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 == undefined ? 0 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2,
+                    UnitNumber1: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == undefined ? -1500 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1,
+                    UnitNumber2: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 == undefined ? -1500 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2,
                     NewToStatusValue: _TempStatus,
                     NewLocationID: _TempLocID,
                     NewUnitTag1: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag1,
@@ -2543,8 +2543,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     NewUnitTag3: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag3,
                     NewUniqueDate: wcfDateStr1New,
                     NewUnitDate2: wcfDateStr2New,
-                    NewUnitNumber1: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1 == undefined || $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1 == null ? 0: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1,
-                    NewUnitNumber2: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 == undefined || $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 == null ? 0 : $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2,
+                    NewUnitNumber1: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1 == undefined || $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1 == null ? -1500 : $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber1,
+                    NewUnitNumber2: $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 == undefined || $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2 == null ? -1500 : $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitNumber2,
                     myPostObj: _MyObjdata, IsLineItem: $scope.CurrentCart[k].IsLineItemData
                 });
             }
