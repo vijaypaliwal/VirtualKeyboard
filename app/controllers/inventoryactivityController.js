@@ -205,6 +205,8 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
         $scope.ClearImageFilter();
         $scope.FilterData.SearchValue = "";
+        $("#startDate").val("");
+        $("#endDate").val("");
         CheckScopeBeforeApply();
         $scope.GetActivityDataAccordingToView();
     }
