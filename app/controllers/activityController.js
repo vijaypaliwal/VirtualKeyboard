@@ -1742,7 +1742,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         });
 
         // process the checkboxes by getting the Boolean string for whether they are currently checked
-        $.each($('.customActivityData input:checkbox[cfd-id]:not(":hidden")'), function () {
+        $.each($('.customActivityData input:checkbox[cfd-id]'), function () {
             var _dataVal = $(this).is(':checked').toString();
             _dataVal = _dataVal.substr(0, 1).toUpperCase() + _dataVal.substr(1).toLowerCase();
 
