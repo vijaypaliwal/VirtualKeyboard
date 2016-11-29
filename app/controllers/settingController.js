@@ -28,14 +28,16 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
 
     $scope.GoTo = function (url) {
         $location.path(url);
-    }
-    $scope.logOut = function () {
+    };
 
+    $scope.logOut = function () {
 
         authService.logOut();
         $location.path('/login');
-        CheckScopeBeforeApply();
-    }
+
+    };
+
+
     $scope.getstatus = function () {
 
         $scope.IsStatusLoading = true;
@@ -268,7 +270,7 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
                   $scope.$apply();
 
               },
-              error: function (err, textStatus, errorThrown) {
+              error: function (err, textStatus) {
                   $scope.IsCustomfieldLoading = false;
                   if (err.readyState == 0 || err.status == 0) {
 

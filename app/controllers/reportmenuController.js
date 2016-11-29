@@ -1,7 +1,6 @@
 ﻿ 'use strict';
 app.controller('reportmenuController', ['$scope',  'localStorageService', 'authService', '$location', 'log', function ($scope,  localStorageService, authService, $location, log) {
  
-
     $scope.mainObjectToSend = [];
 
     $scope.currentinvloaded = false;
@@ -35,8 +34,6 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
             $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
         }
     }
-
-
 
     $scope.GoTo = function (url) {
 
@@ -78,11 +75,8 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
               error: function (err) {
                   $scope.currentinvloaded = true;
                   $scope.ShowErrorMessage("Inventory  reports counter", 2, 1, err.statusText);
-
-
               }
           });
-
     }
 
     $scope.GetActivityViews = function () {
@@ -296,7 +290,7 @@ app.controller('reportmenuController', ['$scope',  'localStorageService', 'authS
 
               }
           });
-    }
+    };
     function init() {
        
 

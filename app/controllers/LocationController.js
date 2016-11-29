@@ -29,7 +29,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
 
     $('#bottommenumodal').on('hidden.bs.modal', function () {
-        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars');
     });
 
 
@@ -80,7 +80,9 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
         if (!$scope.$$phase) {
             $scope.$apply();
         }
-    };
+    }
+
+
     $scope.FilterArray = [
        { ColumnName: 'lLoc', FilterOperator: 'cn', SearchValue: $('#lLoc-filter').val() },
         { ColumnName: 'lDescription', FilterOperator: 'cn', SearchValue: $('#lDescription-filter').val() },
@@ -114,10 +116,6 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                     CheckScopeBeforeApply();
                     $scope.GetLocations();
                 }
-                else {
-                    // log.info("You have already loaded all data.")
-                }
-
             }
         }
 
@@ -212,13 +210,6 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                     }
                     else {
                         $(".norecords").hide();
-
-
-                    }
-
-                    if ($scope.ActualTotalRecords) {
-                    } else {
-                    
                     }
                 }
                 else {
@@ -407,8 +398,6 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                             setTimeout(function () {
                                 $scope.GetLocations();
                             }, 400)
-
-                         
 
                         }
 

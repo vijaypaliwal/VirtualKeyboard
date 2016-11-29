@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('AccountsController', ['$scope', '$location', 'authService','localStorageService', 'ngAuthSettings', 'log', function ($scope, $location, authService,localStorageService, ngAuthSettings, log) {
+app.controller('AccountsController', ['$scope', '$location', 'authService','localStorageService', 'ngAuthSettings', function ($scope, $location, authService,localStorageService, ngAuthSettings) {
 
 
 
@@ -10,8 +10,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
     $scope.AccountsList = [];
     $scope.IsLoading = false;
     $scope.CurrentAccount = "";
-    $scope.GetUserAccounts=function()
-    {
+    $scope.GetUserAccounts = function () {
         $scope.IsLoading = true;
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -26,25 +25,12 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
 
             dataType: 'json',
 
-            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken}),
-            error: function (err, textStatus, errorThrown) {
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+            error: function (err) {
                 $scope.IsLoading = false;
-                if (err.readyState == 0 || err.status == 0)
-                {
-
-                }
-                else {
-
-                    if (textStatus != "timeout") {
-
-                        $scope.ShowErrorMessage("Get user Accounts", 2, 1, err.statusText);
-                    }
-                }
             },
 
             success: function (data) {
-
-                debugger;
 
                 if (data.GetUserAccountsResult.Success == true) {
 
@@ -53,8 +39,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
                     }
                 }
                 else {
-                    $scope.ShowErrorMessage("Get user Accounts", 1, 1, data.GetUserAccountsResult.Message)
-
+                    $scope.ShowErrorMessage("Get user Accounts", 1, 1, data.GetUserAccountsResult.Message);
 
                 }
                 $scope.IsLoading = false;
@@ -62,19 +47,17 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
                 $scope.$apply();
             }
         });
-    }
+    };
    
 
-    $scope.CheckCurrentAccount=function(Account)
-    {
-        if($scope.CurrentAccount==Account)
-        {
+    $scope.CheckCurrentAccount = function (Account) {
+        if ($scope.CurrentAccount == Account) {
             return true;
         }
         else {
             return false;
         }
-    }
+    };
     $scope.UpdateSecurityToken = function (AccountID, AccountName) {
 
         $scope.IsLoading = true;
@@ -93,7 +76,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
             dataType: 'json',
 
             data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "AccountID": AccountID }),
-            error: function (err, textStatus, errorThrown) {
+            error: function (err, textStatus) {
                 $scope.UOMSearching = false;
 
                 $scope.IsLoading = false;
@@ -139,13 +122,8 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
                 }
                 else {
                     $scope.IsLoading = false;
-                    $scope.ShowErrorMessage("update security token", 1, 1, data.UpdateSecurityTokenResult.Message)
-
-
+                    $scope.ShowErrorMessage("update security token", 1, 1, data.UpdateSecurityTokenResult.Message);
                 }
-
-
-
             }
         });
     }

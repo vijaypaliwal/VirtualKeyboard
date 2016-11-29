@@ -36,26 +36,23 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
     }
 
 
-    $scope.logOut = function () {
-
-
+    $scope.logOut = function ()
+    {
         authService.logOut();
         $location.path('/login');
-
     }
+
 
     $scope.addUOM = function () {
         $scope.UomID = 0;
         $scope.UOMToCreate = "";
         $scope.mode = 2;
-       
         $scope.$apply();
-
     }
 
 
     $('#bottommenumodal').on('hidden.bs.modal', function () {
-        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars');
     });
 
 

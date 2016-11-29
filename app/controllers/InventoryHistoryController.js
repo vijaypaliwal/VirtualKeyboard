@@ -25,8 +25,8 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
 
         authService.logOut();
         $location.path('/login');
-        CheckScopeBeforeApply();
-    }
+
+    };
     $scope.OpenmenuModal = function () {
 
         if ($("body").hasClass("modal-open")) {
@@ -35,11 +35,11 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
         else {
             $("#myModal2").modal('show');
         }
-    }
+    };
 
 
     $('#bottommenumodal').on('hidden.bs.modal', function () {
-        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars');
     });
 
 
@@ -48,8 +48,7 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
         if ($("body").hasClass("modal-open")) {
             $("#bottommenumodal").modal('hide');
 
-            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
-
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars');
 
         }
         else {
@@ -124,7 +123,7 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
                    }
                    else {
 
-                       $scope.ShowErrorMessage("Recent Activities", 1, 1, response.GetRecentActivityResult.Message)
+                       $scope.ShowErrorMessage("Recent Activities", 1, 1, response.GetRecentActivityResult.Message);
                    }
                },
                error: function (err) {
@@ -201,38 +200,6 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
     $scope.$watch('Activity', function () {
         $scope.GetRecentActivities();
     });
-
-    function InitializeSwiper() {
-        var mySwiper = new Swiper('.swiper-container', {
-            initialSlide: 0,
-            speed: 200,
-            effect: 'flip',
-
-            allowSwipeToPrev: false,
-
-
-            onSlideChangeEnd: function (swiperHere) {
-
-
-            }
-
-
-        });
-
-
-        $('.arrow-left').on('click', function (e) {
-            e.preventDefault()
-            mySwiper.swipePrev();
-
-        })
-        $('.arrow-right').on('click', function (e) {
-
-            e.preventDefault()
-            mySwiper.swipeNext()
-
-        })
-
-    }
 
 
 }]);

@@ -49,17 +49,12 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.showinventory = function () {
         $location.path('/FindItems');
-
         $scope.$apply();
-
     }
 
-
-
-    $scope.OpenBox = function () {
-
+    $scope.OpenBox = function ()
+    {
         $("#bottommenumodal").modal('hide');
-
         $("#myModalforlist").modal("show");
 
     }
@@ -530,11 +525,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     }
 
-
-  
-   
-
-
     $scope.addtocart = function (v) {
 
 
@@ -599,7 +589,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         if (!$scope.$$phase) {
             $scope.$apply();
         }
-    };
+    }
     function CheckIntoCartData ()
     {
         $scope.CanAddIntoCart = false;
@@ -728,7 +718,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         $("#imagemodaldetail").modal('show');
         $scope.CurrentActiveImage = Object;
         $scope.$apply();
-    }
+    };
     $scope.ToggleEditView = function () {
 
         
