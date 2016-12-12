@@ -367,9 +367,9 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
 
 
 
-  
+   
 
-    $scope.UpdateUnitData = function (TagID, IsActive) {
+    $scope.UpdateUnitData = function (TagID, IsActive, IsUnique) {
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -383,7 +383,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
              url: serviceBase + 'UpdateUnitDataColumn',
              contentType: 'application/json; charset=utf-8',
              dataType: 'json',
-             data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "TagID": TagID, "IsActive": IsActive }),
+             data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "TagID": TagID, "IsActive": IsActive, "IsUnique": IsUnique }),
              success: function (response) {
                  debugger;
                  HideWaitingInv();
@@ -531,6 +531,8 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
+
+
                    $scope.UnitDataColumns = [];
                    if (response.GetUnitDataColumnsResult.Success == true) {
                        var _unitDataColumns = response.GetUnitDataColumnsResult.Payload;
@@ -543,7 +545,8 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
                        }
 
                    }
-                   else {
+                   else
+                   {
                        $scope.ShowErrorMessage("Getting unit data columns", 1, 1, response.GetUnitDataColumnsResult.Message)
 
                    }

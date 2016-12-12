@@ -72,18 +72,26 @@
                         <div class="row">
 
                             <div class="col-xs-2">
-                                <a class="btn text btn-warning ng-binding"> {{$index+1}} </a>
+                                <a style="margin-top:17px;" class="btn text btn-warning ng-binding"> {{$index+1}} </a>
                             </div>
 
                             <div class="col-xs-6">
                                 <a class="text ng-binding">{{_obj.ColumnLabel}} </a>
-                                <small class="smallText">{{_obj.Show}}</small>
+                                <a style="font-size:14px;" class="text">Do Not Allow Duplicate Entries</a>
+                                <!--<small class="smallText">{{_obj.Show}}</small>-->
                             </div>
                             <div class="col-xs-4" >
                                 <div class="btn-group custombtnGroup">
                                     <label class="switch1">
 
-                                        <input type="checkbox" ng-change="UpdateUnitData(_obj.RowID,_obj.originalMobileOrder)" ng-model="_obj.originalMobileOrder">
+                                        <input type="checkbox" ng-change="UpdateUnitData(_obj.RowID,_obj.originalMobileOrder, _obj.IsUnique)" ng-model="_obj.originalMobileOrder">
+                                        <div class="slider round"></div>
+                                    </label>
+
+                                    <br />
+
+                                    <label class="switch1">
+                                        <input type="checkbox" ng-change="UpdateUnitData(_obj.RowID,_obj.originalMobileOrder, _obj.IsUnique)" ng-model="_obj.IsUnique">
                                         <div class="slider round"></div>
                                     </label>
                                 </div>
