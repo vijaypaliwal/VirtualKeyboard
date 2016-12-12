@@ -1748,11 +1748,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
     $scope.CheckUnitDataFieldValueAll = function () {
         var _FieldArray = ["iReqValue", "iUnitTag2", "iUnitTag3", "iUniqueDate", "iUnitDate2", "iUnitNumber1", "iUnitNumber2"];
+        var _FieldArray1 = ["ReqValue", "UnitTag2", "UnitTag3", "UniqueDate", "UnitDate2", "UnitNumber1", "UnitNumber2"];
         var value = "";
         var _returnVar = true;
         var _count = 1;
         for (var i = 0; i < _FieldArray.length; i++) {
-            if($scope.IsAvailableMyInventoryColumn(_FieldArray[i]))
+            if ($scope.IsAvailableMyInventoryColumn(_FieldArray[i]) == true && $scope.CheckIsAllowDuplicate(_FieldArray1[i]) == true)
             {
                 var ColumnName = _FieldArray[i];
                 switch (ColumnName) {
