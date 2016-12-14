@@ -21,7 +21,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.isLineItemColumnNames = [];
     $scope.IsQuantityUpdated = false;
     $scope.IsSingleMode = false;
-
+    $scope.CustomAutoClear = false;
     $scope.CanIncrease = 'true';
     $scope.CanDecrease = 'true';
     $scope.CanConvert = 'true';
@@ -146,7 +146,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         });
 
     }
+    $scope.UpdateAutoClear = function (autoclearvalue) {
 
+        $scope.CustomAutoClear = autoclearvalue;
+        localStorageService.set('CustomAutoClear', $scope.CustomAutoClear);
+    }
 
     $scope.ScanTagItem = function (Type, Id, index, inventoryID) {
         var _typeString = "";
@@ -1892,7 +1896,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
        
         var _CurrentAction = localStorageService.get("SelectedAction");
         _CurrentAction = _CurrentAction != null && _CurrentAction != undefined ? parseInt(_CurrentAction) : 4548;
+        var _autoClear = localStorageService.get('CustomAutoClear');
 
+        $scope.CustomAutoClear = _autoClear == "true" || _autoClear == true ? true : false;
         $scope._CurrentAction = _CurrentAction;
         GetActionType(_CurrentAction);
 
@@ -3264,7 +3270,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     contentType: 'application/json; charset=utf-8',
 
                     dataType: 'json',
-                    data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _mdata }),
+                    data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "data": _mdata, "CustomAutoClear": $scope.CustomAutoClear }),
                     success: function (response) {
                         if (response.MultipleActivityResult.Success == true) {
 

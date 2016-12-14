@@ -2283,6 +2283,18 @@
                         <div ng-if="IsSummary==false">
 
                             <br />
+                            <div class="row" ng-if="CurrentOperation!='Increase'">
+                                <div class=" col-xs-9">
+                                    If processing the cart results in a record with "0" quantity, clear the record.
+                                </div>
+                                <div class="col-xs-3">
+                                    <label class="switch1">
+                                        <input type="checkbox" ng-model="CustomAutoClear" ng-change="UpdateAutoClear(CustomAutoClear)">
+                                        <div class="slider round"></div>
+                                    </label>
+                                </div>
+                            </div>
+                            <br />
 
                             <div ng-if="IsProcessing==false" style=" margin-left:0px; margin-right:0px;" class="row btn-success" ng-click="SubmitAllActivities()">
 
@@ -2576,7 +2588,17 @@
 
     <div ng-if="IsSingleMode==false">
 
-
+        <div class="form-inputs row" ng-if="CurrentOperation!='Increase'">
+            <div class=" col-xs-9">
+                <span style="font-size:12px;"> If processing the cart results in a record with "0" quantity, clear the record. </span>
+            </div>
+            <div class="col-xs-3">
+                <label class="switch1">
+                    <input type="checkbox" ng-model="CustomAutoClear" ng-change="UpdateAutoClear(CustomAutoClear)">
+                    <div class="slider round"></div>
+                </label>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xs-12">
 
