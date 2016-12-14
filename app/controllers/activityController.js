@@ -276,7 +276,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 }
             }
 
-
+            $(".uniqueunitData").first().trigger("blur");
+            var $inputs = $(".uniqueunitData");
+            $inputs.trigger('blur');
 
 
             $scope.$apply();
