@@ -172,6 +172,16 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
     });
 
+    $scope.GetParentActionClass = function (_cssclass) {
+        if (_cssclass == "Move, Tag, & Update") {
+            _cssclass = "MoveTagUpdate";
+            return _cssclass;
+        }
+        else {
+            return _cssclass;
+        }
+    }
+
 
     // function for hidden modal
     $('#bottommenumodal').on('hidden.bs.modal', function () {
