@@ -171,7 +171,10 @@ app.config(function ($routeProvider) {
         controller: "itemgroupController",
         templateUrl: "app/views/itemgroup.html"
     });
-
+    $routeProvider.when("/configuresetting", {
+        controller: "configuresettingController",
+        templateUrl: "app/views/configuresetting.html"
+    });
 
     $routeProvider.otherwise({ redirectTo: "/login" });
 

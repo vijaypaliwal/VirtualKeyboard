@@ -170,7 +170,7 @@
 
                 </td>
             </tr>
-            <tr ng-repeat="_obj in Permissions3" ng-if="IsAdminopen==true && (_obj.PermissionName == 'MyInventory Columns' || _obj.PermissionName == 'Custom Item Fields' || _obj.PermissionName == 'Custom Transaction Fields' || _obj.PermissionName == 'Unit Data Fields')">
+            <tr ng-repeat="_obj in Permissions3" ng-if="IsAdminopen==true && (_obj.PermissionCode == 'URL:configure/default.aspx'|| _obj.PermissionName == 'MyInventory Columns' || _obj.PermissionName == 'Custom Item Fields' || _obj.PermissionName == 'Custom Transaction Fields' || _obj.PermissionName == 'Unit Data Fields')">
                 <td>
                     <div class="infoareas">
                         <div class="row">

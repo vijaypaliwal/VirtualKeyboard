@@ -36,6 +36,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.ColumnList = [];
     $scope.CurrentCartBkup = [];
     $scope.UnitDataList = [];
+    $scope.CanAutoClear = false;
     function CheckScopeBeforeApply() {
         if (!$scope.$$phase) {
             $scope.$apply();
@@ -1893,7 +1894,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     function init() {
 
-
+        debugger;
         $scope.CurrentCart = localStorageService.get("ActivityCart");
        
         var _CurrentAction = localStorageService.get("SelectedAction");
@@ -1901,6 +1902,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         var _autoClear = localStorageService.get('CustomAutoClear');
 
         $scope.CustomAutoClear = _autoClear == "true" || _autoClear == true ? true : false;
+
+        var _autoClear1 = localStorageService.get('AutoClear');
+
+        $scope.CanAutoClear = _autoClear1 == "true" || _autoClear1 == true ? true : false;
         $scope._CurrentAction = _CurrentAction;
         GetActionType(_CurrentAction);
 
