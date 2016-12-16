@@ -916,6 +916,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         //}
 
         //$('#list123').html('');
+        $scope.InventoryObject.Quantity = $scope.GetDefaultQty();
         CheckScopeBeforeApply();
     }
 
@@ -2341,6 +2342,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     function init() {
         //  $cordovaKeyboard.disableScroll(true);
         $scope.GetAllData();
+        $scope.InventoryObject.Quantity = $scope.GetDefaultQty();
         $scope.IsItemLibrary = $scope.checkpermission('URL:Manage/Item');
         if ($scope.IsItemLibrary == true && $scope.IsActiveItemLibrary == true) {
 

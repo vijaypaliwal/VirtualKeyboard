@@ -39,7 +39,17 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
 
     $scope.CurrentUserKey = localStorageService.get('UserKey');
+    $scope.GetDefaultQty = function () {
+        var _DefaultQty = localStorageService.get('DefaultQty');
 
+        if (_DefaultQty == "1" || _DefaultQty == 1) {
+            return 1;
+        }
+        else {
+            return "";
+        }
+
+    }
     $scope.GetPermission = function (Type, Key) {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
