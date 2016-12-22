@@ -8,6 +8,11 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/home.html"
     });
 
+    $routeProvider.when("/dashboard", {
+        controller: "dashboardController",
+        templateUrl: "app/views/dashboard.html"
+    });
+
     $routeProvider.when("/login", {
         controller: "loginController",
         templateUrl: "app/views/login.html"
@@ -176,6 +181,14 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/configuresetting.html"
     });
 
+    $routeProvider.when("/manageinventory", {
+        controller: "manageinventoryController",
+        templateUrl: "app/views/manageinventory.html"
+    });
+    $routeProvider.when("/logindemo", {
+        controller: "logindemoController",
+        templateUrl: "app/views/logindemo.html"
+    });
     $routeProvider.otherwise({ redirectTo: "/login" });
 
 });

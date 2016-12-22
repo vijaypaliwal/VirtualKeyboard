@@ -1,0 +1,664 @@
+﻿
+<link href="css/settingmenu.css" rel="stylesheet" />
+
+
+<style>
+    .tabmenu {
+        text-align: center;
+        padding: 5px;
+        color: #fff;
+        background: #2196F3;
+    }
+
+
+
+        .tabmenu .active {
+            -moz-transition: all 1s;
+            -o-transition: all 1s;
+            -webkit-transition: all 1s;
+            transition: all 1s;
+        }
+
+
+    .list-group .btn {
+        border-radius: 0 !important;
+        height: 63px;
+        width: 70px;
+        margin-left: -5px;
+    }
+
+
+    .list-group-item {
+        border-radius: 0 !important;
+        padding: 0 !important;
+        margin-bottom: 10px;
+        background: #eaeaea;
+    }
+
+        .list-group-item .col-xs-7 {
+            padding-top: 12px;
+        }
+
+
+
+    .list-group img {
+        margin-top: 10px;
+        margin-left: -12px;
+    }
+
+    .fa-info-circle {
+        margin-top: 21px;
+        margin-right: 15px;
+        color: brown;
+    }
+
+    .well {
+        padding-top: 0;
+        margin-bottom: 12px;
+        padding-bottom: 0;
+    }
+
+    .addbtn {
+        margin-top: 8px;
+        height: 35px;
+        width: 35px;
+        padding: 0px;
+        border-radius: 100%;
+    }
+
+    .top10 {
+        padding-top: 10px;
+    }
+
+    .activetext {
+        color: darkseagreen;
+        margin-right: 10px;
+        margin-top: 20px;
+    }
+
+    .tabmenu .col-xs-4, .innerSpan {
+        -webkit-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        position: relative;
+    }
+
+
+    .tabmenu .innerSpan {
+        bottom: 2px;
+        display: block;
+        width: 33.3333%;
+        height: 3px;
+        background: #fff;
+        top: 19px;
+    }
+
+    .left0 {
+        left: 0%;
+    }
+
+    .left33 {
+        left: 33%;
+    }
+
+    .left66 {
+        left: 66%;
+    }
+
+    .loginusername {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        color: #fff;
+        z-index: 1000;
+        text-align: center;
+        font-size: 30px;
+        padding: 24px;
+        background: #43ac6a;
+    }
+
+    .userinfo .btn-user {
+        border-radius: 100% !important;
+        color: #fff;
+        height: 40px;
+        width: 40px;
+        margin-top: 0;
+        line-height: 40px;
+        padding: 0;
+    }
+
+    .userinfo .list-group-item {
+        background: #fff;
+        border: transparent;
+        border-bottom: 1px solid #dedede;
+        min-height: 50px;
+    }
+
+    .userimage {
+        height: 125px;
+        width: 125px;
+        z-index: 100000;
+        position: relative;
+        text-align: center;
+        color: #f04124;
+        margin: 0 auto;
+        background: #fff;
+        border: 3px solid #f04124;
+        border-radius: 100%;
+    }
+
+        .userimage i {
+            font-size: 75px;
+            margin-top: 20px;
+        }
+
+
+
+    .userinfoblock {
+        background: #f04124;
+        min-height: 150px;
+        margin-top: -60px;
+    }
+
+    .editbtn
+    {
+        background-color: transparent !important;
+    border: 1px solid #fff !important;
+    box-shadow: none;
+    }
+</style>
+
+
+
+<div class="row tabmenu">
+    <div class="col-xs-4 active" ng-click="GotoStep(0)">
+        <a>Inventory </a>
+    </div>
+    <div class="col-xs-4" ng-click="GotoStep(1)">
+        <a>Users </a>
+    </div>
+    <div class="col-xs-4" ng-click="GotoStep(2)">
+        <a>Others</a>
+    </div>
+
+    <span class="innerSpan {{ActiveClass}}"></span>
+
+</div>
+
+<div ng-if="logintext==true" class="animated bounceInUp loginusername">
+    <p>Hi {{UserName}}</p>
+</div>
+
+
+
+<div class="top10">
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+                <div class="well">
+
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <h4>Active Inventory</h4>
+                        </div>
+
+                        <div class="col-xs-4">
+                            <a class="btn btn-success addbtn pull-right">
+                                <i class="fa fa-plus-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <ul class="list-group">
+                        <li class="list-group-item">
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a class="btn text btn-warning">
+
+                                        <img src="img/stra.png" alt="" />
+
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-7">
+                                    <a class="text">Black Inventory</a>
+                                    <br />
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
+
+                                </div>
+
+
+                                <div class="col-xs-2">
+
+                                    <a class="pull-right">
+                                        <i class="fa fa-info-circle"></i>
+                                    </a>
+                                </div>
+
+
+                            </div>
+
+                        </li>
+                        <li class="list-group-item">
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a class="btn text btn-success">
+
+                                        <img src="img/stra.png" alt="" />
+
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-7">
+                                    <a class="text">Black Inventory</a>
+                                    <br />
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
+
+                                </div>
+
+                                <div class="col-xs-2">
+
+                                    <a class="pull-right">
+                                        <i class="fa fa-info-circle"></i>
+                                    </a>
+                                </div>
+
+
+                            </div>
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a class="btn text btn-danger">
+
+                                        <img src="img/stra.png" alt="" />
+
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-7">
+                                    <a class="text">Black Inventory</a>
+                                    <br />
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Joined by You</a>
+
+                                </div>
+
+                                <div class="col-xs-2">
+
+                                    <a class="pull-right">
+                                        <i class="fa fa-info-circle"></i>
+                                    </a>
+                                </div>
+
+
+                            </div>
+
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="well">
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h4>Inventory Invitations</h4>
+                        </div>
+
+
+                    </div>
+
+
+                    <ul class="list-group">
+                        <li class="list-group-item">
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a class="btn text btn-warning">
+
+                                        <img src="img/stra.png" alt="" />
+
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-7">
+                                    <a class="text">Black Inventory</a>
+                                    <br />
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
+
+                                </div>
+
+
+                                <div class="col-xs-2">
+
+                                    <a class="pull-right">
+                                        <i class="fa fa-info-circle"></i>
+                                    </a>
+                                </div>
+
+
+                            </div>
+
+                        </li>
+
+
+
+                    </ul>
+
+                </div>
+
+                <div class="well">
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h4>Archived Inventory</h4>
+                        </div>
+
+
+                    </div>
+
+
+                    <ul class="list-group">
+                        <li class="list-group-item">
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a class="btn text btn-warning">
+
+                                        <img src="img/stra.png" alt="" />
+
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-7">
+                                    <a class="text">Black Inventory</a>
+                                    <br />
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
+
+                                </div>
+
+
+                                <div class="col-xs-2">
+
+                                    <a class="activetext pull-right">
+                                        Active
+                                    </a>
+                                </div>
+
+
+                            </div>
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a class="btn text btn-danger">
+
+                                        <img src="img/stra.png" alt="" />
+
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-7">
+                                    <a class="text">Black Inventory</a>
+                                    <br />
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
+
+                                </div>
+
+
+                                <div class="col-xs-2">
+
+                                    <a class="pull-right activetext">
+                                        Active
+                                    </a>
+                                </div>
+
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+            <div class="swiper-slide">
+                <div class="well userinfo">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h4>Associate Users</h4>
+                        </div>
+
+
+                    </div>
+
+                    <ul class="list-group">
+                        <li class="list-group-item">
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a class="btn text btn-warning btn-user">
+
+                                        <i class="fa fa-male"></i>
+
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-9">
+                                    <a class="text">Gray User</a>
+                                    <br />
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
+
+                                </div>
+
+
+
+
+
+                            </div>
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a class="btn text btn-success btn-user">
+
+                                        <i class="fa fa-male"></i>
+
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-9">
+                                    <a class="text">Black User</a>
+                                    <br />
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
+
+                                </div>
+
+
+
+
+
+                            </div>
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a class="btn text btn-primary btn-user">
+
+                                        <i class="fa fa-male"></i>
+
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-9">
+                                    <a class="text">Blue User</a>
+                                    <br />
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
+
+                                </div>
+
+
+
+
+
+                            </div>
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a class="btn text btn-warning btn-user">
+
+                                        <i class="fa fa-male"></i>
+
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-9">
+                                    <a class="text">Gray User</a>
+                                    <br />
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
+
+                                </div>
+
+
+
+
+
+                            </div>
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a class="btn text btn-success btn-user">
+
+                                        <i class="fa fa-male"></i>
+
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-9">
+                                    <a class="text">Black User</a>
+                                    <br />
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
+
+                                </div>
+
+
+
+
+
+                            </div>
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <a class="btn text btn-primary btn-user">
+
+                                        <i class="fa fa-male"></i>
+
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-9">
+                                    <a class="text">Red User</a>
+                                    <br />
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
+
+                                </div>
+
+
+
+
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="userimage">
+                    <i class="fa fa-male"></i>
+                </div>
+
+                <div class="userinfoblock">
+
+                   
+
+                    <div style="padding-top:60px; padding-bottom:12px; text-align:center; color:#fff;">
+
+                     
+                        <h4>{{UserName}}</h4>
+                        <p>Test@test.com</p>
+                        <a class="btn btn-primary editbtn"> <i class="fa fa-pencil"></i> Update Profile detail </a>
+                    </div>
+
+                </div>
+
+                <div class="well">
+                    <h4>Billing Information</h4>
+                    <hr />
+                    <p>Your next bill date is on Saturday, Dec 31, 2016</p>
+                </div>
+               
+
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+    <br /><br />
+</div>
+
+<a ng-click="Openbottommenu()" class="menubtn waves-effect btn-info">
+    <i class="fa fa-bars"></i>
+</a>
+
+<div id="bottommenumodal" class="modal bottommenu fade">
+    <div class="modal-body">
+        <ul class="animated slideInUp selectAction">
+
+            <li> <a ng-click="addinventory()"><span class="newinv">Add Inventory</span></a>  <a ng-click="addinventory()" class=" waves-effect btn-success btn"> <i class="fa fa-plus"></i> </a></li>
+            <li ng-if="checkpermission('URL:Manage/UnitOfMeasure')==true"> <a href="#/uom"><span class="newinv">Manage UOM</span></a>  <a href="#/uom" class=" waves-effect btn-success btn"> <i class="fa fa-cog"></i> </a></li>
+            <li ng-if="checkpermission('URL:Manage/Status')==true"> <a href="#/status"><span class="newinv">Manage status</span></a>  <a href="#/status" class=" waves-effect btn-primary btn"> <i class="fa fa-check-circle-o"></i> </a></li>
+            <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
+        </ul>
+    </div>
+</div>

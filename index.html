@@ -698,6 +698,8 @@
         <!--<li><a href="#/mainmenu" class="no-child"><i class="ion-android-list"></i> Main menu</a></li>-->
        
        <li> <a style="background:#e2e2e2;" class="no-child"> <i style="color: #1fa67a; font-size:15px; margin-top:5px;" class="fa fa-circle"> </i> {{CurrentAccount}} </a> </li>
+        <li><a ng-class="getClass('/Logindemo')" href="#/logindemo" class="no-child"><i class="fa fa-dot-circle-o"></i> Demo Login</a></li>
+        <li><a ng-class="getClass('/dashboard')" href="#/logindemo" class="no-child"><i class="fa fa-dot-circle-o"></i> Dashboard</a></li>
         <li><a ng-class="getClass('/Accounts')" href="#/Accounts" class="no-child"><i class="fa fa-briefcase"></i> My Accounts</a></li>
         <li id="Permissionlink" ><a ng-class="getClass('/permission')" href="#/permission" class="no-child"><i class="fa fa-gears"></i> Permissions</a></li>
         <li><a ng-class="getClass('/FindItems')" href="#/FindItems" class="no-child"><i class="fa fa-shopping-cart"></i>Go to Inventory</a></li>
@@ -815,6 +817,8 @@
     <!-- Load controllers -->
     <script src="app/controllers/indexController.js?v=2"></script>
     <script src="app/controllers/loginController.js?v=2"></script>
+    <script src="app/controllers/dashboardController.js?v=2"></script>
+
     <script src="app/controllers/mainmenuController.js?v=2"></script>
     <script src="app/controllers/helpController.js?v=2"></script>
     <script src="app/controllers/signupController.js?v=2"></script>
@@ -855,6 +859,7 @@
     <script src="app/controllers/contactController.js?v=2"></script>
     <script src="app/controllers/configuresettingController.js?v=2"></script>
 
+    <script src="app/controllers/logindemoController.js?v=2"></script>
     <!-- Load custom filters -->
     <!-- Load custom directives -->
 
@@ -942,7 +947,7 @@
         }
 
 
-        var _Islive = true;
+        var _Islive = false;
 
         var IsActiveLocationLibrary = true;
         var IsActiveStatusLibrary = true;
