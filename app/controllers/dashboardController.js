@@ -214,6 +214,7 @@ app.controller('dashboardController', ['$scope', 'localStorageService', 'authSer
                       if (response.GetInventoryMastersResult.Success == true) {
                           $scope.Inventories = response.GetInventoryMastersResult.Payload;
                           $scope.Users = $scope.Inventories[0].Users;
+                          console.log($scope.Users);
                           localStorageService.set("Inventories", $scope.Inventories);
                           CheckScopeBeforeApply()
                       }
