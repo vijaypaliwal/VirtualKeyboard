@@ -51,6 +51,25 @@ app.controller('manageinventoryController', ['$scope', 'localStorageService', 'a
         }
         CheckScopeBeforeApply();
     }
+
+    $('#bottommenumodal').on('hidden.bs.modal', function () {
+        $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars');
+    });
+
+    $scope.Openbottommenu = function () {
+
+        if ($("body").hasClass("modal-open")) {
+            $("#bottommenumodal").modal('hide');
+
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
+
+
+        }
+        else {
+            $("#bottommenumodal").modal('show');
+            $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
+        }
+    }
   
     $scope.openClosePanel(1);
     $scope.GetSelectedInventory = function (ID) {
