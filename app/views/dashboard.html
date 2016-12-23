@@ -9,7 +9,9 @@
         color: #fff;
         background: #2196F3;
     }
-
+    .swiper-slide-visible {
+        height: auto !important;
+    }
 
 
         .tabmenu .active {
@@ -54,11 +56,9 @@
     }
 
     .well {
-       padding-top: 0;
-    margin-bottom: 12px;
-    padding-bottom: 0;
-    padding-left: 5px;
-    padding-right: 7px;
+        padding-top: 0;
+        margin-bottom: 12px;
+        padding-bottom: 0;
     }
 
     .addbtn {
@@ -177,6 +177,64 @@
     text-transform: capitalize;
     /* padding: 3px; */
 }
+
+    .bgm-red {
+        background: #F44336;
+    }
+
+    .bgm-pink {
+        background: #E91E63;
+    }
+
+    .bgm-purple {
+        background: #9C27B0;
+    }
+
+    .bgm-blue {
+        background: #2196F3;
+    }
+
+    .bgm-lightblue {
+        background: #03A9F4;
+    }
+
+    .bgm-gold {
+        background: #FFC107;
+    }
+
+    .bgm-yellow {
+        background: #FFEB3B;
+    }
+
+    .bgm-black {
+        background: #000;
+    }
+
+    #Addinvmodal {
+        z-index: 152222;
+        background: #fff;
+        bottom: auto;
+        top: 22%;
+        overflow:hidden;
+    }
+
+    #Addinvmodal .modal-footer
+    {
+        text-align:left;
+        margin-top:0px;
+    }
+
+    .modal-backdrop {
+        background: #000;
+        opacity: 0.3 !important;
+    }
+
+    #Addinvmodal .form-group {
+        margin-bottom: 5px;
+    }
+
+    
+
 </style>
 
 
@@ -203,7 +261,15 @@
 
 
 <div class="top10">
+    <div ng-if="masterdataloaded==false">
 
+        <div class="modal-backdrop fade in"></div>
+        <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
+            <img src="img/loader.gif" alt="Alternate Text" />
+
+            <!--<i style="font-size: 100px; color: #0083C7; " class="fa fa-spin fa-spinner"></i>-->
+        </div>
+    </div>
     <div class="swiper-container">
         <div class="swiper-wrapper">
 
@@ -216,7 +282,7 @@
                         </div>
 
                         <div class="col-xs-4">
-                            <a class="btn btn-success addbtn pull-right">
+                            <a ng-click="addinventory()" class="btn btn-success addbtn pull-right">
                                 <i class="fa fa-plus-circle"></i>
                             </a>
                         </div>
@@ -224,26 +290,28 @@
 
 
                     <ul class="list-group">
-                        <li class="list-group-item">
+                        <li class="list-group-item" ng-repeat="_obj in Inventories" ng-if="_obj.InventoryType==1">
 
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <a class="btn text btn-warning">
+                                    <a  class="btn text btn-warning {{GetCurrentClass(_obj.InventoryID)}}">
 
                                         <img src="img/stra.png" alt="" />
 
                                     </a>
+
+                                  
                                 </div>
 
                                 <div class="col-xs-7">
-                                    <a class="text">Black Inventory</a>
+                                    <a class="text">{{_obj.InventoryName}} {{_obj.InventoryID}}</a>
                                     <br />
                                     <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
 
                                 </div>
 
 
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" ng-click="GoToEditInventory(_obj.InventoryID)">
 
                                     <a class="pull-right">
                                         <i class="fa fa-info-circle"></i>
@@ -254,7 +322,7 @@
                             </div>
 
                         </li>
-                        <li class="list-group-item">
+                        <!--<li class="list-group-item">
 
                             <div class="row">
                                 <div class="col-xs-3">
@@ -312,7 +380,7 @@
 
                             </div>
 
-                        </li>
+                        </li>-->
                     </ul>
 
                 </div>
@@ -329,11 +397,11 @@
 
 
                     <ul class="list-group">
-                        <li class="list-group-item">
+                        <li class="list-group-item" ng-repeat="_obj in Inventories" ng-if="_obj.InventoryType==2">
 
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <a class="btn text btn-warning">
+                                    <a class="bgm-black btn text btn-warning {{GetCurrentClass(_obj.InventoryID)}}">
 
                                         <img src="img/stra.png" alt="" />
 
@@ -341,10 +409,9 @@
                                 </div>
 
                                 <div class="col-xs-7">
-                                    <a class="text">Black Inventory</a>
+                                    <a class="text">{{_obj.InventoryName}}</a>
                                     <br />
-                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
-
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Invited by Mr. Gray</a>
                                 </div>
 
 
@@ -378,11 +445,11 @@
 
 
                     <ul class="list-group">
-                        <li class="list-group-item">
+                        <li class="list-group-item" ng-repeat="_obj in Inventories" ng-if="_obj.InventoryType==3">
 
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <a class="btn text btn-warning">
+                                    <a class="bgm-black btn text btn-warning {{GetCurrentClass(_obj.InventoryID)}}">
 
                                         <img src="img/stra.png" alt="" />
 
@@ -390,49 +457,15 @@
                                 </div>
 
                                 <div class="col-xs-7">
-                                    <a class="text">Black Inventory</a>
+                                    <a class="text">{{_obj.InventoryName}} - {{_obj.InventoryID}}</a>
                                     <br />
-                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
-
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Invited by Mr. Red</a>
                                 </div>
 
 
                                 <div class="col-xs-2">
 
-                                    <a class="activetext pull-right">
-                                        Active
-                                    </a>
-                                </div>
-
-
-                            </div>
-
-                        </li>
-
-                        <li class="list-group-item">
-
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <a class="btn text btn-danger">
-
-                                        <img src="img/stra.png" alt="" />
-
-                                    </a>
-                                </div>
-
-                                <div class="col-xs-7">
-                                    <a class="text">Black Inventory</a>
-                                    <br />
-                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
-
-                                </div>
-
-
-                                <div class="col-xs-2">
-
-                                    <a class="pull-right activetext">
-                                        Active
-                                    </a>
+                                   
                                 </div>
 
 
@@ -456,7 +489,7 @@
                     </div>
 
                     <ul class="list-group">
-                        <li class="list-group-item">
+                        <li class="list-group-item" ng-repeat="_obj in Users">
 
                             <div class="row">
                                 <div class="col-xs-3">
@@ -468,9 +501,9 @@
                                 </div>
 
                                 <div class="col-xs-9">
-                                    <a class="text">Gray User</a>
+                                    <a class="text">{{_obj.UserName}}</a>
                                     <br />
-                                    <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
+                                    <a class="text" style="font-size: 12px; color: #a69a9a;">{{_obj.Email}}</a>
 
                                 </div>
 
@@ -482,7 +515,7 @@
 
                         </li>
 
-                        <li class="list-group-item">
+                        <!--<li class="list-group-item">
 
                             <div class="row">
                                 <div class="col-xs-3">
@@ -610,7 +643,7 @@
 
                             </div>
 
-                        </li>
+                        </li>-->
 
                     </ul>
                 </div>
@@ -665,5 +698,24 @@
             <li ng-if="checkpermission('URL:Manage/Status')==true"> <a href="#/status"><span class="newinv">Manage status</span></a>  <a href="#/status" class=" waves-effect btn-primary btn"> <i class="fa fa-check-circle-o"></i> </a></li>
             <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
         </ul>
+    </div>
+</div>
+
+
+<div id="Addinvmodal" class="modal fade">
+    <div class="modal-header">
+        <h4>Add Inventory</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="form-group">
+            <input class="form-control" type="text" name="name" ng-model="InventoryName"  />
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <a class="btn btn-success" ng-click="PushInventory()"> <i class="fa fa-plus"></i> Add  </a>
+        <a class="btn btn-default" data-dismiss="modal"> <i class="fa fa-times"></i> Cancel  </a>
     </div>
 </div>

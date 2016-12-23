@@ -3,9 +3,9 @@
         width: 100% !important;
     }
 
-    .columnHeader {
+    .titlehead {
         padding-left: 5px;
-        background: #d6d6d6;
+      
     }
 
     .infoareas {
@@ -13,219 +13,427 @@
         padding-bottom: 5px;
     }
 
-    .columnHeader .fa-chevron-down {
-        position: absolute;
-        right: 22px;
-        top: 13px;
-        font-size: 15px;
-    }
-    .columnHeader .fa-chevron-up {
-        position: absolute;
-        right: 22px;
-        top: 13px;
-        font-size: 15px;
-    }
+  
     .infoareas h6 {
         margin-left: 5px;
     }
+
+    .inventorylist
+    {
+        margin-top:35px;
+        margin-bottom:10px;
+    }
+
+    .inventorylist .input-group-addon {
+        background:#0094ff;
+        border-radius:0;
+
+    }
+
+    .inventorylist .form-control {
+        border-top-left-radius: 0;
+        -webkit-border-bottom-left-radius:0;
+        border-bottom-left-radius:0;
+    }
+
+    body
+    {
+        background:#eaeaea;
+    }
+    .well{
+        padding:7px;
+        margin-bottom:8px;
+        padding-bottom:0;
+        padding-top:10px;
+    }
+
+
+    .arrow-btn {
+        border-radius:100%;
+        height:35px;
+        width:35px;
+        padding:0;
+        text-align:center;
+        color:#fff;
+    }
+    .bgm-pink
+    {
+        background:#E91E63;
+        color:#fff;
+    }
+
+     .bgm-purple
+    {
+        background:#9C27B0;
+        color:#fff;
+    }
+
+      
+
+      .bgm-red
+    {
+        background:#F44336;
+        color:#fff;
+    }
+
+      .usercounter
+      {
+          float: right;
+    background: #fff;
+    height: 33px;
+    width: 33px;
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+      }
+
+
+      .viewaccess .fa-male
+      {
+          color:#9C27B0;
+          font-size:30px;
+         
+      }
+
+        .fullaccess .fa-male
+      {
+          color:#F44336;
+          font-size:30px;
+         
+      }
+        .list-group-item
+        {
+            margin-top:7px;
+            margin-bottom:7px;
+            background:#f3f3f3;
+        }
+
 </style>
 
-<br />
-<div class="container">
+
+
+<div class="title-header">
+
     <div class="row">
-        <div class="col-md-12">
-            <label> Select Inventory </label>
-            <div class="select">
-                <select class="form-control" id="selectInv">
-                    <!--<option ng-repeat="_obj in Inventories" ng-change="GetSelectedInventory(_obj.InventoryID)" value="{{_obj.InventoryID}}">{{_obj.InventoryName}}</option>-->
-                    <option value="">Black Inventory</option>
-                    <option value="">Gold Inventory</option>
-                    <option value="">Pink Inventory</option>
-                    <option value="">Blue Inventory</option>
-                    <option value="">Yellow Inventory</option>
-                    <option value="">Red Inventory</option>
-                </select>
+        <div class="col-xs-12">
+            <h4 class="titletext">Manage Inventory</h4>
+        </div>
+    </div>
+</div>
+
+<a href="#/dashboard" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
+<br />
+
+<div class="inventorylist">
+    <div class="input-group">
+        <span class="input-group-addon">
+            <img src="img/stra.png" alt="" />
+        </span>
+        <select class="form-control" id="selectInv" ng-model="selectedInventory.InventoryID">
+            <option>Choose inventory</option>
+            <option ng-repeat="_obj in LocalInventories" value="{{_obj.InventoryID}}">{{_obj.InventoryName}}</option>
+
+
+        </select>
+    </div>
+</div>
+
+<div class="well">
+    <div class="infoareas bgm-pink titlehead" ng-click="openClosePanel(1)">
+
+        <div class="row">
+
+            <div class="col-xs-2">
+                <a class="btn btn-success arrow-btn">
+                    <i class="fa fa-chevron-up" ng-if="Isinventory==true"></i>
+                    <i class="fa fa-chevron-down" ng-if="Isinventory==false"></i>
+                </a>
+            </div>
+            <div class="col-xs-6">
+                <h6>{{selectedInventory.InventoryName}} </h6>
+            </div>
+
+            <div class="col-xs-4">
+
+                <div style="text-align:right;">
+
+                    <a class="btn btn-warning arrow-btn">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+
+                    <a class="btn btn-danger bgm-purple arrow-btn">
+                        <i class="fa fa-circle-o-notch"></i>
+                    </a>
+
+                </div>
+              
             </div>
         </div>
-    </div>
-</div>
-<br />
-<div class="row">
-    <div class="col-md-12">
-        <div class="infoareas columnHeader" ng-click="openClosePanel(1)">
-            <h6>Inventory Information </h6>
 
-            <i class="fa fa-chevron-up pull-right" ng-if="Isinventory==true"></i>
-            <i class="fa fa-chevron-down pull-right" ng-if="Isinventory==false"></i>
+        
+
+       
+
+      
+    </div>
+    <table class="table table-bordered" ng-if="Isinventory==true">
+        <tr>
+            <td> <span>Inventory</span></td>
+            <td>
+                <span>{{selectedInventory.InventoryName}}</span>
+
+              
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>Owner</span>
+            </td>
+            <td>
+                <span>{{selectedInventory.Owner}}</span>
+                <br />
+                <a style=" color: #069; text-decoration: underline;">Transfer Ownership</a>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>Items Used/Available</span>
+            </td>
+            <td>
+                {{selectedInventory.ItemsUsed}} /{{selectedInventory.ItemsAvailable}}
+              
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>Locations Used/Available</span>
+            </td>
+            <td>
+                <span>{{selectedInventory.LocationsUsed}} /{{selectedInventory.LocationsAvailable}} </span>
+
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="well viewaccess">
+
+    <div class="infoareas bgm-purple titlehead" ng-click="openClosePanel(2)">
+
+        <div class="row">
+
+            <div class="col-xs-2">
+                <a class="btn btn-success arrow-btn">
+                    <i class="fa fa-chevron-up" ng-if="Isviewuser==true"></i>
+                    <i class="fa fa-chevron-down" ng-if="Isviewuser==false"></i>
+                </a>
+            </div>
+            <div class="col-xs-7">
+                <h6>View Access users </h6>
+            </div>
+
+            <div class="col-xs-3">
+
+                <a class="usercounter">
+                  4
+                </a>
+
+            </div>
         </div>
-        <table class="table table-bordered" ng-if="Isinventory==true">
-            <tr>
-                <td> <span>Inventory</span></td>
-                <td>
-                    <span>Black Inventory</span>
 
-                    <span>
-                        <i class="fa fa-pencil"></i>
-                        <i class="fa fa-trash"></i>
-                        <i class="fa fa-circle-o-notch"></i>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Owner</span>
-                </td>
-                <td>
-                    <span>Mr.Blue</span>
-
-                    <a >Transfer Ownership</a>
-
-                </td>
-            </tr>
-        </table>
     </div>
+
+    
+
+    <ul class="list-group" ng-if="Isviewuser==true">
+        <li class="list-group-item">
+
+            <div class="row">
+                <div class="col-xs-2">
+                    <i class="fa fa-male"></i>
+                </div>
+
+                <div class="col-xs-7">
+                    <a class="text">User 1</a>
+                    <br />
+                    <a class="text" style="font-size: 12px; color: #a69a9a;">user1@user1.com</a>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </li>
+
+        <li class="list-group-item">
+
+            <div class="row">
+                <div class="col-xs-2">
+                    <i class="fa fa-male"></i>
+                </div>
+
+                <div class="col-xs-7">
+                    <a class="text">User 2</a>
+                    <br />
+                    <a class="text" style="font-size: 12px; color: #a69a9a;">user2@user2.com</a>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </li>
+
+        <li class="list-group-item">
+
+            <div class="row">
+                <div class="col-xs-2">
+                    <i class="fa fa-male"></i>
+                </div>
+
+                <div class="col-xs-7">
+                    <a class="text">User 3</a>
+                    <br />
+                    <a class="text" style="font-size: 12px; color: #a69a9a;">user3@user3.com</a>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </li>
+
+        <li class="list-group-item">
+
+            <div class="row">
+                <div class="col-xs-2">
+                    <i class="fa fa-male"></i>
+                </div>
+
+                <div class="col-xs-7">
+                    <a class="text">User 3</a>
+                    <br />
+                    <a class="text" style="font-size: 12px; color: #a69a9a;">user3@user3.com</a>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </li>
+    </ul>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="infoareas columnHeader" ng-click="openClosePanel(2)">
-            <h6>Full Access users</h6>
-            <i class="fa fa-chevron-up pull-right" ng-if="Isfulluser==true"></i>
-            <i class="fa fa-chevron-down pull-right" ng-if="Isfulluser==false"></i>
+
+<div class="well fullaccess">
+
+    <div class="infoareas bgm-red titlehead" ng-click="openClosePanel(3)">
+
+        <div class="row">
+
+            <div class="col-xs-2">
+                <a class="btn btn-success arrow-btn">
+                    <i class="fa fa-chevron-up" ng-if="Isfulluser==true"></i>
+                    <i class="fa fa-chevron-down" ng-if="Isfulluser==false"></i>
+                </a>
+            </div>
+            <div class="col-xs-7">
+                <h6>Full Access users </h6>
+            </div>
+
+            <div class="col-xs-3">
+
+                <a class="usercounter">
+                    3
+                </a>
+
+            </div>
         </div>
 
-        <ul class="list-group" ng-if="Isfulluser==true">
-            <li class="list-group-item">
-
-                <div class="row">
-
-
-                    <div class="col-xs-7">
-                        <a class="text">User 1</a>
-                        <br />
-                        <a class="text" style="font-size: 12px; color: #a69a9a;">user1@user1.com</a>
-
-                    </div>
-
-
-
-
-
-                </div>
-
-            </li>
-
-            <li class="list-group-item">
-
-                <div class="row">
-
-
-                    <div class="col-xs-7">
-                        <a class="text">User 2</a>
-                        <br />
-                        <a class="text" style="font-size: 12px; color: #a69a9a;">user2@user2.com</a>
-
-                    </div>
-
-
-
-
-
-                </div>
-
-            </li>
-
-            <li class="list-group-item">
-
-                <div class="row">
-
-
-                    <div class="col-xs-7">
-                        <a class="text">User 3</a>
-                        <br />
-                        <a class="text" style="font-size: 12px; color: #a69a9a;">user3@user3.com</a>
-
-                    </div>
-
-
-
-
-
-                </div>
-
-            </li>
-        </ul>
-
-
     </div>
+
+    
+
+    <ul class="list-group" ng-if="Isfulluser==true">
+        <li class="list-group-item">
+
+            <div class="row">
+
+                <div class="col-xs-2">
+                    <i class="fa fa-male"></i>
+                </div>
+
+
+                <div class="col-xs-7">
+                    <a class="text">User 1</a>
+                    <br />
+                    <a class="text" style="font-size: 12px; color: #a69a9a;">user1@user1.com</a>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </li>
+
+        <li class="list-group-item">
+
+            <div class="row">
+
+                <div class="col-xs-2">
+                    <i class="fa fa-male"></i>
+                </div>
+                <div class="col-xs-7">
+                    <a class="text">User 2</a>
+                    <br />
+                    <a class="text" style="font-size: 12px; color: #a69a9a;">user2@user2.com</a>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </li>
+
+        <li class="list-group-item">
+
+            <div class="row">
+
+                <div class="col-xs-2">
+                    <i class="fa fa-male"></i>
+                </div>
+                <div class="col-xs-7">
+                    <a class="text">User 3</a>
+                    <br />
+                    <a class="text" style="font-size: 12px; color: #a69a9a;">user3@user3.com</a>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </li>
+    </ul>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="infoareas columnHeader" ng-click="openClosePanel(3)">
-            <h6>View only users</h6>
 
-            <i class="fa fa-chevron-up pull-right" ng-if="Isviewuser==true"></i>
-            <i class="fa fa-chevron-down pull-right" ng-if="Isviewuser==false"></i>
-        </div>
-        <ul class="list-group" ng-if="Isviewuser==true">
-            <li class="list-group-item">
-
-                <div class="row">
-
-
-                    <div class="col-xs-7">
-                        <a class="text">User 4</a>
-                        <br />
-                        <a class="text" style="font-size: 12px; color: #a69a9a;">user4@user4.com</a>
-
-                    </div>
-
-
-
-
-
-                </div>
-
-            </li>
-
-            <li class="list-group-item">
-
-                <div class="row">
-
-
-                    <div class="col-xs-7">
-                        <a class="text">User 5</a>
-                        <br />
-                        <a class="text" style="font-size: 12px; color: #a69a9a;">user5@user5.com</a>
-
-                    </div>
-
-
-
-
-
-                </div>
-
-            </li>
-
-            <li class="list-group-item">
-
-                <div class="row">
-
-
-                    <div class="col-xs-7">
-                        <a class="text">User 6</a>
-                        <br />
-                        <a class="text" style="font-size: 12px; color: #a69a9a;">user6@user6.com</a>
-
-                    </div>
-
-
-
-
-
-                </div>
-
-            </li>
-        </ul>
-    </div>
-</div>
