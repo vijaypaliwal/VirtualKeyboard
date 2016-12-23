@@ -304,7 +304,7 @@
                                 </div>
 
                                 <div class="col-xs-7">
-                                    <a class="text">{{_obj.InventoryName}} {{_obj.InventoryID}}</a>
+                                    <a class="text">{{_obj.InventoryName}} </a>
                                     <br />
                                     <a class="text" style="font-size: 12px; color: #a69a9a;">Owned by You</a>
 
@@ -343,7 +343,7 @@
 
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <a class="bgm-black btn text btn-warning {{GetCurrentClass(_obj.InventoryID)}}">
+                                    <a class="btn text btn-warning {{GetCurrentClass(_obj.InventoryID)}}">
 
                                         <img src="img/stra.png" alt="" />
 
@@ -391,7 +391,7 @@
 
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <a class="bgm-black btn text btn-warning {{GetCurrentClass(_obj.InventoryID)}}">
+                                    <a class="btn text btn-warning {{GetCurrentClass(_obj.InventoryID)}}">
 
                                         <img src="img/stra.png" alt="" />
 
@@ -529,7 +529,8 @@
     </div>
 
     <div class="modal-footer">
-        <a class="btn btn-success" ng-click="PushInventory()"> <i class="fa fa-plus"></i> Add  </a>
+        <a class="btn btn-success" ng-if="InventoryName!=''" ng-click="PushInventory()"> <i class="fa fa-plus"></i> Add  </a>
+        <a class="btn btn-success disabled" ng-if="InventoryName==''" > <i class="fa fa-plus"></i> Add  </a>
         <a class="btn btn-default" data-dismiss="modal"> <i class="fa fa-times"></i> Cancel  </a>
     </div>
 </div>
