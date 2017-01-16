@@ -945,7 +945,25 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $scope.IsSummary = false;
         CheckScopeBeforeApply();
     }
+    $scope.FillCost = function (cost, Id) {
+        if ($.trim(cost) != "") {
 
+            for (k = 0; k < $scope.CurrentCart.length; k++) {
+
+                $scope.CurrentCart[k].iCostPerItem = cost;
+            }
+
+
+            $("#mybuttonCost_" + id).addClass("movepin")
+
+            ShowSuccessActivity('Updated', $scope._CurrentAction);
+
+            CheckScopeBeforeApply();
+        }
+        else {
+            toastr.error("Please fill some value");
+        }
+    }
     $scope.FillQuantity = function (value, id, type) {
 
         $scope.ActionQuantityValue = value;
