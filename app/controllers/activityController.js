@@ -947,14 +947,14 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
     $scope.FillCost = function (cost, Id) {
         if ($.trim(cost) != "") {
-
+            var k = 0;
             for (k = 0; k < $scope.CurrentCart.length; k++) {
 
                 $scope.CurrentCart[k].iCostPerItem = cost;
             }
 
 
-            $("#mybuttonCost_" + id).addClass("movepin")
+            $("#mybuttonCost_" + Id).addClass("movepin")
 
             ShowSuccessActivity('Updated', $scope._CurrentAction);
 
