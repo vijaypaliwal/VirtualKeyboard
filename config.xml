@@ -16,7 +16,12 @@
    <plugin name="phonegap-plugin-barcodescanner" source="npm"/>
   <plugin name="cordova-plugin-statusbar" source="npm"/>
   <plugin name="cordova-plugin-globalization" source="npm"/>
-  <plugin name="cordova-plugin-camera" source="npm"/>
+  
+
+  <plugin name="cordova-plugin-camera" source="npm" spec="*">
+    <variable name="CAMERA_USAGE_DESCRIPTION" value="App would like to access the camera." />
+    <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="App would like to access the library." />
+  </plugin>
 
   <plugin name="cordova-plugin-file" source="npm" spec="~4.1.1"/>
 
