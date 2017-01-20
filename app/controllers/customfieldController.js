@@ -10,6 +10,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
 
     $scope.IsActivityOpen = false;
     $scope.IsItemOpen = false;
+    $scope.IsSaving = false;
     $scope.IsUnitDataOpen = true;
     $scope.LocalCustomItemFieldsList = [];
     $scope.LocalCustomActivityFieldsList = [];
@@ -85,7 +86,6 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
     }
 
     $scope.searchData = function (item) {
-        debugger;
         if (!$scope.SearchString || (item.ColumnLabel.toLowerCase().indexOf($scope.SearchString.toLowerCase()) != -1) || (item.Show.toLowerCase().indexOf($scope.SearchString.toLowerCase()) != -1)) {
             return true;
         }
@@ -423,7 +423,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
-
+        $scope.IsSaving = true;
         var _TempObj = angular.copy(Obj);
         _TempObj.mobileorder=1;
         var _toSendObj={
@@ -453,11 +453,12 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
          success: function (response) {
              debugger;
              HideWaitingInv();
+             $scope.IsSaving = false;
+
              if (response.UpdateCustomColumnResult.Success == true) {
                  setTimeout(function () {
                      ShowSuccess("Saved");
-
-                   //  $scope.GetAllData(false);
+                    $scope.GetAllData(true);
 
                  },1000);
              }
@@ -471,6 +472,8 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
          },
          error: function (err) {
              HideWaitingInv();
+             $scope.IsSaving = false;
+
              $scope.ShowErrorMessage("Getting unit data columns", 2, 1, err.statusText);
 
 
