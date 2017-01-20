@@ -4,11 +4,27 @@
 
 <link href=".pgbomit/activityIOS.css" rel="stylesheet" />
 
+<style>
+    .singleSlide .row {
+        margin-left:0 !important;
+        margin-right:0 !important;
+    }
+
+    .Newrow{
+        margin-left:0 !important;
+        margin-right:0 !important;
+    }
+
+    .singlePanel .col-xs-8 {
+        padding-left:0;
+    }
+</style>
+
 
 
 <div style="display:none" class="activity" ng-cloak>
 
-    <div style="top: 0;" class="topheader header Increase {{CurrentHeaderClass}}">
+    <div style="top: 0; font-size:24px;" class="topheader header Increase {{CurrentHeaderClass}}">
         <div class="row" id="headerrow">
 
             <div class="col-md-4 col-xs-3">
@@ -161,8 +177,8 @@
 
 
 
-                                                    <div class="input-group">
-                                                        <input ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveTransactionData.MoveToLocationText)" type="text" class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
+                                                    <div ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveTransactionData.MoveToLocationText)" class="input-group">
+                                                        <input disabled type="text" class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
 
                                                         <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveTransactionData.MoveToLocationText)"><i class="fa fa-search"></i></span>
                                                     </div>
@@ -686,8 +702,8 @@
                                                 <label>Location</label>
                                                 <div class="fg-line">
 
-                                                    <div class="input-group">
-                                                        <input ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocationText)" type="text" class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocationText" />
+                                                    <div ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocationText)" class="input-group">
+                                                        <input disabled type="text" class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocationText" />
                                                         <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocationText)"><i class="fa fa-search"></i></span>
                                                     </div>
 
@@ -966,7 +982,7 @@
 
             </div>
 
-            <div class="form-inputs customActivityData" data-type="Activity" data-index="{{GetProperIndex(1)}}">
+            <div class="customActivityData form-inputs" data-type="Activity" data-index="{{GetProperIndex(1)}}">
 
              
                 <h4>Activity data</h4>
@@ -2072,7 +2088,7 @@
                         </div>
                     </div>
 
-                    <div class="swiper-slide form-inputs  customActivityData" ng-if="IsSingleMode==true" data-type="Activity" data-index="{{GetProperIndex(1)}}">
+                    <div class="swiper-slide customActivityData" ng-if="IsSingleMode==true" data-type="Activity" data-index="{{GetProperIndex(1)}}">
 
                         <div ng-if="CurrentOperation!='Adjust'">
 
@@ -2278,12 +2294,12 @@
 
                     </div>
 
-                    <div class="swiper-slide form-inputs laststep" ng-if="IsSingleMode==true" data-type="LastStep" data-index="{{GetProperIndex(2)}}">
+                    <div class="swiper-slide laststep" ng-if="IsSingleMode==true" data-type="LastStep" data-index="{{GetProperIndex(2)}}">
 
                         <div ng-if="IsSummary==false">
 
                             <br />
-                            <div class="row" ng-if="CanAutoClear==false">
+                            <div class="row form-inputs" ng-if="CanAutoClear==false">
                                 <div class=" col-xs-9">
                                     If processing the cart results in a record with "0" quantity, clear the record.
                                 </div>
@@ -2588,7 +2604,7 @@
 
     <div ng-if="IsSingleMode==false">
 
-        <div class="form-inputs row" ng-if="CanAutoClear==false">
+        <div  class="row Newrow" ng-if="CanAutoClear==false">
             <div class=" col-xs-9">
                 <span style="font-size:12px;"> If processing the cart results in a record with "0" quantity, clear the record. </span>
             </div>
@@ -2599,7 +2615,7 @@
                 </label>
             </div>
         </div>
-        <div class="row">
+        <div  class="row Newrow">
             <div class="col-xs-12">
 
                 <a ng-if="IsProcessing==false" ng-click="SubmitAllActivities()" class="btn  waves-effect  btn-primary">
