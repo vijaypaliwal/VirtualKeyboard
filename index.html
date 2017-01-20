@@ -777,6 +777,10 @@
     <!-- 3rd party libraries -->
     <script src="scripts/jquery-1.11.0.min.js"></script>
 
+    
+
+    
+
     <script src="scripts/jquery-ui.js"></script>
     <script src="scripts/jquery.touchSwipe.min.js"></script>
 
@@ -1238,23 +1242,23 @@
         //}
 
 
-        var mouseEventTypes = {
-            touchstart: "mousedown",
-            touchmove: "mousemove",
-            touchend: "mouseup"
-        };
+        //var mouseEventTypes = {
+        //    touchstart: "mousedown",
+        //    touchmove: "mousemove",
+        //    touchend: "mouseup"
+        //};
 
-        for (originalType in mouseEventTypes) {
-            document.addEventListener(originalType, function (originalEvent) {
-                event = document.createEvent("MouseEvents");
-                touch = originalEvent.changedTouches[0];
-                event.initMouseEvent(mouseEventTypes[originalEvent.type], true, true,
-                        window, 0, touch.screenX, touch.screenY, touch.clientX,
-                        touch.clientY, touch.ctrlKey, touch.altKey, touch.shiftKey,
-                        touch.metaKey, 0, null);
-                originalEvent.target.dispatchEvent(event);
-            });
-        }
+        //for (originalType in mouseEventTypes) {
+        //    document.addEventListener(originalType, function (originalEvent) {
+        //        event = document.createEvent("MouseEvents");
+        //        touch = originalEvent.changedTouches[0];
+        //        event.initMouseEvent(mouseEventTypes[originalEvent.type], true, true,
+        //                window, 0, touch.screenX, touch.screenY, touch.clientX,
+        //                touch.clientY, touch.ctrlKey, touch.altKey, touch.shiftKey,
+        //                touch.metaKey, 0, null);
+        //        originalEvent.target.dispatchEvent(event);
+        //    });
+        //}
 
 
 
