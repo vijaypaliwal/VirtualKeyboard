@@ -18,6 +18,10 @@
     .singlePanel .col-xs-8 {
         padding-left:0;
     }
+    select
+    {
+        display:block !important;
+    }
 </style>
 
 
@@ -211,7 +215,7 @@
 
 
 
-                                                        <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
+                                                        <select class="" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
                                                             <option value="">None</option>
                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                         </select>
@@ -309,7 +313,7 @@
                                                 <label>Status</label>
                                                 <div class="fg-line">
                                                     <div class="select">
-                                                        <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
+                                                        <select class="" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
                                                             <option value="">None</option>
                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.UpdateTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                         </select>
@@ -726,7 +730,7 @@
                                                 <div class="fg-line">
                                                     <div class="select">
 
-                                                        <select class="form-control" ng-model="CurrentActiveObject.MoveUpdateTagTransactionData.StatusToUpdate">
+                                                        <select class="" ng-model="CurrentActiveObject.MoveUpdateTagTransactionData.StatusToUpdate">
                                                             <option value="">None</option>
                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveUpdateTagTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                         </select>
@@ -1323,7 +1327,7 @@
 
 
 
-                                                <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
+                                                <select class="" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
                                                     <option value="">None</option>
                                                     <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                 </select>
@@ -1422,7 +1426,7 @@
                                         <div class="fg-line">
                                             <div class="select">
 
-                                                <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
+                                                <select class="" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
                                                     <option value="">None</option>
                                                     <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.UpdateTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                 </select>
@@ -1824,7 +1828,7 @@
                                         <div class="fg-line">
                                             <div class="select">
 
-                                                <select class="form-control" ng-model="CurrentActiveObject.MoveUpdateTagTransactionData.StatusToUpdate">
+                                                <select class="" ng-model="CurrentActiveObject.MoveUpdateTagTransactionData.StatusToUpdate">
                                                     <option value="">None</option>
                                                     <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveUpdateTagTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                 </select>
