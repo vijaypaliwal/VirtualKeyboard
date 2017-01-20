@@ -3851,7 +3851,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $(document)
     .on('focus', 'input,select', function () {
 
-         $cordovaKeyboard.disableScroll(true);
+       //  $cordovaKeyboard.disableScroll(true);
 
 
 
@@ -3867,7 +3867,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     })
     .on('blur', 'input,select', function () {
 
-         $cordovaKeyboard.disableScroll(false);
+       //  $cordovaKeyboard.disableScroll(false);
         $('.collapsible-header').css("position", "fixed");
 
         $('.header').css("position", "fixed");
