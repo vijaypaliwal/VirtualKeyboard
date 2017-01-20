@@ -596,8 +596,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.InventoryObject.lZone = obj.DefaultLocationGroup;
         $scope.InventoryObject.ItemGroup = obj.ItemGroup;
         $scope.InventoryObject.pDefaultCost = obj.DefaultCost;
-       // $scope.InventoryObject.pTargetQty = obj.pTargetQty;
-      //  $scope.InventoryObject.pReorderQty = obj.pReorderQty;
+       $scope.InventoryObject.pTargetQty = obj.pTargetQty;
+       $scope.InventoryObject.pReorderQty = obj.pReorderQty;
         $scope.InventoryObject.DefaultItemLocationID = obj.DefaultLocationID;
 
         $scope.InventoryObject.DefaultItemUOM = obj.DefaultUomID;
