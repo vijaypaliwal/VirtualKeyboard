@@ -2599,22 +2599,22 @@
 
     </div>
 
-   
-
 
     <div ng-if="IsSingleMode==false">
 
         <div  class="row Newrow" ng-if="CanAutoClear==false">
-            <div class=" col-xs-9">
+            <div class=" col-xs-8">
                 <span style="font-size:12px;"> If processing the cart results in a record with "0" quantity, clear the record. </span>
             </div>
-            <div class="col-xs-3">
+            <div class="col-xs-4">
                 <label class="switch1">
                     <input type="checkbox" ng-model="CustomAutoClear" ng-change="UpdateAutoClear(CustomAutoClear)">
                     <div class="slider round"></div>
                 </label>
             </div>
         </div>
+
+        <br />
         <div  class="row Newrow">
             <div class="col-xs-12">
 
@@ -2627,7 +2627,6 @@
                 <a class="btn waves-effect btn-gray" ng-click="LeavePage()"><i class="fa fa-times"></i> Cancel</a>
             </div>
         </div>
-
 
         <div >
            
