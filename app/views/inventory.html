@@ -201,7 +201,53 @@
 
                             </div>
                         </div>
+                        <div class="form-group" ng-if="obj.ColumnName=='DefaultItemUOM'">
+                            <label>Default UOM</label>
+                            <div class="input-group">
 
+                                <select class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.DefaultItemUOM" id="DefaultItemUOM">
+                                    <option value="{{obj.UnitOfMeasureID}}" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
+                                </select>
+
+
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="obj.ColumnName=='pDefaultCost'">
+                            <label>Default Cost</label>
+
+                            <div class="input-group">
+                                <input ng-model="InventoryObject.pDefaultCost" min="0" id="pDefaultCost" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="pDefaultCost" value="" />
+
+                            </div>
+
+                        </div>
+                        <div class="form-group" ng-if="obj.ColumnName=='pReorderQty'">
+                            <label>Low Qty. Threshold</label>
+
+                            <div class="input-group">
+                                <input ng-model="InventoryObject.pReorderQty" id="pReorderQty" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="pReorderQty" value="" />
+
+                            </div>
+
+                        </div>
+                        <div class="form-group" ng-if="obj.ColumnName=='pTargetQty'">
+                            <label> High Qty. Threshold</label>
+
+                            <div class="input-group">
+                                <input ng-model="InventoryObject.pTargetQty" id="pTargetQty" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="pTargetQty" value="" />
+
+                            </div>
+
+                        </div>
+                        <div class="form-group" ng-if="obj.ColumnName=='DefaultItemLocation'">
+                            <label>Default Location </label>
+                            <div class="input-group">
+                                <select class="form-control" id="DefaultItemLocationID" ng-model="InventoryObject.DefaultItemLocationID">
+                                    <option mytag="{{obj.LocationName}}" value="{{obj.LocationID}}"  ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
+                                </select>
+
+                            </div>
+                        </div>
                         <div class="form-group" ng-if="obj.ColumnName=='pCountFrq'">
                             <div class="row">
                                 <div class="col-xs-12" >
@@ -471,6 +517,29 @@
 
                                 </div>
 
+
+
+
+                                <div ng-if="obj.ColumnName=='DefaultItemUOM'" ng-click="getstep(0,'DefaultItemUOM')" class="form-group">
+
+                                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{GetUOMName(InventoryObject.DefaultItemUOM)}}</span>
+                                </div>
+                                <div ng-if="obj.ColumnName=='DefaultItemLocation'" ng-click="getstep(0,'DefaultItemLocation')" class="form-group">
+                                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{GetLocationName(InventoryObject.DefaultItemLocationID)}}</span>
+                                </div>
+                                <div ng-if="obj.ColumnName=='pDefaultCost'" ng-click="getstep(0,'pDefaultCost')" class="form-group">
+
+                                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.pDefaultCost}}</span>
+                                </div>
+                                <div ng-if="obj.ColumnName=='pReorderQty'" ng-click="getstep(0,'pReorderQty')" class="form-group">
+                                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.pReorderQty}}</span>
+
+                                </div>
+                                <div ng-if="obj.ColumnName=='pTargetQty'" ng-click="getstep(0,'pTargetQty')" class="form-group">
+
+                                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.pTargetQty}}</span>
+
+                                </div>
 
 
                                 <div ng-if="CheckInCommonArray(obj.ColumnName)!=true" ng-click="getstep(0,obj.ColumnName)" class="form-group">

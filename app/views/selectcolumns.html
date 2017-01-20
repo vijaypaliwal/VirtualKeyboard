@@ -33,36 +33,29 @@
 
 
         <tbody class="dragarea"  ng-model="MyInventorycolumns">
-            <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" >
+            <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" ng-if="obj.ColumnName!='iUpdateQty' && obj.ColumnName!='iUpdateDate' && obj.ColumnName!='iLastAction'">
                 <td>
                     <div class="infoareas">
-
                         <div class="row">
-
                             <div class="col-xs-2">
                                 <a class="btn text btn-warning">{{$index+1}} </a>
                             </div>
-
                             <div class="col-xs-6">
                                 <a class="text">{{obj.ColumnLabel}} </a>
                             </div>
                             <div class="col-xs-4">
                                 <div ng-if="obj.ColumnLabel != 'Item Name'" class="btn-group custombtnGroup">
-
                                     <label class="switch1">
                                         <input type="checkbox" ng-model="obj.originalMobileOrder">
                                         <div class="slider round"></div>
                                     </label>
                                     <!--<input ng-model="obj.originalMobileOrder"  type="checkbox" bootstrap-switch />-->
-
                                 </div>
-
                                 <div class="pull-right" ng-if="obj.ColumnLabel == 'Item Name'">
                                     <p style="color:brown;">*Required</p>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </td>
             </tr>
