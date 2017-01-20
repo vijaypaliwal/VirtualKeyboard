@@ -53,7 +53,8 @@
                                 </div>
                                 <div class="col-xs-8">
                                     <span style="color: #000; font-weight:700" ng-click="getstep(0,'pPart')"> <span style="display:inline-block" ng-bind="InventoryObject.ItemID"></span> <span style="float: right;  font-size:11px;"> Step {{CurrentCount+1}} of {{Totalslides+1}} <!--{{CurrentCount+1}} / {{Totalslides+1}}--></span></span>
-                                    <span ng-bind="InventoryObject.Description" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
+                                    <span ng-bind="InventoryObject.Description" ng-if="InventoryObject.Description!=''" style="font-size:12px;" ng-click="getstep(1,'pDescription')">  </span>
+                                    <span ng-if="InventoryObject.Description==''" style="font-size: 12px; color: #bbb;" ng-click="getstep(1,'pDescription')">[Item Description]</span>
                                     <span ng-bind="InventoryObject.Quantity" style="display:inline" ng-click="getstep(2,'iQty')"></span> <span ng-bind="InventoryObject.Uom" style="display:inline" ng-click="getstep(4,'uomUOM')"></span>
                                     <span ng-bind="InventoryObject.Location" ng-click="getstep(3,'lLoc')"> </span>
                                     <span class="pull-right" style="color:#0083C7;text-align:right; font-size:14px;" ng-if="slide != Totalslides" ng-click="viewall()">View all details</span>
@@ -1207,6 +1208,11 @@
                     <span class="mylabel">Description</span>  <span > {{ InventoryObject.Description }} </span>
 
                 </div>
+
+
+
+                
+
             </div>
 
 
@@ -1216,7 +1222,26 @@
 
             <div class="myCols" data-index="{{$index}}" data-type="myinventory" data-id="CustomItem_{{obj.cfdID}}" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-repeat="obj in MyinventoryFields" end-repeat>
 
+                <div ng-if="obj.ColumnName=='DefaultItemUOM'" ng-click="getstep(0,'DefaultItemUOM')" class="form-group">
 
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{GetUOMName(InventoryObject.DefaultItemUOM)}}</span>
+                </div>
+                <div ng-if="obj.ColumnName=='DefaultItemLocation'" ng-click="getstep(0,'DefaultItemLocation')" class="form-group">
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{GetLocationName(InventoryObject.DefaultItemLocationID)}}</span>
+                </div>
+                <div ng-if="obj.ColumnName=='pDefaultCost'" ng-click="getstep(0,'pDefaultCost')" class="form-group">
+
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.pDefaultCost}}</span>
+                </div>
+                <div ng-if="obj.ColumnName=='pReorderQty'" ng-click="getstep(0,'pReorderQty')" class="form-group">
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.pReorderQty}}</span>
+
+                </div>
+                <div ng-if="obj.ColumnName=='pTargetQty'" ng-click="getstep(0,'pTargetQty')" class="form-group">
+
+                    <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.pTargetQty}}</span>
+
+                </div>
                 <div ng-if="obj.ColumnName=='pCountFrq'" ng-click="getstep(0,'pCountFrq')" class="form-group">
                     <span class="mylabel">{{obj.ColumnLabel}}</span> <span>{{InventoryObject.ItemGroup}}</span>
                 </div>
