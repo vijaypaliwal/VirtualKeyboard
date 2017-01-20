@@ -1212,13 +1212,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
 
-    $("#searchlocation").click(function () {
-        alert("In");
-
-        $("#locationlistmodal").css("top","0px !important;")
-
-    })
-
+    
 
     $scope.OnChangeLocationNameFunction = function () {
 
