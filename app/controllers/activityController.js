@@ -1191,17 +1191,18 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     });
 
+    
+
 
 
 
     $scope.locationlist = function (inventoryid, locationid, locationtext) {
 
 
+        $(".activitycontent").hide();
 
         $scope.currentinventoryid = inventoryid
-
         $scope.currentlocationid = locationid
-
 
         $("#locationlistmodal").modal('show');
         $scope.LocationSearchList = [];
@@ -1411,11 +1412,21 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         CheckScopeBeforeApply();;
 
 
-
+        $(".activitycontent").show();
 
         $("#locationlistmodal").modal('hide');
         CheckScopeBeforeApply()
     }
+
+
+    $scope.hidelocationmodal = function () {
+
+        $(".activitycontent").show();
+
+        $("#locationlistmodal").modal('hide');
+        CheckScopeBeforeApply()
+    }
+
 
     $scope.FillUOMLineItems = function (value, myid) {
         $scope.ToUOMID = value;
