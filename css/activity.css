@@ -184,7 +184,7 @@
 .laststep .row {
     border-bottom: 1px solid #eee;
     padding-bottom: 0px;
-    padding-top: 5px;
+    /*padding-top: 5px;*/
     width: 100%;
     display: block;
     border-radius: 50px;
