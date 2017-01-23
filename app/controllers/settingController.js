@@ -215,7 +215,8 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
 
                       var _myinventorycols = response.GetMyInventoryColumnsResult.Payload;
                       for (var i = 0; i < _myinventorycols.length; i++) {
-                          if (_myinventorycols[i].ColumnName != "HasConversion" && _myinventorycols[i].ColumnName != "ActionQty") {
+                          var obj = _myinventorycols[i];
+                          if (obj.ColumnName != "HasConversion" && obj.ColumnName != "ActionQty" && obj.ColumnName != 'iUpdateQty' && obj.ColumnName != 'iUpdateDate' && obj.ColumnName != 'iLastAction') {
                               $scope.columnlist.push(_myinventorycols[i]);
                               if (_myinventorycols[i].mobileorder != 0) {
                                   $scope.columnlist2.push(_myinventorycols[i]);
@@ -249,7 +250,7 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
     $scope.GetAllData = function () {
 
         $scope.IsCustomfieldLoading = true;
-      
+
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -312,9 +313,9 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
 
                    if (response.GetItemGroupResult.Success == true) {
 
-                     
+
                        $scope.Itemgrouplist = response.GetItemGroupResult.Payload;
-                   
+
                    }
                    else {
                        $scope.ShowErrorMessage("Get Item group", 1, 1, response.GetItemGroupResult.Message)

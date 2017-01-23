@@ -554,42 +554,7 @@
 
 
 
-                            <!--<div class="innerCols" ng-click="getstepCustom(1,obj.ColumnMap)" data-id="CustomItem_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="Part" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true" end-repeat1>
-
-
-
-                                <div ng-if="obj.cfdDataType=='string'">
-                                    <span class="mylabel">  {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span> <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
-                                </div>
-
-                                <div ng-if="obj.cfdDataType=='checkbox'">
-
-
-                                    <span class="mylabel">  {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span>  <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
-
-
-                                </div>
-
-                                <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
-
-                                    <span class="mylabel">  {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span> <span>  {{InventoryObject.CustomPartData[$index].Value}} </span>
-
-                                </div>
-
-                                <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'">
-                                    <span class="mylabel"> {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span>  <span> {{InventoryObject.CustomPartData[$index].Value}} </span>
-                                </div>
-
-                                <div ng-if="obj.cfdDataType=='number'">
-                                    <span class="mylabel">  {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></span> <span> {{InventoryObject.CustomPartData[$index].Value}} </span>
-                                </div>
-
-
-                                <div ng-if="obj.cfdDataType=='currency'">
-                                    <span class="mylabel"> {{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span> </span> <span>   {{InventoryObject.CustomPartData[$index].Value}} </span>
-                                </div>
-
-                            </div>-->
+                            
 
 
 
@@ -739,6 +704,39 @@
                                 </div>
 
                             </td>
+
+                            <td ng-if="CurrentActiveField=='pDefaultCost'">
+                                <div class="alignright">
+                                    <a ng-click="GetLastValue('Inv_pDefaultCost','#pDefaultCost')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
+                                </div>
+
+                            </td>
+                            <td ng-if="CurrentActiveField=='pReorderQty'">
+                                <div class="alignright">
+                                    <a ng-click="GetLastValue('Inv_pReorderQty','#pReorderQty')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
+                                </div>
+
+                            </td>
+                            <td ng-if="CurrentActiveField=='pTargetQty'">
+                                <div class="alignright">
+                                    <a ng-click="GetLastValue('Inv_pTargetQty','#pTargetQty')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
+                                </div>
+
+                            </td>
+                            <td ng-if="CurrentActiveField=='DefaultItemLocation'">
+                                <div class="alignright">
+                                    <a ng-click="GetLastValue('Inv_DefaultItemLocationID','#DefaultItemLocationID')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
+                                </div>
+
+                            </td>
+                            <td ng-if="CurrentActiveField=='DefaultItemUOM'">
+                                <div class="alignright">
+                                    <a ng-click="GetLastValue('Inv_DefaultItemUOM','#DefaultItemUOM')" class="btn btn-gray"><i class="fa fa-undo"></i>Reuse</a>
+                                </div>
+
+                            </td>
+
+                       
 
                             <td ng-if="CurrentActiveField=='pDescription'">
                                 <div class="alignright">

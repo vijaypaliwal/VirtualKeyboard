@@ -14,7 +14,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.IsSummary = false;
     $scope.CurrentStep = 0;
     $scope.IsProcessing = false;
-    var _AllowNegative ='False';
+    var _AllowNegative = 'False';
     $scope.IssueType = 0;
     $scope.CollapsClass = "";
     $scope.CollapsOpen = false;
@@ -200,7 +200,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 if ($scope.CurrentCart[i].InventoryID == inventoryID) {
                     switch (Type) {
                         case "iReqValue":
-                            
+
 
                             if ($scope.CurrentOperation == "MoveTagUpdate") {
                                 $scope.CurrentCart[i].MoveUpdateTagTransactionData.UnitTag1 = _value;
@@ -210,7 +210,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
                             }
-                            
+
                             break;
                         case "iUnitTag2":
 
@@ -679,9 +679,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
     }
-    
 
-    $scope.CheckUnitDataFieldValue = function (ColumnName, IsAllowDuplicate,index) {
+
+    $scope.CheckUnitDataFieldValue = function (ColumnName, IsAllowDuplicate, index) {
         if (IsAllowDuplicate == true) {
 
             var value = "";
@@ -797,7 +797,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         if ($.trim(value) != "" && value != oldValue) {
             var _returnVar = CheckUnitDataDuplicate(ColumnName, value);
-          
+
             return _returnVar;
         }
         else {
@@ -1191,7 +1191,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     });
 
-    
+
 
 
 
@@ -1216,7 +1216,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
 
-    
+
 
     $scope.OnChangeLocationNameFunction = function () {
 
@@ -1773,8 +1773,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
           });
     }
 
-    function IsAnyUnitDataFieldActive()
-    {
+    function IsAnyUnitDataFieldActive() {
         return IsAvailableMyInventoryColumn('iReqValue') || IsAvailableMyInventoryColumn('iUniqueDate') || IsAvailableMyInventoryColumn('iUnitDate2') || IsAvailableMyInventoryColumn('iUnitNumber1') || IsAvailableMyInventoryColumn('iUnitNumber2') || IsAvailableMyInventoryColumn('iUnitTag2') || IsAvailableMyInventoryColumn('iUnitTag3');
     }
     function SetPermisssions() {
@@ -1931,7 +1930,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         debugger;
         $scope.CurrentCart = localStorageService.get("ActivityCart");
-       
+
         var _CurrentAction = localStorageService.get("SelectedAction");
         _CurrentAction = _CurrentAction != null && _CurrentAction != undefined ? parseInt(_CurrentAction) : 4548;
         var _autoClear = localStorageService.get('CustomAutoClear');
@@ -1995,8 +1994,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         debugger;
         if (localStorageService.get('AllowNegativeQuantity') != null && localStorageService.get('AllowNegativeQuantity') != undefined) {
             var _temp = localStorageService.get('AllowNegativeQuantity');
-            if(_temp=='true' || _temp==true)
-            {
+            if (_temp == 'true' || _temp == true) {
                 $scope.AllowNegative = true;
                 _AllowNegative = 'True';
             }
@@ -2543,8 +2541,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             var k = 0;
             for (k = 0; k < $scope.CurrentCart.length; k++) {
 
-                if ($scope.CurrentOperation == "MoveTagUpdate")
-                {
+                if ($scope.CurrentOperation == "MoveTagUpdate") {
                     $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation = $scope.ToLocID;
                     $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocationText = text;
                 }
@@ -2554,7 +2551,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText = text;
                 }
 
-                
+
             }
             ShowSuccessActivity('Updated', $scope._CurrentAction);
 
@@ -3008,7 +3005,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0] - 1, dsplit[1]);
 
-               // var d1 =  new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
+                // var d1 =  new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
                 if (_genVar == 1) {
 
 
@@ -3026,7 +3023,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
 
                 var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0] - 1, dsplit[1]);
-               // var d2 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
+                // var d2 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
 
                 if (_genVar == 1) {
 
@@ -3036,7 +3033,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 else {
                     d2.setDate(d2.getDate() + 1);
                 }
-                var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate() , 0, 0, 0, 0))
+                var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate(), 0, 0, 0, 0))
 
                 wcfDateStr2 = d21.toMSJSON();
 
@@ -3067,11 +3064,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 var dateVar = $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2;
                 var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
 
-                  var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0]-1, dsplit[1]);
+                var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0] - 1, dsplit[1]);
                 //var d2 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
 
                 if (_genVar == 1) {
-                    
+
 
                     d2.setDate(d2.getDate());
                 }
@@ -3146,7 +3143,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     UnitTag3: $scope.CurrentCart[k].ApplyTransactionData.UnitTag3,
                     UniqueDate: wcfDateStr1,
                     UnitDate2: wcfDateStr2,
-                    UnitNumber1: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == undefined || $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == null ||  $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == "" ? -1500 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1,
+                    UnitNumber1: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == undefined || $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == null || $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 == "" ? -1500 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1,
                     UnitNumber2: $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 == undefined || $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 == null || $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 == "" ? -1500 : $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2,
                     NewToStatusValue: _TempStatus,
                     NewLocationID: _TempLocID,
@@ -3865,7 +3862,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $(document)
     .on('focus', 'input,select', function () {
 
-       //  $cordovaKeyboard.disableScroll(true);
+        //  $cordovaKeyboard.disableScroll(true);
 
 
 
@@ -3881,7 +3878,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     })
     .on('blur', 'input,select', function () {
 
-       //  $cordovaKeyboard.disableScroll(false);
+        //  $cordovaKeyboard.disableScroll(false);
         $('.collapsible-header').css("position", "fixed");
 
         $('.header').css("position", "fixed");
@@ -3902,7 +3899,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     var today = now.getFullYear() + "-" + (month) + "-" + (day);
 
 
-    setTimeout(function () { $('#itUpdateDate').val(today); }, 1000);
+    setTimeout(function () { $('.itUpdateDate').val(today)  }, 1000);
 
     setTimeout(function () { $('.FormDateType').val(today); }, 1000);
 
@@ -4048,7 +4045,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             }
                         }
-                        
+
                     }
                     break;
 
@@ -4077,8 +4074,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             break;
                         }
-                       
-                        
+
+
                         else if ($scope.CheckIsAllowDuplicate('ReqValue') == true || $scope.CheckIsAllowDuplicate('UnitTag2') == true || $scope.CheckIsAllowDuplicate('UnitTag3') == true || $scope.CheckIsAllowDuplicate('UniqueDate') == true || $scope.CheckIsAllowDuplicate('UnitDate2') == true || $scope.CheckIsAllowDuplicate('UnitNumber1') == true || $scope.CheckIsAllowDuplicate('UnitNumber2') == true) {
                             var _count = 1;
 
@@ -4252,31 +4249,31 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                                 }
                                 return true;
                             }
-                           
-                        else if (_AllowNegative != null && _AllowNegative != "True") {
-                            debugger;
 
-                            if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+                            else if (_AllowNegative != null && _AllowNegative != "True") {
+                                debugger;
 
-                                if ($scope.IsSingleMode == false) {
-                                    $scope.GoToStep(0);
-                                    log.error("Seems like " + $scope.CurrentCart[k].ItemID + " item is having more than original quantity for activity, please update");
-                                }
-                                else {
-                                    if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
-                                        $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+                                if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
+
+                                    if ($scope.IsSingleMode == false) {
+                                        $scope.GoToStep(0);
+                                        log.error("Seems like " + $scope.CurrentCart[k].ItemID + " item is having more than original quantity for activity, please update");
+                                    }
+                                    else {
+                                        if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
+                                            $scope.AffectedItemIds.push($scope.CurrentCart[k].ItemID);
+
+                                        }
+                                        $scope.GoToStep(k);
 
                                     }
-                                    $scope.GoToStep(k);
+                                    return true;
+                                    break;
+                                }
+                                else {
 
                                 }
-                                return true;
-                                break;
                             }
-                            else {
-
-                            }
-                        }
                         }
 
                     }

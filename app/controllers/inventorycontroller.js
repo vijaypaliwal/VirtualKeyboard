@@ -486,6 +486,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.GetLastValue('Inv_UnitDate2', '#UnitDate2');
         $scope.GetLastValue('Inv_UnitNumber1', '#UnitNumber1');
         $scope.GetLastValue('Inv_UnitNumber2', '#UnitNumber2');
+
+        $scope.GetLastValue('Inv_DefaultItemLocationID', '#DefaultItemLocationID');
+        $scope.GetLastValue('Inv_pTargetQty', '#pTargetQty');
+        $scope.GetLastValue('Inv_pReorderQty', '#pReorderQty');
+        $scope.GetLastValue('Inv_pDefaultCost', '#pDefaultCost');
+        $scope.GetLastValue('Inv_DefaultItemUOM', '#DefaultItemUOM');
         if ($scope.CustomItemDataList.length > 0) {
 
             for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
@@ -2559,7 +2565,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.IsinavailableInventoryField = function (field) {
-        var _FieldArray = ["iReqValue", "iUnitTag2", "iUnitTag3", "iUniqueDate", "iUnitDate2", "iUnitNumber1", "iUnitNumber2", "pDescription", "pPart", "lLoc", "uomUOM", "iQty", "iStatusValue", "pCountFrq", "lZone"]
+        var _FieldArray = ["iReqValue", "iUnitTag2", "iUnitTag3", "iUniqueDate","pDefaultCost","pReorderQty","pTargetQty", "iUnitDate2", "iUnitNumber1", "iUnitNumber2", "pDescription", "pPart", "lLoc", "uomUOM", "iQty", "iStatusValue", "pCountFrq", "lZone"]
 
 
 
