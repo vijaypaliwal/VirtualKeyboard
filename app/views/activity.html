@@ -2667,14 +2667,14 @@
 
     
 
-    <div id="locationlistmodal" class="modal">
+    <div id="locationlistmodal" class="modal"  data-backdrop="static" data-keyboard="false">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
             <h4>select Location <span style="font-size:11px;" ng-if="LocationSearchList.length > 0">{{LocationSearchList.length}} Location(s) found</span></h4>
             <div class="form-group">
 
                 <div class="input-group">
-                    <input  type="text" id="searchlocation" placeholder1="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
+                    <input type="text" id="searchlocation" placeholder1="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
                     <span class="input-group-addon last" ng-click="ScanLocationsearch()">
                         <i class="fa fa-barcode"></i>
                     </span>

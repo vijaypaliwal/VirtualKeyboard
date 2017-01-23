@@ -1191,8 +1191,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     });
 
-    $scope.locationlist = function (inventoryid, locationid, locationtext) {
 
+
+
+    $scope.locationlist = function (inventoryid, locationid, locationtext) {
 
 
 
