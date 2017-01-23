@@ -35,7 +35,24 @@
         //}
     </script>
     <style>
+        .form-control {
+            background: url(/img/clear.png) no-repeat right -26px center;
+            transition: background 0.2s;
+        }
 
+            .form-control.x {
+                background-position: right 5px center;
+            }
+
+            .form-control.onX {
+                cursor: pointer;
+            }
+
+            .form-control::-ms-clear {
+                display: none;
+                width: 0;
+                height: 0;
+            }
 
         /*.testp {
             visibility: hidden;
@@ -934,6 +951,23 @@
         });
     </script>-->
     <script>
+
+        function tog(v) { return v ? 'addClass' : 'removeClass'; }
+        $(document).on('input', 'input[type="text"]', function () {
+            $(this)[tog(this.value)]('x');
+        }).on('mousemove', '.x', function (e) {
+            $(this)[tog(this.offsetWidth - 26 < e.clientX - this.getBoundingClientRect().left)]('onX');
+        }).on('touchstart click', '.onX', function (ev) {
+            ev.preventDefault();
+            $(this).removeClass('x onX').val('').change();
+        });
+
+       
+
+        
+
+     
+
         var myDate = new Date();
         var _genVar = 0;
         var _timeZone = myDate.getTimezoneOffset();
