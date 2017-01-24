@@ -625,3 +625,7 @@ input:checked + .slider:before {
     .imgfilterarea a {
         color: #00526e;
     }
+
+     .modal-open #mylist {
+        display:none;
+    }
