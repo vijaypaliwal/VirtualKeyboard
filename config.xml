@@ -106,7 +106,8 @@
   <gap:splash src=".pgbomit/res/screen/ios/Splash-1080x1920.png"     gap:platform="ios" height="1080" width="1920" />
   <gap:splash src=".pgbomit/res/screen/ios/Splash-750x1334.png"     gap:platform="ios"  width="750" height="1334" />
   <gap:splash src=".pgbomit/res/screen/ios/Splash-1334x750.png"     gap:platform="ios"  height="750" width="1334" />
-  
+    <gap:splash src=".pgbomit/res/screen/ios/Splash-2048x1536.png"   gap:platform="ios"     height="1536" width="2048" />
+  <gap:splash src=".pgbomit/res/screen/ios/Splash-1536x2048.png"   gap:platform="ios"     height="2048" width="1536" />
 
   <gap:splash src=".pgbomit/res/screen/ios/Splash-2208x1242.png"     gap:platform="ios" width="1242" height="2208" />
   <gap:splash src=".pgbomit/res/screen/ios/Splash-1242x2208.png"     gap:platform="ios" width="2208" height="1242" />

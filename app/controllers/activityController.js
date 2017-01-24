@@ -1198,7 +1198,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     $scope.locationlist = function (inventoryid, locationid, locationtext) {
 
-        alert("In");
 
         $(".activitycontent").hide();
 
