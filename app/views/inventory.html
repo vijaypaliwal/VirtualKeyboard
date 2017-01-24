@@ -148,7 +148,7 @@
 
                             <div class="input-group">
 
-                                <input ng-model="InventoryObject.Quantity" id="iQty" min="0" tabindex="-1"  class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="Quantity" value="" />
+                                <input ng-model="InventoryObject.Quantity" id="iQty" min="0" tabindex="-1"  class="form-control" type="number" pattern="[0-9]*" step="0.01" inputmode="numeric" name="Quantity" value="" />
 
 
                             </div>
@@ -217,7 +217,7 @@
                             <label>Default Cost</label>
 
                             <div class="input-group">
-                                <input ng-model="InventoryObject.pDefaultCost" min="0" id="pDefaultCost" tabindex="-1"  class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="pDefaultCost" value="" />
+                                <input ng-model="InventoryObject.pDefaultCost" min="0" id="pDefaultCost" tabindex="-1"  class="form-control" type="number" pattern="[0-9]*"  name="pDefaultCost" value="" />
 
                             </div>
 
