@@ -40,6 +40,7 @@
             transition: background 0.2s;
             padding-right: 30px;
         }
+
         input[type="text"] {
             background: #fff url(img/clear.png) no-repeat right -26px center;
             transition: background 0.2s;
@@ -55,15 +56,15 @@
             }
 
 
-        input[type="text"].form-control {
-            background: #fff url(img/clear.png) no-repeat right -26px center;
-            transition: background 0.2s;
-            padding-right:30px;
-        }
-
-            input[type="text"].form-control.x {
-                background-position: right 5px center;
+            input[type="text"].form-control {
+                background: #fff url(img/clear.png) no-repeat right -26px center;
+                transition: background 0.2s;
+                padding-right: 30px;
             }
+
+                input[type="text"].form-control.x {
+                    background-position: right 5px center;
+                }
 
         input[type="number"].form-control.x {
             background-position: right 5px center;
@@ -100,7 +101,7 @@
                 text-align: center;
                 color: #fff;
                 font-size: 15px;
-            
+
             }*/
 
         #filtermodal .operator {
@@ -132,13 +133,12 @@
             display: none !important;
         }
 
-        .side-nav
-        {
-            z-index:1500;
+        .side-nav {
+            z-index: 1500;
         }
-        
-        
-         .input-group {
+
+
+        .input-group {
             width: 100%;
         }
 
@@ -174,7 +174,7 @@
             position: absolute;
         }
 
-       
+
 
 
 
@@ -264,7 +264,6 @@
             text-align: center;
             padding-left: 5px !important;
             padding-right: 5px !important;
-        
             margin-top: 0px !important;
         }
 
@@ -341,7 +340,7 @@
             display: inline-block;
         }
 
-      
+
 
 
         .scanbtn {
@@ -404,7 +403,7 @@
                 color: #6683DA;
                 cursor: pointer;
             }
-      
+
 
         .bootstrap-switch-primary {
             background: #0083C7 !important;
@@ -416,11 +415,9 @@
         }
 
 
-        .contentsection
-        {
-            padding-bottom:45px;
+        .contentsection {
+            padding-bottom: 45px;
         }
-
     </style>
     <style>
         #itemlistmodal {
@@ -487,7 +484,7 @@
             margin: 0 auto;
             width: 160px;
             z-index: 1050;
-            text-align:center;
+            text-align: center;
         }
 
         .waitingContent {
@@ -497,8 +494,8 @@
             z-index: 1050;
             text-align: center;
         }
-        
-         .bgColorTransparent {
+
+        .bgColorTransparent {
             background-color: transparent !important;
         }
 
@@ -516,7 +513,6 @@
         }
     </style>
     <style>
-      
         #menu-toggle {
             padding: 6px 12px;
             padding-left: 0px;
@@ -552,7 +548,7 @@
 
 
         #toolbar {
-            text-align:center;
+            text-align: center;
         }
 
         .tablink {
@@ -608,7 +604,7 @@
             .top-menu i {
                 line-height: initial !important;
                 color: #333 !important;
-                font-size:15px !important;
+                font-size: 15px !important;
             }
     </style>
 
@@ -632,14 +628,15 @@
                 cursor: pointer;
             }
 
-            .input-group-addon .fa-barcode
-            {
-                padding-left:10px;
-                padding-right:13px;
+            .input-group-addon .fa-barcode {
+                padding-left: 10px;
+                padding-right: 13px;
             }
 
-
-     
+        .add-clear-x {
+            font-size: 25px;
+            padding-top: 3px;
+        }
     </style>
 
 </head>
@@ -729,7 +726,7 @@
 
     <div class="container" id="viewdata">
         <div data-ng-view="">
-            
+
         </div>
 
     </div>
@@ -753,13 +750,13 @@
 
 
         <!--<li><a href="#/mainmenu" class="no-child"><i class="ion-android-list"></i> Main menu</a></li>-->
-       
-       <li> <a style="background:#e2e2e2;" class="no-child"> <i style="color: #1fa67a; font-size:15px; margin-top:5px;" class="fa fa-circle"> </i> {{CurrentAccount}} </a> </li>
+
+        <li> <a style="background:#e2e2e2;" class="no-child"> <i style="color: #1fa67a; font-size:15px; margin-top:5px;" class="fa fa-circle"> </i> {{CurrentAccount}} </a> </li>
         <!--<li><a ng-class="getClass('/Logindemo')" href="#/logindemo" class="no-child"><i class="fa fa-dot-circle-o"></i> Demo Login</a></li>
         <li><a ng-class="getClass('/dashboard')" href="#/dashboard" class="no-child"><i class="fa fa-dot-circle-o"></i> Dashboard</a></li>
         <li><a ng-class="getClass('/dashboard')" href="#/manageinventory" class="no-child"><i class="fa fa-dot-circle-o"></i> Manage Inventory</a></li>-->
         <li><a ng-class="getClass('/Accounts')" href="#/Accounts" class="no-child"><i class="fa fa-briefcase"></i> My Accounts</a></li>
-        <li id="Permissionlink" ><a ng-class="getClass('/permission')" href="#/permission" class="no-child"><i class="fa fa-gears"></i> Permissions</a></li>
+        <li id="Permissionlink"><a ng-class="getClass('/permission')" href="#/permission" class="no-child"><i class="fa fa-gears"></i> Permissions</a></li>
         <li><a ng-class="getClass('/FindItems')" href="#/FindItems" class="no-child"><i class="fa fa-shopping-cart"></i>Go to Inventory</a></li>
         <li ng-if="checkpermission('ACTION:CanAddInventory')==true"><a ng-class="getClass('/inventory')" href="#/inventory" class="no-child"><i class="fa fa-plus-circle"></i> Add Inventory</a></li>
         <li ng-if="checkpermission('ACTION:CanAddInventory')==false"><a ng-click="restricted()" class="no-child restricted"><i class="fa fa-ban"> </i> Add Inventory</a></li>
@@ -795,7 +792,7 @@
         </li>
         <li id="sidebar2" class="p-10">
             <!-- Chat -->
-            
+
         </li>
     </ul>
 
@@ -849,12 +846,12 @@
     <script src="scripts/angular-sanitize.js"></script>
     <script src="scripts/angular-route.min.js"></script>
     <script src="scripts/angular-local-storage.min.js"></script>
- 
+
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 
     <script src="js/sortableUI.js"></script>
-    
+
     <script src="scripts/loading-bar.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="scripts/ng-cordova.js"></script>
@@ -919,7 +916,6 @@
     <script src="app/controllers/manageinventoryController.js?v=2"></script>
     <!-- Load custom filters -->
     <!-- Load custom directives -->
-
     <!--<script>
         var supportTouch = $.support.touch,
             scrollEvent = "touchmove scroll",
@@ -990,24 +986,173 @@
     </script>-->
 
     <script>
-        !function (i, n, s, e) { function t(n, s) { this.element = n, this.options = i.extend({}, o, s), this._defaults = o, this._name = a, this.init() } var a = "addClear"; t.prototype = { init: function () { var n = i(this.element), s = this, e = this.options; n.wrap("<div class='add-clear-span form-group has-feedback " + e.wrapperClass + "'></div>"), n.after(i("<span class='add-clear-x form-control-feedback " + e.symbolClass + "' style='display: none;'>" + e.closeSymbol + "</span>")), n.next().css({ color: e.color, cursor: "pointer", "text-decoration": "none", display: "none", overflow: "hidden", position: "absolute", "pointer-events": "auto", right: e.right, top: e.top, "z-index": e.zindex }, this), n.val().length >= 1 && e.showOnLoad === !0 && n.siblings(".add-clear-x").show(), n.on("focus.addclear", function () { i(this).val().length >= 1 && i(this).siblings(".add-clear-x").show() }), n.on("blur.addclear", function () { var n = this; e.hideOnBlur && setTimeout(function () { i(n).siblings(".add-clear-x").hide() }, 50) }), n.on("keyup.addclear", function (n) { e.clearOnEscape === !0 && 27 == n.keyCode && (i(this).val("").focus(), e.onClear && e.onClear(i(this).siblings("input"))), i(this).val().length >= 1 ? i(this).siblings(".add-clear-x").show() : i(this).siblings(".add-clear-x").hide() }), n.on("input.addclear change.addclear paste.addclear", function () { i(this).val().length >= 1 ? i(this).siblings(".add-clear-x").show() : i(this).siblings(".add-clear-x").hide() }), n.siblings(".add-clear-x").on("click.addclear", function (n) { i(this).siblings(s.element).val(""), i(this).hide(), e.returnFocus === !0 && i(this).siblings(s.element).focus(), e.onClear && e.onClear(i(this).siblings("input")), n.preventDefault() }) } }, i.fn[a] = function (n, s, e) { return this.each(function () { if ("option" === n) { var o = i(this); "show" === s ? o.siblings(".add-clear-x").show() : "hide" === s && o.siblings(".add-clear-x").hide() } var l = s && "show" !== s && "hide" !== s; if (l) { var d = i.data(this, "plugin_" + a); if (!d || !d.options) throw "Cannot set option, plugin was not instantiated"; d.options[s] = e } else i.data(this, "plugin_" + a) || i.data(this, "plugin_" + a, new t(this, n)) }) }, i.fn[a].Constructor = t; var o = i.fn[a].defaults = { closeSymbol: "", symbolClass: "glyphicon glyphicon-remove-circle", color: "#CCC", top: 0, right: 0, returnFocus: !0, showOnLoad: !1, onClear: null, hideOnBlur: !1, clearOnEscape: !0, wrapperClass: "", zindex: 100 } }(jQuery, window, document);
+  
+       (function ($, window, document, undefined) {
+
+            var pluginName = "addClear";
+
+            // The actual plugin constructor
+            function Plugin(element, options) {
+                this.element = element;
+
+                this.options = $.extend({}, defaults, options);
+
+                this._defaults = defaults;
+                this._name = pluginName;
+
+                this.init();
+            }
+
+            Plugin.prototype = {
+
+                init: function () {
+                    var $this = $(this.element),
+                      me = this,
+                      options = this.options;
+
+                    $this.wrap("<div class='add-clear-span form-group has-feedback " + options.wrapperClass + "'></div>");
+                    $this.after($("<span class='add-clear-x form-control-feedback " + options.symbolClass + "' style='display: none;'>" + options.closeSymbol + "</span>"));
+                    $this.next().css({
+                        'color': options.color,
+                        'cursor': 'pointer',
+                        'text-decoration': 'none',
+                        'display': 'none',
+                        'overflow': 'hidden',
+                        'position': 'absolute',
+                        'pointer-events': 'auto',
+                        'right': options.right,
+                        'top': options.top,
+                        'z-index': options.zindex
+                    }, this);
+
+                    if ($this.val().length >= 1 && options.showOnLoad === true) {
+                        $this.siblings(".add-clear-x").show();
+                    }
+
+                    $this.on('focus.addclear', function () {
+                        if ($(this).val().length >= 1) {
+                            $(this).siblings(".add-clear-x").show();
+                        }
+                    });
+
+                    $this.on('blur.addclear', function () {
+                        var self = this;
+
+                        if (options.hideOnBlur) {
+                            setTimeout(function () {
+                                $(self).siblings(".add-clear-x").hide();
+                            }, 50);
+                        }
+                    });
+
+                    $this.on('keyup.addclear', function (e) {
+
+                        if (options.clearOnEscape === true && e.keyCode == 27) {
+                            $(this).val('').focus();
+                            if (options.onClear) {
+                                options.onClear($(this).siblings("input"));
+                            }
+                        }
+                        if ($(this).val().length >= 1) {
+                            $(this).siblings(".add-clear-x").show();
+                        } else {
+                            $(this).siblings(".add-clear-x").hide();
+                        }
+                    });
+
+                    $this.on('input.addclear change.addclear paste.addclear', function () {
+                        if ($(this).val().length >= 1) {
+                            $(this).siblings(".add-clear-x").show();
+                        } else {
+                            $(this).siblings(".add-clear-x").hide();
+                        }
+                    });
+
+                    $this.siblings(".add-clear-x").on('click.addclear', function (e) {
+                        $(this).siblings(me.element).val("");
+                        $(this).hide();
+                        if (options.returnFocus === true) {
+                            $(this).siblings(me.element).focus();
+                        }
+                        if (options.onClear) {
+                            options.onClear($(this).siblings("input"));
+                        }
+                        e.preventDefault();
+                    });
+                }
+
+            };
+
+            $.fn[pluginName] = function (options, optionName, optionValue) {
+                return this.each(function () {
+                    if (options === "option") {
+                        var $this = $(this);
+                        if (optionName === "show") {
+                            $this.siblings(".add-clear-x").show();
+                        } else if (optionName === "hide") {
+                            $this.siblings(".add-clear-x").hide();
+                        }
+                    }
+                    var isSetOption = optionName && optionName !== "show" && optionName !== "hide";
+                    if (isSetOption) {
+                        var oldInstance = $.data(this, "plugin_" + pluginName);
+                        if (!oldInstance || !oldInstance.options) {
+                            throw "Cannot set option, plugin was not instantiated";
+                        }
+                        oldInstance.options[optionName] = optionValue;
+                    } else {
+                        if (!$.data(this, "plugin_" + pluginName)) {
+                            $.data(this,
+                                "plugin_" + pluginName,
+                                new Plugin(this, options));
+                        }
+                    }
+
+                });
+            };
+
+            $.fn[pluginName].Constructor = Plugin;
+
+            var defaults = $.fn[pluginName].defaults = {
+                closeSymbol: "",
+                symbolClass: 'glyphicon glyphicon-remove-circle',
+                color: "#CCC",
+                top: 0,
+                right: 0,
+                returnFocus: true,
+                showOnLoad: false,
+                onClear: null,
+                hideOnBlur: false,
+                clearOnEscape: true,
+                wrapperClass: '',
+                zindex: 100
+            };
+
+        })(jQuery, window, document);
     </script>
     <script>
 
         function tog(v) { return v ? 'addClass' : 'removeClass'; }
 
-        //$('input[type="text"],input[type="number"]').wrap('<span class="deleteicon" />').after($('<span/>').click(function () {
-        //    $(this).prev('input').val('').focus();
-        //}));
+
         $(document).on('input', 'input[type="text"],input[type="number"]', function () {
-            $(':input').addClear();
+            //$('input[type="text"]:input').addClear({
+            //    symbolClass: "fa fa-times-circle"
+            //});
+            //$('input[type="number"]:input').addClear({
+            //    symbolClass: "fa fa-times-circle"
+            //});
+
+            //$('input[type="password"]:input').addClear({
+            //    symbolClass: "fa fa-times-circle"
+            //});
         });
 
 
         //$(document).on('input', 'input[type="text"],input[type="number"]', function () {
         //    $(this)[tog(this.value)]('x');
         //}).on('mousemove', '.x', function (e) {
-          
+
         //    $(this)[tog(this.offsetWidth - 26 < e.clientX - this.getBoundingClientRect().left)]('onX');
         //}).on('touchstart click', '.onX', function (ev) {
         //    ev.preventDefault();
@@ -1018,16 +1163,16 @@
         //});
 
 
-       
 
-        
 
-     
+
+
+
 
         var myDate = new Date();
         var _genVar = 0;
         var _timeZone = myDate.getTimezoneOffset();
-  
+
         if (_timeZone == -330) {
             _genVar = 1;
         }
@@ -1063,8 +1208,8 @@
 
         function hideSuccess() {
             $("#mysmallModal").removeClass('bounceIn').addClass('bounceOut');
-            
-            
+
+
         }
 
         function HideWaitingInv() {
@@ -1078,13 +1223,11 @@
 
         }
 
-        function ShowGlobalWaitingDiv()
-        {
+        function ShowGlobalWaitingDiv() {
             $("#mysmallModalWaiting").removeClass('fadeOut').addClass('fadeIn');
             $('#mysmallModalWaiting').show();
         }
-        function HideGlobalWaitingDiv()
-        {
+        function HideGlobalWaitingDiv() {
             $("#mysmallModalWaiting").removeClass('fadeIn').addClass('fadeOut');
 
             setTimeout(function () {
@@ -1247,7 +1390,7 @@
         }
 
 
-   
+
 
         var exitApp = false, intval = setInterval(function () { exitApp = false; }, 1000);
         document.addEventListener("backbutton", function (e) {
@@ -1455,7 +1598,7 @@
             });
         }
 
- 
+
 
         // A button will call this function
         //
@@ -1488,7 +1631,7 @@
 
 
         function vibrate() {
-           // navigator.notification.vibrate(2000);
+            // navigator.notification.vibrate(2000);
         }
 
 
@@ -1498,8 +1641,7 @@
 
 
 
-        function UpdateStatusBar(Type)
-        {
+        function UpdateStatusBar(Type) {
 
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
             if (deviceType != "Android") {
@@ -1584,7 +1726,7 @@
 
 
         function GetDefaultAccount() {
-       
+
             $.ajax({
 
                 type: "POST",
@@ -1607,7 +1749,7 @@
                 },
 
                 success: function (data) {
-               
+
                     if (data.DefaultAccountResult.Success == true) {
 
                         if (data.DefaultAccountResult != null && data.DefaultAccountResult.Payload != null) {
@@ -1630,14 +1772,14 @@
 
             navigator.splashscreen.hide();
             GetDefaultAccount();
-           
+
 
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
-          
-       
-          
-           
+
+
+
+
             var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
             pictureSource = navigator.camera.PictureSourceType;
             destinationType = navigator.camera.DestinationType;
@@ -1648,9 +1790,9 @@
             try {
 
 
-           
-                 
-                
+
+
+
 
 
             }
@@ -1682,7 +1824,7 @@
 
                     break;
                 default:
-                   // alert(window.orientation);
+                    // alert(window.orientation);
                     $("#mycartModal").removeClass("activitylist")
                     break;
             }
@@ -1727,7 +1869,7 @@
         document.addEventListener('click', addRippleEffect, false);
     </script>
 
-  
+
 
 
     <script>
@@ -1776,8 +1918,8 @@
         }
     </script>
 
- 
-    
+
+
 </body>
 
 </html>
