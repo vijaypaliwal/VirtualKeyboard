@@ -904,7 +904,7 @@
     <!-- Load custom filters -->
     <!-- Load custom directives -->
 
-    <!--<script>
+    <script>
         var supportTouch = $.support.touch,
             scrollEvent = "touchmove scroll",
             touchStartEvent = supportTouch ? "touchstart" : "mousedown",
@@ -971,7 +971,7 @@
                 }
             };
         });
-    </script>-->
+    </script>
     <script>
 
         function tog(v) { return v ? 'addClass' : 'removeClass'; }
@@ -979,7 +979,7 @@
 
         $(document).on('input', 'input[type="text"],input[type="number"]', function () {
             $(this)[tog(this.value)]('x');
-        }).on('mousemove touchmove', '.x', function (e) {
+        }).on('mousemove', '.x', function (e) {
             $(this)[tog(this.offsetWidth - 26 < e.clientX - this.getBoundingClientRect().left)]('onX');
         }).on('touchstart click', '.onX', function (ev) {
             ev.preventDefault();
