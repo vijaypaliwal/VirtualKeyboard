@@ -978,7 +978,7 @@
 
         $(document).on('input', 'input[type="text"],input[type="number"]', function () {
             $(this)[tog(this.value)]('x');
-        }).on('mousemove', '.x', function (e) {
+        }).on('mousemove touchmove', '.x', function (e) {
             $(this)[tog(this.offsetWidth - 26 < e.clientX - this.getBoundingClientRect().left)]('onX');
         }).on('touchstart click', '.onX', function (ev) {
             ev.preventDefault();
