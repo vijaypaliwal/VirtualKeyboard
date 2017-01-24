@@ -711,6 +711,7 @@
 
 
     <div class="container" id="viewdata">
+        <input type="hidden" id="hiddeninput" name="hiddeninput" value=" " />
         <div data-ng-view="">
             
         </div>
@@ -982,8 +983,7 @@
             $(this)[tog(this.offsetWidth - 26 < e.clientX - this.getBoundingClientRect().left)]('onX');
         }).on('touchstart click', '.onX', function (ev) {
             ev.preventDefault();
-
-            $(this).trigger("blur");
+            $("#hiddeninput").focus();
             $(this).removeClass('x onX').val('').change();
             $(this).attr("value", "");
             $(this).focus();
