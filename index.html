@@ -996,9 +996,9 @@
 
         function tog(v) { return v ? 'addClass' : 'removeClass'; }
 
-        $('input[type="text"],input[type="number"]').wrap('<span class="deleteicon" />').after($('<span/>').click(function () {
-            $(this).prev('input').val('').focus();
-        }));
+        //$('input[type="text"],input[type="number"]').wrap('<span class="deleteicon" />').after($('<span/>').click(function () {
+        //    $(this).prev('input').val('').focus();
+        //}));
         $(document).on('input', 'input[type="text"],input[type="number"]', function () {
             $(':input').addClear();
         });
