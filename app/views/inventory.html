@@ -23,6 +23,7 @@
 
 <div class="maincontent animated slideInLeft">
   
+    <form id="myform" name="myForm">
 
         <div class="device">
 
@@ -34,7 +35,7 @@
             <div style="display:none;" class="swiper-container">
 
 
-              
+
                 <div style="background:#fff; margin-left:0px; margin-right:0px;" class="row">
                     <div style="padding-left: 0px; padding-right: 0px; background: #eee;" class="col-xs-12">
                         <div class="iteminfo">
@@ -82,7 +83,7 @@
                                     <div class="row">
                                         <div class="col-xs-6">
                                             <label>Item Name   </label>
-                                          
+
                                         </div>
 
                                     </div>
@@ -90,7 +91,7 @@
                                     <div ng-if="InventoryObject.AutoID==false && IsItemLibrary==true && IsActiveItemLibrary==true" class="input-group">
                                         <div>
 
-                                            <input type="text" id="ItemName" tabindex="-1"  class="form-control" my-enter="GoToNext()" ng-model="InventoryObject.ItemID" required="" />
+                                            <input type="text" id="ItemName" tabindex="-1" class="form-control" my-enter="GoToNext()" ng-model="InventoryObject.ItemID" required="" />
 
                                         </div>
 
@@ -101,7 +102,7 @@
                                     <div ng-if="IsItemLibrary==false || IsActiveItemLibrary==false">
                                         <div class="row requiredfields" ng-if="(IsActiveItemLibrary==false|| IsItemLibrary==false) && IsItemChose==false">
                                             <div class="col-md-12">
-                                               
+
                                                 <a ng-if="IsItemLibrary==false">
                                                     You are not permitted to add new item so please select item from item list.
                                                 </a>
@@ -117,12 +118,12 @@
                                     </div>
 
 
-                                    
+
 
                                     <div ng-if="InventoryObject.AutoID==true && IsItemLibrary==true && IsActiveItemLibrary==true" class="input-group">
 
                                         <div>
-                                            <input placeholder="Automated" my-enter="GoToNext()" type="text" ng-model="InventoryObject.ItemID" id="ItemName" disabled="disabled" tabindex="-1"  class="form-control" />
+                                            <input placeholder="Automated" my-enter="GoToNext()" type="text" ng-model="InventoryObject.ItemID" id="ItemName" disabled="disabled" tabindex="-1" class="form-control" />
                                         </div>
 
                                     </div>
@@ -137,7 +138,7 @@
                         <div class="form-group" ng-if="obj.ColumnName=='pDescription'">
                             <label>Item Description </label>
                             <div class="input-group">
-                                <input type="text" id="pDescriptionForm" my-enter="GoToNext()" ng-model="InventoryObject.Description" name="name" tabindex="-1"  class="form-control" value="" />
+                                <input type="text" id="pDescriptionForm" my-enter="GoToNext()" ng-model="InventoryObject.Description" name="name" tabindex="-1" class="form-control" value="" />
 
                             </div>
                         </div>
@@ -148,7 +149,7 @@
 
                             <div class="input-group">
 
-                                <input ng-model="InventoryObject.Quantity" id="iQty" min="0" tabindex="-1"  class="form-control" type="number" pattern="[0-9]*" step="0.01" inputmode="numeric" name="Quantity" value="" />
+                                <input ng-model="InventoryObject.Quantity" id="iQty" min="0" tabindex="-1" class="form-control" type="number" pattern="[0-9]*" step="0.01" inputmode="numeric" name="Quantity" value="" />
 
 
                             </div>
@@ -159,7 +160,7 @@
                         <div class="form-group" ng-if="obj.ColumnName=='lLoc'">
                             <label>Select Location <span class="redText">*</span></label>
                             <div class="input-group">
-                                <select ng-change="changelocation()" tabindex="-1"  class="form-control" id="Location" ng-model="InventoryObject.Location">
+                                <select ng-change="changelocation()" tabindex="-1" class="form-control" id="Location" ng-model="InventoryObject.Location">
                                     <option mytag="{{obj.LocationZone}}" value="{{obj.LocationName}}" ng-selected="CheckSelectedValues(InventoryObject.Location,obj.LocationName)?true:false" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
                                 </select>
 
@@ -172,7 +173,7 @@
                         <div class="form-group" ng-if="obj.ColumnName=='lZone'">
                             <label>Location Group</label>
                             <div class="input-group">
-                                <input type="text" tabindex="-1"  class="form-control" id="lZone" ng-model="InventoryObject.lZone" />
+                                <input type="text" tabindex="-1" class="form-control" id="lZone" ng-model="InventoryObject.lZone" />
 
                             </div>
                         </div>
@@ -181,7 +182,7 @@
                         <div class="form-group" ng-if="obj.ColumnName=='iStatusValue'">
                             <label>Status </label>
                             <div class="input-group">
-                                <select tabindex="-1"  class="form-control" id="Status" ng-model="InventoryObject.Status">
+                                <select tabindex="-1" class="form-control" id="Status" ng-model="InventoryObject.Status">
                                     <option value="">None</option>
                                     <option value="{{obj.StatusValue}}" ng-selected="obj.StatusValue==InventoryObject.Status" ng-repeat="obj in StatusList">{{obj.StatusValue}}</option>
                                 </select>
@@ -195,7 +196,7 @@
                             <label>Select UOM <span class="redText">*</span></label>
                             <div class="input-group">
 
-                                <select tabindex="-1"  class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.Uom" id="UOM">
+                                <select tabindex="-1" class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.Uom" id="UOM">
                                     <option value="{{obj.UnitOfMeasureName}}" ng-selected="CheckSelectedValues(InventoryObject.Uom,obj.UnitOfMeasureName)?true:false" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                 </select>
 
@@ -206,7 +207,7 @@
                             <label>Default UOM</label>
                             <div class="input-group">
 
-                                <select tabindex="-1"  class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.DefaultItemUOM" id="DefaultItemUOM">
+                                <select tabindex="-1" class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.DefaultItemUOM" id="DefaultItemUOM">
                                     <option value="{{obj.UnitOfMeasureID}}" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                 </select>
 
@@ -217,7 +218,7 @@
                             <label>Default Cost</label>
 
                             <div class="input-group">
-                                <input ng-model="InventoryObject.pDefaultCost" min="0" id="pDefaultCost" tabindex="-1"  class="form-control" type="number" pattern="[0-9]*"  name="pDefaultCost" value="" />
+                                <input ng-model="InventoryObject.pDefaultCost" min="0" id="pDefaultCost" tabindex="-1" class="form-control" type="number"  name="pDefaultCost" value="" />
 
                             </div>
 
@@ -226,7 +227,7 @@
                             <label>Low Qty. Threshold</label>
 
                             <div class="input-group">
-                                <input ng-model="InventoryObject.pReorderQty" id="pReorderQty" tabindex="-1"  class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="pReorderQty" value="" />
+                                <input ng-model="InventoryObject.pReorderQty" id="pReorderQty" tabindex="-1" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="pReorderQty" value="" />
 
                             </div>
 
@@ -235,7 +236,7 @@
                             <label> High Qty. Threshold</label>
 
                             <div class="input-group">
-                                <input ng-model="InventoryObject.pTargetQty" id="pTargetQty" tabindex="-1"  class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="pTargetQty" value="" />
+                                <input ng-model="InventoryObject.pTargetQty" id="pTargetQty" tabindex="-1" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="pTargetQty" value="" />
 
                             </div>
 
@@ -243,18 +244,18 @@
                         <div class="form-group" ng-if="obj.ColumnName=='DefaultItemLocation'">
                             <label>Default Location </label>
                             <div class="input-group">
-                                <select tabindex="-1"  class="form-control" id="DefaultItemLocationID" ng-model="InventoryObject.DefaultItemLocationID">
-                                    <option mytag="{{obj.LocationName}}" value="{{obj.LocationID}}"  ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
+                                <select tabindex="-1" class="form-control" id="DefaultItemLocationID" ng-model="InventoryObject.DefaultItemLocationID">
+                                    <option mytag="{{obj.LocationName}}" value="{{obj.LocationID}}" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
                                 </select>
 
                             </div>
                         </div>
                         <div class="form-group" ng-if="obj.ColumnName=='pCountFrq'">
                             <div class="row">
-                                <div class="col-xs-12" >
+                                <div class="col-xs-12">
                                     <label>Item Group </label>
                                     <div class="input-group" ng-if="IsItemGroupLibrary==true && IsActiveItemGroupLibrary==true">
-                                        <input tabindex="-1"  class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
+                                        <input tabindex="-1" class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
 
                                     </div>
 
@@ -284,7 +285,7 @@
                             <label>Cost per unit</label>
 
                             <div class="input-group">
-                                <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" tabindex="-1"  class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="cost" value="" />
+                                <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" tabindex="-1" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" name="cost" value="" />
 
                             </div>
 
@@ -321,7 +322,7 @@
                             <label>{{obj.ColumnLabel}}</label>
 
                             <div class="input-group">
-                                <input id="UniqueTag" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="text" ng-model="InventoryObject.UniqueTag" tabindex="-1"  class="form-control" value="" />
+                                <input id="UniqueTag" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="text" ng-model="InventoryObject.UniqueTag" tabindex="-1" class="form-control" value="" />
                                 <span ng-if="mtuvar1==false" class="redText">Please input some unique data</span>
 
                             </div>
@@ -329,7 +330,7 @@
                         <div ng-if="obj.ColumnName=='iUnitTag2'" class="form-group">
                             <label>{{obj.ColumnLabel}}</label>
                             <div class="input-group">
-                                <input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" tabindex="-1"  class="form-control" value="" />
+                                <input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" tabindex="-1" class="form-control" value="" />
                                 <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
                             </div>
                         </div>
@@ -337,7 +338,7 @@
 
                             <label>{{obj.ColumnLabel}}</label>
                             <div class="input-group">
-                                <input id="UnitTag3" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="text" ng-model="InventoryObject.UnitTag3" tabindex="-1"  class="form-control" value="" />
+                                <input id="UnitTag3" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="text" ng-model="InventoryObject.UnitTag3" tabindex="-1" class="form-control" value="" />
                                 <span ng-if="mtuvar3==false" class="redText">Please input some unique data</span>
                             </div>
                         </div>
@@ -345,7 +346,7 @@
                             <label>{{obj.ColumnLabel}}</label>
 
                             <div class="input-group">
-                                <input id="UniqueDate" ng-blur="mtuvar4=CheckUnitDataFieldValue('UniqueDate',CheckIsAllowDuplicate('UniqueDate'))" type="date" ng-model="InventoryObject.UniqueDate" tabindex="-1"  class="form-control" value="" />
+                                <input id="UniqueDate" ng-blur="mtuvar4=CheckUnitDataFieldValue('UniqueDate',CheckIsAllowDuplicate('UniqueDate'))" type="date" ng-model="InventoryObject.UniqueDate" tabindex="-1" class="form-control" value="" />
                                 <span ng-if="mtuvar4==false" class="redText">Please input some unique data</span>
                             </div>
                         </div>
@@ -354,14 +355,14 @@
                             <label>{{obj.ColumnLabel}}</label>
 
                             <div class="input-group">
-                                <input id="UnitDate2" ng-blur="mtuvar5=CheckUnitDataFieldValue('UnitDate2',CheckIsAllowDuplicate('UnitDate2'))" type="date" ng-model="InventoryObject.UnitDate2" tabindex="-1"  class="form-control" value="" />
+                                <input id="UnitDate2" ng-blur="mtuvar5=CheckUnitDataFieldValue('UnitDate2',CheckIsAllowDuplicate('UnitDate2'))" type="date" ng-model="InventoryObject.UnitDate2" tabindex="-1" class="form-control" value="" />
                                 <span ng-if="mtuvar5==false" class="redText">Please input some unique data</span>
                             </div>
                         </div>
                         <div ng-if="obj.ColumnName=='iUnitNumber1'" class="form-group">
                             <label>{{obj.ColumnLabel}}</label>
                             <div class="input-group">
-                                <input id="UnitNumber1" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'))" type="number" pattern="[0-9]*" inputmode="numeric" tabindex="-1"  class="form-control" value="" ng-model="InventoryObject.UnitNumber1" />
+                                <input id="UnitNumber1" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'))" type="number" pattern="[0-9]*" inputmode="numeric" tabindex="-1" class="form-control" value="" ng-model="InventoryObject.UnitNumber1" />
                                 <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
                             </div>
                         </div>
@@ -371,7 +372,7 @@
 
                             <div class="input-group">
 
-                                <input id="UnitNumber2" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'))" type="number" pattern="[0-9]*" inputmode="numeric" tabindex="-1"  class="form-control" value="" ng-model="InventoryObject.UnitNumber2" />
+                                <input id="UnitNumber2" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'))" type="number" pattern="[0-9]*" inputmode="numeric" tabindex="-1" class="form-control" value="" ng-model="InventoryObject.UnitNumber2" />
                                 <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
                             </div>
                         </div>
@@ -381,7 +382,7 @@
 
                             <div ng-if="obj.cfdDataType=='string'" class="input-group">
 
-                                <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" tabindex="-1"  class="form-control" value="{{obj.CfValue}}" />
+                                <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" tabindex="-1" class="form-control" value="{{obj.CfValue}}" />
 
                             </div>
 
@@ -399,7 +400,7 @@
                             <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
                                 <div class="select">
-                                    <select id="CustomItem_{{obj.cfdID}}" tabindex="-1"  class="form-control" ng-model="InventoryObject.CustomPartData[$index].Value">
+                                    <select id="CustomItem_{{obj.cfdID}}" tabindex="-1" class="form-control" ng-model="InventoryObject.CustomPartData[$index].Value">
 
                                         <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
@@ -410,19 +411,19 @@
                             </div>
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="date" tabindex="-1"  class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" />
+                                <input id="CustomItem_{{obj.cfdID}}" type="date" tabindex="-1" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" />
 
                             </div>
 
                             <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" tabindex="-1"  class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
+                                <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" tabindex="-1" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
 
                             </div>
 
 
                             <div ng-if="obj.cfdDataType=='currency'" class="input-group">
 
-                                <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" tabindex="-1"  class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
+                                <input id="CustomItem_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" tabindex="-1" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
 
                             </div>
                         </div>
@@ -435,7 +436,7 @@
                         <div class="form-group">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
                             <div ng-if="obj.cfdDataType=='string'" class="input-group">
-                                <input id="CustomActivity_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" tabindex="-1"  class="form-control stringType" value="{{obj.CfValue}}" />
+                                <input id="CustomActivity_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" tabindex="-1" class="form-control stringType" value="{{obj.CfValue}}" />
 
                             </div>
 
@@ -456,7 +457,7 @@
 
 
                                 <div class="select">
-                                    <select id="CustomActivity_{{obj.cfdID}}" tabindex="-1"  class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
+                                    <select id="CustomActivity_{{obj.cfdID}}" tabindex="-1" class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
 
                                         <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
@@ -468,17 +469,17 @@
 
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                                <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" tabindex="-1"  class="form-control customFieldDatePicker FormDateType" />
+                                <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" tabindex="-1" class="form-control customFieldDatePicker FormDateType" />
 
                             </div>
 
                             <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                <input id="CustomActivity_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" tabindex="-1"  class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
+                                <input id="CustomActivity_{{obj.cfdID}}" type="number" pattern="[0-9]*" inputmode="numeric" tabindex="-1" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
 
                             </div>
 
                             <div ng-if="obj.cfdDataType=='currency'" class="input-group">
-                                <input id="CustomActivity_{{obj.cfdID}}" type="text" tabindex="-1"  class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
+                                <input id="CustomActivity_{{obj.cfdID}}" type="text" tabindex="-1" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
 
                             </div>
                         </div>
@@ -558,7 +559,7 @@
 
 
 
-                            
+
 
 
 
@@ -628,7 +629,7 @@
                             <td ng-if="CurrentActiveField=='iQty'">
 
                                 <div>
-                                <a ng-click="UpDownValue('Quantity',true)" class="btn btn-gray"><i class="fa fa-plus"></i>Increase</a>
+                                    <a ng-click="UpDownValue('Quantity',true)" class="btn btn-gray"><i class="fa fa-plus"></i>Increase</a>
                                 </div>
                             </td>
 
@@ -679,7 +680,7 @@
                             </td>
                             <td ng-if="CurrentActiveField=='lLoc' && checkpermission('URL:Manage/Location')==true">
                                 <div class="aligncenter">
-                                    <a class="scanbtn btn btn-gray" ng-if="IsActiveLocationLibrary==true" ng-click="CreateNew(1)" ><i class="fa fa-plus"></i>Add</a>
+                                    <a class="scanbtn btn btn-gray" ng-if="IsActiveLocationLibrary==true" ng-click="CreateNew(1)"><i class="fa fa-plus"></i>Add</a>
                                     <a class="scanbtn btn btn-gray" ng-if="IsActiveLocationLibrary==false" ng-click="locked()"><i class="fa fa-lock"></i>Add</a>
                                 </div>
 
@@ -740,7 +741,7 @@
 
                             </td>
 
-                       
+
 
                             <td ng-if="CurrentActiveField=='pDescription'">
                                 <div class="alignright">
@@ -941,6 +942,7 @@
 
 
         </div>
+    </form>
 
  
 
