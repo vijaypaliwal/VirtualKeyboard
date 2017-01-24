@@ -652,7 +652,15 @@ body {
     box-shadow: none !important;
     padding-left: 3px;
     font-size: 13px;
+    text-transform:none;
 }
+
+
+.list-group-item-heading .pull-right span {
+     text-transform:none;
+}
+
+
 
 .multiselect-container {
     width: 100%;
