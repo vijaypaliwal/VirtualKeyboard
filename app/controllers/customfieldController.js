@@ -442,7 +442,7 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
             cfdID:_TempObj.cfdid
         }
 
-        ShowWaitingInv();
+        //ShowWaitingInv();
         $.ajax
      ({
          type: "POST",
