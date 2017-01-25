@@ -401,11 +401,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             $(_fieldid).val(_value);
             $(_fieldid).trigger('change');
+            $(_fieldid).trigger('input');
         }
         else {
 
             $(_fieldid).val(_value);
             $(_fieldid).trigger('change');
+            $(_fieldid).trigger('input');
 
         }
 
@@ -459,13 +461,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 $(id).val(_value);
 
                 $(id).trigger('change');
+                $(id).trigger('input');
             }
         }
         else {
 
             $(id).val(_value);
             $(id).trigger('change');
-
+            $(id).trigger('input');
         }
         CheckScopeBeforeApply()
 
