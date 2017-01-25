@@ -378,7 +378,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.GetLastValueCustom = function (id, Type) {
 
-        alert("ID" + id);
 
         var field = "Inv_" + id;
         var _fieldid = "";
@@ -410,7 +409,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         }
 
-        alert("Val" + _value);
+       
 
 
     }
