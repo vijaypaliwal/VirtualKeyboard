@@ -637,6 +637,10 @@
             font-size: 25px;
             padding-top: 3px;
         }
+
+        #filtermodal .add-clear-x {
+            z-index:1000 !important;
+        }
     </style>
 
 </head>
@@ -987,7 +991,9 @@
 
     <script>
   
-       (function ($, window, document, undefined) {
+        (function ($, window, document, undefined) {
+
+            debugger;
 
             var pluginName = "addClear";
 
@@ -1069,6 +1075,10 @@
                     });
 
                     $this.siblings(".add-clear-x").on('click.addclear', function (e) {
+                        debugger;
+
+                      
+
                         $(this).siblings(me.element).val("");
                         $(this).hide();
                         if (options.returnFocus === true) {
@@ -1077,6 +1087,7 @@
                         if (options.onClear) {
                             options.onClear($(this).siblings("input"));
                         }
+                        $(this).siblings(me.element).trigger('input');
                         e.preventDefault();
                     });
                 }
@@ -1916,6 +1927,29 @@
                 hideSuccess();
             }, 3000)
         }
+    </script>
+
+    <script>    
+    
+        $(document).on('input', 'input[type="text"],input[type="number"]', function () {
+
+
+            $('input[type="text"]:input').not(".hideaddclear").addClear({
+                symbolClass: "fa fa-times-circle"
+            });
+            $('input[type="number"]:input').addClear({
+                symbolClass: "fa fa-times-circle"
+            });
+
+            $('input[type="password"]:input').addClear({
+                symbolClass: "fa fa-times-circle"
+            });
+
+            $(this).focus();
+           
+            $(this).trigger("change");
+        });
+
     </script>
 
 
