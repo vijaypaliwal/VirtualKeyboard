@@ -328,7 +328,7 @@
 
                                             </div>
                                             <div class="col-xs-2 col-md-2" >
-                                                <div ng-if="IsActiveStatusLibrary==true">
+                                                <div ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true">
                                                     <label>&nbsp;</label>
                                                     <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
                                                         <i class="fa fa-plus-circle"></i>
@@ -666,7 +666,7 @@
                                             </div>
 
                                             <div class="col-xs-2 col-md-2">
-                                                <div ng-if="IsActiveUOMLibrary==true">
+                                                <div ng-if="IsActiveUOMLibrary==true && checkpermission('URL:Manage/UnitOfMeasure')==true">
                                                     <label>&nbsp;</label>
                                                     <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(1,$index)">
                                                         <i class="fa fa-plus-circle"></i>
@@ -760,7 +760,7 @@
 
                                             </div>
                                             <div class="col-xs-2 col-md-2">
-                                                <div ng-if="IsActiveStatusLibrary==true">
+                                                <div ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true">
                                                     <label>&nbsp;</label>
                                                     <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
                                                         <i class="fa fa-plus-circle"></i>
@@ -1368,7 +1368,7 @@
                                     </div>
 
                                     <div class="col-xs-2 col-md-2">
-                                        <div ng-if="IsActiveStatusLibrary==true">
+                                        <div ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true">
                                             <label>&nbsp;</label>
                                             <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
                                                 <i class="fa fa-plus-circle"></i>
@@ -1475,7 +1475,7 @@
 
                                     </div>
                                     <div class="col-xs-2 col-md-2">
-                                        <div ng-if="IsActiveStatusLibrary==true">
+                                        <div ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true">
                                             <label>&nbsp;</label>
                                             <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
                                                 <i class="fa fa-plus-circle"></i>
@@ -1798,7 +1798,7 @@
                                     </div>
 
                                     <div class="col-xs-2 col-md-2">
-                                        <div ng-if="IsActiveUOMLibrary==true">
+                                        <div ng-if="IsActiveUOMLibrary==true && checkpermission('URL:Manage/UnitOfMeasure')==true">
                                             <label>&nbsp;</label>
                                             <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(1,$index)">
                                                 <i class="fa fa-plus-circle"></i>
@@ -1892,7 +1892,7 @@
 
                                     </div>
                                     <div class="col-xs-2 col-md-2">
-                                        <div ng-if="IsActiveStatusLibrary==true">
+                                        <div ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true">
                                             <label>&nbsp;</label>
                                             <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
                                                 <i class="fa fa-plus-circle"></i>
@@ -2840,7 +2840,7 @@
             <div style="text-align: center; border: 1px solid #eeeeee;">
                 <h4 style="font-size:20px;"><i class="fa fa-frown-o"></i> We're sorry !</h4>
                 <h4 style="font-size:15px;">We can't find the location you're looking for</h4>
-                <h5 ng-if="TrimValue(SearchLocationValue)!='' && IsActiveLocationLibrary==true">click to <span ng-click="filllocationAutoComplete()" style="cursor:pointer; color:#0083C7; font-size:20px;">{{SearchLocationValue}}</span>  for add in your list.</h5>
+                <h5 ng-if="TrimValue(SearchLocationValue)!='' && IsActiveLocationLibrary==true && checkpermission('URL:Manage/Location')==true">click to <span ng-click="filllocationAutoComplete()" style="cursor:pointer; color:#0083C7; font-size:20px;">{{SearchLocationValue}}</span>  for add in your list.</h5>
             </div>
         </div>
 
