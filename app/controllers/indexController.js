@@ -314,7 +314,6 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.checkpermission = function (permissioncode) {
 
-        console.log($scope.Permission);
 
         for (var i = 0; i < $scope.Permission.length; i++) {
             if ($scope.Permission[i].PermissionCode == permissioncode) {
@@ -473,7 +472,6 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             $scope.UserInfoData = authService.UserInfo;
             if ($scope.UserInfoData != null && $scope.UserInfoData != undefined) {
 
-                console.log($scope.UserInfoData);
                 $scope.username = $scope.UserInfoData.username;
                 $scope.myprofileimage = $scope.UserInfoData.myprofileimage;
                 $scope.picURl = $scope.UserInfoData.picURl;

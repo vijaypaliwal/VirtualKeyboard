@@ -256,7 +256,7 @@
                                                     </span>
                                                 </label>
                                                 <div class="fg-line">
-                                                    <input type="number"   placeholder1="Fill Quantity" ng-change="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-blur="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
+                                                    <input type="number" placeholder1="Fill Quantity" ng-change="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-blur="UpdateQty(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity,$index)" ng-model="CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity" class="input-mini form-control  WholeNumbersOnly NumberType" />
                                                 </div>
 
                                             </div>
@@ -311,7 +311,7 @@
 
                                     <div ng-if="CurrentOperation=='Update'">
                                         <div class="row">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div class="col-xs-6 col-md-6" style="padding-left:0px;">
                                                 <div class="form-group">
                                                     <label>Status</label>
                                                     <div class="fg-line">
@@ -326,6 +326,14 @@
                                                 </div>
 
 
+                                            </div>
+                                            <div class="col-xs-2 col-md-2" >
+                                                <div ng-if="IsActiveStatusLibrary==true">
+                                                    <label>&nbsp;</label>
+                                                    <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
+                                                        <i class="fa fa-plus-circle"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                             <div class="col-xs-4 col-md-4" ng-if="$index==0">
                                                 <div class="pull-right">
@@ -637,17 +645,17 @@
 
 
                                         <div class="row">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div class="col-xs-6 col-md-6" style="padding-left:0px;">
 
                                                 <div class="form-group">
 
                                                     <label>Select UOM <span>*</span></label>
-
-                                                    <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ToUOMID==''?'':''">
+                                                    
+                                                    <div class="fg-line" ng-class="CurrentActiveObject.ConvertTransactionData.ToUOMID==''?'':''">
                                                         <div class="select">
                                                             <select class="form-control" ng-model=" CurrentActiveObject.ConvertTransactionData.ToUOMID">
                                                                 <option value="">None</option>
-                                                                <option ng-repeat="_optionValue in  UOMList" value="{{_optionValue.UnitOfMeasureID}}">{{_optionValue.UnitOfMeasureName}}</option>
+                                                                <option ng-repeat="_optionValue in  UOMList" ng-selected="CheckUOMValues(CurrentActiveObject.ConvertTransactionData.ToUOMID,_optionValue.UnitOfMeasureID)?true:false" value="{{_optionValue.UnitOfMeasureID}}">{{_optionValue.UnitOfMeasureName}}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -656,10 +664,19 @@
 
 
                                             </div>
+
+                                            <div class="col-xs-2 col-md-2">
+                                                <div ng-if="IsActiveUOMLibrary==true">
+                                                    <label>&nbsp;</label>
+                                                    <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(1,$index)">
+                                                        <i class="fa fa-plus-circle"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                             <div class="col-xs-4 col-md-4" ng-if="$index==0">
                                                 <div class="pull-right">
                                                     <label>&nbsp;</label>
-                                                    <button id="uom_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click=" FillUOMLineItems( CurrentActiveObject.ConvertTransactionData.ToUOMID, CurrentActiveObject.InventoryDataList.uId)">
+                                                    <button id="uom_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click=" FillUOMLineItems( CurrentActiveObject.ConvertTransactionData.ToUOMID, CurrentActiveObject.InventoryDataList.uId,CurrentActiveObject.ConvertTransactionData.ToUOM)">
                                                         <i class="fa fa-thumb-tack"></i>
                                                     </button>
                                                 </div>
@@ -727,7 +744,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div class="col-xs-6 col-md-6" style="padding-left:0px;">
                                                 <div class="form-group">
                                                     <label>Status</label>
                                                     <div class="fg-line">
@@ -741,6 +758,14 @@
                                                     </div>
                                                 </div>
 
+                                            </div>
+                                            <div class="col-xs-2 col-md-2">
+                                                <div ng-if="IsActiveStatusLibrary==true">
+                                                    <label>&nbsp;</label>
+                                                    <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
+                                                        <i class="fa fa-plus-circle"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                             <div class="col-xs-4 col-md-4" ng-if="$index==0">
                                                 <label>&nbsp;</label>
@@ -1322,7 +1347,7 @@
                                 </div>
                                 <br />
                                 <div class="row">
-                                    <div class="col-xs-8 col-md-8">
+                                    <div class="col-xs-6 col-md-6">
                                         <div class="form-group">
                                             <label>Status</label>
                                             <div class="fg-line">
@@ -1340,6 +1365,15 @@
                                         </div>
 
 
+                                    </div>
+
+                                    <div class="col-xs-2 col-md-2">
+                                        <div ng-if="IsActiveStatusLibrary==true">
+                                            <label>&nbsp;</label>
+                                            <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
+                                                <i class="fa fa-plus-circle"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="col-xs-4 col-md-4">
 
@@ -1423,7 +1457,7 @@
 
                             <div ng-if="CurrentOperation=='Update'">
                                 <div class="row">
-                                    <div class="col-xs-8 col-md-8">
+                                    <div class="col-xs-6 col-md-6">
                                         <div class="form-group">
                                             <label>To Status</label>
                                             <div class="fg-line">
@@ -1439,6 +1473,14 @@
                                         </div>
 
 
+                                    </div>
+                                    <div class="col-xs-2 col-md-2">
+                                        <div ng-if="IsActiveStatusLibrary==true">
+                                            <label>&nbsp;</label>
+                                            <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
+                                                <i class="fa fa-plus-circle"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="col-xs-4 col-md-4">
                                         <div class="pull-right">
@@ -1737,7 +1779,7 @@
                                 <br />
 
                                 <div class="row">
-                                    <div class="col-xs-8 col-md-8">
+                                    <div class="col-xs-6 col-md-6">
 
                                         <div class="form-group">
                                             <label>New Unit of Measure <span>*</span></label>
@@ -1745,7 +1787,7 @@
                                                 <div class="select">
                                                     <select class="form-control" ng-model=" CurrentActiveObject.ConvertTransactionData.ToUOMID">
                                                         <option value="">None</option>
-                                                        <option ng-repeat="_optionValue in  UOMList" value="{{_optionValue.UnitOfMeasureID}}">{{_optionValue.UnitOfMeasureName}}</option>
+                                                        <option ng-repeat="_optionValue in  UOMList" value="{{_optionValue.UnitOfMeasureID}}" ng-selected="CheckUOMValues(CurrentActiveObject.ConvertTransactionData.ToUOMID,_optionValue.UnitOfMeasureID)?true:false">{{_optionValue.UnitOfMeasureName}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -1754,10 +1796,19 @@
 
 
                                     </div>
+
+                                    <div class="col-xs-2 col-md-2">
+                                        <div ng-if="IsActiveUOMLibrary==true">
+                                            <label>&nbsp;</label>
+                                            <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(1,$index)">
+                                                <i class="fa fa-plus-circle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                     <div class="col-xs-4 col-md-4">
                                         <div class="pull-right">
                                             <label>&nbsp;</label>
-                                            <button id="uom_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click=" FillUOMLineItems( CurrentActiveObject.ConvertTransactionData.ToUOMID, CurrentActiveObject.InventoryDataList.uId)">
+                                            <button id="uom_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click=" FillUOMLineItems(CurrentActiveObject.ConvertTransactionData.ToUOMID, CurrentActiveObject.InventoryDataList.uId,CurrentActiveObject.ConvertTransactionData.ToUOM)">
                                                 <i class="fa fa-thumb-tack"></i>
                                             </button>
                                         </div>
@@ -1825,7 +1876,7 @@
                                 </div>
                                 <br />
                                 <div class="row">
-                                    <div class="col-xs-8 col-md-8">
+                                    <div class="col-xs-6 col-md-6" >
                                         <div class="form-group">
                                             <label>Status</label>
                                             <div class="fg-line">
@@ -1839,6 +1890,14 @@
                                             </div>
                                         </div>
 
+                                    </div>
+                                    <div class="col-xs-2 col-md-2">
+                                        <div ng-if="IsActiveStatusLibrary==true">
+                                            <label>&nbsp;</label>
+                                            <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
+                                                <i class="fa fa-plus-circle"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="col-xs-4 col-md-4">
                                         <label>&nbsp;</label>
@@ -2781,7 +2840,7 @@
             <div style="text-align: center; border: 1px solid #eeeeee;">
                 <h4 style="font-size:20px;"><i class="fa fa-frown-o"></i> We're sorry !</h4>
                 <h4 style="font-size:15px;">We can't find the location you're looking for</h4>
-
+                <h5 ng-if="TrimValue(SearchLocationValue)!='' && IsActiveLocationLibrary==true">click to <span ng-click="filllocationAutoComplete()" style="cursor:pointer; color:#0083C7; font-size:20px;">{{SearchLocationValue}}</span>  for add in your list.</h5>
             </div>
         </div>
 
@@ -2815,6 +2874,40 @@
         </ul>
     </div>
 </div>
+
+
+<div style="background:#fff;" id="createnewlabel" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
+        <h4>Create new <span ng-if="CreateType==1">Unit of measure</span> <span ng-if="CreateType==2">Status</span></h4>
+    </div>
+
+    <div style="padding:12px;" class="modal-body">
+
+        <div class="form-group">
+            <label>Enter new <newtag ng-if="CreateType==1">Unit of measure</newtag> <newtag ng-if="CreateType==2">Status</newtag> </label>
+
+            <div class="input-group">
+                <input type="text" ng-model="CreateNewLabel" class="form-control" value="" />
+
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <button ng-disabled="CreateNewLabel==''" ng-click="SaveLabel(CreateType)" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button>
+
+                    <a href="#" data-dismiss="modal" class="btn btn-gray"> <i class="fa fa-times"></i> Cancel</a>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
 
 <a ng-click="showallmenu()" class="btn waves-effect {{CurrentHeaderClass}} btn-sm changebtn"><i class="fa fa-ellipsis-v"></i></a>
 
@@ -2863,7 +2956,6 @@
     $(init);
 
     function init() {
-        $('.changebtn').draggable();
         $('.changebtn').draggable();
     }
 

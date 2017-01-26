@@ -36,7 +36,13 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.ColumnList = [];
     $scope.CurrentCartBkup = [];
     $scope.UnitDataList = [];
+    $scope.CreateType = 0;
     $scope.CanAutoClear = false;
+    $scope.CurrentNewLabelIndex = -1;
+    $scope.CurrentLocationIndex = -1;
+    $scope.CreateNewLabel = "";
+
+
     function CheckScopeBeforeApply() {
         if (!$scope.$$phase) {
             $scope.$apply();
@@ -62,6 +68,145 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         $scope.$apply();
 
+    }
+
+    $scope.CreateNewModal = function (Type, _index) {
+        $scope.CreateType = Type;
+        $scope.CurrentNewLabelIndex = _index;
+
+        CheckScopeBeforeApply();
+        $("#createnewlabel").modal('show');
+    }
+    $scope.checkDuplicate = function (type) {
+
+
+        if (type == 1) {
+            for (var i = 0; i < $scope.UOMList.length; i++) {
+                if ($scope.UOMList[i].UnitOfMeasureName.toLowerCase() == $scope.CreateNewLabel.toLowerCase()) {
+                    return false;
+                }
+            }
+        }
+
+
+
+        if (type == 2) {
+            for (var i = 0; i < $scope.StatusList.length; i++) {
+                if ($scope.StatusList[i].StatusValue.toLowerCase() == $scope.CreateNewLabel.toLowerCase()) {
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
+    }
+
+
+    $scope.savestatus = function (Statusvalue) {
+
+        var _StatusValue = $.trim(Statusvalue);
+
+        if (_StatusValue != "") {
+
+            $scope.StatusToCreate = Statusvalue;
+            var authData = localStorageService.get('authorizationData');
+            if (authData) {
+                $scope.SecurityToken = authData.token;
+            }
+            $scope.IsProcessing = true;
+            var datatosend = { "StatusId": 0, "StatusValue": $scope.StatusToCreate };
+
+
+            $.ajax({
+                url: serviceBase + "CreateEditStatus",
+                type: 'POST',
+                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "_StatusVM": datatosend }),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (result) {
+
+                    $scope.IsProcessing = false;
+
+                    if (result.CreateEditStatusResult.Success == true) {
+
+                        if (result.CreateEditStatusResult.Payload == 1) {
+                            if ($scope.mode == 2) {
+                                ShowSuccess("Added");
+
+                            }
+
+
+
+
+                        }
+
+                        if (result.CreateEditStatusResult.Payload == 0) {
+
+                            log.warning("Already exist");
+                            $scope.$apply();
+                        }
+                    }
+                    else {
+                        $scope.ShowErrorMessage("Updating status", 3, 1, result.CreateEditStatusResult.Message)
+
+                    }
+
+                },
+                error: function (err) {
+                    $scope.IsProcessing = false;
+                    $scope.ShowErrorMessage("Updating Status", 2, 1, err.statusText);
+
+
+                },
+                complete: function () {
+                    $scope.IsProcessing = false;
+                }
+
+            });
+
+            $scope.$apply();
+
+        }
+
+    }
+    $scope.SaveLabel = function (Type) {
+        if ($scope.checkDuplicate(Type)) {
+
+            debugger;
+            if (Type == 1) {
+                var _uomobj = { UnitOfMeasureName: $scope.CreateNewLabel, UnitOfMeasureID: -2 };
+                $scope.UOMList.push(_uomobj);
+                CheckScopeBeforeApply();
+                if ($scope.CurrentNewLabelIndex != -1) {
+                    $scope.CurrentCart[$scope.CurrentNewLabelIndex].ConvertTransactionData.ToUOM = $scope.CreateNewLabel;
+                    $scope.CurrentCart[$scope.CurrentNewLabelIndex].ConvertTransactionData.ToUOMID = -2;
+                }
+            }
+
+
+            if (Type == 2) {
+                var _statusobj = { StatusValue: $scope.CreateNewLabel };
+                $scope.StatusList.push(_statusobj);
+                if ($scope.CurrentNewLabelIndex != -1) {
+                    if ($scope.CurrentOperation == "MoveTagUpdate") {
+                        $scope.CurrentCart[$scope.CurrentNewLabelIndex].MoveUpdateTagTransactionData.StatusToUpdate = $scope.CreateNewLabel;
+                    }
+                    if ($scope.CurrentOperation == "Update") {
+                        $scope.CurrentCart[$scope.CurrentNewLabelIndex].UpdateTransactionData.StatusToUpdate = $scope.CreateNewLabel;
+                    }
+                }
+
+                $scope.savestatus($scope.CreateNewLabel);
+            }
+            $scope.CreateNewLabel = "";
+            $scope.CurrentNewLabelIndex = -1;
+            CheckScopeBeforeApply();
+            $("#createnewlabel").modal('hide');
+        }
+        else {
+            log.error("This value already exist.");
+        }
     }
 
     function TryParseInt(str, defaultValue) {
@@ -1428,12 +1573,13 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
 
-    $scope.FillUOMLineItems = function (value, myid) {
+    $scope.FillUOMLineItems = function (value, myid, uom) {
         $scope.ToUOMID = value;
         if ($scope.ToUOMID != 0) {
             var k = 0;
             for (k = 0; k < $scope.CurrentCart.length; k++) {
                 $scope.CurrentCart[k].ConvertTransactionData.ToUOMID = $scope.ToUOMID;
+                $scope.CurrentCart[k].ConvertTransactionData.ToUOM = uom;
 
             }
 
@@ -2530,13 +2676,41 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
     };
+    $scope.filllocationAutoComplete = function () {
 
+        var k = 0;
+        for (k = 0; k < $scope.CurrentCart.length; k++) {
+
+            if ($scope.CurrentOperation == "MoveTagUpdate" && $scope.CurrentCart[k].InventoryID == $scope.currentinventoryid) {
+                $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocationText = $scope.SearchLocationValue;
+                $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation = 0;
+                break;
+            }
+
+            if ($scope.CurrentOperation == "Move" && $scope.CurrentCart[k].InventoryID == $scope.currentinventoryid) {
+                $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText = $scope.SearchLocationValue;
+                $scope.CurrentCart[k].MoveTransactionData.MoveToLocation = 0;
+                break;
+            }
+
+
+        }
+        $("#locationlistmodal").hide();
+        $(".activitycontent").show();
+        CheckScopeBeforeApply()
+
+    }
 
     $scope.FillLocation = function (value, text, id) {
 
+        var _canupdate = true;
+        if ($scope.IsActiveLocationLibrary == false && ($scope.ToLocID == 0 || $scope.ToLocID == "")) {
+            _canupdate = false;
+        }
 
-        $scope.ToLocID = value;
-        if ($scope.ToLocID != 0) {
+        if (_canupdate == true) {
+            $scope.ToLocID = value;
+
             var k = 0;
             for (k = 0; k < $scope.CurrentCart.length; k++) {
 
@@ -2565,7 +2739,23 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
 
     }
+    $scope.CheckUOMValues = function (firstValue, secondValue) {
+        if (firstValue != undefined && firstValue != null && firstValue != "") {
+            firstValue = firstValue;
+        }
 
+        if (secondValue != undefined && secondValue != null && secondValue != "") {
+            secondValue = secondValue;
+        }
+
+        if (firstValue == secondValue) {
+            debugger;
+
+            return true;
+        }
+
+        return false;
+    }
     $scope.CheckStatusValues = function (firstValue, secondValue) {
         if (firstValue != undefined && firstValue != null && firstValue != "") {
             firstValue = firstValue.toLowerCase();
@@ -2576,6 +2766,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
 
         if (firstValue == secondValue) {
+            debugger;
+
             return true;
         }
 
@@ -2828,6 +3020,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     };
 
     function BuildMultipleData() {
+        debugger;
+
         var dt = new Date();
         var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate() - 1, 0, 0, 0, 0));
         var wcfDateStr = dt1.toMSJSON();
@@ -2888,7 +3082,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 ToLocationID: 0,
                 ToUomID: 0,
                 ToConvertedQuantity: 0,
-                ToStatus: ""
+                ToStatus: "",
+                ToLocation: "",
+                ToUom: ""
             },
             CustomData: BuildCustomArrayData()
         };
@@ -2924,7 +3120,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 ToLocationID: 0,
                 ToUomID: 0,
                 ToConvertedQuantity: 0,
-                ToStatus: ""
+                ToStatus: "",
+                ToLocation: "",
+                ToUom: ""
             },
             CustomData: BuildCustomArrayDataSelector("#transactionForm1")
         };
@@ -2959,18 +3157,140 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 ToLocationID: 0,
                 ToUomID: 0,
                 ToConvertedQuantity: 0,
-                ToStatus: ""
+                ToStatus: "",
+                ToLocation: "",
+                ToUom: ""
+
             },
             CustomData: BuildCustomArrayDataSelector("#transactionForm2")
         };
 
         for (_i = 0; _i < $scope.CurrentCart.length; _i++) {
+
+
+
+             _MyObjdata = {
+                InvID: 0,
+                Transaction: {
+                    itAID: 0,
+                    itAction: $scope._CurrentAction,
+                    itBatchID: 0,
+                    itCostPerUnit: 0,
+                    itID: 0,
+                    itInvID: 0,
+                    itLID: 0,
+                    itPID: 0,
+                    itParentTransID: 0,
+                    itQtyChange: 0,
+                    itReqValue: "",
+                    itSourceID: 1,
+                    itStatusValue: "",
+                    itUpdateDate: wcfDateStr123,
+                    itUOMID: 0,
+                    itUncontrolled: 0,
+                    itUniqueDate: wcfDateStr,
+                    itUnitDate2: wcfDateStr,
+                    itUnitNumber1: 0,
+                    itUnitNumber2: 0,
+                    itUnitTag2: "",
+                    itUnitTag3: ""
+                },
+                Targets: {
+                    ToLocationID: 0,
+                    ToUomID: 0,
+                    ToConvertedQuantity: 0,
+                    ToStatus: "",
+                    ToLocation: "",
+                    ToUom: ""
+                },
+                CustomData: BuildCustomArrayData()
+            };
+
+
+             _MyObjdata1 = {
+                InvID: 0,
+                Transaction: {
+                    itAID: 0,
+                    itAction: $scope._CurrentAction,
+                    itBatchID: 0,
+                    itCostPerUnit: 0,
+                    itID: 0,
+                    itInvID: 0,
+                    itLID: 0,
+                    itPID: 0,
+                    itParentTransID: 0,
+                    itQtyChange: 0,
+                    itReqValue: "",
+                    itSourceID: 1,
+                    itStatusValue: "",
+                    itUpdateDate: wcfDateStr123,
+                    itUOMID: 0,
+                    itUncontrolled: 0,
+                    itUniqueDate: wcfDateStr,
+                    itUnitDate2: wcfDateStr,
+                    itUnitNumber1: 0,
+                    itUnitNumber2: 0,
+                    itUnitTag2: "",
+                    itUnitTag3: ""
+                },
+                Targets: {
+                    ToLocationID: 0,
+                    ToUomID: 0,
+                    ToConvertedQuantity: 0,
+                    ToStatus: "",
+                    ToLocation: "",
+                    ToUom: ""
+                },
+                CustomData: BuildCustomArrayDataSelector("#transactionForm1")
+            };
+
+             _MyObjdata2 = {
+                InvID: 0,
+                Transaction: {
+                    itAID: 0,
+                    itAction: $scope._CurrentAction,
+                    itBatchID: 0,
+                    itCostPerUnit: 0,
+                    itID: 0,
+                    itInvID: 0,
+                    itLID: 0,
+                    itPID: 0,
+                    itParentTransID: 0,
+                    itQtyChange: 0,
+                    itReqValue: "",
+                    itSourceID: 1,
+                    itStatusValue: "",
+                    itUpdateDate: wcfDateStr123,
+                    itUOMID: 0,
+                    itUncontrolled: 0,
+                    itUniqueDate: wcfDateStr,
+                    itUnitDate2: wcfDateStr,
+                    itUnitNumber1: 0,
+                    itUnitNumber2: 0,
+                    itUnitTag2: "",
+                    itUnitTag3: ""
+                },
+                Targets: {
+                    ToLocationID: 0,
+                    ToUomID: 0,
+                    ToConvertedQuantity: 0,
+                    ToStatus: "",
+                    ToLocation: "",
+                    ToUom: ""
+
+                },
+                CustomData: BuildCustomArrayDataSelector("#transactionForm2")
+            };
+
+
             var _OriginalAction = $scope.CurrentCart[_i].ActionPerformed;
             // k = $scope.IsSingleMode == true ? _i : 0;
             k = _i;
             var _TempQty = $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity;
             var _TempStatus = $scope.CurrentCart[_i].InventoryDataList.iStatusValue;
             var _TempLocID = $scope.CurrentCart[_i].InventoryDataList.iLID;
+            var _TempLocText = "";
+            var _TempUOM = "";
             var IsAdjustOnData = "False";
             if ($scope.CurrentOperation == "Convert") {
                 _TempQty = $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity;
@@ -2980,8 +3300,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 _TempQty = $scope.CurrentCart[k].MoveTransactionData.ActionQuantity;
                 _TempStatus = $scope.CurrentCart[k].MoveTransactionData.StatusToUpdate;
-                _TempLocID = $scope.CurrentCart[k].MoveTransactionData.MoveToLocation;
-
+                _TempLocID = $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "" ? 0 : $scope.CurrentCart[k].MoveTransactionData.MoveToLocation;
+                _TempLocText = $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText;
+                _MyObjdata.Targets.ToLocation = _TempLocText;
+                _MyObjdata1.Targets.ToLocation = _TempLocText;
+                _MyObjdata2.Targets.ToLocation = _TempLocText;
             }
 
 
@@ -2989,8 +3312,19 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 _TempQty = $scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity;
                 _TempStatus = $scope.CurrentCart[k].MoveUpdateTagTransactionData.StatusToUpdate;
-                _TempLocID = $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation;
+                _TempLocID = $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation == "" ? 0 : $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation;
+                _TempLocText = $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocationText;
+                _MyObjdata.Targets.ToLocation = _TempLocText;
+                _MyObjdata1.Targets.ToLocation = _TempLocText;
+                _MyObjdata2.Targets.ToLocation = _TempLocText;
 
+            }
+
+            if ($scope.CurrentOperation == "Convert") {
+                _TempUOM = $scope.CurrentCart[k].ConvertTransactionData.ToUOM;
+                _MyObjdata.Targets.ToUom = _TempUOM;
+                _MyObjdata1.Targets.ToUom = _TempUOM;
+                _MyObjdata2.Targets.ToUom = _TempUOM;
             }
 
             if ($scope.CurrentOperation == "Adjust") {
@@ -3190,6 +3524,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             }
 
         }
+
+        console.log(_myData);
         return _myData;
 
     }
@@ -3898,14 +4234,13 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     var today = now.getFullYear() + "-" + (month) + "-" + (day);
 
 
-    setTimeout(function () { $('.itUpdateDate').val(today)  }, 1000);
+    setTimeout(function () { $('.itUpdateDate').val(today) }, 1000);
 
     setTimeout(function () { $('.FormDateType').val(today); }, 1000);
 
 
     $scope.ValidateObjectVM = function () {
         $scope.AffectedItemIds = [];
-
 
         var k = 0;
         var _totalLength = $scope.CurrentCart.length;
@@ -3955,9 +4290,39 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             }
                             else if ($scope.CurrentCart[k].ConvertTransactionData.ToUOMID == null || $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == "") {
-                                $scope.IssueType = 21;
+
+
+
+                                if ($scope.CurrentCart[k].ConvertTransactionData.ToUOMID == null || $scope.CurrentCart[k].ConvertTransactionData.ToUOM == "") {
+
+
+                                    $scope.IssueType = 21;
+                                    return true;
+
+                                    break;
+                                }
+
+
+
+                                else if ($scope.IsActiveUOMLibrary == true && $scope.CurrentCart[k].ConvertTransactionData.ToUOM == "") {
+                                    $scope.IssueType = 21;
+                                    return true;
+
+                                    break;
+
+                                }
+                                else if ($scope.IsActiveUOMLibrary == false && $scope.CurrentCart[k].ConvertTransactionData.ToUOMID == "") {
+                                    $scope.IssueType = 21;
+                                    return true;
+
+                                    break;
+
+                                }
                             }
-                            $scope.GoToStep(k);
+                            else {
+                                $scope.GoToStep(k);
+
+                            }
                             CheckScopeBeforeApply();;
                             return true;
 
@@ -4000,14 +4365,23 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                                 $scope.IssueType = 3;
                             }
 
-                            else if ($scope.CurrentCart[k].MoveTransactionData.MoveToLocation == null || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "") {
-                                $scope.IssueType = 32;
-                            }
-                            $scope.GoToStep(k);
-                            CheckScopeBeforeApply();
-                            return true;
 
-                            break;
+
+                            else if ($scope.IsActiveLocationLibrary == true && $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText == "") {
+                                $scope.IssueType = 32;
+                                return true;
+
+                                break;
+
+                            }
+                            else if ($scope.IsActiveLocationLibrary == false && $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "") {
+                                $scope.IssueType = 32;
+                                return true;
+
+                                break;
+
+                            }
+
                         }
                         else if ($scope.CurrentCart[k].MoveTransactionData.MoveToLocation == $scope.CurrentCart[k].InventoryDataList.iLID) {
                             $scope.IssueType = 31;
@@ -4064,14 +4438,24 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                                 $scope.IssueType = 3;
                             }
 
-                            else if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation == null || $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation == "") {
-                                $scope.IssueType = 32;
-                            }
-                            $scope.GoToStep(k);
-                            CheckScopeBeforeApply();
-                            return true;
 
-                            break;
+
+                            else if ($scope.IsActiveLocationLibrary == true && $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocationText == "") {
+                                $scope.IssueType = 32;
+                                return true;
+
+                                break;
+
+                            }
+                            else if ($scope.IsActiveLocationLibrary == false && $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation == "") {
+                                $scope.IssueType = 32;
+                                return true;
+
+                                break;
+
+                            }
+
+
                         }
 
 
