@@ -217,6 +217,18 @@ label {
     transform: rotate(45deg);
 }
 
+
+.smallBtn
+{  
+    padding: 0px;
+        height: 40px;
+    width: 40px;
+    background: #128ece;
+    border-radius: 100%;
+    color: #fff !important;
+  
+
+}
 .movepin {
     -ms-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
