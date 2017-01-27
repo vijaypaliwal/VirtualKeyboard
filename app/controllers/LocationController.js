@@ -315,11 +315,31 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                         }
 
                         if ($scope.mode == 3) {
-                            ShowSuccess("Updated");
-                            $scope.mode = 1;
-                            $scope.GetLocations();
-                        }
 
+                            debugger;
+
+
+                            $scope.similar = false;
+
+
+                            for (var i = 0; i < $scope.Locations.length; i++) {
+
+                                debugger;
+
+                                if ($scope.Locations[i].LocationName === $scope.locationdata.LocationName) {
+                                    log.warning("Already exist or change some value");
+                                    $scope.similar = true;
+                                }
+                            }
+
+
+                            if ($scope.similar == false) {
+                                ShowSuccess("Updated");
+                                $scope.mode = 1;
+                                $scope.GetLocations();
+                            }
+
+                        }
 
 
                       //  $scope.SearchData.SearchValue = "";
