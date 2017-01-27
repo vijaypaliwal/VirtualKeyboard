@@ -4367,7 +4367,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
 
-                            else if ($scopeIsActiveLocationLibrary==true && $scope.checkpermission('URL:Manage/Location')==true&& $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText == "") {
+                            else if ($scope.IsActiveLocationLibrary==true && $scope.checkpermission('URL:Manage/Location')==true&& $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText == "") {
                                 $scope.IssueType = 32;
                                 return true;
 
@@ -4440,7 +4440,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
 
-                            else if ($scopeIsActiveLocationLibrary==true && $scope.checkpermission('URL:Manage/Location')==true && $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocationText == "") {
+                            else if ($scope.IsActiveLocationLibrary==true && $scope.checkpermission('URL:Manage/Location')==true && $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocationText == "") {
                                 $scope.IssueType = 32;
                                 return true;
 
