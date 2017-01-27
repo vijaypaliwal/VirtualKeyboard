@@ -219,6 +219,8 @@
 <a class="cd-top" onclick="scrollToTop()" title="Go to top"><i class="fa fa-arrow-up"></i></a>
 
 
+
+
 <a ng-click="Openbottommenu()" class="menubtn waves-effect">
     <i class="fa fa-bars"></i>
 </a>
@@ -322,9 +324,6 @@
 
         $('html, body').animate({ scrollTop: 0 }, 500, 'linear');
     }
-
-
-
     $(window).scroll(function () {
         ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
         if ($(this).scrollTop() > offset_opacity) {
