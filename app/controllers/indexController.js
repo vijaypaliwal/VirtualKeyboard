@@ -107,15 +107,9 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                },
                error: function (response) {
 
-                   alert("Error");
-
-                   //   log.error(response.statusText);
-                   //    $scope.ShowErrorMessage("Custom column's data", 2, 1, response.statusText);
-
-                   //$scope.InventoryObject.Location = 678030;
+     
                },
                complete: function () {
-
 
 
                }
@@ -605,7 +599,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
              },
              error: function (err) {
-                 alert(err.status);
+                
                  if (err.status == 200 || err.status == "200") {
                      log.success("Image uploaded successfully please refresh grid to see the uploaded image.")
                  }
