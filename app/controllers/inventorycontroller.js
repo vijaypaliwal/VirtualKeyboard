@@ -2704,7 +2704,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                     $(_id).val(resultvalue);
-
+                    $(_id).trigger("input");
                     if (deviceType == 'iPhone') {
 
                         mySwiper.swipeNext();
@@ -2846,7 +2846,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                 $(_id).val(resultvalue);
-
+                $(_id).trigger("input");
                 mySwiper.swipeNext();
 
                 CheckScopeBeforeApply();
