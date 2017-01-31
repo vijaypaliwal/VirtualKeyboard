@@ -769,3 +769,6 @@ input:checked + .slider:before {
         -o-transition: .4s;
         transition: .4s;
     }
+.form-group {
+        margin-bottom: 0px;
+    }
