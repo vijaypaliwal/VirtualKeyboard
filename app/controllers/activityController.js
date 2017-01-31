@@ -2790,27 +2790,87 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
     };
+
+    $scope.savelocation = function (value) {
+
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        var datatosend = { "LocationID": 0, "LocationName": value, "LocationZone": "", "LocationDescription": "" };
+
+        $scope.IsProcessing = true;
+
+        $.ajax({
+            url: serviceBase + "CreateEditLocation",
+            type: 'POST',
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "_Location": datatosend }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (result) {
+                $scope.IsProcessing = false;
+
+                if (result.CreateEditLocationResult.Success == true) {
+
+                    if (result.CreateEditLocationResult.Payload == 1) {
+                       
+
+                        $scope.OnChangeLocationNameFunction();
+
+                    }
+
+                    if (result.CreateEditLocationResult.Payload == 0) {
+
+                        log.warning("Already exist");
+                    }
+
+
+                }
+                else {
+                    $scope.ShowErrorMessage("Updating location", 1, 1, result.CreateEditLocationResult.Message)
+
+                }
+
+            },
+            error: function (err) {
+                $scope.ShowErrorMessage("Updating location", 2, 1, err.statusText);
+
+
+
+            },
+            complete: function () {
+            }
+
+        });
+
+
+
+    }
     $scope.filllocationAutoComplete = function () {
 
-        var k = 0;
-        for (k = 0; k < $scope.CurrentCart.length; k++) {
 
-            if ($scope.CurrentOperation == "MoveTagUpdate" && $scope.CurrentCart[k].InventoryID == $scope.currentinventoryid) {
-                $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocationText = $scope.SearchLocationValue;
-                $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation = 0;
-                break;
-            }
+        $scope.savelocation($scope.SearchLocationValue);
+        //var k = 0;
+        //for (k = 0; k < $scope.CurrentCart.length; k++) {
 
-            if ($scope.CurrentOperation == "Move" && $scope.CurrentCart[k].InventoryID == $scope.currentinventoryid) {
-                $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText = $scope.SearchLocationValue;
-                $scope.CurrentCart[k].MoveTransactionData.MoveToLocation = 0;
-                break;
-            }
+        //    if ($scope.CurrentOperation == "MoveTagUpdate" && $scope.CurrentCart[k].InventoryID == $scope.currentinventoryid) {
+        //        $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocationText = $scope.SearchLocationValue;
+        //        $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation = 0;
+        //        break;
+        //    }
+
+        //    if ($scope.CurrentOperation == "Move" && $scope.CurrentCart[k].InventoryID == $scope.currentinventoryid) {
+        //        $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText = $scope.SearchLocationValue;
+        //        $scope.CurrentCart[k].MoveTransactionData.MoveToLocation = 0;
+        //        break;
+        //    }
 
 
-        }
-        $("#locationlistmodal").hide();
-        $(".activitycontent").show();
+        //}
+        //$("#locationlistmodal").hide();
+       // $(".activitycontent").show();
         CheckScopeBeforeApply()
 
     }
