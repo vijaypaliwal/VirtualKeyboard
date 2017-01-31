@@ -382,7 +382,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             }
 
             $(_ID).val(_value);
-            $(_ID).trigger("input");
+         //   $(_ID).trigger("input");
             switch (Type) {
                 case 1:
                     for (var i = 0; i < $scope.CurrentCart.length; i++) {
@@ -453,7 +453,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 }
             }
             $(_ID).val(_value);
-            $(_ID).trigger("input");
+           // $(_ID).trigger("input");
 
             for (var i = 0; i < $scope.CurrentCart.length; i++) {
                 if ($scope.CurrentCart[i].InventoryID == inventoryID) {
