@@ -170,17 +170,131 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
 
     }
+    $scope.saveUOM = function (value, _index) {
+
+        var _StatusValue = $.trim(value);
+        var _UOM = { ID: 0, value: "" };
+
+        if (_StatusValue != "") {
+
+
+
+            $scope.UOMToCreate = value;
+            var authData = localStorageService.get('authorizationData');
+            if (authData) {
+                $scope.SecurityToken = authData.token;
+            }
+
+            var datatosend = { "UomID": 0, "UOM": $scope.UOMToCreate };
+
+
+            $.ajax({
+                url: serviceBase + "CreateEditUOM",
+                type: 'POST',
+                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "UOMModel": datatosend }),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (result) {
+
+
+                    if (result.CreateEditUOMResult.Success == true) {
+
+                        if (result.CreateEditUOMResult.Payload.ID == 1) {
+
+                            _UOM.ID = result.CreateEditUOMResult.Payload.NewUOM;
+                            _UOM.value = result.CreateEditUOMResult.Payload.OldUOM;
+
+                            $scope.CurrentCart[_index].ConvertTransactionData.ToUOM = _UOM.value;
+                            $scope.CurrentCart[_index].ConvertTransactionData.ToUOMID = _UOM.ID;
+                            var _uomobj = { UnitOfMeasureName: _UOM.value, UnitOfMeasureID: _UOM.ID };
+                            $scope.UOMList.push(_uomobj);
+                            CheckScopeBeforeApply();
+                        }
+
+
+
+                        if (result.CreateEditUOMResult.Payload.ID == 0) {
+
+
+
+                            var _headerText = result.CreateEditUOMResult.Payload.OldUOM + " into " + result.CreateEditUOMResult.Payload.NewUOM + " ?"
+                            var _OldUOM = result.CreateEditUOMResult.Payload.OldUOM;
+                            var _NewUOM = result.CreateEditUOMResult.Payload.NewUOM;
+                            var box = bootbox.confirm(_headerText, function (result) {
+                                if (result) {
+
+                                    $.ajax({
+                                        url: serviceBase + "MergeUOM",
+                                        type: 'POST',
+                                        data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "OldUOM": _OldUOM, "NewUOM": _NewUOM }),
+                                        dataType: 'json',
+                                        contentType: 'application/json',
+                                        success: function (result) {
+
+                                            if (result.MergeUOMResult.Success == true) {
+
+
+                                            }
+                                            else {
+                                                $scope.ShowErrorMessage("Merging UOM", 1, 1, result.MergeUOMResult.Message)
+
+                                            }
+
+                                        },
+                                        error: function (err) {
+                                            $scope.ShowErrorMessage("Merging UOM", 2, 1, err.statusText);
+
+
+
+                                        },
+                                        complete: function () {
+                                        }
+
+                                    });
+                                }
+                            });
+
+                            var _msg = "The new unit of measure name you have chosen is already in use.  If you like, you may merge all existing records at the unit of measure, " + _OldUOM + ", into the existing unit of measure called " + _NewUOM + ".<br /><br />If you proceed, all existing references to " + _OldUOM + " will be removed.  <strong>This may take up to a minute, and the action cannot be undone.</strong><br /><br /> Would you like to proceed?"
+
+                            box.on("shown.bs.modal", function () {
+                                $(".mybootboxbody").html(_msg);
+
+                            });
+
+
+
+                            CheckScopeBeforeApply();
+                        }
+                    }
+                    else {
+                        $scope.ShowErrorMessage("Updating UOM", 1, 1, result.CreateEditUOMResult.Message)
+
+                    }
+                },
+                error: function (err) {
+                    $scope.IsProcessing = false;
+                    $scope.ShowErrorMessage("Updating UOM", 2, 1, err.statusText);
+
+
+
+                },
+                complete: function () {
+                    $scope.IsProcessing = false;
+                }
+            });
+        }
+
+        return _UOM;
+    }
     $scope.SaveLabel = function (Type) {
         if ($scope.checkDuplicate(Type)) {
 
-            debugger;
             if (Type == 1) {
-                var _uomobj = { UnitOfMeasureName: $scope.CreateNewLabel, UnitOfMeasureID: -2 };
-                $scope.UOMList.push(_uomobj);
+            
                 CheckScopeBeforeApply();
                 if ($scope.CurrentNewLabelIndex != -1) {
-                    $scope.CurrentCart[$scope.CurrentNewLabelIndex].ConvertTransactionData.ToUOM = $scope.CreateNewLabel;
-                    $scope.CurrentCart[$scope.CurrentNewLabelIndex].ConvertTransactionData.ToUOMID = -2;
+                    $scope.saveUOM($scope.CreateNewLabel, $scope.CurrentNewLabelIndex);
+
                 }
             }
 
