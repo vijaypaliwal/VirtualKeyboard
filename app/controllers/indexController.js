@@ -633,7 +633,7 @@ app.directive('ngModel', [
 
 
                     scope.$watch(attrs.ngModel, function (newValue, oldValue) {
-                        element.trigger("input");
+                        element.trigger("change");
                     });
                 }
             };
