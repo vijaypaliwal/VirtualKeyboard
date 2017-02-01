@@ -4369,32 +4369,30 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $(document)
     .on('focus', 'input,select', function () {
 
-        //  $cordovaKeyboard.disableScroll(true);
 
 
 
-        $('.collapsible-header').css("position", "absolute");
-        $('.collapsible-body').css('margin-top', '49px');
-        $('.header').css("position", "relative");
-        $('.iteminfopanel').css('margin-top', '0px');
-        $('.activityfields').css('margin-top', '0px');
-        $('.singlePanel').css('margin-top', '0px');
-        $('#transactionForm1').css('margin-top', '0px');
-        $('.bottombutton').css("position", "relative");
+        //$('.collapsible-header').css("position", "absolute");
+        //$('.collapsible-body').css('margin-top', '49px');
+        //$('.header').css("position", "relative");
+        //$('.iteminfopanel').css('margin-top', '0px');
+        //$('.activityfields').css('margin-top', '0px');
+        //$('.singlePanel').css('margin-top', '0px');
+        //$('#transactionForm1').css('margin-top', '0px');
+        //$('.bottombutton').css("position", "relative");
 
     })
     .on('blur', 'input,select', function () {
 
-        //  $cordovaKeyboard.disableScroll(false);
-        $('.collapsible-header').css("position", "fixed");
+        //$('.collapsible-header').css("position", "fixed");
 
-        $('.header').css("position", "fixed");
-        $('.iteminfopanel').css('margin-top', '80px');
-        $('.collapsible-body').css('margin-top', '85px');
-        $('.activityfields').css('margin-top', '80px');
-        $('.singlePanel').css('margin-top', '35px');
-        $('#transactionForm1').css('margin-top', '85px');
-        $('.bottombutton').css("position", "fixed");
+        //$('.header').css("position", "fixed");
+        //$('.iteminfopanel').css('margin-top', '80px');
+        //$('.collapsible-body').css('margin-top', '85px');
+        //$('.activityfields').css('margin-top', '80px');
+        //$('.singlePanel').css('margin-top', '35px');
+        //$('#transactionForm1').css('margin-top', '85px');
+        //$('.bottombutton').css("position", "fixed");
 
     });
 
