@@ -2814,14 +2814,14 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 if (result.CreateEditLocationResult.Success == true) {
 
-                    if (result.CreateEditLocationResult.Payload == 1) {
+                    if (result.CreateEditLocationResult.Payload.ID == 1) {
                        
 
                         $scope.OnChangeLocationNameFunction();
 
                     }
 
-                    if (result.CreateEditLocationResult.Payload == 0) {
+                    if (result.CreateEditLocationResult.Payload.ID == 0) {
 
                         log.warning("Already exist");
                     }
