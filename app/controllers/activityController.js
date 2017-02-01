@@ -4523,7 +4523,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     }
                     break;
                 case "Move":
-
+                    debugger;
                     for (k = 0; k < _totalLength; k++) {
                         if ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity == undefined || $scope.CurrentCart[k].MoveTransactionData.ActionQuantity == null || $scope.CurrentCart[k].MoveTransactionData.ActionQuantity == "" || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "") {
                             if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
@@ -4535,6 +4535,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
                                 $scope.IssueType = 3;
+                                return true;
+
+                                break;
                             }
 
 
@@ -4608,6 +4611,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
                                 $scope.IssueType = 3;
+                                return true;
+
+                                break;
                             }
 
 
