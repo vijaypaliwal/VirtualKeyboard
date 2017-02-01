@@ -4372,27 +4372,28 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
 
-        //$('.collapsible-header').css("position", "absolute");
-        //$('.collapsible-body').css('margin-top', '49px');
-        //$('.header').css("position", "relative");
-        //$('.iteminfopanel').css('margin-top', '0px');
-        //$('.activityfields').css('margin-top', '0px');
-        //$('.singlePanel').css('margin-top', '0px');
-        //$('#transactionForm1').css('margin-top', '0px');
-        //$('.bottombutton').css("position", "relative");
+        $('.collapsible-header').css("position", "relative");
+       $('.collapsible-body').css('margin-top', '2px');
+        $('.header').css("position", "relative");
+        $('.iteminfopanel').css('margin-top', '5px');
+        $('.collapsible-header').css('top', '0px');
+        $('.activityfields').css('margin-top', '0px');
+        $('.singlePanel').css('margin-top', '0px');
+        $('#transactionForm1').css('margin-top', '0px');
+        $('.bottombutton').css("position", "relative");
 
     })
     .on('blur', 'input,select', function () {
 
-        //$('.collapsible-header').css("position", "fixed");
-
-        //$('.header').css("position", "fixed");
-        //$('.iteminfopanel').css('margin-top', '80px');
-        //$('.collapsible-body').css('margin-top', '85px');
-        //$('.activityfields').css('margin-top', '80px');
-        //$('.singlePanel').css('margin-top', '35px');
-        //$('#transactionForm1').css('margin-top', '85px');
-        //$('.bottombutton').css("position", "fixed");
+        $('.collapsible-header').css("position", "fixed");
+        $('.collapsible-header').css('top', '36px');
+        $('.header').css("position", "fixed");
+        $('.iteminfopanel').css('margin-top', '80px');
+        $('.collapsible-body').css('margin-top', '85px');
+        $('.activityfields').css('margin-top', '80px');
+        $('.singlePanel').css('margin-top', '35px');
+        $('#transactionForm1').css('margin-top', '85px');
+        $('.bottombutton').css("position", "fixed");
 
     });
 
