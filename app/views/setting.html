@@ -1,30 +1,6 @@
 ﻿<link href="css/setting.css" rel="stylesheet" />
 
-<style>
-    .btn-indigo {
-        background-color: #3f51b5 !important;
-        color:#fff !important;
-    }
 
-    .btn-purple {
-        background-color: #9c27b0 !important;
-        color: #fff !important;
-    }
-
-    .restricted {
-        color: brown !important;
-        background-color: pink !important;
-    }
-
-    .lime {
-        background: #cddc39 !important; 
-    }
-
-    .btn-lightgreen{
-        background:#FF5722;
-        color:#fff;
-    }
-</style>
 
 <div class="title-header">
     <div class="row">
@@ -176,34 +152,23 @@
         <div class="row">
             <div class="col-xs-12">
                 <i class="fa fa-ban"></i> Select Inventory Columns
-
             </div>
-
-
-
-
         </div>
-
-
-
     </button>
   
     <button type="button" ng-if="checkpermission('URL:Admin/MyInventoryColumn')==true" ng-click="GoTo('/mobileorder')" class="waves-effect waves-light btn-large btn-warning width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-9">
                 <i class="fa fa-sort-alpha-asc"></i> Arrange Inventory Columns
-
             </div>
 
 
             <div class="col-xs-3">
-
                 <div ng-if="Iscolumnloading == true"> <img height="30" width="30" src="img/loader1.gif" alt="Alternate Text" /></div>
                 <div ng-if="Iscolumnloading == false">
                     {{ columnlist2.length}}
                 </div>
             </div>
-
         </div>
 
 
@@ -309,3 +274,29 @@
         </ul>
     </div>
 </div>
+
+<style>
+    .btn-indigo {
+        background-color: #3f51b5 !important;
+        color: #fff !important;
+    }
+
+    .btn-purple {
+        background-color: #9c27b0 !important;
+        color: #fff !important;
+    }
+
+    .restricted {
+        color: brown !important;
+        background-color: pink !important;
+    }
+
+    .lime {
+        background: #cddc39 !important;
+    }
+
+    .btn-lightgreen {
+        background: #FF5722;
+        color: #fff;
+    }
+</style>

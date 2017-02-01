@@ -772,3 +772,30 @@ input:checked + .slider:before {
 .form-group {
         margin-bottom: 0px;
     }
+
+ .singleSlide .row {
+        margin-left:0 !important;
+        margin-right:0 !important;
+    }
+
+    .Newrow{
+        margin-left:0 !important;
+        margin-right:0 !important;
+    }
+
+    .singlePanel .col-xs-8 {
+        padding-left:0;
+    }
+
+    .swiper-slide.customActivityData .form-group {
+       
+    }
+
+
+    .modal-open .singleSlide {
+        display: none;
+    }
+
+    .modal-open .Newrow {
+        display: none;
+    }
