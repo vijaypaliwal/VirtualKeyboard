@@ -4372,11 +4372,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
 
-        $('.collapsible-header').css("position", "relative");
-       $('.collapsible-body').css('margin-top', '2px');
+        $('.collapsible-header').css("position", "absolute");
+        $('.collapsible-body').css('margin-top', '49px');
         $('.header').css("position", "relative");
-        $('.iteminfopanel').css('margin-top', '5px');
-        $('.collapsible-header').css('top', '0px');
+        $('.iteminfopanel').css('margin-top', '0px');
         $('.activityfields').css('margin-top', '0px');
         $('.singlePanel').css('margin-top', '0px');
         $('#transactionForm1').css('margin-top', '0px');
@@ -4386,7 +4385,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     .on('blur', 'input,select', function () {
 
         $('.collapsible-header').css("position", "fixed");
-        $('.collapsible-header').css('top', '36px');
+
         $('.header').css("position", "fixed");
         $('.iteminfopanel').css('margin-top', '80px');
         $('.collapsible-body').css('margin-top', '85px');
