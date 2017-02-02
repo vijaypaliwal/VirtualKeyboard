@@ -46,7 +46,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             return 1;
         }
         else {
-            return "";
+            return 0;
         }
 
     }
