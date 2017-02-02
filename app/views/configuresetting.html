@@ -17,39 +17,39 @@
 
 <a ng-if="Issearch==true" ng-click="hidefilter()" class="waves-effect btn roundbtntitle"><i class="fa fa-times"></i> </a>
 
-<div class="top45">
+<div class="top45 ">
 
-    <div class="well">
-    
+    <div class="well" style="display:none;">
 
-            <div class="row">
-                <div class="col-xs-8">
 
-                    <a class="text">Manage Auto Clear</a>
-                    <!--<small class="smallText">{{_obj.Show}}</small>-->
-                </div>
-                <div class="col-xs-4">
-                    <div class="btn-group custombtnGroup">
-                        <label class="switch1">
+        <div class="row">
+            <div class="col-xs-8">
 
-                            <input type="checkbox" ng-change="UpdateSettings(SettingsVm.AutoClear,1)" ng-model="SettingsVm.AutoClear">
-                            <div class="slider round"></div>
-                        </label>
+                <a class="text">Manage Auto Clear</a>
+                <!--<small class="smallText">{{_obj.Show}}</small>-->
+            </div>
+            <div class="col-xs-4">
+                <div class="btn-group custombtnGroup">
+                    <label class="switch1">
 
-                    </div>
-                </div>
+                        <input type="checkbox" ng-change="UpdateSettings(SettingsVm.AutoClear,1)" ng-model="SettingsVm.AutoClear">
+                        <div class="slider round"></div>
+                    </label>
 
-                <div class="col-xs-12">
-                    <p style="font-size:13px; color:#888">When 'On' this removes records when an activity causes their quantity to reach '0'. Most users should leave this 'On'.</p>
                 </div>
             </div>
 
-          
+            <div class="col-xs-12">
+                <p style="font-size:13px; color:#888">When 'On' this removes records when an activity causes their quantity to reach '0'. Most users should leave this 'On'.</p>
+            </div>
+        </div>
 
-      
+
+
+
     </div>
 
-    <div class="well">
+    <div class="well" style="display:none;">
         <div class="row">
 
 
@@ -74,11 +74,11 @@
             </div>
         </div>
 
-       
+
     </div>
 
 
-    <div class="well">
+    <div class="well" style="display:none;">
         <div class="row">
 
 
@@ -129,5 +129,23 @@
 </div>
 
 
+<script>
+      
 
+        var elements = $(".top45").find('.well');
+        var index = 0;
+      
+
+        for (var i = 2; i >= 0; i--) {
+            (function (ind) {
+                console.log(ind);
+                setTimeout(function () {
+                    elements[ind].style = "";
+                    elements[ind].className = ind%2==0?"well animated bounceInUp":"well animated bounceInUp";
+                }, 50 + (150 * ind));
+            })(i);
+        }
+           
+      
+</script>
 
