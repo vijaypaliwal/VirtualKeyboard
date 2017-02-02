@@ -1026,7 +1026,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 if ($scope.InventoryObject.UnitNumber2 == "") {
                     $scope.InventoryObject.UnitNumber2 = null;
                 }
-                $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity == "" ? 0 : $scope.InventoryObject.Quantity;
+                
+                $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity == "" || $scope.InventoryObject.Quantity == null || $scope.InventoryObject.Quantity == undefined ? 0 : $scope.InventoryObject.Quantity;
                 var _updateDateval = $scope.InventoryObject.UniqueDate;
 
                 if (_updateDateval != null && _updateDateval != "") {
