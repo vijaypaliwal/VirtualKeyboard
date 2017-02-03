@@ -32,13 +32,29 @@
     .list-group-item.selected {
         background: #e3e3e3;
     }
+
+
+        .list-group-item .col-xs-3{
+            padding-left:5px;
+            padding-right:5px;
+        }
+
+          .list-group-item .col-xs-7{
+            padding-left:5px;
+            padding-right:5px;
+        }
+
+            .list-group-item .col-xs-2{
+            padding-left:5px;
+            padding-right:5px;
+        }
     
     
      .btn-warning {
         height: 50px;
         width: 50px;
         line-height: 50px;
-        border-radius: 100%;
+      
         padding: 0px;
         text-align: center;
     }
@@ -54,16 +70,10 @@
         color: #8e8e8e;
         font-size:11px;
         margin-bottom:1px;
+           word-break:break-all;
     }
 
 
-    .list-group .fa-angle-right {
-        font-size: 50px;
-        position: absolute;
-        right: 0px;
-        top: 0;
-        color: #ccc;
-    }
 
     .loaderanimation {
         text-align: center;
@@ -72,3 +82,22 @@
         z-index: 10;
         width: 100%;
     }
+
+.btn-next {
+    height:50px;
+    width:50px;
+    border-radius:100%;
+    text-align:center;
+    line-height:50px;
+    padding:0;
+    color:#fff;
+    background:#2196F3;
+    float:right;
+}
+
+.btn-next i 
+{
+    color:#fff;
+    font-size:30px;
+
+}

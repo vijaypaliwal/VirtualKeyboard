@@ -190,37 +190,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-xs-8 col-md-8">
-                                                <div class="form-group">
-                                                    <label>Status</label>
-                                                    <div class="fg-line">
-                                                        <div class="select">
-
-
-
-                                                            <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
-                                                                <option value="">None</option>
-                                                                <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-
-                                            </div>
-                                            <div class="col-xs-4 col-md-4" ng-if="$index==0">
-
-                                                <label>&nbsp;</label>
-
-                                                <div class="pull-right">
-                                                    <button id="LineItems2_{{CurrentActiveObject.InventoryDataList.uId}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click="FillStatusLineItems2(CurrentActiveObject.MoveTransactionData.StatusToUpdate,CurrentActiveObject.InventoryDataList.uId)">
-                                                        <i class="fa fa-thumb-tack"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
 
                                     </div>
 
@@ -1327,47 +1297,7 @@
 
                                 </div>
                                 <br />
-                                <div class="row">
-                                    <div class="col-xs-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <div class="fg-line">
-                                                <div class="select">
-
-
-
-                                                    <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.StatusToUpdate">
-                                                        <option value="">None</option>
-                                                        <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-
-                                    <div class="col-xs-2 col-md-2">
-                                        <div ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true">
-                                            <label>&nbsp;</label>
-                                            <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
-                                                <i class="fa fa-plus-circle"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 col-md-4">
-
-                                        <label>&nbsp;</label>
-
-                                        <div class="pull-right">
-                                            <button id="LineItems2_{{CurrentActiveObject.InventoryDataList.uId}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click="FillStatusLineItems2(CurrentActiveObject.MoveTransactionData.StatusToUpdate,CurrentActiveObject.InventoryDataList.uId)">
-                                                <i class="fa fa-thumb-tack"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br />
+                                
                             </div>
 
 

@@ -993,7 +993,6 @@
   
         (function ($, window, document, undefined) {
 
-            debugger;
 
             var pluginName = "addClear";
 
@@ -1075,7 +1074,6 @@
                     });
 
                     $this.siblings(".add-clear-x").on('click.addclear', function (e) {
-                        debugger;
 
                       
 
@@ -1143,35 +1141,7 @@
     </script>
     <script>
 
-        function tog(v) { return v ? 'addClass' : 'removeClass'; }
-
-
-        $(document).on('input', 'input[type="text"],input[type="number"]', function () {
-            //$('input[type="text"]:input').addClear({
-            //    symbolClass: "fa fa-times-circle"
-            //});
-            //$('input[type="number"]:input').addClear({
-            //    symbolClass: "fa fa-times-circle"
-            //});
-
-            //$('input[type="password"]:input').addClear({
-            //    symbolClass: "fa fa-times-circle"
-            //});
-        });
-
-
-        //$(document).on('input', 'input[type="text"],input[type="number"]', function () {
-        //    $(this)[tog(this.value)]('x');
-        //}).on('mousemove', '.x', function (e) {
-
-        //    $(this)[tog(this.offsetWidth - 26 < e.clientX - this.getBoundingClientRect().left)]('onX');
-        //}).on('touchstart click', '.onX', function (ev) {
-        //    ev.preventDefault();
-        //    alert("into click");
-        //    $(':focus').blur();
-        //    $(this).removeClass('x onX').val('').change();
-        //    $(this).attr("value", "");
-        //});
+        
 
 
 

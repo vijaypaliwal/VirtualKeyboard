@@ -1,4 +1,8 @@
-
+.Reusedisabled{
+pointer-events: none;
+    opacity: 0.4;
+cursor:not-allowed;
+}
 
 
 .innerCols {

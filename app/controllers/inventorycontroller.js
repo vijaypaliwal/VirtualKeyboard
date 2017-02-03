@@ -18,7 +18,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.Isopendiv = true;
     $scope.InventoryObject = {
         IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", DefaultItemLocationID: 0, DefaultItemUOM: 0, pDefaultCost: 0, pTargetQty: null, pReorderQty: null, Quantity: "", Uom: "units", UomID: 0, Location: "In Stock", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
-        UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
+        UpdateDate: "", Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
         UnitTag3: "", CustomPartData: [], CustomTxnData: []
     };
 
@@ -427,6 +427,19 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         return result;
     }
     //var rString = randomString(10, '0123456789');
+
+    $scope.GetLastValueData=function(field,Type)
+    {
+        var _toCheckValue = "";
+        field = Type != undefined && Type != "" ? "Inv_" + field : field;
+        _toCheckValue = localStorageService.get(field);
+
+        _toCheckValue = _toCheckValue != undefined && $.trim(_toCheckValue) != "" ? _toCheckValue : "";
+
+        return _toCheckValue;
+
+             
+    }
     $scope.GetLastValue = function (field, id) {
 
 
@@ -470,6 +483,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $(id).trigger('change');
             $(id).trigger('input');
         }
+
         CheckScopeBeforeApply()
 
     }
@@ -1063,7 +1077,29 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
-                $scope.InventoryObject.UpdateDate = wcfDateStrUpd;
+                var _updateDateval67 = $scope.InventoryObject.UpdateDate;
+
+                if (_updateDateval67 != null && _updateDateval67 != "") {
+                    var wcfDateStr123 = null;
+                    var dsplit1 = _updateDateval67.split("-");
+
+                    var d122 = new Date(dsplit1[0], dsplit1[1] - 1, dsplit1[2]);
+
+                    var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
+
+                    d122.setDate(d122.getDate() + _genVar);
+                    var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
+                    wcfDateStr123 = d122.toMSJSON();
+
+                    $scope.InventoryObject.UpdateDate = wcfDateStr123;
+                }
+                else {
+                    
+                    $scope.InventoryObject.UpdateDate = wcfDateStrUpd;
+
+                }
+
+
 
                 var _updateDateval1 = $scope.InventoryObject.UnitDate2;
 
@@ -3585,5 +3621,25 @@ app.directive('myEnter', function () {
             }
         });
     };
+});
+
+
+app.directive('testCase', function () {
+    return {
+        restrict: 'A',
+        scope: {
+            'condition': '='
+        },
+        link: function (scope, element, attrs) {
+            scope.$watch('condition', function (condition) {
+                if(condition!=undefined && $.trim(condition)!=""){
+                    element.removeClass('Reusedisabled');
+                }
+                else{
+                    element.addClass('Reusedisabled');
+                };
+            });
+        }
+    }
 });
 

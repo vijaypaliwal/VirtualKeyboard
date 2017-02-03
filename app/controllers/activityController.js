@@ -2046,13 +2046,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     function AssignFirstObject() {
         if ($scope.CurrentCart.length > 0) {
             $scope._IsLoading = false;
-
             setTimeout(function () {
                 InitializeSwiper();
 
             }, 0);
         }
         CheckScopeBeforeApply();
+        $(".form-control").first().focus();
+        $("input[type='number']").trigger("change");
+
     }
 
     function ConverttoMsJsonDate(_DateValue) {
@@ -2181,7 +2183,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     function init() {
 
-        debugger;
+     
         $scope.CurrentCart = localStorageService.get("ActivityCart");
 
         var _CurrentAction = localStorageService.get("SelectedAction");
@@ -2197,7 +2199,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         GetActionType(_CurrentAction);
 
         for (var i = 0; i < $scope.CurrentCart.length; i++) {
-            //   UniqueDate
+           
             if ($scope.CurrentCart[i].ApplyTransactionData.UnitDate2 != undefined && $scope.CurrentCart[i].ApplyTransactionData.UnitDate2 != null && $.trim($scope.CurrentCart[i].ApplyTransactionData.UnitDate2) != "") {
 
                 var _date = angular.copy($scope.CurrentCart[i].ApplyTransactionData.UnitDate2);
@@ -2244,7 +2246,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $scope.CurrentCartBkup = angular.copy($scope.CurrentCart);
         $scope.GetActiveUnitDataField();
 
-        debugger;
+        
         if (localStorageService.get('AllowNegativeQuantity') != null && localStorageService.get('AllowNegativeQuantity') != undefined) {
             var _temp = localStorageService.get('AllowNegativeQuantity');
             if (_temp == 'true' || _temp == true) {
@@ -2260,9 +2262,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             $scope.AllowNegative = false;
             _AllowNegative = 'False';
         }
-        console.log(_AllowNegative);
+        
         CheckScopeBeforeApply();
-
+        
 
     }
 
@@ -2271,6 +2273,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         GetActionType(type);
         $scope.totalLength = $scope.IsSingleMode == true ? $scope.CurrentCart.length + 2 : 3;
         $scope.$apply();
+
+        setTimeout(function () {
+            $(".form-control").first().focus();
+            $("input[type='number']").trigger("change");
+        }, 500);
 
     }
 
@@ -2368,7 +2375,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
         }
-
+    
         CheckScopeBeforeApply();
     }
 
@@ -3467,7 +3474,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             if ($scope.CurrentOperation == "Move") {
 
                 _TempQty = $scope.CurrentCart[k].MoveTransactionData.ActionQuantity;
-                _TempStatus = $scope.CurrentCart[k].MoveTransactionData.StatusToUpdate;
+                _TempStatus = $scope.CurrentCart[_i].InventoryDataList.iStatusValue;
                 _TempLocID = $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "" ? 0 : $scope.CurrentCart[k].MoveTransactionData.MoveToLocation;
                 _TempLocText = $scope.CurrentCart[k].MoveTransactionData.MoveToLocationText;
                 _MyObjdata.Targets.ToLocation = _TempLocText;

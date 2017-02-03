@@ -350,6 +350,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.OpenmenuModal = function () {
 
+
         if ($("body").hasClass("modal-open")) {
             $("#myModal2").modal('hide');
 
@@ -362,6 +363,15 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
 
         }
+
+
+        if ($scope.ActualTotalRecords == 0) {
+          
+
+            $(".modal-backdrop").hide();
+
+        }
+
     }
 
 
@@ -1150,6 +1160,10 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     } else {
                         $scope.OpenmenuModal();
                         $(".searchtable").addClass("disablepointer");
+
+                     
+
+                      
                     }
 
 
