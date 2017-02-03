@@ -33,7 +33,7 @@ h4,
 h5,
 h6 {
   
-    text-shadow: rgba(0, 0, 0, .12) 0 0 1px;
+  
   
 }
 h1 {
@@ -1604,7 +1604,7 @@ li.your-comment {
     box-shadow: none;
     border: none;
     margin: 0;
-    background-color: #fafafa;
+    background-color: #eaeaea;
 }
 .checkout-header .collapsible-header {
     padding-top: 10px;
@@ -1617,6 +1617,8 @@ li.your-comment {
 }
 .checkout-header .collapsible-body {
     padding: 10px;
+    padding-left:0;
+    padding-right:0;
 }
 .checkout-header .collapsible-body .checkout-details {
     display: flex;
@@ -1638,7 +1640,8 @@ li.your-comment {
 .checkout-product-title h6 {
     margin-bottom: 0;
     margin-top: 0;
-    font-weight: 700;
+    padding-top:4px;
+   
   
 }
 .checkout-product-title h6 .right {

@@ -41,8 +41,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.CurrentNewLabelIndex = -1;
     $scope.CurrentLocationIndex = -1;
     $scope.CreateNewLabel = "";
-
-
+    $scope.LocationSearchList = [];
+    $scope.LocationList = [];
     function CheckScopeBeforeApply() {
         if (!$scope.$$phase) {
             $scope.$apply();
@@ -102,7 +102,53 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         return true;
     }
 
+    $scope.getlocation = function () {
+        $scope.LocationList = [];
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
 
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetLocations',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+                   if (response.GetLocationsResult.Success == true) {
+                       $scope.LocationList = response.GetLocationsResult.Payload;
+                       $scope.LocationSearchList = angular.copy($scope.LocationList);
+
+                       $scope.UpdateLocationAndUOMList();
+                       CheckScopeBeforeApply()
+                   }
+
+                   else {
+                       $scope.ShowErrorMessage("Getting locations", 1, 1, response.GetLocationsResult.Message)
+
+                   }
+
+
+               },
+               error: function (err, textStatus, errorThrown) {
+                   if (err.readyState == 0 || err.status == 0) {
+
+                   }
+                   else {
+                       if (textStatus != "timeout") {
+
+
+                           $scope.ShowErrorMessage("Getting locations", 2, 1, err.statusText);
+                       }
+                   }
+
+
+               }
+           });
+
+    }
     $scope.savestatus = function (Statusvalue) {
 
         var _StatusValue = $.trim(Statusvalue);
@@ -2246,7 +2292,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $scope.CurrentCartBkup = angular.copy($scope.CurrentCart);
         $scope.GetActiveUnitDataField();
 
-        
+        $scope.getlocation();
         if (localStorageService.get('AllowNegativeQuantity') != null && localStorageService.get('AllowNegativeQuantity') != undefined) {
             var _temp = localStorageService.get('AllowNegativeQuantity');
             if (_temp == 'true' || _temp == true) {

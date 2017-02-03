@@ -320,8 +320,8 @@
 
                                         <span ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
 
-                                            <img src="{{_obj.bytestring}}" ng-if="$index<4" height="60" width="60" ng-class="{'lessOpacity':$index==3}" alt="Alternate Text" />
-                                            <span class="moreCounter" ng-if="ImageList.length>3 && $index==3">3+</span>
+                                            <img src="{{_obj.bytestring}}" ng-if="$index<2" height="60" width="60" ng-class="{'lessOpacity':$index==1}" alt="Alternate Text" />
+                                            <span class="moreCounter" ng-if="ImageList.length>1 && $index==1">3+</span>
                                         </span>
 
                                     </div>
@@ -1066,7 +1066,7 @@
         <div class="form-group">
 
             <div class="input-group">
-                <input type="text" id="searchlocation" placeholder="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
+                <input type="text" id="searchlocation" placeholder="Type Keyword to find locations" ng-change="FilterRecordsLength.length=(LocationSearchList | filter:SearchLocationValue).length" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
                 <span class="input-group-addon waves-effect last">
                     <a ng-click="ScanLocationsearch()"><i class="fa fa-barcode"></i></a>
                 </span>
@@ -1080,7 +1080,7 @@
             <i class="fa fa-spin fa-spinner"></i> searching please wait..
         </div>
 
-        <div ng-if="isnolocationmsg == true" class="noitem">
+        <div ng-if="FilterRecordsLength.length==0" class="noitem">
             <div style="text-align: center; border: 1px solid #eeeeee;">
                 <h4 style="font-size:20px;"><i class="fa fa-frown-o"></i> We're sorry !</h4>
                 <h4 style="font-size:15px;">We can't find the location you're looking for</h4>

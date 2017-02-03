@@ -107,7 +107,7 @@
                                     <div ng-if="CurrentOperation=='Move'">
 
                                         <div class="row">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
 
 
                                                 <div class="form-group">
@@ -118,7 +118,7 @@
 
                                                         <div class="fg-line">
 
-                                                            <input placeholder1="Fill Quantity" type="number"   class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
+                                                            <input placeholder1="Fill Quantity" type="number" class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.ActionQuantity" />
 
                                                         </div>
 
@@ -155,7 +155,8 @@
 
 
                                         <div class="row">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
+                                                
 
                                                 <div class="form-group">
 
@@ -196,7 +197,7 @@
 
 
                                     <div class="row" ng-if=" CurrentOperation!='Convert' &&  CurrentOperation!='Move' && CurrentOperation!='MoveTagUpdate'">
-                                        <div class="col-xs-8 col-md-8">
+                                        <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                             <div class="form-group">
                                                 <label>
                                                     Quantity
@@ -238,12 +239,12 @@
 
                                     <div class="row" ng-if=" CurrentOperation=='Increase'&&  CanCost=='True'">
 
-                                        <div class="col-xs-8 col-md-8">
+                                        <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                             <div class="form-group" ng-if="_groupRow.ActionPerformed!=-1">
                                                 <label>Cost/unit</label>
                                                 <div class="fg-line">
 
-                                                    <input type="number"   placeholder1="Fill Cost per unit" class="form-control NumberType FormControlType" ng-model=" CurrentActiveObject.iCostPerItem" />
+                                                    <input type="number" placeholder1="Fill Cost per unit" class="form-control NumberType FormControlType" ng-model=" CurrentActiveObject.iCostPerItem" />
 
                                                 </div>
                                             </div>
@@ -262,30 +263,24 @@
 
                                     <div ng-if="CurrentOperation=='Update'">
                                         <div class="row">
-                                            <div class="col-xs-6 col-md-6" style="padding-left:0px;">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>Status</label>
-                                                    <div class="fg-line">
+                                                    <div class="input-group">
                                                         <div class="select">
                                                             <select class="form-control" ng-model="CurrentActiveObject.UpdateTransactionData.StatusToUpdate">
                                                                 <option value="">None</option>
                                                                 <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.UpdateTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                             </select>
                                                         </div>
+                                                        <span ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true" class="input-group-addon last" ng-click="CreateNewModal(2,$index)"><i class="fa fa-plus"></i></span>
                                                     </div>
 
                                                 </div>
 
 
                                             </div>
-                                            <div class="col-xs-2 col-md-2" >
-                                                <div ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true">
-                                                    <label>&nbsp;</label>
-                                                    <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
-                                                        <i class="fa fa-plus-circle"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                            
                                             <div class="col-xs-4 col-md-4" ng-if="$index==0">
                                                 <div class="pull-right">
                                                     <label>&nbsp;</label>
@@ -302,7 +297,7 @@
                                     <div ng-if="CurrentOperation=='Apply'">
 
                                         <div class="row" ng-if=" IsMyInventoryColumns('iReqValue')==true">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>{{ GetColumnLabel('iReqValue')}}</label>
                                                     <div class="input-group">
@@ -335,7 +330,7 @@
                                         </div>
 
                                         <div class="row" ng-if=" IsMyInventoryColumns('iUnitTag2')==true">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>{{ GetColumnLabel('iUnitTag2')}}</label>
 
@@ -366,7 +361,7 @@
 
                                         </div>
                                         <div class="row" ng-if=" IsMyInventoryColumns('iUnitTag3')==true">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>{{ GetColumnLabel('iUnitTag3')}}</label>
 
@@ -399,7 +394,7 @@
                                         </div>
 
                                         <div class="row" ng-if="IsMyInventoryColumns('iUniqueDate')==true">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>{{ GetColumnLabel('iUniqueDate')}}</label>
                                                     <div class="fg-line">
@@ -422,7 +417,7 @@
 
                                         </div>
                                         <div class="row" ng-if=" IsMyInventoryColumns('iUnitDate2')==true">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>{{ GetColumnLabel('iUnitDate2')}}</label>
                                                     <div class="fg-line">
@@ -445,7 +440,7 @@
 
                                         </div>
                                         <div class="row" ng-if=" IsMyInventoryColumns('iUnitNumber1')==true">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
 
                                                 <div class="form-group">
                                                     <label>{{ GetColumnLabel('iUnitNumber1')}}</label>
@@ -455,7 +450,7 @@
 
                                                         <div class="fg-line">
 
-                                                            <input id="unitnumbertext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'),$index)" type="number" data-type="number"   class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
+                                                            <input id="unitnumbertext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'),$index)" type="number" data-type="number" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
                                                             <span ng-if="tvar6==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                                         </div>
                                                         <span class="input-group-addon last" ng-click="ScanTagItem('iUnitNumber1',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
@@ -477,7 +472,7 @@
 
                                         </div>
                                         <div class="row" ng-if=" IsMyInventoryColumns('iUnitNumber2')==true">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
 
                                                 <div class="form-group">
                                                     <label>{{ GetColumnLabel('iUnitNumber2')}}</label>
@@ -487,7 +482,7 @@
 
                                                         <div class="fg-line">
 
-                                                            <input id="unitnumbertext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar7=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'),$index)" type="number" data-type="number"   class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
+                                                            <input id="unitnumbertext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar7=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'),$index)" type="number" data-type="number" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
                                                             <span ng-if="tvar7==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                                         </div>
                                                         <span class="input-group-addon last" ng-click="ScanTagItem('iUnitNumber2',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
@@ -512,14 +507,14 @@
 
                                     <div ng-if="CurrentOperation=='Convert'">
                                         <div class="row">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>Quantity</label>
 
                                                     <div class="input-group">
                                                         <div class="fg-line" ng-class="CurrentActiveObject.ConvertTransactionData.ActionFromQuantity=='' ||  CurrentActiveObject.ConvertTransactionData.ActionFromQuantity> CurrentActiveObject.InventoryDataList.oquantity ?'':''">
 
-                                                            <input type="number"   class="form-control WholeNumbersOnly NumberType" placeholder1="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity" />
+                                                            <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder1="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionFromQuantity" />
 
                                                         </div>
 
@@ -554,7 +549,7 @@
 
 
                                         <div class="row">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
 
                                                 <div class="form-group">
 
@@ -562,7 +557,7 @@
 
                                                     <div class="fg-line" ng-class=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity==''?'':''">
 
-                                                        <input type="number"   class="form-control WholeNumbersOnly NumberType" placeholder1="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity" />
+                                                        <input type="number" class="form-control WholeNumbersOnly NumberType" placeholder1="This value is required" ng-model=" CurrentActiveObject.ConvertTransactionData.ActionToQuantity" />
 
                                                     </div>
                                                 </div>
@@ -596,19 +591,20 @@
 
 
                                         <div class="row">
-                                            <div class="col-xs-6 col-md-6" style="padding-left:0px;">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
 
                                                 <div class="form-group">
 
                                                     <label>Select UOM <span>*</span></label>
-                                                    
-                                                    <div class="fg-line" ng-class="CurrentActiveObject.ConvertTransactionData.ToUOMID==''?'':''">
+
+                                                    <div class="input-group" ng-class="CurrentActiveObject.ConvertTransactionData.ToUOMID==''?'':''">
                                                         <div class="select">
                                                             <select class="form-control" ng-model=" CurrentActiveObject.ConvertTransactionData.ToUOMID">
                                                                 <option value="">None</option>
                                                                 <option ng-repeat="_optionValue in  UOMList" ng-selected="CheckUOMValues(CurrentActiveObject.ConvertTransactionData.ToUOMID,_optionValue.UnitOfMeasureID)?true:false" value="{{_optionValue.UnitOfMeasureID}}">{{_optionValue.UnitOfMeasureName}}</option>
                                                             </select>
                                                         </div>
+                                                        <span ng-if="IsActiveUOMLibrary==true && checkpermission('URL:Manage/UnitOfMeasure')==true" class="input-group-addon last" ng-click="CreateNewModal(1,$index)"><i class="fa fa-plus"></i></span>
                                                     </div>
                                                 </div>
 
@@ -616,14 +612,7 @@
 
                                             </div>
 
-                                            <div class="col-xs-2 col-md-2">
-                                                <div ng-if="IsActiveUOMLibrary==true && checkpermission('URL:Manage/UnitOfMeasure')==true">
-                                                    <label>&nbsp;</label>
-                                                    <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(1,$index)">
-                                                        <i class="fa fa-plus-circle"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                            
                                             <div class="col-xs-4 col-md-4" ng-if="$index==0">
                                                 <div class="pull-right">
                                                     <label>&nbsp;</label>
@@ -638,13 +627,13 @@
                                     </div>
                                     <div ng-if="CurrentOperation=='MoveTagUpdate'">
                                         <div class="row">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
 
                                                 <div class="form-group">
                                                     <label>Quantity</label>
                                                     <div class="input-group">
                                                         <div class="fg-line">
-                                                            <input placeholder1="Fill Quantity" type="number"   class="form-control" ng-model="CurrentActiveObject.MoveUpdateTagTransactionData.ActionQuantity" />
+                                                            <input placeholder1="Fill Quantity" type="number" class="form-control" ng-model="CurrentActiveObject.MoveUpdateTagTransactionData.ActionQuantity" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -671,7 +660,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
 
                                                     <label>Location</label>
@@ -695,10 +684,10 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-xs-6 col-md-6" style="padding-left:0px;">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>Status</label>
-                                                    <div class="fg-line">
+                                                    <div class="input-group">
                                                         <div class="select">
 
                                                             <select class="form-control" ng-model="CurrentActiveObject.MoveUpdateTagTransactionData.StatusToUpdate">
@@ -706,18 +695,13 @@
                                                                 <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveUpdateTagTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                             </select>
                                                         </div>
+
+                                                        <span ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true" class="input-group-addon last" ng-click="CreateNewModal(2,$index)"><i class="fa fa-plus"></i></span>
                                                     </div>
                                                 </div>
 
                                             </div>
-                                            <div class="col-xs-2 col-md-2">
-                                                <div ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true">
-                                                    <label>&nbsp;</label>
-                                                    <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
-                                                        <i class="fa fa-plus-circle"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                            
                                             <div class="col-xs-4 col-md-4" ng-if="$index==0">
                                                 <label>&nbsp;</label>
                                                 <div class="pull-right">
@@ -729,7 +713,7 @@
                                         </div>
 
                                         <div class="row" ng-if="IsMyInventoryColumns('iReqValue')==true">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>{{ GetColumnLabel('iReqValue')}}</label>
                                                     <div class="input-group">
@@ -754,7 +738,7 @@
 
                                         </div>
                                         <div class="row" ng-if="IsMyInventoryColumns('iUnitTag2')==true">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>{{ GetColumnLabel('iUnitTag2')}}</label>
 
@@ -778,7 +762,7 @@
                                             </div>
                                         </div>
                                         <div class="row" ng-if="IsMyInventoryColumns('iUnitTag3')==true">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>{{ GetColumnLabel('iUnitTag3')}}</label>
 
@@ -803,7 +787,7 @@
 
                                         </div>
                                         <div class="row" ng-if="IsMyInventoryColumns('iUniqueDate')==true">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>{{ GetColumnLabel('iUniqueDate')}}</label>
                                                     <div class="fg-line">
@@ -824,7 +808,7 @@
 
                                         </div>
                                         <div class="row" ng-if="IsMyInventoryColumns('iUnitDate2')==true">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>{{ GetColumnLabel('iUnitDate2')}}</label>
                                                     <div class="fg-line">
@@ -845,13 +829,13 @@
 
                                         </div>
                                         <div class="row" ng-if="IsMyInventoryColumns('iUnitNumber1')==true">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>{{ GetColumnLabel('iUnitNumber1')}}</label>
 
                                                     <div class="input-group">
                                                         <div class="fg-line">
-                                                            <input id="unitnumbertext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'),$index)" type="number" data-type="number"   class="form-control NumberType uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitNumber1" />
+                                                            <input id="unitnumbertext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'),$index)" type="number" data-type="number" class="form-control NumberType uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitNumber1" />
                                                             <span ng-if="mtuvar6==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                                         </div>
                                                         <span class="input-group-addon last" ng-click="ScanTagItem('iUnitNumber1',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
@@ -870,14 +854,14 @@
 
                                         </div>
                                         <div class="row" ng-if="IsMyInventoryColumns('iUnitNumber2')==true">
-                                            <div class="col-xs-8 col-md-8">
+                                            <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                                 <div class="form-group">
                                                     <label>{{ GetColumnLabel('iUnitNumber2')}}</label>
 
 
                                                     <div class="input-group">
                                                         <div class="fg-line">
-                                                            <input id="unitnumbertext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="mtuvar7=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'),$index)" type="number" data-type="number"   class="form-control NumberType uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitNumber2" />
+                                                            <input id="unitnumbertext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="mtuvar7=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'),$index)" type="number" data-type="number" class="form-control NumberType uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitNumber2" />
                                                             <span ng-if="mtuvar7==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                                         </div>
                                                         <span class="input-group-addon last" ng-click="ScanTagItem('iUnitNumber2',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
@@ -897,7 +881,7 @@
                                     </div>
                                     <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" data-ng-repeat="_columns in isLineItemColumnNames">
 
-                                        <div class="col-xs-8 col-md-8">
+                                        <div ng-class="$index==0 ? 'col-md-8 col-xs-8' : 'col-md-12 col-xs-12'">
                                             <div class="form-group">
                                                 <label>{{_columns}} <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
                                                 <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'input-group':''}}">
@@ -925,8 +909,8 @@
                                                         </div>
                                                     </div>
                                                     <input type="date" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                                    <input type="number"   id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                                    <input type="number"   id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                                    <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                                    <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                                     <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i style="margin-left:10px;" class="fa fa-barcode"></i></span>
                                                 </div>
                                                 <div>
@@ -1798,6 +1782,7 @@
                                                         <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.MoveUpdateTagTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                     </select>
                                                 </div>
+
                                             </div>
                                         </div>
 

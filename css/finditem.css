@@ -116,12 +116,14 @@ label {
     padding-bottom: 7px;
 }
 
+
 .widget-products li .product {
     display: block;
     margin-left: 80px;
     margin-top: 7px;
     border-bottom: 1px solid #ebebeb;
     padding-bottom: 10px;
+    min-height:68px;
 }
 
 .widget-products li > a {
@@ -614,9 +616,9 @@ body {
     border: transparent !important;
     opacity: 1 !important;
     margin-left: -4px;
-    max-height: 48px;
-    max-width: 48px;
-    border-radius: 0px;
+    max-height: 42px;
+    max-width: 46px;
+    border-radius: 0;
 }
 
 .disablepointer {

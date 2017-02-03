@@ -1335,15 +1335,28 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     }
+    $scope.$watch("SearchLocationValue", function () {
+        if ($scope.SearchLocationValue != null && $scope.SearchLocationValue != undefined && $.trim($scope.SearchLocationValue)!="") {
+         
+        }
+        else {
+            $scope.isnolocationmsg = false;
+            $scope.LocationSearchList = angular.copy($scope.LocationList);
+        }
+        CheckScopeBeforeApply()
+
+    });
+   
 
     $scope.locationlist = function () {
 
         $("#itemlistmodal").modal('hide');
         $("#locationlistmodal").modal('show');
 
+        debugger;
         $scope.LocationSearchList = angular.copy($scope.LocationList);
         CheckScopeBeforeApply();
-        $scope.SearchLocationValue = "";
+        
         $scope.isnolocationmsg = false
         $('html,body').animate({ scrollTop: 0 }, 800);
 

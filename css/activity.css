@@ -84,18 +84,25 @@
     -o-animation: fadeIn 1s;
     animation: fadeIn 1s;
     padding-top: 0px !important;
+    
 }
 
 
-.mycartitem:nth-child(odd) {
-    background: #F5F5F5;
-    padding-top: 10px;
+.mycartitem .col-xs-12
+{
+    padding-left:0;
+    padding-right:0;
 }
 
-.mycartitem:nth-child(even) {
-    background: #ffffff;
-    padding-top: 10px;
+
+
+.mycartitem {
+    background: #fff;
+  padding:10px;
+  margin-bottom:12px;
+    
 }
+
 
 
 .errorMessage {
@@ -525,10 +532,15 @@ label {
     left: 66%;
 }
 
+.activitycontent
+{
+    margin-bottom:50px;
+}
+
 .changebtn {
     height: 60px;
     width: 60px;
-    bottom: 75px;
+    bottom: 20px;
     position: fixed !important;
     border-radius: 60px;
     line-height: 60px;
@@ -614,7 +626,7 @@ label {
 
 .selectAction {
     position: fixed;
-    bottom: 126px;
+    bottom: 95px;
     right: 35px;
 }
 
@@ -662,6 +674,7 @@ label {
 
 .collapsible-body {
     margin-top: 85px;
+    padding-bottom:0 !important;
 }
 
 body {
