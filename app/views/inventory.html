@@ -1048,7 +1048,7 @@
             </div>
         </div>
 
-
+        <span ng-if="IsFromSlideChange==true">This Item is already available please choose from below list.</span>
         <ul class="searchresultlist" ng-if="ItemSearching==false">
             <li ng-click="SetItemData(obj)" ng-repeat="obj in SearchList">
                 <a><span ng-bind-html="HighLightTerm(SearchItemValue,obj.ItemID)"></span><i class="fa fa-angle-right"></i></a>

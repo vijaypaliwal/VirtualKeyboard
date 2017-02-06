@@ -3011,7 +3011,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
 
         if (firstValue == secondValue) {
-            debugger;
 
             return true;
         }
@@ -4464,7 +4463,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     .on('focus', 'input,select', function () {
 
 
-
+        $('.changebtn').css("position", "absolute");
 
         $('.collapsible-header').css("position", "absolute");
         $('.collapsible-body').css('margin-top', '49px');
@@ -4479,7 +4478,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     .on('blur', 'input,select', function () {
 
         $('.collapsible-header').css("position", "fixed");
-
+        $('.changebtn').css("position", "fixed");
         $('.header').css("position", "fixed");
         $('.iteminfopanel').css('margin-top', '80px');
         $('.collapsible-body').css('margin-top', '85px');

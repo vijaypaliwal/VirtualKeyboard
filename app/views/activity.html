@@ -180,9 +180,19 @@
                                                             </div>
                                                             
 
-                                                            <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveTransactionData.MoveToLocationText)"><i class="fa fa-search"></i></span>
 
-                                                            <span class="input-group-addon last" ng-click="CreateNewModal(3,$index)"><i class="fa fa-plus"></i></span>
+                                                            <span class="input-group-addon last">
+                                                                <span data-toggle="dropdown" aria-expanded="false" class="waves-effect myicon rotateData btnPrimary btn-icon">
+                                                                    <i class="fa fa-caret-down"></i>
+                                                                </span>
+
+
+                                                                <ul style="width:100%; text-align:left;" class="animated zoomIn dropdown-menu">
+                                                                    <li><a ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveTransactionData.MoveToLocationText)"><i class="fa fa-search"></i> Search Location</a></li>
+                                                                    <li><a ng-click="CreateNewModal(3,$index)"><i class="fa fa-plus-circle"></i> Create New</a></li>
+                                                                </ul>
+                                                            </span>
+                                                            
                                                         </div>
 
                                                         <span ng-if="CurrentActiveObject.MoveTransactionData.MoveToLocation==CurrentActiveObject.InventoryDataList.iLID" class="errorMessage">
@@ -688,10 +698,18 @@
                                                                 </select>
                                                             </div>
 
+                                                            <span class="input-group-addon last">
+                                                                <span data-toggle="dropdown" aria-expanded="false" class="waves-effect myicon rotateData btnPrimary btn-icon">
+                                                                    <i class="fa fa-caret-down"></i>
+                                                                </span>
 
-                                                            <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocationText)"><i class="fa fa-search"></i></span>
 
-                                                            <span class="input-group-addon last" ng-click="CreateNewModal(3,$index)"><i class="fa fa-plus"></i></span>
+                                                                <ul style="width:100%; text-align:left;" class="animated zoomIn dropdown-menu">
+                                                                    <li><a ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocationText)"><i class="fa fa-search"></i> Search Location</a></li>
+                                                                    <li><a ng-click="CreateNewModal(3,$index)"><i class="fa fa-plus-circle"></i> Create New</a></li>
+                                                                </ul>
+                                                            </span>
+
                                                         </div>
 
                                                     </div>

@@ -16,12 +16,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.UnitDataColumnWithError = "";
     $scope.IsFormDataloaded = false;
     $scope.Isopendiv = true;
+    $scope.IsFromSlideChange = false;
     $scope.InventoryObject = {
         IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", DefaultItemLocationID: 0, DefaultItemUOM: 0, pDefaultCost: 0, pTargetQty: null, pReorderQty: null, Quantity: "", Uom: "units", UomID: 0, Location: "In Stock", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
         UpdateDate: "", Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
         UnitTag3: "", CustomPartData: [], CustomTxnData: []
     };
 
+    var _IsItemSlide = false;
 
 
     $scope.changelocation = function () {
@@ -761,7 +763,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.OnChangeItemNameFunction = function () {
 
 
-
+        debugger;
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -779,6 +781,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, SearchValue: $scope.SearchItemValue }),
                 error: function (err, textStatus, errorThrown) {
                     $scope.ItemSearching = false;
+                    _IsItemSlide = false;
                     if (err.readyState == 0 || err.status == 0) {
 
                     }
@@ -793,15 +796,22 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 },
 
                 success: function (data) {
+                    debugger;
                     if (data.SearchItemsResult.Success == true) {
                         if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
                             $scope.ItemSearching = false;
                             $scope.SearchList = data.SearchItemsResult.Payload;
 
-                            if ($scope.SearchList.length == 0)
+                            if ($scope.SearchList.length == 0) {
                                 $scope.isnoitemmsg = true;
-                            else
+                            }
+                            else {
                                 $scope.isnoitemmsg = false;
+                                $("#itemlistmodal").modal("show");
+
+                            }
+
+                            _IsItemSlide = false;
 
 
                             CheckScopeBeforeApply()
@@ -1313,7 +1323,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.itemlist = function () {
 
         $("#locationlistmodal").modal('hide');
-
+        $scope.IsFromSlideChange = false;
         $("#itemlistmodal").modal('show');
 
         $scope.SearchList = [];
@@ -3020,12 +3030,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.changeNav = function () {
 
+
+        
         if (deviceType != "Android" && deviceType != "null") {
 
             $("#myform .swiper-slide-active input:first").focus();
             $("#myform .swiper-slide-active select:first").focus();
             $("#myform .swiper-slide-active input:first").not("input[type='file']").not("input[type = 'checkbox']").trigger("click");
             $("#myform .swiper-slide-active input:first").not("input[type='file']").not("input[type = 'checkbox']").trigger("keypress");
+
+           
         }
         else {
             //SoftKeyboard.hide();
@@ -3308,6 +3322,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 speed: 500,
                 effect: 'flip',
                 allowSwipeToPrev: false,
+                onSlideChangeStart: function () {
+                    if ($scope.CurrentActiveField =="pPart" && $.trim($scope.InventoryObject.ItemID) != "") {
+                        _IsItemSlide = true;
+                        $scope.SearchItemValue = $scope.InventoryObject.ItemID;
+                        CheckScopeBeforeApply();
+                        $scope.OnChangeItemNameFunction();
+                        $scope.IsFromSlideChange = true;
+                    }
+                },
                 onSlideChangeEnd: function (swiperHere) {
 
                     $(".bknext").removeClass("darkblue");

@@ -1157,10 +1157,15 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     }
 
                     if ($scope.ActualTotalRecords) {
+                        $("#arrow").attr("style", "");
+
+                        $("#arrow").hide();
                     } else {
                         $scope.OpenmenuModal();
                         $(".searchtable").addClass("disablepointer");
-
+                        $("#arrow").attr("style", "");
+                        $("#arrow").show();
+                        
                      
 
                       
