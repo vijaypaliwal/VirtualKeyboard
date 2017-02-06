@@ -596,7 +596,7 @@ body {
     margin: 1em 0;
     float: left;
     margin-top: 5px;
-    border-radius: 100%;
+    /*border-radius: 100%;*/
     position: fixed;
     background: #70b9f3 !important;
 }
@@ -616,10 +616,11 @@ body {
     border: transparent !important;
     opacity: 1 !important;
     margin-left: -4px;
-    max-height: 42px;
-    max-width: 46px;
-    border-radius: 0;
+    max-height: 64px;
+    max-width: 64px;
+    border-radius: 100%;
 }
+
 
 .disablepointer {
     pointer-events: none;

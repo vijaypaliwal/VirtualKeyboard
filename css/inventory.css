@@ -671,12 +671,15 @@ html, body {
 }
 
 .detailheight {
-    height: 93px !important;
+   height: 110px !important;
     overflow-y: auto;
-    max-height: 93px;
-    background: #eee;
+    max-height: 140px;
+    background: #fff;
 }
 
+.laststepbtn{
+    width:100% !important;
+}
 .darkblue {
     background-color: rgb(0, 99, 177) !important;
 }

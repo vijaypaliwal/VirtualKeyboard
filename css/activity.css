@@ -812,3 +812,8 @@ input:checked + .slider:before {
     .modal-open .Newrow {
         display: none;
     }
+.input-group-addon .fa-caret-down
+    {
+        padding-left: 15px;
+    padding-right: 15px;
+        }

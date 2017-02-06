@@ -166,13 +166,24 @@
 
 
 
-                                                        <div ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveTransactionData.MoveToLocationText)" class="input-group">
+                                                        <!--<div ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveTransactionData.MoveToLocationText)" class="input-group">
                                                             <input disabled type="text" class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
 
                                                             <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveTransactionData.MoveToLocationText)"><i class="fa fa-search"></i></span>
+                                                        </div>-->
+
+                                                        <div class="input-group">
+                                                            <div class="select">
+                                                                <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocation">
+                                                                    <option ng-repeat="obj in LocationDataList" value="{{obj.LocationID}}">{{obj.LocationName}}</option>
+                                                                </select>
+                                                            </div>
+                                                            
+
+                                                            <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveTransactionData.MoveToLocationText)"><i class="fa fa-search"></i></span>
+
+                                                            <span class="input-group-addon last" ng-click="CreateNewModal(3,$index)"><i class="fa fa-plus"></i></span>
                                                         </div>
-
-
 
                                                         <span ng-if="CurrentActiveObject.MoveTransactionData.MoveToLocation==CurrentActiveObject.InventoryDataList.iLID" class="errorMessage">
                                                             Can't move to same location please update.
@@ -666,9 +677,21 @@
                                                     <label>Location</label>
                                                     <div class="fg-line">
 
-                                                        <div ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocationText)" class="input-group">
-                                                            <input disabled type="text" class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocationText" />
+                                                    
+
+
+                                                        <div class="input-group">
+                                                            <div class="select">
+
+                                                                <select class="form-control" ng-model="CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocation">
+                                                                    <option ng-selected="CheckUOMValues(CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocation,obj.LocationID)?true:false" ng-repeat="obj in LocationDataList" value="{{obj.LocationID}}">{{obj.LocationName}}</option>
+                                                                </select>
+                                                            </div>
+
+
                                                             <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocationText)"><i class="fa fa-search"></i></span>
+
+                                                            <span class="input-group-addon last" ng-click="CreateNewModal(3,$index)"><i class="fa fa-plus"></i></span>
                                                         </div>
 
                                                     </div>
@@ -1254,7 +1277,7 @@
 
                                                 <label>Location <span>*</span> </label>
 
-                                                <div class="input-group">
+                                                <!--<div class="input-group">
                                                     <input type="text" class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocationText" />
 
                                                     <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID)"><i class="fa fa-search"></i></span>
@@ -1267,10 +1290,37 @@
 
 
 
+                                                </div>-->
+
+                                                <div class="input-group">
+
+                                                    <div class="select">
+                                                        <select class="form-control" ng-model="CurrentActiveObject.MoveTransactionData.MoveToLocation">
+                                                            <option ng-repeat="obj in LocationDataList" value="{{obj.LocationID}}">{{obj.LocationName}}</option>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <span class="input-group-addon last">
+                                                        <span data-toggle="dropdown" aria-expanded="false" class="waves-effect myicon rotateData btnPrimary btn-icon">
+                                                            <i class="fa fa-caret-down"></i>
+                                                        </span>
+
+
+                                                        <ul style="width:100%; text-align:left;" class="animated zoomIn dropdown-menu">
+                                                            <li><a ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveTransactionData.MoveToLocationText)"><i class="fa fa-search"></i> Search Location</a></li>
+                                                            <li><a ng-click="CreateNewModal(3,$index)"><i class="fa fa-plus-circle"></i> Create New</a></li>
+                                                        </ul>
+                                                    </span>
+
+
+
+                                                    <span class="input-group-addon last">
+                                                        <span id="location_{{CurrentActiveObject.InventoryDataList.uId}}" class="rotateData btnPrimary" data-ng-click="FillLocation(CurrentActiveObject.MoveTransactionData.MoveToLocation,CurrentActiveObject.MoveTransactionData.MoveToLocationText,CurrentActiveObject.InventoryDataList.uId)">
+                                                            <i class="fa fa-thumb-tack"></i>
+                                                        </span>
+                                                    </span>
                                                 </div>
-
-
-
                                                 <span ng-if="CurrentActiveObject.MoveTransactionData.MoveToLocation==CurrentActiveObject.InventoryDataList.iLID" class="errorMessage">
                                                     Can't move to same location please update.
                                                 </span>
@@ -1753,8 +1803,26 @@
                                             <div class="fg-line">
                                                 <label>Location <span>*</span> </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder1="Select Location" ng-model="CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocationText" />
-                                                    <span class="input-group-addon last" ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID)"><i class="fa fa-search"></i></span>
+
+
+                                                    <div class="select">
+                                                        <select class="form-control" ng-model="CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocation">
+                                                            <option ng-selected="CheckUOMValues(CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocation,obj.LocationID)?true:false" ng-repeat="obj in LocationDataList" value="{{obj.LocationID}}">{{obj.LocationName}}</option>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <span class="input-group-addon last">
+                                                        <span data-toggle="dropdown" aria-expanded="false"  class="waves-effect myicon rotateData btnPrimary btn-icon">
+                                                            <i class="fa fa-caret-down"></i>
+                                                        </span>
+
+
+                                                        <ul style="width:100%; text-align:left;" class="animated zoomIn dropdown-menu">
+                                                            <li><a ng-click="locationlist(CurrentActiveObject.InventoryID,CurrentActiveObject.InventoryDataList.iLID,CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocationText)"><i class="fa fa-search"></i> Search Location</a></li>
+                                                            <li><a ng-click="CreateNewModal(3,$index)"><i class="fa fa-plus-circle"></i> Create New</a></li>
+                                                        </ul>
+                                                    </span>
                                                     <span class="input-group-addon last">
                                                         <span id="location_{{CurrentActiveObject.InventoryDataList.uId}}" class="rotateData btnPrimary" data-ng-click="FillLocation(CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocation,CurrentActiveObject.MoveUpdateTagTransactionData.MoveToLocationText,CurrentActiveObject.InventoryDataList.uId)">
                                                             <i class="fa fa-thumb-tack"></i>
@@ -2715,11 +2783,11 @@
 <div style="display:none;" id="locationlistmodal" class="" >
     <div class="modal-header">
         <button ng-click="hidelocationmodal();" type="button" class="close"><span> <i class="fa fa-times"></i> </span></button>
-        <h4>select Location <span style="font-size:11px;" ng-if="LocationSearchList.length > 0">{{LocationSearchList.length}} Location(s) found</span></h4>
+        <h4>select Location <span style="font-size:11px;" ng-if="FilterRecordsLength.length > 0">{{FilterRecordsLength.length}} Location(s) found</span></h4>
         <div class="form-group">
 
             <div class="input-group">
-                <input type="text" id="searchlocation" placeholder1="Type Keyword to find locations" ng-change="OnChangeLocationNameFunction()" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
+                <input type="text" id="searchlocation" placeholder1="Type Keyword to find locations" ng-blur="FilterRecordsLength.length=(LocationSearchList | filter:SearchLocationValue).length" ng-change="FilterRecordsLength.length=(LocationSearchList | filter:SearchLocationValue).length" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
                 <span class="input-group-addon last" ng-click="ScanLocationsearch()">
                     <i class="fa fa-barcode"></i>
                 </span>
@@ -2729,11 +2797,8 @@
 
     <div class="modal-body">
 
-        <div ng-if="LocationSearching==true">
-            <i class="fa fa-spin fa-spinner"></i> searching please wait..
-        </div>
-
-        <div ng-if="isnolocationmsg == true" class="noitem">
+   
+        <div ng-if="FilterRecordsLength.length==0 && $.trim(SearchLocationValue)!=''" class="noitem">
             <div style="text-align: center; border: 1px solid #eeeeee;">
                 <h4 style="font-size:20px;"><i class="fa fa-frown-o"></i> We're sorry !</h4>
                 <h4 style="font-size:15px;">We can't find the location you're looking for</h4>
@@ -2741,8 +2806,8 @@
             </div>
         </div>
 
-        <ul class="searchresultlist" ng-if="LocationSearching==false">
-            <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList">
+        <ul class="searchresultlist">
+            <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList | filter : SearchLocationValue">
                 <a>
                     <span ng-bind-html="HighLightTerm(SearchLocationValue,obj.LocationName)"></span>
 
@@ -2777,14 +2842,13 @@
 <div style="background:#fff;" id="createnewlabel" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
 
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
-        <h4>Create new <span ng-if="CreateType==1">Unit of measure</span> <span ng-if="CreateType==2">Status</span></h4>
+        <h4>Create new <span ng-if="CreateType==3">Location</span><span ng-if="CreateType==1">Unit of measure</span> <span ng-if="CreateType==2">Status</span></h4>
     </div>
 
     <div style="padding:15px;" class="modal-body">
 
         <div class="form-group">
-            <label>Enter new <newtag ng-if="CreateType==1">Unit of measure</newtag> <newtag ng-if="CreateType==2">Status</newtag> </label>
+            <label>Enter new <newtag ng-if="CreateType==3">Location</newtag> <newtag ng-if="CreateType==1">Unit of measure</newtag> <newtag ng-if="CreateType==2">Status</newtag> </label>
 
             <div class="input-group">
                 <input type="text" ng-model="CreateNewLabel" class="form-control" value="" />

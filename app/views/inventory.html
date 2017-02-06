@@ -878,14 +878,17 @@
 
 
                             <td ng-if="slide == Totalslides">
-                                <a ng-click="addinventory()" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn laststepbtn waves-effect btn-success animated fadeInUp"> <i class="fa fa-plus-circle"></i>Add Inventory</a>
-                            </td>
+                                <div class="alignright">
+                                    <a ng-click="addinventory()" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn laststepbtn waves-effect btn-success animated fadeInUp"> <i class="fa fa-plus-circle"></i>Process</a>
+                                    </div>
+</td>
 
 
                             <td ng-if="slide == Totalslides">
-                                <div class="alignright">
-                                    <a ng-click="movetoback()" class="laststepbtn btn btn-gray animated fadeInUp"> <i class="fa fa-times"></i>Cancel</a>
-                                </div>
+                                
+                                    <a ng-click="movetoback()" class="pull-left laststepbtn btn btn-gray animated fadeInUp"> <i class="fa fa-times"></i>Cancel</a>
+                                
+
                             </td>
                         </tr>
                     </table>
