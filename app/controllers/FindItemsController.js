@@ -1068,7 +1068,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             $scope.myinventoryColumnLoaded = false;
 
         }
-
+        $("#arrow").hide();
 
 
         var authData = localStorageService.get('authorizationData');
