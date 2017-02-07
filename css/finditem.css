@@ -162,6 +162,12 @@ label {
     transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
 }
 
+.searchsection {
+    background:#fff;
+    padding:10px;
+    margin-top:-14px;
+}
+
 
 
 
@@ -175,7 +181,7 @@ label {
     margin: 0;
     padding: 0;
     min-height: 175px;
-    background: #fff;
+    background: #edecec;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -602,7 +608,7 @@ h5.list-group-item-heading {
 }
 
 body {
-    background: #fff;
+    background: #edecec;
 }
 
 .finditem {
@@ -613,7 +619,7 @@ body {
 .img {
     height: 66px;
     width: 67px;
-    border: 1px solid #ccc;
+   
     white-space: nowrap;
     text-align: center;
     margin: 1em 0;
@@ -653,10 +659,17 @@ body {
 }
 
 .cartImage {
-    font-size: 35px;
-    color: #9c9a9a ;
+  font-size: 35px;
+    color: #9c9a9a;
     margin: 15px;
-    margin-left: 6px;
+    margin-left: 0px;
+    background: #f2f2f2;
+    padding: 12px;
+    padding-left: 14px;
+    border: 1px solid #ccc;
+    border-radius: 100%;
+    padding-right: 14px;
+    margin-top: 5px;
 }
 
 .drag-target {

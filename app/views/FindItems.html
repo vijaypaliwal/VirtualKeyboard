@@ -7,8 +7,8 @@
 
     <div class="row">
 
-        <div class="col-xs-12">
-            <h4 class="titletext">Inventory <small>{{currentrecord}} of {{totalrecords}} <span ng-if="totalrecords<1">record</span> <span ng-if="totalrecords>1">records</span>  shown</small> </h4>
+        <div style="text-align:center;" class="col-xs-12">
+            <h4 style="padding-left:0" class="titletext"><small style="font-size: 13px !important; ">{{currentrecord}} of {{totalrecords}} <span ng-if="totalrecords<1">record</span> <span ng-if="totalrecords>1">records</span>  shown</small> </h4>
         </div>
     </div>
 </div>
@@ -16,7 +16,7 @@
 <a ng-if="isshowsearch==false" ng-click="showsearch()" class="btn btn-danger roundbtntitle"> <i class="fa fa-search"></i> </a>
 
 <a ng-if="isshowsearch==true" ng-click="hidesearch()" class="btn btn-danger roundbtntitle"> <i class="fa fa-times"></i> </a>
-<a href="#/Accounts" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
+<!--<a href="#/Accounts" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>-->
 <div>
     <br /><br /><br />
 
@@ -35,7 +35,7 @@
         </div>
     </div>
     <div id="sticky-anchor"></div>
-    <div class="" style="margin-bottom:7px;" ng-if="isshowsearch==true" id="">
+    <div class="searchsection"  ng-if="isshowsearch==true" id="">
         <table class="searchtable">
             <tbody>
                 <tr>
