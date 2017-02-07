@@ -1428,19 +1428,16 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
     $scope.ScanItemSearch = function () {
-        $scope.isSanned = false;
 
+        $scope.isSanned = false;
+    
         var scanner = cordova.plugins.barcodeScanner;
 
         scanner.scan(function (result) {
             $scope.SearchValue = result.text;
 
             CheckScopeBeforeApply();
-
-            console.log("Scanner result: \n" +
-                 "text: " + result.text + "\n" +
-                 "format: " + result.format + "\n" +
-                 "cancelled: " + result.cancelled + "\n");
+            $scope.GetInventories();
 
 
 
@@ -2121,6 +2118,28 @@ app.directive('imageonload', function () {
             element.bind('load', function () {
                 element[0].nextElementSibling.remove();
                 element[0].style.display = "";
+                var image = new Image();
+                image.src = $(element).attr("src");
+                image.onload = function () {
+                    
+                    var _height = this.height;
+                    var _Width = this.width;
+
+                    if (_height < _Width)
+                    {
+                        _Width = _height;
+                    }
+
+                    if (_Width < _height) {
+                        _height = _Width;
+                    }
+
+
+
+                    $(element).css("height", _height+"px");
+                    $(element).css("width", _Width + "px");
+                };
+                
             });
             element.bind('error', function () {
             });

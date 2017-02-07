@@ -17,14 +17,34 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.IsFormDataloaded = false;
     $scope.Isopendiv = true;
     $scope.IsFromSlideChange = false;
+    var _IsSavedItemGroup = false;
+    var _IsSavedItemGroupData = "";
     $scope.InventoryObject = {
         IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", DefaultItemLocationID: 0, DefaultItemUOM: 0, pDefaultCost: 0, pTargetQty: null, pReorderQty: null, Quantity: "", Uom: "units", UomID: 0, Location: "In Stock", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
-        UpdateDate: "", Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
+        UpdateDate: GetDefaultDate(), Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
         UnitTag3: "", CustomPartData: [], CustomTxnData: []
     };
 
     var _IsItemSlide = false;
 
+
+    function GetDefaultDate()
+    {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+
+        return today;
+    }
 
     $scope.changelocation = function () {
         var element = $("#Location");
@@ -264,7 +284,57 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         return true;
     }
+    $scope.saveItemGroup = function (ItemGroupValue) {
+        debugger;
+        var _StatusValue = $.trim(ItemGroupValue);
 
+        if (_StatusValue != "") {
+
+
+
+            $scope.ItemGroupToCreate = ItemGroupValue;
+            var authData = localStorageService.get('authorizationData');
+            if (authData) {
+                $scope.SecurityToken = authData.token;
+            }
+
+            var datatosend = { "pcfID": $scope.ItemGroupID, "pcfCountFrq": $scope.ItemGroupToCreate, "pcfAID": 0 };
+            $scope.IsProcessing = true;
+
+            $.ajax({
+                url: serviceBase + "CreateEditItemGroup",
+                type: 'POST',
+                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "model": datatosend }),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (result) {
+
+                    debugger;
+                    if (result.CreateEditItemGroupResult.Success == true) {
+
+                        _IsSavedItemGroup = true;
+                        _IsSavedItemGroupData = ItemGroupValue;
+                        $scope.getItemgroup();
+
+                        
+                    }
+                    else {
+                        $scope.ShowErrorMessage("Updating ItemGroup", 1, 1, result.CreateEditItemGroupResult.Message)
+                    }
+                },
+                error: function (err) {
+                    $scope.IsProcessing = false;
+                    $scope.ShowErrorMessage("Updating ItemGroup", 2, 1, err.statusText);
+
+
+
+                },
+                complete: function () {
+                    $scope.IsProcessing = false;
+                }
+            });
+        }
+    }
 
     $scope.savestatus = function (Statusvalue) {
 
@@ -358,6 +428,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 $scope.StatusList.push(_statusobj);
                 $scope.InventoryObject.Status = $scope.CreateNewLabel;
                 $scope.savestatus($scope.InventoryObject.Status);
+            }
+
+
+
+            if (Type == 4) {
+               
+                $scope.saveItemGroup($scope.CreateNewLabel);
             }
             $scope.CreateNewLabel = "";
             CheckScopeBeforeApply();
@@ -969,7 +1046,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.resetObject = function () {
         $scope.InventoryObject = {
             IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", DefaultItemLocationID: 0, DefaultItemUOM: 0, pDefaultCost: 0, pTargetQty: null, pReorderQty: null, Quantity: "", Uom: "units", UomID: 0, Location: "In Stock", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
-            UpdateDate: "/Date(1320825600000-0800)/", Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
+            UpdateDate: GetDefaultDate(), Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
             UnitTag3: "", CustomPartData: [], CustomTxnData: []
         };
         $scope.ImageList = [];
@@ -1807,6 +1884,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                contentType: 'application/json; charset=utf-8',
                dataType: 'json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               complete:function()
+               {
+                   if (_IsSavedItemGroup == true)
+                   {
+
+                       $scope.InventoryObject.ItemGroup = _IsSavedItemGroupData;
+                       CheckScopeBeforeApply();
+                       _IsSavedItemGroupData = "";
+                       _IsSavedItemGroup = false;
+                   }
+
+               },
                success: function (response) {
                    $scope.ItemgroupLoaded = true;
 

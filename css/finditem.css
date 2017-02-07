@@ -621,7 +621,7 @@ body {
     margin-top: 5px;
     /*border-radius: 100%;*/
     position: fixed;
-    background: #70b9f3 !important;
+  
 }
 
 .imghelper {
@@ -634,13 +634,12 @@ body {
 
 .img .thumbimg {
     vertical-align: middle;
-    height: auto !important;
-    width: auto !important;
+  
     border: transparent !important;
     opacity: 1 !important;
     margin-left: -4px;
-    max-height: 64px;
-    max-width: 64px;
+    max-height: 60px;
+    max-width: 60px;
     border-radius: 100%;
 }
 
@@ -655,7 +654,7 @@ body {
 
 .cartImage {
     font-size: 35px;
-    color: #fff;
+    color: #9c9a9a ;
     margin: 15px;
     margin-left: 6px;
 }

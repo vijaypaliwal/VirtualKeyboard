@@ -256,28 +256,30 @@
                                 <div class="col-xs-12">
                                     <label>Item Group </label>
                                     <div class="input-group" ng-if="IsItemGroupLibrary==true && IsActiveItemGroupLibrary==true">
-                                        <input class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup" type="text" name="name" value=" " />
-
+                                        <select class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup">
+                                            <option ng-repeat="obj in Itemgrouplist" value="{{obj.pcfCountFrq}}">{{obj.pcfCountFrq}}</option>
+                                        </select>
                                     </div>
 
+                                    
+                  
+                                            <div ng-if="IsItemGroupLibrary==false || IsActiveItemGroupLibrary==false">
+                                                <div class="row requiredfields" style="font-size:12px;padding:2px;" ng-if="(IsItemGroupLibrary==false|| IsActiveItemGroupLibrary==false) && IsItemGroupChose==false">
+                                                    <div class="col-md-12">
 
-                                    <div ng-if="IsItemGroupLibrary==false || IsActiveItemGroupLibrary==false">
-                                        <div class="row requiredfields" style="font-size:12px;padding:2px;" ng-if="(IsItemGroupLibrary==false|| IsActiveItemGroupLibrary==false) && IsItemGroupChose==false">
-                                            <div class="col-md-12">
+                                                        <a ng-if="IsItemGroupLibrary==false">
+                                                            You are not permitted to add new item group so please select item group from item list.
+                                                        </a>
+                                                        <a ng-if="IsActiveItemGroupLibrary==false">
+                                                            Your item group library is locked so please select item group from item list.
+                                                        </a>
+                                                    </div>
 
-                                                <a ng-if="IsItemGroupLibrary==false">
-                                                    You are not permitted to add new item group so please select item group from item list.
-                                                </a>
-                                                <a ng-if="IsActiveItemGroupLibrary==false">
-                                                    Your item group library is locked so please select item group from item list.
-                                                </a>
+                                                </div>
+
+                                                <label>{{InventoryObject.ItemGroup}}</label>
+
                                             </div>
-
-                                        </div>
-
-                                        <label>{{InventoryObject.ItemGroup}}</label>
-
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -729,8 +731,13 @@
                                 </div>
 
                             </td>
-                            
+                            <td ng-if="CurrentActiveField=='pCountFrq' && checkpermission('URL:Manage/ItemGroup')==true">
+                                <div class="aligncenter">
+                                    <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveItemGroupLibrary==true" ng-click="CreateNew(4)"><i class="fa fa-plus"></i>New</a>
+                                    <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveItemGroupLibrary==false" ng-click="locked()"><i class="fa fa-lock"></i>New</a>
+                                </div>
 
+                            </td>
 
                             <td ng-if="CurrentActiveField=='pPart'">
                                 <div class="alignright">
@@ -1469,13 +1476,13 @@
 
     <div class="modal-header">
 
-        <h4>Create new <span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of measure</span> <span ng-if="CreateType==3">Status</span></h4>
+        <h4>Create new  <span ng-if="CreateType==4">Item Group</span><span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of measure</span> <span ng-if="CreateType==3">Status</span></h4>
     </div>
 
     <div style="padding:12px;" class="modal-body">
 
         <div class="form-group">
-            <label>Enter new <span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of measure</span> <span ng-if="CreateType==3">Status</span> </label>
+            <label>Enter new <span ng-if="CreateType==4">Item Group</span><span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of measure</span> <span ng-if="CreateType==3">Status</span> </label>
 
             <div class="input-group">
                 <input type="text" ng-model="CreateNewLabel" class="form-control" value="" />
