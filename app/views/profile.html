@@ -13,7 +13,7 @@
             </div>
 
 
-            <img src="{{picURl}}" alt="Alternate Text" />
+            <img src="{{picURl}}" id="myimg" ng-click="openModel()" alt="Alternate Text" />
             <div>
                 <br />
             </div>
@@ -100,7 +100,7 @@
 
 </div>
 
-
+<input type="file" style="visibility:hidden" id="files" accept="image/*;" />
 
 <a ng-click="Openbottommenu()" class="menubtn waves-effect btn-info">
     <i class="fa fa-bars"></i>
@@ -116,7 +116,29 @@
         </ul>
     </div>
 </div>
+<div id="myModalforlist" class="modal bottom-sheet bottom-modal fade" role="dialog">
+    <!-- Modal content-->
+    <div class="modal-body">
 
+        <ul>
+            <li>
+                <a ng-click="capturePhotoNew();"> <i class="fa fa-camera"></i> Capture Photo</a>
+            </li>
+            <li>
+
+                <!--<a ng-click="triggerFileClick()"><i class="fa fa-picture-o"></i> From Photo Library</a>-->
+                <a ng-click="getPhoto()"><i class="fa fa-picture-o"></i> From Photo Library</a>
+            </li>
+        </ul>
+
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn width-100 btn-gray" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+    </div>
+
+</div>
 <script>
  
 

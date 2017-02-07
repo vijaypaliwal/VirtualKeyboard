@@ -213,8 +213,8 @@ label {
 
 .rotateData {
     padding: 0px;
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     background: #128ece;
     border-radius: 100%;
     color: #fff !important;
@@ -224,6 +224,7 @@ label {
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
 
 
 .smallBtn
@@ -237,6 +238,12 @@ label {
   
 
 }
+
+.rotateData i {
+    padding:0;
+}
+
+
 .movepin {
     -ms-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
@@ -817,3 +824,12 @@ input:checked + .slider:before {
         padding-left: 15px;
     padding-right: 15px;
         }
+
+.input-group-addon .dropdown-menu {
+    right:0;
+    text-align:left;
+}
+
+.input-group-addon {
+    padding-right:0;
+}

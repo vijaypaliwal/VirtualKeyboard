@@ -11,6 +11,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
     $scope.organization = "";
     $scope.email = "";
     $scope.picURl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
+    $scope.Image={ImageID:0,FileName:"",bytestring:"",Size:0}
     $scope.isSaving = false;
     function init() {
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
@@ -22,7 +23,17 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
 
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
+    function CheckScopeBeforeApply() {
+        if (!$scope.$$phase) {
+            $scope.$apply();
+        }
+    };
 
+    function removePaddingCharacters(bytes) {
+        bytes = bytes.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "");
+
+        return bytes;
+    }
 
     $scope.Getuserinfo = function () {
 
@@ -32,7 +43,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         }
 
         $scope.phoneLabel = "";
-
+        $scope.picURl = "";
         $.ajax
            ({
                type: "POST",
@@ -70,6 +81,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
                     $scope.picURl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
 
                    }
+                   
 
                    }
                    else {
@@ -77,6 +89,9 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
 
                    }
                    $scope.$apply();
+
+                   var d = new Date();
+                   $("#myimg").attr("src", $scope.picURl + "?" + d.getTime());
 
                },
                error: function (err) {
@@ -93,6 +108,68 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
     });
 
+    $("#files").on('change', function (event) {
+        $scope.handleFileSelect(event);
+    });
+
+
+ 
+
+    $scope.handleFileSelect = function (evt) {
+
+
+        var files = evt.target.files;
+      var  FileName = "";
+      var  StreamData = "";
+        var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
+        // Loop through the FileList and render image files as thumbnails.
+        for (var i = 0, f; f = files[i]; i++) {
+
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            // Closure to capture the file information.
+            reader.onload = (function (theFile) {
+
+                _ImgObj.ImageID = 2;
+
+
+
+                return function (e) {
+                    // Render thumbnail.
+                    FileName = theFile.name;
+                    StreamData = e.target.result;
+                    _ImgObj.FileName = FileName;
+                    _ImgObj.bytestring = e.target.result;
+                    _ImgObj.Size = theFile.size;
+
+
+                };
+            })(f);
+
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(f);
+        }
+
+        setTimeout(function () {
+            $scope.Image = _ImgObj;
+            CheckScopeBeforeApply();
+
+
+            $scope.uploadProfile();
+
+        }, 100);
+
+    }
+    $scope.openModel = function () {
+        $("#myModalforlist").modal("show");
+
+        //$("#files").trigger("click");
+    }
 
     $scope.Openbottommenu = function () {
 
@@ -109,6 +186,109 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         }
     }
 
+
+    $scope.onPhotoURISuccessNew = function (imageData) {
+        var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
+
+        imageData = "data:image/jpeg;base64," + imageData;
+
+        var id = randomStringNew(5, '0123456789');
+        _ImgObj.ImageID = id;
+
+        $(".viewimage").show();
+        $("#myModalforlist").modal("hide");
+
+
+        _ImgObj.FileName = "IphoneLibrary";
+        _ImgObj.bytestring = imageData;
+        $scope.Image = _ImgObj;
+        CheckScopeBeforeApply();
+        $scope.uploadProfile();
+
+    }
+
+    $scope.getPhoto = function (source) {
+        // Retrieve image file location from specified source
+        navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
+            quality: 50,
+            destinationType: destinationType.DATA_URL,
+            correctOrientation: true,
+            sourceType: pictureSource.PHOTOLIBRARY
+        });
+    }
+    $scope.onPhotoDataSuccessNew = function (imageData) {
+        var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
+
+        imageData = "data:image/jpeg;base64," + imageData;
+
+        var id = randomStringNew(5, '0123456789');
+        _ImgObj.ImageID = id;
+
+        $("#myModalforlist").modal("hide");
+
+
+        _ImgObj.FileName = "IphoneCapture";
+        _ImgObj.bytestring = imageData;
+        $scope.Image=_ImgObj;
+        CheckScopeBeforeApply();
+        $scope.uploadProfile();
+
+    }
+
+    $scope.onFail = function (message) {
+
+        log.error('Failed because: ' + message);
+    }
+    $scope.capturePhotoNew = function () {
+        navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
+            quality: 50,
+            targetWidth: 120,
+            targeHeight: 120,
+            correctOrientation: true,
+            destinationType: destinationType.DATA_URL,
+            allowEdit: true,
+            saveToPhotoAlbum: true,
+        });
+    }
+    $scope.uploadProfile = function () {
+        $("#myModalforlist").modal("hide");
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + "UploadProfileImage",
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ProfileImage": $scope.Image }),
+               success: function (response) {
+                   debugger;
+                   if (response.UploadProfileImageResult.Success == true) {
+
+                       $scope.Getuserinfo();
+                     
+
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Upload profile image", 1, 1, response.UploadProfileImageResult.Message)
+
+                   }
+                   $scope.$apply();
+
+               },
+               error: function (err) {
+                   debugger;
+                   $scope.ShowErrorMessage("Upload profile image", 2, 1, err.statusText);
+
+
+               }
+           });
+    }
 
     $scope.Updateinfo = function () {
 

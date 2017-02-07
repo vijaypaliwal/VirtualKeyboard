@@ -96,7 +96,7 @@
 
                                         </div>
 
-
+                                        <span ng-click="itemlist()" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
                                     </div>
 
@@ -164,7 +164,9 @@
                                 <select ng-change="changelocation()" class="form-control" id="Location" ng-model="InventoryObject.Location">
                                     <option mytag="{{obj.LocationZone}}" value="{{obj.LocationName}}" ng-selected="CheckSelectedValues(InventoryObject.Location,obj.LocationName)?true:false" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
                                 </select>
+                                <span ng-if="IsActiveLocationLibrary==true" ng-click="CreateNew(1)" class="input-group-addon last"><i class="fa fa-plus"></i></span>
 
+                                <span ng-click="locationlist()" class="input-group-addon last"><i class="fa fa-search"></i></span>
                             </div>
 
 
@@ -187,7 +189,7 @@
                                     <option value="">None</option>
                                     <option value="{{obj.StatusValue}}" ng-selected="obj.StatusValue==InventoryObject.Status" ng-repeat="obj in StatusList">{{obj.StatusValue}}</option>
                                 </select>
-
+                                <span ng-if="IsActiveStatusLibrary==true" ng-click="CreateNew(3)" class="input-group-addon last"><i class="fa fa-plus"></i></span>
                             </div>
                         </div>
 
@@ -200,7 +202,7 @@
                                 <select class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.Uom" id="UOM">
                                     <option value="{{obj.UnitOfMeasureName}}" ng-selected="CheckSelectedValues(InventoryObject.Uom,obj.UnitOfMeasureName)?true:false" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                 </select>
-
+                                <span ng-if="IsActiveUOMLibrary==true" ng-click="CreateNew(2)" class="input-group-addon last"><i class="fa fa-plus"></i></span>
 
                             </div>
                         </div>
@@ -211,7 +213,7 @@
                                 <select class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.DefaultItemUOM" id="DefaultItemUOM">
                                     <option value="{{obj.UnitOfMeasureID}}" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                 </select>
-
+                            
 
                             </div>
                         </div>
@@ -259,6 +261,11 @@
                                         <select class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup">
                                             <option ng-repeat="obj in Itemgrouplist" value="{{obj.pcfCountFrq}}">{{obj.pcfCountFrq}}</option>
                                         </select>
+
+                                        <span ng-if="IsActiveItemGroupLibrary==true" ng-click="CreateNew(4)" class="input-group-addon last"><i class="fa fa-plus"></i></span>
+
+                                        <span ng-click="Itemgrouplistmodal()" class="input-group-addon last"><i class="fa fa-search"></i></span>
+
                                     </div>
 
                                     
@@ -681,37 +688,37 @@
                             </td>
 
 
-                            <td ng-if="CurrentActiveField=='pPart'">
+                            <!--<td ng-if="CurrentActiveField=='pPart'">
 
                                 <div class="aligncenter">
                                     <a ng-click="itemlist()" class="btn btn-gray waves-effect"><i class="fa fa-search"></i>Find</a>
                                 </div>
 
 
-                            </td>
+                            </td>-->
 
 
 
-                            <td ng-if="CurrentActiveField=='lLoc'">
+                            <!--<td ng-if="CurrentActiveField=='lLoc'">
 
                                 <div class="aligncenter">
                                     <a ng-click="locationlist()" class="btn btn-gray waves-effect"><i class="fa fa-search"></i>Find</a>
                                 </div>
 
 
-                            </td>
+                            </td>-->
 
-                            <td ng-if="CurrentActiveField=='pCountFrq'">
+                            <!--<td ng-if="CurrentActiveField=='pCountFrq'">
 
                                 <div class="aligncenter">
                                     <a ng-click="Itemgrouplistmodal()" class="btn btn-gray waves-effect"><i class="fa fa-search"></i>Find</a>
                                 </div>
 
 
-                            </td>
+                            </td>-->
 
 
-                            <td ng-if="CurrentActiveField=='iStatusValue' && checkpermission('URL:Manage/Status')==true">
+                            <!--<td ng-if="CurrentActiveField=='iStatusValue' && checkpermission('URL:Manage/Status')==true">
                                 <div class="aligncenter">
                                     <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveStatusLibrary==true" ng-click="CreateNew(3)"><i class="fa fa-plus"></i>New</a>
                                     <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveStatusLibrary==false" ng-click="locked()"><i class="fa fa-lock"></i>New</a>
@@ -730,14 +737,14 @@
                                     <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveUOMLibrary==false" ng-click="locked()"><i class="fa fa-lock"></i>New</a>
                                 </div>
 
-                            </td>
-                            <td ng-if="CurrentActiveField=='pCountFrq' && checkpermission('URL:Manage/ItemGroup')==true">
+                            </td>-->
+                            <!--<td ng-if="CurrentActiveField=='pCountFrq' && checkpermission('URL:Manage/ItemGroup')==true">
                                 <div class="aligncenter">
                                     <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveItemGroupLibrary==true" ng-click="CreateNew(4)"><i class="fa fa-plus"></i>New</a>
                                     <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveItemGroupLibrary==false" ng-click="locked()"><i class="fa fa-lock"></i>New</a>
                                 </div>
 
-                            </td>
+                            </td>-->
 
                             <td ng-if="CurrentActiveField=='pPart'">
                                 <div class="alignright">

@@ -679,6 +679,8 @@ html, body {
 
 .laststepbtn{
     width:100% !important;
+    margin-right:15px;
+    max-width:140px !important;
 }
 .darkblue {
     background-color: rgb(0, 99, 177) !important;
