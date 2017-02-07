@@ -47,6 +47,8 @@ app.controller('customfieldController', ['$scope', 'localStorageService', 'authS
             default:
 
         }
+
+        $('html, body').animate({ scrollTop: 0 }, 0, 'linear');
         CheckScopeBeforeApply();
     }
     $scope.GetClass = function (index) {
