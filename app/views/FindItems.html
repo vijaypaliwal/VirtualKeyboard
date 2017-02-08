@@ -2,6 +2,13 @@
 
 <link href="css/finditem.css" rel="stylesheet" />
 
+<style>
+    .form-group.has-feedback {
+        margin-bottom:0;
+    }
+
+</style>
+
 
 <div class="title-header">
 
@@ -109,12 +116,13 @@
 
                                 <span ng-if="CurrentActiveSearchType==1">
 
-                                    <input style="border-radius:0px;" id="MasterSearch" type="text" ng-model="SearchValue" class="form-control hideaddclear" placeholder="Search">
+                                    <input id="MasterSearch" type="text" ng-model="SearchValue" class="form-control hideaddclear" placeholder="Search">
                                 </span>
+
 
                                 <span ng-if="CurrentActiveSearchType==3">
 
-                                    <input id="MasterSearchDate" type="date" ng-model="SearchDateValue" class="form-control" placeholder="Search">
+                                    <input style="font-size:10px;" id="MasterSearchDate" type="date" ng-model="SearchDateValue" class="form-control" placeholder="Search">
                                 </span>
                                 <span ng-if="CurrentActiveSearchType==2">
 

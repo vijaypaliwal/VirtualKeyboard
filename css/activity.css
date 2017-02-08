@@ -267,6 +267,10 @@ label {
     font-size: 32px;
 }
 
+.singlePanel .input-group {
+    margin-bottom:7px;
+}
+
 
 
 .mybootboxbody {
