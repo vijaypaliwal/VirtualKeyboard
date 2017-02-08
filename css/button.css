@@ -565,6 +565,9 @@
 
 .form-control
  {
+      -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     box-shadow:none !important;
     -webkit-transition: all .7s ease !important;
    -moz-transition: all .7s ease !important;
@@ -581,6 +584,9 @@
 
 input[type="password"]
  {
+      -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     box-shadow:none !important;
     -webkit-transition: all .7s ease !important;
    -moz-transition: all .7s ease !important;
