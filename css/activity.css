@@ -237,9 +237,10 @@ label {
 
 }
 
-.rotateData i {
-    padding:0;
+.input-group-addon i {
+    line-height:initial;
 }
+
 
 
 .movepin {
