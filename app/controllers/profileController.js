@@ -36,6 +36,11 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         return bytes;
     }
 
+
+    $scope.PreviewImage = function () {
+        $("#imagemodaldetail").modal("show");
+    }
+
     $scope.Getuserinfo = function () {
 
         var authData = localStorageService.get('authorizationData');
@@ -98,6 +103,8 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
                    var d = new Date();
                    $("#myimg").attr("src", $scope.picURl + "?" + d.getTime());
                    $("#myimgProfile").attr("src", $scope.ProfilePicURl + "?" + d.getTime());
+                   $("#imagepreview").attr("src", $scope.picURl + "?" + d.getTime());
+                   
                },
                error: function (err) {
 
@@ -173,7 +180,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
     $scope.openModel = function () {
         $("#myModalforlist").modal("show");
 
-       // $("#files").trigger("click");
+     //   $("#files").trigger("click");
     }
 
     $scope.Openbottommenu = function () {
