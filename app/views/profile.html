@@ -12,8 +12,8 @@
                 <br />
             </div>
 
-
-            <img src="{{picURl}}" id="myimg" ng-click="openModel()" alt="Alternate Text" />
+            <img  ng-if="_isProfileLoading==true" src="img/loader1.gif" class="loadingImage" alt="loading.." />
+            <img src="{{picURl}}" id="myimg" ng-click="openModel()" ng-if="_isProfileLoading==false" alt="Alternate Text" />
             <div>
                 <br />
             </div>

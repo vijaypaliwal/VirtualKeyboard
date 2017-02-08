@@ -13,6 +13,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
     $scope.picURl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
     $scope.Image={ImageID:0,FileName:"",bytestring:"",Size:0}
     $scope.isSaving = false;
+    $scope._isProfileLoading = false;
     function init() {
         $scope.CurrentInventory = localStorageService.get("CurrentDetailObject");
         console.log($scope.CurrentInventory);
@@ -41,7 +42,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
-
+        $scope._isProfileLoading = true;
         $scope.phoneLabel = "";
         $scope.picURl = "";
         $.ajax
@@ -73,16 +74,20 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
 
                    if (response.GetUserInfoResult.Payload[0].ProfilePic != null && response.GetUserInfoResult.Payload[0].ProfilePic != "") {
 
-                       $scope.picURl = serviceBaseUrl + "Logos/" + response.GetUserInfoResult.Payload[0].ProfilePic
+                       $scope.picURl = response.GetUserInfoResult.Payload[0].ProfilePic;
+
+                       $scope.ProfilePicURl = $scope.picURl;
                    }
 
                    else {
 
-                    $scope.picURl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
+                       $scope.picURl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
+
+                       $scope.ProfilePicURl = "img/dummy-user48.png";
 
                    }
                    
-
+                   $scope._isProfileLoading = false;
                    }
                    else {
                        $scope.ShowErrorMessage("User Info", 1, 1, response.GetUserInfoResult.Message)
@@ -92,13 +97,13 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
 
                    var d = new Date();
                    $("#myimg").attr("src", $scope.picURl + "?" + d.getTime());
-
+                   $("#myimgProfile").attr("src", $scope.ProfilePicURl + "?" + d.getTime());
                },
                error: function (err) {
 
                    $scope.ShowErrorMessage("User Info", 2, 1, err.statusText);
 
-
+                   $scope._isProfileLoading = false;
                }
            });
 
@@ -168,7 +173,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
     $scope.openModel = function () {
         $("#myModalforlist").modal("show");
 
-        //$("#files").trigger("click");
+       // $("#files").trigger("click");
     }
 
     $scope.Openbottommenu = function () {
@@ -252,7 +257,8 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
     }
     $scope.uploadProfile = function () {
         $("#myModalforlist").modal("hide");
-
+        $scope._isProfileLoading = true;
+        $scope.$apply();
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -271,7 +277,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
                    if (response.UploadProfileImageResult.Success == true) {
 
                        $scope.Getuserinfo();
-                     
+                     log.success("Profile image updated successfully.")
 
                    }
                    else {

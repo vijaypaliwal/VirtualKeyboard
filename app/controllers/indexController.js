@@ -129,7 +129,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $scope.IsActiveUOMLibrary = IsActiveUOMLibrary;
         $scope.IsActiveItemLibrary = IsActiveItemLibrary;
         $scope.IsActiveItemGroupLibrary = IsActiveItemGroupLibrary;
-
+        $scope.GetProfileData();
 
 
 
@@ -468,7 +468,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
                 $scope.username = $scope.UserInfoData.username;
                 $scope.myprofileimage = $scope.UserInfoData.myprofileimage;
-                $scope.picURl = $scope.UserInfoData.picURl;
+                $scope.ProfilePicURl = $scope.UserInfoData.picURl;
                 $scope.$apply();
             }
         }, 1000)
