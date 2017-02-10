@@ -247,3 +247,7 @@ body {
 .profilepage {
     display: block !important;
 }
+
+h4 {
+    word-break:break-all;
+}
