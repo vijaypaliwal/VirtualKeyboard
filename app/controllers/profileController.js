@@ -126,6 +126,8 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
                    var d = new Date();
                    $("#myimg").attr("src", $scope.picURl + "?" + d.getTime());
                    $("#myimgProfile").attr("src", $scope.ProfilePicURl + "?" + d.getTime());
+                   $("#myimgProfile1").attr("src", $scope.ProfilePicURl + "?" + d.getTime());
+                   
                    $("#imagepreview").attr("src", $scope.picURl + "?" + d.getTime());
                    
                },
@@ -307,8 +309,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
                    if (response.UploadProfileImageResult.Success == true) {
 
                        $scope.Getuserinfo();
-                     log.success("Profile image updated successfully.")
-
+                     ShowSuccess("Updated");
                    }
                    else {
                        $scope.ShowErrorMessage("Upload profile image", 1, 1, response.UploadProfileImageResult.Message)
