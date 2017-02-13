@@ -451,6 +451,7 @@
                                                             <span ng-if="tvar6==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                                         </div>
 
+                                                        <span class="input-group-addon last" ng-click="ScanTagItem('iUnitNumber1',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
 
                                                         <span ng-if="$index==0" class="input-group-addon last">
                                                             <button id="unitnumber1_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUnitNumber1', CurrentActiveObject.ApplyTransactionData.UnitNumber1, CurrentActiveObject.InventoryDataList.uId)">
@@ -458,7 +459,6 @@
                                                             </button>
                                                         </span>
 
-                                                        <span class="input-group-addon last" ng-click="ScanTagItem('iUnitNumber1',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                                     </div>
                                                 </div>
 
@@ -483,6 +483,7 @@
                                                             <input id="unitnumbertext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar7=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'),$index)" type="number" data-type="number" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
                                                             <span ng-if="tvar7==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                                         </div>
+                                                        <span class="input-group-addon last" ng-click="ScanTagItem('iUnitNumber2',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
 
                                                         <span ng-if="$index==0" class="input-group-addon last">
                                                             <button id="unitnumber2_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUnitNumber2', CurrentActiveObject.ApplyTransactionData.UnitNumber2, CurrentActiveObject.InventoryDataList.uId)">
@@ -490,7 +491,6 @@
                                                             </button>
                                                         </span>
 
-                                                        <span class="input-group-addon last" ng-click="ScanTagItem('iUnitNumber2',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                                     </div>
                                                 </div>
 
