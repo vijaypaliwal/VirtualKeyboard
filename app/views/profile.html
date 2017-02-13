@@ -16,7 +16,7 @@
     }
 </style>
 
-<div style="display:none;" class="profilepage">
+<div style="display:none; position:fixed;width:100%;" class="profilepage">
 
     <div class="detailmode">
         <div class="bluearea">
@@ -116,18 +116,20 @@
         
         
     </div>
-    <div class="modal fade" id="imagemodaldetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div style="background:#fff;" class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
-            <h4>Image</h4>
-        </div>
-        <div class="modal-body">
-            <img src="{{picURl}}" id="imagepreview" style="max-height:250px;max-width:250px;">
-        </div>
-    </div>
+    
 </div>
 
 <input type="file" style="visibility:hidden" id="files" accept="image/*;" />
+
+<div class="modal fade" id="imagemodaldetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div style="background:#fff;" class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
+        <h4>Image</h4>
+    </div>
+    <div class="modal-body">
+        <img src="{{picURl}}" id="imagepreview" style="max-height:250px;max-width:250px;">
+    </div>
+</div>
 
 <a ng-click="Openbottommenu()" class="menubtn waves-effect btn-info">
     <i class="fa fa-bars"></i>
