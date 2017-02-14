@@ -2556,10 +2556,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         CheckScopeBeforeApply();
 
         setTimeout(function() {
-            $("#myform .swiper-slide-active input:first").focus();
-
-            $cordovaKeyboard.show();
-        },500)
+            $scope.changeNav();
+        },600)
 
        
 
@@ -3142,7 +3140,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
         else {
             //SoftKeyboard.hide();
-            alert("1");
+          
 
             $cordovaKeyboard.close();
 
@@ -3155,7 +3153,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     if ($("#myform .swiper-slide-active input").length > 0) {
 
-                        alert("2");
+                      
                         $("#myform .swiper-slide-active input:first").focus();
                         //  SoftKeyboard.show();
                         $cordovaKeyboard.show();
