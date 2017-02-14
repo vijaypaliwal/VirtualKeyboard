@@ -2557,9 +2557,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         setTimeout(function() {
             $scope.changeNav();
-        },600)
-
-       
+        },1000)
 
 
     }
@@ -3126,43 +3124,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.changeNav = function () {
 
 
+        $("#myform .swiper-slide-active input:first").focus();
+        $("#myform .swiper-slide-active select:first").focus();
+        $("#myform .swiper-slide-active input:first").not("input[type='file']").not("input[type = 'checkbox']").trigger("click");
+        $("#myform .swiper-slide-active input:first").not("input[type='file']").not("input[type = 'checkbox']").trigger("keypress");
         
-        if (deviceType != "Android" && deviceType != "null") {
-
-            alert("0");
-
-            $("#myform .swiper-slide-active input:first").focus();
-            $("#myform .swiper-slide-active select:first").focus();
-            $("#myform .swiper-slide-active input:first").not("input[type='file']").not("input[type = 'checkbox']").trigger("click");
-            $("#myform .swiper-slide-active input:first").not("input[type='file']").not("input[type = 'checkbox']").trigger("keypress");
-
-           
-        }
-        else {
-            //SoftKeyboard.hide();
-          
-
-            $cordovaKeyboard.close();
-
-            if ($scope.CurrentActiveField != "Image") {
-
-                if ($("#myform .swiper-slide-active select").length > 0 || $("#myform .swiper-slide-active input[type = 'checkbox']").length > 0) {
-
-                }
-                else {
-
-                    if ($("#myform .swiper-slide-active input").length > 0) {
-
-                      
-                        $("#myform .swiper-slide-active input:first").focus();
-                        //  SoftKeyboard.show();
-                        $cordovaKeyboard.show();
-
-                    }
-                }
-            }
-            //
-        }
+       
     }
 
     $(".modal-backdrop").remove();
@@ -3458,7 +3425,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     $scope.slidenumber(swiperHere.activeIndex);
 
 
-                    if (swiperHere.activeIndex != 3 && swiperHere.activeIndex != 6) {
+                    if (swiperHere.activeIndex != 100 && swiperHere.activeIndex != 101) {
 
                         $scope.changeNav();
 
