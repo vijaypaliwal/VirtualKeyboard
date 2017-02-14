@@ -3442,8 +3442,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             });
 
 
-
-
             setTimeout(function () {
                 var _TempcolName = $(".swiper-slide-active").attr("data-column");
                 $scope.CurrentActiveField = _TempcolName != undefined && _TempcolName != "" ? _TempcolName : "";
@@ -3462,7 +3460,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $scope.SetDefaultObjects();
             $scope.laststepindex = mySwiper.slides.length;
 
-            $scope.changeNav();
+            setTimeout(function () {
+                $scope.changeNav();
+            }, 100)
         }, 10)
     }
 
