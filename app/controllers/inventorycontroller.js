@@ -3131,6 +3131,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         
         if (deviceType != "Android" && deviceType != "null") {
 
+            alert("0");
+
             $("#myform .swiper-slide-active input:first").focus();
             $("#myform .swiper-slide-active select:first").focus();
             $("#myform .swiper-slide-active input:first").not("input[type='file']").not("input[type = 'checkbox']").trigger("click");
@@ -3140,7 +3142,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
         else {
             //SoftKeyboard.hide();
-
+            alert("1");
 
             $cordovaKeyboard.close();
 
@@ -3153,7 +3155,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     if ($("#myform .swiper-slide-active input").length > 0) {
 
-                        alert("In");
+                        alert("2");
                         $("#myform .swiper-slide-active input:first").focus();
                         //  SoftKeyboard.show();
                         $cordovaKeyboard.show();
