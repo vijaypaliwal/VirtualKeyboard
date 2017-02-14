@@ -2555,9 +2555,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.GetActiveUnitDataField();
         CheckScopeBeforeApply();
 
-        setTimeout(function() {
-            $scope.changeNav();
-        },1000)
+      
 
 
     }
@@ -3463,6 +3461,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             $scope.SetDefaultObjects();
             $scope.laststepindex = mySwiper.slides.length;
+
+            $scope.changeNav();
         }, 10)
     }
 
