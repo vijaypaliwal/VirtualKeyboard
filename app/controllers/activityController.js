@@ -72,6 +72,60 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     }
 
+    $scope.dropdownLabel = "";
+
+    $scope.Addnew = function (ID)
+    {
+        $scope.currentcfdID = ID;
+        CheckScopeBeforeApply();
+
+        alert($scope.currentcfdID);
+        $("#Adddropdownvalue").modal('show');
+
+    }
+
+    $scope.SaveDropdownlabel = function () {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax({
+            url: serviceBase + "UpdateCustomDropdown",
+            type: 'POST',
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "cfdID": $scope.currentcfdID, "Value": $scope.dropdownLabel }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (result)
+            {
+
+               $('#CustomActivity_' + $scope.currentcfdID).append('<option value=' + $scope.dropdownLabel + ' selected="selected"> '+ $scope.dropdownLabel+'</option>');
+               
+
+               $('#CustomActivity_' + $scope.currentcfdID).val($scope.dropdownLabel);
+
+                $("#Adddropdownvalue").modal('hide');
+
+
+            },
+            error: function (err) {
+
+                alert("error");
+                debugger;
+               
+
+            },
+            complete: function () {
+               
+
+            }
+
+        });
+
+    }
+
+
     $scope.CreateNewModal = function (Type, _index) {
         $scope.CreateType = Type;
         $scope.CurrentNewLabelIndex = _index;

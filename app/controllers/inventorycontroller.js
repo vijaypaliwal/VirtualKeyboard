@@ -2555,6 +2555,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.GetActiveUnitDataField();
         CheckScopeBeforeApply();
 
+        setTimeout(function() {
+            $("#myform .swiper-slide-active input:first").focus();
+
+            $cordovaKeyboard.show();
+        },500)
+
+       
+
 
     }
 
@@ -3144,6 +3152,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 else {
 
                     if ($("#myform .swiper-slide-active input").length > 0) {
+
+                        alert("In");
                         $("#myform .swiper-slide-active input:first").focus();
                         //  SoftKeyboard.show();
                         $cordovaKeyboard.show();
