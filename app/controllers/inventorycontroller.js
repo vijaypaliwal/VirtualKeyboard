@@ -3291,6 +3291,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.Addnew = function (ID, _Fieldtype) {
 
+        $scope.dropdownLabel = "";
+
         $scope.fieldtype = _Fieldtype;
         $scope.currentcfdID = ID;
         CheckScopeBeforeApply();
@@ -3321,6 +3323,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                 $('#' + $scope.fieldtype + $scope.currentcfdID).val($scope.dropdownLabel);
+
+                $('#' + $scope.fieldtype + $scope.currentcfdID).trigger("change");
+                $('#' + $scope.fieldtype + $scope.currentcfdID).trigger("input");
+                CheckScopeBeforeApply();
 
                 $("#Adddropdownvalue").modal('hide');
 
