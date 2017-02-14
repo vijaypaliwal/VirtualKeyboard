@@ -79,7 +79,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $scope.currentcfdID = ID;
         CheckScopeBeforeApply();
 
-        alert($scope.currentcfdID);
+     
         $("#Adddropdownvalue").modal('show');
 
     }

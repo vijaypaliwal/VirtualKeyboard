@@ -3287,6 +3287,62 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
+    $scope.dropdownLabel = "";
+
+    $scope.Addnew = function (ID, _Fieldtype) {
+
+        $scope.fieldtype = _Fieldtype;
+        $scope.currentcfdID = ID;
+        CheckScopeBeforeApply();
+
+        debugger;
+
+       
+        $("#Adddropdownvalue").modal('show');
+
+    }
+
+    $scope.SaveDropdownlabel = function () {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax({
+            url: serviceBase + "UpdateCustomDropdown",
+            type: 'POST',
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "cfdID": $scope.currentcfdID, "Value": $scope.dropdownLabel }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (result) {
+
+                $('#' + $scope.fieldtype+ $scope.currentcfdID).append('<option value=' + $scope.dropdownLabel + ' selected="selected"> ' + $scope.dropdownLabel + '</option>');
+
+
+                $('#' + $scope.fieldtype + $scope.currentcfdID).val($scope.dropdownLabel);
+
+                $("#Adddropdownvalue").modal('hide');
+
+
+            },
+            error: function (err) {
+
+                alert("error");
+                debugger;
+
+
+            },
+            complete: function () {
+
+
+            }
+
+        });
+
+    }
+
+
     $scope.UpdateLocationAndUOMList = function () {
         var _defaultUOM = { UnitOfMeasureID: "", UnitOfMeasureName: "units" };
 
