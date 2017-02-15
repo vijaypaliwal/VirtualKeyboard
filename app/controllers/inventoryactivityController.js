@@ -436,7 +436,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
             if ($scope.CustomItemDataList[i].cfdID == ID) {
                 if ($scope.CustomItemDataList[i].cfdCustomFieldType == "Part") {
 
-                    return "i" + $scope.CustomItemDataList[i].ColumnMap;
+                    return "i_" + $scope.CustomItemDataList[i].ColumnMap;
                 }
 
 
