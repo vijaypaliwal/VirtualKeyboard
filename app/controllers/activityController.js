@@ -74,8 +74,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     $scope.dropdownLabel = "";
 
-    $scope.Addnew = function (ID)
+    $scope.Addnew = function (ID, FieldType)
     {
+        $scope.dropdownLabel = "";
+        $scope.FieldType = FieldType;
         $scope.currentcfdID = ID;
         CheckScopeBeforeApply();
 
@@ -100,10 +102,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             success: function (result)
             {
 
-               $('#CustomActivity_' + $scope.currentcfdID).append('<option value=' + $scope.dropdownLabel + ' selected="selected"> '+ $scope.dropdownLabel+'</option>');
+                $('#' + $scope.FieldType + $scope.currentcfdID).append('<option value=' + $scope.dropdownLabel + ' selected="selected"> ' + $scope.dropdownLabel + '</option>');
                
 
-               $('#CustomActivity_' + $scope.currentcfdID).val($scope.dropdownLabel);
+                $('#' + $scope.FieldType + $scope.currentcfdID).val($scope.dropdownLabel);
 
                 $("#Adddropdownvalue").modal('hide');
 
