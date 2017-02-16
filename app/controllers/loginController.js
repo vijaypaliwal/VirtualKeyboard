@@ -76,7 +76,6 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
 
     $scope.InIt();
 
-    
 
     $scope.login = function ()
     {
