@@ -27,6 +27,27 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     var _IsItemSlide = false;
 
+    $scope.itemfields = false;
+
+    $scope.switchmode = false;
+
+    $scope.mode1 = function () {
+        $scope.itemfields = false;
+        $scope.switchmode = false;
+    }
+
+    $scope.mode2 = function () {
+        $scope.itemfields = false;
+        $scope.switchmode = true;
+    }
+
+    $scope.nextstep = function () {
+        $scope.itemfields = true;
+
+    }
+
+
+
 
     function GetDefaultDate()
     {

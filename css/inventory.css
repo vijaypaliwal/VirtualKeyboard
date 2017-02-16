@@ -40,8 +40,11 @@ body {
 html, body {
     margin: 0 !important;
     padding: 0 !important;
-    height: 100% !important;
+ 
 }
+
+
+
 
 
 .swiper-slide {
@@ -621,9 +624,7 @@ html, body {
     }
 
 
-.menubtn {
-    display: none;
-}
+
 
 .aligncenter {
     text-align: center;

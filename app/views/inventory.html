@@ -14,6 +14,72 @@
         .iamgebtn i {
             font-size:14px;
         }
+
+        .switchmode .tophead
+        {
+            background: #dbdbdb;
+  margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom:5px;
+        }
+
+         .switchmode .tophead h4
+         {
+             line-height:7px;
+         }
+
+         .switchmode .form-group
+         {
+             margin-bottom:5px;
+         }
+
+         .stickybtn
+         {
+              position: fixed;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+         }
+
+         .stickybtn .btn
+         {
+         width: 100%;
+    color: #fff;
+    text-transform: capitalize;
+    border-radius: 0;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding-left: 7px;
+    border-radius: 20px;
+    padding-right: 7px;
+         }
+
+          .row.stickybtn
+         {
+             margin-left:0;
+             margin-right:0;
+         }
+
+         .stickybtn .col-xs-4
+         {
+             padding-left:7px;
+             padding-right:7px;
+           
+         }
+
+         .stickybtn i 
+         {
+             font-size:14px;
+         }
+
+         .menubtn
+         {
+             bottom:60px;
+         }
+
+
+        
 </style>
 
 
@@ -22,7 +88,7 @@
 <a href="#/mainmenu" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
 
 
-<div class="maincontent animated slideInLeft">
+<div ng-show="switchmode==false" class="maincontent animated slideInLeft">
 
 
     <form id="myform" name="myform">
@@ -213,7 +279,7 @@
                                 <select class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.DefaultItemUOM" id="DefaultItemUOM">
                                     <option value="{{obj.UnitOfMeasureID}}" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                 </select>
-                            
+
 
                             </div>
                         </div>
@@ -259,7 +325,7 @@
                                     <label>Item Group </label>
                                     <div class="input-group" ng-if="IsItemGroupLibrary==true && IsActiveItemGroupLibrary==true">
                                         <select class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup">
-                                            <option  value="">None</option>
+                                            <option value="">None</option>
                                             <option ng-repeat="obj in Itemgrouplist" value="{{obj.pcfCountFrq}}">{{obj.pcfCountFrq}}</option>
                                         </select>
 
@@ -269,25 +335,25 @@
 
                                     </div>
 
-                                    
-                  
-                                            <div ng-if="IsItemGroupLibrary==false || IsActiveItemGroupLibrary==false">
-                                                <div class="row requiredfields" style="font-size:12px;padding:2px;" ng-if="(IsItemGroupLibrary==false|| IsActiveItemGroupLibrary==false) && IsItemGroupChose==false">
-                                                    <div class="col-md-12">
 
-                                                        <a ng-if="IsItemGroupLibrary==false">
-                                                            You are not permitted to add new item group so please select item group from item list.
-                                                        </a>
-                                                        <a ng-if="IsActiveItemGroupLibrary==false">
-                                                            Your item group library is locked so please select item group from item list.
-                                                        </a>
-                                                    </div>
 
-                                                </div>
+                                    <div ng-if="IsItemGroupLibrary==false || IsActiveItemGroupLibrary==false">
+                                        <div class="row requiredfields" style="font-size:12px;padding:2px;" ng-if="(IsItemGroupLibrary==false|| IsActiveItemGroupLibrary==false) && IsItemGroupChose==false">
+                                            <div class="col-md-12">
 
-                                                <label>{{InventoryObject.ItemGroup}}</label>
-
+                                                <a ng-if="IsItemGroupLibrary==false">
+                                                    You are not permitted to add new item group so please select item group from item list.
+                                                </a>
+                                                <a ng-if="IsActiveItemGroupLibrary==false">
+                                                    Your item group library is locked so please select item group from item list.
+                                                </a>
                                             </div>
+
+                                        </div>
+
+                                        <label>{{InventoryObject.ItemGroup}}</label>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -321,7 +387,7 @@
 
                                 <div class="col-xs-8">
 
-                                    
+
 
                                     <h4 style="text-align:center;" ng-if="ImageList.length==0">No Image seleceted</h4>
 
@@ -674,12 +740,12 @@
                             </td>
                             <td ng-if="CurrentActiveField=='UpdateDate'">
 
-                              
+
                                 <div class="alignright">
                                     <a ng-click="GetLastValue('Inv_UpdateDate','#UpdateDate')" test-case condition="GetLastValueData('Inv_UpdateDate')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
                             </td>
-                            
+
 
                             <td ng-if="CurrentActiveField=='iQty'">
 
@@ -697,9 +763,6 @@
 
 
                             </td>-->
-
-
-
                             <!--<td ng-if="CurrentActiveField=='lLoc'">
 
                                 <div class="aligncenter">
@@ -708,7 +771,6 @@
 
 
                             </td>-->
-
                             <!--<td ng-if="CurrentActiveField=='pCountFrq'">
 
                                 <div class="aligncenter">
@@ -717,8 +779,6 @@
 
 
                             </td>-->
-
-
                             <!--<td ng-if="CurrentActiveField=='iStatusValue' && checkpermission('URL:Manage/Status')==true">
                                 <div class="aligncenter">
                                     <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveStatusLibrary==true" ng-click="CreateNew(3)"><i class="fa fa-plus"></i>New</a>
@@ -895,14 +955,14 @@
                             <td ng-if="slide == Totalslides">
                                 <div class="alignright">
                                     <a ng-click="addinventory()" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" id="addinventories" class="btn laststepbtn waves-effect btn-success animated fadeInUp"> <i class="fa fa-plus-circle"></i>Process</a>
-                                    </div>
-</td>
+                                </div>
+                            </td>
 
 
                             <td ng-if="slide == Totalslides">
-                                
-                                    <a ng-click="movetoback()" class="pull-left laststepbtn btn btn-gray animated fadeInUp"> <i class="fa fa-times"></i>Cancel</a>
-                                
+
+                                <a ng-click="movetoback()" class="pull-left laststepbtn btn btn-gray animated fadeInUp"> <i class="fa fa-times"></i>Cancel</a>
+
 
                             </td>
                         </tr>
@@ -990,20 +1050,171 @@
 
 </div>
 
-<div id="myModal2" class="modal bottommenu fade">
+<div ng-show="switchmode==true" class="switchmode">
 
-    <div class="modal-body">
-        <ul class="animated slideInUp selectAction">
-            <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-plus"></i> </a></li>
-            <li> <a href="#/reportmenu"><span class="newinv">Go to Reports</span></a>  <a href="#/reportmenu" class=" waves-effect btn-primary btn"> <i class="fa fa-th-list"></i> </a></li>
-            <li class="bottomlink"><span data-dismiss="modal">Close</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
-        </ul>
+    <div ng-if="itemfields==false" class="row tophead">
+        <div class="col-xs-7">
+            <h4>Required fields</h4>
+        </div>
+        <div class="col-xs-5">
+            <a class="scanbtn btn btn-gray" class="pull-right">
+                <i class="fa fa-refresh"></i> Reuse
+      </a>
+                
+
+            </a>
+            
+
+        </div>
     </div>
+
+    <div ng-if="itemfields==false" class="row">
+        <div class="col-md-12">
+
+            <div class="form-group">
+                <label>Item Name</label>
+                <div class="input-group">
+
+                    <input type="text" class="form-control" value="" />
+                    <span class="input-group-addon last">
+                        <i class="fa fa-barcode"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Item Name</label>
+                <div class="input-group">
+
+                    <input type="text" class="form-control" value="" />
+                    <span class="input-group-addon last">
+                        <i class="fa fa-barcode"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Item Name</label>
+                <div class="input-group">
+
+                    <input type="text" class="form-control" value="" />
+                    <span class="input-group-addon last">
+                        <i class="fa fa-barcode"></i>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div ng-if="itemfields==true" class="row tophead animated slideInRight">
+        <div class="col-xs-7">
+            <h4>Item fields</h4>
+        </div>
+        <div class="col-xs-5">
+            <a class="scanbtn btn btn-gray" class="pull-right">
+                <i class="fa fa-refresh"></i> Reuse
+            </a>
+        </div>
+    </div>
+
+
+    <div ng-if="itemfields==true" class="row animated slideInRight">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Item val</label>
+                <div class="input-group">
+
+                    <input type="text" class="form-control" value="" />
+                    <span class="input-group-addon last">
+                        <i class="fa fa-barcode"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Item Number</label>
+                <div class="input-group">
+
+                    <input type="text" class="form-control" value="" />
+                    <span class="input-group-addon last">
+                        <i class="fa fa-barcode"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Serial Number</label>
+                <div class="input-group">
+
+                    <input type="text" class="form-control" value="" />
+                    <span class="input-group-addon last">
+                        <i class="fa fa-barcode"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Item Drop</label>
+                <div class="input-group">
+
+                    <select class="form-control">
+                        <option>One</option>
+                        <option>Two</option>
+                        <option>Three</option>
+                    </select>
+                    <span class="input-group-addon last">
+                        <i class="fa fa-barcode"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Activitydate</label>
+                <div class="input-group">
+
+                    <input type="date" class="form-control" value="" />
+                    <span class="input-group-addon last">
+                        <i class="fa fa-barcode"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="itemfields==false" class="row stickybtn">
+        <div class="col-xs-6">
+            <a ng-click="mode1()" class="btn green"> <i class="fa fa-check"></i> Save</a>
+        </div>
+      
+        <div class="col-xs-6">
+            <a ng-click="nextstep()" class="btn pink"> <i class="fa fa-step-forward"></i> Continue</a>
+        </div>
+    </div>
+
+
+    <div ng-if="itemfields==true" class="row stickybtn">
+        <div class="col-xs-4">
+            <a ng-click="mode1()" class="btn green"> <i class="fa fa-check"></i> Save</a>
+        </div>
+        <div class="col-xs-4">
+            <a ng-click="mode1()" class="btn blue"> <i class="fa fa-step-backward"></i> Skip</a>
+        </div>
+        <div class="col-xs-4">
+            <a ng-click="itemfields=true" class="btn pink"> <i class="fa fa-step-forward"></i> Continue</a>
+        </div>
+    </div>
+
 </div>
 
-<a ng-click="OpenmenuModal()" class="menubtn waves-effect btn-info">
-    <i class="fa fa-bars"></i>
+<a ng-if="switchmode==false" ng-click="mode2()" class="menubtn waves-effect btn-info btn-floating">
+    <i class="fa fa-exchange"></i>
 </a>
+
+<a ng-if="switchmode==true" ng-click="mode1()" class="menubtn waves-effect btn-info btn-floating">
+    <i class="fa fa-exchange"></i>
+</a>
+
+
 
 
 <div id="myModalforlist" class="modal bottom-sheet bottom-modal fade" role="dialog">
@@ -1123,6 +1334,7 @@
 </div>
 
 
+
 <div style="background:#fff;" id="Itemgrouplistmodal" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span> <i class="fa fa-times"></i> </span></button>
@@ -1154,6 +1366,7 @@
 
     </div>
 </div>
+
 
 
 <div id="uomlistmodal" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
@@ -1516,6 +1729,7 @@
     </div>
 </div>
 
+
 <div style="background:#fff;" id="Adddropdownvalue" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
 
     <div class="modal-header">
@@ -1545,6 +1759,7 @@
 
     </div>
 </div>
+
 
 <div id="Inventoryerror" class="modal bottom-modal bottom-sheet animated bounceIn">
     <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
@@ -1584,6 +1799,7 @@
    
 
 </div>
+
 
 <script>
     function Toggle() {
