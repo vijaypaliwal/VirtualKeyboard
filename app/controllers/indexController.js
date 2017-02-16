@@ -393,8 +393,15 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
                 $(".modal").modal("hide");
                 HideGlobalWaitingDiv();
-                $("#modalerror").modal('show');
-                $("#errortext").html(exception);
+
+                var _path = $location.path();
+
+                if (_path != "/login") {
+                    $("#modalerror").modal('show');
+                    $("#errortext").html(exception);
+                }
+
+           
             }
         }
     });
@@ -408,8 +415,21 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.errorbox = function (error) {
 
-        $("#modalerror").modal('show');
-        $("#errortext").html(error)
+      
+
+
+        var _path = $location.path();
+
+
+
+
+        if (_path != "/login") {
+            $("#modalerror").modal('show');
+            $("#errortext").html(error)
+        }
+
+
+     
 
     }
 
