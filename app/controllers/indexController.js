@@ -461,8 +461,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             $cordovaKeyboard.disableScroll(false);
         }
 
-        if (_path == "/activity") {
-
+        if (_path == "/mobileorder") {
+            $cordovaKeyboard.disableScroll(true);
         }
         else {
             UpdateStatusBar(55);
