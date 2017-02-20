@@ -36,9 +36,18 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         return bytes;
     }
 
+    $scope.IsdummyImage = true;
+
 
     $scope.PreviewImage = function () {
-        $("#imagemodaldetail").modal("show");
+
+      
+
+        if ($scope.IsdummyImage==false) {
+            $("#imagemodaldetail").modal("show");
+        }
+
+        
     }
 
     $scope.Getuserinfo = function () {
@@ -86,20 +95,17 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
 
                        if (response.GetUserInfoResult.Payload[0].ProfilePic.indexOf("png") != -1 || response.GetUserInfoResult.Payload[0].ProfilePic.indexOf("jpg") != -1 || response.GetUserInfoResult.Payload[0].ProfilePic.indexOf("jpeg") != -1 || response.GetUserInfoResult.Payload[0].ProfilePic.indexOf("gif") != -1) {
                            $scope.picURl = response.GetUserInfoResult.Payload[0].ProfilePic;
+                           $scope.IsdummyImage = false;
 
                            $scope.ProfilePicURl = $scope.picURl;
                        }
 
                        else {
-                           $scope.picURl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
-
+                           $scope.picURl = "img/No_image_available.svg";
+                           $scope.IsdummyImage = true;
                            $scope.ProfilePicURl = "img/dummy-user48.png";
 
-
                        }
-
-
-                      
                     
                    }
 
