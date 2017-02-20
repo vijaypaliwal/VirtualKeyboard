@@ -706,6 +706,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.SetItemData = function (obj) {
 
+      
+        debugger;
+
         $scope.InventoryObject.ItemID = obj.ItemID;
 
         $scope.InventoryObject.Description = obj.ItemDescription;
@@ -858,10 +861,25 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         return $.trim(value);
     }
 
+
+    $scope.showmessage = false;
+
+    $scope.Itemvaluechange = function () {
+        $scope.showmessage = true;
+        CheckScopeBeforeApply();
+    }
+
+
+   
+
+    
+
+
+
     $scope.OnChangeItemNameFunction = function () {
 
 
-        debugger;
+       
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -900,12 +918,42 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                             $scope.ItemSearching = false;
                             $scope.SearchList = data.SearchItemsResult.Payload;
 
+                          
+                            debugger;
+
                             if ($scope.SearchList.length == 0) {
                                 $scope.isnoitemmsg = true;
                             }
                             else {
-                                $scope.isnoitemmsg = false;
-                                $("#itemlistmodal").modal("show");
+                                
+
+                                if ($scope.SearchList.length == 1)
+                                {
+
+                                    if ($scope.InventoryObject.ItemID.toLowerCase() == $scope.SearchList[0].ItemID.toLowerCase()) {
+
+                                        log.info("This Item already exist, we fill all associate data.");
+
+                                        var obj = $scope.SearchList[0];
+
+                                        $scope.SetItemData(obj);
+
+                                        $scope.showmessage = false;
+
+                                    }
+
+                                   
+
+                                }
+
+
+                                else {
+                                   // $scope.isnoitemmsg = false;
+                                   // $("#itemlistmodal").modal("show");
+
+                                }
+
+                              
 
                             }
 
@@ -3355,7 +3403,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             },
             error: function (err) {
 
-                alert("error");
+              
                 debugger;
 
 
