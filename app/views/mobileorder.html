@@ -3,11 +3,30 @@
 <link href="css/mobileorder.css" rel="stylesheet" />
 
 <style>
-    body
-    {
-        -webkit-overflow-scrolling: touch;
-        overflow-y:scroll;
-    }
+ .scrollbar-for-ipad {
+    overflow-y: scroll;
+  
+    max-height: 500px;
+   
+    line-height: 1em;
+    font-family: arial;
+    font-size: 12px;
+    padding:5px;
+}
+.scrollbar-for-ipad::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+.scrollbar-for-ipad::-webkit-scrollbar:vertical {
+    width: 9px;
+}
+.scrollbar-for-ipad::-webkit-scrollbar:horizontal {
+    height: 9px;
+}
+.scrollbar-for-ipad::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    border: 3px solid white;
+    background-color: rgba(0, 0, 0, .6);
+}
 </style>
 
 <div class="title-header">
@@ -35,39 +54,41 @@
     </div>
 
         <div class="col-xs-12"><h5 class="">Drag to change order</h5></div>
-    <table style="width:93%;" class="table gridTable table-striped bs-item">
+    <div class="scrollbar-for-ipad">
+        <table style="width:93%;" class="table  gridTable table-striped bs-item">
 
 
-        <tbody class="dragarea" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
-            <tr data-ng-repeat="obj in MyInventorycolumns" ng-if="obj.mobileorder!=0" class="MoveCursor" ng-class="{'unsortable':isallowdrag==false}">
-                <td>
-                    <div class="infoareas">
+            <tbody class="dragarea" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
+                <tr data-ng-repeat="obj in MyInventorycolumns" ng-if="obj.mobileorder!=0" class="MoveCursor" ng-class="{'unsortable':isallowdrag==false}">
+                    <td>
+                        <div class="infoareas">
 
-                        <div class="row">
+                            <div class="row">
 
-                            <div class="col-xs-2">
-                                <a class="btn text btn-warning" >{{$index+1}}</a>
+                                <div class="col-xs-2">
+                                    <a class="btn text btn-warning">{{$index+1}}</a>
+                                </div>
+
+                                <div class="col-xs-7">
+                                    <a class="text"> {{obj.ColumnLabel}} </a>
+                                </div>
+
                             </div>
 
-                            <div class="col-xs-7">
-                                <a class="text"> {{obj.ColumnLabel}} </a>
-                            </div>
-                       
                         </div>
+                    </td>
+                </tr>
+                <tr class="unsortable" style="border:transparent !important; height:15px;">
+                    <td>
+                        <a></a>
+                    </td>
+                </tr>
 
-                    </div>
-                </td>
-            </tr>
-            <tr class="unsortable" style="border:transparent !important; height:15px;">
-                <td>
-                    <a></a>
-                </td>
-            </tr>
-
-        </tbody>
+            </tbody>
 
 
-    </table>
+        </table>
+    </div>
 </div>
 <!--<div class="vertical-text">
 
