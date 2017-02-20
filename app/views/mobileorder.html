@@ -3,9 +3,9 @@
 <link href="css/mobileorder.css" rel="stylesheet" />
 
 <style>
-    .scrollbar
+    body
     {
-        min-height:1000px;
+        -webkit-overflow-scrolling: touch;
         overflow-y:scroll;
     }
 </style>
@@ -35,50 +35,39 @@
     </div>
 
         <div class="col-xs-12"><h5 class="">Drag to change order</h5></div>
+    <table style="width:93%;" class="table gridTable table-striped bs-item">
 
 
-    <div class="row">
-        <div class="col-xs-10">
-            <table style="width:100%;" class="table gridTable table-striped bs-item">
+        <tbody class="dragarea" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
+            <tr data-ng-repeat="obj in MyInventorycolumns" ng-if="obj.mobileorder!=0" class="MoveCursor" ng-class="{'unsortable':isallowdrag==false}">
+                <td>
+                    <div class="infoareas">
 
+                        <div class="row">
 
-                <tbody class="dragarea" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
-                    <tr data-ng-repeat="obj in MyInventorycolumns" ng-if="obj.mobileorder!=0" class="MoveCursor" ng-class="{'unsortable':isallowdrag==false}">
-                        <td>
-                            <div class="infoareas">
-
-                                <div class="row">
-
-                                    <div class="col-xs-2">
-                                        <a class="btn text btn-warning">{{$index+1}}</a>
-                                    </div>
-
-                                    <div class="col-xs-7">
-                                        <a class="text"> {{obj.ColumnLabel}} </a>
-                                    </div>
-
-                                </div>
-
+                            <div class="col-xs-2">
+                                <a class="btn text btn-warning" >{{$index+1}}</a>
                             </div>
-                        </td>
-                    </tr>
-                    <tr class="unsortable" style="border:transparent !important; height:15px;">
-                        <td>
-                            <a></a>
-                        </td>
-                    </tr>
 
-                </tbody>
+                            <div class="col-xs-7">
+                                <a class="text"> {{obj.ColumnLabel}} </a>
+                            </div>
+                       
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+            <tr class="unsortable" style="border:transparent !important; height:15px;">
+                <td>
+                    <a></a>
+                </td>
+            </tr>
+
+        </tbody>
 
 
-            </table>
-        </div>
-        <div class="col-xs-2">
-            <div class="scrollbar"></div>
-        </div>
-    </div>
-
-    
+    </table>
 </div>
 <!--<div class="vertical-text">
 
