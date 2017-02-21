@@ -157,7 +157,7 @@
             background: #2196F3;
             list-style-type: none;
             margin-bottom: 10px;
-            border-radius: 20px;
+            border-radius: 30px;
         }
 
             .bottom-modal ul li a {
@@ -490,14 +490,13 @@
 }
 
 
-.finditems .fa-caret-down {
-  
- color: #fff !important;
+.finditems .fa-caret-down
+ {
+    color: #fff !important;
     background: transparent;
     padding: 1px !important;
     padding-top: 2px !important;
     padding-left: 9px !important;
- 
     padding-right: 9px !important;
 }
 
