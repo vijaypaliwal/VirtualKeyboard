@@ -2513,14 +2513,14 @@
                                                             <span ng-if="IsSingleMode==true"> {{_groupRow.MoveUpdateTagTransactionData.ActionQuantity}}<br /></span>
                                                             <span ng-if="IsSingleMode==false"> {{CurrentCart[0].MoveUpdateTagTransactionData.ActionQuantity}}<br /></span>
 
-                                                          With data
+                                                          With data <br />
 
                                                             <span ng-if="IsSingleMode==true"> Location:{{_groupRow.MoveUpdateTagTransactionData.MoveToLocationText}}<br /></span>
                                                             <span ng-if="IsSingleMode==false">Location:{{CurrentCart[0].MoveUpdateTagTransactionData.MoveToLocationText}}<br /></span>
 
 
-                                                            <span ng-if="IsSingleMode==true">Status:{{_groupRow.UpdateTransactionData.StatusToUpdate}} <br /></span>
-                                                            <span ng-if="IsSingleMode==false">Status:{{CurrentCart[0].UpdateTransactionData.StatusToUpdate}}<br /></span>
+                                                            <span ng-if="IsSingleMode==true">Status:{{_groupRow.MoveUpdateTagTransactionData.StatusToUpdate}} <br /></span>
+                                                            <span ng-if="IsSingleMode==false">Status:{{CurrentCart[0].MoveUpdateTagTransactionData.StatusToUpdate}}<br /></span>
 
                                                             <span ng-if="IsSingleMode==true">
                                                                 <span ng-if="IsMyInventoryColumns('iReqValue')==true">{{GetColumnLabel('iReqValue')}}: {{_groupRow.MoveUpdateTagTransactionData.UnitTag1}} <br /></span>
