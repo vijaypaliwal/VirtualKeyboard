@@ -599,4 +599,10 @@ input[type="password"]:focus
    box-shadow: 0px 0px 12px #ccc !important;
 }
 
+.contentsection .infoareas .btn-white 
+{
+ background-color:#FF4081; 
+ color:#fff;
+}
+
 

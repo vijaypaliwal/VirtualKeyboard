@@ -135,51 +135,51 @@
             </div>
         </div>
 
-        <div class="card m-t-10 animated fadeinup delay-1" style="padding:10px;">
+        <div class="card m-t-10 animated fadeinup delay-1" style="padding:10px;" ng-if="IsEmptyAllcheck(CurrentInventory)==true">
             <div class="c-widget">
                 <div class="c-widget-figure primary-color">
                     <i class="fa fa-list udt"></i>
                 </div>
                 <div class="c-widget-body">
-                  
+
                     <p class="m-0" ng-if="CurrentInventory.iStatusValue!=''"> <span>Status:</span> {{CurrentInventory.iStatusValue}} </p>
-                
-
-                        <p class="m-0" ng-if="CurrentInventory.iReqValue != ''">
-                            <span> {{GetUnitDataLabel('iReqValue')}}:</span> {{CurrentInventory.iReqValue}}
-                        </p>
-                        <p class="m-0" ng-if="CurrentInventory.iUnitTag2 != ''">
-                            <span> {{GetUnitDataLabel('iUnitTag2')}}:</span> {{CurrentInventory.iUnitTag2}}
-                        </p>
-
-                        <p class="m-0" ng-if="CurrentInventory.iUnitTag3 != ''">
-                            <span>{{GetUnitDataLabel('iUnitTag3')}}:</span> {{CurrentInventory.iUnitTag3}}
-                        </p>
 
 
-                        <p class="m-0" ng-if="CurrentInventory.iUniqueDate != null">
-                            <span> {{GetUnitDataLabel('iUniqueDate')}}:</span> {{CurrentInventory.iUniqueDate}}
-                        </p>
+                    <p class="m-0" ng-if="CurrentInventory.iReqValue != ''">
+                        <span> {{GetUnitDataLabel('iReqValue')}}:</span> {{CurrentInventory.iReqValue}}
+                    </p>
+                    <p class="m-0" ng-if="CurrentInventory.iUnitTag2 != ''">
+                        <span> {{GetUnitDataLabel('iUnitTag2')}}:</span> {{CurrentInventory.iUnitTag2}}
+                    </p>
 
-                        <p class="m-0" ng-if="CurrentInventory.iUnitDate2 != null">
-                            <span> {{GetUnitDataLabel('iUnitDate2')}}: </span>{{CurrentInventory.iUnitDate2}}
-                        </p>
+                    <p class="m-0" ng-if="CurrentInventory.iUnitTag3 != ''">
+                        <span>{{GetUnitDataLabel('iUnitTag3')}}:</span> {{CurrentInventory.iUnitTag3}}
+                    </p>
 
-                        <p class="m-0" ng-if="CurrentInventory.iUnitNumber1 != null">
-                            <span> {{GetUnitDataLabel('iUnitNumber1')}}: </span>{{CurrentInventory.iUnitNumber1}}
-                        </p>
 
-                        <p class="m-0" ng-if="CurrentInventory.iUnitNumber2 != null">
-                            <span> {{GetUnitDataLabel('iUnitNumber2')}}: </span>{{CurrentInventory.iUnitNumber2}}
-                        </p>
-                  
+                    <p class="m-0" ng-if="CurrentInventory.iUniqueDate != null">
+                        <span> {{GetUnitDataLabel('iUniqueDate')}}:</span> {{CurrentInventory.iUniqueDate}}
+                    </p>
+
+                    <p class="m-0" ng-if="CurrentInventory.iUnitDate2 != null">
+                        <span> {{GetUnitDataLabel('iUnitDate2')}}: </span>{{CurrentInventory.iUnitDate2}}
+                    </p>
+
+                    <p class="m-0" ng-if="CurrentInventory.iUnitNumber1 != null">
+                        <span> {{GetUnitDataLabel('iUnitNumber1')}}: </span>{{CurrentInventory.iUnitNumber1}}
+                    </p>
+
+                    <p class="m-0" ng-if="CurrentInventory.iUnitNumber2 != null">
+                        <span> {{GetUnitDataLabel('iUnitNumber2')}}: </span>{{CurrentInventory.iUnitNumber2}}
+                    </p>
+
                 </div>
 
             </div>
-          
 
 
-         
+
+
 
         </div>
 
