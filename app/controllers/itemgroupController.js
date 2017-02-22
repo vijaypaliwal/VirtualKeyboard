@@ -180,10 +180,34 @@ app.controller('itemgroupController', ['$scope', 'localStorageService', 'authSer
                                 }
                             }
                             if ($scope.mode == 3) {
+
+
                                 $scope.IsProcessing = false;
-                                ShowSuccess("Updated");
-                                $scope.getItemgroup();
-                                $scope.mode = 1;
+                                $scope.$apply();
+
+
+                                $scope.similar = false;
+
+
+                                for (var i = 0; i < $scope.Itemgrouplist.length; i++) {
+
+
+                                    if ($scope.Itemgrouplist[i].pcfCountFrq === $scope.ItemGroupToCreate) {
+                                        log.warning("Change some value");
+                                        $scope.similar = true;
+                                    }
+                                }
+
+
+                                if ($scope.similar == false) {
+                                    $scope.IsProcessing = false;
+                                    ShowSuccess("Updated");
+                                    $scope.getItemgroup();
+                                    $scope.mode = 1;
+                                }
+
+
+                              
                             }
                         
 

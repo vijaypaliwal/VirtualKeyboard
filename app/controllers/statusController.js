@@ -188,9 +188,35 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
                         }
 
                         if ($scope.mode == 3) {
-                            ShowSuccess("Updated");
-                            $scope.getstatus();
-                            $scope.mode = 1;
+
+
+                            $scope.IsProcessing = false;
+                            $scope.$apply();
+
+
+                            $scope.similar = false;
+
+
+                            for (var i = 0; i < $scope.StatusList.length; i++) {
+
+
+                                if ($scope.StatusList[i].StatusValue === $scope.StatusToCreate) {
+                                    log.warning("Change some value");
+                                    $scope.similar = true;
+                                }
+                            }
+
+
+                            if ($scope.similar == false) {
+                                $scope.IsProcessing = false;
+                                ShowSuccess("Updated");
+                                $scope.getstatus();
+                                $scope.mode = 1;
+                            }
+
+
+
+                           
                         }
 
                     

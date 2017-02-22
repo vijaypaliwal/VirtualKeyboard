@@ -326,7 +326,7 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
 
                                 if ($scope.Locations[i].LocationName === $scope.locationdata.LocationName) {
-                                    log.warning("Already exist or change some value");
+                                    log.warning("Change some value");
                                     $scope.similar = true;
                                 }
                             }
