@@ -352,6 +352,7 @@ h5.list-group-item-heading {
     color: #000;
     padding-bottom: 3px;
     font-family: Verdana;
+    word-break:break-all;
 }
 
 .list-group-item-text {
