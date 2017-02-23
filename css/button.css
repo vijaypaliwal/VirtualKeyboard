@@ -605,4 +605,17 @@ input[type="password"]:focus
  margin-top:8px;
 }
 
+.side-nav .no-child.active
+{
+    color: #0d8ccb;
+    background:#eaeaea;
+   
+}
+
+.side-nav .no-child.active i
+{
+    color: #1fa67a;
+   
+}
+
 
