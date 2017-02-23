@@ -336,6 +336,8 @@ label {
 h5.list-group-item-heading {
     font-size: 14px !important;
     text-transform: uppercase;
+    word-break:break-all;
+   
 }
 
 .list-group-item-heading .pull-right {
