@@ -2851,6 +2851,148 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 break;
         }
     }
+
+    $scope.ScanNewSwitch=function(_Column)
+    {
+        debugger;
+        var _id = "#";
+
+
+        var ControlID = _Column;
+        var _IsActiveScan = true;
+        switch (ControlID) {
+            case "iStatusValue":
+                _IsActiveScan = $scope.IsActiveStatusLibrary;
+                break;
+            case "lLoc":
+                _IsActiveScan = $scope.IsActiveLocationLibrary;
+                break;
+            case "uomUOM":
+                _IsActiveScan = $scope.IsActiveUOMLibrary;
+                break;
+            case "pCountFrq":
+                _IsActiveScan = $scope.IsActiveItemGroupLibrary;
+                break;
+            default:
+                _IsActiveScan = true;
+
+        }
+
+        if (_IsActiveScan == true) {
+
+            var scanner = cordova.plugins.barcodeScanner;
+
+            scanner.scan(function (result) {
+
+                var resultvalue = result.text;
+                var _fieldType = GetFieldType(ControlID);
+                if (_fieldType != 4) {
+
+                    resultvalue = $scope.Validation(resultvalue, _fieldType) == true ? resultvalue : "";
+                }
+                if (resultvalue != "") {
+                    switch (ControlID) {
+                        case "pPart":
+                            _id = "#ItemName";
+
+
+                            $scope.InventoryObject.ItemID = resultvalue;
+
+
+                            break;
+                        case "lLoc":
+                            _id = "#Location";
+                            $scope.InventoryObject.Location = resultvalue;
+                            break;
+                        case "uomUOM":
+                            _id = "#UOM";
+                            $scope.InventoryObject.Uom = resultvalue;
+                            break;
+                        case "iQty":
+                            _id = "#iQty";
+                            $scope.InventoryObject.Quantity = resultvalue;
+                            break;
+                        case "iStatusValue":
+                            $scope.InventoryObject.iStatusValue = resultvalue;
+                            break;
+                        case "pDescription":
+                            _id = "#pDescriptionForm";
+                            $scope.InventoryObject.Description = resultvalue;
+                            break;
+                        case "iReqValue":
+                            _id = "#UniqueTag";
+                            $scope.InventoryObject.UniqueTag = resultvalue;
+                            break;
+                        case "iUnitTag2":
+                            _id = "#UnitTag2";
+                            $scope.InventoryObject.UnitTag2 = resultvalue;
+                            break;
+                        case "iUnitTag3":
+                            _id = "#UnitTag3";
+                            $scope.InventoryObject.UnitTag3 = resultvalue;
+                            break;
+                        case "iUniqueDate":
+                            _id = "#UniqueDate";
+                            resultvalue = ConvertDatetoDate(resultvalue);
+                            $scope.InventoryObject.UniqueDate = resultvalue;
+                            break;
+                        case "iUnitDate2":
+                            _id = "#UnitDate2";
+                            resultvalue = ConvertDatetoDate(resultvalue);
+                            $scope.InventoryObject.UnitDate2 = resultvalue;
+                            break;
+                        case "iUnitNumber1":
+                            _id = "#UnitNumber1";
+                            $scope.InventoryObject.UnitNumber1 = resultvalue;
+                            break;
+                        case "iUnitNumber2":
+                            _id = "#UnitNumber2";
+                            $scope.InventoryObject.UnitNumber2 = resultvalue;
+                            break;
+                        case "pCountFrq":
+                            _id = "#itemgroup";
+                            $scope.InventoryObject.ItemGroup = resultvalue;
+                            break;
+                        case "lZone":
+                            _id = "#lZone";
+                            $scope.InventoryObject.lZone = resultvalue;
+                            break;
+                        default:
+
+                    }
+
+
+
+                    $(_id).val(resultvalue);
+                    // $(_id).trigger("input");
+                  
+
+
+
+                    CheckScopeBeforeApply();
+
+
+                }
+
+                else {
+
+                    $scope.ShowScanError(_fieldType);
+                }
+
+
+
+
+
+
+            }, function (error) {
+                log.error("Scanning failed: ", error);
+            });
+        }
+        else {
+            $scope.locked();
+        }
+
+    }
     $scope.ScanNew = function () {
 
 
@@ -3040,6 +3182,93 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         }
     }
+    $scope.ScanNewCustomSwitch = function (_colID, _Column) {
+
+        debugger;
+        var _id = "#" + _colID;
+
+        var _colarray = _colID.split("_");
+        var ControlID = _Column;
+        var scanner = cordova.plugins.barcodeScanner;
+
+
+        scanner.scan(function (result) {
+
+
+            var resultvalue = result.text;
+
+            var _fieldType = $scope.GetCustomDataType($scope.CurrentActiveFieldDatatype);
+            if (_fieldType != 4) {
+
+                resultvalue = $scope.Validation(resultvalue, _fieldType) == true ? resultvalue : "";
+            }
+
+            if (resultvalue != "") {
+
+
+                var _Arraytoupdate = [];
+                var _Type = _colarray[0];
+                if (_Type != null && _Type != undefined && _Type != "") {
+
+                    if ($scope.CurrentActiveFieldDatatype != null && $scope.CurrentActiveFieldDatatype != undefined) {
+
+                        if ($scope.CurrentActiveFieldDatatype == "date" || $scope.CurrentActiveFieldDatatype == "datetime") {
+                            resultvalue = ConvertDatetoDate(resultvalue);
+                        }
+
+                    }
+                    if (_Type == "CustomItem") {
+
+
+                        for (var i = 0; i < $scope.InventoryObject.CustomPartData.length; i++) {
+
+                            if ($scope.InventoryObject.CustomPartData[i].CfdID == _colarray[1]) {
+                                $scope.InventoryObject.CustomPartData[i].Value = resultvalue;
+                                break;
+
+                            }
+
+                        }
+                    }
+                    else if (_Type == "CustomActivity") {
+
+
+                        for (var i = 0; i < $scope.InventoryObject.CustomTxnData.length; i++) {
+
+                            if ($scope.InventoryObject.CustomTxnData[i].CfdID == _colarray[1]) {
+                                $scope.InventoryObject.CustomTxnData[i].Value = resultvalue;
+                                break;
+
+                            }
+
+                        }
+                    }
+                }
+
+
+
+                $(_id).val(resultvalue);
+
+                CheckScopeBeforeApply();
+
+
+            }
+
+            else {
+
+                $scope.ShowScanError(_fieldType);
+            }
+
+
+            vibrate()
+
+
+
+        }, function (error) {
+            log.error("Scanning failed: ", error);
+        });
+    }
+
     $scope.ScanNewCustom = function () {
 
         var _id = "#" + _colid;
