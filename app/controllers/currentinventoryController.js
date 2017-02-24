@@ -269,7 +269,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 if ($(window).scrollTop() == $(document).height() - $(window).height()) {
                     if (_PageSize < $scope.totalrecords) {
 
-
+                        debugger;
                         _IsLazyLoadingUnderProgress = 1;
                         $scope.isDataLoading = false;
                         _PageSize = _TotalRecordsCurrent + getIncrementor($scope.totalrecords);

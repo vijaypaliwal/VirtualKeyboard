@@ -34,11 +34,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.mode1 = function () {
         $scope.itemfields = false;
         $scope.switchmode = false;
+        $cordovaKeyboard.disableScroll(true);
     }
 
     $scope.mode2 = function () {
         $scope.itemfields = false;
         $scope.switchmode = true;
+        $cordovaKeyboard.disableScroll(false);
     }
 
     $scope.nextstep = function () {
@@ -479,6 +481,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.GetLastValueCustom = function (id, Type) {
 
 
+
         var field = "Inv_" + id;
         var _fieldid = "";
 
@@ -498,16 +501,47 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         if (_toCheckValue != null && _toCheckValue != undefined) {
             _value = _toCheckValue;
 
-
             $(_fieldid).val(_value);
+
+         
             $(_fieldid).trigger('change');
             $(_fieldid).trigger('input');
+
+
+            $("#secondDiv").find(_fieldid).val(_value);
+
+
+            $("#secondDiv").find(_fieldid).trigger('change');
+            $("#secondDiv").find(_fieldid).trigger('input');
+
+            $("#firstDiv").find(_fieldid).val(_value);
+
+
+            $("#firstDiv").find(_fieldid).trigger('change');
+            $("#firstDiv").find(_fieldid).trigger('input');
+
+          
+
+         
+         
         }
         else {
 
             $(_fieldid).val(_value);
             $(_fieldid).trigger('change');
             $(_fieldid).trigger('input');
+
+            $("#secondDiv").find(_fieldid).val(_value);
+
+
+            $("#secondDiv").find(_fieldid).trigger('change');
+            $("#secondDiv").find(_fieldid).trigger('input');
+
+            $("#firstDiv").find(_fieldid).val(_value);
+
+
+            $("#firstDiv").find(_fieldid).trigger('change');
+            $("#firstDiv").find(_fieldid).trigger('input');
 
         }
 
@@ -1537,7 +1571,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
-
+    $scope.ReuseAll=function(ID)
+    {
+        $(ID).find(".fa-undo").each(function () {
+            $(this).parent("span").trigger("click");
+        });
+    }
 
     $scope.GetAllData = function () {
         var authData = localStorageService.get('authorizationData');
@@ -1624,7 +1663,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                               _obj.cfdDataType = _CustomObj.cfdDataType;
                               _obj.cfdComboValues = _CustomObj.cfdComboValues;
                               _obj.CfValue = _CustomObj.CfValue;
-
+                              _obj.Required = _CustomObj.cfdIsRequired;
 
                               $scope.InventoryObject.CustomPartData.push({ CfdID: _CustomObj.cfdID, Value: _CustomObj.cfdDefaultValue, DataType: _CustomObj.cfdDataType });
                           }

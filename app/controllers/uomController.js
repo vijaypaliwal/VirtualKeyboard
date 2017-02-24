@@ -190,14 +190,7 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
                                 $scope.similar = false;
 
 
-                                for (var i = 0; i < $scope.UOMList.length; i++) {
-
-
-                                    if ($scope.UOMList[i].UnitOfMeasureName === $scope.UOMToCreate) {
-                                        log.warning("Change some value");
-                                        $scope.similar = true;
-                                    }
-                                }
+                              
 
 
                                 if ($scope.similar == false) {

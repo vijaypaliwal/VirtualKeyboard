@@ -1057,50 +1057,257 @@
             <h4>Required fields</h4>
         </div>
         <div class="col-xs-5">
-            <a class="scanbtn btn btn-gray" class="pull-right">
+            <a class="scanbtn btn btn-gray pull-right" ng-click="ReuseAll('#firstDiv')">
                 <i class="fa fa-refresh"></i> Reuse
-      </a>
+            </a>
                 
 
-            </a>
             
 
         </div>
     </div>
 
-    <div ng-if="itemfields==false" class="row">
+    <div ng-if="itemfields==false" class="row" id="firstDiv">
         <div class="col-md-12">
 
-            <div class="form-group">
-                <label>Item Name</label>
-                <div class="input-group">
+            <div class="myCols" data-index="{{$index}}" data-type="myinventory" data-id="CustomItem_{{obj.cfdID}}" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-if="obj.ColumnName!='HasConversion' && obj.ColumnName!='ActionQty'" ng-repeat="obj in MyinventoryFields" end-repeat>
 
-                    <input type="text" class="form-control" value="" />
-                    <span class="input-group-addon last">
-                        <i class="fa fa-barcode"></i>
-                    </span>
+                <div class=" form-group" ng-if="obj.ColumnName=='pPart'">
+
+                    <div class="row">
+                        <div class="col-xs-12">
+
+
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Item Name   </label>
+
+                                </div>
+
+                            </div>
+
+                            <div ng-if="InventoryObject.AutoID==false && IsItemLibrary==true && IsActiveItemLibrary==true" class="input-group">
+                                <div>
+
+                                    <input type="text" id="ItemName" class="form-control" ng-change="Itemvaluechange()" my-enter="GoToNext()" ng-model="InventoryObject.ItemID" required="" />
+
+                                </div>
+
+                                <span ng-click="itemlist()" class="input-group-addon last"><i class="fa fa-search"></i></span>
+
+                                <span ng-click="GetLastValue('Inv_ItemID','#ItemName')" test-case condition="GetLastValueData('Inv_ItemID')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+
+                            </div>
+
+                            <div ng-if="IsItemLibrary==false || IsActiveItemLibrary==false">
+                                <div class="row requiredfields" ng-if="(IsActiveItemLibrary==false|| IsItemLibrary==false) && IsItemChose==false">
+                                    <div class="col-md-12">
+
+                                        <a ng-if="IsItemLibrary==false">
+                                            You are not permitted to add new item so please select item from item list.
+                                        </a>
+                                        <a ng-if="IsActiveItemLibrary==false">
+                                            Your item library is locked so please select item from item list.
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                                <label>{{InventoryObject.ItemID}}</label>
+
+                            </div>
+
+
+
+
+                            <div ng-if="InventoryObject.AutoID==true && IsItemLibrary==true && IsActiveItemLibrary==true" class="input-group">
+
+                                <div>
+                                    <input placeholder="Automated" my-enter="GoToNext()" type="text" ng-model="InventoryObject.ItemID" id="ItemName" disabled="disabled" class="form-control" />
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="form-group" ng-if="obj.ColumnName=='pDescription'">
+                    <label>Item Description </label>
+                    <div class="input-group">
+                        <input type="text" id="pDescriptionForm" my-enter="GoToNext()" ng-model="InventoryObject.Description" name="name" class="form-control" value="" />
+                        <span ng-click="GetLastValue('Inv_Description','#pDescriptionForm')" test-case condition="GetLastValueData('Inv_Description')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group" ng-if="obj.ColumnName=='iQty'">
+                    <label>Quantity</label>
+
+                    <div class="input-group">
+
+                        <input ng-model="InventoryObject.Quantity" id="iQty" min="0" class="form-control" type="number" name="Quantity" value="" />
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group" ng-if="obj.ColumnName=='lLoc'">
+                    <label>Select Location <span class="redText">*</span></label>
+                    <div class="input-group">
+                        <select ng-change="changelocation()" class="form-control" id="Location" ng-model="InventoryObject.Location">
+                            <option mytag="{{obj.LocationZone}}" value="{{obj.LocationName}}" ng-selected="CheckSelectedValues(InventoryObject.Location,obj.LocationName)?true:false" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
+                        </select>
+                        <span ng-if="IsActiveLocationLibrary==true" ng-click="CreateNew(1)" class="input-group-addon last"><i class="fa fa-plus"></i></span>
+
+                        <span ng-click="GetLastValue('Inv_Location','#Location')" test-case condition="GetLastValueData('Inv_Location')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                        <span ng-click="locationlist()" class="input-group-addon last"><i class="fa fa-search"></i></span>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+                <div class="form-group" ng-if="obj.ColumnName=='uomUOM'">
+                    <label>Select UOM <span class="redText">*</span></label>
+                    <div class="input-group">
+
+                        <select class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.Uom" id="UOM">
+                            <option value="{{obj.UnitOfMeasureName}}" ng-selected="CheckSelectedValues(InventoryObject.Uom,obj.UnitOfMeasureName)?true:false" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
+                        </select>
+                        <span ng-if="IsActiveUOMLibrary==true" ng-click="CreateNew(2)" class="input-group-addon last"><i class="fa fa-plus"></i></span>
+                        <span ng-click="GetLastValue('Inv_Uom','#UOM')" test-case condition="GetLastValueData('Inv_Uom')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="form-group" ng-if="obj.Required==true && CheckInCommonArray(obj.ColumnName)!=true">
+                    <label>{{obj.cfdName}} <span ng-if="obj.Required" class="redText">*</span></label>
+
+                    <div ng-if="obj.cfdDataType=='string'" class="input-group">
+
+                        <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{obj.CfValue}}" />
+                        <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='checkbox'">
+
+                        <div class="btn-group custombtnGroup">
+                            <label class="switch1">
+                                <input id="CustomItem_{{obj.cfdID}}" ng-checked="InventoryObject.CustomPartData[$index].Value==true" type="checkbox" ng-model="InventoryObject.CustomPartData[$index].Value">
+                                <div class="slider round"></div>
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
+
+                        <div class="select">
+                            <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[$index].Value">
+
+                                <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
+
+                            </select>
+                        </div>
+                        <span ng-if="checkpermission('URL:configure/CustomFieldItemList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomItem_')"><i class="fa fa-plus"></i></span>
+                        <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
+                        <input id="CustomItem_{{obj.cfdID}}" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" />
+                        <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='number'" class="input-group">
+                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
+                        <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+
+                    <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+
+                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
+                        <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label>Item Name</label>
-                <div class="input-group">
 
-                    <input type="text" class="form-control" value="" />
-                    <span class="input-group-addon last">
-                        <i class="fa fa-barcode"></i>
-                    </span>
+
+
+            <div ng-repeat="obj in CustomActivityDataList" data-id="CustomActivity_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="activity" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-if="obj.cfdIsRequired==true && CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)" class="CustomActivityCols" end-repeat3>
+
+                <div class="form-group">
+                    <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
+                    <div ng-if="obj.cfdDataType=='string'" class="input-group">
+                        <input id="CustomActivity_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control stringType" value="{{obj.CfValue}}" />
+
+                        <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+
+                    <div ng-if="obj.cfdDataType=='checkbox'" class="">
+
+                        <div class="btn-group custombtnGroup">
+                            <label class="switch1">
+                                <input id="CustomActivity_{{obj.cfdID}}" ng-checked="InventoryObject.CustomTxnData[$index].Value==true" type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value">
+                                <div class="slider round"></div>
+                            </label>
+                        </div>
+
+
+                    </div>
+
+                    <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
+
+
+                        <div class="select">
+                            <select id="CustomActivity_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
+
+                                <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
+
+                            </select>
+                        </div>
+                        <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomActivity_')"><i class="fa fa-plus"></i></span>
+
+                        <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+
+                    <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
+                        <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control customFieldDatePicker FormDateType" />
+
+                        <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='number'" class="input-group">
+                        <input id="CustomActivity_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
+
+                        <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                        <input id="CustomActivity_{{obj.cfdID}}" type="text" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
+
+                        <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label>Item Name</label>
-                <div class="input-group">
 
-                    <input type="text" class="form-control" value="" />
-                    <span class="input-group-addon last">
-                        <i class="fa fa-barcode"></i>
-                    </span>
-                </div>
-            </div>
+
 
         </div>
     </div>
@@ -1108,100 +1315,360 @@
 
     <div ng-if="itemfields==true" class="row tophead animated slideInRight">
         <div class="col-xs-7">
-            <h4>Item fields</h4>
+            <h4>Other fields</h4>
         </div>
         <div class="col-xs-5">
-            <a class="scanbtn btn btn-gray" class="pull-right">
+            <a class="scanbtn btn btn-gray pull-right" ng-click="ReuseAll('#secondDiv')">
                 <i class="fa fa-refresh"></i> Reuse
             </a>
         </div>
     </div>
 
 
-    <div ng-if="itemfields==true" class="row animated slideInRight">
+    <div ng-if="itemfields==true" class="row animated slideInRight" id="secondDiv">
         <div class="col-md-12">
-            <div class="form-group">
-                <label>Item val</label>
-                <div class="input-group">
+            <div class="myCols" data-index="{{$index}}" data-type="myinventory" data-id="CustomItem_{{obj.cfdID}}" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-if="obj.ColumnName!='HasConversion' && obj.ColumnName!='ActionQty'" ng-repeat="obj in MyinventoryFields" end-repeat>
 
-                    <input type="text" class="form-control" value="" />
-                    <span class="input-group-addon last">
-                        <i class="fa fa-barcode"></i>
-                    </span>
+
+                <div class="form-group" ng-if="obj.ColumnName=='lZone'">
+                    <label>Location Group</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="lZone" ng-model="InventoryObject.lZone" />
+                        <span ng-click="GetLastValue('Inv_lZone','#lZone')" test-case condition="GetLastValueData('Inv_lZone')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group" ng-if="obj.ColumnName=='iStatusValue'">
+                    <label>Status </label>
+                    <div class="input-group">
+                        <select class="form-control" id="Status" ng-model="InventoryObject.Status">
+                            <option value="">None</option>
+                            <option value="{{obj.StatusValue}}" ng-selected="obj.StatusValue==InventoryObject.Status" ng-repeat="obj in StatusList">{{obj.StatusValue}}</option>
+                        </select>
+                        <span ng-if="IsActiveStatusLibrary==true" ng-click="CreateNew(3)" class="input-group-addon last"><i class="fa fa-plus"></i></span>
+                    </div>
+                </div>
+
+
+
+                
+                <div class="form-group" ng-if="obj.ColumnName=='DefaultItemUOM'">
+                    <label>Default UOM</label>
+                    <div class="input-group">
+
+                        <select class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.DefaultItemUOM" id="DefaultItemUOM">
+                            <option value="{{obj.UnitOfMeasureID}}" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
+                        </select>
+                        <span ng-click="GetLastValue('Inv_DefaultItemUOM','#DefaultItemUOM')" test-case condition="GetLastValueData('Inv_DefaultItemUOM')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+
+                    </div>
+                </div>
+                <div class="form-group" ng-if="obj.ColumnName=='pDefaultCost'">
+                    <label>Default Cost</label>
+
+                    <div class="input-group">
+                        <input ng-model="InventoryObject.pDefaultCost" min="0" id="pDefaultCost" class="form-control" type="number" name="pDefaultCost" value="" />
+                        <span ng-click="GetLastValue('Inv_pDefaultCost','#pDefaultCost')" test-case condition="GetLastValueData('Inv_pDefaultCost')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+                </div>
+                <div class="form-group" ng-if="obj.ColumnName=='pReorderQty'">
+                    <label>Low Qty. Threshold</label>
+
+                    <div class="input-group">
+                        <input ng-model="InventoryObject.pReorderQty" id="pReorderQty" class="form-control" type="number" name="pReorderQty" value="" />
+                        <span ng-click="GetLastValue('Inv_pReorderQty','#pReorderQty')" test-case condition="GetLastValueData('Inv_pReorderQty')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+                </div>
+                <div class="form-group" ng-if="obj.ColumnName=='pTargetQty'">
+                    <label> High Qty. Threshold</label>
+
+                    <div class="input-group">
+                        <input ng-model="InventoryObject.pTargetQty" id="pTargetQty" class="form-control" type="number" name="pTargetQty" value="" />
+
+                        <span ng-click="GetLastValue('Inv_pTargetQty','#pTargetQty')" test-case condition="GetLastValueData('Inv_pTargetQty')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+                </div>
+                <div class="form-group" ng-if="obj.ColumnName=='DefaultItemLocation'">
+                    <label>Default Location </label>
+                    <div class="input-group">
+                        <select class="form-control" id="DefaultItemLocationID" ng-model="InventoryObject.DefaultItemLocationID">
+                            <option mytag="{{obj.LocationName}}" value="{{obj.LocationID}}" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
+                        </select>
+                        <span ng-click="GetLastValue('Inv_DefaultItemLocationID','#DefaultItemLocationID')" test-case condition="GetLastValueData('Inv_DefaultItemLocationID')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="obj.ColumnName=='pCountFrq'">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label>Item Group </label>
+                            <div class="input-group" ng-if="IsItemGroupLibrary==true && IsActiveItemGroupLibrary==true">
+                                <select class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup">
+                                    <option value="">None</option>
+                                    <option ng-repeat="obj in Itemgrouplist" value="{{obj.pcfCountFrq}}">{{obj.pcfCountFrq}}</option>
+                                </select>
+
+                                <span ng-if="IsActiveItemGroupLibrary==true" ng-click="CreateNew(4)" class="input-group-addon last"><i class="fa fa-plus"></i></span>
+
+                                <span ng-click="Itemgrouplistmodal()" class="input-group-addon last"><i class="fa fa-search"></i></span>
+                                <span ng-click="GetLastValue('Inv_ItemGroup','#itemgroup')" test-case condition="GetLastValueData('Inv_ItemGroup')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                            </div>
+
+
+
+                            <div ng-if="IsItemGroupLibrary==false || IsActiveItemGroupLibrary==false">
+                                <div class="row requiredfields" style="font-size:12px;padding:2px;" ng-if="(IsItemGroupLibrary==false|| IsActiveItemGroupLibrary==false) && IsItemGroupChose==false">
+                                    <div class="col-md-12">
+
+                                        <a ng-if="IsItemGroupLibrary==false">
+                                            You are not permitted to add new item group so please select item group from item list.
+                                        </a>
+                                        <a ng-if="IsActiveItemGroupLibrary==false">
+                                            Your item group library is locked so please select item group from item list.
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                                <label>{{InventoryObject.ItemGroup}}</label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-if="obj.ColumnName=='iCostPerUnit'">
+                    <label>Cost per ({{InventoryObject.Uom}})</label>
+
+                    <div class="input-group">
+                        <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" class="form-control" type="number" name="cost" value="" />
+                        <span ng-click="GetLastValue('Inv_Cost','#Costperunit')" test-case condition="GetLastValueData('Inv_Cost')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+                </div>
+
+
+
+
+                <div ng-if="obj.ColumnName=='iReqValue'" class="form-group">
+                    <label>{{obj.ColumnLabel}}</label>
+
+                    <div class="input-group">
+                        <input id="UniqueTag" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="text" ng-model="InventoryObject.UniqueTag" class="form-control" value="" />
+                        <span ng-if="mtuvar1==false" class="redText">Please input some unique data</span>
+                        <span ng-click="GetLastValue('Inv_UniqueTag','#UniqueTag')" test-case condition="GetLastValueData('Inv_UniqueTag')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+                </div>
+                <div ng-if="obj.ColumnName=='iUnitTag2'" class="form-group">
+                    <label>{{obj.ColumnLabel}}</label>
+                    <div class="input-group">
+                        <input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
+                        <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
+                        <span ng-click="GetLastValue('Inv_UnitTag2','#UnitTag2')" test-case condition="GetLastValueData('Inv_UnitTag2')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+                </div>
+                <div ng-if="obj.ColumnName=='iUnitTag3'" class="form-group">
+
+                    <label>{{obj.ColumnLabel}}</label>
+                    <div class="input-group">
+                        <input id="UnitTag3" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />
+                        <span ng-if="mtuvar3==false" class="redText">Please input some unique data</span>
+                        <span ng-click="GetLastValue('Inv_UnitTag3','#UnitTag3')" test-case condition="GetLastValueData('Inv_UnitTag3')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+                </div>
+                <div ng-if="obj.ColumnName=='iUniqueDate'" class="form-group">
+                    <label>{{obj.ColumnLabel}}</label>
+
+                    <div class="input-group">
+                        <input id="UniqueDate" ng-blur="mtuvar4=CheckUnitDataFieldValue('UniqueDate',CheckIsAllowDuplicate('UniqueDate'))" type="date" ng-model="InventoryObject.UniqueDate" class="form-control" value="" />
+                        <span ng-if="mtuvar4==false" class="redText">Please input some unique data</span>
+                        <span ng-click="GetLastValue('Inv_UniqueDate','#UniqueDate')" test-case condition="GetLastValueData('Inv_UniqueDate')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+                </div>
+                <div ng-if="obj.ColumnName=='iUnitDate2'" class="form-group">
+
+                    <label>{{obj.ColumnLabel}}</label>
+
+                    <div class="input-group">
+                        <input id="UnitDate2" ng-blur="mtuvar5=CheckUnitDataFieldValue('UnitDate2',CheckIsAllowDuplicate('UnitDate2'))" type="date" ng-model="InventoryObject.UnitDate2" class="form-control" value="" />
+                        <span ng-if="mtuvar5==false" class="redText">Please input some unique data</span>
+                        <span ng-click="GetLastValue('Inv_UnitDate2','#UnitDate2')" test-case condition="GetLastValueData('Inv_UnitDate2')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+                </div>
+                <div ng-if="obj.ColumnName=='iUnitNumber1'" class="form-group">
+                    <label>{{obj.ColumnLabel}}</label>
+                    <div class="input-group">
+                        <input id="UnitNumber1" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'))" type="number" class="form-control" value="" ng-model="InventoryObject.UnitNumber1" />
+                        <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
+                        <span ng-click="GetLastValue('Inv_UnitNumber1','#UnitNumber1')" test-case condition="GetLastValueData('Inv_UnitNumber1')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+                </div>
+                <div ng-if="obj.ColumnName=='iUnitNumber2'" class="form-group">
+
+                    <label>{{obj.ColumnLabel}}</label>
+
+                    <div class="input-group">
+
+                        <input id="UnitNumber2" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'))" type="number" class="form-control" value="" ng-model="InventoryObject.UnitNumber2" />
+                        <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
+
+                        <span ng-click="GetLastValue('Inv_UnitNumber2','#UnitNumber2')" test-case condition="GetLastValueData('Inv_UnitNumber2')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+                </div>
+                
+                <div class="form-group" ng-if="obj.Required==false && CheckInCommonArray(obj.ColumnName)!=true">
+                    <label>{{obj.cfdName}} <span ng-if="obj.Required" class="redText">*</span></label>
+
+                    <div ng-if="obj.cfdDataType=='string'" class="input-group">
+
+                        <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{obj.CfValue}}" />
+                        <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='checkbox'">
+
+                        <div class="btn-group custombtnGroup">
+                            <label class="switch1">
+                                <input id="CustomItem_{{obj.cfdID}}" ng-checked="InventoryObject.CustomPartData[$index].Value==true" type="checkbox" ng-model="InventoryObject.CustomPartData[$index].Value">
+                                <div class="slider round"></div>
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
+
+                        <div class="select">
+                            <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[$index].Value">
+
+                                <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
+
+                            </select>
+                        </div>
+                        <span ng-if="checkpermission('URL:configure/CustomFieldItemList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomItem_')"><i class="fa fa-plus"></i></span>
+                        <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
+                        <input id="CustomItem_{{obj.cfdID}}" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" />
+                        <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='number'" class="input-group">
+                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
+                        <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+
+                    <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+
+                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
+                        <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div ng-repeat="obj in CustomActivityDataList" data-id="CustomActivity_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="activity" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-if="obj.cfdIsRequired==false && CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)" class="CustomActivityCols" end-repeat3>
+
+                <div class="form-group">
+                    <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
+                    <div ng-if="obj.cfdDataType=='string'" class="input-group">
+                        <input id="CustomActivity_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control stringType" value="{{obj.CfValue}}" />
+                        <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+
+                    <div ng-if="obj.cfdDataType=='checkbox'" class="">
+
+                        <div class="btn-group custombtnGroup">
+                            <label class="switch1">
+                                <input id="CustomActivity_{{obj.cfdID}}" ng-checked="InventoryObject.CustomTxnData[$index].Value==true" type="checkbox" ng-model="InventoryObject.CustomTxnData[$index].Value">
+                                <div class="slider round"></div>
+                            </label>
+                        </div>
+
+
+                    </div>
+
+                    <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
+
+
+                        <div class="select">
+                            <select id="CustomActivity_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
+
+                                <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
+
+                            </select>
+                        </div>
+                        <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomActivity_')"><i class="fa fa-plus"></i></span>
+                        <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+
+                    <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
+                        <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control customFieldDatePicker FormDateType" />
+                        <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='number'" class="input-group">
+                        <input id="CustomActivity_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
+                        <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
+
+                    <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                        <input id="CustomActivity_{{obj.cfdID}}" type="text" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
+                        <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label>Item Number</label>
+                <label>Activity Date</label>
+
                 <div class="input-group">
-
-                    <input type="text" class="form-control" value="" />
-                    <span class="input-group-addon last">
-                        <i class="fa fa-barcode"></i>
-                    </span>
+                    <input ng-model="InventoryObject.UpdateDate" id="UpdateDate" class="form-control" type="date" name="UpdateDate" value="" />
+                    <span ng-click="GetLastValue('Inv_UpdateDate','#UpdateDate')" test-case condition="GetLastValueData('Inv_UpdateDate')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label>Serial Number</label>
-                <div class="input-group">
-
-                    <input type="text" class="form-control" value="" />
-                    <span class="input-group-addon last">
-                        <i class="fa fa-barcode"></i>
-                    </span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Item Drop</label>
-                <div class="input-group">
-
-                    <select class="form-control">
-                        <option>One</option>
-                        <option>Two</option>
-                        <option>Three</option>
-                    </select>
-                    <span class="input-group-addon last">
-                        <i class="fa fa-barcode"></i>
-                    </span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Activitydate</label>
-                <div class="input-group">
-
-                    <input type="date" class="form-control" value="" />
-                    <span class="input-group-addon last">
-                        <i class="fa fa-barcode"></i>
-                    </span>
-                </div>
             </div>
         </div>
     </div>
 
+    <br />
+    <br />
+    <br />
+
     <div ng-if="itemfields==false" class="row stickybtn">
         <div class="col-xs-6">
-            <a ng-click="mode1()" class="btn green"> <i class="fa fa-check"></i> Save</a>
+            <a ng-click="addinventory()" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" class="btn green"> <i class="fa fa-plus-circle"></i> Process</a>
         </div>
       
         <div class="col-xs-6">
             <a ng-click="nextstep()" class="btn pink"> <i class="fa fa-step-forward"></i> Continue</a>
         </div>
+
+
+
     </div>
 
 
     <div ng-if="itemfields==true" class="row stickybtn">
         <div class="col-xs-4">
-            <a ng-click="mode1()" class="btn green"> <i class="fa fa-check"></i> Save</a>
+            <a ng-click="addinventory()" ng-disabled="CheckRequiredField()==true || CheckCustomRequiredFields()==true" class="btn green"> <i class="fa fa-plus-circle"></i> Process</a>
+            
         </div>
         <div class="col-xs-4">
-            <a ng-click="mode1()" class="btn blue"> <i class="fa fa-step-backward"></i> Skip</a>
+            <a ng-click="mode2()" class="btn pink"> <i class="fa fa-angle-left"></i> Back</a>
         </div>
         <div class="col-xs-4">
-            <a ng-click="itemfields=true" class="btn pink"> <i class="fa fa-step-forward"></i> Continue</a>
+            <a ng-click="mode1()" class="btn grey"> <i class="fa fa-times"></i> Cancel</a>
         </div>
+      
     </div>
 
 </div>
