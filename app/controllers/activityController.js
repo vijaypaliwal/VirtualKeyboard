@@ -4597,7 +4597,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     function MatchString(_Val1, _Val2) {
         _Val1 = $.trim(_Val1) != "" ? _Val1.toLowerCase() : "";
-        _Val2 = $.trim(_Val1) != "" ? _Val2.toLowerCase() : "";
+        _Val2 = $.trim(_Val2) != "" ? _Val2.toLowerCase() : "";
 
         return _Val1 == _Val2;
 
