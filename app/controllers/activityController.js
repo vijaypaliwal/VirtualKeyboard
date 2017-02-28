@@ -2340,40 +2340,40 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         for (var i = 0; i < $scope.CurrentCart.length; i++) {
 
-            if ($scope.CurrentCart[i].ApplyTransactionData.UnitDate2 != undefined && $scope.CurrentCart[i].ApplyTransactionData.UnitDate2 != null && $.trim($scope.CurrentCart[i].ApplyTransactionData.UnitDate2) != "") {
+            //if ($scope.CurrentCart[i].ApplyTransactionData.UnitDate2 != undefined && $scope.CurrentCart[i].ApplyTransactionData.UnitDate2 != null && $.trim($scope.CurrentCart[i].ApplyTransactionData.UnitDate2) != "") {
 
-                var _date = angular.copy($scope.CurrentCart[i].ApplyTransactionData.UnitDate2);
+            //    var _date = angular.copy($scope.CurrentCart[i].ApplyTransactionData.UnitDate2);
 
-                var dsplit1 = _date.split("/");
-
-
+            //    var dsplit1 = _date.split("/");
 
 
-                var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
-
-                var day = ("0" + now.getDate()).slice(-2);
-                var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-                var today = now.getFullYear() + "-" + (month) + "-" + (day);
-                $scope.CurrentCart[i].ApplyTransactionData.UnitDate2 = today;
-
-            }
 
 
-            if ($scope.CurrentCart[i].ApplyTransactionData.UniqueDate != undefined && $scope.CurrentCart[i].ApplyTransactionData.UniqueDate != null && $.trim($scope.CurrentCart[i].ApplyTransactionData.UniqueDate) != "") {
+            //    var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
 
-                var _date = angular.copy($scope.CurrentCart[i].ApplyTransactionData.UniqueDate);
+            //    var day = ("0" + now.getDate()).slice(-2);
+            //    var month = ("0" + (now.getMonth() + 1)).slice(-2);
 
-                var dsplit1 = _date.split("/");
-                var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
+            //    var today = now.getFullYear() + "-" + (month) + "-" + (day);
+            //    $scope.CurrentCart[i].ApplyTransactionData.UnitDate2 = today;
 
-                var day = ("0" + now.getDate()).slice(-2);
-                var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            //}
 
-                var today = now.getFullYear() + "-" + (month) + "-" + (day);
-                $scope.CurrentCart[i].ApplyTransactionData.UniqueDate = today;
 
-            }
+            //if ($scope.CurrentCart[i].ApplyTransactionData.UniqueDate != undefined && $scope.CurrentCart[i].ApplyTransactionData.UniqueDate != null && $.trim($scope.CurrentCart[i].ApplyTransactionData.UniqueDate) != "") {
+
+            //    var _date = angular.copy($scope.CurrentCart[i].ApplyTransactionData.UniqueDate);
+
+            //    var dsplit1 = _date.split("/");
+            //    var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
+
+            //    var day = ("0" + now.getDate()).slice(-2);
+            //    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+            //    var today = now.getFullYear() + "-" + (month) + "-" + (day);
+            //    $scope.CurrentCart[i].ApplyTransactionData.UniqueDate = today;
+
+            //}
 
         }
         $scope.totalLength = $scope.IsSingleMode == true ? $scope.CurrentCart.length + 2 : 3;
@@ -4602,6 +4602,24 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         return _Val1 == _Val2;
 
     }
+
+    function formatDate(date) {
+        if (date != null && date != undefined && date != "") {
+
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+        else {
+            return date;
+        }
+    }
     $scope.UnchangedData = function () {
         var k = 0;
         if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
@@ -4675,7 +4693,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             var _val24 = $scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate != "" && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate != null && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate != undefined ? $scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate : null;
 
-                            _x4 = (_val23 == _val24);
+                            _x4 = (formatDate(_val23) == _val24);
 
 
                         }
@@ -4691,7 +4709,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             var _val26 = $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != "" && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != null && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != undefined ? $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2: null;
 
-                            _x5 = (_val25 == _val26);
+                            _x5 = (formatDate(_val25) == _val26);
                         }
                         else {
 
@@ -4806,7 +4824,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             var _val24 = $scope.CurrentCart[k].ApplyTransactionData.UniqueDate != "" && $scope.CurrentCart[k].ApplyTransactionData.UniqueDate!= null && $scope.CurrentCart[k].ApplyTransactionData.UniqueDate != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UniqueDate : null;
 
-                            _x4 = (_val23 == _val24);
+                            _x4 = (formatDate(_val23) == _val24);
 
                         }
 
@@ -4817,7 +4835,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             var _val26 = $scope.CurrentCart[k].ApplyTransactionData.UnitDate2 != "" && $scope.CurrentCart[k].ApplyTransactionData.UnitDate2 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitDate2 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitDate2 : null;
 
-                            _x5 = (_val25 == _val26);
+                            _x5 = (formatDate(_val25) == _val26);
                         }
 
                         if ($scope.IsMyInventoryColumns('iUnitNumber1') == true) {
