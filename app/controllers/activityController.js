@@ -114,7 +114,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             error: function (err) {
 
                 alert("error");
-                debugger;
+                 
                
 
             },
@@ -735,7 +735,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             if ($.trim(value) != "" && $.trim(value) != $.trim(defaultValueOfColumn)) {
 
-                                debugger;
+                                 
                                 if (CheckUnitDataDuplicate(ColumnName, value) == false) {
                                     _Count = _Count * 0;
                                 }
@@ -1792,7 +1792,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     }
                 }
                 else {
-                    debugger;
+                     
                     $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocationText = obj.LocationName;
                     $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation = obj.LocationID;
                     break;
@@ -2170,7 +2170,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         return IsAvailableMyInventoryColumn('iReqValue') || IsAvailableMyInventoryColumn('iUniqueDate') || IsAvailableMyInventoryColumn('iUnitDate2') || IsAvailableMyInventoryColumn('iUnitNumber1') || IsAvailableMyInventoryColumn('iUnitNumber2') || IsAvailableMyInventoryColumn('iUnitTag2') || IsAvailableMyInventoryColumn('iUnitTag3');
     }
     function SetPermisssions() {
-        debugger;
+         
         $scope.CanIncrease = IsAvailableMyInventoryColumn('iQty') && $scope.checkpermission('ACTION:CanAddInventory') ? 'True' : 'False';
         $scope.CanDecrease = IsAvailableMyInventoryColumn('iQty') && $scope.checkpermission('ACTION:CanSubtractInventory') ? 'True' : 'False';
         $scope.CanConvert = IsAvailableMyInventoryColumn('uomUOM') && $scope.checkpermission('ACTION:CanConvertInventory') ? 'True' : 'False';
@@ -3083,7 +3083,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
 
         if (firstValue == secondValue) {
-            debugger;
+             
 
             return true;
         }
@@ -3091,7 +3091,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         return false;
     }
     $scope.FillStatusLineItems = function (value, myid) {
-        debugger;
+         
 
 
         $scope.StatusToUpdate = value == null ? "" : value;
@@ -3337,7 +3337,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     };
 
     function BuildMultipleData() {
-        debugger;
+         
 
         var dt = new Date();
         var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate() - 1, 0, 0, 0, 0));
@@ -3693,7 +3693,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
             }
 
-            debugger;
+             
 
             if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate != undefined && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate != "") {
 
@@ -3945,7 +3945,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
     $scope.SubmitAllActivities = function () {
-
         var _unchangeData = $scope.UnchangedData();
         var _validateObjectVm=$scope.ValidateObjectVM();
         if (!_validateObjectVm && !_unchangeData) {
@@ -4016,7 +4015,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
 
         else {
-            $scope.ShowErrorMessage($scope.IssueType);
+            if (_validateObjectVm) {
+                $scope.ShowErrorMessage($scope.IssueType);
+            }
         }
 
 
@@ -4623,7 +4624,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.UnchangedData = function () {
         var k = 0;
         if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
-            debugger;
+             
             switch ($scope.CurrentOperation) {
                 case "Convert":
                     for (k = 0; k < $scope.CurrentCart.length; k++) {
@@ -4994,7 +4995,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     }
                     break;
                 case "Move":
-                    debugger;
+                     
                     for (k = 0; k < _totalLength; k++) {
                         if ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity == undefined || $scope.CurrentCart[k].MoveTransactionData.ActionQuantity == null || $scope.CurrentCart[k].MoveTransactionData.ActionQuantity == "" || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "") {
                             if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
@@ -5177,7 +5178,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
                             else if (_AllowNegative != null && _AllowNegative != "True") {
-                                debugger;
+                                 
                                 if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
 
                                     if ($scope.IsSingleMode == false) {
@@ -5283,7 +5284,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             }
 
                             else if (_AllowNegative != null && _AllowNegative != "True") {
-                                debugger;
+                                 
 
                                 if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
 
