@@ -2582,8 +2582,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.capturePhotoNew = function () {
         navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
             quality: 50,
-            targetWidth: 120,
-            targetHeight: 120,
             correctOrientation: true,
             destinationType: destinationType.DATA_URL,
             allowEdit: true,
