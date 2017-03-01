@@ -1069,7 +1069,7 @@
 
     <div ng-if="itemfields==false" class="row tophead">
         <div class="col-xs-7">
-            <div ng-click="OpenBox()" class="" ng-if="IsAvailableMyInventoryColumn('Image')==true">
+            <div style="float:left;" ng-click="OpenBox()" class="" ng-if="IsAvailableMyInventoryColumn('Image')==true">
 
                 <output style="margin-top: 0px;" id="list567">
                     <span ng-repeat="_obj in ImageList" ng-if="ImageList.length>0">
@@ -1087,15 +1087,14 @@
 
                 <img id="defaultimg" style="height: 40px; width: 40px;" src="img/na.jpg" alt="Alternate Text" />
             </div>
+
+            <div ng-if="ImageList.length>0" style="float:left; height:40px; width:40px; border-radius:30px;text-align:center; line-height:40px; padding:0; margin-left:15px; margin-top:7px;" class="btn btn-success" ng-click="viewimages()">1+</div>
+
         </div>
         <div class="col-xs-5">
             <a class="scanbtn btn btn-gray pull-right" ng-click="ReuseAll('#firstDiv')">
                 <i class="fa fa-refresh"></i> Reuse
             </a>
-                
-
-            
-
         </div>
     </div>
 
@@ -1112,7 +1111,7 @@
 
                             <div class="">
                                 <div class="">
-                                    <label>Item Name   </label>
+                                    <label>Item Name</label>
 
                                 </div>
 
@@ -1183,9 +1182,15 @@
 
                     <div class="input-group">
 
+                   
+
                         <input ng-model="InventoryObject.Quantity" id="iQty" min="0" class="form-control" type="number" name="Quantity" value="" />
-
-
+                        <span ng-click="UpDownValue('Quantity',false)" class="input-group-addon last">
+                            <i class="fa fa-minus"></i>
+                        </span>
+                        <span ng-click="UpDownValue('Quantity',true)" class="input-group-addon last">
+                            <i class="fa fa-plus"></i>
+                        </span>
                     </div>
 
                 </div>
