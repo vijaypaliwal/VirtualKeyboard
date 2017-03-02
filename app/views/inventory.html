@@ -36,10 +36,13 @@
 
          .stickybtn
          {
-              position: fixed;
-    bottom: 0;
-    z-index: 100;
-    width: 100%;
+       position: fixed;
+       bottom: 0;
+       z-index: 100;
+     width: 100%;
+      background: #fff;
+      padding-top: 13px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.19);
          }
 
          .stickybtn .btn
@@ -96,6 +99,25 @@
         margin-left:0px !important;
         border-radius:0px;
     }
+
+    .changebtn {
+  position: fixed;
+    bottom: 23px;
+    right: 25px;
+    background: #FF4081 !important;
+    z-index: 13000;
+    color: #fff !important;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 52px;
+    cursor: pointer;
+}
+
+    body {
+    background: #edecec;
+}
         
 </style>
 
@@ -1088,7 +1110,7 @@
                 <img id="defaultimg" style="height: 40px; width: 40px;" src="img/na.jpg" alt="Alternate Text" />
             </div>
 
-            <div ng-if="ImageList.length>0" style="float:left; height:40px; width:40px; border-radius:30px;text-align:center; line-height:40px; padding:0; margin-left:15px; margin-top:7px;" class="btn btn-success" ng-click="viewimages()">1+</div>
+            <div ng-if="ImageList.length>1" style="float:left; height:40px; width:40px; border-radius:30px;text-align:center; line-height:40px; padding:0; margin-left:15px; margin-top:7px;" class="btn btn-success" ng-click="viewimages()">1+</div>
 
         </div>
         <div class="col-xs-5">
@@ -1203,9 +1225,10 @@
                             <option mytag="{{obj.LocationZone}}" value="{{obj.LocationName}}" ng-selected="CheckSelectedValues(InventoryObject.Location,obj.LocationName)?true:false" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
                         </select>
                         <span ng-if="IsActiveLocationLibrary==true" ng-click="CreateNew(1)" class="input-group-addon last"><i class="fa fa-plus"></i></span>
+                        <span ng-click="locationlist()" class="input-group-addon last"><i class="fa fa-search"></i></span>
                         <span class="input-group-addon last" ng-click="ScanNewSwitch(obj.ColumnName)"> <i class="fa fa-barcode"></i></span>
                         <span ng-click="GetLastValue('Inv_Location','#Location')" test-case condition="GetLastValueData('Inv_Location')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
-                        <span ng-click="locationlist()" class="input-group-addon last"><i class="fa fa-search"></i></span>
+                       
                     </div>
 
 
@@ -1741,11 +1764,11 @@
 
 </div>
 
-<a ng-if="switchmode==false" ng-click="mode2()" class="menubtn waves-effect btn-info btn-floating">
+<a ng-show="switchmode==false" ng-click="mode2()" class="changebtn waves-effect btn-info ">
     <i class="fa fa-exchange"></i>
 </a>
 
-<a ng-if="switchmode==true" ng-click="mode1()" class="menubtn waves-effect btn-info btn-floating">
+<a ng-show="switchmode==true" ng-click="mode1()" class="changebtn waves-effect btn-info">
     <i class="fa fa-exchange"></i>
 </a>
 
@@ -2347,6 +2370,14 @@
 
 
 <script>
+
+
+    $(init);
+
+    function init() {
+        $('.changebtn').draggable();
+    }
+
     function Toggle() {
         $("#iteminfo").toggle("slow");
     }

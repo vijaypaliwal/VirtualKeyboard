@@ -32,21 +32,57 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.switchmode = false;
 
     $scope.mode1 = function () {
+
+        debugger;
         $scope.itemfields = false;
         $scope.switchmode = false;
+        $scope.currentmode = 1;
+        localStorageService.set("mode", $scope.currentmode);
+       
         $cordovaKeyboard.disableScroll(true);
+
+      
+        CheckScopeBeforeApply();
+
+       
+       
     }
 
-    $scope.mode2 = function () {
+    $scope.mode2 = function ()
+    {
         $scope.itemfields = false;
         $scope.switchmode = true;
+        $scope.currentmode = 2 ;
+        localStorageService.set("mode", $scope.currentmode);
         $cordovaKeyboard.disableScroll(false);
+
+      
+        CheckScopeBeforeApply();
+
+      
     }
 
     $scope.nextstep = function () {
         $scope.itemfields = true;
 
     }
+
+
+    $(document)
+   .on('focus', '.switchmode input,select', function () {
+
+       
+       $('#toolbar').css("position", "absolute");
+       $('.stickybtn').css("position", "relative");
+
+   })
+   .on('blur', '.switchmode input,select', function () {
+
+     
+       $('#toolbar').css("position", "fixed");
+      
+       $('.stickybtn').css("position", "fixed");
+   });
 
 
 
@@ -2649,8 +2685,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.IsStatusLibrary = $scope.checkpermission('URL:Manage/Status');
         $scope.GetActiveUnitDataField();
         CheckScopeBeforeApply();
+      
 
+        
 
+      
 
 
     }
@@ -3843,6 +3882,20 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             $scope.SetDefaultObjects();
             $scope.laststepindex = mySwiper.slides.length;
+
+            $scope.currentmode = localStorageService.get('mode');
+
+            debugger;
+
+            if ($scope.currentmode == 1) {
+                $scope.switchmode = false;
+                CheckScopeBeforeApply();
+            }
+
+            if ($scope.currentmode == 2) {
+                $scope.switchmode = true;
+                CheckScopeBeforeApply();
+            }
 
             setTimeout(function () {
                 $scope.changeNav();
