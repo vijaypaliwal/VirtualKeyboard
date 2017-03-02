@@ -121,15 +121,10 @@
         
 </style>
 
-
-
 <a ng-click="viewall()" class="btn btn-danger waves-effect roundbtntitle"> <i class="fa fa-info"></i> </a>
 <a href="#/mainmenu" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
 
-
 <div ng-show="switchmode==false" class="maincontent animated slideInLeft">
-
-
     <form id="myform" name="myform">
         <div class="device">
 
@@ -166,9 +161,6 @@
                                     <!--<span class="pull-right" style="color:#069;text-decoration:underline;font-size:11px" ng-if="slide == Totalslides"> <a ng-if="Isopendiv==false" ng-click="SetIsOpen(true)"> Show more </a><a ng-if="Isopendiv==true" ng-click="SetIsOpen(false)"> Show less </a> </span>-->
                                 </div>
                             </div>
-
-
-
                         </div>
                     </div>
                 </div>
@@ -178,18 +170,15 @@
 
                     <div class="swiper-slide myCols" data-index="{{$index}}" data-type="myinventory" data-id="CustomItem_{{obj.cfdID}}" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-if="obj.ColumnName!='HasConversion' && obj.ColumnName!='ActionQty'" ng-repeat="obj in MyinventoryFields" end-repeat>
 
-                        <div class=" form-group" ng-if="obj.ColumnName=='pPart'">
+                        <div class="form-group" ng-if="obj.ColumnName=='pPart'">
 
                             <div class="row">
                                 <div class="col-xs-12">
 
-
                                     <div class="row">
                                         <div class="col-xs-6">
                                             <label>Item Name   </label>
-
                                         </div>
-
                                     </div>
 
                                     <div ng-if="InventoryObject.AutoID==false && IsItemLibrary==true && IsActiveItemLibrary==true" class="input-group">
@@ -295,8 +284,6 @@
                                 <span ng-if="IsActiveStatusLibrary==true" ng-click="CreateNew(3)" class="input-group-addon last"><i class="fa fa-plus"></i></span>
                             </div>
                         </div>
-
-
 
                         <div class="form-group" ng-if="obj.ColumnName=='uomUOM'">
                             <label>Select UOM <span class="redText">*</span></label>
@@ -1726,7 +1713,6 @@
                     <input ng-model="InventoryObject.UpdateDate" id="UpdateDate" class="form-control" type="date" name="UpdateDate" value="" />
                     <span ng-click="GetLastValue('Inv_UpdateDate','#UpdateDate')" test-case condition="GetLastValueData('Inv_UpdateDate')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                 </div>
-
             </div>
         </div>
     </div>
@@ -1743,9 +1729,6 @@
         <div class="col-xs-6">
             <a id="addinventoriesnew" ng-click="nextstep()" class="btn blue"> <i class="fa fa-step-forward"></i> Continue</a>
         </div>
-
-
-
     </div>
 
 
