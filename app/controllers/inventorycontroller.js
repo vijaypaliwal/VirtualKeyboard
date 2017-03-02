@@ -1214,6 +1214,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 $('#addinventories').addClass("disabled");
                 $('#addinventories').find(".fa").addClass("fa-spin");
 
+                $('#addinventoriesnew').addClass("disabled");
+                $('#addinventoriesnew').find(".fa").addClass("fa-spin");
+
 
                 var _TempObj = $scope.InventoryObject;
 
@@ -1409,6 +1412,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                           $('#addinventories').removeClass("disabled");
                           $('#addinventories').find(".fa").removeClass("fa-spin");
+
+
+                          $('#addinventoriesnew').removeClass("disabled");
+                          $('#addinventoriesnew').find(".fa").removeClass("fa-spin");
                       },
                       fail: function (jqXHR, textStatus, errorThrown) {
                           console.log("jqxhr");
@@ -2990,7 +2997,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     $(_id).val(resultvalue);
                     // $(_id).trigger("input");
+                    $("#secondDiv").find(_id).val(_value);
 
+
+                    $("#secondDiv").find(_id).trigger('change');
+                    $("#secondDiv").find(_id).trigger('input');
+
+                    $("#firstDiv").find(_id).val(_value);
+
+
+                    $("#firstDiv").find(_id).trigger('change');
+                    $("#firstDiv").find(_id).trigger('input');
 
 
 
@@ -3935,6 +3952,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         //window.location.reload();
         $scope.resetObject();
         $scope.getstep(0);
+
+        if ($scope.switchmode == true) {
+
+            $scope.mode2();
+        }
 
         $("#modal3").modal('hide');
 
