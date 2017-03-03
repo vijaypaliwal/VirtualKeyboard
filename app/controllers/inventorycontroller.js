@@ -84,15 +84,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
        
        $('#toolbar').css("position", "absolute");
-       //$('.stickybtn').css("position", "relative");
+       $('.stickybtn').css("position", "relative");
 
    })
    .on('blur', '.switchmode input,select', function () {
 
      
        $('#toolbar').css("position", "fixed");
-      
-       //$('.stickybtn').css("position", "fixed");
+       $('.stickybtn').css("position", "fixed");
    });
 
 
