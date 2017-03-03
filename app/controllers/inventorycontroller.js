@@ -4022,6 +4022,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             if ($scope.currentmode == 2) {
                 $scope.switchmode = true;
                 CheckScopeBeforeApply();
+                $cordovaKeyboard.disableScroll(false);
             }
 
            
