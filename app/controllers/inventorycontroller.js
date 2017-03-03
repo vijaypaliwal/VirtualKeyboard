@@ -33,16 +33,19 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.mode1 = function () {
 
-        debugger;
         $scope.itemfields = false;
         $scope.switchmode = false;
         $scope.currentmode = 1;
         localStorageService.set("mode", $scope.currentmode);
-       
+        CheckScopeBeforeApply();
+
         $cordovaKeyboard.disableScroll(true);
         $scope.changeNav();
-      
-        CheckScopeBeforeApply();
+        InitializeSwiper();
+
+        setTimeout(function () {
+            $("#myform .swiper-slide-active").find(".form-control:first").focus();
+        }, 100);
 
        
        
@@ -69,6 +72,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         setTimeout(function () {
             $("#secondDiv").find(".form-group:first").find(".form-control:first").focus();
+          
         }, 100);
         CheckScopeBeforeApply();
 
@@ -80,7 +84,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
        
        $('#toolbar').css("position", "absolute");
-       $('.stickybtn').css("position", "relative");
+       //$('.stickybtn').css("position", "relative");
 
    })
    .on('blur', '.switchmode input,select', function () {
@@ -88,7 +92,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
      
        $('#toolbar').css("position", "fixed");
       
-       $('.stickybtn').css("position", "fixed");
+       //$('.stickybtn').css("position", "fixed");
    });
 
 
@@ -348,7 +352,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         return true;
     }
     $scope.saveItemGroup = function (ItemGroupValue) {
-        debugger;
+        
         var _StatusValue = $.trim(ItemGroupValue);
 
         if (_StatusValue != "") {
@@ -372,7 +376,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 contentType: 'application/json',
                 success: function (result) {
 
-                    debugger;
+                    
                     if (result.CreateEditItemGroupResult.Success == true) {
 
                         _IsSavedItemGroup = true;
@@ -776,11 +780,40 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         CheckScopeBeforeApply()
     }
 
+    $scope.GetCustomFieldDataType=function(ID)
+    {
+        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            if($scope.CustomItemDataList[i].cfdID==ID)
+            {
+                return $scope.CustomItemDataList[i].cfdDataType;
+            }
 
+        }
+
+        return "";
+    }
+
+    function formatDate(date) {
+        if (date != null && date != undefined && date != "") {
+
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+        else {
+            return date;
+        }
+    }
     $scope.SetItemData = function (obj) {
 
 
-        debugger;
+        
 
         $scope.InventoryObject.ItemID = obj.ItemID;
 
@@ -808,14 +841,44 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             for (var i = 0; i < $scope.InventoryObject.CustomPartData.length; i++) {
                 for (var j = 0; j < obj.CustomData.length; j++) {
                     if (obj.CustomData[j].cfdID == $scope.InventoryObject.CustomPartData[i].CfdID) {
-                        $scope.InventoryObject.CustomPartData[i].Value = obj.CustomData[j].CustomFieldValue;
+                        switch ($scope.GetCustomFieldDataType(obj.CustomData[j].cfdID)) {
+                            case "string":
+                            case "checkbox":
+                            case "combobox":
+                                $scope.InventoryObject.CustomPartData[i].Value = obj.CustomData[j].CustomFieldValue;
+
+                                break;
+                            case "currency":
+                            case "number":
+                                if (obj.CustomData[j].CustomFieldValue != undefined && obj.CustomData[j].CustomFieldValue != null && obj.CustomData[j].CustomFieldValue != "") {
+                                    $scope.InventoryObject.CustomPartData[i].Value = parseFloat(obj.CustomData[j].CustomFieldValue);
+
+                                }
+                                break;
+                            case "datetime":
+                                if (obj.CustomData[j].CustomFieldValue != undefined && obj.CustomData[j].CustomFieldValue != null && obj.CustomData[j].CustomFieldValue != "") {
+                                    $scope.InventoryObject.CustomPartData[i].Value = formatDate(obj.CustomData[j].CustomFieldValue);
+
+                                }
+                                break;
+                            default:
+                                $scope.InventoryObject.CustomPartData[i].Value = obj.CustomData[j].CustomFieldValue;
+        
+                        }
                     }
                 }
 
             }
         }
 
-
+        $("#secondDiv .form-control").each(function () {
+            console.log($(this).attr("id"));
+            $(this).trigger("input");
+        });
+        $("#firstDiv .form-control").each(function () {
+            console.log($(this).attr("id"));
+            $(this).trigger("input");
+        });
         $("#itemlistmodal").modal('hide');
 
         $("#locationlistmodal").modal('hide');
@@ -985,21 +1048,19 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 },
 
                 success: function (data) {
-                    debugger;
+                    
                     if (data.SearchItemsResult.Success == true) {
                         if (data.SearchItemsResult != null && data.SearchItemsResult.Payload != null) {
                             $scope.ItemSearching = false;
                             $scope.SearchList = data.SearchItemsResult.Payload;
 
 
-                            debugger;
-
                             if ($scope.SearchList.length == 0) {
                                 $scope.isnoitemmsg = true;
                             }
                             else {
 
-
+                                $scope.isnoitemmsg = false;
                                 if ($scope.SearchList.length == 1) {
 
                                     if ($scope.InventoryObject.ItemID != "" && $scope.InventoryObject.ItemID != undefined) {
@@ -1591,7 +1652,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#itemlistmodal").modal('hide');
         $("#locationlistmodal").modal('show');
 
-        debugger;
+        
         $scope.LocationSearchList = angular.copy($scope.LocationList);
         CheckScopeBeforeApply();
 
@@ -2675,7 +2736,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     function init() {
-        //  $cordovaKeyboard.disableScroll(true);
+         //$cordovaKeyboard.disableScroll(true);
         $scope.GetAllData();
         $scope.InventoryObject.Quantity = $scope.GetDefaultQty();
         $scope.IsItemLibrary = $scope.checkpermission('URL:Manage/Item');
@@ -2896,7 +2957,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.ScanNewSwitch = function (_Column) {
-        debugger;
+        
         var _id = "#";
 
 
@@ -3687,7 +3748,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.currentcfdID = ID;
         CheckScopeBeforeApply();
 
-        debugger;
+        
 
 
         $("#Adddropdownvalue").modal('show');
@@ -3725,7 +3786,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             error: function (err) {
 
 
-                debugger;
+                
 
 
             },
@@ -3814,6 +3875,114 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         return false;
     }
 
+    function InitializeSwiper() {
+        debugger;
+
+        setTimeout(function () {
+            $(".swiper-container").show();
+
+
+            $(".spinner").hide();
+        mySwiper = new Swiper('.swiper-container', {
+            initialSlide: 0,
+            speed: 500,
+            effect: 'flip',
+            allowSwipeToPrev: false,
+            onSlideChangeStart: function () {
+                if ($scope.CurrentActiveField == "pPart" && $.trim($scope.InventoryObject.ItemID) != "") {
+                    _IsItemSlide = true;
+                    $scope.SearchItemValue = $scope.InventoryObject.ItemID;
+                    CheckScopeBeforeApply();
+                    $scope.OnChangeItemNameFunction();
+                    $scope.IsFromSlideChange = true;
+                }
+            },
+            onSlideChangeEnd: function (swiperHere) {
+
+                $(".bknext").removeClass("darkblue");
+
+                setTimeout(function () {
+                    $(".bknext").addClass("darkblue");
+                }, 300)
+
+
+                $scope.slide = swiperHere.activeIndex;
+                $scope.CurrentCount = swiperHere.activeIndex;
+                $scope.Totalslides = swiperHere.slides.length - 1;
+                var _colName = $(".swiper-slide-active").attr("data-column");
+                var _colType = $(".swiper-slide-active").attr("data-type");
+                _colid = $(".swiper-slide-active").attr("data-id");
+                var _fieldType = $(".swiper-slide-active").attr("field-type");
+
+                $scope.CurrentActiveField = _colName != undefined && _colName != "" ? _colName : "";
+                $scope.CurrentActiveFieldDatatype = _colType;
+                $scope.CurrentActiveFieldType = _fieldType == "activity" ? "Activity" : "Inventory";
+                CheckScopeBeforeApply();
+
+
+                var swiperPage = swiperHere.activeSlide();
+
+                $scope.slidenumber(swiperHere.activeIndex);
+
+
+                if (swiperHere.activeIndex != 100 && swiperHere.activeIndex != 101) {
+
+                    $scope.changeNav();
+
+                }
+
+                else {
+
+                    $cordovaKeyboard.close()
+
+                    //  SoftKeyboard.hide();
+
+                }
+
+            }
+
+        });
+
+        setTimeout(function () {
+            var _TempcolName = $(".swiper-slide-active").attr("data-column");
+            $scope.CurrentActiveField = _TempcolName != undefined && _TempcolName != "" ? _TempcolName : "";
+            $scope.Totalslides = mySwiper.slides.length - 1;
+            $scope.IsFormDataloaded = true;
+            $scope.CurrentActiveFieldType = "Inventory";
+
+
+
+
+            CheckScopeBeforeApply();
+        }, 10)
+        $scope.laststepindex = mySwiper.slides.length;
+
+        setTimeout(function () {
+            $scope.changeNav();
+
+            $('.arrow-left').on('click', function (e) {
+                e.preventDefault()
+
+                if ($scope.slide == 0 || $scope.slide == 1000) {
+                    // showConfirmInventory();
+
+                }
+                else {
+                    mySwiper.swipePrev();
+
+                }
+
+
+            })
+            $('.arrow-right').on('click', function (e) {
+
+                e.preventDefault()
+                mySwiper.swipeNext()
+                CheckScopeBeforeApply();
+            })
+        }, 100)
+        },100);
+    }
     function AfterLoadedData() {
         $('.probeProbe').bootstrapSwitch('state', true);
         $(".iosbtn").show();
@@ -3833,88 +4002,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $(".spinner").hide();
         setTimeout(function () {
 
-            mySwiper = new Swiper('.swiper-container', {
-                initialSlide: 0,
-                speed: 500,
-                effect: 'flip',
-                allowSwipeToPrev: false,
-                onSlideChangeStart: function () {
-                    if ($scope.CurrentActiveField == "pPart" && $.trim($scope.InventoryObject.ItemID) != "") {
-                        _IsItemSlide = true;
-                        $scope.SearchItemValue = $scope.InventoryObject.ItemID;
-                        CheckScopeBeforeApply();
-                        $scope.OnChangeItemNameFunction();
-                        $scope.IsFromSlideChange = true;
-                    }
-                },
-                onSlideChangeEnd: function (swiperHere) {
+        
+            InitializeSwiper();
 
-                    $(".bknext").removeClass("darkblue");
-
-                    setTimeout(function () {
-                        $(".bknext").addClass("darkblue");
-                    }, 300)
-
-
-                    $scope.slide = swiperHere.activeIndex;
-                    $scope.CurrentCount = swiperHere.activeIndex;
-                    $scope.Totalslides = swiperHere.slides.length - 1;
-                    var _colName = $(".swiper-slide-active").attr("data-column");
-                    var _colType = $(".swiper-slide-active").attr("data-type");
-                    _colid = $(".swiper-slide-active").attr("data-id");
-                    var _fieldType = $(".swiper-slide-active").attr("field-type");
-
-                    $scope.CurrentActiveField = _colName != undefined && _colName != "" ? _colName : "";
-                    $scope.CurrentActiveFieldDatatype = _colType;
-                    $scope.CurrentActiveFieldType = _fieldType == "activity" ? "Activity" : "Inventory";
-                    CheckScopeBeforeApply();
-
-
-                    var swiperPage = swiperHere.activeSlide();
-
-                    $scope.slidenumber(swiperHere.activeIndex);
-
-
-                    if (swiperHere.activeIndex != 100 && swiperHere.activeIndex != 101) {
-
-                        $scope.changeNav();
-
-                    }
-
-                    else {
-
-                        $cordovaKeyboard.close()
-
-                        //  SoftKeyboard.hide();
-
-                    }
-
-                }
-
-            });
-
-
-            setTimeout(function () {
-                var _TempcolName = $(".swiper-slide-active").attr("data-column");
-                $scope.CurrentActiveField = _TempcolName != undefined && _TempcolName != "" ? _TempcolName : "";
-                $scope.Totalslides = mySwiper.slides.length - 1;
-                $scope.IsFormDataloaded = true;
-                $scope.CurrentActiveFieldType = "Inventory";
-                $("#files").on('change', function (event) {
-                    $scope.handleFileSelect(event);
-                });
-
-
-
-                CheckScopeBeforeApply();
-            }, 10)
+          
 
             $scope.SetDefaultObjects();
-            $scope.laststepindex = mySwiper.slides.length;
+
 
             $scope.currentmode = localStorageService.get('mode');
 
-            debugger;
+            
 
             if ($scope.currentmode == 1) {
                 $scope.switchmode = false;
@@ -3926,9 +4024,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 CheckScopeBeforeApply();
             }
 
-            setTimeout(function () {
-                $scope.changeNav();
-            }, 100)
+           
         }, 10)
     }
 
@@ -4000,26 +4096,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
-    $('.arrow-left').on('click', function (e) {
-        e.preventDefault()
 
-        if ($scope.slide == 0 || $scope.slide == 1000) {
-            // showConfirmInventory();
-
-        }
-        else {
-            mySwiper.swipePrev();
-
-        }
-
-
-    })
-    $('.arrow-right').on('click', function (e) {
-
-        e.preventDefault()
-        mySwiper.swipeNext()
-        CheckScopeBeforeApply();
-    })
 
 
 

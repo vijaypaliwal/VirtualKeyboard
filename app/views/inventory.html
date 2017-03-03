@@ -19,8 +19,8 @@
         {
             background: #fff;
   margin-top: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     margin-bottom:5px;
         }
 
@@ -98,6 +98,9 @@
     {
         margin-left:0px !important;
         border-radius:0px;
+        height:50px;
+        width:50px;
+
     }
 
     .changebtn {
@@ -118,13 +121,30 @@
     body {
     background: #edecec;
 }
+
+    .switchmode .scanbtn {
+        height: 36px;
+        line-height: 36px;
+        font-size: 15px;
+        margin-top:6px;
+    }
+
+    .switchmode .scanbtn i
+    {
+        font-size:15px;
+    }
+
+    output
+    {
+        padding-top:0px;
+    }
         
 </style>
 
 <a ng-click="viewall()" class="btn btn-danger waves-effect roundbtntitle"> <i class="fa fa-info"></i> </a>
 <a href="#/mainmenu" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
 
-<div ng-show="switchmode==false" class="maincontent animated slideInLeft">
+<div ng-if="switchmode==false" class="maincontent animated slideInLeft">
     <form id="myform" name="myform">
         <div class="device">
 
@@ -494,7 +514,6 @@
 
                         <div class="form-group" ng-if="CheckInCommonArray(obj.ColumnName)!=true">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
-
                             <div ng-if="obj.cfdDataType=='string'" class="input-group">
 
                                 <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{obj.CfValue}}" />
@@ -1074,9 +1093,9 @@
 
 </div>
 
-<div ng-show="switchmode==true" class="switchmode">
+<div ng-if="switchmode==true" class="switchmode">
 
-    <div ng-if="itemfields==false" class="row tophead">
+    <div ng-show="itemfields==false" class="row tophead">
         <div class="col-xs-7">
             <div style="float:left;" ng-click="OpenBox()" class="" ng-if="IsAvailableMyInventoryColumn('Image')==true">
 
@@ -1087,17 +1106,17 @@
                     </span>
                 </output>
 
-                <img id="defaultimg" style="height:40px; width:40px;" src="img/default.png" alt="Alternate Text" />
+                <img id="defaultimg" style="height:50px; width:50px;" src="img/default.png" alt="Alternate Text" />
             </div>
 
             <div class="" ng-if="IsAvailableMyInventoryColumn('Image')==false">
 
                 <output style="float: left; padding-top: 0px; margin-top: 0px;" id="list567"></output>
 
-                <img id="defaultimg" style="height: 40px; width: 40px;" src="img/na.jpg" alt="Alternate Text" />
+                <img id="defaultimg" style="height: 50px; width: 50px;" src="img/na.jpg" alt="Alternate Text" />
             </div>
 
-            <div ng-if="ImageList.length>1" style="float:left; height:40px; width:40px; border-radius:30px;text-align:center; line-height:40px; padding:0; margin-left:15px; margin-top:7px;" class="btn btn-success" ng-click="viewimages()">1+</div>
+            <div ng-if="ImageList.length>1" style="float:left; height:40px; width:40px; border-radius:30px;text-align:center; line-height:40px; padding:0; margin-left:15px; margin-top:5px;" class="btn btn-success" ng-click="viewimages()">1+</div>
 
         </div>
         <div class="col-xs-5">
@@ -1107,7 +1126,7 @@
         </div>
     </div>
 
-    <div ng-if="itemfields==false" class="row" id="firstDiv">
+    <div ng-show="itemfields==false" class="row" id="firstDiv">
         <div class="col-md-12">
 
             <div class="myCols" data-index="{{$index}}" data-type="myinventory" data-id="CustomItem_{{obj.cfdID}}" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-if="obj.ColumnName!='HasConversion' && obj.ColumnName!='ActionQty'" ng-repeat="obj in MyinventoryFields" end-repeat>
@@ -1247,7 +1266,6 @@
 
                 <div class="form-group" ng-if="obj.Required==true && CheckInCommonArray(obj.ColumnName)!=true">
                     <label>{{obj.cfdName}} <span ng-if="obj.Required" class="redText">*</span></label>
-
                     <div ng-if="obj.cfdDataType=='string'" class="input-group">
 
                         <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{obj.CfValue}}" />
@@ -1370,7 +1388,7 @@
     </div>
 
 
-    <div ng-if="itemfields==true" class="row tophead">
+    <div ng-show="itemfields==true" class="row tophead">
         <div class="col-xs-7">
             <h4>Other fields</h4>
         </div>
@@ -1382,7 +1400,7 @@
     </div>
 
 
-    <div ng-if="itemfields==true" class="row animated slideInRight" id="secondDiv">
+    <div ng-show="itemfields==true" class="row animated slideInRight" id="secondDiv">
         <div class="col-md-12">
             <div class="myCols" data-index="{{$index}}" data-type="myinventory" data-id="CustomItem_{{obj.cfdID}}" field-type="myinventorycols" data-column="{{obj.ColumnName}}" ng-if="obj.ColumnName!='HasConversion' && obj.ColumnName!='ActionQty'" ng-repeat="obj in MyinventoryFields" end-repeat>
 
@@ -1413,7 +1431,7 @@
 
 
 
-                
+
                 <div class="form-group" ng-if="obj.ColumnName=='DefaultItemUOM'">
                     <label>Default UOM</label>
                     <div class="input-group">
@@ -1421,7 +1439,7 @@
                         <select class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.DefaultItemUOM" id="DefaultItemUOM">
                             <option value="{{obj.UnitOfMeasureID}}" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                         </select>
-                        
+
                         <span ng-click="GetLastValue('Inv_DefaultItemUOM','#DefaultItemUOM')" test-case condition="GetLastValueData('Inv_DefaultItemUOM')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
 
                     </div>
@@ -1464,8 +1482,8 @@
                     </div>
                 </div>
                 <div class="form-group" ng-if="obj.ColumnName=='pCountFrq'">
-                    <div >
-                        <div >
+                    <div>
+                        <div>
                             <label>Item Group </label>
                             <div class="input-group" ng-if="IsItemGroupLibrary==true && IsActiveItemGroupLibrary==true">
                                 <select class="form-control" id="itemgroup" ng-model="InventoryObject.ItemGroup">
@@ -1587,10 +1605,9 @@
                         <span ng-click="GetLastValue('Inv_UnitNumber2','#UnitNumber2')" test-case condition="GetLastValueData('Inv_UnitNumber2')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                     </div>
                 </div>
-                
+
                 <div class="form-group" ng-if="obj.Required==false && CheckInCommonArray(obj.ColumnName)!=true">
                     <label>{{obj.cfdName}} <span ng-if="obj.Required" class="redText">*</span></label>
-
                     <div ng-if="obj.cfdDataType=='string'" class="input-group">
 
                         <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{obj.CfValue}}" />
@@ -1741,7 +1758,7 @@
             <a ng-click="mode2()" class="btn blue"> <i class="fa fa-angle-left"></i> Back</a>
         </div>
         <div class="col-xs-4">
-            <a ng-click="mode1()" class="btn grey"> <i class="fa fa-times"></i> Cancel</a>
+            <a ng-click="movetoback()" class="btn grey"> <i class="fa fa-times"></i> Cancel</a>
         </div>
       
     </div>
