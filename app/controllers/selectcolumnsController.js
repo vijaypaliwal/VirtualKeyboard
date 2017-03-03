@@ -204,7 +204,15 @@ app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'aut
     }
 
   
+    $scope.$on('$locationChangeStart', function (event) {
 
+        if (counter == 0) {
+
+            $scope.saveColumnsNew();
+        }
+
+
+    });
    
 
     $scope.saveColumns = function () {
@@ -212,7 +220,7 @@ app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'aut
         $(".fa-check").addClass("fa-spin");
 
        // $scope.LocationsLoaded = false;
-
+        counter = 1;
         $scope.loadingbutton = true;
 
         for (var i = 0; i < $scope.MyInventorycolumns.length; i++) {
@@ -242,7 +250,7 @@ app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'aut
                dataType: 'json',
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Columns": $scope.MyInventorycolumns }),
               success: function (response) {
-
+                  counter = 0;
                   if (response.SaveMyInventoryColumnResult.Success == true) {
                  
                   $scope.LocationsLoaded = true;
@@ -259,6 +267,7 @@ app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'aut
               },
               error: function (err)
               {
+                  counter = 0;
                   console.log(err);
                   $scope.LocationsLoaded = true;
                   $(".fa-check").removeClass("fa-spin");
