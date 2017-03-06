@@ -3095,6 +3095,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                     $(_id).val(resultvalue);
+                    $(_id).trigger('change');
+                    $(_id).trigger('input');
+                    $(_id).trigger('blur');
                     // $(_id).trigger("input");
                     $("#secondDiv").find(_id).val(_value);
 
