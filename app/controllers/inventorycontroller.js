@@ -1828,6 +1828,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                                   }
                               }
                           }
+                          else if ($scope.CustomActivityDataList[i].cfdDataType == "checkbox") {
+                              var _value = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
+                              $scope.CustomActivityDataList[i].cfdDefaultValue = (_value == "true" || _value === "True");
+                          }
                           $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomActivityDataList[i].cfdID, Value: $scope.CustomActivityDataList[i].cfdDefaultValue, DataType: $scope.CustomActivityDataList[i].cfdDataType });
                       }
                       CheckScopeBeforeApply()
