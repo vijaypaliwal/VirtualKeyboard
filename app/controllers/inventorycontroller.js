@@ -3098,7 +3098,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     // $(_id).trigger("input");
                     $("#secondDiv").find(_id).val(_value);
 
-
                     $("#secondDiv").find(_id).trigger('change');
                     $("#secondDiv").find(_id).trigger('input');
 
@@ -3109,6 +3108,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     $("#firstDiv").find(_id).trigger('input');
 
 
+                    $("#firstDiv").find(_id).focus();
+                    $("#secondDiv").find(_id).focus();
 
                     CheckScopeBeforeApply();
 
