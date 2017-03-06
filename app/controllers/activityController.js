@@ -1810,7 +1810,16 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $("#locationlistmodal").hide();
         CheckScopeBeforeApply()
     }
-
+    $scope.GetLocationByID = function (LID) {
+        if ($scope.LocationDataList.length > 0) {
+            var _idData = parseInt(LID);
+            for (var i = 0; i < $scope.LocationDataList.length; i++) {
+                if ($scope.LocationDataList[i].LocationID == _idData) {
+                    return $scope.LocationDataList[i].LocationName;
+                }
+            }
+        }
+    }
 
     $scope.hidelocationmodal = function () {
 
