@@ -3964,9 +3964,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.SubmitAllActivities = function () {
         var _unchangeData = $scope.UnchangedData();
         var _validateObjectVm=$scope.ValidateObjectVM();
+        var _validateCustomFields = CheckintoCustomData(0);
+        var _dateValidated = IsDateValidated();
         if (!_validateObjectVm && !_unchangeData) {
-
-            if (!CheckintoCustomData(0) && IsDateValidated() == true) {
+          
+            if (!_validateCustomFields && _dateValidated == true) {
 
                 var authData = localStorageService.get('authorizationData');
                 if (authData) {
@@ -4016,7 +4018,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             }
             else {
 
-                if (_validateObjectVm) {
+                if (_validateObjectVm || _validateCustomFields || _dateValidated==false) {
 
                     var _dataIndex = $scope.IsSingleMode == true ? $scope.CurrentCart.length : 1;
                     $scope.GoToStep(_dataIndex, 1);
@@ -4032,7 +4034,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
 
         else {
-            if (_validateObjectVm) {
+            if (_validateObjectVm || _validateCustomFields || _dateValidated == false) {
                 $scope.ShowErrorMessage($scope.IssueType);
             }
         }
