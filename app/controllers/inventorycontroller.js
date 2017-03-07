@@ -2770,7 +2770,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.IsItemLibrary = $scope.checkpermission('URL:Manage/Item');
         if ($scope.IsItemLibrary == true && $scope.IsActiveItemLibrary == true) {
 
-            $scope.IsItemChose = true;
+            $scope.IsItemChose = false;
         }
         else {
             $scope.IsItemChose = false;
@@ -4103,11 +4103,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.notmove = function () {
         //window.location.reload();
         $scope.resetObject();
-        $scope.getstep(0);
-
         if ($scope.switchmode == true) {
 
             $scope.mode2();
+        }
+        else {
+            $scope.getstep(0);
         }
 
         $("#modal3").modal('hide');
