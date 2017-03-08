@@ -366,7 +366,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
         if ($scope.ActualTotalRecords == 0) {
-
+          
 
             $(".modal-backdrop").hide();
 
@@ -633,7 +633,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 $scope.mainObjectToSend.splice(i, 1);
             }
         }
-
+       
 
         CheckScopeBeforeApply();
 
@@ -1165,10 +1165,10 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                         $(".searchtable").addClass("disablepointer");
                         $("#arrow").attr("style", "");
                         $("#arrow").show();
+                        
+                     
 
-
-
-
+                      
                     }
 
 
@@ -1430,48 +1430,22 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $scope.ScanItemSearch = function () {
 
         $scope.isSanned = false;
-
+    
         var scanner = cordova.plugins.barcodeScanner;
 
 
-        scanner.scan(
-      function (result) {
-          alert("We got a barcode\n" +
-                "Result: " + result.text + "\n" +
-                "Format: " + result.format + "\n" +
-                "Cancelled: " + result.cancelled);
 
-          $scope.SearchValue = result.text;
+        scanner.scan(function (result) {
+            $scope.SearchValue = result.text;
 
-          CheckScopeBeforeApply();
-          $scope.GetInventories();
-      },
-      function (error) {
-          alert("Scanning failed: " + error);
-      },
-      {
-          preferFrontCamera: true, // iOS and Android 
-          showFlipCameraButton: true, // iOS and Android 
-          showTorchButton: true, // iOS and Android 
-          torchOn: false, // Android, launch with the torch switched on (if available) 
-          prompt: "Place a barcode inside the scan area", // Android 
-         // resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500 
-          formats: null, // default: all but PDF_417 and RSS_EXPANDED 
-         // orientation: "landscape", // Android only (portrait|landscape), default unset so it rotates with the device 
-          disableAnimations: true // iOS 
-      }
-   );
-        //scanner.scan(function (result) {
-        //    $scope.SearchValue = result.text;
-
-        //    CheckScopeBeforeApply();
-        //    $scope.GetInventories();
+            CheckScopeBeforeApply();
+            $scope.GetInventories();
 
 
 
-        //}, function (error) {
-        //    console.log("Scanning failed: ", error);
-        //});
+        }, function (error) {
+            console.log("Scanning failed: ", error);
+        });
     }
 
 
@@ -1755,7 +1729,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                             pDescription: v.pDescription,
                             Action: '',
                             // CurrentInvObj: v,
-                            iUniqueDate_date: formatDate(v.iUniqueDate),
+                            iUniqueDate_date:formatDate(v.iUniqueDate),
                             iUnitNumber2: v.iUnitNumber2,
                             iUnitNumber1: v.iUnitNumber1,
                             iUnitDate2_date: formatDate(v.iUnitDate2),
@@ -1986,7 +1960,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     init();
 
-
+    
     function GetDataToSend(mainObjectToSend) {
         var _defaultQty = $scope.GetDefaultQty();
         if (mainObjectToSend.length > 0) {
@@ -2004,7 +1978,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     MoveTransactionData: ({ ActionQuantity: _defaultQty, StatusToUpdate: mainObjectToSend[i].iStatusValue, MoveToLocationText: "", MoveToLocation: "" }),
                     UpdateTransactionData: ({ ActionQuantity: _defaultQty, StatusToUpdate: mainObjectToSend[i].iStatusValue }),
                     ApplyTransactionData: ({ ActionQuantity: _defaultQty, UnitTag1: mainObjectToSend[i].iReqValue, UnitTag2: mainObjectToSend[i].iUnitTag2, UnitTag3: mainObjectToSend[i].iUnitTag3, UniqueDate: formatDate(mainObjectToSend[i].iUniqueDate_date), UnitDate2: formatDate(mainObjectToSend[i].iUnitDate2_date), UnitNumber1: mainObjectToSend[i].iUnitNumber1, UnitNumber2: mainObjectToSend[i].iUnitNumber2 }),
-                    ConvertTransactionData: ({ ActionFromQuantity: _defaultQty, ActionToQuantity: _defaultQty, ToUOMID: 0, ToUOM: "" }),
+                    ConvertTransactionData: ({ ActionFromQuantity: _defaultQty, ActionToQuantity: _defaultQty, ToUOMID: 0,ToUOM:"" }),
                     MoveUpdateTagTransactionData: ({ ActionQuantity: _defaultQty, StatusToUpdate: mainObjectToSend[i].iStatusValue, MoveToLocationText: mainObjectToSend[i].lLoc, MoveToLocation: mainObjectToSend[i].iLID, UnitTag1: mainObjectToSend[i].iReqValue, UnitTag2: mainObjectToSend[i].iUnitTag2, UnitTag3: mainObjectToSend[i].iUnitTag3, UniqueDate: formatDate(mainObjectToSend[i].iUniqueDate_date), UnitDate2: formatDate(mainObjectToSend[i].iUnitDate2_date), UnitNumber1: mainObjectToSend[i].iUnitNumber1, UnitNumber2: mainObjectToSend[i].iUnitNumber2 }),
                 });
             }
@@ -2165,11 +2139,12 @@ app.directive('imageonload', function () {
                 var image = new Image();
                 image.src = $(element).attr("src");
                 image.onload = function () {
-
+                    
                     var _height = this.height;
                     var _Width = this.width;
 
-                    if (_height < _Width) {
+                    if (_height < _Width)
+                    {
                         _Width = _height;
                     }
 
@@ -2179,10 +2154,10 @@ app.directive('imageonload', function () {
 
 
 
-                    $(element).css("height", _height + "px");
+                    $(element).css("height", _height+"px");
                     $(element).css("width", _Width + "px");
                 };
-
+                
             });
             element.bind('error', function () {
             });
