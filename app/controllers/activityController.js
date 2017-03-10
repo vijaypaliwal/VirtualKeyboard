@@ -1547,6 +1547,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.CartFunction = function (type) {
         switch (type) {
             case 1:
+                localStorageService.set("ActivityCart", $scope.CurrentCart);
                 break;
             case 2:
                 localStorageService.set("ActivityCart", "");
