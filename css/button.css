@@ -619,3 +619,370 @@ input[type="password"]:focus
 }
 
 
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px)  {
+ .form-control
+ {
+     height:55px;
+ }
+
+ .has-feedback .form-control-feedback {
+   
+   
+    width: 40px;
+    height: 40px;
+    line-height: 55px;
+   
+}
+
+ #toolbar
+ {
+     height:80px;
+ }
+
+ .open-left .fa-bars
+ {
+     font-size:30px !important;
+ }
+
+ #toolbar .title
+ {
+     font-size:25px;
+     line-height:63px;
+ }
+
+ #viewdata
+ {
+     margin-top:75px !important;
+ }
+
+    .titletext {
+        font-size: 26px;
+    line-height: 43px;
+    margin-top: 0px;
+    }
+
+    .roundbtntitle {
+    height: 55px;
+    width: 55px;
+    margin-top: 26px;
+    line-height: 50px;
+    font-size: 23px;
+   
+}
+
+    #myimgProfile {
+        height: 65px !important;
+    width: 65px !important;
+    margin-top: 5px;
+    margin-left: -19px;
+    border: 1px solid #ccc;
+    }
+
+
+    .menubtn {
+ 
+    bottom: 35px;
+    right: 35px;
+   
+    height: 90px;
+    width: 90px;
+   
+  
+    line-height: 110px;
+    cursor: pointer;
+}
+
+    .menubtn i
+    {
+        font-size:45px;
+    }
+
+    #bottommenumodal .selectAction {
+  
+      bottom: 125px;
+    right: 55px;
+}
+
+    #bottommenumodal .selectAction .btn {
+height: 60px;
+    width: 60px;
+    line-height: 60px;
+    margin-bottom: 12px;
+   
+}
+
+    label {
+        font-size:23px;
+    }
+
+    .btn-primary
+    {
+        font-size: 24px;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    }
+
+    .btn-primary i {
+    font-size: 24px;
+}
+
+    .btn-gray
+    {
+           font-size: 24px;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    }
+
+    .btn-gray i
+    {
+         font-size: 24px;
+    }
+    .cd-top {
+        height: 80px !important;
+        width: 80px !important;
+        color: #fff !important;
+        background: #b39a99;
+        position: fixed;
+        bottom: 36px !important;
+        text-align:center;
+    }
+
+    .cd-top i
+    {
+           font-size: 35px;
+    margin-top: 15px;
+    margin-right: 12px;
+    }
+
+
+
+        #bottommenumodal .selectAction .btn i {
+font-size:30px;
+   
+}
+
+    #bottommenumodal span {
+    font-size: 23px;
+   
+}
+
+
+    .selectAction .btn {
+    height: 60px !important;
+    width: 60px !important;
+
+    line-height: 60px !important;
+  
+}
+
+    .selectAction {
+    position: fixed;
+    bottom: 125px !important;
+    right: 52px !important;
+}
+    #myModal2 span {
+    font-size: 20px !important;
+  
+}
+
+    .selectAction li
+    {
+        margin-bottom:7px;
+    }
+    .cartbtn
+    {
+        height:90px !important;
+        width:90px !important;
+            bottom: 37px !important;
+    right: 42px !important;
+    line-height:90px !important;
+    }
+
+    .cartbtn i
+    {
+        font-size:35px;
+    }
+
+    .side-nav .no-child
+    {
+        font-size:18px;
+    }
+
+    .toast
+    {
+        font-size:30px !important;
+    }
+
+    .input-group-addon i
+    {
+        padding:18px !important;
+    }
+
+    .input-group-addon .fa-plus {
+     padding-left: 18px !important; 
+     padding-right: 18px !important; 
+}
+
+      .input-group-addon .fa-minus {
+     padding-left: 18px !important; 
+     padding-right: 18px !important; 
+     padding-top:18px !important;
+}
+
+      .changebtn 
+      {
+          height:90px !important;
+          width:90px !important;
+          line-height:90px !important;
+          bottom:60px !important;
+      }
+
+      .stickybtn .btn
+      {
+          height:60px !important;
+          font-size:26px !important;
+          line-height:60px;
+          border-radius:30px !important;
+      }
+
+      .stickybtn .btn i
+      {
+          font-size:26px;
+      }
+
+      .switchmode .tophead
+      {
+          padding-top:20px !important;
+          padding-bottom:20px !important;
+      }
+
+      .input-group-addon .fa-barcode {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
+}
+
+   
+      .input-group-addon .fa-undo
+      {
+            padding-left: 18px !important;
+    padding-right: 18px !important;
+      }
+
+      .bottom-modal ul li {
+    padding: 25px;
+   
+    margin-bottom: 15px;
+    border-radius: 41px;
+    font-size: 30px;
+}
+      
+      .bottom-modal ul li a i {
+        font-size: 28px;
+}
+      .bottom-modal .modal-body
+      {
+          padding-top:35px;
+          padding-bottom:30px;
+      }
+
+      i 
+      {
+          font-size:35px;
+      }
+
+    .title-header small {
+        font-size:20px !important;
+    }
+    .searchsection
+    {
+        margin-top:-5px !important;
+    }
+    .finditems.input-group-addon a
+    {
+        padding:16px !important;
+    }
+
+    .squirelimg
+    {
+        height:125px !important;
+        width:125px !important;
+    }
+    p {
+        font-size:18px;
+    }
+
+    .form-group {
+        margin-bottom:20px;
+    }
+
+    .signupheader
+    {
+        position:fixed;
+    }
+
+    .signupheader td
+    {
+        padding:15px;
+    }
+
+     .signupheader td h5
+     {
+         font-size:25px;
+     }
+
+     .finditems img
+     {
+         height:23px;
+     }
+     .dropdown-menu > li > a
+     {
+         font-size:16px;
+     }
+
+     .top-menu i
+     {
+         font-size:20px;
+     }
+     #mycartModal span
+     {
+         font-size:20px !important;
+     }
+     .finditems .fa-caret-down {
+    color: #fff !important;
+    background: transparent;
+    padding: 1px !important;
+    padding-top: 1px !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+}
+
+     .rotateData
+     {
+         height:50px !important;
+         width:50px !important;
+     }
+     .summaryClearbtn i
+     {
+         font-size:45px;
+     }
+
+    .topheader i {
+        font-size:24px !important;
+    }
+
+    .imagesection {
+   
+    min-height: 120px !important;
+    margin-top: 10px !important;
+}
+
+
+}
+
+
