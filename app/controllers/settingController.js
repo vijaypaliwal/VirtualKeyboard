@@ -203,7 +203,7 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
               success: function (response) {
 
-                  debugger;
+                 
                   $scope.Iscolumnloading = false;
 
 

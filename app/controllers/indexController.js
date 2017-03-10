@@ -66,7 +66,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type, "UserKey": Key }),
                success: function (response) {
 
-                   debugger;
+                 
 
 
                    if (response.GetUserPermissionsResult.Success == true) {

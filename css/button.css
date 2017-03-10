@@ -823,8 +823,8 @@ font-size:30px;
     }
 
     .input-group-addon .fa-plus {
-     padding-left: 18px !important; 
-     padding-right: 18px !important; 
+     padding-left: 19px !important; 
+     padding-right: 19px !important; 
 }
 
       .input-group-addon .fa-minus {
@@ -875,7 +875,7 @@ font-size:30px;
       }
 
       .bottom-modal ul li {
-    padding: 25px;
+    padding: 20px;
    
     margin-bottom: 15px;
     border-radius: 41px;
@@ -891,10 +891,7 @@ font-size:30px;
           padding-bottom:30px;
       }
 
-      i 
-      {
-          font-size:35px;
-      }
+   
 
     .title-header small {
         font-size:20px !important;
@@ -981,6 +978,58 @@ font-size:30px;
     min-height: 120px !important;
     margin-top: 10px !important;
 }
+
+    .btn-large {
+    height: 63px;
+   line-height:63px;
+  
+    font-size: 20px;
+}
+
+    .contentsection .table-responsive .input-group span
+    {
+        padding:0 !important;
+    }
+    .contentsection
+    {
+        padding-top:65px !important;
+    }
+    .Celldata
+    {
+        font-size:17px;
+    }
+
+    code
+    {
+        font-size:17px !important;
+    }
+
+    .top50 .listview
+    {
+        margin-top:18px;
+    }
+
+    .filtercross
+    {
+        margin-top:8px;
+    }
+
+    .scrollbar-for-ipad
+    {
+        max-height:780px !important;
+    }
+    .activityinfo
+    {
+        margin-top:25px;
+    }
+
+    .actionbtnarea .btn-primary i
+    {
+        font-size:18px;
+    }
+
+
+
 
 
 }

@@ -55,7 +55,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
             data: JSON.stringify({ "UserName": loginData.userName, "Password": loginData.password, "AccountName": loginData.account }),
             success: function (response) {
 
-                debugger;
+               
 
                  
 
@@ -151,7 +151,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                success: function (response) {
 
 
-                   debugger;
+                   
 
 
                     
