@@ -1316,7 +1316,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                       $scope.Columns = response.GetInventoryActivitiesResult.Payload[0].Columns;
                       $scope.ActualTotalRecords = response.GetInventoryActivitiesResult.Payload[0].ActualTotalRecords;
                       
-                      ConvertToProperFilter(response.GetCurrentInventoriesNewResult.Payload[0].Filters);
+                      ConvertToProperFilter(response.GetInventoryActivitiesResult.Payload[0].Filters);
                       // FillFilterArray();
                       UpdateFilterArray();
                       }

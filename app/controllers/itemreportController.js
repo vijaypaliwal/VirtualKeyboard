@@ -886,7 +886,7 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
                       $scope.Columns = response.GetAllItemsResult.Payload[0].Columns;
                       $scope.ActualTotalRecords = response.GetAllItemsResult.Payload[0].ActualTotalRecords;
                       //$scope.FilterArray = response.GetAllItemsResult.Payload[0].Filters;
-                      ConvertToProperFilter(response.GetCurrentInventoriesNewResult.Payload[0].Filters);
+                      ConvertToProperFilter(response.GetAllItemsResult.Payload[0].Filters);
                       CheckScopeBeforeApply();
                       // FillFilterArray();
                       UpdateFilterArray();

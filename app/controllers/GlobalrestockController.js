@@ -869,7 +869,7 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
                       $scope.Columns = response.GetGlobalRestockResult.Payload[0].Columns;
                       $scope.ActualTotalRecords = response.GetGlobalRestockResult.Payload[0].ActualTotalRecords;
                       //$scope.FilterArray = response.GetGlobalRestockResult.Payload[0].Filters;
-                      ConvertToProperFilter(response.GetCurrentInventoriesNewResult.Payload[0].Filters);
+                      ConvertToProperFilter(response.GetGlobalRestockResult.Payload[0].Filters);
                       CheckScopeBeforeApply();
                     
                       UpdateFilterArray();
