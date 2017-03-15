@@ -629,6 +629,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         if (_toCheckValue != null && _toCheckValue != undefined) {
             _value = _toCheckValue;
 
+
+            if (id == "#ItemName")
+            {
+                $scope.IsItemChose = false;
+            }
+
             if (id == "#UOM") {
                 $scope.InventoryObject.Uom = _value;
                 $scope.$apply();
