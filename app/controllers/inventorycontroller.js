@@ -2793,11 +2793,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         CheckScopeBeforeApply();
 
 
-
-
-
-
-
     }
 
 
@@ -2964,6 +2959,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         return false;
     }
 
+    $scope.SetItemChoseFalse = function () {
+        $scope.IsItemChose = false;
+        CheckScopeBeforeApply();
+    }
+
     function GetFieldType(fieldName) {
         switch (fieldName) {
 
@@ -3028,7 +3028,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                             $scope.InventoryObject.ItemID = resultvalue;
-
+                            $scope.IsItemChose = false;
 
                             break;
                         case "lLoc":
@@ -4055,14 +4055,20 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             $scope.currentmode = localStorageService.get('mode');
 
+            $scope.currentInvmode = localStorageService.get('DefaultInvmode');
 
 
-            if ($scope.currentmode == 1) {
+
+            debugger;
+
+
+
+            if ($scope.currentInvmode == "swiper") {
                 $scope.switchmode = false;
                 CheckScopeBeforeApply();
             }
 
-            if ($scope.currentmode == 2) {
+            if ($scope.currentInvmode == "Vertical") {
                 $scope.switchmode = true;
                 CheckScopeBeforeApply();
                 $cordovaKeyboard.disableScroll(false);
@@ -4187,6 +4193,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     });
 
+    $scope.$watch("InventoryObject.ItemID", function () {
+       // $scope.IsItemChose = false;
+        CheckScopeBeforeApply()
+
+    });
+  
 
 
 

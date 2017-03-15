@@ -2,7 +2,7 @@
 app.controller('configuresettingController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
   
 
-    $scope.SettingsVm = {AutoClear:"",AllowNegative:"",DefaultQty:""}
+    $scope.SettingsVm = { AutoClear: "", AllowNegative: "", DefaultQty: "", Defaultmode: false }
     $scope.accountID = 0;
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
@@ -11,6 +11,25 @@ app.controller('configuresettingController', ['$scope', 'localStorageService', '
             $scope.$apply();
         }
     };
+
+
+    $scope.setInventorymode = function () {
+
+        debugger;
+        var defaultInvmode = $scope.SettingsVm.Defaultmode;
+
+        CheckScopeBeforeApply();
+
+        if (defaultInvmode == true) {
+            localStorageService.set('DefaultInvmode', "Vertical");
+        }
+        else {
+            localStorageService.set('DefaultInvmode', "swiper");
+        }
+
+        ShowSuccess("Updated");
+      
+    }
 
 
     $scope.logOut = function () {
@@ -185,6 +204,21 @@ app.controller('configuresettingController', ['$scope', 'localStorageService', '
 
         
         $scope.SettingsVm.AutoClear = _autoClear == "true" || _autoClear == true ? true : false;
+
+
+        $scope.currentInvmode = localStorageService.get('DefaultInvmode');
+
+        if ($scope.currentInvmode == "Vertical") {
+
+            $scope.SettingsVm.Defaultmode = true;
+
+        }
+
+        else {
+            $scope.SettingsVm.Defaultmode = false;
+        }
+
+
         CheckScopeBeforeApply();
 
     }
