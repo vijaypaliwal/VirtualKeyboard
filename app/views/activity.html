@@ -1,23 +1,18 @@
 ﻿<!--CSS section - Start -->
 <link href="css/activity.css" rel="stylesheet" />
-
-
 <link href=".pgbomit/activityIOS.css" rel="stylesheet" />
 
 <!--CSS section - end -->
 
-
-
 <div class="activitycontent">
 
-    <div style="display:none" class="activity" ng-cloak>
+    <div style="display:none" class="activity" ng-cloak >
 
         <!--Header Bar if slide mode true start-->
         <div style="top: 0; font-size:24px;" class="topheader header Increase {{CurrentHeaderClass}}">
             <div class="row" id="headerrow">
-
                 <div class="col-md-4 col-xs-3">
-                    <a href="#/FindItems"><i class="fa fa-home"></i></a>
+                 <a href="#/FindItems"><i class="fa fa-home"></i></a>
                 </div>
                 <div class="col-md-4 col-xs-6">
                     <div style="text-align:center">
@@ -895,7 +890,7 @@
                                     <!-- Line items activity columns -->
                                     <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" data-ng-repeat="_columns in isLineItemColumnNames">
 
-                                        <div ng-class="$index==0 ? 'col-md-12 col-xs-12' : 'col-md-12 col-xs-12'">
+                                        <div ng-class="parentIndex==0 ? 'col-md-12 col-xs-12' : 'col-md-12 col-xs-12'">
                                             <div class="form-group">
                                                 <label>{{_columns}} <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
 
@@ -907,9 +902,8 @@
                                                             <div custom-swipe class="btn-group custombtnGroup">
                                                                 <label class="switch1">
                                                                     <input type="checkbox" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
-                                                                    <div class="slider round">
-                                                                        </di
-                                                                        <div class="slider round"></div>
+
+                                                                    <div class="slider round"></div>
                                                                 </label>
                                                             </div>
 
@@ -929,7 +923,7 @@
                                                         <input type="date" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='date'||CurrentActiveObject.IsLineItemData[$index].cfdDataType=='datetime'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                                         <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
                                                         <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                                        <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i style="margin-left:10px;" class="fa fa-barcode"></i></span>
+
                                                     </div>
                                                     <div>
                                                         <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)=='' " class="errorMessage">
@@ -938,14 +932,15 @@
                                                         </span>
 
                                                     </div>
-                                                    <span ng-if="$index==0" class="input-group-addon last">
+                                                    <span ng-if="parentIndex==0" class="input-group-addon last">
                                                         <button ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" id="lineitem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}_{{CurrentActiveObject.IsLineItemData[$index].InventoryID}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click="FillLineItem($index,CurrentActiveObject.IsLineItemData[$index].cfdID,CurrentActiveObject.IsLineItemData[$index].CfValue,CurrentActiveObject.IsLineItemData[$index].InventoryID)">
                                                             <i class="fa fa-thumb-tack"></i>
                                                         </button>
                                                     </span>
+                                                    <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i style="margin-left:10px;" class="fa fa-barcode"></i></span>
                                                 </div>
 
-                                             
+
                                             </div>
                                         </div>
 
@@ -1296,8 +1291,6 @@
                                                         </span>
                                                     </span>
 
-
-
                                                 </div>-->
 
                                                 <div class="input-group">
@@ -1356,11 +1349,8 @@
                                                     <li><a data-ng-click="FillQuantityNew(CurrentActiveObject.IncreaseDecreaseVMData.ActionQuantity, CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
                                                 </ul>
                                             </span>
-                                          
                                         </div>
-
                                     </div>
-
                                     <div>
 
 
@@ -1390,8 +1380,6 @@
                                             </span>
                                         </div>
                                     </div>
-
-
                                 </div>
                                 
                             </div>
@@ -1422,13 +1410,8 @@
                                                     </button>
                                                 </span>
                                             </div>
-
                                         </div>
-
-
                                     </div>
-                                 
-
                                 </div>
                             </div>
 
@@ -1442,14 +1425,11 @@
                                         <div class="form-group">
                                             <label>{{ GetColumnLabel('iReqValue')}}</label>
                                             <div class="input-group">
-
                                                 <div class="fg-line">
 
                                                     <input id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
                                                     <span ng-if="tvar1==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                                 </div>
-                                                
-
                                                 <span class="input-group-addon last">
                                                     <button id="unittag1_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iReqValue', CurrentActiveObject.ApplyTransactionData.UnitTag1, CurrentActiveObject.InventoryDataList.uId)">
                                                         <i class="fa fa-thumb-tack"></i>
@@ -1460,14 +1440,7 @@
                                             </div>
                                         </div>
 
-
-
-
-
                                     </div>
-                                    
-
-
                                 </div>
 
                                 <div class="row" ng-if=" IsMyInventoryColumns('iUnitTag2')==true">
@@ -1481,7 +1454,6 @@
                                                     <input id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" type="text" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
                                                     <span ng-if="tvar2==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                                 </div>
-                                               
 
                                                 <span class="input-group-addon last">
                                                     <button id="unittag2_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click=" FillUnitData('iUnitTag2', CurrentActiveObject.ApplyTransactionData.UnitTag2,  CurrentActiveObject.InventoryDataList.uId)">
@@ -1493,9 +1465,6 @@
                                             </div>
 
                                         </div>
-
-
-
                                     </div>
                                     
 
@@ -1505,9 +1474,7 @@
                                         <div class="form-group">
                                             <label>{{ GetColumnLabel('iUnitTag3')}}</label>
                                             <div class="input-group">
-
                                                 <div class="fg-line">
-
                                                     <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="text" data-type="string" class="form-control" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
                                                     <span ng-if="tvar3==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                                 </div>
@@ -1521,12 +1488,8 @@
                                                 <span class="input-group-addon last" ng-click="ScanTagItem('iUnitTag3',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                             </div>
                                         </div>
-
-
                                     </div>
                                     
-
-
                                 </div>
 
                                 <div class="row" ng-if=" IsMyInventoryColumns('iUniqueDate')==true">
@@ -1543,12 +1506,8 @@
                                                 <span ng-if="tvar4==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                             </div>
                                         </div>
-
-
                                     </div>
                                     
-
-
                                 </div>
                                 <div class="row" ng-if=" IsMyInventoryColumns('iUnitDate2')==true">
                                     <div class="col-xs-12 col-md-12">
@@ -1564,8 +1523,6 @@
                                                 <span ng-if="tvar5==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                             </div>
                                         </div>
-
-
                                     </div>
                                     
 
@@ -1593,13 +1550,7 @@
                                                 <span class="input-group-addon last" ng-click="ScanTagItem('iUnitNumber1',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                             </div>
                                         </div>
-
-
-
                                     </div>
-                                   
-
-
                                 </div>
                                 <div class="row" ng-if=" IsMyInventoryColumns('iUnitNumber2')==true">
                                     <div class="col-xs-12 col-md-12">
@@ -1624,11 +1575,7 @@
                                                 <span class="input-group-addon last" ng-click="ScanTagItem('iUnitNumber2',CurrentActiveObject.InventoryDataList.uId,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                             </div>
                                         </div>
-
-
                                     </div>
-                                    
-
                                 </div>
                             </div>
 
@@ -2664,8 +2611,8 @@
         </div>
 
 
-
         <!--Bottom strip if slide mode false start-->
+
         <div ng-if="IsSingleMode==false">
 
             <div class="row Newrow" ng-if="CanAutoClear==false">
@@ -2699,10 +2646,11 @@
             </div>
 
         </div>
+
         <!--Bottom strip if slide mode false end-->
 
         <div>
-            <br />
+         <br />
         </div>
 
 
@@ -2733,9 +2681,6 @@
         </div>
 
         <!--Bottom navigator if slide mode true end-->
-
-        
-
 
         <!--Selected Item List Modal start-->
         <div id="selecteditemlistmodal" class="modal">
@@ -2781,11 +2726,11 @@
     </div>
     <div style="background:#fff; padding-top:2px;" class="modal-body">
 
-        <div ng-click="CartFunction(1)" style="margin:0px; padding-left:0px;" class="card">
+        <div ng-click="CartFunction(1)" style="margin:0; padding-left:0;" class="card">
             <div class="c-widget">
                 <div id="keepCart" class="c-widget-figure primary-color">
                     <i class="fa fa-shopping-cart"></i>
-                </div>
+                </div>`
                 <div class="c-widget-body">
                     <p class="m-0">Keep cart</p>
                     <p class="small m-0">Keep it so I can complete it later</p>
@@ -2793,7 +2738,7 @@
             </div>
         </div>
 
-        <div ng-click="CartFunction(2)" style="margin: 0px; padding-left: 0px;" class="card">
+        <div ng-click="CartFunction(2)" style="margin: 0; padding-left: 0;" class="card">
             <div class="c-widget">
                 <div class="c-widget-figure accent-color">
                     <i class="fa fa-times"></i>
@@ -2805,7 +2750,7 @@
             </div>
         </div>
 
-        <div data-dismiss="modal" style="margin: 0px; padding-left: 0px;" class="card">
+        <div data-dismiss="modal" style="margin: 0; padding-left: 0;" class="card">
             <div class="c-widget">
                 <div class="c-widget-figure gray-color">
                     <i class="fa fa-arrow-left"></i>
@@ -2816,18 +2761,15 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
 
 <!--Location Search Modal-->
-<div style="display:none;" id="locationlistmodal" class="" >
+<div style="display:none;" id="locationlistmodal" class="">
     <div class="modal-header">
         <button ng-click="hidelocationmodal();" type="button" class="close"><span> <i class="fa fa-times"></i> </span></button>
         <h4>select Location <span style="font-size:11px;" ng-if="FilterRecordsLength.length > 0">{{FilterRecordsLength.length}} Location(s) found</span></h4>
         <div class="form-group">
-
             <div class="input-group">
                 <input type="text" id="searchlocation" placeholder1="Type Keyword to find locations" ng-blur="FilterRecordsLength.length=(LocationSearchList | filter:SearchLocationValue).length" ng-change="FilterRecordsLength.length=(LocationSearchList | filter:SearchLocationValue).length" class="form-control" ng-model="SearchLocationValue" required="" autofocus />
                 <span class="input-group-addon last" ng-click="ScanLocationsearch()">
@@ -2838,8 +2780,6 @@
     </div>
 
     <div class="modal-body">
-
-   
         <div ng-if="FilterRecordsLength.length==0 && $.trim(SearchLocationValue)!=''" class="noitem">
             <div style="text-align: center; border: 1px solid #eeeeee;">
                 <h4 style="font-size:20px;"><i class="fa fa-frown-o"></i> We're sorry !</h4>
@@ -2847,18 +2787,14 @@
                 <h5 ng-if="TrimValue(SearchLocationValue)!='' && IsActiveLocationLibrary==true && checkpermission('URL:Manage/Location')==true">click to <span ng-click="filllocationAutoComplete()" style="cursor:pointer; color:#0083C7; font-size:20px;">{{SearchLocationValue}}</span>  for add in your list.</h5>
             </div>
         </div>
-
         <ul class="searchresultlist">
             <li ng-click="LocationSetItemData(obj)" ng-repeat="obj in LocationSearchList | filter : SearchLocationValue">
                 <a>
                     <span ng-bind-html="HighLightTerm(SearchLocationValue,obj.LocationName)"></span>
-
-
                     <i class="fa fa-angle-right"></i>
                 </a>
             </li>
         </ul>
-
     </div>
 </div>
 

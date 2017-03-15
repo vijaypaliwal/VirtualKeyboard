@@ -123,14 +123,13 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     function initIndex() {
 
 
-
         $scope.IsActiveLocationLibrary = IsActiveLocationLibrary;
         $scope.IsActiveStatusLibrary = IsActiveStatusLibrary;
         $scope.IsActiveUOMLibrary = IsActiveUOMLibrary;
         $scope.IsActiveItemLibrary = IsActiveItemLibrary;
         $scope.IsActiveItemGroupLibrary = IsActiveItemGroupLibrary;
         $scope.GetProfileData();
-
+        $scope.$apply();
 
 
     }

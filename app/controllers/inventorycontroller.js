@@ -14,6 +14,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.Totalslides = 0;
     $scope.CurrentCount = 0;
     $scope.UnitDataColumnWithError = "";
+    $scope.IsItemChoseCheck = false;
     $scope.IsFormDataloaded = false;
     $scope.Isopendiv = true;
     $scope.IsFromSlideChange = false;
@@ -632,7 +633,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             if (id == "#ItemName")
             {
-                $scope.IsItemChose = false;
+                $scope.IsItemChoseCheck = false;
             }
 
             if (id == "#UOM") {
@@ -903,6 +904,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#locationlistmodal").modal('hide');
         $("#uomlistmodal").modal('hide');
         $scope.IsItemChose = true;
+        $scope.IsItemChoseCheck = true;
         CheckScopeBeforeApply()
     }
     $scope.onChangeUOMData = function () {
@@ -1297,7 +1299,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.addinventory = function () {
         if ($scope.CheckUnitDataFieldValueAll() == true) {
 
-
+            debugger;
             if ($scope.IsItemChose == true) {
                 var authData = localStorageService.get('authorizationData');
                 if (authData) {
@@ -2772,11 +2774,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     function init() {
         //$cordovaKeyboard.disableScroll(true);
         $scope.GetAllData();
+        debugger;
         $scope.InventoryObject.Quantity = $scope.GetDefaultQty();
         $scope.IsItemLibrary = $scope.checkpermission('URL:Manage/Item');
         if ($scope.IsItemLibrary == true && $scope.IsActiveItemLibrary == true) {
 
-            $scope.IsItemChose = false;
+            $scope.IsItemChose = true;
+
         }
         else {
             $scope.IsItemChose = false;
@@ -2966,7 +2970,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.SetItemChoseFalse = function () {
-        $scope.IsItemChose = false;
+        $scope.IsItemChoseCheck = false;
         CheckScopeBeforeApply();
     }
 
@@ -3034,8 +3038,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                             $scope.InventoryObject.ItemID = resultvalue;
-                            $scope.IsItemChose = false;
-
+                            
+                            $scope.IsItemChoseCheck = false;
                             break;
                         case "lLoc":
                             _id = "#Location";
