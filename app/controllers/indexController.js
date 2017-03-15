@@ -129,7 +129,6 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $scope.IsActiveItemLibrary = IsActiveItemLibrary;
         $scope.IsActiveItemGroupLibrary = IsActiveItemGroupLibrary;
         $scope.GetProfileData();
-        $scope.$apply();
 
 
     }
