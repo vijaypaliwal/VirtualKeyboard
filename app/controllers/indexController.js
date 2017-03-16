@@ -383,9 +383,11 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         }
     }
 
+    //$.ajaxSetup({
+    //    timeout: 1000 //Time in milliseconds
+    //});
 
     $(document).ajaxError(function (event, jqxhr, settings, exception) {
-
         if (jqxhr.status != 200 && (jqxhr.readyState != 0 || jqxhr.status != 0)) {
             if (exception != "timeout") {
 
@@ -398,8 +400,18 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                     $("#modalerror").modal('show');
                     $("#errortext").html(exception);
                 }
+               
 
            
+            }
+            else {
+                alert("timeout error");
+            }
+        }
+        else {
+            if (exception == "timeout") {
+                $("#modalerror").modal('show');
+                $("#errortext").html("Slow Network error");
             }
         }
     });
