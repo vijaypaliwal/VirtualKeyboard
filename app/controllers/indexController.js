@@ -412,6 +412,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             if (exception == "timeout") {
                 $("#modalerror").modal('show');
                 $("#errortext").html("Slow Network error");
+                //toastr.warning("slow network error we are retrying the request.")
+                //$.ajax(settings);
             }
         }
     });
