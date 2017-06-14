@@ -335,6 +335,8 @@
 
                             </div>
                         </div>
+
+
                         <div class="form-group" ng-if="obj.ColumnName=='DefaultItemUOM'">
                             <label>Default UOM</label>
                             <div class="input-group">
@@ -346,6 +348,8 @@
 
                             </div>
                         </div>
+
+
                         <div class="form-group" ng-if="obj.ColumnName=='pDefaultCost'">
                             <label>Default Cost</label>
 
@@ -355,6 +359,8 @@
                             </div>
 
                         </div>
+
+
                         <div class="form-group" ng-if="obj.ColumnName=='pReorderQty'">
                             <label>Low Qty. Threshold</label>
 
@@ -517,11 +523,20 @@
 
                         <div class="form-group" ng-if="CheckInCommonArray(obj.ColumnName)!=true">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
+
                             <div ng-if="obj.cfdDataType=='string'" class="input-group">
 
-                                <input id="CustomItem_{{obj.cfdID}}" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{obj.CfValue}}" />
+                                <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='1'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='2'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='3'">
+                                    <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdDefaultValue}}" />
+                                    <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!=''" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdDefaultValue}}" />
+                                    </div>
 
-                            </div>
+                                    <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='1'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='2'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='3'">
+
+
+                                        <input type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control  prepostCustom" value="{{GetCustomItemObjByColumnmap(obj.ColumnName).CombineValue}}"  />
+                                    </div>
+                                </div>
 
                             <div ng-if="obj.cfdDataType=='checkbox'">
 

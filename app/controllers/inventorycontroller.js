@@ -258,13 +258,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.GetCustomColumn = function (ColumnMap) {
-        var _obj = {};
+        var _obj = undefined;
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
             if ($scope.CustomItemDataList[i].ColumnMap == ColumnMap) {
                 return $scope.CustomItemDataList[i];
             }
 
         }
+
+       
         return _obj;
 
     }
@@ -1299,7 +1301,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.addinventory = function () {
         if ($scope.CheckUnitDataFieldValueAll() == true) {
 
-            debugger;
+   
             if ($scope.IsItemChose == true) {
                 var authData = localStorageService.get('authorizationData');
                 if (authData) {
@@ -1712,6 +1714,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $(ID).find(".form-group:first").find(".form-control:first").focus();
     }
 
+    $scope.GetCustomItemObjByColumnmap=function(columnMap)
+    {
+        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            if($scope.CustomItemDataList[i].ColumnMap==columnMap)
+            {
+                return $scope.CustomItemDataList[i];
+            }
+        }
+        return new Object();
+    }
+
     $scope.GetAllData = function () {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -1743,6 +1756,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                           _TempArrayMyInventory[i].ColumnName = _ColName[0];
                           _tempData.push(_TempArrayMyInventory[i]);
                       }
+
+                      
 
                       CheckScopeBeforeApply()
 
@@ -1792,23 +1807,34 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                               Show: _tempData[i].Show,
                               Sort: _tempData[i].Sort,
                               mobileorder: _tempData[i].mobileorder,
-                              Required: _tempData[i].Required
+                              Required: _tempData[i].Required,
+
                           }
 
                           var _CustomObj = $scope.GetCustomColumn(_tempData[i].ColumnName);
 
+                    
+
                           if (_CustomObj != undefined && _CustomObj != {}) {
+
                               _obj.cfdName = _CustomObj.cfdName;
                               _obj.cfdID = _CustomObj.cfdID;
                               _obj.cfdDataType = _CustomObj.cfdDataType;
                               _obj.cfdComboValues = _CustomObj.cfdComboValues;
-                              _obj.CfValue = _CustomObj.CfValue;
+                              _obj.CfValue = ($.trim(_CustomObj.cfdprefixsuffixtype) != "" ? _CustomObj.CombineValue : _CustomObj.cfdDefaultValue);
                               _obj.Required = _CustomObj.cfdIsRequired;
 
-                              $scope.InventoryObject.CustomPartData.push({ CfdID: _CustomObj.cfdID, Value: _CustomObj.cfdDefaultValue, DataType: _CustomObj.cfdDataType });
+                              $scope.InventoryObject.CustomPartData.push({ CfdID: _CustomObj.cfdID, Value: _obj.CfValue, DataType: _CustomObj.cfdDataType });
+
+                              $("#CustomItem_" + _obj.cfdID.toString()).trigger("input");
                           }
 
                           $scope.MyinventoryFields.push(_obj);
+
+
+                    
+
+
                       }
 
 
@@ -2774,7 +2800,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     function init() {
         //$cordovaKeyboard.disableScroll(true);
         $scope.GetAllData();
-        debugger;
+         
         $scope.InventoryObject.Quantity = $scope.GetDefaultQty();
         $scope.IsItemLibrary = $scope.checkpermission('URL:Manage/Item');
         if ($scope.IsItemLibrary == true && $scope.IsActiveItemLibrary == true) {
@@ -3929,7 +3955,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     function InitializeSwiper() {
-        debugger;
+         
 
         setTimeout(function () {
             $(".swiper-container").show();
@@ -4047,7 +4073,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
-            debugger;
+   
 
 
 
