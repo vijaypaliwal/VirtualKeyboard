@@ -1836,8 +1836,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                               _obj.CfValue = ($.trim(_CustomObj.cfdprefixsuffixtype) != "" ? _CustomObj.CombineValue : _CustomObj.cfdDefaultValue);
                               _obj.Required = _CustomObj.cfdIsRequired;
                             
-                              console.log(_obj.cfdName + " c::" + _CustomObj.CombineValue);
-                              console.log(_obj.cfdName + " d::" + _CustomObj.cfdDefaultValue);
                               $scope.InventoryObject.CustomPartData.push({ CfdID: _CustomObj.cfdID, Value: _obj.CfValue, DataType: _CustomObj.cfdDataType });
 
                               $("#CustomItem_" + _obj.cfdID.toString()).trigger("input");
@@ -1862,7 +1860,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                       $scope.CustomActivityDataList = response.GetAllDataResult.Payload[0].CustomActivityField;
                       CheckScopeBeforeApply()
-
+                       
                       for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
 
                           var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
@@ -1884,7 +1882,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                               var _value = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
                               $scope.CustomActivityDataList[i].cfdDefaultValue = (_value == "true" || _value === "True");
                           }
-                          $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomActivityDataList[i].cfdID, Value: $scope.CustomActivityDataList[i].cfdDefaultValue, DataType: $scope.CustomActivityDataList[i].cfdDataType });
+                          var _CustomObj = $scope.CustomActivityDataList[i];
+                          var _value = ($.trim(_CustomObj.cfdprefixsuffixtype) != "" ? _CustomObj.CombineValue : _CustomObj.cfdDefaultValue);
+                          $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomActivityDataList[i].cfdID, Value: _value, DataType: $scope.CustomActivityDataList[i].cfdDataType });
                       }
                       CheckScopeBeforeApply()
                       // Unit Of Measure
@@ -1918,6 +1918,36 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
               }
           });
+    }
+
+    $scope.currtrentcustomauto = [];
+
+
+    $scope.customautocomplete = function (ColumnName, id) {
+        $("#customautolistmodal").modal('show');
+
+        $scope.activecustomfield = "CustomItem_" + id;
+
+        debugger;
+
+        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            if ($scope.CustomItemDataList[i].ColumnMap == ColumnName) {
+                $scope.currtrentcustomauto = $scope.CustomItemDataList[i].cfdComboValues;
+            }
+        }
+        console.log("autovalue");
+        console.log($scope.currtrentcustomauto);
+
+
+    }
+
+    $scope.fillcustomvalue = function (value) {
+        debugger;
+        $("#" + $scope.activecustomfield).val(value);
+        $scope.$apply();
+
+        $("#customautolistmodal").modal('hide');
+
     }
 
 
@@ -2548,7 +2578,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         $scope.CurrentOperation = "Increase";
         for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
-            if ($scope.CustomActivityDataList[i].cfdCustomFieldType == "Inventory" && $scope.CustomActivityDataList[i].cfdID == cfdid) {
+            if ($scope.CustomActivityDataList[i].cfdCustomFieldType.toLowerCase() == "inventory" && $scope.CustomActivityDataList[i].cfdID == cfdid) {
                 switch ($scope.CurrentOperation) {
                     case "Increase":
                         if ($scope.CustomActivityDataList[i].cfdIncludeOnAdd) {
@@ -2818,7 +2848,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     function init() {
         //$cordovaKeyboard.disableScroll(true);
         $scope.GetAllData();
-         
+        debugger;
         $scope.InventoryObject.Quantity = $scope.GetDefaultQty();
         $scope.IsItemLibrary = $scope.checkpermission('URL:Manage/Item');
         if ($scope.IsItemLibrary == true && $scope.IsActiveItemLibrary == true) {
@@ -3627,6 +3657,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 }
                 break;
             default:
+                debugger;
+
+                break;
 
         }
 

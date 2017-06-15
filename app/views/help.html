@@ -57,54 +57,15 @@
 
 </div>
 
-
-<div class="form-group">
-    <label>Time</label>
-    <input class="form-control" type="time" name="time">
-</div>
-
 <div class="form-group">
     <label>week</label>
-    <input class="form-control" type="week" name="week">
+    <input id="weekPicker1" class="form-control" type="text" >
 </div>
-
-<div class="form-group">
-    <label>datetime</label>
-    <input class="form-control" type="datetime">
-</div>
-
-<div class="form-group">
-    <label>datetime local</label>
-    <input class="form-control" type="datetime-local">
-</div>
-
-
-<div class="form-group">
-    <label>Date</label>
-    <input class="form-control" type="text" id="datepicker">
-</div>
-
-<div class="form-group">
-    <label>time</label>
-    <input class="form-control" type="text" id="timepicker">
-</div>
-
-
-
-
-
-
-
-<div class="form-group">
-    <label>datetimepicker</label>
-    <input class="form-control" type="text" id="dt">
-</div>
-
-
-
 
 <style>
- 
+    .container {
+        width: 100%;
+    }
 
     body {
         background: #eaeaea;
@@ -121,9 +82,6 @@
     }
     
 </style>
-
-
-
 <script>
     function Toggle(ID) {
         $(ID).toggle("slow");
@@ -131,14 +89,18 @@
 
     Toggle('#firstDiv');
 
-   
+</script>
+<script>
 
-  
+    $(document).ready(function () {
 
-  
+        alert("In");
+        convertToWeekPicker($("#weekPicker1"))
+    });
 
 
 </script>
+
 
 
 <link href="css/activityreport.css" rel="stylesheet" />
@@ -151,4 +113,3 @@
         width: 98%;
     }
 </style>
-
