@@ -1750,7 +1750,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               dataType: 'json',
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "ConsidermobileOrder": true }),
               success: function (response) {
-
+                  $scope.Totalslides = 0;
+                  $scope.CurrentCount = 0;
                   if (response.GetAllDataResult.Success == true) {
 
 
@@ -1928,24 +1929,23 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         $scope.activecustomfield = "CustomItem_" + id;
 
-        debugger;
+      
 
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
             if ($scope.CustomItemDataList[i].ColumnMap == ColumnName) {
                 $scope.currtrentcustomauto = $scope.CustomItemDataList[i].cfdComboValues;
+                break;
             }
         }
-        console.log("autovalue");
-        console.log($scope.currtrentcustomauto);
 
 
     }
 
     $scope.fillcustomvalue = function (value) {
-        debugger;
         $("#" + $scope.activecustomfield).val(value);
-        $scope.$apply();
-
+        
+        $("#" + $scope.activecustomfield).trigger("input");
+        CheckScopeBeforeApply();
         $("#customautolistmodal").modal('hide');
 
     }
@@ -4210,6 +4210,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         else {
             $scope.getstep(0);
         }
+
+        $scope.GetAllData();
 
         $("#modal3").modal('hide');
 

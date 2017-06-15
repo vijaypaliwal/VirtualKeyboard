@@ -1098,36 +1098,7 @@
 
 
 
-                <!--<div ng-if="CheckRequiredField()==true || CheckCustomRequiredFields()==true" class="requiredfields" ng-show="slide == Totalslides">
-
-                    <p>Please fill below required fields</p>
-
-
-                    <a ng-if="InventoryObject.Uom == ''" ng-click="getstep(4,'uomUOM')">
-                        UOM
-                    </a>
-
-                    <a ng-if="InventoryObject.Location == ''" ng-click="getstep(3,'lLoc')">
-                        LOC
-                    </a>
-
-                    <a ng-click="getstepCustom(1,obj.ColumnMap)" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true && obj.cfdIsRequired==true && (InventoryObject.CustomPartData[$index].Value==null || InventoryObject.CustomPartData[$index].Value==undefined || InventoryObject.CustomPartData[$index].Value=='')">
-
-
-                        {{obj.cfdName}}
-
-
-                    </a>
-                    <a ng-click="getstepCustom(2,obj.ColumnMap)" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)==true && obj.cfdIsRequired==true && (InventoryObject.CustomTxnData[$index].Value==null || InventoryObject.CustomTxnData[$index].Value==undefined || InventoryObject.CustomTxnData[$index].Value=='')">
-
-
-
-                        {{obj.cfdName}}
-
-
-
-                    </a>
-                </div>-->
+                
 
 
 
@@ -1364,14 +1335,23 @@
 
                     <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
-                        <div class="select">
+                        <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete != true" class="select">
                             <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[$index].Value">
 
                                 <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
                             </select>
                         </div>
-                        <span ng-if="checkpermission('URL:configure/CustomFieldItemList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomItem_')"><i class="fa fa-plus"></i></span>
+                        <span ng-if="checkpermission('URL:configure/CustomFieldItemList.aspx')==true && GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete != true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomItem_')"><i class="fa fa-plus"></i></span>
+
+
+
+
+                        <input ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" type="text" />
+                        <span ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnName, obj.cfdID)" class="input-group-addon last"><i class="fa fa-search"></i></span>
+
+
+
 
                         <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                         <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,1)"> <i class="fa fa-barcode"></i></span>
@@ -1735,14 +1715,23 @@
 
                     <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
-                        <div class="select">
+                        <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete != true" class="select">
                             <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[$index].Value">
 
                                 <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
                             </select>
                         </div>
-                        <span ng-if="checkpermission('URL:configure/CustomFieldItemList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomItem_')"><i class="fa fa-plus"></i></span>
+                        <span ng-if="checkpermission('URL:configure/CustomFieldItemList.aspx')==true && GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete != true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomItem_')"><i class="fa fa-plus"></i></span>
+
+
+
+
+                        <input ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" type="text" />
+                        <span ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnName, obj.cfdID)" class="input-group-addon last"><i class="fa fa-search"></i></span>
+
+
+
 
                         <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                         <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,1)"> <i class="fa fa-barcode"></i></span>
@@ -2257,7 +2246,7 @@
 
                 <div ng-if="CheckInCommonArray(obj.ColumnName)!=true" ng-click="getstep(0,obj.ColumnName)" class="form-group">
 
-                    <span class="mylabel">{{obj.ColumnLabel}}</span>&nbsp;<span>{{InventoryObject.CustomPartData[$index].Value}}</span>
+                    <span class="mylabel">{{obj.ColumnLabel}}</span>&nbsp;<span>{{InventoryObject.CustomPartData[obj.CustomFieldIndex].Value}}</span>
                 </div>
 
             </div>
