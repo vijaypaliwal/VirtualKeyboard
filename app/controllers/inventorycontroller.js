@@ -1724,7 +1724,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
         return new Object();
     }
+    $scope.getIndexBycolName = function (_ID)
+    {
+        for (var i = 0; i < $scope.InventoryObject.CustomPartData.length; i++) {
+            if($scope.InventoryObject.CustomPartData[i].CfdID==_ID)
+            {
+                return i;
+            }
 
+        }
+
+        return 0;
+    }
     $scope.GetAllData = function () {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -1808,6 +1819,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                               Sort: _tempData[i].Sort,
                               mobileorder: _tempData[i].mobileorder,
                               Required: _tempData[i].Required,
+                              CustomFieldIndex:-1,
 
                           }
 
@@ -1823,19 +1835,25 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                               _obj.cfdComboValues = _CustomObj.cfdComboValues;
                               _obj.CfValue = ($.trim(_CustomObj.cfdprefixsuffixtype) != "" ? _CustomObj.CombineValue : _CustomObj.cfdDefaultValue);
                               _obj.Required = _CustomObj.cfdIsRequired;
-
+                            
+                              console.log(_obj.cfdName + " c::" + _CustomObj.CombineValue);
+                              console.log(_obj.cfdName + " d::" + _CustomObj.cfdDefaultValue);
                               $scope.InventoryObject.CustomPartData.push({ CfdID: _CustomObj.cfdID, Value: _obj.CfValue, DataType: _CustomObj.cfdDataType });
 
                               $("#CustomItem_" + _obj.cfdID.toString()).trigger("input");
                           }
 
+                          _obj.CustomFieldIndex = _obj.cfdID!=0?$scope.getIndexBycolName(_obj.cfdID):-1;
                           $scope.MyinventoryFields.push(_obj);
+
+                       
 
 
                     
 
 
                       }
+
 
 
                       // Custom Activity Field 
@@ -4096,7 +4114,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             ApplyBackAndNext();
 
 
-        }, 10)
+        }, 100)
     }
     function ApplyBackAndNext() {
 

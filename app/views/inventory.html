@@ -520,29 +520,29 @@
                                 <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
                             </div>
                         </div>
-
-                        <div class="form-group" ng-if="CheckInCommonArray(obj.ColumnName)!=true">
+                        <div class="form-group" ng-if="CheckInCommonArray(obj.ColumnName)!=true && InventoryObject.CustomPartData.length>0">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
-
+                        
                             <div ng-if="obj.cfdDataType=='string'" class="input-group">
 
+
                                 <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='1'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='2'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='3'">
-                                    <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdDefaultValue}}" />
-                                    <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!=''" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control" value="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdDefaultValue}}" />
-                                    </div>
-
-                                    <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='1'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='2'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='3'">
-
-
-                                        <input type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[$index].Value" class="form-control  prepostCustom" value="{{GetCustomItemObjByColumnmap(obj.ColumnName).CombineValue}}"  />
-                                    </div>
+                                    <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control"  />
+                                    <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!=''" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control"  />
                                 </div>
 
-                            <div ng-if="obj.cfdDataType=='checkbox'">
+                                <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='1'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='2'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='3'">
 
+
+                                    <input type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control  prepostCustom"  />
+                                </div>
+                            </div>
+
+                            <div ng-if="obj.cfdDataType=='checkbox'">
+                           
                                 <div class="btn-group custombtnGroup">
                                     <label class="switch1">
-                                        <input id="CustomItem_{{obj.cfdID}}" ng-checked="InventoryObject.CustomPartData[$index].Value==true" type="checkbox" ng-model="InventoryObject.CustomPartData[$index].Value">
+                                        <input id="CustomItem_{{obj.cfdID}}" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true" type="checkbox" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value">
                                         <div class="slider round"></div>
                                     </label>
                                 </div>
@@ -552,7 +552,7 @@
                             <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
                                 <div class="select">
-                                    <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[$index].Value">
+                                    <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value">
 
                                         <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
@@ -563,19 +563,19 @@
                             </div>
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" />
+                                <input id="CustomItem_{{obj.cfdID}}" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" />
 
                             </div>
 
                             <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
+                                <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" value="{{obj.CfValue}}" />
 
                             </div>
 
 
                             <div ng-if="obj.cfdDataType=='currency'" class="input-group">
 
-                                <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
+                                <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" ng-change="" value="{{obj.CfValue}}" />
 
                             </div>
                         </div>
