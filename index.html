@@ -28,8 +28,10 @@
 
     <link href="css/button.css" rel="stylesheet" type="text/css">
     <link href="css/index.css" rel="stylesheet" type="text/css">
-  
 
+    <link href="http://trentrichardson.com/examples/timepicker/jquery-ui-timepicker-addon.css" rel="stylesheet" type="text/css">
+  
+    
 </head>
 <body data-ng-controller="indexController">
     <!-- No Internet Message - Start -->
@@ -223,8 +225,32 @@
 
 
     <!-- Jquery libraries -->
-    <script src="scripts/jquery-1.11.0.min.js"></script>
-    <script src="scripts/jquery-ui.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
+
+
+<script src="http://trentrichardson.com/examples/timepicker/jquery-ui-timepicker-addon.js"></script>
+
+<script src="http://inventory4qa-customfieldsnew.azurewebsites.net/Scripts/jquery.timepicker.min.js"></script>
+
+
+<script type="text/javascript" src="http://trentrichardson.com/examples/timepicker/i18n/jquery-ui-timepicker-addon-i18n.min.js"></script>
+<script type="text/javascript" src="http://trentrichardson.com/examples/timepicker/jquery-ui-sliderAccess.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#datepicker").datepicker();
+
+        $("#timepicker").timepicker();
+
+
+        $("#dt").datetimepicker();
+
+
+
+    });
+</script>
     <script src="scripts/jquery.touchSwipe.min.js"></script>
 
     <!-- Bootstrap libraries -->
