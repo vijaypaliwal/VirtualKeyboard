@@ -1326,7 +1326,7 @@
 
                         <div class="btn-group custombtnGroup">
                             <label class="switch1">
-                                <input id="CustomItem_{{obj.cfdID}}" ng-checked="InventoryObject.CustomPartData[$index].Value==true" type="checkbox" ng-model="InventoryObject.CustomPartData[$index].Value">
+                                <input id="CustomItem_{{obj.cfdID}}" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true" type="checkbox" ng-model="InventoryObject.CustomPartData[$index].Value">
                                 <div class="slider round"></div>
                             </label>
                         </div>
@@ -1336,7 +1336,7 @@
                     <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
                         <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete != true" class="select">
-                            <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[$index].Value">
+                            <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value">
 
                                 <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
@@ -1358,14 +1358,14 @@
                     </div>
 
                     <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                        <input id="CustomItem_{{obj.cfdID}}" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" />
+                        <input id="CustomItem_{{obj.cfdID}}" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" />
 
                         <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                         <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,1)"> <i class="fa fa-barcode"></i></span>
                     </div>
 
                     <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
+                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" value="{{obj.CfValue}}" />
 
                         <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                         <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,1)"> <i class="fa fa-barcode"></i></span>
@@ -1374,7 +1374,7 @@
 
                     <div ng-if="obj.cfdDataType=='currency'" class="input-group">
 
-                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
+                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" ng-change="" value="{{obj.CfValue}}" />
 
                         <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                         <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,1)"> <i class="fa fa-barcode"></i></span>
@@ -1716,7 +1716,7 @@
                     <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
                         <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete != true" class="select">
-                            <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[$index].Value">
+                            <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value">
 
                                 <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
@@ -1738,14 +1738,14 @@
                     </div>
 
                     <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                        <input id="CustomItem_{{obj.cfdID}}" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[$index].Value" />
+                        <input id="CustomItem_{{obj.cfdID}}" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" />
 
                         <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                         <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,1)"> <i class="fa fa-barcode"></i></span>
                     </div>
 
                     <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" value="{{obj.CfValue}}" />
+                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" value="{{obj.CfValue}}" />
 
                         <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                         <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,1)"> <i class="fa fa-barcode"></i></span>
@@ -1754,7 +1754,7 @@
 
                     <div ng-if="obj.cfdDataType=='currency'" class="input-group">
 
-                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[$index].Value" ng-change="" value="{{obj.CfValue}}" />
+                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" ng-change="" value="{{obj.CfValue}}" />
 
                         <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                         <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,1)"> <i class="fa fa-barcode"></i></span>

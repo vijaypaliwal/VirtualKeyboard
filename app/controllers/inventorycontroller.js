@@ -57,7 +57,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.switchmode = true;
         $scope.currentmode = 2;
         localStorageService.set("mode", $scope.currentmode);
-        $cordovaKeyboard.disableScroll(false);
+      //  $cordovaKeyboard.disableScroll(false);
         CheckScopeBeforeApply();
         setTimeout(function () {
             $("#firstDiv").find(".form-group:first").find(".form-control:first").focus();
@@ -1752,6 +1752,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               success: function (response) {
                   $scope.Totalslides = 0;
                   $scope.CurrentCount = 0;
+                  $scope.MyinventoryFields = [];
                   if (response.GetAllDataResult.Success == true) {
 
 
