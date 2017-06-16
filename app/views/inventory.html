@@ -523,20 +523,32 @@
                         <div class="form-group" ng-if="CheckInCommonArray(obj.ColumnName)!=true && InventoryObject.CustomPartData.length>0">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
                         
-                            <div ng-if="obj.cfdDataType=='string'" class="input-group">
+                            <div ng-if="obj.cfdDataType=='string'">
+                              
+                                <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType != 1" class="input-group">
+                                    <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='1'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='2'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='3'">
+                                        <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
+                                        <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!=''" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
+                                    </div>
 
+                                    <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='1'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='2'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='3'">
 
-                                <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='1'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='2'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='3'">
-                                    <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control"  />
-                                    <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!=''" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control"  />
+                                        <input type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control  prepostCustom" />
+                                    </div>
                                 </div>
 
-                                <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='1'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='2'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='3'">
 
+                                <div class="input-group" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType == 1">
+                                    <input  type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
 
-                                    <input type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control  prepostCustom"  />
+                                    <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnName, obj.cfdID, 'item')"><i class="fa fa-circle-o"></i></span>
                                 </div>
+                               
                             </div>
+
+
+                            
+
 
                             <div ng-if="obj.cfdDataType=='checkbox'">
                            
@@ -566,7 +578,7 @@
                                 <div class="input-group" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true">
 
                                     <input id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" type="text" />
-                                    <span ng-click="customautocomplete(obj.ColumnName, obj.cfdID)" class="input-group-addon last"><i class="fa fa-search"></i></span>
+                                    <span ng-click="customautocomplete(obj.ColumnName, obj.cfdID, 'item')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
                                 </div>
 
@@ -575,12 +587,14 @@
                             </div>
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" />
+                                <input id="CustomItem_{{obj.cfdID}}" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType==2" type="datetime-local" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" />
+                                <input id="CustomItem_{{obj.cfdID}}" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType==3" type="time" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" />
+                                <input id="CustomItem_{{obj.cfdID}}" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType!=3 && GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType!=2" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" />
 
                             </div>
 
-                            <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" value="{{obj.CfValue}}" />
+                            <div ng-if="obj.cfdDataType=='number'" class="input-group customnumbergroup">
+                                <input id="CustomItem_{{obj.cfdID}}" max="{{GetCustomItemObjByColumnmap(obj.ColumnName).MaximumValue}}" min="{{GetCustomItemObjByColumnmap(obj.ColumnName).MinimumValue}}" name="CustomItem_{{obj.ColumnName}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" value="{{obj.CfValue}}" />
 
                             </div>
 
@@ -598,19 +612,33 @@
 
                         <div class="form-group">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
-                            <div ng-if="obj.cfdDataType=='string'" class="input-group">
+                            <div ng-if="obj.cfdDataType=='string'" >
+
+                               
+
+                                <div ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType != 1" class="input-group">
+
+                                    <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
+                                        <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
+                                        <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!=''" type="{{obj.cfdInputMask}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
+                                    </div>
+
+                                    <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
 
-                                <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
-                                    <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
-                                    <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!=''" type="{{obj.cfdInputMask}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
+                                        <input type="text" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control  prepostCustom" />
+                                    </div>
+
                                 </div>
 
-                                <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
+                                <div class="input-group" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType == 1">
+                                    <input type="text" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
 
-                                    <input type="text" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control  prepostCustom" />
+                                    <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>
                                 </div>
+
+
                             </div>
                             <div ng-if="obj.cfdDataType=='checkbox'" class="">
 
@@ -624,28 +652,39 @@
 
                             </div>
 
-                            <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
+                            <div  ng-if="obj.cfdDataType=='combobox'">
 
+                             
+                                <div class="input-group" ng-if="GetCustomItemObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete != true">
+                                    <div class="select">
+                                        <select id="CustomActivity_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
 
-                                <div class="select">
-                                    <select id="CustomActivity_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
+                                            <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
-                                        <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
-
-                                    </select>
+                                        </select>
+                                    </div>
+                                    <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomActivity_')"><i class="fa fa-plus"></i></span>
                                 </div>
-                                <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomActivity_')"><i class="fa fa-plus"></i></span>
+
+                                <div class="input-group" ng-if="GetCustomItemObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true">
+                                    <input id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" type="text" />
+                                    <span ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
+                                </div>
 
                             </div>
 
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
-                                <input id="CustomActivity_{{obj.cfdID}}" type="date" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control customFieldDatePicker FormDateType" />
+
+
+                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType==2" type="datetime-local" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomTxnData[$index].Value" />
+                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType==3" type="time" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomTxnData[$index].Value" />
+                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType!=3 && GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType!=2" type="date" class="form-control customFieldDatePicker FormDateType" ng-model="InventoryObject.CustomTxnData[$index].Value" />
 
                             </div>
 
-                            <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                <input id="CustomActivity_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
+                            <div ng-if="obj.cfdDataType=='number'" class="input-group customnumbergroup">
+                                <input id="CustomActivity_{{obj.cfdID}}" max="{{obj.MaximumValue}}" min="{{obj.MinimumValue}}" name="CustomActivity_{{obj.ColumnMap}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
 
                             </div>
 
@@ -799,7 +838,7 @@
                     <table style="width:100%;">
                         <tr>
 
-                         
+
 
                             <td ng-if="CurrentActiveField=='iQty'">
 
@@ -808,7 +847,7 @@
                                 </div>
                             </td>
 
-                            <td ng-if="GetCustomColumn(CurrentActiveField).cfdIsIncremental==true && GetCustomColumn(CurrentActiveField).cfdDataType=='number'">
+                            <td ng-if="(GetCustomActivityObjByColumnmap(CurrentActiveField).cfdIsIncremental==true || GetCustomColumn(CurrentActiveField).cfdIsIncremental==true) &&(GetCustomActivityObjByColumnmap(CurrentActiveField).cfdDataType==true ||  GetCustomColumn(CurrentActiveField).cfdDataType=='number')">
 
                                 <div>
                                     <a ng-click="UpDownValue(CurrentActiveField,true)" class="btn btn-gray"><i class="fa fa-plus"></i>Increase</a>
@@ -817,7 +856,7 @@
                             <td ng-if="CurrentActiveField=='UpdateDate'">
 
 
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_UpdateDate','#UpdateDate')" test-case condition="GetLastValueData('Inv_UpdateDate')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
                             </td>
@@ -825,98 +864,56 @@
 
                             <td ng-if="CurrentActiveField=='iQty'">
 
-                                <div class="alignright" >
+                                <div class="alignright">
                                     <a ng-click="UpDownValue('Quantity',false)" class="btn btn-gray"><i class="fa fa-minus"></i>Decrease</a>
                                 </div>
                             </td>
 
-    
+
 
                             <!--<td ng-if="CurrentActiveField=='pPart'">
 
-                                <div class="aligncenter">
-                                    <a ng-click="itemlist()" class="btn btn-gray waves-effect"><i class="fa fa-search"></i>Find</a>
-                                </div>
+                    <div class="aligncenter">
+                        <a ng-click="itemlist()" class="btn btn-gray waves-effect"><i class="fa fa-search"></i>Find</a>
+                    </div>
 
 
-                            </td>-->
-                            <!--<td ng-if="CurrentActiveField=='lLoc'">
+                </td>-->
 
-                                <div class="aligncenter">
-                                    <a ng-click="locationlist()" class="btn btn-gray waves-effect"><i class="fa fa-search"></i>Find</a>
-                                </div>
-
-
-                            </td>-->
-                            <!--<td ng-if="CurrentActiveField=='pCountFrq'">
-
-                                <div class="aligncenter">
-                                    <a ng-click="Itemgrouplistmodal()" class="btn btn-gray waves-effect"><i class="fa fa-search"></i>Find</a>
-                                </div>
-
-
-                            </td>-->
-                            <!--<td ng-if="CurrentActiveField=='iStatusValue' && checkpermission('URL:Manage/Status')==true">
-                                <div class="aligncenter">
-                                    <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveStatusLibrary==true" ng-click="CreateNew(3)"><i class="fa fa-plus"></i>New</a>
-                                    <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveStatusLibrary==false" ng-click="locked()"><i class="fa fa-lock"></i>New</a>
-                                </div>
-                            </td>
-                            <td ng-if="CurrentActiveField=='lLoc' && checkpermission('URL:Manage/Location')==true">
-                                <div class="aligncenter">
-                                    <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveLocationLibrary==true" ng-click="CreateNew(1)"><i class="fa fa-plus"></i>New</a>
-                                    <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveLocationLibrary==false" ng-click="locked()"><i class="fa fa-lock"></i>New</a>
-                                </div>
-
-                            </td>
-                            <td ng-if="CurrentActiveField=='uomUOM' && checkpermission('URL:Manage/UnitOfMeasure')==true">
-                                <div class="aligncenter">
-                                    <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveUOMLibrary==true" ng-click="CreateNew(2)"><i class="fa fa-plus"></i>New</a>
-                                    <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveUOMLibrary==false" ng-click="locked()"><i class="fa fa-lock"></i>New</a>
-                                </div>
-
-                            </td>-->
-                            <!--<td ng-if="CurrentActiveField=='pCountFrq' && checkpermission('URL:Manage/ItemGroup')==true">
-                                <div class="aligncenter">
-                                    <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveItemGroupLibrary==true" ng-click="CreateNew(4)"><i class="fa fa-plus"></i>New</a>
-                                    <a class="scanbtn btn btn-gray waves-effect" ng-if="IsActiveItemGroupLibrary==false" ng-click="locked()"><i class="fa fa-lock"></i>New</a>
-                                </div>
-
-                            </td>-->
 
                             <td ng-if="CurrentActiveField=='pPart'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_ItemID','#ItemName')" test-case condition="GetLastValueData('Inv_ItemID')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
 
                             <td ng-if="CurrentActiveField=='pDefaultCost'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_pDefaultCost','#pDefaultCost')" test-case condition="GetLastValueData('Inv_pDefaultCost')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='pReorderQty'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_pReorderQty','#pReorderQty')" test-case condition="GetLastValueData('Inv_pReorderQty')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='pTargetQty'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_pTargetQty','#pTargetQty')" test-case condition="GetLastValueData('Inv_pTargetQty')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='DefaultItemLocation'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_DefaultItemLocationID','#DefaultItemLocationID')" test-case condition="GetLastValueData('Inv_DefaultItemLocationID')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='DefaultItemUOM'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_DefaultItemUOM','#DefaultItemUOM')" test-case condition="GetLastValueData('Inv_DefaultItemUOM')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
@@ -925,32 +922,32 @@
 
 
                             <td ng-if="CurrentActiveField=='pDescription'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_Description','#pDescriptionForm')" test-case condition="GetLastValueData('Inv_Description')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
 
                             <td ng-if="CurrentActiveField=='lZone'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_lZone','#lZone')" test-case condition="GetLastValueData('Inv_lZone')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='pCountFrq'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_ItemGroup','#itemgroup')" test-case condition="GetLastValueData('Inv_ItemGroup')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='iStatusValue'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_Status','#Status')" test-case condition="GetLastValueData('Inv_Status')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='lLoc'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_Location','#Location')" test-case condition="GetLastValueData('Inv_Location')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
@@ -958,64 +955,64 @@
 
 
                             <td ng-if="CurrentActiveField=='uomUOM'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_Uom','#UOM')" test-case condition="GetLastValueData('Inv_Uom')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
 
                             <td ng-if="CurrentActiveField=='iCostPerUnit'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_Cost','#Costperunit')" test-case condition="GetLastValueData('Inv_Cost')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='iReqValue'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_UniqueTag','#UniqueTag')" test-case condition="GetLastValueData('Inv_UniqueTag')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='iUnitTag2'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_UnitTag2','#UnitTag2')" test-case condition="GetLastValueData('Inv_UnitTag2')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='iUnitTag3'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_UnitTag3','#UnitTag3')" test-case condition="GetLastValueData('Inv_UnitTag3')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
 
                             <td ng-if="CurrentActiveField=='iUniqueDate'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_UniqueDate','#UniqueDate')" test-case condition="GetLastValueData('Inv_UniqueDate')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='iUnitDate2'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_UnitDate2','#UnitDate2')" test-case condition="GetLastValueData('Inv_UnitDate2')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='iUnitNumber1'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_UnitNumber1','#UnitNumber1')" test-case condition="GetLastValueData('Inv_UnitNumber1')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
                             <td ng-if="CurrentActiveField=='iUnitNumber2'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValue('Inv_UnitNumber2','#UnitNumber2')" test-case condition="GetLastValueData('Inv_UnitNumber2')" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
                             </td>
 
                             <td ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true && obj.ColumnMap==CurrentActiveField && CurrentActiveFieldType.toLowerCase()=='inventory'">
-                                <div >
+                                <div>
                                     <a ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="btn btn-gray waves-effect"><i class="fa fa-undo"></i>Reuse</a>
                                 </div>
 
@@ -1035,14 +1032,14 @@
 
                             </td>
 
-                            
-                            <td ng-if="(GetCustomColumn(CurrentActiveField).cfdIsIncremental!=true) && (CurrentActiveField.indexOf('string_')>-1 || CurrentActiveField.indexOf('bool_')>-1 || CurrentActiveField.indexOf('number_')>-1 || CurrentActiveField.indexOf('date_')>-1 )">
+
+                            <td ng-if="(GetCustomActivityObjByColumnmap(CurrentActiveField).cfdIsIncremental!=true && GetCustomColumn(CurrentActiveField).cfdIsIncremental!=true) && (CurrentActiveField.indexOf('string_')>-1 || CurrentActiveField.indexOf('bool_')>-1 || CurrentActiveField.indexOf('number_')>-1 || CurrentActiveField.indexOf('date_')>-1 )">
                                 <div class="alignright">
                                     <a class="scanbtn waves-effect btn btn-gray" ng-click="ScanNewCustom()"> <i class="fa fa-barcode"></i>Scan</a>
                                 </div>
                             </td>
 
-                            <td ng-if="GetCustomColumn(CurrentActiveField).cfdIsIncremental==true && GetCustomColumn(CurrentActiveField).cfdDataType=='number'">
+                            <td ng-if="(GetCustomActivityObjByColumnmap(CurrentActiveField).cfdIsIncremental==true || GetCustomColumn(CurrentActiveField).cfdIsIncremental==true) &&(GetCustomActivityObjByColumnmap(CurrentActiveField).cfdDataType==true ||  GetCustomColumn(CurrentActiveField).cfdDataType=='number')">
 
                                 <div class="alignright">
                                     <a ng-click="UpDownValue(CurrentActiveField,false)" class="btn btn-gray"><i class="fa fa-minus"></i>Decrease</a>
@@ -1303,7 +1300,7 @@
                     <label>{{obj.cfdName}} <span ng-if="obj.Required" class="redText">*</span></label>
                     <div ng-if="obj.cfdDataType=='string'" class="input-group">
 
-
+                        
 
                         <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='1'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='2'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='3'">
                             <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
@@ -1348,7 +1345,7 @@
 
 
                         <input ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" type="text" />
-                        <span ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnName, obj.cfdID)" class="input-group-addon last"><i class="fa fa-search"></i></span>
+                        <span ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnName, obj.cfdID, 'item')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
 
 
@@ -1365,10 +1362,19 @@
                     </div>
 
                     <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" value="{{obj.CfValue}}" />
+                        <input id="CustomItem_{{obj.cfdID}}" max="{{GetCustomItemObjByColumnmap(obj.ColumnName).MaximumValue}}" min="{{GetCustomItemObjByColumnmap(obj.ColumnName).MinimumValue}}" name="CustomItem_{{obj.ColumnName}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" value="{{obj.CfValue}}" />
 
-                        <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
-                        <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,1)"> <i class="fa fa-barcode"></i></span>
+
+                        <span ng-if="GetCustomColumn(obj.ColumnName).cfdIsIncremental==true" ng-click="UpDownValue(obj.ColumnName,false,1)" class="input-group-addon last">
+                            <i class="fa fa-minus"></i>
+                        </span>
+
+                        <span ng-if="GetCustomColumn(obj.ColumnName).cfdIsIncremental==true" ng-click="UpDownValue(obj.ColumnName,true,1)" class="input-group-addon last">
+                            <i class="fa fa-plus"></i>
+                        </span>
+                        <span ng-if="GetCustomColumn(obj.ColumnName).cfdIsIncremental!=true" ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+
+                        <span ng-if="GetCustomColumn(obj.ColumnName).cfdIsIncremental!=true" class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,1)"> <i class="fa fa-barcode"></i></span>
                     </div>
 
 
@@ -1389,7 +1395,7 @@
                 <div class="form-group">
                     <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
                     <div ng-if="obj.cfdDataType=='string'" class="input-group">
-
+                        
 
                             <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
                                 <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
@@ -1421,16 +1427,18 @@
 
                     <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
-
-                        <div class="select">
+                        <div ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete != true" class="select">
                             <select id="CustomActivity_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
 
                                 <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
                             </select>
                         </div>
-                        <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomActivity_')"><i class="fa fa-plus"></i></span>
-                        
+                        <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true && GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete != true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomActivity_')"><i class="fa fa-plus"></i></span>
+
+                        <input ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" type="text" />
+                        <span ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
+
                         <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                         <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,2)"> <i class="fa fa-barcode"></i></span>
                     </div>
@@ -1444,10 +1452,18 @@
                     </div>
 
                     <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                        <input id="CustomActivity_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
-                       
-                        <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
-                        <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,2)"> <i class="fa fa-barcode"></i></span>
+                        <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.ColumnMap}}" min="{{GetCustomActivityObjByColumnmap(obj.ColumnMap).MinimumValue}}" max="{{GetCustomActivityObjByColumnmap(obj.ColumnMap).MaximumValue}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" />
+
+
+                        <span ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsIncremental==true" ng-click="UpDownValue(obj.ColumnMap,false,2)" class="input-group-addon last">
+                            <i class="fa fa-minus"></i>
+                        </span>
+                        <span ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsIncremental==true" ng-click="UpDownValue(obj.ColumnMap,true,2)" class="input-group-addon last">
+                            <i class="fa fa-plus"></i>
+                        </span>
+
+                        <span ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsIncremental!=true" ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                        <span ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsIncremental!=true" class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,2)"> <i class="fa fa-barcode"></i></span>
                     </div>
 
                     <div ng-if="obj.cfdDataType=='currency'" class="input-group">
@@ -1683,22 +1699,32 @@
                 </div>
                 <div class="form-group" ng-if="obj.Required==false && CheckInCommonArray(obj.ColumnName)!=true && IsItemChoseCheck==false">
                     <label>{{obj.cfdName}} <span ng-if="obj.Required" class="redText">*</span></label>
-                    <div ng-if="obj.cfdDataType=='string'" class="input-group">
+                    <div ng-if="obj.cfdDataType=='string'">
+
+                        <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType != 1" class="input-group">
+
+                            <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='1'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='2'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='3'">
+                                <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
+                                <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!=''" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
+                            </div>
+
+                            <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='1'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='2'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='3'">
 
 
+                                <input type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control  prepostCustom" />
+                            </div>
+                            <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                            <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,1)"> <i class="fa fa-barcode"></i></span>
 
-                        <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='1'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='2'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='3'">
-                            <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
-                            <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!=''" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
+
                         </div>
+                    
 
-                        <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='1'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='2'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='3'">
+                        <div class="input-group" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType == 1">
+                            <input type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
 
-
-                            <input type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control  prepostCustom" />
+                            <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnName, obj.cfdID, 'item')"><i class="fa fa-circle-o"></i></span>
                         </div>
-                        <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
-                        <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,1)"> <i class="fa fa-barcode"></i></span>
 
                     </div>
 
@@ -1715,6 +1741,8 @@
 
                     <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
+                     
+
                         <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete != true" class="select">
                             <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value">
 
@@ -1728,7 +1756,7 @@
 
 
                         <input ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" type="text" />
-                        <span ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnName, obj.cfdID)" class="input-group-addon last"><i class="fa fa-search"></i></span>
+                        <span ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnName, obj.cfdID, 'item')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
 
 
@@ -1745,10 +1773,17 @@
                     </div>
 
                     <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" value="{{obj.CfValue}}" />
+                        <input id="CustomItem_{{obj.cfdID}}" max="{{GetCustomItemObjByColumnmap(obj.ColumnName).MaximumValue}}" min="{{GetCustomItemObjByColumnmap(obj.ColumnName).MinimumValue}}" name="CustomItem_{{obj.ColumnName}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" value="{{obj.CfValue}}" />
 
-                        <span ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
-                        <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,1)"> <i class="fa fa-barcode"></i></span>
+
+                        <span ng-if="GetCustomColumn(obj.ColumnName).cfdIsIncremental==true" ng-click="UpDownValue(obj.ColumnName,false,1)" class="input-group-addon last">
+                            <i class="fa fa-minus"></i>
+                        </span>
+                        <span ng-if="GetCustomColumn(obj.ColumnName).cfdIsIncremental==true" ng-click="UpDownValue(obj.ColumnName,true,1)" class="input-group-addon last">
+                            <i class="fa fa-plus"></i>
+                        </span>
+                        <span ng-if="GetCustomColumn(obj.ColumnName).cfdIsIncremental!=true" ng-click="GetLastValueCustom(obj.cfdID,1)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                        <span ng-if="GetCustomColumn(obj.ColumnName).cfdIsIncremental!=true" class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,1)"> <i class="fa fa-barcode"></i></span>
                     </div>
 
 
@@ -1768,10 +1803,11 @@
 
                 <div class="form-group">
                     <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
-                    <div ng-if="obj.cfdDataType=='string'" class="input-group">
+                    <div ng-if="obj.cfdDataType=='string'">
 
+                      
 
-
+                        <div ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType != 1" class="input-group">
                             <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
                                 <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
                                 <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!=''" type="{{obj.cfdInputMask}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
@@ -1782,9 +1818,16 @@
 
                                 <input type="text" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control  prepostCustom" />
                             </div>
-                        
-                        <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
-                        <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,2)"> <i class="fa fa-barcode"></i></span>
+
+                            <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                            <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,2)"> <i class="fa fa-barcode"></i></span>
+                        </div>
+
+                        <div class="input-group" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType == 1">
+                            <input type="text" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
+
+                            <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>
+                        </div>
                     </div>
 
 
@@ -1801,17 +1844,20 @@
                     </div>
 
                     <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
-
-
-                        <div class="select">
+                         
+                        <div ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete != true" class="select">
                             <select id="CustomActivity_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
 
                                 <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
                             </select>
                         </div>
-                        <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomActivity_')"><i class="fa fa-plus"></i></span>
+
+                        <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true && GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete != true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomActivity_')"><i class="fa fa-plus"></i></span>
                         
+                        <input ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" type="text" />
+                        <span ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
+
                         <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                         <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,2)"> <i class="fa fa-barcode"></i></span>
                     </div>
@@ -1825,10 +1871,18 @@
                     </div>
 
                     <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                        <input id="CustomActivity_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" value="{{obj.CfValue}}" />
+                        <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.ColumnMap}}" min="{{GetCustomActivityObjByColumnmap(obj.ColumnMap).MinimumValue}}" max="{{GetCustomActivityObjByColumnmap(obj.ColumnMap).MaximumValue}}" type="number" class="form-control FormControlType" ng-model="InventoryObject.CustomTxnData[$index].Value" />
 
-                        <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
-                        <span class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,2)"> <i class="fa fa-barcode"></i></span>
+
+                        <span ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsIncremental==true" ng-click="UpDownValue(obj.ColumnMap,false,2)" class="input-group-addon last">
+                            <i class="fa fa-minus"></i>
+                        </span>
+                        <span ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsIncremental==true" ng-click="UpDownValue(obj.ColumnMap,true,2)" class="input-group-addon last">
+                            <i class="fa fa-plus"></i>
+                        </span>
+
+                        <span ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsIncremental!=true" ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                        <span ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsIncremental!=true" class="input-group-addon last" ng-click="ScanNewCustomSwitch(obj.cfdID,obj.ColumnName,2)"> <i class="fa fa-barcode"></i></span>
                     </div>
 
                     <div ng-if="obj.cfdDataType=='currency'" class="input-group">
@@ -1939,6 +1993,40 @@
 
     </div>
 </div>
+
+
+
+<div style="background:#fff;" id="customradiotextmodal" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span> <i class="fa fa-times"></i> </span>
+        </button>
+        <h4>Select Item  </h4>
+        
+    </div>
+
+
+    <div class="modal-body">
+      
+
+        <p ng-repeat="obj in currtrentcustomradiovalue" class="todo-element">
+            <input ng-click="fillcurrentradiovalue(obj)" id="{{obj}}" name="dashrath" type="radio"> <label for="{{obj}}">{{obj}}</label>
+        </p>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <a ng-click="fillvaluetoradio()" class="waves-effect btn btn-primary arrow-left bknext darkblue"> <i class="fa fa-check"></i> OK</a>
+                <a data-dismiss="modal" class="waves-effect btn btn-gray"> <i class="fa fa-times"></i> Cancel </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
 
 <div id="itemlistmodal" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
     <div class="modal-header">

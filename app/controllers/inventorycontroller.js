@@ -1724,6 +1724,23 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
         return new Object();
     }
+
+    $scope.GetCustomActivityObjByColumnmap = function (columnMap) {
+
+        debugger;
+
+        for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+            if ($scope.CustomActivityDataList[i].ColumnMap == columnMap) {
+                return $scope.CustomActivityDataList[i];
+            }
+        }
+        return new Object();
+    }
+
+
+
+    
+
     $scope.getIndexBycolName = function (_ID)
     {
         for (var i = 0; i < $scope.InventoryObject.CustomPartData.length; i++) {
@@ -1925,22 +1942,37 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.currtrentcustomauto = [];
 
 
-    $scope.customautocomplete = function (ColumnName, id) {
+    $scope.customautocomplete = function (ColumnName, id, fieldtype) {
         $("#customautolistmodal").modal('show');
 
-        $scope.activecustomfield = "CustomItem_" + id;
+        debugger;
 
-      
-
-        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
-            if ($scope.CustomItemDataList[i].ColumnMap == ColumnName) {
-                $scope.currtrentcustomauto = $scope.CustomItemDataList[i].cfdComboValues;
-                break;
+        if (fieldtype=="item") {
+            $scope.activecustomfield = "CustomItem_" + id;
+            for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+                if ($scope.CustomItemDataList[i].ColumnMap == ColumnName) {
+                    $scope.currtrentcustomauto = $scope.CustomItemDataList[i].cfdComboValues;
+                    break;
+                }
             }
         }
 
+        if (fieldtype == "activity") {
+            $scope.activecustomfield = "CustomActivity_" + id;
+
+            for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+                if ($scope.CustomActivityDataList[i].ColumnMap == ColumnName) {
+                    $scope.currtrentcustomauto = $scope.CustomActivityDataList[i].cfdComboValues;
+                    break;
+                }
+            }
+        }
+     
+
 
     }
+
+
 
     $scope.fillcustomvalue = function (value) {
         $("#" + $scope.activecustomfield).val(value);
@@ -1950,6 +1982,67 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#customautolistmodal").modal('hide');
 
     }
+
+    $scope.currtrentcustomradiovalue = [];
+    $scope.customradiolist = function (ColumnName, id, fieldtype) {
+
+        debugger;
+
+
+        if (fieldtype == "item") {
+
+            $scope.activeradiofield = "CustomItem_" + id;
+
+            for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+                if ($scope.CustomItemDataList[i].ColumnMap == ColumnName) {
+                    $scope.currtrentcustomradiovalue = $scope.CustomItemDataList[i].cfdRadioValues;
+                    break;
+                }
+            }
+
+          
+
+        }
+
+
+        if (fieldtype == "activity") {
+            $scope.activeradiofield = "CustomActivity_" + id;
+
+            for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+                if ($scope.CustomActivityDataList[i].ColumnMap == ColumnName) {
+                    $scope.currtrentcustomradiovalue = $scope.CustomActivityDataList[i].cfdRadioValues;
+                    break;
+                }
+            }
+        }
+
+        console.log($scope.currtrentcustomradiovalue)
+
+        $("#customradiotextmodal").modal("show");
+    }
+
+    $scope.fillcurrentradiovalue = function (value) {
+
+        $scope.selectedradiovalue = value;
+
+      
+
+    }
+
+    $scope.fillvaluetoradio = function () {
+
+        $("#" + $scope.activeradiofield).val($scope.selectedradiovalue);
+
+        $("#" + $scope.activeradiofield).trigger("input");
+
+        $("#customradiotextmodal").modal("hide");
+       
+    }
+
+
+
+ 
+
 
 
     $scope.GetMyinventoryColumns = function () {
@@ -3638,15 +3731,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     //}
 
-    $scope.UpDownValue = function (value, IsUp) {
-        if ($.trim($scope.InventoryObject.Quantity) == "") {
-
-            $scope.InventoryObject.Quantity = 0;
-
-        }
+    $scope.UpDownValue = function (value, IsUp, Type) {
 
         switch (value) {
             case "Quantity":
+                if ($.trim($scope.InventoryObject.Quantity) == "") {
+
+                    $scope.InventoryObject.Quantity = 0;
+
+                }
                 if (!IsUp) {
                     if ($scope.InventoryObject.Quantity > 0) {
 
@@ -3658,14 +3751,47 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 }
                 break;
             default:
-                debugger;
+                var _name;
+                var _ID;
 
+                if (Type == undefined) {
+                    _name = $scope.CurrentActiveFieldType == "Inventory" ? "CustomItem_" + value : "CustomActivity_" + value;
+
+
+                }
+                else {
+                    _name = Type == 1 ? "CustomItem_" + value : "CustomActivity_" + value;
+                }
+
+                _ID = "#" + $("input[name='" + _name + "']").attr("id");
+                var _inputvalue = $(_ID).val();
+                var _Max = $(_ID).attr("max");
+                var _Min = $(_ID).attr("min");
+                _inputvalue = TryParseFloat(_inputvalue, 0);
+                _Max = TryParseFloat(_Max, -100);
+                _Min = TryParseFloat(_Min, -100);
+                if (IsUp && _Max != -100 && _inputvalue == _Max) {
+                    log.error("Exceeding maximum value " + _Max + ", Please fill lesser value than maximum value");
+                }
+
+                else if (!IsUp && _Min != -100 && _inputvalue == _Min) {
+                    log.error("Beneath the  minimum value " + _Min + ", Please fill greater value than minimum value");
+
+                }
+                else {
+
+                    _inputvalue = _inputvalue + (IsUp ? 1 : -1);
+
+                    $(_ID).val(_inputvalue);
+
+
+                    $(_ID).trigger("input");
+                }
                 break;
 
         }
 
-        vibrate();
-        playBeep();
+
     }
 
 

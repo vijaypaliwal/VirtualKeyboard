@@ -120,6 +120,40 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     $scope.locked = function () {
         log.error("This Library is locked");
     }
+
+
+    $(document).on('blur', '.customnumbergroup input', function () {
+        var _val = $(this).val();
+        var _minD = $(this).attr("min");
+        _minD = $.trim(_minD) != "" ? _minD : -1000;
+        var _minVal = parseFloat(_minD);
+
+
+        var _maxD = $(this).attr("max");
+        _maxD = $.trim(_maxD) != "" ? _maxD : -1000;
+        var _maxVal = parseFloat(_maxD);
+
+
+
+        if ($.trim(_val) != "" && !isNaN(_val)) {
+
+            if (_maxVal != -1000 && _maxVal < _val) {
+
+                log.error("Exceeding maximum value " + _maxVal + ", Please fill lesser value than maximum value");
+                $(this).val("");
+                $(this).focus();
+            }
+            if (_minVal != -1000 && _minVal > _val) {
+
+                log.error("Beneath the  minimum value " + _minVal + ", Please fill greater value than minimum value");
+                $(this).val("");
+                $(this).focus();
+            }
+        }
+
+
+    });
+
     function initIndex() {
 
 
