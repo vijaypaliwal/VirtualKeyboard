@@ -18,6 +18,61 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.IsFormDataloaded = false;
     $scope.Isopendiv = true;
     $scope.IsFromSlideChange = false;
+
+    $scope.UniqueTagCombovalues = [];
+    $scope.UniqueTag3Combovalues = [];
+    $scope.UniqueTag2Combovalues = [];
+
+
+
+    $scope.UnitNumber1FieldDefaultValue = 0;
+    $scope.UnitNumber1FieldNumberMax = 0;
+    $scope.UnitNumber1FieldNumberMin = 0;
+
+
+    $scope.UnitNumber2FieldDefaultValue = 0;
+    $scope.UnitNumber2FieldNumberMax = 0;
+    $scope.UnitNumber2FieldNumberMin = 0;
+
+
+
+
+    $scope.UniqueTagRadiovalues = [];
+    $scope.UniqueTag2Radiovalues = [];
+    $scope.UniqueTag3Radiovalues = [];
+
+    $scope.UniqueDateFieldDefaultValue = ""
+    $scope.UnitDate2FieldDefaultValue = ""
+
+    $scope.ReqValueFieldSpecialType = "";
+    $scope.UnitTag2FieldSpecialType = "";
+    $scope.UnitTag3FieldSpecialType = "";
+    $scope.UniqueDateFieldSpecialType = "";
+    $scope.UnitDate2FieldSpecialType = "";
+    $scope.UnitNumber1FieldSpecialType = "";
+    $scope.UnitNumber2FieldSpecialType = "";
+
+
+    $scope.ReqValueFieldDefaultType = "";
+    $scope.UnitTag2FieldDefaultValue = "";
+    $scope.UnitTag3FieldDefaultValue = "";
+
+    $scope.ActiveUnitRadioField = "";
+    $scope.ActiveUnitAutoCompleteField = "";
+    $scope.selectedUnitradiovalue = "";
+
+
+
+    $scope.UnitAutoComboValues = [];
+    $scope.ActiveUnitAutoCompleteField = [];
+    $scope.weeklist = [];
+
+    $scope.CurrentYear = new Date().getFullYear();
+
+    for (var i = 1; i <= 52; i++) {
+        $scope.weeklist.push(i);
+    }
+
     var _IsSavedItemGroup = false;
     var _IsSavedItemGroupData = "";
     $scope.InventoryObject = {
@@ -2669,7 +2724,35 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         return _returnVar;
     }
+    $scope.UpDownValueUnit = function (value, IsUp) {
 
+        debugger;
+        var _ID;
+        _ID = "#" + value;
+        var _inputvalue = $(_ID).val();
+        var _Max = $(_ID).attr("max");
+        var _Min = $(_ID).attr("min");
+        _inputvalue = TryParseFloat(_inputvalue, 0);
+        _Max = TryParseFloat(_Max, -100);
+        _Min = TryParseFloat(_Min, -100);
+        if (IsUp && _Max != -100 && _inputvalue == _Max) {
+            log.error("Exceeding maximum value " + _Max + ", Please fill lesser value than maximum value");
+        }
+
+        else if (!IsUp && _Min != -100 && _inputvalue == _Min) {
+            log.error("Beneath the  minimum value " + _Min + ", Please fill greater value than minimum value");
+
+        }
+        else {
+
+            _inputvalue = _inputvalue + (IsUp ? 1 : -1);
+
+            $(_ID).val(_inputvalue);
+
+
+            $(_ID).trigger("input");
+        }
+    }
     $scope.GetActiveUnitDataField = function () {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -2684,8 +2767,117 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                dataType: 'text json',
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
+
+                   debugger;
                    if (response.GetActiveUnitDataFieldsResult.Success == true) {
                        $scope.UnitDataList = response.GetActiveUnitDataFieldsResult.Payload;
+
+                       console.log("List of active unitdata fields");
+                       console.log($scope.UnitDataList);
+
+                       $scope.UnitDataList.forEach(function (item) {
+
+                           if (item.FieldName == 'ReqValue') {
+                               $scope.ReqValueFieldSpecialType = item.FieldSpecialType;
+                               $scope.ReqValueFieldDefaultType = item.FieldDefaultValue;
+                               $scope.InventoryObject.UniqueTag = item.FieldDefaultValue;
+                               if (item.FieldComboValues != null) {
+                                   $scope.UniqueTagCombovalues = item.FieldComboValues.split("\n");
+                               }
+                               if (item.FieldRadioValues != null) {
+                                   $scope.UniqueTagRadiovalues = item.FieldRadioValues.split(" ");
+                               }
+                           }
+                           else if (item.FieldName == 'UnitTag2') {
+
+                               $scope.UnitTag2FieldSpecialType = item.FieldSpecialType;
+                               $scope.UnitTag2FieldDefaultValue = item.FieldDefaultValue;
+                               $scope.InventoryObject.UnitTag2 = item.FieldDefaultValue;
+
+                               if (item.FieldComboValues != null) {
+                                   $scope.UniqueTag2Combovalues = item.FieldComboValues.split("\n");
+                               }
+                               if (item.FieldRadioValues != null) {
+                                   $scope.UniqueTag2Radiovalues = item.FieldRadioValues.split(" ");
+                               }
+
+                           }
+                           else if (item.FieldName == 'UnitTag3') {
+                               $scope.UnitTag3FieldSpecialType = item.FieldSpecialType;
+                               $scope.UnitTag3FieldDefaultValue = item.FieldDefaultValue;
+                               $scope.InventoryObject.UnitTag3 = item.FieldDefaultValue;
+                               if (item.FieldComboValues != null) {
+                                   $scope.UniqueTag3Combovalues = item.FieldComboValues.split("\n");
+                               }
+                               if (item.FieldRadioValues != null) {
+                                   $scope.UniqueTag3Radiovalues = item.FieldRadioValues.split(" ");
+                               }
+                           }
+
+                           else if (item.FieldName == 'UniqueDate') {
+                               $scope.UniqueDateFieldSpecialType = item.FieldSpecialType;
+
+                               if (item.FieldSpecialType == 15) {
+
+
+                                   $scope.UniqueDateFieldDefaultValue = ConverttoMsJsonDate(item.FieldDefaultValue);
+                               }
+
+                               else if (item.FieldSpecialType == 16) {
+
+
+                                   $scope.UniqueDateFieldDefaultValue = ConverttoMsJsonDateTime(item.FieldDefaultValue);
+                               }
+
+                               else {
+
+
+                                   $scope.UniqueDateFieldDefaultValue = item.FieldDefaultValue;
+                               }
+
+                               $scope.InventoryObject.UniqueDate = $scope.UniqueDateFieldDefaultValue;
+                           }
+                           else if (item.FieldName == 'UnitDate2') {
+                               $scope.UnitDate2FieldSpecialType = item.FieldSpecialType;
+
+                               if (item.FieldSpecialType == 15) {
+
+
+                                   $scope.UnitDate2FieldDefaultValue = ConverttoMsJsonDate(item.FieldDefaultValue);
+                               }
+
+                               else if (item.FieldSpecialType == 16) {
+
+
+                                   $scope.UnitDate2FieldDefaultValue = ConverttoMsJsonDateTime(item.FieldDefaultValue);
+                               }
+
+                               else  {
+
+
+                                   $scope.UnitDate2FieldDefaultValue = item.FieldDefaultValue;
+                               }
+                               $scope.InventoryObject.UnitDate2 = $scope.UniqueDateFieldDefaultValue;
+
+                           }
+
+                           else if (item.FieldName == 'UnitNumber1') {
+                               debugger;
+                               $scope.UnitNumber1FieldSpecialType = item.FieldSpecialType;
+                               $scope.InventoryObject.UnitNumber1 = TryParseFloat(item.FieldDefaultValue);
+                               $scope.UnitNumber1FieldNumberMax = TryParseFloat(item.FieldNumberMax.toString());
+                               $scope.UnitNumber1FieldNumberMin = TryParseFloat(item.FieldNumberMin.toString());
+
+                           }
+                           else if (item.FieldName == 'UnitNumber2') {
+                               $scope.UnitNumber2FieldSpecialType = item.FieldSpecialType;
+                               $scope.InventoryObject.UnitNumber2 = TryParseFloat(item.FieldDefaultValue);
+                               $scope.UnitNumber2FieldNumberMax = TryParseFloat(item.FieldNumberMax.toString());
+                               $scope.UnitNumber2FieldNumberMin = TryParseFloat(item.FieldNumberMin.toString());
+                           }
+
+                       });
+
                        CheckScopeBeforeApply()
                    }
                    else {
@@ -2708,6 +2900,110 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                }
            });
     }
+
+    //#region Unit Data function
+    $scope.Unitautocomplete = function (FieldName) {
+        $("#Unitautolistmodal").modal('show');
+
+        debugger;
+        switch (FieldName) {
+            case 'UniqueTag':
+                $scope.UnitAutoComboValues = $scope.UniqueTagCombovalues;
+                $scope.ActiveUnitAutoCompleteField = FieldName
+                break;
+            case 'UnitTag2':
+                $scope.UnitAutoComboValues = $scope.UniqueTag2Combovalues;
+                $scope.ActiveUnitAutoCompleteField = FieldName
+                break;
+            case 'UnitTag3':
+                $scope.UnitAutoComboValues = $scope.UniqueTag3Combovalues;
+                $scope.ActiveUnitAutoCompleteField = FieldName
+                break;
+            default:
+        }
+    }
+
+
+    $scope.fillUnitAutoCompleteValue = function (value) {
+        $("#" + $scope.ActiveUnitAutoCompleteField).val(value);
+
+        $("#" + $scope.ActiveUnitAutoCompleteField).trigger("input");
+        CheckScopeBeforeApply();
+        $("#Unitautolistmodal").modal('hide');
+
+    }
+
+
+
+    $scope.Unitradiolist = function (FieldName) {
+
+        switch (FieldName) {
+            case 'UniqueTag':
+                $scope.UnitRadioValues = $scope.UniqueTagRadiovalues;
+                $scope.ActiveUnitRadioField = FieldName
+                break;
+            case 'UnitTag2':
+                $scope.UnitRadioValues = $scope.UniqueTag2Radiovalues;
+                $scope.ActiveUnitRadioField = FieldName
+                break;
+            case 'UnitTag3':
+                $scope.UnitRadioValues = $scope.UniqueTag3Radiovalues;
+                $scope.ActiveUnitRadioField = FieldName
+                break;
+            default:
+        }
+
+        console.log($scope.currtrentcustomradiovalue)
+
+        $("#Unitradiotextmodal").modal("show");
+    }
+
+
+    $scope.fillUnitradiovalue = function (value) {
+        $scope.selectedUnitradiovalue = value;
+    }
+
+
+    $scope.fillUnitvaluetoradio = function () {
+
+        $("#" + $scope.ActiveUnitRadioField).val($scope.selectedUnitradiovalue);
+
+        $("#" + $scope.ActiveUnitRadioField).trigger("input");
+
+        $("#Unitradiotextmodal").modal("hide");
+
+    }
+
+
+    $scope.GetUnitNumberDefaultValue = function (NumberFieldName) {
+        $scope.UnitDataList.forEach(function (item) {
+            if (item.FieldName == NumberFieldName) {
+                return item.FieldDefaultValue;
+            }
+        });
+    }
+
+
+
+    $scope.GetUnitNumberMaxValue = function (NumberFieldName) {
+
+
+        $scope.UnitDataList.forEach(function (item) {
+            if (item.FieldName == NumberFieldName) {
+                return item.FieldNumberMax;
+            }
+        });
+    }
+
+    $scope.GetUnitNumberMinValue = function (NumberFieldName) {
+        $scope.UnitDataList.forEach(function (item) {
+            if (item.FieldName == NumberFieldName) {
+                return item.FieldNumberMin;
+            }
+        });
+    }
+    //#endregion
+
     $scope.IsActiveTransactionField = function (cfdid) {
 
 
