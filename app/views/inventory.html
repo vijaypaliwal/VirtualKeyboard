@@ -2148,7 +2148,7 @@
                     <label>{{obj.ColumnLabel}}</label>
 
                     <!--NumberType Unit Data Fields-->
-                    <div ng-if="UnitNumber1FieldSpecialType == 13">
+                    <div ng-if="UnitNumber1FieldSpecialType != 14">
                         <div class="input-group">
                             <input id="UnitNumber1" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'))" type="number" max="{{UnitNumber1FieldNumberMax}}" min="{{UnitNumber1FieldNumberMin}}" class="form-control" ng-model="InventoryObject.UnitNumber1" />
                             <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
@@ -2179,7 +2179,7 @@
 
 
                     <!--NumberType Unit Data Fields-->
-                    <div ng-if="UnitNumber2FieldSpecialType == 13">
+                    <div ng-if="UnitNumber2FieldSpecialType!= 14">
                         <div class="input-group">
                             <input id="UnitNumber2" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'))" type="number" max="{{UnitNumber2FieldNumberMax}}" min="{{UnitNumber2FieldNumberMin}}" class="form-control" ng-model="InventoryObject.UnitNumber2" />
                             <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
