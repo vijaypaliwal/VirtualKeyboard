@@ -277,7 +277,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
     Date.prototype.toMSJSON = function () {
-        this.setHours(this.getHours() - this.getTimezoneOffset() / 60);
+        this.setHours(this.getHours() - (this.getTimezoneOffset() / 60));
         var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
         return date;
     };
@@ -581,9 +581,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.GetLastValueCustom = function (id, Type) {
 
 
-        debugger;
-
-
 
         var field = "Inv_" + id;
         var _fieldid = "";
@@ -622,6 +619,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             $("#firstDiv").find(_fieldid).trigger('change');
             $("#firstDiv").find(_fieldid).trigger('input');
+
+
+
 
 
         }
@@ -663,9 +663,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     //var rString = randomString(10, '0123456789');
 
     $scope.GetLastValueData = function (field, Type) {
-
-     
-
         var _toCheckValue = "";
         field = Type != undefined && Type != "" ? "Inv_" + field : field;
         _toCheckValue = localStorageService.get(field);
@@ -678,8 +675,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
     $scope.GetLastValue = function (field, id) {
 
+
+
+
         var _value = "";
         var _toCheckValue = localStorageService.get(field);
+
+
 
 
         if (_toCheckValue != null && _toCheckValue != undefined) {
@@ -799,10 +801,20 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         });
 
-
-
+        console.log($scope.CheckEmailFields());
     }, true);
 
+
+
+    $(document).on('change', 'input[type=email]', function () {
+        if($.trim($(this).val())!="")
+        {
+            $(this).trigger("input");
+        }
+
+
+    });
+   
 
     $scope.fillitem = function () {
 
@@ -1327,6 +1339,65 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
+    $scope.CheckEmailFields = function () {
+
+        for (var i = 0; i < $scope.InventoryObject.CustomPartData.length; i++) {
+
+            var _emailValue = $.trim($("#CustomItem_" + $scope.InventoryObject.CustomPartData[i].CfdID.toString()).val());
+            var _mask=$scope.GetCustomItemObjByColumnID($scope.InventoryObject.CustomPartData[i].CfdID).cfdInputMask;
+            if (_mask=="email" && _emailValue!= "" && $scope.IsProperEmail(_emailValue) == false ) {
+                return true;
+            }
+
+        }
+        for (var i = 0; i < $scope.InventoryObject.CustomTxnData.length; i++) {
+            var _mask=$scope.GetCustomActivityObjByColumnID($scope.InventoryObject.CustomTxnData[i].CfdID).cfdInputMask;
+            var _emailValue = $.trim($("#CustomActivity_"+$scope.InventoryObject.CustomTxnData[i].CfdID.toString()).val());
+            if (_mask=="email" && _emailValue != "" && $scope.IsProperEmail(_emailValue) == false) {
+                return true;
+
+            }
+        }
+
+        if ($scope.ReqValueFieldSpecialType == 4)
+        {
+            var _emailValue = $.trim($("#UnitTag").val());
+
+            if ( _emailValue != "" && $scope.IsProperEmail(_emailValue) == false) {
+                return true;
+
+            }
+
+        }
+
+        if ($scope.UnitTag2FieldSpecialType == 4) {
+            var _emailValue = $.trim($("#UnitTag2").val());
+
+            if (_emailValue != "" && $scope.IsProperEmail(_emailValue) == false) {
+                return true;
+
+            }
+
+        }
+
+        if ($scope.UnitTag3FieldSpecialType == 4) {
+            var _emailValue = $.trim($("#UnitTag3").val());
+
+            if (_emailValue != "" && $scope.IsProperEmail(_emailValue) == false) {
+                return true;
+
+            }
+
+        }
+        return false;
+
+    }
+
+
+ 
+
+
+
     $scope.resetObject = function () {
         $scope.InventoryObject = {
             IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", DefaultItemLocationID: 0, DefaultItemUOM: 0, pDefaultCost: 0, pTargetQty: null, pReorderQty: null, Quantity: "", Uom: "units", UomID: 0, Location: "In Stock", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
@@ -1420,15 +1491,47 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                 if (_updateDateval != null && _updateDateval != "") {
                     var wcfDateStr123 = null;
-                    var dsplit1 = _updateDateval.split("-");
 
-                    var d122 = new Date(dsplit1[0], dsplit1[1] - 1, dsplit1[2]);
+                    if ($scope.UniqueDateFieldSpecialType != 16 && $scope.UniqueDateFieldSpecialType != 17) {
 
-                    var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
 
-                    d122.setDate(d122.getDate() + _genVar);
-                    var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
-                    wcfDateStr123 = d122.toMSJSON();
+                        var dsplit1 = _updateDateval.split("-");
+
+                        var d122 = new Date(dsplit1[0], dsplit1[1] - 1, dsplit1[2]);
+
+                        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
+
+                        d122.setDate(d122.getDate() + _genVar);
+                        var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), 0, 0, 0, 0))
+                        wcfDateStr123 = d122.toMSJSON();
+                    }
+                    else if ($scope.UniqueDateFieldSpecialType == 16)
+                    {
+                        debugger;
+                        var _dateValuearray = _updateDateval.split("T");
+
+
+                        var tsplit12 = _dateValuearray[1].split(":");
+                        var dsplit12 = _dateValuearray[0].split("-");
+
+                        var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
+
+                        d1222.setDate(d1222.getDate() + _genVar);
+                        var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
+
+                        wcfDateStr123 = d1222.toMSJSON();
+
+                    }
+                    else if ($scope.UniqueDateFieldSpecialType == 17) {
+                        var dsplit1 = _updateDateval.split(":");
+                        var d122 = new Date(1900, 1, 1);
+
+                        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]), parseInt(dsplit1[1]), 0, 0))
+
+                        d122.setDate(d122.getDate() + _genVar);
+                        var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
+                        wcfDateStr123 = d122.toMSJSON();
+                    }
 
                     $scope.InventoryObject.UniqueDate = wcfDateStr123;
                 }
@@ -1479,8 +1582,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                 if (_updateDateval1 != null && _updateDateval1 != "") {
-
                     var wcfDateStr1234 = null;
+
+                    if ($scope.UnitDate2FieldSpecialType != 16 && $scope.UnitDate2FieldSpecialType != 17) {
+
+
+
                     var dsplit12 = _updateDateval1.split("-");
 
                     var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
@@ -1490,10 +1597,37 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     wcfDateStr1234 = d1222.toMSJSON();
 
-                    $scope.InventoryObject.UnitDate2 = wcfDateStr1234;
+                }
+
+                    else if ($scope.UnitDate2FieldSpecialType == 16)
+                    {
+                        var _dateValuearray = _updateDateval1.split("T");
 
 
+                        var tsplit12 = _dateValuearray[1].split(":");
+                        var dsplit12 = _dateValuearray[0].split("-");
 
+                        var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
+
+                        d1222.setDate(d1222.getDate() + _genVar);
+                        var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
+
+                        wcfDateStr1234 = d1222.toMSJSON();
+                }
+                    else if ($scope.UnitDate2FieldSpecialType == 17) {
+                        debugger;
+
+                        var dsplit1 = _updateDateval1.split(":");
+                    var d122 = new Date(1900, 1, 1);
+
+                    var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]),parseInt(dsplit1[1]), 0, 0))
+
+                    d122.setDate(d122.getDate() + _genVar);
+                    var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
+                    wcfDateStr1234 = d122.toMSJSON();
+                }
+
+                $scope.InventoryObject.UnitDate2 = wcfDateStr1234;
 
                 }
                 else {
@@ -1635,6 +1769,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     function ConverttoMsJsonDateTime(_DateValue) {
 
+    
         var _date = angular.copy(_DateValue);
 
         var dsplit1 = _date.split("/");
@@ -1653,6 +1788,23 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var today = now.getFullYear() + "-" + (month) + "-" + (day);
 
         return today + _ToMergeTime;
+    }
+
+    function ConvertToTime(_timeValue)
+    {
+
+        if ($.trim(_timeValue) != "") {
+
+            var _timeSplit = _timeValue.split(" ");
+            var _timeString = _timeSplit[0].split(":");
+
+            var _ToMergeTime = (_timeSplit[1] == "AM" ? _timeString[0] : (12 + parseInt(_timeString[0]))).toString() + ":" + _timeString[1];
+
+            return _ToMergeTime;
+        }
+
+        return "";
+
     }
     $scope.CheckCustomFields = function (Type) {
         var _returnVar = false;
@@ -1812,10 +1964,34 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         return new Object();
     }
 
+    $scope.GetCustomItemObjByColumnID=function(columnMap)
+    {
+        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            if($scope.CustomItemDataList[i].cfdID==columnMap)
+            {
+                return $scope.CustomItemDataList[i];
+            }
+        }
+        return new Object();
+    }
 
+    $scope.GetCustomActivityObjByColumnID = function (columnMap) {
+
+         
+
+        for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+            if ($scope.CustomActivityDataList[i].cfdID == columnMap) {
+                return $scope.CustomActivityDataList[i];
+            }
+        }
+        return new Object();
+    }
 
     
-
+    $scope.IsProperEmail = function (email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
     $scope.getIndexBycolName = function (_ID)
     {
         for (var i = 0; i < $scope.InventoryObject.CustomPartData.length; i++) {
@@ -1877,11 +2053,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                           var _defaultValue = angular.copy($scope.CustomItemDataList[i].cfdDefaultValue);
 
                  
-                          if ($scope.CustomItemDataList[i].cfdDataType == "datetime" && $scope.CustomItemDataList[i].cfdSpecialType != 3) {
+                          if ($scope.CustomItemDataList[i].cfdDataType == "datetime") {
                               if (_defaultValue != null && _defaultValue != "") {
 
                                   if ($scope.CustomItemDataList[i].cfdSpecialType == 2) {
                                       $scope.CustomItemDataList[i].cfdDefaultValue = ConverttoMsJsonDateTime(_defaultValue);
+                                  }
+                                  else if ($scope.CustomItemDataList[i].cfdSpecialType != 3) {
+                                      $scope.CustomItemDataList[i].cfdDefaultValue = ConvertToTime(_defaultValue);
                                   }
                                   else {
 
@@ -1941,13 +2120,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                               _obj.cfdComboValues = _CustomObj.cfdComboValues;
                               _obj.CfValue = ($.trim(_CustomObj.cfdprefixsuffixtype) != "" ? _CustomObj.CombineValue : _CustomObj.cfdDefaultValue);
                               _obj.Required = _CustomObj.cfdIsRequired;
-                            
-                              $scope.InventoryObject.CustomPartData.push({ CfdID: _CustomObj.cfdID, Value: _obj.CfValue, DataType: _CustomObj.cfdDataType });
+                              _obj.cfdTruelabel = _CustomObj.cfdTruelabel;
+                              _obj.cfdFalselabel = _CustomObj.cfdFalselabel;
+
+                              $scope.InventoryObject.CustomPartData.push({ CfdID: _CustomObj.cfdID, Value: _obj.CfValue, DataType: _CustomObj.cfdDataType, TrueLabel: _CustomObj.cfdTruelabel, FalseLabel: _CustomObj.cfdFalselabel });
 
                               $("#CustomItem_" + _obj.cfdID.toString()).trigger("input");
+
                           }
 
-                          _obj.CustomFieldIndex = _obj.cfdID!=0?$scope.getIndexBycolName(_obj.cfdID):-1;
+                          _obj.CustomFieldIndex = _obj.cfdID != 0 ? $scope.getIndexBycolName(_obj.cfdID) : -1;
                           $scope.MyinventoryFields.push(_obj);
 
                        
@@ -1970,11 +2152,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                       for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
 
                           var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
-                          if ($scope.CustomActivityDataList[i].cfdDataType == "datetime" && $scope.CustomActivityDataList[i].cfdSpecialType!=3) {
+                          if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
                               if (_defaultValue != null && _defaultValue != "") {
 
                                   if ($scope.CustomActivityDataList[i].cfdSpecialType == 2) {
                                       $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDateTime(_defaultValue);
+                                  }
+                                 else if($scope.CustomActivityDataList[i].cfdSpecialType!=3)
+                                  {
+                                     $scope.CustomActivityDataList[i].cfdDefaultValue = ConvertToTime(_defaultValue);
                                   }
                                   else {
 
@@ -2123,16 +2309,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
-    $scope.fillvaluetoradio = function ()
-    {
-        debugger;
+    $scope.fillvaluetoradio = function () {
 
-     $("#" + $scope.activeradiofield).val($scope.selectedradiovalue);
-      $("#customradiotextmodal").modal("hide");
-   
-      $("#" + $scope.activeradiofield).trigger("input");
-   
+        $("#" + $scope.activeradiofield).val($scope.selectedradiovalue);
 
+        $("#" + $scope.activeradiofield).trigger("input");
+
+        $("#customradiotextmodal").modal("hide");
+       
     }
 
 
@@ -2726,7 +2910,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
     $scope.UpDownValueUnit = function (value, IsUp) {
 
-        ;
+    
         var _ID;
         _ID = "#" + value;
         var _inputvalue = $(_ID).val();
@@ -2768,7 +2952,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
 
-                   ;
+               
                    if (response.GetActiveUnitDataFieldsResult.Success == true) {
                        $scope.UnitDataList = response.GetActiveUnitDataFieldsResult.Payload;
 
@@ -2832,7 +3016,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                                else {
 
 
-                                   $scope.UniqueDateFieldDefaultValue = item.FieldDefaultValue;
+                                   $scope.UniqueDateFieldDefaultValue =ConvertToTime(item.FieldDefaultValue);
                                }
 
                                $scope.InventoryObject.UniqueDate = $scope.UniqueDateFieldDefaultValue;
@@ -2855,25 +3039,25 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                                else  {
 
 
-                                   $scope.UnitDate2FieldDefaultValue = item.FieldDefaultValue;
+                                   $scope.UnitDate2FieldDefaultValue = ConvertToTime(item.FieldDefaultValue);
                                }
-                               $scope.InventoryObject.UnitDate2 = $scope.UniqueDateFieldDefaultValue;
-
+                               $scope.InventoryObject.UnitDate2 = $scope.UnitDate2FieldDefaultValue;
+                            
                            }
 
                            else if (item.FieldName == 'UnitNumber1') {
-                               ;
+                           
                                $scope.UnitNumber1FieldSpecialType = item.FieldSpecialType;
                                $scope.InventoryObject.UnitNumber1 = TryParseFloat(item.FieldDefaultValue);
-                               $scope.UnitNumber1FieldNumberMax = TryParseFloat(item.FieldNumberMax.toString());
-                               $scope.UnitNumber1FieldNumberMin = TryParseFloat(item.FieldNumberMin.toString());
+                               $scope.UnitNumber1FieldNumberMax = TryParseFloat(item.FieldNumberMax);
+                               $scope.UnitNumber1FieldNumberMin = TryParseFloat(item.FieldNumberMin);
 
                            }
                            else if (item.FieldName == 'UnitNumber2') {
                                $scope.UnitNumber2FieldSpecialType = item.FieldSpecialType;
                                $scope.InventoryObject.UnitNumber2 = TryParseFloat(item.FieldDefaultValue);
-                               $scope.UnitNumber2FieldNumberMax = TryParseFloat(item.FieldNumberMax.toString());
-                               $scope.UnitNumber2FieldNumberMin = TryParseFloat(item.FieldNumberMin.toString());
+                               $scope.UnitNumber2FieldNumberMax = TryParseFloat(item.FieldNumberMax);
+                               $scope.UnitNumber2FieldNumberMin = TryParseFloat(item.FieldNumberMin);
                            }
 
                        });
@@ -2905,7 +3089,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.Unitautocomplete = function (FieldName) {
         $("#Unitautolistmodal").modal('show');
 
-        ;
+    
         switch (FieldName) {
             case 'UniqueTag':
                 $scope.UnitAutoComboValues = $scope.UniqueTagCombovalues;
@@ -4676,7 +4860,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
 
         $scope.GetAllData();
-
+        $scope.GetActiveUnitDataField();
         $("#modal3").modal('hide');
 
         $(".Addbtn").show()
