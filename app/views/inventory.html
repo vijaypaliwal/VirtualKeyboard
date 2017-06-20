@@ -445,64 +445,374 @@
                             </div>
                         </div>
 
+                        <!--PlaygroundSwiper for unitdata swipermode-->
+
                         <div ng-if="obj.ColumnName=='iReqValue'" class="form-group">
                             <label>{{obj.ColumnLabel}}</label>
 
-                            <div class="input-group">
-                                <input id="UniqueTag" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="text" ng-model="InventoryObject.UniqueTag" class="form-control" value="" />
-                                <span ng-if="mtuvar1==false" class="redText">Please input some unique data</span>
+                            <!--<div class="input-group">
+            <input id="UniqueTag" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="text" ng-model="InventoryObject.UniqueTag" class="form-control" value="" />
+            <span ng-if="mtuvar1==false" class="redText">Please input some unique data</span>
+        </div>-->
+                            <!--Prefix , Suffix-->
+                            <div ng-if="ReqValueFieldSpecialType == 0">
+                                <div class="input-group">
+                                    <input id="UniqueTag" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="text" ng-model="InventoryObject.UniqueTag" class="form-control" />
+                                    <span ng-if="mtuvar1==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
 
+                            <!--Open Field-->
+                            <div ng-if="ReqValueFieldSpecialType == 1">
+                                <div class="input-group">
+                                    <input id="UniqueTag" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="text" ng-model="InventoryObject.UniqueTag" class="form-control" value="" />
+                                    <span ng-if="mtuvar1==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+                            <!--Dropdown-->
+                            <div ng-if="ReqValueFieldSpecialType == 2">
+                                <div class="input-group">
+                                    <select class="form-control">
+                                        <option id="UniqueTag" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="text" ng-model="InventoryObject.UniqueTag" ng-repeat="obj in UniqueTagCombovalues">{{obj}}</option>
+                                    </select>
+                                    <span ng-if="mtuvar1==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+                            <!--AutoComplete-->
+                            <div ng-if="ReqValueFieldSpecialType == 3">
+                                <div class="input-group">
+                                    <input id="UniqueTag" ng-model="InventoryObject.UniqueTag" class="form-control" type="text" ng-blur="mtuvar1=CheckUnitDataFieldValue('UniqueTag',CheckIsAllowDuplicate('UniqueTag'))" />
+                                    <span ng-click="Unitautocomplete('UniqueTag')" class="input-group-addon last"><i class="fa fa-search"></i></span>
+                                    <span ng-if="mtuvar1==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+
+
+                            <!--Email-->
+                            <div ng-if="ReqValueFieldSpecialType == 4">
+                                <div class="input-group">
+                                    <input id="UniqueTag" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="email" ng-model="InventoryObject.UniqueTag" class="form-control" value="" />
+                                    <span ng-if="mtuvar1==false" class="redText">Please input some unique data</span>
+
+                                </div>
+                            </div>
+
+
+                            <!--Month-->
+                            <div ng-if="ReqValueFieldSpecialType == 5">
+                                <div class="input-group">
+                                    <input id="UniqueTag" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="month" ng-model="InventoryObject.UniqueTag" class="form-control" value="" />
+                                    <span ng-if="mtuvar1==false" class="redText">Please input some unique data</span>
+
+                                </div>
+                            </div>
+
+
+                            <!--Week-->
+                            <div ng-if="ReqValueFieldSpecialType == 6">
+                                <div class="input-group">
+
+                                    <select id="UniqueTag" ng-model="InventoryObject.UniqueTag" class="form-control" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))">
+                                        <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
+                                        <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
+                                        <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
+                                        <option ng-repeat="n in weeklist" value="{{CurrentYear+2}}-W{{n}}">Week {{n}}, {{CurrentYear+2}}</option>
+                                    </select>
+                                    <!--<input id="UniqueTag" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="week" ng-model="InventoryObject.UniqueTag" class="form-control" value="" />-->
+                                    <span ng-if="mtuvar1==false" class="redText">Please input some unique data</span>
+
+                                </div>
+                            </div>
+
+
+
+                            <!--Radio-->
+                            <div ng-if="ReqValueFieldSpecialType == 12">
+                                <div class="input-group">
+                                    <!--<input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" />-->
+
+                                    <input type="text" id="UniqueTag" ng-model="InventoryObject.UniqueTag" class="form-control" />
+                                    <span class="input-group-addon last" ng-click="Unitradiolist('UniqueTag')"><i class="fa fa-circle-o"></i></span>
+                                    <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
+                                </div>
                             </div>
                         </div>
+
                         <div ng-if="obj.ColumnName=='iUnitTag2'" class="form-group">
                             <label>{{obj.ColumnLabel}}</label>
-                            <div class="input-group">
-                                <input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
-                                <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
+                            <!--<div class="input-group">
+            <input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
+            <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
+        </div>-->
+                            <!--Prefix , Suffix -->
+                            <div ng-if="UnitTag2FieldSpecialType == 0">
+                                <div class="input-group">
+                                    <input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" />
+                                    <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+                            <!--Open Field-->
+                            <div ng-if="UnitTag2FieldSpecialType == 1">
+                                <div class="input-group">
+                                    <input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
+                                    <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+
+                            <!--DropDown-->
+                            <div ng-if="UnitTag2FieldSpecialType == 2">
+                                <div class="input-group">
+                                    <select class="form-control">
+                                        <option id="UnitTag2" ng-blur="mtuvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" ng-model="InventoryObject.UniqueTag" ng-repeat="obj in UniqueTag2Combovalues">{{obj}}</option>
+                                    </select>
+                                    <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+                            <!--Autocomplete-->
+                            <div ng-if="UnitTag2FieldSpecialType == 3">
+                                <div class="input-group">
+                                    <input id="UnitTag2" ng-model="InventoryObject.UnitTag2" class="form-control" type="text" ng-blur="mtuvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" />
+                                    <span ng-click="Unitautocomplete('UnitTag2')" class="input-group-addon last"><i class="fa fa-search"></i></span>
+                                    <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+                            <!--Email-->
+                            <div ng-if="UnitTag2FieldSpecialType == 4">
+                                <div class="input-group">
+                                    <input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="email" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
+                                    <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+                            <!--Month-->
+                            <div ng-if="UnitTag2FieldSpecialType == 5">
+                                <div class="input-group">
+                                    <input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="month" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />
+                                    <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+
+                            <!--Week-->
+                            <div ng-if="UnitTag2FieldSpecialType == 6">
+                                <div class="input-group">
+
+                                    <select id="UnitTag2" ng-model="InventoryObject.UnitTag2" class="form-control" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))">
+                                        <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
+                                        <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
+                                        <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
+                                        <option ng-repeat="n in weeklist" value="{{CurrentYear+2}}-W{{n}}">Week {{n}}, {{CurrentYear+2}}</option>
+                                    </select>
+
+                                    <!--<input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="week" ng-model="InventoryObject.UnitTag2" class="form-control" value="" />-->
+                                    <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+
+
+                            <!--Radio-->
+                            <div ng-if="UnitTag2FieldSpecialType == 12">
+                                <div class="input-group">
+                                    <input type="text" id="UnitTag2" ng-model="InventoryObject.UnitTag2" class="form-control" />
+                                    <span class="input-group-addon last" ng-click="Unitradiolist('UnitTag2')"><i class="fa fa-circle-o"></i></span>
+                                    <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
+                                </div>
                             </div>
                         </div>
+
                         <div ng-if="obj.ColumnName=='iUnitTag3'" class="form-group">
 
                             <label>{{obj.ColumnLabel}}</label>
-                            <div class="input-group">
-                                <input id="UnitTag3" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />
-                                <span ng-if="mtuvar3==false" class="redText">Please input some unique data</span>
+                            <!--<div class="input-group">
+            <input id="UnitTag3" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />
+            <span ng-if="mtuvar3==false" class="redText">Please input some unique data</span>
+        </div>-->
+                            <!--Prefix , Suffix-->
+                            <div ng-if="UnitTag3FieldSpecialType == 0">
+                                <div class="input-group">
+                                    <input id="UnitTag3" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" />
+                                    <span ng-if="mtuvar3==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+                            <!--Open Field-->
+                            <div ng-if="UnitTag3FieldSpecialType == 1">
+                                <div class="input-group">
+                                    <input id="UnitTag3" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />
+                                    <span ng-if="mtuvar3==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+
+                            <!--Dropdown-->
+                            <div ng-if="UnitTag3FieldSpecialType == 2">
+                                <div class="input-group">
+                                    <select class="form-control">
+                                        <option id="UnitTag3" ng-blur="mtuvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" ng-model="InventoryObject.UnitTag3" ng-repeat="obj in UniqueTag3Combovalues">{{obj}}</option>
+                                    </select>
+                                    <span ng-if="mtuvar3==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+                            <!--Autocomplete-->
+                            <div ng-if="UnitTag3FieldSpecialType == 3">
+                                <div class="input-group">
+                                    <!--<input id="UnitTag3" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />-->
+
+                                    <input id="UnitTag3" ng-model="InventoryObject.UnitTag3" class="form-control" type="text" ng-blur="mtuvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" />
+                                    <span ng-click="Unitautocomplete('UnitTag3')" class="input-group-addon last"><i class="fa fa-search"></i></span>
+
+                                    <span ng-if="mtuvar3==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+
+                            <!--Email-->
+                            <div ng-if="UnitTag3FieldSpecialType == 4">
+                                <div class="input-group">
+                                    <input id="UnitTag3" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="email" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />
+                                    <span ng-if="mtuvar3==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+                            <!--Month-->
+                            <div ng-if="UnitTag3FieldSpecialType == 5">
+                                <div class="input-group">
+                                    <input id="UnitTag3" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="month" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />
+                                    <span ng-if="mtuvar3==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+
+                            <!--Week-->
+                            <div ng-if="UnitTag3FieldSpecialType == 6">
+                                <div class="input-group">
+                                    <select id="UnitTag3" ng-model="InventoryObject.UnitTag3" class="form-control" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))">
+                                        <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
+                                        <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
+                                        <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
+                                        <option ng-repeat="n in weeklist" value="{{CurrentYear+2}}-W{{n}}">Week {{n}}, {{CurrentYear+2}}</option>
+                                    </select>
+
+                                    <!--<input id="UnitTag3" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="week" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />-->
+                                    <span ng-if="mtuvar3==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+
+                            <!--Radio-->
+                            <div ng-if="UnitTag3FieldSpecialType == 12">
+                                <div class="input-group">
+                                    <input type="text" id="UnitTag3" ng-model="InventoryObject.UnitTag3" class="form-control" />
+                                    <span class="input-group-addon last" ng-click="Unitradiolist('UnitTag3')"><i class="fa fa-circle-o"></i></span>
+                                    <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
+                                </div>
                             </div>
                         </div>
+
                         <div ng-if="obj.ColumnName=='iUniqueDate'" class="form-group">
                             <label>{{obj.ColumnLabel}}</label>
 
+                            <!--<div class="input-group">
+            <input id="UniqueDate" ng-blur="mtuvar4=CheckUnitDataFieldValue('UniqueDate',CheckIsAllowDuplicate('UniqueDate'))" type="date" ng-model="InventoryObject.UniqueDate" class="form-control" value="" />
+            <span ng-if="mtuvar4==false" class="redText">Please input some unique data</span>
+        </div>-->
+
+
                             <div class="input-group">
-                                <input id="UniqueDate" ng-blur="mtuvar4=CheckUnitDataFieldValue('UniqueDate',CheckIsAllowDuplicate('UniqueDate'))" type="date" ng-model="InventoryObject.UniqueDate" class="form-control" value="" />
+                                <input id="UniqueDate" ng-if="UniqueDateFieldSpecialType==16" ng-blur="mtuvar4=CheckUnitDataFieldValue('UniqueDate',CheckIsAllowDuplicate('UniqueDate'))" type="datetime-local" ng-model="InventoryObject.UniqueDate" class="form-control" />
+                                <input id="UniqueDate" ng-if="UniqueDateFieldSpecialType==17" ng-blur="mtuvar4=CheckUnitDataFieldValue('UniqueDate',CheckIsAllowDuplicate('UniqueDate'))" type="time" ng-model="InventoryObject.UniqueDate" class="form-control" />
+                                <input id="UniqueDate" ng-if="UniqueDateFieldSpecialType!=16 && UniqueDateFieldSpecialType!=17" ng-blur="mtuvar4=CheckUnitDataFieldValue('UniqueDate',CheckIsAllowDuplicate('UniqueDate'))" type="date" ng-model="InventoryObject.UniqueDate" class="form-control" />
                                 <span ng-if="mtuvar4==false" class="redText">Please input some unique data</span>
                             </div>
                         </div>
+
                         <div ng-if="obj.ColumnName=='iUnitDate2'" class="form-group">
 
                             <label>{{obj.ColumnLabel}}</label>
-
+                            <!--<div class="input-group">
+            <input id="UnitDate2" ng-blur="mtuvar5=CheckUnitDataFieldValue('UnitDate2',CheckIsAllowDuplicate('UnitDate2'))" type="date" ng-model="InventoryObject.UnitDate2" class="form-control" value="" />
+            <span ng-if="mtuvar5==false" class="redText">Please input some unique data</span>
+        </div>-->
                             <div class="input-group">
-                                <input id="UnitDate2" ng-blur="mtuvar5=CheckUnitDataFieldValue('UnitDate2',CheckIsAllowDuplicate('UnitDate2'))" type="date" ng-model="InventoryObject.UnitDate2" class="form-control" value="" />
+                                <input id="UnitDate2" ng-if="UnitDate2FieldSpecialType==16" ng-blur="mtuvar5=CheckUnitDataFieldValue('UnitDate2',CheckIsAllowDuplicate('UnitDate2'))" type="datetime-local" ng-model="InventoryObject.UnitDate2" class="form-control" />
+                                <input id="UnitDate2" ng-if="UnitDate2FieldSpecialType==17" ng-blur="mtuvar5=CheckUnitDataFieldValue('UnitDate2',CheckIsAllowDuplicate('UnitDate2'))" type="time" ng-model="InventoryObject.UnitDate2" class="form-control" />
+                                <input id="UnitDate2" ng-if="UnitDate2FieldSpecialType!=16 && UnitDate2FieldSpecialType!=17" ng-blur="mtuvar5=CheckUnitDataFieldValue('UnitDate2',CheckIsAllowDuplicate('UnitDate2'))" type="date" ng-model="InventoryObject.UnitDate2" class="form-control" />
                                 <span ng-if="mtuvar5==false" class="redText">Please input some unique data</span>
                             </div>
                         </div>
+
                         <div ng-if="obj.ColumnName=='iUnitNumber1'" class="form-group">
                             <label>{{obj.ColumnLabel}}</label>
-                            <div class="input-group">
-                                <input id="UnitNumber1" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'))" type="number" class="form-control" value="" ng-model="InventoryObject.UnitNumber1" />
-                                <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
+                            <!--<div class="input-group">
+            <input id="UnitNumber1" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'))" type="number" class="form-control" value="" ng-model="InventoryObject.UnitNumber1" />
+            <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
+        </div>-->
+                            <!--NumberType Unit Data Fields-->
+                            <div ng-if="UnitNumber1FieldSpecialType != 14">
+                                <div class="input-group">
+                                    <input id="UnitNumber1" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'))" type="number" max="{{UnitNumber1FieldNumberMax}}" min="{{UnitNumber1FieldNumberMin}}" class="form-control" ng-model="InventoryObject.UnitNumber1" />
+                                    <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+                            <!--NumberIncrementerType Unit Data Fields-->
+                            <div ng-if="UnitNumber1FieldSpecialType == 14">
+                                <div class="input-group">
+                                    <input id="UnitNumber1" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'))" type="number" max="{{UnitNumber1FieldNumberMax}}" min="{{UnitNumber1FieldNumberMin}}" class="form-control" ng-model="InventoryObject.UnitNumber1" />
+                                    <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
+                                    <span ng-click="UpDownValueUnit('UnitNumber1',false)" class="input-group-addon last">
+                                        <i class="fa fa-minus"></i>
+                                    </span>
+
+                                    <span ng-click="UpDownValueUnit('UnitNumber1',true)" class="input-group-addon last">
+                                        <i class="fa fa-plus"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                        <div ng-if="obj.ColumnName=='iUnitNumber2'" class="form-group">
 
+                        <div ng-if="obj.ColumnName=='iUnitNumber2'" class="form-group">
                             <label>{{obj.ColumnLabel}}</label>
 
-                            <div class="input-group">
+                            <!--<div class="input-group">
 
-                                <input id="UnitNumber2" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'))" type="number" class="form-control" value="" ng-model="InventoryObject.UnitNumber2" />
-                                <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
+            <input id="UnitNumber2" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'))" type="number" class="form-control" value="" ng-model="InventoryObject.UnitNumber2" />
+            <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
+        </div>-->
+                            <!--NumberType Unit Data Fields-->
+                            <div ng-if="UnitNumber2FieldSpecialType!= 14">
+                                <div class="input-group">
+                                    <input id="UnitNumber2" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'))" type="number" max="{{UnitNumber2FieldNumberMax}}" min="{{UnitNumber2FieldNumberMin}}" class="form-control" ng-model="InventoryObject.UnitNumber2" />
+                                    <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
+                                </div>
+                            </div>
+
+                            <!--NumberIncrementerType Unit Data Fields-->
+                            <div ng-if="UnitNumber2FieldSpecialType == 14">
+                                <div class="input-group">
+                                    <input id="UnitNumber2" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'))" type="number" max="{{UnitNumber2FieldNumberMax}}" min="{{UnitNumber2FieldNumberMin}}" class="form-control" ng-model="InventoryObject.UnitNumber2" />
+                                    <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
+                                    <span ng-click="UpDownValueUnit('UnitNumber2',false)" class="input-group-addon last">
+                                        <i class="fa fa-minus"></i>
+                                    </span>
+                                    <span ng-click="UpDownValueUnit('UnitNumber2',true)" class="input-group-addon last">
+                                        <i class="fa fa-plus"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
+
+
+
                         <div class="form-group" ng-if="CheckInCommonArray(obj.ColumnName)!=true && InventoryObject.CustomPartData.length>0">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired" class="redText">*</span></label>
 
@@ -514,7 +824,7 @@
                                         <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='month'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
                                         <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='email'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
 
-                                        <select ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='week'">
+                                        <select id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='week'">
                                             <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                             <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                             <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -531,7 +841,7 @@
 
 
                                 <div class="input-group" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType == 1">
-                                    <input type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
+                                    <input disabled type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
 
                                     <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnName, obj.cfdID, 'item')"><i class="fa fa-circle-o"></i></span>
                                 </div>
@@ -595,7 +905,7 @@
 
                                 <div class="input-group" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true">
 
-                                    <input id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" type="text" />
+                                    <input disabled id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" type="text" />
                                     <span ng-click="customautocomplete(obj.ColumnName, obj.cfdID, 'item')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
                                 </div>
@@ -646,7 +956,7 @@
                                         <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" type="{{obj.cfdInputMask}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
 
 
-                                        <select ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
+                                        <select id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
                                             <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                             <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                             <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -665,7 +975,7 @@
 
 
                                 <div class="input-group" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType == 1">
-                                    <input type="text" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
+                                    <input disabled type="text" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
 
                                     <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>
                                 </div>
@@ -726,7 +1036,7 @@
                                 </div>
 
                                 <div class="input-group" ng-if="GetCustomItemObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true">
-                                    <input id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" type="text" />
+                                    <input disabled id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" type="text" />
                                     <span ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
                                 </div>
 
@@ -1353,7 +1663,7 @@
                                 <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='month'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
                                 <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='email'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
 
-                                <select ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='week'">
+                                <select id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='week'">
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -1371,7 +1681,7 @@
                         </div>
 
                         <div class="input-group" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType ==1">
-                            <input type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
+                            <input disabled type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
 
                             <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnName, obj.cfdID, 'item')"><i class="fa fa-circle-o"></i></span>
                         </div>
@@ -1430,7 +1740,7 @@
 
 
 
-                        <input ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" type="text" />
+                        <input disabled ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" type="text" />
                         <span ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnName, obj.cfdID, 'item')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
 
@@ -1491,7 +1801,7 @@
                                 <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
                                 <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" type="{{obj.cfdInputMask}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
 
-                                <select ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
+                                <select id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -1514,7 +1824,7 @@
 
 
                         <div class="input-group" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType == 1">
-                            <input type="text" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
+                            <input disabled type="text" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
 
                             <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>
                         </div>
@@ -1573,7 +1883,7 @@
                         </div>
                         <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true && GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete != true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomActivity_')"><i class="fa fa-plus"></i></span>
 
-                        <input ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" type="text" />
+                        <input disabled ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" type="text" />
                         <span ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
                         <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
@@ -2216,7 +2526,7 @@
                                 <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='month'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
                                 <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='email'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
 
-                                <select ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='week'">
+                                <select id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='week'">
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -2238,7 +2548,7 @@
 
 
                         <div class="input-group" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType == 1">
-                            <input type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
+                            <input disabled type="text" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
 
                             <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnName, obj.cfdID, 'item')"><i class="fa fa-circle-o"></i></span>
                         </div>
@@ -2299,7 +2609,7 @@
 
 
 
-                        <input ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" type="text" />
+                        <input disabled ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" type="text" />
                         <span ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnName, obj.cfdID, 'item')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
 
@@ -2360,7 +2670,7 @@
                                 <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
                                 <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" type="{{obj.cfdInputMask}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
 
-                                <select ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
+                                <select id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -2380,7 +2690,7 @@
                         </div>
 
                         <div class="input-group" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType == 1">
-                            <input type="text" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
+                            <input disabled type="text" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
 
                             <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>
                         </div>
@@ -2438,7 +2748,7 @@
 
                         <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true && GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete != true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomActivity_')"><i class="fa fa-plus"></i></span>
 
-                        <input ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" type="text" />
+                        <input disabled ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" type="text" />
                         <span ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
                         <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>
@@ -2593,16 +2903,14 @@
 
     <div class="modal-body">
 
-
         <p ng-repeat="obj in currtrentcustomradiovalue" class="todo-element">
-            <input ng-click="fillcurrentradiovalue(obj)" id="{{obj}}" name="dashrath" type="radio"> <label for="{{obj}}">{{obj}}</label>
+        <input ng-click="fillcurrentradiovalue(obj)" id="{{obj}}" name="dashrath" type="radio"> <label for="{{obj}}">{{obj}}</label>
         </p>
-
         <hr />
         <div class="row">
             <div class="col-md-12">
-                <a ng-click="fillvaluetoradio()" class="waves-effect btn btn-primary arrow-left bknext darkblue"> <i class="fa fa-check"></i> OK</a>
-                <a data-dismiss="modal" class="waves-effect btn btn-gray"> <i class="fa fa-times"></i> Cancel </a>
+            <a ng-click="fillvaluetoradio()" class="waves-effect btn btn-primary"> <i class="fa fa-check"></i> OK</a>
+            <a data-dismiss="modal" class="waves-effect btn btn-gray"> <i class="fa fa-times"></i> Cancel </a>
             </div>
         </div>
 

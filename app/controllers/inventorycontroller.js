@@ -581,6 +581,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.GetLastValueCustom = function (id, Type) {
 
 
+        debugger;
+
+
 
         var field = "Inv_" + id;
         var _fieldid = "";
@@ -619,9 +622,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             $("#firstDiv").find(_fieldid).trigger('change');
             $("#firstDiv").find(_fieldid).trigger('input');
-
-
-
 
 
         }
@@ -663,6 +663,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     //var rString = randomString(10, '0123456789');
 
     $scope.GetLastValueData = function (field, Type) {
+
+     
+
         var _toCheckValue = "";
         field = Type != undefined && Type != "" ? "Inv_" + field : field;
         _toCheckValue = localStorageService.get(field);
@@ -675,13 +678,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
     $scope.GetLastValue = function (field, id) {
 
-
-
-
         var _value = "";
         var _toCheckValue = localStorageService.get(field);
-
-
 
 
         if (_toCheckValue != null && _toCheckValue != undefined) {
@@ -2125,14 +2123,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
-    $scope.fillvaluetoradio = function () {
+    $scope.fillvaluetoradio = function ()
+    {
+        debugger;
 
-        $("#" + $scope.activeradiofield).val($scope.selectedradiovalue);
+     $("#" + $scope.activeradiofield).val($scope.selectedradiovalue);
+      $("#customradiotextmodal").modal("hide");
+   
+      $("#" + $scope.activeradiofield).trigger("input");
+   
 
-        $("#" + $scope.activeradiofield).trigger("input");
-
-        $("#customradiotextmodal").modal("hide");
-       
     }
 
 
@@ -2726,7 +2726,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
     $scope.UpDownValueUnit = function (value, IsUp) {
 
-        debugger;
+        ;
         var _ID;
         _ID = "#" + value;
         var _inputvalue = $(_ID).val();
@@ -2768,7 +2768,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
 
-                   debugger;
+                   ;
                    if (response.GetActiveUnitDataFieldsResult.Success == true) {
                        $scope.UnitDataList = response.GetActiveUnitDataFieldsResult.Payload;
 
@@ -2862,7 +2862,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                            }
 
                            else if (item.FieldName == 'UnitNumber1') {
-                               debugger;
+                               ;
                                $scope.UnitNumber1FieldSpecialType = item.FieldSpecialType;
                                $scope.InventoryObject.UnitNumber1 = TryParseFloat(item.FieldDefaultValue);
                                $scope.UnitNumber1FieldNumberMax = TryParseFloat(item.FieldNumberMax.toString());
@@ -2905,7 +2905,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.Unitautocomplete = function (FieldName) {
         $("#Unitautolistmodal").modal('show');
 
-        debugger;
+        ;
         switch (FieldName) {
             case 'UniqueTag':
                 $scope.UnitAutoComboValues = $scope.UniqueTagCombovalues;
