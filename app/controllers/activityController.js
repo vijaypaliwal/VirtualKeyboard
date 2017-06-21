@@ -45,6 +45,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.LocationSearchList = [];
     $scope.LocationList = [];
     $scope.TempLocationID = -1;
+
+    $scope.weeklist = [];
+
+    $scope.CurrentYear = new Date().getFullYear();
+
+    for (var i = 1; i <= 52; i++) {
+        $scope.weeklist.push(i);
+    }
+
     function CheckScopeBeforeApply() {
         if (!$scope.$$phase) {
             $scope.$apply();
@@ -483,6 +492,79 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         today = yyyy + '-' + mm + '-' + dd;
 
         return today;
+    }
+
+
+    $scope.currtrentcustomauto = [];
+
+
+    $scope.customautocomplete = function (ColumnName, id, fieldtype) {
+        $("#customautolistmodal").modal('show');
+
+
+
+      
+
+            $scope.activecustomfield = "CustomActivity_" + id;
+
+            for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+                if ($scope.CustomActivityDataList[i].ColumnMap == ColumnName) {
+                    $scope.currtrentcustomauto = $scope.CustomActivityDataList[i].cfdComboValues;
+                    break;
+                }
+            }
+
+
+
+    }
+
+
+
+    $scope.fillcustomvalue = function (value) {
+        $("#" + $scope.activecustomfield).val(value);
+
+        $("#" + $scope.activecustomfield).trigger("input");
+        CheckScopeBeforeApply();
+        $("#customautolistmodal").modal('hide');
+
+    }
+
+    $scope.currtrentcustomradiovalue = [];
+    $scope.customradiolist = function (ColumnName, id, fieldtype) {
+
+
+
+
+       
+            $scope.activeradiofield = "CustomActivity_" + id;
+
+            for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+                if ($scope.CustomActivityDataList[i].ColumnMap == ColumnName) {
+                    $scope.currtrentcustomradiovalue = $scope.CustomActivityDataList[i].cfdRadioValues;
+                    break;
+                }
+            }
+
+
+        $("#customradiotextmodal").modal("show");
+    }
+
+    $scope.fillcurrentradiovalue = function (value) {
+
+        $scope.selectedradiovalue = value;
+
+
+
+    }
+
+    $scope.fillvaluetoradio = function () {
+
+        $("#" + $scope.activeradiofield).val($scope.selectedradiovalue);
+
+        $("#" + $scope.activeradiofield).trigger("input");
+
+        $("#customradiotextmodal").modal("hide");
+
     }
     $scope.ScanLineItem = function (Type, Id, index, inventoryID) {
         var _typeString = "";
@@ -2087,7 +2169,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         var j = 0;
         var _TempArray = [];
         for (k = 0; k < $scope.CustomActivityDataList.length; k++) {
-            if ($scope.CustomActivityDataList[k].cfdCustomFieldType == "Inventory" && $scope.CustomActivityDataList[k].isLineItem == "True") {
+            if ($scope.CustomActivityDataList[k].cfdCustomFieldType.toLowerCase() == "inventory" && $scope.CustomActivityDataList[k].isLineItem == "True") {
                 _TempArray.push($scope.CustomActivityDataList[k]);
                 $scope.isLineItemColumnNames.push($scope.CustomActivityDataList[k].cfdName)
             }
@@ -2225,6 +2307,45 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         return today;
     }
+
+    function ConverttoMsJsonDateTime(_DateValue) {
+
+
+        var _date = angular.copy(_DateValue);
+
+        var dsplit1 = _date.split("/");
+
+        var _timeSplit = dsplit1[2].split(" ");
+
+        var _timeString = _timeSplit[1].split(":");
+
+        var _ToMergeTime = "T" + (_timeSplit[2] == "AM" ? _timeString[0] : (12 + parseInt(_timeString[0]))).toString() + ":" + _timeString[1];
+
+        var now = new Date(_timeSplit[0], dsplit1[0] - 1, dsplit1[1]);
+
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+        return today + _ToMergeTime;
+    }
+
+    function ConvertToTime(_timeValue) {
+
+        if ($.trim(_timeValue) != "") {
+
+            var _timeSplit = _timeValue.split(" ");
+            var _timeString = _timeSplit[0].split(":");
+
+            var _ToMergeTime = (_timeSplit[1] == "AM" ? _timeString[0] : (12 + parseInt(_timeString[0]))).toString() + ":" + _timeString[1];
+
+            return _ToMergeTime;
+        }
+
+        return "";
+
+    }
     function GetCustomDataField(Type) {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -2249,7 +2370,17 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                            var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
                            if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
                                if (_defaultValue != null && _defaultValue != "") {
-                                   $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
+
+                                   if ($scope.CustomActivityDataList[i].cfdSpecialType == 2) {
+                                       $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDateTime(_defaultValue);
+                                   }
+                                   else if ($scope.CustomActivityDataList[i].cfdSpecialType != 3) {
+                                       $scope.CustomActivityDataList[i].cfdDefaultValue = ConvertToTime(_defaultValue);
+                                   }
+                                   else {
+
+                                       $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
+                                   }
                                }
                            }
                            else if ($scope.CustomActivityDataList[i].cfdDataType == "currency" || $scope.CustomActivityDataList[i].cfdDataType == "number") {
@@ -2265,6 +2396,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                                var _value = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
                                $scope.CustomActivityDataList[i].cfdDefaultValue = (_value == "true" || _value === "True");
                            }
+                           var _CustomObj = $scope.CustomActivityDataList[i];
+                           var _value = ($.trim(_CustomObj.cfdprefixsuffixtype) != "" ? _CustomObj.CombineValue : _CustomObj.cfdDefaultValue);
+
+                           $scope.CustomActivityDataList[i].CfValue = _value;
                        }
 
                        CheckScopeBeforeApply();
@@ -2277,20 +2412,58 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                    CheckScopeBeforeApply();
                },
                error: function (response) {
-
                    $scope.ShowErrorMessage("Getting custom data", 2, 1, err.statusText);
 
                }
            });
     }
 
+    $scope.UpDownValue = function (value, IsUp, Type) {
 
+        switch (value) {
+            case "Quantity":
+             
+                break;
+            default:
+                var _name;
+                var _ID;
+
+                _ID = "#CustomActivity_" + value
+
+                var _inputvalue = $(_ID).val();
+                var _Max = $(_ID).attr("max");
+                var _Min = $(_ID).attr("min");
+                _inputvalue = TryParseInt(_inputvalue, 0);
+                _Max = TryParseInt(_Max, -100);
+                _Min = TryParseInt(_Min, -100);
+                if (IsUp && _Max != -100 && _inputvalue == _Max) {
+                    log.error("Exceeding maximum value " + _Max + ", Please fill lesser value than maximum value");
+                }
+
+                else if (!IsUp && _Min != -100 && _inputvalue == _Min) {
+                    log.error("Beneath the  minimum value " + _Min + ", Please fill greater value than minimum value");
+
+                }
+                else {
+
+                    _inputvalue = _inputvalue + (IsUp ? 1 : -1);
+
+                    $(_ID).val(_inputvalue);
+
+
+                    $(_ID).trigger("input");
+                }
+
+        }
+
+
+    }
 
     $scope.IsActiveTransactionField = function (cfdid) {
 
 
         for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
-            if ($scope.CustomActivityDataList[i].cfdCustomFieldType == "Inventory" && $scope.CustomActivityDataList[i].cfdID == cfdid) {
+            if ($scope.CustomActivityDataList[i].cfdCustomFieldType.toLowerCase() == "inventory" && $scope.CustomActivityDataList[i].cfdID == cfdid) {
                 switch ($scope.CurrentOperation) {
                     case "Increase":
                         if ($scope.CustomActivityDataList[i].cfdIncludeOnAdd) {
@@ -2341,7 +2514,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     function init() {
 
-
+        debugger;
         $scope.CurrentCart = localStorageService.get("ActivityCart");
 
         var _CurrentAction = localStorageService.get("SelectedAction");
