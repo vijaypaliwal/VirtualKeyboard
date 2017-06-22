@@ -316,6 +316,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var _obj = undefined;
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
             if ($scope.CustomItemDataList[i].ColumnMap == ColumnMap) {
+
                 return $scope.CustomItemDataList[i];
             }
 
@@ -325,6 +326,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         return _obj;
 
     }
+
+  
 
 
     $('#myModal2').on('hidden.bs.modal', function () {
@@ -1507,7 +1510,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     }
                     else if ($scope.UniqueDateFieldSpecialType == 16)
                     {
-                        debugger;
+                        
                         var _dateValuearray = _updateDateval.split("T");
 
 
@@ -1615,7 +1618,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         wcfDateStr1234 = d1222.toMSJSON();
                 }
                     else if ($scope.UnitDate2FieldSpecialType == 17) {
-                        debugger;
+                        
 
                         var dsplit1 = _updateDateval1.split(":");
                     var d122 = new Date(1900, 1, 1);
@@ -2147,6 +2150,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                       $scope.CustomActivityDataList = response.GetAllDataResult.Payload[0].CustomActivityField;
+
+
+
+
+
+                    
+
+                      console.log(response.GetAllDataResult.Payload[0].CustomActivityField);
+
                       CheckScopeBeforeApply()
                        
                       for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
@@ -2183,9 +2195,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                           }
                           var _CustomObj = $scope.CustomActivityDataList[i];
                           var _value = ($.trim(_CustomObj.cfdprefixsuffixtype) != "" ? _CustomObj.CombineValue : _CustomObj.cfdDefaultValue);
-                          $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomActivityDataList[i].cfdID, Value: _value, DataType: $scope.CustomActivityDataList[i].cfdDataType });
+                          $scope.InventoryObject.CustomTxnData.push({ CfdID: $scope.CustomActivityDataList[i].cfdID, Value: _value, DataType: $scope.CustomActivityDataList[i].cfdDataType, TrueLabel: $scope.CustomActivityDataList[i].cfdTruelabel, FalseLabel: $scope.CustomActivityDataList[i].cfdFalselabel });
                       }
                       CheckScopeBeforeApply()
+
+                      console.log("Activity fields")
+                      console.log($scope.InventoryObject.CustomTxnData);
                       // Unit Of Measure
                       $scope.UOMList = response.GetAllDataResult.Payload[0].UnitOfMeasure;
                       CheckScopeBeforeApply()
@@ -3253,9 +3268,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type }),
                success: function (response) {
 
-                   if (response.LoginResult.Success == true) {
-
-
+                   if (response.LoginResult.Success == true)
+                   {
 
 
                        if (Type == 0) {

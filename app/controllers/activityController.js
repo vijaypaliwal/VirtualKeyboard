@@ -503,9 +503,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
 
-      
-
-            $scope.activecustomfield = "CustomActivity_" + id;
+        var _toAppend = fieldtype == "line" ? "LineItem_" : "CustomActivity_"
+        
+        $scope.activecustomfield = _toAppend + id;
 
             for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
                 if ($scope.CustomActivityDataList[i].ColumnMap == ColumnName) {
@@ -1284,6 +1284,16 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
 
     }
+    $scope.GetUnitDataFieldByName=function(Name)
+    {
+        for (var i = 0; i < $scope.UnitDataList.length; i++) {
+            if($scope.UnitDataList[i].FieldName==Name)
+            {
+                return $scope.UnitDataList[i];
+            }
+
+        }
+    }
     $scope.GetActiveUnitDataField = function () {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -1300,7 +1310,22 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                success: function (response) {
                    if (response.GetActiveUnitDataFieldsResult.Success == true) {
                        $scope.UnitDataList = response.GetActiveUnitDataFieldsResult.Payload;
-                       CheckScopeBeforeApply()
+
+                       for (var i = 0; i < $scope.UnitDataList.length; i++) {
+                           var _ComboValues = angular.copy($.trim($scope.UnitDataList[i].FieldComboValues));
+                           var _RadioValues = angular.copy($.trim($scope.UnitDataList[i].FieldRadioValues));
+                           if (_ComboValues != "")
+                           {
+                               $scope.UnitDataList[i].FieldComboValues = _ComboValues.split("\n");
+                           }
+
+                           if (_RadioValues != "") {
+                               $scope.UnitDataList[i].FieldRadioValues = _RadioValues.split(" ");
+                           }
+                          
+                       }
+
+                       CheckScopeBeforeApply();
                    }
                    else {
                        $scope.ShowErrorMessage("Active unit data columns", 1, 1, response.GetActiveUnitDataFieldsResult.Message)
@@ -1359,6 +1384,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         return _returnVar;
     }
+
     //#endregion check unit data
 
 
@@ -2163,7 +2189,35 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
     init();
+    $scope.UpDownValueUnit = function ( text,value, IsUp) {
 
+        debugger;
+        var _ID;
+        _ID = "#" +text+ value;
+        var _inputvalue = $(_ID).val();
+        var _Max = $(_ID).attr("max");
+        var _Min = $(_ID).attr("min");
+        _inputvalue = TryParseInt(_inputvalue, 0);
+        _Max = TryParseInt(_Max, -100);
+        _Min = TryParseInt(_Min, -100);
+        if (IsUp && _Max != -100 && _inputvalue == _Max) {
+            log.error("Exceeding maximum value " + _Max + ", Please fill lesser value than maximum value");
+        }
+
+        else if (!IsUp && _Min != -100 && _inputvalue == _Min) {
+            log.error("Beneath the  minimum value " + _Min + ", Please fill greater value than minimum value");
+
+        }
+        else {
+
+            _inputvalue = _inputvalue + (IsUp ? 1 : -1);
+
+            $(_ID).val(_inputvalue);
+
+
+            $(_ID).trigger("input");
+        }
+    }
     function UpdateCartWithCustomFields() {
         var k = 0;
         var j = 0;
@@ -2189,7 +2243,24 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         ColumnMap: _TempArray[j].ColumnMap,
                         cfdDataType: _TempArray[j].cfdDataType,
                         CfValue: _TempArray[j].cfdDefaultValue != null && $.trim(_TempArray[j].cfdDefaultValue) != "" ? _TempArray[j].cfdDefaultValue : "",
-                        cfdComboValues: _TempArray[j].cfdComboValues == null ? [] : _TempArray[j].cfdComboValues
+                        cfdComboValues: _TempArray[j].cfdComboValues == null ? [] : _TempArray[j].cfdComboValues,
+                        cfdprefixsuffixtype: _TempArray[j].cfdprefixsuffixtype == null ? "" : _TempArray[j].cfdprefixsuffixtype,
+                        cfdPrefix: _TempArray[j].cfdPrefix == null ? "" : _TempArray[j].cfdPrefix,
+                        cfdSuffix: _TempArray[j].cfdSuffix == null ? "" : _TempArray[j].cfdSuffix,
+                        cfdIsIncremental: _TempArray[j].cfdIsIncremental,
+                        cfdBaseValue: _TempArray[j].cfdBaseValue == null ? "" : _TempArray[j].cfdBaseValue,
+                        cfdIncrementby: _TempArray[j].cfdIncrementby == null ? "" : _TempArray[j].cfdIncrementby,
+                        cfdIsAutoComplete: _TempArray[j].cfdIsAutoComplete == null ? "" : _TempArray[j].cfdIsAutoComplete,
+                        cfdInputMask: _TempArray[j].cfdInputMask == "text" ? "NA" : _TempArray[j].cfdInputMask,
+                        MaximumValue: _TempArray[j].cfdIsIncremental == true ? _TempArray[j].MaximumValue : "",
+                        CombineValue: _TempArray[j].CombineValue,
+                        cfdSpecialType: _TempArray[j].cfdSpecialType == null ? "" : _TempArray[j].cfdSpecialType,
+                        cfdRadioValues: _TempArray[j].cfdRadioValues == null ? "" : _TempArray[j].cfdRadioValues,
+                        cfdTruelabel: _TempArray[j].cfdTruelabel,
+                        cfdFalselabel: _TempArray[j].cfdFalselabel,
+                        cfdUse24Hours: _TempArray[j].cfdUse24Hours,
+                        cfdMax: _TempArray[j].MaximumValue == null ? "" : _TempArray[j].MaximumValue,
+                        cfdMin: _TempArray[j].MinimumValue == null ? "" : _TempArray[j].MinimumValue,
                     });
                 }
 
@@ -2419,7 +2490,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
     $scope.UpDownValue = function (value, IsUp, Type) {
-
+      
         switch (value) {
             case "Quantity":
              
@@ -2428,7 +2499,16 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 var _name;
                 var _ID;
 
-                _ID = "#CustomActivity_" + value
+                if (Type == 3) {
+
+                    
+                    _ID = "#LineItem_" + value;
+                }
+                else {
+
+
+                    _ID = "#CustomActivity_" + value;
+                }
 
                 var _inputvalue = $(_ID).val();
                 var _Max = $(_ID).attr("max");
@@ -2514,7 +2594,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     function init() {
 
-        debugger;
+      
         $scope.CurrentCart = localStorageService.get("ActivityCart");
 
         var _CurrentAction = localStorageService.get("SelectedAction");
@@ -2529,44 +2609,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $scope._CurrentAction = _CurrentAction;
         GetActionType(_CurrentAction);
 
-        for (var i = 0; i < $scope.CurrentCart.length; i++) {
-
-            //if ($scope.CurrentCart[i].ApplyTransactionData.UnitDate2 != undefined && $scope.CurrentCart[i].ApplyTransactionData.UnitDate2 != null && $.trim($scope.CurrentCart[i].ApplyTransactionData.UnitDate2) != "") {
-
-            //    var _date = angular.copy($scope.CurrentCart[i].ApplyTransactionData.UnitDate2);
-
-            //    var dsplit1 = _date.split("/");
-
-
-
-
-            //    var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
-
-            //    var day = ("0" + now.getDate()).slice(-2);
-            //    var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-            //    var today = now.getFullYear() + "-" + (month) + "-" + (day);
-            //    $scope.CurrentCart[i].ApplyTransactionData.UnitDate2 = today;
-
-            //}
-
-
-            //if ($scope.CurrentCart[i].ApplyTransactionData.UniqueDate != undefined && $scope.CurrentCart[i].ApplyTransactionData.UniqueDate != null && $.trim($scope.CurrentCart[i].ApplyTransactionData.UniqueDate) != "") {
-
-            //    var _date = angular.copy($scope.CurrentCart[i].ApplyTransactionData.UniqueDate);
-
-            //    var dsplit1 = _date.split("/");
-            //    var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
-
-            //    var day = ("0" + now.getDate()).slice(-2);
-            //    var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-            //    var today = now.getFullYear() + "-" + (month) + "-" + (day);
-            //    $scope.CurrentCart[i].ApplyTransactionData.UniqueDate = today;
-
-            //}
-
-        }
+       
         $scope.totalLength = $scope.IsSingleMode == true ? $scope.CurrentCart.length + 2 : 3;
 
         GetMyInventoryColumns();
