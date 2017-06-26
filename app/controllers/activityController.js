@@ -83,14 +83,13 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     $scope.dropdownLabel = "";
 
-    $scope.Addnew = function (ID, FieldType)
-    {
+    $scope.Addnew = function (ID, FieldType) {
         $scope.dropdownLabel = "";
         $scope.FieldType = FieldType;
         $scope.currentcfdID = ID;
         CheckScopeBeforeApply();
 
-     
+
         $("#Adddropdownvalue").modal('show');
 
     }
@@ -108,11 +107,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "cfdID": $scope.currentcfdID, "Value": $scope.dropdownLabel }),
             dataType: 'json',
             contentType: 'application/json',
-            success: function (result)
-            {
+            success: function (result) {
 
                 $('#' + $scope.FieldType + $scope.currentcfdID).append('<option value=' + $scope.dropdownLabel + ' selected="selected"> ' + $scope.dropdownLabel + '</option>');
-               
+
 
                 $('#' + $scope.FieldType + $scope.currentcfdID).val($scope.dropdownLabel);
 
@@ -123,12 +121,12 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             error: function (err) {
 
                 alert("error");
-                 
-               
+
+
 
             },
             complete: function () {
-               
+
 
             }
 
@@ -504,15 +502,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
         var _toAppend = fieldtype == "line" ? "LineItem_" : "CustomActivity_"
-        
+
         $scope.activecustomfield = _toAppend + id;
 
-            for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
-                if ($scope.CustomActivityDataList[i].ColumnMap == ColumnName) {
-                    $scope.currtrentcustomauto = $scope.CustomActivityDataList[i].cfdComboValues;
-                    break;
-                }
+        for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+            if ($scope.CustomActivityDataList[i].ColumnMap == ColumnName) {
+                $scope.currtrentcustomauto = $scope.CustomActivityDataList[i].cfdComboValues;
+                break;
             }
+        }
 
 
 
@@ -535,15 +533,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
 
-       
-            $scope.activeradiofield = "CustomActivity_" + id;
 
-            for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
-                if ($scope.CustomActivityDataList[i].ColumnMap == ColumnName) {
-                    $scope.currtrentcustomradiovalue = $scope.CustomActivityDataList[i].cfdRadioValues;
-                    break;
-                }
+        $scope.activeradiofield = "CustomActivity_" + id;
+
+        for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+            if ($scope.CustomActivityDataList[i].ColumnMap == ColumnName) {
+                $scope.currtrentcustomradiovalue = $scope.CustomActivityDataList[i].cfdRadioValues;
+                break;
             }
+        }
 
 
         $("#customradiotextmodal").modal("show");
@@ -817,7 +815,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             if ($.trim(value) != "" && $.trim(value) != $.trim(defaultValueOfColumn)) {
 
-                                 
+
                                 if (CheckUnitDataDuplicate(ColumnName, value) == false) {
                                     _Count = _Count * 0;
                                 }
@@ -1284,11 +1282,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
 
     }
-    $scope.GetUnitDataFieldByName=function(Name)
-    {
+    $scope.GetUnitDataFieldByName = function (Name) {
         for (var i = 0; i < $scope.UnitDataList.length; i++) {
-            if($scope.UnitDataList[i].FieldName==Name)
-            {
+            if ($scope.UnitDataList[i].FieldName == Name) {
                 return $scope.UnitDataList[i];
             }
 
@@ -1314,15 +1310,14 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                        for (var i = 0; i < $scope.UnitDataList.length; i++) {
                            var _ComboValues = angular.copy($.trim($scope.UnitDataList[i].FieldComboValues));
                            var _RadioValues = angular.copy($.trim($scope.UnitDataList[i].FieldRadioValues));
-                           if (_ComboValues != "")
-                           {
+                           if (_ComboValues != "") {
                                $scope.UnitDataList[i].FieldComboValues = _ComboValues.split("\n");
                            }
 
                            if (_RadioValues != "") {
                                $scope.UnitDataList[i].FieldRadioValues = _RadioValues.split(" ");
                            }
-                          
+
                        }
 
                        CheckScopeBeforeApply();
@@ -1901,7 +1896,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     }
                 }
                 else {
-                     
+
                     $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocationText = obj.LocationName;
                     $scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation = obj.LocationID;
                     break;
@@ -2189,11 +2184,59 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
     init();
-    $scope.UpDownValueUnit = function ( text,value, IsUp) {
+    $scope.Unitautocomplete = function (ControlID, ID, FieldName) {
 
-        debugger;
+        var _unitData = $scope.GetUnitDataFieldByName(FieldName)
+        $scope.UnitAutoComboValues = _unitData.FieldComboValues;
+        $scope.ActiveUnitAutoCompleteField = ControlID + ID.toString();
+
+
+        $("#Unitautolistmodal").modal("show");
+    }
+
+
+    $scope.fillUnitAutoCompleteValue = function (value) {
+        $("#" + $scope.ActiveUnitAutoCompleteField).val(value);
+
+        $("#" + $scope.ActiveUnitAutoCompleteField).trigger("input");
+        CheckScopeBeforeApply();
+        $("#Unitautolistmodal").modal('hide');
+
+    }
+
+
+
+    $scope.Unitradiolist = function (ControlID, ID, FieldName) {
+
+        var _unitData = $scope.GetUnitDataFieldByName(FieldName)
+        $scope.UnitRadioValues = _unitData.FieldRadioValues;
+        $scope.ActiveUnitRadioField = ControlID + ID.toString();
+
+
+        $("#Unitradiotextmodal").modal("show");
+    }
+
+
+    $scope.fillUnitradiovalue = function (value) {
+        $scope.selectedUnitradiovalue = value;
+    }
+
+
+    $scope.fillUnitvaluetoradio = function () {
+
+        $("#" + $scope.ActiveUnitRadioField).val($scope.selectedUnitradiovalue);
+
+        $("#" + $scope.ActiveUnitRadioField).trigger("input");
+
+        $("#Unitradiotextmodal").modal("hide");
+
+    }
+
+    $scope.UpDownValueUnit = function (text, value, IsUp) {
+
+
         var _ID;
-        _ID = "#" +text+ value;
+        _ID = "#" + text + value;
         var _inputvalue = $(_ID).val();
         var _Max = $(_ID).attr("max");
         var _Min = $(_ID).attr("min");
@@ -2337,7 +2380,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         return IsAvailableMyInventoryColumn('iReqValue') || IsAvailableMyInventoryColumn('iUniqueDate') || IsAvailableMyInventoryColumn('iUnitDate2') || IsAvailableMyInventoryColumn('iUnitNumber1') || IsAvailableMyInventoryColumn('iUnitNumber2') || IsAvailableMyInventoryColumn('iUnitTag2') || IsAvailableMyInventoryColumn('iUnitTag3');
     }
     function SetPermisssions() {
-         
+
         $scope.CanIncrease = IsAvailableMyInventoryColumn('iQty') && $scope.checkpermission('ACTION:CanAddInventory') ? 'True' : 'False';
         $scope.CanDecrease = IsAvailableMyInventoryColumn('iQty') && $scope.checkpermission('ACTION:CanSubtractInventory') ? 'True' : 'False';
         $scope.CanConvert = IsAvailableMyInventoryColumn('uomUOM') && $scope.checkpermission('ACTION:CanConvertInventory') ? 'True' : 'False';
@@ -2490,10 +2533,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
     $scope.UpDownValue = function (value, IsUp, Type) {
-      
+
         switch (value) {
             case "Quantity":
-             
+
                 break;
             default:
                 var _name;
@@ -2501,7 +2544,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 if (Type == 3) {
 
-                    
+
                     _ID = "#LineItem_" + value;
                 }
                 else {
@@ -2594,7 +2637,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     function init() {
 
-      
+
         $scope.CurrentCart = localStorageService.get("ActivityCart");
 
         var _CurrentAction = localStorageService.get("SelectedAction");
@@ -2609,7 +2652,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $scope._CurrentAction = _CurrentAction;
         GetActionType(_CurrentAction);
 
-       
+
         $scope.totalLength = $scope.IsSingleMode == true ? $scope.CurrentCart.length + 2 : 3;
 
         GetMyInventoryColumns();
@@ -3317,7 +3360,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
 
         if (firstValue == secondValue) {
-             
+
 
             return true;
         }
@@ -3325,7 +3368,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         return false;
     }
     $scope.FillStatusLineItems = function (value, myid) {
-         
+
 
 
         $scope.StatusToUpdate = value == null ? "" : value;
@@ -3571,7 +3614,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     };
 
     function BuildMultipleData() {
-         
+
 
         var dt = new Date();
         var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate() - 1, 0, 0, 0, 0));
@@ -3887,85 +3930,259 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             }
 
             if ($scope.CurrentCart[k].ApplyTransactionData.UniqueDate != undefined && $scope.CurrentCart[k].ApplyTransactionData.UniqueDate != "") {
-
                 var dateVar = $scope.CurrentCart[k].ApplyTransactionData.UniqueDate;
-                var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
 
-                var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0] - 1, dsplit[1]);
+                if ($scope.GetUnitDataFieldByName('UniqueDate').FieldSpecialType == 16) {
 
-                // var d1 =  new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
-                if (_genVar == 1) {
+                    if ($scope.CurrentOperation == "Apply") {
+                        var _dateValuearray = dateVar.split("T");
 
 
-                    d1.setDate(d1.getDate());
+                        var tsplit12 = _dateValuearray[1].split(":");
+                        var dsplit12 = _dateValuearray[0].split("-");
+
+                        var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
+                        if (_genVar == 1) {
+                            d1222.setDate(d1222.getDate());
+
+                        }
+                        else {
+                            d1222.setDate(d1222.getDate() + _genVar);
+
+                        }
+                        var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
+
+                        wcfDateStr1 = d1222.toMSJSON();
+                    }
+                }
+                else if ($scope.GetUnitDataFieldByName('UniqueDate').FieldSpecialType == 17) {
+                    if ($scope.CurrentOperation == "Apply") {
+                        var dsplit1 = dateVar.split(":");
+                        var d122 = new Date(1900, 1, 1);
+
+                        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]), parseInt(dsplit1[1]), 0, 0))
+                        if (_genVar == 1) {
+                            d122.setDate(d122.getDate() + _genVar);
+                        }
+                        else {
+
+                            d122.setDate(d122.getDate() + _genVar);
+                        }
+                        var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
+                        wcfDateStr1 = d122.toMSJSON();
+                    }
                 }
                 else {
-                    d1.setDate(d1.getDate() + 1);
-                }
-                var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0))
 
-                wcfDateStr1 = d11.toMSJSON();
+                    var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
+
+                    var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0] - 1, dsplit[1]);
+
+                    // var d1 =  new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
+                    if (_genVar == 1) {
+
+
+                        d1.setDate(d1.getDate());
+                    }
+                    else {
+                        d1.setDate(d1.getDate() + 1);
+                    }
+                    var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0))
+
+                    wcfDateStr1 = d11.toMSJSON();
+                }
             }
             if ($scope.CurrentCart[k].ApplyTransactionData.UnitDate2 != undefined && $scope.CurrentCart[k].ApplyTransactionData.UnitDate2 != "") {
                 var dateVar = $scope.CurrentCart[k].ApplyTransactionData.UnitDate2;
-                var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
-
-                var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0] - 1, dsplit[1]);
-                // var d2 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
-
-                if (_genVar == 1) {
+                if ($scope.GetUnitDataFieldByName('UnitDate2').FieldSpecialType == 16) {
+                    if ($scope.CurrentOperation == "Apply") {
+                        var _dateValuearray = dateVar.split("T");
 
 
-                    d2.setDate(d2.getDate());
+                        var tsplit12 = _dateValuearray[1].split(":");
+                        var dsplit12 = _dateValuearray[0].split("-");
+
+                        var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
+                        if (_genVar == 1) {
+                            d1222.setDate(d1222.getDate());
+
+                        }
+                        else {
+                            d1222.setDate(d1222.getDate() + _genVar);
+
+                        }
+                        var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
+
+                        wcfDateStr2 = d1222.toMSJSON();
+                    }
+
+
+                }
+                else if ($scope.GetUnitDataFieldByName('UnitDate2').FieldSpecialType == 17) {
+                    if ($scope.CurrentOperation == "Apply") {
+                        var dsplit1 = dateVar.split(":");
+                        var d122 = new Date(1900, 1, 1);
+
+                        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]), parseInt(dsplit1[1]), 0, 0))
+                        if (_genVar == 1) {
+                            d122.setDate(d122.getDate() + _genVar);
+                        }
+                        else {
+
+                            d122.setDate(d122.getDate() + _genVar);
+                        }
+                        var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
+                        wcfDateStr2 = d122.toMSJSON();
+                    }
                 }
                 else {
-                    d2.setDate(d2.getDate() + 1);
+                    var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
+
+                    var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0] - 1, dsplit[1]);
+                    // var d2 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
+
+                    if (_genVar == 1) {
+
+
+                        d2.setDate(d2.getDate());
+                    }
+                    else {
+                        d2.setDate(d2.getDate() + 1);
+                    }
+                    var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate(), 0, 0, 0, 0))
+
+                    wcfDateStr2 = d21.toMSJSON();
                 }
-                var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate(), 0, 0, 0, 0))
-
-                wcfDateStr2 = d21.toMSJSON();
-
             }
 
-             
+
 
             if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate != undefined && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate != "") {
 
                 var dateVar = $scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate;
-                var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
-                var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0] - 1, dsplit[1]);
 
-                //var d1 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
-                if (_genVar == 1) {
+                if ($scope.GetUnitDataFieldByName('UniqueDate').FieldSpecialType == 16) {
+
+                    if ($scope.CurrentOperation == "MoveTagUpdate") {
+
+                        var _dateValuearray = dateVar.split("T");
 
 
-                    d1.setDate(d1.getDate());
+                        var tsplit12 = _dateValuearray[1].split(":");
+                        var dsplit12 = _dateValuearray[0].split("-");
+
+                        var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
+                        if (_genVar == 1) {
+                            d1222.setDate(d1222.getDate());
+
+                        }
+                        else {
+                            d1222.setDate(d1222.getDate() + _genVar);
+
+                        }
+                        var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
+
+                        wcfDateStr1New = d1222.toMSJSON();
+                    }
+                }
+                else if ($scope.GetUnitDataFieldByName('UniqueDate').FieldSpecialType == 17) {
+                    if ($scope.CurrentOperation == "MoveTagUpdate") {
+                        var dsplit1 = dateVar.split(":");
+                        var d122 = new Date(1900, 1, 1);
+
+                        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]), parseInt(dsplit1[1]), 0, 0))
+                        if (_genVar == 1) {
+                            d122.setDate(d122.getDate() + _genVar);
+                        }
+                        else {
+
+                            d122.setDate(d122.getDate() + _genVar);
+                        }
+                        var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
+                        wcfDateStr1New = d122.toMSJSON();
+                    }
+
                 }
                 else {
-                    d1.setDate(d1.getDate() + 1);
-                }
-                var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0))
 
-                wcfDateStr1New = d11.toMSJSON();
+                    var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
+                    var d1 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0] - 1, dsplit[1]);
+
+                    //var d1 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
+                    if (_genVar == 1) {
+
+
+                        d1.setDate(d1.getDate());
+                    }
+                    else {
+                        d1.setDate(d1.getDate() + 1);
+                    }
+                    var d11 = new Date(Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate(), 0, 0, 0, 0))
+
+                    wcfDateStr1New = d11.toMSJSON();
+                }
             }
             if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != undefined && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != "") {
                 var dateVar = $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2;
-                var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
 
-                var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0] - 1, dsplit[1]);
-                //var d2 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
+                debugger;
+                if ($scope.GetUnitDataFieldByName('UnitDate2').FieldSpecialType == 16) {
+                    if ($scope.CurrentOperation == "MoveTagUpdate") {
+                        var _dateValuearray = dateVar.split("T");
 
-                if (_genVar == 1) {
 
+                        var tsplit12 = _dateValuearray[1].split(":");
+                        var dsplit12 = _dateValuearray[0].split("-");
 
-                    d2.setDate(d2.getDate());
+                        var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
+                        if (_genVar == 1) {
+                            d1222.setDate(d1222.getDate());
+
+                        }
+                        else {
+                            d1222.setDate(d1222.getDate() + _genVar);
+
+                        }
+                        var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
+                        wcfDateStr2New = d1222.toMSJSON();
+                    }
+                }
+                else if ($scope.GetUnitDataFieldByName('UnitDate2').FieldSpecialType == 17) {
+                    if ($scope.CurrentOperation == "MoveTagUpdate") {
+                        var dsplit1 = dateVar.split(":");
+                        var d122 = new Date(1900, 1, 1);
+
+                        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]), parseInt(dsplit1[1]), 0, 0))
+                        if (_genVar == 1) {
+                            d122.setDate(d122.getDate() + _genVar);
+                        }
+                        else {
+
+                            d122.setDate(d122.getDate() + _genVar);
+                        }
+                        var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
+                        wcfDateStr2New = d122.toMSJSON();
+                    }
+
                 }
                 else {
-                    d2.setDate(d2.getDate() + 1);
-                }
-                var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate(), 0, 0, 0, 0))
+                    var dsplit = dateVar.indexOf("/") == -1 ? dateVar.split("-") : dateVar.split("/");
 
-                wcfDateStr2New = d21.toMSJSON();
+                    var d2 = dateVar.indexOf("/") == -1 ? new Date(dsplit[0], dsplit[1] - 1, dsplit[2]) : new Date(dsplit[2], dsplit[0] - 1, dsplit[1]);
+                    //var d2 = new Date(dsplit[0], dsplit[1] - 1, dsplit[2]);
+
+                    if (_genVar == 1) {
+
+
+                        d2.setDate(d2.getDate());
+                    }
+                    else {
+                        d2.setDate(d2.getDate() + 1);
+                    }
+                    var d21 = new Date(Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate(), 0, 0, 0, 0))
+
+                    wcfDateStr2New = d21.toMSJSON();
+                }
 
             }
 
@@ -4180,11 +4397,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     $scope.SubmitAllActivities = function () {
         var _unchangeData = $scope.UnchangedData();
-        var _validateObjectVm=$scope.ValidateObjectVM();
+        var _validateObjectVm = $scope.ValidateObjectVM();
         var _validateCustomFields = CheckintoCustomData(0);
         var _dateValidated = IsDateValidated();
         if (!_validateObjectVm && !_unchangeData) {
-          
+
             if (!_validateCustomFields && _dateValidated == true) {
 
                 var authData = localStorageService.get('authorizationData');
@@ -4235,7 +4452,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             }
             else {
 
-                if (_validateObjectVm || _validateCustomFields || _dateValidated==false) {
+                if (_validateObjectVm || _validateCustomFields || _dateValidated == false) {
 
                     var _dataIndex = $scope.IsSingleMode == true ? $scope.CurrentCart.length : 1;
                     $scope.GoToStep(_dataIndex, 1);
@@ -4860,7 +5077,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.UnchangedData = function () {
         var k = 0;
         if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
-             
+
             switch ($scope.CurrentOperation) {
                 case "Convert":
                     for (k = 0; k < $scope.CurrentCart.length; k++) {
@@ -4944,7 +5161,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             var _val25 = $scope.CurrentCart[k].InventoryDataList.iUnitDate2_date != "" && $scope.CurrentCart[k].InventoryDataList.iUnitDate2_date != null && $scope.CurrentCart[k].InventoryDataList.iUnitDate2_date != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitDate2_date : null;
 
-                            var _val26 = $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != "" && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != null && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != undefined ? $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2: null;
+                            var _val26 = $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != "" && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != null && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != undefined ? $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 : null;
 
                             _x5 = (formatDate(_val25) == _val26);
                         }
@@ -4985,10 +5202,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             _x7 = true;
                         }
-                        if (MatchString($scope.CurrentCart[k].MoveUpdateTagTransactionData.StatusToUpdate,$scope.CurrentCart[k].InventoryDataList.iStatusValue)) {
+                        if (MatchString($scope.CurrentCart[k].MoveUpdateTagTransactionData.StatusToUpdate, $scope.CurrentCart[k].InventoryDataList.iStatusValue)) {
                             _x8 = true;
                         }
-                       
+
                         if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.MoveToLocation == $scope.CurrentCart[k].InventoryDataList.iLID) {
                             _x9 = true;
                         }
@@ -5007,7 +5224,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     break;
                 case "Update":
                     for (k = 0; k < $scope.CurrentCart.length; k++) {
-                        if (MatchString($scope.CurrentCart[k].UpdateTransactionData.StatusToUpdate , $scope.CurrentCart[k].InventoryDataList.iStatusValue)) {
+                        if (MatchString($scope.CurrentCart[k].UpdateTransactionData.StatusToUpdate, $scope.CurrentCart[k].InventoryDataList.iStatusValue)) {
                             ShowErrorMessage($scope.CurrentOperation);
                             $scope.GoToStep(k);
                             return true;
@@ -5030,7 +5247,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             var _val2 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 : "";
 
-                            _x1 = MatchString(_val1,_val2);
+                            _x1 = MatchString(_val1, _val2);
                         }
                         else {
 
@@ -5043,7 +5260,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             var _val12 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 : "";
 
-                            _x2 = MatchString(_val11,_val12);
+                            _x2 = MatchString(_val11, _val12);
 
 
 
@@ -5058,7 +5275,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             var _val22 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 : "";
 
-                            _x3 = MatchString(_val21,_val22);
+                            _x3 = MatchString(_val21, _val22);
 
                         } else {
 
@@ -5069,7 +5286,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             var _val23 = $scope.CurrentCart[k].InventoryDataList.iUniqueDate_date != "" && $scope.CurrentCart[k].InventoryDataList.iUniqueDate_date != null && $scope.CurrentCart[k].InventoryDataList.iUniqueDate_date != undefined ? $scope.CurrentCart[k].InventoryDataList.iUniqueDate_date : null;
 
-                            var _val24 = $scope.CurrentCart[k].ApplyTransactionData.UniqueDate != "" && $scope.CurrentCart[k].ApplyTransactionData.UniqueDate!= null && $scope.CurrentCart[k].ApplyTransactionData.UniqueDate != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UniqueDate : null;
+                            var _val24 = $scope.CurrentCart[k].ApplyTransactionData.UniqueDate != "" && $scope.CurrentCart[k].ApplyTransactionData.UniqueDate != null && $scope.CurrentCart[k].ApplyTransactionData.UniqueDate != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UniqueDate : null;
 
                             _x4 = (formatDate(_val23) == _val24);
 
@@ -5253,7 +5470,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     }
                     break;
                 case "Move":
-                     
+
                     for (k = 0; k < _totalLength; k++) {
                         if ($scope.CurrentCart[k].MoveTransactionData.ActionQuantity == undefined || $scope.CurrentCart[k].MoveTransactionData.ActionQuantity == null || $scope.CurrentCart[k].MoveTransactionData.ActionQuantity == "" || $scope.CurrentCart[k].MoveTransactionData.MoveToLocation == "") {
                             if ($scope.AffectedItemIds.indexOf($scope.CurrentCart[k].ItemID) >= -1) {
@@ -5436,7 +5653,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
                             else if (_AllowNegative != null && _AllowNegative != "True") {
-                                 
+
                                 if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
 
                                     if ($scope.IsSingleMode == false) {
@@ -5542,7 +5759,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             }
 
                             else if (_AllowNegative != null && _AllowNegative != "True") {
-                                 
+
 
                                 if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity > $scope.CurrentCart[k].InventoryDataList.oquantity) {
 
