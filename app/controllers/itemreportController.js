@@ -21,6 +21,16 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
     var _masterSearch = "";
     $scope.loadingblock = false;
     $scope.HasImage = "";
+
+
+    $scope.weeklist = [];
+
+    $scope.CurrentYear = new Date().getFullYear();
+
+    for (var i = 1; i <= 52; i++) {
+        $scope.weeklist.push(i);
+    }
+
     function getIncrementor(_Total) {
         if (_Total <= 100) {
             return 10;
@@ -180,6 +190,43 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
         }
     }
 
+    $scope.getCustomSpecialType = function (FieldName) {
+        debugger;
+        var type = "";
+        var Map = "";
+
+        type = "part";
+        Map = FieldName;
+        if ($scope.CustomItemDataList.length > 0) {
+            for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            
+
+
+                if ($scope.CustomItemDataList[i].ColumnMap == Map && $scope.CustomItemDataList[i].cfdCustomFieldType.toLowerCase() == type) {
+                    return $scope.CustomItemDataList[i];
+                }
+            }
+        }
+        else {
+        }
+    }
+
+    // Get Column type according to column name
+    $scope.getColumnType = function (ColumnName) {
+
+        var ColumnType = "system"
+        var _column = $scope.getCustomSpecialType(ColumnName);
+        if (_column != undefined) {
+
+            for (var i = 0; i < $scope.Columns.length; i++) {
+                if ($scope.Columns[i].ColumnID == _column.cfdID) {
+                    ColumnType = $scope.Columns[i].ColumnType.toLowerCase();
+                    return ColumnType;
+                }
+            }
+        }
+        return ColumnType;
+    }
     $scope.GetColumnDataType=function(ColumnName)
     {
         var DataType=""

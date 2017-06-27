@@ -1232,11 +1232,11 @@
                                                                     <input id="LineItem_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" ng-checked="obj.cfdDefaultValue==true" cfd-id="{{obj.cfdID}}" type="checkbox" custom-data-type="{{obj.cfdDataType}}">
                                                                     <div class="slider round"></div>
 
-                                                                    <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.CfValue==true">
+                                                                    <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.CfValue==true">
                                                                         {{obj.cfdTruelabel}}
                                                                     </span>
 
-                                                                    <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.CfValue!=true">
+                                                                    <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.CfValue!=true">
                                                                         {{obj.cfdFalselabel}}
                                                                     </span>
                                                                 </label>
@@ -1253,9 +1253,9 @@
 
 
                                                             <div class="" ng-if="obj.cfdSpecialType==5">
-                                                                <p class="todo-element">
-                                                                    <input name="LineItem_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="LineItem_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
-                                                                    <input name="LineItem_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem1_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="LineItem1_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
+                                                                <p style="padding-left:0;" class="todo-element">
+                                                                    <input name="LineItem_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
+                                                                    <input name="LineItem_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem1{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="LineItem1{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
                                                                 </p>
 
 
@@ -1407,11 +1407,11 @@
                                         <input id="CustomActivity_{{obj.cfdID}}" type="checkbox" ng-checked="obj.cfdDefaultValue==true" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
                                         <div class="slider round"></div>
 
-                                        <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
+                                        <span style="margin-left:75px; color:#888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
                                             {{obj.cfdTruelabel}}
                                         </span>
 
-                                        <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue!=true">
+                                        <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue!=true">
                                             {{obj.cfdFalselabel}}
                                         </span>
                                     </label>
@@ -1552,11 +1552,11 @@
                                             <input id="CustomActivity_{{obj.cfdID}}" type="checkbox" ng-checked="obj.cfdDefaultValue==true" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
                                             <div class="slider round"></div>
 
-                                            <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
+                                            <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
                                                 {{obj.cfdTruelabel}}
                                             </span>
 
-                                            <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue!=true">
+                                            <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue!=true">
                                                 {{obj.cfdFalselabel}}
                                             </span>
                                         </label>
@@ -1695,11 +1695,11 @@
                                             <input id="CustomActivity_{{obj.cfdID}}" type="checkbox" ng-checked="obj.cfdDefaultValue==true" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
                                             <div class="slider round"></div>
 
-                                            <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
+                                            <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
                                                 {{obj.cfdTruelabel}}
                                             </span>
 
-                                            <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue!=true">
+                                            <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue!=true">
                                                 {{obj.cfdFalselabel}}
                                             </span>
                                         </label>
@@ -2942,11 +2942,11 @@
                                                             <input id="LineItem_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" ng-checked="obj.cfdDefaultValue==true" cfd-id="{{obj.cfdID}}" type="checkbox" custom-data-type="{{obj.cfdDataType}}">
                                                             <div class="slider round"></div>
 
-                                                            <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.CfValue==true">
+                                                            <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.CfValue==true">
                                                                 {{obj.cfdTruelabel}}
                                                             </span>
 
-                                                            <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.CfValue!=true">
+                                                            <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.CfValue!=true">
                                                                 {{obj.cfdFalselabel}}
                                                             </span>
                                                         </label>
@@ -2963,9 +2963,12 @@
 
 
                                                     <div class="" ng-if="obj.cfdSpecialType==5">
+
+                                                        <h1>{{CurrentActiveObject.InventoryID}}</h1>
+
                                                         <p class="todo-element">
-                                                            <input name="LineItem_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="LineItem_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
-                                                            <input name="LineItem_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem1_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="LineItem1_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
+                                                            <input name="LineItem_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
+                                                            <input name="LineItem_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem1{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="LineItem1{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
                                                         </p>
 
 
@@ -3097,11 +3100,11 @@
                                                     <input id="CustomActivity_{{obj.cfdID}}" type="checkbox" ng-checked="obj.cfdDefaultValue==true" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
                                                     <div class="slider round"></div>
 
-                                                    <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
+                                                    <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
                                                         {{obj.cfdTruelabel}}
                                                     </span>
 
-                                                    <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue!=true">
+                                                    <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue!=true">
                                                         {{obj.cfdFalselabel}}
                                                     </span>
                                                 </label>
@@ -3242,11 +3245,11 @@
                                                         <input id="CustomActivity_{{obj.cfdID}}" type="checkbox" ng-checked="obj.cfdDefaultValue==true" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
                                                         <div class="slider round"></div>
 
-                                                        <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
+                                                        <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
                                                             {{obj.cfdTruelabel}}
                                                         </span>
 
-                                                        <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue!=true">
+                                                        <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue!=true">
                                                             {{obj.cfdFalselabel}}
                                                         </span>
                                                     </label>
@@ -3385,11 +3388,11 @@
                                                         <input id="CustomActivity_{{obj.cfdID}}" type="checkbox" ng-checked="obj.cfdDefaultValue==true" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
                                                         <div class="slider round"></div>
 
-                                                        <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
+                                                        <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
                                                             {{obj.cfdTruelabel}}
                                                         </span>
 
-                                                        <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue!=true">
+                                                        <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue!=true">
                                                             {{obj.cfdFalselabel}}
                                                         </span>
                                                     </label>

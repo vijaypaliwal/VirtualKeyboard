@@ -2,6 +2,117 @@
 app.controller('inventorysummaryController', ['$scope', 'localStorageService', 'authService', '$location', 'log', function ($scope, localStorageService, authService, $location, log) {
 
 
+
+    $scope.GetActiveUnitDataField = function () {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetActiveUnitDataFields',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'text json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+
+
+                   if (response.GetActiveUnitDataFieldsResult.Success == true) {
+                       $scope.UnitDataList = response.GetActiveUnitDataFieldsResult.Payload;
+
+                       console.log("List of active unitdata fields");
+                       console.log($scope.UnitDataList);
+
+
+                       if ($scope.UnitDataList.length > 0) {
+                           for (var i = 0; i < $scope.UnitDataList.length; i++) {
+                               if ($scope.UnitDataList[i].FieldCombovalues != null || $scope.UnitDataList[i].FieldCombovalues != "") {
+                                   $scope.UnitDataFieldCombovalues = $scope.UnitDataList[i].FieldCombovalues.split("\n");
+                               }
+
+                               if ($scope.UnitDataList[i].FieldRadioValues != null || $scope.UnitDataList[i].FieldRadioValues != "") {
+                                   $scope.UnitDataFieldRadioValues = $scope.UnitDataList[i].FieldRadioValues.split(" ");
+                               }
+                           }
+
+                       }
+                       else {
+                       }
+
+
+
+
+
+                       CheckScopeBeforeApply()
+                   }
+                   else {
+                       $scope.ShowErrorMessage("Active unit data columns", 1, 1, response.GetActiveUnitDataFieldsResult.Message)
+
+                   }
+
+               },
+               error: function (err, textStatus, errorThrown) {
+                   if (err.readyState == 0 || err.status == 0) {
+
+                   }
+                   else {
+                       if (textStatus != "timeout") {
+                           //log.error(response.statusText);
+                           $scope.ShowErrorMessage("Active unit data columns", 2, 1, err.statusText);
+                       }
+                   }
+
+               }
+           });
+    }
+
+
+    $scope.getComboValues = function (FieldName) {
+
+        debugger;
+
+        if ($scope.UnitDataList.length > 0) {
+            for (var i = 0; i < $scope.UnitDataList.length; i++) {
+
+                if ($scope.UnitDataList[i].FieldName == FieldName) {
+                    if ($.trim($scope.UnitDataList[i].FieldComboValues) != "") {
+                        $scope.UnitDataFieldCombovalues = $scope.UnitDataList[i].FieldComboValues.split("\n");
+                        return $scope.UnitDataFieldCombovalues;
+                    }
+                    if ($.trim($scope.UnitDataList[i].FieldRadioValues) != "") {
+                        $scope.UnitDataFieldRadioValues = $scope.UnitDataList[i].FieldRadioValues.split(" ");
+                        return $scope.UnitDataFieldRadioValues;
+                    }
+                }
+            }
+        }
+        else {
+        }
+    }
+
+
+    // Function to get special type of unit data fields.
+
+    $scope.getUnitSpecialType = function (FieldName) {
+
+        if ($scope.UnitDataList.length > 0) {
+            for (var i = 0; i < $scope.UnitDataList.length; i++) {
+                if ($scope.UnitDataList[i].FieldName == FieldName) {
+                    return $scope.UnitDataList[i].FieldSpecialType;
+                }
+            }
+
+        }
+        else {
+        }
+    }
+
+    $scope.UnitDataFieldCombovalues = [];
+
+    $scope.UnitDataFieldRadioValues = [];
+
     $scope.CurrentView = { Name: "Inventory Summary" };
     $scope.InventoryViewsGrouped = [];
     $scope.InventoryListGrouped = [];
@@ -144,15 +255,27 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
         //  CheckScopeBeforeApply();
         //  $scope.GetInventoryGroupedDataAccordingToView();
     }
+    // Get custom dropdown's column available data
     $scope.GetComboData = function (ColumnName) {
+        debugger;
+
+        var type = "";
+        var Map = "";
+        if (ColumnName.includes("t_")) {
+            type = "inventory";
+            Map = FieldName.substring(2);
+        }
+        else {
+            type = "part";
+            Map = ColumnName;
+        }
+
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
-            if ($scope.CustomItemDataList[i].ColumnMap == ColumnName) {
+            if ($scope.CustomItemDataList[i].ColumnMap == Map && $scope.CustomItemDataList[i].cfdCustomFieldType == type) {
                 console.log($scope.CustomItemDataList[i].cfdComboValues);
                 return $scope.CustomItemDataList[i].cfdComboValues;
             }
-
         }
-
     }
     $scope.GetDisplayLabel = function (ColumnName) {
         var DataType = ""
@@ -171,7 +294,22 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
             return DataType;
         }
     }
+    // Get Column type according to column name
+    $scope.getColumnType = function (ColumnName) {
 
+        var ColumnType = "system"
+        var _column = $scope.getCustomSpecialType(ColumnName);
+        if (_column != undefined) {
+
+            for (var i = 0; i < $scope.Columns.length; i++) {
+                if ($scope.Columns[i].ColumnID == _column.cfdID) {
+                    ColumnType = $scope.Columns[i].ColumnType.toLowerCase();
+                    return ColumnType;
+                }
+            }
+        }
+        return ColumnType;
+    }
     $scope.GetColumnDataType = function (ColumnName) {
         var DataType = ""
 
@@ -333,27 +471,81 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
         }
     }
 
+
+    // Function to get cfdspecial type for Custom Field
+
+    $scope.getCustomSpecialType = function (FieldName) {
+        debugger;
+        if ($scope.CustomItemDataList.length > 0) {
+            for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+                var type = "";
+                var Map = "";
+                if (FieldName.includes("t_")) {
+                    type = "inventory";
+                    Map = FieldName.substring(2);
+                }
+                else {
+                    type = "part";
+                    Map = FieldName;
+                }
+
+
+                if ($scope.CustomItemDataList[i].ColumnMap == Map && $scope.CustomItemDataList[i].cfdCustomFieldType == type) {
+                    return $scope.CustomItemDataList[i];
+                }
+            }
+        }
+        else {
+        }
+    }
+
+
+
+    // Get custom column name by map
     $scope.GetCustomFieldNameByMap = function (ID) {
         var _return = "N/A";
+        var type = "";
+        var Map = "";
+        if (ID.includes("t_")) {
+            type = "inventory";
+            Map = ID.substring(2);
+        }
+        else {
+            type = "part";
+            Map = ID;
+        }
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
-            if ($scope.CustomItemDataList[i].ColumnMap == ID) {
+            if ($scope.CustomItemDataList[i].ColumnMap == Map && $scope.CustomItemDataList[i].cfdCustomFieldType == type) {
                 return $scope.CustomItemDataList[i].cfdName;
             }
-
         }
-
         return _return;
     }
 
-    $scope.GetCustomFieldTypeByID = function (ID) {
-        var _return = "N/A";
-        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
-            if ($scope.CustomItemDataList[i].ColumnMap == ID) {
-                return $scope.CustomItemDataList[i].cfdDataType;
-            }
 
+
+    // Get custom column name by ID
+    $scope.GetCustomFieldTypeByID = function (ID) {
+
+        var type = "";
+        var Map = "";
+        if (ID.includes("t_")) {
+            type = "inventory";
+            Map = ID.substring(2);
+        }
+        else {
+            type = "part";
+            Map = ID;
         }
 
+
+
+        var _return = "N/A";
+        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            if ($scope.CustomItemDataList[i].ColumnMap == Map && $scope.CustomItemDataList[i].cfdCustomFieldType == type) {
+                return $scope.CustomItemDataList[i].cfdDataType;
+            }
+        }
         return _return;
     }
 
@@ -1250,7 +1442,16 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
            });
 
     }
+    // get custom field according to given id
+    $scope.GetCustomFieldByID = function (ID) {
 
+        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            if ($scope.CustomItemDataList[i].cfdID == ID) {
+                return $scope.CustomItemDataList[i].ColumnMap;
+            }
+
+        }
+    }
     $scope.getstatus = function () {
 
         var authData = localStorageService.get('authorizationData');
@@ -1334,10 +1535,12 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
     }
 
     function init() {
+
+        $scope.GetActiveUnitDataField();
         $scope.getuom();
         $scope.getstatus();
         $scope.GetInventoryViewsGrouped();
-        $scope.GetCustomDataField(0);
+        $scope.GetCustomDataField(2);
         CheckScopeBeforeApply();
 
 

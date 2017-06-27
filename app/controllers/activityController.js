@@ -2291,19 +2291,19 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         cfdPrefix: _TempArray[j].cfdPrefix == null ? "" : _TempArray[j].cfdPrefix,
                         cfdSuffix: _TempArray[j].cfdSuffix == null ? "" : _TempArray[j].cfdSuffix,
                         cfdIsIncremental: _TempArray[j].cfdIsIncremental,
-                        cfdBaseValue: _TempArray[j].cfdBaseValue == null ? "" : _TempArray[j].cfdBaseValue,
-                        cfdIncrementby: _TempArray[j].cfdIncrementby == null ? "" : _TempArray[j].cfdIncrementby,
+                        cfdBaseValue: _TempArray[j].cfdBaseValue == null ? 0 : _TempArray[j].cfdBaseValue,
+                        cfdIncrementby: _TempArray[j].cfdIncrementby == null ? 0 : _TempArray[j].cfdIncrementby,
                         cfdIsAutoComplete: _TempArray[j].cfdIsAutoComplete == null ? "" : _TempArray[j].cfdIsAutoComplete,
                         cfdInputMask: _TempArray[j].cfdInputMask == "text" ? "NA" : _TempArray[j].cfdInputMask,
-                        MaximumValue: _TempArray[j].cfdIsIncremental == true ? _TempArray[j].MaximumValue : "",
+                        MaximumValue: _TempArray[j].cfdIsIncremental == true ? _TempArray[j].MaximumValue : null,
                         CombineValue: _TempArray[j].CombineValue,
                         cfdSpecialType: _TempArray[j].cfdSpecialType == null ? "" : _TempArray[j].cfdSpecialType,
                         cfdRadioValues: _TempArray[j].cfdRadioValues == null ? "" : _TempArray[j].cfdRadioValues,
                         cfdTruelabel: _TempArray[j].cfdTruelabel,
                         cfdFalselabel: _TempArray[j].cfdFalselabel,
                         cfdUse24Hours: _TempArray[j].cfdUse24Hours,
-                        cfdMax: _TempArray[j].MaximumValue == null ? "" : _TempArray[j].MaximumValue,
-                        cfdMin: _TempArray[j].MinimumValue == null ? "" : _TempArray[j].MinimumValue,
+                        cfdMax: _TempArray[j].MaximumValue == null ? null : _TempArray[j].MaximumValue,
+                        cfdMin: _TempArray[j].MinimumValue == null ? null : _TempArray[j].MinimumValue,
                     });
                 }
 
@@ -3612,7 +3612,21 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
         return date;
     };
+    function GetProperUnitValue(_val, _Prefix, _Suffix) {
 
+        if ($.trim(_val) != "") {
+
+
+            _Prefix = $.trim(_Prefix) != "" ? _Prefix : "";
+            _Suffix = $.trim(_Suffix) != "" ? _Suffix : "";
+            _val = _val.replace(_Prefix, "");
+            _val = _val.replace(_Suffix, "");
+
+            return _val;
+        }
+        return -1;
+
+    }
     function BuildMultipleData() {
 
 
@@ -3670,7 +3684,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 itUnitNumber1: 0,
                 itUnitNumber2: 0,
                 itUnitTag2: "",
-                itUnitTag3: ""
+                itUnitTag3: "",
+                incrementedValue: 0,
+                incrementedValue2: 0,
+                incrementedValue3: 0
             },
             Targets: {
                 ToLocationID: 0,
@@ -3708,7 +3725,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 itUnitNumber1: 0,
                 itUnitNumber2: 0,
                 itUnitTag2: "",
-                itUnitTag3: ""
+                itUnitTag3: "",
+                incrementedValue: 0,
+                incrementedValue2: 0,
+                incrementedValue3: 0
             },
             Targets: {
                 ToLocationID: 0,
@@ -3787,7 +3807,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     itUnitNumber1: 0,
                     itUnitNumber2: 0,
                     itUnitTag2: "",
-                    itUnitTag3: ""
+                    itUnitTag3: "",
+                    incrementedValue: 0,
+                    incrementedValue2: 0,
+                    incrementedValue3: 0
                 },
                 Targets: {
                     ToLocationID: 0,
@@ -3825,7 +3848,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     itUnitNumber1: 0,
                     itUnitNumber2: 0,
                     itUnitTag2: "",
-                    itUnitTag3: ""
+                    itUnitTag3: "",
+                    incrementedValue: 0,
+                    incrementedValue2: 0,
+                    incrementedValue3: 0
                 },
                 Targets: {
                     ToLocationID: 0,
@@ -3862,7 +3888,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     itUnitNumber1: 0,
                     itUnitNumber2: 0,
                     itUnitTag2: "",
-                    itUnitTag3: ""
+                    itUnitTag3: "",
+                    incrementedValue: 0,
+                    incrementedValue2: 0,
+                    incrementedValue3: 0
+
                 },
                 Targets: {
                     ToLocationID: 0,
@@ -3890,6 +3920,12 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 _TempQty = $scope.CurrentCart[k].ConvertTransactionData.ActionFromQuantity;
             }
 
+            if ($scope.CurrentOperation == "Apply") {
+                _MyObjdata.incrementedValue = $scope.GetUnitDataFieldByName("ReqValue").FieldSpecialType == 0 ? GetProperUnitValue($scope.CurrentCart[k].ApplyTransactionData.UnitTag1, $scope.GetUnitDataFieldByName("ReqValue").Prefix, $scope.GetUnitDataFieldByName("ReqValue").Suffix) : 0;
+                _MyObjdata1.incrementedValue2 = $scope.GetUnitDataFieldByName("UnitTag2").FieldSpecialType == 0 ? GetProperUnitValue($scope.CurrentCart[k].ApplyTransactionData.UnitTag2, $scope.GetUnitDataFieldByName("UnitTag2").Prefix, $scope.GetUnitDataFieldByName("UnitTag2").Suffix) : 0;
+                _MyObjdata2.incrementedValue3 = $scope.GetUnitDataFieldByName("UnitTag2").FieldSpecialType == 0 ? GetProperUnitValue($scope.CurrentCart[k].ApplyTransactionData.UnitTag3, $scope.GetUnitDataFieldByName("UnitTag3").Prefix, $scope.GetUnitDataFieldByName("UnitTag3").Suffix) : 0;
+            }
+
             if ($scope.CurrentOperation == "Move") {
 
                 _TempQty = $scope.CurrentCart[k].MoveTransactionData.ActionQuantity;
@@ -3899,6 +3935,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 _MyObjdata.Targets.ToLocation = _TempLocText;
                 _MyObjdata1.Targets.ToLocation = _TempLocText;
                 _MyObjdata2.Targets.ToLocation = _TempLocText;
+              
             }
 
 
@@ -3911,6 +3948,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 _MyObjdata.Targets.ToLocation = _TempLocText;
                 _MyObjdata1.Targets.ToLocation = _TempLocText;
                 _MyObjdata2.Targets.ToLocation = _TempLocText;
+                _MyObjdata.incrementedValue = $scope.GetUnitDataFieldByName("ReqValue").FieldSpecialType == 0 ? GetProperUnitValue($scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag1, $scope.GetUnitDataFieldByName("ReqValue").Prefix, $scope.GetUnitDataFieldByName("ReqValue").Suffix) : 0;
+                _MyObjdata1.incrementedValue2 = $scope.GetUnitDataFieldByName("UnitTag2").FieldSpecialType == 0 ? GetProperUnitValue($scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag2, $scope.GetUnitDataFieldByName("UnitTag2").Prefix, $scope.GetUnitDataFieldByName("UnitTag2").Suffix) : 0;
+                _MyObjdata2.incrementedValue3 = $scope.GetUnitDataFieldByName("UnitTag2").FieldSpecialType == 0 ? GetProperUnitValue($scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag3, $scope.GetUnitDataFieldByName("UnitTag3").Prefix, $scope.GetUnitDataFieldByName("UnitTag3").Suffix) : 0;
 
             }
 
@@ -4411,6 +4451,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $scope.IsProcessing = true;
 
                 var _mdata = BuildMultipleData();
+
+                console.log(_mdata);
 
                 $.ajax({
                     type: "POST",

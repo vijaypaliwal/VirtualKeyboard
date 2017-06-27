@@ -397,25 +397,25 @@
 </script>
 
 <script>
-    var _count = 0;
-    function sticky_relocate() {
-        var window_top = $(window).scrollTop();
-        var div_top = $('#sticky-anchor').offset().top;
-        if (window_top > div_top + 22) {
-            $('#sticky').addClass('stick');
-            $('.page-header').fadeOut(1000);
+    //var _count = 0;
+    //function sticky_relocate() {
+    //    var window_top = $(window).scrollTop();
+    //    var div_top = $('#sticky-anchor').offset().top;
+    //    if (window_top > div_top + 22) {
+    //        $('#sticky').addClass('stick');
+    //        $('.page-header').fadeOut(1000);
 
-        } else {
-            $('#sticky').removeClass('stick');
-            $('.page-header').fadeIn(1000);
-        }
-    }
+    //    } else {
+    //        $('#sticky').removeClass('stick');
+    //        $('.page-header').fadeIn(1000);
+    //    }
+    //}
 
 
-    $(function () {
-        $(window).scroll(sticky_relocate);
-        sticky_relocate();
-    });
+    //$(function () {
+    //    $(window).scroll(sticky_relocate);
+    //    sticky_relocate();
+    //});
 
 
 

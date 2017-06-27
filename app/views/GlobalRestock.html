@@ -175,7 +175,38 @@
                             </ul>
 
                         </span>
-                        <input class="form-control" type="text" name="name" ng-model="_obj.SearchValue" value="" />
+                        <div ng-if="getColumnType(_obj.ColumnName) == 'system'">
+                            <input class="form-control" type="text" name="name" ng-model="_obj.SearchValue" value="" />
+                        </div>
+
+                        <div ng-if="getColumnType(_obj.ColumnName) == 'custom'">
+                            <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdInputMask!='month' && getCustomSpecialType(_obj.ColumnName).cfdInputMask!='week' && getCustomSpecialType(_obj.ColumnName).cfdSpecialType!=1">
+                                <input class=" form-control" type="text" name="name" ng-model="_obj.SearchValue" value="" />
+                            </div>
+
+                            <!--CustomMonth-->
+                            <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdInputMask == 'month' ">
+                                <input class="form-control" type="month" name="name" ng-model="_obj.SearchValue" value="" />
+                            </div>
+
+                            <!--CustomWeek-->
+                            <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdInputMask == 'week' ">
+                                <select id="UniqueTag" ng-model="_obj.SearchValue" class="form-control">
+                                    <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
+                                    <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
+                                    <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
+                                    <option ng-repeat="n in weeklist" value="{{CurrentYear+2}}-W{{n}}">Week {{n}}, {{CurrentYear+2}}</option>
+                                </select>
+                            </div>
+
+
+                            <!--CustomRadio-->
+                            <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdSpecialType == 1">
+                                <select id="CustomRadio" ng-model="_obj.SearchValue" class="form-control">
+                                    <option ng-repeat="n in getCustomSpecialType(_obj.ColumnName).cfdRadioValues track by $index" value="{{n}}"> {{n}}</option>
+                                </select>
+                            </div>
+                        </div> 
                     </div>
 
 
@@ -193,7 +224,25 @@
                             </ul>
 
                         </span>
-                        <input class="form-control" type="date" name="name" ng-model="_obj.SearchValue" value="" />
+                        <div ng-if="getColumnType(_obj.ColumnName) == 'system'">
+                            <input class="form-control" type="date" name="name" ng-model="_obj.SearchValue" value="" />
+                        </div>
+
+                        <div ng-if="getColumnType(_obj.ColumnName) == 'custom'">
+                            <!--CustomDate-->
+                            <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdSpecialType != 3 && getCustomSpecialType(_obj.ColumnName).cfdSpecialType != 2">
+                                <input class="form-control" type="date" name="name" ng-model="_obj.SearchValue" value="" />
+                            </div>
+
+                            <!--CustomDateTime-->
+                            <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdSpecialType == 2">
+                                <input class="form-control" type="datetime-local" name="name" ng-model="_obj.SearchValue" value="" />
+                            </div>
+                            <!--CustomTime-->
+                            <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdSpecialType == 3">
+                                <input class="form-control" type="time" name="name" ng-model="_obj.SearchValue" value="" />
+                            </div>
+                        </div>   
                     </div>
 
                     <div class="input-group" ng-if="GetColumnDataType(_obj.ColumnName)=='combobox'">
