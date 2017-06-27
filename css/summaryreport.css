@@ -643,3 +643,8 @@
          .modal-open #mylist {
         display:none;
     }
+
+              .form-group {
+         margin-bottom:0px !important;
+    
+}
