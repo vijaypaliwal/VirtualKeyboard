@@ -445,7 +445,7 @@
                                                             
 
                                                             <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
-                                                            <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType<=6 ">
+                                                            <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType<=6 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType!=2">
                                                                 <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
                                                                 <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==4" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
                                                                 <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==5" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
@@ -988,7 +988,7 @@
 
 
                                                             <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
-                                                            <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType<=6 ">
+                                                            <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType<=6 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType!=2">
                                                                 <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" />
                                                                 <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==4" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" />
                                                                 <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==5" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" />
@@ -1178,6 +1178,10 @@
                                     </div>
 
                                     <!-- Line items activity columns -->
+
+                                    <!--<h1>Length = {{isLineItemColumnNames.length}} </h1>
+                                    <h1> IsActive Transaction - {{IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)}} </h1>-->
+
                                     <div class="row" ng-if="isLineItemColumnNames.length>0 && IsActiveTransactionField(CurrentActiveObject.IsLineItemData[$index].cfdID)" data-ng-repeat="_columns in isLineItemColumnNames">
 
                                         <div ng-class="parentIndex==0 ? 'col-md-12 col-xs-12' : 'col-md-12 col-xs-12'">
@@ -1192,6 +1196,10 @@
 
 
                                                             <div ng-if="obj.cfdSpecialType != 1">
+
+                                                                <!--<h1>{{CurrentActiveObject.IsLineItemData[$index].CfValue}}</h1>-->
+
+
                                                                 <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
 
                                                                     <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)==''" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="text" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
@@ -1208,16 +1216,14 @@
 
                                                                 <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
-
                                                                     <input type="text" id="LineItem_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType  prepostCustom" />
                                                                 </div>
 
                                                             </div>
 
                                                             <div ng-if="obj.cfdSpecialType == 1">
-                                                                <input disabled type="text" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType" />
+                                                                <input disabled type="text" id="CustomActivity_{{obj.cfdID}}_{{CurrentActiveObject.InventoryID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType" />
 
-                                                               
                                                             </div>
                                                         </div>
 
@@ -1263,7 +1269,7 @@
 
                                                         </div>
                                                         <div ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='combobox'">
-                             
+                                                          
 
                                                             <div class="select" ng-if="obj.cfdIsAutoComplete != true">
                                                                 <select id="LineItem_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control">
@@ -1272,7 +1278,7 @@
 
                                                                 </select>
                                                             </div>
-                                                            <input disabled ng-if="obj.cfdIsAutoComplete == true" id="LineItem_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control" type="text" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" value="{{obj.CfValue}}" />
+                                                            <input disabled ng-if="obj.cfdIsAutoComplete == true" id="LineItem_{{obj.cfdID}}_{{CurrentActiveObject.InventoryID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control" type="text" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" value="{{obj.CfValue}}" />
                                                         </div>
 
                                                         
@@ -1301,8 +1307,8 @@
                                                         </button>
                                                     </span>
                                                     <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i style="margin-left:10px;" class="fa fa-barcode"></i></span>
-                                                    <span class="input-group-addon last" ng-if="obj.cfdSpecialType == 1" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>
-                                                    <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'line')" class="input-group-addon last"><i class="fa fa-search"></i></span>
+                                                    <span class="input-group-addon last" ng-if="obj.cfdSpecialType == 1" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, CurrentActiveObject.InventoryID, 'activity')"><i class="fa fa-circle-o"></i></span>
+                                                    <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, CurrentActiveObject.InventoryID, 'line')" class="input-group-addon last"><i class="fa fa-search"></i></span>
                                                     <span ng-if="obj.cfdDataType=='number' && obj.cfdIsIncremental==true" ng-click="UpDownValue(obj.cfdID,false,3)" class="input-group-addon last">
                                                         <i class="fa fa-minus"></i>
                                                     </span>
@@ -1391,7 +1397,7 @@
                                 <div class="input-group" ng-if="obj.cfdSpecialType == 1">
                                     <input disabled type="text" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType" />
 
-                                    <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>
+                                    <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID,'empty', 'activity')"><i class="fa fa-circle-o"></i></span>
                                 </div>
                             </div>
 
@@ -1450,7 +1456,7 @@
                                     </select>
                                 </div>
                                 <input disabled ng-if="obj.cfdIsAutoComplete == true" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control" type="text" value="{{obj.CfValue}}" />
-                                <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
+                                <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'empty', 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
                                 <span ng-if="obj.cfdIsAutoComplete != true && checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID,'CustomActivity_')"><i class="fa fa-plus"></i></span>
                                 <span class="input-group-addon last" ng-if="obj.cfdIsAutoComplete != true " ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
@@ -1459,6 +1465,7 @@
 
                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
 
+                              
 
                                 <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                 <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
@@ -1534,6 +1541,10 @@
                                     </div>
 
                                     <div class="input-group" ng-if="obj.cfdSpecialType == 1">
+
+
+                                       
+
                                         <input disabled type="text" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType" />
 
                                         <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>
@@ -1677,6 +1688,8 @@
                                     </div>
 
                                     <div class="input-group" ng-if="obj.cfdSpecialType == 1">
+
+                                      
                                         <input disabled type="text" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType" />
 
                                         <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>
@@ -2159,7 +2172,7 @@
 
 
                                                     <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
-                                                    <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType<=6 ">
+                                                    <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType<=6 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType!=2">
                                                         <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
                                                         <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==4" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
                                                         <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==5" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
@@ -2698,7 +2711,7 @@
 
 
                                                     <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
-                                                    <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType<=6 ">
+                                                    <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType<=6 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType!=2">
                                                         <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" />
                                                         <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==4" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" />
                                                         <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==5" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" />
@@ -2925,7 +2938,9 @@
                                                     </div>
 
                                                     <div ng-if="obj.cfdSpecialType == 1">
-                                                        <input disabled type="text" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType" />
+
+                                                   
+                                                        <input disabled type="text" id="CustomActivity_{{obj.cfdID}}_{{CurrentActiveObject.InventoryID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType" />
 
 
                                                     </div>
@@ -2964,7 +2979,7 @@
 
                                                     <div class="" ng-if="obj.cfdSpecialType==5">
 
-                                                        <h1>{{CurrentActiveObject.InventoryID}}</h1>
+                                                       
 
                                                         <p class="todo-element">
                                                             <input name="LineItem_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
@@ -2985,7 +3000,7 @@
 
                                                         </select>
                                                     </div>
-                                                    <input disabled ng-if="obj.cfdIsAutoComplete == true" id="LineItem_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control" type="text" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" value="{{obj.CfValue}}" />
+                                                    <input disabled ng-if="obj.cfdIsAutoComplete == true" id="LineItem_{{obj.cfdID}}_{{CurrentActiveObject.InventoryID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control" type="text" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" value="{{obj.CfValue}}" />
                                                 </div>
 
 
@@ -3014,8 +3029,8 @@
                                                 </button>
                                             </span>
                                             <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i style="margin-left:10px;" class="fa fa-barcode"></i></span>
-                                            <span class="input-group-addon last" ng-if="obj.cfdSpecialType == 1" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>
-                                            <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'line')" class="input-group-addon last"><i class="fa fa-search"></i></span>
+                                            <span class="input-group-addon last" ng-if="obj.cfdSpecialType == 1" ng-click="customradiolist(obj.ColumnMap, obj.cfdID,CurrentActiveObject.InventoryID, 'activity')"><i class="fa fa-circle-o"></i></span>
+                                            <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, CurrentActiveObject.InventoryID, 'line')" class="input-group-addon last"><i class="fa fa-search"></i></span>
                                             <span ng-if="obj.cfdDataType=='number' && obj.cfdIsIncremental==true" ng-click="UpDownValue(obj.cfdID,false,3)" class="input-group-addon last">
                                                 <i class="fa fa-minus"></i>
                                             </span>
@@ -3082,9 +3097,12 @@
                                             </div>
 
                                             <div class="input-group" ng-if="obj.cfdSpecialType == 1">
+
+                                                
+
                                                 <input disabled type="text" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType" />
 
-                                                <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>
+                                                <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'empty', 'activity')"><i class="fa fa-circle-o"></i></span>
                                             </div>
                                         </div>
 
@@ -3143,7 +3161,7 @@
                                                 </select>
                                             </div>
                                             <input disabled ng-if="obj.cfdIsAutoComplete == true" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control" type="text" value="{{obj.CfValue}}" />
-                                            <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
+                                            <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID,'empty','activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
                                             <span ng-if="obj.cfdIsAutoComplete != true && checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID,'CustomActivity_')"><i class="fa fa-plus"></i></span>
                                             <span class="input-group-addon last" ng-if="obj.cfdIsAutoComplete != true " ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
@@ -3227,6 +3245,9 @@
                                                 </div>
 
                                                 <div class="input-group" ng-if="obj.cfdSpecialType == 1">
+
+                                                   
+
                                                     <input disabled type="text" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType" />
 
                                                     <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>
@@ -3370,6 +3391,9 @@
                                                 </div>
 
                                                 <div class="input-group" ng-if="obj.cfdSpecialType == 1">
+
+                                                    <h1>545455</h1>
+
                                                     <input disabled type="text" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType" />
 
                                                     <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>

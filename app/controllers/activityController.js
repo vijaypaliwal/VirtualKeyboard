@@ -496,11 +496,14 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.currtrentcustomauto = [];
 
 
-    $scope.customautocomplete = function (ColumnName, id, fieldtype) {
+    $scope.customautocomplete = function (ColumnName, id, inventoryid, fieldtype) {
         $("#customautolistmodal").modal('show');
 
+        if (inventoryid != 'empty') {
+            id = id + '_' + inventoryid;
+        }
 
-
+       
         var _toAppend = fieldtype == "line" ? "LineItem_" : "CustomActivity_"
 
         $scope.activecustomfield = _toAppend + id;
@@ -528,10 +531,12 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
     $scope.currtrentcustomradiovalue = [];
-    $scope.customradiolist = function (ColumnName, id, fieldtype) {
+    $scope.customradiolist = function (ColumnName, id, inventoryid, fieldtype) {
 
 
-
+        if (inventoryid != 'empty') {
+            id = id + '_' + inventoryid;
+        }
 
 
         $scope.activeradiofield = "CustomActivity_" + id;
@@ -2272,6 +2277,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             }
 
 
+           
+
+
         }
         if ($scope.CurrentCart.length > 0) {
             var i = 0;
@@ -2479,9 +2487,16 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                        $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
 
+                       console.log("All data")
+                       console.log($scope.CustomActivityDataList)
+
+
                        for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
 
                            var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
+
+
+
                            if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
                                if (_defaultValue != null && _defaultValue != "") {
 
@@ -2511,10 +2526,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                                $scope.CustomActivityDataList[i].cfdDefaultValue = (_value == "true" || _value === "True");
                            }
                            var _CustomObj = $scope.CustomActivityDataList[i];
-                           var _value = ($.trim(_CustomObj.cfdprefixsuffixtype) != "" ? _CustomObj.CombineValue : _CustomObj.cfdDefaultValue);
+                           var _value = ($.trim(_CustomObj.cfdprefixsuffixtype) != "" ? _CustomObj.CombineValue : _CustomObj.CombineValue);
 
                            $scope.CustomActivityDataList[i].CfValue = _value;
+
+                           console.log("fdsdfsdf")
+                           console.log($scope.CustomActivityDataList[i].CfValue)
+
                        }
+
 
                        CheckScopeBeforeApply();
                        UpdateCartWithCustomFields();
@@ -2531,6 +2551,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                }
            });
     }
+
 
     $scope.UpDownValue = function (value, IsUp, Type) {
 
@@ -2582,7 +2603,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     }
 
-    $scope.IsActiveTransactionField = function (cfdid) {
+    $scope.IsActiveTransactionField = function (cfdid)
+    {
+
+      
 
 
         for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
@@ -2621,7 +2645,18 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         break;
 
                     case "MoveTagUpdate":
+
+                     //   alert("NTU");
+                       // debugger;
+
+                        $scope.CustomActivityDataList[i].cfdIncludeOnMoveTagUpdate = true;
+
                         if ($scope.CustomActivityDataList[i].cfdIncludeOnMoveTagUpdate) {
+
+                         //   alert("Is having");
+
+                       //     debugger;
+
                             return true;
                         }
                         break;

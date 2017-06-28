@@ -202,10 +202,48 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }       
     }
 
+
+
+
+
+
+    $scope.GetBooleabData = function (ColumnName) {
+        debugger;
+
+
+        var BooeanArray = [];
+
+        var type = "";
+        var Map = "";
+        if (ColumnName.includes("t_")) {
+            type = "inventory";
+            Map = FieldName.substring(2);
+        }
+        else {
+            type = "part";
+            Map = ColumnName;
+        }
+
+        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            if ($scope.CustomItemDataList[i].ColumnMap == Map && $scope.CustomItemDataList[i].cfdCustomFieldType == type) {
+                BooeanArray.push($scope.CustomItemDataList[i].cfdTruelabel);
+                BooeanArray.push($scope.CustomItemDataList[i].cfdFalselabel);
+            }
+        }
+
+        return BooeanArray;
+    }
+
+
+
+
+
+
     // Get display label according to column name
     $scope.GetDisplayLabel = function (ColumnName) {
-        var DataType = ""
-      
+
+        debugger;
+        var DataType = ""    
 
 
         
@@ -568,7 +606,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     // Function to get cfdspecial type for Custom Field
 
     $scope.getCustomSpecialType = function (FieldName) {
-        debugger;
+        //debugger;
         if ($scope.CustomItemDataList.length > 0) {
             for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
                 var type = "";
@@ -611,7 +649,13 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
             if ($scope.CustomItemDataList[i].ColumnMap == Map && $scope.CustomItemDataList[i].cfdCustomFieldType == type) {
-                return $scope.CustomItemDataList[i].cfdName;
+                //if ($scope.CustomItemDataList[i].cfdDataType == "checkbox") {
+                //    return "";
+                //}
+                //else
+                //{
+                    return $scope.CustomItemDataList[i].cfdName;
+                //}                
             }
         }
         return _return;
@@ -689,7 +733,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     // Get cell's data according to column name and index
     $scope.GetCellData = function (columnName, Index, isCalculated) {
 
-        debugger;
+        //debugger;
        var _ID = TryParseInt(columnName, 0);
        if (_ID != 0)
        {
@@ -948,7 +992,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                        }
                    }
                }
-                return $scope.InventoryList[Index].bool_3 != null ? $scope.InventoryList[Index].bool_3 : "";
+                //return $scope.InventoryList[Index].bool_3 != null ? $scope.InventoryList[Index].bool_3 : "";
                 break;
            case "bool_4":
                if ($scope.InventoryList[Index].bool_4 != null) {

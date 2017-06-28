@@ -849,6 +849,8 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
     }
 
     $scope.GetCellData = function (columnName, parentIndex, Index, isCalculated, isGrouped) {
+
+        debugger;
         var _ID = TryParseInt(columnName, 0);
         if (_ID != 0) {
             columnName = $scope.GetCustomFieldByID(_ID);
@@ -1061,25 +1063,115 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
             case "number_12":
                 return $scope.InventoryListGrouped[Index].number_12 != null ? ChangeIntoNumberFormat($scope.InventoryListGrouped[Index].number_12) : "";
                 break;
-
             case "bool_1":
-                return $scope.InventoryListGrouped[Index].bool_1 != null ? $scope.InventoryListGrouped[Index].bool_1 : "";
+
+                if ($scope.InventoryListGrouped[Index].bool_1 != null) {
+                    for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                        if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                            if ($scope.InventoryListGrouped[Index].bool_1 == true) {
+                                return $scope.CustomItemDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].bool_1 != null ? $scope.InventoryList[Index].bool_1 : "";
                 break;
             case "bool_2":
-                return $scope.InventoryListGrouped[Index].bool_2 != null ? $scope.InventoryListGrouped[Index].bool_2 : "";
+                if ($scope.InventoryListGrouped[Index].bool_2 != null) {
+                    for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                        if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                            if ($scope.InventoryListGrouped[Index].bool_2 == true) {
+                                return $scope.CustomItemDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].bool_2 != null ? $scope.InventoryList[Index].bool_2 : "";
                 break;
             case "bool_3":
-                return $scope.InventoryListGrouped[Index].bool_3 != null ? $scope.InventoryListGrouped[Index].bool_3 : "";
+                if ($scope.InventoryListGrouped[Index].bool_3 != null) {
+                    for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                        if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                            if ($scope.InventoryListGrouped[Index].bool_3 == true) {
+                                return $scope.CustomItemDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].bool_3 != null ? $scope.InventoryList[Index].bool_3 : "";
                 break;
             case "bool_4":
-                return $scope.InventoryListGrouped[Index].bool_4 != null ? $scope.InventoryListGrouped[Index].bool_4 : "";
+                if ($scope.InventoryListGrouped[Index].bool_4 != null) {
+                    for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                        if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                            if ($scope.InventoryListGrouped[Index].bool_4 == true) {
+                                return $scope.CustomItemDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].bool_4 != null ? $scope.InventoryList[Index].bool_4 : "";
                 break;
             case "bool_5":
-                return $scope.InventoryListGrouped[Index].bool_5 != null ? $scope.InventoryListGrouped[Index].bool_5 : "";
+                if ($scope.InventoryListGrouped[Index].bool_5 != null) {
+                    for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                        if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                            if ($scope.InventoryListGrouped[Index].bool_5 == true) {
+                                return $scope.CustomItemDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].bool_5 != null ? $scope.InventoryList[Index].bool_5 : "";
                 break;
             case "bool_6":
-                return $scope.InventoryListGrouped[Index].bool_6 != null ? $scope.InventoryListGrouped[Index].bool_6 : "";
+                if ($scope.InventoryListGrouped[Index].bool_6 != null) {
+                    for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                        if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                            if ($scope.InventoryListGrouped[Index].bool_6 == true) {
+                                return $scope.CustomItemDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].bool_6 != null ? $scope.InventoryList[Index].bool_6 : "";
                 break;
+            //case "bool_1":
+            //    return $scope.InventoryListGrouped[Index].bool_1 != null ? $scope.InventoryListGrouped[Index].bool_1 : "";
+            //    break;
+            //case "bool_2":
+            //    return $scope.InventoryListGrouped[Index].bool_2 != null ? $scope.InventoryListGrouped[Index].bool_2 : "";
+            //    break;
+            //case "bool_3":
+            //    return $scope.InventoryListGrouped[Index].bool_3 != null ? $scope.InventoryListGrouped[Index].bool_3 : "";
+            //    break;
+            //case "bool_4":
+            //    return $scope.InventoryListGrouped[Index].bool_4 != null ? $scope.InventoryListGrouped[Index].bool_4 : "";
+            //    break;
+            //case "bool_5":
+            //    return $scope.InventoryListGrouped[Index].bool_5 != null ? $scope.InventoryListGrouped[Index].bool_5 : "";
+            //    break;
+            //case "bool_6":
+            //    return $scope.InventoryListGrouped[Index].bool_6 != null ? $scope.InventoryListGrouped[Index].bool_6 : "";
+            //    break;
 
             case "date_1":
                 return $scope.InventoryListGrouped[Index].date_1 != null ? $scope.InventoryListGrouped[Index].date_1 : "";
@@ -1276,6 +1368,48 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
 
         CheckScopeBeforeApply();
     }
+
+
+    $scope.GetBooleabData = function (ColumnName) {
+        debugger;
+
+
+        var BooeanArray = [];
+
+        var type = "";
+        var Map = "";
+        if (ColumnName.includes("t_")) {
+            type = "inventory";
+            Map = FieldName.substring(2);
+        }
+        else {
+            type = "part";
+            Map = ColumnName;
+        }
+
+        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            if ($scope.CustomItemDataList[i].ColumnMap == Map && $scope.CustomItemDataList[i].cfdCustomFieldType == type) {
+                BooeanArray.push($scope.CustomItemDataList[i].cfdTruelabel);
+                BooeanArray.push($scope.CustomItemDataList[i].cfdFalselabel);
+            }
+        }
+
+        return BooeanArray;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     $scope.GetInventoryGroupedDataAccordingToView = function () {
 
         $scope.isDataLoading = false;
