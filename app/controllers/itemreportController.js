@@ -463,6 +463,43 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
     }
 
     
+    $scope.GetBooleabData = function (ColumnName) {
+        debugger;
+
+
+        var BooeanArray = [];
+
+        var type = "";
+        var Map = "";
+        if (ColumnName.includes("t_")) {
+            type = "inventory";
+            Map = FieldName.substring(2);
+        }
+        else {
+            type = "part";
+            Map = ColumnName;
+        }
+
+        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+            if ($scope.CustomItemDataList[i].ColumnMap == Map && $scope.CustomItemDataList[i].cfdCustomFieldType == type) {
+                BooeanArray.push($scope.CustomItemDataList[i].cfdTruelabel);
+                BooeanArray.push($scope.CustomItemDataList[i].cfdFalselabel);
+            }
+        }
+
+        return BooeanArray;
+    }
+
+
+
+
+
+
+
+
+
+
+
    $scope.GetCellData=function(columnName, Index,isCalculated) {
        var _ID = TryParseInt(columnName, 0);
        if (_ID != 0)
@@ -655,23 +692,95 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
                 return $scope.ItemList[Index].number_12 != null ? ChangeIntoNumberFormat($scope.ItemList[Index].number_12) : "";
                 break;
 
-            case "bool_1":
-                return $scope.ItemList[Index].bool_1 != null ? $scope.ItemList[Index].bool_1 : "";
+           case "bool_1":
+               if ($scope.ItemList[Index].bool_1 != null) {
+                   for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                       if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                           if ($scope.ItemList[Index].bool_1 == true) {
+                               return $scope.CustomItemDataList[i].cfdTruelabel;
+                           }
+                           else {
+                               return $scope.CustomItemDataList[i].cfdFalselabel;
+                           }
+                       }
+                   }
+               }
+                //return $scope.ItemList[Index].bool_1 != null ? $scope.ItemList[Index].bool_1 : "";
                 break;
-            case "bool_2":
-                return $scope.ItemList[Index].bool_2 != null ? $scope.ItemList[Index].bool_2 : "";
+           case "bool_2":
+               if ($scope.ItemList[Index].bool_2 != null) {
+                   for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                       if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                           if ($scope.ItemList[Index].bool_2 == true) {
+                               return $scope.CustomItemDataList[i].cfdTruelabel;
+                           }
+                           else {
+                               return $scope.CustomItemDataList[i].cfdFalselabel;
+                           }
+                       }
+                   }
+               }
+                //return $scope.ItemList[Index].bool_2 != null ? $scope.ItemList[Index].bool_2 : "";
                 break;
-            case "bool_3":
-                return $scope.ItemList[Index].bool_3 != null ? $scope.ItemList[Index].bool_3 : "";
+           case "bool_3":
+               if ($scope.ItemList[Index].bool_3 != null) {
+                   for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                       if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                           if ($scope.ItemList[Index].bool_3 == true) {
+                               return $scope.CustomItemDataList[i].cfdTruelabel;
+                           }
+                           else {
+                               return $scope.CustomItemDataList[i].cfdFalselabel;
+                           }
+                       }
+                   }
+               }
+                //return $scope.ItemList[Index].bool_3 != null ? $scope.ItemList[Index].bool_3 : "";
                 break;
-            case "bool_4":
-                return $scope.ItemList[Index].bool_4 != null ? $scope.ItemList[Index].bool_4 : "";
+           case "bool_4":
+               if ($scope.ItemList[Index].bool_4 != null) {
+                   for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                       if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                           if ($scope.ItemList[Index].bool_4 == true) {
+                               return $scope.CustomItemDataList[i].cfdTruelabel;
+                           }
+                           else {
+                               return $scope.CustomItemDataList[i].cfdFalselabel;
+                           }
+                       }
+                   }
+               }
+                //return $scope.ItemList[Index].bool_4 != null ? $scope.ItemList[Index].bool_4 : "";
                 break;
-            case "bool_5":
-                return $scope.ItemList[Index].bool_5 != null ? $scope.ItemList[Index].bool_5 : "";
+           case "bool_5":
+               if ($scope.ItemList[Index].bool_5 != null) {
+                   for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                       if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                           if ($scope.ItemList[Index].bool_5 == true) {
+                               return $scope.CustomItemDataList[i].cfdTruelabel;
+                           }
+                           else {
+                               return $scope.CustomItemDataList[i].cfdFalselabel;
+                           }
+                       }
+                   }
+               }
+                //return $scope.ItemList[Index].bool_5 != null ? $scope.ItemList[Index].bool_5 : "";
                 break;
-            case "bool_6":
-                return $scope.ItemList[Index].bool_6 != null ? $scope.ItemList[Index].bool_6 : "";
+           case "bool_6":
+               if ($scope.ItemList[Index].bool_6 != null) {
+                   for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                       if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                           if ($scope.ItemList[Index].bool_6 == true) {
+                               return $scope.CustomItemDataList[i].cfdTruelabel;
+                           }
+                           else {
+                               return $scope.CustomItemDataList[i].cfdFalselabel;
+                           }
+                       }
+                   }
+               }
+                //return $scope.ItemList[Index].bool_6 != null ? $scope.ItemList[Index].bool_6 : "";
                 break;
 
             case "date_1":
@@ -1061,7 +1170,7 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
     function init() {
         $scope.getuom();
         $scope.GetItemViews();
-        $scope.GetCustomDataField(0);
+        $scope.GetCustomDataField(2);
         CheckScopeBeforeApply();
       
     

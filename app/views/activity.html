@@ -1169,11 +1169,7 @@
 
                                                     </div>
                                                 </div>
-
-
                                             </div>
-
-
                                         </div>
                                     </div>
 
@@ -1278,7 +1274,10 @@
 
                                                                 </select>
                                                             </div>
-                                                            <input disabled ng-if="obj.cfdIsAutoComplete == true" id="LineItem_{{obj.cfdID}}_{{CurrentActiveObject.InventoryID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control" type="text" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" value="{{obj.CfValue}}" />
+
+                                                            <div ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, CurrentActiveObject.InventoryID, 'line')">
+                                                                <input disabled ng-if="obj.cfdIsAutoComplete == true" id="LineItem_{{obj.cfdID}}_{{CurrentActiveObject.InventoryID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control" type="text" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" value="{{obj.CfValue}}" />
+                                                            </div>
                                                         </div>
 
                                                         
@@ -1447,6 +1446,8 @@
 
                             <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
+                                <h1>dashrath</h1>
+
 
                                 <div class="select" ng-if="obj.cfdIsAutoComplete != true">
                                     <select id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
@@ -1455,10 +1456,15 @@
 
                                     </select>
                                 </div>
-                                <input disabled ng-if="obj.cfdIsAutoComplete == true" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control" type="text" value="{{obj.CfValue}}" />
+
+                                <div ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'empty', 'activity')">
+                                    <input disabled ng-if="obj.cfdIsAutoComplete == true" id="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control" type="text" value="{{obj.CfValue}}" />
+                                </div>
+
+                               
                                 <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'empty', 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
-                                <span ng-if="obj.cfdIsAutoComplete != true && checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID,'CustomActivity_')"><i class="fa fa-plus"></i></span>
+                                <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID,'CustomActivity_')"><i class="fa fa-plus"></i></span>
                                 <span class="input-group-addon last" ng-if="obj.cfdIsAutoComplete != true " ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
 
