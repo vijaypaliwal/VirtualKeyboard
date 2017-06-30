@@ -116,7 +116,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
 
     $scope.getCustomSpecialType = function (FieldName) {
-        debugger;
+       // debugger;
         if ($scope.CustomItemDataList.length > 0) {
             for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
                 var type = "";
@@ -148,6 +148,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     $scope.ActivityList = [];
     $scope.CustomItemDataList = [];
     $scope.CustomActivityDataList = [];
+    $scope.CustomItemActivityDataList = [];
     $scope.FilterData = { SearchValue: "" };
     $scope.isDataLoading = true;
     $scope.FilterArray = [{ ColumnName: "", FilterOperator: "", SearchValue: "" }];
@@ -212,6 +213,9 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
             case "decimal":
             case "money":
                 return "num-eq";
+                break;
+            case "bool":
+                return "bool";
                 break;
 
 
@@ -427,7 +431,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     // Function to get cfdspecial type for Custom Field
 
     $scope.getCustomSpecialType = function (FieldName) {
-        debugger;
+        //debugger;
         if ($scope.CustomItemDataList.length > 0) {
             for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
                 var type = "";
@@ -468,8 +472,9 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     }
     // get data type according to column name
     $scope.GetColumnDataType = function (ColumnName) {
-        var DataType = ""
 
+       // debugger;
+        var DataType = ""
 
         DataType = $scope.GetCustomFieldTypeByID(ColumnName);
         if (DataType == "N/A") {
@@ -607,7 +612,14 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                        }
 
                        if (Type == 1) {
+
+                           //debugger;
                            $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
+
+                       }
+
+                       if (Type == 2) {
+                           $scope.CustomItemActivityDataList = response.GetCustomFieldsDataResult.Payload;
 
                        }
 
@@ -628,14 +640,40 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
            });
     }
 
+    $scope.GetBooleabData = function (ColumnName) {
+        debugger;
+
+        var BooeanArray = [];
+
+        var type = "";
+        var Map = "";
+        if (ColumnName.includes("t_")) {
+            type = "inventory";
+            Map = ColumnName.substring(2);
+        }
+        else {
+            type = "part";
+            Map = ColumnName;
+        }
+
+        for (var i = 0; i < $scope.CustomItemActivityDataList.length; i++) {
+            if ($scope.CustomItemActivityDataList[i].ColumnMap == Map && $scope.CustomItemActivityDataList[i].cfdCustomFieldType == type) {
+                BooeanArray.push($scope.CustomItemActivityDataList[i].cfdTruelabel);
+                BooeanArray.push($scope.CustomItemActivityDataList[i].cfdFalselabel);
+            }
+        }
+
+        return BooeanArray;
+    }
+
     // get custom column according to ID 
     $scope.GetCustomFieldByID = function (ID) {
+        
+        for (var i = 0; i < $scope.CustomItemActivityDataList.length; i++) {
+            if ($scope.CustomItemActivityDataList[i].cfdID == ID) {
+                if ($scope.CustomItemActivityDataList[i].cfdCustomFieldType.toLowerCase() == "part") {
 
-        for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
-            if ($scope.CustomItemDataList[i].cfdID == ID) {
-                if ($scope.CustomItemDataList[i].cfdCustomFieldType.toLowerCase() == "part") {
-
-                    return "i_" + $scope.CustomItemDataList[i].ColumnMap;
+                    return "i_" + $scope.CustomItemActivityDataList[i].ColumnMap;
                 }
 
 
@@ -644,17 +682,45 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
 
 
-        for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
-            if ($scope.CustomActivityDataList[i].cfdID == ID) {
+        for (var i = 0; i < $scope.CustomItemActivityDataList.length; i++) {
+            if ($scope.CustomItemActivityDataList[i].cfdID == ID) {
 
 
-                if ($scope.CustomActivityDataList[i].cfdCustomFieldType.toLowerCase() == "inventory") {
+                if ($scope.CustomItemActivityDataList[i].cfdCustomFieldType.toLowerCase() == "inventory") {
 
-                    return $scope.CustomActivityDataList[i].ColumnMap;
+                    return $scope.CustomItemActivityDataList[i].ColumnMap;
                 }
             }
 
         }
+
+
+
+
+        //for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+        //    if ($scope.CustomItemDataList[i].cfdID == ID) {
+        //        if ($scope.CustomItemDataList[i].cfdCustomFieldType.toLowerCase() == "part") {
+
+        //            return "i_" + $scope.CustomItemDataList[i].ColumnMap;
+        //        }
+
+
+        //    }
+
+        //}
+
+
+        //for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+        //    if ($scope.CustomActivityDataList[i].cfdID == ID) {
+
+
+        //        if ($scope.CustomActivityDataList[i].cfdCustomFieldType.toLowerCase() == "inventory") {
+
+        //            return $scope.CustomActivityDataList[i].ColumnMap;
+        //        }
+        //    }
+
+        //}
 
 
 
@@ -719,7 +785,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
         for (var i = 0; i < _TempArray.length; i++) {
             if (_TempArray[i].ColumnMap == Map) {
-                return _TempArray[i].cfdName;
+                return _TempArray[i].cfdDataType;
             }
         }
         return _return;
@@ -780,6 +846,8 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
     // get column data according to column name and index of data
     $scope.GetCellData = function (columnName, Index, isCalculated) {
+
+        //debugger;
         var _ID = TryParseInt(columnName, 0);
         if (_ID != 0) {
             columnName = $scope.GetCustomFieldByID(_ID);
@@ -1152,46 +1220,208 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
             case "i_number_12":
                 return $scope.ActivityList[Index].i_number_12 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].i_number_12) : "";
                 break;
-
             case "bool_1":
-                return $scope.ActivityList[Index].bool_1 != null ? $scope.ActivityList[Index].bool_1 : "";
+
+                if ($scope.ActivityList[Index].bool_1 != null) {
+                    for (var i = 0 ; $scope.CustomItemActivityDataList.length ; i++) {
+                        if ($scope.CustomItemActivityDataList[i].cfdID == _ID) {
+                            if ($scope.ActivityList[Index].bool_1 == true) {
+                                return $scope.CustomItemActivityDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemActivityDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].bool_1 != null ? $scope.InventoryList[Index].bool_1 : "";
                 break;
             case "bool_2":
-                return $scope.ActivityList[Index].bool_2 != null ? $scope.ActivityList[Index].bool_2 : "";
+                if ($scope.ActivityList[Index].bool_2 != null) {
+                    for (var i = 0 ; $scope.CustomItemActivityDataList.length ; i++) {
+                        if ($scope.CustomItemActivityDataList[i].cfdID == _ID) {
+                            if ($scope.ActivityList[Index].bool_2 == true) {
+                                return $scope.CustomItemActivityDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemActivityDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].bool_2 != null ? $scope.InventoryList[Index].bool_2 : "";
                 break;
             case "bool_3":
-                return $scope.ActivityList[Index].bool_3 != null ? $scope.ActivityList[Index].bool_3 : "";
+                if ($scope.ActivityList[Index].bool_3 != null) {
+                    for (var i = 0 ; $scope.CustomItemActivityDataList.length ; i++) {
+                        if ($scope.CustomItemActivityDataList[i].cfdID == _ID) {
+                            if ($scope.ActivityList[Index].bool_3 == true) {
+                                return $scope.CustomItemActivityDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemActivityDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].bool_3 != null ? $scope.InventoryList[Index].bool_3 : "";
                 break;
             case "bool_4":
-                return $scope.ActivityList[Index].bool_4 != null ? $scope.ActivityList[Index].bool_4 : "";
+                if ($scope.ActivityList[Index].bool_4 != null) {
+                    for (var i = 0 ; $scope.CustomItemActivityDataList.length ; i++) {
+                        if ($scope.CustomItemActivityDataList[i].cfdID == _ID) {
+                            if ($scope.ActivityList[Index].bool_4 == true) {
+                                return $scope.CustomItemActivityDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemActivityDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].bool_4 != null ? $scope.InventoryList[Index].bool_4 : "";
                 break;
             case "bool_5":
-                return $scope.ActivityList[Index].bool_5 != null ? $scope.ActivityList[Index].bool_5 : "";
+                if ($scope.ActivityList[Index].bool_5 != null) {
+                    for (var i = 0 ; $scope.CustomItemActivityDataList.length ; i++) {
+                        if ($scope.CustomItemActivityDataList[i].cfdID == _ID) {
+                            if ($scope.ActivityList[Index].bool_5 == true) {
+                                return $scope.CustomItemActivityDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemActivityDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].bool_5 != null ? $scope.InventoryList[Index].bool_5 : "";
                 break;
             case "bool_6":
-                return $scope.ActivityList[Index].bool_6 != null ? $scope.ActivityList[Index].bool_6 : "";
+                if ($scope.ActivityList[Index].bool_6 != null) {
+                    for (var i = 0 ; $scope.CustomItemActivityDataList.length ; i++) {
+                        if ($scope.CustomItemActivityDataList[i].cfdID == _ID) {
+                            if ($scope.ActivityList[Index].bool_6 == true) {
+                                return $scope.CustomItemActivityDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemActivityDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].bool_6 != null ? $scope.InventoryList[Index].bool_6 : "";
                 break;
+            //case "bool_1":
+            //    return $scope.ActivityList[Index].bool_1 != null ? $scope.ActivityList[Index].bool_1 : "";
+            //    break;
+            //case "bool_2":
+            //    return $scope.ActivityList[Index].bool_2 != null ? $scope.ActivityList[Index].bool_2 : "";
+            //    break;
+            //case "bool_3":
+            //    return $scope.ActivityList[Index].bool_3 != null ? $scope.ActivityList[Index].bool_3 : "";
+            //    break;
+            //case "bool_4":
+            //    return $scope.ActivityList[Index].bool_4 != null ? $scope.ActivityList[Index].bool_4 : "";
+            //    break;
+            //case "bool_5":
+            //    return $scope.ActivityList[Index].bool_5 != null ? $scope.ActivityList[Index].bool_5 : "";
+            //    break;
+            //case "bool_6":
+            //    return $scope.ActivityList[Index].bool_6 != null ? $scope.ActivityList[Index].bool_6 : "";
+            //    break;
 
 
 
 
             case "i_bool_1":
-                return $scope.ActivityList[Index].i_bool_1 != null ? $scope.ActivityList[Index].i_bool_1 : "";
+                if ($scope.ActivityList[Index].i_bool_1 != null) {
+                    for (var i = 0 ; $scope.CustomItemActivityDataList.length ; i++) {
+                        if ($scope.CustomItemActivityDataList[i].cfdID == _ID) {
+                            if ($scope.ActivityList[Index].i_bool_1 == true) {
+                                return $scope.CustomItemActivityDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemActivityDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.ActivityList[Index].i_bool_1 != null ? $scope.ActivityList[Index].i_bool_1 : "";
                 break;
             case "i_bool_2":
-                return $scope.ActivityList[Index].i_bool_2 != null ? $scope.ActivityList[Index].i_bool_2 : "";
+                if ($scope.ActivityList[Index].i_bool_2 != null) {
+                    for (var i = 0 ; $scope.CustomItemActivityDataList.length ; i++) {
+                        if ($scope.CustomItemActivityDataList[i].cfdID == _ID) {
+                            if ($scope.ActivityList[Index].i_bool_2 == true) {
+                                return $scope.CustomItemActivityDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemActivityDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.ActivityList[Index].i_bool_2 != null ? $scope.ActivityList[Index].i_bool_2 : "";
                 break;
             case "i_bool_3":
-                return $scope.ActivityList[Index].i_bool_3 != null ? $scope.ActivityList[Index].i_bool_3 : "";
+                if ($scope.ActivityList[Index].i_bool_3 != null) {
+                    for (var i = 0 ; $scope.CustomItemActivityDataList.length ; i++) {
+                        if ($scope.CustomItemActivityDataList[i].cfdID == _ID) {
+                            if ($scope.ActivityList[Index].i_bool_3 == true) {
+                                return $scope.CustomItemActivityDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemActivityDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.ActivityList[Index].i_bool_3 != null ? $scope.ActivityList[Index].i_bool_3 : "";
                 break;
             case "i_bool_4":
-                return $scope.ActivityList[Index].i_bool_4 != null ? $scope.ActivityList[Index].i_bool_4 : "";
+                if ($scope.ActivityList[Index].i_bool_4 != null) {
+                    for (var i = 0 ; $scope.CustomItemActivityDataList.length ; i++) {
+                        if ($scope.CustomItemActivityDataList[i].cfdID == _ID) {
+                            if ($scope.ActivityList[Index].i_bool_4 == true) {
+                                return $scope.CustomItemActivityDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemActivityDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.ActivityList[Index].i_bool_4 != null ? $scope.ActivityList[Index].i_bool_4 : "";
                 break;
             case "i_bool_5":
-                return $scope.ActivityList[Index].i_bool_5 != null ? $scope.ActivityList[Index].i_bool_5 : "";
+                if ($scope.ActivityList[Index].i_bool_5 != null) {
+                    for (var i = 0 ; $scope.CustomItemActivityDataList.length ; i++) {
+                        if ($scope.CustomItemActivityDataList[i].cfdID == _ID) {
+                            if ($scope.ActivityList[Index].i_bool_5 == true) {
+                                return $scope.CustomItemActivityDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemActivityDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.ActivityList[Index].i_bool_5 != null ? $scope.ActivityList[Index].i_bool_5 : "";
                 break;
             case "i_bool_6":
-                return $scope.ActivityList[Index].i_bool_6 != null ? $scope.ActivityList[Index].i_bool_6 : "";
+                if ($scope.ActivityList[Index].i_bool_6 != null) {
+                    for (var i = 0 ; $scope.CustomItemActivityDataList.length ; i++) {
+                        if ($scope.CustomItemActivityDataList[i].cfdID == _ID) {
+                            if ($scope.ActivityList[Index].i_bool_6 == true) {
+                                return $scope.CustomItemActivityDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemActivityDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.ActivityList[Index].i_bool_6 != null ? $scope.ActivityList[Index].i_bool_6 : "";
                 break;
 
             case "i_date_1":
@@ -1406,6 +1636,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
     }
     function ConvertToProperFilter(_Filters) {
+        //debugger;
         if (_Filters != null && _Filters != undefined && _Filters.length != 0) {
             for (var i = 0; i < _Filters.length; i++) {
                 switch (GetColumnDataType(_Filters[i].ColumnName)) {
@@ -1434,6 +1665,33 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
         CheckScopeBeforeApply();
     }
+
+
+
+
+
+    function ChangeBooleanOperator() {
+        debugger;
+        for (var i = 0; i < $scope.FilterArray.length ; i++) {
+            if ($scope.FilterArray[i].ColumnName.includes("bool")) {
+                $scope.FilterArray[i].FilterOperator = 'bool';
+            }
+        }
+
+        console.log("Filter Array after changing the boolean operator");
+        console.log($scope.FilterArray);
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     // Get activity data according to selected view 
     $scope.GetActivityDataAccordingToView = function () {
@@ -1549,8 +1807,6 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
 
 
-
-
                           _TotalRecordsCurrent = response.GetInventoryActivitiesResult.Payload[0].Data.length;
                           $scope.currentrecord = response.GetInventoryActivitiesResult.Payload[0].Data.length;
                           $scope.ActivityList = response.GetInventoryActivitiesResult.Payload[0].Data;
@@ -1559,7 +1815,8 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                           $scope.ActualTotalRecords = response.GetInventoryActivitiesResult.Payload[0].ActualTotalRecords;
 
                           ConvertToProperFilter(response.GetInventoryActivitiesResult.Payload[0].Filters);
-                          // FillFilterArray();
+                          ChangeBooleanOperator();
+                          //FillFilterArray();
                           UpdateFilterArray();
                       }
                       else {
@@ -1571,7 +1828,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                   },
                   error: function (requestObject, err, errorThrown) {
 
-                      debugger;
+                     // debugger;
                       if (requestObject.readyState == 0 || requestObject.status == 0) {
                           log.error("Seems like some issue in network, please try again.")
                       }
@@ -1741,9 +1998,8 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         $scope.GetActivityViews();
         $scope.GetCustomDataField(0);
         $scope.GetCustomDataField(1);
+        $scope.GetCustomDataField(2);
         CheckScopeBeforeApply();
-
-
     }
 
     init();

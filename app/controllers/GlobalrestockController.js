@@ -87,6 +87,9 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
             case "money":
                 return "num-eq";
                 break;
+            case "bool":
+                return "bool";
+                break;
 
 
             default:
@@ -455,7 +458,7 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
         var Map = "";
         if (ColumnName.includes("t_")) {
             type = "inventory";
-            Map = FieldName.substring(2);
+            Map = ColumnName.substring(2);
         }
         else {
             type = "part";
@@ -946,6 +949,35 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
 
         CheckScopeBeforeApply();
     }
+
+
+
+
+    function ChangeBooleanOperator() {
+        debugger;
+        for (var i = 0; i < $scope.FilterArray.length ; i++) {
+            if ($scope.FilterArray[i].ColumnName.includes("bool")) {
+                $scope.FilterArray[i].FilterOperator = 'bool';
+            }
+        }
+
+        console.log("Filter Array after changing the boolean operator");
+        console.log($scope.FilterArray);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     $scope.GetGlobalDataAccordingToView=function()
     {
         
@@ -1014,7 +1046,9 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
                       //$scope.FilterArray = response.GetGlobalRestockResult.Payload[0].Filters;
                       ConvertToProperFilter(response.GetGlobalRestockResult.Payload[0].Filters);
                       CheckScopeBeforeApply();
-                    
+
+                      ChangeBooleanOperator();
+                          //FillFilterArray()
                       UpdateFilterArray();
 
                       }

@@ -504,8 +504,8 @@
                             <li style="text-align: left"><a tabindex="-1" ng-click="_obj.FilterOperator='bool'"><img src="img/filter/NotEqualTo.gif" alt=""> Does not equals</a></li>
                         </ul>
                     </span>
-                    <select class="form-control">
-                        <option></option>    
+                    <select class="form-control" ng-model="_obj.SearchValue">
+                        <option></option>
                         <option ng-repeat="_data in GetBooleabData(_obj.ColumnName)" value="{{$index == 0 ? true : false}}">{{_data}}</option>
                     </select>
 

@@ -6,14 +6,6 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
     $scope.UnitDataFieldRadioValues = [];
 
-
-
-
-
-
-
-
-
     //#region variable declaration
     $scope.CurrentView = { Name: "Current Inventory" };
     $scope.InventoryViews = [];
@@ -81,7 +73,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     // this function is giving filter operator according to column name
     function GetFilterOperator(ColumnName)
     {
-         
+        //debugger;
         
         switch (ColumnName.toLowerCase()) {
             case "date":
@@ -92,6 +84,9 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
             case "decimal":
             case "money":
                 return "num-eq";
+                break;
+            case "bool":
+                return "bool";
                 break;
 
 
@@ -181,7 +176,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     // Get custom dropdown's column available data
     $scope.GetComboData=function(ColumnName)
     {
-        debugger;
+        //debugger;
 
         var type = "";
         var Map = "";
@@ -208,7 +203,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
 
     $scope.GetBooleabData = function (ColumnName) {
-        debugger;
+       // debugger;
 
 
         var BooeanArray = [];
@@ -217,7 +212,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         var Map = "";
         if (ColumnName.includes("t_")) {
             type = "inventory";
-            Map = FieldName.substring(2);
+            Map = ColumnName.substring(2);
         }
         else {
             type = "part";
@@ -242,7 +237,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     // Get display label according to column name
     $scope.GetDisplayLabel = function (ColumnName) {
 
-        debugger;
+        //debugger;
         var DataType = ""    
 
 
@@ -254,7 +249,6 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 if ($scope.Columns[i].ColumnID == ColumnName) {
                     return $scope.Columns[i].DisplayLabel;
                 }
-
             }
         }
         else {
@@ -1175,6 +1169,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
     $scope.AssignCurrentView=function(view)
     {
+        debugger;
         $scope.CurrentView = view;
         $scope.FilterArray = [{ ColumnName: "", FilterOperator: "", SearchValue: "" }];
         CheckScopeBeforeApply();
@@ -1226,7 +1221,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     }
     function ConvertToProperFilter(_Filters)
     {
-         
+        //debugger;
         if (_Filters != null && _Filters != undefined && _Filters.length != 0)
         {
             for (var i = 0; i < _Filters.length; i++) {
@@ -1258,6 +1253,23 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
         CheckScopeBeforeApply();
     }
+
+
+    function ChangeBooleanOperator() {
+        //debugger;
+        for (var i = 0; i < $scope.FilterArray.length ; i++) {
+            if ($scope.FilterArray[i].ColumnName.includes("bool"))
+            {
+                $scope.FilterArray[i].FilterOperator = 'bool';
+            }
+        }           
+
+        console.log("Filter Array after changing the boolean operator");
+        console.log($scope.FilterArray);
+    }
+
+
+
 
     // get data according to selected view 
     $scope.GetInventoryDataAccordingToView=function()
@@ -1300,6 +1312,13 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
             else {
                 $scope.FilterData.SearchValue = "";
             }
+
+            //debugger;
+
+            console.log("Filter array")
+            console.log($scope.FilterArray);
+
+         
             $.ajax
               ({
                   type: "POST",
@@ -1308,6 +1327,9 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                   contentType: 'application/json',
                   dataType: 'json',
                   success: function (response) {
+
+                    
+
                       $scope.isDataLoading = true;
                       $scope.isviewload = true;
 
@@ -1322,7 +1344,10 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                       $scope.ActualTotalRecords = response.GetCurrentInventoriesNewResult.Payload[0].ActualTotalRecords;
                       ConvertToProperFilter(response.GetCurrentInventoriesNewResult.Payload[0].Filters);
                       CheckScopeBeforeApply();
-                      // FillFilterArray();
+                    
+                      ChangeBooleanOperator();
+
+                      //FillFilterArray();
                       UpdateFilterArray();
 
 
@@ -1331,18 +1356,31 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
                       }
                       else {
+                       
                           $scope.ShowErrorMessage("Current Inventory Data", 1, 1, response.GetCurrentInventoriesNewResult.Message)
 
                       }
 
                   },
                   error: function (err) {
+
+                   
+
+                      alert("Error");
+
                       console.log(err);
                       $scope.ShowErrorMessage("Current Inventory Data", 2, 1, err.statusText);
 
                       $scope.isDataLoading = true;
+                      _IsLazyLoadingUnderProgress = 0;
+                      $scope.isDataLoading = true;
+                      HideGlobalWaitingDiv();
+                      clearInterval(timer);
+                      $scope.loadingblock = false;
                   },
                   complete: function () {
+
+                 
                       _IsLazyLoadingUnderProgress = 0;
                       $scope.isDataLoading = true;
                       HideGlobalWaitingDiv();
@@ -1486,9 +1524,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
     }
 
-    function init() {
+    function init() {        
         $scope.GetActiveUnitDataField();
-
         $scope.getuom();
         $scope.getstatus();
         $scope.GetInventoryViews();

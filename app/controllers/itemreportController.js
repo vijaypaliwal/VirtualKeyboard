@@ -91,6 +91,9 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
             case "money":
                 return "num-eq";
                 break;
+            case "bool":
+                return "bool";
+                break;
 
 
             default:
@@ -473,7 +476,7 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
         var Map = "";
         if (ColumnName.includes("t_")) {
             type = "inventory";
-            Map = FieldName.substring(2);
+            Map = ColumnName.substring(2);
         }
         else {
             type = "part";
@@ -973,6 +976,28 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
         CheckScopeBeforeApply();
     }
 
+
+    function ChangeBooleanOperator() {
+        debugger;
+        for (var i = 0; i < $scope.FilterArray.length ; i++) {
+            if ($scope.FilterArray[i].ColumnName.includes("bool")) {
+                $scope.FilterArray[i].FilterOperator = 'bool';
+            }
+        }
+
+        console.log("Filter Array after changing the boolean operator");
+        console.log($scope.FilterArray);
+    }
+
+
+
+
+
+
+
+
+
+
     $scope.GetItemsDataAccordingToView=function()
     {
         
@@ -1044,7 +1069,11 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
                       //$scope.FilterArray = response.GetAllItemsResult.Payload[0].Filters;
                       ConvertToProperFilter(response.GetAllItemsResult.Payload[0].Filters);
                       CheckScopeBeforeApply();
-                      // FillFilterArray();
+
+                      ChangeBooleanOperator();
+
+                          //FillFilterArray();
+
                       UpdateFilterArray();
 
                       }
