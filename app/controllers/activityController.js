@@ -2316,6 +2316,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 }
 
             }
+
+            debugger;
+            console.log($scope.CurrentCart);
         }
 
         CheckScopeBeforeApply();
@@ -2456,12 +2459,19 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     function ConvertToTime(_timeValue) {
 
         if ($.trim(_timeValue) != "") {
+            var _ToMergeTime = "";
+            var _timeString ="";
+            if (_timeValue.indexOf("AM") > -1 || _timeValue.indexOf("PM") > -1) {
 
-            var _timeSplit = _timeValue.split(" ");
-            var _timeString = _timeSplit[0].split(":");
+                var _timeSplit = _timeValue.split(" ");
+                 _timeString = _timeSplit[0].split(":");
 
-            var _ToMergeTime = (_timeSplit[1] == "AM" ? _timeString[0] : (12 + parseInt(_timeString[0]))).toString() + ":" + _timeString[1];
-
+                 _ToMergeTime = (_timeSplit[1] == "AM" ? _timeString[0] : (12 + parseInt(_timeString[0]))).toString() + ":" + _timeString[1];
+            }
+            else {
+                _timeString = _timeValue.split(":");
+                 _ToMergeTime = _timeString[0] +":"+_timeString[1]+ ":" + _timeString[2];
+            }
             return _ToMergeTime;
         }
 
@@ -2487,15 +2497,13 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                        $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
 
-                       console.log("All data")
-                       console.log($scope.CustomActivityDataList)
 
 
                        for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
 
                            var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
 
-
+                          
 
                            if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
                                if (_defaultValue != null && _defaultValue != "") {
@@ -2503,7 +2511,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                                    if ($scope.CustomActivityDataList[i].cfdSpecialType == 2) {
                                        $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDateTime(_defaultValue);
                                    }
-                                   else if ($scope.CustomActivityDataList[i].cfdSpecialType != 3) {
+                                   else if ($scope.CustomActivityDataList[i].cfdSpecialType == 3) {
                                        $scope.CustomActivityDataList[i].cfdDefaultValue = ConvertToTime(_defaultValue);
                                    }
                                    else {
@@ -2525,13 +2533,16 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                                var _value = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
                                $scope.CustomActivityDataList[i].cfdDefaultValue = (_value == "true" || _value === "True");
                            }
-                           var _CustomObj = $scope.CustomActivityDataList[i];
-                           var _value = ($.trim(_CustomObj.cfdprefixsuffixtype) != "" ? _CustomObj.CombineValue : _CustomObj.CombineValue);
+                           var _CustomObj = angular.copy($scope.CustomActivityDataList[i]);
+                           if ($.trim(_CustomObj.cfdprefixsuffixtype) != "") {
 
-                           $scope.CustomActivityDataList[i].CfValue = _value;
+                               var _value = _CustomObj.CombineValue;
 
-                           console.log("fdsdfsdf")
-                           console.log($scope.CustomActivityDataList[i].CfValue)
+                               $scope.CustomActivityDataList[i].cfdDefaultValue = _value;
+                           }
+
+                           $scope.CustomActivityDataList[i].CfValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
+                           
 
                        }
 
