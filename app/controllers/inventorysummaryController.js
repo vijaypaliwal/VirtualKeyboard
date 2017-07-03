@@ -265,7 +265,7 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
         var Map = "";
         if (ColumnName.includes("t_")) {
             type = "inventory";
-            Map = FieldName.substring(2);
+            Map = ColumnName.substring(2);
         }
         else {
             type = "part";

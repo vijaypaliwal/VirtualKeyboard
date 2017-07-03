@@ -378,7 +378,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         var type = "";
         var Map = "";
         var _TempArray = angular.copy($scope.CustomItemDataList);
-        if (ID.includes("i_")) {
+        if (ColumnName.includes("i_")) {
             type = "part";
             _TempArray = angular.copy($scope.CustomItemDataList);
             Map = ID.substring(2);

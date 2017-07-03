@@ -182,7 +182,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         var Map = "";
         if (ColumnName.includes("t_")) {
             type = "inventory";
-            Map = FieldName.substring(2);
+            Map = ColumnName.substring(2);
         }
         else {
             type = "part";
@@ -283,7 +283,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     $scope.GetColumnDataType=function(ColumnName)
     {
 
-        
+        //debugger;
         var DataType=""
         
 
@@ -1221,13 +1221,17 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     }
     function ConvertToProperFilter(_Filters)
     {
-        //debugger;
+        debugger;
         if (_Filters != null && _Filters != undefined && _Filters.length != 0)
         {
             for (var i = 0; i < _Filters.length; i++) {
-                switch (GetColumnDataType(_Filters[i].ColumnName)) {
+                switch ($scope.GetColumnDataType(_Filters[i].ColumnName)) {
                     case "Decimal":
+                        _Filters[i].SearchValue = _Filters[i].SearchValue;
+                        break;
                     case "number":
+                        _Filters[i].SearchValue = _Filters[i].SearchValue;
+                        break;
                     case "currency":
                         if (_Filters[i].SearchValue != null && _Filters[i].SearchValue != undefined && $.trim(_Filters[i].SearchValue) != "") {
 
@@ -1237,6 +1241,9 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                     case "Date":
                     case "datetime":
                         _Filters[i].SearchValue = formatDate(_Filters[i].SearchValue);
+                        break;
+                    case "checkbox":
+                        _Filters[i].SearchValue = _Filters[i].SearchValue;
                         break;
                     default:
                 }
@@ -1256,7 +1263,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
 
     function ChangeBooleanOperator() {
-        //debugger;
+        debugger;
         for (var i = 0; i < $scope.FilterArray.length ; i++) {
             if ($scope.FilterArray[i].ColumnName.includes("bool"))
             {
