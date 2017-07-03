@@ -198,10 +198,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
     $scope.GetBooleabData = function (ColumnName) {
         // debugger;
-
-
         var BooeanArray = [];
-
         var type = "";
         var Map = "";
         if (ColumnName.includes("t_")) {
@@ -224,6 +221,14 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     }
 
 
+    var trueFalseArray = [];
+
+    $scope.GetTrueFalseArray = function () {
+        trueFalseArray.push("true");
+        trueFalseArray.push("false");
+
+        return trueFalseArray;
+    }
 
 
 

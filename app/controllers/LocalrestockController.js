@@ -451,7 +451,12 @@ app.controller('LocalrestockController', ['$scope', 'localStorageService', 'auth
         }
         return _returnPath;
     }
+    $scope.GetTrueFalseArray = function () {
+        trueFalseArray.push("true");
+        trueFalseArray.push("false");
 
+        return trueFalseArray;
+    }
     $scope.GetBooleabData = function (ColumnName) {
         debugger;
 
