@@ -1790,6 +1790,23 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
             $scope.isDataLoading = false;
 
             var _searchParameter = $scope.filterVal;
+
+            for (var i = 0 ; i < $scope.FilterArray.length ; i++) {
+                var fieldSpecialType = $scope.getCustomSpecialType($scope.FilterArray[i].ColumnName);
+                if (fieldSpecialType != undefined) {
+                    if ($.trim($scope.FilterArray[i].SearchValue) != "") {
+                        if (fieldSpecialType.cfdSpecialType == 2) {
+                            // For DateTime Fields
+                        }
+                        if (fieldSpecialType.cfdSpecialType == 3) {
+                            // For Time Fields
+
+                            $scope.FilterArray[i].SearchValue = "1990-01-01T" + $scope.FilterArray[i].SearchValue;
+                        }
+                    }
+                }
+            }
+
             $.ajax
               ({
                   type: "POST",

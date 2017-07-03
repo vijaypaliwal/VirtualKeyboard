@@ -364,6 +364,7 @@
                                         <!--CustomWeek-->
                                         <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdInputMask == 'week' ">
                                             <select id="UniqueTag" ng-model="_obj.SearchValue" class="form-control">
+                                                <option value="">choose week</option>
                                                 <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                 <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                 <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -415,6 +416,7 @@
                                         <!--WeekPicker-->
                                         <div ng-if="getUnitSpecialType('ReqValue') == 6">
                                             <select id="UniqueTag" ng-model="_obj.SearchValue" class="form-control">
+                                                <option value="">choose week</option>
                                                 <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                 <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                 <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -461,6 +463,7 @@
                                         <!--WeekPicker-->
                                         <div ng-if="getUnitSpecialType('UnitTag2') == 6">
                                             <select id="UniqueTag2" ng-model="_obj.SearchValue" class="form-control">
+                                                <option value="">choose week</option>
                                                 <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                 <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                 <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -509,6 +512,7 @@
                                         <!--WeekPicker-->
                                         <div ng-if="getUnitSpecialType('UnitTag3') == 6">
                                             <select id="UniqueTag3" ng-model="_obj.SearchValue" class="form-control">
+                                                <option value="">choose week</option>
                                                 <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                 <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                 <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>

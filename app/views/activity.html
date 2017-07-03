@@ -330,6 +330,7 @@
                                                             <!--Week-->
                                                             <div ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==6">
                                                                 <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)">
+                                                                    <option value="">choose week</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -399,6 +400,7 @@
                                                             <!--Week-->
                                                             <div ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==6">
                                                                 <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)">
+                                                                    <option value="">choose week</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -463,6 +465,7 @@
                                                             <!--Week-->
                                                             <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==6">
                                                                 <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)">
+                                                                    <option value="">choose week</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -873,6 +876,7 @@
                                                             <!--Week-->
                                                             <div ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==6">
                                                                 <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)">
+                                                                    <option value="">choose week</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -943,6 +947,7 @@
                                                             <!--Week-->
                                                             <div ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==6">
                                                                 <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)">
+                                                                    <option value="">choose week</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -1006,6 +1011,7 @@
                                                             <!--Week-->
                                                             <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==6">
                                                                 <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)">
+                                                                    <option value="">choose week</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -1202,6 +1208,7 @@
 
                                                                     <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="{{obj.cfdInputMask}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType"   />
                                                                     <select id="LineItem_{{obj.cfdID}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
+                                                                        <option value="">choose week</option>
                                                                         <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear-1}}-W{{n}}" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                         <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear}}-W{{n}}" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                                         <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear+1}}-W{{n}}" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -1375,6 +1382,7 @@
                                         <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
 
                                         <select id="CustomActivity_{{obj.cfdID}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
+                                            <option value="">choose week</option>
                                             <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear-1}}-W{{n}}" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                             <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear}}-W{{n}}" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                             <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear+1}}-W{{n}}" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -1528,6 +1536,7 @@
                                             <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
 
                                             <select id="CustomActivity_{{obj.cfdID}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
+                                                <option value="">choose week</option>
                                                 <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear-1}}-W{{n}}" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                 <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear}}-W{{n}}" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                 <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear+1}}-W{{n}}" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -1675,6 +1684,7 @@
                                             <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
 
                                             <select id="CustomActivity_{{obj.cfdID}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
+                                                <option value="">choose week</option>
                                                 <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear-1}}-W{{n}}" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                 <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear}}-W{{n}}" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                 <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear+1}}-W{{n}}" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -2062,6 +2072,7 @@
                                                     <!--Week-->
                                                     <div ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==6">
                                                         <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)">
+                                                            <option value="">choose week</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -2131,6 +2142,7 @@
                                                     <!--Week-->
                                                     <div ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==6">
                                                         <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)">
+                                                            <option value="">choose week</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -2195,6 +2207,7 @@
                                                     <!--Week-->
                                                     <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==6">
                                                         <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)">
+                                                            <option value="">choose week</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -2601,6 +2614,7 @@
                                                     <!--Week-->
                                                     <div ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==6">
                                                         <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)">
+                                                            <option value="">choose week</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -2671,6 +2685,7 @@
                                                     <!--Week-->
                                                     <div ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==6">
                                                         <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)">
+                                                            <option value="">choose week</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -2734,6 +2749,7 @@
                                                     <!--Week-->
                                                     <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==6">
                                                         <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)">
+                                                            <option value="">choose week</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -2927,6 +2943,7 @@
 
                                                             <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="{{obj.cfdInputMask}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType"   />
                                                             <select id="LineItem_{{obj.cfdID}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
+                                                                <option value="">choose week</option>
                                                                 <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear-1}}-W{{n}}" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                 <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear}}-W{{n}}" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                                 <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear+1}}-W{{n}}" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -3233,6 +3250,7 @@
                                                         <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
 
                                                         <select id="CustomActivity_{{obj.cfdID}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
+                                                            <option value="">choose week</option>
                                                             <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear-1}}-W{{n}}" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                             <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear}}-W{{n}}" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                             <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear+1}}-W{{n}}" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
@@ -3379,6 +3397,7 @@
                                                         <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
 
                                                         <select id="CustomActivity_{{obj.cfdID}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
+                                                            <option value="">choose week</option>
                                                             <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear-1}}-W{{n}}" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                             <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear}}-W{{n}}" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
                                                             <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear+1}}-W{{n}}" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
