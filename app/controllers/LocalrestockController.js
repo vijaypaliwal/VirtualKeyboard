@@ -925,6 +925,7 @@ app.controller('LocalrestockController', ['$scope', 'localStorageService', 'auth
             for (var i = 0; i < _Filters.length; i++) {
                 switch (GetColumnDataType(_Filters[i].ColumnName)) {
                     case "Decimal":
+                    case "decimal":
                     case "number":
                     case "currency":
                         if (_Filters[i].SearchValue != null && _Filters[i].SearchValue != undefined && $.trim(_Filters[i].SearchValue) != "") {

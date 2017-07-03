@@ -951,6 +951,7 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
             for (var i = 0; i < _Filters.length; i++) {
                 switch (GetColumnDataType(_Filters[i].ColumnName)) {
                     case "Decimal":
+                    case "decimal":
                     case "number":
                     case "currency":
                         if (_Filters[i].SearchValue != null && _Filters[i].SearchValue != undefined && $.trim(_Filters[i].SearchValue) != "") {
@@ -1199,7 +1200,7 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
     function init() {
         $scope.getuom();
         $scope.GetItemViews();
-        $scope.GetCustomDataField(2);
+        $scope.GetCustomDataField(0);
         CheckScopeBeforeApply();
       
     

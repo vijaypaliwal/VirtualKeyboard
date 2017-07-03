@@ -1182,7 +1182,7 @@
 
                                         <div ng-class="parentIndex==0 ? 'col-md-12 col-xs-12' : 'col-md-12 col-xs-12'">
                                             <div class="form-group">
-                                                <label>{{_columns}}  <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
+                                                <label>{{_columns}}    <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
 
                                                 <div class="input-group" ng-init="obj=CurrentActiveObject.IsLineItemData[$index]">
                                                     <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'input-group':''}}">
@@ -1198,9 +1198,9 @@
 
                                                                 <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
 
-                                                                    <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)==''" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="text" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                                                    <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)==''" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="text" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType"   />
 
-                                                                    <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="{{obj.cfdInputMask}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                                                    <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="{{obj.cfdInputMask}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType"   />
                                                                     <select id="LineItem_{{obj.cfdID}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
                                                                         <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear-1}}-W{{n}}" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                         <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear}}-W{{n}}" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -1218,7 +1218,7 @@
                                                             </div>
 
                                                             <div ng-if="obj.cfdSpecialType == 1">
-                                                                <input disabled type="text" id="CustomActivity_{{obj.cfdID}}_{{CurrentActiveObject.InventoryID}}"  value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" />
+                                                                <input disabled type="text" id="CustomActivity_{{obj.cfdID}}_{{CurrentActiveObject.InventoryID}}"    ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" />
 
                                                             </div>
                                                         </div>
@@ -1284,12 +1284,12 @@
                                                         <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
 
 
-                                                            <input id="LineItem_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" custom-data-type="{{obj.cfdDataType}}" />
-                                                            <input id="LineItem_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" custom-data-type="{{obj.cfdDataType}}" />
-                                                            <input type="date" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                                            <input id="LineItem_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" custom-data-type="{{obj.cfdDataType}}" />
+                                                            <input id="LineItem_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" custom-data-type="{{obj.cfdDataType}}" />
+                                                            <input type="date" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker"   />
                                                         </div>
-                                                        <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" min="{{obj.MinimumValue}}" max="{{obj.MaximumValue}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                                        <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                                        <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" min="{{obj.MinimumValue}}" max="{{obj.MaximumValue}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType"   />
+                                                        <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)"   />
 
                                                     </div>
                                                     <div>
@@ -1472,8 +1472,8 @@
 
                               
 
-                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
-                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                 <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" type="date" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                 <span class="input-group-addon last" style="margin-left:10px;" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
@@ -1621,8 +1621,8 @@
                                 <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
 
 
-                                    <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
-                                    <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                    <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                    <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                     <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" type="date" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                     <span class="input-group-addon last" style="margin-left:10px;" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
@@ -1766,8 +1766,8 @@
                                 <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
 
 
-                                    <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
-                                    <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                    <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                    <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                     <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" type="date" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                     <span class="input-group-addon last" style="margin-left:10px;" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
@@ -2915,6 +2915,7 @@
                                         <div class="input-group" ng-init="obj=CurrentActiveObject.IsLineItemData[$index]">
                                             <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'input-group':''}}">
 
+                                            
                                                 <div ng-if="obj.cfdDataType=='string'">
 
 
@@ -2922,9 +2923,9 @@
                                                     <div ng-if="obj.cfdSpecialType != 1">
                                                         <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
 
-                                                            <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)==''" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="text" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                                            <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)==''" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="text" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType"   />
 
-                                                            <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="{{obj.cfdInputMask}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                                            <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="{{obj.cfdInputMask}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType"   />
                                                             <select id="LineItem_{{obj.cfdID}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
                                                                 <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear-1}}-W{{n}}" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                 <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear}}-W{{n}}" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -3013,12 +3014,12 @@
                                                 <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
 
 
-                                                    <input id="LineItem_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" custom-data-type="{{obj.cfdDataType}}" />
-                                                    <input id="LineItem_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" custom-data-type="{{obj.cfdDataType}}" />
-                                                    <input type="date" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                                    <input id="LineItem_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" custom-data-type="{{obj.cfdDataType}}" />
+                                                    <input id="LineItem_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" custom-data-type="{{obj.cfdDataType}}" />
+                                                    <input type="date" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control customFieldDatePicker"   />
                                                 </div>
-                                                <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" min="{{obj.MinimumValue}}" max="{{obj.MaximumValue}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
-                                                <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" value="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}" />
+                                                <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" min="{{obj.MinimumValue}}" max="{{obj.MaximumValue}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='number'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType"   />
+                                                <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)"   />
 
                                             </div>
                                             <div>
@@ -3176,8 +3177,8 @@
                                         <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
 
 
-                                            <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
-                                            <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                            <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                            <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                             <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" type="date" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                             <span class="input-group-addon last" style="margin-left:10px;" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                         </div>
@@ -3324,8 +3325,8 @@
                                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
 
 
-                                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
-                                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                                 <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" type="date" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                                 <span class="input-group-addon last" style="margin-left:10px;" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                             </div>
@@ -3470,8 +3471,8 @@
                                             <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
 
 
-                                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
-                                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                                 <input id="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" type="date" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                                 <span class="input-group-addon last" style="margin-left:10px;" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                             </div>

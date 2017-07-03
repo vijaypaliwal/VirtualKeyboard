@@ -503,7 +503,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             id = id + '_' + inventoryid;
         }
 
-       
+
         var _toAppend = fieldtype == "line" ? "LineItem_" : "CustomActivity_"
 
         $scope.activecustomfield = _toAppend + id;
@@ -2078,7 +2078,16 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         setTimeout(function () { $('.itUpdateDate').val(today) }, 1000);
 
-        setTimeout(function () { $('.FormDateType').val(today); }, 1000);
+
+
+        setTimeout(function () {
+            $('.FormDateType').each(function () {
+                if ($.trim($(this).val()) != "") {
+                    $(this).val(today)
+
+                }
+            });
+        }, 1000);
     }
     $scope.FillQuantityToConvert = function (value, myid, Type) {
         $scope.ActionQuantityValueToConvert = value;
@@ -2277,7 +2286,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             }
 
 
-           
+
 
 
         }
@@ -2444,7 +2453,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         var _timeString = _timeSplit[1].split(":");
 
-        var _ToMergeTime = "T" + (_timeSplit[2] == "AM" ? _timeString[0] : (12 + parseInt(_timeString[0]))).toString() + ":" + _timeString[1];
+        var _ToMergeTime = "T" + (_timeSplit[2] == "AM" ? leadZero(_timeString[0]) : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
 
         var now = new Date(_timeSplit[0], dsplit1[0] - 1, dsplit1[1]);
 
@@ -2456,21 +2465,26 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         return today + _ToMergeTime;
     }
 
+    function leadZero(_something) {
+        if (parseInt(_something) < 10) return "0" + _something;
+        return _something;//else    
+    }
+
     function ConvertToTime(_timeValue) {
 
         if ($.trim(_timeValue) != "") {
             var _ToMergeTime = "";
-            var _timeString ="";
+            var _timeString = "";
             if (_timeValue.indexOf("AM") > -1 || _timeValue.indexOf("PM") > -1) {
 
                 var _timeSplit = _timeValue.split(" ");
-                 _timeString = _timeSplit[0].split(":");
+                _timeString = _timeSplit[0].split(":");
 
-                 _ToMergeTime = (_timeSplit[1] == "AM" ? _timeString[0] : (12 + parseInt(_timeString[0]))).toString() + ":" + _timeString[1];
+                _ToMergeTime = (_timeSplit[1] == "AM" ? leadZero(_timeString[0]) : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
             }
             else {
                 _timeString = _timeValue.split(":");
-                 _ToMergeTime = _timeString[0] +":"+_timeString[1]+ ":" + _timeString[2];
+                _ToMergeTime = (_timeString[0]) + ":" + (_timeString[1]) + ":" + (_timeString[2]);
             }
             return _ToMergeTime;
         }
@@ -2503,7 +2517,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                            var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
 
-                          
+
 
                            if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
                                if (_defaultValue != null && _defaultValue != "") {
@@ -2542,7 +2556,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                            }
 
                            $scope.CustomActivityDataList[i].CfValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
-                           
+
 
                        }
 
@@ -2614,10 +2628,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     }
 
-    $scope.IsActiveTransactionField = function (cfdid)
-    {
+    $scope.IsActiveTransactionField = function (cfdid) {
 
-      
+
 
 
         for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
@@ -2657,16 +2670,16 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                     case "MoveTagUpdate":
 
-                     //   alert("NTU");
-                       // debugger;
+                        //   alert("NTU");
+                        // debugger;
 
                         $scope.CustomActivityDataList[i].cfdIncludeOnMoveTagUpdate = true;
 
                         if ($scope.CustomActivityDataList[i].cfdIncludeOnMoveTagUpdate) {
 
-                         //   alert("Is having");
+                            //   alert("Is having");
 
-                       //     debugger;
+                            //     debugger;
 
                             return true;
                         }
@@ -3981,7 +3994,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 _MyObjdata.Targets.ToLocation = _TempLocText;
                 _MyObjdata1.Targets.ToLocation = _TempLocText;
                 _MyObjdata2.Targets.ToLocation = _TempLocText;
-              
+
             }
 
 
@@ -5101,7 +5114,14 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     setTimeout(function () { $('.itUpdateDate').val(today) }, 1000);
 
-    setTimeout(function () { $('.FormDateType').val(today); }, 1000);
+    setTimeout(function () {
+        $('.FormDateType').each(function () {
+            if ($.trim($(this).val()) != "") {
+                $(this).val(today)
+
+            }
+        });
+    }, 1000);
 
     function ShowErrorMessage(Action) {
         var _MsgTitle = "DATA HAS NOT CHANGED";
