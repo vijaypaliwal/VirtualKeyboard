@@ -1481,8 +1481,8 @@
 
                               
 
-                                <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control datetimedata" value="{{obj.CfValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
-                                <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control datetimedata" value="{{obj.CfValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control datetimedata" ng-model="obj.CfValue" value="{{obj.CfValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control datetimedata" ng-model="obj.CfValue" value="{{obj.CfValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                 <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" type="date" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
                                 <span class="input-group-addon last" style="margin-left:10px;" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
