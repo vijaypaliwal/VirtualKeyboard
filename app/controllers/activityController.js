@@ -5131,12 +5131,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         
     }, 1000);
 
-    setTimeout(function () {
-        alert("change called");
-        $('input[type="datetime-local"]').trigger("input");
-        $('input[type="time"]').trigger("input");
-        $('input[type="month"]').trigger("input");
-    }, 4000);
+  
 
     function ShowErrorMessage(Action) {
         var _MsgTitle = "DATA HAS NOT CHANGED";
