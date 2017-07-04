@@ -5211,6 +5211,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             return date;
         }
     }
+
+
     $scope.UnchangedData = function () {
         var k = 0;
         if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
