@@ -3676,6 +3676,12 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
         return date;
     };
+
+    Date.prototype.toMSJSONTime = function () {
+        this.setHours(this.getHours());
+        var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
+        return date;
+    };
     function GetProperUnitValue(_val, _Prefix, _Suffix) {
 
         if ($.trim(_val) != "") {
@@ -4056,7 +4062,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         }
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
 
-                        wcfDateStr1 = d1222.toMSJSON();
+                        wcfDateStr1 = d1122.toMSJSONTime();
                     }
                 }
                 else if ($scope.GetUnitDataFieldByName('UniqueDate').FieldSpecialType == 17) {
@@ -4073,7 +4079,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             d122.setDate(d122.getDate() + _genVar);
                         }
                         var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
-                        wcfDateStr1 = d122.toMSJSON();
+                        wcfDateStr1 = d1123.toMSJSONTime();
                     }
                 }
                 else {
@@ -4117,7 +4123,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         }
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
 
-                        wcfDateStr2 = d1222.toMSJSON();
+                        wcfDateStr2 = d1122.toMSJSONTime();
                     }
 
 
@@ -4136,7 +4142,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             d122.setDate(d122.getDate() + _genVar);
                         }
                         var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
-                        wcfDateStr2 = d122.toMSJSON();
+                        wcfDateStr2 = d1123.toMSJSONTime();
                     }
                 }
                 else {
@@ -4186,7 +4192,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         }
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
 
-                        wcfDateStr1New = d1222.toMSJSON();
+                        wcfDateStr1New = d1122.toMSJSONTime();
                     }
                 }
                 else if ($scope.GetUnitDataFieldByName('UniqueDate').FieldSpecialType == 17) {
@@ -4203,7 +4209,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             d122.setDate(d122.getDate() + _genVar);
                         }
                         var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
-                        wcfDateStr1New = d122.toMSJSON();
+                        wcfDateStr1New = d1123.toMSJSONTime();
                     }
 
                 }
@@ -4248,7 +4254,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                         }
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
-                        wcfDateStr2New = d1222.toMSJSON();
+                        wcfDateStr2New = d1122.toMSJSONTime();
                     }
                 }
                 else if ($scope.GetUnitDataFieldByName('UnitDate2').FieldSpecialType == 17) {
@@ -4265,7 +4271,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             d122.setDate(d122.getDate() + _genVar);
                         }
                         var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
-                        wcfDateStr2New = d122.toMSJSON();
+                        wcfDateStr2New = d1123.toMSJSONTime();
                     }
 
                 }
@@ -5211,8 +5217,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             return date;
         }
     }
-
-
     $scope.UnchangedData = function () {
         var k = 0;
         if ($scope.CurrentCart != null && $scope.CurrentCart.length > 0) {
