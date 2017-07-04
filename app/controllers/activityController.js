@@ -82,8 +82,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
 
-    $scope.GetWeekValue=function(year,week)
-    {
+    $scope.GetWeekValue = function (year, week) {
         return year.toString() + "-W" + week.toString();
     }
 
@@ -5128,10 +5127,21 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             }
         });
 
-        
+
     }, 1000);
 
-  
+    setTimeout(function () {
+
+
+        $(".datetimedata").each(function () {
+            var _val = $(this).val();
+            alert("datetime " + _val);
+            $(this).val(_val);
+            $(this).trigger("input");
+        });
+       
+    }, 4000);
+
 
     function ShowErrorMessage(Action) {
         var _MsgTitle = "DATA HAS NOT CHANGED";
