@@ -2471,7 +2471,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
     function leadZero(_something) {
-        if (parseInt(_something) < 10 && _something.indexOf("0") > 0) return "0" + _something;
+        if (parseInt(_something) < 10 && _something.indexOf("0")>0) return "0" + _something;
         return _something;//else    
     }
 
@@ -5135,19 +5135,20 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         $(".datetimedata").each(function () {
             var _val = $(this).val();
-            alert("datetime " + _val);
             $(this).val(_val);
-
-
-
             setTimeout(function () {
-                alert("changed value " + _val);
                 $(this).trigger("input");
                 $(this).trigger("blur");
                 $(this).trigger("change");
             }, 1000);
         });
-       
+
+        $(".weekPicker").each(function () {
+            var _val = $(this).attr("selectvalue");
+            $(this).val(_val);
+            $(this).trigger("change");
+        });
+
     }, 4000);
 
 

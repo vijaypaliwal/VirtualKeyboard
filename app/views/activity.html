@@ -1371,7 +1371,6 @@
 
                         <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveTransactionField(obj.cfdID)">
                             <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
-                       {{obj.CfValue}}
                             <div ng-if="obj.cfdDataType=='string'" class="input-group">
 
 
@@ -1380,14 +1379,14 @@
                                     <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
 
                                         <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''" type="text" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
-                                        <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
+                                        <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" ng-model="obj.CfValue" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
 
-                                        <select id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
+                                        <select id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" selectvalue="{{obj.CfValue}}" ng-selected="obj.CfValue" class="form-control stringType weekPicker" cfd-id="{{obj.cfdID}}" ng-model="obj.CfValue" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
                                             <option value="">choose week</option>
-                                            <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear-1}}-W{{n}}" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
-                                            <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear}}-W{{n}}" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
-                                            <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear+1}}-W{{n}}" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
-                                            <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear+2}}-W{{n}}" value="{{CurrentYear+2}}-W{{n}}">Week {{n}}, {{CurrentYear+2}}</option>
+                                            <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
+                                            <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
+                                            <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
+                                            <option ng-repeat="n in weeklist" value="{{CurrentYear+2}}-W{{n}}">Week {{n}}, {{CurrentYear+2}}</option>
                                         </select>
 
                                     </div>
@@ -1525,7 +1524,6 @@
 
                             <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveTransactionField(obj.cfdID)">
                                 <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
-
                                 <div ng-if="obj.cfdDataType=='string'" class="input-group">
 
 
@@ -1533,15 +1531,15 @@
                                     <div ng-if="obj.cfdSpecialType != 1" class="input-group">
                                         <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
 
-                                            <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''" type="text" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
-                                            <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
+                                            <input id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''" type="text" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
+                                            <input id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" ng-model="obj.CfValue" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
 
-                                            <select id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
+                                            <select id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" selectvalue="{{obj.CfValue}}" ng-selected="obj.CfValue" class="form-control stringType weekPicker" cfd-id="{{obj.cfdID}}" ng-model="obj.CfValue" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
                                                 <option value="">choose week</option>
-                                                <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear-1}}-W{{n}}" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
-                                                <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear}}-W{{n}}" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
-                                                <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear+1}}-W{{n}}" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
-                                                <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear+2}}-W{{n}}" value="{{CurrentYear+2}}-W{{n}}">Week {{n}}, {{CurrentYear+2}}</option>
+                                                <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
+                                                <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
+                                                <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
+                                                <option ng-repeat="n in weeklist" value="{{CurrentYear+2}}-W{{n}}">Week {{n}}, {{CurrentYear+2}}</option>
                                             </select>
 
                                         </div>
@@ -1549,20 +1547,16 @@
                                         <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
 
-                                            <input type="text" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustom" />
+                                            <input type="text" id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustom" />
                                         </div>
 
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
+                                        <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
                                     <div class="input-group" ng-if="obj.cfdSpecialType == 1">
+                                        <input disabled type="text" id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType" />
 
-
-                                       
-
-                                        <input disabled type="text" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType" />
-
-                                        <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>
+                                        <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID,'empty', 'activity')"><i class="fa fa-circle-o"></i></span>
                                     </div>
                                 </div>
 
@@ -1575,10 +1569,10 @@
 
                                     <div custom-swipe class="btn-group custombtnGroup" ng-if="obj.cfdSpecialType!=4 && obj.cfdSpecialType!=5">
                                         <label style="width:100%" class="switch1">
-                                            <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" type="checkbox" ng-checked="obj.cfdDefaultValue==true" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
+                                            <input id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" type="checkbox" ng-checked="obj.cfdDefaultValue==true" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
                                             <div class="slider round"></div>
 
-                                            <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
+                                            <span style="margin-left:75px; color:#888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
                                                 {{obj.cfdTruelabel}}
                                             </span>
 
@@ -1591,7 +1585,7 @@
                                     <div ng-if="obj.cfdSpecialType==4">
 
 
-                                        <select id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" class="form-control" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
+                                        <select id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" class="form-control" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
                                             <option ng-selected="obj.cfdDefaultValue==true" value="true">{{obj.cfdTruelabel}}</option>
                                             <option ng-selected="obj.cfdDefaultValue==false" value="false">{{obj.cfdFalselabel}}</option>
                                         </select>
@@ -1600,8 +1594,8 @@
 
                                     <div class="" ng-if="obj.cfdSpecialType==5">
                                         <p class="todo-element">
-                                            <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="CustomActivity_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
-                                            <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
+                                            <input name="CustomActivityIncrease_{{obj.cfdID}}" id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="CustomActivityIncrease_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
+                                            <input name="CustomActivityIncrease_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
                                         </p>
 
 
@@ -1613,32 +1607,40 @@
                                 <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
 
+
+
                                     <div class="select" ng-if="obj.cfdIsAutoComplete != true">
-                                        <select id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
+                                        <select id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
 
                                             <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
                                         </select>
                                     </div>
-                                    <input disabled ng-if="obj.cfdIsAutoComplete == true" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control" type="text" value="{{obj.CfValue}}" />
-                                    <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
-                                    <span ng-if="obj.cfdIsAutoComplete != true && checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID,'CustomActivity_')"><i class="fa fa-plus"></i></span>
-                                    <span class="input-group-addon last" ng-if="obj.cfdIsAutoComplete != true " ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
+                                    <div ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'empty', 'activity')">
+                                        <input disabled ng-if="obj.cfdIsAutoComplete == true" id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control" type="text" value="{{obj.CfValue}}" />
+                                    </div>
+
+
+                                    <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'empty', 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
+
+                                    <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID,'CustomActivityIncrease_')"><i class="fa fa-plus"></i></span>
+                                    <span class="input-group-addon last" ng-if="obj.cfdIsAutoComplete != true " ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
 
                                 <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
 
 
-                                    <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control" value="{{obj.CfValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
-                                    <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control" value="{{obj.CfValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
-                                    <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" type="date" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
-                                    <span class="input-group-addon last" style="margin-left:10px;" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
+
+                                    <input id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control datetimedata" ng-model="obj.CfValue" value="{{obj.CfValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                    <input id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control datetimedata" ng-model="obj.CfValue" value="{{obj.CfValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                    <input id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" type="date" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                    <span class="input-group-addon last" style="margin-left:10px;" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                    <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" min="{{obj.MinimumValue}}" max="{{obj.MaximumValue}}" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                                    <input id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" min="{{obj.MinimumValue}}" max="{{obj.MaximumValue}}" class="form-control FormControlType" value="{{obj.CfValue}}" />
 
 
                                     <span ng-if="obj.cfdIsIncremental==true" ng-click="UpDownValue(obj.cfdID,false,2)" class="input-group-addon last">
@@ -1648,12 +1650,12 @@
                                         <i class="fa fa-plus"></i>
                                     </span>
 
-                                    <span class="input-group-addon last" ng-if="obj.cfdIsIncremental!=true" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
+                                    <span class="input-group-addon last" ng-if="obj.cfdIsIncremental!=true" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='currency'" class="input-group">
-                                    <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
-                                    <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
+                                    <input id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
+                                    <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
                             </div>
@@ -1673,7 +1675,6 @@
 
                             <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveTransactionField(obj.cfdID)">
                                 <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
-
                                 <div ng-if="obj.cfdDataType=='string'" class="input-group">
 
 
@@ -1681,15 +1682,15 @@
                                     <div ng-if="obj.cfdSpecialType != 1" class="input-group">
                                         <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
 
-                                            <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''" type="text" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
-                                            <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
+                                            <input id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''" type="text" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
+                                            <input id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask !='week'" ng-model="obj.CfValue" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
 
-                                            <select id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
+                                            <select id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" selectvalue="{{obj.CfValue}}" ng-selected="obj.CfValue" class="form-control stringType weekPicker" cfd-id="{{obj.cfdID}}" ng-model="obj.CfValue" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'">
                                                 <option value="">choose week</option>
-                                                <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear-1}}-W{{n}}" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
-                                                <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear}}-W{{n}}" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
-                                                <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear+1}}-W{{n}}" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
-                                                <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear+2}}-W{{n}}" value="{{CurrentYear+2}}-W{{n}}">Week {{n}}, {{CurrentYear+2}}</option>
+                                                <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
+                                                <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
+                                                <option ng-repeat="n in weeklist" value="{{CurrentYear+1}}-W{{n}}">Week {{n}}, {{CurrentYear+1}}</option>
+                                                <option ng-repeat="n in weeklist" value="{{CurrentYear+2}}-W{{n}}">Week {{n}}, {{CurrentYear+2}}</option>
                                             </select>
 
                                         </div>
@@ -1697,18 +1698,16 @@
                                         <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
 
-                                            <input type="text" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustom" />
+                                            <input type="text" id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustom" />
                                         </div>
 
-                                        <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
+                                        <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
 
                                     <div class="input-group" ng-if="obj.cfdSpecialType == 1">
+                                        <input disabled type="text" id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType" />
 
-                                      
-                                        <input disabled type="text" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType" />
-
-                                        <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, 'activity')"><i class="fa fa-circle-o"></i></span>
+                                        <span class="input-group-addon last" ng-click="customradiolist(obj.ColumnMap, obj.cfdID,'empty', 'activity')"><i class="fa fa-circle-o"></i></span>
                                     </div>
                                 </div>
 
@@ -1721,10 +1720,10 @@
 
                                     <div custom-swipe class="btn-group custombtnGroup" ng-if="obj.cfdSpecialType!=4 && obj.cfdSpecialType!=5">
                                         <label style="width:100%" class="switch1">
-                                            <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" type="checkbox" ng-checked="obj.cfdDefaultValue==true" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
+                                            <input id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" type="checkbox" ng-checked="obj.cfdDefaultValue==true" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
                                             <div class="slider round"></div>
 
-                                            <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
+                                            <span style="margin-left:75px; color:#888; -webkit-box-decoration-break: clone;" ng-if="obj.cfdDefaultValue==true">
                                                 {{obj.cfdTruelabel}}
                                             </span>
 
@@ -1737,7 +1736,7 @@
                                     <div ng-if="obj.cfdSpecialType==4">
 
 
-                                        <select id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" class="form-control" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
+                                        <select id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" class="form-control" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}">
                                             <option ng-selected="obj.cfdDefaultValue==true" value="true">{{obj.cfdTruelabel}}</option>
                                             <option ng-selected="obj.cfdDefaultValue==false" value="false">{{obj.cfdFalselabel}}</option>
                                         </select>
@@ -1746,8 +1745,8 @@
 
                                     <div class="" ng-if="obj.cfdSpecialType==5">
                                         <p class="todo-element">
-                                            <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="CustomActivity_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
-                                            <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
+                                            <input name="CustomActivityDecrease_{{obj.cfdID}}" id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="CustomActivityDecrease_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
+                                            <input name="CustomActivityDecrease_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
                                         </p>
 
 
@@ -1759,32 +1758,40 @@
                                 <div class="input-group" ng-if="obj.cfdDataType=='combobox'">
 
 
+
+
                                     <div class="select" ng-if="obj.cfdIsAutoComplete != true">
-                                        <select id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
+                                        <select id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control">
 
                                             <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
 
                                         </select>
                                     </div>
-                                    <input disabled ng-if="obj.cfdIsAutoComplete == true" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control" type="text" value="{{obj.CfValue}}" />
-                                    <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
-                                    <span ng-if="obj.cfdIsAutoComplete != true && checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID,'CustomActivity_')"><i class="fa fa-plus"></i></span>
-                                    <span class="input-group-addon last" ng-if="obj.cfdIsAutoComplete != true " ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
+                                    <div ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'empty', 'activity')">
+                                        <input disabled ng-if="obj.cfdIsAutoComplete == true" id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" class="form-control" type="text" value="{{obj.CfValue}}" />
+                                    </div>
+
+
+                                    <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'empty', 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
+
+                                    <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID,'CustomActivityDecrease_')"><i class="fa fa-plus"></i></span>
+                                    <span class="input-group-addon last" ng-if="obj.cfdIsAutoComplete != true " ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
 
                                 <div ng-if="obj.cfdDataType=='date'||obj.cfdDataType=='datetime'" class="input-group">
 
 
-                                    <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control" value="{{obj.CfValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
-                                    <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control" value="{{obj.CfValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
-                                    <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" type="date" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
-                                    <span class="input-group-addon last" style="margin-left:10px;" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
+
+                                    <input id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==2" type="datetime-local" class="form-control datetimedata" ng-model="obj.CfValue" value="{{obj.CfValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                    <input id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" ng-if="obj.cfdSpecialType==3" type="time" class="form-control datetimedata" ng-model="obj.CfValue" value="{{obj.CfValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                    <input id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" ng-if="obj.cfdSpecialType!=3 && obj.cfdSpecialType!=2" type="date" class="form-control customFieldDatePicker FormDateType" value="{{obj.cfdDefaultValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" />
+                                    <span class="input-group-addon last" style="margin-left:10px;" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='number'" class="input-group">
-                                    <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" min="{{obj.MinimumValue}}" max="{{obj.MaximumValue}}" class="form-control FormControlType" value="{{obj.CfValue}}" />
+                                    <input id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" type="number" min="{{obj.MinimumValue}}" max="{{obj.MaximumValue}}" class="form-control FormControlType" value="{{obj.CfValue}}" />
 
 
                                     <span ng-if="obj.cfdIsIncremental==true" ng-click="UpDownValue(obj.cfdID,false,2)" class="input-group-addon last">
@@ -1794,12 +1801,12 @@
                                         <i class="fa fa-plus"></i>
                                     </span>
 
-                                    <span class="input-group-addon last" ng-if="obj.cfdIsIncremental!=true" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
+                                    <span class="input-group-addon last" ng-if="obj.cfdIsIncremental!=true" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
                                 <div ng-if="obj.cfdDataType=='currency'" class="input-group">
-                                    <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
-                                    <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
+                                    <input id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
+                                    <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                 </div>
 
                             </div>
