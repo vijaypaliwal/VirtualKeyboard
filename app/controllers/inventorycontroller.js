@@ -296,12 +296,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         return date;
     };
 
-    Date.prototype.toMSJSONTime = function () {
-        this.setHours(this.getHours());
-        var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
-        return date;
-    };
-
     if (deviceType == 'iPhone') {
         $(".iosbtn").show()
         $(".androidbtn").hide()
@@ -312,15 +306,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
-    setTimeout(function () {
-
-        $(".weekPicker").each(function () {
-            var _val = $(this).attr("selectvalue");
-            $(this).val(_val);
-            $(this).trigger("change");
-        });
-
-    }, 2000);
 
     $scope.CheckInCommonArray = function (Column) {
         for (var i = 0; i < $scope.CommonArray.length ; i++) {
@@ -1568,7 +1553,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         d1222.setDate(d1222.getDate() + _genVar);
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
 
-                        wcfDateStr123 = d1122.toMSJSONTime();
+                        wcfDateStr123 = d1222.toMSJSON();
 
                     }
                     else if ($scope.UniqueDateFieldSpecialType == 17) {
@@ -1577,9 +1562,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                         var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]), parseInt(dsplit1[1]), 0, 0))
 
-                        d122.setDate(d122.getDate());
+                        d122.setDate(d122.getDate() + _genVar);
                         var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
-                        wcfDateStr123 = d1123.toMSJSONTime();
+                        wcfDateStr123 = d122.toMSJSON();
                     }
 
                     $scope.InventoryObject.UniqueDate = wcfDateStr123;
@@ -1660,7 +1645,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         d1222.setDate(d1222.getDate() + _genVar);
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
 
-                        wcfDateStr1234 = d1122.toMSJSONTime();
+                        wcfDateStr1234 = d1222.toMSJSON();
                     }
                     else if ($scope.UnitDate2FieldSpecialType == 17) {
 
@@ -1670,9 +1655,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                         var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]), parseInt(dsplit1[1]), 0, 0))
 
-                        d122.setDate(d122.getDate());
+                        d122.setDate(d122.getDate() + _genVar);
                         var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
-                        wcfDateStr1234 = d1123.toMSJSONTime();
+                        wcfDateStr1234 = d122.toMSJSON();
                     }
 
                     $scope.InventoryObject.UnitDate2 = wcfDateStr1234;
@@ -1826,7 +1811,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         var _timeString = _timeSplit[1].split(":");
 
-        var _ToMergeTime = "T" + (_timeSplit[2] == "AM" ? leadZero(_timeString[0]) : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
+        var _ToMergeTime = "T" + (_timeSplit[2] == "AM" ? _timeString[0] : (12 + parseInt(_timeString[0]))).toString() + ":" + _timeString[1];
 
         var now = new Date(_timeSplit[0], dsplit1[0] - 1, dsplit1[1]);
 
@@ -1845,19 +1830,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             var _timeSplit = _timeValue.split(" ");
             var _timeString = _timeSplit[0].split(":");
 
-            var _ToMergeTime = (_timeSplit[1] == "AM" ? leadZero(_timeString[0]): leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
+            var _ToMergeTime = (_timeSplit[1] == "AM" ? _timeString[0] : (12 + parseInt(_timeString[0]))).toString() + ":" + _timeString[1];
 
             return _ToMergeTime;
         }
 
         return "";
 
-    }
-
-    function leadZero(_something) {
-        _something = parseInt(_something).toString();
-        if (parseInt(_something) < 10) return "0" + _something;
-        return _something;//else    
     }
     $scope.CheckCustomFields = function (Type) {
         var _returnVar = false;
@@ -3070,7 +3049,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                            }
 
                            else if (item.FieldName == 'UniqueDate') {
-                               debugger;
                                $scope.UniqueDateFieldSpecialType = item.FieldSpecialType;
 
                                if (item.FieldSpecialType == 15) {
@@ -3095,7 +3073,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                            }
                            else if (item.FieldName == 'UnitDate2') {
                                $scope.UnitDate2FieldSpecialType = item.FieldSpecialType;
-                               debugger;
+
                                if (item.FieldSpecialType == 15) {
 
 

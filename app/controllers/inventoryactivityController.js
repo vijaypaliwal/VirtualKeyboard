@@ -1643,11 +1643,10 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
         }
     }
     function ConvertToProperFilter(_Filters) {
-
-        debugger;
+        //debugger;
         if (_Filters != null && _Filters != undefined && _Filters.length != 0) {
             for (var i = 0; i < _Filters.length; i++) {
-                switch ($scope.GetColumnDataType(_Filters[i].ColumnName)) {
+                switch (GetColumnDataType(_Filters[i].ColumnName)) {
                     case "Decimal":
                     case "decimal":
                     case "number":
@@ -1658,49 +1657,9 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                         }
                         break;
                     case "Date":
-                    case "date":
                     case "datetime":
-                        if (_Filters[i].SearchValue != null && _Filters[i].SearchValue != undefined && _Filters[i].SearchValue != "") {
-                            if (_Filters[i].SearchValue.includes("AM") || _Filters[i].SearchValue.includes("PM")) {
-                                if (_Filters[i].SearchValue.includes("1900")) {
-                                    var x = _Filters[i].SearchValue.split(" ");
-                                    _Filters[i].SearchValue = x[1];
-                                    break;
-                                }
-                                else {
-                                    var x = _Filters[i].SearchValue.split(" ");
-                                    var replaced = x[0].split("/");
-                                    var Datereplaced = x[1].split(":");
-
-                                    if (replaced[0].length < 2) {
-                                        replaced[0] = "0" + replaced[0]
-                                    }
-
-                                    if (replaced[1].length < 2) {
-                                        replaced[1] = "0" + replaced[1]
-                                    }
-
-                                    if (Datereplaced[0].length < 2) {
-                                        Datereplaced[0] = "0" + Datereplaced[0]
-                                    }
-
-                                    if (Datereplaced[1].length < 2) {
-                                        Datereplaced[1] = "0" + Datereplaced[1]
-                                    }
-
-
-                                    var newdate = replaced[2] + "-" + replaced[1] + "-" + replaced[0];
-
-                                    _Filters[i].SearchValue = newdate + "T" + Datereplaced[0] + ":" + Datereplaced[1]
-                                    break;
-                                }
-                            }
-                        }
-
-
                         _Filters[i].SearchValue = formatDate(_Filters[i].SearchValue);
                         break;
-
                     case "checkbox":
                         _Filters[i].SearchValue = _Filters[i].SearchValue;
                         break;
@@ -1708,13 +1667,19 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                         _Filters[i].SearchValue = _Filters[i].SearchValue;
                         break;
                     default:
+                  
+
+
                 }
+
             }
+
             $scope.FilterArray = _Filters;
         }
+
+
         CheckScopeBeforeApply();
     }
-
 
 
 
