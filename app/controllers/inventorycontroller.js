@@ -1826,7 +1826,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         var _timeString = _timeSplit[1].split(":");
 
-        var _ToMergeTime = "T" + (_timeSplit[2] == "AM" ? _timeString[0] : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
+        var _ToMergeTime = "T" + (_timeSplit[2] == "AM" ? leadZero(_timeString[0]) : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
 
         var now = new Date(_timeSplit[0], dsplit1[0] - 1, dsplit1[1]);
 
@@ -1845,7 +1845,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             var _timeSplit = _timeValue.split(" ");
             var _timeString = _timeSplit[0].split(":");
 
-            var _ToMergeTime = (_timeSplit[1] == "AM" ? _timeString[0] : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
+            var _ToMergeTime = (_timeSplit[1] == "AM" ? leadZero(_timeString[0]): leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
 
             return _ToMergeTime;
         }
@@ -1855,7 +1855,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     function leadZero(_something) {
-        if (parseInt(_something) < 10 && _something.indexOf("0") > 0) return "0" + _something;
+        _something = parseInt(_something).toString();
+        if (parseInt(_something) < 10) return "0" + _something;
         return _something;//else    
     }
     $scope.CheckCustomFields = function (Type) {
@@ -3069,6 +3070,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                            }
 
                            else if (item.FieldName == 'UniqueDate') {
+                               debugger;
                                $scope.UniqueDateFieldSpecialType = item.FieldSpecialType;
 
                                if (item.FieldSpecialType == 15) {
@@ -3093,7 +3095,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                            }
                            else if (item.FieldName == 'UnitDate2') {
                                $scope.UnitDate2FieldSpecialType = item.FieldSpecialType;
-
+                               debugger;
                                if (item.FieldSpecialType == 15) {
 
 

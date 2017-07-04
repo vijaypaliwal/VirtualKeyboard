@@ -2471,7 +2471,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
     function leadZero(_something) {
-        if (parseInt(_something) < 10 && _something.indexOf("0")>0) return "0" + _something;
+        _something= parseInt(_something).toString();
+        if (parseInt(_something) < 10) return "0" + _something;
         return _something;//else    
     }
 
