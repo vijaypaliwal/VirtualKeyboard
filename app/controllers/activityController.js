@@ -5133,9 +5133,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     setTimeout(function () {
         alert("change called");
-        $('input[type="datetime-local"]').trigger("change");
-        $('input[type="time"]').trigger("change");
-        $('input[type="month"]').trigger("change");
+        $('input[type="datetime-local"]').trigger("input");
+        $('input[type="time"]').trigger("input");
+        $('input[type="month"]').trigger("input");
     }, 4000);
 
     function ShowErrorMessage(Action) {
