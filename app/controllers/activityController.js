@@ -5137,9 +5137,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             var _val = $(this).val();
             alert("datetime " + _val);
             $(this).val(_val);
-            $(this).trigger("input");
-            $(this).trigger("blur");
-            $(this).trigger("change");
+
+
+
+            setTimeout(function () {
+                alert("changed value " + _val);
+                $(this).trigger("input");
+                $(this).trigger("blur");
+                $(this).trigger("change");
+            }, 1000);
         });
        
     }, 4000);
