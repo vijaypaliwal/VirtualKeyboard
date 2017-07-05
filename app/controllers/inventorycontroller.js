@@ -312,15 +312,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
-    setTimeout(function () {
 
-        $(".weekPicker").each(function () {
-            var _val = $(this).attr("selectvalue");
-            $(this).val(_val);
-            $(this).trigger("change");
-        });
-
-    }, 2000);
 
     $scope.CheckInCommonArray = function (Column) {
         for (var i = 0; i < $scope.CommonArray.length ; i++) {
@@ -1567,9 +1559,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                         var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
 
-                        d1222.setDate(d1222.getDate() + _genVar);
+                        d1222.setDate(d1222.getDate());
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
-                        alert(d1122);
                         wcfDateStr123 = d1122.toMSJSONTime();
 
                     }
@@ -1582,7 +1573,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                         d122.setDate(d122.getDate());
                         var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
-                        alert(d1123);
                         wcfDateStr123 = d1123.toMSJSONTime();
                     }
 
@@ -1661,7 +1651,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                         var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
 
-                        d1222.setDate(d1222.getDate() + _genVar);
+                        d1222.setDate(d1222.getDate());
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
 
                         alert(d1122);
@@ -3576,6 +3566,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.IsStatusLibrary = $scope.checkpermission('URL:Manage/Status');
         $scope.GetActiveUnitDataField();
         CheckScopeBeforeApply();
+
+
+        setTimeout(function () {
+
+            $(".weekPicker").each(function () {
+                var _val = $(this).attr("selectvalue");
+                $(this).val(_val);
+                $(this).trigger("change");
+            });
+
+        }, 2000);
 
 
     }

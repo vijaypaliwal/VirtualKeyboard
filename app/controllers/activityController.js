@@ -2756,7 +2756,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
 
         CheckScopeBeforeApply();
+        setTimeout(function () {
 
+            $(".weekPicker").each(function () {
+                var _val = $(this).attr("selectvalue");
+                $(this).val(_val);
+                $(this).trigger("change");
+            });
+
+        }, 2000);
 
     }
 
@@ -4068,7 +4076,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                         }
                         else {
-                            d1222.setDate(d1222.getDate() + _genVar);
+                            d1222.setDate(d1222.getDate());
 
                         }
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
@@ -4129,7 +4137,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                         }
                         else {
-                            d1222.setDate(d1222.getDate() + _genVar);
+                            d1222.setDate(d1222.getDate());
 
                         }
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
@@ -4198,7 +4206,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                         }
                         else {
-                            d1222.setDate(d1222.getDate() + _genVar);
+                            d1222.setDate(d1222.getDate());
 
                         }
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
@@ -4261,7 +4269,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                         }
                         else {
-                            d1222.setDate(d1222.getDate() + _genVar);
+                            d1222.setDate(d1222.getDate());
 
                         }
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
