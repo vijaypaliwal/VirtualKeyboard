@@ -1556,7 +1556,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                         if (fieldSpecialType.cfdSpecialType == 3) {
                             // For Time Fields
 
-                            $scope.FilterArray[i].SearchValue = "1990-01-01T" + $scope.FilterArray[i].SearchValue;
+                            $scope.FilterArray[i].SearchValue = "1900-01-01T" + $scope.FilterArray[i].SearchValue;
                         }
                     }
                 }

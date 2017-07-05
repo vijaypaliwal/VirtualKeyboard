@@ -1253,16 +1253,16 @@
 
 
                                                                 <select id="LineItem_{{obj.cfdID}}" class="form-control" cfd-id="{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" custom-data-type="{{obj.cfdDataType}}">
-                                                                    <option ng-selected="CurrentActiveObject.IsLineItemData[$index].CfValue==true" ng-value="true">{{obj.cfdTruelabel}}</option>
-                                                                    <option ng-selected="CurrentActiveObject.IsLineItemData[$index].CfValue==false" ng-value="false">{{obj.cfdFalselabel}}</option>
+                                                                    <option ng-selected="CurrentActiveObject.IsLineItemData[$index].CfValue==true"   value="true">{{obj.cfdTruelabel}}</option>
+                                                                    <option ng-selected="CurrentActiveObject.IsLineItemData[$index].CfValue==false"   value="false">{{obj.cfdFalselabel}}</option>
                                                                 </select>
                                                             </div>
 
 
                                                             <div class="" ng-if="obj.cfdSpecialType==5">
                                                                 <p style="padding-left:0;" class="todo-element">
-                                                                    <input name="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-value="true" ng-checked="CurrentActiveObject.IsLineItemData[$index].CfValue==true" type="radio"> <label for="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
-                                                                    <input name="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem1{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-value="false" ng-checked="CurrentActiveObject.IsLineItemData[$index].CfValue==false" type="radio"> <label for="LineItem1{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
+                                                                    <input name="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}"   value="true" ng-checked="CurrentActiveObject.IsLineItemData[$index].CfValue==true" type="radio"> <label for="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
+                                                                    <input name="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem1{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}"   value="false" ng-checked="CurrentActiveObject.IsLineItemData[$index].CfValue==false" type="radio"> <label for="LineItem1{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
                                                                 </p>
 
 
