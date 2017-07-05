@@ -80,6 +80,34 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         UpdateDate: GetDefaultDate(), Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
         UnitTag3: "", CustomPartData: [], CustomTxnData: [], incrementedValue: "", incrementedValue2: "", incrementedValue3: ""
     };
+    var _defaultUnitObj = {
+        AccountID: 0,
+        Active: false,
+        BaseValue: 0,
+        FieldComboValues: null,
+        FieldDataType: "",
+        FieldDefaultAMPM: null,
+        FieldDefaultValue: "",
+        FieldDescription: "test",
+        FieldInputMask: null,
+        FieldLabel: "",
+        FieldName: "",
+        FieldNumberDecimalPlaces: 0,
+        FieldNumberMax: null,
+        FieldNumberMin: null,
+        FieldRadioValues: null,
+        FieldSpecialType: 0,
+        FieldTextMaxLength: 500,
+        FieldTextMultiRow: false,
+        FieldUse24Hours: false,
+        IncrementBy: 1,
+        IsSpecial: true,
+        IsUnique: false,
+        Prefix: "",
+        Suffix: "",
+        TagID: 0
+    }
+
     function GetProperUnitValue(_val,_Prefix,_Suffix) {
 
         if ($.trim(_val)!="") {
@@ -1459,7 +1487,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
 
         }
-        return false;
+        return _defaultUnitObj;
     }
     $scope.addinventory = function () {
 
@@ -1662,7 +1690,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         d1222.setDate(d1222.getDate());
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
 
-                        alert(d1122);
                         wcfDateStr1234 = d1122.toMSJSONTime();
                     }
                     else if ($scope.UnitDate2FieldSpecialType == 17) {
@@ -1675,7 +1702,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                         d122.setDate(d122.getDate());
                         var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
-                        alert(d1123);
                         wcfDateStr1234 = d1123.toMSJSONTime();
                     }
 

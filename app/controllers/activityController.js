@@ -47,7 +47,33 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.TempLocationID = -1;
 
     $scope.weeklist = [];
-
+    var _defaultUnitObj = {
+        AccountID: 0,
+        Active: false,
+        BaseValue: 0,
+        FieldComboValues: null,
+        FieldDataType: "",
+        FieldDefaultAMPM: null,
+        FieldDefaultValue: "",
+        FieldDescription: "test",
+        FieldInputMask: null,
+        FieldLabel: "",
+        FieldName: "",
+        FieldNumberDecimalPlaces: 0,
+        FieldNumberMax: null,
+        FieldNumberMin: null,
+        FieldRadioValues: null,
+        FieldSpecialType: 0,
+        FieldTextMaxLength: 500,
+        FieldTextMultiRow: false,
+        FieldUse24Hours: false,
+        IncrementBy: 1,
+        IsSpecial: true,
+        IsUnique: false,
+        Prefix: "",
+        Suffix: "",
+        TagID: 0
+    }
     $scope.CurrentYear = new Date().getFullYear();
 
     for (var i = 1; i <= 52; i++) {
@@ -1299,6 +1325,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             }
 
         }
+        return _defaultUnitObj;
     }
     $scope.GetActiveUnitDataField = function () {
         var authData = localStorageService.get('authorizationData');
