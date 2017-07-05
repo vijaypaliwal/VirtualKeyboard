@@ -357,11 +357,11 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                     if (_PageSize < $scope.totalrecords) {
 
 
-                        _IsLazyLoadingUnderProgress = 1;
-                        $scope.isDataLoading = false;
-                        _PageSize = _TotalRecordsCurrent + getIncrementor($scope.totalrecords);
-                        CheckScopeBeforeApply();
-                        $scope.GetInventoryDataAccordingToView();
+                        //_IsLazyLoadingUnderProgress = 1;
+                        //$scope.isDataLoading = false;
+                        //_PageSize = _TotalRecordsCurrent + getIncrementor($scope.totalrecords);
+                        //CheckScopeBeforeApply();
+                        //$scope.GetInventoryDataAccordingToView();
                     }
                     else {
                         // log.info("You have already loaded all data.")
@@ -1414,6 +1414,8 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
             return date;
         }
     }
+
+   
     function ConvertToProperFilter(_Filters) {
 
          
@@ -1433,6 +1435,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                     case "date":
                     case "datetime":
                         if (_Filters[i].SearchValue != null && _Filters[i].SearchValue != undefined && _Filters[i].SearchValue != "") {
+                            debugger;
                             if (_Filters[i].SearchValue.includes("AM") || _Filters[i].SearchValue.includes("PM")) {
                                 if (_Filters[i].SearchValue.includes("1900")) {
                                     var x = _Filters[i].SearchValue.split(" ");
@@ -1544,12 +1547,10 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 $scope.FilterData.SearchValue = "";
             }
 
-            // 
 
             for (var i = 0 ; i < $scope.FilterArray.length ; i++) {
 
                 if ($scope.FilterArray[i].ColumnName == "iUniqueDate" || $scope.FilterArray[i].ColumnName == "iUnitDate2") {
-                    debugger;
                     var fieldSpecialType = $scope.getUnitSpecialType($scope.FilterArray[i].ColumnName.substring(1));
                     if (fieldSpecialType != undefined) {
                         if ($.trim($scope.FilterArray[i].SearchValue) != "") {

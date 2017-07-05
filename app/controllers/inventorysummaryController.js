@@ -1522,7 +1522,12 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
                         if (fieldSpecialType == 17) {
                             // For Time Fields
 
-                            $scope.FilterArray[i].SearchValue = "1900-01-01T" + $scope.FilterArray[i].SearchValue;
+                            if ($.trim($scope.FilterArray[i].SearchValue) != "") {
+
+
+
+                                $scope.FilterArray[i].SearchValue = "1900-01-01T" + $scope.FilterArray[i].SearchValue;
+                            }
                         }
                     }
                 }

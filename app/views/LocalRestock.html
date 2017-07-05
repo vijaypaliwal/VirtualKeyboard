@@ -260,6 +260,7 @@
 
                     </span>
                     <select class="form-control" ng-model="_obj.SearchValue">
+                        <option value=""></option>
                         <option ng-repeat="_data in GetComboData(_obj.ColumnName)" value="{{_data}}" ng-selected="_data == _obj.SearchValue">{{_data}}</option>
                     </select>
                 </div>
@@ -276,6 +277,7 @@
                         </ul>
                     </span>
                     <select class="form-control" ng-model="_obj.SearchValue">
+                        <option value=""></option>
                         <option ng-repeat="_data in GetBooleabData(_obj.ColumnName)" value="{{_data}}" ng-selected="GetTrueFalseArray()[$index] == _obj.SearchValue">{{_data}}</option>
                     </select>
 

@@ -486,6 +486,7 @@ app.controller('LocalrestockController', ['$scope', 'localStorageService', 'auth
 
    $scope.GetCellData=function(columnName, Index,isCalculated) {
        var _ID = TryParseInt(columnName, 0);
+       debugger;
        if (_ID != 0)
        {
            columnName = $scope.GetCustomFieldByID(_ID);

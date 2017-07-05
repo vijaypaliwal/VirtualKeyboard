@@ -1843,12 +1843,14 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
             for (var i = 0 ; i < $scope.FilterArray.length ; i++) {
 
                 if ($scope.FilterArray[i].ColumnName == "itUniqueDate" || $scope.FilterArray[i].ColumnName == "itUnitDate2") {
-                    var fieldSpecialType = $scope.getUnitSpecialType($scope.FilterArray[i].ColumnName.slice(1));
+                    var fieldSpecialType = $scope.getUnitSpecialType($scope.FilterArray[i].ColumnName.slice(2));
                     if (fieldSpecialType != undefined) {
                         if (fieldSpecialType == 17) {
                             // For Time Fields
+                            if ($.trim($scope.FilterArray[i].SearchValue) != "") {
 
-                            $scope.FilterArray[i].SearchValue = "1900-01-01T" + $scope.FilterArray[i].SearchValue;
+                                $scope.FilterArray[i].SearchValue = "1900-01-01T" + $scope.FilterArray[i].SearchValue;
+                            }
                         }
                     }
                 }
@@ -1860,7 +1862,6 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                         }
                         if (fieldSpecialType.cfdSpecialType == 3) {
                             // For Time Fields
-
                             $scope.FilterArray[i].SearchValue = "1900-01-01T" + $scope.FilterArray[i].SearchValue;
                         }
                     }
