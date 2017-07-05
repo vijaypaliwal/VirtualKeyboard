@@ -81,6 +81,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     }
 
+
+    $scope.GetWeekValue = function (year, week) {
+        return year.toString() + "-W" + week.toString();
+    }
+
     $scope.dropdownLabel = "";
 
     $scope.Addnew = function (ID, FieldType) {
@@ -2326,7 +2331,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
             }
 
-            debugger;
+            
             console.log($scope.CurrentCart);
         }
 
@@ -2453,6 +2458,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         var _timeString = _timeSplit[1].split(":");
 
+        if (parseInt(_timeString[0]) > 12) {
+            _timeString[0] = (parseInt(_timeString[0]) - 12).toString();
+        }
+
         var _ToMergeTime = "T" + (_timeSplit[2] == "AM" ? leadZero(_timeString[0]) : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
 
         var now = new Date(_timeSplit[0], dsplit1[0] - 1, dsplit1[1]);
@@ -2466,6 +2475,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
     function leadZero(_something) {
+        
+      var _TempString = parseInt(_something).toString();
+        _something = _TempString.toString();
         if (parseInt(_something) < 10) return "0" + _something;
         return _something;//else    
     }
@@ -2479,6 +2491,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                 var _timeSplit = _timeValue.split(" ");
                 _timeString = _timeSplit[0].split(":");
+
+                if (parseInt(_timeString[0]) > 12) {
+                    _timeString[0] = (parseInt(_timeString[0]) - 12).toString();
+                }
 
                 _ToMergeTime = (_timeSplit[1] == "AM" ? leadZero(_timeString[0]) : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
             }
@@ -2671,7 +2687,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     case "MoveTagUpdate":
 
                         //   alert("NTU");
-                        // debugger;
+                        // 
 
                         $scope.CustomActivityDataList[i].cfdIncludeOnMoveTagUpdate = true;
 
@@ -2679,7 +2695,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             //   alert("Is having");
 
-                            //     debugger;
+                            //     
 
                             return true;
                         }
@@ -3671,6 +3687,12 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
         return date;
     };
+
+    Date.prototype.toMSJSONTime = function () {
+        this.setHours(this.getHours());
+        var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
+        return date;
+    };
     function GetProperUnitValue(_val, _Prefix, _Suffix) {
 
         if ($.trim(_val) != "") {
@@ -4051,24 +4073,24 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         }
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
 
-                        wcfDateStr1 = d1222.toMSJSON();
+                        wcfDateStr1 = d1122.toMSJSONTime();
                     }
                 }
                 else if ($scope.GetUnitDataFieldByName('UniqueDate').FieldSpecialType == 17) {
                     if ($scope.CurrentOperation == "Apply") {
                         var dsplit1 = dateVar.split(":");
-                        var d122 = new Date(1900, 1, 1);
+                        var d122 = new Date(1900, 0, 1);
 
                         var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]), parseInt(dsplit1[1]), 0, 0))
                         if (_genVar == 1) {
-                            d122.setDate(d122.getDate() + _genVar);
+                            d122.setDate(d122.getDate());
                         }
                         else {
 
-                            d122.setDate(d122.getDate() + _genVar);
+                            d122.setDate(d122.getDate());
                         }
                         var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
-                        wcfDateStr1 = d122.toMSJSON();
+                        wcfDateStr1 = d1123.toMSJSONTime();
                     }
                 }
                 else {
@@ -4112,7 +4134,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         }
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
 
-                        wcfDateStr2 = d1222.toMSJSON();
+                        wcfDateStr2 = d1122.toMSJSONTime();
                     }
 
 
@@ -4120,18 +4142,18 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 else if ($scope.GetUnitDataFieldByName('UnitDate2').FieldSpecialType == 17) {
                     if ($scope.CurrentOperation == "Apply") {
                         var dsplit1 = dateVar.split(":");
-                        var d122 = new Date(1900, 1, 1);
+                        var d122 = new Date(1900, 0, 1);
 
                         var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]), parseInt(dsplit1[1]), 0, 0))
                         if (_genVar == 1) {
-                            d122.setDate(d122.getDate() + _genVar);
+                            d122.setDate(d122.getDate());
                         }
                         else {
 
-                            d122.setDate(d122.getDate() + _genVar);
+                            d122.setDate(d122.getDate());
                         }
                         var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
-                        wcfDateStr2 = d122.toMSJSON();
+                        wcfDateStr2 = d1123.toMSJSONTime();
                     }
                 }
                 else {
@@ -4181,24 +4203,24 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         }
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
 
-                        wcfDateStr1New = d1222.toMSJSON();
+                        wcfDateStr1New = d1122.toMSJSONTime();
                     }
                 }
                 else if ($scope.GetUnitDataFieldByName('UniqueDate').FieldSpecialType == 17) {
                     if ($scope.CurrentOperation == "MoveTagUpdate") {
                         var dsplit1 = dateVar.split(":");
-                        var d122 = new Date(1900, 1, 1);
+                        var d122 = new Date(1900, 0, 1);
 
                         var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]), parseInt(dsplit1[1]), 0, 0))
                         if (_genVar == 1) {
-                            d122.setDate(d122.getDate() + _genVar);
+                            d122.setDate(d122.getDate());
                         }
                         else {
 
-                            d122.setDate(d122.getDate() + _genVar);
+                            d122.setDate(d122.getDate());
                         }
                         var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
-                        wcfDateStr1New = d122.toMSJSON();
+                        wcfDateStr1New = d1123.toMSJSONTime();
                     }
 
                 }
@@ -4224,7 +4246,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             if ($scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != undefined && $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2 != "") {
                 var dateVar = $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitDate2;
 
-                debugger;
+                
                 if ($scope.GetUnitDataFieldByName('UnitDate2').FieldSpecialType == 16) {
                     if ($scope.CurrentOperation == "MoveTagUpdate") {
                         var _dateValuearray = dateVar.split("T");
@@ -4243,24 +4265,24 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                         }
                         var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
-                        wcfDateStr2New = d1222.toMSJSON();
+                        wcfDateStr2New = d1122.toMSJSONTime();
                     }
                 }
                 else if ($scope.GetUnitDataFieldByName('UnitDate2').FieldSpecialType == 17) {
                     if ($scope.CurrentOperation == "MoveTagUpdate") {
                         var dsplit1 = dateVar.split(":");
-                        var d122 = new Date(1900, 1, 1);
+                        var d122 = new Date(1900, 0, 1);
 
                         var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]), parseInt(dsplit1[1]), 0, 0))
                         if (_genVar == 1) {
-                            d122.setDate(d122.getDate() + _genVar);
+                            d122.setDate(d122.getDate());
                         }
                         else {
 
-                            d122.setDate(d122.getDate() + _genVar);
+                            d122.setDate(d122.getDate());
                         }
                         var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
-                        wcfDateStr2New = d122.toMSJSON();
+                        wcfDateStr2New = d1123.toMSJSONTime();
                     }
 
                 }
@@ -5121,7 +5143,31 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
             }
         });
+
+
     }, 1000);
+
+    setTimeout(function () {
+
+
+        $(".datetimedata").each(function () {
+            var _val = $(this).val();
+            $(this).val(_val);
+            setTimeout(function () {
+                $(this).trigger("input");
+                $(this).trigger("blur");
+                $(this).trigger("change");
+            }, 1000);
+        });
+
+        $(".weekPicker").each(function () {
+            var _val = $(this).attr("selectvalue");
+            $(this).val(_val);
+            $(this).trigger("change");
+        });
+
+    }, 4000);
+
 
     function ShowErrorMessage(Action) {
         var _MsgTitle = "DATA HAS NOT CHANGED";
