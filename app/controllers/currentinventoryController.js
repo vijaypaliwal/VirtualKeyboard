@@ -72,7 +72,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
     // this function is giving filter operator according to column name
     function GetFilterOperator(ColumnName) {
-        //debugger;
+        // 
 
         switch (ColumnName.toLowerCase()) {
             case "date":
@@ -170,7 +170,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
     // Get custom dropdown's column available data
     $scope.GetComboData = function (ColumnName) {
-        //debugger;
+        // 
 
         var type = "";
         var Map = "";
@@ -197,7 +197,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
 
     $scope.GetBooleabData = function (ColumnName) {
-        // debugger;
+        //  
         var BooeanArray = [];
         var type = "";
         var Map = "";
@@ -236,7 +236,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     // Get display label according to column name
     $scope.GetDisplayLabel = function (ColumnName) {
 
-        //debugger;
+        // 
         var DataType = ""
 
 
@@ -281,7 +281,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     // Get data type according to column name
     $scope.GetColumnDataType = function (ColumnName) {
 
-        //debugger;
+        // 
         var DataType = ""
 
 
@@ -590,7 +590,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     // Function to get cfdspecial type for Custom Field
 
     $scope.getCustomSpecialType = function (FieldName) {
-        //debugger;
+        // 
         if ($scope.CustomItemDataList.length > 0) {
             for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
                 var type = "";
@@ -713,7 +713,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     // Get cell's data according to column name and index
     $scope.GetCellData = function (columnName, Index, isCalculated) {
 
-        debugger;
+         
         var _ID = TryParseInt(columnName, 0);
         if (_ID != 0) {
             columnName = $scope.GetCustomFieldByID(_ID);
@@ -1366,7 +1366,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     // This function assign selected view to load accordingly
 
     $scope.AssignCurrentView = function (view) {
-        debugger;
+         
         $scope.CurrentView = view;
         $scope.FilterArray = [{ ColumnName: "", FilterOperator: "", SearchValue: "" }];
         CheckScopeBeforeApply();
@@ -1416,7 +1416,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     }
     function ConvertToProperFilter(_Filters) {
 
-        debugger;
+         
         if (_Filters != null && _Filters != undefined && _Filters.length != 0) {
             for (var i = 0; i < _Filters.length; i++) {
                 switch ($scope.GetColumnDataType(_Filters[i].ColumnName)) {
@@ -1490,7 +1490,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
 
     function ChangeBooleanOperator() {
-        debugger;
+         
         for (var i = 0; i < $scope.FilterArray.length ; i++) {
             if ($scope.FilterArray[i].ColumnName.includes("bool")) {
                 $scope.FilterArray[i].FilterOperator = 'bool';
@@ -1544,17 +1544,20 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 $scope.FilterData.SearchValue = "";
             }
 
-            //debugger;
+            // 
 
             for (var i = 0 ; i < $scope.FilterArray.length ; i++) {
 
                 if ($scope.FilterArray[i].ColumnName == "iUniqueDate" || $scope.FilterArray[i].ColumnName == "iUnitDate2") {
-                    var fieldSpecialType = $scope.getUnitSpecialType($scope.FilterArray[i].ColumnName.slice(1));
+                    debugger;
+                    var fieldSpecialType = $scope.getUnitSpecialType($scope.FilterArray[i].ColumnName.substring(1));
                     if (fieldSpecialType != undefined) {
-                        if (fieldSpecialType.FieldSpecialType == 17) {
-                            // For Time Fields
+                        if ($.trim($scope.FilterArray[i].SearchValue) != "") {
+                            if (fieldSpecialType == 17) {
+                                // For Time Fields
 
-                            $scope.FilterArray[i].SearchValue = "1900-01-01T" + $scope.FilterArray[i].SearchValue;
+                                $scope.FilterArray[i].SearchValue = "1900-01-01T" + $scope.FilterArray[i].SearchValue;
+                            }
                         }
                     }
                 }

@@ -1845,7 +1845,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                 if ($scope.FilterArray[i].ColumnName == "itUniqueDate" || $scope.FilterArray[i].ColumnName == "itUnitDate2") {
                     var fieldSpecialType = $scope.getUnitSpecialType($scope.FilterArray[i].ColumnName.slice(1));
                     if (fieldSpecialType != undefined) {
-                        if (fieldSpecialType.FieldSpecialType == 17) {
+                        if (fieldSpecialType == 17) {
                             // For Time Fields
 
                             $scope.FilterArray[i].SearchValue = "1900-01-01T" + $scope.FilterArray[i].SearchValue;
