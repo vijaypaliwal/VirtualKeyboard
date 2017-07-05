@@ -439,7 +439,7 @@
                             </div>
                             <!--CustomTime-->
                             <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdSpecialType == 3">
-                                <input class="form-control" type="time" name="name" ng-model="_obj.SearchValue" value="" />
+                                <input class="form-control" type="time" step="1" name="name" ng-model="_obj.SearchValue" value="" />
                             </div>                            
                         </div>                        
                     </div>
@@ -454,7 +454,7 @@
 
                         </div>
                         <div ng-if="getUnitSpecialType('UniqueDate') == 17">
-                            <input class="form-control" type="time" name="name" ng-model="_obj.SearchValue" value="" />
+                            <input class="form-control" type="time" step="1" name="name" ng-model="_obj.SearchValue" value="" />
                         </div>
                     </div>
 
@@ -468,7 +468,7 @@
 
                         </div>
                         <div ng-if="getUnitSpecialType('UnitDate2') == 17">
-                            <input class="form-control" type="time" name="name" ng-model="_obj.SearchValue" value="" />
+                            <input class="form-control" type="time" step="1" name="name" ng-model="_obj.SearchValue" value="" />
                         </div>
                     </div>
 
