@@ -471,7 +471,7 @@
 
                                 <!--CustomDateTime-->
                                 <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdSpecialType == 2">
-                                    <input class="form-control" type="datetime-local" name="name" ng-model="_obj.SearchValue" value="" />
+                                    <input class="form-control" type="datetime-local" step="1"name="name" ng-model="_obj.SearchValue" value="" />
                                 </div>
                                 <!--CustomTime-->
                                 <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdSpecialType == 3">
@@ -485,7 +485,7 @@
                                 <input class="form-control" type="date" name="name" ng-model="_obj.SearchValue" value="" />
                             </div>
                             <div ng-if="getUnitSpecialType('UniqueDate') == 16">
-                                <input class="form-control" type="datetime-local" name="name" ng-model="_obj.SearchValue" value="" />
+                                <input class="form-control" type="datetime-local" step="1"name="name" ng-model="_obj.SearchValue" value="" />
                             </div>
                             <div ng-if="getUnitSpecialType('UniqueDate') == 17">
                                 <input class="form-control" type="time" name="name" ng-model="_obj.SearchValue" value="" />
@@ -497,7 +497,7 @@
                                 <input class="form-control" type="date" name="name" ng-model="_obj.SearchValue" value="" />
                             </div>
                             <div ng-if="getUnitSpecialType('UnitDate2') == 16">
-                                <input class="form-control" type="datetime-local" name="name" ng-model="_obj.SearchValue" value="" />
+                                <input class="form-control" type="datetime-local" step="1"name="name" ng-model="_obj.SearchValue" value="" />
                             </div>
                             <div ng-if="getUnitSpecialType('UnitDate2') == 17">
                                 <input class="form-control" type="time" name="name" ng-model="_obj.SearchValue" value="" />

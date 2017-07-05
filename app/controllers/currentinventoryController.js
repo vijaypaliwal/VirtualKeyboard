@@ -451,7 +451,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     $scope.GetCustomFieldByID = function (ID) {
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
             if ($scope.CustomItemDataList[i].cfdID == ID) {
-                return $scope.CustomItemDataList[i].ColumnMap;
+                return $scope.CustomItemDataList[i].cfdCustomFieldType.toLowerCase() == "inventory" ? "t_" + $scope.CustomItemDataList[i].ColumnMap : $scope.CustomItemDataList[i].ColumnMap;
             }
         }
     }
@@ -713,7 +713,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     // Get cell's data according to column name and index
     $scope.GetCellData = function (columnName, Index, isCalculated) {
 
-        //debugger;
+        debugger;
         var _ID = TryParseInt(columnName, 0);
         if (_ID != 0) {
             columnName = $scope.GetCustomFieldByID(_ID);
@@ -878,6 +878,79 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 return $scope.InventoryList[Index].string_24 != null ? $scope.InventoryList[Index].string_24 : "";
                 break;
 
+            case "t_string_1":
+                return $scope.InventoryList[Index].t_string_1 != null ? $scope.InventoryList[Index].t_string_1 : "";
+                break;
+            case "t_string_2":
+                return $scope.InventoryList[Index].t_string_2 != null ? $scope.InventoryList[Index].t_string_2 : "";
+                break;
+            case "t_string_3":
+                return $scope.InventoryList[Index].t_string_3 != null ? $scope.InventoryList[Index].t_string_3 : "";
+                break;
+            case "t_string_4":
+                return $scope.InventoryList[Index].t_string_4 != null ? $scope.InventoryList[Index].t_string_4 : "";
+                break;
+            case "t_string_5":
+                return $scope.InventoryList[Index].t_string_5 != null ? $scope.InventoryList[Index].t_string_5 : "";
+                break;
+            case "t_string_6":
+                return $scope.InventoryList[Index].t_string_6 != null ? $scope.InventoryList[Index].t_string_6 : "";
+                break;
+            case "t_string_7":
+                return $scope.InventoryList[Index].t_string_7 != null ? $scope.InventoryList[Index].t_string_7 : "";
+                break;
+            case "t_string_8":
+                return $scope.InventoryList[Index].t_string_8 != null ? $scope.InventoryList[Index].t_string_8 : "";
+                break;
+            case "t_string_9":
+                return $scope.InventoryList[Index].t_string_9 != null ? $scope.InventoryList[Index].t_string_9 : "";
+                break;
+            case "t_string_10":
+                return $scope.InventoryList[Index].t_string_10 != null ? $scope.InventoryList[Index].t_string_10 : "";
+                break;
+
+            case "t_string_11":
+                return $scope.InventoryList[Index].t_string_11 != null ? $scope.InventoryList[Index].t_string_11 : "";
+                break;
+            case "t_string_12":
+                return $scope.InventoryList[Index].t_string_12 != null ? $scope.InventoryList[Index].t_string_12 : "";
+                break;
+            case "t_string_13":
+                return $scope.InventoryList[Index].t_string_13 != null ? $scope.InventoryList[Index].t_string_13 : "";
+                break;
+            case "t_string_14":
+                return $scope.InventoryList[Index].t_string_14 != null ? $scope.InventoryList[Index].t_string_14 : "";
+                break;
+            case "t_string_15":
+                return $scope.InventoryList[Index].t_string_15 != null ? $scope.InventoryList[Index].t_string_15 : "";
+                break;
+            case "t_string_16":
+                return $scope.InventoryList[Index].t_string_16 != null ? $scope.InventoryList[Index].t_string_16 : "";
+                break;
+            case "t_string_17":
+                return $scope.InventoryList[Index].t_string_17 != null ? $scope.InventoryList[Index].t_string_17 : "";
+                break;
+            case "t_string_18":
+                return $scope.InventoryList[Index].t_string_18 != null ? $scope.InventoryList[Index].t_string_18 : "";
+                break;
+            case "t_string_19":
+                return $scope.InventoryList[Index].t_string_19 != null ? $scope.InventoryList[Index].t_string_19 : "";
+                break;
+            case "t_string_20":
+                return $scope.InventoryList[Index].t_string_20 != null ? $scope.InventoryList[Index].t_string_20 : "";
+                break;
+            case "t_string_21":
+                return $scope.InventoryList[Index].t_string_21 != null ? $scope.InventoryList[Index].t_string_21 : "";
+                break;
+            case "t_string_22":
+                return $scope.InventoryList[Index].t_string_22 != null ? $scope.InventoryList[Index].t_string_22 : "";
+                break;
+            case "t_string_23":
+                return $scope.InventoryList[Index].t_string_23 != null ? $scope.InventoryList[Index].t_string_23 : "";
+                break;
+            case "t_string_24":
+                return $scope.InventoryList[Index].t_string_24 != null ? $scope.InventoryList[Index].t_string_24 : "";
+                break;
 
 
 
@@ -921,6 +994,135 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 return $scope.InventoryList[Index].number_12 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].number_12) : "";
                 break;
 
+
+            case "t_number_1":
+                return $scope.InventoryList[Index].t_number_1 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].t_number_1) : "";
+                break;
+            case "t_number_2":
+                return $scope.InventoryList[Index].t_number_2 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].t_number_2) : "";
+                break;
+            case "t_number_3":
+                return $scope.InventoryList[Index].t_number_3 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].t_number_3) : "";
+                break;
+            case "t_number_4":
+                return $scope.InventoryList[Index].t_number_4 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].t_number_4) : "";
+                break;
+            case "t_number_5":
+                return $scope.InventoryList[Index].t_number_5 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].t_number_5) : "";
+                break;
+            case "t_number_6":
+                return $scope.InventoryList[Index].t_number_6 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].t_number_6) : "";
+                break;
+            case "t_number_7":
+                return $scope.InventoryList[Index].t_number_7 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].t_number_7) : "";
+                break;
+            case "t_number_8":
+                return $scope.InventoryList[Index].t_number_8 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].t_number_8) : "";
+                break;
+            case "t_number_9":
+                return $scope.InventoryList[Index].t_number_9 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].t_number_9) : "";
+                break;
+            case "t_number_10":
+                return $scope.InventoryList[Index].t_number_10 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].t_number_10) : "";
+                break;
+
+            case "t_number_11":
+                return $scope.InventoryList[Index].t_number_11 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].t_number_11) : "";
+                break;
+            case "t_number_12":
+                return $scope.InventoryList[Index].t_number_12 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].t_number_12) : "";
+                break;
+            case "t_bool_1":
+
+                if ($scope.InventoryList[Index].t_bool_1 != null) {
+                    for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                        if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                            if ($scope.InventoryList[Index].t_bool_1 == true) {
+                                return $scope.CustomItemDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].t_bool_1 != null ? $scope.InventoryList[Index].t_bool_1 : "";
+                break;
+            case "t_bool_2":
+                if ($scope.InventoryList[Index].t_bool_2 != null) {
+                    for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                        if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                            if ($scope.InventoryList[Index].t_bool_2 == true) {
+                                return $scope.CustomItemDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].t_bool_2 != null ? $scope.InventoryList[Index].t_bool_2 : "";
+                break;
+            case "t_bool_3":
+                if ($scope.InventoryList[Index].t_bool_3 != null) {
+                    for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                        if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                            if ($scope.InventoryList[Index].t_bool_3 == true) {
+                                return $scope.CustomItemDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].t_bool_3 != null ? $scope.InventoryList[Index].t_bool_3 : "";
+                break;
+            case "t_bool_4":
+                if ($scope.InventoryList[Index].t_bool_4 != null) {
+                    for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                        if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                            if ($scope.InventoryList[Index].t_bool_4 == true) {
+                                return $scope.CustomItemDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].t_bool_4 != null ? $scope.InventoryList[Index].t_bool_4 : "";
+                break;
+            case "t_bool_5":
+                if ($scope.InventoryList[Index].t_bool_5 != null) {
+                    for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                        if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                            if ($scope.InventoryList[Index].t_bool_5 == true) {
+                                return $scope.CustomItemDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].t_bool_5 != null ? $scope.InventoryList[Index].t_bool_5 : "";
+                break;
+            case "t_bool_6":
+                if ($scope.InventoryList[Index].t_bool_6 != null) {
+                    for (var i = 0 ; $scope.CustomItemDataList.length ; i++) {
+                        if ($scope.CustomItemDataList[i].cfdID == _ID) {
+                            if ($scope.InventoryList[Index].t_bool_6 == true) {
+                                return $scope.CustomItemDataList[i].cfdTruelabel;
+                            }
+                            else {
+                                return $scope.CustomItemDataList[i].cfdFalselabel;
+                            }
+                        }
+                    }
+                }
+                //return $scope.InventoryList[Index].t_bool_6 != null ? $scope.InventoryList[Index].t_bool_6 : "";
+                break;
             case "bool_1":
 
                 if ($scope.InventoryList[Index].bool_1 != null) {
@@ -1032,6 +1234,24 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 return $scope.InventoryList[Index].date_6 != null ? $scope.InventoryList[Index].date_6 : "";
                 break;
 
+            case "t_date_1":
+                return $scope.InventoryList[Index].t_date_1 != null ? $scope.InventoryList[Index].t_date_1 : "";
+                break;
+            case "t_date_2":
+                return $scope.InventoryList[Index].t_date_2 != null ? $scope.InventoryList[Index].t_date_2 : "";
+                break;
+            case "t_date_3":
+                return $scope.InventoryList[Index].t_date_3 != null ? $scope.InventoryList[Index].t_date_3 : "";
+                break;
+            case "t_date_4":
+                return $scope.InventoryList[Index].t_date_4 != null ? $scope.InventoryList[Index].t_date_4 : "";
+                break;
+            case "t_date_5":
+                return $scope.InventoryList[Index].t_date_5 != null ? $scope.InventoryList[Index].t_date_5 : "";
+                break;
+            case "t_date_6":
+                return $scope.InventoryList[Index].t_date_6 != null ? $scope.InventoryList[Index].t_date_6 : "";
+                break;
             case "pCountFrq":
                 return $scope.InventoryList[Index].pCountFrq != null ? $scope.InventoryList[Index].pCountFrq : "";
                 break;
@@ -1195,23 +1415,14 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
         }
     }
     function ConvertToProperFilter(_Filters) {
+
+        debugger;
         if (_Filters != null && _Filters != undefined && _Filters.length != 0) {
             for (var i = 0; i < _Filters.length; i++) {
                 switch ($scope.GetColumnDataType(_Filters[i].ColumnName)) {
                     case "Decimal":
                     case "decimal":
-                        if ($.trim(_Filters[i].SearchValue) != "") {
-
-                            _Filters[i].SearchValue = parseFloat(_Filters[i].SearchValue);
-                        }
-                        break;
-                    case "Number":
                     case "number":
-                        if ($.trim(_Filters[i].SearchValue) != "") {
-
-                            _Filters[i].SearchValue = parseFloat(_Filters[i].SearchValue);
-                        }
-                        break;
                     case "currency":
                         if (_Filters[i].SearchValue != null && _Filters[i].SearchValue != undefined && $.trim(_Filters[i].SearchValue) != "") {
 
@@ -1219,9 +1430,49 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                         }
                         break;
                     case "Date":
+                    case "date":
                     case "datetime":
+                        if (_Filters[i].SearchValue != null && _Filters[i].SearchValue != undefined && _Filters[i].SearchValue != "") {
+                            if (_Filters[i].SearchValue.includes("AM") || _Filters[i].SearchValue.includes("PM")) {
+                                if (_Filters[i].SearchValue.includes("1900")) {
+                                    var x = _Filters[i].SearchValue.split(" ");
+                                    _Filters[i].SearchValue = x[1];
+                                    break;
+                                }
+                                else {
+                                    var x = _Filters[i].SearchValue.split(" ");
+                                    var replaced = x[0].split("/");
+                                    var Datereplaced = x[1].split(":");
+
+                                    if (replaced[0].length < 2) {
+                                        replaced[0] = "0" + replaced[0]
+                                    }
+
+                                    if (replaced[1].length < 2) {
+                                        replaced[1] = "0" + replaced[1]
+                                    }
+
+                                    if (Datereplaced[0].length < 2) {
+                                        Datereplaced[0] = "0" + Datereplaced[0]
+                                    }
+
+                                    if (Datereplaced[1].length < 2) {
+                                        Datereplaced[1] = "0" + Datereplaced[1]
+                                    }
+
+
+                                    var newdate = replaced[2] + "-" + replaced[1] + "-" + replaced[0];
+
+                                    _Filters[i].SearchValue = newdate + "T" + Datereplaced[0] + ":" + Datereplaced[1]
+                                    break;
+                                }
+                            }
+                        }
+
+
                         _Filters[i].SearchValue = formatDate(_Filters[i].SearchValue);
                         break;
+
                     case "checkbox":
                         _Filters[i].SearchValue = _Filters[i].SearchValue;
                         break;
@@ -1230,19 +1481,12 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                         break;
                     default:
                 }
-
             }
-
             $scope.FilterArray = _Filters;
-
-
-            console.log("$scope.MyFilterArray");
-            console.log($scope.FilterArray);
         }
-
-
         CheckScopeBeforeApply();
     }
+
 
 
     function ChangeBooleanOperator() {
