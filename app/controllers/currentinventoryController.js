@@ -1547,6 +1547,17 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
             //debugger;
 
             for (var i = 0 ; i < $scope.FilterArray.length ; i++) {
+
+                if ($scope.FilterArray[i].ColumnName == "iUniqueDate" || $scope.FilterArray[i].ColumnName == "iUnitDate2") {
+                    var fieldSpecialType = $scope.getUnitSpecialType($scope.FilterArray[i].ColumnName.slice(1));
+                    if (fieldSpecialType != undefined) {
+                        if (fieldSpecialType.FieldSpecialType == 17) {
+                            // For Time Fields
+
+                            $scope.FilterArray[i].SearchValue = "1900-01-01T" + $scope.FilterArray[i].SearchValue;
+                        }
+                    }
+                }
                 var fieldSpecialType = $scope.getCustomSpecialType($scope.FilterArray[i].ColumnName);
                 if (fieldSpecialType != undefined) {
                     if ($.trim($scope.FilterArray[i].SearchValue) != "") {
