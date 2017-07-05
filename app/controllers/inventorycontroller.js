@@ -142,6 +142,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         setTimeout(function () {
             $("#secondDiv").find(".form-group:first").find(".form-control:first").focus();
 
+
+                $(".weekPicker").each(function () {
+                    var _val = $(this).attr("selectvalue");
+                    $(this).val(_val);
+                    $(this).trigger("change");
+                });
+
+
         }, 100);
         CheckScopeBeforeApply();
 
