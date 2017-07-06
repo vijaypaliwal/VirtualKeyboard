@@ -713,7 +713,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
     // Get cell's data according to column name and index
     $scope.GetCellData = function (columnName, Index, isCalculated) {
 
-         
+        
         var _ID = TryParseInt(columnName, 0);
         if (_ID != 0) {
             columnName = $scope.GetCustomFieldByID(_ID);
@@ -832,6 +832,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 return $scope.InventoryList[Index].string_9 != null ? $scope.InventoryList[Index].string_9 : "";
                 break;
             case "string_10":
+
                 return $scope.InventoryList[Index].string_10 != null ? $scope.InventoryList[Index].string_10 : "";
                 break;
 

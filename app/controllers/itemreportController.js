@@ -1261,9 +1261,10 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
     }
 
     function init() {
+        $scope.GetCustomDataField(0);
         $scope.getuom();
         $scope.GetItemViews();
-        $scope.GetCustomDataField(0);
+
         CheckScopeBeforeApply();
       
     

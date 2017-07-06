@@ -377,7 +377,6 @@ app.controller('LocalrestockController', ['$scope', 'localStorageService', 'auth
            });
     }
     $scope.GetCustomFieldByID = function (ID) {
-        
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
             if($scope.CustomItemDataList[i].cfdID==ID)
             {
@@ -1238,9 +1237,10 @@ app.controller('LocalrestockController', ['$scope', 'localStorageService', 'auth
     }
 
     function init() {
+        $scope.GetCustomDataField(0);
+
         $scope.getuom();
         $scope.GetLocalViews();
-        $scope.GetCustomDataField(0);
         CheckScopeBeforeApply();
       
     

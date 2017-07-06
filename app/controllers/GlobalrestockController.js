@@ -1241,9 +1241,10 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
     }
 
     function init() {
+        $scope.GetCustomDataField(0);
         $scope.getuom();
         $scope.GetGlobalViews();
-        $scope.GetCustomDataField(0);
+
         CheckScopeBeforeApply();
       
     

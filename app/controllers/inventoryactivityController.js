@@ -116,23 +116,23 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
 
     $scope.getCustomSpecialType = function (FieldName) {
-       // debugger;
-        if ($scope.CustomItemDataList.length > 0) {
-            for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+        
+        if ($scope.CustomItemActivityDataList.length > 0) {
+            for (var i = 0; i < $scope.CustomItemActivityDataList.length; i++) {
                 var type = "";
                 var Map = "";
-                if (FieldName.includes("t_")) {
-                    type = "inventory";
+                if (FieldName.includes("i_")) {
+                    type = "part";
                     Map = FieldName.substring(2);
                 }
                 else {
-                    type = "part";
+                    type = "inventory";
                     Map = FieldName;
                 }
 
 
-                if ($scope.CustomItemDataList[i].ColumnMap == Map && $scope.CustomItemDataList[i].cfdCustomFieldType == type) {
-                    return $scope.CustomItemDataList[i];
+                if ($scope.CustomItemActivityDataList[i].ColumnMap == Map && $scope.CustomItemActivityDataList[i].cfdCustomFieldType == type) {
+                    return $scope.CustomItemActivityDataList[i];
                 }
             }
         }
@@ -431,9 +431,11 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     // Function to get cfdspecial type for Custom Field
 
     $scope.getCustomSpecialType = function (FieldName) {
-        //debugger;
-        if ($scope.CustomItemDataList.length > 0) {
-            for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
+        // 
+
+        debugger;
+        if ($scope.CustomItemActivityDataList.length > 0) {
+            for (var i = 0; i < $scope.CustomItemActivityDataList.length; i++) {
                 var type = "";
                 var Map = "";
                 if (FieldName.includes("i_")) {
@@ -441,13 +443,14 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                     Map = FieldName.substring(2);
                 }
                 else {
+                    console.log("into inventory");
                     type = "inventory";
                     Map = FieldName;
                 }
 
 
-                if ($scope.CustomItemDataList[i].ColumnMap == Map && $scope.CustomItemDataList[i].cfdCustomFieldType == type) {
-                    return $scope.CustomItemDataList[i];
+                if ($scope.CustomItemActivityDataList[i].ColumnMap == Map && $scope.CustomItemActivityDataList[i].cfdCustomFieldType == type) {
+                    return $scope.CustomItemActivityDataList[i];
                 }
             }
         }
@@ -473,7 +476,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     // get data type according to column name
     $scope.GetColumnDataType = function (ColumnName) {
 
-       // debugger;
+       //  
         var DataType = ""
 
         DataType = $scope.GetCustomFieldTypeByID(ColumnName);
@@ -613,7 +616,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
                        if (Type == 1) {
 
-                           //debugger;
+                           // 
                            $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
 
                        }
@@ -648,18 +651,18 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     }
 
     $scope.GetBooleabData = function (ColumnName) {
-        debugger;
+         
 
         var BooeanArray = [];
 
         var type = "";
         var Map = "";
-        if (ColumnName.includes("t_")) {
-            type = "inventory";
+        if (ColumnName.includes("i_")) {
+            type = "part";
             Map = ColumnName.substring(2);
         }
         else {
-            type = "part";
+            type = "inventory";
             Map = ColumnName;
         }
 
@@ -854,7 +857,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     // get column data according to column name and index of data
     $scope.GetCellData = function (columnName, Index, isCalculated) {
 
-        //debugger;
+        // 
         var _ID = TryParseInt(columnName, 0);
         if (_ID != 0) {
             columnName = $scope.GetCustomFieldByID(_ID);
@@ -1644,7 +1647,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     }
     function ConvertToProperFilter(_Filters) {
 
-        debugger;
+         
         if (_Filters != null && _Filters != undefined && _Filters.length != 0) {
             for (var i = 0; i < _Filters.length; i++) {
                 switch ($scope.GetColumnDataType(_Filters[i].ColumnName)) {
@@ -1721,7 +1724,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
 
     function ChangeBooleanOperator() {
-        debugger;
+         
         for (var i = 0; i < $scope.FilterArray.length ; i++) {
             if ($scope.FilterArray[i].ColumnName.includes("bool")) {
                 $scope.FilterArray[i].FilterOperator = 'bool';
@@ -1907,7 +1910,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                   },
                   error: function (requestObject, err, errorThrown) {
 
-                     // debugger;
+                     //  
                       if (requestObject.readyState == 0 || requestObject.status == 0) {
                           log.error("Seems like some issue in network, please try again.")
                       }
@@ -2069,15 +2072,16 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     }
 
     function init() {
+        $scope.GetCustomDataField(0);
+        $scope.GetCustomDataField(1);
+        $scope.GetCustomDataField(2);
 
         $scope.GetActiveUnitDataField();
 
         $scope.getuom();
         $scope.getstatus();
         $scope.GetActivityViews();
-        $scope.GetCustomDataField(0);
-        $scope.GetCustomDataField(1);
-        $scope.GetCustomDataField(2);
+     
         CheckScopeBeforeApply();
     }
 
