@@ -530,14 +530,36 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.customautocomplete = function (ColumnName, id, inventoryid, fieldtype) {
         $("#customautolistmodal").modal('show');
 
+
+        $scope.adjustid = id;
+
         if (inventoryid != 'empty') {
             id = id + '_' + inventoryid;
         }
 
 
+
+
         var _toAppend = fieldtype == "line" ? "LineItem_" : "CustomActivity_"
 
+
+
+
+
+
+
         $scope.activecustomfield = _toAppend + id;
+
+
+        if (inventoryid == 'increase') {
+            $scope.activecustomfield = 'CustomActivityIncrease_' + $scope.adjustid;
+        }
+
+        if (inventoryid == 'decrease') {
+            $scope.activecustomfield = 'CustomActivityDecrease_' + $scope.adjustid;
+        }
+
+
 
         for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
             if ($scope.CustomActivityDataList[i].ColumnMap == ColumnName) {
