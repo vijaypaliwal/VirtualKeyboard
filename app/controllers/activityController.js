@@ -2739,6 +2739,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     function init() {
 
+        console.log($scope.CurrentCart);
 
         $scope.CurrentCart = localStorageService.get("ActivityCart");
 

@@ -190,7 +190,7 @@
                         </div>
 
                         <!--CustomWeek-->
-                        <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdInputMask == 'week' ">
+                        <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdInputMask == 'week' " currentvalue="{{_obj.SearchValue}}" class="weekfilter">
                             <select id="UniqueTag" ng-model="_obj.SearchValue" class="form-control">
                                 <option value="">choose week</option>
                                 <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
@@ -260,7 +260,7 @@
 
                     </span>
                     <select class="form-control" ng-model="_obj.SearchValue">
-                        <option value=""></option>
+                       
                         <option ng-repeat="_data in GetComboData(_obj.ColumnName)" value="{{_data}}" ng-selected="_data == _obj.SearchValue">{{_data}}</option>
                     </select>
                 </div>
@@ -277,7 +277,7 @@
                         </ul>
                     </span>
                     <select class="form-control" ng-model="_obj.SearchValue">
-                        <option value=""></option>
+                       
                         <option ng-repeat="_data in GetBooleabData(_obj.ColumnName)" value="{{$index == 0 ? true : false}}" ng-selected="GetTrueFalseArray()[$index] == _obj.SearchValue">{{_data}}</option>
                     </select>
 

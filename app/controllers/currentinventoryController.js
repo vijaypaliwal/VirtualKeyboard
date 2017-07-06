@@ -1419,7 +1419,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
    
     function ConvertToProperFilter(_Filters) {
 
-         
+        debugger;
         if (_Filters != null && _Filters != undefined && _Filters.length != 0) {
             for (var i = 0; i < _Filters.length; i++) {
                 switch ($scope.GetColumnDataType(_Filters[i].ColumnName)) {
@@ -1440,7 +1440,23 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                             if (_Filters[i].SearchValue.includes("AM") || _Filters[i].SearchValue.includes("PM")) {
                                 if (_Filters[i].SearchValue.includes("1900")) {
                                     var x = _Filters[i].SearchValue.split(" ");
-                                    _Filters[i].SearchValue = x[1];
+                                    var y = x[1].split(":");
+
+
+                                    if (_Filters[i].SearchValue.includes("PM"))
+                                    {
+                                        y[0] = parseInt(y[0]) + 12;
+                                    }
+
+                                    if (y[0].length < 2) {
+                                        y[0] = "0" + y[0]
+                                    }
+                                    if (y[1].length < 2) {
+                                        y[1] = "0" + y[1]
+                                    }
+
+
+                                    _Filters[i].SearchValue = y[0]+":"+y[1];
                                     break;
                                 }
                                 else {
@@ -1465,7 +1481,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                                     }
 
 
-                                    var newdate = replaced[2] + "-" + replaced[1] + "-" + replaced[0];
+                                    var newdate = replaced[2] + "-" + replaced[0] + "-" + replaced[1];
 
                                     _Filters[i].SearchValue = newdate + "T" + Datereplaced[0] + ":" + Datereplaced[1]
                                     break;
@@ -1483,11 +1499,27 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                     case "combobox":
                         _Filters[i].SearchValue = _Filters[i].SearchValue;
                         break;
+                    case "string":                      
+                    case "String":
+                        _Filters[i].SearchValue = _Filters[i].SearchValue;
+                        break;
                     default:
                 }
             }
             $scope.FilterArray = _Filters;
         }
+        setTimeout(function () {
+     
+        $(".weekfilter").each(function () {         
+
+            var _val = $(this).attr("currentvalue");
+            if ($.trim(_val) != "") {
+
+                $(this).val(_val);
+                $(this).trigger("change");
+            }
+        });
+        }, 1000);
         CheckScopeBeforeApply();
     }
 
@@ -1548,7 +1580,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 $scope.FilterData.SearchValue = "";
             }
 
-
+            debugger;
             for (var i = 0 ; i < $scope.FilterArray.length ; i++) {
 
                 if ($scope.FilterArray[i].ColumnName == "iUniqueDate" || $scope.FilterArray[i].ColumnName == "iUnitDate2") {
@@ -1557,7 +1589,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                         if ($.trim($scope.FilterArray[i].SearchValue) != "") {
                             if (fieldSpecialType == 17) {
                                 // For Time Fields
-
+                                
                                 $scope.FilterArray[i].SearchValue = "1900-01-01T" + $scope.FilterArray[i].SearchValue;
                             }
                         }

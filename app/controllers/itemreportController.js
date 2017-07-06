@@ -953,6 +953,7 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
     }
     function ConvertToProperFilter(_Filters) {
 
+        debugger;
         if (_Filters != null && _Filters != undefined && _Filters.length != 0) {
             for (var i = 0; i < _Filters.length; i++) {
                 switch ($scope.GetColumnDataType(_Filters[i].ColumnName)) {
@@ -969,10 +970,26 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
                     case "date":
                     case "datetime":
                         if (_Filters[i].SearchValue != null && _Filters[i].SearchValue != undefined && _Filters[i].SearchValue != "") {
+                            debugger;
                             if (_Filters[i].SearchValue.includes("AM") || _Filters[i].SearchValue.includes("PM")) {
                                 if (_Filters[i].SearchValue.includes("1900")) {
                                     var x = _Filters[i].SearchValue.split(" ");
-                                    _Filters[i].SearchValue = x[1];
+                                    var y = x[1].split(":");
+
+
+                                    if (_Filters[i].SearchValue.includes("PM")) {
+                                        y[0] = parseInt(y[0]) + 12;
+                                    }
+
+                                    if (y[0].length < 2) {
+                                        y[0] = "0" + y[0]
+                                    }
+                                    if (y[1].length < 2) {
+                                        y[1] = "0" + y[1]
+                                    }
+
+
+                                    _Filters[i].SearchValue = y[0] + ":" + y[1];
                                     break;
                                 }
                                 else {
@@ -997,7 +1014,7 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
                                     }
 
 
-                                    var newdate = replaced[2] + "-" + replaced[1] + "-" + replaced[0];
+                                    var newdate = replaced[2] + "-" + replaced[0] + "-" + replaced[1];
 
                                     _Filters[i].SearchValue = newdate + "T" + Datereplaced[0] + ":" + Datereplaced[1]
                                     break;
@@ -1015,11 +1032,27 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
                     case "combobox":
                         _Filters[i].SearchValue = _Filters[i].SearchValue;
                         break;
+                    case "string":
+                    case "String":
+                        _Filters[i].SearchValue = _Filters[i].SearchValue;
+                        break;
                     default:
                 }
             }
             $scope.FilterArray = _Filters;
         }
+        setTimeout(function () {
+
+            $(".weekfilter").each(function () {
+
+                var _val = $(this).attr("currentvalue");
+                if ($.trim(_val) != "") {
+
+                    $(this).val(_val);
+                    $(this).trigger("change");
+                }
+            });
+        }, 1000);
         CheckScopeBeforeApply();
     }
 
