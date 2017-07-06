@@ -260,7 +260,7 @@
                             <!--CustomRadio-->
                             <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdSpecialType == 1">
                                 <select id="CustomRadio" ng-model="_obj.SearchValue" class="form-control">
-                                    <option ng-repeat="n in getCustomSpecialType(_obj.ColumnName).cfdRadioValues track by $index" value="{{n}}"> {{n}}</option>
+                                    <option ng-repeat="n in getCustomSpecialType(_obj.ColumnName).cfdRadioValues track by $index" value="{{n}}" ng-selected="n == _obj.SearchValue"> {{n}}</option>
                                 </select>
                             </div>
                         </div>                                             

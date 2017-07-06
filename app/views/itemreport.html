@@ -220,8 +220,8 @@
                             </div>
 
                             <!--CustomWeek-->
-                            <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdInputMask == 'week' " currentvalue="{{_obj.SearchValue}}" class="weekfilter">
-                                <select id="UniqueTag" ng-model="_obj.SearchValue" class="form-control">
+                            <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdInputMask == 'week' " >
+                                <select id="UniqueTag" ng-model="_obj.SearchValue" class="form-control weekfilter" currentvalue="{{_obj.SearchValue}}" >
                                     <option value="">choose week</option>
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -234,7 +234,7 @@
                             <!--CustomRadio-->
                             <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdSpecialType == 1">
                                 <select id="CustomRadio" ng-model="_obj.SearchValue" class="form-control">
-                                    <option ng-repeat="n in getCustomSpecialType(_obj.ColumnName).cfdRadioValues track by $index" value="{{n}}"> {{n}}</option>
+                                    <option ng-repeat="n in getCustomSpecialType(_obj.ColumnName).cfdRadioValues track by $index" value="{{n}}" ng-selected="n == _obj.SearchValue"> {{n}}</option>
                                 </select>
                             </div>
                         </div> 

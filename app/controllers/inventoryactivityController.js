@@ -159,7 +159,13 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     $scope.isviewload = false;
     $scope.Columns = [];
     $scope.loadingblock = false;
+    $scope.weeklist = [];
 
+    $scope.CurrentYear = new Date().getFullYear();
+
+    for (var i = 1; i <= 52; i++) {
+        $scope.weeklist.push(i);
+    }
 
     $scope.HasImage = "";
     var _IsLazyLoadingUnderProgress = 0;

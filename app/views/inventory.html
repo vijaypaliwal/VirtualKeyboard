@@ -566,7 +566,7 @@
                             <!--DropDown-->
                             <div ng-if="UnitTag2FieldSpecialType == 2">
                                 <div class="input-group">
-                                    <select ng-model="InventoryObject.UnitTag2" class="form-control">
+                                    <select ng-model="InventoryObject.UniqueTag" class="form-control">
                                         <option id="UnitTag2" ng-blur="mtuvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" ng-repeat="obj in UniqueTag2Combovalues">{{obj}}</option>
                                     </select>
                                     <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
@@ -882,16 +882,16 @@
 
 
                                     <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value">
-                                        <option ng-value="true"  value="true" ng-selected="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</option>
-                                        <option ng-value="false" value="false" ng-selected="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==false">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</option>
+                                        <option   value="true" ng-selected="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</option>
+                                        <option   value="false" ng-selected="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==false">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</option>
                                     </select>
                                 </div>
 
 
                                 <div class="" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType==5">
                                     <p class="todo-element">
-                                        <input name="CustomItem_{{obj.cfdID}}" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" ng-value="true"  value="true" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true" type="radio"> <label for="CustomItem_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</label>
-                                        <input name="CustomItem_{{obj.cfdID}}" id="CustomItem1_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" ng-value="false"  value="false" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==false" type="radio"> <label for="CustomItem1_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</label>
+                                        <input name="CustomItem_{{obj.cfdID}}" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value"   value="true" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true" type="radio"> <label for="CustomItem_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</label>
+                                        <input name="CustomItem_{{obj.cfdID}}" id="CustomItem1_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value"   value="false" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==false" type="radio"> <label for="CustomItem1_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</label>
                                     </p>
 
 
@@ -1018,16 +1018,16 @@
 
 
                                     <select id="CustomActivity_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
-                                        <option ng-selected="InventoryObject.CustomTxnData[$index].Value==true" ng-value="true"  value="true">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdTruelabel}}</option>
-                                        <option ng-selected="InventoryObject.CustomTxnData[$index].Value==false"  ng-value="false" value="false">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdFalselabel}}</option>
+                                        <option ng-selected="InventoryObject.CustomTxnData[$index].Value==true"   value="true">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdTruelabel}}</option>
+                                        <option ng-selected="InventoryObject.CustomTxnData[$index].Value==false"   value="false">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdFalselabel}}</option>
                                     </select>
                                 </div>
 
 
                                 <div class="" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType==5">
                                     <p class="todo-element">
-                                        <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value"  ng-value="true" value="true" ng-checked="InventoryObject.CustomTxnData[$index].Value==true" type="radio"> <label for="CustomActivity_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdTruelabel}}</label>
-                                        <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-value="false"  value="false" ng-checked="InventoryObject.CustomTxnData[$index].Value==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdFalselabel}}</label>
+                                        <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value"   value="true" ng-checked="InventoryObject.CustomTxnData[$index].Value==true" type="radio"> <label for="CustomActivity_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdTruelabel}}</label>
+                                        <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value"   value="false" ng-checked="InventoryObject.CustomTxnData[$index].Value==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdFalselabel}}</label>
                                     </p>
 
 
@@ -1779,8 +1779,8 @@
 
                         <div class="" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType==5">
                             <p class="todo-element">
-                                <input name="CustomItem_{{obj.cfdID}}" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" ng-value="true" value="true" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true" type="radio"> <label for="CustomItem_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</label>
-                                <input name="CustomItem_{{obj.cfdID}}" id="CustomItem1_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" ng-value="false" value="false" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==false" type="radio"> <label for="CustomItem1_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</label>
+                                <input name="CustomItem_{{obj.cfdID}}" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" value="true" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true" type="radio"> <label for="CustomItem_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</label>
+                                <input name="CustomItem_{{obj.cfdID}}" id="CustomItem1_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" value="false" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==false" type="radio"> <label for="CustomItem1_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</label>
                             </p>
 
 
@@ -1928,8 +1928,8 @@
 
                         <div class="" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType==5">
                             <p class="todo-element">
-                                <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-value="true"  value="true" ng-checked="InventoryObject.CustomTxnData[$index].Value==true" type="radio"> <label for="CustomActivity_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdTruelabel}}</label>
-                                <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value"  ng-value="false" value="false" ng-checked="InventoryObject.CustomTxnData[$index].Value==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdFalselabel}}</label>
+                                <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value"   value="true" ng-checked="InventoryObject.CustomTxnData[$index].Value==true" type="radio"> <label for="CustomActivity_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdTruelabel}}</label>
+                                <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value"   value="false" ng-checked="InventoryObject.CustomTxnData[$index].Value==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdFalselabel}}</label>
                             </p>
 
 
@@ -2290,7 +2290,7 @@
                         <div class="input-group">
                             <!--<input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" />-->
 
-                            <select ng-model="InventoryObject.UnitTag2" class="form-control">
+                            <select ng-model="InventoryObject.UniqueTag" class="form-control">
                                 <option id="UnitTag2" ng-blur="mtuvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" ng-repeat="obj in UniqueTag2Combovalues">{{obj}}</option>
                             </select>
 
@@ -2687,16 +2687,16 @@
 
 
                             <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value">
-                                <option ng-selected="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true"  ng-value="true" value="true">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</option>
-                                <option ng-selected="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==false"  ng-value="false" value="false">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</option>
+                                <option ng-selected="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true"   value="true">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</option>
+                                <option ng-selected="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==false"   value="false">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</option>
                             </select>
                         </div>
 
 
                         <div class="" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType==5">
                             <p class="todo-element">
-                                <input name="CustomItem_{{obj.cfdID}}" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" ng-value="true"  value="true" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true" type="radio"> <label for="CustomItem_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</label>
-                                <input name="CustomItem_{{obj.cfdID}}" id="CustomItem1_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value"  ng-value="false" value="false" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==false" type="radio"> <label for="CustomItem1_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</label>
+                                <input name="CustomItem_{{obj.cfdID}}" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value"   value="true" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true" type="radio"> <label for="CustomItem_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</label>
+                                <input name="CustomItem_{{obj.cfdID}}" id="CustomItem1_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value"   value="false" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==false" type="radio"> <label for="CustomItem1_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</label>
                             </p>
 
 
@@ -2837,16 +2837,16 @@
 
 
                             <select id="CustomActivity_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
-                                <option ng-selected="InventoryObject.CustomTxnData[$index].Value==true"  ng-value="true" value="true">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdTruelabel}}</option>
-                                <option ng-selected="InventoryObject.CustomTxnData[$index].Value==false"  ng-value="false"  value="false">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdFalselabel}}</option>
+                                <option ng-selected="InventoryObject.CustomTxnData[$index].Value==true"   value="true">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdTruelabel}}</option>
+                                <option ng-selected="InventoryObject.CustomTxnData[$index].Value==false"   value="false">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdFalselabel}}</option>
                             </select>
                         </div>
 
 
                         <div class="" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType==5">
                             <p class="todo-element">
-                                <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value"  ng-value="true" value="true" ng-checked="InventoryObject.CustomTxnData[$index].Value==true" type="radio"> <label for="CustomActivity_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdTruelabel}}</label>
-                                <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value"  ng-value="false" value="false" ng-checked="InventoryObject.CustomTxnData[$index].Value==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdFalselabel}}</label>
+                                <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value"   value="true" ng-checked="InventoryObject.CustomTxnData[$index].Value==true" type="radio"> <label for="CustomActivity_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdTruelabel}}</label>
+                                <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value"   value="false" ng-checked="InventoryObject.CustomTxnData[$index].Value==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdFalselabel}}</label>
                             </p>
 
 
