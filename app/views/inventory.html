@@ -566,7 +566,7 @@
                             <!--DropDown-->
                             <div ng-if="UnitTag2FieldSpecialType == 2">
                                 <div class="input-group">
-                                    <select ng-model="InventoryObject.UniqueTag" class="form-control">
+                                    <select ng-model="InventoryObject.UnitTag2" class="form-control">
                                         <option id="UnitTag2" ng-blur="mtuvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" ng-repeat="obj in UniqueTag2Combovalues">{{obj}}</option>
                                     </select>
                                     <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
@@ -2290,7 +2290,7 @@
                         <div class="input-group">
                             <!--<input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" />-->
 
-                            <select ng-model="InventoryObject.UniqueTag" class="form-control">
+                            <select ng-model="InventoryObject.UnitTag2" class="form-control">
                                 <option id="UnitTag2" ng-blur="mtuvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" ng-repeat="obj in UniqueTag2Combovalues">{{obj}}</option>
                             </select>
 
