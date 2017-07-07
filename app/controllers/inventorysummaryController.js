@@ -112,7 +112,7 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
     $scope.UnitDataFieldCombovalues = [];
 
     $scope.UnitDataFieldRadioValues = [];
-
+    var trueFalseArray = [];
     $scope.CurrentView = { Name: "Inventory Summary" };
     $scope.InventoryViewsGrouped = [];
     $scope.InventoryListGrouped = [];
@@ -130,6 +130,7 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
     var _IsLazyLoadingUnderProgress = 0;
     var _PageSize = 30;
     $scope.Columns = [];
+    var trueFalseArray = [];
     var _TotalRecordsCurrent = 0;
     $scope.loadingblock = false;
     var _masterSearch = "";
@@ -1427,7 +1428,7 @@ app.controller('inventorysummaryController', ['$scope', 'localStorageService', '
                         break;
 
                     case "checkbox":
-                        _Filters[i].SearchValue = _Filters[i].SearchValue;
+                        _Filters[i].SearchValue = _Filters[i].SearchValue == null ? " " : _Filters[i].SearchValue.toLowerCase();
                         break;
                     case "combobox":
                         _Filters[i].SearchValue = _Filters[i].SearchValue;

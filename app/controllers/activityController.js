@@ -1179,8 +1179,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                         if ($scope.CurrentOperation == "MoveTagUpdate") {
 
-                            value = $scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate_date;
-                            defaultValueOfColumn = $scope.GroupCopy[k].MoveUpdateTagTransactionData.UniqueDate_date;
+                            value = $scope.CurrentCart[k].MoveUpdateTagTransactionData.UniqueDate;
+                            defaultValueOfColumn = $scope.GroupCopy[k].MoveUpdateTagTransactionData.UniqueDate;
 
                             if ($.trim(value) != "" && $.trim(value) != $.trim(defaultValueOfColumn)) {
 
@@ -2761,9 +2761,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     function init() {
 
-        console.log($scope.CurrentCart);
+       
 
         $scope.CurrentCart = localStorageService.get("ActivityCart");
+
+       
 
         var _CurrentAction = localStorageService.get("SelectedAction");
         _CurrentAction = _CurrentAction != null && _CurrentAction != undefined ? parseInt(_CurrentAction) : 4548;
@@ -2785,7 +2787,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         GetCustomDataField(1);
         getuom();
         $scope.getstatus()
-        $scope.CurrentCartBkup = angular.copy($scope.CurrentCart);
+
+   
         $scope.GetActiveUnitDataField();
 
         $scope.getlocation();
@@ -2804,8 +2807,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             $scope.AllowNegative = false;
             _AllowNegative = 'False';
         }
+        for (var i = 0; i < $scope.CurrentCart.length; i++) {
+            $scope.CurrentCart[i].MoveUpdateTagTransactionData.UniqueDate = angular.copy($scope.CurrentCart[i].ApplyTransactionData.UniqueDate);
+            $scope.CurrentCart[i].MoveUpdateTagTransactionData.UnitDate2 = angular.copy($scope.CurrentCart[i].ApplyTransactionData.UnitDate2);
+        }
 
+        $scope.CurrentCartBkup = angular.copy($scope.CurrentCart);
         CheckScopeBeforeApply();
+        console.log("Activity Data");
+        console.log($scope.CurrentCart)
         setTimeout(function () {
 
             $(".weekPicker").each(function () {
@@ -3184,8 +3194,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         var _array = [];
 
         // process all custom fields that are NOT checkboxes
-        $.each($('.customActivityData input[cfd-id]:not(":checkbox"):not(":hidden"), select[cfd-id]:not(":hidden"), textarea[cfd-id]:not(":hidden")'), function () {
+        $.each($('.customActivityData input[cfd-id]:not(":checkbox"):not(":hidden"), .customActivityData select[cfd-id]:not(":hidden"), .customActivityData  textarea[cfd-id]:not(":hidden")'), function () {
 
+      
 
             _array.push({ "CfdID": $(this).attr('cfd-id'), "Value": $(this).val(), "DataType": $(this).attr('custom-data-type') });
         });

@@ -204,6 +204,7 @@
                         <!--CustomRadio-->
                         <div ng-if="getCustomSpecialType(_obj.ColumnName).cfdSpecialType == 1">
                             <select id="CustomRadio" ng-model="_obj.SearchValue" class="form-control">
+                                <option value=""></option>
                                 <option ng-repeat="n in getCustomSpecialType(_obj.ColumnName).cfdRadioValues track by $index" value="{{n}}" ng-selected="n == _obj.SearchValue"> {{n}}</option>
                             </select>
                         </div>
@@ -260,7 +261,7 @@
 
                     </span>
                     <select class="form-control" ng-model="_obj.SearchValue">
-                       
+                        <option value=""></option>
                         <option ng-repeat="_data in GetComboData(_obj.ColumnName)" value="{{_data}}" ng-selected="_data == _obj.SearchValue">{{_data}}</option>
                     </select>
                 </div>
@@ -277,7 +278,7 @@
                         </ul>
                     </span>
                     <select class="form-control" ng-model="_obj.SearchValue">
-                       
+                        <option value=""></option>
                         <option ng-repeat="_data in GetBooleabData(_obj.ColumnName)" value="{{$index == 0 ? true : false}}" ng-selected="GetTrueFalseArray()[$index] == _obj.SearchValue">{{_data}}</option>
                     </select>
 
