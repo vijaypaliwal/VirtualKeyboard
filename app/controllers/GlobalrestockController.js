@@ -21,7 +21,7 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
     var _masterSearch = "";
     $scope.loadingblock = false;
 
-
+    var trueFalseArray = [];
     $scope.weeklist = [];
 
     $scope.CurrentYear = new Date().getFullYear();
@@ -1004,7 +1004,7 @@ app.controller('GlobalrestockController', ['$scope', 'localStorageService', 'aut
                         break;
 
                     case "checkbox":
-                        _Filters[i].SearchValue = _Filters[i].SearchValue;
+                        _Filters[i].SearchValue = _Filters[i].SearchValue == null ? " " : _Filters[i].SearchValue.toLowerCase();
                         break;
                     case "combobox":
                         _Filters[i].SearchValue = _Filters[i].SearchValue;
