@@ -149,7 +149,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                    if (response.GetActiveUnitDataFieldsResult.Success == true) {
                        $scope.UnitDataList = response.GetActiveUnitDataFieldsResult.Payload;
 
-                      
+
 
                        CheckScopeBeforeApply()
                    }
@@ -444,7 +444,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
         if ($scope.ActualTotalRecords == 0) {
-          
+
 
             $(".modal-backdrop").hide();
 
@@ -711,7 +711,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 $scope.mainObjectToSend.splice(i, 1);
             }
         }
-       
+
 
         CheckScopeBeforeApply();
 
@@ -1243,10 +1243,10 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                         $(".searchtable").addClass("disablepointer");
                         $("#arrow").attr("style", "");
                         $("#arrow").show();
-                        
-                     
 
-                      
+
+
+
                     }
 
 
@@ -1508,7 +1508,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $scope.ScanItemSearch = function () {
 
         $scope.isSanned = false;
-    
+
         var scanner = cordova.plugins.barcodeScanner;
 
 
@@ -1806,41 +1806,41 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         if (parseInt(_something) < 10) return "0" + _something;
         return _something;//else    
     }
-    function ConvertToProperDate(value,Type)
-    {
-        debugger;
-        switch (Type) {
-            case 1:
+    function ConvertToProperDate(value, Type) {
+        if ($.trim(value) != "") {
+            switch (Type) {
+                case 1:
 
-                if ($scope.getUnitObjByName("UniqueDate").FieldSpecialType == 16)
-                {
-                    return ConverttoMsJsonDateTime(value);
-                }
+                    if ($scope.getUnitObjByName("UniqueDate").FieldSpecialType == 16) {
+                        return ConverttoMsJsonDateTime(value);
+                    }
 
-                else if ($scope.getUnitObjByName("UniqueDate").FieldSpecialType == 17) {
-                    return ConvertToTime(value);
-                }
-                else {
-                    return formatDate(value);
-                }
+                    else if ($scope.getUnitObjByName("UniqueDate").FieldSpecialType == 17) {
+                        return ConvertToTime(value);
+                    }
+                    else {
+                        return formatDate(value);
+                    }
 
-                break;
-            case 2:
-                if ($scope.getUnitObjByName("UnitDate2").FieldSpecialType == 16) {
-                    return ConverttoMsJsonDateTime(value);
-                }
+                    break;
+                case 2:
+                    if ($scope.getUnitObjByName("UnitDate2").FieldSpecialType == 16) {
+                        return ConverttoMsJsonDateTime(value);
+                    }
 
-                else if ($scope.getUnitObjByName("UnitDate2").FieldSpecialType == 17) {
-                    return ConvertToTime(value);
-                }
-                else {
-                    return formatDate(value);
-                }
+                    else if ($scope.getUnitObjByName("UnitDate2").FieldSpecialType == 17) {
+                        return ConvertToTime(value);
+                    }
+                    else {
+                        return formatDate(value);
+                    }
 
-                break;
-            default:
+                    break;
+                default:
 
+            }
         }
+        return "";
     }
     function addItemsToCart(object, IdToSave, originalID, _isSelectAll) {
 
@@ -1914,7 +1914,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                             pDescription: v.pDescription,
                             Action: '',
                             // CurrentInvObj: v,
-                            iUniqueDate_date:(v.iUniqueDate),
+                            iUniqueDate_date: (v.iUniqueDate),
                             iUnitNumber2: v.iUnitNumber2,
                             iUnitNumber1: v.iUnitNumber1,
                             iUnitDate2_date: (v.iUnitDate2),
@@ -2168,11 +2168,11 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 var _ItemData = GetFromlocalMyItemlist(mainObjectToSend[i].uId)
                 if (_ItemData == null) {
 
-                    var _unitDate1=ConvertToProperDate(mainObjectToSend[i].iUniqueDate_date, 1);
+                    var _unitDate1 = ConvertToProperDate(mainObjectToSend[i].iUniqueDate_date, 1);
                     var _unitDate2 = ConvertToProperDate(mainObjectToSend[i].iUnitDate2_date, 2);
 
-                    console.log("unit Date 1"+_unitDate1);
-                    console.log("unit Date 2"+ _unitDate2);
+                    console.log("unit Date 1" + _unitDate1);
+                    console.log("unit Date 2" + _unitDate2);
                     $scope.Cart.push({
                         InventoryID: mainObjectToSend[i].uId,
                         IsLineItemData: [],
@@ -2185,7 +2185,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                         IncreaseDecreaseVMData: ({ ActionQuantity: _defaultQty }),
                         MoveTransactionData: ({ ActionQuantity: _defaultQty, StatusToUpdate: mainObjectToSend[i].iStatusValue, MoveToLocationText: "", MoveToLocation: "" }),
                         UpdateTransactionData: ({ ActionQuantity: _defaultQty, StatusToUpdate: mainObjectToSend[i].iStatusValue }),
-                        ApplyTransactionData: ({ ActionQuantity: _defaultQty, UnitTag1: mainObjectToSend[i].iReqValue, UnitTag2: mainObjectToSend[i].iUnitTag2, UnitTag3: mainObjectToSend[i].iUnitTag3, UniqueDate:_unitDate1 , UnitDate2: _unitDate2, UnitNumber1: mainObjectToSend[i].iUnitNumber1, UnitNumber2: mainObjectToSend[i].iUnitNumber2 }),
+                        ApplyTransactionData: ({ ActionQuantity: _defaultQty, UnitTag1: mainObjectToSend[i].iReqValue, UnitTag2: mainObjectToSend[i].iUnitTag2, UnitTag3: mainObjectToSend[i].iUnitTag3, UniqueDate: _unitDate1, UnitDate2: _unitDate2, UnitNumber1: mainObjectToSend[i].iUnitNumber1, UnitNumber2: mainObjectToSend[i].iUnitNumber2 }),
                         ConvertTransactionData: ({ ActionFromQuantity: _defaultQty, ActionToQuantity: _defaultQty, ToUOMID: 0, ToUOM: "" }),
                         MoveUpdateTagTransactionData: ({ ActionQuantity: _defaultQty, StatusToUpdate: mainObjectToSend[i].iStatusValue, MoveToLocationText: mainObjectToSend[i].lLoc, MoveToLocation: mainObjectToSend[i].iLID, UnitTag1: mainObjectToSend[i].iReqValue, UnitTag2: mainObjectToSend[i].iUnitTag2, UnitTag3: mainObjectToSend[i].iUnitTag3, UniqueDate: _unitDate1, UnitDate2: _unitDate2, UnitNumber1: mainObjectToSend[i].iUnitNumber1, UnitNumber2: mainObjectToSend[i].iUnitNumber2 }),
                     });
@@ -2201,7 +2201,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         return $scope.Cart;
     }
 
-   
+
 
     // Go to next page after select particular activity from list(Increase,decrease,move,convert,tag..)
     $scope.GoToNextMobile = function (selectedAction) {
@@ -2339,12 +2339,11 @@ app.directive('imageonload', function () {
                 var image = new Image();
                 image.src = $(element).attr("src");
                 image.onload = function () {
-                    
+
                     var _height = this.height;
                     var _Width = this.width;
 
-                    if (_height < _Width)
-                    {
+                    if (_height < _Width) {
                         _Width = _height;
                     }
 
@@ -2354,10 +2353,10 @@ app.directive('imageonload', function () {
 
 
 
-                    $(element).css("height", _height+"px");
+                    $(element).css("height", _height + "px");
                     $(element).css("width", _Width + "px");
                 };
-                
+
             });
             element.bind('error', function () {
             });
