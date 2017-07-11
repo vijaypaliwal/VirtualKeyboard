@@ -1258,7 +1258,7 @@
 
                                                             <div class="" ng-if="obj.cfdSpecialType==5">
 
-                                                                <p style="padding-left:0;" class="todo-element">
+                                                                <p style="padding:5px !important;" class="todo-element">
                                                                     <input name="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-value="true" ng-checked="CurrentActiveObject.IsLineItemData[$index].CfValue==true" type="radio"> <label for="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
                                                                     <input name="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem1{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-value="false" ng-checked="CurrentActiveObject.IsLineItemData[$index].CfValue==false" type="radio"> <label for="LineItem1{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
                                                                 </p>
@@ -1310,7 +1310,7 @@
                                                             <i class="fa fa-thumb-tack"></i>
                                                         </button>
                                                     </span>
-                                                    <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i style="margin-left:10px;" class="fa fa-barcode"></i></span>
+                                                    <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                                     <span class="input-group-addon last" ng-if="obj.cfdSpecialType == 1" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, CurrentActiveObject.InventoryID, 'activity')"><i class="fa fa-circle-o"></i></span>
                                                     <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, CurrentActiveObject.InventoryID, 'line')" class="input-group-addon last"><i class="fa fa-search"></i></span>
                                                     <span ng-if="obj.cfdDataType=='number' && obj.cfdIsIncremental==true" ng-click="UpDownValue(obj.cfdID,false,3)" class="input-group-addon last">
@@ -1438,7 +1438,7 @@
 
 
                                 <div class="" ng-if="obj.cfdSpecialType==5">
-                                    <p class="todo-element">
+                                    <p style="padding:5px !important;" class="todo-element">
                                         <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="CustomActivity_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
                                         <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
                                     </p>
@@ -1591,7 +1591,7 @@
 
 
                                     <div class="" ng-if="obj.cfdSpecialType==5">
-                                        <p class="todo-element">
+                                        <p style="padding:5px !important;" class="todo-element" >
                                             <input name="CustomActivityIncrease_{{obj.cfdID}}" id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="CustomActivityIncrease_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
                                             <input name="CustomActivityIncrease_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
                                         </p>
@@ -1742,7 +1742,7 @@
 
 
                                     <div class="" ng-if="obj.cfdSpecialType==5">
-                                        <p class="todo-element">
+                                        <p style="padding:5px !important;" class="todo-element">
                                             <input name="CustomActivityDecrease_{{obj.cfdID}}" id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="CustomActivityDecrease_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
                                             <input name="CustomActivityDecrease_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
                                         </p>
@@ -1881,8 +1881,8 @@
 
 
                                                     <ul style="width:100%; text-align:left;" class="animated zoomIn dropdown-menu">
-                                                        <li><a data-ng-click="FillQuantityMove(CurrentActiveObject.MoveTransactionData.ActionQuantity,CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
-                                                        <li><a data-ng-click="FillQuantityMove(CurrentActiveObject.MoveTransactionData.ActionQuantity,CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
+                                                        <li><a style="text-align:left !important" data-ng-click="FillQuantityMove(CurrentActiveObject.MoveTransactionData.ActionQuantity,CurrentActiveObject.InventoryDataList.uId,1)"><i class="fa fa-check"></i> Use this quantity for all</a></li>
+                                                        <li><a style="text-align:left !important" data-ng-click="FillQuantityMove(CurrentActiveObject.MoveTransactionData.ActionQuantity,CurrentActiveObject.InventoryDataList.uId,2)"><i class="fa fa-check"></i> Fill all with current quantity</a></li>
                                                     </ul>
                                                 </span>
 
@@ -3008,7 +3008,7 @@
 
 
 
-                                                        <p class="todo-element">
+                                                        <p style="padding:5px !important;" class="todo-element">
                                                             <input name="LineItem_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="LineItem{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
                                                             <input name="LineItem_{{obj.cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" id="LineItem1{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="LineItem1{{CurrentActiveObject.InventoryID}}_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
                                                         </p>
@@ -3055,7 +3055,7 @@
                                                     <i class="fa fa-thumb-tack"></i>
                                                 </button>
                                             </span>
-                                            <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i style="margin-left:10px;" class="fa fa-barcode"></i></span>
+                                            <span class="input-group-addon last" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'" ng-click="ScanLineItem(1,CurrentActiveObject.IsLineItemData[$index].cfdID,$index,CurrentActiveObject.InventoryID)"><i class="fa fa-barcode"></i></span>
                                             <span class="input-group-addon last" ng-if="obj.cfdSpecialType == 1" ng-click="customradiolist(obj.ColumnMap, obj.cfdID,CurrentActiveObject.InventoryID, 'activity')"><i class="fa fa-circle-o"></i></span>
                                             <span ng-if="obj.cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, CurrentActiveObject.InventoryID, 'line')" class="input-group-addon last"><i class="fa fa-search"></i></span>
                                             <span ng-if="obj.cfdDataType=='number' && obj.cfdIsIncremental==true" ng-click="UpDownValue(obj.cfdID,false,3)" class="input-group-addon last">
@@ -3166,7 +3166,7 @@
 
 
                                             <div class="" ng-if="obj.cfdSpecialType==5">
-                                                <p class="todo-element">
+                                                <p style="padding:5px !important;" class="todo-element">
                                                     <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="CustomActivity_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
                                                     <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
                                                 </p>
@@ -3315,7 +3315,7 @@
 
 
                                                 <div class="" ng-if="obj.cfdSpecialType==5">
-                                                    <p class="todo-element">
+                                                    <p style="padding:5px !important;" class="todo-element" >
                                                         <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="CustomActivity_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
                                                         <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
                                                     </p>
@@ -3462,7 +3462,7 @@
 
 
                                                 <div class="" ng-if="obj.cfdSpecialType==5">
-                                                    <p class="todo-element">
+                                                    <p style="padding:5px !important;" class="todo-element" >
                                                         <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="true" ng-checked="obj.cfdDefaultValue==true" type="radio"> <label for="CustomActivity_{{obj.cfdID}}">{{obj.cfdTruelabel}}</label>
                                                         <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="false" ng-checked="obj.cfdDefaultValue==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{obj.cfdFalselabel}}</label>
                                                     </p>
