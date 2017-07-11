@@ -311,7 +311,7 @@
                                                         <div class="fg-line">
                                                             <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
                                                             <div ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType>=0 && GetUnitDataFieldByName('ReqValue').FieldSpecialType<=6 && GetUnitDataFieldByName('ReqValue').FieldSpecialType!=2">
-                                                                <input id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
+                                                                <input id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-if="CheckForUnitText(GetUnitDataFieldByName('ReqValue').FieldSpecialType)==true" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
                                                                 <input ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==4" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
                                                                 <input ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==5" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
 
@@ -328,7 +328,7 @@
 
                                                             <!--Week-->
                                                             <div ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==6">
-                                                                <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)">
+                                                                <select class="form-control uniqueunitData weekPicker" selectvalue="{{CurrentActiveObject.ApplyTransactionData.UnitTag1}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)">
                                                                     <option value="">choose week</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -383,7 +383,7 @@
 
                                                             <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
                                                             <div ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag2').FieldSpecialType<=6 && GetUnitDataFieldByName('UnitTag2').FieldSpecialType!=2">
-                                                                <input id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
+                                                                <input id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-if="CheckForUnitText(GetUnitDataFieldByName('UnitTag2').FieldSpecialType)==true" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
                                                                 <input ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==4" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
                                                                 <input ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==5" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
 
@@ -398,7 +398,7 @@
 
                                                             <!--Week-->
                                                             <div ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==6">
-                                                                <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)">
+                                                                <select class="form-control uniqueunitData weekPicker" selectvalue="{{CurrentActiveObject.ApplyTransactionData.UnitTag2}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)">
                                                                     <option value="">choose week</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -447,7 +447,7 @@
 
                                                             <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
                                                             <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType<=6 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType!=2">
-                                                                <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
+                                                                <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-if="CheckForUnitText(GetUnitDataFieldByName('UnitTag3').FieldSpecialType)==true" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
                                                                 <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==4" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
                                                                 <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==5" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
 
@@ -463,7 +463,7 @@
 
                                                             <!--Week-->
                                                             <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==6">
-                                                                <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)">
+                                                                <select class="form-control uniqueunitData weekPicker" selectvalue="{{CurrentActiveObject.ApplyTransactionData.UnitTag3}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)">
                                                                     <option value="">choose week</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -858,7 +858,7 @@
                                                         <div class="fg-line">
                                                             <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
                                                             <div ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType>=0 && GetUnitDataFieldByName('ReqValue').FieldSpecialType<=6 && GetUnitDataFieldByName('ReqValue').FieldSpecialType!=2">
-                                                                <input id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1" />
+                                                                <input id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-if="CheckForUnitText(GetUnitDataFieldByName('ReqValue').FieldSpecialType)==true" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1" />
                                                                 <input ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==4" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1" />
                                                                 <input ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==5" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1" />
 
@@ -874,7 +874,7 @@
 
                                                             <!--Week-->
                                                             <div ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==6">
-                                                                <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)">
+                                                                <select class="form-control uniqueunitData weekPicker" selectvalue="{{CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)">
                                                                     <option value="">choose week</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -930,7 +930,7 @@
 
                                                             <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
                                                             <div ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag2').FieldSpecialType<=6 && GetUnitDataFieldByName('UnitTag2').FieldSpecialType!=2">
-                                                                <input id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2" />
+                                                                <input id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-if="CheckForUnitText(GetUnitDataFieldByName('UnitTag2').FieldSpecialType)==true" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2" />
                                                                 <input ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==4" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2" />
                                                                 <input ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==5" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2" />
 
@@ -945,7 +945,7 @@
 
                                                             <!--Week-->
                                                             <div ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==6">
-                                                                <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)">
+                                                                <select class="form-control uniqueunitData weekPicker" selectvalue="{{CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)">
                                                                     <option value="">choose week</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -993,7 +993,7 @@
 
                                                             <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
                                                             <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType<=6 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType!=2">
-                                                                <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" />
+                                                                <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-if="CheckForUnitText(GetUnitDataFieldByName('UnitTag3').FieldSpecialType)==true" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" />
                                                                 <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==4" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" />
                                                                 <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==5" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" />
 
@@ -1009,7 +1009,7 @@
 
                                                             <!--Week-->
                                                             <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==6">
-                                                                <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)">
+                                                                <select class="form-control uniqueunitData weekPicker" selectvalue="{{CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)">
                                                                     <option value="">choose week</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -2058,7 +2058,7 @@
                                                 <div class="fg-line">
                                                     <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
                                                     <div ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType>=0 && GetUnitDataFieldByName('ReqValue').FieldSpecialType<=6 && GetUnitDataFieldByName('ReqValue').FieldSpecialType!=2">
-                                                        <input id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
+                                                        <input id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-if="CheckForUnitText(GetUnitDataFieldByName('ReqValue').FieldSpecialType)==true" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
                                                         <input ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==4" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
                                                         <input ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==5" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" />
 
@@ -2075,7 +2075,7 @@
 
                                                     <!--Week-->
                                                     <div ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==6">
-                                                        <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)">
+                                                        <select class="form-control uniqueunitData weekPicker" selectvalue="{{CurrentActiveObject.ApplyTransactionData.UnitTag1}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag1" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)">
                                                             <option value="">choose week</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -2130,7 +2130,7 @@
 
                                                     <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
                                                     <div ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag2').FieldSpecialType<=6 && GetUnitDataFieldByName('UnitTag2').FieldSpecialType!=2">
-                                                        <input id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
+                                                        <input id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-if="CheckForUnitText(GetUnitDataFieldByName('UnitTag2').FieldSpecialType)==true" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
                                                         <input ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==4" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
                                                         <input ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==5" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" />
 
@@ -2145,7 +2145,7 @@
 
                                                     <!--Week-->
                                                     <div ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==6">
-                                                        <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)">
+                                                        <select class="form-control uniqueunitData weekPicker" selectvalue="{{CurrentActiveObject.ApplyTransactionData.UnitTag2}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag2" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)">
                                                             <option value="">choose week</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -2194,7 +2194,7 @@
 
                                                     <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
                                                     <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType<=6 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType!=2">
-                                                        <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
+                                                        <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-if="CheckForUnitText(GetUnitDataFieldByName('UnitTag3').FieldSpecialType)==true" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
                                                         <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==4" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
                                                         <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==5" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" />
 
@@ -2210,7 +2210,7 @@
 
                                                     <!--Week-->
                                                     <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==6">
-                                                        <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)">
+                                                        <select class="form-control uniqueunitData weekPicker" selectvalue="{{CurrentActiveObject.ApplyTransactionData.UnitTag3}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitTag3" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)">
                                                             <option value="">choose week</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -2601,7 +2601,7 @@
                                                 <div class="fg-line">
                                                     <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
                                                     <div ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType>=0 && GetUnitDataFieldByName('ReqValue').FieldSpecialType<=6 && GetUnitDataFieldByName('ReqValue').FieldSpecialType!=2">
-                                                        <input id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1" />
+                                                        <input id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-if="CheckForUnitText(GetUnitDataFieldByName('ReqValue').FieldSpecialType)==true" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1" />
                                                         <input ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==4" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1" />
                                                         <input ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==5" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iReqValue')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1" />
 
@@ -2617,7 +2617,7 @@
 
                                                     <!--Week-->
                                                     <div ng-if="GetUnitDataFieldByName('ReqValue').FieldSpecialType==6">
-                                                        <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)">
+                                                        <select class="form-control uniqueunitData weekPicker" selectvalue="{{CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag1" id="unittext1_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'),$index)">
                                                             <option value="">choose week</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -2673,7 +2673,7 @@
 
                                                     <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
                                                     <div ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag2').FieldSpecialType<=6 ">
-                                                        <input id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2" />
+                                                        <input id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-if="CheckForUnitText(GetUnitDataFieldByName('UnitTag2').FieldSpecialType)==true" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2" />
                                                         <input ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==4" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2" />
                                                         <input ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==5" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag2')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2" />
 
@@ -2688,7 +2688,7 @@
 
                                                     <!--Week-->
                                                     <div ng-if="GetUnitDataFieldByName('UnitTag2').FieldSpecialType==6">
-                                                        <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)">
+                                                        <select class="form-control uniqueunitData weekPicker" selectvalue="{{CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag2" id="unittext2_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'),$index)">
                                                             <option value="">choose week</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -2736,7 +2736,7 @@
 
                                                     <!--Prefix , Suffix,Open,Autocomplete,Email, Month-->
                                                     <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType>=0 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType<=6 && GetUnitDataFieldByName('UnitTag3').FieldSpecialType!=2">
-                                                        <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" />
+                                                        <input id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-if="CheckForUnitText(GetUnitDataFieldByName('UnitTag3').FieldSpecialType)==true" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="text" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" />
                                                         <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==4" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="email" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" />
                                                         <input ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==5" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)" type="month" data-type="string" class="form-control uniqueunitData" placeholder1="{{ GetColumnLabel('iUnitTag3')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" />
 
@@ -2752,7 +2752,7 @@
 
                                                     <!--Week-->
                                                     <div ng-if="GetUnitDataFieldByName('UnitTag3').FieldSpecialType==6">
-                                                        <select class="form-control uniqueunitData" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)">
+                                                        <select class="form-control uniqueunitData weekPicker" selectvalue="{{CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitTag3" id="unittext3_{{ CurrentActiveObject.InventoryDataList.uId}}" ng-blur="tvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'),$index)">
                                                             <option value="">choose week</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                             <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -4313,7 +4313,7 @@
 
 <!-- Script Section Start-->
 <script>
-
+  
     $(init);
 
     function init() {

@@ -106,7 +106,12 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $scope.$apply();
 
     }
-
+    $scope.CheckForUnitText = function (_type) {
+        if (_type != 4 && _type != 5 && _type != 6) {
+            return true;
+        }
+        return false;
+    }
 
     $scope.GetWeekValue = function (year, week) {
         return year.toString() + "-W" + week.toString();
@@ -2132,7 +2137,18 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         setTimeout(function () { $('.itUpdateDate').val(today) }, 1000);
 
+        setTimeout(function () {
 
+
+
+
+            $(".weekPicker").each(function () {
+                var _val = $(this).attr("selectvalue");
+                $(this).val(_val);
+                $(this).trigger("change");
+            });
+
+        }, 2000);
 
         setTimeout(function () {
             $('.FormDateType').each(function () {
