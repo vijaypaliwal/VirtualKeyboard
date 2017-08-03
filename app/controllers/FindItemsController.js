@@ -932,6 +932,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 break;
             case "iUnitTag3":
                 $scope.CurrentActiveSearchField = "iUnitTag3";
+
+                $scope.CurrentActiveSearchType = 1;
                 var _label = $scope.GetUnitDataLabel('iUnitTag3');
                 _label = _label != undefined && _label != "" ? _label : "";
                 $('#MasterSearch').attr("placeholder", "Search by " + _label);
@@ -942,7 +944,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 $scope.CurrentActiveSearchType = 2;
                 var _label = $scope.GetUnitDataLabel('iUnitNumber1');
                 _label = _label != undefined && _label != "" ? _label : "";
-                $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                $('#MasterSearchNumber').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
                 break;
             case "iUnitNumber2":
@@ -950,7 +952,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 $scope.CurrentActiveSearchType = 2;
                 var _label = $scope.GetUnitDataLabel('iUnitNumber2');
                 _label = _label != undefined && _label != "" ? _label : "";
-                $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                $('#MasterSearchNumber').attr("placeholder", "Search by " + _label);
                 $scope.SearchFromText = _label;
                 break
             default:
@@ -1039,7 +1041,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 case "iUnitNumber1":
                     var _label = $scope.GetUnitDataLabel('iUnitNumber1');
                     _label = _label != undefined && _label != "" ? _label : "";
-                    $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                    $('#MasterSearchNumber').attr("placeholder", "Search by " + _label);
                     $scope.SearchFromText = _label;
                     $scope.IsDateColumnOn = false;
                     UpdateFilterArray("iUnitNumber1", $.trim($scope.SearchValue));
@@ -1047,7 +1049,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 case "iUnitNumber2":
                     var _label = $scope.GetUnitDataLabel('iUnitNumber2');
                     _label = _label != undefined && _label != "" ? _label : "";
-                    $('#MasterSearch').attr("placeholder", "Search by " + _label);
+                    $('#MasterSearchNumber').attr("placeholder", "Search by " + _label);
                     $scope.SearchFromText = _label;
                     $scope.IsDateColumnOn = false;
                     UpdateFilterArray("iUnitNumber2", $.trim($scope.SearchValue));

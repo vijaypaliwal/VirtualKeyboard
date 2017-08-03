@@ -916,7 +916,7 @@
 
                                     <input disabled id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="autolistview form-control" type="text" />
                                     <span ng-click="customautocomplete(obj.ColumnName, obj.cfdID, 'item')" class="input-group-addon last"><i class="fa fa-search"></i></span>
-                                    <span ng-if="checkpermission('URL:configure/CustomFieldItemList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomItem_')"><i class="fa fa-plus"></i></span>
+                                    <!--<span ng-if="checkpermission('URL:configure/CustomFieldItemList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomItem_')"><i class="fa fa-plus"></i></span>-->
                                 </div>
 
 
@@ -1038,9 +1038,6 @@
 
                             <div ng-if="obj.cfdDataType=='combobox'">
 
-
-
-
                                 <div class="input-group" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete != true">
                                     <div class="select">
                                         <select id="CustomActivity_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
@@ -1055,7 +1052,7 @@
                                 <div  class="input-group" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true">
                                     <input disabled id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="autolistview form-control" type="text" />
                                     <span ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
-                                     <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomActivity_')"><i class="fa fa-plus"></i></span>
+                                     <!--<span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomActivity_')"><i class="fa fa-plus"></i></span>-->
                                 </div>
 
                             </div>
@@ -1803,8 +1800,11 @@
                             <input disabled ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" type="text" />
                         </div>
 
-                        <span ng-if="checkpermission('URL:configure/CustomFieldItemList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomItem_')"><i class="fa fa-plus"></i></span>
+                        
 
+                      <span ng-if="checkpermission('URL:configure/CustomFieldItemList.aspx')==true && GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete != true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomItem_')"><i class="fa fa-plus"></i></span>
+
+                        
 
                         <span ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnName, obj.cfdID, 'item')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
@@ -2719,9 +2719,10 @@
                             <input disabled ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" type="text" />
                         </div>
 
-                        <span ng-if="checkpermission('URL:configure/CustomFieldItemList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomItem_')"><i class="fa fa-plus"></i></span>
-
-                        <span ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnName, obj.cfdID, 'item')" class="input-group-addon last"><i class="fa fa-search"></i></span>
+                       
+                       <span ng-if="checkpermission('URL:configure/CustomFieldItemList.aspx')==true && GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete != true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomItem_')"><i class="fa fa-plus"></i></span>
+                       
+                       <span ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnName, obj.cfdID, 'item')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
 
 
@@ -2870,10 +2871,11 @@
                             <input disabled ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" type="text" />
                         </div>
 
-                        <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomActivity_')"><i class="fa fa-plus"></i></span>
-                       
 
-                        
+                       
+                        <span ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true && GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete != true" class="input-group-addon last" ng-click="Addnew(obj.cfdID, 'CustomActivity_')"><i class="fa fa-plus"></i></span>
+
+                       
                         <span ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdIsAutoComplete == true" ng-click="customautocomplete(obj.ColumnMap, obj.cfdID, 'activity')" class="input-group-addon last"><i class="fa fa-search"></i></span>
 
                         <span ng-click="GetLastValueCustom(obj.cfdID,2)" test-case condition="GetLastValueData(obj.cfdID,1)" class="input-group-addon last"><i class="fa fa-undo"></i></span>

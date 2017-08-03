@@ -591,7 +591,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.currtrentcustomradiovalue = [];
     $scope.customradiolist = function (ColumnName, id, inventoryid, fieldtype) {
 
-
+        debugger;
         if (inventoryid != 'empty') {
             id = id + '_' + inventoryid;
         }
@@ -2514,7 +2514,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     function ConverttoMsJsonDateTime(_DateValue) {
 
-
+        debugger;
         var _date = angular.copy(_DateValue);
 
         var dsplit1 = _date.split("/");
@@ -2523,10 +2523,13 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         var _timeString = _timeSplit[1].split(":");
 
-        if (parseInt(_timeString[0]) > 12) {
+        if (parseInt(_timeString[0]) > 12 || parseInt(_timeString[0]) == 12) {
+          
+            alert("time");
+            alert(parseInt(_timeString[0]));
             _timeString[0] = (parseInt(_timeString[0]) - 12).toString();
         }
-
+        
         var _ToMergeTime = "T" + (_timeSplit[2] == "AM" ? leadZero(_timeString[0]) : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
 
         var now = new Date(_timeSplit[0], dsplit1[0] - 1, dsplit1[1]);
@@ -2550,6 +2553,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     function ConvertToTime(_timeValue) {
 
         if ($.trim(_timeValue) != "") {
+            debugger;
             var _ToMergeTime = "";
             var _timeString = "";
             if (_timeValue.indexOf("AM") > -1 || _timeValue.indexOf("PM") > -1) {
@@ -2557,9 +2561,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 var _timeSplit = _timeValue.split(" ");
                 _timeString = _timeSplit[0].split(":");
 
-                if (parseInt(_timeString[0]) > 12) {
+                if (parseInt(_timeString[0]) > 12 || parseInt(_timeString[0]) == 12) {
+                  
                     _timeString[0] = (parseInt(_timeString[0]) - 12).toString();
                 }
+                
 
                 _ToMergeTime = (_timeSplit[1] == "AM" ? leadZero(_timeString[0]) : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
             }
