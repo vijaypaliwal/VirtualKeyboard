@@ -94,6 +94,7 @@ li.disabled {
 .operator li a {
     color: #000 !important;
     text-align: left;
+    padding-left: 9px;
 }
 
 .dropdown-toggle {

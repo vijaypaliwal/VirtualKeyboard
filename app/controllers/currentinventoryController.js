@@ -506,8 +506,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                    if (response.GetActiveUnitDataFieldsResult.Success == true) {
                        $scope.UnitDataList = response.GetActiveUnitDataFieldsResult.Payload;
 
-                       console.log("List of active unitdata fields");
-                       console.log($scope.UnitDataList);
+
 
 
                        if ($scope.UnitDataList.length > 0) {
@@ -583,7 +582,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
 
         if ($scope.UnitDataList.length > 0) {
             for (var i = 0; i < $scope.UnitDataList.length; i++) {
-                if ($scope.UnitDataList[i].FieldName == FieldName) {
+                if ($scope.UnitDataList[i].FieldName == FieldName || "i" + $scope.UnitDataList[i].FieldName == FieldName) {
                     return $scope.UnitDataList[i].FieldSpecialType;
                 }
             }

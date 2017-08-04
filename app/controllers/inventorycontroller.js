@@ -70,7 +70,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.CurrentYear = new Date().getFullYear();
 
     for (var i = 1; i <= 52; i++) {
-        $scope.weeklist.push(i);
+
+        var x = leadZero(i);
+
+        $scope.weeklist.push(x);
     }
 
     var _IsSavedItemGroup = false;
@@ -1832,44 +1835,56 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     function ConverttoMsJsonDate(_DateValue) {
 
-        var _date = angular.copy(_DateValue);
+        if ($.trim(_DateValue) != "") {
+            var _date = angular.copy(_DateValue);
 
-        var dsplit1 = _date.split("/");
-        var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
+            var dsplit1 = _date.split("/");
+            var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
 
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
 
-        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+            var today = now.getFullYear() + "-" + (month) + "-" + (day);
 
-        return today;
+            return today;
+
+        }
+        else { return "";}
+        
     }
 
     function ConverttoMsJsonDateTime(_DateValue) {
 
 
-        var _date = angular.copy(_DateValue);
+        if ($.trim(_DateValue) != "")
+        {
+            var _date = angular.copy(_DateValue);
 
-        var dsplit1 = _date.split("/");
+            var dsplit1 = _date.split("/");
 
-        var _timeSplit = dsplit1[2].split(" ");
+            var _timeSplit = dsplit1[2].split(" ");
 
-        var _timeString = _timeSplit[1].split(":");
+            var _timeString = _timeSplit[1].split(":");
 
-        if (parseInt(_timeString[0]) > 12) {
-            _timeString[0] = (parseInt(_timeString[0]) - 12).toString();
+            if (parseInt(_timeString[0]) > 12) {
+                _timeString[0] = (parseInt(_timeString[0]) - 12).toString();
+            }
+
+            var _ToMergeTime = "T" + (_timeSplit[2] == "AM" ? leadZero(_timeString[0]) : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
+
+            var now = new Date(_timeSplit[0], dsplit1[0] - 1, dsplit1[1]);
+
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+            var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+            return today + _ToMergeTime;
+
         }
+        else { return ""; }
 
-        var _ToMergeTime = "T" + (_timeSplit[2] == "AM" ? leadZero(_timeString[0]) : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
-
-        var now = new Date(_timeSplit[0], dsplit1[0] - 1, dsplit1[1]);
-
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-        var today = now.getFullYear() + "-" + (month) + "-" + (day);
-
-        return today + _ToMergeTime;
+        
     }
 
     function ConvertToTime(_timeValue) {
@@ -3063,114 +3078,135 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                    if (response.GetActiveUnitDataFieldsResult.Success == true) {
-                       $scope.UnitDataList = response.GetActiveUnitDataFieldsResult.Payload;
 
-                       console.log("List of active unitdata fields");
+                       var UnitDataAray = response.GetActiveUnitDataFieldsResult.Payload;
+                       $scope.UnitDataList = UnitDataAray;
+                       CheckScopeBeforeApply();
+
+                       console.log("Unit data list");
                        console.log($scope.UnitDataList);
 
-                       $scope.UnitDataList.forEach(function (item) {
+                     //  $scope.UnitDataList.forEach(function (item){
 
-                           if (item.FieldName == 'ReqValue') {
-                               $scope.ReqValueFieldSpecialType = item.FieldSpecialType;
-                               $scope.ReqValueFieldDefaultValue = item.FieldDefaultValue;
-                               $scope.InventoryObject.UniqueTag = item.FieldDefaultValue;
-                               if (item.FieldComboValues != null) {
-                                   $scope.UniqueTagCombovalues = item.FieldComboValues.split("\n");
+                           for (var i = 0; i < $scope.UnitDataList.length; i++) {
+    
+                         
+                               
+                                   var item=$scope.UnitDataList[i];
+
+                                   debugger;
+
+                                   console.log("ReqValue field sepecial type - 6");
+
+                                   if (item.FieldName == 'ReqValue') {
+                                       $scope.ReqValueFieldSpecialType = item.FieldSpecialType;
+                                       $scope.ReqValueFieldDefaultValue = item.FieldDefaultValue;
+                                       $scope.InventoryObject.UniqueTag = item.FieldDefaultValue;
+                                       if (item.FieldComboValues != null) {
+                                           $scope.UniqueTagCombovalues = item.FieldComboValues.split("\n");
+                                       }
+                                       if (item.FieldRadioValues != null) {
+                                           $scope.UniqueTagRadiovalues = item.FieldRadioValues.split(" ");
+                                       }
+                                       console.log("ReqValue field sepecial type - 6");
+                                       console.log($scope.ReqValueFieldSpecialType);
+                                   }
+                                   else if (item.FieldName == 'UnitTag2') {
+
+                                       $scope.UnitTag2FieldSpecialType = item.FieldSpecialType;
+                                       $scope.UnitTag2FieldDefaultValue = item.FieldDefaultValue;
+                                       $scope.InventoryObject.UnitTag2 = item.FieldDefaultValue;
+
+                                       if (item.FieldComboValues != null) {
+                                           $scope.UniqueTag2Combovalues = item.FieldComboValues.split("\n");
+                                       }
+                                       if (item.FieldRadioValues != null) {
+                                           $scope.UniqueTag2Radiovalues = item.FieldRadioValues.split(" ");
+                                       }
+                                       console.log("UT2 field sepecial type - 6");
+                                       console.log($scope.UnitTag2FieldSpecialType);
+
+                                   }
+                                   else if (item.FieldName == 'UnitTag3') {
+                                       $scope.UnitTag3FieldSpecialType = item.FieldSpecialType;
+                                       $scope.UnitTag3FieldDefaultValue = item.FieldDefaultValue;
+                                       $scope.InventoryObject.UnitTag3 = item.FieldDefaultValue;
+                                       if (item.FieldComboValues != null) {
+                                           $scope.UniqueTag3Combovalues = item.FieldComboValues.split("\n");
+                                       }
+                                       if (item.FieldRadioValues != null) {
+                                           $scope.UniqueTag3Radiovalues = item.FieldRadioValues.split(" ");
+                                       }
+                                       console.log("UT3 field sepecial type - 6");
+                                       console.log($scope.UnitTag3FieldSpecialType);
+                                   }
+
+                                   else if (item.FieldName == 'UniqueDate') {
+                                       debugger;
+                                       $scope.UniqueDateFieldSpecialType = item.FieldSpecialType;
+
+                                       if (item.FieldSpecialType == 15) {
+
+
+                                           $scope.UniqueDateFieldDefaultValue = ConverttoMsJsonDate(item.FieldDefaultValue);
+                                       }
+
+                                       else if (item.FieldSpecialType == 16) {
+
+
+                                           $scope.UniqueDateFieldDefaultValue = ConverttoMsJsonDateTime(item.FieldDefaultValue);
+                                       }
+
+                                       else {
+
+
+                                           $scope.UniqueDateFieldDefaultValue = ConvertToTime(item.FieldDefaultValue);
+                                       }
+
+                                       $scope.InventoryObject.UniqueDate = $scope.UniqueDateFieldDefaultValue;
+                                   }
+                                   else if (item.FieldName == 'UnitDate2') {
+                                       $scope.UnitDate2FieldSpecialType = item.FieldSpecialType;
+                                       debugger;
+                                       if (item.FieldSpecialType == 15) {
+
+
+                                           $scope.UnitDate2FieldDefaultValue = ConverttoMsJsonDate(item.FieldDefaultValue);
+                                       }
+
+                                       else if (item.FieldSpecialType == 16) {
+
+
+                                           $scope.UnitDate2FieldDefaultValue = ConverttoMsJsonDateTime(item.FieldDefaultValue);
+                                       }
+
+                                       else {
+
+
+                                           $scope.UnitDate2FieldDefaultValue = ConvertToTime(item.FieldDefaultValue);
+                                       }
+                                       $scope.InventoryObject.UnitDate2 = $scope.UnitDate2FieldDefaultValue;
+
+                                   }
+
+                                   else if (item.FieldName == 'UnitNumber1') {
+
+                                       $scope.UnitNumber1FieldSpecialType = item.FieldSpecialType;
+                                       $scope.InventoryObject.UnitNumber1 = TryParseFloat(item.FieldDefaultValue);
+                                       $scope.UnitNumber1FieldNumberMax = TryParseFloat(item.FieldNumberMax);
+                                       $scope.UnitNumber1FieldNumberMin = TryParseFloat(item.FieldNumberMin);
+
+                                   }
+                                   else if (item.FieldName == 'UnitNumber2') {
+                                       $scope.UnitNumber2FieldSpecialType = item.FieldSpecialType;
+                                       $scope.InventoryObject.UnitNumber2 = TryParseFloat(item.FieldDefaultValue);
+                                       $scope.UnitNumber2FieldNumberMax = TryParseFloat(item.FieldNumberMax);
+                                       $scope.UnitNumber2FieldNumberMin = TryParseFloat(item.FieldNumberMin);
+                                   }
+
                                }
-                               if (item.FieldRadioValues != null) {
-                                   $scope.UniqueTagRadiovalues = item.FieldRadioValues.split(" ");
-                               }
-                           }
-                           else if (item.FieldName == 'UnitTag2') {
 
-                               $scope.UnitTag2FieldSpecialType = item.FieldSpecialType;
-                               $scope.UnitTag2FieldDefaultValue = item.FieldDefaultValue;
-                               $scope.InventoryObject.UnitTag2 = item.FieldDefaultValue;
-
-                               if (item.FieldComboValues != null) {
-                                   $scope.UniqueTag2Combovalues = item.FieldComboValues.split("\n");
-                               }
-                               if (item.FieldRadioValues != null) {
-                                   $scope.UniqueTag2Radiovalues = item.FieldRadioValues.split(" ");
-                               }
-
-                           }
-                           else if (item.FieldName == 'UnitTag3') {
-                               $scope.UnitTag3FieldSpecialType = item.FieldSpecialType;
-                               $scope.UnitTag3FieldDefaultValue = item.FieldDefaultValue;
-                               $scope.InventoryObject.UnitTag3 = item.FieldDefaultValue;
-                               if (item.FieldComboValues != null) {
-                                   $scope.UniqueTag3Combovalues = item.FieldComboValues.split("\n");
-                               }
-                               if (item.FieldRadioValues != null) {
-                                   $scope.UniqueTag3Radiovalues = item.FieldRadioValues.split(" ");
-                               }
-                           }
-
-                           else if (item.FieldName == 'UniqueDate') {
-                               debugger;
-                               $scope.UniqueDateFieldSpecialType = item.FieldSpecialType;
-
-                               if (item.FieldSpecialType == 15) {
-
-
-                                   $scope.UniqueDateFieldDefaultValue = ConverttoMsJsonDate(item.FieldDefaultValue);
-                               }
-
-                               else if (item.FieldSpecialType == 16) {
-
-
-                                   $scope.UniqueDateFieldDefaultValue = ConverttoMsJsonDateTime(item.FieldDefaultValue);
-                               }
-
-                               else {
-
-
-                                   $scope.UniqueDateFieldDefaultValue = ConvertToTime(item.FieldDefaultValue);
-                               }
-
-                               $scope.InventoryObject.UniqueDate = $scope.UniqueDateFieldDefaultValue;
-                           }
-                           else if (item.FieldName == 'UnitDate2') {
-                               $scope.UnitDate2FieldSpecialType = item.FieldSpecialType;
-                               debugger;
-                               if (item.FieldSpecialType == 15) {
-
-
-                                   $scope.UnitDate2FieldDefaultValue = ConverttoMsJsonDate(item.FieldDefaultValue);
-                               }
-
-                               else if (item.FieldSpecialType == 16) {
-
-
-                                   $scope.UnitDate2FieldDefaultValue = ConverttoMsJsonDateTime(item.FieldDefaultValue);
-                               }
-
-                               else {
-
-
-                                   $scope.UnitDate2FieldDefaultValue = ConvertToTime(item.FieldDefaultValue);
-                               }
-                               $scope.InventoryObject.UnitDate2 = $scope.UnitDate2FieldDefaultValue;
-
-                           }
-
-                           else if (item.FieldName == 'UnitNumber1') {
-
-                               $scope.UnitNumber1FieldSpecialType = item.FieldSpecialType;
-                               $scope.InventoryObject.UnitNumber1 = TryParseFloat(item.FieldDefaultValue);
-                               $scope.UnitNumber1FieldNumberMax = TryParseFloat(item.FieldNumberMax);
-                               $scope.UnitNumber1FieldNumberMin = TryParseFloat(item.FieldNumberMin);
-
-                           }
-                           else if (item.FieldName == 'UnitNumber2') {
-                               $scope.UnitNumber2FieldSpecialType = item.FieldSpecialType;
-                               $scope.InventoryObject.UnitNumber2 = TryParseFloat(item.FieldDefaultValue);
-                               $scope.UnitNumber2FieldNumberMax = TryParseFloat(item.FieldNumberMax);
-                               $scope.UnitNumber2FieldNumberMin = TryParseFloat(item.FieldNumberMin);
-                           }
-
-                       });
+                      // });
 
                        CheckScopeBeforeApply()
                    }

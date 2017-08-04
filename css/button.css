@@ -439,6 +439,8 @@
     #filtermodal .dropdown-menu img {
         background: #2196F3;
         border: 1px solid #ccc;
+         border-radius: 100%;
+    padding: 3px;
     }
 
     #filtermodal .form-control {
@@ -504,7 +506,7 @@
     position: fixed !important;
     z-index: 999999;
     width: 100%;
-    bottom: 0;
+    /*bottom: 0;*/
     left: 0;
     right: 0;
     top: 0;
