@@ -203,6 +203,26 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
    });
 
 
+    $(document)
+   .on('change', "input[type='email']", function () {
+
+       if ($.trim($(this).val())!="") {
+           var _value = $(this).val();
+           if ($scope.IsProperEmail(_value)==false) {
+               $(this).css("border-color", "#c31818");
+               $(this).parent("div").find(".emailError").remove();
+               $('<span class="emailError">Invalid email</span>').insertAfter(this);
+
+           }
+           else {
+               $(this).css("border-color", "#cccccc");
+               $(this).parent("div").find(".emailError").remove();
+               
+           }
+       }
+
+
+   });
 
 
     function GetDefaultDate() {
@@ -1866,7 +1886,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             var _timeString = _timeSplit[1].split(":");
 
-            if (parseInt(_timeString[0]) > 12) {
+            if (parseInt(_timeString[0]) >= 12) {
                 _timeString[0] = (parseInt(_timeString[0]) - 12).toString();
             }
 
@@ -1894,7 +1914,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             var _timeSplit = _timeValue.split(" ");
             var _timeString = _timeSplit[0].split(":");
 
-            if (parseInt(_timeString[0]) > 12)
+            if (parseInt(_timeString[0]) >= 12)
             {
                 _timeString[0] = (parseInt(_timeString[0]) - 12).toString();
             }
@@ -3058,7 +3078,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $(_ID).val(_inputvalue);
 
 
-            $(_ID).trigger("input");
+            $(_ID).trigger("change");
         }
     }
     $scope.GetActiveUnitDataField = function () {
@@ -3106,7 +3126,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                                            $scope.UniqueTagCombovalues = item.FieldComboValues.split("\n");
                                        }
                                        if (item.FieldRadioValues != null) {
-                                           $scope.UniqueTagRadiovalues = item.FieldRadioValues.split(" ");
+                                           $scope.UniqueTagRadiovalues = item.FieldRadioValues.split("\r\n");
                                        }
                                        console.log("ReqValue field sepecial type - 6");
                                        console.log($scope.ReqValueFieldSpecialType);
@@ -3121,7 +3141,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                                            $scope.UniqueTag2Combovalues = item.FieldComboValues.split("\n");
                                        }
                                        if (item.FieldRadioValues != null) {
-                                           $scope.UniqueTag2Radiovalues = item.FieldRadioValues.split(" ");
+                                           $scope.UniqueTag2Radiovalues = item.FieldRadioValues.split("\r\n");
                                        }
                                        console.log("UT2 field sepecial type - 6");
                                        console.log($scope.UnitTag2FieldSpecialType);
@@ -3135,7 +3155,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                                            $scope.UniqueTag3Combovalues = item.FieldComboValues.split("\n");
                                        }
                                        if (item.FieldRadioValues != null) {
-                                           $scope.UniqueTag3Radiovalues = item.FieldRadioValues.split(" ");
+                                           $scope.UniqueTag3Radiovalues = item.FieldRadioValues.split("\r\n");
                                        }
                                        console.log("UT3 field sepecial type - 6");
                                        console.log($scope.UnitTag3FieldSpecialType);
@@ -4463,7 +4483,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     $(_ID).val(_inputvalue);
 
 
-                    $(_ID).trigger("input");
+                    $(_ID).trigger("change");
                 }
                 break;
 

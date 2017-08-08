@@ -894,7 +894,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                         break
                     }
                     case 12: {
-                        var x = Field.FieldRadioValues.split("\n");
+                        var x = Field.FieldRadioValues.split("\r\n");
                         return x;
                         break
                     }
@@ -1991,7 +1991,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         var _timeString = _timeSplit[1].split(":");
 
-        if (parseInt(_timeString[0]) > 12) {
+        if (parseInt(_timeString[0]) >= 12) {
             _timeString[0] = (parseInt(_timeString[0]) - 12).toString();
         }
 
@@ -2014,7 +2014,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             var _timeSplit = _timeValue.split(" ");
             var _timeString = _timeSplit[0].split(":");
 
-            if (parseInt(_timeString[0]) > 12) {
+            if (parseInt(_timeString[0]) >= 12) {
                 _timeString[0] = (parseInt(_timeString[0]) - 12).toString();
             }
 

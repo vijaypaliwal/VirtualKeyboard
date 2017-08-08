@@ -1382,7 +1382,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                            }
 
                            if (_RadioValues != "") {
-                               $scope.UnitDataList[i].FieldRadioValues = _RadioValues.split(" ");
+                               $scope.UnitDataList[i].FieldRadioValues = _RadioValues.split("\r\n");
                            }
 
                        }
@@ -2345,7 +2345,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
             $(_ID).val(_inputvalue);
 
 
-            $(_ID).trigger("input");
+            $(_ID).trigger("change");
         }
     }
     function UpdateCartWithCustomFields() {
@@ -2710,7 +2710,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     $(_ID).val(_inputvalue);
 
 
-                    $(_ID).trigger("input");
+                    $(_ID).trigger("change");
                 }
 
         }
@@ -5220,6 +5220,33 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     });
 
+
+
+    $(document)
+ .on('change', "input[type='email']", function () {
+
+     if ($.trim($(this).val()) != "") {
+         var _value = $(this).val();
+         if ($scope.IsProperEmail(_value) == false) {
+             $(this).css("border-color", "#c31818");
+             $(this).parent("div").find(".emailError").remove();
+             $('<span class="emailError">Invalid email</span>').insertAfter(this);
+
+         }
+         else {
+             $(this).css("border-color", "#cccccc");
+             $(this).parent("div").find(".emailError").remove();
+
+         }
+     }
+
+
+ });
+
+    $scope.IsProperEmail = function (email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
     var now = new Date();
 
     var day = ("0" + now.getDate()).slice(-2);

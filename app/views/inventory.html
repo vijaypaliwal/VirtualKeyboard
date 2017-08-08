@@ -3639,6 +3639,66 @@
         </div>
     </div>
 </div>
+
+
+<div ng-if="CheckRequiredField()==true || CheckCustomRequiredFields()==true || CheckEmailFields()==true" class="requiredfields" ng-show="slide == Totalslides">
+
+    <p>Please fill/correct below required/email fields</p>
+
+
+    <a ng-if="InventoryObject.Uom == ''" ng-click="getstep(4,'uomUOM')">
+        Unit of measure
+    </a>
+
+    <a ng-if="InventoryObject.Location == ''" ng-click="getstep(3,'lLoc')">
+        Location
+    </a>
+
+    <a ng-click="getstepCustom(1,obj.ColumnMap)" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true && obj.cfdIsRequired==true && (InventoryObject.CustomPartData[$index].Value==null || InventoryObject.CustomPartData[$index].Value==undefined || InventoryObject.CustomPartData[$index].Value=='')">
+
+
+        {{obj.cfdName}}
+
+
+    </a>
+    <a ng-click="getstepCustom(2,obj.ColumnMap)" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)==true && obj.cfdIsRequired==true && (InventoryObject.CustomTxnData[$index].Value==null || InventoryObject.CustomTxnData[$index].Value==undefined || InventoryObject.CustomTxnData[$index].Value=='')">
+
+
+
+        {{obj.cfdName}}
+
+
+
+    </a>
+
+
+    <a ng-if="IsProperEmail(InventoryObject.UniqueTag) == false" ng-click="getstep(3,'iReqValue')">
+        Unique Tag
+    </a>
+    <a ng-if="IsProperEmail(InventoryObject.UnitTag2) == false" ng-click="getstep(3,'iUnitTag2')">
+        Unit Tag2
+    </a>
+    <a ng-if="IsProperEmail(InventoryObject.UnitTag3) == false" ng-click="getstep(3,'iUnitTag3')">
+        Unit Tag3
+    </a>
+    <a ng-click="getstepCustom(1,obj.ColumnMap)" ng-repeat="obj in CustomItemDataList" ng-if="CustomItemDataList.length > 0 && IsAvailableMyInventoryColumn(obj.ColumnMap)==true && IsProperEmail(InventoryObject.CustomPartData[$index].Value)==false">
+
+
+        {{obj.cfdName}}
+
+
+    </a>
+    <a ng-click="getstepCustom(2,obj.ColumnMap)" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)==true && IsProperEmail(InventoryObject.CustomTxnData[$index].Value)==false">
+
+
+
+        {{obj.cfdName}}
+
+
+
+    </a>
+</div>
+
 <script>
 
     $(init);
@@ -3661,6 +3721,9 @@
 <style>
     .switch1 {
         width: 100%;
+    }
+    .emailError {
+        color: #c31818;
     }
 </style>
 
