@@ -2009,6 +2009,9 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     function ConvertToTime(_timeValue) {
 
+
+        debugger;
+
         if ($.trim(_timeValue) != "") {
 
             var _timeSplit = _timeValue.split(" ");
