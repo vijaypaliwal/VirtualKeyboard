@@ -260,6 +260,7 @@
                                 </div>
                                 <div ng-if="_obj.FilterOperator=='date-month'">
                                     <select class="form-control" name="name" ng-model="_obj.SearchValue">
+                                        <option ng-repeat="x in monthList" value="{{x.id}}">{{x.text}}</option>
                                     </select>
                                 </div>
                                 <div ng-if="_obj.FilterOperator=='date-day'">
@@ -282,6 +283,7 @@
                                 </div>
                                 <div ng-if="_obj.FilterOperator=='date-month'">
                                     <select class="form-control" name="name" ng-model="_obj.SearchValue">
+                                        <option ng-repeat="x in monthList" value="{{x.id}}">{{x.text}}</option>
                                     </select>
                                 </div>
                                 <div ng-if="_obj.FilterOperator=='date-day'">
