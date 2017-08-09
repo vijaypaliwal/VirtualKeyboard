@@ -4877,15 +4877,38 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                     if (swiperHere.activeIndex != 100 && swiperHere.activeIndex != 101) {
 
-                        $scope.changeNav();
+
+                        if ($(".swiper-slide-active").find("input").length > 0) {
+                            var _type = $(".swiper-slide-active").find("input").attr("type");
+                            var _value = $(".swiper-slide-active").find("input").attr("value");
+
+                            if (_type == "text" || _type == "number" || _type == "week" || _type == "email") {
+
+                                $scope.changeNav();
+
+                            }
+
+
+                        }
 
                     }
 
                     else {
 
+                        if ($(".swiper-slide-active").find("input").length > 0) {
+                            var _type = $(".swiper-slide-active").find("input").attr("type");
+                            var _value = $(".swiper-slide-active").find("input").attr("value");
+
+                            if (_type == "text" || _type == "number" || _type == "week" || _type == "email") {
+                                $(".swiper-slide-active").find("input").focus();
+
+
+                            }
+
+
+                        }
                         $cordovaKeyboard.close()
 
-                        //  SoftKeyboard.hide();
 
                     }
 
