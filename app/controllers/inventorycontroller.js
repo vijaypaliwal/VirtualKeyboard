@@ -4877,6 +4877,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     $scope.slidenumber(swiperHere.activeIndex);
 
 
+
+                    $(".weekPicker").each(function () {
+                        var _val = $(this).attr("selectvalue");
+                        $(this).val(_val);
+                        $(this).trigger("change");
+                    });
+
                     if (swiperHere.activeIndex != 100 && swiperHere.activeIndex != 101) {
 
                         $scope.changeNav();
