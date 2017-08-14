@@ -2500,88 +2500,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     }
 
-    function ConverttoMsJsonDate(_DateValue) {
+  
 
-        var _date = angular.copy(_DateValue);
 
-        var dsplit1 = _date.split("/");
-        var now = new Date(dsplit1[2], dsplit1[0] - 1, dsplit1[1]);
-
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-        var today = now.getFullYear() + "-" + (month) + "-" + (day);
-
-        return today;
-    }
-
-    function ConverttoMsJsonDateTime(_DateValue) {
-
-        debugger;
-        var _date = angular.copy(_DateValue);
-
-        var dsplit1 = _date.split("/");
-
-        var _timeSplit = dsplit1[2].split(" ");
-
-        var _timeString = _timeSplit[1].split(":");
-
-        if (parseInt(_timeString[0]) > 12 || parseInt(_timeString[0]) == 12) {
-          
-            alert("time");
-            alert(parseInt(_timeString[0]));
-            _timeString[0] = (parseInt(_timeString[0]) - 12).toString();
-        }
-        
-        var _ToMergeTime = "T" + (_timeSplit[2] == "AM" ? leadZero(_timeString[0]) : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
-
-        var now = new Date(_timeSplit[0], dsplit1[0] - 1, dsplit1[1]);
-
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-        var today = now.getFullYear() + "-" + (month) + "-" + (day);
-
-        return today + _ToMergeTime;
-    }
-
-    function leadZero(_something) {
-        
-      var _TempString = parseInt(_something).toString();
-        _something = _TempString.toString();
-        if (parseInt(_something) < 10) return "0" + _something;
-        return _something;//else    
-    }
-
-    function ConvertToTime(_timeValue) {
-
-        if ($.trim(_timeValue) != "") {
-            debugger;
-            var _ToMergeTime = "";
-            var _timeString = "";
-            if (_timeValue.indexOf("AM") > -1 || _timeValue.indexOf("PM") > -1) {
-
-                var _timeSplit = _timeValue.split(" ");
-                _timeString = _timeSplit[0].split(":");
-
-                if (parseInt(_timeString[0]) > 12 || parseInt(_timeString[0]) == 12) {
-                  
-                    _timeString[0] = (parseInt(_timeString[0]) - 12).toString();
-                }
-                
-
-                _ToMergeTime = (_timeSplit[1] == "AM" ? leadZero(_timeString[0]) : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
-            }
-            else {
-                _timeString = _timeValue.split(":");
-                _ToMergeTime = (_timeString[0]) + ":" + (_timeString[1]) + ":" + (_timeString[2]);
-            }
-            return _ToMergeTime;
-        }
-
-        return "";
-
-    }
     function GetCustomDataField(Type) {
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -5359,23 +5280,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     }
 
-    function formatDate(date) {
-        if (date != null && date != undefined && date != "") {
-
-            var d = new Date(date),
-                month = '' + (d.getMonth() + 1),
-                day = '' + d.getDate(),
-                year = d.getFullYear();
-
-            if (month.length < 2) month = '0' + month;
-            if (day.length < 2) day = '0' + day;
-
-            return [year, month, day].join('-');
-        }
-        else {
-            return date;
-        }
-    }
+  
 
 
     function formatDate(date) {
@@ -5425,20 +5330,27 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     function ConvertToTime(_timeValue) {
 
-
-        debugger;
-
         if ($.trim(_timeValue) != "") {
+            debugger;
+            var _ToMergeTime = "";
+            var _timeString = "";
+            if (_timeValue.indexOf("AM") > -1 || _timeValue.indexOf("PM") > -1) {
 
-            var _timeSplit = _timeValue.split(" ");
-            var _timeString = _timeSplit[0].split(":");
+                var _timeSplit = _timeValue.split(" ");
+                _timeString = _timeSplit[0].split(":");
 
-            if (parseInt(_timeString[0]) >= 12) {
-                _timeString[0] = (parseInt(_timeString[0]) - 12).toString();
+                if (parseInt(_timeString[0]) > 12 || parseInt(_timeString[0]) == 12) {
+
+                    _timeString[0] = (parseInt(_timeString[0]) - 12).toString();
+                }
+
+
+                _ToMergeTime = (_timeSplit[1] == "AM" ? leadZero(_timeString[0]) : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
             }
-
-            var _ToMergeTime = (_timeSplit[1] == "AM" ? leadZero(_timeString[0]) : leadZero((12 + parseInt(_timeString[0]))).toString()) + ":" + leadZero(_timeString[1]);
-
+            else {
+                _timeString = _timeValue.split(":");
+                _ToMergeTime = (_timeString[0]) + ":" + (_timeString[1]) + ":" + (_timeString[2]);
+            }
             return _ToMergeTime;
         }
 
