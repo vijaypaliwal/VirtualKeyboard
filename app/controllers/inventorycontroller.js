@@ -1053,8 +1053,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         $("#locationlistmodal").modal('hide');
         $("#uomlistmodal").modal('hide');
+
         $scope.IsItemChose = true;
         $scope.IsItemChoseCheck = true;
+
+
         CheckScopeBeforeApply()
     }
     $scope.onChangeUOMData = function () {
@@ -2115,8 +2118,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.IsProperEmail = function (email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
+
+        if ($.trim(email) != "") {
+
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+        return true;
     }
     $scope.getIndexBycolName = function (_ID) {
         for (var i = 0; i < $scope.InventoryObject.CustomPartData.length; i++) {
