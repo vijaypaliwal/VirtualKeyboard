@@ -2541,7 +2541,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                                    }
                                    else {
 
-                                       $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDate(_defaultValue);
+                                       $scope.CustomActivityDataList[i].cfdDefaultValue = formatDate(_defaultValue);
                                    }
                                }
                            }
