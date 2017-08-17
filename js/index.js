@@ -760,9 +760,7 @@ function GetDefaultAccount() {
 
 function onDeviceReady() {
 
-    setTimeout(function () {
-        navigator.splashscreen.hide();
-    }, 1500);
+    navigator.splashscreen.hide();
 
   //  navigator.splashscreen.hide();
     GetDefaultAccount();
@@ -770,8 +768,6 @@ function onDeviceReady() {
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-
-
 
 
     var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
