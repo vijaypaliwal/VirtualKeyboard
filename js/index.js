@@ -760,7 +760,11 @@ function GetDefaultAccount() {
 
 function onDeviceReady() {
 
-    navigator.splashscreen.hide();
+    setTimeout(function () {
+        navigator.splashscreen.hide();
+    }, 1500);
+
+  //  navigator.splashscreen.hide();
     GetDefaultAccount();
 
 
