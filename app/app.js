@@ -193,6 +193,8 @@ app.config(function ($routeProvider) {
 
 });
 
+
+
 //var serviceBaseUrl = 'http://localhost:7440/';
 //var serviceBase = 'http://localhost:7440/API/ClearlyInventoryAPI.svc/';
 var serviceBaseUrl = 'http://dev.style.u8i9.com/';

@@ -7,6 +7,15 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
         account: "",
         useRefreshTokens: false
     };
+
+    if (serviceBase == "http://dev.style.u8i9.com/API/ClearlyInventoryAPI.svc/") {
+
+        $("#currentserver").html("Development");
+
+    }
+    else {
+        $("#currentserver").html("Production");
+    }
  
     $scope.message = "";
     $scope.DefaultAccount = function () {

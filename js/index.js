@@ -774,6 +774,12 @@ function onDeviceReady() {
     pictureSource = navigator.camera.PictureSourceType;
     destinationType = navigator.camera.DestinationType;
     $cordovaSplashscreen.hide();
+
+    cordova.getAppVersion(function (version) {
+        alert(version);
+        $("#Appversion").html(version);
+    });
+
     InitializeModal();
 
 

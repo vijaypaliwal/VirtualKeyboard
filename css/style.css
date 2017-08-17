@@ -159,17 +159,10 @@ blockquote {
 .primary-text {
     color: #2196F3 !important;
 }
-/*.primary-color {
+.primary-color {
     background-color: #2196F3 !important;
     color:#fff;
-}*/
-
-primary-color {
-    background-color: #8bc34a !important;
-    color:#fff;
 }
-
-
 .primary-border {
     border-color: #2196F3 !important;
 }
