@@ -14,7 +14,7 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
 
     }
     else {
-        $("#currentserver").html("Production");
+        $("#currentserver").html("");
     }
  
     $scope.message = "";
