@@ -13,6 +13,16 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
     $scope.secondList = [];
 
 
+    $scope.weeklist = [];
+
+    $scope.CurrentYear = new Date().getFullYear();
+
+    for (var i = 1; i <= 52; i++) {
+        $scope.weeklist.push(i);
+    }
+
+
+
     for (var i = 1; i <= 24; i++) {
         $scope.hourList.push(i);
     }
