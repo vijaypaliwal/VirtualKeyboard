@@ -624,9 +624,12 @@ input[type="password"]:focus
 
 .form-control[disabled]
 {
-    color:#6f6f6f !important;
+ 
     opacity:1 !important;
+    -webkit-text-fill-color:#6f6f6f !important;
 }
+
+
 
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px)  {
