@@ -622,10 +622,22 @@ input[type="password"]:focus
 }
 
 
+.form-control[disabled]
+{
+    color:#6f6f6f !important;
+    opacity:1 !important;
+}
+
+
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px)  {
  .form-control
  {
      height:55px;
+ }
+
+ .Ipadheight
+ {
+     height:50px;
  }
 
  .has-feedback .form-control-feedback {
@@ -636,6 +648,16 @@ input[type="password"]:focus
     line-height: 55px;
    
 }
+
+
+ .Btndisabled {
+ background: #ccc;
+    border: 1px solid brown !important;
+    color: brown !important;
+    background-color: #ccc !important;
+}
+
+
 
  #toolbar
  {
@@ -758,8 +780,13 @@ height: 60px;
     {
            font-size: 35px;
     margin-top: 15px;
-    margin-right: 12px;
+   line-height:45px;
+   font-size:35px !important;
     }
+
+
+
+
 
 
 
