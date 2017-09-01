@@ -12,19 +12,13 @@
 }
 
 .smallText {
-  color: #958d8d !important;
-    position: absolute;
-    display: inline-block;
-    margin-top: -5px;
-    line-height: 12px;
+    color: #958d8d !important;
+  
+    display: block;
+    margin-top: -9px;
     font-size: 95% !important;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    word-break: break-all;
+    word-wrap: break-word;
 }
-
 .infoareas {
     background: white;
 }
@@ -56,8 +50,6 @@
     background-color: #fff;
     border: 1px solid #ccc;
     -webkit-transition: .4s;
-    -moz-transition: .4s;
-    -o-transition: .4s;
     transition: .4s;
 }
 
@@ -71,8 +63,6 @@
         bottom: 0px;
         background-color: white;
         -webkit-transition: .4s;
-        -moz-transition: .4s;
-        -o-transition: .4s;
         transition: .4s;
     }
 
@@ -132,7 +122,7 @@ table tr {
 }
 
 .text {
-    line-height: 32px;
+    line-height: 24px;
 }
 
 .cd-top.cd-is-visible {
@@ -155,10 +145,4 @@ table tr {
     padding-top: 4px;
     opacity: 1;
     visibility: hidden;
-}
-
-.NoDataAnchor {
-    font-size: 14px;
-    color: brown;
-    padding-left: 5px;
 }
