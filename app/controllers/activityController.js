@@ -3110,7 +3110,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         var _data = true;
         var _CurrentCustomColumns = angular.copy($scope.CustomActivityDataList);
         for (var i = 0; i < _CurrentCustomColumns.length; i++) {
-            if (_CurrentCustomColumns[i].cfdCustomFieldType == "Inventory" && _CurrentCustomColumns[i].cfdID == cfdid) {
+            if (_CurrentCustomColumns[i].cfdCustomFieldType.toLowerCase() == "inventory" && _CurrentCustomColumns[i].cfdID == cfdid) {
                 switch ($scope.CurrentOperation) {
                     case "Increase":
                     case "Decrease":
