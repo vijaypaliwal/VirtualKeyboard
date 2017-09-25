@@ -1223,7 +1223,7 @@
 
                                                                 <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
-                                                                    <input type="text" id="LineItem_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType  prepostCustom" />
+                                                                    <input type="text" id="LineItem_{{obj.cfdID}}" data-prefix="{{obj.cfdPrefix}}" data-suffix="{{obj.cfdSuffix}}" data-cvalue="{{obj.CombineValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType  prepostCustomActivity" />
                                                                 </div>
 
                                                             </div>
@@ -1399,7 +1399,7 @@
                                     <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
 
-                                        <input type="text" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustom" />
+                                        <input type="text" id="CustomActivity_{{obj.cfdID}}" data-prefix="{{obj.cfdPrefix}}" data-suffix="{{obj.cfdSuffix}}" data-cvalue="{{obj.CombineValue}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustomActivity" />
                                     </div>
 
                                     <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
@@ -1550,7 +1550,7 @@
                                         <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
 
-                                            <input type="text" id="CustomActivity_Increase_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustom" />
+                                            <input type="text" id="CustomActivity_Increase_{{obj.cfdID}}" data-prefix="{{obj.cfdPrefix}}" data-suffix="{{obj.cfdSuffix}}" data-cvalue="{{obj.CombineValue}}" name="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustomActivity" />
                                         </div>
 
                                         <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
@@ -1700,7 +1700,7 @@
                                         <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
 
-                                            <input type="text" id="CustomActivity_Decrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustom" />
+                                            <input type="text" id="CustomActivity_Decrease_{{obj.cfdID}}" data-prefix="{{obj.cfdPrefix}}" data-suffix="{{obj.cfdSuffix}}" data-cvalue="{{obj.CombineValue}}" name="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustomActivity" />
                                         </div>
 
                                         <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
@@ -2975,7 +2975,7 @@
                                                         <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
 
-                                                            <input type="text" id="LineItem_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType  prepostCustom" />
+                                                            <input type="text" id="LineItem_{{obj.cfdID}}" data-prefix="{{obj.cfdPrefix}}" data-suffix="{{obj.cfdSuffix}}" data-cvalue="{{obj.CombineValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType  prepostCustomActivity" />
                                                         </div>
 
                                                     </div>
@@ -3132,7 +3132,7 @@
                                                 <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
 
-                                                    <input type="text" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustom" />
+                                                    <input type="text" id="CustomActivity_{{obj.cfdID}}" data-prefix="{{obj.cfdPrefix}}" data-suffix="{{obj.cfdSuffix}}" data-cvalue="{{obj.CombineValue}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustomActivity" />
                                                 </div>
 
                                                 <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
@@ -3285,7 +3285,7 @@
                                                     <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
 
-                                                        <input type="text" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustom" />
+                                                        <input type="text" id="CustomActivity_{{obj.cfdID}}" data-prefix="{{obj.cfdPrefix}}" data-suffix="{{obj.cfdSuffix}}" data-cvalue="{{obj.CombineValue}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustomActivity" />
                                                     </div>
 
                                                     <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
@@ -3436,7 +3436,7 @@
                                                     <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
 
-                                                        <input type="text" id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustom" />
+                                                        <input type="text" id="CustomActivity_{{obj.cfdID}}" data-prefix="{{obj.cfdPrefix}}" data-suffix="{{obj.cfdSuffix}}" data-cvalue="{{obj.CombineValue}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" class="form-control stringType  prepostCustomActivity" />
                                                     </div>
 
                                                     <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
