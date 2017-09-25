@@ -195,7 +195,7 @@ $(".signoutbtn").click(function () {
 });
 
 
-$(document).on('keyup', '.prepostCustom', function (e) {
+$(document).on('input', '.prepostCustom', function (e) {
     // if useing right key move cursor to first position it auto move focus at last character in text box 
  
     var prefix = $(this).attr("data-prefix");
@@ -217,7 +217,7 @@ $(document).on('keyup', '.prepostCustom', function (e) {
         }
     }
 });
-$(document).on('keyup', '.prepostCustomActivity', function (e) {
+$(document).on('input', '.prepostCustomActivity', function (e) {
     // if useing right key move cursor to first position it auto move focus at last character in text box 
  
     var prefix = $(this).attr("data-prefix");
@@ -242,7 +242,7 @@ $(document).on('keyup', '.prepostCustomActivity', function (e) {
 
 
 
-$(document).on('select', '.prepostCustom , .prepostUnit', function (e) {
+$(document).on('input', '.prepostCustom , .prepostUnit', function (e) {
     var _value = $(this).val();
     if ($.trim(_value) == "") { _value = "" };
 
@@ -254,7 +254,7 @@ $(document).on('select', '.prepostCustom , .prepostUnit', function (e) {
 
 
 
-$(document).on('keyup', '.prepostUnit', function (e) {
+$(document).on('input', '.prepostUnit', function (e) {
 
     var prefix = $(this).attr("data-prefix");
     var suffix = $(this).attr("data-suffix");
