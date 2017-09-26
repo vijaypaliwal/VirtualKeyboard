@@ -686,31 +686,29 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     }
 
-    $scope.UpdateSecurityTokenGlobal = function () {
 
+    $scope.UpdateSecurityTokenGlobal = function () {
+        $scope.userName = "";
         var _path = $location.path();
         var AccountID = localStorageService.get('AccountDBID');
+        if (_path != "/login" && $.trim(AccountID) != "") {
 
-        if (_path != "/login" && $.trim(AccountID)!="") {
-
-            var authData = localStorageService.get('authorizationData');
+            var authData = localStorageService.get('lastlogindata');
             if (authData) {
-                $scope.SecurityToken = authData.token;
+                $scope.userName = authData.userName;
             }
 
             $.ajax({
 
                 type: "POST",
-                url: serviceBase + "UpdateSecurityToken",
+                url: serviceBase + "UpdateSecurityTokenWithUserName",
                 contentType: 'application/json; charset=utf-8',
 
                 dataType: 'json',
                 async: true,
-                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "AccountID": AccountID }),
+                data: JSON.stringify({ "UserName": $scope.userName, "AccountID": AccountID }),
                 error: function (err, textStatus) {
-                    $scope.UOMSearching = false;
-
-                    $scope.IsLoading = false;
+                    alert("into error" + err);
 
                     if (err.readyState == 0 || err.status == 0) {
 
@@ -729,11 +727,11 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                 success: function (data) {
 
 
-                    if (data.UpdateSecurityTokenResult.Success == true) {
+                    if (data.UpdateSecurityTokenWithUserNameResult.Success == true) {
 
                         alert("into success");
-                        if (data.UpdateSecurityTokenResult != null && data.UpdateSecurityTokenResult.Payload != null) {
-                            var _token = data.UpdateSecurityTokenResult.Payload;
+                        if (data.UpdateSecurityTokenWithUserNameResult != null && data.UpdateSecurityTokenWithUserNameResult.Payload != null) {
+                            var _token = data.UpdateSecurityTokenWithUserNameResult.Payload;
 
                             localStorageService.set('authorizationData', { token: _token });
 
@@ -744,7 +742,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                     }
                     else {
                         alert("into error");
-                        $scope.ShowErrorMessage("update security token", 1, 1, data.UpdateSecuritTokenResult.Message);
+                        $scope.ShowErrorMessage("update security token", 1, 1, data.UpdateSecurityTokenWithUserNameResult.Message);
                     }
                 }
             });
