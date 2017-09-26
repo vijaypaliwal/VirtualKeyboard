@@ -761,7 +761,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     document.addEventListener('resume', function () {
         alert('resume event. resumeType=' + cordova.backgroundapp.resumeType);
-        if (cordova.backgroundapp.resumeType == 'normal-launch') {
+        if (cordova.backgroundapp.resumeType == 'normal') {
             alert("back from resume")
             $scope.UpdateSecurityTokenGlobal();
         }
