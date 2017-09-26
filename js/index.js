@@ -841,7 +841,7 @@ function onDeviceReady() {
 
     navigator.splashscreen.hide();
 
-  //  navigator.splashscreen.hide();
+    //  navigator.splashscreen.hide();
     GetDefaultAccount();
 
 
@@ -854,7 +854,8 @@ function onDeviceReady() {
     destinationType = navigator.camera.DestinationType;
     $cordovaSplashscreen.hide();
 
-  
+    document.addEventListener("resume", onResume, false);
+    document.addEventListener("pause", onPause, false);
 
     InitializeModal();
 
@@ -868,6 +869,17 @@ function onDeviceReady() {
         // alert("into Error");
         alert("Error Occurred during hiding keyboard" + err);
     }
+}
+
+
+// Handle the resume event
+//
+function onResume() {
+    alert("in resume");
+}
+function onPause() {
+
+    alert("in pause");
 }
 
 function onOffline() {
