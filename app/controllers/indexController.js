@@ -759,6 +759,14 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $scope.UpdateSecurityTokenGlobal();
     }, 10000);
 
+    document.addEventListener('resume', function () {
+        alert('resume event. resumeType=' + cordova.backgroundapp.resumeType);
+        if (cordova.backgroundapp.resumeType == 'normal-launch') {
+            alert("back from resume")
+            $scope.UpdateSecurityTokenGlobal();
+        }
+    });
+
     initIndex();
 
 }]);

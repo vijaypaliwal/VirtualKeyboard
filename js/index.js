@@ -503,6 +503,9 @@ document.addEventListener("backbutton", function (e) {
 document.addEventListener("online", onOnline, false);
 document.addEventListener("offline", onOffline, false);
 
+
+
+
 var pictureSource;
 var destinationType;
 var ImageListAndroid = [];
@@ -854,11 +857,16 @@ function onDeviceReady() {
     destinationType = navigator.camera.DestinationType;
     $cordovaSplashscreen.hide();
 
-    document.addEventListener("resume", onResume, false);
-    document.addEventListener("pause", onPause, false);
+ 
 
     InitializeModal();
 
+    // Don't bother drawing UI when running in the background.
+    if (cordova.backgroundapp.resumeType == 'launch') {
+        alert('initial launch');
+    } else { // resumeType == ''
+        alert('Running in the background!');
+    }
 
     try {
 
