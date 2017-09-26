@@ -755,7 +755,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     setInterval(function () {
         $scope.UpdateSecurityTokenGlobal();
-    }, 10000);
+    }, 2400000);
 
     document.addEventListener('resume', function () {
      //   alert('resume event. resumeType=' + cordova.backgroundapp.resumeType);
