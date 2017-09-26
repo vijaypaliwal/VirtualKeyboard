@@ -50,8 +50,10 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
     };
    
 
-    $scope.CheckCurrentAccount = function (Account) {
+    $scope.CheckCurrentAccount = function (Account, AccountID) {
         if ($scope.CurrentAccount == Account) {
+
+            localStorageService.set('AccountDBID', AccountID);
             return true;
         }
         else {

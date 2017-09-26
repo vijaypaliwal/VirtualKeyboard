@@ -20,29 +20,29 @@
     </div>
 
     <ul class="list-group">
-        <li ng-repeat="_obj in AccountsList"  class="list-group-item" ng-class="{'selected':CheckCurrentAccount(_obj.AccountName)==true}">
-         
+        <li ng-repeat="_obj in AccountsList" class="list-group-item" ng-class="{'selected':CheckCurrentAccount(_obj.AccountName,_obj.AccountID)==true}">
 
-                <div class="row">
-                    <div class="col-xs-3">
-                        <div ng-class="{'accent-color': $index % 2 === 0 }" class="btn btn-warning"> {{$index+1}} </div>
-                    </div>
 
-                    <div ng-click="UpdateSecurityToken(_obj.AccountID,_obj.AccountName)" class="col-xs-7">
-                        <h4>{{_obj.AccountName}} <small style="color:brown !important; font-size:11px !important;"> - {{_obj.CustomerType}}</small> </h4>
-                        <p>{{_obj.FirstName}} {{_obj.LastName}}</p>
-                        <p>{{_obj.Email}}</p>
-                      
-                    </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div ng-class="{'accent-color': $index % 2 === 0 }" class="btn btn-warning"> {{$index+1}} </div>
+                </div>
 
-                    <div class="col-xs-2" ng-click="UpdateSecurityToken(_obj.AccountID,_obj.AccountName)">
-                        <a class="btn btn-next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </div>
+                <div ng-click="UpdateSecurityToken(_obj.AccountID,_obj.AccountName)" class="col-xs-7">
+                    <h4>{{_obj.AccountName}} <small style="color:brown !important; font-size:11px !important;"> - {{_obj.CustomerType}}</small> </h4>
+                    <p>{{_obj.FirstName}} {{_obj.LastName}}</p>
+                    <p>{{_obj.Email}}</p>
 
                 </div>
-         
+
+                <div class="col-xs-2" ng-click="UpdateSecurityToken(_obj.AccountID,_obj.AccountName)">
+                    <a class="btn btn-next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+
+            </div>
+
         </li>
     </ul>
 </div>
