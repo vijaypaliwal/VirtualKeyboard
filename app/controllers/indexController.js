@@ -688,62 +688,67 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.UpdateSecurityTokenGlobal = function () {
 
-        $scope.IsLoading = true;
+        var _path = $location.path();
         var AccountID = localStorageService.get('AccountDBID');
-        var authData = localStorageService.get('authorizationData');
-        if (authData) {
-            $scope.SecurityToken = authData.token;
-        }
 
-        $.ajax({
+        if (_path != "/login" && $.trim(AccountID)!="") {
 
-            type: "POST",
-            url: serviceBase + "UpdateSecurityToken",
-            contentType: 'application/json; charset=utf-8',
-
-            dataType: 'json',
-
-            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "AccountID": AccountID }),
-            error: function (err, textStatus) {
-                $scope.UOMSearching = false;
-
-                $scope.IsLoading = false;
-
-                if (err.readyState == 0 || err.status == 0) {
-
-                }
-                else {
-
-
-                    if (textStatus != "timeout") {
-
-
-                        $scope.ShowErrorMessage("update security token", 2, 1, err.statusText);
-                    }
-                }
-            },
-
-            success: function (data) {
-
-
-                if (data.UpdateSecurityTokenResult.Success == true) {
-
-                    if (data.UpdateSecurityTokenResult != null && data.UpdateSecurityTokenResult.Payload != null) {
-                        var _token = data.UpdateSecurityTokenResult.Payload;
-
-                        localStorageService.set('authorizationData', { token: _token });
-
-
-
-
-                    }
-                }
-                else {
-                    $scope.IsLoading = false;
-                    $scope.ShowErrorMessage("update security token", 1, 1, data.UpdateSecuritTokenResult.Message);
-                }
+            var authData = localStorageService.get('authorizationData');
+            if (authData) {
+                $scope.SecurityToken = authData.token;
             }
-        });
+
+            $.ajax({
+
+                type: "POST",
+                url: serviceBase + "UpdateSecurityToken",
+                contentType: 'application/json; charset=utf-8',
+
+                dataType: 'json',
+                async: true,
+                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "AccountID": AccountID }),
+                error: function (err, textStatus) {
+                    $scope.UOMSearching = false;
+
+                    $scope.IsLoading = false;
+
+                    if (err.readyState == 0 || err.status == 0) {
+
+                    }
+                    else {
+
+
+                        if (textStatus != "timeout") {
+
+
+                            $scope.ShowErrorMessage("update security token", 2, 1, err.statusText);
+                        }
+                    }
+                },
+
+                success: function (data) {
+
+
+                    if (data.UpdateSecurityTokenResult.Success == true) {
+
+                        alert("into success");
+                        if (data.UpdateSecurityTokenResult != null && data.UpdateSecurityTokenResult.Payload != null) {
+                            var _token = data.UpdateSecurityTokenResult.Payload;
+
+                            localStorageService.set('authorizationData', { token: _token });
+
+
+
+
+                        }
+                    }
+                    else {
+                        alert("into error");
+                        $scope.ShowErrorMessage("update security token", 1, 1, data.UpdateSecuritTokenResult.Message);
+                    }
+                }
+            });
+        }
     }
 
 
