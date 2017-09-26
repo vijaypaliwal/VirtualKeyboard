@@ -861,12 +861,7 @@ function onDeviceReady() {
 
     InitializeModal();
 
-    // Don't bother drawing UI when running in the background.
-    if (cordova.backgroundapp.resumeType == 'launch') {
-        alert('initial launch');
-    } else { // resumeType == ''
-        alert('Running in the background!');
-    }
+    
 
     try {
 

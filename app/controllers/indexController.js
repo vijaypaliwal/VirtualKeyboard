@@ -708,7 +708,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                 async: true,
                 data: JSON.stringify({ "UserName": $scope.userName, "AccountID": AccountID }),
                 error: function (err, textStatus) {
-                    alert("into error" + err);
+                  
 
                     if (err.readyState == 0 || err.status == 0) {
 
@@ -729,7 +729,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
                     if (data.UpdateSecurityTokenWithUserNameResult.Success == true) {
 
-                        alert("into success");
+               
                         if (data.UpdateSecurityTokenWithUserNameResult != null && data.UpdateSecurityTokenWithUserNameResult.Payload != null) {
                             var _token = data.UpdateSecurityTokenWithUserNameResult.Payload;
 
@@ -741,7 +741,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                         }
                     }
                     else {
-                        alert("into error");
+                 
                         $scope.ShowErrorMessage("update security token", 1, 1, data.UpdateSecurityTokenWithUserNameResult.Message);
                     }
                 }
