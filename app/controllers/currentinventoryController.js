@@ -433,11 +433,11 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                     if (_PageSize < $scope.totalrecords) {
 
 
-                        //_IsLazyLoadingUnderProgress = 1;
-                        //$scope.isDataLoading = false;
-                        //_PageSize = _TotalRecordsCurrent + getIncrementor($scope.totalrecords);
-                        //CheckScopeBeforeApply();
-                        //$scope.GetInventoryDataAccordingToView();
+                        _IsLazyLoadingUnderProgress = 1;
+                        $scope.isDataLoading = false;
+                        _PageSize = _TotalRecordsCurrent + getIncrementor($scope.totalrecords);
+                        CheckScopeBeforeApply();
+                        $scope.GetInventoryDataAccordingToView();
                     }
                     else {
                         // log.info("You have already loaded all data.")
