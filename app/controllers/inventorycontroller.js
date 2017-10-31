@@ -1244,7 +1244,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                                         if (($scope.InventoryObject.ItemID.toLowerCase() == $scope.SearchList[0].ItemID.toLowerCase())) {
 
-                                            log.info("This Item already exist, we fill all associate data.");
+                                           // log.info("This Item already exist, we fill all associate data.");
 
                                             var obj = $scope.SearchList[0];
 
