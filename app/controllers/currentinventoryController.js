@@ -440,7 +440,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                         $scope.GetInventoryDataAccordingToView();
                     }
                     else {
-                        // log.info("You have already loaded all data.")
+                         //log.info("You have already loaded all data.")
                     }
 
                 }
@@ -766,6 +766,11 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
             case "cn":
                 _returnPath = path + "Contains.gif";
                 break;
+
+            case "nc":
+                _returnPath = path + "DoesNotContain.gif";
+                break;
+
             case "date-after":
                 _returnPath = path + "OnOrAfter.gif";
                 break;
