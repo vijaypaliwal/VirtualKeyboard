@@ -315,7 +315,7 @@ function ShowSuccess(Message) {
 
     setTimeout(function () {
         hideSuccess();
-    }, 3000)
+    }, 500)
 }
 function ShowLoginSuccess() {
     $(".errorcontent").css("background", "rgba(52, 73, 94,0.8)");

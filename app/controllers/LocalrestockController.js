@@ -581,7 +581,9 @@ app.controller('LocalrestockController', ['$scope', 'localStorageService', 'auth
                }
                return _valueData;
                break;
-               
+           case "RestockQty":
+               return $scope.LocalRestockList[Index].RestockQty != null ? ($scope.LocalRestockList[Index].RestockQty) : "";
+               break;
            case "ItemID":
                return $scope.LocalRestockList[Index].ItemID != null ? $scope.LocalRestockList[Index].ItemID : "";
                break;
