@@ -90,6 +90,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     }
     function FillMonthlist()
     {
+        $scope.MonthlistGlobal = [];
         var CurrentYear = new Date().getFullYear();
 
         $scope.MonthlistGlobal.push({ Text: "None", Value: "" });
