@@ -37,7 +37,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.CurrentAccount = localStorageService.get('AccountID');
 
-    $scope.Monthlist = [];
+    $scope.MonthlistGlobal = [];
 
     function GetMonthTextAndValue(Num,Type,Year)
     {
@@ -92,17 +92,16 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     {
         var CurrentYear = new Date().getFullYear();
 
-        $scope.Monthlist.push({ Text: "None", Value: "" });
+        $scope.MonthlistGlobal.push({ Text: "None", Value: "" });
         for (var i = CurrentYear - 10; i <= CurrentYear + 10; i++) {
 
             for (var j = 1; j <= 12; j++) {
-                $scope.Monthlist.push({ Text: GetMonthTextAndValue(j, 1, i), Value: GetMonthTextAndValue(j, 2, i) })
+                $scope.MonthlistGlobal.push({ Text: GetMonthTextAndValue(j, 1, i), Value: GetMonthTextAndValue(j, 2, i) })
             }
            
         }
 
-        console.log("months data");
-        console.log($scope.Monthlist);
+    
         
     }
 
