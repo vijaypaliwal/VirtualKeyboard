@@ -174,7 +174,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $("#secondDiv").find(".form-group:first").find(".form-control:first").focus();
 
 
-                $(".weekPicker").each(function () {
+            $(".weekPicker,.monthPicker").each(function () {
                     var _val = $(this).attr("selectvalue");
                     $(this).val(_val);
                     $(this).trigger("change");
@@ -3671,7 +3671,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         setTimeout(function () {
 
-            $(".weekPicker").each(function () {
+            $(".weekPicker,.monthPicker").each(function () {
                 var _val = $(this).attr("selectvalue");
                 $(this).val(_val);
                 $(this).trigger("change");
@@ -4887,7 +4887,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
-                    $(".weekPicker").each(function () {
+                    $(".weekPicker,.monthPicker").each(function () {
                         var _val = $(this).attr("selectvalue");
                         $(this).val(_val);
                         $(this).trigger("change");
