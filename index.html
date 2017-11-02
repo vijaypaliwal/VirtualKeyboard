@@ -333,6 +333,15 @@
   
 
     <script src="js/index.js"></script>
+
+    <script>
+        //Catch all JQuery errors and log into the DB
+        window.onerror = function (msg, url, lineNo) {
+
+            alert("Message::" + msg + " at line" + lineNo);
+            //Do what you want with the error including line number 
+        };
+    </script>
    
 
 
