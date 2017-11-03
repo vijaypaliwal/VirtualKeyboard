@@ -174,11 +174,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $("#secondDiv").find(".form-group:first").find(".form-control:first").focus();
 
 
-            $(".weekPicker,.monthPicker").each(function () {
-                    var _val = $(this).attr("selectvalue");
-                    $(this).val(_val);
-                    $(this).trigger("change");
-                });
+            SetWeekMonthValues();
 
 
         }, 100);
@@ -664,8 +660,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.GetLastValueCustom = function (id, Type) {
+  
         debugger;
-
 
         var field = "Inv_" + id;
         var _fieldid = "";
@@ -748,7 +744,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     //var rString = randomString(10, '0123456789');
 
     $scope.GetLastValueData = function (field, Type) {
-        debugger;
+  
         var _toCheckValue = "";
         field = Type != undefined && Type != "" ? "Inv_" + field : field;
         _toCheckValue = localStorageService.get(field);
@@ -762,7 +758,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.GetLastValue = function (field, id) {
 
 
-        debugger;
+  
 
         var _value = "";
         var _toCheckValue = localStorageService.get(field);
@@ -1044,12 +1040,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
         }
 
-        $("#secondDiv .form-control").each(function () {
-            $(this).trigger("input");
-        });
-        $("#firstDiv .form-control").each(function () {
-            $(this).trigger("input");
-        });
+        //$("#secondDiv .form-control").each(function () {
+        //    $(this).trigger("input");
+        //});
+        //$("#firstDiv .form-control").each(function () {
+        //    $(this).trigger("input");
+        //});
+
         $("#itemlistmodal").modal('hide');
 
         $("#locationlistmodal").modal('hide');
@@ -1059,7 +1056,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.IsItemChoseCheck = true;
 
 
-        CheckScopeBeforeApply()
+        CheckScopeBeforeApply();
     }
     $scope.onChangeUOMData = function () {
         $scope.InventoryObject.UomID = 0;
@@ -1518,7 +1515,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
     $scope.addinventory = function () {
 
-        debugger;
+  
         if ($scope.CheckUnitDataFieldValueAll() == true) {
 
 
@@ -1837,7 +1834,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
         }
         else {
-            $scope.getstep(0, $scope.UnitDataColumnWithError);
+
+            if ($scope.switchmode == false) {
+
+                $scope.getstep(0, $scope.UnitDataColumnWithError);
+            }
             log.error("Please enter unique values in unit data columns.")
         }
     }
@@ -1913,7 +1914,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     function ConvertToTime(_timeValue) {
 
-        debugger;
+  
 
         if ($.trim(_timeValue) != "") {
 
@@ -2307,7 +2308,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                           var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
                           if ($scope.CustomActivityDataList[i].cfdDataType == "datetime") {
                               if (_defaultValue != null && _defaultValue != "") {
-                                  debugger;
+                            
                                   if ($scope.CustomActivityDataList[i].cfdSpecialType == 2) {
                                       $scope.CustomActivityDataList[i].cfdDefaultValue = ConverttoMsJsonDateTime(_defaultValue);
                                   }
@@ -3125,7 +3126,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                                
                                    var item=$scope.UnitDataList[i];
 
-                                   debugger;
+                             
 
                                    console.log("ReqValue field sepecial type - 6");
 
@@ -3173,7 +3174,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                                    }
 
                                    else if (item.FieldName == 'UniqueDate') {
-                                       debugger;
+                                 
                                        $scope.UniqueDateFieldSpecialType = item.FieldSpecialType;
 
                                        if (item.FieldSpecialType == 15) {
@@ -3198,7 +3199,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                                    }
                                    else if (item.FieldName == 'UnitDate2') {
                                        $scope.UnitDate2FieldSpecialType = item.FieldSpecialType;
-                                       debugger;
+                                 
                                        if (item.FieldSpecialType == 15) {
 
 
@@ -3671,11 +3672,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         setTimeout(function () {
 
-            $(".weekPicker,.monthPicker").each(function () {
-                var _val = $(this).attr("selectvalue");
-                $(this).val(_val);
-                $(this).trigger("change");
-            });
+            SetWeekMonthValues();
 
         }, 2000);
 
@@ -4887,11 +4884,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
-                    $(".weekPicker,.monthPicker").each(function () {
-                        var _val = $(this).attr("selectvalue");
-                        $(this).val(_val);
-                        $(this).trigger("change");
-                    });
+                    SetWeekMonthValues();
 
                     if (swiperHere.activeIndex != 100 && swiperHere.activeIndex != 101) {
 
@@ -4982,11 +4975,26 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             $(".spinner").hide();
             $(".swiper-container").show();
+
+
             ApplyBackAndNext();
 
-
+            SetWeekMonthValues();
         }, 100)
     }
+
+
+    function SetWeekMonthValues()
+    {
+        setTimeout(function () {
+            $(".weekPicker,.monthPicker").each(function () {
+                var _val = $(this).attr("selectvalue");
+                $(this).val(_val);
+                $(this).trigger("change");
+            });
+        },100);
+    }
+
     function ApplyBackAndNext() {
 
         $('.arrow-left').on('click', function (e) {
