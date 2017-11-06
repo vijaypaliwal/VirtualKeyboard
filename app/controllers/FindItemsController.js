@@ -1782,7 +1782,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             var originalID = "#actionQty_" + obj.iID;
 
 
-            if ($(originalID).find(".fa-check").css("color") == "rgb(0, 150, 136)") {
+            if ($(originalID).find(".fa-check").css("color") == "rgb(76, 175, 80)") {
 
                 if (_isSelectAll != true) {
 
@@ -1796,7 +1796,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             else {
                 var _CartObjLimittemp = _isSelectAll == true ? _CartObjLimit : (_CartObjLimit - 1);
                 if ($scope.mainObjectToSend.length <= _CartObjLimittemp) {
-                    $(originalID).find(".fa-check").css("color", "#009688");
+                    $(originalID).find(".fa-check").css("color", "#4CAF50");
                     $(originalID).parent(".newlistitem").find(".img").css("opacity", "0.4")
                 }
 
@@ -1810,6 +1810,10 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         }
 
     }
+
+
+
+
     $scope.AddToCartSelectAll = function (obj) {
 
         if (_CanAct == 'True') {
@@ -1819,7 +1823,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
 
-            if ($(originalID).find(".fa-check").css("color") == "rgb(0, 150, 136)") {
+            if ($(originalID).find(".fa-check").css("color") == "rgb(76, 175, 80)") {
 
                 $(originalID).find(".fa-check").css("color", "transparent");
 
@@ -1829,7 +1833,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             }
             else {
                 if ($scope.mainObjectToSend.length < _CartObjLimit) {
-                    $(originalID).find(".fa-check").css("color", "#009688");
+                    $(originalID).find(".fa-check").css("color", "#4CAF50");
                     $(originalID).parent(".newlistitem").find(".img").css("opacity", "0.4")
                 }
 
@@ -2085,7 +2089,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         var _CartObjLimittemp = _isSelectAll == true ? _CartObjLimit : (_CartObjLimit - 1);
         var _count = 0;
 
-        if ($(originalID).find(".fa-check").css("color") == "rgb(0, 150, 136)" && $scope.mainObjectToSend.length <= _CartObjLimittemp) {
+        if ($(originalID).find(".fa-check").css("color") == "rgb(76, 175, 80)" && $scope.mainObjectToSend.length <= _CartObjLimittemp) {
             _isExceededLimit = false;
             $.each($scope.InventoryItems, function (i, v) {
                 if (v.iID == IdToSave) {
