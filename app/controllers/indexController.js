@@ -39,8 +39,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.MonthlistGlobal = [];
 
-    function GetMonthTextAndValue(Num,Type,Year)
-    {
+    function GetMonthTextAndValue(Num, Type, Year) {
         var _monthValue = "";
         switch (Num) {
             case 1:
@@ -88,8 +87,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         return _monthValue + Year;
 
     }
-    function FillMonthlist()
-    {
+    function FillMonthlist() {
         $scope.MonthlistGlobal = [];
         var CurrentYear = new Date().getFullYear();
 
@@ -99,11 +97,11 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             for (var j = 1; j <= 12; j++) {
                 $scope.MonthlistGlobal.push({ Text: GetMonthTextAndValue(j, 1, i), Value: GetMonthTextAndValue(j, 2, i) })
             }
-           
+
         }
 
-    
-        
+
+
     }
 
     $scope.CurrentUserKey = localStorageService.get('UserKey');
@@ -134,7 +132,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type, "UserKey": Key }),
                success: function (response) {
 
-                 
+
 
 
                    if (response.GetUserPermissionsResult.Success == true) {
@@ -171,11 +169,11 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
 
 
-                   $scope.$apply();
+
                },
                error: function (response) {
 
-     
+
                },
                complete: function () {
 
@@ -369,19 +367,22 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.getactivepermission = function () {
         $scope.CurrentUserKey = localStorageService.get('UserKey');
+        $scope.GetPermission(1, $scope.CurrentUserKey);
+
+  
         setTimeout(function () {
             $scope.GetPermission(3, $scope.CurrentUserKey);
         }, 10);
+
         setTimeout(function () {
             $scope.GetPermission(4, $scope.CurrentUserKey);
         }, 10);
+
         setTimeout(function () {
             $scope.GetPermission(5, $scope.CurrentUserKey);
         }, 10);
 
-        setTimeout(function () {
-            $scope.GetPermission(1, $scope.CurrentUserKey);
-        }, 10);
+
         $scope.$apply();
         setTimeout(function () {
 
@@ -403,12 +404,9 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
         }, 500);
 
-
     }
 
     $scope.checkpermission = function (permissioncode) {
-
-
         for (var i = 0; i < $scope.Permission.length; i++) {
             if ($scope.Permission[i].PermissionCode == permissioncode) {
 
@@ -475,7 +473,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
         switch (Type) {
             case 1:
-               // log.error(_returnError);
+                // log.error(_returnError);
                 break;
             case 2:
                 log.warning(_returnError);
@@ -491,7 +489,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $(document).ajaxError(function (event, jqxhr, settings, exception) {
 
-     
+
 
         if (jqxhr.status != 200 && (jqxhr.readyState != 0 || jqxhr.status != 0)) {
             if (exception != "timeout") {
@@ -505,7 +503,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                     $("#modalerror").modal('show');
                     $("#errortext").html(exception);
                 }
-           
+
             }
             else {
                 alert("timeout error");
@@ -530,7 +528,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.errorbox = function (error) {
 
-      
+
 
 
         var _path = $location.path();
@@ -544,7 +542,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         }
 
 
-     
+
 
     }
 
@@ -734,7 +732,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
              },
              error: function (err) {
-                
+
                  if (err.status == 200 || err.status == "200") {
                      log.success("Image uploaded successfully please refresh grid to see the uploaded image.")
                  }
@@ -776,7 +774,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                 async: true,
                 data: JSON.stringify({ "UserName": $scope.userName, "AccountID": AccountID }),
                 error: function (err, textStatus) {
-                  
+
 
                     if (err.readyState == 0 || err.status == 0) {
 
@@ -797,7 +795,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
                     if (data.UpdateSecurityTokenWithUserNameResult.Success == true) {
 
-               
+
                         if (data.UpdateSecurityTokenWithUserNameResult != null && data.UpdateSecurityTokenWithUserNameResult.Payload != null) {
                             var _token = data.UpdateSecurityTokenWithUserNameResult.Payload;
 
@@ -809,7 +807,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                         }
                     }
                     else {
-                 
+
                         $scope.ShowErrorMessage("update security token", 1, 1, data.UpdateSecurityTokenWithUserNameResult.Message);
                     }
                 }
@@ -826,7 +824,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     }, 2400000);
 
     document.addEventListener('resume', function () {
-     //   alert('resume event. resumeType=' + cordova.backgroundapp.resumeType);
+        //   alert('resume event. resumeType=' + cordova.backgroundapp.resumeType);
         if (cordova.backgroundapp.resumeType == 'normal') {
             $scope.UpdateSecurityTokenGlobal();
         }
