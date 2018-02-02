@@ -5113,12 +5113,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
-    function getBase64Image (img) {
+    function getBase64Image(img) {
         // Create an empty canvas element
         var canvas = document.createElement('canvas');
         canvas.width = img.width;
         canvas.height = img.height;
-
+        alert("base64 called");
         // Copy the image contents to the canvas
         var ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0);
@@ -5129,9 +5129,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         var dataURL = canvas.toDataURL('image/png');
         return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
     }
-    function encodeImageUri(imageUri) {
+    function encodeImageUri2(imageUri) {
         var deferred = $q.defer();
-
+        alert("Encode called");
         var c = document.createElement('canvas');
         var ctx = c.getContext('2d');
         var img = new Image();
@@ -5162,7 +5162,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 	        var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
 
-	        imageData = "data:image/jpeg;base64," + encodeImageUri(results[i]);
+	        imageData = "data:image/jpeg;base64," + encodeImageUri2(results[i]);
 
 	        var id = randomStringNew(5, '0123456789');
 	        _ImgObj.ImageID = id;
