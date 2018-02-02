@@ -5093,28 +5093,37 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
-    $scope.onPhotoURISuccessNew = function (imageData) {
-        var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
-
-        imageData = "data:image/jpeg;base64," + imageData;
-
-        var id = randomStringNew(5, '0123456789');
-        _ImgObj.ImageID = id;
-
-        $(".viewimage").show();
-        $("#myModalforlist").modal("hide");
+    $scope.onPhotoURISuccessNew = function (results) {
 
 
-        _ImgObj.FileName = "IphoneLibrary";
-        _ImgObj.bytestring = imageData;
-        $scope.ImageList.push(_ImgObj);
+        for (var i = 0; i < results.length; i++) {
+
+            imageData == results[i];
+            var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
+
+            imageData = "data:image/jpeg;base64," + imageData;
+
+            var id = randomStringNew(5, '0123456789');
+            _ImgObj.ImageID = id;
+
+            $(".viewimage").show();
+            $("#myModalforlist").modal("hide");
+
+
+            _ImgObj.FileName = "IphoneLibrary";
+            _ImgObj.bytestring = imageData;
+            alert("before push");
+
+            $scope.ImageList.push(_ImgObj);
+
+        }
         CheckScopeBeforeApply();
 
     }
 
     $scope.getPhoto = function (source) {
         // Retrieve image file location from specified source
-        navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
+        navigator.camera.getPictures($scope.onPhotoURISuccessNew, $scope.onFail, {
             quality: 50,
             destinationType: destinationType.DATA_URL,
             correctOrientation: true,
