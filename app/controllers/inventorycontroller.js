@@ -5161,7 +5161,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 	        var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
 
-	        imageData = "data:image/jpeg;base64," + encodeImageUri2(results[i]);
+	       var imageDataa = "data:image/jpeg;base64," + encodeImageUri2(results[i]);
 
 	        var id = randomStringNew(5, '0123456789');
 	        _ImgObj.ImageID = id;
@@ -5171,8 +5171,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 	        _ImgObj.FileName = "IphoneLibrary";
-	        _ImgObj.bytestring = imageData;
-	        alert(imageData);
+	        _ImgObj.bytestring = imageDataa;
+	        alert(imageDataa);
 	        $scope.ImageList.push(_ImgObj);
 	    }
 	}, function (error) {

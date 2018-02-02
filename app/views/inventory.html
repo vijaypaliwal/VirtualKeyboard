@@ -411,7 +411,7 @@
                                     <div ng-if="CurrentActiveField=='Image'">
                                         <div>
                                             <a class="btn btn btn-gray iamgebtn" ng-click="OpenBox()">
-                                                <i class="fa fa-picture-o"></i> Add
+                                                <i class="fa fa-picture-o"></i> <span ng-if="ImageList.length==0"> Add </span><span ng-if="ImageList.length>0"> More </span>
                                                 <input type="file" style="visibility:hidden" multiple id="files" accept="image/*;" />
                                             </a>
                                         </div>
@@ -1586,7 +1586,7 @@
         </div>
         <div style="padding-left:0;" class="col-xs-4">
             <a class="btn btn btn-gray iamgebtn" ng-click="OpenBox()">
-                <i class="fa fa-picture-o"></i> Add
+                <i class="fa fa-picture-o"></i> <span ng-if="ImageList.length==0"> Add </span><span ng-if="ImageList.length>0"> More </span>
             </a>
         </div>
         <div style="padding-left:0;" class="col-xs-4">
