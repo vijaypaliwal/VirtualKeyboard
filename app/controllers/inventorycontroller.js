@@ -5130,7 +5130,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
     }
     function encodeImageUri2(imageUri) {
-        var deferred = $q.defer();
         alert("Encode called");
         var c = document.createElement('canvas');
         var ctx = c.getContext('2d');
