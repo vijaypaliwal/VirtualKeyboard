@@ -5115,7 +5115,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     function getBase64Image (img) {
         // Create an empty canvas element
-        var canvas = document.createElement(‘canvas’);
+        var canvas = document.createElement('canvas');
         canvas.width = img.width;
         canvas.height = img.height;
 
