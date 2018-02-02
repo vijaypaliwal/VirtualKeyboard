@@ -3502,7 +3502,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $("#files").on('change', function (event) {
-        $scope.handleFileSelect(event);
+      //  $scope.handleFileSelect(event);
     });
 
 
