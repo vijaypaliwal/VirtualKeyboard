@@ -5112,73 +5112,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
-
-    function getBase64Image(img) {
-        // Create an empty canvas element
-        var canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        alert("base64 called");
-        // Copy the image contents to the canvas
-        var ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0);
-        // Get the data-URL formatted image
-        // Firefox supports PNG and JPEG. You could check img.src to
-        // guess the original format, but be aware the using 'image/jpg'
-        // will re-encode the image.
-        var dataURL = canvas.toDataURL('image/png');
-        return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
-    }
-    function encodeImageUri2(imageUri) {
-        alert("Encode called");
-        var c = document.createElement('canvas');
-        var ctx = c.getContext('2d');
-        var img = new Image();
-        img.onload = function(){
-            c.width = this.width;
-            c.height = this.height;
-            ctx.drawImage(img, 0,0);
-        };
-        img.src = imageUri;
-        return getBase64Image(img);
-    }
-
     $scope.getPhoto = function (source) {
         // Retrieve image file location from specified source
-        //navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
-        //    quality: 50,
-        //    destinationType: destinationType.DATA_URL,
-        //    correctOrientation: true,
-        //    sourceType: pictureSource.PHOTOLIBRARY
-        //});
-
-
-        window.imagePicker.getPictures(
-	function (results) {
-	    for (var i = 0; i < results.length; i++) {
-	      
-	        alert(results[i]);
-
-	        var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
-
-	       var imageDataa = "data:image/jpeg;base64," + encodeImageUri2(results[i]);
-
-	        var id = randomStringNew(5, '0123456789');
-	        _ImgObj.ImageID = id;
-
-	        $(".viewimage").show();
-	        $("#myModalforlist").modal("hide");
-
-
-	        _ImgObj.FileName = "IphoneLibrary";
-	        _ImgObj.bytestring = imageDataa;
-	        alert(imageDataa);
-	        $scope.ImageList.push(_ImgObj);
-	    }
-	}, function (error) {
-	    console.log('Error: ' + error);
-	}
-);
+        navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
+            quality: 50,
+            destinationType: destinationType.DATA_URL,
+            correctOrientation: true,
+            sourceType: pictureSource.PHOTOLIBRARY
+        });
     }
 
     $scope.$watch("InventoryObject.AutoID", function () {
