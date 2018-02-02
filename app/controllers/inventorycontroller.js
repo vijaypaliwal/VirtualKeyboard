@@ -5114,12 +5114,24 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.getPhoto = function (source) {
         // Retrieve image file location from specified source
-        navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
-            quality: 50,
-            destinationType: destinationType.DATA_URL,
-            correctOrientation: true,
-            sourceType: pictureSource.PHOTOLIBRARY
-        });
+        //navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
+        //    quality: 50,
+        //    destinationType: destinationType.DATA_URL,
+        //    correctOrientation: true,
+        //    sourceType: pictureSource.PHOTOLIBRARY
+        //});
+
+
+        window.imagePicker.getPictures(
+	function (results) {
+	    for (var i = 0; i < results.length; i++) {
+	        console.log('Image URI: ' + results[i]);
+	        alert(results[i]);
+	    }
+	}, function (error) {
+	    console.log('Error: ' + error);
+	}
+);
     }
 
     $scope.$watch("InventoryObject.AutoID", function () {
