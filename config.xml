@@ -2,7 +2,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.clearlyinventory"
-        version   = "3.0.6">
+        version   = "3.0.7">
   <name>Clearly Inventory</name>
 
   <description>
@@ -13,17 +13,14 @@
    SHIVAM ITCS Team
   </author>
   
-   <plugin name="phonegap-plugin-barcodescanner" source="npm"/>
+  <plugin name="phonegap-plugin-barcodescanner" source="npm"/>
   <plugin name="cordova-plugin-statusbar" source="npm"/>
   <plugin name="cordova-plugin-globalization" source="npm"/>
-  
   <plugin name="cordova-plugin-ios-camera-permissions" source="npm"/>
- 
   <plugin name="cordova-plugin-camera" source="npm" spec="*">
     <variable name="CAMERA_USAGE_DESCRIPTION" value="App would like to access the camera." />
     <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="App would like to access the library." />
     <variable name="PHOTOLIBRARY_ADD_USAGE_DESCRIPTION" value="App would like to save the library." />
-    
   </plugin>
 
   <plugin name="cordova-plugin-file" source="npm" spec="~4.1.1"/>
