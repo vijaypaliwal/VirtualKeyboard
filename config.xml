@@ -92,6 +92,8 @@
   <icon src=".pgbomit/res/icon/ios/icon-57-2x.png"         gap:platform="ios"        width="114" height="114" />
   <icon src=".pgbomit/res/icon/ios/icon-72-2x.png"         gap:platform="ios"        width="144" height="144" />
   <icon src=".pgbomit/res/icon/ios/icon-180.png"           gap:platform="ios"        width="180" height="180" />
+    <icon src=".pgbomit/res/ios/icon-1024.png" gap:platform="ios"  width="1024" height="1024" />
+  
   
           <icon height="40" gap:platform="ios" src=".pgbomit/res/icon/ios/icon-40.png" width="40" />
         <icon height="80" gap:platform="ios" src=".pgbomit/res/icon/ios/icon-40@2x.png" width="80" />
@@ -103,6 +105,9 @@
         <icon height="87" gap:platform="ios" src=".pgbomit/res/icon/ios/icon-small@3x.png" width="87" />
   
   <icon src=".pgbomit/res/icon/webos/icon-64.png"          gap:platform="webos" />
+  
+ 
+  
   <icon src=".pgbomit/res/icon/windows-phone/icon-48.png"  gap:platform="winphone" />
   <icon src=".pgbomit/res/icon/windows-phone/icon-173.png" gap:platform="winphone"   gap:role="background" />
   <gap:splash src=".pgbomit/res/screen/android/screen-ldpi-portrait.png"  gap:platform="android" gap:density="ldpi" />
@@ -125,6 +130,7 @@
   <gap:splash src=".pgbomit/res/screen/ios/Splash-2208x1242.png"     gap:platform="ios" width="1242" height="2208" />
   <gap:splash src=".pgbomit/res/screen/ios/Splash-1242x2208.png"     gap:platform="ios" width="2208" height="1242" />
 
+ 
 
   <gap:splash src=".pgbomit/res/screen/ios/Default-Landscape@2x~ipad.png"     gap:platform="ios" width="2248" height="1536" />
   <gap:splash src=".pgbomit/res/screen/ios/Default-Portrait@2x~ipad.png"     gap:platform="ios" width="1536" height="2048" />
