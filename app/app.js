@@ -201,8 +201,11 @@ app.config(function ($routeProvider) {
 //var serviceBaseUrl = 'http://dev.style.u8i9.com/';
 //var serviceBase = 'http://dev.style.u8i9.com/API/ClearlyInventoryAPI.svc/';
 
-var serviceBaseUrl = 'https://test.inventory4.com/';
-var serviceBase = 'https://test.inventory4.com/API/ClearlyInventoryAPI.svc/';
+//var serviceBaseUrl = 'https://test.inventory4.com/';
+//var serviceBase = 'https://test.inventory4.com/API/ClearlyInventoryAPI.svc/';
+
+var serviceBaseUrl = 'http://mobile-staging.inventory4.com/';
+var serviceBase = 'http://mobile-staging.inventory4.com/API/ClearlyInventoryAPI.svc/';
 
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
