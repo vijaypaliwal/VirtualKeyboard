@@ -70,7 +70,10 @@ app.controller('signupController', ['$scope','localStorageService', '$location',
 
 
     $scope.loginAfterSignup = function (userName, Password, AccountName) {
+        localStorageService.set("ActivityCart", "");
 
+        localStorageService.set("SelectedAction", "");
+        localStorageService.set("lastlogindata", "");
         $scope.loginData = {
             userName: userName,
             password: Password,
@@ -81,14 +84,7 @@ app.controller('signupController', ['$scope','localStorageService', '$location',
         $scope.$apply();
         authService.login($scope.loginData).then(function (response) {
 
-            alert("In");
-
-
-            setTimeout(function () {
-                $scope.GetProfileData();
-                $scope.getactivepermission();
-
-            }, 10);
+         
          
 
             $scope.IsOwner = localStorageService.get('IsOwner');

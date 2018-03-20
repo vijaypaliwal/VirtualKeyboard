@@ -402,7 +402,12 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             for (var i = 0; i < $scope.Permissions4.length; i++) {
                 $scope.Permission.push($scope.Permissions4[i]);
             }
+
+
             $scope.$apply();
+
+            console.log("Permissions list");
+            console.log($scope.Permission);
 
         }, 500);
 

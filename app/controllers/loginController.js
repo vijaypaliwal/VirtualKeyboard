@@ -94,7 +94,6 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
         localStorageService.set("SelectedAction", "");
         localStorageService.set("lastlogindata", "");
 
-
         authService.login($scope.loginData).then(function (response)
         {
            

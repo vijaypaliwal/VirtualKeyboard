@@ -111,13 +111,16 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
 
                         $scope.currentactiveaccount(AccountName);
                         localStorageService.set('AccountID', AccountName);
-
-                        $scope.IsLoading = false;
                         $scope.GetProfileData();
 
-                        $scope.getactivepermission();
-                        $location.path("/FindItems");
+                        $scope.IsLoading = false;
+       
+                            $scope.getactivepermission();
 
+                       
+                     
+                            $location.path("/FindItems");
+            
                         $scope.$apply();
 
 

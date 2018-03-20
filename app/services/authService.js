@@ -82,7 +82,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                     _authentication.isAuth = true;
                     _authentication.userName = loginData.userName;
                     _authentication.useRefreshTokens = loginData.useRefreshTokens;
-                   // _Getuserinfo();
+                    _Getuserinfo();
                     deferred.resolve(response);
                     
 
@@ -158,7 +158,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
 
                     
-                   _UserInfo.username = response.GetUserInfoResult.Payload[0].UserName
+                   _UserInfo.username = response.GetUserInfoResult.Payload[0].UserName;
                    _UserInfo.myprofileimage = response.GetUserInfoResult.Payload[0].ProfilePic;
                    localStorageService.set('LockLibrary', response.GetUserInfoResult.Payload[0]);
                    localStorageService.set('AllowNegativeQuantity', response.GetUserInfoResult.Payload[0].AllowNegativeQuantity);
@@ -171,6 +171,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                    IsActiveItemLibrary = response.GetUserInfoResult.Payload[0].IsActiveItemLibrary;
                    IsActiveItemGroupLibrary = response.GetUserInfoResult.Payload[0].IsActiveItemGroupLibrary;
 
+                
                    localStorageService.set('UserKey', response.GetUserInfoResult.Payload[0].UserKey);
 
                    localStorageService.set('IsOwner', response.GetUserInfoResult.Payload[0].IsOwner);
