@@ -98,8 +98,8 @@ app.controller('loginController', ['$scope','localStorageService', '$location', 
         authService.login($scope.loginData).then(function (response)
         {
            
-            $scope.GetProfileData();
-
+           
+            
            
             $scope.getactivepermission();
 

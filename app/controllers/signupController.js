@@ -3,7 +3,13 @@ app.controller('signupController', ['$scope','localStorageService', '$location',
 
     $scope.savedSuccessfully = false;
     $scope.message = "";
-    
+
+    $scope.loginData = {
+        userName: "",
+        password: "",
+        account: "",
+        useRefreshTokens: false
+    };
     $scope.registration = {
         Name:"",
     Company:"",
@@ -40,7 +46,8 @@ app.controller('signupController', ['$scope','localStorageService', '$location',
                     localStorageService.set("LatestSignUp", true);
 
                     localStorageService.set('lastlogindata', { userName: response.SignupResult.Payload.UserName, Password: response.SignupResult.Payload.Password, AccountName: response.SignupResult.Payload.Account });
-                    $location.path('/login');
+                    //$location.path('/login');
+                    $scope.loginAfterSignup(response.SignupResult.Payload.UserName, response.SignupResult.Payload.UserName, response.SignupResult.Payload.Account);
                     $scope.$apply();
                 }
                 else {
@@ -60,6 +67,44 @@ app.controller('signupController', ['$scope','localStorageService', '$location',
         });
        
     };
+
+
+    $scope.loginAfterSignup = function (userName, Password, AccountName) {
+
+        $scope.loginData = {
+            userName: userName,
+            password: Password,
+            account: AccountName,
+            useRefreshTokens: false
+        };
+
+        $scope.$apply();
+        authService.login($scope.loginData).then(function (response) {
+
+            alert("In");
+
+
+            setTimeout(function () {
+                $scope.GetProfileData();
+                $scope.getactivepermission();
+
+            }, 10);
+         
+
+            $scope.IsOwner = localStorageService.get('IsOwner');
+
+
+
+
+            //$location.path('/FindItems');
+            $location.path('/Accounts');
+
+        },
+    function (err) {
+        $scope.message = err.error_description;
+        playBeep();
+    });
+    }
 
     $scope.showpassword = function () {
         $(".showbtn").hide();

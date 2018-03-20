@@ -53,7 +53,8 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
     $scope.Getuserinfo = function () {
 
         debugger;
-
+        var _string="this.onerror = null;this.src = 'img/dummy-user48.png'";
+        $("#myimgProfile").attr("onerror", _string);
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;

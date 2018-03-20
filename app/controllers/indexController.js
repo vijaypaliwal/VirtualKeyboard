@@ -366,7 +366,9 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     }
 
     $scope.getactivepermission = function () {
+        
         $scope.CurrentUserKey = localStorageService.get('UserKey');
+
         $scope.GetPermission(1, $scope.CurrentUserKey);
 
   
@@ -482,7 +484,39 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
         }
     }
+    $scope.ShowErrorMessageAccount = function (Place, TextType, Type, Message) {
+        var _returnError = ""
+        if (Message != undefined && Message != null) {
 
+        }
+        else {
+            Message = "";
+        }
+        switch (TextType) {
+            case 1:
+                _returnError = "Error occurred in fetching " + Place + " " + Message;
+                break;
+            case 2:
+                _returnError = "Error in your requested data while getting " + Place + " " + Message;
+                break;
+            case 3:
+                _returnError = "Error occurred during updating data " + Place + " " + Message;
+                break;
+            default:
+                _returnError = "Error in your requested data while getting " + Place + " " + Message;
+        }
+
+        switch (Type) {
+            case 1:
+               log.error(_returnError);
+                break;
+            case 2:
+                log.warning(_returnError);
+                break;
+            default:
+
+        }
+    }
     //$.ajaxSetup({
     //    timeout: 1000 //Time in milliseconds
     //});
@@ -593,7 +627,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.GetProfileData = function () {
 
-
+        debugger;
         authService.GetuserInfo();
         setTimeout(function () {
             $scope.UserInfoData = authService.UserInfo;
