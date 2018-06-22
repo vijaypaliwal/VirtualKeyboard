@@ -153,7 +153,10 @@ app.config(function ($routeProvider) {
         controller: "AccountsController",
         templateUrl: "app/views/Accounts.html"
     });
-
+    $routeProvider.when("/Billings", {
+        controller: "BillingController",
+        templateUrl: "app/views/Billing.html"
+    });
     $routeProvider.when("/selectcolumns", {
         controller: "selectcolumnsController",
         templateUrl: "app/views/selectcolumns.html"
@@ -195,8 +198,8 @@ app.config(function ($routeProvider) {
 
 
 
-//var serviceBaseUrl = 'http://localhost:7440/';
-//var serviceBase = 'http://localhost:7440/API/ClearlyInventoryAPI.svc/';
+//var serviceBaseUrl = 'http://localhost:24003/';
+//var serviceBase = 'http://localhost:24003/ClearlyInventoryAPI.svc/';
 
 //var serviceBaseUrl = 'http://dev.style.u8i9.com/';
 //var serviceBase = 'http://dev.style.u8i9.com/API/ClearlyInventoryAPI.svc/';

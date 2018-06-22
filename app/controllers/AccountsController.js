@@ -10,6 +10,13 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
     $scope.AccountsList = [];
     $scope.IsLoading = false;
     $scope.CurrentAccount = "";
+    $scope.Addinventory = false;
+
+    $scope.Addinventoryaccount = function () {
+        $scope.Addinventory = true;
+    }
+
+
     $scope.GetUserAccounts = function () {
         $scope.IsLoading = true;
         var authData = localStorageService.get('authorizationData');
@@ -20,7 +27,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
         $.ajax({
 
             type: "POST",
-            url: serviceBase + "GetUserAccounts",
+            url: serviceBase + "GetInventoryAccounts",
             contentType: 'application/json; charset=utf-8',
 
             dataType: 'json',
@@ -32,14 +39,14 @@ app.controller('AccountsController', ['$scope', '$location', 'authService','loca
 
             success: function (data) {
 
-                if (data.GetUserAccountsResult.Success == true) {
+                if (data.GetInventoryAccountsResult.Success == true) {
 
-                    if (data.GetUserAccountsResult != null && data.GetUserAccountsResult.Payload != null) {
-                        $scope.AccountsList = data.GetUserAccountsResult.Payload;
+                    if (data.GetInventoryAccountsResult != null && data.GetInventoryAccountsResult.Payload != null) {
+                        $scope.AccountsList = data.GetInventoryAccountsResult.Payload;
                     }
                 }
                 else {
-                    $scope.ShowErrorMessage("Get user Accounts", 1, 1, data.GetUserAccountsResult.Message);
+                    $scope.ShowErrorMessage("Get user Accounts", 1, 1, data.GetInventoryAccountsResult.Message);
 
                 }
                 $scope.IsLoading = false;

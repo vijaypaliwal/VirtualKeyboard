@@ -1,0 +1,426 @@
+﻿
+
+<link href="css/account.css" rel="stylesheet" />
+
+<style>
+    .btn-next {
+        height: 50px;
+        width: 50px;
+        border-radius: 100%;
+        text-align: center;
+        line-height: 50px;
+        padding: 0;
+        color: #333;
+        background: #f2f2f2;
+        float: right;
+        border: 1px solid #ccc;
+    }
+
+        .btn-next i {
+            color: #888;
+        }
+
+    .list-group {
+        min-height: 40px;
+    }
+
+
+    .list-group-item:nth-child(even) {
+        background: #f5f5f5;
+    }
+
+    .list-group-item:nth-child(odd) {
+        background: #FFF;
+    }
+
+    body {
+        background: #edecec;
+    }
+
+    .bottommenu {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        left: 0;
+        text-align: center;
+        background: #ccc;
+        color: #333;
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+        .bottommenu i {
+            display: block;
+            font-size: 20px;
+        }
+
+        .bottommenu a:hover {
+            color: #fff;
+        }
+
+    .listbtn a {
+        color: #069;
+    }
+
+    .card
+    {
+        padding:0;
+        margin:0;
+        margin-bottom:12px;
+    }
+
+    .card-header
+    {
+        background-color:#f5f5f5;
+        padding:12px;
+        font-size:16px;
+    }
+
+    .card-body
+    {
+        padding:12px;
+    }
+
+     .card-body p
+    {
+        font-size:13px;
+    }
+
+        .card-body .editicon {
+            position: absolute;
+            right: 17px;
+            top: 74px;
+            font-size: 14px;
+            background: #2196F3;
+            color: #fff;
+            padding: 0;
+            height: 40px;
+            border-radius: 100%;
+            width: 40px;
+            text-align: center;
+            line-height: 40px;
+        }
+
+    .card-body .editicon i
+    {
+        font-size:20px;
+    }
+</style>
+
+
+<style>
+    .accordion {
+        width: 100%;
+       
+        margin: 30px auto 20px;
+        background: #FFF;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+    }
+
+        .accordion .link {
+            cursor: pointer;
+            display: block;
+            padding: 15px 15px 15px 42px;
+            color: #4D4D4D;
+            font-size: 14px;
+            font-weight: 700;
+            border-bottom: 1px solid #CCC;
+            position: relative;
+            -webkit-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+        }
+
+        .accordion li:last-child .link {
+            border-bottom: 0;
+        }
+
+        .accordion li i {
+            position: absolute;
+            top: 16px;
+            left: 12px;
+            font-size: 18px;
+            color: #595959;
+            -webkit-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+        }
+
+            .accordion li i.fa-chevron-down {
+                right: 12px;
+                left: auto;
+                font-size: 16px;
+            }
+
+        .accordion li.open .link {
+            color: #fff;
+            background:#2196F3;
+        }
+
+        .accordion li.open i {
+            color: #fff;
+        }
+
+            .accordion li.open i.fa-chevron-down {
+                -webkit-transform: rotate(180deg);
+                -ms-transform: rotate(180deg);
+                -o-transform: rotate(180deg);
+                transform: rotate(180deg);
+            }
+
+        .accordion li.default .submenu {
+            display: block;
+        }
+    /**
+ * Submenu
+ -----------------------------*/
+    .submenu {
+        display: none;
+      
+        font-size: 14px;
+    }
+
+        .submenu li {
+            border-bottom: 1px solid #4b4a5e;
+        }
+
+        .submenu a {
+            display: block;
+            text-decoration: none;
+            color: #d9d9d9;
+            padding: 12px;
+            padding-left: 42px;
+            -webkit-transition: all 0.25s ease;
+            -o-transition: all 0.25s ease;
+            transition: all 0.25s ease;
+        }
+
+            .submenu a:hover {
+                background: #b63b4d;
+                color: #FFF;
+            }
+
+    .loaderanimation {
+        text-align: center;
+        position: fixed;
+        top: 22%;
+        z-index: 10;
+        width: 100%;
+        left: 0;
+    }
+
+</style>
+
+<div style="display:block !important; text-align:left; padding-left:15px;" id="toolbar" class="primary-color">
+
+    <span class="title"> <i class="fa fa-credit-card"></i> Billing Information</span>
+
+    <a style="padding-right:15px;" class="pull-right" href="#">
+        <i style="font-size:28px;" class="fa fa-sign-out"></i>
+    </a>
+
+
+</div>
+
+<br />
+
+
+<div ng-if="IsLoading==true" class="loaderanimation">
+    <img src="img/loader.gif" alt="Alternate Text" />
+    <p>Loading data....</p>
+</div>
+
+<div ng-show="IsLoading==false">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-user"></i> Customer Information
+        </div>
+        <div class="card-body">
+
+            <a class="editicon"> <i class="fa fa-pencil"></i> </a>
+
+            <p><b>{{BillingData.MasterAccountID}}</b></p>
+            <p>{{BillingData.Description}}</p>
+            <p>{{BillingData.Email}}</p>
+
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-credit-card"></i> Credit card Information
+        </div>
+        <div ng-repeat="obj in BillingData.Cards" class="card-body">
+
+            <a class="editicon"> <i class="fa fa-pencil"></i> </a>
+
+            <p>Credit card : <b>{{obj.Brand}} {{obj.Last4}}</b></p>
+            <p>Expr date : <b>{{obj.ExpMonth}}/{{obj.ExpYear}}</b></p>
+            <p>Name on card : <b>{{obj.CardName}}</b></p>
+
+        </div>
+    </div>
+
+
+
+    <div class="">
+
+
+
+
+        <!-- Contenedor -->
+        <ul id="accordion" class="accordion">
+
+            <li class="default open">
+                <div class="link"><i class="fa fa-globe"></i>Current Subscription <i class="fa fa-chevron-down"></i></div>
+                <div class="submenu">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>QTY x Price</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in BillingData.Subscriptions">
+                                <td>
+                                    {{data.Item}}
+                                </td>
+                                <td>
+                                    {{data.Quantity}} x  {{data.UnitPrice}}
+                                </td>
+                                <td>
+                                    {{data.Amount}}
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </li>
+            <li>
+                <div class="link"><i class="fa fa-code"></i>Next Invoice<i class="fa fa-chevron-down"></i></div>
+                <div class="submenu">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in BillingData.UpComingInvoices">
+                                <td>
+                                    {{data.Description}}
+                                </td>
+
+                                <td>
+                                    {{data.Amount}}
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </li>
+            <li>
+                <div class="link"><i class="fa fa-picture-o"></i>Past Invoices <small>1,120</small><i class="fa fa-chevron-down"></i></div>
+                <div class="submenu">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Invoice</th>
+
+                                <th>Amount</th>
+
+                                <th>Ispaid</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="prev in BillingData.PreviousInvoices">
+                                <td>
+                                    {{prev.InvoiceNumber}}
+                                </td>
+
+                                <td>
+                                    {{prev.InvoiceTotal}}
+                                </td>
+
+                                <td>
+
+                                    <span ng-if="prev.InvoicePaid==true"> <i class="fa fa-check-square-o"></i> yes</span>
+                                    <span ng-if="prev.InvoicePaid==false"> <i class="fa fa-square-o"></i> No</span>
+
+
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </li>
+
+        </ul>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <br /><br />
+            </div>
+        </div>
+
+        <div class="bottommenu">
+            <div class="row">
+                <div style="border-right: 1px solid #888; " class="col-xs-6">
+                  
+                    <a href="#/Accounts"><i class="fa fa-cubes"></i>Inventories</a>
+                </div>
+                <div style="color: #2196F3;" class="col-xs-6">
+                  
+                    <a href="#/billing"><i class="fa fa-credit-card"></i>Billing Info</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<script>
+    $(function () {
+        var Accordion = function (el, multiple) {
+            this.el = el || {};
+            this.multiple = multiple || false;
+
+            // Variables privadas
+            var links = this.el.find('.link');
+            // Evento
+            links.on('click', { el: this.el, multiple: this.multiple }, this.dropdown)
+        }
+
+        Accordion.prototype.dropdown = function (e) {
+            var $el = e.data.el;
+            $this = $(this),
+			$next = $this.next();
+
+            $next.slideToggle();
+            $this.parent().toggleClass('open');
+
+            if (!e.data.multiple) {
+                $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+            };
+        }
+
+        var accordion = new Accordion($('#accordion'), false);
+    });
+
+</script>
