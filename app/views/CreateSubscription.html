@@ -150,20 +150,42 @@
     </tfoot>
 </table>
 
+<div class="form-group">
+    <label>Email</label>
+    <div class="input-group">
+        <input type="text" class="form-control" ng-model="CreditCard.Email" />
 
-<!--<form id="stripeForm">
-    <div style="margin-bottom:10px;">
-        <div>
-            <label for="card-element">Card info</label>
+        <input type="hidden" id="stripe-token" ng-model="CreditCard.StripeToken" value="">
+       
+    </div>
+</div>
+
+<div class="form-group">
+    <label>Name</label>
+    <div class="input-group">
+        <input type="text" class="form-control" id="cardholder-name" ng-model="CreditCard.Name" />
+
+    </div>
+</div>
+<form id="stripeForm">
+    <div class="form-group">
+        <label>Card info</label>
+        <div class="input-group">
             <div id="card-element" class="form-control" style="padding-top:5px;"></div>
+            <div id="card-error" style="color: #eb1c26;"></div>
         </div>
-        <div id="card-error" style="color: #eb1c26;"></div>
     </div>
+    
     <div style="margin-bottom:10px;">
-        <button type="button"  class="btn btn-clearlyInventory btnPrimary" title="save credit card information"><i class="fa fa-check c-white"></i>Save</button>
-        <a href="#/Billings" class="btn btn-clearlyInventory btnSecondry" title="go back"><i class="fa fa-close"></i>Cancel</a>
+        <button type="submit" ng-if="IsSaving==false" class="btn btn-primary {{GetDisabledClass()}}" title="save credit card information"><i class="fa fa-check c-white"></i>Save</button>
+        <button type="button" ng-if="IsSaving==true" class="btn btn-primary disabled" title="save credit card information"><i class="fa fa-check fa-spin"></i>Save</button>
+        <a href="#/Billings" class="btn btn-gray" title="go back"><i class="fa fa-times"></i>Cancel</a>
     </div>
-</form>-->
+</form>
+
+<br/>
+<br />
+<br />
 
 <div class="bottommenu">
     <div class="row">

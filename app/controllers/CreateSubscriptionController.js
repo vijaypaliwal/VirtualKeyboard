@@ -2,8 +2,11 @@
 
 app.controller('CreateSubscriptionController', ['$scope', '$location', 'authService', 'localStorageService', 'ngAuthSettings', 'log', function ($scope, $location, authService, localStorageService, ngAuthSettings, log) {
     $scope.IsLoading = false;
-    $scope.CreditCard = {};
-
+    $scope.IsSaving = false;
+    $scope.CreditCard = {Email:"",Name:"",StripePublicKey:"",StripeToken:"",UserCount:0};
+    var stripe = {};
+    var card = {};
+    var elements = [];
     $scope.includedUserCount = 2;
     $scope.GetCreditCardDetail = function () {
         $scope.IsLoading = true;
@@ -28,6 +31,23 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
 
                 if (data.GetCreditCardDetailResult.Success == true) {
                     $scope.CreditCard = data.GetCreditCardDetailResult.Payload;
+                    stripe = Stripe($scope.CreditCard.StripePublicKey);
+                    elements = stripe.elements();
+
+                    card = elements.create('card', {
+                        style: {
+                            base: {
+                                color: '#069',
+                                fontSize: '16px'
+                            }
+                        }
+                    });
+                    card.mount('#card-element');
+
+                    card.on('change', function (event) {
+                        setOutcome(event);
+                    });
+
                     if ($scope.CreditCard.UserCount == 1)
                     {
                         $scope.includedUserCount = 1;
@@ -45,7 +65,45 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
             }
         });
     };
- 
+    $scope.SaveCreditCardDetail = function () {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+        $scope.IsSaving = true;
+        $scope.$apply();
+        $scope.CreditCard.StripeToken = $("#stripe-token").val();
+        $.ajax({
+
+            type: "POST",
+            url: serviceBase + "CreateNewSubscription",
+            contentType: 'application/json; charset=utf-8',
+
+            dataType: 'json',
+
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Model": $scope.CreditCard }),
+            error: function (err) {
+                $scope.IsSaving = false;
+                $scope.$apply();
+            },
+
+            success: function (data) {
+
+                if (data.CreateNewSubscriptionResult.Success == true) {
+                   
+                    log.success("Card Detail Saved successfully");
+                    $location.path("/Billings");
+                    $scope.$apply();
+                }
+                else {
+                    $scope.ShowErrorMessage("Get Credit Card Detail", 1, 1, data.CreateNewSubscriptionResult.Message);
+
+                }
+                $scope.IsSaving = false;
+                $scope.$apply();
+            }
+        });
+    };
     function init()
     {
         var _accountID = localStorageService.get('AccountID');
@@ -59,48 +117,56 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
     }
 
     init();  
+    $scope.GetDisabledClass = function () {
+        
+        if ($.trim($scope.CreditCard.Email) == "" || $.trim($scope.CreditCard.Name) == "")
+        {
+            return "disabled";
+
+        }
+
+        return "";
+    }
+
+
    
 
+ 
 
-    //var stripe = Stripe($scope.CreditCard.StripePublicKey);
-    //var elements = stripe.elements();
+    function setOutcome(result) {
+        document.getElementById('card-error').textContent = '';
+        if (result.token) {
+            document.getElementById('stripe-token').value = result.token.id;
+            $("#stripe-token").trigger("input");
+        } else if (result.error) {
+            document.getElementById('card-error').textContent = result.error.message;
+            $scope.IsSaving = false
+            $scope.$apply();
+        }
+    }
 
-    //var card = elements.create('card', {
-    //    style: {
-    //        base: {
-    //            color: '#069',
-    //            fontSize: '16px'
-    //        }
-    //    }
-    //});
-    //card.mount('#card-element');
+  
 
-    //function setOutcome(result) {
-    //    document.getElementById('card-error').textContent = '';
-    //    if (result.token) {
-    //        document.getElementById('stripe-token').value = result.token.id;
-    //    } else if (result.error) {
-    //        document.getElementById('card-error').textContent = result.error.message;
-    //    }
-    //}
-
-    //card.on('change', function (event) {
-    //    setOutcome(event);
-    //});
-
-    //document.getElementById('stripeForm').addEventListener('submit', function (e) {
-    //    e.preventDefault();
-    //    var extraDetails = {
-    //        name: document.getElementById('cardholder-name').value
-    //    };
-    //    stripe.createToken(card, extraDetails).then(
-    //        function (result) {
-    //            setOutcome(result);
-    //            var _token = document.getElementById('stripe-token').value;
-    //            if (_token.length > 0) {
-    //                //document.getElementById('customerForm').submit();
-    //            }
-    //        });
-    //});
+    document.getElementById('stripeForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        $scope.IsSaving = true
+        $scope.$apply();
+        var extraDetails = {
+            name: document.getElementById('cardholder-name').value
+        };
+        stripe.createToken(card, extraDetails).then(
+            function (result) {
+                setOutcome(result);
+                var _token = document.getElementById('stripe-token').value;
+                if (_token.length > 0) {
+                    //document.getElementById('customerForm').submit();
+                    $scope.SaveCreditCardDetail();
+                }
+                else {
+                    $scope.IsSaving = false
+                    $scope.$apply();
+                }
+            });
+    });
 
 }]);
