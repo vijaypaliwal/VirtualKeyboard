@@ -82,6 +82,26 @@
         /* symbol for "collapsed" panels */
         content: "\f105"; /* adjust as needed, taken from bootstrap.css */
     }
+
+    .sub-btn
+    {
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .alert-info {
+        background-color: #d9edf7;
+        border-color: #d9edf7;
+        color: #2196f3;
+    }
+
+    .alert {
+        padding: 15px;
+        margin-bottom: 18px;
+        border: 1px solid transparent;
+        border-radius: 2px;
+    }
 </style>
 
 
@@ -117,7 +137,7 @@
     </div>
 
 
-    <p style="background: #ccc; margin-bottom: 0; padding: 15px; padding-right:10px;"> <i class="fa fa-cubes"></i> Your Inventories <button style="height: 36px; line-height: 36px; margin-top: -5px;"  type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New</button> </p>
+    <p style="background: #ccc; margin-bottom: 0; padding: 15px; padding-right:10px;"> <i class="fa fa-cubes"></i> Your Inventories <button style="height: 36px; line-height: 36px; margin-top: -5px;" ng-click="AddNewAccount()"  type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New</button> </p>
 
     <!--<ul class="list-group">
 
@@ -156,7 +176,7 @@
         <div class="panel panel-default" ng-repeat="_obj in AccountsList" ng-if="_obj.CurrentUserMasterAccountID==_obj.MasterAccountID">
             <div class="panel-heading" style="background-color:{{_obj.BackColor}} !important" role="tab" id="heading{{_obj.InventoryAccountID}}">
                 <h4 class="panel-title">
-                    <a role="button" class="accordion-toggle" style="color:white;" data-toggle="collapse" data-parent="#accordion" data-target="#{{_obj.InventoryAccountID}}" aria-expanded="true">
+                    <a role="button" class="accordion-toggle" style="color: white; display: block;" data-toggle="collapse" data-parent="#accordion" data-target="#{{_obj.InventoryAccountID}}" aria-expanded="true">
                         <i class="fa fa-cubes"></i> {{_obj.InventoryName}}
                     </a>
                 </h4>
@@ -165,11 +185,11 @@
                 <div class="panel-body">
                     <p>{{_obj.FirstName}} {{_obj.LastName}}</p>
                     <p>{{_obj.Email}}</p>
-                    Status - <small style="color:brown !important; font-size:11px !important;"> <span ng-if="_obj.TrialExpired==true">TRIAL </span> <span ng-if="_obj.TrialExpired!=true">  <span ng-if="_obj.IsOpen==true">Open</span><span ng-if="_obj.IsOpen!=true">Closed</span> </span></small>
+                    Status - <small style="color:brown !important; font-size:11px !important;"> {{_obj.Status}}<span ng-if="_obj.DaysRemaining>0">({{_obj.DaysRemaining}} days remaining) </span></small>
                     <div class="row listbtn">
                         <div class="col-md-12">
                             <a ng-click="UpdateSecurityToken(_obj.InventoryAccountID,_obj.InventoryName)">Go to Inventory</a>
-                            |<a>Edit</a> | <a>Update status</a> | <a>Subscibe</a>
+                            |<a ng-click="OpenEditInventoryModal(_obj)">Edit</a> | <a ng-click="CloseInventory(_obj.InventoryAccountID)">Update status</a>  <a ng-if="_obj.DaysRemaining>0" href="#/CreateSubscription">| Create new Subscription</a>
                         </div>
                     </div>
                 </div>
@@ -213,7 +233,7 @@
         <div class="panel panel-default" ng-repeat="_obj in AccountsList" ng-if="_obj.CurrentUserMasterAccountID!=_obj.MasterAccountID">
             <div class="panel-heading" style="background-color:{{_obj.BackColor}} !important" role="tab" id="heading{{_obj.InventoryAccountID}}">
                 <h4 class="panel-title">
-                    <a role="button" class="accordion-toggle" style="color:white;" data-toggle="collapse" data-parent="#accordion" data-target="#{{_obj.InventoryAccountID}}" aria-expanded="true">
+                    <a role="button" class="accordion-toggle" style="color: white; display: block;" data-toggle="collapse" data-parent="#accordion" data-target="#{{_obj.InventoryAccountID}}" aria-expanded="true">
                         <i class="fa fa-cubes"></i> {{_obj.InventoryName}}
                     </a>
                 </h4>
@@ -222,7 +242,7 @@
                 <div class="panel-body">
                     <p>{{_obj.FirstName}} {{_obj.LastName}}</p>
                     <p>{{_obj.Email}}</p>
-                    Status - <small style="color:brown !important; font-size:11px !important;"> <span ng-if="_obj.TrialExpired==true">TRIAL </span> <span ng-if="_obj.TrialExpired!=true">  <span ng-if="_obj.IsOpen==true">Open</span><span ng-if="_obj.IsOpen!=true">Closed</span> </span></small>
+                    Status - <small style="color:brown !important; font-size:11px !important;"> {{_obj.Status}}<span ng-if="_obj.DaysRemaining>0">{{_obj.DaysRemaining}} days remaining </span></small>
                     <div class="row listbtn">
                         <div class="col-md-12">
                             <a ng-click="UpdateSecurityToken(_obj.InventoryAccountID,_obj.InventoryName)">Go to Inventory</a>
@@ -236,16 +256,33 @@
     </div>
 </div>
 
+<p ng-if="Addinventory==true" style="background: #ccc; margin-bottom: 0; padding: 15px; padding-right:10px;"> <i class="fa fa-cubes"></i> Add/Update Inventory </p>
 
-<div ng-if="Addinventory==true" class="animated zoomIn" style="background:#fff;padding:10px; margin-top:7px;">
-    <div class="form-group">
-        <label>Inventory Name</label>
-        <input type="text" class="form-control" name="name" value=" " />
+
+<div ng-if="Addinventory==true" class="animated zoomIn" style="background:#fff;padding:10px;">
+    
+    <div ng-if="IsAddInventoryShown==true">
+        <span ng-if="OwnedInventoryCount>1 && InventoryObj.InventoryAccountID==0" style="display:block;" class="alert alert-info">
+            Additional inventories are only $29.99, share your users across inventories for Free!
+        </span>
+
+        <div class="form-group">
+            <label>Inventory Name</label>
+            <input type="text" class="form-control" name="name" ng-model="InventoryObj.InventoryAccountName" />
+        </div>
+        <a class="btn btn-primary {{GetDisabledClass()}}" ng-if="InventoryObj.InventoryAccountID==0 && isSaving==false" ng-click="CreateNewInventoryAccount()"> <i class="fa fa-plus"></i> Add </a>
+        <a class="btn btn-primary disabled" ng-if="InventoryObj.InventoryAccountID==0 && isSaving==true" ng-click="CreateNewInventoryAccount()"> <i class="fa fa-plus fa-spin"></i> Add </a>
+        <a class="btn btn-primary {{GetDisabledClass()}}" ng-if="InventoryObj.InventoryAccountID!=0 && isSaving==false" ng-click="UpdateInventoryName()"> <i class="fa fa-pencil"></i> Update </a>
+        <a class="btn btn-primary disabled" ng-if="InventoryObj.InventoryAccountID!=0 && isSaving==true" > <i class="fa fa-pencil fa-spin"></i> Update </a>
+
+        
+        <a ng-click="CancelNewAccount()" class="btn btn-gray"> <i class="fa fa-times"></i> Cancel </a>
+
     </div>
-
-    <a class="btn btn-primary" > <i class="fa fa-plus"></i> Add </a>
-    <a ng-click="Addinventory=false;" class="btn btn-gray" > <i class="fa fa-times"></i> Cancel </a>
-
+    <div ng-if="IsAddInventoryShown==false">
+        <a class="btn btn-primary sub-btn" href="#/CreateSubscription"> <i class="fa fa-plus"></i> Create Subscription </a>
+        <a ng-click="CancelNewAccount()" class="btn btn-gray sub-btn"> <i class="fa fa-times"></i> Cancel </a>
+    </div>
 </div>
 
 <div class="row">

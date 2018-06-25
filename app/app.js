@@ -192,6 +192,12 @@ app.config(function ($routeProvider) {
         controller: "logindemoController",
         templateUrl: "app/views/logindemo.html"
     });
+    $routeProvider.when("/CreateSubscription", {
+        controller: "CreateSubscriptionController",
+        templateUrl: "app/views/CreateSubscription.html"
+    });
+
+    
     $routeProvider.otherwise({ redirectTo: "/login" });
 
 });
