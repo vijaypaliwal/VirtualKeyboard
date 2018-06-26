@@ -32,6 +32,9 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
                 if (data.GetCreditCardDetailResult.Success == true) {
                     $scope.CreditCard = data.GetCreditCardDetailResult.Payload;
                     stripe = Stripe($scope.CreditCard.StripePublicKey);
+                    debugger;
+                    console.log(stripe);
+                    alert(stripe._apiKey);
                     elements = stripe.elements();
 
                     card = elements.create('card', {
