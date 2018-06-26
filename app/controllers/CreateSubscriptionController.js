@@ -131,7 +131,8 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
     };
 
     function onSuccess(tokenId) {
-        alert(JSON.stringify(tokenId));
+        var _token = JSON.stringify(tokenId);
+        alert(_token.id);
     }
 
     function onError(errorMessage) {
