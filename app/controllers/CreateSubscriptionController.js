@@ -5,7 +5,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
     $scope.IsSaving = false;
     $scope.CreditCard = {Email:"",Name:"",StripePublicKey:"",StripeToken:"",UserCount:0};
     var stripe = {};
-    var card = {};
+    var _newcard = {};
     var elements = [];
     $scope.includedUserCount = 2;
     $scope.GetCreditCardDetail = function () {
@@ -34,10 +34,9 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
                     stripe = Stripe($scope.CreditCard.StripePublicKey);
                     debugger;
                     console.log(stripe);
-                    alert(stripe._apiKey);
                     elements = stripe.elements();
 
-                    card = elements.create('card', {
+                    _newcard = elements.create('card', {
                         style: {
                             base: {
                                 color: '#069',
@@ -45,9 +44,13 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
                             }
                         }
                     });
-                    card.mount('#card-element');
 
-                    card.on('change', function (event) {
+                    alert(_newcard._componentName);
+                    _newcard.mount('#newcardelement');
+
+                    alert($('#newcardelement').html());
+
+                    _newcard.on('change', function (event) {
                         setOutcome(event);
                     });
 
@@ -157,7 +160,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
         var extraDetails = {
             name: document.getElementById('cardholder-name').value
         };
-        stripe.createToken(card, extraDetails).then(
+        stripe.createToken(_newcard, extraDetails).then(
             function (result) {
                 setOutcome(result);
                 var _token = document.getElementById('stripe-token').value;
