@@ -70,7 +70,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
                 $scope.$apply();
 
                 cordova.plugins.stripe.setPublishableKey($scope.CreditCard.StripePublicKey);
-                $scope.CreditCardSubmission();
+               // $scope.CreditCardSubmission();
             }
         });
     };
