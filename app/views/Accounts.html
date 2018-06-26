@@ -59,9 +59,15 @@
     {
         color:#fff;
     }
-    .listbtn a
+
+    .row.listbtn 
     {
-        color:#069;
+        height:25px;
+    }
+    
+    
+     .listbtn a {
+        color: #069;
     }
     .btn-xs {
         padding: 1px 5px;
@@ -102,9 +108,30 @@
         border: 1px solid transparent;
         border-radius: 2px;
     }
+
+    .panel p {
+        font-size: 13px;
+        margin-bottom: 7px;
+    }
+
+    .panel p i
+    {
+        font-size:18px;
+        color:#888;
+        width:18px;
+    }
+
+    .bottomlinks {
+        position: absolute;
+        background: #f5f5f5;
+        left: 2px;
+        right: 2px;
+        width: auto;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin-top: 9px;
+    }
 </style>
-
-
 
 
 
@@ -182,20 +209,22 @@
                 </h4>
             </div>
             <div id="{{_obj.InventoryAccountID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                    <p>{{_obj.FirstName}} {{_obj.LastName}}</p>
-                    <p>{{_obj.Email}}</p>
-                    Status - <small style="color:brown !important; font-size:11px !important;"> {{_obj.Status}}<span ng-if="_obj.DaysRemaining>0">({{_obj.DaysRemaining}} days remaining) </span></small>
+                <div style="border:1px solid {{_obj.BackColor}} !important;" class="panel-body">
+                    <p style="text-transform:capitalize; font-weight:700;"> <i class="fa fa-user"></i> {{_obj.FirstName}} {{_obj.LastName}} <span class="pull-right" style="font-size: 11px !important; text-transform: lowercase; background: #e2e2e2; padding: 4px; border-radius: 6px; color: #888;"> {{_obj.Status}}</span></p>
+                    <p><i class="fa fa-envelope"></i> {{_obj.Email}}</p>
+
+                    <p><span ng-if="_obj.DaysRemaining>0">({{_obj.DaysRemaining}} days remaining) </span></p>
+
+                  
                     <div class="row listbtn">
-                        <div class="col-md-12">
+                        <div class="col-md-12 bottomlinks">
                             <a ng-click="UpdateSecurityToken(_obj.InventoryAccountID,_obj.InventoryName)">Go to Inventory</a>
-                            |<a ng-click="OpenEditInventoryModal(_obj)">Edit</a> | <a ng-click="CloseInventory(_obj.InventoryAccountID)">Update status</a>  <a ng-if="_obj.DaysRemaining>0" href="#/CreateSubscription">| Create new Subscription</a>
+                            | <a ng-click="OpenEditInventoryModal(_obj)">Edit</a> | <a ng-click="CloseInventory(_obj.InventoryAccountID)">Update status</a>  <a ng-if="_obj.DaysRemaining>0" href="#/CreateSubscription">| Create new Subscription</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
         
     </div>
 
@@ -239,12 +268,13 @@
                 </h4>
             </div>
             <div id="{{_obj.InventoryAccountID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                    <p>{{_obj.FirstName}} {{_obj.LastName}}</p>
-                    <p>{{_obj.Email}}</p>
-                    Status - <small style="color:brown !important; font-size:11px !important;"> {{_obj.Status}}<span ng-if="_obj.DaysRemaining>0">{{_obj.DaysRemaining}} days remaining </span></small>
+                <div style="border:1px solid {{_obj.BackColor}} !important;" class="panel-body">
+                    <p style="text-transform:capitalize; font-weight:700;"> <i class="fa fa-user"></i> {{_obj.FirstName}} {{_obj.LastName}} <span class="pull-right" style="font-size: 11px !important; text-transform: lowercase; background: #e2e2e2; padding: 4px; border-radius: 6px; color: #888;"> {{_obj.Status}}</span></p>
+                    <p><i class="fa fa-envelope"></i> {{_obj.Email}}</p>
+                    <p><span ng-if="_obj.DaysRemaining>0">{{_obj.DaysRemaining}} days remaining </span></p>
+                   
                     <div class="row listbtn">
-                        <div class="col-md-12">
+                        <div class="bottomlinks col-md-12">
                             <a ng-click="UpdateSecurityToken(_obj.InventoryAccountID,_obj.InventoryName)">Go to Inventory</a>
                         </div>
                     </div>

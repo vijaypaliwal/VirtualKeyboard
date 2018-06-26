@@ -3,6 +3,21 @@
 <link href="css/account.css" rel="stylesheet" />
 
 <style>
+    .nodata {
+        text-align: center;
+        padding: 15px;
+    }
+
+        .nodata i {
+            position: initial !important;
+            top: 0 !important;
+            font-size: 30px !important;
+            color: #ccc !important;
+        }
+
+        .nodata p {
+            font-family: cursive;
+        }
     .btn-next {
         height: 50px;
         width: 50px;
@@ -109,108 +124,118 @@
 
 
 <style>
-    .accordion {
-        width: 100%;
-       
-        margin: 30px auto 20px;
-        background: #FFF;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
-    }
+       .redColor {
+           color: red;
+       }
 
-        .accordion .link {
-            cursor: pointer;
-            display: block;
-            padding: 15px 15px 15px 42px;
-            color: #4D4D4D;
-            font-size: 14px;
-            font-weight: 700;
-            border-bottom: 1px solid #CCC;
-            position: relative;
-            -webkit-transition: all 0.4s ease;
-            -o-transition: all 0.4s ease;
-            transition: all 0.4s ease;
-        }
+       .accordion {
+           width: 100%;
+           margin: 30px auto 20px;
+           background: #FFF;
+           -webkit-border-radius: 4px;
+           -moz-border-radius: 4px;
+           border-radius: 4px;
+       }
 
-        .accordion li:last-child .link {
-            border-bottom: 0;
-        }
+           .accordion .link {
+               cursor: pointer;
+               display: block;
+               padding: 15px 15px 15px 42px;
+               color: #069;
+               font-size: 14px;
+               font-weight: 700;
+               border-bottom: 1px solid #CCC;
+               position: relative;
+               -webkit-transition: all 0.4s ease;
+               -o-transition: all 0.4s ease;
+               transition: all 0.4s ease;
+               background: #f2f2f2;
+           }
 
-        .accordion li i {
-            position: absolute;
-            top: 16px;
-            left: 12px;
-            font-size: 18px;
-            color: #595959;
-            -webkit-transition: all 0.4s ease;
-            -o-transition: all 0.4s ease;
-            transition: all 0.4s ease;
-        }
+           .accordion li:last-child .link {
+               border-bottom: 0;
+           }
 
-            .accordion li i.fa-chevron-down {
-                right: 12px;
-                left: auto;
-                font-size: 16px;
-            }
+           .accordion li i {
+               position: absolute;
+               top: 16px;
+               left: 12px;
+               font-size: 18px;
+               color: #595959;
+               -webkit-transition: all 0.4s ease;
+               -o-transition: all 0.4s ease;
+               transition: all 0.4s ease;
+           }
 
-        .accordion li.open .link {
-            color: #fff;
-            background:#2196F3;
-        }
+               .accordion li i.fa-chevron-down {
+                   right: 12px;
+                   left: auto;
+                   font-size: 16px;
+               }
 
-        .accordion li.open i {
-            color: #fff;
-        }
+           .accordion li.open .link {
+               color: #fff;
+               background: #2196F3;
+           }
 
-            .accordion li.open i.fa-chevron-down {
-                -webkit-transform: rotate(180deg);
-                -ms-transform: rotate(180deg);
-                -o-transform: rotate(180deg);
-                transform: rotate(180deg);
-            }
+           .accordion li.open i {
+               color: #fff;
+           }
 
-        .accordion li.default .submenu {
-            display: block;
-        }
-    /**
- * Submenu
- -----------------------------*/
-    .submenu {
-        display: none;
-      
-        font-size: 14px;
-    }
+               .accordion li.open i.fa-chevron-down {
+                   -webkit-transform: rotate(180deg);
+                   -ms-transform: rotate(180deg);
+                   -o-transform: rotate(180deg);
+                   transform: rotate(180deg);
+               }
 
-        .submenu li {
-            border-bottom: 1px solid #4b4a5e;
-        }
+           .accordion li.default .submenu {
+               display: block;
+           }
+       /**
+    * Submenu
+    -----------------------------*/
+       .submenu {
+           display: none;
+           font-size: 14px;
+       }
 
-        .submenu a {
-            display: block;
-            text-decoration: none;
-            color: #d9d9d9;
-            padding: 12px;
-            padding-left: 42px;
-            -webkit-transition: all 0.25s ease;
-            -o-transition: all 0.25s ease;
-            transition: all 0.25s ease;
-        }
+           .submenu li {
+               border-bottom: 1px solid #4b4a5e;
+           }
 
-            .submenu a:hover {
-                background: #b63b4d;
-                color: #FFF;
-            }
+           .submenu a {
+               display: block;
+               text-decoration: none;
+               color: #d9d9d9;
+               padding: 12px;
+               padding-left: 42px;
+               -webkit-transition: all 0.25s ease;
+               -o-transition: all 0.25s ease;
+               transition: all 0.25s ease;
+           }
 
-    .loaderanimation {
-        text-align: center;
-        position: fixed;
-        top: 22%;
-        z-index: 10;
-        width: 100%;
-        left: 0;
-    }
+               .submenu a:hover {
+                   background: #b63b4d;
+                   color: #FFF;
+               }
 
+       .loaderanimation {
+           text-align: center;
+           position: fixed;
+           top: 22%;
+           z-index: 10;
+           width: 100%;
+           left: 0;
+       }
+
+       .table-bordered thead {
+           background: #d2d2d2;
+       }
+
+       .table-bordered {
+           margin-bottom: 0;
+       }
 </style>
 
 <div style="display:block !important; text-align:left; padding-left:15px;" id="toolbar" class="primary-color">
@@ -233,40 +258,79 @@
 </div>
 
 <div ng-show="IsLoading==false">
-    <div class="card">
-        <div class="card-header">
-            <i class="fa fa-user"></i> Customer Information
+    <div ng-show="ShowInvoicedetails==false">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-user"></i> Customer Information
+            </div>
+            <div class="card-body">
+
+
+                <div ng-if="CustomerEdit==false">
+                    <a class="editicon" ng-click="ToggleCustomerEdit()"> <i class="fa fa-pencil"></i> </a>
+
+                    <p><b>{{BillingData.MasterAccountID}}</b></p>
+                    <p>{{BillingData.Description}}</p>
+                    <p>{{BillingData.Email}}</p>
+
+
+                </div>
+                <div ng-if="CustomerEdit==true">
+
+                    <form name="signup" id="signup">
+
+                        <div class="form-group">
+                            <label>Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="cardholder-name" required="required" name="Name" ng-model="CustomerObj.Name" />
+                                <span class="redColor" ng-if="signup.$submitted && signup.Name.$valid==false && signup.Name.$error.required">
+                                    Name is required.
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <div class="input-group">
+                                <input type="email" class="form-control" id="email" name="Email" required="required" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" ng-model="CustomerObj.Email" />
+                                <span class="redColor" ng-if="signup.$submitted && signup.Email.$valid==false && signup.Email.$error.required">
+                                    Email is required.
+                                </span>
+                                <span class="redColor" ng-if="signup.$submitted && signup.Email.$error.pattern">
+                                    Please fill correct email.
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom:10px;">
+                            <button type="button" class="btn btn-primary" id="signUpBtn" data-ng-click="signup.$submitted=true;signup.$valid && UpdateCustomerDetail()" title="save credit card information"><i class="fa fa-check c-white" ng-class="{'fa-spin':IsSaving==true}"></i>Save</button>
+                            <a ng-click="ToggleCustomerEdit()" class="btn btn-gray" title="go back"><i class="fa fa-times"></i>Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
 
-            <a class="editicon"> <i class="fa fa-pencil"></i> </a>
 
-            <p><b>{{BillingData.MasterAccountID}}</b></p>
-            <p>{{BillingData.Description}}</p>
-            <p>{{BillingData.Email}}</p>
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-credit-card"></i> Credit card Information
+            </div>
+            <div ng-repeat="obj in BillingData.Cards" class="card-body">
 
+                <a class="editicon"> <i class="fa fa-pencil"></i> </a>
+
+                <p>Credit card : <b>{{obj.Brand}} {{obj.Last4}}</b></p>
+                <p>Expr date : <b>{{obj.ExpMonth}}/{{obj.ExpYear}}</b></p>
+                <p>Name on card : <b>{{obj.CardName}}</b></p>
+
+            </div>
         </div>
-    </div>
-
-
-    <div class="card">
-        <div class="card-header">
-            <i class="fa fa-credit-card"></i> Credit card Information
-        </div>
-        <div ng-repeat="obj in BillingData.Cards" class="card-body">
-
-            <a class="editicon"> <i class="fa fa-pencil"></i> </a>
-
-            <p>Credit card : <b>{{obj.Brand}} {{obj.Last4}}</b></p>
-            <p>Expr date : <b>{{obj.ExpMonth}}/{{obj.ExpYear}}</b></p>
-            <p>Name on card : <b>{{obj.CardName}}</b></p>
-
-        </div>
-    </div>
 
 
 
-   
+
 
 
 
@@ -275,9 +339,9 @@
         <ul id="accordion" class="accordion">
 
             <li class="default open">
-                <div class="link"><i class="fa fa-globe"></i>Current Subscription <i class="fa fa-chevron-down"></i></div>
+                <div class="link"><i class="fa fa-file-pdf-o"></i>Current Subscription <i class="fa fa-chevron-down"></i></div>
                 <div class="submenu">
-                    <table class="table table-bordered">
+                    <table ng-show="BillingData.Subscriptions.length>0" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Item</th>
@@ -294,21 +358,28 @@
                                     {{data.Quantity}} x  {{data.UnitPrice}}
                                 </td>
                                 <td>
-                                    {{data.Amount}}
+                                    {{data.Quantity*data.UnitPrice}}
                                 </td>
                             </tr>
+                            <tr><td style="text-align:right;" colspan="2">Subscription Amount</td><td>${{CurrentSubscriptionTotal}}</td></tr>
                         </tbody>
 
                     </table>
+
+                    <div class="nodata" ng-show="BillingData.Subscriptions.length==0">
+                        <p><i class="fa fa-frown-o" aria-hidden="true"></i></p>
+                        <p>No subscription record !</p>
+                    </div>
+
                 </div>
             </li>
             <li>
-                <div class="link"><i class="fa fa-code"></i>Next Invoice<i class="fa fa-chevron-down"></i></div>
+                <div class="link"><i class="fa fa-file-text-o"></i>Next Invoice will be on 6/26/2018 <i class="fa fa-chevron-down"></i></div>
                 <div class="submenu">
-                    <table class="table table-bordered">
+                    <table ng-show="BillingData.UpComingInvoices.length>0" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Description</th>
+                                <th>Description (Period: {{StartDate}} to {{EndDate}})</th>
 
                                 <th>Amount</th>
                             </tr>
@@ -320,22 +391,28 @@
                                 </td>
 
                                 <td>
-                                    {{data.Amount}}
+                                    {{data.Amount/100}}
                                 </td>
                             </tr>
+                            <tr style=""><td style="text-align:right;">Estimated Amount</td><td>${{UpcomingSubscriptionTotal}}</td></tr>
                         </tbody>
 
                     </table>
+
+                    <div class="nodata" ng-show="BillingData.UpComingInvoices.length==0">
+                        <p><i class="fa fa-frown-o" aria-hidden="true"></i></p>
+                        <p>No Invoice record !</p>
+                    </div>
                 </div>
             </li>
             <li>
-                <div class="link"><i class="fa fa-picture-o"></i>Past Invoices <small>1,120</small><i class="fa fa-chevron-down"></i></div>
+                <div class="link"><i class="fa fa-history"></i>Past Invoices <i class="fa fa-chevron-down"></i></div>
                 <div class="submenu">
-                    <table class="table table-bordered">
+                    <table ng-show="BillingData.PreviousInvoices.length>0" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Invoice</th>
-
+                                <th>Date</th>
                                 <th>Amount</th>
 
                                 <th>Ispaid</th>
@@ -344,11 +421,13 @@
                         <tbody>
                             <tr ng-repeat="prev in BillingData.PreviousInvoices">
                                 <td>
-                                    {{prev.InvoiceNumber}}
+                                    <a style="color:#069 !important; padding:7px !important; background:#fff;" ng-click="getInvoiceDetails(prev.InvoiceID)">{{prev.InvoiceNumber}}</a>
                                 </td>
-
                                 <td>
-                                    {{prev.InvoiceTotal}}
+                                    {{prev.InvoiceDate}}
+                                </td>
+                                <td>
+                                    ${{prev.InvoiceTotal/100}}
                                 </td>
 
                                 <td>
@@ -362,6 +441,11 @@
                         </tbody>
 
                     </table>
+
+                    <div class="nodata" ng-show="BillingData.PreviousInvoices.length==0">
+                        <p><i class="fa fa-frown-o" aria-hidden="true"></i></p>
+                        <p>No Invoice record !</p>
+                    </div>
                 </div>
             </li>
 
@@ -374,10 +458,56 @@
             </div>
         </div>
 
-        
 
-  
 
+    </div>
+
+</div>
+<div ng-show="ShowInvoicedetails==true">
+
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-info-circle"></i> Invoice Details <a style="color:#069;" ng-click="ShowInvoicedetails=false" class="pull-right">Back</a>
+        </div>
+        <div class="card-body">
+
+            <p><b>{{InvoiceDetails.CustomerDescription}}</b></p>
+            <p>{{InvoiceDetails.InvoiceDate}}</p>
+            <p>{{InvoiceDetails.Email}}</p>
+
+            <p>{{InvoiceDetails.Number}}</p>
+
+        </div>
+    </div>
+
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Description (Period: {{StartInvoiceDate}} to {{EndInvoiceDate}})</th>
+
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="data in InvoiceDetails.Invoices">
+                <td>
+                    {{data.Description}}
+                </td>
+
+                <td>
+                    {{data.Amount}}
+                </td>
+            </tr>
+            <tr style=""><td style="text-align:right;">Total</td><td>${{InvoiceDetails.InvoicesTotal}}</td></tr>
+        </tbody>
+
+    </table>
+
+</div>
+
+<div>
+    <br /><br /><br />
 </div>
 
 <div class="bottommenu">
