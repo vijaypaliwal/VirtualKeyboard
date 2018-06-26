@@ -31,6 +31,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
 
                 if (data.GetCreditCardDetailResult.Success == true) {
                     $scope.CreditCard = data.GetCreditCardDetailResult.Payload;
+                 
                     stripe = Stripe($scope.CreditCard.StripePublicKey);
                     debugger;
                     console.log(stripe);
@@ -59,8 +60,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
                         $scope.includedUserCount = 1;
 
                     }
-                    
-
+                   
                 }
                 else {
                     $scope.ShowErrorMessage("Get Credit Card Detail", 1, 1, data.GetCreditCardDetailResult.Message);
@@ -68,6 +68,9 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
                 }
                 $scope.IsLoading = false;
                 $scope.$apply();
+
+                cordova.plugins.stripe.setPublishableKey($scope.CreditCard.StripePublicKey);
+                $scope.CreditCardSubmission();
             }
         });
     };
@@ -110,6 +113,37 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
             }
         });
     };
+
+
+    var card = {
+        number: '4242424242424242', // 16-digit credit card number
+        expMonth: 12, // expiry month
+        expYear: 2020, // expiry year
+        cvc: '220', // CVC / CCV
+        name: 'John Smith', // card holder name (optional)
+        address_line1: '123 Some Street', // address line 1 (optional)
+        address_line2: 'Suite #220', // address line 2 (optional)
+        address_city: 'Toronto', // city (optional)
+        address_state: 'Ontario', // state/province (optional)
+        address_country: 'Canada', // country (optional)
+        postal_code: 'L5L5L5', // Postal Code / Zip Code (optional)
+        currency: 'CAD' // Three-letter ISO currency code (optional)
+    };
+
+    function onSuccess(tokenId) {
+        alert(tokenId);
+    }
+
+    function onError(errorMessage) {
+        alert('Error getting card token', errorMessage);
+    }
+
+    $scope.CreditCardSubmission = function () {
+        cordova.plugins.stripe.createCardToken(card, onSuccess, onError);
+    }
+
+   
+
     function init()
     {
         var _accountID = localStorageService.get('AccountID');
