@@ -45,10 +45,10 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
                         }
                     });
 
-                    alert(_newcard._componentName);
+                   // alert(_newcard._componentName);
                     _newcard.mount('#newcardelement');
 
-                    alert($('#newcardelement').html());
+                    console.log($('#newcardelement').html());
 
                     _newcard.on('change', function (event) {
                         setOutcome(event);
