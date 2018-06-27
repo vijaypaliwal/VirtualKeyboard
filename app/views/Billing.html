@@ -430,6 +430,15 @@
                 <form class="myform">
                
                     <ul>
+
+                        <li>
+                            <label for="card_number">Name on card</label>
+                            <input ng-model="creditcardinfo.Name" type="text" class="form-control"  placeholder="My Name">
+
+
+                        </li>
+
+
                         <li>
                             <label for="card_number">Card number</label>
                             <input ng-model="creditcardinfo.Number" type="text" onkeypress="if(this.value.length==16) return false;" name="card_number" id="card_number" placeholder="1234 5678 9012 3456">
@@ -680,7 +689,7 @@
     <div class="row">
         <div style="border-right: 1px solid #888; " class="col-xs-6">
 
-            <a href="#/Accounts"><i class="fa fa-cubes"></i>Inventories</a>
+            <a style="color: #000;" href="#/Accounts"><i class="fa fa-cubes"></i>Inventories</a>
         </div>
         <div style="color: #2196F3;" class="col-xs-6">
 

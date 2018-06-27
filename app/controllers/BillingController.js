@@ -15,7 +15,8 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
     $scope.CustomerObj = { Name: "", Email: "" };
     $scope.IsSaving = false;
     $scope.ShowInvoicedetails = false;
-
+    $scope.creditcardinfo = { Name: "", Number: "", ExpMonth: "", ExpYear: "", PostalCode: "", CVV: "" }
+    $scope.StripePublicKey = "";
     $scope.IsProperEmail = function (email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
@@ -53,6 +54,10 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
                         
                         $scope.CustomerObj.Email = $scope.BillingData.Email;
                         $scope.CustomerObj.Name = $scope.BillingData.Description;
+                        $scope.creditcardinfo.Name = $scope.BillingData.Description;
+                        $scope.StripePublicKey = $scope.BillingData.StripePublicKey;
+
+
                         for (var i = 0; i < $scope.BillingData.Subscriptions.length; i++) {
                             $scope.CurrentSubscriptionTotal += $scope.BillingData.Subscriptions[i].Quantity * $scope.BillingData.Subscriptions[i].UnitPrice;
                         }
@@ -71,6 +76,9 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
                 $scope.IsLoading = false;
 
                 $scope.$apply();
+
+                cordova.plugins.stripe.setPublishableKey($scope.StripePublicKey);
+
             }
         });
     };
@@ -138,31 +146,37 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
         }
         $scope.IsSaving = true;
         $scope.$apply();
+        
+        
+        
         $scope.CreditCard.StripeToken = $("#stripe-token").val();
         $.ajax({
 
             type: "POST",
-            url: serviceBase + "CreateNewSubscription",
+            url: serviceBase + "EditCreditCard",
             contentType: 'application/json; charset=utf-8',
 
             dataType: 'json',
 
-            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Model": $scope.CreditCard }),
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "customerName": $scope.creditcardinfo.Name, "stripeToken": $scope.creditcardinfo.Number }),
             error: function (err) {
                 $scope.IsSaving = false;
                 $scope.$apply();
+                $scope.ToggleCreditcardEdit();
             },
 
             success: function (data) {
 
-                if (data.CreateNewSubscriptionResult.Success == true) {
+                if (data.EditCreditCardResult.Success == true) {
 
                     log.success("Card Detail Saved successfully");
-                    $location.path("/Billings");
+                    $scope.ToggleCreditcardEdit();
+                    init();
                     $scope.$apply();
                 }
                 else {
-                    $scope.ShowErrorMessage("Get Credit Card Detail", 1, 1, data.CreateNewSubscriptionResult.Message);
+                    $scope.ToggleCreditcardEdit();
+                    $scope.ShowErrorMessage("Get Credit Card Detail", 1, 1, data.EditCreditCardResult.Message);
 
                 }
                 $scope.IsSaving = false;
@@ -171,7 +185,6 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
         });
     };
 
-    $scope.creditcardinfo = { Number: "", ExpMonth: "", ExpYear: "", PostalCode: "", CVV: "" }
 
 
     var card = {
