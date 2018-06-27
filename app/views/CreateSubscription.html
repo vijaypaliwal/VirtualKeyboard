@@ -2,6 +2,26 @@
 
 <link href="css/account.css" rel="stylesheet" />
 
+
+<link rel="stylesheet" href="https://jquerycreditcardvalidator.com/css/demo.css">
+
+<style>
+  body
+  {
+      font-size:15px;
+      padding-top:0;
+  }
+  h4
+  {
+      font-size:18px;
+  }
+
+</style>
+
+
+
+<script type="text/javascript" src="https://jquerycreditcardvalidator.com/js/demo.js"></script>
+
 <style>
 
 
@@ -87,6 +107,39 @@
    #newcardelement iframe {
         z-index: 999999 !important;
     }
+
+    .myform
+    {
+        position:relative;
+        width:100%;
+    }
+
+    form #card_number
+    {
+        width:calc(100% - 86px);
+    }
+
+    #name_on_card {
+        width: calc(100% - 30px);
+    }
+
+    .vertical li {
+        float: left !important;
+        width:33%
+    }
+
+        .vertical li:last-child input {
+           float:left;
+        }
+
+    .vertical input {
+      width:100%;
+    }
+
+    .vertical li input, select
+    {
+        border-radius:0 !important;
+    }
 </style>
 <div style="display:block !important; text-align:left; padding-left:15px;" id="toolbar" class="primary-color">
 
@@ -110,7 +163,7 @@
     <thead>
         <tr>
             <td>Item</td>
-            <td class="text-right">Quantity</td>
+            <td class="text-right">QTY</td>
             <td class="text-right">Amount</td>
             <td class="text-right">Extended</td>
         </tr>
@@ -171,7 +224,7 @@
 
     </div>
 </div>
-<form id="stripeForm">
+<form style="visibility:hidden" id="stripeForm">
     <div class="form-group">
         <label>Card info</label>
         <div class="input-group">
@@ -180,16 +233,91 @@
         </div>
     </div>
     
-    <div style="margin-bottom:10px;">
-        <button type="submit" ng-if="IsSaving==false" class="btn btn-primary {{GetDisabledClass()}}" title="save credit card information"><i class="fa fa-check c-white"></i>Save</button>
-        <button type="button" ng-if="IsSaving==true" class="btn btn-primary disabled" title="save credit card information"><i class="fa fa-check fa-spin"></i>Save</button>
-        <a href="#/Billings" class="btn btn-gray" title="go back"><i class="fa fa-times"></i>Cancel</a>
-    </div>
+   
+</form>
+<br />
+
+
+<form class="myform">
+    <h4>Payment details</h4>
+
+    <ul>
+        <li>
+            <label for="card_number">Card number</label>
+            <input ng-model="creditcardinfo.Number" type="text" onkeypress="if(this.value.length==16) return false;" name="card_number" id="card_number" placeholder="1234 5678 9012 3456">
+
+         
+        </li>
+
+        <li class="vertical">
+            <ul>
+                <li>
+                    <label for="expiry_date">Exp Month</label>
+                    <select ng-model="creditcardinfo.ExpMonth" class="form-control">
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                  
+                </li>
+
+                <li>
+                    <label for="expiry_date">Exp Yr</label>
+                    <select ng-model="creditcardinfo.ExpYear" id="year1" class="form-control"></select>
+
+                </li>
+
+                <li>
+                    <label for="cvv">CVV</label>
+                    <input ng-model="creditcardinfo.CVV" onkeypress="if(this.value.length==3) return false;" class="form-control" style="text-align:center;padding:0; height:40px;" type="number" name="cvv" id="cvvnumber" maxlength="3" placeholder="123">
+                </li>
+            </ul>
+        </li>
+
+
+        <li>
+            <label>Postal Code</label>
+            <input style="padding-top:0;padding-bottom:0;padding-right:0; width:calc(100% - 12px);" onkeypress="if(this.value.length==5) return false;"  type="number" class="form-control" ng-model="creditcardinfo.PostalCode" placeholder="43210">
+        </li>
+
+        
+
+     
+    </ul>
+
+
 </form>
 
-<br/>
-<br />
-<br />
+<div class="row">
+    <div class="col-md-12">
+        <br />
+    </div>  
+</div>
+
+<!--<button ng-click="savecreditcardinfo();" style="width:100%" class="btn btn-primary"> <i class="fa fa-check"></i> Save data </button>-->  
+<div style="margin-bottom:10px;">
+    <button type="button" ng-if="IsSaving==false" ng-click="savecreditcardinfo();" class="btn btn-primary {{GetDisabledClass()}}" title="save credit card information"><i class="fa fa-check c-white"></i>Save</button>
+    <button type="button" ng-if="IsSaving==true" class="btn btn-primary disabled" title="save credit card information"><i class="fa fa-check fa-spin"></i>Save</button>
+    <a href="#/Billings" class="btn btn-gray" title="go back"><i class="fa fa-times"></i>Cancel</a>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <br /><br /><br /><br />
+    </div>
+</div>
+
+
+
 
 <div class="bottommenu">
     <div class="row">
@@ -204,4 +332,17 @@
     </div>
 
 </div>
+
+<script>
+    $(document).ready(function () {
+
+        var d = new Date();
+        var n = d.getFullYear();
+        var year = n + 1;
+        for (i = 0; i < 25; i++) {
+            $("#year1").get(0).options[$("#year1").get(0).options.length] = new Option(year, year);
+            year = year + 1;
+        }
+    });
+</script>
 

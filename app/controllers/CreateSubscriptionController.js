@@ -70,7 +70,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
                 $scope.$apply();
 
                 cordova.plugins.stripe.setPublishableKey($scope.CreditCard.StripePublicKey);
-                $scope.CreditCardSubmission();
+             
             }
         });
     };
@@ -114,6 +114,8 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
         });
     };
 
+    $scope.creditcardinfo = {Number:"", ExpMonth:"",ExpYear:"",PostalCode:"",CVV:""}
+
 
     var card = {
         number: '4242424242424242', // 16-digit credit card number
@@ -132,7 +134,10 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
 
     function onSuccess(tokenId) {
         var _token = JSON.stringify(tokenId);
-        alert(_token.id);
+        alert(tokenId.id);
+        document.getElementById('stripe-token').value = tokenId.id;
+        alert($("#stripe-token").val());
+        $scope.SaveCreditCardDetail();
     }
 
     function onError(errorMessage) {
@@ -160,7 +165,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
     init();  
     $scope.GetDisabledClass = function () {
         
-        if ($.trim($scope.CreditCard.Email) == "" || $.trim($scope.CreditCard.Name) == "")
+        if ($.trim($scope.CreditCard.Email) == "" || $.trim($scope.CreditCard.Name) == "" || $.trim($scope.creditcardinfo.Number) == "" || $.trim($scope.creditcardinfo.ExpMonth) == "" || $.trim($scope.creditcardinfo.ExpYear) == "" || $.trim($scope.creditcardinfo.CVV) == "" || $.trim($scope.creditcardinfo.PostalCode) == "")
         {
             return "disabled";
 
@@ -169,10 +174,52 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
         return "";
     }
 
+    $scope.savecreditcardinfo = function () {
+        debugger;
+        var cvv = $("#cvvnumber").val().length;
+        var _postelCode=$scope.creditcardinfo.PostalCode;
+        var _postelcodelength = $.trim(_postelCode)!=""?_postelCode.length:0;
+        if ($("#card_number").hasClass("valid") && cvv == 3 && _postelcodelength==5) {
 
-   
+            console.log($scope.creditcardinfo);
+            card = {
+                number: $scope.creditcardinfo.Number, // 16-digit credit card number
+                expMonth: $scope.creditcardinfo.ExpMonth, // expiry month
+                expYear: $scope.creditcardinfo.ExpYear, // expiry year
+                cvc: $scope.creditcardinfo.CVV, // CVC / CCV
+                name: $scope.CreditCard.Name, // card holder name (optional)
+                address_line1: '', // address line 1 (optional)
+                address_line2: '', // address line 2 (optional)
+                address_city: '', // city (optional)
+                address_state: '', // state/province (optional)
+                address_country: '', // country (optional)
+                postal_code: $scope.creditcardinfo.PostalCode, // Postal Code / Zip Code (optional)
+                currency: 'USD' // Three-letter ISO currency code (optional)
+            };
 
- 
+            $scope.CreditCardSubmission();
+            
+        }
+
+        else {
+            if (_postelcodelength < 5)
+            {
+                log.error("Postel code should be atleast 5 digits");
+            }
+            else if (cvv != 3)
+            {
+                log.error("CVV should be atleast 3 digits");
+            }
+            else {
+                log.error("Wrong Credit card Info fill correct")
+
+            }
+        }
+
+        
+
+    }
+
 
     function setOutcome(result) {
         document.getElementById('card-error').textContent = '';
@@ -187,7 +234,6 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
     }
 
   
-
     document.getElementById('stripeForm').addEventListener('submit', function (e) {
         e.preventDefault();
         $scope.IsSaving = true
@@ -200,7 +246,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
                 setOutcome(result);
                 var _token = document.getElementById('stripe-token').value;
                 if (_token.length > 0) {
-                    //document.getElementById('customerForm').submit();
+                   
                     $scope.SaveCreditCardDetail();
                 }
                 else {
