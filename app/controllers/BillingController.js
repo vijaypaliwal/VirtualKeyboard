@@ -203,18 +203,20 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
 
     function onSuccess(tokenId) {
         var _token = JSON.stringify(tokenId);
-        alert(tokenId.id);
         document.getElementById('stripe-token').value = tokenId.id;
-        alert(document.getElementById('stripe-token').value);
         $scope.SaveCreditCardDetail();
     }
 
     function onError(errorMessage) {
+        $scope.IsSaving = false;
+        $scope.$apply();
         alert('Error getting card token', errorMessage);
     }
 
     $scope.CreditCardSubmission = function () {
+        $scope.IsSaving = true;
         cordova.plugins.stripe.createCardToken(card, onSuccess, onError);
+       
     }
 
 
@@ -318,6 +320,9 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
 
     $scope.ToggleCreditcardEdit = function () {
         $scope.CreditcardEdit = !$scope.CreditcardEdit;
+        $scope.creditcardinfo = { Name: "", Number: "", ExpMonth: "", ExpYear: "", PostalCode: "", CVV: "" }
+        $scope.creditcardinfo.Name = $scope.BillingData.Description;
+
         $scope.$apply();
     }
 
