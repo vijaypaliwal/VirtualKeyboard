@@ -81,12 +81,15 @@
         font-family: 'FontAwesome'; /* essential for enabling glyphicon */
         content: "\f107"; /* adjust as needed, taken from bootstrap.css */
         float: right; /* adjust as needed */
-        color: white; /* adjust as needed */
+        color: #069; /* adjust as needed */
+        width:11px;
+        display:none;
     }
 
     .panel-heading .accordion-toggle.collapsed:after {
         /* symbol for "collapsed" panels */
         content: "\f105"; /* adjust as needed, taken from bootstrap.css */
+        display: none;
     }
 
     .sub-btn
@@ -131,6 +134,32 @@
         padding-bottom: 5px;
         margin-top: 9px;
     }
+
+    .inventoryname {
+        padding: 10px;
+        color: #fff;
+        margin-bottom: 0 !important;
+        border-radius: 25px;
+        font-size: 17px !important;
+        text-align:center;
+    }
+
+    .col-xs-9
+    {
+        padding-left:0;
+        padding-right:0;
+    }
+
+    .col-xs-3
+    {
+        padding-left:0;
+        padding-right:5px;
+    }
+
+    .col-xs-3 a
+    {
+        margin-top:10px;
+    } 
 </style>
 
 
@@ -201,15 +230,27 @@
 
     <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default" ng-repeat="_obj in AccountsList" ng-if="_obj.CurrentUserMasterAccountID==_obj.MasterAccountID">
-            <div class="panel-heading" style="background-color:{{_obj.BackColor}} !important" role="tab" id="heading{{_obj.InventoryAccountID}}">
+            <div class="panel-heading"  role="tab" id="heading{{_obj.InventoryAccountID}}">
                 <h4 class="panel-title">
-                    <a role="button" class="accordion-toggle" style="color: white; display: block;" data-toggle="collapse" data-parent="#accordion" data-target="#{{_obj.InventoryAccountID}}" aria-expanded="true">
-                        <i class="fa fa-cubes"></i> {{_obj.InventoryName}}
-                    </a>
+
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <p class="inventoryname" ng-click="UpdateSecurityToken(_obj.InventoryAccountID,_obj.InventoryName)" style="background-color:{{_obj.BackColor}} !important"> {{_obj.InventoryName}}</p>
+                        </div>
+
+                        <div style="text-align:right;" class="col-xs-3">
+                            <a role="button" class="accordion-toggle" style="color: #069; display: block;" data-toggle="collapse" data-parent="#accordion" data-target="#{{_obj.InventoryAccountID}}" aria-expanded="true">
+                                <span>Details </span>
+                            </a>
+                        </div>
+                    </div>
+
+
+                  
                 </h4>
             </div>
             <div id="{{_obj.InventoryAccountID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                <div style="border:1px solid {{_obj.BackColor}} !important;" class="panel-body">
+                <div  class="panel-body">
                     <p style="text-transform:capitalize; font-weight:700;"> <i class="fa fa-user"></i> {{_obj.FirstName}} {{_obj.LastName}} <span class="pull-right" style="font-size: 11px !important; text-transform: lowercase; background: #e2e2e2; padding: 4px; border-radius: 6px; color: #888;"> {{_obj.Status}}</span></p>
                     <p><i class="fa fa-envelope"></i> {{_obj.Email}}</p>
 
@@ -218,8 +259,8 @@
                   
                     <div class="row listbtn">
                         <div class="col-md-12 bottomlinks">
-                            <a ng-click="UpdateSecurityToken(_obj.InventoryAccountID,_obj.InventoryName)">Go to Inventory</a>
-                            | <a ng-click="OpenEditInventoryModal(_obj)">Edit</a> | <a ng-click="CloseInventory(_obj.InventoryAccountID)">Update status</a>  <a ng-if="_obj.DaysRemaining>0" href="#/CreateSubscription">| Create new Subscription</a>
+                         
+                             <a ng-click="OpenEditInventoryModal(_obj)">Edit</a> | <a ng-click="CloseInventory(_obj.InventoryAccountID)">Update status</a>  <a ng-if="_obj.DaysRemaining>0" href="#/CreateSubscription">| Create new Subscription</a>
                         </div>
                     </div>
                 </div>
@@ -260,24 +301,32 @@
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default" ng-repeat="_obj in AccountsList" ng-if="_obj.CurrentUserMasterAccountID!=_obj.MasterAccountID">
-            <div class="panel-heading" style="background-color:{{_obj.BackColor}} !important" role="tab" id="heading{{_obj.InventoryAccountID}}">
+            <div class="panel-heading" role="tab" id="heading{{_obj.InventoryAccountID}}">
                 <h4 class="panel-title">
-                    <a role="button" class="accordion-toggle" style="color: white; display: block;" data-toggle="collapse" data-parent="#accordion" data-target="#{{_obj.InventoryAccountID}}" aria-expanded="true">
-                        <i class="fa fa-cubes"></i> {{_obj.InventoryName}}
-                    </a>
+
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <p class="inventoryname" ng-click="UpdateSecurityToken(_obj.InventoryAccountID,_obj.InventoryName)" style="background-color:{{_obj.BackColor}} !important"> {{_obj.InventoryName}}</p>
+                        </div>
+
+                        <div style="text-align:right;" class="col-xs-3">
+                            <a role="button" class="accordion-toggle" style="color: #069; display: block;" data-toggle="collapse" data-parent="#accordion" data-target="#{{_obj.InventoryAccountID}}" aria-expanded="true">
+                                <span>Details </span>
+                            </a>
+                        </div>
+                    </div>
+
+
+
                 </h4>
             </div>
             <div id="{{_obj.InventoryAccountID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                <div style="border:1px solid {{_obj.BackColor}} !important;" class="panel-body">
+                <div class="panel-body">
                     <p style="text-transform:capitalize; font-weight:700;"> <i class="fa fa-user"></i> {{_obj.FirstName}} {{_obj.LastName}} <span class="pull-right" style="font-size: 11px !important; text-transform: lowercase; background: #e2e2e2; padding: 4px; border-radius: 6px; color: #888;"> {{_obj.Status}}</span></p>
                     <p><i class="fa fa-envelope"></i> {{_obj.Email}}</p>
                     <p><span ng-if="_obj.DaysRemaining>0">{{_obj.DaysRemaining}} days remaining </span></p>
                    
-                    <div class="row listbtn">
-                        <div class="bottomlinks col-md-12">
-                            <a ng-click="UpdateSecurityToken(_obj.InventoryAccountID,_obj.InventoryName)">Go to Inventory</a>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
