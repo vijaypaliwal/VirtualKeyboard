@@ -134,9 +134,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
 
     function onSuccess(tokenId) {
         var _token = JSON.stringify(tokenId);
-        alert(tokenId.id);
         document.getElementById('stripe-token').value = tokenId.id;
-        alert($("#stripe-token").val());
         $scope.SaveCreditCardDetail();
     }
 

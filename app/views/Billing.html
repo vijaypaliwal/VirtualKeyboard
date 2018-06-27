@@ -2,6 +2,104 @@
 
 <link href="css/account.css" rel="stylesheet" />
 
+<link rel="stylesheet" href="https://jquerycreditcardvalidator.com/css/demo.css">
+
+<style>
+    body {
+        font-size: 15px;
+        padding-top: 0;
+        color: #000;
+        opacity: 1;
+        line-height: inherit;
+        font-weight: inherit;
+    }
+
+    h4 {
+        font-size: 18px;
+        color: #000;
+    }
+
+    label {
+        color: #000 !important;
+    }
+
+    input {
+        color: #000 !important;
+    }
+
+    select {
+        color: #000 !important;
+    }
+
+    .myform {
+        position: relative;
+        width: 100%;
+    }
+
+    form #card_number {
+        width: 100%;
+        height: 38px;
+        background-size: 124px 364px,120px 361px;
+    }
+
+    #name_on_card {
+        width: calc(100% - 30px);
+    }
+
+    .vertical li {
+        float: left !important;
+        width: 33%;
+    }
+
+        .vertical li:last-child input {
+            float: left;
+        }
+
+    .vertical input {
+        width: 100%;
+    }
+
+    .vertical li input, select {
+        border-radius: 0 !important;
+    }
+
+    p {
+        color: #000;
+        margin-bottom: 13px;
+    }
+
+    b
+    {
+        font-weight:700 !important;
+    }
+
+    form
+    {
+        background:transparent;
+        padding:0;
+        box-shadow:none;
+        border:none;
+        color:#000;
+        margin:0;
+        position:relative;
+        width:100%;
+    }
+
+        form input
+        {
+            box-sizing:inherit;
+        }
+
+    .card-header
+    {
+        color:#000;
+    }
+</style>
+
+
+
+<script type="text/javascript" src="https://jquerycreditcardvalidator.com/js/demo.js"></script>
+
 <style>
     .nodata {
         text-align: center;
@@ -317,15 +415,83 @@
             <div class="card-header">
                 <i class="fa fa-credit-card"></i> Credit card Information
             </div>
-            <div ng-repeat="obj in BillingData.Cards" class="card-body">
+            <div ng-show="CreditcardEdit==false" ng-repeat="obj in BillingData.Cards" class="card-body">
 
-                <a class="editicon"> <i class="fa fa-pencil"></i> </a>
+                <a ng-click="ToggleCreditcardEdit()" class="editicon"> <i class="fa fa-pencil"></i> </a>
 
                 <p>Credit card : <b>{{obj.Brand}} {{obj.Last4}}</b></p>
                 <p>Expr date : <b>{{obj.ExpMonth}}/{{obj.ExpYear}}</b></p>
                 <p>Name on card : <b>{{obj.CardName}}</b></p>
 
             </div>
+
+            <div ng-show="CreditcardEdit==true" class="card-body">
+
+                <form class="myform">
+               
+                    <ul>
+                        <li>
+                            <label for="card_number">Card number</label>
+                            <input ng-model="creditcardinfo.Number" type="text" onkeypress="if(this.value.length==16) return false;" name="card_number" id="card_number" placeholder="1234 5678 9012 3456">
+
+
+                        </li>
+
+                        <li class="vertical">
+                            <ul>
+                                <li>
+                                    <label for="expiry_date">Exp Month</label>
+                                    <select ng-model="creditcardinfo.ExpMonth" class="form-control">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+
+                                </li>
+
+                                <li>
+                                    <label for="expiry_date">Exp Yr</label>
+                                    <select ng-model="creditcardinfo.ExpYear" id="year1" class="form-control"></select>
+
+                                </li>
+
+                                <li>
+                                    <label for="cvv">CVV</label>
+                                    <input ng-model="creditcardinfo.CVV" onkeypress="if(this.value.length==3) return false;" class="form-control" style="text-align:center;padding:0; " type="number" name="cvv" id="cvvnumber" maxlength="3" placeholder="123">
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <label>Postal Code</label>
+                            <input id="PostalCode" style="padding-top:0;padding-bottom:0;padding-right:0;" onkeypress="if(this.value.length==5) return false;" type="number" class="form-control" ng-model="creditcardinfo.PostalCode" placeholder="43210">
+                        </li>
+
+
+
+
+                    </ul>
+
+
+                </form>
+
+                <div style="margin-bottom:10px;">
+                    <button type="button" ng-if="IsSaving==false" ng-click="savecreditcardinfo();" class="btn btn-primary {{GetDisabledClass()}}" title="save credit card information"><i class="fa fa-check c-white"></i>Save</button>
+                    <button type="button" ng-if="IsSaving==true" class="btn btn-primary disabled" title="save credit card information"><i class="fa fa-check fa-spin"></i>Save</button>
+                    <a ng-click="ToggleCreditcardEdit()" class="btn btn-gray" title="go back"><i class="fa fa-times"></i>Cancel</a>
+                </div>
+            </div>
+
         </div>
 
 
@@ -553,4 +719,17 @@
         var accordion = new Accordion($('#accordion'), false);
     });
 
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        var d = new Date();
+        var n = d.getFullYear();
+        var year = n + 1;
+        for (i = 0; i < 25; i++) {
+            $("#year1").get(0).options[$("#year1").get(0).options.length] = new Option(year, year);
+            year = year + 1;
+        }
+    });
 </script>
