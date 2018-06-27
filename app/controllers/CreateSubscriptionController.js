@@ -177,8 +177,8 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
     $scope.savecreditcardinfo = function () {
         debugger;
         var cvv = $("#cvvnumber").val().length;
-        var _postelCode=$scope.creditcardinfo.PostalCode;
-        var _postelcodelength = $.trim(_postelCode)!=""?_postelCode.length:0;
+        
+        var _postelcodelength = $("#PostalCode").val().length;
         if ($("#card_number").hasClass("valid") && cvv == 3 && _postelcodelength==5) {
 
             console.log($scope.creditcardinfo);

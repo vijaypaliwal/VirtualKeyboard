@@ -10,6 +10,8 @@
   {
       font-size:15px;
       padding-top:0;
+      color:#000;
+      opacity:1;
   }
   h4
   {
@@ -286,7 +288,7 @@
 
         <li>
             <label>Postal Code</label>
-            <input style="padding-top:0;padding-bottom:0;padding-right:0; width:calc(100% - 12px);" onkeypress="if(this.value.length==5) return false;"  type="number" class="form-control" ng-model="creditcardinfo.PostalCode" placeholder="43210">
+            <input id="PostalCode" style="padding-top:0;padding-bottom:0;padding-right:0; width:calc(100% - 12px);" onkeypress="if(this.value.length==5) return false;" type="number" class="form-control" ng-model="creditcardinfo.PostalCode" placeholder="43210">
         </li>
 
         
