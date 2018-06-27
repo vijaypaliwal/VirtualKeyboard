@@ -107,7 +107,7 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
                 expMonth: $scope.creditcardinfo.ExpMonth, // expiry month
                 expYear: $scope.creditcardinfo.ExpYear, // expiry year
                 cvc: $scope.creditcardinfo.CVV, // CVC / CCV
-                name: $scope.CreditCard.Name, // card holder name (optional)
+                name: $scope.creditcardinfo.Name, // card holder name (optional)
                 address_line1: '', // address line 1 (optional)
                 address_line2: '', // address line 2 (optional)
                 address_city: '', // city (optional)
@@ -149,7 +149,6 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
         
         
         
-        $scope.CreditCard.StripeToken = $("#stripe-token").val();
         $.ajax({
 
             type: "POST",
@@ -158,7 +157,7 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
 
             dataType: 'json',
 
-            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "customerName": $scope.creditcardinfo.Name, "stripeToken": $scope.creditcardinfo.Number }),
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "customerName": $scope.creditcardinfo.Name, "stripeToken": $("#stripe-token").val() }),
             error: function (err) {
                 $scope.IsSaving = false;
                 $scope.$apply();
@@ -204,7 +203,9 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
 
     function onSuccess(tokenId) {
         var _token = JSON.stringify(tokenId);
+        alert(tokenId.id);
         document.getElementById('stripe-token').value = tokenId.id;
+        alert(document.getElementById('stripe-token').value);
         $scope.SaveCreditCardDetail();
     }
 
