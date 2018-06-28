@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('AccountsController', ['$scope', '$location', 'authService', 'localStorageService', 'ngAuthSettings', 'log', function ($scope, $location, authService, localStorageService, ngAuthSettings, log) {
+app.controller('AccountsController', ['$scope', '$location', 'authService', 'localStorageService', 'ngAuthSettings', 'log', '$rootScope', function ($scope, $location, authService, localStorageService, ngAuthSettings, log, $rootScope) {
 
 
 
@@ -45,6 +45,8 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
 
                 if (data.GetInventoryAccountsResult.Success == true) {
 
+
+
                     if (data.GetInventoryAccountsResult != null && data.GetInventoryAccountsResult.Payload != null) {
                         $scope.AccountsList = data.GetInventoryAccountsResult.Payload;
 
@@ -55,6 +57,10 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
                         {
                             $scope.IsAddInventoryShown = true;
                         }
+
+                        $scope.$emit("SendUp", $scope.AccountsList);
+
+                    
                     }
                 }
                 else {
@@ -67,7 +73,11 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
             }
         });
     };
+
    
+   
+   
+
     $scope.AddNewAccount=function()
     {
         $scope.Addinventory = true;
@@ -244,6 +254,11 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
 
         var authData = localStorageService.get('authorizationData');
         localStorageService.set('AccountDBID', AccountID);
+
+     
+
+        $scope.$emit("MyActiveAccount", AccountName);
+
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
@@ -293,11 +308,11 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
 
                         $scope.IsLoading = false;
        
-                            $scope.getactivepermission();
+                        $scope.getactivepermission();
 
                        
                      
-                            $location.path("/FindItems");
+                         $location.path("/FindItems");
             
                         $scope.$apply();
 
@@ -313,6 +328,10 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
             }
         });
     }
+
+
+
+
     function init()
     {
         var _accountID = localStorageService.get('AccountID');

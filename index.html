@@ -49,6 +49,61 @@
             padding-top: 20px;
             line-height: 40px !important;
         }
+
+        #Inventorylistmodal {
+            background: #fff;
+            width: calc(100% - 50px);
+            margin: 0 auto;
+            margin-top: 25px;
+            bottom: auto;
+            overflow: hidden;
+        }
+
+            #Inventorylistmodal .modal-header
+            {
+                background-color:#f5f5f5;
+            }
+
+            #Inventorylistmodal .modal-footer {
+                background-color: #ccc;
+                text-align: center;
+              
+            }
+
+                #Inventorylistmodal .modal-footer
+                {
+                    display:block;
+                    padding-bottom:8px;
+                    padding-top:8px;
+                }
+                
+                
+                
+                 #Inventorylistmodal .modal-body {
+                    min-height: 250px;
+                    overflow-y: auto;
+                    max-height:370px;
+                }
+
+        #Inventorylistmodal .btn
+        {
+            width:100%;
+            margin-bottom:12px;
+            color:#fff;
+            border-radius:15px;
+            text-align:left;
+         
+        }
+
+        #Inventorylistmodal .modal-body
+        {
+            padding:12px;
+        }
+
+        #toolbar i
+        {
+            font-size:18px;
+        }
     </style>
 
 </head>
@@ -72,6 +127,26 @@
 
         </div>
 
+    </div>
+
+
+    <div id="Inventorylistmodal" class="modal animated zoomIn">
+        <div class="modal-header">
+            <h4> <i class="fa fa-cubes"></i> Select Your Inventory</h4>
+        </div>
+
+        <div class="modal-body">
+
+            <a ng-if="obj.CurrentUserMasterAccountID==obj.MasterAccountID" ng-click="changeInventory(obj.InventoryAccountID, obj.InventoryName)" style="background-color:{{obj.BackColor}} !important" ng-repeat="obj in MyInventories" class="btn btn-danger"> <i class="fa fa-cube"></i> {{obj.InventoryName}} </a> 
+       
+
+        </div>
+
+        <div class="modal-footer">
+
+            <a data-dismiss="modal" >Close</a>  
+       
+        </div>
     </div>
 
 
@@ -153,7 +228,7 @@
         <div class="open-left" id="open-left" data-activates="slide-out-left">
             <i class="fa fa-bars" style="font-size:17px;"></i>
         </div>
-        <span class="title">Clearly Inventory</span>
+        <span ng-click="showinventories()" class="title">{{currentInventoryname}} <i class="fa fa-angle-down"></i></span>
         <div class="dropdown open-right">
             <a style="padding-left:0" data-toggle="dropdown" class="dropdown-toggle ">
                 <img id="myimgProfile" src="{{ProfilePicURl}}" onerror="this.onerror = null; this.src = 'img/dummy-user48.png';" alt="" style=" height: 50px; width:50px; border: 2px solid #ccc;" class="circle">
