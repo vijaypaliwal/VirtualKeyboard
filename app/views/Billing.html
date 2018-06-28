@@ -435,7 +435,7 @@
                             <label for="card_number">Name on card</label>
                             <input ng-model="creditcardinfo.Name" type="text" class="form-control"  placeholder="My Name">
 
-                            <input type="hidden" id="stripe-token" value="">
+
                         </li>
 
 
@@ -529,12 +529,10 @@
                                 <td>
                                     {{data.Item}}
                                 </td>
-                                <td>
+                                <td >
                                     {{data.Quantity}} x  {{data.UnitPrice}}
                                 </td>
-                                <td>
-                                    {{data.Quantity*data.UnitPrice}}
-                                </td>
+                                <td ng-bind="{{data.Quantity*data.UnitPrice | number:2}}"></td>
                             </tr>
                             <tr><td style="text-align:right;" colspan="2">Subscription Amount</td><td>${{CurrentSubscriptionTotal}}</td></tr>
                         </tbody>
