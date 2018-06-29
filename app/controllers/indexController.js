@@ -981,7 +981,10 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                             $location.path("/FindItems");
                         }, 300);
 
-                      
+                        if (_Islive) {
+                            StatusBar.backgroundColorByHexString(Inventorycolor);
+                        }
+
 
                         $scope.$apply();
 
