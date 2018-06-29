@@ -978,13 +978,15 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                         $location.path("/permission");
 
                         setTimeout(function () {
-                            $location.path("/FindItems");
                             alert(Inventorycolor);
                             if (_Islive) {
                                 alert("in");
                                 StatusBar.backgroundColorByHexString(Inventorycolor);
                             }
                             StatusBar.backgroundColorByHexString(Inventorycolor);
+
+                            $location.path("/FindItems");
+
                         }, 300);
 
                       
