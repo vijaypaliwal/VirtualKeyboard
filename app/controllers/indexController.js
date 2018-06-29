@@ -622,6 +622,11 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             UpdateStatusBar(55);
         }
 
+        var _Inventorycolor = localStorageService.get('InventoryColor');
+
+        if (_Islive && $.trim(_Inventorycolor)!="") {
+            StatusBar.backgroundColorByHexString(_Inventorycolor);
+        }
 
         initIndex();
 
@@ -976,17 +981,12 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                         log.success("Inventory switched successfully");
 
                         $location.path("/permission");
-
+                        localStorageService.set('InventoryColor', Inventorycolor);
                         setTimeout(function () {
 
 
                             $location.path("/FindItems");
-                            setTimeout(function () {
-                                if (_Islive) {
-                                    StatusBar.backgroundColorByHexString(Inventorycolor);
-                                }
-                            }, 100);
-
+                          
                         }, 300);
 
 

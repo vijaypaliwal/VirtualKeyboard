@@ -261,7 +261,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
 
         $scope.$emit("MyInventorycolor", Inventorycolor);
 
-
+        localStorageService.set('InventoryColor', Inventorycolor);
         
 
 
