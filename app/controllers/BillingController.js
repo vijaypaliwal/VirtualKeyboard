@@ -101,7 +101,7 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
         var _postelcodelength = $("#PostalCode").val().length;
         if ($("#card_number").hasClass("valid") && cvv == 3 && _postelcodelength == 5) {
 
-            console.log($scope.creditcardinfo);
+           alert("into card info");
             card = {
                 number: $scope.creditcardinfo.Number, // 16-digit credit card number
                 expMonth: $scope.creditcardinfo.ExpMonth, // expiry month
@@ -218,6 +218,7 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
 
     $scope.CreditCardSubmission = function () {
         $scope.IsSaving = true;
+        alert("credit card submission start");
         cordova.plugins.stripe.createCardToken(card, onSuccess, onError);
        
     }
