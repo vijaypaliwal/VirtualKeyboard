@@ -159,6 +159,7 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
 
             data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "customerName": $scope.creditcardinfo.Name, "stripeToken": $("#stripe-token").val() }),
             error: function (err) {
+                alert("into error");
                 $scope.IsSaving = false;
                 $scope.$apply();
                 $scope.ToggleCreditcardEdit();
@@ -167,13 +168,14 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
             success: function (data) {
 
                 if (data.EditCreditCardResult.Success == true) {
-
+                    alert("into success");
                     log.success("Card Detail Saved successfully");
                     $scope.ToggleCreditcardEdit();
                     init();
                     $scope.$apply();
                 }
                 else {
+                    alert("into error");
                     $scope.ToggleCreditcardEdit();
                     $scope.ShowErrorMessage("Get Credit Card Detail", 1, 1, data.EditCreditCardResult.Message);
 
@@ -204,6 +206,7 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
     function onSuccess(tokenId) {
         var _token = JSON.stringify(tokenId);
         document.getElementById('stripe-token').value = tokenId.id;
+        alert("token received::"+tokenId.id)
         $scope.SaveCreditCardDetail();
     }
 
