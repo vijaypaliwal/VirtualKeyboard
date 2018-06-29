@@ -148,7 +148,7 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
         $scope.IsSaving = true;
         $scope.$apply();
         
-        
+        alert("CI edit credit card start");
         
         $.ajax({
 
