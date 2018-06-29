@@ -44,8 +44,6 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
 
             success: function (data) {
                 debugger;
-               
-
                 if (data.BillingDetailResult.Success == true) {
 
                 
@@ -79,6 +77,7 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
 
                 $scope.$apply();
 
+                cordova.plugins.stripe.setPublishableKey($scope.StripePublicKey);
 
             }
         });
@@ -102,7 +101,7 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
         var _postelcodelength = $("#PostalCode").val().length;
         if ($("#card_number").hasClass("valid") && cvv == 3 && _postelcodelength == 5) {
 
-           alert("into card info");
+            console.log($scope.creditcardinfo);
             card = {
                 number: $scope.creditcardinfo.Number, // 16-digit credit card number
                 expMonth: $scope.creditcardinfo.ExpMonth, // expiry month
@@ -148,7 +147,7 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
         $scope.IsSaving = true;
         $scope.$apply();
         
-        alert("CI edit credit card start");
+        
         
         $.ajax({
 
@@ -160,7 +159,6 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
 
             data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "customerName": $scope.creditcardinfo.Name, "stripeToken": $("#stripe-token").val() }),
             error: function (err) {
-                alert("into error");
                 $scope.IsSaving = false;
                 $scope.$apply();
                 $scope.ToggleCreditcardEdit();
@@ -169,14 +167,13 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
             success: function (data) {
 
                 if (data.EditCreditCardResult.Success == true) {
-                    alert("into success");
+
                     log.success("Card Detail Saved successfully");
                     $scope.ToggleCreditcardEdit();
                     init();
                     $scope.$apply();
                 }
                 else {
-                    alert("into error");
                     $scope.ToggleCreditcardEdit();
                     $scope.ShowErrorMessage("Get Credit Card Detail", 1, 1, data.EditCreditCardResult.Message);
 
@@ -207,7 +204,6 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
     function onSuccess(tokenId) {
         var _token = JSON.stringify(tokenId);
         document.getElementById('stripe-token').value = tokenId.id;
-        alert("token received::"+tokenId.id)
         $scope.SaveCreditCardDetail();
     }
 
@@ -218,9 +214,7 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
     }
 
     $scope.CreditCardSubmission = function () {
-        cordova.plugins.stripe.setPublishableKey($scope.StripePublicKey);
         $scope.IsSaving = true;
-        alert("credit card submission start");
         cordova.plugins.stripe.createCardToken(card, onSuccess, onError);
        
     }
