@@ -368,12 +368,12 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     }
 
     $scope.getactivepermission = function () {
-        
+
         $scope.CurrentUserKey = localStorageService.get('UserKey');
 
         $scope.GetPermission(1, $scope.CurrentUserKey);
 
-  
+
         setTimeout(function () {
             $scope.GetPermission(3, $scope.CurrentUserKey);
         }, 10);
@@ -515,7 +515,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
         switch (Type) {
             case 1:
-               log.error(_returnError);
+                log.error(_returnError);
                 break;
             case 2:
                 log.warning(_returnError);
@@ -858,7 +858,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
 
     $scope.showinventories = function () {
-     
+
         $("#Inventorylistmodal").modal("show");
     }
 
@@ -867,7 +867,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $scope.MyInventories = data;
         console.log("Account List");
         console.log($scope.MyInventories);
-       
+
     });
 
     $scope.$on("MyActiveAccount", function (evt, data) {
@@ -875,16 +875,16 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     });
 
 
-  
+
 
     $scope.$on("MyInventorycolor", function (evt, data) {
-       
+
         $("#toolbar").attr('style', 'background-color: ' + data + ' !important');
 
         $(".primary-color").attr('style', 'background-color: ' + data + ' !important');
 
 
-       
+
 
 
 
@@ -893,17 +893,17 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
 
 
- 
 
-   
 
-   
+
+
+
 
 
     $scope.changeInventory = function (AccountID, AccountName, Inventorycolor) {
 
         var authData = localStorageService.get('authorizationData');
-     
+
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
@@ -939,7 +939,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             success: function (data) {
 
 
-              
+
 
 
 
@@ -963,11 +963,11 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
                         debugger;
 
-                        $("#toolbar").attr('style', 'background-color: '+ Inventorycolor +' !important');
+                        $("#toolbar").attr('style', 'background-color: ' + Inventorycolor + ' !important');
 
-                  
 
-                        $("<style/>", { text: ".title-header {background-color: "+Inventorycolor+"}" }).appendTo('head');
+
+                        $("<style/>", { text: ".title-header {background-color: " + Inventorycolor + "}" }).appendTo('head');
 
                         $(".primary-color").attr('style', 'background-color: ' + Inventorycolor + ' !important');
 
@@ -978,18 +978,18 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                         $location.path("/permission");
 
                         setTimeout(function () {
-                            alert(Inventorycolor);
-                            if (_Islive) {
-                                alert("in");
-                                StatusBar.backgroundColorByHexString(Inventorycolor);
-                            }
-                            StatusBar.backgroundColorByHexString(Inventorycolor);
+
 
                             $location.path("/FindItems");
+                            setTimeout(function () {
+                                if (_Islive) {
+                                    StatusBar.backgroundColorByHexString(Inventorycolor);
+                                }
+                            }, 100);
 
                         }, 300);
 
-                      
+
 
 
                         $scope.$apply();
