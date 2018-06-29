@@ -979,14 +979,15 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
                         setTimeout(function () {
                             $location.path("/FindItems");
+                            alert(Inventorycolor);
+                            if (_Islive) {
+                                alert("in");
+                                StatusBar.backgroundColorByHexString(Inventorycolor);
+                            }
+                            StatusBar.backgroundColorByHexString(Inventorycolor);
                         }, 300);
 
-                        alert(Inventorycolor);
-                        if (_Islive) {
-                            alert("in");
-                            StatusBar.backgroundColorByHexString(Inventorycolor);
-                        }
-                        StatusBar.backgroundColorByHexString(Inventorycolor);
+                      
 
 
                         $scope.$apply();
