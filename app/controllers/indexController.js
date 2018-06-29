@@ -872,19 +872,35 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.$on("MyActiveAccount", function (evt, data) {
         $scope.currentInventoryname = data;
-
-      
-     
-
     });
 
 
-   
+  
+
+    $scope.$on("MyInventorycolor", function (evt, data) {
+       
+        $("#toolbar").attr('style', 'background-color: ' + data + ' !important');
+
+        $(".primary-color").attr('style', 'background-color: ' + data + ' !important');
+
+
+       
+
+
+
+        $("<style/>", { text: ".title-header {background-color: " + data + "}" }).appendTo('head');
+    });
+
+
+
+ 
 
    
 
+   
 
-    $scope.changeInventory = function (AccountID, AccountName) {
+
+    $scope.changeInventory = function (AccountID, AccountName, Inventorycolor) {
 
         var authData = localStorageService.get('authorizationData');
      
@@ -944,6 +960,17 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                         $scope.getactivepermission();
 
                         $scope.currentInventoryname = AccountName;
+
+                        debugger;
+
+                        $("#toolbar").attr('style', 'background-color: '+ Inventorycolor +' !important');
+
+                  
+
+                        $("<style/>", { text: ".title-header {background-color: "+Inventorycolor+"}" }).appendTo('head');
+
+                        $(".primary-color").attr('style', 'background-color: ' + Inventorycolor + ' !important');
+
                         $("#Inventorylistmodal").modal('hide');
 
                         log.success("Inventory switched successfully");
@@ -973,10 +1000,6 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     }
 
 
-   
-
-
-  
 
 
 

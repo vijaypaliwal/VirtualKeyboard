@@ -248,7 +248,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
             return false;
         }
     };
-    $scope.UpdateSecurityToken = function (AccountID, AccountName) {
+    $scope.UpdateSecurityToken = function (AccountID, AccountName, Inventorycolor) {
 
         $scope.IsLoading = true;
 
@@ -259,9 +259,18 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
 
         $scope.$emit("MyActiveAccount", AccountName);
 
+        $scope.$emit("MyInventorycolor", Inventorycolor);
+
+
+        
+
+
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
+
+
+
         
         $.ajax({
 
