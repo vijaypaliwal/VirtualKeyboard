@@ -44,6 +44,8 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
 
             success: function (data) {
                 debugger;
+                cordova.plugins.stripe.setPublishableKey($scope.StripePublicKey);
+
                 if (data.BillingDetailResult.Success == true) {
 
                 
@@ -77,7 +79,6 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
 
                 $scope.$apply();
 
-                cordova.plugins.stripe.setPublishableKey($scope.StripePublicKey);
 
             }
         });
