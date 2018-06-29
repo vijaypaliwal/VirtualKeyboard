@@ -171,7 +171,7 @@
 
         <div class="modal-body">
 
-            <a ng-if="obj.CurrentUserMasterAccountID==obj.MasterAccountID" ng-click="changeInventory(obj.InventoryAccountID, obj.InventoryName, obj.BackColor)" style="background-color:{{obj.BackColor}} !important" ng-repeat="obj in MyInventories" class="btn btn-danger"> <i class="fa fa-cube"></i> {{obj.InventoryName}} </a> 
+            <a  ng-click="changeInventory(obj.InventoryAccountID, obj.InventoryName, obj.BackColor)" style="background-color:{{obj.BackColor}} !important" ng-repeat="obj in MyInventories" class="btn btn-danger"> <i class="fa fa-cube"></i> {{obj.InventoryName}} </a> 
        
 
         </div>
