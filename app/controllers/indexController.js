@@ -983,7 +983,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
                         $("#Inventorylistmodal").modal('hide');
 
-                        log.success("Inventory switched successfully");
+                      
 
                         $location.path("/permission");
                         localStorageService.set('InventoryColor', Inventorycolor);
