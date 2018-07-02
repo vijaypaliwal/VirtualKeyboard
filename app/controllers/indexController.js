@@ -625,7 +625,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         var _Inventorycolor = localStorageService.get('InventoryColor');
 
         if (_Islive && $.trim(_Inventorycolor) != "") {
-            if (_path != "/Accounts" && _path != "/Billings" && _path != "/CreateSubscription") {
+            if (_path != "/login" && _path != "/Accounts" && _path != "/Billings" && _path != "/CreateSubscription") {
                 StatusBar.backgroundColorByHexString(_Inventorycolor);
             }
             else {
