@@ -3,7 +3,7 @@
 app.controller('CreateSubscriptionController', ['$scope', '$location', 'authService', 'localStorageService', 'ngAuthSettings', 'log', function ($scope, $location, authService, localStorageService, ngAuthSettings, log) {
     $scope.IsLoading = false;
     $scope.IsSaving = false;
-    $scope.CreditCard = {Email:"",Name:"",StripePublicKey:"",StripeToken:"",UserCount:0};
+    $scope.CreditCard = { Email: "", Name: "", StripePublicKey: "", StripeToken: "", UserCount: 0 };
     var stripe = {};
     var _newcard = {};
     var elements = [];
@@ -22,7 +22,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
 
             dataType: 'json',
 
-            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken}),
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
             error: function (err) {
                 $scope.IsLoading = false;
             },
@@ -31,7 +31,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
 
                 if (data.GetCreditCardDetailResult.Success == true) {
                     $scope.CreditCard = data.GetCreditCardDetailResult.Payload;
-                 
+
                     stripe = Stripe($scope.CreditCard.StripePublicKey);
                     debugger;
                     console.log(stripe);
@@ -46,7 +46,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
                         }
                     });
 
-                   // alert(_newcard._componentName);
+                    // alert(_newcard._componentName);
                     _newcard.mount('#newcardelement');
 
                     console.log($('#newcardelement').html());
@@ -55,12 +55,11 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
                         setOutcome(event);
                     });
 
-                    if ($scope.CreditCard.UserCount == 1)
-                    {
+                    if ($scope.CreditCard.UserCount == 1) {
                         $scope.includedUserCount = 1;
 
                     }
-                   
+
                 }
                 else {
                     $scope.ShowErrorMessage("Get Credit Card Detail", 1, 1, data.GetCreditCardDetailResult.Message);
@@ -70,7 +69,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
                 $scope.$apply();
 
                 cordova.plugins.stripe.setPublishableKey($scope.CreditCard.StripePublicKey);
-             
+
             }
         });
     };
@@ -99,7 +98,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
             success: function (data) {
 
                 if (data.CreateNewSubscriptionResult.Success == true) {
-                   
+
                     log.success("Card Detail Saved successfully");
                     $location.path("/Billings");
                     $scope.$apply();
@@ -114,7 +113,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
         });
     };
 
-    $scope.creditcardinfo = {Number:"", ExpMonth:"",ExpYear:"",PostalCode:"",CVV:""}
+    $scope.creditcardinfo = { Number: "", ExpMonth: "", ExpYear: "", PostalCode: "", CVV: "" }
 
 
     var card = {
@@ -139,32 +138,32 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
     }
 
     function onError(errorMessage) {
+        $scope.IsSaving = false;
+        $scope.$apply();
         alert('Error getting card token', errorMessage);
     }
 
     $scope.CreditCardSubmission = function () {
+        $scope.IsSaving = true;
         cordova.plugins.stripe.createCardToken(card, onSuccess, onError);
     }
 
-   
 
-    function init()
-    {
+
+    function init() {
         var _accountID = localStorageService.get('AccountID');
-        
-        if (_accountID != null && _accountID != undefined)
-        {
-              $scope.CurrentAccount=_accountID;
+
+        if (_accountID != null && _accountID != undefined) {
+            $scope.CurrentAccount = _accountID;
         }
 
         $scope.GetCreditCardDetail();
     }
 
-    init();  
+    init();
     $scope.GetDisabledClass = function () {
-        
-        if ($.trim($scope.CreditCard.Email) == "" || $.trim($scope.CreditCard.Name) == "" || $.trim($scope.creditcardinfo.Number) == "" || $.trim($scope.creditcardinfo.ExpMonth) == "" || $.trim($scope.creditcardinfo.ExpYear) == "" || $.trim($scope.creditcardinfo.CVV) == "" || $.trim($scope.creditcardinfo.PostalCode) == "")
-        {
+
+        if ($.trim($scope.CreditCard.Email) == "" || $.trim($scope.CreditCard.Name) == "" || $.trim($scope.creditcardinfo.Number) == "" || $.trim($scope.creditcardinfo.ExpMonth) == "" || $.trim($scope.creditcardinfo.ExpYear) == "" || $.trim($scope.creditcardinfo.CVV) == "" || $.trim($scope.creditcardinfo.PostalCode) == "") {
             return "disabled";
 
         }
@@ -175,9 +174,9 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
     $scope.savecreditcardinfo = function () {
         debugger;
         var cvv = $("#cvvnumber").val().length;
-        
+
         var _postelcodelength = $("#PostalCode").val().length;
-        if ($("#card_number").hasClass("valid") && cvv == 3 && _postelcodelength==5) {
+        if ($("#card_number").hasClass("valid") && cvv == 3 && _postelcodelength == 5) {
 
             console.log($scope.creditcardinfo);
             card = {
@@ -196,16 +195,14 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
             };
 
             $scope.CreditCardSubmission();
-            
+
         }
 
         else {
-            if (_postelcodelength < 5)
-            {
+            if (_postelcodelength < 5) {
                 log.error("Postel code should be atleast 5 digits");
             }
-            else if (cvv != 3)
-            {
+            else if (cvv != 3) {
                 log.error("CVV should be atleast 3 digits");
             }
             else {
@@ -214,7 +211,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
             }
         }
 
-        
+
 
     }
 
@@ -231,7 +228,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
         }
     }
 
-  
+
     document.getElementById('stripeForm').addEventListener('submit', function (e) {
         e.preventDefault();
         $scope.IsSaving = true
@@ -244,7 +241,7 @@ app.controller('CreateSubscriptionController', ['$scope', '$location', 'authServ
                 setOutcome(result);
                 var _token = document.getElementById('stripe-token').value;
                 if (_token.length > 0) {
-                   
+
                     $scope.SaveCreditCardDetail();
                 }
                 else {
