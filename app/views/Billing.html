@@ -409,7 +409,7 @@
             </div>
             <div ng-show="CreditcardEdit==false" ng-repeat="obj in BillingData.Cards" class="card-body">
 
-                <a ng-if="IsCardOn==true" ng-click="ToggleCreditcardEdit()" class="editicon"> <i class="fa fa-pencil"></i> </a>
+                <a  ng-click="ToggleCreditcardEdit()" class="editicon"> <i class="fa fa-pencil"></i> </a>
 
                 <p>Credit card : <b>{{obj.Brand}} {{obj.Last4}}</b></p>
                 <p>Expr date : <b>{{obj.ExpMonth}}/{{obj.ExpYear}}</b></p>
@@ -688,18 +688,7 @@
 
 </div>
 
-<script>
-    $(document).ready(function () {
 
-        var d = new Date();
-        var n = d.getFullYear();
-        var year = n + 1;
-        for (i = 0; i < 25; i++) {
-            $("#year1").get(0).options[$("#year1").get(0).options.length] = new Option(year, year);
-            year = year + 1;
-        }
-    });
-</script>
 <script>
     $(function () {
         var Accordion = function (el, multiple) {
@@ -729,4 +718,15 @@
     });
 
 </script>
+<script>
+    $(document).ready(function () {
 
+        var d = new Date();
+        var n = d.getFullYear();
+        var year = n + 1;
+        for (i = 0; i < 25; i++) {
+            $("#year1").get(0).options[$("#year1").get(0).options.length] = new Option(year, year);
+            year = year + 1;
+        }
+    });
+</script>
