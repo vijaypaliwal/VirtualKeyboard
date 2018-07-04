@@ -17,6 +17,9 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
     $scope.ShowInvoicedetails = false;
     $scope.creditcardinfo = { Name: "", Number: "", ExpMonth: "", ExpYear: "", PostalCode: "", CVV: "" }
     $scope.StripePublicKey = "";
+
+    $scope.IsCustomerOn = true;
+    $scope.IsCardOn = true;
     $scope.IsProperEmail = function (email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
@@ -46,11 +49,28 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
                 debugger;
                 if (data.BillingDetailResult.Success == true) {
 
-                
+                    console.log("Billing Data");
+                    console.log(data.BillingDetailResult.Payload);
+
                     
                  
                     if (data.BillingDetailResult != null && data.BillingDetailResult.Payload != null) {
                         $scope.BillingData = data.BillingDetailResult.Payload[0];
+
+                        if ($.trim($scope.BillingData.Email) != "")
+                        {
+                            $scope.IsCustomerOn = true;
+                        }
+                        else {
+                            $scope.IsCustomerOn = false;
+                        }
+                        if ($scope.BillingData.Cards.length>0) {
+                            $scope.IsCardOn = true;
+                        }
+                        else {
+                            $scope.IsCardOn = false;
+                        }
+                      
                         
                         $scope.CustomerObj.Email = $scope.BillingData.Email;
                         $scope.CustomerObj.Name = $scope.BillingData.Description;
@@ -335,7 +355,6 @@ app.controller('BillingController', ['$scope', '$location', 'authService', 'loca
         {
             $scope.CurrentAccount=_accountID;
         }
-
         $scope.GetUserBills();
     }
 
