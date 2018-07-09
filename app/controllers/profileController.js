@@ -323,8 +323,11 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         // Retrieve image file location from specified source
         navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
             quality: 500,
+            targetWidth: 350,
+            targeHeight: 350,
             destinationType: destinationType.DATA_URL,
             correctOrientation: true,
+            allowEdit: true,
             sourceType: pictureSource.PHOTOLIBRARY
         });
     }
@@ -354,11 +357,11 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
     $scope.capturePhotoNew = function () {
         navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
             quality: 500,
-            targetWidth: 150,
-            targeHeight: 150,
+            targetWidth: 350,
+            targeHeight: 350,
             correctOrientation: true,
             destinationType: destinationType.DATA_URL,
-           // allowEdit: true,
+            allowEdit: true,
             saveToPhotoAlbum: true,
         });
     }
