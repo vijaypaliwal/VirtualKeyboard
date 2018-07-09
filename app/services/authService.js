@@ -187,10 +187,10 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
 
 
-                   if (response.GetUserInfoResult.Payload[0].ProfilePic != null && response.GetUserInfoResult.Payload[0].ProfilePic != "") {
+                   if (response.GetUserInfoResult.Payload[0].ProfilePicThumb != null && response.GetUserInfoResult.Payload[0].ProfilePicThumb != "") {
 
-                       if (response.GetUserInfoResult.Payload[0].ProfilePic.indexOf("png") != -1 || response.GetUserInfoResult.Payload[0].ProfilePic.indexOf("jpg") != -1 || response.GetUserInfoResult.Payload[0].ProfilePic.indexOf("jpeg") != -1 || response.GetUserInfoResult.Payload[0].ProfilePic.indexOf("gif") != -1) {
-                           _UserInfo.picURl = response.GetUserInfoResult.Payload[0].ProfilePic
+                       if (response.GetUserInfoResult.Payload[0].ProfilePicThumb.indexOf("png") != -1 || response.GetUserInfoResult.Payload[0].ProfilePicThumb.indexOf("jpg") != -1 || response.GetUserInfoResult.Payload[0].ProfilePicThumb.indexOf("jpeg") != -1 || response.GetUserInfoResult.Payload[0].ProfilePicThumb.indexOf("gif") != -1) {
+                           _UserInfo.picURl = response.GetUserInfoResult.Payload[0].ProfilePicThumb
 
                            var _string = "this.onerror = null;this.src = 'img/dummy-user48.png'";
                            $("#myimgProfile").attr("onerror", _string);
