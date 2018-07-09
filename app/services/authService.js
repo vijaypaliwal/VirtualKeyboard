@@ -186,7 +186,6 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
 
 
-
                    if (response.GetUserInfoResult.Payload[0].ProfilePicThumb != null && response.GetUserInfoResult.Payload[0].ProfilePicThumb != "") {
 
                        if (response.GetUserInfoResult.Payload[0].ProfilePicThumb.indexOf("png") != -1 || response.GetUserInfoResult.Payload[0].ProfilePicThumb.indexOf("jpg") != -1 || response.GetUserInfoResult.Payload[0].ProfilePicThumb.indexOf("jpeg") != -1 || response.GetUserInfoResult.Payload[0].ProfilePicThumb.indexOf("gif") != -1) {
