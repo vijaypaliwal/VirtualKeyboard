@@ -373,19 +373,24 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         $scope.myImage = '';
         $scope.myCroppedImage = '';
 
-        
+        $scope.myImage = $scope.Image;
+
         var file = $scope.Image;
-            var reader = new FileReader();
-            reader.onload = function () {
-                $scope.$apply(function ($scope) {
-                    $scope.myImage = $scope.Image;
-                    alert("My image--"+ $scope.myImage);
-                });
-            };
+        $scope.myImage = $scope.Image;
+        alert("My image--" + $scope.myImage);
 
-            alert("Second");
 
-            reader.readAsDataURL(file);
+            //var reader = new FileReader();
+            //reader.onload = function () {
+            //    $scope.$apply(function ($scope) {
+            //        $scope.myImage = $scope.Image;
+                   
+            //    });
+            //};
+
+          
+
+            //reader.readAsDataURL(file);
       
         //
             alert("Third");
