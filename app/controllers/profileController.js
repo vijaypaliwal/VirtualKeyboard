@@ -371,14 +371,14 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         _ImgObj.bytestring = imageData;
         $scope.Image = _ImgObj;
 
-        alert("First");
+       
         //updated
         $scope.myImage = '';
         $scope.myCroppedImage = '';
 
         $scope.myImage = imageData;
 
-        alert("Third");
+       
 
         CheckScopeBeforeApply();
         
@@ -425,8 +425,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
         //$scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
 
-        alert($("#croppedImage").attr("ng-src"));
-
+       
         $scope.Image.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
 
         $.ajax
