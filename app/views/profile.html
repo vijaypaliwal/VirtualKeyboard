@@ -102,7 +102,7 @@
 
 <style>
     .cropArea {
-        overflow: hidden;
+       
         width: 500px;
         height: 350px;
     }
@@ -131,11 +131,7 @@
 
 <input type="file" id="files" style="visibility:hidden" accept="image/*;" />
 
-<div class="cropArea">
-    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
-</div>
-<div>Cropped Image:</div>
-<div><img ng-src="{{myCroppedImage}}" /></div>
+
 
 <div style="display:none; position:fixed;width:100%;" class="profilepage">
 
@@ -330,17 +326,29 @@
                 <a data-dismiss="modal"><i class="fa fa-times"></i> Cancel</a>
             </li>
         </ul>
-
-
        
 
 
     </div>
-
-
-
-
 </div>
+<div id="myModalforCropImg" class="modal fade" role="dialog">
+    <!-- Modal content-->
+    <div class="modal-body">
+
+      
+        <div class="cropArea">
+            <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+        </div>
+        <div>Cropped Image:</div>
+        <div><img ng-src="{{myCroppedImage}}" /></div>
+
+        <a data-dismiss="modal"><i class="fa fa-times"></i> Cancel</a>
+
+    </div>
+</div>
+
+
+
 <script>
 
 

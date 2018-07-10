@@ -399,6 +399,9 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         alert("Third");
 
         CheckScopeBeforeApply();
+
+        
+        $("#myModalforCropImg").modal("show");
         //$scope.uploadProfile();
 
     }
