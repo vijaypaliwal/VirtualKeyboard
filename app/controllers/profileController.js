@@ -339,8 +339,20 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         _ImgObj.FileName = "IphoneLibrary";
         _ImgObj.bytestring = imageData;
         $scope.Image = _ImgObj;
+
+
+        //updated
+        $scope.myImage = '';
+        $scope.myCroppedImage = '';
+
+        $scope.myImage = imageData;
+
+
+
         CheckScopeBeforeApply();
-        $scope.uploadProfile();
+
+        $("#myModalforCropImg").modal("show");
+        //$scope.uploadProfile();      
 
     }
 
