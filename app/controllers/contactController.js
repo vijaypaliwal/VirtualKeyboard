@@ -8,7 +8,9 @@ app.controller('contactController', ['$scope', '$location', 'authService', 'ngAu
     $("body").removeClass("modal-open");
 
 
-    var myCenter = new google.maps.LatLng(38.5737822, -90.3928599);
+    // var myCenter = new google.maps.LatLng(38.5737822, -90.3928599);
+    
+    var myCenter = new google.maps.LatLng(38.5745931, -90.3934053);
 
     function initialize() {
 
