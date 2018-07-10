@@ -389,7 +389,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
 
     $scope.saveCroppedImage = function () {
-        alert("saveCroppedImage");
+       
         $scope.uploadProfile();
     }
 
