@@ -23,6 +23,28 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         $scope.$apply();
     }
 
+
+
+    //Image Crop 
+    $scope.myImage = '';
+    $scope.myCroppedImage = '';
+
+    var handleCropSelect = function (evt) {
+        var file = evt.currentTarget.files[0];
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+            $scope.$apply(function ($scope) {
+                $scope.myImage = evt.target.result;
+            });
+        };
+        reader.readAsDataURL(file);
+    };
+    angular.element(document.querySelector('#fileInput')).on('change', handleCropSelect);
+
+    //
+
+
+
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
     function CheckScopeBeforeApply() {
@@ -323,14 +345,16 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         // Retrieve image file location from specified source
         navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
             quality: 500,
-           // targetWidth: 350,
-          //  targeHeight: 350,
+            targetWidth: 350,
+            targeHeight: 350,
             destinationType: destinationType.DATA_URL,
             correctOrientation: true,
             allowEdit: true,
             sourceType: pictureSource.PHOTOLIBRARY
         });
     }
+
+
     $scope.onPhotoDataSuccessNew = function (imageData) {
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
 
@@ -340,11 +364,26 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         _ImgObj.ImageID = id;
 
         $("#myModalforlist").modal("hide");
-
-
         _ImgObj.FileName = "IphoneCapture";
         _ImgObj.bytestring = imageData;
-        $scope.Image=_ImgObj;
+        $scope.Image = _ImgObj;
+
+        //updated
+        $scope.myImage = '';
+        $scope.myCroppedImage = '';
+
+        
+        var file = $scope.Image;
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                $scope.$apply(function ($scope) {
+                    $scope.myImage = evt.target.result;
+                });
+            };
+            reader.readAsDataURL(file);
+      
+        //
+        
         CheckScopeBeforeApply();
         $scope.uploadProfile();
 
@@ -354,17 +393,21 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
 
         log.error('Failed because: ' + message);
     }
+
+
     $scope.capturePhotoNew = function () {
         navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
             quality: 500,
-          //  targetWidth: 350,
-          //  targeHeight: 350,
+            targetWidth: 350,
+            targeHeight: 350,
             correctOrientation: true,
             destinationType: destinationType.DATA_URL,
-            allowEdit: true,
+            allowEdit: false,
             saveToPhotoAlbum: true,
         });
     }
+
+
     $scope.uploadProfile = function () {
         $("#myModalforlist").modal("hide");
         $scope._isProfileLoading = true;
