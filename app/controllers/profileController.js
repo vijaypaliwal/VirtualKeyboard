@@ -368,6 +368,7 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         _ImgObj.bytestring = imageData;
         $scope.Image = _ImgObj;
 
+        alert("First");
         //updated
         $scope.myImage = '';
         $scope.myCroppedImage = '';
@@ -375,15 +376,20 @@ app.controller('profileController', ['$scope',  'localStorageService', 'authServ
         
         var file = $scope.Image;
             var reader = new FileReader();
-            reader.onload = function (evt) {
+            reader.onload = function () {
                 $scope.$apply(function ($scope) {
-                    $scope.myImage = evt.target.result;
+                    $scope.myImage = $scope.Image;
+                    alert("My image--"+ $scope.myImage);
                 });
             };
+
+            alert("Second");
+
             reader.readAsDataURL(file);
       
         //
-        
+            alert("Third");
+
         CheckScopeBeforeApply();
         $scope.uploadProfile();
 
