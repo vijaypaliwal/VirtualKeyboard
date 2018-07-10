@@ -12,7 +12,7 @@
         position: absolute;
         border-radius: 100%;
         margin-top: -31px;
-        color:#fff !important;
+        color: #fff !important;
     }
 </style>
 
@@ -123,6 +123,20 @@
 
 
 
+
+
+
+
+
+
+<input type="file" id="files" style="visibility:hidden" accept="image/*;" />
+
+<div class="cropArea">
+    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+</div>
+<div>Cropped Image:</div>
+<div><img ng-src="{{myCroppedImage}}" /></div>
+
 <div style="display:none; position:fixed;width:100%;" class="profilepage">
 
     <div class="detailmode">
@@ -133,12 +147,12 @@
                 <br />
             </div>
 
-            <img  ng-if="_isProfileLoading==true" src="img/loader1.gif" class="loadingImage" alt="loading.." />
+            <img ng-if="_isProfileLoading==true" src="img/loader1.gif" class="loadingImage" alt="loading.." />
             <img src="{{picURl}}" ng-click="PreviewImage()" onerror="this.onerror = null; this.src = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg';" class="myimg" id="myimg" ng-if="_isProfileLoading==false" alt="Alternate Text" />
 
             <div ng-click="openModel()">
                 <a class="btn-openimage"><i class="fa fa-pencil"></i></a>
-               
+
             </div>
             <div>
                 <br />
@@ -269,10 +283,10 @@
 
 
     </div>
-    
+
 </div>
 
-<input type="file" style="visibility:hidden" id="files" accept="image/*;" />
+
 
 <div class="modal fade" id="imagemodaldetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div style="background:#fff;" class="modal-header">
@@ -318,21 +332,17 @@
         </ul>
 
 
-        <!--<div class="cropArea">
-            <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
-        </div>
-        <div>Cropped Image:</div>
-        <div><img ng-src="{{myCroppedImage}}" /></div>-->
+       
 
 
     </div>
-    
 
-    
+
+
 
 </div>
 <script>
- 
+
 
     var stickyHeaders = (function () {
 
@@ -399,11 +409,11 @@
     })();
 
     $(function () {
-       // stickyHeaders.load($(".followMeBar"));
+        // stickyHeaders.load($(".followMeBar"));
     });
 
- 
-  
+
+
 </script>
 
 
