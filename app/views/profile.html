@@ -326,13 +326,10 @@
                 <a data-dismiss="modal"><i class="fa fa-times"></i> Cancel</a>
             </li>
         </ul>
-       
-
-
     </div>
 </div>
 <div id="myModalforCropImg" class="modal fade" role="dialog">
-    <!-- Modal content-->
+    <!-- Modal for Croping content-->
     <div class="modal-body">
 
       
@@ -340,8 +337,8 @@
             <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
         </div>
         <div>Cropped Image:</div>
-        <div><img ng-src="{{myCroppedImage}}" /></div>
-
+        <div><img id="croppedImage" ng-src="{{myCroppedImage}}" /></div>
+        <a ng-click="saveCroppedImage();"> <i class="fa fa-camera"></i> Save Photo</a>
         <a data-dismiss="modal"><i class="fa fa-times"></i> Cancel</a>
 
     </div>

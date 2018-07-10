@@ -378,33 +378,21 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
         $scope.myImage = imageData;
 
-        //var file = $scope.Image;
-        //$scope.myImage = $scope.Image;
-        //alert("My image--" + $scope.myImage);
-
-
-        //var reader = new FileReader();
-        //reader.onload = function () {
-        //    $scope.$apply(function ($scope) {
-        //        $scope.myImage = $scope.Image;
-
-        //    });
-        //};
-
-
-
-        //reader.readAsDataURL(file);
-
-        //
         alert("Third");
 
         CheckScopeBeforeApply();
-
         
         $("#myModalforCropImg").modal("show");
         //$scope.uploadProfile();
 
     }
+
+
+    $scope.saveCroppedImage = function () {
+        alert("saveCroppedImage");
+        $scope.uploadProfile();
+    }
+
 
     $scope.onFail = function (message) {
 
@@ -427,13 +415,19 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
     $scope.uploadProfile = function () {
         $("#myModalforlist").modal("hide");
+        $("#myModalforCropImg").modal("hide");
         $scope._isProfileLoading = true;
         $scope.$apply();
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
         }
-        $scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
+
+        //$scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
+
+        alert($("#croppedImage").attr("ng-src"));
+
+        $scope.Image.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
 
         $.ajax
            ({
