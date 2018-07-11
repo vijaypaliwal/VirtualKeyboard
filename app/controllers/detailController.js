@@ -202,11 +202,9 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         if (!UsFullImg) {
             $scope.ImagObject.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($("#croppedImage").attr("ng-src"));
         }
-        else {
-            alert("UseFullImage")
-            $scope.Image.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($scope.ImagObject.bytestring);
-        }
-        alert("Out")
+        else {           
+            $scope.ImagObject.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($scope.ImagObject.bytestring);
+        }       
         $scope.ImageList.push($scope.ImagObject);
         CheckScopeBeforeApply();
         $("#myModalforCropImg").modal("hide");

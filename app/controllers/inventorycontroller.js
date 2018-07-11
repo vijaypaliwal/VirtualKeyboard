@@ -3612,9 +3612,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $scope.ImagObject.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($("#croppedImage").attr("ng-src"));
         }
         else {
-            $scope.Image.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($scope.ImagObject.bytestring);
+            $scope.ImagObject.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($scope.ImagObject.bytestring);
         }
-
 
         $scope.ImageList.push($scope.ImagObject);
         CheckScopeBeforeApply();
