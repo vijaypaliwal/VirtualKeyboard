@@ -366,13 +366,17 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
             targeHeight: 350,
             destinationType: destinationType.DATA_URL,
             correctOrientation: true,
-            allowEdit: true,
+            allowEdit: false,
             sourceType: pictureSource.PHOTOLIBRARY
         });
     }
 
 
     $scope.onPhotoDataSuccessNew = function (imageData) {
+
+        UsFullImg = true;
+        $("#myModalforCropImg").modal("show");
+
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
 
         imageData = "data:image/jpeg;base64," + imageData;
@@ -394,11 +398,9 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
        
 
-        CheckScopeBeforeApply();
-        
+        CheckScopeBeforeApply();       
 
-        UsFullImg = true;
-        $("#myModalforCropImg").modal("show");
+      
         //$scope.uploadProfile();
 
     }
