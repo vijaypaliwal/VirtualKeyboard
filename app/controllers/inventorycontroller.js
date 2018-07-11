@@ -3597,23 +3597,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         $("#myModalforCropImg").modal("show");
         //
-
-
-        //$scope.ImageList.push(_ImgObj);      
-
+        //$scope.ImageList.push(_ImgObj);   
         
         // log.success("Images captured length"+$scope.ImageList.length);
 
     }
 
 
-    $scope.saveCroppedImage = function () {
-        alert("saveCroppedImage");
-        $scope.ImagObject.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($("#croppedImage").attr("ng-src"));
-        alert($scope.ImagObject.id);
-        alert($scope.ImagObject.bytestring);
-        alert($scope.ImagObject.FileName);
+    $scope.saveCroppedImage = function () {      
+        $scope.ImagObject.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($("#croppedImage").attr("ng-src"));       
         $scope.ImageList.push($scope.ImagObject);
+        CheckScopeBeforeApply();
         $("#myModalforCropImg").modal("hide");
     }
 
@@ -5134,8 +5128,21 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         _ImgObj.FileName = "IphoneLibrary";
         _ImgObj.bytestring = imageData;
-        $scope.ImageList.push(_ImgObj);
+
+
+        $scope.ImagObject = _ImgObj
+
+        //updated for image crop
+        $scope.myImage = '';
+        $scope.myCroppedImage = '';
+
+        $scope.myImage = imageData;
+
         CheckScopeBeforeApply();
+
+        $("#myModalforCropImg").modal("show");
+
+        //$scope.ImageList.push(_ImgObj);       
 
     }
 
