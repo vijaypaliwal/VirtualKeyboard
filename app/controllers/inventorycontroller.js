@@ -3609,7 +3609,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.saveCroppedImage = function () {
         alert("saveCroppedImage");
-        $scope.ImagObject.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
+        $scope.ImagObject.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($("#croppedImage").attr("ng-src"));
         alert($scope.ImagObject.id);
         alert($scope.ImagObject.bytestring);
         alert($scope.ImagObject.FileName);
