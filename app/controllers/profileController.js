@@ -364,7 +364,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
             targeHeight: 350,
             destinationType: destinationType.DATA_URL,
             correctOrientation: true,
-          //  allowEdit: true,
+            allowEdit: true,
             sourceType: pictureSource.PHOTOLIBRARY
         });
     }
@@ -437,8 +437,11 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
         //$scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
 
-       
-        $scope.Image.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
+        alert(UsFullImg);
+
+        if (!UsFullImg) {
+            $scope.Image.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
+        }
 
         $.ajax
            ({

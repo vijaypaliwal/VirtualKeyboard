@@ -1823,7 +1823,11 @@ crop.directive('imgCrop', ['$timeout', 'cropHost', 'cropPubSub', function($timeo
         .on('load-error', fnSafeApply(function(scope){
           scope.onLoadError({});
         }))
-        .on('area-move area-resize', fnSafeApply(function(scope){
+        .on('area-move area-resize', fnSafeApply(function (scope) {
+
+            //Updated for fullCrop
+            UsFullImg = false;
+
           if(!!scope.changeOnFly) {
             updateResultImage(scope);
           }
