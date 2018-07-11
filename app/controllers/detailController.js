@@ -188,7 +188,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         $scope.myImage = imageData;
 
         CheckScopeBeforeApply();
-
+        UsFullImg = true;
         $("#myModalforCropImg").modal("show");
 
 
@@ -199,8 +199,12 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
 
     $scope.saveCroppedImage = function () {
-        $scope.ImagObject.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($("#croppedImage").attr("ng-src"));
-        $scope.ImageList.push($scope.ImagObject);
+        if (!UsFullImg) {
+            $scope.ImagObject.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($("#croppedImage").attr("ng-src"));
+        }
+        else {
+            $scope.Image.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($scope.ImagObject.bytestring);
+        } $scope.ImageList.push($scope.ImagObject);
         CheckScopeBeforeApply();
         $("#myModalforCropImg").modal("hide");
     }
@@ -298,7 +302,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         $scope.myImage = imageData;
 
         CheckScopeBeforeApply();
-
+        UsFullImg = true;
         $("#myModalforCropImg").modal("show");       
 
     }

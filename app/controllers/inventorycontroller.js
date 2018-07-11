@@ -3595,6 +3595,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         CheckScopeBeforeApply();
 
+        UsFullImg = true;
+
         $("#myModalforCropImg").modal("show");
         //
         //$scope.ImageList.push(_ImgObj);   
@@ -3604,8 +3606,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
-    $scope.saveCroppedImage = function () {      
-        $scope.ImagObject.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($("#croppedImage").attr("ng-src"));       
+    $scope.saveCroppedImage = function () {
+
+        if (!UsFullImg) {
+            $scope.ImagObject.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($("#croppedImage").attr("ng-src"));
+        }
+        else {
+            $scope.Image.bytestring = "data:image/jpeg;base64," + removePaddingCharacters($scope.ImagObject.bytestring);
+        }
+
+
         $scope.ImageList.push($scope.ImagObject);
         CheckScopeBeforeApply();
         $("#myModalforCropImg").modal("hide");
@@ -5139,6 +5149,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.myImage = imageData;
 
         CheckScopeBeforeApply();
+
+        UsFullImg = true;
 
         $("#myModalforCropImg").modal("show");
 

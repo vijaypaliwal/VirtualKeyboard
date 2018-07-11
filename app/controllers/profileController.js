@@ -396,6 +396,8 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
         CheckScopeBeforeApply();
         
+
+        UsFullImg = true;
         $("#myModalforCropImg").modal("show");
         //$scope.uploadProfile();
 
@@ -439,15 +441,14 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
         //$scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
 
-        alert(UsFullImg);
+       
 
         if (!UsFullImg) {
             $scope.Image.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
         }
         else {
             $scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
-
-        }
+        }       
 
         $.ajax
            ({
