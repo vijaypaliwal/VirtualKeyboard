@@ -140,6 +140,31 @@
    
 </style>
 
+
+
+<style>
+    .cropArea {
+        overflow: hidden;
+        width: 100%;
+        height: 300px;
+        text-align: center;
+    }
+
+    img-crop {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: relative;
+    }
+
+        img-crop canvas {
+            position: absolute;
+            top: 50%;
+            max-width: 220px;
+        }
+</style>
+
+
 <a ng-click="viewall()" class="btn btn-danger waves-effect roundbtntitle"> <i class="fa fa-info"></i> </a>
 <a href="#/mainmenu" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
 
