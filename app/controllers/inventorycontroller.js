@@ -3582,15 +3582,32 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $(".viewimage").show();
         $("#myModalforlist").modal("hide");
 
-
         _ImgObj.FileName = "IphoneCapture";
         _ImgObj.bytestring = imageData;
-        $scope.ImageList.push(_ImgObj);
-        CheckScopeBeforeApply();
 
+        $scope.ImagObject = _ImgObj
+
+        //updated for image crop
+        $scope.myImage = '';
+        $scope.myCroppedImage = '';
+
+        $scope.myImage = imageData;       
+        $("#myModalforCropImg").modal("show");
+        //
+        //$scope.ImageList.push(_ImgObj);      
+
+        //CheckScopeBeforeApply();
         // log.success("Images captured length"+$scope.ImageList.length);
 
     }
+
+
+    $scope.saveCroppedImage = function () {
+        $scope.ImagObject.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
+        $scope.ImageList.push($scope.ImagObject);
+    }
+
+
 
     $scope.onFail = function (message) {
 
@@ -3601,7 +3618,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             quality: 50,
             correctOrientation: true,
             destinationType: destinationType.DATA_URL,
-            allowEdit: true,
+            allowEdit: false,
             saveToPhotoAlbum: true,
         });
     }
