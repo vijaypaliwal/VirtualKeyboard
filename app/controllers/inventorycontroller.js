@@ -23,7 +23,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.UniqueTag3Combovalues = [];
     $scope.UniqueTag2Combovalues = [];
 
-    $scope.ImagObject = {};
+    $scope.ImagObject = { ImageID: 0, FileName: "", bytestring: "", Size: 0 };
 
     $scope.UnitNumber1FieldDefaultValue = 0;
     $scope.UnitNumber1FieldNumberMax = 0;
@@ -3592,11 +3592,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.myCroppedImage = '';
 
         $scope.myImage = imageData;       
+
+        CheckScopeBeforeApply();
+
         $("#myModalforCropImg").modal("show");
         //
+
+
         //$scope.ImageList.push(_ImgObj);      
 
-        //CheckScopeBeforeApply();
+        
         // log.success("Images captured length"+$scope.ImageList.length);
 
     }
