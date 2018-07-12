@@ -647,7 +647,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.GetProfileData = function () {
         $scope.ProfilePicURl = "img/dummy-user48.png";
-        $scope.$apply();
+  
         debugger;
         authService.GetuserInfo();
         setTimeout(function () {
