@@ -1782,15 +1782,13 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             var originalID = "#actionQty_" + obj.iID;
 
 
-            if ($(originalID).find(".fa-check").css("color") == "rgb(255, 255, 255)") {
+            if ($(originalID).find(".fa-check").css("color") == "rgb(76, 175, 80)") {
 
                 if (_isSelectAll != true) {
 
                     $(originalID).find(".fa-check").css("color", "transparent");
 
-                    $(originalID).parent(".newlistitem").find(".img").css("opacity", "1");
-                    $(originalID).parent(".newlistitem").find(".img").css("background-color", "transparent")
-                    $(originalID).parent(".newlistitem").find(".img").removeClass("hideimage");
+                    $(originalID).parent(".newlistitem").find(".img").css("opacity", "1")
                 }
 
 
@@ -1798,9 +1796,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             else {
                 var _CartObjLimittemp = _isSelectAll == true ? _CartObjLimit : (_CartObjLimit - 1);
                 if ($scope.mainObjectToSend.length <= _CartObjLimittemp) {
-                    $(originalID).find(".fa-check").css("color", "#fff");
-                    $(originalID).parent(".newlistitem").find(".img").css("background-color", "#4caf50")
-                    $(originalID).parent(".newlistitem").find(".img").addClass("hideimage");
+                    $(originalID).find(".fa-check").css("color", "#4CAF50");
+                    $(originalID).parent(".newlistitem").find(".img").css("opacity", "0.4")
                 }
 
             }
@@ -1826,24 +1823,18 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
 
-            if ($(originalID).find(".fa-check").css("color") == "rgb(255, 255, 255)") {
+            if ($(originalID).find(".fa-check").css("color") == "rgb(76, 175, 80)") {
 
                 $(originalID).find(".fa-check").css("color", "transparent");
 
-                $(originalID).parent(".newlistitem").find(".img").css("opacity", "1");
-
-                $(originalID).parent(".newlistitem").find(".img").css("background-color", "#fff")
-
-                $(originalID).parent(".newlistitem").find(".img").removeClass("hideimage");
+                $(originalID).parent(".newlistitem").find(".img").css("opacity", "1")
 
 
             }
             else {
                 if ($scope.mainObjectToSend.length < _CartObjLimit) {
-                    $(originalID).find(".fa-check").css("color", "#fff");
-                    $(originalID).parent(".newlistitem").find(".img").css("background-color", "transparent");
-
-                    $(originalID).parent(".newlistitem").find(".img").addClass("hideimage");
+                    $(originalID).find(".fa-check").css("color", "#4CAF50");
+                    $(originalID).parent(".newlistitem").find(".img").css("opacity", "0.4")
                 }
 
             }
@@ -1891,7 +1882,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $scope.DeselectAll = function () {
         _tempCopy = angular.copy($scope.mainObjectToSend);
         $('#mylist .checkicon').each(function () {
-            $(this).parent(".newlistitem").find(".img").css("opacity", "1")
+            $(this).parent(".newlistitem").find(".img").css("background-color", "transparent");
+            $(this).parent(".newlistitem").find(".img").removeClass("hideimage");
             $(this).find(".fa-check").css("color", "transparent");
             var originalID = "#" + $(this).attr("id");
             var _invID = parseFloat($(this).attr("inv-id"));
@@ -2098,7 +2090,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         var _CartObjLimittemp = _isSelectAll == true ? _CartObjLimit : (_CartObjLimit - 1);
         var _count = 0;
 
-        if ($(originalID).find(".fa-check").css("color") == "rgb(255, 255, 255)" && $scope.mainObjectToSend.length <= _CartObjLimittemp) {
+        if ($(originalID).find(".fa-check").css("color") == "rgb(76, 175, 80)" && $scope.mainObjectToSend.length <= _CartObjLimittemp) {
             _isExceededLimit = false;
             $.each($scope.InventoryItems, function (i, v) {
                 if (v.iID == IdToSave) {

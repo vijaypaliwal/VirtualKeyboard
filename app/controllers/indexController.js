@@ -25,6 +25,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         $scope.$apply();
     }
 
+
+
     $scope.Permission = [];
     $scope.Permission1 = [];
     $scope.Permission2 = [];
@@ -641,6 +643,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
         return ($location.path().substr(0, path.length) === path) ? 'active' : '';
     }
     $scope.authentication = authService.authentication;
+
+    $scope.ProfilePicURl = "img/dummy-user48.png";
 
     $scope.GetProfileData = function () {
 

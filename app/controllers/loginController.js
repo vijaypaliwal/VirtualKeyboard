@@ -142,7 +142,7 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
 
             $scope.IsOwner = localStorageService.get('IsOwner');
 
-
+            $scope.ProfilePicURl = "img/dummy-user48.png";
 
 
             //$location.path('/FindItems');
