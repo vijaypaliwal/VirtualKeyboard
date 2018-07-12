@@ -645,23 +645,22 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
     $scope.authentication = authService.authentication;
 
 
-    $scope.GetProfileData = function () {
-        $scope.ProfilePicURl = "img/dummy-user48.png";
-  
+    $scope.GetProfileData = function () {       
         debugger;
         authService.GetuserInfo();
+        $scope.ProfilePicURl = "img/dummy-user48.png";       
+        $("#myimgProfile").attr("src", "");
         setTimeout(function () {
             $scope.UserInfoData = authService.UserInfo;
             if ($scope.UserInfoData != null && $scope.UserInfoData != undefined) {
-
                 $scope.username = $scope.UserInfoData.username;
-                $scope.myprofileimage = $scope.UserInfoData.myprofileimage;
-                $scope.ProfilePicURl = $scope.UserInfoData.picURl;
+                $scope.myprofileimage = $scope.UserInfoData.myprofileimage;   
+                $scope.ProfilePicURl = $scope.UserInfoData.picURl;            
                 $scope.$apply();
             }
         }, 1000)
-
     }
+
     function TryParseInt(str, defaultValue) {
         var retValue = defaultValue;
         if (str !== null) {
