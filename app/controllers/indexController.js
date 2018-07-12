@@ -655,9 +655,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
             if ($scope.UserInfoData != null && $scope.UserInfoData != undefined) {
                 $scope.username = $scope.UserInfoData.username;
                 $scope.myprofileimage = $scope.UserInfoData.myprofileimage;   
-                $scope.ProfilePicURl = $scope.UserInfoData.picURl;
-                alert("ProfilePicURl " + $scope.ProfilePicURl);
-                alert("attr " + $("#myimgProfile").attr("src"));
+                $scope.ProfilePicURl = $scope.UserInfoData.picURl;               
                 $scope.$apply();
             }
         }, 1000)
