@@ -5188,6 +5188,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
+    var deviceheight = $(window).height();
+
+    $scope.cropmodalheight = deviceheight
+
 
 
 }]);

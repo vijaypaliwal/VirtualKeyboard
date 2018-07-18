@@ -8,6 +8,18 @@
     .formarea {
         box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
     }
+
+    .signuplink {
+        background: #fff;
+        border-radius: 20px;
+        display: block;
+        padding: 12px;
+        font-size: 18px;
+        width: auto;
+        margin: 0 auto;
+        max-width: 200px;
+        margin-top: 15px;
+    }
 </style>
 
 <div style="text-align:center; margin-bottom:15px;">
@@ -44,7 +56,7 @@
                             <label>Email or <em>(username)</em></label>
                             <div class="input-group">
                                 <span class="input-group-addon"> <i class="fa fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="Username" data-ng-model="loginData.userName" value="" required>
+                                <input type="email" class="form-control" placeholder="Username" data-ng-model="loginData.userName" value="" required>
                             </div>
                         </div>
                     </div>
@@ -57,7 +69,18 @@
                             <label>Password</label>
                             <div class="input-group">
                                 <span class="input-group-addon"> <i class="fa fa-key"></i></span>
-                                <input type="password" class="form-control" placeholder="Password" data-ng-model="loginData.password" value="" required>
+                                <input type="{{passwordtype}}" class="form-control" placeholder="Password" data-ng-model="loginData.password" value="" required>
+
+                                <span ng-show="Isshowpassword==true" ng-click="showpassword()" class="input-group-addon">
+                                 <i class="fa fa-eye"></i>
+                                
+                                </span>
+
+                                <span ng-show="Isshowpassword==false" ng-click="hidepassword()" class="input-group-addon">
+                                    <i class="fa fa-eye-slash"></i>
+                                </span>
+
+                             
                             </div>
                         </div>
                     </div>
@@ -76,7 +99,7 @@
                  
                     </div>
             <div class="row" ng-if="IsProduction==false" style="text-align:center">
-                <h2 style="color: #ff5e00">Development</h2>
+                <h2 style="color: #ff5e00; font-size:17px;">Development</h2>
             </div>
                 </div>
             </div>
@@ -84,8 +107,11 @@
 
 
 
-<div style="text-align:center; width:100%; position:fixed; bottom:25px;">
-    <a href="https://account.inventory4.com/signup" target="_blank" style="color:#fff; border:transparent;" class="signuplink">Sign Up for an account </a>
+<div style="text-align:center; width:100%; position:fixed; bottom:30px;">
+
+    <a style="color:#fff;">Don't have an account?</a>
+
+    <a href="https://account.inventory4.com/signup" target="_blank" class="signuplink">sign up <i style="font-size:15px;" class="fa fa-sign-in" aria-hidden="true"></i></a>
 </div>
 
 

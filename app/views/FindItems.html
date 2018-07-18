@@ -59,6 +59,48 @@
         border-radius: 20px;
     }
 
+    .form-control[disabled] {
+        opacity: 1 !important;
+        background-color: #eee !important;
+        -webkit-text-fill-color: #6f6f6f !important;
+    }
+
+    .Addfirstinv a {
+        height: 70px;
+        width: 70px;
+        text-align: center;
+        display: block;
+        margin: 0 auto;
+        background: #177B3D;
+        border-radius: 100%;
+        color:#fff;
+        font-size:35px;
+        line-height:70px;
+    }
+
+   
+    
+    
+     .Addfirstinv a span {
+        display: block;
+    }
+
+    .Addfirstinv {
+        background: #efefef;
+        border: 1px solid #ccc;
+        padding: 19px;
+        margin-top: 28px;
+        width: 275px;
+        margin: 0 auto;
+        border-radius: 19px;
+        margin-top: 30px;
+    }
+
+    .Addfirstinv span
+    {
+        color:#888;
+        font-size:18px;
+    }
 </style>
 
 
@@ -167,7 +209,7 @@
 
                                 <span ng-if="CurrentActiveSearchType==1">
 
-                                    <input id="MasterSearch" type="text" ng-model="SearchValue" class="form-control hideaddclear" placeholder="Search">
+                                    <input id="MasterSearch" ng-disabled="ActualTotalRecords==0" type="text" ng-model="SearchValue" class="form-control hideaddclear" placeholder="Search">
                                 </span>
 
 
@@ -245,15 +287,19 @@
 
                 <img style="height:70px; width:70px; float:left;" class="animated slideInLeft" src="img/Untitled-11.png" alt="Alternate Text"><br />
 
-                <h5>You don't have any inventory records yet. Click the "New Inventory" button below to put something in inventory.</h5>
+                <h5>You don't have any inventory records yet. Click the "New Inventory" button below to put something in inventory.</h5>  
                 
+                
+                              
                 <br />
 
-
+                <a ng-if="checkpermission('ACTION:CanAddInventory') && totalrecords==0" style="border-radius: 25px; height: 45px; padding-left: 40px; padding-right: 40px; line-height: 40px; /* width: 100%; */ /* padding: 25px; */ font-size: 17px; text-transform: capitalize;" class="btn waves-effect waves-light btn-success animated center bouncein delay-6 ng-scope" href="#/inventory"><i class="fa fa-plus"></i> New Inventory</a> 
             </div>
-
         </div>
     </div>
+
+
+    
 
 
     <div class="animated slideInLeft" id="mylist" style="display:block !important;">
@@ -376,9 +422,9 @@
 
 
 
-    <div ng-if="checkpermission('ACTION:CanAddInventory')==true">
+    <!--<div ng-if="checkpermission('ACTION:CanAddInventory')==true">
         <img style="display:none" id="arrow" src="img/downarrow.png">
-    </div>
+    </div>-->
 
   
 
@@ -390,21 +436,20 @@
     </div>
 
     <div id="myModal2" class="modal bottommenu fade">
-
         <div class="modal-body">
             <ul class="animated slideInUp selectAction">
-                <li ng-if="checkpermission('ACTION:CanAddInventory')==true"> <a href="#/inventory"><span class="newinv">New Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-success btn"> <i class="fa fa-plus"></i> </a></li>
+                <li ng-if="checkpermission('ACTION:CanAddInventory')==true && totalrecords!=0"> <a href="#/inventory"><span class="newinv">New Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-success btn"> <i class="fa fa-plus"></i> </a></li>
                 <li class="bottomlink" ng-if="totalrecords!=0 && _areImagesShown==false" ng-click="Showhideimage('true')"> <span>Show Image</span> <a class="waves-effect btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
                 <li class="bottomlink" ng-if="totalrecords!=0 &&_areImagesShown==true" ng-click="Showhideimage('false')"> <span>Hide Image</span> <a class="waves-effect btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
-                <li class="bottomlink" ng-if="totalrecords!=0 &&_areZeroRecordsShown==false" ng-click=" showhidezerorecord('true')"><span>Show Zero record</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
-                <li class="bottomlink" ng-if="totalrecords!=0 &&_areZeroRecordsShown==true" ng-click="showhidezerorecord('false')"><span>Hide Zero record</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+                <li class="bottomlink" ng-if="totalrecords!=0 &&_areZeroRecordsShown==false" ng-click=" showhidezerorecord('true')"><span>Show Zero Quantities</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+                <li class="bottomlink" ng-if="totalrecords!=0 &&_areZeroRecordsShown==true" ng-click="showhidezerorecord('false')"><span>Hide Zero Quantities</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
                 <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
                 <li ng-click="ClearFilter()" class="bottomlink"><span data-dismiss="modal">Clear Filters</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
             </ul>
         </div>
     </div>
 
-    <a ng-click="OpenmenuModal()" class="menubtn waves-effect btn-info btn-floating" ng-if="mainObjectToSend.length==0">
+    <a ng-if="totalrecords!=0" ng-click="OpenmenuModal()" class="menubtn waves-effect btn-info btn-floating" ng-if="mainObjectToSend.length==0">
         <i class="fa fa-bars"></i>
     </a>
 
@@ -421,9 +466,6 @@
                         <i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Add to cart
                     </a>
                 </li>
-
-
-
             </ul>
         </div>
     </div>

@@ -244,11 +244,14 @@
         font-size: 16px;
         font-family: verdana;
         margin-right: 7px;
+         text-transform:capitalize;
     }
 
 
     #bottommenumodal .modal-body {
         background: transparent;
+        height:100%;
+        width:100%;
     }
 
 
@@ -264,7 +267,7 @@
 .filtercross {
     font-size: 25px;
     padding-top: 5px;
-    color: #ccc;
+    color: brown;
     padding: 6px;
     margin-top: 3px;
   

@@ -31,7 +31,7 @@
 
         <div class="row">
             <div class="col-xs-9">
-                <i class="fa fa-cog"></i> Manage UOM
+                <i class="fa fa-cog"></i> Manage Unit of Measure
             </div>
 
             <div class="col-xs-3">
@@ -49,7 +49,7 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <i class="fa fa-ban"></i> Manage UOM
+                <i class="fa fa-ban"></i> Manage Unit of Measure
             </div>
 
 
@@ -57,7 +57,7 @@
 
     </button>
 
-    <button ng-if="checkpermission('URL:Manage/ItemGroup')==true" type="button" ng-click="GoTo('/itemgroup')" class="waves-effect waves-light btn-large btn-success width-100 animated bouncein delay-6 lime">
+    <!--<button ng-if="checkpermission('URL:Manage/ItemGroup')==true" type="button" ng-click="GoTo('/itemgroup')" class="waves-effect waves-light btn-large btn-success width-100 animated bouncein delay-6 lime">
         <div class="row">
             <div class="col-xs-9">
                 <i class="fa fa-users"></i> Manage Item Group
@@ -78,13 +78,13 @@
             </div>
 
         </div>
-    </button>
+    </button>-->
 
     <button ng-if="checkpermission('URL:Manage/Location')==true" type="button" ng-click="GoTo('/Location')" class="waves-effect waves-light btn-large btn-danger width-100 animated bouncein delay-6">
 
         <div class="row">
             <div class="col-xs-9">
-                <i class="fa fa-map-marker"></i>  Manage Location
+                <i class="fa fa-map-marker"></i>  Location Library
 
             </div>
 
@@ -101,7 +101,7 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <i class="fa fa-ban"></i>  Manage Location
+                <i class="fa fa-ban"></i>  Location Library
 
             </div>
 
@@ -113,7 +113,7 @@
     <button ng-if="checkpermission('URL:Manage/Status')==true" type="button" ng-click="GoTo('/status')" class="waves-effect waves-light btn-large accent-color width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-9">
-                <i class="fa fa-check-circle-o"> </i> Manage Status
+                <i class="fa fa-check-circle-o"> </i> Status Library
 
             </div>
 
@@ -130,7 +130,7 @@
     <button ng-if="checkpermission('URL:Manage/Status')==false" type="button" ng-click="restricted()" class="waves-effect waves-light btn-large accent-color width-100 animated bouncein delay-6 restricted">
         <div class="row">
             <div class="col-xs-9">
-                <i class="fa fa-ban"> </i> Manage Status
+                <i class="fa fa-ban"> </i> Status Library
 
             </div>
 
@@ -199,7 +199,7 @@
 
     </button>
 
-    <button ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true && checkpermission('URL:configure/CustomFieldItemList.aspx')==true" type="button" ng-click="GoTo('/customfield')" class="waves-effect waves-light btn-large btn-purple width-100 animated bouncein delay-6">
+    <!--<button ng-if="checkpermission('URL:configure/CustomFieldTransList.aspx')==true && checkpermission('URL:configure/CustomFieldItemList.aspx')==true" type="button" ng-click="GoTo('/customfield')" class="waves-effect waves-light btn-large btn-purple width-100 animated bouncein delay-6">
         <div class="row">
             <div class="col-xs-9">
                 <i class="fa fa-eye-slash"></i>    Manage Custom Fields
@@ -232,7 +232,7 @@
 
 
 
-    </button>
+    </button>-->
 
 
     <button type="button" ng-if="checkpermission('URL:configure/default.aspx')==true" ng-click="GoTo('/configuresetting')" class="waves-effect waves-light btn-large btn-lightgreen width-100 animated bouncein delay-6">

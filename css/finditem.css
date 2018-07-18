@@ -483,14 +483,22 @@ h5.list-group-item-heading {
 }
 
     #myModal2 span {
-        font-size: 16px;
-        font-family: verdana;
-        margin-right: 7px;
+        color: #000;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 5px;
+            font-size: 14px;
+            background: #fff;
+            padding-left: 15px;
+            /* text-shadow: -3px -1px 4px #ccc; */
+            padding-right: 15px;
+            text-transform:capitalize;
     }
 
 
     #myModal2 .modal-body {
         background: transparent;
+    
     }
 
 
@@ -505,14 +513,23 @@ h5.list-group-item-heading {
 }
 
     #mycartModal span {
-        font-size: 16px;
-        font-family: verdana;
-        margin-right: 7px;
+        color: #000;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 5px;
+            font-size: 14px;
+            background: #fff;
+            padding-left: 15px;
+            /* text-shadow: -3px -1px 4px #ccc; */
+            padding-right: 15px;
+            margin-right:0px;
+             text-transform:capitalize;
     }
 
 
     #mycartModal .modal-body {
         background: transparent;
+     
     }
 
 
@@ -588,6 +605,7 @@ h5.list-group-item-heading {
         border: transparent;
         margin-bottom: 5px;
         color: #fff;
+        margin-left:8px;
     }
 
 .counter {
