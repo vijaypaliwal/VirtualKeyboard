@@ -583,7 +583,9 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
 
 
+    var deviceheight = $(window).height();
 
+    $scope.cropmodalheight = deviceheight
 
 
 
