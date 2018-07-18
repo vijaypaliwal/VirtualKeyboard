@@ -4532,15 +4532,23 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.movetoback = function () {
+        bootbox.confirm({
+            message: "Cancel and return to inventory?",
+            buttons: {
+                confirm: {
+                    label: 'Yes',
 
+                },
+                cancel: {
+                    label: 'No',
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $location.path('/FindItems');
 
-        bootbox.confirm("Are you sure to exit ?", function (result) {
-            if (result) {
-
-                $location.path('/FindItems');
-
-                CheckScopeBeforeApply()
-
+                    CheckScopeBeforeApply();
+                }
             }
         });
 

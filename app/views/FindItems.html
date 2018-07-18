@@ -435,19 +435,7 @@
         <span>Please click hamburger icon <i style="font-size:14px;" class="fa fa-bars"></i>  to see other options</span>
     </div>
 
-    <div id="myModal2" class="modal bottommenu fade">
-        <div class="modal-body">
-            <ul class="animated slideInUp selectAction">
-                <li ng-if="checkpermission('ACTION:CanAddInventory')==true && totalrecords!=0"> <a href="#/inventory"><span class="newinv">New Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-success btn"> <i class="fa fa-plus"></i> </a></li>
-                <li class="bottomlink" ng-if="totalrecords!=0 && _areImagesShown==false" ng-click="Showhideimage('true')"> <span>Show Image</span> <a class="waves-effect btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
-                <li class="bottomlink" ng-if="totalrecords!=0 &&_areImagesShown==true" ng-click="Showhideimage('false')"> <span>Hide Image</span> <a class="waves-effect btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
-                <li class="bottomlink" ng-if="totalrecords!=0 &&_areZeroRecordsShown==false" ng-click=" showhidezerorecord('true')"><span>Show Zero Quantities</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
-                <li class="bottomlink" ng-if="totalrecords!=0 &&_areZeroRecordsShown==true" ng-click="showhidezerorecord('false')"><span>Hide Zero Quantities</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
-                <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
-                <li ng-click="ClearFilter()" class="bottomlink"><span data-dismiss="modal">Clear Filters</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
-            </ul>
-        </div>
-    </div>
+    
 
     <a ng-click="OpenmenuModal()" class="menubtn waves-effect btn-info btn-floating" ng-if="mainObjectToSend.length==0 && totalrecords!=0">
         <i class="fa fa-bars"></i>
@@ -498,6 +486,21 @@
         <div class="cartcounter" style="font-size:32px;"> {{mainObjectToSend.length}}</div>
         <i class="fa fa-shopping-cart"></i>
     </a>
+
+
+    <div id="myModal234" class="modal bottommenu fade">
+        <div class="modal-body">
+            <ul class="animated slideInUp selectAction">
+                <li ng-if="checkpermission('ACTION:CanAddInventory')==true && totalrecords!=0"> <a href="#/inventory"><span class="newinv">New Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-success btn"> <i class="fa fa-plus"></i> </a></li>
+                <li class="bottomlink" ng-if="totalrecords!=0 && _areImagesShown==false" ng-click="Showhideimage('true')"> <span>Show Image</span> <a class="waves-effect btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
+                <li class="bottomlink" ng-if="totalrecords!=0 &&_areImagesShown==true" ng-click="Showhideimage('false')"> <span>Hide Image</span> <a class="waves-effect btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
+                <li class="bottomlink" ng-if="totalrecords!=0 &&_areZeroRecordsShown==false" ng-click=" showhidezerorecord('true')"><span>Show Zero Quantities</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+                <li class="bottomlink" ng-if="totalrecords!=0 &&_areZeroRecordsShown==true" ng-click="showhidezerorecord('false')"><span>Hide Zero Quantities</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+                <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
+                <li ng-click="ClearFilter()" class="bottomlink"><span data-dismiss="modal">Clear Filters</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
+            </ul>
+        </div>
+    </div>
 
     <div id="sticky-anchor"></div>
 

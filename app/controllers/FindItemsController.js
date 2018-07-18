@@ -457,16 +457,18 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.OpenmenuModal = function () {
 
+        debugger;
+
 
         if ($("body").hasClass("modal-open")) {
-            $("#myModal2").modal('hide');
+            $("#myModal234").modal('hide');
 
 
             $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
 
         }
         else {
-            $("#myModal2").modal('show');
+            $("#myModal234").modal('show');
             $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
 
         }
@@ -491,7 +493,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         localStorageService.set("ShowImageRecords", $scope._areImagesShown);
 
-        $("#myModal2").modal('hide');
+        $("#myModal234").modal('hide');
 
         CheckScopeBeforeApply();
 
@@ -512,7 +514,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         localStorageService.set("ShowZeroRecords", showzero);
         $scope._areZeroRecordsShown = showzero;
         CheckScopeBeforeApply();
-        $("#myModal2").modal('hide');
+        $("#myModal234").modal('hide');
         $scope.GetInventories();
 
     }
@@ -1932,12 +1934,12 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
 
-    $('#myModal2').on('shown.bs.modal', function () {
+    $('#myModal234').on('shown.bs.modal', function () {
         $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
 
     });
 
-    $('#myModal2').on('hidden.bs.modal', function () {
+    $('#myModal234').on('hidden.bs.modal', function () {
 
         $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
 
@@ -2471,6 +2473,17 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $('#MasterSearchStatus').multiselect();
 
+
+    setTimeout(function () {
+
+      
+        $("#myModal234").modal('hide');
+
+    },4000)
+
+
+  
+
 }]);
 
 
@@ -2612,3 +2625,5 @@ app.directive('imageonload', function () {
         }
     };
 });
+
+
