@@ -498,6 +498,8 @@ h5.list-group-item-heading {
 
     #myModal2 .modal-body {
         background: transparent;
+        height:100%;
+        width:100%;
     
     }
 
@@ -529,6 +531,8 @@ h5.list-group-item-heading {
 
     #mycartModal .modal-body {
         background: transparent;
+         height:100%;
+        width:100%;
      
     }
 
