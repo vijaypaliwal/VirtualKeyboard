@@ -3089,30 +3089,40 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     //Updates of Adjust activity work 7/19/2018
     $scope.checkToShowAdjustActivity = function ()
     {
+        debugger;
         $scope.onlyShowIncreaseAdjustActivity = false;
         $scope.onlyShowDecreaseAdjustActivity = false;
         var showIncrease = [];
         var showDecrease = [];
+        var showBothIncreaseDecrease = [];
 
         for (var x = 0; x < $scope.CurrentCart.length; x++) {
             if ($scope.CurrentCart[x].ActionPerformed == "1") {
                
                 showIncrease.push("1");
             }
-            else if ($scope.CurrentCart[x].ActionPerformed == "-1") {
+            if ($scope.CurrentCart[x].ActionPerformed == "-1") {
                 
                 showDecrease.push("1");
             }
+            if ($scope.CurrentCart[x].AdjustActionQuantity === 0) {
+
+                showBothIncreaseDecrease.push("1");
+            }
         }
 
-        if (showIncrease.length > 0)
-        {
-            
+        if (showIncrease.length > 0 && showBothIncreaseDecrease.length == 0)
+        {           
             $scope.onlyShowIncreaseAdjustActivity = true;
         }
 
-        if (showDecrease.length > 0) {
-          
+        if (showDecrease.length > 0 && showBothIncreaseDecrease.length == 0) {
+           
+            $scope.onlyShowDecreaseAdjustActivity = true;
+        }
+
+        if (showBothIncreaseDecrease.length > 0) {           
+            $scope.onlyShowIncreaseAdjustActivity = true;
             $scope.onlyShowDecreaseAdjustActivity = true;
         }
 
