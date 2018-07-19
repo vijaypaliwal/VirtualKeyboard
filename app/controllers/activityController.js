@@ -1,5 +1,11 @@
 ﻿'use strict';
 app.controller('activityController', ['$scope', 'localStorageService', 'authService', '$location', 'log', '$cordovaKeyboard', function ($scope, localStorageService, authService, $location, log, $cordovaKeyboard) {
+
+
+    $scope.onlyShowIncreaseAdjustActivity = false;
+    $scope.onlyShowDecreaseAdjustActivity = false;
+
+
     $scope.CurrentCart = [];
     $scope.SavingData = false;
     $scope.IsEditMode = false;
@@ -3024,7 +3030,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
     }
-    $scope.TrimValue = function (value) {
+    $scope.TrimValue = function (value) {        
+
         if (value != null && value != undefined) {
             return $.trim(value);
         }
@@ -3033,36 +3040,80 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
 
     }
-    $scope.UpdateQty = function (Qty, Index) {
+    $scope.UpdateQty = function (Qty, Index) {        
 
         $scope.ActionQuantityValue = Qty;
         var value = 0;
         $scope.CurrentCart[Index].AdjustCalculation = "";
-        if ($scope.CurrentOperation == "Adjust") {
+        if ($scope.CurrentOperation == "Adjust") {           
 
-
+           
             if ($scope.ActionQuantityValue != "" && $scope.ActionQuantityValue != null && $scope.ActionQuantityValue != undefined) {
 
                 if ($scope.ActionQuantityValue > $scope.CurrentCart[Index].InventoryDataList.oquantity) {
                     value = $scope.ActionQuantityValue - $scope.CurrentCart[Index].InventoryDataList.oquantity;
                     $scope.CurrentCart[Index].AdjustCalculation += $scope.CurrentCart[Index].InventoryDataList.oquantity.toString() + " + " + value.toString() + "=" + $scope.ActionQuantityValue.toString();
+
+                    
+
                 }
                 else if ($scope.ActionQuantityValue < $scope.CurrentCart[Index].InventoryDataList.oquantity) {
                     value = $scope.CurrentCart[Index].InventoryDataList.oquantity - $scope.ActionQuantityValue;
                     $scope.CurrentCart[Index].AdjustCalculation += $scope.CurrentCart[Index].InventoryDataList.oquantity.toString() + " - " + value.toString() + "=" + $scope.ActionQuantityValue.toString();
+
+                   
+
                 }
                 else {
                     value = 0;
                     $scope.CurrentCart[Index].AdjustCalculation += $scope.CurrentCart[Index].InventoryDataList.oquantity.toString() + " + " + value.toString() + "=" + $scope.ActionQuantityValue.toString();
+
+                    
+                   
                 }
 
                 $scope.CurrentCart[Index].AdjustActionQuantity = value;
 
-                // $scope.CurrentCart[Index].IncreaseDecreaseVMData.ActionQuantity = value;
+                
                 $scope.IsQuantityUpdated = true;
 
                 $scope.CurrentCart[Index].ActionPerformed = ($scope.ActionQuantityValue > $scope.CurrentCart[Index].InventoryDataList.oquantity || $scope.ActionQuantityValue == $scope.CurrentCart[Index].InventoryDataList.oquantity) ? "1" : "-1";
+
+                $scope.checkToShowAdjustActivity();
+
             }
+        }
+
+    }
+
+    //Updates of Adjust activity work 7/19/2018
+    $scope.checkToShowAdjustActivity = function ()
+    {
+        $scope.onlyShowIncreaseAdjustActivity = false;
+        $scope.onlyShowDecreaseAdjustActivity = false;
+        var showIncrease = [];
+        var showDecrease = [];
+
+        for (var x = 0; x < $scope.CurrentCart.length; x++) {
+            if ($scope.CurrentCart[x].ActionPerformed == "1") {
+               
+                showIncrease.push("1");
+            }
+            else if ($scope.CurrentCart[x].ActionPerformed == "-1") {
+                
+                showDecrease.push("1");
+            }
+        }
+
+        if (showIncrease.length > 0)
+        {
+            
+            $scope.onlyShowIncreaseAdjustActivity = true;
+        }
+
+        if (showDecrease.length > 0) {
+          
+            $scope.onlyShowDecreaseAdjustActivity = true;
         }
 
     }
