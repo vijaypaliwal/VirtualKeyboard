@@ -438,7 +438,7 @@
                                     <div ng-if="CurrentActiveField=='Image'">
                                         <div>
                                             <a class="btn btn btn-gray iamgebtn" ng-click="OpenBox()">
-                                                <i class="fa fa-picture-o"></i> <span ng-if="ImageList.length==0"> Add </span><span ng-if="ImageList.length>0"> More </span>
+                                                <i class="fa fa-picture-o"></i> <span ng-if="ImageList.length==0"> Add Photo </span><span ng-if="ImageList.length>0"> Add Photo </span>
                                                 <input type="file" style="visibility:hidden" multiple id="files" accept="image/*;" />
                                             </a>
                                         </div>
@@ -1613,7 +1613,7 @@
         </div>
         <div style="padding-left:0;" class="col-xs-4">
             <a class="btn btn btn-gray iamgebtn" ng-click="OpenBox()">
-                <i class="fa fa-picture-o"></i> <span ng-if="ImageList.length==0"> Add </span><span ng-if="ImageList.length>0"> More </span>
+                <i class="fa fa-picture-o"></i> <span ng-if="ImageList.length==0"> Add Photo </span><span ng-if="ImageList.length>0"> Add Photo </span>
             </a>
         </div>
         <div style="padding-left:0;" class="col-xs-4">
@@ -3611,10 +3611,10 @@
     <div style="padding:12px;" class="modal-body">
 
         <div class="form-group">
-            <label>Enter new <span ng-if="CreateType==4">Item Group</span><span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of measure</span> <span ng-if="CreateType==3">Status</span> </label>
+            <label>Enter new <span ng-if="CreateType==4">Item Group</span><span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of Measure</span> <span ng-if="CreateType==3">Status</span> </label>
 
             <div class="input-group">
-                <input type="text" ng-model="CreateNewLabel" class="form-control" value="" />
+                <input type="text" ng-model="CreateNewLabel" class="form-control" value="" autocorrect="off" autocapitalize="none" />
 
             </div>
             <br />
