@@ -4473,6 +4473,34 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     //}
 
+    function playtouch()
+    {
+        if (window.plugins && window.plugins.NativeAudio) {
+
+            alert("into music plugin")
+           
+
+            window.plugins.NativeAudio.preloadSimple('click', 'audio/click.mp3', function (msg) {
+            }, function (msg) {
+               alert('error: ' + msg);
+            });
+
+
+            // Play
+            window.plugins.NativeAudio.play('click');
+
+
+            // Stop multichannel clip after 60 seconds
+            window.setTimeout(function () {
+
+
+                window.plugins.NativeAudio.unload('click');
+
+            }, 1000 * 60);
+        }
+
+    }
+
     $scope.UpDownValue = function (value, IsUp, Type) {
 
         switch (value) {
@@ -4533,7 +4561,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         }
 
-
+        playtouch();
     }
 
 
