@@ -110,8 +110,15 @@
         }
 
         #toolbar .title {
-            padding-top: 8px;
-            padding-bottom: 8px;
+          
+            background: #fff;
+        
+            color: #333;
+            padding: 5px;
+            border-radius: 15px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            font-size: 15px;
         }
 
         .sidenav-header .avatar {
@@ -245,6 +252,31 @@
             padding-left: 15px;
             /* text-shadow: -3px -1px 4px #ccc; */
             padding-right: 15px;
+        }
+
+        html {
+            -webkit-user-select: none !important;
+        }
+
+        body {
+            -webkit-user-select: none !important;
+        }
+
+        .switchinv {
+            background: #e6e4e4;
+            color: #333;
+            padding: 5px;
+            border-radius: 15px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            font-size: 15px;
+            padding-left: 7px;
+            padding-right: 8px;
+        }
+
+        .switchinv i
+        {
+            color:#333 !important;
         }
 
     </style>
@@ -394,7 +426,7 @@
         <div class="open-left" id="open-left" data-activates="slide-out-left">
             <i class="fa fa-bars" style="font-size:17px;"></i>
         </div>
-        <span ng-click="showinventories()" class="title">{{currentInventoryname}} <i class="fa fa-angle-down"></i></span>
+        <a href="#/FindItems" class="title">{{currentInventoryname}}</a><span class="switchinv" ng-click="showinventories()"><i class="fa fa-angle-down"></i></span> 
         <div class="dropdown open-right">
             <a style="padding-left:0" data-toggle="dropdown" class="dropdown-toggle ">
                 <img id="myimgProfile" src="{{ProfilePicURl}}" onerror="this.onerror = null; this.src = 'img/dummy-user48.png';" alt="" style=" height: 50px; width:50px; border: 2px solid #ccc;" class="circle">
