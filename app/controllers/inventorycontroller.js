@@ -4473,20 +4473,24 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     //}
 
-    function playtouch()
+    function playtouch(noicetype)
     {
         if (window.plugins && window.plugins.NativeAudio) {
 
+          
 
-            alert("Play");
+            if (noicetype == true || noicetype == "true") {
+                window.plugins.NativeAudio.play('click');
+            }
 
-            window.plugins.NativeAudio.play('click');
+            else {
+                window.plugins.NativeAudio.play('dclick');
+            }
 
-            
-            alert("Play comp");
+          
+
 
             // Play
-           
 
 
             // Stop multichannel clip after 60 seconds
@@ -4560,7 +4564,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         }
 
-        playtouch();
+        playtouch(IsUp);
     }
 
 

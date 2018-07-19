@@ -847,6 +847,11 @@ function onDeviceReady() {
         alert('error: ' + msg);
     });
 
+    window.plugins.NativeAudio.preloadSimple('dclick', 'audio/d_click.mp3', function (msg) {
+    }, function (msg) {
+        alert('error: ' + msg);
+    });
+
     navigator.splashscreen.hide();
 
     //  navigator.splashscreen.hide();
