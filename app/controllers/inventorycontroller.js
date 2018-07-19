@@ -4477,26 +4477,25 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     {
         if (window.plugins && window.plugins.NativeAudio) {
 
-            alert("into music plugin")
-           
 
-            window.plugins.NativeAudio.preloadSimple('click', 'audio/click.mp3', function (msg) {
-            }, function (msg) {
-               alert('error: ' + msg);
-            });
+            alert("Play");
 
+            window.plugins.NativeAudio.play('click');
+
+            
+            alert("Play comp");
 
             // Play
-            window.plugins.NativeAudio.play('click');
+           
 
 
             // Stop multichannel clip after 60 seconds
-            window.setTimeout(function () {
+            //window.setTimeout(function () {
 
 
-                window.plugins.NativeAudio.unload('click');
+            //    window.plugins.NativeAudio.unload('click');
 
-            }, 1000 * 60);
+            //}, 1000 * 60);
         }
 
     }

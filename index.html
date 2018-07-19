@@ -616,7 +616,12 @@
     <script>
 
 
-      
+        $(document).ready(function () {
+            window.plugins.NativeAudio.preloadSimple('click', 'audio/click.mp3', function (msg) {
+            }, function (msg) {
+                alert('error: ' + msg);
+            });
+        });
 
         ////Catch all JQuery errors and log into the DB
         //window.onerror = function (msg, url, lineNo) {
