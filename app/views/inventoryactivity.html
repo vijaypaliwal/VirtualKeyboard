@@ -124,9 +124,9 @@
 
                         <tr ng-if="IsAvailableColumn('ImagePath')">
                             <td style="text-align:center;" colspan="2">
-                                <img ng-if="_obj.ImagePath !=''" style="height:55px; width:55px; border-radius:55px;" ng-click="OpenImageModal(_obj.ImagePath,_obj.iOrgName)" src="{{_obj.ImagePath}}" alt="Alternate Text" />
+                                <img ng-if="_obj.ImagePath !=''" style="height:55px; width:55px; border-radius:0;" ng-click="OpenImageModal(_obj.ImagePath,_obj.iOrgName)" src="{{_obj.ImagePath}}" alt="Alternate Text" />
 
-                                <img ng-if="_obj.ImagePath ==''" style="height:55px; width:55px; border-radius:55px;" src="img/default.png" alt="Alternate Text" />
+                                <img ng-if="_obj.ImagePath ==''" style="height:55px; width:55px; border-radius:0;" src="img/default.png" alt="Alternate Text" />
                             </td>
 
                         </tr>

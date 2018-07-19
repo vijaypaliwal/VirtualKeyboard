@@ -111,8 +111,8 @@
                     <tbody id="row_{{_obj.pID}}">
                         <tr ng-if="IsAvailableColumn('ImageFileName')">
                             <td style="text-align:center;" colspan="2">
-                                <img ng-if="_obj.ImageFileName !=''" style="height:55px; width:55px; border-radius:55px;" src="{{_obj.ImagePath}}" alt="Alternate Text" />
-                                <img ng-if="_obj.ImageFileName ==''" style="height:55px; width:55px; border-radius:55px;" src="img/default.png" alt="Alternate Text" />
+                                <img ng-if="_obj.ImageFileName !=''" style="height:55px; width:55px; border-radius:0;" src="{{_obj.ImagePath}}" alt="Alternate Text" />
+                                <img ng-if="_obj.ImageFileName ==''" style="height:55px; width:55px; border-radius:0;" src="img/default.png" alt="Alternate Text" />
                             </td>
                         </tr>
                         <tr ng-repeat="_obj2 in Columns" ng-class="{'ExtraTr':$index > 2}" ng-if="_obj2.ColumnID!='LeaveBlank' && _obj2.Visible!=false && _obj2.ColumnID != 'Button1' && _obj2.ColumnID != 'Button2' && _obj2.ColumnID != 'ImageFileName' ">
