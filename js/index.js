@@ -841,6 +841,12 @@ function GetDefaultAccount() {
 
 function onDeviceReady() {
 
+
+    window.plugins.NativeAudio.preloadSimple('click', 'audio/click.mp3', function (msg) {
+    }, function (msg) {
+        alert('error: ' + msg);
+    });
+
     navigator.splashscreen.hide();
 
     //  navigator.splashscreen.hide();
