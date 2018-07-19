@@ -664,6 +664,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         debugger;
 
         var field = "Inv_" + id;
+    
         var _fieldid = "";
 
         switch (Type) {
@@ -2069,7 +2070,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $scope.ReuseAll = function (ID) {
+        $scope.GetLastValue('Inv_ItemID', '#ItemName');
         $(ID).find(".fa-undo").each(function () {
+            $(this).parent("span").trigger("click");
+        });
+
+        $("#secondDiv").find(".fa-undo").each(function () {
             $(this).parent("span").trigger("click");
         });
 
