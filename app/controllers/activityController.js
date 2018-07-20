@@ -1626,6 +1626,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             $scope.CurrentCart[k].ActionPerformed = ($scope.ActionQuantityValue == $scope.CurrentCart[k].InventoryDataList.oquantity || $scope.ActionQuantityValue > $scope.CurrentCart[k].InventoryDataList.oquantity) ? "1" : "-1";
 
+                            $scope.checkToShowAdjustActivity();
                         }
 
                         else {
