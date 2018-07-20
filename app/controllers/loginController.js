@@ -148,6 +148,9 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
 
 
             //$location.path('/FindItems');
+
+            localStorageService.set("ShowImageRecords", "true");
+
             $location.path('/Accounts');
 
         },
