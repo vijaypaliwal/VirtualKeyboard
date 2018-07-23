@@ -2354,6 +2354,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
             $(_ID).trigger("change");
         }
+
+        playtouch(IsUp);
+
     }
     function UpdateCartWithCustomFields() {
         var k = 0;
@@ -2596,6 +2599,36 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
 
+    function playtouch(noicetype) {
+        if (window.plugins && window.plugins.NativeAudio) {
+
+
+
+            if (noicetype == true || noicetype == "true") {
+                window.plugins.NativeAudio.play('click');
+            }
+
+            else {
+                window.plugins.NativeAudio.play('dclick');
+            }
+
+
+
+
+            // Play
+
+
+            // Stop multichannel clip after 60 seconds
+            //window.setTimeout(function () {
+
+
+            //    window.plugins.NativeAudio.unload('click');
+
+            //}, 1000 * 60);
+        }
+
+    }
+
     $scope.UpDownValue = function (value, IsUp, Type) {
 
         switch (value) {
@@ -2643,6 +2676,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         }
 
+        playtouch(IsUp);
 
     }
 

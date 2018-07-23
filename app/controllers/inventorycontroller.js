@@ -3098,6 +3098,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             $(_ID).trigger("change");
         }
+
+        playtouch(IsUp);
     }
     $scope.GetActiveUnitDataField = function () {
         var authData = localStorageService.get('authorizationData');
