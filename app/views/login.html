@@ -31,6 +31,33 @@
         position:relative;
         height:100%;
     }
+
+    .duplicate {
+        background: transparent !important;
+        position: absolute;
+        z-index: 10;
+        width: calc(100% - 88px);
+        min-width: 100px;
+        margin: 0 auto;
+        right: -2px;
+        margin-top: 40px !important;
+        /* color: transparent !important; */
+        height: 34px !important;
+        border: none !important;
+        box-shadow: none !important;
+        /* font-size: 1px; */
+        color: #6f6f6f;
+        font-size: 15px;
+    }
+
+        .duplicate:focus {
+            outline: none !important;
+        }
+
+    .add-clear-x 
+    {
+        display:none !important;
+    }
 </style>
 
 <div style="text-align:center; margin-bottom:15px;">
@@ -43,8 +70,10 @@
     <h3 style="color:#fff">Log in to your account</h3>
 </div>
 
-
+<input style="background:#ccc"  type="email" class="duplicate" value="">
 <form class="login-form" role="form" name="myform">
+
+  
         <div class="row">
         <div class="col-md-12">
              <div class="formarea">
@@ -67,7 +96,9 @@
                             <label>Email or <em>(username)</em></label>
                             <div class="input-group">
                                 <span class="input-group-addon"> <i class="fa fa-user"></i></span>
-                                <input type="text" name="e" class="form-control" placeholder="Username" data-ng-model="loginData.userName" value="">
+                                <input type="text" name="t" class="form-control" placeholder="Username" data-ng-model="loginData.userName" value="">
+
+                             
                             </div>
                         </div>
                     </div>
