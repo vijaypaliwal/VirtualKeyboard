@@ -184,16 +184,5 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
         $scope.Isshowpassword = true;
     }
 
-    $(".duplicate").val($scope.loginData.userName)
-
-    $(".duplicate").keyup(function () {
-        $scope.loginData.userName = $(".duplicate").val();
-        $scope.$apply();
-
-     
-    });
-
-   
-
 
 }]);
