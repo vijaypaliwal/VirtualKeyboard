@@ -99,7 +99,7 @@
         <!--Header Bar if slide mode true end-->
         <!--Collapsible header if slide  false start-->
         <div ng-if="IsSingleMode==false" onclick="cartitems()" class="collapsible-header">
-            <span class="checkout-price">Show Cart summary</span>
+            <span class="checkout-price">Show Cart Summary</span>
             <i class="fa fa-caret-down" id="updownIcon"></i>
             <span ng-click="selecteditemlist()" class="checkout-price right">{{CurrentCart.length}} Items</span>
         </div>
@@ -4246,9 +4246,9 @@
 
     <div class="modal-body">
         <ul class="animated slideInUp transactionbody selectAction">
-            <li class="bottomlink" data-dismiss="modal" data-ng-show="CanIncrease=='True'" data-ng-click=" Operate(1)"><span>Increase</span> <a style="background-color: #177B3D;" class="btn waves-effect-success btn decrease"> <i class="fa fa-plus"></i> </a></li>
-            <li class="bottomlink" data-dismiss="modal" data-ng-show="CanDecrease=='True'" data-ng-click=" Operate(-1)"><span>Decrease</span> <a style="background-color: #AF2525;" class="btn waves-effect-danger btn decrease"> <i class="fa fa-minus-circle"></i> </a></li>
-            <li class="bottomlink" data-dismiss="modal" data-ng-show="CanIncrease=='True' &&  CanDecrease=='True'" data-ng-click=" Operate(12)"><span>Adjust</span> <a style="background-color: #f8c217;" class="btn waves-effect-danger btn adjust"> <i class="fa fa-arrows-v"></i> </a></li>
+            <li class="bottomlink" data-dismiss="modal" data-ng-show="CanIncrease=='True'" data-ng-click=" Operate(1)"><span>Increase</span><a style="background-color: #177B3D;" class="btn waves-effect-success btn decrease"> <i class="fa fa-plus"></i> </a></li>
+            <li class="bottomlink" data-dismiss="modal" data-ng-show="CanDecrease=='True'" data-ng-click=" Operate(-1)"><span>Decrease</span><a style="background-color: #AF2525;" class="btn waves-effect-danger btn decrease"> <i class="fa fa-minus-circle"></i> </a></li>
+            <li class="bottomlink" data-dismiss="modal" data-ng-show="CanIncrease=='True' &&  CanDecrease=='True'" data-ng-click=" Operate(12)"><span>Adjust</span><a style="background-color: #f8c217;" class="btn waves-effect-danger btn adjust"> <i class="fa fa-arrows-v"></i> </a></li>
             <li class="bottomlink" data-dismiss="modal" data-ng-show="CanMove=='True'" data-ng-click=" Operate(0)"><span>Move</span><a style="background-color: #C65E28;" class="btn waves-effect-warning btn decrease"> <i class="fa fa-exchange"></i>  </a></li>
             <li class="bottomlink" data-dismiss="modal" data-ng-show="CanApply=='True'" data-ng-click=" Operate(4)"><span>Tag</span><a style="background-color: #0D190F" class="btn waves-effect-info btn decrease"> <i class="fa fa-tag"></i>  </a></li>
             <li class="bottomlink" data-dismiss="modal" data-ng-show="CanStatus=='True'" data-ng-click=" Operate(3)"><span>Update</span><a style=" background-color: #583782" class="btn waves-effect-info btn decrease"> <i class="fa fa-pencil"></i>  </a></li>
