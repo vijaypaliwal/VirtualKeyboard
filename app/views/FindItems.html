@@ -4,34 +4,31 @@
 
 <style>
     .form-group.has-feedback {
-        margin-bottom:0;
+        margin-bottom: 0;
     }
 
     .cartbtn {
         background: #4CAF50;
     }
 
-    .img .thumbimg
-    {
-        border-radius:0;
-    }
-    .cartImage
-    {
-        border-radius:0;
+    .img .thumbimg {
+        border-radius: 0;
     }
 
-    .hideimage img
-    {
-        visibility:hidden;
+    .cartImage {
+        border-radius: 0;
+    }
+
+    .hideimage img {
+        visibility: hidden;
     }
 
     .hideimage .fa-shopping-cart {
         visibility: hidden;
     }
 
-    .cartcounter
-    {
-        position:absolute;
+    .cartcounter {
+        position: absolute;
     }
 
     .cartcounter {
@@ -73,17 +70,17 @@
         margin: 0 auto;
         background: #177B3D;
         border-radius: 100%;
-        color:#fff;
-        font-size:35px;
-        line-height:70px;
+        color: #fff;
+        font-size: 35px;
+        line-height: 70px;
     }
 
-   
-    
-    
-     .Addfirstinv a span {
-        display: block;
-    }
+
+
+
+        .Addfirstinv a span {
+            display: block;
+        }
 
     .Addfirstinv {
         background: #efefef;
@@ -96,11 +93,10 @@
         margin-top: 30px;
     }
 
-    .Addfirstinv span
-    {
-        color:#888;
-        font-size:18px;
-    }
+        .Addfirstinv span {
+            color: #888;
+            font-size: 18px;
+        }
 </style>
 
 
@@ -133,7 +129,7 @@
             <!--<i style="font-size: 100px; color: #0083C7; " class="fa fa-spin fa-spinner"></i>-->
         </div>
     </div>
-    <div class="searchsection" >
+    <div class="searchsection">
         <table class="searchtable">
             <tbody>
                 <tr>
@@ -219,7 +215,7 @@
                                 </span>
                                 <span ng-if="CurrentActiveSearchType==2">
 
-                                    <input  id="MasterSearchNumber" type="number" ng-model="SearchNumberValue" class="form-control hideaddclear" placeholder="Search">
+                                    <input id="MasterSearchNumber" type="number" ng-model="SearchNumberValue" class="form-control hideaddclear" placeholder="Search">
                                 </span>
                                 <span ng-if="CurrentActiveSearchType==4">
 
@@ -237,7 +233,7 @@
 
 
                                 <span ng-if="CurrentActiveSearchType==6">
-                                    <select id="MasterSearch" ng-model="SearchValue" class="form-control" >
+                                    <select id="MasterSearch" ng-model="SearchValue" class="form-control">
                                         <option value="">choose week</option>
                                         <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                         <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -280,26 +276,26 @@
             <a style="cursor:pointer;width:auto;" class="btn btn-primary" ng-click="ClearFilter()"> <i class="fa fa-filter"></i> Clear your filters</a>
             <br /><br />
         </div>
-        
+
         <div ng-if="ActualTotalRecords==0" style="z-index: 1000000; ">
 
-            <div >
+            <div>
 
                 <img style="height:70px; width:70px; float:left;" class="animated slideInLeft" src="img/Untitled-11.png" alt="Alternate Text"><br />
 
-                <h5>You don't have any inventory records yet. Click the "New Inventory" button below to put something in inventory.</h5>  
-                
-                
-                              
+                <h5>You don't have any inventory records yet. Click the "New Inventory" button below to put something in inventory.</h5>
+
+
+
                 <br />
 
-                <a ng-if="checkpermission('ACTION:CanAddInventory') && totalrecords==0" style="border-radius: 25px; height: 45px; padding-left: 40px; padding-right: 40px; line-height: 40px; /* width: 100%; */ /* padding: 25px; */ font-size: 17px; text-transform: capitalize;" class="btn waves-effect waves-light btn-success animated center bouncein delay-6 ng-scope" href="#/inventory"><i class="fa fa-plus"></i> New Inventory</a> 
+                <a ng-if="checkpermission('ACTION:CanAddInventory') && totalrecords==0" style="border-radius: 25px; height: 45px; padding-left: 40px; padding-right: 40px; line-height: 40px; /* width: 100%; */ /* padding: 25px; */ font-size: 17px; text-transform: capitalize;" class="btn waves-effect waves-light btn-success animated center bouncein delay-6 ng-scope" href="#/inventory"><i class="fa fa-plus"></i> New Inventory</a>
             </div>
         </div>
     </div>
 
 
-    
+
 
 
     <div class="animated slideInLeft" id="mylist" style="display:block !important;">
@@ -421,7 +417,7 @@
         <img style="display:none" id="arrow" src="img/downarrow.png">
     </div>-->
 
-  
+
 
     <div style="margin-top:-175px;" ng-if="checkpermission('ACTION:CanAddInventory')==false" class="notification notification-danger">
         <a class="close-notification no-smoothState"></a>
@@ -430,7 +426,7 @@
         <span>Please click hamburger icon <i style="font-size:14px;" class="fa fa-bars"></i>  to see other options</span>
     </div>
 
-    
+
 
     <a ng-click="OpenmenuModal()" class="menubtn waves-effect btn-info btn-floating" ng-if="mainObjectToSend.length==0 && totalrecords!=0">
         <i class="fa fa-bars"></i>
@@ -460,12 +456,12 @@
             <ul class="animated transactionbody selectAction animated slideInUp">
 
 
-                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iQty') && checkpermission('ACTION:CanAddInventory')==true" ng-click="GoToNextMobile(1)"> <span>Increase</span><a style="background-color: #177B3D;" class=" waves-effect btn-success btn decrease" data-dismiss="modal"><i class="fa fa-plus"></i> </a></li>
-                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iQty') && checkpermission('ACTION:CanSubtractInventory')==true" ng-click="GoToNextMobile(-1)"> <span>Decrease</span><a style="background-color: #AF2525;" class=" waves-effect btn-danger btn decrease" data-dismiss="modal"><i class="fa fa-minus-circle"></i> </a></li>
-                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iQty') && checkpermission('ACTION:CanAddInventory')==true && checkpermission('ACTION:CanSubtractInventory')==true" ng-click="GoToNextMobile(12)"> <span>Adjust</span><a style="background-color: #f8c217;" class="waves-effect btn-danger btn adjust" data-dismiss="modal"> <i class="fa fa-arrows-v"></i> </a></li>
-                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('lLoc') && checkpermission('ACTION:CanMoveInventory')==true" ng-click="GoToNextMobile(0)"><span>Move</span><a style="background-color: #C65E28;" class=" waves-effect btn-warning btn decrease" data-dismiss="modal"><i class="fa fa-exchange"></i>  </a></li>
-                <li class="bottomlink" ng-if="IsAnyUnitDataFieldActive()==true && checkpermission('ACTION:UniqueTag')==true" ng-click="GoToNextMobile(4)"><span>Tag</span><a style="background-color: #0D190F" class=" waves-effect btn-info btn decrease" data-dismiss="modal"><i class="fa fa-tag"></i>  </a></li>
-                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iStatusValue') && checkpermission('ACTION:CanStatusInventory')==true" ng-click="GoToNextMobile(3)"><span>Update</span><a style=" background-color: #583782" class="waves-effect btn-info btn decrease" data-dismiss="modal"><i class="fa fa-pencil"></i>  </a></li>
+                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iQty') && checkpermission('ACTION:CanAddInventory')==true" ng-click="GoToNextMobile(1)"> <span>Increase</span> <a style="background-color: #177B3D;" class=" waves-effect btn-success btn decrease" data-dismiss="modal"> <i class="fa fa-plus"></i> </a></li>
+                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iQty') && checkpermission('ACTION:CanSubtractInventory')==true" ng-click="GoToNextMobile(-1)"> <span>Decrease</span> <a style="background-color: #AF2525;" class=" waves-effect btn-danger btn decrease" data-dismiss="modal"> <i class="fa fa-minus-circle"></i> </a></li>
+                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iQty') && checkpermission('ACTION:CanAddInventory')==true && checkpermission('ACTION:CanSubtractInventory')==true" ng-click="GoToNextMobile(12)"> <span>Adjust</span> <a style="background-color: #f8c217;" class="waves-effect btn-danger btn adjust" data-dismiss="modal"> <i class="fa fa-arrows-v"></i> </a></li>
+                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('lLoc') && checkpermission('ACTION:CanMoveInventory')==true" ng-click="GoToNextMobile(0)"><span>Move</span><a style="background-color: #C65E28;" class=" waves-effect btn-warning btn decrease" data-dismiss="modal"> <i class="fa fa-exchange"></i>  </a></li>
+                <li class="bottomlink" ng-if="IsAnyUnitDataFieldActive()==true && checkpermission('ACTION:UniqueTag')==true" ng-click="GoToNextMobile(4)"><span>Tag</span><a style="background-color: #0D190F" class=" waves-effect btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-tag"></i>  </a></li>
+                <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('iStatusValue') && checkpermission('ACTION:CanStatusInventory')==true" ng-click="GoToNextMobile(3)"><span>Update</span><a style=" background-color: #583782" class="waves-effect btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-pencil"></i>  </a></li>
 
                 <li class="bottomlink" ng-if="(IsAvailableMyInventoryColumn('lLoc') ||IsAvailableMyInventoryColumn('iStatusValue') ||IsAnyUnitDataFieldActive()) && checkpermission('ACTION:CanMoveTagUpdate')==true && checkpermission('ACTION:CanStatusInventory')==true && checkpermission('ACTION:CanMoveInventory')==true  && checkpermission('ACTION:UniqueTag')==true" ng-click="GoToNextMobile(5)"><span>Move, Tag, & Update</span><a class=" bgm-MoveTagUpdate waves-effect btn-warning btn decrease" data-dismiss="modal"> &  </a></li>
                 <li class="bottomlink" ng-if="IsAvailableMyInventoryColumn('uomUOM') && checkpermission('ACTION:CanConvertInventory')==true" ng-click="GoToNextMobile(2)"><span>Convert</span><a style="background-color: #CE59A1" class=" waves-effect btn-info btn decrease" data-dismiss="modal"> <i class="fa fa-refresh"></i>  </a></li>

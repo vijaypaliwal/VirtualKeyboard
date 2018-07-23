@@ -5,13 +5,13 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.InventoryItems = [];
     $scope.SecurityToken = "";
+    $scope.Animationtime = 5000;
     $scope.InvObject = {
         InventoryID: 0, CurrentQuantity: "", AvgCostPerUnit: "", Uncontrolled: "", UniqueTag: "",
         ItemID: "", ItemNumber: "", ItemDescription: 0, UomID: 0, UOM: 0, LocationID: 0, Location: 0,
         LocationZone: "", LastTransactionID: 0, StatusValue: "", LastQuantityChange: 0, LastDateChange: "",
         CustomData: []
     };
-    $scope.Animationtime = 5000;
     var _CanAct = 'True';
     var _CartObjLimit = 25;
     $scope.Cart = [];
@@ -58,7 +58,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $scope.UnitDataList = [];
     $scope.loadingblock = false;
 
- 
+
     $scope.ActiveUnitDataFields = [];
 
     $scope.dropDownValues = [];
@@ -441,7 +441,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     _Value = $.trim($("#MasterSearchUOM").val());
                 }
                 break;
-            
+
             default:
                 _Value = $.trim($('#MasterSearch').val());
                 break;
@@ -457,16 +457,18 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.OpenmenuModal = function () {
 
+        debugger;
+
 
         if ($("body").hasClass("modal-open")) {
-            $("#myModal2").modal('hide');
+            $("#myModal234").modal('hide');
 
 
             $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
 
         }
         else {
-            $("#myModal2").modal('show');
+            $("#myModal234").modal('show');
             $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
 
         }
@@ -491,7 +493,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         localStorageService.set("ShowImageRecords", $scope._areImagesShown);
 
-        $("#myModal2").modal('hide');
+        $("#myModal234").modal('hide');
 
         CheckScopeBeforeApply();
 
@@ -512,7 +514,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         localStorageService.set("ShowZeroRecords", showzero);
         $scope._areZeroRecordsShown = showzero;
         CheckScopeBeforeApply();
-        $("#myModal2").modal('hide');
+        $("#myModal234").modal('hide');
         $scope.GetInventories();
 
     }
@@ -866,20 +868,19 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
     function getFieldSpecialType(columnName) {
-       
+
         for (var i = 0; i < $scope.ActiveUnitDataFields.length; i++) {
             var Field = $scope.ActiveUnitDataFields[i]
 
-            if (Field.FieldName == columnName) {               
-                return Field.FieldSpecialType;                
-            }           
+            if (Field.FieldName == columnName) {
+                return Field.FieldSpecialType;
+            }
         }
         return "";
 
     }
 
-    function getDropDownValues(columnName, type)
-    {
+    function getDropDownValues(columnName, type) {
 
         debugger;
         for (var i = 0; i < $scope.ActiveUnitDataFields.length; i++) {
@@ -905,7 +906,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
                 }
             }
-        }       
+        }
 
     }
 
@@ -917,7 +918,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         console.log("$scope.MyinventoryFieldsNames");
         console.log($scope.MyinventoryFieldsNames);
         console.log("===========================");
-             
+
         console.log("===========================");
         console.log("$scope.ActiveUnitDataFields");
         console.log($scope.ActiveUnitDataFields);
@@ -976,21 +977,21 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
                 $scope.CurrentActiveSearchType = 1;
                 $scope.SearchFromText = "Location";
-                $('#MasterSearch').attr("placeholder", "Search by Location");
+                $('#MasterSearch').attr("placeholder", "Search by location");
                 break;
             case "pPart":
                 $scope.CurrentActiveSearchField = "pPart";
 
                 $scope.CurrentActiveSearchType = 1;
                 $scope.SearchFromText = "Items";
-                $('#MasterSearch').attr("placeholder", "Search by Item");
+                $('#MasterSearch').attr("placeholder", "Search by item");
                 break;
             case "All":
                 $scope.CurrentActiveSearchField = "All";
 
                 $scope.CurrentActiveSearchType = 1;
                 $scope.SearchFromText = "All";
-                $('#MasterSearch').attr("placeholder", "Type to Search");
+                $('#MasterSearch').attr("placeholder", "Type to search");
                 break;
             case "iUnitDate2":
                 $scope.CurrentActiveSearchField = "iUnitDate2";
@@ -1009,13 +1010,13 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 $scope.SearchFromText = _label;
                 break;
             case "iReqValue":
+                debugger;
                 $scope.CurrentActiveSearchField = "iReqValue";
 
 
                 $scope.iReqValueFieldSpecialType = getFieldSpecialType("ReqValue");
 
-                if ($scope.iReqValueFieldSpecialType != "")
-                {
+                if ($scope.iReqValueFieldSpecialType != "") {
                     switch ($scope.iReqValueFieldSpecialType) {
                         case 2:
                             $scope.CurrentActiveSearchType = 7;
@@ -1043,10 +1044,9 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
                     }
                 }
-                else
-                {
+                else {
                     $scope.CurrentActiveSearchType = 1;
-                }             
+                }
 
                 //$scope.CurrentActiveSearchType = 1;
 
@@ -1091,7 +1091,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 else {
                     $scope.CurrentActiveSearchType = 1;
                 }
-                
+
                 //$scope.CurrentActiveSearchType = 1;
                 var _label = $scope.GetUnitDataLabel('iUnitTag2');
                 _label = _label != undefined && _label != "" ? _label : "";
@@ -1436,7 +1436,10 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
                         $("#arrow").hide();
                     } else {
-                       
+
+
+
+                        // $scope.OpenmenuModal();
                         $(".searchtable").addClass("disablepointer");
                         $("#arrow").attr("style", "");
                         $("#arrow").show();
@@ -1479,7 +1482,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     }
 
 
-   
+
 
 
     $scope.GetUnitDataColumns = function () {
@@ -1507,7 +1510,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                         $scope.ActiveUnitDataFields.push(_TempArrayMyInventory[i]);
 
                     }
-                   
+
 
                     CheckScopeBeforeApply();
                 }
@@ -1543,7 +1546,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                         $scope.MyinventoryFieldsNames.push(_TempArrayMyInventory[i]);
 
                     }
-                   
+
                     CheckScopeBeforeApply();
                 }
                 else {
@@ -1558,7 +1561,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             complete: function () {
 
             }
-        });    
+        });
 
 
     }
@@ -1742,6 +1745,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         var scanner = cordova.plugins.barcodeScanner;
 
+
+
         scanner.scan(function (result) {
             $scope.SearchValue = result.text;
 
@@ -1891,10 +1896,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             $(this).parent(".newlistitem").find(".img").css("background-color", "transparent");
             $(this).parent(".newlistitem").find(".img").removeClass("hideimage");
             $(this).find(".fa-check").css("color", "transparent");
-
-          //  $(originalID).parent(".newlistitem").find(".img").css("background-color", "transparent")
-         //   $(originalID).parent(".newlistitem").find(".img").removeClass("hideimage");
-
             var originalID = "#" + $(this).attr("id");
             var _invID = parseFloat($(this).attr("inv-id"));
             for (var i = 0; i < _tempCopy.length; i++) {
@@ -1933,12 +1934,12 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
 
-    $('#myModal2').on('shown.bs.modal', function () {
+    $('#myModal234').on('shown.bs.modal', function () {
         $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
 
     });
 
-    $('#myModal2').on('hidden.bs.modal', function () {
+    $('#myModal234').on('hidden.bs.modal', function () {
 
         $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
 
@@ -2472,6 +2473,17 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $('#MasterSearchStatus').multiselect();
 
+
+    setTimeout(function () {
+
+
+        $("#myModal234").modal('hide');
+
+    }, 4000)
+
+
+
+
 }]);
 
 
@@ -2613,3 +2625,4 @@ app.directive('imageonload', function () {
         }
     };
 });
+
