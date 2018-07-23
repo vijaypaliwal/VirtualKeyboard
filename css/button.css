@@ -318,9 +318,9 @@
         color: #fff !important;
     }
 
-    .title-header h4 {
+    /*.title-header h4 {
         padding-left: 50px;
-    }
+    }*/
 
     .title-header small {
         font-size: 12px !important;
@@ -331,7 +331,7 @@
     -ms-text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
-    display: -webkit-inline-box;
+    /*display: -webkit-inline-box;*/
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     -ms-word-break: break-all;
@@ -340,6 +340,7 @@
     font-size: 17px;
     line-height: 25px;
     margin-top: 5px;
+    text-align:center;
 }
 
 .roundbtntitle {
