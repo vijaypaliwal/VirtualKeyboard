@@ -318,7 +318,7 @@
     </style>
 
 </head>
-<body data-ng-controller="indexController">
+<body data-ng-controller="indexController" ng-cloak>
 
 
 
@@ -374,7 +374,6 @@
                     </a>
                 </li>
             </ul>
-
 
 
 
@@ -461,12 +460,12 @@
 
 
         <div class="row">
-            <div style="width:25%" class="col-xs-4">
+            <div style="width:15%" class="col-xs-4">
                 <div class="open-left" id="open-left" data-activates="slide-out-left">
                     <i class="fa fa-bars" style="font-size:17px;"></i>
                 </div>
             </div>
-            <div style="width:50%" class="col-xs-4">
+            <div style="width:70%" class="col-xs-4">
 
                 <table style="margin-top:12px;">
                     <tr>
@@ -479,7 +478,7 @@
 
 
             </div>
-            <div style="width:25%" class="col-xs-4">
+            <div style="width:15%" class="col-xs-4">
                 <div class="dropdown open-right">
                     <a style="padding-left:0" data-toggle="dropdown" class="dropdown-toggle ">
                         <img id="myimgProfile" src="{{ProfilePicURl}}" onerror="this.onerror = null; this.src = 'img/dummy-user48.png';" alt="" style=" height: 50px; width:50px; border: 2px solid #ccc;" class="circle">
