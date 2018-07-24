@@ -1014,8 +1014,7 @@ document.addEventListener('click', addRippleEffect, false);
  
 
      
-    
-    $(document).on('input', 'input[type="text"],input[type="number"]', function () {
+    $(document).on('input', 'input[type="text"],input[type="number"],input[type="email"],input[type="password"]', function () {
 
 
         $('input[type="text"]:input').not(".hideaddclear").addClear({
@@ -1029,26 +1028,35 @@ document.addEventListener('click', addRippleEffect, false);
             symbolClass: "fa fa-times-circle"
         });
 
+        $('input[type="email"]:input').addClear({
+            symbolClass: "fa fa-times-circle"
+        });
+
         $(this).focus();
-           
+
         $(this).trigger("change");
     });
 
-$(document).on('change', 'input[type="text"],input[type="number"]', function () {
+    $(document).on('change', 'input[type="text"],input[type="number"],input[type="email"],input[type="password"]', function () {
 
 
-    $('input[type="text"]').not(".hideaddclear").addClear({
-        symbolClass: "fa fa-times-circle"
+        $('input[type="text"]').not(".hideaddclear").addClear({
+            symbolClass: "fa fa-times-circle"
+        });
+        $('input[type="number"]').addClear({
+            symbolClass: "fa fa-times-circle"
+        });
+
+        $('input[type="password"]:input').addClear({
+            symbolClass: "fa fa-times-circle"
+        });
+
+        $('input[type="email"]:input').addClear({
+            symbolClass: "fa fa-times-circle"
+        });
+
+
+
     });
-    $('input[type="number"]').addClear({
-        symbolClass: "fa fa-times-circle"
-    });
-
-    $('input[type="password"]').addClear({
-        symbolClass: "fa fa-times-circle"
-    });
-
-
-});
 
  
