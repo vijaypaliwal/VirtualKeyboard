@@ -113,7 +113,6 @@
         #toolbar .title {
             background: #fff;
             color: #333;
-            padding: 5px;
             border-radius: 15px;
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
@@ -129,11 +128,11 @@
             -ms-word-break: break-all;
             word-break: break-all;
             margin-bottom: 0;
-            line-height: 22px !important;
+            line-height: 28px !important;
             height: 31px;
-            margin-top: 10px;
             text-align: center;
-          
+            padding-left: 10px;
+            padding-right: 10px;
         }
 
         .sidenav-header .avatar {
@@ -278,20 +277,18 @@
         }
 
         .switchinv {
-            background: #e6e4e4;
+            background: #e6e4e4 !important;
             color: #333;
-            padding: 5px;
-            border-radius: 15px;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
+            border-radius: 15px !important;
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
             font-size: 15px;
             padding-left: 10px;
             padding-right: 8px;
             height: 31px;
             width: 40px;
-            margin-top: 7px;
             display: inline-block;
-         
+            line-height:30px !important;
         }
 
             .switchinv i {
@@ -469,13 +466,13 @@
             </div>
             <div style="width:50%" class="col-xs-4">
 
-                <table>
+                <table style="margin-top:12px;">
                     <tr>
                         <td style="text-align:right;">
                             <a href="#/FindItems" class="title">{{currentInventoryname}}</a>
                         </td>
                         <td style="text-align:left;">
-                            <span class="switchinv" ng-click="showinventories()"><i class="fa fa-angle-down"></i></span>
+                            <a style="line-height:32px !important;" class="title switchinv"  ng-click="showinventories()"><i class="fa fa-angle-down"></i></a>
                         </td>
                     </tr>
                 </table>
