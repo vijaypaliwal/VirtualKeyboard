@@ -12,7 +12,7 @@
     <link href="css/materialize.min.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" type="text/css">
 
- 
+
 
     <link href="content/css/loading-bar.css" rel="stylesheet" />
     <link href="content/css/font-awesome.min.css" rel="stylesheet" />
@@ -28,7 +28,7 @@
 
     <link id="buttoncss" href="css/button.css" rel="stylesheet" type="text/css">
     <link href="css/index.css" rel="stylesheet" type="text/css">
-  
+
     <style>
         input[type=datetime-local] {
             padding-top: 20px;
@@ -107,18 +107,32 @@
 
         #toolbar i {
             font-size: 18px;
+            line-height: 25px;
         }
 
         #toolbar .title {
-          
             background: #fff;
-        
             color: #333;
             padding: 5px;
             border-radius: 15px;
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
             font-size: 15px;
+            min-width: 45px;
+            overflow: hidden;
+            -ms-text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            display: -webkit-inline-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            -ms-word-break: break-all;
+            word-break: break-all;
+            margin-bottom: 0;
+            line-height: 21px !important;
+            height: 31px;
+            margin-top: 10px;
+            text-align: center;
         }
 
         .sidenav-header .avatar {
@@ -177,6 +191,7 @@
                 padding: 12px;
                 text-transform: capitalize;
                 font-size: 16px;
+                text-align: left;
             }
 
             .Inventorylist li:nth-child(even) {
@@ -234,12 +249,11 @@
             }
 
         #Permissionlink {
-            display:none !important;
+            display: none !important;
         }
 
-        .modal-backdrop.in
-        {
-            opacity:0.9 !important;
+        .modal-backdrop.in {
+            opacity: 0.9 !important;
         }
 
         #bottommenumodal .selectAction li span {
@@ -270,25 +284,46 @@
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
             font-size: 15px;
-            padding-left: 7px;
+            padding-left: 10px;
             padding-right: 8px;
+            height: 31px;
+            width: 40px;
+            margin-top: 7px;
+            display: inline-block;
         }
 
-        .switchinv i
-        {
-            color:#333 !important;
-        }
+            .switchinv i {
+                color: #333 !important;
+            }
 
+        .Inventorylist .invname {
+            overflow: hidden;
+            -ms-text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            display: -webkit-inline-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            -ms-word-break: break-all;
+            word-break: break-all;
+            margin-bottom: 0;
+            line-height: 17px !important;
+            width: calc(100% - 70px);
+            border-radius: 0;
+            padding: 0;
+            padding-left: 12px;
+            padding-top: 0px;
+        }
     </style>
 
 </head>
 <body data-ng-controller="indexController">
 
-  
+
 
     <!-- No Internet Message - Start -->
     <div style="z-index:10000;" class="nointernet">
-    
+
         <p><i class="fa fa-exclamation-triangle"></i> Sorry, no internet connectivity. <span>Retry</span> </p>
     </div>
     <!-- No Internet Message - End -->
@@ -334,7 +369,7 @@
             <ul class="Inventorylist">
                 <li ng-repeat="obj in MyInventories" ng-click="changeInventory(obj.InventoryAccountID, obj.InventoryName, obj.BackColor)">
                     <a>
-                        <span style="background-color:{{obj.BackColor}} !important"><i class="fa fa-cube"></i></span> {{obj.InventoryName}} <i class="fa fa-angle-right"></i>
+                        <span style="background-color:{{obj.BackColor}} !important"><i class="fa fa-cube"></i></span> <span class="invname"> {{obj.InventoryName}} </span> <i class="fa fa-angle-right"></i>
                     </a>
                 </li>
             </ul>
@@ -420,26 +455,53 @@
         </div>
     </div>
     <!--Success/Waiting message modals start -->
-
     <!-- Header Section Starts -->
     <div id="toolbar" class="primary-color">
-        <div class="open-left" id="open-left" data-activates="slide-out-left">
-            <i class="fa fa-bars" style="font-size:17px;"></i>
-        </div>
-        <a href="#/FindItems" class="title">{{currentInventoryname}}</a><span class="switchinv" ng-click="showinventories()"><i class="fa fa-angle-down"></i></span> 
-        <div class="dropdown open-right">
-            <a style="padding-left:0" data-toggle="dropdown" class="dropdown-toggle ">
-                <img id="myimgProfile" src="{{ProfilePicURl}}" onerror="this.onerror = null; this.src = 'img/dummy-user48.png';" alt="" style=" height: 50px; width:50px; border: 2px solid #ccc;" class="circle">
-            </a>
-            <ul class="top-menu dropdown-menu">
-                <li><a href="#/Accounts"><i class="fa fa-cubes"></i> Your Inventories</a></li>
-                <li><a href="#/profile"><i class="fa fa-user"></i> My Profile</a></li>
-                <li><a href="#/contact"><i class="fa fa-map-marker"></i> Contact</a></li>
 
-                <li><a href="#/help"><i class="fa fa-question"></i> Help</a></li>
-                <li><a href="#"><i class="fa fa-sign-out"></i> Sign Out</a></li>
-            </ul>
+
+        <div class="row">
+            <div style="width:25%" class="col-xs-4">
+                <div class="open-left" id="open-left" data-activates="slide-out-left">
+                    <i class="fa fa-bars" style="font-size:17px;"></i>
+                </div>
+            </div>
+            <div style="width:50%" class="col-xs-4">
+
+                <table>
+                    <tr>
+                        <td style="text-align:right;">
+                            <a href="#/FindItems" class="title">{{currentInventoryname}}</a>
+                        </td>
+                        <td style="text-align:left;">
+                            <span class="switchinv" ng-click="showinventories()"><i class="fa fa-angle-down"></i></span>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+            <div style="width:25%" class="col-xs-4">
+                <div class="dropdown open-right">
+                    <a style="padding-left:0" data-toggle="dropdown" class="dropdown-toggle ">
+                        <img id="myimgProfile" src="{{ProfilePicURl}}" onerror="this.onerror = null; this.src = 'img/dummy-user48.png';" alt="" style=" height: 50px; width:50px; border: 2px solid #ccc;" class="circle">
+                    </a>
+                    <ul class="top-menu dropdown-menu">
+                        <li><a href="#/Accounts"><i class="fa fa-cubes"></i> Your Inventories</a></li>
+                        <li><a href="#/profile"><i class="fa fa-user"></i> My Profile</a></li>
+                        <li><a href="#/contact"><i class="fa fa-map-marker"></i> Contact</a></li>
+
+                        <!--<li><a href="#/help"><i class="fa fa-question"></i> Help</a></li>-->
+                        <li><a href="#"><i class="fa fa-sign-out"></i> Sign Out</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
+
+
+
+
+
+
     </div>
     <!-- Header Section End -->
 
@@ -470,7 +532,7 @@
 
 
         <li class="primary-color"> <a style="padding-left:15px; color:#fff;"> {{CurrentAccount}} </a> </li>
-        
+
         <li><a ng-class="getClass('/Accounts')" href="#/Accounts" class="no-child"><i class="fa fa-cubes"></i> Your Inventories</a></li>
 
         <li style="display:none;" id="Permissionlink"><a ng-class="getClass('/permission')" href="#/permission" class="no-child"><i class="fa fa-gears"></i> Permissions</a></li>
@@ -480,7 +542,7 @@
         <li><a ng-class="getClass('/reportmenu')" href="#/reportmenu" class="no-child"><i class="fa fa-th-list"></i> Reports</a></li>
         <li><a ng-class="getClass('/profile')" href="#/profile" class="no-child"><i class="fa fa-user"></i> My Profile</a></li>
         <li><a ng-class="getClass('/setting')" href="#/setting" class="no-child"><i class="fa fa-cog"></i> Settings</a></li>
-        <li><a ng-class="getClass('/help')" href="#/help" class="no-child"><i class="fa fa-question"></i> Help</a></li>
+        <!--<li><a ng-class="getClass('/help')" href="#/help" class="no-child"><i class="fa fa-question"></i> Help</a></li>-->
         <li><a href="#" class="no-child signoutbtn"><i class="fa fa-sign-out"></i> Sign Out</a></li>
     </ul>
 
@@ -514,7 +576,7 @@
         </li>
     </ul>
 
-    
+
 
 
     <!-- Jquery libraries -->
@@ -522,10 +584,10 @@
     <script src="scripts/jquery-ui.js"></script>
     <script src="scripts/weekPicker.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
- 
-    
 
-    
+
+
+
     <script src="scripts/jquery.touchSwipe.min.js"></script>
 
     <!-- Bootstrap libraries -->
@@ -611,23 +673,23 @@
 
     <script src="app/controllers/BillingController.js?v=2"></script>
     <script src="app/controllers/CreateSubscriptionController.js?v=2"></script>
-    
+
     <script src="js/index.js"></script>
     <script>
 
 
         $(document).ready(function () {
-         
+
         });
 
         ////Catch all JQuery errors and log into the DB
         //window.onerror = function (msg, url, lineNo) {
 
         //    alert("Message::" + msg + " at line" + lineNo);
-        //    //Do what you want with the error including line number 
+        //    //Do what you want with the error including line number
         //};
     </script>
-   
+
 
 
 

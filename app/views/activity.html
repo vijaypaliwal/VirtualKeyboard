@@ -22,10 +22,9 @@
         text-transform: capitalize;
     }
 
-    #headerrow
-    {
-        margin-left:0;
-        margin-right:0;
+    #headerrow {
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .mainmodal {
@@ -39,8 +38,6 @@
         height: 100%;
         vertical-align: middle;
     }
-
-
 </style>
 
 <!--CSS section - end -->
@@ -1409,8 +1406,8 @@
                             </div>
                         </li>
                     </ul>
-                
-                                </div>
+
+                </div>
 
 
                 <!--Activity Details start-->
@@ -1577,7 +1574,7 @@
                             </div>
 
                         </div>
-                    </div>                    
+                    </div>
 
 
                     <div ng-if="CurrentOperation=='Adjust'">
@@ -3069,14 +3066,14 @@
                                                             <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)==''||obj.cfdInputMask=='text'|| obj.cfdInputMask=='NA'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="text" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" />
 
                                                             <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="{{obj.cfdInputMask}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" />
-                                                           
+
 
                                                             <select ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='month'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType monthPicker" selectvalue="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}">
 
                                                                 <option ng-repeat="n in MonthlistGlobal track by n.Value" value="{{n.Value}}" ng-selected="n.Value == CurrentActiveObject.IsLineItemData[$index].CfValue"> {{n.Text}}</option>
                                                             </select>
 
-                                                             <select id="LineItem_{{obj.cfdID}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
+                                                            <select id="LineItem_{{obj.cfdID}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='week'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue">
                                                                 <option value="">choose week</option>
                                                                 <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear-1}}-W{{n}}" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                                                 <option ng-repeat="n in weeklist" ng-selected="obj.CfValue=={{CurrentYear}}-W{{n}}" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -4175,7 +4172,7 @@
                     <i class="fa fa-shopping-cart"></i>
                 </div>
                 <div class="c-widget-body">
-                    <p class="m-0">Keep cart</p>
+                    <p class="m-0">Keep Cart</p>
                     <p class="small m-0">Keep it so I can complete it later</p>
                 </div>
             </div>
@@ -4187,7 +4184,7 @@
                     <i class="fa fa-times"></i>
                 </div>
                 <div class="c-widget-body">
-                    <p class="m-0">Clear cart</p>
+                    <p class="m-0">Clear Cart</p>
                     <p class="small m-0">Clear the cart of all items; I don't need it.</p>
                 </div>
             </div>
@@ -4199,7 +4196,7 @@
                     <i class="fa fa-arrow-left"></i>
                 </div>
                 <div class="c-widget-body">
-                    <p class="m-0">Return to cart</p>
+                    <p class="m-0">Return to Cart</p>
                     <p class="small m-0">Return to Cart so I can complete it now.</p>
                 </div>
             </div>
@@ -4264,7 +4261,7 @@
 <!--Create New Label(Status/Location/UOM) modal-->
 <div style="width: calc(100% - 30px); margin: 0 auto; overflow: hidden;" id="createnewlabel" class="modal animated zoomIn" data-backdrop="static" data-keyboard="false">
 
-        <div class="mainmodal">
+    <div class="mainmodal">
         <div class="wrappermodal">
 
             <div style="background: #2196F3; color:#fff;" class="modal-header">
@@ -4295,12 +4292,12 @@
 
             </div>
 
-            </div>
         </div>
-        </div>
+    </div>
+</div>
 
-        <!--Create New Label(Custom Dropdown value) modal-->
-       <div style="width: calc(100% - 30px); margin: 0 auto; overflow: hidden;" id="Adddropdownvalue" class="modal animated zoomIn" data-backdrop="static" data-keyboard="false">
+<!--Create New Label(Custom Dropdown value) modal-->
+<div style="width: calc(100% - 30px); margin: 0 auto; overflow: hidden;" id="Adddropdownvalue" class="modal animated zoomIn" data-backdrop="static" data-keyboard="false">
 
     <div class="mainmodal">
         <div class="wrappermodal">
@@ -4332,202 +4329,202 @@
 
             </div>
 
+        </div>
+    </div>
+
+</div>
+<!--Modal Section - End -->
+<!--Custom Autocomplete-->
+
+<div style="background:#fff;" id="customautolistmodal" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span> <i class="fa fa-times"></i> </span>
+        </button>
+        <h4>Select Item  </h4>
+        <div class="form-group">
+            <div class="input-group">
+                <input ng-model="searchcustom" type="text" placeholder="Type Keyword to find value" class="form-control" autofocus />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal-body">
+
+
+        <ul ng-repeat="obj in currtrentcustomauto | filter:searchcustom">
+            <a ng-click="fillcustomvalue(obj)">{{obj }}</a>
+        </ul>
+
+    </div>
+</div>
+
+<!--Custom Autocomplete Modal Section - End -->
+<!--Custom radio-->
+
+
+<div style="background:#fff;" id="customradiotextmodal" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span> <i class="fa fa-times"></i> </span>
+        </button>
+        <h4>Select Item  </h4>
+
+    </div>
+
+
+    <div class="modal-body">
+
+        <p ng-repeat="obj in currtrentcustomradiovalue" class="todo-element">
+            <input ng-click="fillcurrentradiovalue(obj)" id="{{obj}}" name="dashrath" type="radio"> <label for="{{obj}}">{{obj}}</label>
+        </p>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <a ng-click="fillvaluetoradio()" class="waves-effect btn btn-primary"> <i class="fa fa-check"></i> OK</a>
+                <a data-dismiss="modal" class="waves-effect btn btn-gray"> <i class="fa fa-times"></i> Cancel </a>
             </div>
         </div>
 
-        </div>
-        <!--Modal Section - End -->
-        <!--Custom Autocomplete-->
+    </div>
+</div>
 
-        <div style="background:#fff;" id="customautolistmodal" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span> <i class="fa fa-times"></i> </span>
-                </button>
-                <h4>Select Item  </h4>
-                <div class="form-group">
-                    <div class="input-group">
-                        <input ng-model="searchcustom" type="text" placeholder="Type Keyword to find value" class="form-control" autofocus />
-                    </div>
-                </div>
-            </div>
+<!--Custom radio Modal Section - End -->
+<!--Ellipses button-->
+<a ng-click="showallmenu()" class="btn waves-effect {{CurrentHeaderClass}} btn-sm changebtn"><i class="fa fa-ellipsis-v"></i></a>
 
 
-            <div class="modal-body">
+<!--Modal for Autocomplete-->
 
-
-                <ul ng-repeat="obj in currtrentcustomauto | filter:searchcustom">
-                    <a ng-click="fillcustomvalue(obj)">{{obj }}</a>
-                </ul>
-
+<div style="background:#fff;" id="Unitautolistmodal" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span> <i class="fa fa-times"></i> </span>
+        </button>
+        <h4>Select Item  </h4>
+        <div class="form-group">
+            <div class="input-group">
+                <input ng-model="searchUnitcustom" type="text" placeholder="Type Keyword to find value" class="form-control" autofocus />
             </div>
         </div>
-
-        <!--Custom Autocomplete Modal Section - End -->
-        <!--Custom radio-->
+    </div>
 
 
-        <div style="background:#fff;" id="customradiotextmodal" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span> <i class="fa fa-times"></i> </span>
-                </button>
-                <h4>Select Item  </h4>
-
-            </div>
+    <div class="modal-body">
+        <ul ng-repeat="obj in UnitAutoComboValues  | filter:searchUnitcustom">
+            <a ng-click="fillUnitAutoCompleteValue(obj)">{{obj }}</a>
+        </ul>
+    </div>
+</div>
 
 
-            <div class="modal-body">
-
-                <p ng-repeat="obj in currtrentcustomradiovalue" class="todo-element">
-                    <input ng-click="fillcurrentradiovalue(obj)" id="{{obj}}" name="dashrath" type="radio"> <label for="{{obj}}">{{obj}}</label>
-                </p>
-                <hr />
-                <div class="row">
-                    <div class="col-md-12">
-                        <a ng-click="fillvaluetoradio()" class="waves-effect btn btn-primary"> <i class="fa fa-check"></i> OK</a>
-                        <a data-dismiss="modal" class="waves-effect btn btn-gray"> <i class="fa fa-times"></i> Cancel </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!--Custom radio Modal Section - End -->
-        <!--Ellipses button-->
-        <a ng-click="showallmenu()" class="btn waves-effect {{CurrentHeaderClass}} btn-sm changebtn"><i class="fa fa-ellipsis-v"></i></a>
+<!--Modal for UnitRadio-->
 
 
-        <!--Modal for Autocomplete-->
+<div style="background:#fff;" id="Unitradiotextmodal" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            <span> <i class="fa fa-times"></i> </span>
+        </button>
+        <h4>Select Item  </h4>
+    </div>
 
-        <div style="background:#fff;" id="Unitautolistmodal" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span> <i class="fa fa-times"></i> </span>
-                </button>
-                <h4>Select Item  </h4>
-                <div class="form-group">
-                    <div class="input-group">
-                        <input ng-model="searchUnitcustom" type="text" placeholder="Type Keyword to find value" class="form-control" autofocus />
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="modal-body">
-                <ul ng-repeat="obj in UnitAutoComboValues  | filter:searchUnitcustom">
-                    <a ng-click="fillUnitAutoCompleteValue(obj)">{{obj }}</a>
-                </ul>
+    <div class="modal-body">
+        <p ng-repeat="obj in UnitRadioValues" class="todo-element">
+            <input ng-click="fillUnitradiovalue(obj)" id="{{obj}}" name="yogesh" type="radio"> <label for="{{obj}}">{{obj}}</label>
+        </p>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <a ng-click="fillUnitvaluetoradio()" class="waves-effect btn btn-primary arrow-left bknext darkblue"> <i class="fa fa-check"></i> OK</a>
+                <a data-dismiss="modal" class="waves-effect btn btn-gray"> <i class="fa fa-times"></i> Cancel </a>
             </div>
         </div>
+    </div>
+</div>
 
+<style>
+    .emailError {
+        color: #c31818;
+    }
 
-        <!--Modal for UnitRadio-->
+    #activitymneu {
+        overflow: hidden;
+    }
 
+        #activitymneu ul {
+            background: #fff;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding-left: 12px;
+            -webkit-box-shadow: 0px 0px 5px 0px rgba(204,204,204,1);
+            -moz-box-shadow: 0px 0px 5px 0px rgba(204,204,204,1);
+            box-shadow: 0px 0px 5px 0px rgba(204,204,204,1);
+            margin-bottom: 0px;
+            padding-bottom: 5px;
+        }
 
-        <div style="background:#fff;" id="Unitradiotextmodal" class="modal animated bounceIn" data-backdrop="static" data-keyboard="false">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span> <i class="fa fa-times"></i> </span>
-                </button>
-                <h4>Select Item  </h4>
-            </div>
-
-            <div class="modal-body">
-                <p ng-repeat="obj in UnitRadioValues" class="todo-element">
-                    <input ng-click="fillUnitradiovalue(obj)" id="{{obj}}" name="yogesh" type="radio"> <label for="{{obj}}">{{obj}}</label>
-                </p>
-                <hr />
-                <div class="row">
-                    <div class="col-md-12">
-                        <a ng-click="fillUnitvaluetoradio()" class="waves-effect btn btn-primary arrow-left bknext darkblue"> <i class="fa fa-check"></i> OK</a>
-                        <a data-dismiss="modal" class="waves-effect btn btn-gray"> <i class="fa fa-times"></i> Cancel </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <style>
-            .emailError {
-                color: #c31818;
+            #activitymneu ul li {
+                list-style-type: none;
             }
 
-            #activitymneu {
-                overflow: hidden;
-            }
-
-                #activitymneu ul {
-                    background: #fff;
-                    position: fixed;
-                    bottom: 0;
-                    width: 100%;
-                    padding-left: 12px;
-                    -webkit-box-shadow: 0px 0px 5px 0px rgba(204,204,204,1);
-                    -moz-box-shadow: 0px 0px 5px 0px rgba(204,204,204,1);
-                    box-shadow: 0px 0px 5px 0px rgba(204,204,204,1);
-                    margin-bottom: 0px;
+                #activitymneu ul li a {
+                    color: #000;
+                    padding-top: 5px;
                     padding-bottom: 5px;
+                    display: block;
+                    font-family: Verdana;
+                    text-decoration: none;
+                    font-size: 16px;
                 }
 
-                    #activitymneu ul li {
-                        list-style-type: none;
+                    #activitymneu ul li a i {
+                        min-width: 30px;
                     }
+</style>
 
-                        #activitymneu ul li a {
-                            color: #000;
-                            padding-top: 5px;
-                            padding-bottom: 5px;
-                            display: block;
-                            font-family: Verdana;
-                            text-decoration: none;
-                            font-size: 16px;
-                        }
+<!-- Script Section Start-->
+<script>
 
-                            #activitymneu ul li a i {
-                                min-width: 30px;
-                            }
-        </style>
+    $(init);
 
-        <!-- Script Section Start-->
-        <script>
+    function init() {
+        $('.changebtn').draggable();
+    }
 
-            $(init);
 
-            function init() {
-                $('.changebtn').draggable();
+
+    function cartitems() {
+
+        $(".cartitems").slideToggle();
+
+        setTimeout(function () {
+            if ($(".cartitems").css("display") == "none") {
+                $(".bottomarrow").hide();
+                $(".rightarrow").show();
+                $(".customActivityData").css("padding-top", "50px");
+                $("#updownIcon").attr("class", "");
+                $("#updownIcon").addClass("fa fa-caret-up");
             }
-
-
-
-            function cartitems() {
-
-                $(".cartitems").slideToggle();
-
-                setTimeout(function () {
-                    if ($(".cartitems").css("display") == "none") {
-                        $(".bottomarrow").hide();
-                        $(".rightarrow").show();
-                        $(".customActivityData").css("padding-top", "50px");
-                        $("#updownIcon").attr("class", "");
-                        $("#updownIcon").addClass("fa fa-caret-up");
-                    }
-                    else {
-                        $(".bottomarrow").show();
-                        $(".rightarrow").hide();
-                        $(".customActivityData").css("padding-top", "10px");
-                        $("#updownIcon").attr("class", "");
-                        $("#updownIcon").addClass("fa fa-caret-down");
-                    }
-                }, 500);
-
-
-
+            else {
+                $(".bottomarrow").show();
+                $(".rightarrow").hide();
+                $(".customActivityData").css("padding-top", "10px");
+                $("#updownIcon").attr("class", "");
+                $("#updownIcon").addClass("fa fa-caret-down");
             }
+        }, 500);
 
 
 
-        </script>
+    }
 
-        <script src="scripts/jquery.ui.touch-punch.js"></script>
 
-        <!-- Script Section End-->
+
+</script>
+
+<script src="scripts/jquery.ui.touch-punch.js"></script>
+
+<!-- Script Section End-->
