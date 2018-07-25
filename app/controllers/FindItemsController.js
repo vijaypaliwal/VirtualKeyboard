@@ -1482,7 +1482,16 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     }
 
 
+    $scope.IsAvailableUnitColumn = function (ColumnName) {
+        var i = 0;
+        for (i = 0; i < $scope.ActiveUnitDataFields.length; i++) {
+            if ($scope.ActiveUnitDataFields[i].FieldName == ColumnName) {
+                return true;
+            }
+        }
 
+        return false;
+    }
 
 
     $scope.GetUnitDataColumns = function () {
@@ -1510,6 +1519,12 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                         $scope.ActiveUnitDataFields.push(_TempArrayMyInventory[i]);
 
                     }
+
+
+                    console.log("Active Unit");
+
+                    console.log($scope.ActiveUnitDataFields);
+
 
 
                     CheckScopeBeforeApply();
@@ -1709,6 +1724,10 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 return $scope.MyinventoryFieldsNames[i].ColumnLabel;
             }
         }
+
+
+        console.log("DADSADDADD");
+        console.log($scope.MyinventoryFieldsNames);
 
         return "";
     }

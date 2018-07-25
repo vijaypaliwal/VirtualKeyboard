@@ -23,6 +23,13 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         $scope.$apply();
     }
 
+  
+
+   
+  
+    cropper.start(document.getElementById("testCanvas"), 1);
+
+  
 
 
     //Image Crop 
@@ -297,6 +304,12 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
             $scope.myImage = _ImgObj.bytestring;
 
+
+        
+
+
+            cropper.showImage(data)
+
             //$scope.uploadProfile();
 
         }, 100);
@@ -348,6 +361,12 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         $scope.myImage = imageData;
 
 
+    
+        cropper.showImage(imageData);
+
+      
+
+
 
         CheckScopeBeforeApply();
 
@@ -361,9 +380,8 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
     $scope.getPhoto = function (source) {
         // Retrieve image file location from specified source
         navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
-            quality: 500,
-            targetWidth: 350,
-            targeHeight: 350,
+            quality: 300,
+           
             destinationType: destinationType.DATA_URL,
             correctOrientation: true,
             allowEdit: false,
@@ -373,10 +391,6 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
 
     $scope.onPhotoDataSuccessNew = function (imageData) {
-
-        UsFullImg = true;
-        $("#myModalforCropImg").modal("show");
-
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
 
         imageData = "data:image/jpeg;base64," + imageData;
@@ -389,25 +403,31 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         _ImgObj.bytestring = imageData;
         $scope.Image = _ImgObj;
 
-       
         //updated
         $scope.myImage = '';
         $scope.myCroppedImage = '';
 
         $scope.myImage = imageData;
 
-       
 
-        CheckScopeBeforeApply();       
+     
+        cropper.showImage(imageData);
 
-      
+     
+
+
+        CheckScopeBeforeApply();
+
+
+        UsFullImg = true;
+        $("#myModalforCropImg").modal("show");
         //$scope.uploadProfile();
 
     }
 
 
     $scope.saveCroppedImage = function () {
-       
+
         $scope.uploadProfile();
     }
 
@@ -420,9 +440,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
     $scope.capturePhotoNew = function () {
         navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
-            quality: 500,
-            targetWidth: 350,
-            targeHeight: 350,
+            quality: 300,
             correctOrientation: true,
             destinationType: destinationType.DATA_URL,
             allowEdit: false,
@@ -443,14 +461,14 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
         //$scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
 
-       
+        $scope.Image.bytestring = removePaddingCharacters(croppeddata);
 
-        if (!UsFullImg) {
-            $scope.Image.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
-        }
-        else {
-            $scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
-        }       
+        //if (!UsFullImg) {
+        //    $scope.Image.bytestring = removePaddingCharacters(croppeddata);
+        //}
+        //else {
+        //    $scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
+        //}
 
         $.ajax
            ({
@@ -583,9 +601,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
 
 
-    var deviceheight = $(window).height();
 
-    $scope.cropmodalheight = deviceheight
 
 
 
