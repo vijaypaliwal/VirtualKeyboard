@@ -609,6 +609,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.SaveLabel = function (Type) {
+
+        debugger;
+
         if ($scope.checkDuplicate(Type)) {
 
 
@@ -907,7 +910,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.filllocation = function () {
 
+
+        var _locationobj = { LocationID: 0, LocationZone: "", LocationName: $scope.SearchLocationValue };
+        $scope.LocationSearchList.push(_locationobj);
+        $scope.LocationList.push(_locationobj);
         $scope.InventoryObject.Location = $scope.SearchLocationValue;
+    
         $("#locationlistmodal").modal('hide');
         CheckScopeBeforeApply()
 
