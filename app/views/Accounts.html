@@ -186,6 +186,12 @@
     .col-xs-3 span {
         font-size: 14px;
     }
+
+   .loaderanimation
+   {
+       left:0;
+       top:40%;
+   }
 </style>
 
 
@@ -199,6 +205,10 @@
 
 
 
+<div ng-show="IsLoading==true" class="loaderanimation">
+    <img src="img/loader.gif" alt="Alternate Text" />
+</div>
+
 
 <div style="text-align:center; margin-bottom:15px;">
 
@@ -210,9 +220,7 @@
 
 
 
-    <div ng-show="IsLoading==true" class="loaderanimation">
-        <img src="img/loader.gif" alt="Alternate Text" />
-    </div>
+ 
 
 
     <p style="background: #ccc; margin-bottom: 0; padding: 15px; padding-right:10px;"> <i class="fa fa-cubes"></i> Your Inventories <button style="height: 36px; display:none; line-height: 36px; margin-top: -5px;" ng-click="AddNewAccount()" type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New</button> </p>
@@ -261,7 +269,7 @@
                         </div>
 
                         <div style="text-align:right;" class="col-xs-3">
-                            <a role="button" class="accordion-toggle" style="color: #069; display: block;" data-toggle="collapse" data-parent="#accordion" data-target="#{{_obj.InventoryAccountID}}" aria-expanded="true">
+                            <a role="button" class="accordion-toggle collapsed" style="color: #069; display: block;" data-toggle="collapse" data-parent="#accordion" data-target="#{{_obj.InventoryAccountID}}" aria-expanded="true">
                                 <span>Details </span>
                             </a>
                         </div>

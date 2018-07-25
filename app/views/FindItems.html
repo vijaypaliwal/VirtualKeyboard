@@ -281,7 +281,10 @@
 
             <div>
 
-                <img style="height:70px; width:70px; float:left;" class="animated slideInLeft" src="img/Untitled-11.png" alt="Alternate Text"><br />
+                <div style="text-align:center;">
+
+                    <img style="height: 60px; width: 60px; background-color:#888; padding: 10px; margin-top: 20px; border-radius: 100%; box-shadow: 0 3px 15px rgba(0, 9, 128, 0.1), 0 11px 19px rgba(0, 9, 128, 0.1);" src="img/u2.png" alt="Alternate Text">
+                </div>
 
                 <h5>You don't have any inventory records yet. Click the "New Inventory" button below to put something in inventory.</h5>
 
@@ -290,6 +293,15 @@
                 <br />
 
                 <a ng-if="checkpermission('ACTION:CanAddInventory') && totalrecords==0" style="border-radius: 25px; height: 45px; padding-left: 40px; padding-right: 40px; line-height: 40px; /* width: 100%; */ /* padding: 25px; */ font-size: 17px; text-transform: capitalize;" class="btn waves-effect waves-light btn-success animated center bouncein delay-6 ng-scope" href="#/inventory"><i class="fa fa-plus"></i> New Inventory</a>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <br />
+                    </div>
+                </div>
+
+            
             </div>
         </div>
     </div>
