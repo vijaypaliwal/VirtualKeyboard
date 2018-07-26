@@ -128,6 +128,110 @@
 </style>
 
 
+<style>
+
+    .darkroom-container {
+        position: relative;
+    }
+
+    .darkroom-image-container {
+        top: 0;
+        left: 0;
+    }
+
+    .darkroom-toolbar {
+        display: block;
+        position: absolute;
+        top: -45px;
+        left: 0;
+        background: #444;
+        height: 40px;
+        min-width: 40px;
+        z-index: 99;
+        border-radius: 2px;
+        white-space: nowrap;
+        padding: 0 5px;
+    }
+
+        .darkroom-toolbar:before {
+            content: "";
+            position: absolute;
+            bottom: -7px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 7px solid #444;
+        }
+
+    .darkroom-button-group {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+
+        .darkroom-button-group:last-child {
+            border-right: none;
+        }
+
+    .darkroom-button {
+        box-sizing: border-box;
+        background: transparent;
+        border: none;
+        outline: none;
+        padding: 2px 0 0 0;
+        width: 40px;
+        height: 40px;
+    }
+
+        .darkroom-button:hover {
+            cursor: pointer;
+            background: #555;
+        }
+
+        .darkroom-button:active {
+            cursor: pointer;
+            background: #333;
+        }
+
+        .darkroom-button:disabled .darkroom-icon {
+            fill: #666;
+        }
+
+        .darkroom-button:disabled:hover {
+            cursor: default;
+            background: transparent;
+        }
+
+        .darkroom-button.darkroom-button-active .darkroom-icon {
+            fill: #33b5e5;
+        }
+
+        .darkroom-button.darkroom-button-hidden {
+            display: none;
+        }
+
+        .darkroom-button.darkroom-button-success .darkroom-icon {
+            fill: #99cc00;
+        }
+
+        .darkroom-button.darkroom-button-warning .darkroom-icon {
+            fill: #FFBB33;
+        }
+
+        .darkroom-button.darkroom-button-danger .darkroom-icon {
+            fill: #FF4444;
+        }
+
+    .darkroom-icon {
+        width: 24px;
+        height: 24px;
+        fill: #fff;
+    }
+</style>
+
+
 
 
 
@@ -150,6 +254,17 @@
 
 
 <div style="display:none; position:fixed;width:100%;" class="profilepage">
+
+    <br />
+    <br />
+    <br />
+    <div class="figure-wrapper">
+        <figure class="image-container target">
+            <img src="img/_dummyImage.jpg" alt="DomoKun" id="target">
+
+            
+        </figure>
+    </div>
 
     <div class="detailmode">
         <div class="bluearea">
@@ -320,7 +435,7 @@
             <li ng-if="checkpermission('ACTION:CanAddInventory')==true"> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
             <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-shopping-cart"></i> </a></li>
             <li> <a href="#/reportmenu"><span class="newinv">Go to Reports</span></a>  <a href="#/reportmenu" class=" waves-effect btn-primary btn"> <i class="fa fa-th-list"></i> </a></li>
-            
+
         </ul>
     </div>
 </div>
@@ -475,4 +590,47 @@
         var accordion = new Accordion($('#accordion'), false);
     });
 
+</script>
+
+<script src="scripts/fabric.js"></script>
+<script src="scripts/darkroom.js"></script>
+<script>
+    var dkrm = new Darkroom('#target', {
+        // Size options
+        minWidth: 100,
+        minHeight: 100,
+        maxWidth: 600,
+        maxHeight: 500,
+        ratio: 4 / 3,
+        backgroundColor: '#000',
+
+        // Plugins options
+        plugins: {
+            //save: false,
+            crop: {
+                quickCropKey: 67, //key "c"
+                //minHeight: 50,
+                //minWidth: 50,
+                //ratio: 4/3
+            }
+        },
+
+        // Post initialize script
+        initialize: function () {
+            var cropPlugin = this.plugins['crop'];
+            // cropPlugin.selectZone(170, 25, 300, 300);
+            cropPlugin.requireFocus();
+        },
+       
+        save: {
+            defaults: {
+                callback: function () {
+                    this.darkroom.selfDestroy(); // Cleanup
+                    var newImage = dkrm.canvas.toDataURL();
+                    alert(newImage);
+                }
+            }
+            
+        }
+    });
 </script>
