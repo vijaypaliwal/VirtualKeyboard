@@ -415,7 +415,6 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
     $scope.onPhotoDataSuccessNew = function (imageData) {
 
         UsFullImg = true;
-        $("#myModalforCropImg").modal("show");
 
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
 
@@ -438,10 +437,10 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         CheckScopeBeforeApply();
 
         alert("image Data")
-        alert($scope.myImage);
 
         ApplyDarkRoom();
 
+        $("#myModalforCropImg").modal("show");
 
       
         //$scope.uploadProfile();
