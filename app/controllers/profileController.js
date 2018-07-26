@@ -47,6 +47,9 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
         if ($(".image-container").find(".darkroom-container").length > 0) {
 
+            alert("into second time");
+            $(".image-container").html("");
+
             $(".image-container").html('<img src="' + $("#target2").attr("src") + '" id="target"/>')
 
         }

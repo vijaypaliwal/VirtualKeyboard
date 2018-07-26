@@ -41,11 +41,12 @@ function () {
         },
         selfDestroy: function () {
             var container = this.containerElement,
-                image = new Image;
+                image = new Image(300, 200);
             image.onload = function () {
                 container.parentNode.replaceChild(image, container)
             }, image.src = this.sourceImage.toDataURL()
             $("#croppedImage").attr("src", this.sourceImage.toDataURL());
+            $("#croppedImage").parent().css("display", "none");
         },
         addEventListener: function (eventName, callback) {
             var el = this.canvas.getElement();
