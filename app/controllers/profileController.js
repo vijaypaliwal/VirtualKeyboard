@@ -43,7 +43,43 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
     //
 
+    function ApplyDarkRoom() {
 
+        alert("in dark room");
+        if ($(".image-container").find(".darkroom-container").length > 0) {
+
+            $(".image-container").html('<img src="' + $("#target2").attr("src") + '" id="target"/>')
+
+        }
+        var dkrm = new Darkroom('#target', {
+            // Size options
+            minWidth: 300,
+            minHeight: 100,
+            maxWidth: 350,
+            maxHeight: 250,
+            ratio: 4 / 3,
+            backgroundColor: '#fff',
+
+            // Plugins options
+            plugins: {
+                //save: false,
+                crop: {
+                    quickCropKey: 67, //key "c"
+                    //minHeight: 50,
+                    //minWidth: 50,
+                    //ratio: 4/3
+                }
+            },
+
+            // Post initialize script
+            initialize: function () {
+                var cropPlugin = this.plugins['crop'];
+                // cropPlugin.selectZone(170, 25, 300, 300);
+                cropPlugin.requireFocus();
+            }
+        });
+        alert("out dark room");
+    }
 
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
@@ -326,42 +362,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         }
     }
 
-    function ApplyDarkRoom()
-    {
-        if ($(".image-container").find(".darkroom-container").length > 0)
-        {
-          
-            $(".image-container").html('<img src="'+$("#target2").attr("src")+'" id="target"/>')
-            
-        }
-        var dkrm = new Darkroom('#target', {
-            // Size options
-            minWidth: 100,
-            minHeight: 100,
-            maxWidth: 300,
-            maxHeight: 200,
-            ratio: 4 / 3,
-            backgroundColor: '#fff',
-
-            // Plugins options
-            plugins: {
-                //save: false,
-                crop: {
-                    quickCropKey: 67, //key "c"
-                    //minHeight: 50,
-                    //minWidth: 50,
-                    //ratio: 4/3
-                }
-            },
-
-            // Post initialize script
-            initialize: function () {
-                var cropPlugin = this.plugins['crop'];
-                // cropPlugin.selectZone(170, 25, 300, 300);
-                cropPlugin.requireFocus();
-            }
-        });
-    }
+   
 
 
     $scope.onPhotoURISuccessNew = function (imageData) {
@@ -434,10 +435,13 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         $scope.myCroppedImage = '';
 
         $scope.myImage = imageData;
+        CheckScopeBeforeApply();
+
+        alert("image Data")
+        alert($scope.myImage);
 
         ApplyDarkRoom();
 
-        CheckScopeBeforeApply();       
 
       
         //$scope.uploadProfile();
@@ -484,14 +488,14 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
         //$scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
 
-       
+        $scope.Image.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
 
-        if (!UsFullImg) {
-            $scope.Image.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
-        }
-        else {
-            $scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
-        }       
+        //if (!UsFullImg) {
+        //    $scope.Image.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
+        //}
+        //else {
+        //    $scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
+        //}       
 
         $.ajax
            ({
