@@ -45,7 +45,6 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
     function ApplyDarkRoom() {
 
-        alert("in dark room");
         if ($(".image-container").find(".darkroom-container").length > 0) {
 
             $(".image-container").html('<img src="' + $("#target2").attr("src") + '" id="target"/>')
@@ -53,10 +52,10 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         }
         var dkrm = new Darkroom('#target', {
             // Size options
-            minWidth: 300,
+            minWidth: 100,
             minHeight: 100,
-            maxWidth: 350,
-            maxHeight: 250,
+            maxWidth: 300,
+            maxHeight: 200,
             ratio: 4 / 3,
             backgroundColor: '#fff',
 
@@ -78,7 +77,6 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
                 cropPlugin.requireFocus();
             }
         });
-        alert("out dark room");
     }
 
     $(".modal-backdrop").remove();
@@ -436,7 +434,6 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         $scope.myImage = imageData;
         CheckScopeBeforeApply();
 
-        alert("image Data")
 
         ApplyDarkRoom();
 
