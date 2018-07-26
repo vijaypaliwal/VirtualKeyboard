@@ -1528,7 +1528,43 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         if ($scope.CheckUnitDataFieldValueAll() == true) {
 
 
+
             if ($scope.IsItemChose == true) {
+
+
+                for (var i = 0; i < $scope.InventoryObject.CustomPartData.length; i++) {
+
+                    var _cfdID = $scope.InventoryObject.CustomPartData[i].CfdID;
+                    var _HasPrefix = $("#CustomItem_" + _cfdID).attr("data-prefix");
+                    var _HasSuffix = $("#CustomItem_" + _cfdID).attr("data-suffix");
+                    var _Value = $("#CustomItem_" + _cfdID).val();
+                    if ($.trim(_HasPrefix) != "" || $.trim(_HasSuffix) != "") {
+                        if ($.trim(_Value) != "") {
+                            $scope.InventoryObject.CustomPartData[i].Value = $("#CustomItem_" + _cfdID).attr("data-orginal-value");
+                        }
+                        else {
+                            $scope.InventoryObject.CustomPartData[i].Value = "";
+                        }
+                    }
+                }
+
+
+                for (var i = 0; i < $scope.InventoryObject.CustomTxnData.length; i++) {
+
+                    var _cfdID = $scope.InventoryObject.CustomTxnData[i].CfdID;
+                    var _HasPrefix = $("#CustomActivity_" + _cfdID).attr("data-prefix");
+                    var _HasSuffix = $("#CustomActivity_" + _cfdID).attr("data-suffix");
+                    var _Value = $("#CustomActivity_" + _cfdID).val();
+                    if ($.trim(_HasPrefix) != "" || $.trim(_HasSuffix) != "") {
+                        if ($.trim(_Value) != "") {
+                            $scope.InventoryObject.CustomTxnData[i].Value = $("#CustomActivity_" + _cfdID).attr("data-orginal-value");
+                        }
+                        else {
+                            $scope.InventoryObject.CustomTxnData[i].Value = "";
+                        }
+                    }
+                }
+
                 var authData = localStorageService.get('authorizationData');
                 if (authData) {
                     $scope.SecurityToken = authData.token;
@@ -1542,6 +1578,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                 var _TempObj = $scope.InventoryObject;
+
+
+                debugger;
 
                 var ImageData = $("#list123").find("img").attr("src");
                 $.each(_TempObj, function (datakey, datavalue) {
@@ -2093,6 +2132,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.GetCustomItemObjByColumnmap = function (columnMap) {
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
             if ($scope.CustomItemDataList[i].ColumnMap == columnMap) {
+
+                debugger;
+
                 return $scope.CustomItemDataList[i];
             }
         }
@@ -2170,8 +2212,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   $scope.CurrentCount = 0;
                   $scope.MyinventoryFields = [];
                   if (response.GetAllDataResult.Success == true) {
-
-
 
 
 
@@ -2277,6 +2317,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                               $scope.InventoryObject.CustomPartData.push({ CfdID: _CustomObj.cfdID, Value: _obj.CfValue, DataType: _CustomObj.cfdDataType, TrueLabel: _CustomObj.cfdTruelabel, FalseLabel: _CustomObj.cfdFalselabel });
 
 
+                             
                               $("#CustomItem_" + _obj.cfdID).val(_obj.CfValue);
 
 
