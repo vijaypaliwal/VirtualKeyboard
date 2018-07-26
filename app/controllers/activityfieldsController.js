@@ -461,7 +461,9 @@ app.controller('activityfieldsController', ['$scope', 'localStorageService', 'au
 
                      // FillLocalArray();
                       updateLocalArray();
+
                       $scope.IsLoading = false;
+                      CheckScopeBeforeApply();
                   }
                   else {
                       $scope.ShowErrorMessage("Get All look ups", 1, 1, response.GetAllDataResult.Message)
