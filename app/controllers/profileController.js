@@ -43,45 +43,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
     //
 
-    function ApplyDarkRoom() {
-        $(".image-container").html("");
 
-        $(".image-container").html('<img src="' + $("#target2").attr("src") + '" id="target"/>');
-
-        if ($(".image-container").find(".darkroom-container").length > 0) {
-
- 
-          
-
-        }
-        var dkrm = new Darkroom('#target', {
-            // Size options
-            minWidth: 100,
-            minHeight: 100,
-            maxWidth: 300,
-            maxHeight: 200,
-            ratio: 4 / 3,
-            backgroundColor: '#fff',
-
-            // Plugins options
-            plugins: {
-                //save: false,
-                crop: {
-                    quickCropKey: 67, //key "c"
-                    //minHeight: 50,
-                    //minWidth: 50,
-                    //ratio: 4/3
-                }
-            },
-
-            // Post initialize script
-            initialize: function () {
-                var cropPlugin = this.plugins['crop'];
-                // cropPlugin.selectZone(170, 25, 300, 300);
-                cropPlugin.requireFocus();
-            }
-        });
-    }
 
     $(".modal-backdrop").remove();
     $("body").removeClass("modal-open");
@@ -334,10 +296,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
             $scope.myCroppedImage = '';
 
             $scope.myImage = _ImgObj.bytestring;
-            CheckScopeBeforeApply();
 
-            ApplyDarkRoom();
-            $("#myModalforCropImg").modal("show");
             //$scope.uploadProfile();
 
         }, 100);
@@ -363,8 +322,6 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
             $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
         }
     }
-
-   
 
 
     $scope.onPhotoURISuccessNew = function (imageData) {
@@ -395,7 +352,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         CheckScopeBeforeApply();
 
         UsFullImg = true;
-        ApplyDarkRoom();
+
         $("#myModalforCropImg").modal("show");
         //$scope.uploadProfile();      
 
@@ -404,8 +361,9 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
     $scope.getPhoto = function (source) {
         // Retrieve image file location from specified source
         navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
-            quality: 50,
-          
+            quality: 500,
+            targetWidth: 350,
+            targeHeight: 350,
             destinationType: destinationType.DATA_URL,
             correctOrientation: true,
             allowEdit: false,
@@ -417,6 +375,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
     $scope.onPhotoDataSuccessNew = function (imageData) {
 
         UsFullImg = true;
+        $("#myModalforCropImg").modal("show");
 
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
 
@@ -436,12 +395,10 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         $scope.myCroppedImage = '';
 
         $scope.myImage = imageData;
-        CheckScopeBeforeApply();
 
+       
 
-        ApplyDarkRoom();
-
-        $("#myModalforCropImg").modal("show");
+        CheckScopeBeforeApply();       
 
       
         //$scope.uploadProfile();
@@ -449,14 +406,11 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
     }
 
 
-    $scope.saveCroppedImageOld = function () {
+    $scope.saveCroppedImage = function () {
        
         $scope.uploadProfile();
     }
-    $scope.saveCroppedImage = function () {
 
-        $scope.uploadProfile();
-    }
 
     $scope.onFail = function (message) {
 
@@ -466,8 +420,9 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
     $scope.capturePhotoNew = function () {
         navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
-            quality: 50,
-         
+            quality: 500,
+            targetWidth: 350,
+            targeHeight: 350,
             correctOrientation: true,
             destinationType: destinationType.DATA_URL,
             allowEdit: false,
@@ -488,14 +443,14 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
         //$scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
 
-        $scope.Image.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
+       
 
-        //if (!UsFullImg) {
-        //    $scope.Image.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
-        //}
-        //else {
-        //    $scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
-        //}       
+        if (!UsFullImg) {
+            $scope.Image.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
+        }
+        else {
+            $scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
+        }       
 
         $.ajax
            ({

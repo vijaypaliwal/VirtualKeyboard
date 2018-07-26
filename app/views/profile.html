@@ -121,127 +121,9 @@
             max-width: 220px;
         }
 
-
-    .container h4 {
-        word-break: normal;
-    }
-</style>
-
-
-<style>
-
-    .darkroom-container {
-        position: relative;
-    }
-
-    .darkroom-image-container {
-        top: 0;
-        left: 0;
-    }
-
-    .darkroom-toolbar {
-        display: block;
-        position: absolute;
-        top: -45px;
-        left: 0;
-        background: #444;
-        height: 40px;
-        min-width: 40px;
-        z-index: 99;
-        border-radius: 2px;
-        white-space: nowrap;
-        padding: 0 5px;
-    }
-
-        .darkroom-toolbar:before {
-            content: "";
-            position: absolute;
-            bottom: -7px;
-            left: 20px;
-            width: 0;
-            height: 0;
-            border-left: 7px solid transparent;
-            border-right: 7px solid transparent;
-            border-top: 7px solid #444;
-        }
-
-    .darkroom-button-group {
-        display: inline-block;
-        margin: 0;
-        padding: 0;
-    }
-
-        .darkroom-button-group:last-child {
-            border-right: none;
-        }
-
-    .darkroom-button {
-        box-sizing: border-box;
-        background: transparent;
-        border: none;
-        outline: none;
-        padding: 2px 0 0 0;
-        width: 40px;
-        height: 40px;
-    }
-
-        .darkroom-button:hover {
-            cursor: pointer;
-            background: #555;
-        }
-
-        .darkroom-button:active {
-            cursor: pointer;
-            background: #333;
-        }
-
-        .darkroom-button:disabled .darkroom-icon {
-            fill: #666;
-        }
-
-        .darkroom-button:disabled:hover {
-            cursor: default;
-            background: transparent;
-        }
-
-        .darkroom-button.darkroom-button-active .darkroom-icon {
-            fill: #33b5e5;
-        }
-
-        .darkroom-button.darkroom-button-hidden {
-            display: none;
-        }
-
-        .darkroom-button.darkroom-button-success .darkroom-icon {
-            fill: #99cc00;
-        }
-
-        .darkroom-button.darkroom-button-warning .darkroom-icon {
-            fill: #FFBB33;
-        }
-
-        .darkroom-button.darkroom-button-danger .darkroom-icon {
-            fill: #FF4444;
-        }
-
-    .darkroom-icon {
-        width: 20px;
-        height: 20px;
-        margin-top: 10px;
-        fill: #fff;
-    }
-
-
-
-
-    .image-container{
-        text-align:center;
-    }
-
-        .image-container img;{
-        max-height:200px;
-        max-width:300px;
-        margin:0 auto;
+    .roundbtntitle
+    {
+        z-index:1000;
     }
 </style>
 
@@ -267,10 +149,7 @@
 
 
 
-<div style="display: none; width: 100%; position: fixed;" class="profilepage">
-
-  
-   
+<div style="display:none; width:100%;" class="profilepage">
 
     <div class="detailmode">
         <div class="bluearea">
@@ -313,8 +192,8 @@
         </div>
 
 
-        <div class="container" style="width:95%">
-            <h4>{{CurrentAccount}} </h4>
+        <div class="container">
+            <h4>Active Account - {{CurrentAccount}} </h4>
             <h4>  {{emailLabel}}</h4>
             <h4>{{organizationLabel}}</h4>
             <h4> {{phoneLabel}}</h4>
@@ -441,7 +320,7 @@
             <li ng-if="checkpermission('ACTION:CanAddInventory')==true"> <a href="#/inventory"><span class="newinv">Add Inventory</span></a>  <a href="#/inventory" class=" waves-effect btn-warning btn"> <i class="fa fa-plus"></i> </a></li>
             <li> <a href="#/FindItems"><span class="newinv">Go to Inventory</span></a>  <a href="#/FindItems" class=" waves-effect btn-success btn"> <i class="fa fa-shopping-cart"></i> </a></li>
             <li> <a href="#/reportmenu"><span class="newinv">Go to Reports</span></a>  <a href="#/reportmenu" class=" waves-effect btn-primary btn"> <i class="fa fa-th-list"></i> </a></li>
-
+            
         </ul>
     </div>
 </div>
@@ -465,7 +344,7 @@
         </ul>
     </div>
 </div>
-<div style="margin-top: 0px; z-index: 100001;" id="myModalforCropImgOld" class="modal fade" role="dialog">
+<div style="margin-top: 0px; z-index: 100001;" id="myModalforCropImg" class="modal fade" role="dialog">
 
     <div style="background:#069; color:#fff;" class="modal-header">
         <h4>Crop Image</h4>
@@ -489,36 +368,7 @@
     </div>
 </div>
 
-<div style="margin-top: 0px; z-index: 100001;" id="myModalforCropImg" class="modal fade" role="dialog">
-
-    <div style="background:#069; color:#fff;" class="modal-header">
-        <h4>Crop Image</h4>
-    </div>
-    <!-- Modal for Croping content-->
-    <div style="background: #fff; overflow-y: auto; height: calc({{cropmodalheight}}px - 140px); display: -webkit-box; margin-top: 10px;" class="modal-body">
-
-        <div class="figure-wrapper" style="margin: 0 auto;">
-            <figure class="image-container target">
-               
-                <img src="{{myImage}}" id="target" />
-
-            </figure>
-        </div>
-
-        <img style="display:none" src="{{myImage}}" id="target2" />
-
-        <div style="display:none;"><img id="croppedImage" ng-src="{{myCroppedImage}}" /></div>
-
-
-    </div>
-
-    <div style="background:#f5f5f5; text-align:left; margin-top:0;" class="modal-footer">
-        <a class="btn btn-primary" ng-click="saveCroppedImage();"> <i class="fa fa-camera"></i> Save Photo</a>
-        <a class="btn btn-gray pull-right" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</a>
-    </div>
-</div>
-
-<input type="file" id="files" style="visibility:hidden;"  accept="image/*;" />
+<input type="file" id="files" style="visibility:hidden" accept="image/*;" />
 
 <script>
 
@@ -625,10 +475,4 @@
         var accordion = new Accordion($('#accordion'), false);
     });
 
-</script>
-
-<script src="scripts/fabric.js"></script>
-<script src="scripts/darkroom.js"></script>
-<script>
-    
 </script>
