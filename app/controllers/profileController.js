@@ -296,7 +296,10 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
             $scope.myCroppedImage = '';
 
             $scope.myImage = _ImgObj.bytestring;
+            CheckScopeBeforeApply();
 
+            ApplyDarkRoom();
+            $("#myModalforCropImg").modal("show");
             //$scope.uploadProfile();
 
         }, 100);
@@ -321,6 +324,43 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
             $("#bottommenumodal").modal('show');
             $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
         }
+    }
+
+    function ApplyDarkRoom()
+    {
+        if ($(".image-container").find(".darkroom-container").length > 0)
+        {
+          
+            $(".image-container").html('<img src="'+$("#target2").attr("src")+'" id="target"/>')
+            
+        }
+        var dkrm = new Darkroom('#target', {
+            // Size options
+            minWidth: 100,
+            minHeight: 100,
+            maxWidth: 300,
+            maxHeight: 200,
+            ratio: 4 / 3,
+            backgroundColor: '#fff',
+
+            // Plugins options
+            plugins: {
+                //save: false,
+                crop: {
+                    quickCropKey: 67, //key "c"
+                    //minHeight: 50,
+                    //minWidth: 50,
+                    //ratio: 4/3
+                }
+            },
+
+            // Post initialize script
+            initialize: function () {
+                var cropPlugin = this.plugins['crop'];
+                // cropPlugin.selectZone(170, 25, 300, 300);
+                cropPlugin.requireFocus();
+            }
+        });
     }
 
 
@@ -352,7 +392,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         CheckScopeBeforeApply();
 
         UsFullImg = true;
-
+        ApplyDarkRoom();
         $("#myModalforCropImg").modal("show");
         //$scope.uploadProfile();      
 
@@ -395,7 +435,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
         $scope.myImage = imageData;
 
-       
+        ApplyDarkRoom();
 
         CheckScopeBeforeApply();       
 
@@ -405,11 +445,14 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
     }
 
 
-    $scope.saveCroppedImage = function () {
+    $scope.saveCroppedImageOld = function () {
        
         $scope.uploadProfile();
     }
+    $scope.saveCroppedImage = function () {
 
+        $scope.uploadProfile();
+    }
 
     $scope.onFail = function (message) {
 

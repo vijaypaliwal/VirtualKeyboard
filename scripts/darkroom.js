@@ -45,7 +45,7 @@ function () {
             image.onload = function () {
                 container.parentNode.replaceChild(image, container)
             }, image.src = this.sourceImage.toDataURL()
-            alert(this.sourceImage.toDataURL());
+            $("#croppedImage").attr("src", this.sourceImage.toDataURL());
         },
         addEventListener: function (eventName, callback) {
             var el = this.canvas.getElement();
@@ -281,14 +281,14 @@ function (window, document, Darkroom) {
             }
         },
         _initButtons: function () {
-            var buttonGroup = this.darkroom.toolbar.createButtonGroup();
-            return this.backButton = buttonGroup.createButton({
-                image: "undo",
-                disabled: !0
-            }), this.forwardButton = buttonGroup.createButton({
-                image: "redo",
-                disabled: !0
-            }), this.backButton.addEventListener("click", this.undo.bind(this)), this.forwardButton.addEventListener("click", this.redo.bind(this)), this
+            //var buttonGroup = this.darkroom.toolbar.createButtonGroup();
+            //return this.backButton = buttonGroup.createButton({
+            //    image: "undo",
+            //    disabled: !0
+            //}), this.forwardButton = buttonGroup.createButton({
+            //    image: "redo",
+            //    disabled: !0
+            //}), this.backButton.addEventListener("click", this.undo.bind(this)), this.forwardButton.addEventListener("click", this.redo.bind(this)), this
         },
         _updateButtons: function () {
             this.backButton.disable(0 === this.darkroom.transformations.length), this.forwardButton.disable(0 === this.undoTransformations.length)
@@ -310,14 +310,14 @@ function () {
     });
     Darkroom.plugins.rotate = Darkroom.Plugin.extend({
         initialize: function () {
-            var buttonGroup = this.darkroom.toolbar.createButtonGroup(),
-                leftButton = buttonGroup.createButton({
-                    image: "rotate-left"
-                }),
-                rightButton = buttonGroup.createButton({
-                    image: "rotate-right"
-                });
-            leftButton.addEventListener("click", this.rotateLeft.bind(this)), rightButton.addEventListener("click", this.rotateRight.bind(this))
+            //var buttonGroup = this.darkroom.toolbar.createButtonGroup(),
+            //    leftButton = buttonGroup.createButton({
+            //        image: "rotate-left"
+            //    }),
+            //    rightButton = buttonGroup.createButton({
+            //        image: "rotate-right"
+            //    });
+            //leftButton.addEventListener("click", this.rotateLeft.bind(this)), rightButton.addEventListener("click", this.rotateRight.bind(this))
         },
         rotateLeft: function () {
             this.rotate(-90)

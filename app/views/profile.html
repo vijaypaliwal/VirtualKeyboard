@@ -225,8 +225,9 @@
         }
 
     .darkroom-icon {
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
+        margin-top: 10px;
         fill: #fff;
     }
 </style>
@@ -253,18 +254,10 @@
 
 
 
-<div style="display:none; position:fixed;width:100%;" class="profilepage">
+<div style="display:none;width:100%;" class="profilepage">
 
-    <br />
-    <br />
-    <br />
-    <div class="figure-wrapper">
-        <figure class="image-container target">
-            <img src="img/_dummyImage.jpg" alt="DomoKun" id="target">
-
-            
-        </figure>
-    </div>
+  
+   
 
     <div class="detailmode">
         <div class="bluearea">
@@ -459,7 +452,7 @@
         </ul>
     </div>
 </div>
-<div style="margin-top: 0px; z-index: 100001;" id="myModalforCropImg" class="modal fade" role="dialog">
+<div style="margin-top: 0px; z-index: 100001;" id="myModalforCropImgOld" class="modal fade" role="dialog">
 
     <div style="background:#069; color:#fff;" class="modal-header">
         <h4>Crop Image</h4>
@@ -483,7 +476,36 @@
     </div>
 </div>
 
-<input type="file" id="files" style="visibility:hidden" accept="image/*;" />
+<div style="margin-top: 0px; z-index: 100001;" id="myModalforCropImg" class="modal fade" role="dialog">
+
+    <div style="background:#069; color:#fff;" class="modal-header">
+        <h4>Crop Image</h4>
+    </div>
+    <!-- Modal for Croping content-->
+    <div style="background: #fff; overflow-y: auto; height: calc({{cropmodalheight}}px - 140px); display: -webkit-box; margin-top: 10px;" class="modal-body">
+
+        <div class="figure-wrapper" style="margin: 0 auto;">
+            <figure class="image-container target">
+               
+                <img src="{{myImage}}" id="target" />
+
+            </figure>
+        </div>
+
+        <img style="display:none" src="{{myImage}}" id="target2" />
+
+        <div style="display:none;"><img id="croppedImage" ng-src="{{myCroppedImage}}" /></div>
+
+
+    </div>
+
+    <div style="background:#f5f5f5; text-align:left; margin-top:0;" class="modal-footer">
+        <a class="btn btn-primary" ng-click="saveCroppedImage();"> <i class="fa fa-camera"></i> Save Photo</a>
+        <a class="btn btn-gray pull-right" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</a>
+    </div>
+</div>
+
+<input type="file" id="files" style="visibility:hidden;"  accept="image/*;" />
 
 <script>
 
@@ -595,42 +617,5 @@
 <script src="scripts/fabric.js"></script>
 <script src="scripts/darkroom.js"></script>
 <script>
-    var dkrm = new Darkroom('#target', {
-        // Size options
-        minWidth: 100,
-        minHeight: 100,
-        maxWidth: 600,
-        maxHeight: 500,
-        ratio: 4 / 3,
-        backgroundColor: '#000',
-
-        // Plugins options
-        plugins: {
-            //save: false,
-            crop: {
-                quickCropKey: 67, //key "c"
-                //minHeight: 50,
-                //minWidth: 50,
-                //ratio: 4/3
-            }
-        },
-
-        // Post initialize script
-        initialize: function () {
-            var cropPlugin = this.plugins['crop'];
-            // cropPlugin.selectZone(170, 25, 300, 300);
-            cropPlugin.requireFocus();
-        },
-       
-        save: {
-            defaults: {
-                callback: function () {
-                    this.darkroom.selfDestroy(); // Cleanup
-                    var newImage = dkrm.canvas.toDataURL();
-                    alert(newImage);
-                }
-            }
-            
-        }
-    });
+    
 </script>
