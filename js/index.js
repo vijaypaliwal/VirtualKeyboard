@@ -194,28 +194,31 @@ $(".signoutbtn").click(function () {
 });
 
 
-$(document).on('input', '.prepostCustom', function (e) {
-    // if useing right key move cursor to first position it auto move focus at last character in text box 
+//$(document).on('input', '.prepostCustom', function (e) {
+//    // if useing right key move cursor to first position it auto move focus at last character in text box 
  
-    var prefix = $(this).attr("data-prefix");
-    var suffix = $(this).attr("data-suffix");
+//    var prefix = $(this).attr("data-prefix");
+//    var suffix = $(this).attr("data-suffix");
 
-    if ($.trim(prefix) == "") { prefix = "" };
-    if ($.trim(suffix) == "") { suffix = "" };
+//    if ($.trim(prefix) == "") { prefix = "" };
+//    if ($.trim(suffix) == "") { suffix = "" };
 
-    var _TotalLength = prefix.length + suffix.length;
-    var _defaultValue = prefix + suffix;
+//    var _TotalLength = prefix.length + suffix.length;
+//    var _defaultValue = prefix + suffix;
 
-    _defaultValue = $(this).attr("data-value");
-    if ($.trim($(this).val()).length != _TotalLength) {
-        var _value = $(this).val();
-        if (_value.indexOf(prefix) == -1 || _value.indexOf(suffix) == -1) {
+//    _defaultValue = $(this).attr("data-value");
+//    if ($.trim($(this).val()).length != _TotalLength) {
+//        var _value = $(this).val();
+//        if (_value.indexOf(prefix) == -1 || _value.indexOf(suffix) == -1) {
 
-            $(this).val(_defaultValue);
-            $(this).trigger("input");
-        }
-    }
-});
+//            $(this).val(_defaultValue);
+//            $(this).trigger("input");
+//        }
+//    }
+//});
+
+
+
 $(document).on('input', '.prepostCustomActivity', function (e) {
     // if useing right key move cursor to first position it auto move focus at last character in text box 
  
