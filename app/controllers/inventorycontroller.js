@@ -1639,17 +1639,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 var _u1prefix = $("#UniqueTag").attr("data-prefix");
                 var _u1suffix = $("#UniqueTag").attr("data-suffix");
                 var _u1original = $("#UniqueTag").attr("data-original-value");
-              
+                var _u1value = $("#UniqueTag").val();
 
                 if ($.trim(_u1prefix) != "" || $.trim(_u1suffix) != "") {
 
-                    if ($.trim(_u1original) != "") {
-                        $scope.InventoryObject.UniqueTag = _u1original;
-
+                    if ($.trim(_u1value) != "")
+                    {
+                    $scope.InventoryObject.UniqueTag = _u1original;
                     }
-                    else {
-                        $scope.InventoryObject.UniqueTag = "";
-
+                    else
+                    {
+                    $scope.InventoryObject.UniqueTag = "";
                     }
                 }
 
@@ -1657,10 +1657,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 var _u2prefix = $("#UnitTag2").attr("data-prefix");
                 var _u2suffix = $("#UnitTag2").attr("data-suffix");
                 var _u2original = $("#UnitTag2").attr("data-original-value");
+                var _u2value = $("#UnitTag2").val();
 
                 if ($.trim(_u2prefix) != "" || $.trim(_u2suffix) != "") {
 
-                    if ($.trim(_u2original) != "") {
+                    if ($.trim(_u2value) != "") {
                         $scope.InventoryObject.UnitTag2 = _u2original;
 
                     }
@@ -1673,21 +1674,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 var _u3prefix = $("#UnitTag3").attr("data-prefix");
                 var _u3suffix = $("#UnitTag3").attr("data-suffix");
                 var _u3original = $("#UnitTag3").attr("data-original-value");
+                var _u3value = $("#UnitTag3").val();
 
                 if ($.trim(_u3prefix) != "" || $.trim(_u3suffix) != "") {
                     $scope.InventoryObject.UnitTag3 = _u3original;
 
-                    if ($.trim(_u3original) != "") {
+                    if ($.trim(_u3value) != "") {
                         $scope.InventoryObject.UnitTag3 = _u3original;
-
                     }
                     else {
                         $scope.InventoryObject.UnitTag3 = "";
-
                     }
                 }
-
-
 
                 
                var _inc1= $scope.getUnitObjByName("ReqValue").FieldSpecialType==0? GetProperUnitValue($scope.InventoryObject.UniqueTag, $scope.getUnitObjByName("ReqValue").Prefix, $scope.getUnitObjByName("ReqValue").Suffix):0;
