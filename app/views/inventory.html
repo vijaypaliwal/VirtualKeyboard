@@ -324,6 +324,34 @@
         font-weight: 100;
         border-left: transparent;
     }
+
+    .unitprepend {
+        background-color: #e9ecef !important;
+        color: #888 !important;
+        font-size: 17px;
+        border-top-left-radius: 4px !important;
+        border-bottom-left-radius: 4px !important;
+        border: 1px solid #ccc;
+        /* line-height: 23px; */
+        font-weight: 100;
+        border-right: transparent;
+        padding-left:8px;
+        padding-right:8px;
+    }
+
+    .unitappend {
+        background-color: #e9ecef !important;
+        color: #888 !important;
+        font-size: 17px;
+        border-top-right-radius: 4px !important;
+        border-bottom-right-radius: 4px !important;
+        border: 1px solid #ccc;
+        /* line-height: 23px; */
+        font-weight: 100;
+        border-left: transparent;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
     
     
      .form-control {
@@ -639,8 +667,15 @@
                             </div>-->
                             <!--Prefix , Suffix-->
                             <div ng-if="ReqValueFieldSpecialType == 0">
+                             
                                 <div class="input-group">
-                                    <input id="UniqueTag" data-prefix="{{getUnitObjByName('ReqValue').Prefix}}" data-suffix="{{getUnitObjByName('ReqValue').Suffix}}" data-value="{{getUnitObjByName('ReqValue').FieldDefaultValue}}" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="text" ng-model="InventoryObject.UniqueTag" class="form-control prepostUnit" />
+
+                                    <span ng-if="getUnitObjByName('ReqValue').Prefix != ''" class="input-group-addon last unitprepend">{{getUnitObjByName('ReqValue').Prefix}} </span>
+
+                                    <input id="UniqueTag" data-prefix="{{getUnitObjByName('ReqValue').Prefix}}" data-suffix="{{getUnitObjByName('ReqValue').Suffix}}" data-value="{{getUnitObjByName('ReqValue').FieldDefaultValue}}" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" data-original-value="{{getUnitObjByName('ReqValue').Prefix}}{{InventoryObject.UniqueTag}}{{getUnitObjByName('ReqValue').Suffix}}" type="text" ng-model="InventoryObject.UniqueTag" class="form-control prepostUnit" />
+
+                                    <span ng-if="getUnitObjByName('ReqValue').Suffix != null" class="input-group-addon last unitappend">{{getUnitObjByName('ReqValue').Suffix}} </span>
+
                                     <span ng-if="mtuvar1==false" class="redText">Please input some unique data</span>
                                 </div>
                             </div>
@@ -737,9 +772,17 @@
                                 <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
                             </div>-->
                             <!--Prefix , Suffix -->
+                          
+
                             <div ng-if="UnitTag2FieldSpecialType == 0">
                                 <div class="input-group">
-                                    <input id="UnitTag2" data-prefix="{{getUnitObjByName('UnitTag2').Prefix}}" data-suffix="{{getUnitObjByName('UnitTag2').Suffix}}" data-value="{{getUnitObjByName('UnitTag2').FieldDefaultValue}}" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control prepostUnit" />
+
+                                    <span ng-if="getUnitObjByName('UnitTag2').Prefix != ''" class="input-group-addon last unitprepend">{{getUnitObjByName('UnitTag2').Prefix}} </span>
+
+                                    <input id="UnitTag2" data-prefix="{{getUnitObjByName('UnitTag2').Prefix}}" data-suffix="{{getUnitObjByName('UnitTag2').Suffix}}" data-value="{{getUnitObjByName('UnitTag2').FieldDefaultValue}}" data-original-value="{{getUnitObjByName('UnitTag2').Prefix}}{{InventoryObject.UnitTag2}}{{getUnitObjByName('UnitTag2').Suffix}}" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control prepostUnit" />
+
+                                    <span ng-if="getUnitObjByName('UnitTag2').Suffix != null" class="input-group-addon last unitappend">{{getUnitObjByName('UnitTag2').Suffix}} </span>
+
                                     <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
                                 </div>
                             </div>
@@ -833,8 +876,16 @@
                             </div>-->
                             <!--Prefix , Suffix-->
                             <div ng-if="UnitTag3FieldSpecialType == 0">
+                               
                                 <div class="input-group">
-                                    <input id="UnitTag3" data-prefix="{{getUnitObjByName('UnitTag3').Prefix}}" data-suffix="{{getUnitObjByName('UnitTag3').Suffix}}" data-value="{{getUnitObjByName('UnitTag3').FieldDefaultValue}}" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="text" ng-model="InventoryObject.UnitTag3" class="form-control prepostUnit" />
+
+                                    <span ng-if="getUnitObjByName('UnitTag3').Prefix != null" class="input-group-addon last unitprepend">{{getUnitObjByName('UnitTag3').Prefix}} </span>
+
+                                    <input id="UnitTag3" data-prefix="{{getUnitObjByName('UnitTag3').Prefix}}" data-suffix="{{getUnitObjByName('UnitTag3').Suffix}}" data-value="{{getUnitObjByName('UnitTag3').FieldDefaultValue}}" data-original-value="{{getUnitObjByName('UnitTag3').Prefix}}{{InventoryObject.UnitTag3}}{{getUnitObjByName('UnitTag3').Suffix}}" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="text" ng-model="InventoryObject.UnitTag3" class="form-control prepostUnit" />
+                                    
+
+                                    <span ng-if="getUnitObjByName('UnitTag3').Suffix != null" class="input-group-addon last unitappend">{{getUnitObjByName('UnitTag3').Suffix}} </span>
+
                                     <span ng-if="mtuvar3==false" class="redText">Please input some unique data</span>
                                 </div>
                             </div>
@@ -2437,8 +2488,13 @@
 
                                     <!--Prefix , Suffix-->
                                     <div ng-if="ReqValueFieldSpecialType == 0">
+                                      
                                         <div class="input-group">
-                                            <input id="UniqueTag" data-prefix="{{getUnitObjByName('ReqValue').Prefix}}" data-suffix="{{getUnitObjByName('ReqValue').Suffix}}" data-value="{{getUnitObjByName('ReqValue').FieldDefaultValue}}" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="text" ng-model="InventoryObject.UniqueTag" class="form-control prepostUnit" />
+                                            <span ng-if="getUnitObjByName('ReqValue').Prefix != ''" class="input-group-addon last unitprepend">{{getUnitObjByName('ReqValue').Prefix}} </span>
+
+                                            <input id="UniqueTag" data-prefix="{{getUnitObjByName('ReqValue').Prefix}}" data-suffix="{{getUnitObjByName('ReqValue').Suffix}}" data-value="{{getUnitObjByName('ReqValue').FieldDefaultValue}}" data-original-value="{{getUnitObjByName('ReqValue').Prefix}}{{InventoryObject.UniqueTag}}{{getUnitObjByName('ReqValue').Suffix}}" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="text" ng-model="InventoryObject.UniqueTag" class="form-control prepostUnit" />
+
+                                            <span ng-if="getUnitObjByName('ReqValue').Suffix != null" class="input-group-addon last unitappend">{{getUnitObjByName('ReqValue').Suffix}} </span>
                                             <span ng-if="mtuvar1==false" class="redText">Please input some unique data</span>
                                             <span ng-click="GetLastValue('Inv_UniqueTag','#UniqueTag')" test-case condition="GetLastValueData('Inv_UniqueTag')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                                             <span class="input-group-addon last" ng-click="ScanNewSwitch(obj.ColumnName)"> <i class="fa fa-barcode"></i></span>
@@ -2557,11 +2613,16 @@
                                 <div ng-if="obj.ColumnName=='iUnitTag2'" class="form-group">
                                     <label>{{obj.ColumnLabel}}</label>
 
-
                                     <!--Prefix , Suffix -->
                                     <div ng-if="UnitTag2FieldSpecialType == 0">
                                         <div class="input-group">
-                                            <input id="UnitTag2" data-prefix="{{getUnitObjByName('UnitTag2').Prefix}}" data-suffix="{{getUnitObjByName('UnitTag2').Suffix}}" data-value="{{getUnitObjByName('UnitTag2').FieldDefaultValue}}" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control prepostUnit" />
+
+                                            <span ng-if="getUnitObjByName('UnitTag2').Prefix != null" class="input-group-addon last unitprepend"> {{getUnitObjByName('UnitTag2').Prefix}}</span>
+
+                                            <input id="UnitTag2" data-prefix="{{getUnitObjByName('UnitTag2').Prefix}}" data-suffix="{{getUnitObjByName('UnitTag2').Suffix}}" data-value="{{getUnitObjByName('UnitTag2').FieldDefaultValue}}" data-original-value="{{getUnitObjByName('UnitTag2').Prefix}}{{InventoryObject.UnitTag2}}{{getUnitObjByName('UnitTag2').Suffix}}" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control prepostUnit" />
+
+                                            <span ng-if="getUnitObjByName('UnitTag2').Suffix != null" class="input-group-addon last unitappend"> {{getUnitObjByName('UnitTag2').Suffix}}</span>
+
                                             <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
 
                                             <span ng-click="GetLastValue('Inv_UnitTag2','#UnitTag2')" test-case condition="GetLastValueData('Inv_UnitTag2')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
@@ -2695,7 +2756,12 @@
                                     <!--Prefix , Suffix-->
                                     <div ng-if="UnitTag3FieldSpecialType == 0">
                                         <div class="input-group">
-                                            <input id="UnitTag3" data-prefix="{{getUnitObjByName('UnitTag3').Prefix}}" data-suffix="{{getUnitObjByName('UnitTag3').Suffix}}" data-value="{{getUnitObjByName('UnitTag3').FieldDefaultValue}}" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="text" ng-model="InventoryObject.UnitTag3" class="form-control prepostUnit" />
+                                            <span ng-if="getUnitObjByName('UnitTag3').Prefix != null" class="input-group-addon last unitprepend">{{getUnitObjByName('UnitTag3').Prefix}}</span>
+
+                                            <input id="UnitTag3" data-prefix="{{getUnitObjByName('UnitTag3').Prefix}}" data-suffix="{{getUnitObjByName('UnitTag3').Suffix}}" data-value="{{getUnitObjByName('UnitTag3').FieldDefaultValue}}" data-original-value="{{getUnitObjByName('UnitTag3').Prefix}}{{InventoryObject.UnitTag3}}{{getUnitObjByName('UnitTag3').Suffix}}" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="text" ng-model="InventoryObject.UnitTag3" class="form-control prepostUnit" />
+                                            
+                                            <span ng-if="getUnitObjByName('UnitTag3').Suffix != null" class="input-group-addon last unitappend">{{getUnitObjByName('UnitTag3').Suffix}}</span>
+
                                             <span ng-if="mtuvar3==false" class="redText">Please input some unique data</span>
 
                                             <span ng-click="GetLastValue('Inv_UnitTag3','#UnitTag3')" test-case condition="GetLastValueData('Inv_UnitTag3')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
