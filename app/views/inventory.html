@@ -670,7 +670,7 @@
                              
                                 <div class="input-group">
 
-                                    <span ng-if="getUnitObjByName('ReqValue').Prefix != ''" class="input-group-addon last unitprepend">{{getUnitObjByName('ReqValue').Prefix}} </span>
+                                    <span ng-if="getUnitObjByName('ReqValue').Prefix != null" class="input-group-addon last unitprepend">{{getUnitObjByName('ReqValue').Prefix}} </span>
 
                                     <input id="UniqueTag" data-prefix="{{getUnitObjByName('ReqValue').Prefix}}" data-suffix="{{getUnitObjByName('ReqValue').Suffix}}" data-value="{{getUnitObjByName('ReqValue').FieldDefaultValue}}" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" data-original-value="{{getUnitObjByName('ReqValue').Prefix}}{{InventoryObject.UniqueTag}}{{getUnitObjByName('ReqValue').Suffix}}" type="text" ng-model="InventoryObject.UniqueTag" class="form-control prepostUnit" />
 
@@ -2490,7 +2490,7 @@
                                     <div ng-if="ReqValueFieldSpecialType == 0">
                                       
                                         <div class="input-group">
-                                            <span ng-if="getUnitObjByName('ReqValue').Prefix != ''" class="input-group-addon last unitprepend">{{getUnitObjByName('ReqValue').Prefix}} </span>
+                                            <span ng-if="getUnitObjByName('ReqValue').Prefix != null" class="input-group-addon last unitprepend">{{getUnitObjByName('ReqValue').Prefix}} </span>
 
                                             <input id="UniqueTag" data-prefix="{{getUnitObjByName('ReqValue').Prefix}}" data-suffix="{{getUnitObjByName('ReqValue').Suffix}}" data-value="{{getUnitObjByName('ReqValue').FieldDefaultValue}}" data-original-value="{{getUnitObjByName('ReqValue').Prefix}}{{InventoryObject.UniqueTag}}{{getUnitObjByName('ReqValue').Suffix}}" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="text" ng-model="InventoryObject.UniqueTag" class="form-control prepostUnit" />
 
@@ -3154,7 +3154,25 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label>Activity Date</label>
 
+                                <div class="input-group">
+                                    <input ng-model="InventoryObject.UpdateDate" id="UpdateDate" class="form-control" type="date" name="UpdateDate" value="" />
+                                    <span ng-click="GetLastValue('Inv_UpdateDate','#UpdateDate')" test-case condition="GetLastValueData('Inv_UpdateDate')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Cost per ({{InventoryObject.Uom}})</label>
+
+                                <div class="input-group">
+                                    <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" class="form-control" type="number" name="cost" value="" />
+                                    <span ng-click="GetLastValue('Inv_Cost','#Costperunit')" test-case condition="GetLastValueData('Inv_Cost')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
+
+                                </div>
+
+                            </div>
 
                             <div ng-repeat="obj in CustomActivityDataList" data-id="CustomActivity_{{obj.cfdID}}" data-type="{{obj.cfdDataType}}" field-type="activity" data-index="{{$index}}" data-column="{{obj.ColumnMap}}" ng-if="obj.cfdIsRequired==false && CustomActivityDataList.length > 0 && IsActiveTransactionField(obj.cfdID)" class="CustomActivityCols" end-repeat3>
 
@@ -3317,25 +3335,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label>Activity Date</label>
-
-                                <div class="input-group">
-                                    <input ng-model="InventoryObject.UpdateDate" id="UpdateDate" class="form-control" type="date" name="UpdateDate" value="" />
-                                    <span ng-click="GetLastValue('Inv_UpdateDate','#UpdateDate')" test-case condition="GetLastValueData('Inv_UpdateDate')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Cost per ({{InventoryObject.Uom}})</label>
-
-                                <div class="input-group">
-                                    <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" class="form-control" type="number" name="cost" value="" />
-                                    <span ng-click="GetLastValue('Inv_Cost','#Costperunit')" test-case condition="GetLastValueData('Inv_Cost')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
-
-                                </div>
-
-                            </div>
+                           
                         </div>
                     </div>
 
