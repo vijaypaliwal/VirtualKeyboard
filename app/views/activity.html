@@ -1441,7 +1441,10 @@
                                                 <label>{{_columns}}    <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
 
                                                 <div class="input-group" ng-init="obj=CurrentActiveObject.IsLineItemData[$index]">
-                                                    <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'input-group':''}}">
+                                                    <span ng-if="(obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3') && (obj.cfdPrefix !=undefined && obj.cfdPrefix !=null && obj.cfdPrefix !='')" class="input-group-addon prepend last">
+                                                        <span class="inner">{{obj.cfdPrefix}}</span>
+                                                    </span>
+                                                     <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'input-group':''}}">
 
                                                         <div ng-if="obj.cfdDataType=='string'">
 
@@ -1468,16 +1471,12 @@
                                                                     </select>
 
                                                                 </div>
-                                                                <span ng-if="(obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3') && (obj.cfdPrefix !=undefined && obj.cfdPrefix !=null && obj.cfdPrefix !='')" class="input-group-addon prepend last">
-                                                                    <span class="inner">{{obj.cfdPrefix}}</span>
-                                                                </span>
+                                                              
                                                                 <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
                                                                     <input type="text" id="LineItem_{{obj.cfdID}}" data-orginal-value="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdPrefix}}{{InventoryObject.CustomPartData[obj.CustomFieldIndex].Value}}{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdSuffix}}" data-prefix="{{obj.cfdPrefix}}" data-suffix="{{obj.cfdSuffix}}" data-cvalue="{{obj.CombineValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType  prepostCustomActivity" />
                                                                 </div>
-                                                                <span ng-if="(obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3') && (obj.cfdSuffix !=undefined && obj.cfdSuffix !=null && obj.cfdSuffix !='')" class="input-group-addon append last">
-                                                                    <span class="inner">{{obj.cfdSuffix}}</span>
-                                                                </span>
+                                                              
                                                             </div>
 
                                                             <div ng-if="obj.cfdSpecialType == 1" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, CurrentActiveObject.InventoryID, 'activity')">
@@ -1498,10 +1497,10 @@
                                                                     <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.CfValue==true">
                                                                         {{obj.cfdTruelabel}}
                                                                     </span>
-
                                                                     <span style="margin-left: 75px; color: #888; -webkit-box-decoration-break: clone;" ng-if="obj.CfValue!=true">
                                                                         {{obj.cfdFalselabel}}
                                                                     </span>
+                                                                   
                                                                 </label>
                                                             </div>
 
@@ -1556,7 +1555,11 @@
                                                         <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" />
 
                                                     </div>
-                                                    <div>
+                                                    <span ng-if="(obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3') && (obj.cfdSuffix !=undefined && obj.cfdSuffix !=null && obj.cfdSuffix !='')" class="input-group-addon append last">
+                                                        <span class="inner">{{obj.cfdSuffix}}</span>
+                                                    </span>
+                                                  
+                                                      <div>
                                                         <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)=='' " class="errorMessage">
                                                             {{CurrentActiveObject.IsLineItemData[$index].cfdName }} field is required.
 
@@ -3283,6 +3286,11 @@
                                         <label>{{_columns}}  <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
 
                                         <div class="input-group" ng-init="obj=CurrentActiveObject.IsLineItemData[$index]">
+                                            <span ng-if="(obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3') && (obj.cfdPrefix !=undefined && obj.cfdPrefix !=null && obj.cfdPrefix !='')" class="input-group-addon prepend last">
+                                                <span class="inner">{{obj.cfdPrefix}}</span>
+                                            </span>
+                                            
+                                            
                                             <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'input-group':''}}">
 
 
@@ -3314,16 +3322,12 @@
                                                         </div>
 
 
-                                                        <span ng-if="(obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3') && (obj.cfdPrefix !=undefined && obj.cfdPrefix !=null && obj.cfdPrefix !='')" class="input-group-addon prepend last">
-                                                            <span class="inner">{{obj.cfdPrefix}}</span>
-                                                        </span>
+                                                      
 
                                                         <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
                                                             <input type="text" data-orginal-value="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdPrefix}}{{InventoryObject.CustomPartData[obj.CustomFieldIndex].Value}}{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdSuffix}}" id="LineItem_{{obj.cfdID}}" data-prefix="{{obj.cfdPrefix}}" data-suffix="{{obj.cfdSuffix}}" data-cvalue="{{obj.CombineValue}}" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType  prepostCustomActivity" />
                                                         </div>
-                                                        <span ng-if="(obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3') && (obj.cfdSuffix !=undefined && obj.cfdSuffix !=null && obj.cfdSuffix !='')" class="input-group-addon append last">
-                                                            <span class="inner">{{obj.cfdSuffix}}</span>
-                                                        </span>
+                                                      
                                                     </div>
 
                                                     <div ng-if="obj.cfdSpecialType == 1" ng-click="customradiolist(obj.ColumnMap, obj.cfdID, CurrentActiveObject.InventoryID, 'activity')">
@@ -3403,7 +3407,13 @@
                                                 <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" />
 
                                             </div>
-                                            <div>
+                                         
+                                            <span ng-if="(obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3') && (obj.cfdSuffix !=undefined && obj.cfdSuffix !=null && obj.cfdSuffix !='')" class="input-group-addon append last">
+                                                <span class="inner">{{obj.cfdSuffix}}</span>
+                                            </span>
+                                            
+                                            
+                                               <div>
                                                 <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true && TrimValue(CurrentActiveObject.IsLineItemData[$index].CfValue)=='' " class="errorMessage">
                                                     {{CurrentActiveObject.IsLineItemData[$index].cfdName }} field is required.
 
