@@ -152,7 +152,7 @@
 
 
     .form-control {
-        border-radius: 2px !important;
+        border-radius: 0px !important;
     }
 
 
@@ -183,6 +183,8 @@
         padding-left: 8px;
         padding-right: 8px;
     }
+
+
 </style>
 
 
@@ -1441,7 +1443,7 @@
                                                 <label>{{_columns}}    <span ng-if="CurrentActiveObject.IsLineItemData[$index].cfdIsRequired==true" class="errorMessage">*</span></label>
 
                                                 <div class="input-group" ng-init="obj=CurrentActiveObject.IsLineItemData[$index]">
-                                                    <span style="padding-bottom:8px;" ng-if="(obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3') && (obj.cfdPrefix !=undefined && obj.cfdPrefix !=null && obj.cfdPrefix !='')" class="input-group-addon prepend last">
+                                                    <span style="padding-bottom:12px;" ng-if="(obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3') && (obj.cfdPrefix !=undefined && obj.cfdPrefix !=null && obj.cfdPrefix !='')" class="input-group-addon prepend last">
                                                         <span style="padding-top: 10px; padding-bottom: 9px;" class="inner">{{obj.cfdPrefix}}</span>
                                                     </span>
                                                      <div class="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType!='checkbox'?'input-group':''}}">
@@ -1555,7 +1557,7 @@
                                                         <input type="number" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" custom-data-type="{{CurrentActiveObject.IsLineItemData[$index].cfdDataType}}" ng-if="CurrentActiveObject.IsLineItemData[$index].cfdDataType=='currency'" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control numberType" ng-change="ConvertZeroCurrency(CurrentActiveObject.InventoryDataList.uId,$index)" />
 
                                                     </div>
-                                                    <span style="padding-bottom:8px;" ng-if="(obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3') && (obj.cfdSuffix !=undefined && obj.cfdSuffix !=null && obj.cfdSuffix !='')" class="input-group-addon append last">
+                                                    <span style="padding-bottom:12px;" ng-if="(obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3') && (obj.cfdSuffix !=undefined && obj.cfdSuffix !=null && obj.cfdSuffix !='')" class="input-group-addon append last">
                                                         <span style="padding-top: 10px; padding-bottom: 9px;" class="inner">{{obj.cfdSuffix}}</span>
                                                     </span>
                                                   
