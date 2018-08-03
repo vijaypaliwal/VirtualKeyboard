@@ -370,6 +370,18 @@
         padding-right:4px;
     }
 
+    .emailError {
+        color: #c31818;
+        position: absolute;
+        left: 0;
+        margin-top: 40px;
+        font-size:12px;
+    }
+
+    #accordion .input-group {
+        margin-bottom: 14px;
+    }
+
 </style>
 
 
@@ -1099,7 +1111,7 @@
                                         </select>
 
 
-                                        <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='email'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
+                                        <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='email'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="emailtextbox form-control" />
 
                                         <select id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control weekPicker" selectvalue="{{InventoryObject.CustomPartData[obj.CustomFieldIndex].Value}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='week'">
                                             <option value="">choose week</option>
@@ -2050,7 +2062,7 @@
                                                     <option ng-repeat="n in MonthlistGlobal track by n.Value" value="{{n.Value}}" ng-selected="n.Value == InventoryObject.CustomPartData[obj.CustomFieldIndex].Value"> {{n.Text}}</option>
                                                 </select>
 
-                                                <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='email'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
+                                                <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='email'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="emailtextbox form-control" />
 
                                                 <select id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control weekPicker" selectvalue="{{InventoryObject.CustomPartData[obj.CustomFieldIndex].Value}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='week'">
                                                     <option value="">choose week</option>
@@ -2202,7 +2214,7 @@
                                             <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
 
                                                 <input id="CustomActivity_{{obj.cfdID}}" maxlength="{{GetCustomActivityObjByColumnmap(obj.ColumnName).MaxLength}}" ng-if="$.trim(obj.cfdInputMask)==''||obj.cfdInputMask=='text'" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
-                                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" type="{{obj.cfdInputMask}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
+                                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" type="{{obj.cfdInputMask}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control emailtextbox" />
                                                 <select id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='month'" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control monthPicker" selectvalue="{{InventoryObject.CustomTxnData[$index].Value}}">
 
                                                     <option ng-repeat="n in MonthlistGlobal track by n.Value" value="{{n.Value}}" ng-selected="n.Value == InventoryObject.CustomTxnData[$index].Value"> {{n.Text}}</option>
@@ -3021,7 +3033,7 @@
                                                 </select>
 
 
-                                                <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='email'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
+                                                <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='email'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="emailtextbox form-control" />
 
                                                 <select id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control weekPicker" selectvalue="{{InventoryObject.CustomPartData[obj.CustomFieldIndex].Value}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='week'">
                                                     <option value="">choose week</option>
@@ -3198,7 +3210,7 @@
                                             <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
 
                                                 <input id="CustomActivity_{{obj.cfdID}}" maxlength="{{GetCustomActivityObjByColumnmap(obj.ColumnName).MaxLength}}" ng-if="$.trim(obj.cfdInputMask)==''||obj.cfdInputMask=='text'" type="text" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
-                                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" type="{{obj.cfdInputMask}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control" />
+                                                <input id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" type="{{obj.cfdInputMask}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="emailtextbox form-control" />
                                                 <select id="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='month'" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control monthPicker" selectvalue="{{InventoryObject.CustomTxnData[$index].Value}}">
 
                                                     <option ng-repeat="n in MonthlistGlobal track by n.Value" value="{{n.Value}}" ng-selected="n.Value == InventoryObject.CustomTxnData[$index].Value"> {{n.Text}}</option>

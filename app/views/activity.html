@@ -203,7 +203,19 @@
         padding-right: 8px;
     }
 
- 
+    .emailError {
+        color: #c31818;
+        position: absolute;
+        left: 0;
+        margin-top: 40px;
+        font-size: 12px;
+    }
+
+    .customActivityData .input-group {
+        margin-bottom: 10px;
+    }
+
+
 
 </style>
 
@@ -1477,7 +1489,7 @@
 
                                                                     <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)==''||obj.cfdInputMask=='text'|| obj.cfdInputMask=='NA'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="text" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" />
 
-                                                                    <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="{{obj.cfdInputMask}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" />
+                                                                    <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="{{obj.cfdInputMask}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control emailtextbox stringType" />
 
 
                                                                     <select ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='month'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType monthPicker" selectvalue="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}">
@@ -1653,7 +1665,7 @@
                                     <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
 
                                         <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''||obj.cfdInputMask=='text'" type="text" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
-                                        <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
+                                        <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" type="{{obj.cfdInputMask}}" class="form-control emailtextbox stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
 
 
                                         <select id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='month'" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}">
@@ -1817,7 +1829,7 @@
                                             <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
 
                                                 <input id="CustomActivity_Increase_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''||obj.cfdInputMask=='text'" type="text" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
-                                                <input id="CustomActivity_Increase_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" ng-model="obj.CfValue" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
+                                                <input id="CustomActivity_Increase_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" ng-model="obj.CfValue" type="{{obj.cfdInputMask}}" class="form-control emailtextbox stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
 
 
                                                 <select id="CustomActivity_Increase_{{obj.cfdID}}" name="CustomActivity_Increase_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='month'" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}">
@@ -1979,7 +1991,7 @@
                                             <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
 
                                                 <input id="CustomActivity_Decrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''||obj.cfdInputMask=='text'" type="text" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
-                                                <input id="CustomActivity_Decrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" ng-model="obj.CfValue" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
+                                                <input id="CustomActivity_Decrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" ng-model="obj.CfValue" type="{{obj.cfdInputMask}}" class="form-control emailtextbox stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
 
                                                 <select id="CustomActivity_Decrease_{{obj.cfdID}}" name="CustomActivity_Decrease_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='month'" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}">
 
@@ -3325,7 +3337,7 @@
 
                                                             <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)==''||obj.cfdInputMask=='text'|| obj.cfdInputMask=='NA'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="text" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" />
 
-                                                            <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="{{obj.cfdInputMask}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType" />
+                                                            <input placeholder1="fill {{_columns}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" type="{{obj.cfdInputMask}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control emailtextbox stringType" />
 
 
                                                             <select ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='month'" id="LineItem_{{CurrentActiveObject.IsLineItemData[$index].cfdID}}" ng-model="CurrentActiveObject.IsLineItemData[$index].CfValue" class="form-control stringType monthPicker" selectvalue="{{CurrentActiveObject.IsLineItemData[$index].CfValue}}">
@@ -3496,7 +3508,7 @@
                                                 <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
 
                                                     <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''||obj.cfdInputMask=='text'" type="text" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
-                                                    <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
+                                                    <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" type="{{obj.cfdInputMask}}" class="form-control emailtextbox stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
 
 
                                                     <select id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='month'" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}">
@@ -3659,7 +3671,7 @@
                                                         <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
 
                                                             <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''||obj.cfdInputMask=='text'" type="text" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
-                                                            <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
+                                                            <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" type="{{obj.cfdInputMask}}" class="form-control emailtextbox stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
 
 
                                                             <select id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='month'" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}">
@@ -3820,7 +3832,7 @@
                                                         <div ng-if="obj.cfdprefixsuffixtype!='1'&& obj.cfdprefixsuffixtype!='2'&& obj.cfdprefixsuffixtype!='3'">
 
                                                             <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)==''||obj.cfdInputMask=='text'" type="text" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
-                                                            <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" type="{{obj.cfdInputMask}}" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
+                                                            <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='email'" type="{{obj.cfdInputMask}}" class="form-control emailtextbox stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}" />
 
 
                                                             <select id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" ng-if="$.trim(obj.cfdInputMask)!='' && obj.cfdInputMask =='month'" class="form-control stringType" cfd-id="{{obj.cfdID}}" custom-data-type="{{obj.cfdDataType}}" value="{{obj.CfValue}}">

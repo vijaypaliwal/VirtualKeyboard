@@ -1016,7 +1016,7 @@ document.addEventListener('click', addRippleEffect, false);
  
 
      
-    $(document).on('input', 'input[type="text"],input[type="number"],input[type="email"],input[type="password"]', function () {
+    $(document).on('input', 'input[type="text"],input[type="number"],input[type="email"]:not(.emailtextbox),input[type="password"]', function () {
 
 
         $('input[type="text"]:input').not(".hideaddclear").addClear({
@@ -1039,7 +1039,7 @@ document.addEventListener('click', addRippleEffect, false);
         $(this).trigger("change");
     });
 
-    $(document).on('change', 'input[type="text"],input[type="number"],input[type="email"],input[type="password"]', function () {
+    $(document).on('change', 'input[type="text"],input[type="number"],input[type="email"]:not(.emailtextbox),input[type="password"]', function () {
 
 
         $('input[type="text"]').not(".hideaddclear").addClear({
