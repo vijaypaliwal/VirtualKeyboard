@@ -17,6 +17,8 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
         $("#currentserver").html("");
     }
 
+  
+
     $scope.message = "";
 
     $scope.passwordtype = "password";
@@ -184,5 +186,12 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
         $scope.Isshowpassword = true;
     }
 
+    $("#Emailbox").keyup(function () {
+        $(this).attr("data-send-value", $(this).val());
+        $scope.loginData.userName = $("#Emailbox").attr("data-send-value");
+    });
+
 
 }]);
+
+
