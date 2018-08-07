@@ -123,6 +123,8 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
             $scope.loginData.userName = authLocalData.userName;
             $scope.loginData.password = authLocalData.Password;
             $('#Emailbox').val(authLocalData.userName);
+            $scope.userNamevalue = authLocalData.userName;
+         
         }
         $scope.GetCurrentDataBase();
         //  $scope.DefaultAccount();
@@ -190,6 +192,9 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
     $("#Emailbox").keyup(function () {
         $(this).attr("data-send-value", $(this).val());
         $scope.loginData.userName = $("#Emailbox").attr("data-send-value");
+        $scope.userNamevalue = $("#Emailbox").attr("data-send-value");
+       
+      
     });
 
 
