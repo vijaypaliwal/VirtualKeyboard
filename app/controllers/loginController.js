@@ -124,10 +124,31 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
             $scope.loginData.password = authLocalData.Password;
             $('#Emailbox').val(authLocalData.userName);
             $scope.userNamevalue = authLocalData.userName;
-         
+            $scope.$apply();
+
+           
         }
         $scope.GetCurrentDataBase();
         //  $scope.DefaultAccount();
+
+       
+
+        if ($scope.loginData.userName == "" || $scope.loginData.password == "" || $scope.loginData.password == undefined) {
+
+            $("#loginBtn").removeClass("btn-primary").addClass("btn-gray");
+
+            $("#loginBtn").attr("disabled", true)
+
+        }
+        else {
+            $("#loginBtn").removeClass("btn-gray").addClass("btn-primary");
+            $("#loginBtn").attr("disabled", false)
+
+        }
+
+      
+
+
     }
 
     $scope.InIt();
@@ -193,9 +214,47 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
         $(this).attr("data-send-value", $(this).val());
         $scope.loginData.userName = $("#Emailbox").attr("data-send-value");
         $scope.userNamevalue = $("#Emailbox").attr("data-send-value");
-       
+        $scope.$apply();
+
+        if ($scope.loginData.userName == "" || $scope.loginData.password == "" || $scope.loginData.password == undefined) {
+
+            $("#loginBtn").removeClass("btn-primary").addClass("btn-gray");
+
+            $("#loginBtn").attr("disabled", true)
+
+        }
+        else {
+            $("#loginBtn").removeClass("btn-gray").addClass("btn-primary");
+            $("#loginBtn").attr("disabled", false)
+
+        }
       
     });
+
+
+
+    $("#Passwordbox").keyup(function () {
+
+        debugger;
+    
+        if ($scope.loginData.userName == "" || $scope.loginData.password == "" || $scope.loginData.password == undefined) {
+
+            $("#loginBtn").removeClass("btn-primary").addClass("btn-gray");
+
+            $("#loginBtn").attr("disabled", true)
+
+        }
+        else {
+            $("#loginBtn").removeClass("btn-gray").addClass("btn-primary");
+            $("#loginBtn").attr("disabled", false)
+
+        }
+
+    });
+
+
+
+    
 
 
 }]);
