@@ -17,10 +17,6 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
         $("#currentserver").html("");
     }
 
-    alert(Createaccountlink);
-
-
-    $scope.Addaccountlink = Createaccountlink;
 
   
 
