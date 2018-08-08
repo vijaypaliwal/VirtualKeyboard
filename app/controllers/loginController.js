@@ -17,6 +17,11 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
         $("#currentserver").html("");
     }
 
+    alert(Createaccountlink);
+
+
+    $scope.Addaccountlink = Createaccountlink;
+
   
 
     $scope.message = "";
@@ -230,7 +235,6 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
         }
       
     });
-
 
 
     $("#Passwordbox").keyup(function () {
