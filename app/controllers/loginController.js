@@ -212,6 +212,9 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
     }
 
     $("#Emailbox").keyup(function () {
+
+     
+
         $(this).attr("data-send-value", $(this).val());
         $scope.loginData.userName = $("#Emailbox").attr("data-send-value");
         $scope.userNamevalue = $("#Emailbox").attr("data-send-value");
@@ -234,8 +237,6 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
 
 
     $("#Passwordbox").keyup(function () {
-
-        debugger;
     
         if ($scope.loginData.userName == "" || $scope.loginData.password == "" || $scope.loginData.password == undefined) {
 
@@ -252,10 +253,34 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
 
     });
 
+    $(document).on('#Emailbox,#Passwordbox', function () {
+
+        $('input[type="password"]:input').addClear({
+            symbolClass: "fa fa-times-circle"
+        });
+
+        $('input[type="email"]:input').addClear({
+            symbolClass: "fa fa-times-circle"
+        });
+
+        $(this).focus();
+
+        $(this).trigger("change");
+    });
+
+    $(document).on('change', '#Emailbox,#Passwordbox', function () {
 
 
-    
+        $('input[type="password"]:input').addClear({
+            symbolClass: "fa fa-times-circle"
+        });
 
+        $('input[type="email"]:input').addClear({
+            symbolClass: "fa fa-times-circle"
+        });
+     
+
+    });
 
 }]);
 
