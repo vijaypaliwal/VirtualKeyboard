@@ -18,6 +18,8 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
     }
 
 
+    $scope.SignUpUrl = Signupink;
+
   
 
     $scope.message = "";

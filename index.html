@@ -635,6 +635,44 @@
     <script src="scripts/jquery.animate_from_to-1.0.js"></script>
     <script src="scripts/idangerous.swiper.min.js"></script>
 
+
+    <script>    
+
+            $.ajax
+               ({
+                   type: "POST",
+                   url: 'http://sales2018.u8i9.com/api/mobileapi',
+                   contentType: 'application/json; charset=utf-8',
+                   dataType: 'text json',
+                   data: JSON.stringify({ "UserKey": "ABC@123" }),
+                   success: function (response) {
+
+                       var ClearlybaseURL = response.serviceBaseUrl;
+                       var ClearlyURL = response.serviceBase;
+                       var Signupink = response.mobileSignupUrl;
+
+               
+                       debugger;
+
+                   },
+                   error: function (response) {
+
+                       alert("Error in Clearly API");
+                       debugger;
+
+
+                   },
+                   complete: function () {
+
+
+                   }
+               });
+
+    
+    
+    </script>
+
+
     <!-- Load app main script -->
     <script src="app/app.js?v=2"></script>
 
