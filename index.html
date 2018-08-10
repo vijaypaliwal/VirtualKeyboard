@@ -580,6 +580,59 @@
     <script src="scripts/weekPicker.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
 
+  
+    
+
+    <script>    
+
+        var serviceBaseUrl = "";
+        var serviceBase = "";
+
+      
+        $(document).on("change","#ServiceBase", function () {
+            serviceBase = $(this).val();
+          
+        });
+
+        $.ajax
+       ({
+           type: "POST",
+           url: 'http://sales2018.u8i9.com/api/mobileapi',
+           contentType: 'application/json; charset=utf-8',
+           dataType: 'text json',
+           data: JSON.stringify({ "UserKey": "ABC@123" }),
+           success: function (response) {
+
+               alert("Success");
+
+               debugger;
+
+               ClearlybaseURL = response.serviceBaseUrl;
+               ClearlyURL = response.serviceBase;
+               Signupink = response.mobileSignupUrl;
+               serviceBaseUrl = ClearlybaseURL;
+               serviceBase = ClearlyURL;
+               $("#ServiceBase").val(serviceBase);
+               $("#ServiceBase").trigger("change");
+
+           },
+           error: function (response) {
+
+               alert("Error in Clearly API");
+               debugger;
+
+
+           },
+           complete: function () {
+
+
+           }
+       });
+    </script>
+
+
+
+
 
 
 
@@ -636,41 +689,9 @@
     <script src="scripts/idangerous.swiper.min.js"></script>
 
 
-    <script>    
-
-            $.ajax
-               ({
-                   type: "POST",
-                   url: 'http://sales2018.u8i9.com/api/mobileapi',
-                   contentType: 'application/json; charset=utf-8',
-                   dataType: 'text json',
-                   data: JSON.stringify({ "UserKey": "ABC@123" }),
-                   success: function (response) {
-
-                       var ClearlybaseURL = response.serviceBaseUrl;
-                       var ClearlyURL = response.serviceBase;
-                       var Signupink = response.mobileSignupUrl;
-
-               
-                       debugger;
-
-                   },
-                   error: function (response) {
-
-                       alert("Error in Clearly API");
-                       debugger;
-
-
-                   },
-                   complete: function () {
-
-
-                   }
-               });
+   
 
     
-    
-    </script>
 
 
     <!-- Load app main script -->
