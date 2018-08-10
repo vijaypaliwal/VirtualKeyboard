@@ -587,12 +587,14 @@
 
         var serviceBaseUrl = "";
         var serviceBase = "";
+        var signupLink = "";
 
       
         $(document).on("change","#ServiceBase", function () {
             serviceBase = $(this).val();
-          
         });
+
+   
 
         $.ajax
        ({
@@ -603,7 +605,6 @@
            data: JSON.stringify({ "UserKey": "ABC@123" }),
            success: function (response) {
 
-            
                debugger;
 
                ClearlybaseURL = response.serviceBaseUrl;
@@ -611,8 +612,13 @@
                Signupink = response.mobileSignupUrl;
                serviceBaseUrl = ClearlybaseURL;
                serviceBase = ClearlyURL;
+
+               signupLink = Signupink;
                $("#ServiceBase").val(serviceBase);
                $("#ServiceBase").trigger("change");
+
+               $("#Signuplink").val(signupLink);
+               $("#Signuplink").trigger("change");
 
            },
            error: function (response) {
