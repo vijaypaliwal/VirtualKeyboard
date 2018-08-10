@@ -260,10 +260,12 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
         }
     });
 
+
+    $scope.SignUpUrl = "";
+
+
     $(document).on("change", "#Signuplink", function () {
         $scope.SignUpUrl = $(this).val();
-        alert($scope.SignUpUrl);
-
     });
 
   
