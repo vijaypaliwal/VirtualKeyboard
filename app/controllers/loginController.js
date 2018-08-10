@@ -266,6 +266,7 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
 
     $(document).on("change", "#Signuplink", function () {
         $scope.SignUpUrl = $(this).val();
+        $scope.$apply();
     });
 
   
