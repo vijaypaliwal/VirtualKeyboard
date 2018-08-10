@@ -18,7 +18,7 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
     }
 
 
-    $scope.SignUpUrl = Signupink;
+    $scope.SignUpUrl = "";
 
   
 
@@ -158,6 +158,9 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
 
 
     $scope.login = function () {
+
+
+      
 
         localStorageService.set("ActivityCart", "");
 
