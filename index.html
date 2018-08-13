@@ -581,8 +581,6 @@
     <script src="https://js.stripe.com/v3/"></script>
 
   
-    
-
     <script>    
 
         var serviceBaseUrl = "";
@@ -594,12 +592,13 @@
             serviceBase = $(this).val();
         });
 
-   
+
+
 
         $.ajax
        ({
            type: "POST",
-           url: 'http://sales2018.u8i9.com/api/mobileapi',
+           url: 'http://clearlyinventorymobileweb.azurewebsites.net/MobileCrediantials',
            contentType: 'application/json; charset=utf-8',
            dataType: 'text json',
            data: JSON.stringify({ "UserKey": "ABC@123" }),
@@ -748,20 +747,7 @@
     <script src="app/controllers/CreateSubscriptionController.js?v=2"></script>
 
     <script src="js/index.js"></script>
-    <script>
-
-
-        $(document).ready(function () {
-
-        });
-
-        ////Catch all JQuery errors and log into the DB
-        //window.onerror = function (msg, url, lineNo) {
-
-        //    alert("Message::" + msg + " at line" + lineNo);
-        //    //Do what you want with the error including line number
-        //};
-    </script>
+    
 
 
 
