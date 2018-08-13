@@ -183,6 +183,8 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
 
             localStorageService.set("ShowImageRecords", "true");
 
+            localStorageService.set("ShowZeroRecords", "true");
+
             $location.path('/Accounts');
 
         },
