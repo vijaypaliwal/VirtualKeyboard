@@ -906,13 +906,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
-    $(document).on('change', 'input[type=email]', function () {
-        if ($.trim($(this).val()) != "") {
-            $(this).trigger("input");
-        }
+    //$(document).on('change', 'input[type=email]', function () {
+    //    if ($.trim($(this).val()) != "") {
+    //        $(this).trigger("input");
+    //    }
 
 
-    });
+    //});
 
 
     $scope.fillitem = function () {
