@@ -547,7 +547,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
                 var _path = $location.path();
 
                 if (_path != "/login") {
-                    $("#modalerror").modal('show');
+                     $("#modalerror").modal('show');
+                    //log.warning(exception);
                     $("#errortext").html(exception);
                 }
 
