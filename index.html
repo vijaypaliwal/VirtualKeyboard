@@ -594,14 +594,12 @@
 
         $.ajax
        ({
-           type: "POST",
-           url: 'http://clearlyinventorymobileweb.azurewebsites.net/MobileCrediantials',
+           type: "GET",
+           url: 'https://www.clearlyinventory.com/mobilesettings',
            contentType: 'application/json; charset=utf-8',
            dataType: 'text json',
-           data: JSON.stringify({ "UserKey": "ABC@123" }),
-           success: function (response) {
-
-               debugger;
+          // data: JSON.stringify({ "UserKey": "ABC@123" }),
+           success: function (response) {              
 
                ClearlybaseURL = response.serviceBaseUrl;
                ClearlyURL = response.serviceBase;
