@@ -1893,7 +1893,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             }
 
         }
-
+        $("#mycartModal").modal("hide");
         $scope.OpentransactionModal();
     }
     var _tempCopy = [];
