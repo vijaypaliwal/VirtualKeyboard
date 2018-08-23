@@ -145,8 +145,6 @@
    
 </style>
 
-
-
 <style>
     .cropArea {
         overflow: hidden;
@@ -2514,11 +2512,11 @@
                                     <div ng-if="ReqValueFieldSpecialType == 0">
                                       
                                         <div class="input-group">
-                                            <span ng-if="getUnitObjByName('ReqValue').Prefix != null" class="input-group-addon last unitprepend">{{getUnitObjByName('ReqValue').Prefix}} </span>
+                                            <span ng-if="getUnitObjByName('ReqValue').Prefix != null && getUnitObjByName('ReqValue').Prefix != '' && getUnitObjByName('ReqValue').Prefix != undefined" class="input-group-addon last unitprepend">{{getUnitObjByName('ReqValue').Prefix}} </span>
 
                                             <input id="UniqueTag" data-prefix="{{getUnitObjByName('ReqValue').Prefix}}" data-suffix="{{getUnitObjByName('ReqValue').Suffix}}" data-value="{{getUnitObjByName('ReqValue').FieldDefaultValue}}" data-original-value="{{getUnitObjByName('ReqValue').Prefix}}{{InventoryObject.UniqueTag}}{{getUnitObjByName('ReqValue').Suffix}}" ng-blur="mtuvar1=CheckUnitDataFieldValue('ReqValue',CheckIsAllowDuplicate('ReqValue'))" type="text" ng-model="InventoryObject.UniqueTag" class="form-control prepostUnit" />
 
-                                            <span ng-if="getUnitObjByName('ReqValue').Suffix != null" class="input-group-addon last unitappend">{{getUnitObjByName('ReqValue').Suffix}} </span>
+                                            <span ng-if="getUnitObjByName('ReqValue').Suffix != null && getUnitObjByName('ReqValue').Suffix != '' && getUnitObjByName('ReqValue').Suffix != undefined" class="input-group-addon last unitappend">{{getUnitObjByName('ReqValue').Suffix}} </span>
                                             <span ng-if="mtuvar1==false" class="redText">Please input some unique data</span>
                                             <span ng-click="GetLastValue('Inv_UniqueTag','#UniqueTag')" test-case condition="GetLastValueData('Inv_UniqueTag')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
                                             <span class="input-group-addon last" ng-click="ScanNewSwitch(obj.ColumnName)"> <i class="fa fa-barcode"></i></span>
@@ -2640,12 +2638,11 @@
                                     <!--Prefix , Suffix -->
                                     <div ng-if="UnitTag2FieldSpecialType == 0">
                                         <div class="input-group">
-
-                                            <span ng-if="getUnitObjByName('UnitTag2').Prefix != null" class="input-group-addon last unitprepend"> {{getUnitObjByName('UnitTag2').Prefix}}</span>
+                                            <span ng-if="getUnitObjByName('UnitTag2').Prefix != null && getUnitObjByName('UnitTag2').Prefix != '' && getUnitObjByName('UnitTag2').Prefix != undefined" class="input-group-addon last unitprepend"> {{getUnitObjByName('UnitTag2').Prefix}}</span>
 
                                             <input id="UnitTag2" data-prefix="{{getUnitObjByName('UnitTag2').Prefix}}" data-suffix="{{getUnitObjByName('UnitTag2').Suffix}}" data-value="{{getUnitObjByName('UnitTag2').FieldDefaultValue}}" data-original-value="{{getUnitObjByName('UnitTag2').Prefix}}{{InventoryObject.UnitTag2}}{{getUnitObjByName('UnitTag2').Suffix}}" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control prepostUnit" />
 
-                                            <span ng-if="getUnitObjByName('UnitTag2').Suffix != null" class="input-group-addon last unitappend"> {{getUnitObjByName('UnitTag2').Suffix}}</span>
+                                            <span ng-if="getUnitObjByName('UnitTag2').Suffix != null && getUnitObjByName('UnitTag2').Suffix != '' && getUnitObjByName('UnitTag2').Suffix != undefined" class="input-group-addon last unitappend"> {{getUnitObjByName('UnitTag2').Suffix}}</span>
 
                                             <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
 
