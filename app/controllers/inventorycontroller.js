@@ -393,9 +393,63 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         return false;
     }
 
+    $scope.Accountlimit = function () {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetAccountLimit',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+
+                   $scope.objOverLimit = response.GetAccountLimitResult.Payload;
+
+                   console.log($scope.objOverLimit);
+
+               },
+               error: function (err) {
+                   alert("Error");
+               }
+           });
+    }
+
+    $scope.Accountlimit();
+
     $scope.CreateNew = function (Type) {
-        $scope.CreateType = Type;
-        $("#createnewlabel").modal('show');
+
+        if (Type == 1) {
+
+            if ($scope.objOverLimit.IsOverLimit == true) {
+
+                if ($scope.objOverLimit.canAddLocation) {
+                    $scope.CreateType = Type;
+                    $("#createnewlabel").modal('show');
+                }
+                else {                   
+                    $("#overLimitAlert").modal("show");
+                }
+            }
+            else {
+                $scope.CreateType = Type;
+                $("#createnewlabel").modal('show');
+            }
+
+        }
+
+        else {
+            $scope.CreateType = Type;
+            $("#createnewlabel").modal('show');
+
+        }
+
+
     }
 
     $scope.GoToNext = function () {
@@ -1537,20 +1591,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
         return _defaultUnitObj;
     }
-    $scope.addinventory = function () {
 
-        debugger;
-  
+    $scope.addinventoryNew = function ()
+    {
         if ($scope.CheckUnitDataFieldValueAll() == true) {
-
-
-
             if ($scope.IsItemChose == true) {
-
-
-           
-
-
                 var authData = localStorageService.get('authorizationData');
                 if (authData) {
                     $scope.SecurityToken = authData.token;
@@ -1643,13 +1688,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                 if ($.trim(_u1prefix) != "" || $.trim(_u1suffix) != "") {
 
-                    if ($.trim(_u1value) != "")
-                    {
-                    $scope.InventoryObject.UniqueTag = _u1original;
+                    if ($.trim(_u1value) != "") {
+                        $scope.InventoryObject.UniqueTag = _u1original;
                     }
-                    else
-                    {
-                    $scope.InventoryObject.UniqueTag = "";
+                    else {
+                        $scope.InventoryObject.UniqueTag = "";
                     }
                 }
 
@@ -1687,17 +1730,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     }
                 }
 
-                
-               var _inc1= $scope.getUnitObjByName("ReqValue").FieldSpecialType==0? GetProperUnitValue($scope.InventoryObject.UniqueTag, $scope.getUnitObjByName("ReqValue").Prefix, $scope.getUnitObjByName("ReqValue").Suffix):0;
 
-               var _inc2 = $scope.getUnitObjByName("UnitTag2").FieldSpecialType == 0 ? GetProperUnitValue($scope.InventoryObject.UnitTag2, $scope.getUnitObjByName("UnitTag2").Prefix, $scope.getUnitObjByName("UnitTag2").Suffix) : 0;
+                var _inc1 = $scope.getUnitObjByName("ReqValue").FieldSpecialType == 0 ? GetProperUnitValue($scope.InventoryObject.UniqueTag, $scope.getUnitObjByName("ReqValue").Prefix, $scope.getUnitObjByName("ReqValue").Suffix) : 0;
 
-               var _inc3 = $scope.getUnitObjByName("UnitTag3").FieldSpecialType == 0 ? GetProperUnitValue($scope.InventoryObject.UnitTag3, $scope.getUnitObjByName("UnitTag3").Prefix, $scope.getUnitObjByName("UnitTag3").Suffix) : 0;
+                var _inc2 = $scope.getUnitObjByName("UnitTag2").FieldSpecialType == 0 ? GetProperUnitValue($scope.InventoryObject.UnitTag2, $scope.getUnitObjByName("UnitTag2").Prefix, $scope.getUnitObjByName("UnitTag2").Suffix) : 0;
+
+                var _inc3 = $scope.getUnitObjByName("UnitTag3").FieldSpecialType == 0 ? GetProperUnitValue($scope.InventoryObject.UnitTag3, $scope.getUnitObjByName("UnitTag3").Prefix, $scope.getUnitObjByName("UnitTag3").Suffix) : 0;
 
 
-               $scope.InventoryObject.incrementedValue = $.trim(_inc1) != "" ? _inc1 : 0;
-               $scope.InventoryObject.incrementedValue2 = $.trim(_inc2) != "" ? _inc2 : 0;
-               $scope.InventoryObject.incrementedValue3 = $.trim(_inc3) != "" ? _inc3 : 0;
+                $scope.InventoryObject.incrementedValue = $.trim(_inc1) != "" ? _inc1 : 0;
+                $scope.InventoryObject.incrementedValue2 = $.trim(_inc2) != "" ? _inc2 : 0;
+                $scope.InventoryObject.incrementedValue3 = $.trim(_inc3) != "" ? _inc3 : 0;
 
                 if ($.trim($scope.InventoryObject.ItemID) == "") {
                     $scope.InventoryObject.AutoID = true;
@@ -1837,7 +1880,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         wcfDateStr1234 = d1122.toMSJSONTime();
                     }
                     else if ($scope.UnitDate2FieldSpecialType == 17) {
-                        
+
 
                         var dsplit1 = _updateDateval1.split(":");
                         var d122 = new Date(1900, 0, 1);
@@ -1965,6 +2008,26 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
             log.error("Please enter unique values in unit data columns.")
         }
+    }
+
+
+
+
+
+    $scope.addinventory = function () {
+        debugger;
+        if ($scope.objOverLimit.IsOverLimit == true) {
+            if ($scope.objOverLimit.canAddItem && $scope.canAddInventory) {                
+                $scope.addinventoryNew();
+            }
+            else {
+                $("#overLimitAlert").modal("show");
+            }
+        }
+        else {
+            $scope.addinventoryNew();
+        } 
+        
     }
 
     $scope.Inventoryerrorbox = function (error) {
@@ -5249,7 +5312,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.notmove = function () {
-       
+        $scope.Accountlimit();
 
         if ($("#requiredfields").hasClass("collapsed")) {
 

@@ -45,7 +45,8 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
     $scope.CurrentAccount = localStorageService.get('AccountID');
 
-    $scope.MonthlistGlobal = [];
+    $scope.MonthlistGlobal = [];   
+
 
     function GetMonthTextAndValue(Num, Type, Year) {
         var _monthValue = "";
