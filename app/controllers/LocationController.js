@@ -231,6 +231,9 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
                 if (result.LoadLocationsResult.Success == true) {
 
+
+                    $scope.Accountlimit();
+
                     $scope.LocationsLoaded = true;
                     $scope.Locations = result.LoadLocationsResult.Payload[0].Data;
 
