@@ -2005,9 +2005,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
 
-
     $scope.addinventory = function () {
-        debugger;
+      
         if ($scope.objOverLimit.canAddItem && $scope.canAddInventory) {
             $scope.addinventoryNew();
         }
