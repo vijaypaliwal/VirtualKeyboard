@@ -2003,17 +2003,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
 
-
-
     $scope.addinventory = function () {
-      
-        if ($scope.objOverLimit.canAddItem && $scope.canAddInventory) {
+        if ($scope.objOverLimit.canAddItem && $scope.objOverLimit.canAddInventory) {
             $scope.addinventoryNew();
         }
         else {
             $("#overLimitAlert").modal("show");
         }
-        
     }
 
     $scope.Inventoryerrorbox = function (error) {

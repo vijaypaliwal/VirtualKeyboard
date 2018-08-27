@@ -276,7 +276,6 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
 
 
-
     $scope.addlocation = function () {
         $scope.locationdata = {
             LocationName: "",
