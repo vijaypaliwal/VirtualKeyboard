@@ -179,7 +179,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }, 100);
 
 
-
     }
 
     $scope.nextstep = function () {
@@ -426,19 +425,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         if (Type == 1) {
 
-            if ($scope.objOverLimit.IsOverLimit == true) {
-
-                if ($scope.objOverLimit.canAddLocation) {
-                    $scope.CreateType = Type;
-                    $("#createnewlabel").modal('show');
-                }
-                else {                   
-                    $("#overLimitAlert").modal("show");
-                }
-            }
-            else {
+            if ($scope.objOverLimit.canAddLocation) {
                 $scope.CreateType = Type;
                 $("#createnewlabel").modal('show');
+            }
+            else {
+                $("#overLimitAlert").modal("show");
             }
 
         }
@@ -2016,17 +2008,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.addinventory = function () {
         debugger;
-        if ($scope.objOverLimit.IsOverLimit == true) {
-            if ($scope.objOverLimit.canAddItem && $scope.canAddInventory) {                
-                $scope.addinventoryNew();
-            }
-            else {
-                $("#overLimitAlert").modal("show");
-            }
+        if ($scope.objOverLimit.canAddItem && $scope.canAddInventory) {
+            $scope.addinventoryNew();
         }
         else {
-            $scope.addinventoryNew();
-        } 
+            $("#overLimitAlert").modal("show");
+        }
         
     }
 

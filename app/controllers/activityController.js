@@ -210,36 +210,21 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     $scope.Accountlimit();
 
 
-
-
     $scope.CreateNewModal = function (Type, _index) {
-        debugger;
         if (Type == 3) {
-
-            if ($scope.objOverLimit.IsOverLimit == true) {
-                if ($scope.objOverLimit.canAddLocation) {
-                    $scope.CreateType = Type;
-                    $scope.CurrentNewLabelIndex = _index;
-                    CheckScopeBeforeApply();
-                    $("#createnewlabel").modal('show');                   
-                }
-                else {
-                    $("#overLimitAlert").modal("show");
-                }
-            }
-            else {
-
+            if ($scope.objOverLimit.canAddLocation) {
                 $scope.CreateType = Type;
                 $scope.CurrentNewLabelIndex = _index;
-
                 CheckScopeBeforeApply();
                 $("#createnewlabel").modal('show');
+            }
+            else {
+                $("#overLimitAlert").modal("show");
             }
         }
         else {
             $scope.CreateType = Type;
             $scope.CurrentNewLabelIndex = _index;
-
             CheckScopeBeforeApply();
             $("#createnewlabel").modal('show');
         }

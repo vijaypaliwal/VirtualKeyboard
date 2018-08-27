@@ -284,19 +284,13 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
             LocationZone: "",
             LocationDescription: ""
         };
-        if ($scope.objOverLimit.IsOverLimit == true)
-        {
-            if ($scope.objOverLimit.canAddLocation) {
-                $scope.mode = 2;                
-            }           
-            else {
-                $("#overLimitAlert").modal("show");
-            }
-        }
-        else
-        {           
+
+        if ($scope.objOverLimit.canAddLocation) {
             $scope.mode = 2;
-        }        
+        }
+        else {
+            $("#overLimitAlert").modal("show");
+        }
         $scope.$apply();
     }
 
