@@ -191,6 +191,7 @@
         width: 11px;
         margin-top: -38px;
         padding-right: 15px;
+        display:none;
     }
 
     .panel-heading .accordion-toggle.collapsed:after {
@@ -228,10 +229,10 @@
         padding:0;
     }
 
-    .accordion-toggle {
+    /*.accordion-toggle {
         background-color: #2196f3;
         color:#fff !important;
-    }
+    }*/
 
     .accordion-toggle.collapsed
     {
@@ -1886,13 +1887,13 @@
         <div class="panel panel-default" >
             <div class="panel-heading" role="tab" id="headingone">
                 <h4  class="panel-title">
-                    <a id="requiredfields" style="display:block;" data-toggle="collapse" data-parent="#accordion" data-target="#one" aria-expanded="true" role="button" class="accordion-toggle">
+                    <a id="requiredfields" style="display:block;" class="accordion-toggle">
                         <p>Required fields </p>
                         <p style="font-size:11px;">You must fill below all fields to create Inventory</p>
                     </a>
                 </h4>
             </div>
-            <div id="one" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-collapse" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
                     <div class="row" id="firstDiv">
                         <div class="col-md-12">
@@ -2369,13 +2370,13 @@
         <div style="margin-top:0;" class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingtwo">
                 <h4 class="panel-title">
-                    <a style="display:block;" role="button" class="accordion-toggle collapsed"  data-toggle="collapse" data-parent="#accordion" data-target="#two" aria-expanded="true">
+                    <a style="display:block;" role="button" class="accordion-toggle collapsed">
                         <p> Optional fields </p>
                         <p style="font-size:11px;">You can fill these fields if need</p>
                     </a>
                 </h4>
             </div>
-            <div id="two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingtwo">
+            <div class="panel-collapse" role="tabpanel" aria-labelledby="headingtwo">
                 <div class="panel-body">
                     <div class="row" id="secondDiv">
                         <div class="col-md-12">
