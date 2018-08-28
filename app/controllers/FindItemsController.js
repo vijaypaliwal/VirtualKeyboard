@@ -1797,6 +1797,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.AddToCart = function (obj, _isSelectAll) {
 
+     
         if (_CanAct == 'True') {
 
 
@@ -2526,9 +2527,32 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     // Go to next page after select particular activity from list(Increase,decrease,move,convert,tag..)
     $scope.GoToNextMobile = function (selectedAction) {
 
-        debugger;
 
-        if ($scope.objOverLimit.canAddInventory) {
+        if (selectedAction != 1 && selectedAction != -1) {
+
+            if ($scope.objOverLimit.canAddInventory) {
+                $scope.selectedAction = selectedAction;
+                var _dataToSend = GetDataToSend($scope.mainObjectToSend);
+                localStorageService.set("ActivityCart", "");
+                localStorageService.set("ActivityCart", _dataToSend);
+                console.log(_dataToSend);
+                localStorageService.set("SelectedAction", "");
+                localStorageService.set("SelectedAction", selectedAction);
+                console.log(_dataToSend);
+
+                $("#mycartModal").modal('hide');
+                $location.path("/activity");
+            }
+            else {
+
+                $("#mycartModal").modal('hide');
+                $("#overLimitAlert").modal("show");
+            }
+
+        }
+
+        else {
+
             $scope.selectedAction = selectedAction;
             var _dataToSend = GetDataToSend($scope.mainObjectToSend);
             localStorageService.set("ActivityCart", "");
@@ -2540,16 +2564,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
             $("#mycartModal").modal('hide');
             $location.path("/activity");
+
         }
-        else {
-
-            $("#mycartModal").modal('hide');
-            $("#overLimitAlert").modal("show");
-        }
-
-
-
-     
 
     }
 
