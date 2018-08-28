@@ -2492,22 +2492,64 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         return $scope.Cart;
     }
 
+    $scope.Accountlimit = function () {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetAccountLimit',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+
+                   $scope.objOverLimit = response.GetAccountLimitResult.Payload;
+
+               },
+               error: function (err) {
+
+                   alert("Error");
+
+               }
+           });
+    }
+
+    $scope.Accountlimit();
+
 
 
     // Go to next page after select particular activity from list(Increase,decrease,move,convert,tag..)
     $scope.GoToNextMobile = function (selectedAction) {
-        $scope.selectedAction = selectedAction;
-        var _dataToSend = GetDataToSend($scope.mainObjectToSend);
-        localStorageService.set("ActivityCart", "");
-        localStorageService.set("ActivityCart", _dataToSend);
-        console.log(_dataToSend);
-        localStorageService.set("SelectedAction", "");
-        localStorageService.set("SelectedAction", selectedAction);
 
-        console.log(_dataToSend);
+        debugger;
 
-        $("#mycartModal").modal('hide');
-        $location.path("/activity");
+        if ($scope.objOverLimit.canAddInventory) {
+            $scope.selectedAction = selectedAction;
+            var _dataToSend = GetDataToSend($scope.mainObjectToSend);
+            localStorageService.set("ActivityCart", "");
+            localStorageService.set("ActivityCart", _dataToSend);
+            console.log(_dataToSend);
+            localStorageService.set("SelectedAction", "");
+            localStorageService.set("SelectedAction", selectedAction);
+            console.log(_dataToSend);
+
+            $("#mycartModal").modal('hide');
+            $location.path("/activity");
+        }
+        else {
+
+            $("#mycartModal").modal('hide');
+            $("#overLimitAlert").modal("show");
+        }
+
+
+
+     
 
     }
 
