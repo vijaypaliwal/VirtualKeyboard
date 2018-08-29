@@ -376,13 +376,17 @@ crop.factory('cropAreaSquare', ['cropArea', function(CropArea) {
   return CropAreaSquare;
 }]);
 
-crop.factory('cropArea', ['cropCanvas', function(CropCanvas) {
+crop.factory('cropArea', ['cropCanvas', function (CropCanvas) {
+
+  
+
   var CropArea = function(ctx, events) {
     this._ctx=ctx;
     this._events=events;
 
-    this._minSize=80;
+    this._minSize = 80;
 
+   
     this._cropCanvas=new CropCanvas(ctx);
 
     this._image=new Image();
@@ -420,7 +424,7 @@ crop.factory('cropArea', ['cropCanvas', function(CropCanvas) {
     return this._size;
   };
   CropArea.prototype.setSize = function (size) {
-    this._size = Math.max(this._minSize, size);
+      this._size = 300;
     this._dontDragOutside();
   };
 
@@ -1403,7 +1407,7 @@ crop.factory('cropHost', ['$document', 'cropAreaCircle', 'cropAreaSquare', 'crop
         maxCanvasDims=[300,300];
 
     // Result Image size
-    var resImgSize=300;
+    var resImgSize=200;
 
     // Result Image type
     var resImgFormat='image/png';
