@@ -504,6 +504,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         return _UOM;
     }
     $scope.SaveLabel = function (Type) {
+
+        $scope.Accountlimit();
+
         if (Type != 3) {
 
             if ($scope.checkDuplicate(Type)) {
