@@ -390,7 +390,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
             targeHeight: 350,
             destinationType: destinationType.DATA_URL,
             correctOrientation: true,
-            allowEdit: false,
+            allowEdit: true,
             sourceType: pictureSource.PHOTOLIBRARY
         });
     }
@@ -449,7 +449,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
             targeHeight: 350,
             correctOrientation: true,
             destinationType: destinationType.DATA_URL,
-            allowEdit: false,
+            allowEdit: true,
             saveToPhotoAlbum: true,
         });
     }
