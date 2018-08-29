@@ -671,7 +671,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     $scope.SaveLabel = function (Type) {
 
-      $scope.Accountlimit();
 
         if ($scope.checkDuplicate(Type)) {
 
