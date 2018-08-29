@@ -1403,7 +1403,7 @@ crop.factory('cropHost', ['$document', 'cropAreaCircle', 'cropAreaSquare', 'crop
         maxCanvasDims=[300,300];
 
     // Result Image size
-    var resImgSize=200;
+    var resImgSize=300;
 
     // Result Image type
     var resImgFormat='image/png';
