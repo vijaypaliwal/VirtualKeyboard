@@ -424,7 +424,7 @@ crop.factory('cropArea', ['cropCanvas', function (CropCanvas) {
     return this._size;
   };
   CropArea.prototype.setSize = function (size) {
-      this._size = 125;
+      this._size = 250;
     this._dontDragOutside();
   };
 
