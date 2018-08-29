@@ -243,8 +243,29 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
     });
 
     $("#files").on('change', function (event) {
+
+     
+
         $scope.handleFileSelect(event);
     });
+
+    $scope.IsshowCropimg = false;
+
+    $scope.showcropimg = function() {
+        $scope.IsshowCropimg = true;
+        CheckScopeBeforeApply();
+    }
+
+    $scope.closecropmodal = function () {
+        $scope.IsshowCropimg = false;
+        CheckScopeBeforeApply();
+
+    }
+
+    $scope.showorgimg = function () {
+        $scope.IsshowCropimg = false;
+        CheckScopeBeforeApply();
+    }
 
 
 
@@ -296,6 +317,13 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
             $scope.myCroppedImage = '';
 
             $scope.myImage = _ImgObj.bytestring;
+
+         //   CheckScopeBeforeApply();
+
+
+         
+
+         //   $("#myModalforCropImg").modal("show");
 
             //$scope.uploadProfile();
 

@@ -360,8 +360,12 @@
     <div style="background: #fff; overflow-y: auto; height: calc({{cropmodalheight}}px - 140px); " class="modal-body">
 
 
-        <div class="cropArea">
+        <div ng-show="IsshowCropimg==true" class="cropArea">
             <img-crop image="myImage" area-type="square" area-size="300" result-image="myCroppedImage"></img-crop>
+        </div>
+
+        <div ng-show="IsshowCropimg==false">
+            <img style="max-height:300px;" src="{{myImage}}" alt="Alternate Text" />
         </div>
 
         <div style="display:none;"><img id="croppedImage" ng-src="{{myCroppedImage}}" /></div>
@@ -370,12 +374,17 @@
     </div>
 
     <div style="background:#f5f5f5; text-align:left; margin-top:0;" class="modal-footer">
-        <a class="btn btn-primary" ng-click="saveCroppedImage();"> <i class="fa fa-camera"></i> Save Photo</a>
-        <a class="btn btn-gray pull-right" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</a>
+        <a class="btn btn-primary" ng-click="saveCroppedImage();"> <i class="fa fa-camera"></i> Save </a>
+
+        <a ng-show="IsshowCropimg==false" class="btn btn-gray" ng-click="showcropimg();"> <i class="fa fa-camera"></i> Crop</a>
+
+        <a ng-show="IsshowCropimg==true" class="btn btn-gray" ng-click="showorgimg();"> <i class="fa fa-camera"></i> Original</a>
+
+        <a ng-click="closecropmodal()" class="btn btn-gray pull-right" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</a>
     </div>
 </div>
 
-<input type="file" style="visibility:hidden;" id="files"  accept="image/*;" />
+<input type="file" style="visibility:hidden" id="files"  accept="image/*;" />
 
 <script>
 
