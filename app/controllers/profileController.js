@@ -318,12 +318,8 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
             $scope.myImage = _ImgObj.bytestring;
 
-         //   CheckScopeBeforeApply();
-
-
-         
-
-         //   $("#myModalforCropImg").modal("show");
+          //  CheckScopeBeforeApply();
+          // $("#myModalforCropImg").modal("show");
 
             //$scope.uploadProfile();
 
@@ -462,6 +458,9 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
     $scope.uploadProfile = function () {
         $("#myModalforlist").modal("hide");
         $("#myModalforCropImg").modal("hide");
+
+        $scope.IsshowCropimg = false;
+
         $scope._isProfileLoading = true;
         $scope.$apply();
         var authData = localStorageService.get('authorizationData');
