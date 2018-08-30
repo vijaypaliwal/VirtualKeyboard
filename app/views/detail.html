@@ -112,12 +112,15 @@
                 <a class="btn btn-danger removeImage" altid="{{_obj.ImageID}}" ng-click="RemoveFromImageList(_obj.ImageID)"><i class="fa fa-trash-o"></i></a>
 
             </span>
-            <a ng-if="ImageList.length>0" ng-click="saveimage()" class="btn btn-primary" style="width:90%; margin-top:7px;"> <i class="fa fa-upload"></i> Upload</a>
+
+            <span style="background-color: #43ac6a !important; font-size: 30px; line-height: 22px; padding: 9px; padding-left: 11px; " ng-click="OpenBox()" class="btn btn-primary">+</span>
+
+            <a ng-if="ImageList.length>0" ng-click="saveimage()" class="btn btn-primary" style="width:calc(100% - 30px); margin-top:7px;"> <i class="fa fa-upload"></i> Upload</a>
 
         </div>
 
         
-
+        
               
                 <div style="position:absolute; margin-top:-33px; right:30px;" class="floating-button animated bouncein delay-3">
 
@@ -295,7 +298,7 @@
 
             <ul>
                 <li>
-                   <!--<input id="files" type="file" name="name" value=" " />-->
+                   <input id="files" type="file" name="name" value="" />
                     <a ng-click="capturePhotoNew();"> <i class="fa fa-camera"></i> Capture Photo</a>
                 </li>
                 <li>
