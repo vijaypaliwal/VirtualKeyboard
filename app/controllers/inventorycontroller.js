@@ -3774,9 +3774,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         UsFullImg = true;
 
-        $("#myModalforCropImg").modal("show");
-        //
-        //$scope.ImageList.push(_ImgObj);   
+     //   $("#myModalforCropImg").modal("show");
+     
+         $scope.ImageList.push(_ImgObj);   
         
         // log.success("Images captured length"+$scope.ImageList.length);
 
@@ -3808,7 +3808,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             quality: 50,
             correctOrientation: true,
             destinationType: destinationType.DATA_URL,
-            allowEdit: false,
+            allowEdit: true,
             saveToPhotoAlbum: true,
         });
     }
@@ -3882,7 +3882,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             SetWeekMonthValues();
 
         }, 2000);
-
 
     }
 
@@ -5381,9 +5380,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
         UsFullImg = true;
 
-        $("#myModalforCropImg").modal("show");
+     //   $("#myModalforCropImg").modal("show");
 
-        //$scope.ImageList.push(_ImgObj);       
+          $scope.ImageList.push(_ImgObj);       
 
     }
 
@@ -5391,6 +5390,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         // Retrieve image file location from specified source
         navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
             quality: 50,
+            allowEdit: true,
             destinationType: destinationType.DATA_URL,
             correctOrientation: true,
             sourceType: pictureSource.PHOTOLIBRARY
