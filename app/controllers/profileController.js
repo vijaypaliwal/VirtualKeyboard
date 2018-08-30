@@ -399,7 +399,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
     $scope.onPhotoDataSuccessNew = function (imageData) {
 
         UsFullImg = true;
-        $("#myModalforCropImg").modal("show");
+       // $("#myModalforCropImg").modal("show");
 
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
 
@@ -425,7 +425,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         CheckScopeBeforeApply();       
 
       
-        //$scope.uploadProfile();
+        $scope.uploadProfile();
 
     }
 
@@ -468,16 +468,15 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
             $scope.SecurityToken = authData.token;
         }
 
-        //$scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
+        $scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
 
        
-
-        if (!UsFullImg) {
-            $scope.Image.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
-        }
-        else {
-            $scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
-        }       
+        //if (!UsFullImg) {
+        //    $scope.Image.bytestring = removePaddingCharacters($("#croppedImage").attr("ng-src"));
+        //}
+        //else {
+        //    $scope.Image.bytestring = removePaddingCharacters($scope.Image.bytestring);
+        //}       
 
         $.ajax
            ({
