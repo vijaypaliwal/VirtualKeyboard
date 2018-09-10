@@ -57,10 +57,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
                             {
                                 if ($scope.AccountsList[i].CurrentUserMasterAccountID != $scope.AccountsList[i].MasterAccountID) {
                                     $scope.otherInventoryExists = true;
-                                }
-                                else {
-                                    $scope.otherInventoryExists = false;
-                                }
+                                }                                
                             }
 
                             $scope.OwnedInventoryCount = $scope.AccountsList[0].CurrentUserOwnedInventoryCount;

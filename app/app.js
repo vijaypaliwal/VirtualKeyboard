@@ -239,11 +239,6 @@ app.config(function ($routeProvider) {
 
 
 
-
-
-
-
-
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'
