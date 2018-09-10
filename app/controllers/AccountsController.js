@@ -13,7 +13,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
     $scope.CurrentAccount = "";
     $scope.Addinventory = false;
     $scope.inventoryExists = true;
-    $scope.otherInventoryExists = true;
+    $scope.otherInventoryExists = false;
     $scope.StripeSubscription = "";
     $scope.InventoryObj={InventoryAccountName:"",InventoryAccountID:0,PlanCode:""}
     $scope.OwnedInventoryCount = 0;
