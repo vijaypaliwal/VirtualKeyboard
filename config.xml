@@ -2,8 +2,9 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.clearlyinventory"
-        version   = "3.1.1">
+        version   = "1.1.0">
   <name>Clearly Inventory</name>
+  
 
   <description>
    Welcome to Clearly Inventory, an easy online inventory management software
