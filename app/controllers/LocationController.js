@@ -329,6 +329,9 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function (result) {
+
+                    $scope.Accountlimit();
+
                     $scope.IsProcessing = false;
                     debugger;
                     if (result.CreateEditLocationResult.Success == true) {
@@ -339,6 +342,8 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
                         if (result.CreateEditLocationResult.Payload.ID == 1) {
                             if ($scope.mode == 2) {
                                 ShowSuccess("Added");
+
+                             
 
                                 if ($scope.check == true || $scope.check == "true") {
                                     $scope.mode = 2;
