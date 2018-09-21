@@ -19,9 +19,9 @@
   <plugin name="cordova-plugin-globalization" source="npm"/>
   <plugin name="cordova-plugin-ios-camera-permissions" source="npm"/>
   <plugin name="cordova-plugin-camera" source="npm" spec="*">
-    <variable name="CAMERA_USAGE_DESCRIPTION" value="App would like to access the camera." />
-    <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="App would like to access the library." />
-    <variable name="PHOTOLIBRARY_ADD_USAGE_DESCRIPTION" value="App would like to save the library." />
+    <variable name="CAMERA_USAGE_DESCRIPTION" value="Clearly Inventory needs to access your photos so that we can display images of your inventory." />
+    <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Clearly Inventory needs to access your photos so that we can display images of your inventory." />
+    <variable name="PHOTOLIBRARY_ADD_USAGE_DESCRIPTION" value="Clearly Inventory needs to access your photos so that we can display images of your inventory." />
   </plugin>
 
   <plugin name="cordova-plugin-file" source="npm" spec="~4.1.1"/>
@@ -34,7 +34,7 @@
   <plugin name="ionic-plugin-keyboard" source="npm"/>
   <plugin name="cordova-plugin-nativeaudio" source="npm"/>
   
-  <plugin name="InAppBrowser" />
+ <plugin name="InAppBrowser" value="CDVInAppBrowser" />
   
 
   <plugin name="cordova-plugin-background-app" source="npm" spec="~2.0.0" />
