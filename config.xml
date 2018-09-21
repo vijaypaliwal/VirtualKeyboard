@@ -34,7 +34,7 @@
   <plugin name="ionic-plugin-keyboard" source="npm"/>
   <plugin name="cordova-plugin-nativeaudio" source="npm"/>
   
-  <plugin name="InAppBrowser" source="npm" />
+  <plugin name="InAppBrowser" />
   
 
   <plugin name="cordova-plugin-background-app" source="npm" spec="~2.0.0" />
