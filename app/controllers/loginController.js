@@ -266,6 +266,12 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
     $scope.SignUpUrl = signupLink;
 
 
+    $scope.gotosignup = function () {
+        cordova.InAppBrowser.open($scope.SignUpUrl, '_blank', 'location=yes');
+    }
+
+
+
     $(document).on("change", "#Signuplink", function () {
         $scope.SignUpUrl = $(this).val();
         $scope.$apply();

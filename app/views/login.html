@@ -135,7 +135,9 @@
 
 <div style="text-align:center; width:100%;">
     <a style="color:#fff;">Don't have an account?</a>
-    <a ng-if="SignUpUrl !=''" href="{{SignUpUrl}}" target="_blank" class="signuplink">Sign Up </a>
+    <!--<a ng-if="SignUpUrl !=''" href="{{SignUpUrl}}" target="_blank" class="signuplink">Sign Up </a>-->
+
+    <a ng-if="SignUpUrl !=''" ng-click="gotosignup()" class="signuplink">Sign Up </a>
 
     <a ng-if="SignUpUrl ==''"class="signuplink">Sign Up </a>
 </div>
