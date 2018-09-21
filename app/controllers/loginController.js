@@ -267,7 +267,7 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
 
 
     $scope.gotosignup = function () {
-        cordova.InAppBrowser.open('https://account.inventory4.com/signup/mobilesignup', '_blank', 'location=yes');
+        cordova.InAppBrowser.open($scope.SignUpUrl, '_blank', 'location=yes');
     }
 
 
