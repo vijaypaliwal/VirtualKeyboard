@@ -152,3 +152,47 @@ login-form {
     padding-right: 3px;
     margin-top: 10px;
 }
+
+
+
+ .input-group .form-group {
+        margin-bottom: 0px !important;
+    }
+    .formarea {
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .signuplink {
+        background: #fff;
+        border-radius: 25px;
+        display: block;
+        padding: 12px;
+        font-size: 18px;
+        width: auto;
+        margin: 0 auto;
+        max-width: 200px;
+        margin-top: 15px;
+    }
+
+    html
+    {
+        height:100%;
+    }
+
+    body
+    {
+        position:relative;
+        height:100%;
+    }
+
+   
+
+    .emailError
+    {
+        display:none;
+    }
+
+    .emailtextbox
+    {
+        border-color:#ccc !important;
+    }

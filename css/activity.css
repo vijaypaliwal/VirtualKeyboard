@@ -22,6 +22,7 @@
 
 .AdjustIncrease {
     color: #177B3D !important;
+}
 .summaryClearbtn {
     background: transparent;
     border: 1px solid transparent;
@@ -1670,3 +1671,249 @@ input:checked + .slider:before {
     padding-right:0;
 }
 
+#mycartModal .modal-body {
+        background: transparent;
+        width: 100%;
+        height: 100%;
+    }
+
+    #mycartModal span {
+        color: #000;
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        padding: 5px;
+        font-size: 14px;
+        background: #fff;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-right: 5px;
+        text-transform: capitalize;
+    }
+
+    #headerrow {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .mainmodal {
+        height: 100%;
+        width: 100%;
+        display: table;
+    }
+
+    .wrappermodal {
+        display: table-cell;
+        height: 100%;
+        vertical-align: middle;
+    }
+
+
+    input[type=datetime-local] {
+        padding-top: 20px;
+        line-height: 40px !important;
+        margin-top: 8px;
+    }
+
+    input[type=time] {
+        padding-top: 20px;
+        line-height: 40px !important;
+        margin-top: 8px;
+    }
+
+    input[type=date] {
+        padding-top: 20px;
+        line-height: 40px !important;
+        margin-top: 8px;
+    }
+
+    .mycartitem .input-group-addon {
+        padding-bottom: 7px;
+    }
+
+
+
+      .prepend, .append {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      
+     
+    }
+    .errorMessage {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        margin-top: 43px;
+        display:none;
+    }
+
+
+        .prepend .inner {
+            background-color: #e9ecef !important;
+            color: #888 !important;
+            vertical-align: middle;
+            /* margin-top: 22px; */
+            padding: 9px;
+            padding-bottom: 9px;
+            padding-top: 10px;
+            font-size: 15px;
+            border-top-left-radius: 4px !important;
+            border-bottom-left-radius: 4px !important;
+            border: 1px solid #ccc;
+            /* line-height: 23px; */
+            font-weight: 100;
+            border-right: transparent;
+            display: flex;
+            padding: 0 !important;
+            line-height: 40px;
+            padding-left: 3px !important;
+            padding-right: 3px !important;
+        }
+
+    .swiper-slide .prepend .inner {
+        background-color: #e9ecef !important;
+        color: #888 !important;
+        vertical-align: middle;
+        /* margin-top: 22px; */
+        padding: 9px;
+        padding-bottom: 7px;
+        padding-top: 12px;
+        font-size: 17px;
+        border-top-left-radius: 4px !important;
+        border-bottom-left-radius: 4px !important;
+        border: 1px solid #ccc;
+        /* line-height: 23px; */
+        font-weight: 100;
+        border-right: transparent;
+    }
+
+
+    .prepostCustom {
+        width: calc(100% + 2px) !important;
+        margin-left: -2px !important;
+    }
+
+    .append .inner {
+        background-color: #e9ecef !important;
+        color: #888 !important;
+        vertical-align: middle;
+        padding: 9px;
+        padding-bottom: 9px;
+        /* max-width: 100px; */
+        display: flex;
+        padding-top: 10px;
+        font-size: 15px;
+        border-top-right-radius: 4px !important;
+        border-bottom-right-radius: 4px !important;
+        border: 1px solid #ccc;
+        /* line-height: 23px; */
+        font-weight: 100;
+        border-left: transparent;
+        display: flex;
+        padding: 0 !important;
+        line-height: 40px;
+        padding-left: 3px !important;
+        padding-right: 3px !important;
+    }
+
+    .swiper-slide .append .inner {
+        background-color: #e9ecef !important;
+        color: #888 !important;
+        vertical-align: middle;
+        padding: 9px;
+        padding-bottom: 7px;
+        padding-top: 12px;
+        font-size: 17px;
+        border-top-right-radius: 4px !important;
+        border-bottom-right-radius: 4px !important;
+        border: 1px solid #ccc;
+        /* line-height: 23px; */
+        font-weight: 100;
+        border-left: transparent;
+    }
+
+    .unitprepend {
+        background-color: #e9ecef !important;
+        color: #888 !important;
+        font-size: 15px;
+        border-top-left-radius: 4px !important;
+        border-bottom-left-radius: 4px !important;
+        border: 1px solid #ccc;
+        /* line-height: 23px; */
+        font-weight: 100;
+        border-right: transparent;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .unitappend {
+        background-color: #e9ecef !important;
+        color: #888 !important;
+        font-size: 15px;
+        border-top-right-radius: 4px !important;
+        border-bottom-right-radius: 4px !important;
+        border: 1px solid #ccc;
+        /* line-height: 23px; */
+        font-weight: 100;
+        border-left: transparent;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+
+    .form-control {
+        border-radius: 0px !important;
+    }
+
+
+    .cartitems .input-group-addon.unitprepend {
+        background-color: #e9ecef !important;
+        color: #888 !important;
+        font-size: 15px;
+        border-top-left-radius: 4px !important;
+        border-bottom-left-radius: 4px !important;
+        border: 1px solid #ccc;
+        /* line-height: 23px; */
+        font-weight: 100;
+        border-right: transparent;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .cartitems .input-group-addon.unitappend {
+        background-color: #e9ecef !important;
+        color: #888 !important;
+        font-size: 15px;
+        border-top-right-radius: 4px !important;
+        border-bottom-right-radius: 4px !important;
+        border: 1px solid #ccc;
+        /* line-height: 23px; */
+        font-weight: 100;
+        border-left: transparent;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .emailError {
+        color: #c31818;
+        position: absolute;
+        left: 0;
+        margin-top: 40px;
+        font-size: 12px;
+    }
+
+    .customActivityData .input-group {
+        margin-bottom: 10px;
+    }
+
+
+    .mainmodal {
+        height: 100%;
+        width: 100%;
+        display: table;
+    }
+
+    .wrappermodal {
+        display: table-cell;
+        height: 100%;
+        vertical-align: middle;
+    }
