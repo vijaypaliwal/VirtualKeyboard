@@ -93,14 +93,9 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $scope.Locations = ["Bin 100", "In Stock", "New location", "Refridgerator one", "Refridgerator two", "Pantry, Rack 1, Shelf 1-L", "Pantry, Rack 1, Shelf 1-M", "Storage Room A"];
     $scope.TotalRecords = 0;
     $scope.ActualTotalRecords = 0;
-    function ResetInvObj() {
-        $scope.InvObject = {
-            InventoryID: 0, CurrentQuantity: "", AvgCostPerUnit: "", Uncontrolled: "", UniqueTag: "",
-            ItemID: "", ItemNumber: "", ItemDescription: 0, UomID: 0, UOM: 0, LocationID: 0, Location: 0,
-            LocationZone: "", LastTransactionID: 0, StatusValue: "", LastQuantityChange: 0, LastDateChange: "",
-            CustomData: []
-        };
-    }
+
+
+   
 
     _CurrentUrl = "FindItems";
 
@@ -203,10 +198,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
            });
     }
 
-    $scope.ShowOptionModal = function () {
-
-    };
-
+   
 
 
     $scope.SetCurrentObject = function (CurrentObj) {
@@ -286,12 +278,9 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
 
-    $scope.UploadImg = function (id, _obj) {
+    
 
-        $scope.CurrentImgID = "#Img_" + id;
-        $scope.CurrentObj = _obj;
-        $("#myfile").trigger("click");
-    }
+
     $("#myfile").on('change', function (event) {
 
         $scope.handleFileSelect(event);
@@ -912,20 +901,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
     $scope.searchfunction = function (Byvalue) {
-
-        debugger;
-        console.log("===========================");
-        console.log("$scope.MyinventoryFieldsNames");
-        console.log($scope.MyinventoryFieldsNames);
-        console.log("===========================");
-
-        console.log("===========================");
-        console.log("$scope.ActiveUnitDataFields");
-        console.log($scope.ActiveUnitDataFields);
-        console.log("===========================");
-
-
-
 
         ClearFilterArray();
 
@@ -1701,18 +1676,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         }
 
         return _toReturnvalue;
-    }
-
-    $scope.GetAvailableColumnLabel = function (ColumnName) {
-        var i = 0;
-        for (i = 0; i < $scope.MyinventoryFields.length; i++) {
-            if ($scope.MyinventoryFields[i].ColumnName == ColumnName) {
-                return $scope.MyinventoryFields[i].ColumnLabel;
-            }
-        }
-
-        return "";
-    }
+    }   
 
 
     $scope.GetUnitDataLabel = function (ColumnName) {
@@ -1742,6 +1706,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
         return false;
     }
+
     $scope.PopulateInventoryItems = function () {
 
         $scope.GetMyinventoryColumns();
@@ -1749,13 +1714,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         $scope.GetUnitDataColumns();
         $scope.GetInventories();
     }
-
-    $scope._updateImg = function (src) {
-
-        $scope.selectedImage = src;
-        $("#myModal1").modal('show');
-    }
-
 
 
     $scope.ScanItemSearch = function () {
@@ -1839,45 +1797,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
 
-    $scope.AddToCartSelectAll = function (obj) {
-
-        if (_CanAct == 'True') {
-
-
-            var originalID = "#actionQty_" + obj.iID;
-
-
-
-            if ($(originalID).find(".fa-check").css("color") == "rgb(255, 255, 255)") {
-
-                $(originalID).find(".fa-check").css("color", "transparent");
-
-                $(originalID).parent(".newlistitem").find(".img").css("opacity", "1");
-
-                $(originalID).parent(".newlistitem").find(".img").css("background-color", "#fff")
-
-                $(originalID).parent(".newlistitem").find(".img").removeClass("hideimage");
-
-
-            }
-            else {
-                if ($scope.mainObjectToSend.length < _CartObjLimit) {
-                    $(originalID).find(".fa-check").css("color", "#fff");
-                    $(originalID).parent(".newlistitem").find(".img").css("background-color", "transparent");
-
-                    $(originalID).parent(".newlistitem").find(".img").addClass("hideimage");
-                }
-
-            }
-
-            addItemsToCart(obj, obj.iID, originalID);
-
-        }
-        else {
-            return false;
-        }
-
-    }
+   
 
     $scope.SelectAll = function () {
 
@@ -1897,19 +1817,11 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         $("#myModal234").modal("hide");
         $scope.OpentransactionModal();
     }
+
+
     var _tempCopy = [];
-    function CheckInCart(id) {
-        for (var i = 0; i < _tempCopy.length; i++) {
-            if (_tempCopy[i].uId == id) {
 
-                return true;
-            }
-            else {
-                return false;
-            }
 
-        }
-    }
     $scope.DeselectAll = function () {
         _tempCopy = angular.copy($scope.mainObjectToSend);
         $('#mylist .checkicon').each(function () {
@@ -1947,16 +1859,10 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     $('#mycartModal').on('hidden.bs.modal', function () {
         $(".cartcrossicon").hide();
         $(".cartcounter").show();
-
-
     });
-
-
-
 
     $('#myModal234').on('shown.bs.modal', function () {
         $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
-
     });
 
     $('#myModal234').on('hidden.bs.modal', function () {
@@ -1969,40 +1875,29 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         $(".cartcrossicon").show();
         $(".cartcounter").hide();
     });
+
+
     $scope.OpentransactionModal = function () {
-
-
-
-
-
         if (_TotalRecordsCurrent != 0) {
-
             if ($("body").hasClass("modal-open")) {
-
                 $(".transactionbody").removeClass('slideInUp');
                 $(".transactionbody").addClass('slideOutDown');
                 $(".cartcrossicon").hide();
                 $(".cartcounter").show();
                 setTimeout(function () { $("#mycartModal").modal('hide'); }, 1000);
-
             }
             else {
-
                 $(".transactionbody").removeClass('slideOutDown');
                 $(".transactionbody").addClass('slideInUp');
                 $(".cartcrossicon").show();
                 $(".cartcounter").hide();
                 $("#mycartModal").modal('show');
             }
-
         }
 
-
-
-
-
-
     }
+
+
     function formatDate(date) {
         if (date != null && date != undefined && date != "") {
 
@@ -2049,10 +1944,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     }
 
     function ConvertToTime(_timeValue) {
-
-
-        debugger;
-
+     
         if ($.trim(_timeValue) != "") {
 
             var _timeSplit = _timeValue.split(" ");
@@ -2077,6 +1969,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         if (parseInt(_something) < 10) return "0" + _something;
         return _something;//else    
     }
+
     function ConvertToProperDate(value, Type) {
         if ($.trim(value) != "") {
             switch (Type) {
@@ -2113,6 +2006,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         }
         return "";
     }
+
     function addItemsToCart(object, IdToSave, originalID, _isSelectAll) {
 
         var isItemExist = true;
@@ -2258,9 +2152,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
         ResetCurrentActiveClass();
 
     }
-
-
-
 
     function ResetCurrentActiveClass() {
         setTimeout(function () {
@@ -2526,10 +2417,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     // Go to next page after select particular activity from list(Increase,decrease,move,convert,tag..)
     $scope.GoToNextMobile = function (selectedAction) {
-
-
         if (selectedAction != 1 && selectedAction != -1) {
-
             if ($scope.objOverLimit.canAddInventory) {
                 $scope.selectedAction = selectedAction;
                 var _dataToSend = GetDataToSend($scope.mainObjectToSend);
@@ -2539,7 +2427,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 localStorageService.set("SelectedAction", "");
                 localStorageService.set("SelectedAction", selectedAction);
                 console.log(_dataToSend);
-
                 $("#mycartModal").modal('hide');
                 $location.path("/activity");
             }
@@ -2548,11 +2435,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 $("#mycartModal").modal('hide');
                 $("#overLimitAlert").modal("show");
             }
-
         }
-
         else {
-
             $scope.selectedAction = selectedAction;
             var _dataToSend = GetDataToSend($scope.mainObjectToSend);
             localStorageService.set("ActivityCart", "");
@@ -2561,26 +2445,17 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             localStorageService.set("SelectedAction", "");
             localStorageService.set("SelectedAction", selectedAction);
             console.log(_dataToSend);
-
             $("#mycartModal").modal('hide');
             $location.path("/activity");
-
         }
-
     }
 
     $('#MasterSearchStatus').multiselect();
 
 
     setTimeout(function () {
-
-
         $("#myModal234").modal('hide');
-
     }, 4000)
-
-
-
 
 }]);
 
