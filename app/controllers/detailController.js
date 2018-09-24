@@ -18,40 +18,18 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
 
     $scope.logOut = function () {
-
-
         authService.logOut();
         $location.path('/login');
         CheckScopeBeforeApply();
     }
-    $scope.OpenmenuModal = function () {
-
-        if ($("body").hasClass("modal-open")) {
-            $("#myModal2").modal('hide');
-        }
-        else {
-            $("#myModal2").modal('show');
-        }
-    }
-
-    $scope.CancelEdit = function () {
-        $scope.IsEditMode = false;
-
-        $scope.$apply();
-
-    }
 
     $scope.IsEmptyAllcheck = function (Obj) {
         var _return = true;
-
-
         if (Obj.iUnitNumber2 == null && Obj.iUnitNumber1 == null && Obj.iUnitDate2 == null && Obj.iUniqueDate == null && Obj.iStatusValue == "" && Obj.iReqValue == "" && Obj.iUnitTag2 == "" && Obj.iUnitTag3 == "")
         {
             _return = false;
         }
-
         return _return;
-
     }
 
     $scope.viewhistory = function () {
@@ -73,17 +51,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     }
 
-    $scope.triggerFileClick = function () {
-        $("#files").trigger("click");
-        $("#myModalforlist").modal("hide");
-    }
-
-
-    $scope.OpenBoxAndroid = function () {
-        $("#myModalforlist").modal("show");
-    }
-
-
+   
 
     $("#files").on('change', function (event) {
         $scope.handleFileSelect(event);
@@ -210,13 +178,9 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         $("#myModalforCropImg").modal("hide");
     }
 
-
-
     $scope.onFail = function (message) {
-
         log.error('Failed because: ' + message);
     }
-
 
     $scope.capturePhotoNew = function () {
         navigator.camera.getPicture($scope.onPhotoDataSuccessNew, $scope.onFail, {
@@ -230,10 +194,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         });
     }
 
-    $scope.viewimages = function () {
-        $("#imagemodal").modal('show');
-    }
-
+  
 
     function removeImage(_this) {
 
@@ -306,9 +267,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         $scope.ImageList.push(_ImgObj);
 
         CheckScopeBeforeApply();
-        UsFullImg = true;
-
-      
+        UsFullImg = true;     
 
        // $("#myModalforCropImg").modal("show");       
 
@@ -359,17 +318,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     }
 
 
-    $scope.showbottomarea = function () {
-
-        $("#overlay").addClass("overlay")
-
-
-        $(".scaninfo").show();
-        $(".scaninfo").css("display", "block");
-
-    }
-
-
     $scope.GetUnitDataLabel = function (ColumnName) {
         var i = 0;
 
@@ -404,9 +352,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     }
 
     $scope.Takeitem = function () {
-
         $scope.CurrentInventory.pPart = $scope.itemscanvalue;
-
         $("#overlay").removeClass("overlay");
         $("#scaninfo").hide();
         $scope.$apply();
@@ -441,6 +387,9 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
             log.error("Scanning failed: ", error);
         });
     }
+
+
+
     $scope.UpdateCartItems = function () {
         var v = angular.copy($scope.CurrentInventory);
         var mainObjectToSend = {
@@ -481,6 +430,8 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         localStorageService.set("ActivityCart", "");
         localStorageService.set("ActivityCart", _cartData);
     }
+
+
     $scope.UpdateInventory = function () {
 
         var authData = localStorageService.get('authorizationData');
@@ -549,8 +500,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         });
 
     }
-
-
 
     function removePaddingCharacters(bytes) {
         bytes = bytes.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "");
@@ -652,7 +601,9 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
             $scope.$apply();
         }
     }
-    function CheckIntoCartData ()
+
+
+    function CheckIntoCartData()
     {
         $scope.CanAddIntoCart = false;
        
@@ -706,10 +657,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     }
 
     $scope.getitemimage = function () {
-
-
-
-
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -781,9 +728,9 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         $scope.CurrentActiveImage = Object;
         $scope.$apply();
     };
-    $scope.ToggleEditView = function () {
 
-        
+
+    $scope.ToggleEditView = function () {        
         $("#myModal2").modal('hide');
         $("#bottommenumodal").modal('hide');
         $(".modal-backdrop").remove();
@@ -798,10 +745,5 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
             $(".imagesection").show();
         }, 300);
     }
-
-
-    var deviceheight = $(window).height();
-
-    $scope.cropmodalheight = deviceheight
 
 }]);
