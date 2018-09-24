@@ -42,6 +42,8 @@
   
 
   <plugin name="cordova-plugin-background-app" source="npm" spec="~2.0.0" />
+
+  <plugin name="cordova-plugin-x-socialsharing" source="npm" />
   
   <!--gap:plugin name="com.phonegap.plugins.barcodescanner"/>
   <gap:plugin name="org.apache.cordova.statusbar" spec="0.1.4" source="pgb" />
