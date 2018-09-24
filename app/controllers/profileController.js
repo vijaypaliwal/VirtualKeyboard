@@ -29,23 +29,10 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
     $scope.myImage = '';
     $scope.myCroppedImage = '';
 
-    var handleCropSelect = function (evt) {
-        var file = evt.currentTarget.files[0];
-        var reader = new FileReader();
-        reader.onload = function (evt) {
-            $scope.$apply(function ($scope) {
-                $scope.myImage = evt.target.result;
-            });
-        };
-        reader.readAsDataURL(file);
-    };
-    angular.element(document.querySelector('#fileInput')).on('change', handleCropSelect);
-
-    //
-
-
+  
 
     $(".modal-backdrop").remove();
+
     $("body").removeClass("modal-open");
     function CheckScopeBeforeApply() {
         if (!$scope.$$phase) {
@@ -130,18 +117,12 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
 
     $scope.PreviewImage = function () {
-
-
-
         if ($scope.IsdummyImage == false) {
             $("#imagemodaldetail").modal("show");
         }
-
-
     }
 
     $scope.Getuserinfo = function () {
-
         debugger;
         var _string = "this.onerror = null;this.src = 'img/dummy-user48.png'";
         $("#myimgProfile").attr("onerror", _string);
@@ -243,32 +224,12 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
     });
 
     $("#files").on('change', function (event) {
-
-     
-
         $scope.handleFileSelect(event);
     });
 
     $scope.IsshowCropimg = false;
 
-    $scope.showcropimg = function() {
-        $scope.IsshowCropimg = true;
-        CheckScopeBeforeApply();
-    }
-
-    $scope.closecropmodal = function () {
-        $scope.IsshowCropimg = false;
-        CheckScopeBeforeApply();
-
-    }
-
-    $scope.showorgimg = function () {
-        $scope.IsshowCropimg = false;
-        CheckScopeBeforeApply();
-    }
-
-
-
+   
 
     $scope.handleFileSelect = function (evt) {
 
@@ -326,6 +287,8 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         }, 100);
 
     }
+
+
     $scope.openModel = function () {
         $("#myModalforlist").modal("show");
 
@@ -377,7 +340,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
 
         UsFullImg = true;
 
-      //  $("#myModalforCropImg").modal("show");
+    
         $scope.uploadProfile();      
 
     }
@@ -399,7 +362,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
     $scope.onPhotoDataSuccessNew = function (imageData) {
 
         UsFullImg = true;
-       // $("#myModalforCropImg").modal("show");
+     
 
         var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
 
@@ -420,16 +383,9 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         CheckScopeBeforeApply();    
         $scope.uploadProfile();
     }
-
-
-    $scope.saveCroppedImage = function () {
-       
-        $scope.uploadProfile();
-    }
-
+   
 
     $scope.onFail = function (message) {
-
         log.error('Failed because: ' + message);
     }
 
@@ -560,47 +516,23 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         });
     }
 
-
-
     $scope.logOut = function () {
         authService.logOut();
         $location.path('/login');
         CheckScopeBeforeApply();
     }
 
-
-
-
     init();
-
-
-
-
-
 
     $scope.Editmode = function () {
         $(".editmode").show();
         $(".detailmode").hide();
-
     }
 
     $scope.detailmode = function () {
         $(".editmode").hide();
         $(".detailmode").show();
 
-    }
-
-
-
-
-    var deviceheight = $(window).height();
-
-    $scope.cropmodalheight = deviceheight
-
-
-
-
-
-
+    }  
 
 }]);
