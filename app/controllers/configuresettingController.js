@@ -32,79 +32,13 @@ app.controller('configuresettingController', ['$scope', 'localStorageService', '
     }
 
 
-    $scope.logOut = function () {
-
-
-        authService.logOut();
-        $location.path('/login');
-        CheckScopeBeforeApply();
-    }
-  
 
 
     $('#bottommenumodal').on('hidden.bs.modal', function () {
         $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
     });
 
-    $scope.UpdateSecurityToken = function (AccountID) {
-
-
-        var authData = localStorageService.get('authorizationData');
-        if (authData) {
-            $scope.SecurityToken = authData.token;
-        }
-
-        $.ajax({
-
-            type: "POST",
-            url: serviceBase + "UpdateSecurityToken",
-            contentType: 'application/json; charset=utf-8',
-
-            dataType: 'json',
-
-            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "AccountID": AccountID }),
-            error: function (err, textStatus) {
-                $scope.UOMSearching = false;
-
-                $scope.IsLoading = false;
-
-                if (err.readyState == 0 || err.status == 0) {
-
-                }
-                else {
-
-
-                    if (textStatus != "timeout") {
-
-
-                        $scope.ShowErrorMessage("update security token", 2, 1, err.statusText);
-                    }
-                }
-            },
-
-            success: function (data) {
-
-
-                if (data.UpdateSecurityTokenResult.Success == true) {
-
-                    if (data.UpdateSecurityTokenResult != null && data.UpdateSecurityTokenResult.Payload != null) {
-                        var _token = data.UpdateSecurityTokenResult.Payload;
-
-                        localStorageService.set('authorizationData', { token: _token });
-
-
-                        $scope.$apply();
-
-
-
-                    }
-                }
-                else {
-                    $scope.ShowErrorMessage("update security token", 1, 1, data.UpdateSecurityTokenResult.Message);
-                }
-            }
-        });
-    }
+  
 
     $scope.UpdateSettings = function (value,Type) {
         debugger;

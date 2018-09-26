@@ -45,13 +45,7 @@ app.controller('statusController', ['$scope', 'localStorageService', 'authServic
     }
 
 
-    $scope.logOut = function () {
-
-
-        authService.logOut();
-        $location.path('/login');
-
-    }
+  
     $scope.getstatus = function () {
 
 

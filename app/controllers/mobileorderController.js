@@ -252,10 +252,7 @@ app.controller('mobileorderController', ['$scope', 'localStorageService', 'authS
         }
     };
 
-    $scope.offmobileorder = function ()
-    {
-
-    }
+  
 
 
 

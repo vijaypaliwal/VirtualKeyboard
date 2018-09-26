@@ -62,8 +62,6 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
 
 
-
-
     $('#bottommenumodal').on('hidden.bs.modal', function () {
         $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars');
     });
@@ -159,19 +157,10 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
     });
 
-    $scope.logOut = function () {
-
-
-        authService.logOut();
-        $location.path('/login');
-        CheckScopeBeforeApply();
-    }
+  
 
 
     $scope.ClearFilter = function () {
-
-
-
 
 
         for (var i = 0; i < $scope.FilterArray.length; i++) {
@@ -579,5 +568,5 @@ app.controller('LocationController', ['$scope', 'localStorageService', 'authServ
 
 }]);
 
-app.directive()
+
 

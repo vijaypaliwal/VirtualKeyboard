@@ -1,4 +1,17 @@
-  .container
+  .mainmodal {
+        height: 100%;
+        width: 100%;
+        display: table;
+    }
+
+    .wrappermodal {
+        display: table-cell;
+        height: 100%;
+        vertical-align: middle;
+    }  
+
+
+.container
     {
         width:100%;
     }

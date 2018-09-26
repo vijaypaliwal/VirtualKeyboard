@@ -36,14 +36,7 @@ app.controller('itemgroupController', ['$scope', 'localStorageService', 'authSer
     }
 
 
-    $scope.logOut = function () {
-
-
-        authService.logOut();
-        $location.path('/login');
-
-    }
-
+   
     $scope.addItemGroup = function () {
         $scope.ItemGroupID = 0;
         $scope.ItemGroupToCreate = "";
@@ -363,9 +356,6 @@ app.controller('itemgroupController', ['$scope', 'localStorageService', 'authSer
         $scope.$apply();
     }
     init();
-
-
-
 
 
 }]);

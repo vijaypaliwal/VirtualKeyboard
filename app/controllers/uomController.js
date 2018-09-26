@@ -36,13 +36,6 @@ app.controller('uomController', ['$scope', 'localStorageService', 'authService',
     }
 
 
-    $scope.logOut = function ()
-    {
-        authService.logOut();
-        $location.path('/login');
-    }
-
-
     $scope.addUOM = function () {
         $scope.UomID = 0;
         $scope.UOMToCreate = "";

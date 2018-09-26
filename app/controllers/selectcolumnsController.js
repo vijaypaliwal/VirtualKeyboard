@@ -176,13 +176,6 @@ app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'aut
 
 
 
-    $scope.offmobileorder = function ()
-    {
-
-    }
-
-
-
     $scope.AlreadyTaken = function (ColID, order) {
         for (var i = 0; i < $scope.MyInventorycolumns.length; i++) {
             if ($scope.MyInventorycolumns[i].mobileorder == order) {
@@ -331,19 +324,7 @@ app.directive('customSwipe', [
                             
                             setTimeout(function () {
                                 element.find("input").trigger("click");
-                                //if (direction == "right" || direction == "up") {
-
-                                //    element.find("input").prop("checked", "checked");
-                                //    element.find("input").prop("checked", true);
-
-                                //}
-                                //else if (direction == "left" || direction == "down") {
-                                //    element.find("input").prop("checked", false);
-                                //    element.find("input").removeAttr("checked");
-
-                                //}
-
-                                //element.find("input").trigger("change");
+                              
 
                             },10)
                         },
