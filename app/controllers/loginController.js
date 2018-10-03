@@ -273,7 +273,7 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
     $scope.forgotURL = "https://account.inventory4.com/login/mobileforgotpassword"
 
     $scope.forgotpassword = function () {
-        cordova.InAppBrowser.open($scope.forgotURL, '_blank', 'location=yes');
+        cordova.InAppBrowser.open($scope.forgotURL, '_blank', 'location=no');
     }
 
 
