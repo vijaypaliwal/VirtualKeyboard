@@ -582,6 +582,7 @@
         var serviceBaseUrl = "";
         var serviceBase = "";
         var signupLink = "";
+        var forgotlink = "";
 
       
         $(document).on("change","#ServiceBase", function () {
@@ -602,6 +603,8 @@
                ClearlybaseURL = response.serviceBaseUrl;
                ClearlyURL = response.serviceBase;
                Signupink = response.mobileSignupUrl;
+               forgotlink = response.mobileForgotPasswordUrl;
+
                serviceBaseUrl = ClearlybaseURL;
                serviceBase = ClearlyURL;
 
@@ -611,6 +614,10 @@
 
                $("#Signuplink").val(signupLink);
                $("#Signuplink").trigger("change");
+
+
+               $("#Forgotlink").val(forgotlink);
+               $("#Forgotlink").trigger("change");
 
            },
            error: function (response) {

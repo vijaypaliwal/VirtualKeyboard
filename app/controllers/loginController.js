@@ -270,9 +270,11 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
         cordova.InAppBrowser.open($scope.SignUpUrl, '_blank', 'location=yes');
     }
 
-    $scope.forgotURL = "https://account.inventory4.com/login/mobileforgotpassword"
+    $scope.forgotURL = forgotlink;
 
     $scope.forgotpassword = function () {
+
+     
         cordova.InAppBrowser.open($scope.forgotURL, '_blank', 'location=no');
     }
 
@@ -281,6 +283,15 @@ app.controller('loginController', ['$scope', 'localStorageService', '$location',
         $scope.SignUpUrl = $(this).val();
         $scope.$apply();
     });
+
+
+    $(document).on("change", "#Forgotlink", function () {
+        $scope.forgotURL = $(this).val();
+        $scope.$apply();
+    });
+
+
+    
 
 
 }]);
