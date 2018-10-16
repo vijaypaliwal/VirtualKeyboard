@@ -843,6 +843,8 @@ function GetDefaultAccount() {
 
 function onDeviceReady() {
 
+    
+
 
     window.plugins.NativeAudio.preloadSimple('click', 'audio/click.mp3', function (msg) {
     }, function (msg) {
@@ -855,6 +857,17 @@ function onDeviceReady() {
     });
 
     navigator.splashscreen.hide();
+
+
+
+    recognition = new SpeechRecognition();
+    recognition.onresult = function (event) {
+        if (event.results.length > 0) {
+            q.value = event.results[0][0].transcript;
+            q.form.submit();
+        }
+    }
+
 
     //  navigator.splashscreen.hide();
     GetDefaultAccount();

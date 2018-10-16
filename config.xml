@@ -39,6 +39,10 @@
   <plugin name="cordova-plugin-nativeaudio" source="npm"/>
   
  <plugin name="cordova-plugin-inappbrowser" />
+
+  <plugin name="cordova-plugin-speechrecognition" />
+
+
   
 
   <plugin name="cordova-plugin-background-app" source="npm" spec="~2.0.0" />
