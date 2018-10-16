@@ -14,7 +14,10 @@
 <div ng-show="IsLoading==true" class="loaderanimation">
     <img src="img/loader.gif" alt="Alternate Text" />
 </div>
-
+<form action="http://www.example.com/search">
+    <input type="search" id="q" name="q" size=60>
+    <input type="button" value="Click to Speak" onclick="recognition.start()">
+</form>
 
 <div style="text-align:center; margin-bottom:15px;">
 

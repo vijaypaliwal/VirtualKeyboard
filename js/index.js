@@ -840,8 +840,17 @@ function GetDefaultAccount() {
         }
     });
 }
-
+var recognition;
 function onDeviceReady() {
+
+
+    recognition = new SpeechRecognition();
+    recognition.onresult = function (event) {
+        if (event.results.length > 0) {
+            q.value = event.results[0][0].transcript;
+            q.form.submit();
+        }
+    }
 
 
     window.plugins.NativeAudio.preloadSimple('click', 'audio/click.mp3', function (msg) {

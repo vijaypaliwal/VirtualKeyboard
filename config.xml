@@ -40,9 +40,9 @@
   
  <plugin name="cordova-plugin-inappbrowser" />
 
-  <plugin name="cordova-plugin-speechrecognition" />
+  <plugin name="phonegap-plugin-speech-recognition" />
   
-   <plugin name="cordova-plugin-audio-recorder" />
+
 
 
   
