@@ -41,6 +41,8 @@
  <plugin name="cordova-plugin-inappbrowser" />
 
   <plugin name="cordova-plugin-speechrecognition" />
+  
+   <plugin name="cordova-plugin-audio-recorder" />
 
 
   

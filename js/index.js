@@ -844,21 +844,7 @@ function GetDefaultAccount() {
 function onDeviceReady() {
 
 
-    $('#speak').click(function () {
-
-        alert("1");
-
-        recognition = new SpeechRecognition();
-
-        alert("2");
-        recognition.onresult = function (event) {
-            if (event.results.length > 0) {
-                console.log(event.results[0][0].transcript);
-                q.value = event.results[0][0].transcript;
-            }
-        };
-        recognition.start();
-    });
+  
 
 
     window.plugins.NativeAudio.preloadSimple('click', 'audio/click.mp3', function (msg) {

@@ -106,6 +106,23 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
         return "";
     }
 
+
+    $('#speak').click(function () {
+
+        alert("1");
+
+        recognition = new SpeechRecognition();
+
+        alert("2");
+        recognition.onresult = function (event) {
+            if (event.results.length > 0) {
+                console.log(event.results[0][0].transcript);
+                q.value = event.results[0][0].transcript;
+            }
+        };
+        recognition.start();
+    });
+
    
 
     $scope.UpdateSecurityToken = function (AccountID, AccountName, Inventorycolor) {
