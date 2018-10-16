@@ -844,16 +844,21 @@ function GetDefaultAccount() {
 function onDeviceReady() {
 
 
-    recognition = new SpeechRecognition();
+    $('#speak').click(function () {
 
-    alert("Speech");
+        alert("1");
 
-    recognition.onresult = function (event) {
-        if (event.results.length > 0) {
-            q.value = event.results[0][0].transcript;
-            q.form.submit();
-        }
-    }
+        recognition = new SpeechRecognition();
+
+        alert("2");
+        recognition.onresult = function (event) {
+            if (event.results.length > 0) {
+                console.log(event.results[0][0].transcript);
+                q.value = event.results[0][0].transcript;
+            }
+        };
+        recognition.start();
+    });
 
 
     window.plugins.NativeAudio.preloadSimple('click', 'audio/click.mp3', function (msg) {
