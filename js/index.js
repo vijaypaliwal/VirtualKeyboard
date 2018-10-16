@@ -846,7 +846,13 @@ function onDeviceReady() {
 
     recognition = new SpeechRecognition();
     recognition.onresult = function (event) {
+
+        alert("1");
+
         if (event.results.length > 0) {
+
+            alert("2");
+
             q.value = event.results[0][0].transcript;
             q.form.submit();
         }
