@@ -22,11 +22,13 @@
 
 </div>
 
-<form action="#">
-    <input type="search" id="q" name="q" size=60>
-    <input type="button" value="Click to Speak" onclick="recognition.start()">
-</form>
-
+<button id="begin" onclick="startButton(event)">Begin</button>
+<p />
+<div id="transcript">
+    <span id="complete" class="final"></span>
+    <span id="transcribing" class="interim"></span>
+    <p />
+</div>
 
 <div ng-show="Addinventory==false" class="animated slideInDown">
 
@@ -120,6 +122,92 @@
         </div>
     </div>
 </div>
+
+<script>
+    var transcript = '',
+    active = false,
+    noEndEven,
+    recognition = new webkitSpeechRecognition();
+
+    recognition.continuous = true;
+    recognition.interimResults = true;
+
+    function startButton() {
+        if (active) {
+            recognition.stop();
+            return;
+        }
+
+        transcript = '';
+        recognition.lang = "en-US";
+        recognition.start();
+        noEndEvent = false;
+        complete.innerHTML = '';
+        transcribing.innerHTML = '';
+    }
+
+    recognition.onstart = function () {
+        active = true;
+    };
+
+    recognition.onerror = function (event) {
+        if (event.error == 'no-speech' || event.error == 'not-allowed' || event.error == 'audio-capture') {
+            noEndEvent = true;
+        }
+    };
+
+    recognition.onend = function () {
+        active = false;
+        if (noEndEvent || !transcript) {
+            return;
+        }
+
+        if (window.getSelection) {
+            window.getSelection().removeAllRanges();
+            var range = document.createRange();
+            range.selectNode(document.getElementById('complete'));
+            window.getSelection().addRange(range);
+        }
+    };
+
+    recognition.onresult = function (event) {
+        var processing = '',
+            text = '';
+
+        for (var i = event.resultIndex; i < event.results.length; ++i) {
+            text = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+                transcript += text;
+            } else {
+                processing += text;
+            }
+        }
+
+        transcript = transcript;
+        complete.innerHTML = transcript;
+        transcribing.innerHTML = processing;
+    };
+</script>
+
+<style>
+    .final {
+        color: black;
+        padding-right: 3px;
+    }
+
+    .interim {
+        color: gray;
+    }
+
+    #transcript {
+        font-size: 14px;
+        font-weight: bold;
+        border: 1px solid #ddd;
+        padding: 15px;
+        text-align: left;
+        min-height: 150px;
+    }
+</style>
 
 
 
