@@ -106,25 +106,6 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
         return "";
     }
 
-
-    $('#speak').click(function () {
-
-        var settings = {
-            lang: "en-US",
-            showPopup: true
-        };
-
-        alert("1");
-
-        cordova.speechRecognition.startListening(function (result) {
-            alert(result);
-            // By default just 5 options
-            // ["Hello","Hallou", "Hellou" ...]
-        }, function (err) {
-            console.log(err);
-        }, settings);
-    });
-
    
 
     $scope.UpdateSecurityToken = function (AccountID, AccountName, Inventorycolor) {
