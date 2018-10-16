@@ -109,18 +109,20 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
 
     $('#speak').click(function () {
 
+        var settings = {
+            lang: "en-US",
+            showPopup: true
+        };
+
         alert("1");
 
-        recognition = new SpeechRecognition();
-
-        alert("2");
-        recognition.onresult = function (event) {
-            if (event.results.length > 0) {
-                console.log(event.results[0][0].transcript);
-                q.value = event.results[0][0].transcript;
-            }
-        };
-        recognition.start();
+        window.plugins.speechRecognition.startListening(function (result) {
+            alert(result);
+            // By default just 5 options
+            // ["Hello","Hallou", "Hellou" ...]
+        }, function (err) {
+            console.log(err);
+        }, settings);
     });
 
    
