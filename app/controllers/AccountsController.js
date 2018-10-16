@@ -116,7 +116,7 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
 
         alert("1");
 
-        window.plugins.speechRecognition.startListening(function (result) {
+        cordova.speechRecognition.startListening(function (result) {
             alert(result);
             // By default just 5 options
             // ["Hello","Hallou", "Hellou" ...]
