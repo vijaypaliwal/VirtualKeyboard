@@ -854,7 +854,10 @@ function onDeviceReady() {
             alert("2");
 
             q.value = event.results[0][0].transcript;
-            q.form.submit();
+
+            alert("Mere shabd --" + q.value);
+
+           // q.form.submit();
         }
     }
 
