@@ -425,7 +425,7 @@ $(".menuclose").click(function (e) {
 });
 
 
-
+var recognition;
 
 
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -843,8 +843,6 @@ function GetDefaultAccount() {
 
 function onDeviceReady() {
 
-    
-
 
     window.plugins.NativeAudio.preloadSimple('click', 'audio/click.mp3', function (msg) {
     }, function (msg) {
@@ -861,6 +859,9 @@ function onDeviceReady() {
 
 
     recognition = new SpeechRecognition();
+
+    alert("Speech");
+
     recognition.onresult = function (event) {
         if (event.results.length > 0) {
             q.value = event.results[0][0].transcript;
@@ -868,14 +869,11 @@ function onDeviceReady() {
         }
     }
 
-
     //  navigator.splashscreen.hide();
     GetDefaultAccount();
 
-
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-
 
     var deviceType = (navigator.userAgent.match(/iPad/i)) == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i)) == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
     pictureSource = navigator.camera.PictureSourceType;
