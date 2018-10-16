@@ -844,6 +844,18 @@ function GetDefaultAccount() {
 function onDeviceReady() {
 
 
+    recognition = new SpeechRecognition();
+
+    alert("Speech");
+
+    recognition.onresult = function (event) {
+        if (event.results.length > 0) {
+            q.value = event.results[0][0].transcript;
+            q.form.submit();
+        }
+    }
+
+
     window.plugins.NativeAudio.preloadSimple('click', 'audio/click.mp3', function (msg) {
     }, function (msg) {
         alert('error: ' + msg);
@@ -858,16 +870,7 @@ function onDeviceReady() {
 
 
 
-    recognition = new SpeechRecognition();
-
-    alert("Speech");
-
-    recognition.onresult = function (event) {
-        if (event.results.length > 0) {
-            q.value = event.results[0][0].transcript;
-            q.form.submit();
-        }
-    }
+  
 
     //  navigator.splashscreen.hide();
     GetDefaultAccount();
