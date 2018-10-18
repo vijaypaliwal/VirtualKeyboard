@@ -676,22 +676,14 @@ input[type="password"]:focus
      font-size:30px !important;
  }
 
- #toolbar .title
- {
-     font-size:25px;
-     line-height:63px;
- }
+ 
 
  #viewdata
  {
      margin-top:75px !important;
  }
 
-    .titletext {
-        font-size: 26px;
-    line-height: 43px;
-    margin-top: 0px;
-    }
+   
 
     .roundbtntitle {
     height: 55px;
@@ -711,37 +703,7 @@ input[type="password"]:focus
     }
 
 
-    .menubtn {
- 
-    bottom: 35px;
-    right: 35px;
-   
-    height: 90px;
-    width: 90px;
-   
   
-    line-height: 110px;
-    cursor: pointer;
-}
-
-    .menubtn i
-    {
-        font-size:45px;
-    }
-
-    #bottommenumodal .selectAction {
-  
-      bottom: 125px;
-    right: 55px;
-}
-
-    #bottommenumodal .selectAction .btn {
-height: 60px;
-    width: 60px;
-    line-height: 60px;
-    margin-bottom: 12px;
-   
-}
 
     label {
         font-size:23px;
@@ -797,39 +759,7 @@ height: 60px;
 
 
 
-        #bottommenumodal .selectAction .btn i {
-font-size:30px;
-   
-}
-
-    #bottommenumodal span {
-    font-size: 23px;
-   
-}
-
-
-    .selectAction .btn {
-    height: 60px !important;
-    width: 60px !important;
-
-    line-height: 60px !important;
-  
-}
-
-    .selectAction {
-    position: fixed;
-    bottom: 125px !important;
-    right: 52px !important;
-}
-    #myModal2 span {
-    font-size: 20px !important;
-  
-}
-
-    .selectAction li
-    {
-        margin-bottom:7px;
-    }
+      
     .cartbtn
     {
         height:90px !important;

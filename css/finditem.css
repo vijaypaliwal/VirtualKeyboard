@@ -999,5 +999,103 @@ body {
 {
     margin-top:10px;
 }
+.menubtn {
+    bottom: 35px;
+    right: 35px;
+    height: 90px;
+    width: 90px;
+    line-height: 102px;
+    cursor: pointer;
+}
+
+#toolbar .title
+ {
+     font-size:25px;
+     line-height:63px;
+ }
+  .menubtn {
+ 
+    bottom: 35px;
+    right: 35px;
+   
+    height: 90px;
+    width: 90px;
+   
+  
+    line-height: 110px;
+    cursor: pointer;
+}
+
+    .menubtn i
+    {
+        font-size:45px;
+    }
+
+    #bottommenumodal .selectAction {
+  
+      bottom: 125px;
+    right: 55px;
+}
+
+    #bottommenumodal .selectAction .btn {
+height: 60px;
+    width: 60px;
+    line-height: 60px;
+    margin-bottom: 12px;
+   
+}
+
+      #bottommenumodal .selectAction .btn i {
+font-size:30px;
+   
+}
+
+    #bottommenumodal span {
+    font-size: 23px;
+   
+}
+
+
+    .selectAction .btn {
+    height: 60px !important;
+    width: 60px !important;
+
+    line-height: 60px !important;
+  
+}
+
+    .selectAction {
+    position: fixed;
+    bottom: 125px !important;
+    right: 52px !important;
+}
+    #myModal2 span {
+    font-size: 20px !important;
+  
+}
+
+    .selectAction li
+    {
+        margin-bottom:7px;
+    }
+
+    #myModal234 span {
+    color: #000;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 8px;
+    font-size: 20px;
+    background: #fff;
+    padding-left: 25px;
+    /* text-shadow: -3px -1px 4px #ccc; */
+    padding-right: 25px;
+    text-transform: capitalize;
+}
+
+     .titletext {
+        font-size: 26px;
+    line-height: 43px;
+    margin-top: 0px;
+    }
 
 }
