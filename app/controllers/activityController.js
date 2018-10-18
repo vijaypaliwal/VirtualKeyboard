@@ -139,6 +139,19 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     }
 
+
+    $scope.toggleitem = function (index) {
+        if ($('.submenu-' + index).hasClass('CollapseData')) {
+            $('.submenu-' + index).removeClass('CollapseData');
+            $('.itemcount_' + index + ' .fa').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+        } else {
+            $('.submenu-' + index).addClass('CollapseData');
+            $('.itemcount_' + index + ' .fa').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        }
+    }
+
+
+
     $scope.SaveDropdownlabel = function () {
 
         var authData = localStorageService.get('authorizationData');
@@ -2558,6 +2571,27 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         CheckScopeBeforeApply();
         $(".form-control").first().focus();
         $("input[type='number']").trigger("change");
+
+        if ($scope.CurrentCart.length < 5) {
+
+            $(".itemlink").hide();
+
+            $(".itemcontent").removeClass("CollapseData");
+
+        
+
+            
+        }
+
+        else {
+
+            $(".itemlink").show();
+
+            $(".itemcontent").addClass("CollapseData");
+        }
+
+
+
 
     }
 
