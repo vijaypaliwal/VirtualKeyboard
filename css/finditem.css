@@ -1098,4 +1098,10 @@ font-size:30px;
     margin-top: 0px;
     }
 
+     .finditems.input-group-addon a {
+    padding: 16px !important;
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
+}
+
 }
