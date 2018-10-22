@@ -239,15 +239,15 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     $scope.onPhotoURISuccessNew = function (imageData) {
 
 
-        getFileContentAsBase64(imageData, function (base64Image) {
-            //window.open(base64Image);
-            alert(base64Image);
-            // Then you'll be able to handle the myimage.png file as base64
-        });
+        //getFileContentAsBase64(imageData, function (base64Image) {
+        //    //window.open(base64Image);
+        //    alert(base64Image);
+        //    // Then you'll be able to handle the myimage.png file as base64
+        //});
 
 
-        //alert("call");
-        //alert(imageData);
+        alert("call");
+        alert(imageData);
 
         $(".viewimage").show();
         $("#bottommenumodal").modal('hide');
