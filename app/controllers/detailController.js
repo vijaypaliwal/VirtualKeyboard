@@ -238,23 +238,25 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.onPhotoURISuccessNew = function (imageData) {
 
+
+        alert("call");
+        alert(imageData);
+
         $(".viewimage").show();
         $("#bottommenumodal").modal('hide');
 
-        var _ImgObj = { ImageID: 0,  bytestring: "", Size: 0 }
+        var _ImgObj = { ImageID: 0, FileName: "", bytestring: "", Size: 0 }
 
         imageData = "data:image/jpeg;base64," + imageData;
 
         var id = randomStringNew(5, '0123456789');
         _ImgObj.ImageID = id;
 
-        alert(imageData);
-
      
         $("#myModalforlist").modal("hide");
 
 
-      //  _ImgObj.FileName = "IphoneLibrary";
+        _ImgObj.FileName = "";
         _ImgObj.bytestring = imageData;
 
 
