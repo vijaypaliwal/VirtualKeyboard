@@ -229,7 +229,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
       
         navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
             quality: 50,
-            destinationType: destinationType.NATIVE_URI,
+            destinationType: destinationType.DATA_URL,
             allowEdit: true,
             correctOrientation: true,
             sourceType: pictureSource.PHOTOLIBRARY
