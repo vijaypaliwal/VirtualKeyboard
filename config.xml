@@ -17,6 +17,8 @@
   <plugin name="cordova-plugin-statusbar" source="npm"/>
   <plugin name="cordova-plugin-globalization" source="npm"/>
   
+  <plugin name="cordova-plugin-file" source="npm"/>
+  
   <plugin name="cordova-plugin-ios-camera-permissions" source="npm">
     <variable name="CAMERA_USAGE_DESCRIPTION" value="Clearly Inventory needs to access your photos so that we can display images of your inventory." />
     <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Clearly Inventory needs to access your photos so that we can display images of your inventory." />

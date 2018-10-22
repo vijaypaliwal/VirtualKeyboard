@@ -229,7 +229,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
       
         navigator.camera.getPicture($scope.onPhotoURISuccessNew, $scope.onFail, {
             quality: 50,
-            destinationType: destinationType.DATA_URL,
+            destinationType: destinationType.FILE_URI,
             allowEdit: true,
             correctOrientation: true,
             sourceType: pictureSource.PHOTOLIBRARY
@@ -239,8 +239,15 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     $scope.onPhotoURISuccessNew = function (imageData) {
 
 
-        alert("call");
-        alert(imageData);
+        getFileContentAsBase64(imageData, function (base64Image) {
+            //window.open(base64Image);
+            alert(base64Image);
+            // Then you'll be able to handle the myimage.png file as base64
+        });
+
+
+        //alert("call");
+        //alert(imageData);
 
         $(".viewimage").show();
         $("#bottommenumodal").modal('hide');
