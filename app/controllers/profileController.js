@@ -331,7 +331,7 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
                     + currentdate.getSeconds();
 
 
-        _ImgObj.FileName = localStorageService.get('AccountID') + _datetime;
+        _ImgObj.FileName = localStorageService.get('AccountID') + datetime;
       //  _ImgObj.FileName = "IphoneLibrary";
         _ImgObj.bytestring = imageData;
         $scope.Image = _ImgObj;

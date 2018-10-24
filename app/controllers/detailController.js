@@ -268,7 +268,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                     + currentdate.getSeconds();
 
 
-        _ImgObj.FileName = localStorageService.get('AccountID') + _datetime;
+        _ImgObj.FileName = localStorageService.get('AccountID') + datetime;
 
         _ImgObj.bytestring = imageData;
 

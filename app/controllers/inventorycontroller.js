@@ -5353,7 +5353,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $(".viewimage").show();
         $("#myModalforlist").modal("hide");
 
-        alert("Before");
+     
 
 
         var currentdate = new Date();
@@ -5365,9 +5365,9 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     + currentdate.getSeconds();
 
 
-        _ImgObj.FileName = localStorageService.get('AccountID') + _datetime;
+        _ImgObj.FileName = localStorageService.get('AccountID') + datetime;
 
-        alert(_ImgObj.FileName);
+      
 
 
 
