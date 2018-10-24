@@ -2331,9 +2331,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   $scope.Totalslides = 0;
                   $scope.CurrentCount = 0;
                   $scope.MyinventoryFields = [];
+
+
+
                   if (response.GetAllDataResult.Success == true) {
-
-
 
                       var _TempArray = response.GetAllDataResult.Payload;
 
@@ -2453,12 +2454,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                           _obj.CustomFieldIndex = _obj.cfdID != 0 ? $scope.getIndexBycolName(_obj.cfdID) : -1;
                           $scope.MyinventoryFields.push(_obj);
 
-
-
-
-
-
-
                       }
 
 
@@ -2466,12 +2461,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                       // Custom Activity Field 
 
 
-
                       $scope.CustomActivityDataList = response.GetAllDataResult.Payload[0].CustomActivityField;
-
-
-
-
 
 
 
@@ -5364,7 +5354,20 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $("#myModalforlist").modal("hide");
 
 
-        _ImgObj.FileName = "IphoneLibrary";
+        var currentdate = new Date();
+        var datetime = currentdate.getDate() + "/"
+                    + (currentdate.getMonth() + 1) + "/"
+                    + currentdate.getFullYear() + "@"
+                    + currentdate.getHours() + ":"
+                    + currentdate.getMinutes() + ":"
+                    + currentdate.getSeconds();
+
+
+        _ImgObj.FileName = localStorageService.get('AccountID') + _datetime;
+
+
+
+      //  _ImgObj.FileName = "IphoneLibrary";
         _ImgObj.bytestring = imageData;
 
 

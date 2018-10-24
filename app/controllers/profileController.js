@@ -322,8 +322,17 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         $(".viewimage").show();
         $("#myModalforlist").modal("hide");
 
+        var currentdate = new Date();
+        var datetime = currentdate.getDate() + "/"
+                    + (currentdate.getMonth() + 1) + "/"
+                    + currentdate.getFullYear() + "@"
+                    + currentdate.getHours() + ":"
+                    + currentdate.getMinutes() + ":"
+                    + currentdate.getSeconds();
 
-        _ImgObj.FileName = "IphoneLibrary";
+
+        _ImgObj.FileName = localStorageService.get('AccountID') + _datetime;
+      //  _ImgObj.FileName = "IphoneLibrary";
         _ImgObj.bytestring = imageData;
         $scope.Image = _ImgObj;
 

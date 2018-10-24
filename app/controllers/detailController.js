@@ -236,6 +236,12 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         });
     }
 
+
+ 
+
+   
+
+
     $scope.onPhotoURISuccessNew = function (imageData) {
 
         alert(imageData);
@@ -253,8 +259,17 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
      
         $("#myModalforlist").modal("hide");
 
+        var currentdate = new Date();
+        var datetime = currentdate.getDate() + "/"
+                    + (currentdate.getMonth() + 1) + "/"
+                    + currentdate.getFullYear() + "@"
+                    + currentdate.getHours() + ":"
+                    + currentdate.getMinutes() + ":"
+                    + currentdate.getSeconds();
 
-        _ImgObj.FileName = "IphoneLibrary";
+
+        _ImgObj.FileName = localStorageService.get('AccountID') + _datetime;
+
         _ImgObj.bytestring = imageData;
 
 
@@ -493,6 +508,11 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         $("#customradiotextmodal").modal("hide");
 
     }
+
+
+  
+
+    
 
 
     $scope.UpdateInventory = function () {
@@ -875,6 +895,18 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                     }
                 }
 
+
+                for (var i = 0; i < $scope.Itemdata.length; i++) {
+                    var _defaultValue = angular.copy($scope.Itemdata[i].cfdValue);
+
+
+                    if ($scope.Itemdata[i].cfdDataType == "string" && $scope.Itemdata[i].cfdprefixsuffixtype == 1) {
+                       
+                        $scope.Itemdata[i].cfdValue = $scope.Itemdata[i].cfdValue.replace($scope.Itemdata[i].cfdPrefix, '');
+                       
+                      //  alert("New val = " + $scope.Itemdata[i].cfdValue);
+                    }
+                }
 
 
 
