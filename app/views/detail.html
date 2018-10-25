@@ -208,6 +208,21 @@
     {
         margin-top:15px;
     }
+
+    .input-group .form-control
+    {
+        border-radius:0 !important;
+    }
+
+    input[type=email] {
+        /* Remove First */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        /* Then Style */
+    
+        outline: none;
+    }
 </style>
 <div class="title-header">
 
@@ -381,7 +396,7 @@
 
         </div>
 
-        <div class="card m-t-10 animated fadeinup delay-1" style="padding:10px;" ng-if="IsEmptyAllcheck(CurrentInventory)==true">
+        <div class="card m-t-10 animated fadeinup delay-1" style="padding:10px;">
             <div class="c-widget">
                 
                 <div class="c-widget-body">

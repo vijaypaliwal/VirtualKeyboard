@@ -204,3 +204,39 @@ body {
     border-top-right-radius: 5px !important;
     border-bottom-right-radius: 5px !important;
 }
+
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .append .inner {
+    background-color: #e9ecef !important;
+    color: #888 !important;
+    vertical-align: middle;
+    padding: 9px;
+    padding-bottom: 15px;
+    padding-top: 18px;
+    font-size: 17px;
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    border: 1px solid #ccc;
+    /* line-height: 23px; */
+    font-weight: 100;
+    border-left: transparent;
+}
+
+.prepend .inner {
+    background-color: #e9ecef !important;
+    color: #888 !important;
+    vertical-align: middle;
+    /* margin-top: 22px; */
+    padding: 9px;
+    padding-bottom: 16px;
+    padding-top: 17px;
+    font-size: 17px;
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+    border: 1px solid #ccc;
+    /* line-height: 23px; */
+    font-weight: 100;
+    border-right: transparent;
+}
+}

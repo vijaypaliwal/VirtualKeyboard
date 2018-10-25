@@ -224,6 +224,28 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     }
 
 
+    $(document)
+  .on('focus', 'input,select', function () {
+
+
+      $('#toolbar').css("position", "absolute");
+      $('.title-header').css("position", "absolute");
+      $('.newbackbtn').css("display", "none");
+
+      
+
+  })
+  .on('blur', 'input,select', function () {
+
+
+      $('#toolbar').css("position", "fixed");
+      $('.title-header').css("position", "fixed");
+      $('.newbackbtn').css("display", "block");
+
+  });
+
+
+
     $scope.getPhoto = function (source)
     {
       
