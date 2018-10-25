@@ -485,7 +485,7 @@
                 <div ng-repeat="obj in MyinventoryFields" class="form-group">
 
                     <!--<p>Val - {{InventoryObject[obj.CustomFieldIndex].Value}}</p>-->
-                    <label> {{obj.cfdName}} <span ng-if="obj.Required" class="redText">*</span> </label>
+                    <label> {{obj.cfdName}} <span ng-if="obj.Required" class="redText">*</span>  </label>
 
                     <div ng-if="obj.cfdDataType=='string'">
 
@@ -590,7 +590,7 @@
                             <label style="width:100%" class="switch1">
                                 <input ng-if="InventoryObject[obj.CustomFieldIndex].Value =='true' || InventoryObject[obj.CustomFieldIndex].Value ==true" id="CustomItem_{{obj.cfdID}}" ng-init="InventoryObject[obj.CustomFieldIndex].Value=true" type="checkbox" ng-model="InventoryObject[obj.CustomFieldIndex].Value">
 
-                                <input ng-if="InventoryObject[obj.CustomFieldIndex].Value=='false' || InventoryObject[obj.CustomFieldIndex].Value ==false" id="CustomItem_{{obj.cfdID}}" type="checkbox" ng-model="InventoryObject[obj.CustomFieldIndex].Value">
+                                <input ng-if="InventoryObject[obj.CustomFieldIndex].Value=='false' || InventoryObject[obj.CustomFieldIndex].Value ==false || InventoryObject[obj.CustomFieldIndex].Value ==null" id="CustomItem_{{obj.cfdID}}" type="checkbox" ng-model="InventoryObject[obj.CustomFieldIndex].Value">
 
                                 <div class="slider round"></div>
 
