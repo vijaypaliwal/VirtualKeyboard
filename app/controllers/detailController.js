@@ -860,9 +860,9 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
             contentType: 'application/json',
             success: function (result) {
 
-                alert("Success 123");
+            
 
-                debugger;
+              
 
                 
 
@@ -899,15 +899,34 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                 for (var i = 0; i < $scope.Itemdata.length; i++) {
                     var _defaultValue = angular.copy($scope.Itemdata[i].cfdValue);
 
-
                     if ($scope.Itemdata[i].cfdDataType == "string" && $scope.Itemdata[i].cfdprefixsuffixtype == 1) {
                        
-                        $scope.Itemdata[i].cfdValue = $scope.Itemdata[i].cfdValue.replace($scope.Itemdata[i].cfdPrefix, '');
-                       
-                      //  alert("New val = " + $scope.Itemdata[i].cfdValue);
+                      $scope.Itemdata[i].cfdValue = $scope.Itemdata[i].cfdValue.replace($scope.Itemdata[i].cfdPrefix, '');
                     }
-                }
 
+                    if ($scope.Itemdata[i].cfdDataType == "string" && $scope.Itemdata[i].cfdprefixsuffixtype == 2) {
+
+                        $scope.Itemdata[i].cfdValue = $scope.Itemdata[i].cfdValue.replace($scope.Itemdata[i].cfdSuffix, '');
+                    }
+
+                    if ($scope.Itemdata[i].cfdDataType == "string" && $scope.Itemdata[i].cfdprefixsuffixtype == 3) {
+
+                        $scope.Itemdata[i].cfdValue = $scope.Itemdata[i].cfdValue.replace($scope.Itemdata[i].cfdSuffix, '');
+                        $scope.Itemdata[i].cfdValue = $scope.Itemdata[i].cfdValue.replace($scope.Itemdata[i].cfdPrefix, '');
+                    }
+
+                    if ($scope.Itemdata[i].cfdDataType == "currency" || $scope.Itemdata[i].cfdDataType == "number") {
+
+                        $scope.Itemdata[i].cfdValue = parseFloat($scope.Itemdata[i].cfdValue);
+                      
+                    }
+
+                 
+
+
+                    
+
+                }
 
 
 
@@ -1010,25 +1029,57 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                 console.log("$scope.Itemdata");
                 console.log($scope.Itemdata);
 
+                setTimeout(function () {
+                    SetWeekMonthValues();
+                },300)
+             
+                $scope.loaditemfields = true;
              
 
             },
             error: function (err) {
 
-                alert("Error");
-
-                debugger;
+             
+                $scope.loaditemfields = true;
 
            
 
             },
             complete: function () {
+
+                $scope.loaditemfields = true;
+
             }
         });
 
     }
 
-    $scope.GetItemvalues();
+   
+
+
+    function SetWeekMonthValues() {
+
+        debugger;
+        $(".weekPicker").each(function () {
+            var _val = $(this).attr("selectvalue");
+          
+            $(this).val(_val);
+            $(this).trigger("change");
+        });
+
+        $(".radioselectlist").each(function () {
+            var _val = $(this).attr("selectvalue");
+
+          
+
+            $(this).val(_val);
+            $(this).trigger("change");
+        });
+
+
+        
+
+    }
 
 
     $scope.IsRequired = function (id, type) {
@@ -1289,6 +1340,9 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
         $scope.itemlabel = $scope.CurrentInventory.pPart
         CheckIntoCartData();
+
+      
+
         CheckScopeBeforeApply();
     }
 
@@ -1368,9 +1422,8 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     $scope.ToggleEditView = function () {
 
-
-        console.log("Custom Item data toggle");
-        console.log($scope.InventoryObject);
+       
+       
 
         $("#myModal2").modal('hide');
         $("#bottommenumodal").modal('hide');
@@ -1379,11 +1432,27 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
 
         $scope.IsEditMode = !$scope.IsEditMode;
+
+        if ($scope.IsEditMode == true) {
+
+            $scope.loaditemfields = false;
+            $scope.GetItemvalues();
+
+        }
+
+
+
         setTimeout(function () { InitializeSwiper() }, 10);
+
+
+     
+
 
         setTimeout(function () {
             $(".loadingimage").hide();
             $(".imagesection").show();
+          
+
         }, 300);
     }
 

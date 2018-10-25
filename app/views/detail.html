@@ -190,6 +190,14 @@
     {
         border-radius:0;
     }
+
+    .spinner {
+        text-align: center;
+        position: fixed;
+        width: 100%;
+        margin-top: 160px;
+        z-index: 100;
+    }
 </style>
 <div class="title-header">
 
@@ -207,7 +215,10 @@
 <a ng-if="IsEditMode==true" ng-click="ToggleEditView()" class="btn waves-effect btn-danger roundbtntitle"> <i class="fa fa-times"></i> </a>
 <a ng-if="IsActiveItemLibrary==false" ng-click="locked()" class="btn waves-effect btn-danger roundbtntitle"> <i class="fa fa-lock"></i> </a>
 
-
+<div ng-show="loaditemfields==false" class="spinner" style="text-align:center">
+    <br /><br /><br />
+    <img src="img/loader.gif" alt="Alternate Text" />
+</div>
 
 <div id="content" class="top50 grey-blue" >
     <div ng-show="IsEditMode==false">
@@ -424,13 +435,12 @@
                 <div ng-repeat="obj in MyinventoryFields" class="form-group">
 
                     <!--<p>Val - {{InventoryObject[obj.CustomFieldIndex].Value}}</p>-->
-                    <label> {{obj.cfdName}} <span ng-if="obj.Required" class="redText">*</span></label>
+                    <label> {{obj.cfdName}} <span ng-if="obj.Required" class="redText">*</span> val : <b> {{InventoryObject[obj.CustomFieldIndex].Value}} </b> </label>
 
                     <div ng-if="obj.cfdDataType=='string'">
 
                         <div class="input-group" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType !=1">
                             <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='1'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='2'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='3'">
-
 
 
                                 <input  maxlength="{{GetCustomItemObjByColumnmap(obj.ColumnName).MaxLength}}" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='text' || GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask==0" type="text" ng-model="InventoryObject[obj.CustomFieldIndex].Value" class="form-control" />
@@ -446,7 +456,7 @@
 
                                 <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='email'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject[obj.CustomFieldIndex].Value" class="emailtextbox form-control" />
 
-                                <select id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject[obj.CustomFieldIndex].Value" class="form-control weekPicker" selectvalue="{{InventoryObject.CustomPartData[obj.CustomFieldIndex].Value}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='week'">
+                                <select id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject[obj.CustomFieldIndex].Value" class="form-control weekPicker" selectvalue="{{InventoryObject[obj.CustomFieldIndex].Value}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='week'">
                                     <option value="">choose week</option>
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear-1}}-W{{n}}">Week {{n}}, {{CurrentYear-1}}</option>
                                     <option ng-repeat="n in weeklist" value="{{CurrentYear}}-W{{n}}">Week {{n}}, {{CurrentYear}}</option>
@@ -507,7 +517,7 @@
 
                     <div ng-if="obj.cfdDataType=='number'" class="input-group">
 
-                        <input ng-model="InventoryObject[obj.CustomFieldIndex].Value" id="CustomItem_{{obj.cfdID}}" max="{{GetCustomItemObjByColumnmap(obj.ColumnName).MaximumValue}}" min="{{GetCustomItemObjByColumnmap(obj.ColumnName).MinimumValue}}" name="CustomItem_{{obj.ColumnName}}" type="text" class="form-control FormControlType" />
+                        <input ng-model="InventoryObject[obj.CustomFieldIndex].Value" id="CustomItem_{{obj.cfdID}}" max="{{GetCustomItemObjByColumnmap(obj.ColumnName).MaximumValue}}" min="{{GetCustomItemObjByColumnmap(obj.ColumnName).MinimumValue}}" name="CustomItem_{{obj.ColumnName}}" type="number" class="form-control FormControlType" />
 
                         <span ng-if="GetCustomColumn(obj.ColumnName).cfdIsIncremental==true" ng-click="UpDownValue(obj.ColumnName,false,1)" class="input-group-addon last">
                             <i class="fa fa-minus"></i>
@@ -519,7 +529,7 @@
                     </div>
 
                     <div ng-if="obj.cfdDataType=='currency'" class="input-group">
-                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject[obj.CustomFieldIndex].Value" value="{{obj.CfValue}}" />
+                        <input id="CustomItem_{{obj.cfdID}}" type="number" class="form-control FormControlType" ng-model="InventoryObject[obj.CustomFieldIndex].Value" />
                     </div>
 
 
@@ -528,7 +538,10 @@
 
                         <div class="btn-group custombtnGroup" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType!=4 && GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType!=5">
                             <label style="width:100%" class="switch1">
-                                <input id="CustomItem_{{obj.cfdID}}" ng-checked="InventoryObject[obj.CustomFieldIndex].Value==true" type="checkbox" ng-model="InventoryObject[obj.CustomFieldIndex].Value">
+                                <input ng-if="InventoryObject[obj.CustomFieldIndex].Value =='true' || InventoryObject[obj.CustomFieldIndex].Value ==true" id="CustomItem_{{obj.cfdID}}" ng-init="InventoryObject[obj.CustomFieldIndex].Value=true" type="checkbox" ng-model="InventoryObject[obj.CustomFieldIndex].Value">
+
+                                <input ng-if="InventoryObject[obj.CustomFieldIndex].Value=='false' || InventoryObject[obj.CustomFieldIndex].Value ==false" id="CustomItem_{{obj.cfdID}}" type="checkbox" ng-model="InventoryObject[obj.CustomFieldIndex].Value">
+
                                 <div class="slider round"></div>
 
                                 <span style="margin-left:75px; -webkit-box-decoration-break: clone;" ng-if="InventoryObject[obj.CustomFieldIndex].Value==true">
@@ -544,19 +557,18 @@
                         <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType==4">
 
 
-                            <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject[obj.CustomFieldIndex].Value">
-                                <option ng-selected="InventoryObject[obj.CustomFieldIndex].Value==true" ng-value="true" value="true">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</option>
-                                <option ng-selected="InventoryObject[obj.CustomFieldIndex].Value==false" ng-value="false" value="false">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</option>
+                            <select id="CustomItem_{{obj.cfdID}}" class="form-control radioselectlist" ng-model="InventoryObject[obj.CustomFieldIndex].Value" selectvalue="{{InventoryObject[obj.CustomFieldIndex].Value}}">
+                                <option ng-selected="InventoryObject[obj.CustomFieldIndex].Value==true" value="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</option>
+                                <option ng-selected="InventoryObject[obj.CustomFieldIndex].Value==false" ng-value="false" value="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</option>
                             </select>
                         </div>
 
 
                         <div class="" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType==5">
                             <p class="todo-element">
-                                <input name="CustomItem_{{obj.cfdID}}" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject[obj.CustomFieldIndex].Value" ng-value="true" value="true" ng-checked="InventoryObject[obj.CustomFieldIndex].Value==true" type="radio"> <label for="CustomItem_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</label>
+                                <input name="CustomItem_{{obj.cfdID}}" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject[obj.CustomFieldIndex].Value" ng-value="true" value="true" ng-checked="InventoryObject.obj.CustomFieldIndex].Value==true" type="radio"> <label for="CustomItem_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</label>
                                 <input name="CustomItem_{{obj.cfdID}}" id="CustomItem1_{{obj.cfdID}}" ng-model="InventoryObject[obj.CustomFieldIndex].Value" ng-value="false" value="false" ng-checked="InventoryObject[obj.CustomFieldIndex].Value==false" type="radio"> <label for="CustomItem1_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</label>
                             </p>
-
 
                         </div>
                     </div>
