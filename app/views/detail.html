@@ -435,7 +435,7 @@
                 <div ng-repeat="obj in MyinventoryFields" class="form-group">
 
                     <!--<p>Val - {{InventoryObject[obj.CustomFieldIndex].Value}}</p>-->
-                    <label> {{obj.cfdName}} <span ng-if="obj.Required" class="redText">*</span> val : <b> {{InventoryObject[obj.CustomFieldIndex].Value}} </b> </label>
+                    <label> {{obj.cfdName}} <span ng-if="obj.Required" class="redText">*</span> </label>
 
                     <div ng-if="obj.cfdDataType=='string'">
 
@@ -566,8 +566,8 @@
 
                         <div class="" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType==5">
                             <p class="todo-element">
-                                <input name="CustomItem_{{obj.cfdID}}" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject[obj.CustomFieldIndex].Value" ng-value="true" value="true" ng-checked="InventoryObject.obj.CustomFieldIndex].Value==true" type="radio"> <label for="CustomItem_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</label>
-                                <input name="CustomItem_{{obj.cfdID}}" id="CustomItem1_{{obj.cfdID}}" ng-model="InventoryObject[obj.CustomFieldIndex].Value" ng-value="false" value="false" ng-checked="InventoryObject[obj.CustomFieldIndex].Value==false" type="radio"> <label for="CustomItem1_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</label>
+                                <input name="CustomItem_{{obj.cfdID}}" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject[obj.CustomFieldIndex].Value" ng-value="true" value="true" ng-checked="InventoryObject.obj.CustomFieldIndex].Value==true" type="radio"> <label class="chekasradiotrue" currentvalue="{{InventoryObject[obj.CustomFieldIndex].Value}}" for="CustomItem_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</label>
+                                <input name="CustomItem_{{obj.cfdID}}" id="CustomItem1_{{obj.cfdID}}" ng-model="InventoryObject[obj.CustomFieldIndex].Value" ng-value="false" value="false" ng-checked="InventoryObject[obj.CustomFieldIndex].Value==false" type="radio"> <label class="chekasradiofalse" currentvalue="{{InventoryObject[obj.CustomFieldIndex].Value}}" for="CustomItem1_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</label>
                             </p>
 
                         </div>

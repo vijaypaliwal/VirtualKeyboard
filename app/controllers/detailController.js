@@ -1077,6 +1077,34 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         });
 
 
+        $(".chekasradiotrue").each(function () {
+            var _val = $(this).attr("currentvalue");
+
+          
+
+            if (_val == true || _val == "true") {
+
+                $(this).trigger("click");
+            }
+           
+        });
+
+        $(".chekasradiofalse").each(function () {
+            var _val = $(this).attr("currentvalue");
+
+
+
+            if (_val == false || _val == "false") {
+
+                $(this).trigger("click");
+            }
+
+        });
+
+
+        
+
+
         
 
     }
