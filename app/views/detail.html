@@ -381,6 +381,46 @@
 
         </div>
 
+        <div class="card m-t-10 animated fadeinup delay-1" style="padding:10px;" ng-if="IsEmptyAllcheck(CurrentInventory)==true">
+            <div class="c-widget">
+                
+                <div class="c-widget-body">
+                    <h4 style="text-align:center;">All Item field details</h4>
+
+                    <div style="text-align:center;" ng-show="itemsummaryload==false">
+                        <p><img style="height:30px;" src="img/loader.gif" alt="Alternate Text" /> </p>
+                       
+                     
+                    </div>
+
+                    <table ng-show="itemsummaryload==true" class="table table-bordered">
+                        <tr ng-repeat="summary in Itemsummary">
+                            <td style="text-align:right;" width="50%;">
+                                <p> {{summary.cfdName}} </p>
+                            </td>
+                            <td style="text-align:left;" width="50%;">
+                                <p style="color:#888" ng-if="summary.cfdValue != null"> {{summary.cfdValue}} </p>
+
+                                <p style="color:#888" ng-if="summary.cfdValue == null"> N/A </p>
+
+                                
+
+                            </td>
+                        </tr>
+                    </table>
+                   
+
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+
+
 <br /><br />
 
     </div>

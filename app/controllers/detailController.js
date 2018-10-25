@@ -237,9 +237,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     }
 
 
- 
-
-   
 
 
     $scope.onPhotoURISuccessNew = function (imageData) {
@@ -289,6 +286,50 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
        // $("#myModalforCropImg").modal("show");       
 
     }
+
+    $scope.itemsummaryload = false;
+
+
+
+    $scope.GetItemSummary = function () {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        $.ajax({
+            url: serviceBase + "GetCustomFieldsWithValues",
+            type: 'POST',
+            data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": 0, "ItemId": $scope.CurrentInventory.pID }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (result) {
+
+
+                $scope.Itemsummary = result.GetCustomFieldsWithValuesResult.Payload;
+
+                console.log("$scope.Itemsummary");
+                console.log($scope.Itemsummary);
+                $scope.itemsummaryload = true;
+
+                CheckScopeBeforeApply();
+
+            },
+            error: function (err) {
+
+                $scope.itemsummaryload = true;
+
+            },
+            complete: function () {
+
+                $scope.itemsummaryload = true;
+            }
+        });
+
+    }
+
+
 
 
 
@@ -552,13 +593,14 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                                 //log.success("Inventory updated successfully.");
                                 ShowSuccess("Updated");
                                 $scope.IsEditMode = false;
-
+                                $scope.itemsummaryload = false;
                                 $scope.$apply();
                                 localStorageService.set("CurrentDetailObject", $scope.CurrentInventory);
                                 $scope.SavingData = false;
                                 init();
                                 $scope.getitemimage();
                                 $scope.UpdateCartItems();
+                              
                             }
                             else {
                                 log.error(Message);
@@ -843,9 +885,14 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
     }
 
 
+ 
+
+
 
 
     $scope.GetItemvalues = function () {
+
+        $scope.MyinventoryFields = [];
 
         var authData = localStorageService.get('authorizationData');
         if (authData) {
@@ -899,17 +946,19 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                 for (var i = 0; i < $scope.Itemdata.length; i++) {
                     var _defaultValue = angular.copy($scope.Itemdata[i].cfdValue);
 
-                    if ($scope.Itemdata[i].cfdDataType == "string" && $scope.Itemdata[i].cfdprefixsuffixtype == 1) {
+                    if ($scope.Itemdata[i].cfdDataType == "string" && $scope.Itemdata[i].cfdprefixsuffixtype == 1 && $scope.Itemdata[i].cfdValue != null) {
                        
+                        debugger;
+
                       $scope.Itemdata[i].cfdValue = $scope.Itemdata[i].cfdValue.replace($scope.Itemdata[i].cfdPrefix, '');
                     }
 
-                    if ($scope.Itemdata[i].cfdDataType == "string" && $scope.Itemdata[i].cfdprefixsuffixtype == 2) {
+                    if ($scope.Itemdata[i].cfdDataType == "string" && $scope.Itemdata[i].cfdprefixsuffixtype == 2 && $scope.Itemdata[i].cfdValue != null) {
 
                         $scope.Itemdata[i].cfdValue = $scope.Itemdata[i].cfdValue.replace($scope.Itemdata[i].cfdSuffix, '');
                     }
 
-                    if ($scope.Itemdata[i].cfdDataType == "string" && $scope.Itemdata[i].cfdprefixsuffixtype == 3) {
+                    if ($scope.Itemdata[i].cfdDataType == "string" && $scope.Itemdata[i].cfdprefixsuffixtype == 3 && $scope.Itemdata[i].cfdValue != null) {
 
                         $scope.Itemdata[i].cfdValue = $scope.Itemdata[i].cfdValue.replace($scope.Itemdata[i].cfdSuffix, '');
                         $scope.Itemdata[i].cfdValue = $scope.Itemdata[i].cfdValue.replace($scope.Itemdata[i].cfdPrefix, '');
@@ -920,11 +969,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                         $scope.Itemdata[i].cfdValue = parseFloat($scope.Itemdata[i].cfdValue);
                       
                     }
-
-                 
-
-
-                    
 
                 }
 
@@ -1034,6 +1078,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
                 },300)
              
                 $scope.loaditemfields = true;
+                CheckScopeBeforeApply();
              
 
             },
@@ -1091,8 +1136,6 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
         $(".chekasradiofalse").each(function () {
             var _val = $(this).attr("currentvalue");
-
-
 
             if (_val == false || _val == "false") {
 
@@ -1369,8 +1412,9 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         $scope.itemlabel = $scope.CurrentInventory.pPart
         CheckIntoCartData();
 
+    
       
-
+        $scope.GetItemSummary();
         CheckScopeBeforeApply();
     }
 
@@ -1466,6 +1510,12 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
             $scope.loaditemfields = false;
             $scope.GetItemvalues();
 
+        }
+
+        else {
+            $scope.itemsummaryload = false;
+            $scope.GetItemSummary();
+            CheckScopeBeforeApply();
         }
 
 
