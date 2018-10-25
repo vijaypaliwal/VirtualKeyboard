@@ -242,6 +242,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
       $('.title-header').css("position", "fixed");
       $('.newbackbtn').css("display", "block");
 
+      
   });
 
 
