@@ -110,6 +110,9 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
                    var _ActualCount = parseInt(response.GetRecentActivityResult.Payload.ActualCount);
 
                    $scope.Recentactivities = response.GetRecentActivityResult.Payload.data;
+
+                   debugger;
+
                    $scope.$apply();
                    if (_ActualCount==0)
                    {
@@ -123,13 +126,13 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
                    }
                    else {
 
-                       $scope.ShowErrorMessage("Recent Activities", 1, 1, response.GetRecentActivityResult.Message);
+                       $scope.ShowErrorMessage("Recent Events", 1, 1, response.GetRecentActivityResult.Message);
                    }
                },
                error: function (err) {
                     
                    $scope.isSearching = false;
-                   $scope.ShowErrorMessage("Recent Activities", 2, 1, err.statusText)
+                   $scope.ShowErrorMessage("Recent Events", 2, 1, err.statusText)
 
                }
            });
@@ -137,7 +140,7 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
     $scope.Undo = function (TransID, InvID, ParentID) {
 
 
-        var box = bootbox.confirm("Are you sure you want to Undo this activity?", function (result) {
+        var box = bootbox.confirm("Are you sure you want to Undo this event?", function (result) {
             if (result) {
 
                  
@@ -167,14 +170,14 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
                                }
                            }
                            else {
-                               $scope.ShowErrorMessage("Undo Activity", 1, 1, result.UndoActivityResult.Message)
+                               $scope.ShowErrorMessage("Undo Event", 1, 1, result.UndoActivityResult.Message)
 
                               
                            }
                           
                        },
                        error: function (err) {
-                           $scope.ShowErrorMessage("Undo Activity", 2, 1, err.statusText);
+                           $scope.ShowErrorMessage("Undo Event", 2, 1, err.statusText);
 
                        }
                    });
@@ -183,7 +186,7 @@ app.controller('InventoryHistoryController', ['$scope', 'localStorageService', '
 
    
         box.on("shown.bs.modal", function () {
-            $(".mybootboxbody").html("Once undone, this activity will be removed and cannot be restored.");
+            $(".mybootboxbody").html("Once undone, this event will be removed and cannot be restored.");
 
         });  
 
