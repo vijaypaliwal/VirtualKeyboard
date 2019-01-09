@@ -42,8 +42,8 @@
  <plugin name="cordova-plugin-inappbrowser" />
 
   <plugin name="phonegap-plugin-speech-recognition" />
-  
-  
+
+  <plugin name="com-socketmobile-scanapi-cordova" spec="https://github.com/vijaypaliwal/SDK.git" />
 
   <plugin name="cordova-plugin-background-app" source="npm" spec="~2.0.0" />
 
