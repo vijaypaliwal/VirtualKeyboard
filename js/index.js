@@ -846,7 +846,7 @@ function scanApiNotification(event) {
     event = JSON.parse(event);
     if (event.type) {
         alert('receive an event: ' + event.type);
-        document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
+      //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
         // document.getElementById('eventRec').setAttribute("class", "blink");
         if (event.type === 'decodedData') {
             alert('decodedData: ', event.decodedData);
@@ -855,17 +855,14 @@ function scanApiNotification(event) {
             for (var i = 0; i < event.decodedData.length; i++) {
                 scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
             }
-            document.getElementById('eventData').innerHTML = scannedV;
+         //   document.getElementById('eventData').innerHTML = scannedV;
 
-
+            alert(scannedV);
             $(".form-control").each(function () {
-
-                alert(scannedV);
 
                 if ($(this).hasFocus()) {
                     $(this).val(scannedV);
                     $(this).trigger("change");
-
                     alert(scannedV);
                 }
             });
