@@ -879,7 +879,7 @@ function scanApiNotification(event) {
 function onDeviceReady() {
 
 
-    SocketScanApi.useScanApi('', this.scanApiNotification.bind(event));
+    SocketScanApi.useScanApi('', scanApiNotification.bind(event));
 
     alert("Socket API Work");
 
