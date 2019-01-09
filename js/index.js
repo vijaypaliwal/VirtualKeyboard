@@ -857,13 +857,13 @@ function scanApiNotification(event) {
             }
          //   document.getElementById('eventData').innerHTML = scannedV;
 
-            alert("Out Result" + scannedV);
+            alert("Out Result = " + scannedV);
             $(".form-control").each(function () {
 
                 if ($(this).hasFocus()) {
                     $(this).val(scannedV);
                     $(this).trigger("change");
-                    alert("In Result" + scannedV);
+                    alert("In Result = " + scannedV);
                 }
             });
 
