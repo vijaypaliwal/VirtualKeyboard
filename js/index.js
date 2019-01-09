@@ -857,13 +857,13 @@ function scanApiNotification(event) {
             }
          //   document.getElementById('eventData').innerHTML = scannedV;
 
-            alert(scannedV);
+            alert("Out Result" + scannedV);
             $(".form-control").each(function () {
 
                 if ($(this).hasFocus()) {
                     $(this).val(scannedV);
                     $(this).trigger("change");
-                    alert(scannedV);
+                    alert("In Result" + scannedV);
                 }
             });
 
@@ -881,8 +881,7 @@ function onDeviceReady() {
 
     SocketScanApi.useScanApi('', scanApiNotification.bind(event));
 
-    alert("Socket API Work");
-
+   
 
     recognition = new SpeechRecognition();
     recognition.onresult = function (event) {
