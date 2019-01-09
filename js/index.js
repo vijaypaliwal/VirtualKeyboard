@@ -841,7 +841,50 @@ function GetDefaultAccount() {
     });
 }
 var recognition;
+
+function scanApiNotification(event) {
+    event = JSON.parse(event);
+    if (event.type) {
+        alert('receive an event: ' + event.type);
+        document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
+        // document.getElementById('eventRec').setAttribute("class", "blink");
+        if (event.type === 'decodedData') {
+            alert('decodedData: ', event.decodedData);
+            //  document.getElementById('eventData').innerHTML = event.decodedData.join(",");
+            var scannedV = '';
+            for (var i = 0; i < event.decodedData.length; i++) {
+                scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
+            }
+            document.getElementById('eventData').innerHTML = scannedV;
+
+
+            $(".form-control").each(function () {
+
+                alert(scannedV);
+
+                if ($(this).hasFocus()) {
+                    $(this).val(scannedV);
+                    $(this).trigger("change");
+
+                    alert(scannedV);
+                }
+            });
+
+            // let decodedData = event.decodedData.map(c => String.fromCharCode(c)).join('');
+
+        }
+    }
+}
+
+
+
+
 function onDeviceReady() {
+
+
+    SocketScanApi.useScanApi('', this.scanApiNotification.bind(event));
+
+    alert("Socket API Work");
 
 
     recognition = new SpeechRecognition();
@@ -860,6 +903,8 @@ function onDeviceReady() {
            // q.form.submit();
         }
     }
+
+
 
 
     window.plugins.NativeAudio.preloadSimple('click', 'audio/click.mp3', function (msg) {
