@@ -858,14 +858,31 @@ function scanApiNotification(event) {
          //   document.getElementById('eventData').innerHTML = scannedV;
 
             alert("Out Result = " + scannedV);
-            $(".form-control").each(function () {
+
+         
+
+            var count = 0;
+
+            $("#firstDiv .form-control").each(function () {
+
+                if (count == 0) {
+
+                    alert("In loop ID = " + $(this).attr('id'));
+                    count = 1;
+
+                }
+
 
                 if ($(this).hasFocus()) {
+               
                     $(this).val(scannedV);
                     $(this).trigger("change");
                     alert("In Result = " + scannedV);
                 }
             });
+
+
+            alert("Jquery is working");
 
             // let decodedData = event.decodedData.map(c => String.fromCharCode(c)).join('');
 
