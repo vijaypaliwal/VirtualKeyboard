@@ -873,7 +873,7 @@ function scanApiNotification(event) {
                 }
 
 
-                if ($(this).hasFocus()) {
+                if ($(this).is(':focus')){
                
                     $(this).val(scannedV);
                     $(this).trigger("change");
