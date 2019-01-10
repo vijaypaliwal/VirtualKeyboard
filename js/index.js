@@ -845,10 +845,6 @@ var recognition;
 function scanApiNotification(event) {
     event = JSON.parse(event);
 
-    var scannedV = "BLC1002"
-
-    alert(scannedV);
-
     if (event.type) {
         alert('receive an event: ' + event.type);
       //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
@@ -865,7 +861,6 @@ function scanApiNotification(event) {
             alert("Out Result = " + scannedV);
 
          
-
             var count = 0;
 
             $("#firstDiv .form-control").each(function () {
@@ -902,15 +897,7 @@ function scanApiNotification(event) {
         }
     }
 
-    //Remove temporary
-
-    var $focused = $(':focus');
-
-    $focused.val(scannedV);
-
-    $focused.trigger("change");
-
-    alert("focus text value = " + $focused.val());
+  
 
 
 }
