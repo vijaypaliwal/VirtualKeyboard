@@ -34,7 +34,7 @@
 
 
             <tbody class="dragarea" ui-sortable="sortableOptions" ng-model="MyInventorycolumns">
-                <tr data-ng-repeat="obj in MyInventorycolumns" ng-if="obj.mobileorder!=0" class="MoveCursor" ng-class="{'unsortable':isallowdrag==false}">
+                <tr data-ng-repeat="obj in MyInventorycolumns" ng-if="obj.mobileorder!=0 && obj.ColumnLabel !='Events'" class="MoveCursor" ng-class="{'unsortable':isallowdrag==false}">
                     <td>
                         <div class="infoareas">
 

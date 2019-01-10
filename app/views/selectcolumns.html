@@ -33,7 +33,7 @@
 
 
         <tbody class="dragarea"  ng-model="MyInventorycolumns">
-            <tr data-ng-repeat="obj in MyInventorycolumns" class="MoveCursor" >
+            <tr data-ng-repeat="obj in MyInventorycolumns" ng-if="obj.ColumnLabel !='Events'" class="MoveCursor">
                 <td>
                     <div class="infoareas">
                         <div class="row">
@@ -49,7 +49,7 @@
                                         <input type="checkbox" ng-model="obj.originalMobileOrder">
                                         <div class="slider round"></div>
                                     </label>
-                                 
+
                                 </div>
                                 <div class="pull-right" ng-if="obj.ColumnLabel == 'Item Name'">
                                     <p style="color:brown;">*Required</p>
