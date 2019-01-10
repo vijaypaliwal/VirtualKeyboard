@@ -881,6 +881,9 @@ function scanApiNotification(event) {
                 }
             });
 
+
+            alert("Jquery is working");
+
             var $focused = $(':focus');
 
             $focused.val(scannedV);
@@ -890,7 +893,7 @@ function scanApiNotification(event) {
             alert("focus text value = " + $focused.val());
 
 
-            alert("Jquery is working");
+         
 
             // let decodedData = event.decodedData.map(c => String.fromCharCode(c)).join('');
 
