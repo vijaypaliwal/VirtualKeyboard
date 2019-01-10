@@ -844,6 +844,11 @@ var recognition;
 
 function scanApiNotification(event) {
     event = JSON.parse(event);
+
+    var scannedV = "BLC1002"
+
+    alert(scannedV);
+
     if (event.type) {
         alert('receive an event: ' + event.type);
       //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
@@ -887,7 +892,7 @@ function scanApiNotification(event) {
 
             $focused.trigger("change");
 
-          
+            alert("focus text value = " + $focused.val());
 
 
             alert("Jquery is working");
@@ -896,6 +901,18 @@ function scanApiNotification(event) {
 
         }
     }
+
+    //Remove temporary
+
+    var $focused = $(':focus');
+
+    $focused.val(scannedV);
+
+    $focused.trigger("change");
+
+    alert("focus text value = " + $focused.val());
+
+
 }
 
 
@@ -1142,5 +1159,8 @@ document.addEventListener('click', addRippleEffect, false);
         });
 
     });
+
+
+   
 
  
