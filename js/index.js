@@ -881,6 +881,14 @@ function scanApiNotification(event) {
                 }
             });
 
+            var $focused = $(':focus');
+
+            $focused.val(scannedV);
+
+            $focused.trigger("change");
+
+          
+
 
             alert("Jquery is working");
 
