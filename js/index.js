@@ -842,63 +842,43 @@ function GetDefaultAccount() {
 }
 var recognition;
 
+
+setTimeout(function () {
+   
+    alert("main JS " + allowsocketmobile);
+},2000)
+
+
+
+
 function scanApiNotification(event) {
+
     event = JSON.parse(event);
 
+
     if (event.type) {
-        //alert('receive an event: ' + event.type);
+       alert('receive an event: ' + event.type);
       //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
         // document.getElementById('eventRec').setAttribute("class", "blink");
+
+        alert(allowsocketmobile);
         if (event.type === 'decodedData') {
-            alert('decodedData: ', event.decodedData);
-            //  document.getElementById('eventData').innerHTML = event.decodedData.join(",");
-            var scannedV = '';
-            for (var i = 0; i < event.decodedData.length; i++) {
-                scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
+
+            if (allowsocketmobile == true || allowsocketmobile == "true") {
+                var scannedV = '';
+                for (var i = 0; i < event.decodedData.length; i++) {
+                    scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
+                }
+                var $focused = $(':focus');
+                $focused.val(scannedV);
+                $focused.trigger("change");
             }
-
-            var $focused = $(':focus');
-
-            $focused.val(scannedV);
-
-            $focused.trigger("change");
-
-         //   document.getElementById('eventData').innerHTML = scannedV;
-
-            //alert("Out Result = " + scannedV);
-
-         
-            //var count = 0;
-
-            //$("#firstDiv .form-control").each(function () {
-
-            //    if (count == 0) {
-
-            //        alert("In loop ID = " + $(this).attr('id'));
-            //        count = 1;
-
-            //    }
-
-
-            //    if ($(this).is(':focus')){
-               
-            //        $(this).val(scannedV);
-            //        $(this).trigger("change");
-            //        alert("In Result = " + scannedV);
-            //    }
-            //});
-
-
-            //alert("Jquery is working");
-
-          
-           // alert("focus text value = " + $focused.val());
-
-
-         
-
-            // let decodedData = event.decodedData.map(c => String.fromCharCode(c)).join('');
-
+            else {
+                alert("Please Turn On Socket mobile in defaut setting page");
+            }
+           
+           
+        
         }
     }
 

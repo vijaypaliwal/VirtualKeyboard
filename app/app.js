@@ -210,6 +210,11 @@ app.config(function ($routeProvider) {
 });
 
 
+var allowsocketmobile = localStorage.getItem("allowsocket");
+
+
+
+
 //var serviceBaseUrl = 'http://localhost:24003/';
 //var serviceBase = 'http://localhost:24003/ClearlyInventoryAPI.svc/';
 
