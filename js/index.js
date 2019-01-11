@@ -846,7 +846,7 @@ function scanApiNotification(event) {
     event = JSON.parse(event);
 
     if (event.type) {
-        alert('receive an event: ' + event.type);
+        //alert('receive an event: ' + event.type);
       //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
         // document.getElementById('eventRec').setAttribute("class", "blink");
         if (event.type === 'decodedData') {
@@ -856,33 +856,6 @@ function scanApiNotification(event) {
             for (var i = 0; i < event.decodedData.length; i++) {
                 scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
             }
-         //   document.getElementById('eventData').innerHTML = scannedV;
-
-            alert("Out Result = " + scannedV);
-
-         
-            var count = 0;
-
-            $("#firstDiv .form-control").each(function () {
-
-                if (count == 0) {
-
-                    alert("In loop ID = " + $(this).attr('id'));
-                    count = 1;
-
-                }
-
-
-                if ($(this).is(':focus')){
-               
-                    $(this).val(scannedV);
-                    $(this).trigger("change");
-                    alert("In Result = " + scannedV);
-                }
-            });
-
-
-            alert("Jquery is working");
 
             var $focused = $(':focus');
 
@@ -890,7 +863,36 @@ function scanApiNotification(event) {
 
             $focused.trigger("change");
 
-            alert("focus text value = " + $focused.val());
+         //   document.getElementById('eventData').innerHTML = scannedV;
+
+            //alert("Out Result = " + scannedV);
+
+         
+            //var count = 0;
+
+            //$("#firstDiv .form-control").each(function () {
+
+            //    if (count == 0) {
+
+            //        alert("In loop ID = " + $(this).attr('id'));
+            //        count = 1;
+
+            //    }
+
+
+            //    if ($(this).is(':focus')){
+               
+            //        $(this).val(scannedV);
+            //        $(this).trigger("change");
+            //        alert("In Result = " + scannedV);
+            //    }
+            //});
+
+
+            //alert("Jquery is working");
+
+          
+           // alert("focus text value = " + $focused.val());
 
 
          
