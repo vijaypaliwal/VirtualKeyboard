@@ -861,7 +861,7 @@ function scanApiNotification(event) {
        // alert(allowsocketmobile);
         if (event.type === 'decodedData') {
 
-            if (allowsocketmobile == true || allowsocketmobile == "true") {
+           // if (allowsocketmobile == true || allowsocketmobile == "true") {
                 var scannedV = '';
                 for (var i = 0; i < event.decodedData.length; i++) {
                     scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
@@ -869,10 +869,10 @@ function scanApiNotification(event) {
                 var $focused = $(':focus');
                 $focused.val(scannedV);
                 $focused.trigger("change");
-            }
-            else {
-                alert("Please Turn On Socket mobile in default setting page");
-            }
+            //}
+            //else {
+                //alert("Please Turn On Socket mobile in default setting page");
+            //}
            
            
         
