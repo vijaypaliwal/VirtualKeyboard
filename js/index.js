@@ -843,10 +843,7 @@ function GetDefaultAccount() {
 var recognition;
 
 
-setTimeout(function () {
-   
-    alert("main JS " + allowsocketmobile);
-},2000)
+
 
 
 
@@ -857,11 +854,11 @@ function scanApiNotification(event) {
 
 
     if (event.type) {
-       alert('receive an event: ' + event.type);
+     //  alert('receive an event: ' + event.type);
       //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
         // document.getElementById('eventRec').setAttribute("class", "blink");
 
-        alert(allowsocketmobile);
+       // alert(allowsocketmobile);
         if (event.type === 'decodedData') {
 
             if (allowsocketmobile == true || allowsocketmobile == "true") {
@@ -874,7 +871,7 @@ function scanApiNotification(event) {
                 $focused.trigger("change");
             }
             else {
-                alert("Please Turn On Socket mobile in defaut setting page");
+                alert("Please Turn On Socket mobile in default setting page");
             }
            
            
