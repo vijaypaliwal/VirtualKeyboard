@@ -93,7 +93,7 @@
                                         </div>
                                     </div>
 
-                                    <div ng-if="InventoryObject.AutoID==false && IsItemLibrary==true && IsActiveItemLibrary==true" class="input-group">
+                                    <div  class="input-group">
                                         <div>
 
                                             <input type="text" id="ItemName" class="form-control" ng-change="Itemvaluechange()" my-enter="GoToNext()" ng-model="InventoryObject.ItemID" required="" autocorrect="off" autocapitalize="none" />
@@ -1586,7 +1586,7 @@
 
                                             </div>
 
-                                            <div ng-if="InventoryObject.AutoID==false && IsItemLibrary==true && IsActiveItemLibrary==true" class="input-group">
+                                            <div  class="input-group">
                                                 <div>
 
                                                     <input type="text" id="ItemName" class="form-control" ng-keyup="SetItemChoseFalse()" ng-blur="SwitchModeItemChange()" ng-change="itemvaluechange()" my-enter="GoToNext()" ng-model="InventoryObject.ItemID" required="" autocorrect="off" autocapitalize="none" />
