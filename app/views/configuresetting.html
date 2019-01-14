@@ -1,6 +1,12 @@
 ﻿<link href="css/setting.css" rel="stylesheet" />
 <link href="css/mobileorder.css" rel="stylesheet" />
 <link href="css/customfield.css" rel="stylesheet" />
+<style>
+    a.title
+    {
+        width:auto;
+    }
+</style>
 
 
 
@@ -145,8 +151,9 @@
             <div class="col-xs-4">
                 <div class="btn-group custombtnGroup">
                     <label class="switch1">
+                        <input type="checkbox" ng-change="setsocketmobile()" ng-model="SettingsVm.socketmobile">
 
-                        <input type="checkbox" ng-checked="SettingsVm.socketmobile==true || SettingsVm.socketmobile=='true'" ng-change="setsocketmobile()" ng-model="SettingsVm.socketmobile">
+                        <!--<input type="checkbox" ng-checked="SettingsVm.socketmobile==true || SettingsVm.socketmobile=='true'" ng-change="setsocketmobile()" ng-model="SettingsVm.socketmobile">-->
                         <div class="slider round"></div>
                     </label>
 

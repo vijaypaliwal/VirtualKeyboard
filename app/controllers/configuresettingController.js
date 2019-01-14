@@ -12,12 +12,18 @@ app.controller('configuresettingController', ['$scope', 'localStorageService', '
         }
     };
 
+    if (allowsocketmobile == true || allowsocketmobile=='true') {
+        $scope.SettingsVm.socketmobile = true;
+        CheckScopeBeforeApply();
+    }
+
 
   
 
     $scope.setsocketmobile = function () {
 
-      localStorage.setItem("allowsocket", $scope.SettingsVm.socketmobile);
+        localStorage.setItem("allowsocket", $scope.SettingsVm.socketmobile);
+        CheckScopeBeforeApply();
 
     }
 
