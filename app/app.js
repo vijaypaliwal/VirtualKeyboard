@@ -212,6 +212,12 @@ app.config(function ($routeProvider) {
 
 var allowsocketmobile = localStorage.getItem("allowsocket");
 
+if (allowsocketmobile == null || allowsocketmobile == undefined) {
+
+    allowsocketmobile = true;
+
+}
+
 
 
 
