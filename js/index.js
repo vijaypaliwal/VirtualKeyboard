@@ -858,10 +858,10 @@ function scanApiNotification(event) {
       //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
         // document.getElementById('eventRec').setAttribute("class", "blink");
 
-        alert(allowsocketmobile);
+        //alert(allowsocketmobile);
         if (event.type === 'decodedData') {
 
-            if (allowsocketmobile == true || allowsocketmobile == 'true') {
+           // if (allowsocketmobile == true || allowsocketmobile == 'true') {
                 var scannedV = '';
                 for (var i = 0; i < event.decodedData.length; i++) {
                     scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
@@ -869,10 +869,10 @@ function scanApiNotification(event) {
                 var $focused = $(':focus');
                 $focused.val(scannedV);
                 $focused.trigger("change");
-            }
-            else {
-                alert("Please Turn On Socket mobile in default setting page");
-            }
+           // }
+            //else {
+               // alert("Please Turn On Socket mobile in default setting page");
+          //  }
            
            
         
@@ -891,28 +891,6 @@ function onDeviceReady() {
 
 
     SocketScanApi.useScanApi('', scanApiNotification.bind(event));
-
-   
-
-    recognition = new SpeechRecognition();
-    recognition.onresult = function (event) {
-
-        alert("1");
-
-        if (event.results.length > 0) {
-
-            alert("2");
-
-            q.value = event.results[0][0].transcript;
-
-            alert("Mere shabd --" + q.value);
-
-           // q.form.submit();
-        }
-    }
-
-
-
 
     window.plugins.NativeAudio.preloadSimple('click', 'audio/click.mp3', function (msg) {
     }, function (msg) {
