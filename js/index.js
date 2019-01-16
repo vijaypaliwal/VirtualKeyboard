@@ -849,45 +849,44 @@ var recognition;
 
 
 function scanApiNotification(event) {
+    try {
+        event = JSON.parse(event);
 
-    event = JSON.parse(event);
 
+        if (event.type) {
+            //  alert('receive an event: ' + event.type);
+            //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
+            // document.getElementById('eventRec').setAttribute("class", "blink");
 
-    if (event.type) {
-        //  alert('receive an event: ' + event.type);
-        //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
-        // document.getElementById('eventRec').setAttribute("class", "blink");
+            //alert(allowsocketmobile);
+            if (event.type === 'decodedData') {
 
-        //alert(allowsocketmobile);
-        if (event.type === 'decodedData') {
+                // if (allowsocketmobile == true || allowsocketmobile == 'true') {
+                var scannedV = '';
+                for (var i = 0; i < event.decodedData.length; i++) {
+                    scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
+                }
 
-            // if (allowsocketmobile == true || allowsocketmobile == 'true') {
-            var scannedV = '';
-            for (var i = 0; i < event.decodedData.length; i++) {
-                scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
-            }
-            try {
                 var $focused = $(':focus');
                 if ($focused.prop('type') == "text") {
                     $focused.val(scannedV);
                     $focused.trigger("change");
                 }
+
+
+                // }
+                //else {
+                // alert("Please Turn On Socket mobile in default setting page");
+                //  }
+
             }
-            catch (err) {
-                alert("Problem in selection");
-            }
-
-            // }
-            //else {
-            // alert("Please Turn On Socket mobile in default setting page");
-            //  }
-
-
 
         }
+
     }
-
-
+    catch (err) {
+        alert("Problem in selection");
+    }
 
 
 }
