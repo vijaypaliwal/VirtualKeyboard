@@ -848,52 +848,39 @@ var recognition;
 
 
 function scanApiNotification(event) {
-     
-        event = JSON.parse(event);
+
+    event = JSON.parse(event);
 
 
-        if (event.type) {
-              alert('receive an event: ' + event.type);
-            //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
-            // document.getElementById('eventRec').setAttribute("class", "blink");
+    if (event.type) {
+        alert('receive an event: ' + event.type);
+        //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
+        // document.getElementById('eventRec').setAttribute("class", "blink");
 
-            if (event.type === 'scanApiTerminated')
-            {
-                alert("Scanner having issue and I am trying to re-start");
-                reStartTheScanner();
-            }
-
-            //alert(allowsocketmobile);
-            if (event.type === 'decodedData') {
-
-                // if (allowsocketmobile == true || allowsocketmobile == 'true') {
-                var scannedV = '';
-                for (var i = 0; i < event.decodedData.length; i++) {
-                    scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
-                }
-
-                var $focused = $(':focus');
-                if ($focused.prop('type') == "text") {
-                    $focused.val(scannedV);
-                    $focused.trigger("change");
-                }
-
-
-                // }
-                //else {
-                // alert("Please Turn On Socket mobile in default setting page");
-                //  }
-
-            }
-
+        if (event.type === 'scanApiTerminated') {
+            alert("Scanner having issue and I am trying to re-start");
+            reStartTheScanner();
         }
 
-   
+
+        if (event.type === 'decodedData') {
+            var scannedV = '';
+            for (var i = 0; i < event.decodedData.length; i++) {
+                scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
+            }
+            var $focused = $(':focus');
+            $focused.val(scannedV);
+            $focused.trigger("change");
+        }
+
+    }
+
+
 }
 
 
 function reStartTheScanner() {
-    
+
     SocketScanApi.useScanApi('', scanApiNotification.bind(event));
     alert("Re-started, please continue scanning");
 }
