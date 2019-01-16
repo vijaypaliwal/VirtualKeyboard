@@ -868,8 +868,10 @@ function scanApiNotification(event) {
             }
             try {
                 var $focused = $(':focus');
-                $focused.val(scannedV);
-                $focused.trigger("change");
+                if ($focused.prop('type') == "text") {
+                    $focused.val(scannedV);
+                    $focused.trigger("change");
+                }
             }
             catch (err) {
                 alert("Problem in selection");
