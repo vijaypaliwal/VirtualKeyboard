@@ -869,16 +869,25 @@ function scanApiNotification(event) {
                 scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
             }
            
-             setTimeout(function() {
+              
+                 try
+                 {
                  var $focused = $(':focus');
                 if($focused.attr("type")=="text")
                  { 
-                   alert("Scanned Value:"+ scannedV);
+                  
                    $focused.val(scannedV);
                    $focused.trigger("change");
+                 }else
+                 {
+                   alert("not geting focused");   
                  }
-                 
-              }, 50 );
+                  alert("Scanned Value:"+ scannedV);
+                 }catch(err)
+                 {
+                       alert("focus error");
+                 }
+             
               
              
            
