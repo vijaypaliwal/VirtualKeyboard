@@ -847,16 +847,21 @@ var recognition;
 
 
 
-
 function scanApiNotification(event) {
-    try {
+     
         event = JSON.parse(event);
 
 
         if (event.type) {
-            //  alert('receive an event: ' + event.type);
+              alert('receive an event: ' + event.type);
             //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
             // document.getElementById('eventRec').setAttribute("class", "blink");
+
+            if (event.type === 'scanApiTerminated')
+            {
+                alert("Scanner having issue and I am trying to re-start");
+                reStartTheScanner();
+            }
 
             //alert(allowsocketmobile);
             if (event.type === 'decodedData') {
@@ -883,15 +888,15 @@ function scanApiNotification(event) {
 
         }
 
-    }
-    catch (err) {
-        alert("Problem in selection");
-    }
-
-
+   
 }
 
 
+function reStartTheScanner() {
+    
+    SocketScanApi.useScanApi('', scanApiNotification.bind(event));
+    alert("Re-started, please continue scanning");
+}
 
 
 function onDeviceReady() {
