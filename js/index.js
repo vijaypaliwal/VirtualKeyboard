@@ -1,155 +1,152 @@
- 
-  
-       (function ($, window, document, undefined) {
 
 
-           var pluginName = "addClear";
+(function ($, window, document, undefined) {
 
-           // The actual plugin constructor
-           function Plugin(element, options) {
-               this.element = element;
 
-               this.options = $.extend({}, defaults, options);
+    var pluginName = "addClear";
 
-               this._defaults = defaults;
-               this._name = pluginName;
+    // The actual plugin constructor
+    function Plugin(element, options) {
+        this.element = element;
 
-               this.init();
-           }
+        this.options = $.extend({}, defaults, options);
 
-           Plugin.prototype = {
+        this._defaults = defaults;
+        this._name = pluginName;
 
-               init: function () {
-                   var $this = $(this.element),
-                     me = this,
-                     options = this.options;
+        this.init();
+    }
 
-                   $this.wrap("<div class='add-clear-span form-group has-feedback " + options.wrapperClass + "'></div>");
-                   $this.after($("<span class='add-clear-x form-control-feedback " + options.symbolClass + "' style='display: none;'>" + options.closeSymbol + "</span>"));
-                   $this.next().css({
-                       'color': options.color,
-                       'cursor': 'pointer',
-                       'text-decoration': 'none',
-                       'display': 'none',
-                       'overflow': 'hidden',
-                       'position': 'absolute',
-                       'pointer-events': 'auto',
-                       'right': options.right,
-                       'top': options.top,
-                       'z-index': options.zindex
-                   }, this);
+    Plugin.prototype = {
 
-                   if ($this.val().length >= 1 && options.showOnLoad === true) {
-                       $this.siblings(".add-clear-x").show();
-                   }
+        init: function () {
+            var $this = $(this.element),
+              me = this,
+              options = this.options;
 
-                   $this.on('focus.addclear', function () {
-                       if ($(this).val().length >= 1) {
-                           $(this).siblings(".add-clear-x").show();
-                       }
-                   });
+            $this.wrap("<div class='add-clear-span form-group has-feedback " + options.wrapperClass + "'></div>");
+            $this.after($("<span class='add-clear-x form-control-feedback " + options.symbolClass + "' style='display: none;'>" + options.closeSymbol + "</span>"));
+            $this.next().css({
+                'color': options.color,
+                'cursor': 'pointer',
+                'text-decoration': 'none',
+                'display': 'none',
+                'overflow': 'hidden',
+                'position': 'absolute',
+                'pointer-events': 'auto',
+                'right': options.right,
+                'top': options.top,
+                'z-index': options.zindex
+            }, this);
 
-                   $this.on('blur.addclear', function () {
-                       var self = this;
+            if ($this.val().length >= 1 && options.showOnLoad === true) {
+                $this.siblings(".add-clear-x").show();
+            }
 
-                       if (options.hideOnBlur) {
-                           setTimeout(function () {
-                               $(self).siblings(".add-clear-x").hide();
-                           }, 50);
-                       }
-                   });
+            $this.on('focus.addclear', function () {
+                if ($(this).val().length >= 1) {
+                    $(this).siblings(".add-clear-x").show();
+                }
+            });
 
-                   $this.on('keyup.addclear', function (e) {
+            $this.on('blur.addclear', function () {
+                var self = this;
 
-                       if (options.clearOnEscape === true && e.keyCode == 27) {
-                           $(this).val('').focus();
-                           if (options.onClear) {
-                               options.onClear($(this).siblings("input"));
-                           }
-                       }
-                       if ($(this).val().length >= 1) {
-                           $(this).siblings(".add-clear-x").show();
-                       } else {
-                           $(this).siblings(".add-clear-x").hide();
-                       }
-                   });
+                if (options.hideOnBlur) {
+                    setTimeout(function () {
+                        $(self).siblings(".add-clear-x").hide();
+                    }, 50);
+                }
+            });
 
-                   $this.on('input.addclear change.addclear paste.addclear', function () {
-                       if ($(this).val().length >= 1) {
-                           $(this).siblings(".add-clear-x").show();
-                       } else {
-                           $(this).siblings(".add-clear-x").hide();
-                       }
-                   });
+            $this.on('keyup.addclear', function (e) {
 
-                   $this.siblings(".add-clear-x").on('click.addclear', function (e) {
+                if (options.clearOnEscape === true && e.keyCode == 27) {
+                    $(this).val('').focus();
+                    if (options.onClear) {
+                        options.onClear($(this).siblings("input"));
+                    }
+                }
+                if ($(this).val().length >= 1) {
+                    $(this).siblings(".add-clear-x").show();
+                } else {
+                    $(this).siblings(".add-clear-x").hide();
+                }
+            });
 
-                      
+            $this.on('input.addclear change.addclear paste.addclear', function () {
+                if ($(this).val().length >= 1) {
+                    $(this).siblings(".add-clear-x").show();
+                } else {
+                    $(this).siblings(".add-clear-x").hide();
+                }
+            });
 
-                       $(this).siblings(me.element).val("");
-                       $(this).hide();
-                       if (options.returnFocus === true) {
-                           $(this).siblings(me.element).focus();
-                       }
-                       if (options.onClear) {
-                           options.onClear($(this).siblings("input"));
-                       }
-                       $(this).siblings(me.element).trigger('input');
-                       e.preventDefault();
-                   });
-               }
+            $this.siblings(".add-clear-x").on('click.addclear', function (e) {
 
-           };
 
-           $.fn[pluginName] = function (options, optionName, optionValue) {
-               return this.each(function () {
-                   if (options === "option") {
-                       var $this = $(this);
-                       if (optionName === "show") {
-                           $this.siblings(".add-clear-x").show();
-                       } else if (optionName === "hide") {
-                           $this.siblings(".add-clear-x").hide();
-                       }
-                   }
-                   var isSetOption = optionName && optionName !== "show" && optionName !== "hide";
-                   if (isSetOption) {
-                       var oldInstance = $.data(this, "plugin_" + pluginName);
-                       if (!oldInstance || !oldInstance.options) {
-                           throw "Cannot set option, plugin was not instantiated";
-                       }
-                       oldInstance.options[optionName] = optionValue;
-                   } else {
-                       if (!$.data(this, "plugin_" + pluginName)) {
-                           $.data(this,
-                               "plugin_" + pluginName,
-                               new Plugin(this, options));
-                       }
-                   }
 
-               });
-           };
+                $(this).siblings(me.element).val("");
+                $(this).hide();
+                if (options.returnFocus === true) {
+                    $(this).siblings(me.element).focus();
+                }
+                if (options.onClear) {
+                    options.onClear($(this).siblings("input"));
+                }
+                $(this).siblings(me.element).trigger('input');
+                e.preventDefault();
+            });
+        }
 
-           $.fn[pluginName].Constructor = Plugin;
+    };
 
-           var defaults = $.fn[pluginName].defaults = {
-               closeSymbol: "",
-               symbolClass: 'glyphicon glyphicon-remove-circle',
-               color: "#CCC",
-               top: 0,
-               right: 0,
-               returnFocus: true,
-               showOnLoad: false,
-               onClear: null,
-               hideOnBlur: false,
-               clearOnEscape: true,
-               wrapperClass: '',
-               zindex: 100
-           };
+    $.fn[pluginName] = function (options, optionName, optionValue) {
+        return this.each(function () {
+            if (options === "option") {
+                var $this = $(this);
+                if (optionName === "show") {
+                    $this.siblings(".add-clear-x").show();
+                } else if (optionName === "hide") {
+                    $this.siblings(".add-clear-x").hide();
+                }
+            }
+            var isSetOption = optionName && optionName !== "show" && optionName !== "hide";
+            if (isSetOption) {
+                var oldInstance = $.data(this, "plugin_" + pluginName);
+                if (!oldInstance || !oldInstance.options) {
+                    throw "Cannot set option, plugin was not instantiated";
+                }
+                oldInstance.options[optionName] = optionValue;
+            } else {
+                if (!$.data(this, "plugin_" + pluginName)) {
+                    $.data(this,
+                        "plugin_" + pluginName,
+                        new Plugin(this, options));
+                }
+            }
 
-       })(jQuery, window, document);
- 
- 
+        });
+    };
 
+    $.fn[pluginName].Constructor = Plugin;
+
+    var defaults = $.fn[pluginName].defaults = {
+        closeSymbol: "",
+        symbolClass: 'glyphicon glyphicon-remove-circle',
+        color: "#CCC",
+        top: 0,
+        right: 0,
+        returnFocus: true,
+        showOnLoad: false,
+        onClear: null,
+        hideOnBlur: false,
+        clearOnEscape: true,
+        wrapperClass: '',
+        zindex: 100
+    };
+
+})(jQuery, window, document);
 
 
 
@@ -158,7 +155,10 @@
 
 
 
-    var myDate = new Date();
+
+
+
+var myDate = new Date();
 var _genVar = 0;
 var _timeZone = myDate.getTimezoneOffset();
 
@@ -196,7 +196,7 @@ $(".signoutbtn").click(function () {
 
 //$(document).on('input', '.prepostCustom', function (e) {
 //    // if useing right key move cursor to first position it auto move focus at last character in text box 
- 
+
 //    var prefix = $(this).attr("data-prefix");
 //    var suffix = $(this).attr("data-suffix");
 
@@ -221,7 +221,7 @@ $(".signoutbtn").click(function () {
 
 //$(document).on('input', '.prepostCustomActivity', function (e) {
 //    // if useing right key move cursor to first position it auto move focus at last character in text box 
- 
+
 //    var prefix = $(this).attr("data-prefix");
 //    var suffix = $(this).attr("data-suffix");
 
@@ -854,32 +854,38 @@ function scanApiNotification(event) {
 
 
     if (event.type) {
-     //  alert('receive an event: ' + event.type);
-      //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
+        //  alert('receive an event: ' + event.type);
+        //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
         // document.getElementById('eventRec').setAttribute("class", "blink");
 
         //alert(allowsocketmobile);
         if (event.type === 'decodedData') {
 
-           // if (allowsocketmobile == true || allowsocketmobile == 'true') {
-                var scannedV = '';
-                for (var i = 0; i < event.decodedData.length; i++) {
-                    scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
-                }
+            // if (allowsocketmobile == true || allowsocketmobile == 'true') {
+            var scannedV = '';
+            for (var i = 0; i < event.decodedData.length; i++) {
+                scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
+            }
+            try {
                 var $focused = $(':focus');
                 $focused.val(scannedV);
                 $focused.trigger("change");
-           // }
+            }
+            catch (err) {
+                alert("Problem in selection");
+            }
+
+            // }
             //else {
-               // alert("Please Turn On Socket mobile in default setting page");
-          //  }
-           
-           
-        
+            // alert("Please Turn On Socket mobile in default setting page");
+            //  }
+
+
+
         }
     }
 
-  
+
 
 
 }
@@ -917,11 +923,11 @@ function onDeviceReady() {
     destinationType = navigator.camera.DestinationType;
     $cordovaSplashscreen.hide();
 
- 
+
 
     InitializeModal();
 
-    
+
 
     try {
 
@@ -984,130 +990,130 @@ window.addEventListener('statusTap', function () {
     $('html,body').animate({ scrollTop: 0 }, 800);
 });
 
- 
-
- 
-    var addRippleEffect = function (e) {
-        var target = e.target;
-        if (target.tagName !== 'a') return false;
 
 
-        var rect = target.getBoundingClientRect();
-        var ripple = target.querySelector('.ripple');
-        if (!ripple) {
-            ripple = document.createElement('span');
-            ripple.className = 'ripple';
-            ripple.style.height = ripple.style.width = Math.max(rect.width, rect.height) + 'px';
-            target.appendChild(ripple);
-        }
-        ripple.classList.remove('show');
-        var top = e.pageY - rect.top - ripple.offsetHeight / 2 - document.body.scrollTop;
-        var left = e.pageX - rect.left - ripple.offsetWidth / 2 - document.body.scrollLeft;
-        ripple.style.top = top + 'px';
-        ripple.style.left = left + 'px';
-        ripple.classList.add('show');
-        return false;
+
+var addRippleEffect = function (e) {
+    var target = e.target;
+    if (target.tagName !== 'a') return false;
+
+
+    var rect = target.getBoundingClientRect();
+    var ripple = target.querySelector('.ripple');
+    if (!ripple) {
+        ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.height = ripple.style.width = Math.max(rect.width, rect.height) + 'px';
+        target.appendChild(ripple);
     }
+    ripple.classList.remove('show');
+    var top = e.pageY - rect.top - ripple.offsetHeight / 2 - document.body.scrollTop;
+    var left = e.pageX - rect.left - ripple.offsetWidth / 2 - document.body.scrollLeft;
+    ripple.style.top = top + 'px';
+    ripple.style.left = left + 'px';
+    ripple.classList.add('show');
+    return false;
+}
 
 document.addEventListener('click', addRippleEffect, false);
- 
 
 
 
 
- 
 
-    function ShowSuccessActivity(Message, Type) {
 
-        switch (Type) {
-            case -1:
-                $(".errorcontent").css("background", "rgba(175,37,37,0.7)");
 
-                break;
-            case 0:
-                $(".errorcontent").css("background", "rgba(198,94,40,0.7)");
-                break;
-            case 1:
-                $(".errorcontent").css("background", "rgba(23,123,61,0.7)");
-                break;
-            case 2:
+function ShowSuccessActivity(Message, Type) {
 
-                $(".errorcontent").css("background", "rgba(206,89,161,0.7)");
+    switch (Type) {
+        case -1:
+            $(".errorcontent").css("background", "rgba(175,37,37,0.7)");
 
-                break;
-            case 3:
-                $(".errorcontent").css("background", "rgba(88,55,130,0.7)");
-                break;
-            case 4:
-                $(".errorcontent").css("background", "rgba(13,25,15,0.7)");
-                break;
-            case 5:
-                $(".errorcontent").css("background", "rgba(140, 105,0,0.7)");
-                break;
-            case 12:
+            break;
+        case 0:
+            $(".errorcontent").css("background", "rgba(198,94,40,0.7)");
+            break;
+        case 1:
+            $(".errorcontent").css("background", "rgba(23,123,61,0.7)");
+            break;
+        case 2:
 
-                $(".errorcontent").css("background", "rgba(248,194,23,0.7)");
+            $(".errorcontent").css("background", "rgba(206,89,161,0.7)");
 
-                break;
-            default:
+            break;
+        case 3:
+            $(".errorcontent").css("background", "rgba(88,55,130,0.7)");
+            break;
+        case 4:
+            $(".errorcontent").css("background", "rgba(13,25,15,0.7)");
+            break;
+        case 5:
+            $(".errorcontent").css("background", "rgba(140, 105,0,0.7)");
+            break;
+        case 12:
 
-        }
-        Message = Message != null && Message != undefined ? Message : "Saved";
-        $("#mysmallModal").removeClass('bounceOut').addClass('bounceIn');
-        $('#mysmallModal').show();
-        $('#DataText').html(Message);
+            $(".errorcontent").css("background", "rgba(248,194,23,0.7)");
 
-        setTimeout(function () {
-            hideSuccess();
-        }, 250)
+            break;
+        default:
+
     }
- 
+    Message = Message != null && Message != undefined ? Message : "Saved";
+    $("#mysmallModal").removeClass('bounceOut').addClass('bounceIn');
+    $('#mysmallModal').show();
+    $('#DataText').html(Message);
 
-     
+    setTimeout(function () {
+        hideSuccess();
+    }, 250)
+}
 
-    $(document).on('input', 'input[type="text"],input[type="number"],.emailtextbox,input[type="password"]', function () {
 
 
-        $('input[type="text"]:input').not(".hideaddclear").addClear({
-            symbolClass: "fa fa-times-circle"
-        });
-        $('input[type="number"]:input').addClear({
-            symbolClass: "fa fa-times-circle"
-        });
 
-        $('input[type="password"]:input').addClear({
-            symbolClass: "fa fa-times-circle"
-        });
+$(document).on('input', 'input[type="text"],input[type="number"],.emailtextbox,input[type="password"]', function () {
 
-        $('input[type="email"]:input').addClear({
-            symbolClass: "fa fa-times-circle"
-        });
 
-        $(this).focus();
-
-        $(this).trigger("change");
+    $('input[type="text"]:input').not(".hideaddclear").addClear({
+        symbolClass: "fa fa-times-circle"
+    });
+    $('input[type="number"]:input').addClear({
+        symbolClass: "fa fa-times-circle"
     });
 
-    $(document).on('change', 'input[type="text"],input[type="number"],.emailtextbox,input[type="password"]', function () {
-
-        $('input[type="text"]').not(".hideaddclear").addClear({
-            symbolClass: "fa fa-times-circle"
-        });
-        $('input[type="number"]').addClear({
-            symbolClass: "fa fa-times-circle"
-        });
-
-        $('input[type="password"]:input').addClear({
-            symbolClass: "fa fa-times-circle"
-        });
-
-        $('input[type="email"]:input').addClear({
-            symbolClass: "fa fa-times-circle"
-        });
-
+    $('input[type="password"]:input').addClear({
+        symbolClass: "fa fa-times-circle"
     });
 
+    $('input[type="email"]:input').addClear({
+        symbolClass: "fa fa-times-circle"
+    });
 
-   
+    $(this).focus();
 
- 
+    $(this).trigger("change");
+});
+
+$(document).on('change', 'input[type="text"],input[type="number"],.emailtextbox,input[type="password"]', function () {
+
+    $('input[type="text"]').not(".hideaddclear").addClear({
+        symbolClass: "fa fa-times-circle"
+    });
+    $('input[type="number"]').addClear({
+        symbolClass: "fa fa-times-circle"
+    });
+
+    $('input[type="password"]:input').addClear({
+        symbolClass: "fa fa-times-circle"
+    });
+
+    $('input[type="email"]:input').addClear({
+        symbolClass: "fa fa-times-circle"
+    });
+
+});
+
+
+
+
+
