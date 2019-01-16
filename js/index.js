@@ -853,7 +853,7 @@ function scanApiNotification(event) {
 
 
     if (event.type) {
-        alert('receive an event: ' + event.type);
+        //alert('receive an event: ' + event.type);
         //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
         // document.getElementById('eventRec').setAttribute("class", "blink");
 
@@ -868,9 +868,16 @@ function scanApiNotification(event) {
             for (var i = 0; i < event.decodedData.length; i++) {
                 scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
             }
-            var $focused = $(':focus');
-            $focused.val(scannedV);
-            $focused.trigger("change");
+            alert("Scanned Value:"+ scannedV);
+             setTimeout(function() {
+                 var $focused = $(':focus');
+                $focused.val(scannedV);
+                $focused.trigger("change");
+                 
+              }, 50 );
+              
+             
+           
         }
 
     }
@@ -882,7 +889,7 @@ function scanApiNotification(event) {
 function reStartTheScanner() {
 
     SocketScanApi.useScanApi('', scanApiNotification.bind(event));
-    alert("Re-started, please continue scanning");
+   alert("Re-started, please continue scanning");
 }
 
 
