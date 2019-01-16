@@ -873,14 +873,15 @@ function scanApiNotification(event) {
                  try
                  {
                  var $focused = $(':focus');
-                if($focused.attr("type")=="text")
+                if($focused.attr("type")==undefined || $focused.attr("type")=='date')
                  { 
+                   alert("select or date field");   
                   
-                   $focused.val(scannedV);
-                   $focused.trigger("change");
                  }else
                  {
-                   alert("not geting focused");   
+                  
+                      $focused.val(scannedV);
+                      $focused.trigger("change");
                  }
                   alert("Scanned Value:"+ scannedV);
                  }catch(err)
