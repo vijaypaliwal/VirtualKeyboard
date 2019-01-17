@@ -352,7 +352,8 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
     }
 
-
+    $scope.realItemname = "Name";
+    $scope.realDescname = "Description";
 
     $scope.GetMyinventoryColumns = function () {
 
