@@ -120,6 +120,8 @@ app.controller('selectcolumnsController', ['$scope', 'localStorageService', 'aut
               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
               success: function (response) {
 
+                  debugger;
+
                   if (response.GetMyInventoryColumnsResult.Success == true) {
                  
                   $scope.MyInventorycolumns = [];

@@ -380,7 +380,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $(".iosbtn").hide()
     }
 
+  
+    
 
+    debugger;
 
 
     $scope.CheckInCommonArray = function (Column) {
@@ -391,6 +394,39 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
         return false;
     }
+
+
+    $scope.GetCustomizeterm = function () {
+
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            $scope.SecurityToken = authData.token;
+        }
+
+        alert("In");
+
+        $.ajax
+           ({
+               type: "POST",
+               url: serviceBase + 'GetSystemTermsItemGroupInfo',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'json',
+               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+               success: function (response) {
+
+                   alert("Succ");
+
+               },
+               error: function (err) {
+
+                   alert("err");
+                   debugger;
+                
+               }
+           });
+    }
+ 
+
 
     $scope.Accountlimit = function () {
 
@@ -2253,7 +2289,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
             if ($scope.CustomItemDataList[i].ColumnMap == columnMap) {
 
-                debugger;
+                 
 
                 return $scope.CustomItemDataList[i];
             }
@@ -2331,6 +2367,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                   $scope.Totalslides = 0;
                   $scope.CurrentCount = 0;
                   $scope.MyinventoryFields = [];
+
+                  debugger;
 
 
 
@@ -2664,6 +2702,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
               success: function (response) {
 
 
+               
+
                   if (response.GetMyInventoryColumnsResult.Success == true) {
 
                       var _TempArray = response.GetMyInventoryColumnsResult.Payload;
@@ -2674,6 +2714,17 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                           if (_TempArray[i].Show == "True") {
                               $scope.MyinventoryFields.push(_TempArray[i]);
                           }
+
+                          if (_TempArray[i].ColumnName == "pPart") {
+                              $scope.realItemname = _TempArray[i].ColumnLabel;
+                             
+                          }
+
+                          if (_TempArray[i].ColumnName == "pDescription") {
+                              $scope.realDescname = _TempArray[i].ColumnLabel;
+
+                          }
+
                       }
                       CheckScopeBeforeApply()
                   }
@@ -2699,6 +2750,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
           });
 
     }
+
+
+    $scope.GetMyinventoryColumns()
+
+
 
     $scope.getstatus = function () {
 
@@ -3839,6 +3895,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         //$cordovaKeyboard.disableScroll(true);
         $scope.GetAllData();
 
+      // $scope.GetCustomizeterm();
+
         $scope.InventoryObject.Quantity = $scope.GetDefaultQty();
         $scope.IsItemLibrary = $scope.checkpermission('URL:Manage/Item');
         if ($scope.IsItemLibrary == true && $scope.IsActiveItemLibrary == true) {
@@ -3870,6 +3928,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         setTimeout(function () {
 
             SetWeekMonthValues();
+          //  $scope.GetCustomizeterm();
 
         }, 2000);
 
@@ -4495,6 +4554,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.ScanNewCustom = function () {
+       
 
         var _id = "#" + _colid;
 

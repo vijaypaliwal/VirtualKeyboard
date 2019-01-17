@@ -36,7 +36,7 @@
 <a ng-click="viewall()" class="btn btn-danger waves-effect roundbtntitle"> <i class="fa fa-info"></i> </a>
 <a href="#/mainmenu" class="newbackbtn"> <i class="fa fa-arrow-left"></i> </a>
 
-<div ng-if="switchmode==false" class="maincontent animated slideInLeft">
+<div ng-if="switchmode==false" class="maincontent animated slideInLeft" >
     <form id="myform" name="myform">
         <div class="device">
 
@@ -89,11 +89,11 @@
 
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            <label>Item Name   </label>
+                                            <label>{{obj.ColumnLabel}}  </label>
                                         </div>
                                     </div>
 
-                                    <div  class="input-group">
+                                    <div class="input-group">
                                         <div>
 
                                             <input type="text" id="ItemName" class="form-control" ng-change="Itemvaluechange()" my-enter="GoToNext()" ng-model="InventoryObject.ItemID" required="" autocorrect="off" autocapitalize="none" />
@@ -142,7 +142,7 @@
                         </div>
 
                         <div class="form-group" ng-if="obj.ColumnName=='pDescription'">
-                            <label>Item Description </label>
+                            <label>{{obj.ColumnLabel}}  </label>
                             <div class="input-group">
                                 <input type="text" id="pDescriptionForm" my-enter="GoToNext()" ng-model="InventoryObject.Description" name="name" class="form-control" value="" />
 
@@ -285,7 +285,7 @@
                             </div>
                         </div>
 
-                        
+
 
 
                         <div ng-if="obj.ColumnName=='Image'">
@@ -339,7 +339,7 @@
                             </div>-->
                             <!--Prefix , Suffix-->
                             <div ng-if="ReqValueFieldSpecialType == 0">
-                             
+
                                 <div class="input-group">
 
                                     <span ng-if="getUnitObjByName('ReqValue').Prefix != null" class="input-group-addon last unitprepend">{{getUnitObjByName('ReqValue').Prefix}} </span>
@@ -430,7 +430,7 @@
                                 <div class="input-group" ng-click="Unitradiolist('UniqueTag')">
                                     <!--<input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" />-->
 
-                                    <input type="text" id="UniqueTag" disabled="disabled"  ng-model="InventoryObject.UniqueTag" class="form-control" />
+                                    <input type="text" id="UniqueTag" disabled="disabled" ng-model="InventoryObject.UniqueTag" class="form-control" />
                                     <span class="input-group-addon last" ng-click="Unitradiolist('UniqueTag')"><i class="fa fa-circle-o"></i></span>
                                     <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
                                 </div>
@@ -444,7 +444,7 @@
                                 <span ng-if="mtuvar2==false" class="redText">Please input some unique data</span>
                             </div>-->
                             <!--Prefix , Suffix -->
-                          
+
 
                             <div ng-if="UnitTag2FieldSpecialType == 0">
                                 <div class="input-group">
@@ -548,13 +548,13 @@
                             </div>-->
                             <!--Prefix , Suffix-->
                             <div ng-if="UnitTag3FieldSpecialType == 0">
-                               
+
                                 <div class="input-group">
 
                                     <span ng-if="getUnitObjByName('UnitTag3').Prefix != null" class="input-group-addon last unitprepend">{{getUnitObjByName('UnitTag3').Prefix}} </span>
 
                                     <input id="UnitTag3" data-prefix="{{getUnitObjByName('UnitTag3').Prefix}}" data-suffix="{{getUnitObjByName('UnitTag3').Suffix}}" data-value="{{getUnitObjByName('UnitTag3').FieldDefaultValue}}" data-original-value="{{getUnitObjByName('UnitTag3').Prefix}}{{InventoryObject.UnitTag3}}{{getUnitObjByName('UnitTag3').Suffix}}" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="text" ng-model="InventoryObject.UnitTag3" class="form-control prepostUnit" />
-                                    
+
 
                                     <span ng-if="getUnitObjByName('UnitTag3').Suffix != null" class="input-group-addon last unitappend">{{getUnitObjByName('UnitTag3').Suffix}} </span>
 
@@ -709,7 +709,7 @@
                                     <span class="input-group-addon currency">$</span>
                                     <input id="UnitNumber1" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'))" type="number" max="{{UnitNumber1FieldNumberMax}}" min="{{UnitNumber1FieldNumberMin}}" class="form-control" ng-model="InventoryObject.UnitNumber1" />
                                     <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
-                                 
+
                                 </div>
                             </div>
                         </div>
@@ -750,7 +750,7 @@
                                     <span class="input-group-addon currency">$</span>
                                     <input id="UnitNumber2" ng-blur="mtuvar6=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'))" type="number" max="{{UnitNumber2FieldNumberMax}}" min="{{UnitNumber2FieldNumberMin}}" class="form-control" ng-model="InventoryObject.UnitNumber2" />
                                     <span ng-if="mtuvar6==false" class="redText">Please input some unique data</span>
-                                
+
                                 </div>
                             </div>
                         </div>
@@ -765,12 +765,12 @@
                                 <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType != 1" class="input-group">
                                     <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='1'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='2'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='3'">
 
-                                     
+
 
                                         <input id="CustomItem_{{obj.cfdID}}" maxlength="{{GetCustomItemObjByColumnmap(obj.ColumnName).MaxLength}}" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='text' || GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask==0" type="text" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
 
                                         <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
-                                        
+
                                         <!--<input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='month'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />-->
 
                                         <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='month'" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value">
@@ -794,7 +794,7 @@
                                     <span ng-if="(GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='1'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='2'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='3') && (GetCustomItemObjByColumnmap(obj.ColumnName).cfdPrefix !=undefined && GetCustomItemObjByColumnmap(obj.ColumnName).cfdPrefix !='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdPrefix !=null)" class="input-group-addon last prepend"> <span class="inner"> {{GetCustomItemObjByColumnmap(obj.ColumnName).cfdPrefix}} </span> </span>
 
                                     <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='1'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='2'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='3'">
-                                      
+
                                         <input type="text" data-prefix="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdPrefix}}" data-suffix="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdSuffix}}" data-value="{{GetCustomItemObjByColumnmap(obj.ColumnName).CombineValue}}" id="CustomItem_{{obj.cfdID}}" data-orginal-value="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdPrefix}}{{InventoryObject.CustomPartData[obj.CustomFieldIndex].Value}}{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdSuffix}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control  prepostCustom" />
                                     </div>
 
@@ -810,13 +810,13 @@
 
                             </div>
 
-                     
+
 
 
 
                             <div ng-if="obj.cfdDataType=='checkbox'">
 
-                               
+
 
                                 <div class="btn-group custombtnGroup" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType!=4 && GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType!=5">
                                     <label style="width:100%" class="switch1">
@@ -837,7 +837,7 @@
 
 
                                     <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value">
-                                        <option ng-value="true"  value="true" ng-selected="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</option>
+                                        <option ng-value="true" value="true" ng-selected="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</option>
                                         <option ng-value="false" value="false" ng-selected="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==false">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</option>
                                     </select>
                                 </div>
@@ -845,8 +845,8 @@
 
                                 <div class="" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdSpecialType==5">
                                     <p class="todo-element">
-                                        <input name="CustomItem_{{obj.cfdID}}" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" ng-value="true"  value="true" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true" type="radio"> <label for="CustomItem_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</label>
-                                        <input name="CustomItem_{{obj.cfdID}}" id="CustomItem1_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" ng-value="false"  value="false" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==false" type="radio"> <label for="CustomItem1_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</label>
+                                        <input name="CustomItem_{{obj.cfdID}}" id="CustomItem_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" ng-value="true" value="true" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==true" type="radio"> <label for="CustomItem_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdTruelabel}}</label>
+                                        <input name="CustomItem_{{obj.cfdID}}" id="CustomItem1_{{obj.cfdID}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" ng-value="false" value="false" ng-checked="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value==false" type="radio"> <label for="CustomItem1_{{obj.cfdID}}">{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdFalselabel}}</label>
                                     </p>
 
 
@@ -946,7 +946,7 @@
 
                                     <div ng-if="obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3'">
 
-                                     
+
                                         <input type="text" data-prefix="{{obj.cfdPrefix}}" data-suffix="{{obj.cfdSuffix}}" data-value="{{obj.CombineValue}}" id="CustomActivity_{{obj.cfdID}}" data-orginal-value="{{obj.cfdPrefix}}{{InventoryObject.CustomTxnData[$index].Value}}{{obj.cfdSuffix}}" ng-model="InventoryObject.CustomTxnData[$index].Value" class="form-control  prepostCustom" />
                                     </div>
 
@@ -969,7 +969,7 @@
 
                             <div ng-if="obj.cfdDataType=='checkbox'" class="">
 
-                              
+
 
                                 <div class="btn-group custombtnGroup" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType!=4 && GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType!=5">
                                     <label -webkit-box-decoration-break clone; class="switch1">
@@ -990,16 +990,16 @@
 
 
                                     <select id="CustomActivity_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomTxnData[$index].Value">
-                                        <option ng-selected="InventoryObject.CustomTxnData[$index].Value==true" ng-value="true"  value="true">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdTruelabel}}</option>
-                                        <option ng-selected="InventoryObject.CustomTxnData[$index].Value==false"  ng-value="false" value="false">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdFalselabel}}</option>
+                                        <option ng-selected="InventoryObject.CustomTxnData[$index].Value==true" ng-value="true" value="true">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdTruelabel}}</option>
+                                        <option ng-selected="InventoryObject.CustomTxnData[$index].Value==false" ng-value="false" value="false">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdFalselabel}}</option>
                                     </select>
                                 </div>
 
 
                                 <div class="" ng-if="GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdSpecialType==5">
                                     <p class="todo-element">
-                                        <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value"  ng-value="true" value="true" ng-checked="InventoryObject.CustomTxnData[$index].Value==true" type="radio"> <label for="CustomActivity_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdTruelabel}}</label>
-                                        <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-value="false"  value="false" ng-checked="InventoryObject.CustomTxnData[$index].Value==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdFalselabel}}</label>
+                                        <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-value="true" value="true" ng-checked="InventoryObject.CustomTxnData[$index].Value==true" type="radio"> <label for="CustomActivity_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdTruelabel}}</label>
+                                        <input name="CustomActivity_{{obj.cfdID}}" id="CustomActivity1_{{obj.cfdID}}" ng-model="InventoryObject.CustomTxnData[$index].Value" ng-value="false" value="false" ng-checked="InventoryObject.CustomTxnData[$index].Value==false" type="radio"> <label for="CustomActivity1_{{obj.cfdID}}">{{GetCustomActivityObjByColumnmap(obj.ColumnMap).cfdFalselabel}}</label>
                                     </p>
 
 
@@ -1580,7 +1580,7 @@
 
                                             <div class="">
                                                 <div class="">
-                                                    <label>Item Name  </label>
+                                                    <label>{{obj.ColumnLabel}}  </label>
 
                                                 </div>
 
@@ -1646,7 +1646,7 @@
                                 </div>
 
                                 <div class="form-group" ng-if="obj.ColumnName=='pDescription'">
-                                    <label>Item Description </label>
+                                    <label>{{obj.ColumnLabel}}  </label>
                                     <div class="input-group">
                                         <input type="text" id="pDescriptionForm" my-enter="GoToNext()" ng-model="InventoryObject.Description" name="name" class="form-control" value="" />
 
@@ -3464,7 +3464,7 @@
             <div style="margin-top:15px;" class="row ">
 
                 <div ng-click="getstep(0,'pPart')" class="col-xs-12 form-group">
-                    <span class="mylabel">Item name</span> <span>  {{InventoryObject.ItemID}} </span>
+                    <span class="mylabel">{{realItemname}}</span> <span>  {{InventoryObject.ItemID}} </span>
                 </div>
 
                 <div ng-click="getstep(2,'iQty')" class="col-xs-12 form-group">
@@ -3485,7 +3485,7 @@
 
                 <div ng-click="getstep(1,'pDescription')" class="col-md-12 col-xs-12  form-group">
 
-                    <span class="mylabel">Description</span>  <span> {{ InventoryObject.Description }} </span>
+                    <span class="mylabel">{{realDescname}}</span>  <span> {{ InventoryObject.Description }} </span>
 
                 </div>
 
