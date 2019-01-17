@@ -876,8 +876,8 @@ function scanApiNotification(event) {
                     alert("select or date field");
 
                 } else {
-                    $focused.val(scannedV);
-                    $focused.trigger("change");
+                    $($focused).val(scannedV);
+                    $($focused).trigger("change");
                 }
                 alert("Scanned Value:" + scannedV);
             } catch (err) {
