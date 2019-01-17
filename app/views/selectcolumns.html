@@ -33,7 +33,7 @@
 
 
         <tbody class="dragarea"  ng-model="MyInventorycolumns">
-            <tr data-ng-repeat="obj in MyInventorycolumns" ng-if="obj.ColumnLabel !='Events'" class="MoveCursor">
+            <tr data-ng-repeat="obj in MyInventorycolumns" ng-if="obj.ColumnLabel !='Events' && obj.IsOnlyMobile ==false" class="MoveCursor">
                 <td>
                     <div class="infoareas">
                         <div class="row">
