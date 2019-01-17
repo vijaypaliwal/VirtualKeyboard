@@ -866,28 +866,24 @@ function scanApiNotification(event) {
             var scannedV = '';
             for (var i = 0; i < event.decodedData.length; i++) {
                 scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
-            } 
-            try
-            {
-                var $focused = document.activeElement.tagName;
+            }
+            try {
+                var $focused = document.activeElement;
 
-                alert("Active element = "+$focused);
+                alert("Active element = " + $focused.tagName);
 
-                if ($focused != 'INPUT' || $focused == undefined || $focused == null)
-                 { 
-                   alert("select or date field");   
-                  
-                 }else
-                 {
-                      $focused.val(scannedV);
-                      $focused.trigger("change");
-                 }
-                  alert("Scanned Value:"+ scannedV);
-                 }catch(err)
-                 {
-                       alert("focus error");
-                 }
-           
+                if ($focused.tagName != 'INPUT' || $focused.tagName == undefined || $focused.tagName == null) {
+                    alert("select or date field");
+
+                } else {
+                    $focused.val(scannedV);
+                    $focused.trigger("change");
+                }
+                alert("Scanned Value:" + scannedV);
+            } catch (err) {
+                alert("focus error");
+            }
+
         }
 
     }
@@ -899,7 +895,7 @@ function scanApiNotification(event) {
 function reStartTheScanner() {
 
     SocketScanApi.useScanApi('', scanApiNotification.bind(event));
-   alert("Re-started, please continue scanning");
+    alert("Re-started, please continue scanning");
 }
 
 
