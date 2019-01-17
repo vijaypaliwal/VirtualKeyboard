@@ -858,7 +858,7 @@ function scanApiNotification(event) {
         // document.getElementById('eventRec').setAttribute("class", "blink");
 
         if (event.type === 'scanApiTerminated') {
-            alert("Scanner having issue and I am trying to re-start");
+            alert("Scanner having issue and we are trying to re-start");
             reStartTheScanner();
         }
 
@@ -870,18 +870,18 @@ function scanApiNotification(event) {
             try {
                 var $focused = document.activeElement;
 
-                alert("Active element = " + $focused.tagName);
+                //   alert("Active element = " + $focused.tagName);
 
                 if ($focused.tagName != 'INPUT' || $focused.tagName == undefined || $focused.tagName == null) {
-                    alert("select or date field");
+                    alert("Scanning not available for select option");
 
                 } else {
                     $($focused).val(scannedV);
                     $($focused).trigger("change");
                 }
-                alert("Scanned Value:" + scannedV);
+                //  alert("Scanned Value:" + scannedV);
             } catch (err) {
-                alert("focus error");
+                //alert("focus error");
             }
 
         }
