@@ -862,24 +862,23 @@ function scanApiNotification(event) {
             reStartTheScanner();
         }
 
-
         if (event.type === 'decodedData') {
             var scannedV = '';
             for (var i = 0; i < event.decodedData.length; i++) {
                 scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
-            }
-           
-              
-                 try
-                 {
-                 var $focused = $(':focus');
-                if($focused.attr("type")==undefined || $focused.attr("type")=='date')
+            } 
+            try
+            {
+                var $focused = document.activeElement.tagName;
+
+                alert("Active element = "+$focused);
+
+                if ($focused != 'INPUT' || $focused == undefined || $focused == null)
                  { 
                    alert("select or date field");   
                   
                  }else
                  {
-                  
                       $focused.val(scannedV);
                       $focused.trigger("change");
                  }
@@ -888,9 +887,6 @@ function scanApiNotification(event) {
                  {
                        alert("focus error");
                  }
-             
-              
-             
            
         }
 
