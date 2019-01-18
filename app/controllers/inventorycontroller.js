@@ -2725,6 +2725,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                           }
 
+                          if (_TempArrayDummy[i].ColumnName == "iStatusValue") {
+                              $scope.statusLabel = _TempArrayDummy[i].ColumnLabel;
+                          }
+
                       }
                       CheckScopeBeforeApply()
                   }
