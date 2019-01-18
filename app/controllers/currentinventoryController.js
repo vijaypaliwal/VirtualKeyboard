@@ -1967,19 +1967,15 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                       var _TempArrayDummy = response.GetMyInventoryColumnsResult.Payload;
 
                       for (var i = 0; i < _TempArrayDummy.length; i++) {
-
-
-
                           if (_TempArrayDummy[i].ColumnName == "pPart") {
                               $scope.realItemname = _TempArrayDummy[i].ColumnLabel;
-
-
-
                           }
 
                           if (_TempArrayDummy[i].ColumnName == "pDescription") {
                               $scope.realDescname = _TempArrayDummy[i].ColumnLabel;
-
+                          }
+                          if (_TempArrayDummy[i].ColumnName == "iStatusValue") {
+                              $scope.statusLabel = _TempArrayDummy[i].ColumnLabel;
                           }
 
                       }
