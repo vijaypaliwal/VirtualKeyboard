@@ -888,7 +888,7 @@ function scanApiNotification(event) {
                         }
                 }
                 else {
-                    alert("Please turn on Socket Mobile from Default Settings page.");
+                    alert("Scan Error - Please turn on scanner from default settings page.");
                 }                
             }
         }     
