@@ -845,8 +845,7 @@ var recognition;
 
 function scanApiNotification(event) {
 
-    if (allowsocketmobile == true || allowsocketmobile == "true")
-    {
+   
         event = JSON.parse(event);
         if (event.type) {
             //alert('receive an event: ' + event.type);
@@ -867,31 +866,33 @@ function scanApiNotification(event) {
             }
 
             if (event.type === 'decodedData') {
-                var scannedV = '';
-                for (var i = 0; i < event.decodedData.length; i++) {
-                    scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
-                }
-                try {
-                    var $focused = document.activeElement;
+                if (allowsocketmobile == true || allowsocketmobile == "true") {
+                        var scannedV = '';
+                        for (var i = 0; i < event.decodedData.length; i++) {
+                            scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
+                        }
+                        try {
+                            var $focused = document.activeElement;
 
-                    //   alert("Active element = " + $focused.tagName);
+                            //   alert("Active element = " + $focused.tagName);
 
-                    if ($focused.tagName != 'INPUT' || $focused.tagName == undefined || $focused.tagName == null) {
-                        alert("Scan Error - This field will not accept scanned data. Please use manual entry or pick list.");
-                    } else {
-                        $($focused).val(scannedV);
-                        $($focused).trigger("change");
-                    }
-                    //  alert("Scanned Value:" + scannedV);
-                } catch (err) {
-                    //alert("focus error");
+                            if ($focused.tagName != 'INPUT' || $focused.tagName == undefined || $focused.tagName == null) {
+                                alert("Scan Error - This field will not accept scanned data. Please use manual entry or pick list.");
+                            } else {
+                                $($focused).val(scannedV);
+                                $($focused).trigger("change");
+                            }
+                            //  alert("Scanned Value:" + scannedV);
+                        } catch (err) {
+                            //alert("focus error");
+                        }
                 }
+                else {
+                    alert("Please turn on Socket Mobile from Default Settings page.");
+                }                
             }
-    }
-    else{
-            alert("Please turn on Socket Mobile from Default Settings page.");
-    }    
-    }
+        }     
+   
 }
 
 
