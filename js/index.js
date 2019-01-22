@@ -502,14 +502,22 @@ document.addEventListener("backbutton", function (e) {
 }, false);
 
 function whenResume() {
-    alert("Its Resume");
+    alert("In Wake");
+    isResume = false;
+  
+}
+
+function whenPause() {
+    alert("In Sleep");
+    isResume = true;
+
 }
 
 document.addEventListener("online", onOnline, false);
 document.addEventListener("offline", onOffline, false);
 document.addEventListener("resume", whenResume, false);
 
-
+document.addEventListener("pause", whenPause, false);
 
 
 var pictureSource;
@@ -850,13 +858,13 @@ var recognition;
 
 
 
-
+var isResume = false;
 
 function scanApiNotification(event) {
 
         event = JSON.parse(event);
         if (event.type) {
-             alert('receive an event: ' + event.type);
+          //   alert('receive an event: ' + event.type);
             //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
             // document.getElementById('eventRec').setAttribute("class", "blink");        
 
@@ -867,8 +875,10 @@ function scanApiNotification(event) {
             }        
 
             if (event.type === 'deviceRemoval') {
-                $("#scannerAlert").modal("show");
-                $("#scannererror").html("The scanner is not connected. Please reconnect it in Bluetooth settings.")
+                if (isResume==false) {
+                    $("#scannerAlert").modal("show");
+                    $("#scannererror").html("The scanner is not connected. Please reconnect it in Bluetooth settings.")
+                }
                
             }
 
@@ -921,7 +931,7 @@ function reStartTheScanner() {
 
 function onDeviceReady() {
 
-    alert("In device ready");
+ 
 
 
     SocketScanApi.useScanApi('', scanApiNotification.bind(event));
