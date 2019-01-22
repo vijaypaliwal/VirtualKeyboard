@@ -5199,10 +5199,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 break;
 
             case 5:
-                log.error("Seems like you haven't fill all required fields for activity data, please fill them first in following cart items " + _itemIDs)
+                log.error("Seems like you haven't fill all required fields for Event data, please fill them first in following cart items " + _itemIDs)
                 break;
             case 6:
-                log.error("Activity date is required field, please fill them first")
+                log.error("Event date is required field, please fill them first")
                 break;
             default:
 
