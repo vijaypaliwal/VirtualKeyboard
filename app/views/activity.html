@@ -131,6 +131,18 @@
     {
         padding-bottom:0;
     }
+
+    .input-group-addon.currency {
+        background-color: #e9ecef !important;
+        color: #888 !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        border: 1px solid #ccc;
+        border-right: transparent;
+        font-size: 17px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
 </style>
 
 
@@ -746,9 +758,10 @@
 
 
                                                                 <div class="input-group">
-
+                                                                    <span ng-if="GetUnitDataFieldByName('UnitNumber1').FieldSpecialType==21" class="input-group-addon currency">$</span>
                                                                     <div class="fg-line">
-
+                                                                      
+                                                                       
                                                                         <input id="unitnumbertext1_{{ CurrentActiveObject.InventoryDataList.uId}}" min="{{GetUnitDataFieldByName('UnitNumber1').FieldNumberMin}}" max="{{GetUnitDataFieldByName('UnitNumber1').FieldNumberMax}}" ng-blur="tvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'),$index)" type="number" data-type="number" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
                                                                         <span ng-if="tvar6==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                                                     </div>
@@ -789,7 +802,7 @@
 
 
                                                                 <div class="input-group">
-
+                                                                    <span ng-if="GetUnitDataFieldByName('UnitNumber2').FieldSpecialType==21" class="input-group-addon currency">$</span>
                                                                     <div class="fg-line">
 
                                                                         <input id="unitnumbertext2_{{ CurrentActiveObject.InventoryDataList.uId}}" min="{{GetUnitDataFieldByName('UnitNumber2').FieldNumberMin}}" max="{{GetUnitDataFieldByName('UnitNumber2').FieldNumberMax}}" ng-blur="tvar7=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'),$index)" type="number" data-type="number" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber2" />
@@ -1320,9 +1333,9 @@
 
 
                                                                 <div class="input-group">
-
+                                                                    <span ng-if="GetUnitDataFieldByName('UnitNumber1').FieldSpecialType==21" class="input-group-addon currency">$</span>
                                                                     <div class="fg-line">
-
+                                                                      
                                                                         <input id="unitnumbertext1_{{ CurrentActiveObject.InventoryDataList.uId}}" min="{{GetUnitDataFieldByName('UnitNumber1').FieldNumberMin}}" max="{{GetUnitDataFieldByName('UnitNumber1').FieldNumberMax}}" ng-blur="tvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'),$index)" type="number" data-type="number" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitNumber1" />
                                                                         <span ng-if="tvar6==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                                                     </div>
@@ -1363,7 +1376,7 @@
 
 
                                                                 <div class="input-group">
-
+                                                                    <span ng-if="GetUnitDataFieldByName('UnitNumber2').FieldSpecialType==21" class="input-group-addon currency">$</span>
                                                                     <div class="fg-line">
 
                                                                         <input id="unitnumbertext2_{{ CurrentActiveObject.InventoryDataList.uId}}" min="{{GetUnitDataFieldByName('UnitNumber2').FieldNumberMin}}" max="{{GetUnitDataFieldByName('UnitNumber2').FieldNumberMax}}" ng-blur="tvar7=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'),$index)" type="number" data-type="number" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitNumber2" />
@@ -1735,6 +1748,7 @@
                             </div>
 
                             <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                                <span class="input-group-addon currency">$</span>
                                 <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
                                 <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                             </div>
@@ -1897,6 +1911,7 @@
                                     </div>
 
                                     <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                                        <span class="input-group-addon currency">$</span>
                                         <input id="CustomActivityIncrease_{{obj.cfdID}}" name="CustomActivityIncrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
                                         <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
@@ -2059,6 +2074,7 @@
                                     </div>
 
                                     <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                                        <span class="input-group-addon currency">$</span>
                                         <input id="CustomActivityDecrease_{{obj.cfdID}}" name="CustomActivityDecrease_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
                                         <span class="input-group-addon last" ng-click="ScanLineItem(4,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                     </div>
@@ -2597,9 +2613,9 @@
 
 
                                             <div class="input-group">
-
+                                                <span ng-if="GetUnitDataFieldByName('UnitNumber1').FieldSpecialType==21" class="input-group-addon currency">$</span>
                                                 <div class="fg-line">
-
+                                                 
                                                     <input id="unitnumbertext1_{{ CurrentActiveObject.InventoryDataList.uId}}" min="{{GetUnitDataFieldByName('UnitNumber1').FieldNumberMin}}" max="{{GetUnitDataFieldByName('UnitNumber1').FieldNumberMax}}" ng-blur="tvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'),$index)" type="number" data-type="number" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.ApplyTransactionData.UnitNumber1" />
                                                     <span ng-if="tvar6==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                                 </div>
@@ -2640,6 +2656,8 @@
 
 
                                             <div class="input-group">
+
+                                                <span ng-if="GetUnitDataFieldByName('UnitNumber2').FieldSpecialType==21" class="input-group-addon currency">$</span>
 
                                                 <div class="fg-line">
 
@@ -3170,9 +3188,9 @@
 
 
                                             <div class="input-group">
-
+                                                <span ng-if="GetUnitDataFieldByName('UnitNumber1').FieldSpecialType==21" class="input-group-addon currency">$</span>
                                                 <div class="fg-line">
-
+                                              
                                                     <input id="unitnumbertext1_{{ CurrentActiveObject.InventoryDataList.uId}}" min="{{GetUnitDataFieldByName('UnitNumber1').FieldNumberMin}}" max="{{GetUnitDataFieldByName('UnitNumber1').FieldNumberMax}}" ng-blur="tvar6=CheckUnitDataFieldValue('UnitNumber1',CheckIsAllowDuplicate('UnitNumber1'),$index)" type="number" data-type="number" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber1')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitNumber1" />
                                                     <span ng-if="tvar6==false" class="errorMessage">This value has already been used. Please enter a unique value.</span>
                                                 </div>
@@ -3213,7 +3231,7 @@
 
 
                                             <div class="input-group">
-
+                                                <span ng-if="GetUnitDataFieldByName('UnitNumber2').FieldSpecialType==21" class="input-group-addon currency">$</span>
                                                 <div class="fg-line">
 
                                                     <input id="unitnumbertext2_{{ CurrentActiveObject.InventoryDataList.uId}}" min="{{GetUnitDataFieldByName('UnitNumber2').FieldNumberMin}}" max="{{GetUnitDataFieldByName('UnitNumber2').FieldNumberMax}}" ng-blur="tvar7=CheckUnitDataFieldValue('UnitNumber2',CheckIsAllowDuplicate('UnitNumber2'),$index)" type="number" data-type="number" class="form-control NumberType" placeholder1="{{ GetColumnLabel('iUnitNumber2')}}" ng-model=" CurrentActiveObject.MoveUpdateTagTransactionData.UnitNumber2" />
@@ -3573,6 +3591,7 @@
                                         </div>
 
                                         <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                                            <span class="input-group-addon currency">$</span>
                                             <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
                                             <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                         </div>
@@ -3737,6 +3756,7 @@
                                                 </div>
 
                                                 <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                                                    <span class="input-group-addon currency">$</span>
                                                     <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
                                                     <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                                 </div>
@@ -3897,6 +3917,7 @@
                                                 </div>
 
                                                 <div ng-if="obj.cfdDataType=='currency'" class="input-group">
+                                                    <span class="input-group-addon currency">$</span>
                                                     <input id="CustomActivity_{{obj.cfdID}}" name="CustomActivity_{{obj.cfdID}}" cfd-id="{{obj.cfdID}}" value="{{obj.cfdDefaultValue}}" custom-data-type="{{obj.cfdDataType}}" type="number" class="form-control FormControlType" ng-change="" value="{{obj.CfValue}}" />
                                                     <span class="input-group-addon last" ng-click="ScanLineItem(2,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                                 </div>
