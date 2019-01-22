@@ -3234,13 +3234,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
     $scope.UpdateQty = function (Qty, Index) {        
 
+        debugger;
+
         $scope.ActionQuantityValue = Qty;
         var value = 0;
         $scope.CurrentCart[Index].AdjustCalculation = "";
         if ($scope.CurrentOperation == "Adjust") {           
 
            
-            if ($scope.ActionQuantityValue != "" && $scope.ActionQuantityValue != null && $scope.ActionQuantityValue != undefined) {
+            if ($.trim($scope.ActionQuantityValue) != "" && $.trim($scope.ActionQuantityValue) != null && $.trim($scope.ActionQuantityValue) != undefined) {
 
                 if ($scope.ActionQuantityValue > $scope.CurrentCart[Index].InventoryDataList.oquantity) {
                     value = $scope.ActionQuantityValue - $scope.CurrentCart[Index].InventoryDataList.oquantity;
@@ -4971,6 +4973,9 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
 
     $scope.SubmitAllActivities = function () {
+
+        debugger;
+
         var _unchangeData = $scope.UnchangedData();
         var _validateObjectVm = $scope.ValidateObjectVM();
         var _validateCustomFields = CheckintoCustomData(0);
@@ -6131,7 +6136,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 case "Decrease":
                 case "Adjust":
                     for (k = 0; k < _totalLength; k++) {
-                        if ($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == undefined || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == null || $scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity == "") {
+                        if ($.trim($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity) == undefined || $.trim($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity) == null || $.trim($scope.CurrentCart[k].IncreaseDecreaseVMData.ActionQuantity) == "") {
                             $scope.IssueType = 1;
                             $scope.GoToStep(k);
                             return true;
