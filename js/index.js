@@ -502,13 +502,13 @@ document.addEventListener("backbutton", function (e) {
 }, false);
 
 function whenResume() {
-    alert("In Wake");
+    
     isResume = false;
   
 }
 
 function whenPause() {
-    alert("In Sleep");
+    
     isResume = true;
 
 }
