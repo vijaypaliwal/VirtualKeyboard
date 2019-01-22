@@ -843,26 +843,34 @@ function GetDefaultAccount() {
 var recognition;
 
 
+
+
+
+
 function scanApiNotification(event) {
 
    
         event = JSON.parse(event);
         if (event.type) {
-            //alert('receive an event: ' + event.type);
+             alert('receive an event: ' + event.type);
             //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
             // document.getElementById('eventRec').setAttribute("class", "blink");        
 
             if (event.type === 'scanApiTerminated') {
-                alert("Scan Error - The scanner has lost its connection. Please reconnect it in Bluetooth settings.");
+                $("#scannerAlert").modal("show");
+                $("#scannererror").html("The scanner has lost its connection. Please reconnect it in Bluetooth settings.")
                 reStartTheScanner();
             }        
 
-            if (event.type === 'deviceRemoval') {
-                alert("Scan Error - The scanner is not connected. Please reconnect it in Bluetooth settings.");            
+            if (event.type === 'deviceRemoval' && event.type != 'resume') {
+                $("#scannerAlert").modal("show");
+                $("#scannererror").html("The scanner is not connected. Please reconnect it in Bluetooth settings.")
+               
             }
 
             if (event.type === 'error') {
-                alert("Scan Error - The scanner has reported an error.  ");           
+                $("#scannerAlert").modal("show");
+                $("#scannererror").html("The scanner has reported an error.")
             }
 
             if (event.type === 'decodedData') {
@@ -877,7 +885,9 @@ function scanApiNotification(event) {
                             //   alert("Active element = " + $focused.tagName);
 
                             if ($focused.tagName != 'INPUT' || $focused.tagName == undefined || $focused.tagName == null) {
-                                alert("Scan Error - This field will not accept scanned data. Please use manual entry or pick list.");
+                                $("#scannerAlert").modal("show");
+                                $("#scannererror").html("This field will not accept scanned data. Please use manual entry or pick list.")
+                              
                             } else {
                                 $($focused).val(scannedV);
                                 $($focused).trigger("change");
@@ -888,7 +898,9 @@ function scanApiNotification(event) {
                         }
                 }
                 else {
-                    alert("Scan Error - Please turn on scanner from default settings page.");
+                    $("#scannerAlert").modal("show");
+                    $("#scannererror").html("Please turn on scanner from default settings page")
+                   
                 }                
             }
         }     
