@@ -502,13 +502,13 @@ document.addEventListener("backbutton", function (e) {
 }, false);
 
 function whenResume() {
-    
-    isResume = false;
-  
+
+    // isResume = false;
+
 }
 
 function whenPause() {
-    
+
     isResume = true;
 
 }
@@ -862,63 +862,66 @@ var isResume = false;
 
 function scanApiNotification(event) {
 
-        event = JSON.parse(event);
-        if (event.type) {
-          //   alert('receive an event: ' + event.type);
-            //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
-            // document.getElementById('eventRec').setAttribute("class", "blink");        
+    event = JSON.parse(event);
+    if (event.type) {
+        //   alert('receive an event: ' + event.type);
+        //  document.getElementById('eventRec').innerHTML = 'receive an event: ' + event.type;
+        // document.getElementById('eventRec').setAttribute("class", "blink");        
 
-            if (event.type === 'scanApiTerminated') {
+        if (event.type === 'scanApiTerminated') {
+            $("#scannerAlert").modal("show");
+            $("#scannererror").html("The scanner has lost its connection. Please reconnect it in Bluetooth settings.")
+            reStartTheScanner();
+        }
+
+        if (event.type === 'deviceRemoval') {
+            if (isResume == false) {
                 $("#scannerAlert").modal("show");
-                $("#scannererror").html("The scanner has lost its connection. Please reconnect it in Bluetooth settings.")
-                reStartTheScanner();
-            }        
-
-            if (event.type === 'deviceRemoval') {
-                if (isResume==false) {
-                    $("#scannerAlert").modal("show");
-                    $("#scannererror").html("The scanner is not connected. Please reconnect it in Bluetooth settings.")
-                }
-               
+                $("#scannererror").html("The scanner is not connected. Please reconnect it in Bluetooth settings.")
+            } else {
+                alert("Phone is resume from sleep");
+                isResume = false;
             }
 
-            if (event.type === 'error') {
+        }
+
+        if (event.type === 'error') {
+            $("#scannerAlert").modal("show");
+            $("#scannererror").html("The scanner has reported an error.")
+        }
+
+        if (event.type === 'decodedData') {
+            if (allowsocketmobile == true || allowsocketmobile == "true") {
+                var scannedV = '';
+                for (var i = 0; i < event.decodedData.length; i++) {
+                    scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
+                }
+                try {
+                    var $focused = document.activeElement;
+
+                    //   alert("Active element = " + $focused.tagName);
+
+                    if ($focused.tagName != 'INPUT' || $focused.tagName == undefined || $focused.tagName == null) {
+                        $("#scannerAlert").modal("show");
+                        $("#scannererror").html("This field will not accept scanned data. Please use manual entry or pick list.")
+
+                    } else {
+                        $($focused).val(scannedV);
+                        $($focused).trigger("change");
+                    }
+                    //  alert("Scanned Value:" + scannedV);
+                } catch (err) {
+                    //alert("focus error");
+                }
+            }
+            else {
                 $("#scannerAlert").modal("show");
-                $("#scannererror").html("The scanner has reported an error.")
+                $("#scannererror").html("Please turn on scanner from default settings page")
+
             }
+        }
+    }
 
-            if (event.type === 'decodedData') {
-                if (allowsocketmobile == true || allowsocketmobile == "true") {
-                        var scannedV = '';
-                        for (var i = 0; i < event.decodedData.length; i++) {
-                            scannedV = scannedV + String.fromCharCode(event.decodedData[i]); + '';
-                        }
-                        try {
-                            var $focused = document.activeElement;
-
-                            //   alert("Active element = " + $focused.tagName);
-
-                            if ($focused.tagName != 'INPUT' || $focused.tagName == undefined || $focused.tagName == null) {
-                                $("#scannerAlert").modal("show");
-                                $("#scannererror").html("This field will not accept scanned data. Please use manual entry or pick list.")
-                              
-                            } else {
-                                $($focused).val(scannedV);
-                                $($focused).trigger("change");
-                            }
-                            //  alert("Scanned Value:" + scannedV);
-                        } catch (err) {
-                            //alert("focus error");
-                        }
-                }
-                else {
-                    $("#scannerAlert").modal("show");
-                    $("#scannererror").html("Please turn on scanner from default settings page")
-                   
-                }                
-            }
-        }     
-   
 }
 
 
@@ -931,7 +934,7 @@ function reStartTheScanner() {
 
 function onDeviceReady() {
 
- 
+
 
 
     SocketScanApi.useScanApi('', scanApiNotification.bind(event));
