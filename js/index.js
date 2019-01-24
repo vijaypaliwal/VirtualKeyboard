@@ -855,9 +855,6 @@ function GetDefaultAccount() {
 }
 var recognition;
 
-
-
-
 var isResume = false;
 
 function scanApiNotification(event) {
@@ -879,10 +876,9 @@ function scanApiNotification(event) {
                 $("#scannerAlert").modal("show");
                 $("#scannererror").html("The scanner is not connected. Please reconnect it in Bluetooth settings.")
             } else {
-                alert("Phone is resume from sleep");
+             
                 isResume = false;
             }
-
         }
 
         if (event.type === 'error') {
