@@ -867,10 +867,10 @@ input[type="password"]:focus
     {
         margin-top:-5px !important;
     }
-    .finditems.input-group-addon a
+    /*.finditems.input-group-addon a
     {
         padding:16px !important;
-    }
+    }*/
 
     .squirelimg
     {
@@ -900,10 +900,10 @@ input[type="password"]:focus
          font-size:25px;
      }
 
-     .finditems img
+     /*.finditems img
      {
          height:23px;
-     }
+     }*/
      .dropdown-menu > li > a
      {
          font-size:16px;
@@ -917,14 +917,14 @@ input[type="password"]:focus
      {
          font-size:20px !important;
      }
-     .finditems .fa-caret-down {
+     /*.finditems .fa-caret-down {
     color: #fff !important;
     background: transparent;
     padding: 1px !important;
     padding-top: 1px !important;
     padding-left: 7px !important;
     padding-right: 7px !important;
-}
+}*/
 
      .rotateData
      {
