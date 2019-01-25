@@ -508,9 +508,9 @@
                             <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='1'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='2'&& GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype!='3'">
 
 
-                                <input  maxlength="{{GetCustomItemObjByColumnmap(obj.ColumnName).MaxLength}}" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='text' || GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask==0" type="text" ng-model="InventoryObject[obj.CustomFieldIndex].Value" class="form-control" />
+                                <input id="CustomItem_{{obj.cfdID}}" maxlength="{{GetCustomItemObjByColumnmap(obj.ColumnName).MaxLength}}" ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='text' || GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask==0" type="text" ng-model="InventoryObject[obj.CustomFieldIndex].Value" class="form-control" />
 
-                                <input  ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
+                                <input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)==''" type="text" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />
 
                                 <!--<input id="CustomItem_{{obj.cfdID}}" ng-if="$.trim(GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask)!='' && GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask=='month'" type="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdInputMask}}" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value" class="form-control" />-->
 
@@ -537,7 +537,7 @@
                             <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='1'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='2'||GetCustomItemObjByColumnmap(obj.ColumnName).cfdprefixsuffixtype=='3'">
 
 
-                                <input type="text"  data-prefix="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdPrefix}}" data-suffix="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdSuffix}}" data-value="{{GetCustomItemObjByColumnmap(obj.ColumnName).CombineValue}}" data-orginal-value="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdPrefix}}{{InventoryObject[obj.CustomFieldIndex].Value}}{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdSuffix}}" ng-model="InventoryObject[obj.CustomFieldIndex].Value" class="form-control  prepostCustom" />
+                                <input id="CustomItem_{{obj.cfdID}}" type="text" data-prefix="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdPrefix}}" data-suffix="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdSuffix}}" data-value="{{GetCustomItemObjByColumnmap(obj.ColumnName).CombineValue}}" data-orginal-value="{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdPrefix}}{{InventoryObject[obj.CustomFieldIndex].Value}}{{GetCustomItemObjByColumnmap(obj.ColumnName).cfdSuffix}}" ng-model="InventoryObject[obj.CustomFieldIndex].Value" class="form-control  prepostCustom" />
                             </div>
 
 
