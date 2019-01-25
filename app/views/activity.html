@@ -143,6 +143,16 @@
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
     }
+
+    .mybootboxbody
+    {
+        min-height:27px;
+    }
+
+    .modal-open .changebtn
+    {
+        display:none !important;
+    }
 </style>
 
 
@@ -437,7 +447,7 @@
                                                                             <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.UpdateTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                                         </select>
                                                                     </div>
-                                                                    <span ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true" class="input-group-addon last" ng-click="CreateNewModal(2,$index)"><i class="fa fa-plus"></i></span>
+                                                                    <span ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true" class="input-group-addon waves-effect last" ng-click="CreateNewModal(2,$index)"><i class="fa fa-plus"></i></span>
                                                                     <span ng-if="$index==0" class="input-group-addon last">
                                                                         <button id="status_{{ CurrentActiveObject.InventoryDataList.uId}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click="FillStatusLineItems(CurrentActiveObject.UpdateTransactionData.StatusToUpdate, CurrentActiveObject.InventoryDataList.uId)">
                                                                             <i class="fa fa-thumb-tack"></i>
@@ -1031,7 +1041,7 @@
                                                                         </select>
                                                                     </div>
 
-                                                                    <span ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true" class="input-group-addon last" ng-click="CreateNewModal(2,$index)"><i class="fa fa-plus"></i></span>
+                                                                    <span ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true" class="input-group-addon waves-effect last" ng-click="CreateNewModal(2,$index)"><i class="fa fa-plus"></i></span>
                                                                     <span ng-if="$index==0" class="input-group-addon last">
                                                                         <button id="LineItems2_{{CurrentActiveObject.InventoryDataList.uId}}" class="btn waves-effect rotateData btnPrimary btn-icon" data-ng-click="FillStatusLineItems2(CurrentActiveObject.MoveUpdateTagTransactionData.StatusToUpdate,CurrentActiveObject.InventoryDataList.uId)">
                                                                             <i class="fa fa-thumb-tack"></i>
@@ -2296,7 +2306,7 @@
                                                         <option ng-repeat="_optionValue in StatusList" ng-selected="CheckStatusValues(CurrentActiveObject.UpdateTransactionData.StatusToUpdate,_optionValue.StatusValue)?true:false" value="{{_optionValue.StatusValue}}">{{_optionValue.StatusValue}}</option>
                                                     </select>
                                                 </div>
-                                                <span ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true" class="input-group-addon last">
+                                                <span ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true" class="input-group-addon waves-effect last">
                                                     <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
                                                         <i class="fa fa-plus-circle"></i>
                                                     </button>
@@ -2882,7 +2892,7 @@
                                                     </select>
                                                 </div>
 
-                                                <span ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true" class="input-group-addon last">
+                                                <span ng-if="IsActiveStatusLibrary==true && checkpermission('URL:Manage/Status')==true" class="waves-effect input-group-addon last">
                                                     <button class="btn waves-effect smallBtn btnPrimary btn-icon" data-ng-click="CreateNewModal(2,$index)">
                                                         <i class="fa fa-plus-circle"></i>
                                                     </button>
@@ -4415,7 +4425,7 @@
 
             <div style="background: #f04124; color: #fff;" class="modal-header">
 
-                <h4>   You have exceeded your limits!</h4>
+                <h4> You have exceeded your limits!</h4>
             </div>
 
             <div style="padding: 12px; background: #fff; box-shadow: 0px 2px 10px #ccc; border:1px solid #f5f5f5" class="modal-body">
@@ -4436,9 +4446,9 @@
 </div>
 <!--Modal Section - Start -->
 <!--Keep Cart/Leave Page Modal-->
-<div style="overflow:hidden; margin-top:50px;" id="myModal" class="modal animated bounceIn">
-    <div style="background:#fff;" class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+<div style="overflow:hidden; margin-top:50px;" id="myModal" class="modal animated zoomIn" data-backdrop="static" data-keyboard="false">
+    <div style="background: #2196f3; color:#fff" class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i style="color:#fff" class="fa fa-times-circle"></i></span></button>
         <h4>What do you want? </h4>
     </div>
     <div style="background:#fff; padding-top:2px;" class="modal-body">
@@ -4768,7 +4778,7 @@
     $(init);
 
     function init() {
-        $('.changebtn').draggable();
+       // $('.changebtn').draggable();
     }
 
 

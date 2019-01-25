@@ -2572,7 +2572,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         $(".form-control").first().focus();
         $("input[type='number']").trigger("change");
 
-        if ($scope.CurrentCart.length < 5) {
+        if ($scope.CurrentCart.length < 12) {
 
             $(".itemlink").hide();
 

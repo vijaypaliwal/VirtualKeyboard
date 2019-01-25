@@ -209,7 +209,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
        $('#toolbar').css("position", "fixed");
-       $('.stickybtn').css("position", "fixed");
+
+       setTimeout(function () {
+           $('.stickybtn').css("position", "fixed");
+       },50)
+
    });
 
 
