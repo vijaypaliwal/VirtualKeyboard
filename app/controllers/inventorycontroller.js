@@ -212,7 +212,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
        setTimeout(function () {
            $('.stickybtn').css("position", "fixed");
-       },50)
+       },100)
 
    });
 
