@@ -74,7 +74,7 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         _colID = (CType == 1 ? "CustomItem_" : "CustomActivity_") + _colID;
         var _id = "#" + _colID;
 
-        alert(_id);
+     
         var scanner = cordova.plugins.barcodeScanner;
 
         scanner.scan(function (result) {
@@ -82,15 +82,13 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
 
             var resultvalue = result.text;
 
-            alert(resultvalue);
+          
 
             $(_id).val(resultvalue);
 
             $(_id).trigger("change");
 
-            CheckScopeBeforeApply();
-
-
+         
 
         }, function (error) {
             log.error("Scanning failed: ", error);
