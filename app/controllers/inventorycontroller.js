@@ -4652,6 +4652,31 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         });
 
     }
+
+
+
+
+    $scope.scanloc = function () {
+
+        var scanner = cordova.plugins.barcodeScanner;
+
+        scanner.scan(function (result) {
+
+            var myvalue = result.text;
+
+            alert(myvalue);
+
+            $("#myscanvalue").val(myvalue);
+
+            $("#myscanvalue").trigger("change");
+
+
+
+        }, function (error) {
+            log.error("Scanning failed: ", error);
+        });
+    }
+
     function removePaddingCharacters(bytes) {
         bytes = bytes.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "");
 

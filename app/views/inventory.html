@@ -3732,8 +3732,9 @@
                     <label>Enter new <span ng-if="CreateType==4">Item Group</span><span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of Measure</span> <span ng-if="CreateType==3">{{statusLabel}}</span> </label>
 
                     <div class="input-group">
-                        <input type="text" ng-model="CreateNewLabel" class="form-control" value="" autocorrect="off" autocapitalize="none" />
+                        <input id="myscanvalue" type="text" ng-model="CreateNewLabel" class="form-control" value="" autocorrect="off" autocapitalize="none" />
 
+                        <span class="input-group-addon last" ng-click="scanloc()"> <i class="fa waves-effect  fa-barcode"></i></span>
                     </div>
                     <br />
 
