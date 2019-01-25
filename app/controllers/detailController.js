@@ -74,80 +74,21 @@ app.controller('detailController', ['$scope', 'localStorageService', 'authServic
         _colID = (CType == 1 ? "CustomItem_" : "CustomActivity_") + _colID;
         var _id = "#" + _colID;
 
-        var _colarray = _colID.split("_");
-        var ControlID = _Column;
+        alert(_id);
         var scanner = cordova.plugins.barcodeScanner;
-
 
         scanner.scan(function (result) {
 
 
             var resultvalue = result.text;
 
-            var _fieldType = $scope.GetCustomDataType($scope.CurrentActiveFieldDatatype);
-            if (_fieldType != 4) {
+            alert(resultvalue);
 
-                resultvalue = $scope.Validation(resultvalue, _fieldType) == true ? resultvalue : "";
-            }
+            $(_id).val(resultvalue);
 
-            if (resultvalue != "") {
+            $(_id).trigger("change");
 
-
-                var _Arraytoupdate = [];
-                var _Type = _colarray[0];
-                if (_Type != null && _Type != undefined && _Type != "") {
-
-                    if ($scope.CurrentActiveFieldDatatype != null && $scope.CurrentActiveFieldDatatype != undefined) {
-
-                        if ($scope.CurrentActiveFieldDatatype == "date" || $scope.CurrentActiveFieldDatatype == "datetime") {
-                            resultvalue = ConvertDatetoDate(resultvalue);
-                        }
-
-                    }
-                    if (_Type == "CustomItem") {
-
-
-                        for (var i = 0; i < $scope.InventoryObject.CustomPartData.length; i++) {
-
-                            if ($scope.InventoryObject.CustomPartData[i].CfdID == _colarray[1]) {
-                                $scope.InventoryObject.CustomPartData[i].Value = resultvalue;
-                                break;
-
-                            }
-
-                        }
-                    }
-                    else if (_Type == "CustomActivity") {
-
-
-                        for (var i = 0; i < $scope.InventoryObject.CustomTxnData.length; i++) {
-
-                            if ($scope.InventoryObject.CustomTxnData[i].CfdID == _colarray[1]) {
-                                $scope.InventoryObject.CustomTxnData[i].Value = resultvalue;
-                                break;
-
-                            }
-
-                        }
-                    }
-                }
-
-
-
-                $(_id).val(resultvalue);
-
-                CheckScopeBeforeApply();
-
-
-            }
-
-            else {
-
-                $scope.ShowScanError(_fieldType);
-            }
-
-
-            vibrate()
+            CheckScopeBeforeApply();
 
 
 
