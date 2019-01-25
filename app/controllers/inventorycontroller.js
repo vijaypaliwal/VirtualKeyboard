@@ -4663,8 +4663,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         scanner.scan(function (result) {
 
             var myvalue = result.text;
-
-            alert(myvalue);
+       
 
             $("#myscanvalue").val(myvalue);
 
