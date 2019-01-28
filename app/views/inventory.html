@@ -195,6 +195,9 @@
                             <label>Select Location <span class="redText">*</span></label>
                             <div class="input-group">
                                 <select ng-change="changelocation()" class="form-control" id="Location" ng-model="InventoryObject.Location">
+
+                                    <option value="">-Select-</option>
+
                                     <option mytag="{{obj.LocationZone}}" value="{{obj.LocationName}}" ng-selected="CheckSelectedValues(InventoryObject.Location,obj.LocationName)?true:false" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
                                 </select>
                                 <span ng-if="IsActiveLocationLibrary==true" ng-click="CreateNew(1)" class="input-group-addon last"><i class="fa waves-effect fa-plus"></i></span>
@@ -231,6 +234,7 @@
                             <div class="input-group">
 
                                 <select class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.Uom" id="UOM">
+                                    <option>-Select-</option>  
                                     <option value="{{obj.UnitOfMeasureName}}" ng-selected="CheckSelectedValues(InventoryObject.Uom,obj.UnitOfMeasureName)?true:false" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                 </select>
                                 <span ng-if="IsActiveUOMLibrary==true" ng-click="CreateNew(2)" class="input-group-addon last"><i class="fa waves-effect fa-plus"></i></span>
@@ -244,6 +248,7 @@
                             <div class="input-group">
 
                                 <select class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.DefaultItemUOM" id="DefaultItemUOM">
+                                    <option>-Select-</option>  
                                     <option value="{{obj.UnitOfMeasureID}}" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                 </select>
 
@@ -603,6 +608,7 @@
                             <div ng-if="UnitTag3FieldSpecialType == 2">
                                 <div class="input-group">
                                     <select ng-model="InventoryObject.UnitTag3" id="UnitTag3" class="form-control">
+                                        <option selected value=" ">-Select-</option>
                                         <option ng-blur="mtuvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" ng-repeat="obj in UniqueTag3Combovalues">{{obj}}</option>
                                     </select>
                                     <span ng-if="mtuvar3==false" class="redText">Please input some unique data</span>
@@ -1708,6 +1714,7 @@
                                     <label>Select Location <span class="redText">*</span></label>
                                     <div class="input-group">
                                         <select ng-change="changelocation()" class="form-control" id="Location" ng-model="InventoryObject.Location">
+                                            <option value="">-Select-</option>
                                             <option mytag="{{obj.LocationZone}}" value="{{obj.LocationName}}" ng-selected="CheckSelectedValues(InventoryObject.Location,obj.LocationName)?true:false" ng-repeat="obj in LocationList">{{obj.LocationName}}</option>
                                         </select>
                                         <span ng-if="IsActiveLocationLibrary==true" ng-click="CreateNew(1)" class="input-group-addon last"><i class="fa waves-effect fa-plus"></i></span>
@@ -1730,6 +1737,7 @@
                                     <div class="input-group">
 
                                         <select class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.Uom" id="UOM">
+                                            <option>-Select-</option>  
                                             <option value="{{obj.UnitOfMeasureName}}" ng-selected="CheckSelectedValues(InventoryObject.Uom,obj.UnitOfMeasureName)?true:false" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                         </select>
                                         <span ng-if="IsActiveUOMLibrary==true" ng-click="CreateNew(2)" class="input-group-addon last"><i class="fa waves-effect fa-plus"></i></span>
@@ -2124,6 +2132,7 @@
                                     <div class="input-group">
 
                                         <select class="form-control" ng-change="onChangeUOMData()" ng-model="InventoryObject.DefaultItemUOM" id="DefaultItemUOM">
+                                            <option>-Select-</option>  
                                             <option value="{{obj.UnitOfMeasureID}}" ng-repeat="obj in UOMList">{{obj.UnitOfMeasureName}}</option>
                                         </select>
 
@@ -2372,7 +2381,8 @@
                                             <!--<input id="UnitTag2" ng-blur="mtuvar2=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" type="text" ng-model="InventoryObject.UnitTag2" class="form-control" />-->
 
                                             <select ng-model="InventoryObject.UnitTag2" id="UnitTag2" class="form-control">
-                                                <option ng-blur="mtuvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" ng-repeat="obj in UniqueTag2Combovalues">{{obj}}</option>
+                                                <option selected value=" ">-Select-</option>
+                                                <option  ng-blur="mtuvar1=CheckUnitDataFieldValue('UnitTag2',CheckIsAllowDuplicate('UnitTag2'))" ng-repeat="obj in UniqueTag2Combovalues">{{obj}}</option>
                                             </select>
 
 
@@ -2511,6 +2521,7 @@
                                             <!--<input id="UnitTag3" ng-blur="mtuvar3=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" type="text" ng-model="InventoryObject.UnitTag3" class="form-control" value="" />-->
 
                                             <select ng-model="InventoryObject.UnitTag3" id="UnitTag3" class="form-control">
+                                                <option selected value=" ">-Select-</option>
                                                 <option ng-blur="mtuvar1=CheckUnitDataFieldValue('UnitTag3',CheckIsAllowDuplicate('UnitTag3'))" ng-repeat="obj in UniqueTag3Combovalues">{{obj}}</option>
                                             </select>
 
@@ -2848,8 +2859,8 @@
 
                                         <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete != true" class="select">
                                             <select id="CustomItem_{{obj.cfdID}}" class="form-control" ng-model="InventoryObject.CustomPartData[obj.CustomFieldIndex].Value">
-
-                                                <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index">{{_optionValue}}</option>
+                                                <option selected value="">-Select-</option>
+                                                <option ng-if="obj.cfdComboValues!=null" value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index ">{{_optionValue}}</option>
 
                                             </select>
                                         </div>
