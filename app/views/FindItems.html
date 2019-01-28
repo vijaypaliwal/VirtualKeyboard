@@ -26,7 +26,7 @@
     <div ng-if="myinventoryColumnLoaded==false">
 
         <div class="modal-backdrop fade in"></div>
-        <div class="spinner" style="text-align:center; position:fixed; top:33%; width:100%;  z-index:10000">
+        <div class="spinner">
             <img src="img/loader.gif" alt="Alternate Text" />
 
             <!--<i style="font-size: 100px; color: #0083C7; " class="fa fa-spin fa-spinner"></i>-->
@@ -50,7 +50,7 @@
 
                                 <ul class="dropdown-menu dm-icon searchlist" id="dynamicd">
                                     <li class="suggestItem1"><a ng-click="searchfunction('All')" alt="All">All</a></li>
-                                    <li class="suggestItem2"><a ng-click="searchfunction('pPart')" alt="pPart">Items</a></li>
+                                    <li class="suggestItem2"><a ng-click="searchfunction('pPart')" alt="pPart">{{itemlabel}}</a></li>
                                     <li class="suggestItem3"><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
                                     <li class="suggestItem4"><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">{{statusLabel}}</a></li>
                                     <li class="suggestItem5"><a ng-click="searchfunction('uomUOM')" alt="uomUOM">UOM</a></li>

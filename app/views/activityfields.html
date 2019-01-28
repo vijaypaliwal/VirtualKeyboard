@@ -7,6 +7,10 @@
     .clearicon {
         color:#ccc;
     }
+    a.title
+    {
+        width:auto;
+    }
 </style>
 
 
@@ -48,14 +52,14 @@
             <tr>
                 <td>
                     <div class="infoareas columnHeader" ng-click="openClosePanel(3)">
-                        <h5>Custom Event Columns </h5>                        
+                        <h5 style="padding-left:8px">Custom Event Columns </h5>                        
                     </div>
                 </td>
             </tr>
             <tr ng-show="IsActivityOpen==true">
                 <td>
 
-                    <div class="infoareas" style=" color: #756262; padding: 5px;">
+                    <div class="infoareas" style=" color: #756262; padding: 10px;">
                         You can create new Custom Circumstance Fields in the web version of Clearly Inventory and they will appear here.
                     </div>
                 </td>
@@ -102,7 +106,7 @@
 
                 <td>
                     <div class="infoareas">
-                        <a class="NoDataAnchor">  No Custom Activity Fields found.</a>
+                        <a style="padding:10px;" class="NoDataAnchor">  No Custom Activity Fields found.</a>
                     </div>
                 </td>
             </tr>
