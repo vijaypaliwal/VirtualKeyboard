@@ -2472,6 +2472,19 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                               _obj.cfdID = _CustomObj.cfdID;
                               _obj.cfdDataType = _CustomObj.cfdDataType;
                               _obj.cfdComboValues = _CustomObj.cfdComboValues;
+
+                             
+
+
+                              if ($.trim(_obj.cfdComboValues) != '') {
+                                  _obj.cfdComboValues = _obj.cfdComboValues.filter(function (e) { return e });
+                              }
+                            
+
+                           
+
+                            
+
                               _obj.CfValue = ($.trim(_CustomObj.cfdprefixsuffixtype) != "" ? _CustomObj.CombineValue : _CustomObj.cfdDefaultValue);
                               _obj.Required = _CustomObj.cfdIsRequired;
                               _obj.cfdTruelabel = _CustomObj.cfdTruelabel;
@@ -2498,9 +2511,13 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                           _obj.CustomFieldIndex = _obj.cfdID != 0 ? $scope.getIndexBycolName(_obj.cfdID) : -1;
                           $scope.MyinventoryFields.push(_obj);
 
+
+
+
                       }
 
-
+                      console.log("dadada")
+                      console.log($scope.MyinventoryFields);
 
                       // Custom Activity Field 
 
@@ -3384,6 +3401,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                                        if (item.FieldComboValues != null) {
                                            $scope.UniqueTag2Combovalues = item.FieldComboValues.split("\n");
+
+                                      
                                        }
                                        if (item.FieldRadioValues != null) {
                                            $scope.UniqueTag2Radiovalues = item.FieldRadioValues.split("\r\n");
@@ -4676,6 +4695,26 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         });
     }
 
+    $scope.scancustomfield = function () {
+
+        var scanner = cordova.plugins.barcodeScanner;
+
+        scanner.scan(function (result) {
+
+            var mycustomvalue = result.text;
+
+
+            $("#addcustomdrop").val(mycustomvalue);
+
+            $("#addcustomdrop").trigger("change");
+
+
+
+        }, function (error) {
+            log.error("Scanning failed: ", error);
+        });
+    }
+
     function removePaddingCharacters(bytes) {
         bytes = bytes.replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, "");
 
@@ -5407,7 +5446,33 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
     }
 
+    setTimeout(function () {
+      
 
+
+        $("#UnitTag2").each(function () {
+           
+            $(this).trigger("change");
+        })
+
+        $("#UnitTag3").each(function () {
+         
+            $(this).trigger("change");
+        })
+
+        $("#UniqueTag").each(function () {
+            $(this).trigger("change");
+        })
+
+      
+      
+
+
+    },7000)
+
+
+
+    
 
 
 
@@ -5671,4 +5736,3 @@ app.directive('testCase', function () {
         }
     }
 });
-
