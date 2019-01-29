@@ -404,7 +404,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $scope.SecurityToken = authData.token;
         }
 
-        alert("In");
 
         $.ajax
            ({
@@ -415,12 +414,12 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
 
-                   alert("Succ");
+                 
 
                },
                error: function (err) {
 
-                   alert("err");
+                 
                    debugger;
                 
                }
