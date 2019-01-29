@@ -187,7 +187,6 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         setTimeout(function () {
             $("#secondDiv").find(".form-group:first").find(".form-control:first").focus();
 
-
             SetWeekMonthValues();
 
 
@@ -198,23 +197,19 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
     $(document)
-   .on('focus', '.switchmode input,select', function () {
+   .on('focus', '.switchmode .form-control', function () {
 
-
+    //   alert("In");
        $('#toolbar').css("position", "absolute");
-       // $('.stickybtn').css("position", "relative");
-       $('.stickybtn').hide();
+      $('.stickybtn').css("position", "relative");
+     //  $('.stickybtn').hide();
 
    })
-   .on('blur', '.switchmode input,select', function () {
+   .on('blur', '.switchmode .form-control', function () {
 
 
        $('#toolbar').css("position", "fixed");
-
-       setTimeout(function () {
-           //  $('.stickybtn').css("position", "fixed");
-           $('.stickybtn').show();
-       },100)
+       $('.stickybtn').css("position", "fixed");
 
    });
 

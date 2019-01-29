@@ -2473,7 +2473,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
             }
 
-            
+            console.log("Current Cart333");
             console.log($scope.CurrentCart);
         }
 
@@ -2615,11 +2615,21 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                success: function (response) {
                    if (response.GetCustomFieldsDataResult.Success == true) {
 
+
+                       alert("In");
+                       debugger;
                        $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
 
 
 
                        for (var i = 0; i < $scope.CustomActivityDataList.length; i++) {
+
+
+
+                           if ($.trim($scope.CustomActivityDataList[i].cfdComboValues) != '') {
+                               $scope.CustomActivityDataList[i].cfdComboValues = $scope.CustomActivityDataList[i].cfdComboValues.filter(function (e) { return e });
+                           }
+
 
                            var _defaultValue = angular.copy($scope.CustomActivityDataList[i].cfdDefaultValue);
 
@@ -5715,6 +5725,13 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         return _Val1 == _Val2;
 
     }
+
+    setTimeout(function() {
+        $("select.uniqueunitData").each(function () {
+         
+         // $(this).trigger("change");
+        })
+    },5000)
 
   
 

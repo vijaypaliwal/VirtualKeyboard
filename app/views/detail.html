@@ -568,7 +568,7 @@
 
                         <div ng-if="GetCustomItemObjByColumnmap(obj.ColumnName).cfdIsAutoComplete != true" class="select">
                             <select ng-model="InventoryObject[obj.CustomFieldIndex].Value" class="form-control">
-
+                                <option value="">-Select-</option>
                                 <option value="{{_optionValue}}" ng-repeat="_optionValue in obj.cfdComboValues track by $index" ng-selected="_optionValue == InventoryObject[obj.CustomFieldIndex].Value">{{_optionValue}}</option>
 
                             </select>
