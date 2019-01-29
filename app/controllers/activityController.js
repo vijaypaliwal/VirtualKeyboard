@@ -2616,7 +2616,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                    if (response.GetCustomFieldsDataResult.Success == true) {
 
 
-                       alert("In");
+                     
                        debugger;
                        $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
 
