@@ -2459,7 +2459,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
 
     setTimeout(function () {
-        $("#myModal234").modal('hide');
+       // $("#myModal234").modal('hide');
     }, 4000)
 
 }]);
