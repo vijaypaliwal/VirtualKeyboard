@@ -653,12 +653,23 @@
 
               
                 <br/>
+
                 
-                <button type="button" ng-click="UpdateInventory()" ng-if="SavingData==false" ng-class="{'Btndisabled':CheckCustomRequiredFields()==true}" ng-disabled="CheckCustomRequiredFields()==true || CurrentInventory.pPart=='' || CheckEmailFields()==true" class="waves-effect btn btn-primary"> <i class="fa fa-pencil"></i> Update</button>
-                <button type="button" ng-if="SavingData==true" disabled class="waves-effect btn btn-primary"> <i class="fa fa-pencil fa-spin"></i> Update</button>
-                <button ng-if="SavingData==false" class="waves-effect  btn btn-gray" ng-click="ToggleEditView()"><i class="fa fa-times"></i> Cancel</button>
-                <button ng-if="SavingData==true" disabled class="waves-effect btn btn-gray"><i class="fa fa-times"></i> Cancel</button>
+
+                
+           
+                <div class="row stickybtn">
+                    <div class="col-xs-6">
+                        <button type="button" ng-click="UpdateInventory()" ng-if="SavingData==false" ng-class="{'Btndisabled':CheckCustomRequiredFields()==true}" ng-disabled="CheckCustomRequiredFields()==true || CurrentInventory.pPart=='' || CheckEmailFields()==true" class="waves-effect btn btn-primary"> <i class="fa fa-pencil"></i> Update</button>
+                        <button type="button" ng-if="SavingData==true" disabled class="waves-effect btn btn-primary"> <i class="fa fa-pencil fa-spin"></i> Update</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <button ng-if="SavingData==false" class="waves-effect  btn btn-gray" ng-click="ToggleEditView()"><i class="fa fa-times"></i> Cancel</button>
+                        <button ng-if="SavingData==true" disabled class="waves-effect btn btn-gray"><i class="fa fa-times"></i> Cancel</button>
+                    </div>
+                </div>
             </div>
+            
         </div>
 
         </div>
