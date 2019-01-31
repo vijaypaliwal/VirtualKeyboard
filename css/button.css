@@ -183,7 +183,7 @@
 .menubtn {
     position: fixed;
     bottom: 23px;
-    right: 25px;
+    right: 27px;
     background: #FF4081 !important;
     z-index: 13000;
     color: #fff !important;
@@ -456,6 +456,7 @@
         display: block;
         z-index: 1000;
         position: relative;
+        border-radius:0;
     }
 
     #filtermodal #firstDiv .fa-calendar {
