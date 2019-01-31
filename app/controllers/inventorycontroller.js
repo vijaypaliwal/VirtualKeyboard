@@ -199,17 +199,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $(document)
    .on('focus', '.switchmode .form-control', function () {
 
-    //   alert("In");
        $('#toolbar').css("position", "absolute");
-      $('.stickybtn').css("position", "relative");
-     //  $('.stickybtn').hide();
+   //   $('.stickybtn').css("position", "relative");
+  
 
    })
    .on('blur', '.switchmode .form-control', function () {
 
 
        $('#toolbar').css("position", "fixed");
-       $('.stickybtn').css("position", "fixed");
+     //  $('.stickybtn').css("position", "fixed");
 
    });
 
@@ -404,6 +403,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             $scope.SecurityToken = authData.token;
         }
 
+       
 
         $.ajax
            ({
@@ -419,7 +419,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                },
                error: function (err) {
 
-                 
+                
                    debugger;
                 
                }
