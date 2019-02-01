@@ -675,12 +675,22 @@ input[type="password"]:focus
  .form-control
  {
      height:55px;
+     font-size:20px;
  }
+ .open-left
+ {
+     margin-top:10px;
+ }
+
 
  .Ipadheight
  {
-     height:50px;
+  
  }
+   .panel-group
+    {
+        margin-bottom:0 !important;
+    }
 
  .has-feedback .form-control-feedback {
    
@@ -703,15 +713,18 @@ input[type="password"]:focus
 
  #toolbar
  {
-     height:80px;
+     height:80px !important;
  }
 
  .open-left .fa-bars
  {
-     font-size:30px !important;
+     font-size:34px !important;
+ }
+ .titletext
+ {
+     font-size:23px;
  }
 
- 
 
  #viewdata
  {
@@ -719,11 +732,10 @@ input[type="password"]:focus
  }
 
    
-
     .roundbtntitle {
     height: 55px;
     width: 55px;
-    margin-top: 26px;
+    margin-top: 10px;
     line-height: 50px;
     font-size: 23px;
    
@@ -741,7 +753,8 @@ input[type="password"]:focus
   
 
     label {
-        font-size:23px;
+        font-size:23px !important;
+        margin-top:10px;
     }
 
     .btn-primary
@@ -900,7 +913,7 @@ input[type="password"]:focus
     }
     .searchsection
     {
-        margin-top:-5px !important;
+        margin-top:-8px !important;
     }
     /*.finditems.input-group-addon a
     {
@@ -968,7 +981,7 @@ input[type="password"]:focus
      }
      .summaryClearbtn i
      {
-         font-size:45px;
+         font-size:45px !important;
      }
 
     .topheader i {
@@ -1031,9 +1044,184 @@ input[type="password"]:focus
     }
 
 
+    /*For bottom modal*/
+
+
+     .menubtn {
+ 
+    bottom: 35px;
+    right: 35px;
+   
+    height: 90px;
+    width: 90px;
+   
+  
+    line-height: 110px;
+    cursor: pointer;
+}
+
+    .menubtn i
+    {
+        font-size:45px;
+    }
+
+    #bottommenumodal .selectAction {
+  
+      bottom: 125px;
+    right: 55px;
+}
+
+    #bottommenumodal .selectAction .btn {
+height: 60px;
+    width: 60px;
+    line-height: 60px;
+    margin-bottom: 12px;
+   
+}
+
+      #bottommenumodal .selectAction .btn i {
+font-size:30px;
+   
+}
+
+    #bottommenumodal span {
+    font-size: 23px;
+   
+}
+
+
+    .selectAction .btn {
+    height: 60px !important;
+    width: 60px !important;
+
+    line-height: 60px !important;
+  
+}
+    #bottommenumodal .selectAction li span
+    {
+        font-size:20px !important;
+    }
+
+    .singlePanel .prepend .inner
+    {
+        height:55px !important;
+        line-height:53px !important;
+    }
+     .singlePanel .append .inner
+    {
+        height:55px !important;
+        line-height:53px !important;
+    }
 
 
 
+     .customActivityData .prepend .inner
+{
+padding-top: 8px !important;
+    padding-bottom: 5px !important;
+}
+
+.customActivityData .append .inner{
+padding-top: 8px !important;
+    padding-bottom: 5px !important;
+}
+
+
+
+
+     #filtermodal
+     {
+         width:430px !important; 
+     }
+
+      #filtermodal .input-group
+     {
+      margin-bottom:20px;
+     }
+      #filtermodal .modal-header
+      {
+          padding:20px;
+
+      }
+
+      #filtermodal .modal-header h4 {
+    font-size: 30px;
+}
+
+      #filtermodal .modal-header i {
+    font-size: 35px !important;
+    margin-top: 0px !important;
+   
+}
+
+
+     .text
+     {
+         font-size:22px !important;
+     }
+     .infoareas p {
+    font-size: 16px !important;
+}
+
+     .contentsection .infoareas .btn-white
+     {
+         height:50px;
+         width:50px;
+         line-height:50px;
+         font-size:27px;
+     }
+
+     .switchinv {
+    background: #e6e4e4 !important;
+    color: #333;
+    border-radius: 15px !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    font-size: 24px;
+    padding-left: 10px;
+    padding-right: 8px;
+    height: 40px !important;
+    width: 52px !important;
+    display: inline-block;
+  
+    vertical-align: top;
+}
+
+    body .switchinv {
+          line-height: 40px !important;
+    }
+
+    #toolbar .title {
+        background: #fff;
+        color: #333;
+        border-radius: 15px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        font-size: 17px;
+        min-width: 45px;
+        overflow: hidden;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        display: -webkit-inline-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        -ms-word-break: break-all;
+        word-break: break-all;
+        margin-bottom: 0;
+        line-height: 36px !important;
+        height: 40px !important;
+        text-align: center;
+        padding-left: 13px;
+        padding-right: 13px;
+        vertical-align: top;
+    }
+
+    body #toolbar .title
+    {
+   line-height:40px !important;
+    }
+    
 }
 
 
