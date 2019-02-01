@@ -2617,7 +2617,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
 
                      
-                       debugger;
                        $scope.CustomActivityDataList = response.GetCustomFieldsDataResult.Payload;
 
 
@@ -2919,6 +2918,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         $scope.CurrentCart = localStorageService.get("ActivityCart");
 
+
+        console.log("test");
+        console.log($scope.CurrentCart);
+
        
 
         var _CurrentAction = localStorageService.get("SelectedAction");
@@ -2964,6 +2967,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         for (var i = 0; i < $scope.CurrentCart.length; i++) {
             $scope.CurrentCart[i].MoveUpdateTagTransactionData.UniqueDate = angular.copy($scope.CurrentCart[i].ApplyTransactionData.UniqueDate);
             $scope.CurrentCart[i].MoveUpdateTagTransactionData.UnitDate2 = angular.copy($scope.CurrentCart[i].ApplyTransactionData.UnitDate2);
+
+            if ($scope.CurrentCart[i].iCostPerItem==0) {
+                $scope.CurrentCart[i].iCostPerItem = null;
+            }
+
         }
 
         $scope.CurrentCartBkup = angular.copy($scope.CurrentCart);
