@@ -1121,7 +1121,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-addon currency">$</span>
-                                <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" class="form-control" type="number" name="cost" value="" />
+                                <input ng-model="InventoryObject.Cost"  id="Costperunit" class="form-control" type="number" name="cost" value="" />
 
 
                             </div>
@@ -1617,7 +1617,7 @@
             <div class="panel-heading" role="tab" id="headingone">
                 <h4  class="panel-title">
                     <a id="requiredfields" style="display:block;" class="accordion-toggle">
-                        <p>Required fields </p>                       
+                        <p>Required Fields </p>                       
                     </a>
                 </h4>
             </div>
@@ -2104,7 +2104,7 @@
             <div class="panel-heading" role="tab" id="headingtwo">
                 <h4 class="panel-title">
                     <a style="display:block;" role="button" class="accordion-toggle collapsed">
-                        <p> Optional fields </p>                       
+                        <p> Optional Fields </p>                       
                     </a>
                 </h4>
             </div>
@@ -2956,7 +2956,7 @@
 
                                 <div class="input-group">
                                     <span class="input-group-addon currency">$</span>
-                                    <input ng-model="InventoryObject.Cost" min="0" id="Costperunit" class="form-control" type="number" name="cost" value="" />
+                                    <input ng-model="InventoryObject.Cost"  id="Costperunit" class="form-control" type="number" name="cost" value="" />
                                     <span ng-click="GetLastValue('Inv_Cost','#Costperunit')" test-case condition="GetLastValueData('Inv_Cost')" class="input-group-addon last"><i class="fa fa-undo"></i></span>
 
                                 </div>
@@ -3765,7 +3765,9 @@
         <div class="wrappermodal">
 
             <div style="background: #2196F3; color:#fff;" class="modal-header">
-
+                <span class="close">
+                    <i data-dismiss="modal" class="fa fa-times-circle"></i>
+                </span>
                 <h4>Create new  <span ng-if="CreateType==4">Item Group</span><span ng-if="CreateType==1">Location</span><span ng-if="CreateType==2">Unit of Measure</span> <span ng-if="CreateType==3">{{statusLabel}}</span></h4>
             </div>
 
@@ -3807,7 +3809,11 @@
         <div class="wrappermodal">
 
             <div style="background: #2196F3; color:#fff;" class="modal-header">
+                <span class="close">
+                    <i data-dismiss="modal" class="fa fa-times-circle"></i>
+                </span>
                 <h4>Create new value</h4>
+             
             </div>
 
             <div style="padding: 12px; background: #fff; box-shadow: 0px 2px 10px #ccc; border:1px solid #f5f5f5" class="modal-body">

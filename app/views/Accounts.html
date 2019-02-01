@@ -1,10 +1,16 @@
 ﻿
 
 <link href="css/account.css" rel="stylesheet" />
+<style>
+    .container
+    {
+        min-width:90%;
+    }
+</style>
 
 
 
- <div style="display:block !important;" id="toolbar" > <span class="title" > <i class="fa fa-cogs" > 
+ <div class="accountheader" style="display:block !important;" id="toolbar" > <span class="title" > <i class="fa fa-cogs" > 
      </i > Manage Your Inventories</span > 
  </div >
 
@@ -16,7 +22,7 @@
 </div>
 
 
-<div style="text-align:center; margin-bottom:15px;">
+<div class="accountsq" style="text-align:center; margin-bottom:15px;">
 
     <img style="height: 70px; width: 70px; background: #2196F3; box-shadow: 0 3px 15px rgba(49, 46, 46, 0.69), 0 11px 19px rgba(0, 9, 128, 0.1); padding: 10px; margin-top: 20px; border-radius: 100%; " src="img/u2.png" alt="Alternate Text" />
 
@@ -32,9 +38,9 @@
 
 
 
-<div ng-show="Addinventory==false" class="animated slideInDown">
+<div ng-show="Addinventory==false" class="animated slideInDown ">
 
-    <p style="background: #ccc; margin-bottom: 0; padding: 15px; padding-right:10px;"> <i class="fa fa-cubes"></i> Your Inventories <button style="height: 36px; display:none; line-height: 36px; margin-top: -5px;" ng-click="AddNewAccount()" type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New</button> </p>
+    <p class="accounthead" style="background: #ccc; margin-bottom: 0; padding: 15px; padding-right:10px;"> <i class="fa fa-cubes"></i> Your Inventories <button style="height: 36px; display:none; line-height: 36px; margin-top: -5px;" ng-click="AddNewAccount()" type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New</button> </p>
     
     <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
         <div ng-if="inventoryExists">
@@ -79,7 +85,7 @@
 
 
 
-    <p style="background: #ccc; margin-bottom: 0; padding: 15px;"><i style="color:#888" class="fa fa-cubes"></i> Other Inventories </p>
+    <p class="accounthead" style="background: #ccc; margin-bottom: 0; padding: 15px;"><i style="color:#888" class="fa fa-cubes"></i> Other Inventories </p>
 
    
 

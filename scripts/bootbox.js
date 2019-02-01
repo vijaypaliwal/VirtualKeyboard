@@ -596,7 +596,7 @@
             // can we just build up button elements instead? slower but neater. Then button
             // can just become a template too
 
-            if (button.label == "OK") {
+            if (button.label == "OK" || button.label == "Yes") {
                 buttonStr += "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'><i class='fa fa-check'></i> " + button.label + "</button>";
             }
             else if (button.label == "Cancel") {
