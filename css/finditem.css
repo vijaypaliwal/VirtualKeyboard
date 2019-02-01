@@ -876,6 +876,11 @@ body {
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
 
+
+   #mycartModal .transactionbody.selectAction {
+    bottom: 120px !important;
+}
+
       .widget-products li .product {
     display: block;
     margin-left: 120px;
@@ -1010,7 +1015,7 @@ body {
 
 #toolbar .title
  {
-     font-size:25px;
+   
      line-height:63px;
  }
   .menubtn {
@@ -1054,6 +1059,8 @@ font-size:30px;
     font-size: 23px;
    
 }
+  
+
 
 
     .selectAction .btn {
@@ -1098,10 +1105,6 @@ font-size:30px;
     margin-top: 0px;
     }
 
-     /*.finditems.input-group-addon a {
-    padding: 16px !important;
-    padding-top: 18px !important;
-    padding-bottom: 18px !important;
-}*/
+   
 
 }
