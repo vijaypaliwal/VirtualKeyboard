@@ -2570,6 +2570,24 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         }
         CheckScopeBeforeApply();
         $(".form-control").first().focus();
+
+        setTimeout(function() {
+            $('.changebtn').hide();
+        }, 3000)
+
+        setTimeout(function () {
+            $('.changebtn').hide();
+        }, 2000)
+
+        setTimeout(function () {
+            $('.changebtn').hide();
+        }, 1000)
+
+        setTimeout(function () {
+            $('.changebtn').hide();
+        }, 4000)
+
+        $('.changebtn').hide();
         $("input[type='number']").trigger("change");
 
         if ($scope.CurrentCart.length < 12) {
@@ -3006,6 +3024,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         setTimeout(function () {
             $(".form-control").first().focus();
+            $('.changebtn').hide();
             $("input[type='number']").trigger("change");
         }, 500);
 
@@ -5569,6 +5588,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         if (_type == "text" || _type == "number" || _type == "week" || _type == "email") {
 
                             $(".swiper-slide-active input:first").focus();
+                            $('.changebtn').hide();
                             $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("click");
                             $(".swiper-slide-active input:first").not("input[type='checkbox']").trigger("keypress");
 
@@ -5609,6 +5629,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     })
     .on('blur', 'input,select', function () {
+
+     
 
         $('.collapsible-header').css("position", "fixed");
         $('.changebtn').show();
