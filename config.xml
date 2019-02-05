@@ -43,7 +43,7 @@
 
   <plugin name="phonegap-plugin-speech-recognition" />
 
-  <plugin name="com-socketmobile-scanapi-cordova" source="npm"  />
+  <plugin name="com-socketmobile-scanapi-cordova" source="SocketMobileSDK" />
 
   <plugin name="cordova-plugin-background-app" source="npm" spec="~2.0.0" />
 
@@ -70,9 +70,6 @@
   <feature name="debug-server" required="true">
     <param name="domain" value="http://debug.phonegap.com"/>
     <param name="key" value="willoughby"/>
-  </feature>
-  <feature name="ScanApiCordova">
-    <param name="ios-package" value="ScanApiCordova" />
   </feature>
    
   <preference name="webviewbounce" value="false" />
