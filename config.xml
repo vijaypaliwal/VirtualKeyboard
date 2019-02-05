@@ -43,7 +43,7 @@
 
   <plugin name="phonegap-plugin-speech-recognition" />
 
-  <plugin name="com-socketmobile-scanapi-cordova" source="git" />
+  <plugin name="com-socketmobile-scanapi-cordova" source="npm" spec="10.3.93"/>
 
   <plugin name="cordova-plugin-background-app" source="npm" spec="~2.0.0" />
 
