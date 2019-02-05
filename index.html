@@ -1,0 +1,851 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="ClearlyInventoryApp">
+<head>
+    <meta name="keywords" content="Clearly Inventory - Online Inventory Management Software" />
+    <meta name="description" content="Welcome to Clearly Inventory, an easy online inventory management software for small business and organizations - web based, fast, sharable, and customizable." />
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-   scale=1.0, user-scalable=no;">
+    <title>ClearlyInventory App</title>
+    <link href="content/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="css/materialize.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" type="text/css"> 
+     
+    <link href="content/css/loading-bar.css" rel="stylesheet" />
+    <link href="content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="content/css/toastr.css" rel="stylesheet" />
+    <link href="content/css/simple-sidebar.css" rel="stylesheet" />
+    <link href="content/css/idangerous.swiper.css" rel="stylesheet" />
+    <link href="content/css/select2.min.css" rel="stylesheet" />
+    <link href="content/css/animate.min.css" rel="stylesheet" />
+    <link href="content/css/bootstrap-switch.css" rel="stylesheet" />
+    <link href="content/css/bootstrap-multiselect.css" rel="stylesheet" />
+
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+
+    <link id="buttoncss" href="css/button.css" rel="stylesheet" type="text/css">
+    <link href="css/index.css" rel="stylesheet" type="text/css">
+
+    <style>
+        input[type=datetime-local] {
+            padding-top: 20px;
+            line-height: 40px !important;
+        }
+
+        input[type=time] {
+            padding-top: 20px;
+            line-height: 40px !important;
+        }
+
+        input[type=date] {
+            padding-top: 20px;
+            line-height: 40px !important;
+        }
+
+        input[type=month] {
+            padding-top: 20px;
+            line-height: 40px !important;
+        }
+
+        #Inventorylistmodal {
+            background: #fff;
+            width: calc(100% - 20px);
+            margin-left: 10px;
+            margin: 0 auto;
+            margin: 0 auto;
+            margin-top: 10px;
+            bottom: auto;
+            margin-top: 14px;
+            position: fixed;
+            z-index: 1100;
+            ;
+            left: 10px;
+        }
+
+            #Inventorylistmodal .modal-header {
+                background-color: #f5f5f5;
+            }
+
+                #Inventorylistmodal .modal-header h4 {
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    color: #5f5f5f;
+                }
+
+            #Inventorylistmodal .modal-footer {
+                background-color: #ccc;
+                text-align: center;
+            }
+
+            #Inventorylistmodal .modal-footer {
+                display: block;
+                padding-bottom: 8px;
+                padding-top: 8px;
+            }
+
+
+
+            #Inventorylistmodal .modal-body {
+                min-height: 370px;
+                overflow-y: auto;
+            }
+
+            #Inventorylistmodal .btn {
+                width: 100%;
+                margin-bottom: 12px;
+                color: #fff;
+                border-radius: 15px;
+                text-align: left;
+            }
+
+            #Inventorylistmodal .modal-body {
+                padding: 0;
+            }
+
+        #toolbar i {
+            font-size: 18px;
+            line-height: 25px;
+        }
+
+        #toolbar .title {
+            background: #fff;
+            color: #333;
+            border-radius: 15px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            font-size: 15px;
+            min-width: 45px;
+            overflow: hidden;
+            -ms-text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            display: -webkit-inline-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            -ms-word-break: break-all;
+            word-break: break-all;
+            margin-bottom: 0;
+            line-height: 28px !important;
+            height: 31px;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            vertical-align: top;
+        }
+
+        .sidenav-header .avatar {
+            margin: 20px;
+            height: 40px;
+            width: 38px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 3px;
+            border: 1px solid #ccc;
+            margin-right: 7px;
+        }
+
+        .sidenav-header .avatar-body h3 {
+            color: #fff;
+            margin: 0;
+            font-size: 13px;
+        }
+
+        .sidenav-header .avatar-body p {
+            color: #fff;
+            margin: 0;
+            font-size: 12px;
+        }
+
+        .side-nav .no-child {
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .Inventorylist li {
+            list-style-type: none;
+            width: 100%;
+        }
+
+            .Inventorylist li a span {
+                padding: 6px;
+                padding-left: 8px;
+                padding-right: 8px;
+                padding-top: 5px;
+                border-radius: 100%;
+            }
+
+                .Inventorylist li a span i {
+                    font-size: 15px;
+                    color: #fff;
+                }
+
+            .Inventorylist li .fa-angle-right {
+                float: right;
+                color: #888;
+            }
+
+            .Inventorylist li a {
+                width: 100%;
+                display: block;
+                padding: 12px;
+                text-transform: capitalize;
+                font-size: 16px;
+                text-align: left;
+            }
+
+            .Inventorylist li:nth-child(even) {
+                background: #fbfbfb;
+            }
+
+            .Inventorylist li:nth-child(odd) {
+                background: #fff;
+            }
+
+        .arrow_box {
+            position: relative;
+        }
+
+            .arrow_box:after, .arrow_box:before {
+                bottom: 100%;
+                left: 50%;
+                border: solid transparent;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+            }
+
+            .arrow_box:after {
+                border-color: rgba(136, 183, 213, 0);
+                border-bottom-color: #ccc;
+                border-width: 15px;
+                margin-left: -21px;
+            }
+
+            .arrow_box:before {
+                border-color: rgba(194, 225, 245, 0);
+                border-bottom-color: #f5f5f5;
+                border-width: 20px;
+                margin-left: -26px;
+            }
+
+        .changeinvloader {
+            width: 100%;
+            position: fixed;
+            text-align: center;
+        }
+
+
+
+            .changeinvloader div {
+                margin: 0 auto;
+                padding: 10px;
+                padding-top: 15px;
+                margin-top: 75px;
+                border-radius: 5px;
+                width: 160px;
+            }
+
+        #Permissionlink {
+            display: none !important;
+        }
+
+        .modal-backdrop.in {
+            opacity: 0.9 !important;
+        }
+
+        #bottommenumodal .selectAction li span {
+            color: #000;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 5px;
+            font-size: 14px;
+            background: #fff;
+            padding-left: 15px;
+            /* text-shadow: -3px -1px 4px #ccc; */
+            padding-right: 15px;
+        }
+
+        html {
+            -webkit-user-select: none !important;
+        }
+
+        body {
+            -webkit-user-select: none !important;
+        }
+
+        .switchinv {
+            background: #e6e4e4 !important;
+            color: #333;
+            border-radius: 15px !important;
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            font-size: 15px;
+            padding-left: 10px;
+            padding-right: 8px;
+            height: 31px;
+            width: 40px;
+            display: inline-block;
+            line-height:30px !important;
+            vertical-align:top;
+        }
+
+            .switchinv i {
+                color: #333 !important;
+            }
+
+        .Inventorylist .invname {
+            overflow: hidden;
+            -ms-text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            display: -webkit-inline-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            -ms-word-break: break-all;
+            word-break: break-all;
+            margin-bottom: 0;
+            line-height: 17px !important;
+            width: calc(100% - 70px);
+            border-radius: 0;
+            padding: 0;
+            padding-left: 12px;
+            padding-top: 0px;
+        }
+        button,a
+        {
+            outline:none !important;
+        }
+
+
+        .spinner, .loaderanimation {
+            text-align: center;
+            position: fixed;
+            top: 33%;
+            width: 100%;
+            z-index: 10000;
+            left:0;
+            right:0;
+        }
+
+        .spinner img
+        {
+            height:50px;
+            width:50px;
+
+        }
+
+        .loaderanimation img {
+            height: 50px;
+            width: 50px;
+        }
+
+        #toast-container {
+            top: 33%;
+            width: calc(100% - 30px);
+            margin:0 auto;
+        }
+
+        .toast-error {
+            background-color: brown;
+            color: white;
+            border: 2px solid rgb(226, 83, 83);
+            border-color:brown;
+        }
+
+        .open-right {
+          
+            margin-right: 12px;
+       
+        }
+        #toolbar
+        {
+            height:58px;
+        }
+        .btn-success {
+            background-color: #43ac6a;
+            color: #fff;
+        }
+
+        a.title
+        {
+            width:auto;
+        }
+
+    </style>
+
+
+</head>
+<body data-ng-controller="indexController" ng-cloak>
+
+
+    <!-- No Internet Message - Start -->
+    <div style="z-index:10000;" class="nointernet">
+
+        <p><i class="fa fa-exclamation-triangle"></i> Sorry, no internet connectivity. <span>Retry</span> </p>
+    </div>
+    <!-- No Internet Message - End -->
+    <!--Success/Waiting message modals start -->
+    <div class="animated" id="mysmallModal">
+
+        <div class="errorcontent">
+
+            <i class="fa fa-check-circle" style="font-size: 40px; color: #fafafa;"></i> <br />
+
+            <span style="font-size:20px;font-weight:300;color:#fafafa;" id="DataText">
+                Saved
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div ng-show="showinventory==true" id="Inventorylistmodal" class="animated zoomIn">
+
+        <div class="arrow_box"></div>
+
+        <div class="modal-header ">
+            <h4> <i class="fa fa-cubes"></i> Your Inventories <a ng-click="hideinventorylist()" class="pull-right"> <i class="fa fa-times-circle"></i> </a></h4>
+        </div>
+        <div style="max-height: calc({{ modalheight}}px - 125px); " class="modal-body">
+
+
+            <div ng-show="showinvloader==true" class="changeinvloader">
+
+                <div class="primary-color">
+
+                    <p><img style="width:35px;" src="img/loader1.gif" alt="Alternate Text" /></p>
+
+                    <p>Please wait...</p>
+
+                </div>
+
+            </div>
+
+
+            <ul class="Inventorylist">
+                <li ng-repeat="obj in MyInventories" ng-click="changeInventory(obj.InventoryAccountID, obj.InventoryName, obj.BackColor)">
+                    <a>
+                        <span style="background-color:{{obj.BackColor}} !important"><i class="fa fa-cube"></i></span> <span class="invname"> {{obj.InventoryName}} </span> <i class="fa fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
+
+
+
+        </div>
+
+
+    </div>
+
+
+    <div id="mysmallModalSave" class="animated">
+        <div class="errorcontent">
+
+            <img style="max-height:50px; max-width:50px;" src="img/loader1.gif" />
+
+            <span style="display:block;font-size:20px;font-weight:300;color:#fafafa;">
+                Saving..
+            </span>
+
+        </div>
+    </div>
+
+
+    <div id="mysmallModalWaiting" class="animated">
+        <div class="waitingContent">
+
+
+            <span style="display:block;color:#fafafa;">
+                Loading..
+            </span>
+
+        </div>
+    </div>
+
+    <div class="animated" id="myloginModal">
+
+        <div class="errorcontent" style="background:#000;">
+            <img style="max-height:50px; max-width:50px;" src="img/loader1.gif" />
+            <span style="display:block;font-size:20px;font-weight:300;color:#fafafa;">
+                Signing in..
+            </span>
+        </div>
+    </div>
+
+
+    <div style="display:none;" class="animated" id="mysignupModal">
+        <div class="errorcontent" style="background:#000;">
+            <img style="max-height:50px; max-width:50px;" src="img/loader1.gif" />
+            <span style="display:block;font-size:20px;font-weight:300;color:#fafafa;">
+                Creating Account....
+            </span>
+        </div>
+    </div>
+
+
+    <div id="modalerror" class="modal bottom-sheet bottom-modal animated slideInUp">
+        <div style="padding-top:0px; padding-bottom:0px;" class="modal-header">
+            <h4 style="color:brown; font-size:14px;">Oops something went wrong!!</h4>
+        </div>
+
+        <div class="modal-body">
+            <h4 style="padding-left: 15px; color: brown; font-size: 14px; " id="errortext">Time out</h4>
+
+            <ul>
+                <li>
+                    <a ng-click="logOut()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</a>
+                </li>
+
+                <li style="background:#9e9e9e;">
+                    <a ng-click="logOut()"><i class="fa fa-times"></i> Cancel</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+    <!--Success/Waiting message modals start -->
+    <!-- Header Section Starts -->
+
+    <div style="width: calc(100% - 30px); margin: 0 auto; overflow: hidden;" id="scannerAlert" class="modal animated zoomIn" data-backdrop="static" data-keyboard="false">
+
+        <div style=" align-items: center; display: flex; justify-content: center; height: 100%;" class="mainmodal1">
+            <div style="margin-top:-30px;" class="wrappermodal1">
+
+                <div style="background: #f04124; color: #fff;" class="modal-header">
+
+                    <h4 style="padding-left:12px;">  Scan Error </h4>
+                </div>
+
+                <div style="padding: 12px; background: #fff; box-shadow: 0px 2px 10px #ccc; border:1px solid #f5f5f5; padding-left:20px;" class="modal-body">
+
+                    <p id="scannererror">Some Notes goes Here !!!!!</p>
+
+                </div>
+
+                <div class="modal-footer" style="background: #d8d8d8; margin-top: 0; padding-top: 10px; padding-bottom: 10px; margin-top: 0; text-align:left">
+                    <button data-dismiss="modal" class="btn btn-gray"> <i class="fa fa-times"></i> Cancel</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="toolbar" class="primary-color">
+
+
+        <div class="row">
+            <div style="width:15%" class="col-xs-4">
+                <div class="open-left" id="open-left" data-activates="slide-out-left">
+                    <i class="fa fa-bars" style="font-size:24px;"></i>
+                </div>
+            </div>
+            <div style="width:70%" class="col-xs-4">
+
+                <table style="margin-top:12px;">
+                    <tr style="border:none;">
+                        <td>
+                            <a style="max-width:calc(100% - 45px)" href="#/FindItems" class="title">{{currentInventoryname}}</a><a style="line-height:32px !important;" class="switchinv" ng-click="showinventories()"><i class="fa fa-angle-down"></i></a>
+                        </td>
+                      
+                    </tr>
+                </table>
+
+
+            </div>
+            <div style="width:15%" class="col-xs-4">
+                <div class="dropdown open-right">
+                    <a style="padding-left:0" data-toggle="dropdown" class="dropdown-toggle ">
+                        <img id="myimgProfile" src="{{ProfilePicURl}}" onerror="this.onerror = null; this.src = 'img/dummy-user48.png';" alt="" style=" height: 50px; width:50px; border: 2px solid #ccc;" class="circle">
+                    </a>
+                    <ul class="top-menu dropdown-menu">
+                        <li><a href="#/Accounts"><i class="fa fa-cubes"></i> Your Inventories</a></li>
+                        <li><a href="#/profile"><i class="fa fa-user"></i> &nbsp; My Profile</a></li>
+                        <li><a href="#/contact"><i class="fa fa-map-marker"></i> &nbsp;  Contact</a></li>
+
+                        <!--<li><a href="#/help"><i class="fa fa-question"></i> Help</a></li>-->
+                        <li><a href="#"><i class="fa fa-sign-out"></i>&nbsp;  Sign Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- Header Section End -->
+
+    <div class="container" id="viewdata">
+        <div data-ng-view="">
+
+        </div>
+
+    </div>
+
+
+    <!-- Sidebar -->
+
+    <ul id="slide-out-left" class="side-nav collapsible">
+        <li>
+            <div class="sidenav-header primary-color">
+
+                <div class="nav-avatar">
+                    <img class="circle avatar" id="myimgProfile1" onerror="this.onerror = null; this.src = 'img/dummy-user48.png';" src="{{ProfilePicURl}}" alt="">
+                    <div class="avatar-body">
+                        <h3>{{username}}</h3>
+                        <p>Clearly USER </p>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+
+
+        <li class="primary-color"> <a class="text" style="padding-left: 15px; color: #fff; display: -webkit-box"> {{CurrentAccount}} </a> </li>
+
+        <li><a ng-class="getClass('/Accounts')" href="#/Accounts" class="no-child waves-effect"><i class="fa fa-cubes"></i> Your Inventories</a></li>
+
+        <li style="display:none;" id="Permissionlink"><a ng-class="getClass('/permission')" href="#/permission" class="no-child waves-effect"><i class="fa fa-gears"></i> Permissions</a></li>
+        <li><a ng-class="getClass('/FindItems')" href="#/FindItems" class="no-child waves-effect"><i class="fa fa-shopping-cart"></i>Go To Inventory</a></li>
+        <li ng-if="checkpermission('ACTION:CanAddInventory')==true"><a ng-class="getClass('/inventory')" href="#/inventory" class="no-child waves-effect"><i class="fa fa-plus-circle"></i> Add Inventory</a></li>
+        <li ng-if="checkpermission('ACTION:CanAddInventory')==false"><a ng-click="restricted()" class="no-child restricted waves-effect"><i class="fa fa-ban"> </i> Add Inventory</a></li>
+        <li><a ng-class="getClass('/reportmenu')" href="#/reportmenu" class="no-child waves-effect"><i class="fa fa-th-list"></i> Reports</a></li>
+        <li><a ng-class="getClass('/profile')" href="#/profile" class="no-child waves-effect"><i class="fa fa-user"></i> My Profile</a></li>
+        <li><a ng-class="getClass('/setting')" href="#/setting" class="no-child waves-effect"><i class="fa fa-cog"></i> Settings</a></li>
+
+        <li><a onclick="window.plugins.socialsharing.share('Clearly Inventory', null, null, 'https://itunes.apple.com/in/app/clearlyinventorymobileapp/id1117259775?mt=8')" class="no-child waves-effect"><i class="fa fa-share-alt"></i> Social Share</a></li>
+
+        <!--<li><a ng-class="getClass('/help')" href="#/help" class="no-child"><i class="fa fa-question"></i> Help</a></li>-->
+        <li><a href="#" class="no-child signoutbtn waves-effect"><i class="fa fa-sign-out "></i> Sign Out</a></li>
+    </ul>
+
+
+    <!-- Right Sidebar -->
+    <ul id="slide-out" class="side-nav rightsection">
+        <!-- Tabs -->
+        <li>
+            <ul class="tabs">
+                <li class="tab col s3"><a class="active tablink" href="#sidebar1">Social</a></li>
+                <li class="tab col s3"><a href="#sidebar2" class="tablink">Contact</a></li>
+            </ul>
+        </li>
+        <li id="sidebar1" class="p-10">
+            <!-- Facebook -->
+            <ul>
+
+                <li><a ng-click="logOut()" class="no-child signoutbtn"><i class="fa fa-sign-out"></i> Sign out</a></li>
+            </ul>
+            <hr />
+            <p style="font-size:14px; text-align:justify">
+                Online Inventory Management Software You Can Customize,
+                Share, and Access From
+                Anywhere Before you spend money on special fonts or software, you should take a look at one of the best hidden native features of Microsoft Office—creating and printing barcodes
+            </p>
+
+        </li>
+        <li id="sidebar2" class="p-10">
+            <!-- Chat -->
+
+        </li>
+    </ul>
+
+
+    <!-- Jquery libraries -->
+    <script src="scripts/jquery-1.11.0.min.js"></script>
+    <script src="scripts/jquery-ui.js"></script>
+    <script src="scripts/weekPicker.js"></script>
+  
+
+  
+    <script>    
+
+
+        //var serviceBaseUrl = 'https://staging-mobile.azurewebsites.net/';
+        //var serviceBase = 'https://staging-mobile.azurewebsites.net/ClearlyInventoryAPI.svc/';
+
+        var serviceBaseUrl = '';
+        var serviceBase = '';
+
+        var signupLink = "";
+        var forgotlink = "";
+
+      
+        $(document).on("change","#ServiceBase", function () {
+            serviceBase = $(this).val();
+        });
+
+
+
+        $.ajax
+       ({
+           type: "GET",
+           url: 'https://www.clearlyinventory.com/mobilesettings',
+           contentType: 'application/json; charset=utf-8',
+           dataType: 'text json',
+          // data: JSON.stringify({ "UserKey": "ABC@123" }),
+           success: function (response) {              
+
+               ClearlybaseURL = response.serviceBaseUrl;
+               ClearlyURL = response.serviceBase;
+               Signupink = response.mobileSignupUrl;
+               forgotlink = response.mobileForgotPasswordUrl;
+
+               serviceBaseUrl = ClearlybaseURL;
+               serviceBase = ClearlyURL;
+
+               signupLink = Signupink;
+               $("#ServiceBase").val(serviceBase);
+               $("#ServiceBase").trigger("change");
+
+               $("#Signuplink").val(signupLink);
+               $("#Signuplink").trigger("change");
+
+
+               $("#Forgotlink").val(forgotlink);
+               $("#Forgotlink").trigger("change");
+
+           },
+           error: function (response) {
+
+               alert("Error in Clearly API");
+               debugger;
+
+
+           },
+           complete: function () {
+
+
+           }
+       });
+    </script>
+
+
+
+
+
+
+
+    <script src="scripts/jquery.touchSwipe.min.js"></script>
+
+    <!-- Bootstrap libraries -->
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/bootstrap-switch.js"></script>
+    <script src="scripts/bootbox.js"></script>
+    <script src="scripts/bootstrap-multiselect.js"></script>
+
+
+
+    <script src="js/materialize.min.js"></script>
+    <script src="js/functions.js"></script>
+
+  
+
+
+    <!-- Angularjs libraries -->
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-sanitize.js"></script>
+    <script src="scripts/angular-route.min.js"></script>
+    <script src="scripts/angular-local-storage.min.js"></script>
+
+    <script>
+        var UsFullImg = true;
+    </script>
+
+    <!-- ngCrop libraries -->
+    <script src="scripts/ng-img-crop.js"></script>
+
+
+
+    <script>
+        var croppeddata = "";
+    </script>
+
+
+    <script src="scripts/cropper.js"></script>
+
+    <!-- Cordova libraries -->
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/ng-cordova.js"></script>
+    <script type="text/javascript" src="barcodescanner.js"></script>
+    <script type="text/javascript" src="ScanApiCordova.js"></script>
+
+    <!-- Utility libraries -->
+
+    <script src="js/sortableUI.js"></script>
+    <script src="scripts/loading-bar.min.js"></script>
+    <script src="scripts/toastr.js"></script>
+    <script src="scripts/jquery.animate_from_to-1.0.js"></script>
+    <script src="scripts/idangerous.swiper.min.js"></script>
+
+
+   
+
+    
+
+
+    <!-- Load app main script -->
+    <script src="app/app.js?v=2"></script>
+
+    <!-- Load services -->
+    <script src="app/services/authService.js?v=2"></script>
+
+    <!-- Load controllers -->
+    <script src="app/controllers/indexController.js?v=2"></script>
+    <script src="app/controllers/loginController.js?v=2"></script>
+    <script src="app/controllers/dashboardController.js?v=2"></script>
+
+    <script src="app/controllers/mainmenuController.js?v=2"></script>
+    <script src="app/controllers/helpController.js?v=2"></script>
+    <script src="app/controllers/signupController.js?v=2"></script>
+    <script src="app/controllers/inventorycontroller.js?v=2"></script>
+    <script src="app/controllers/ordersController.js?v=2"></script>
+    <script src="app/controllers/FindItemsController.js?v=2"></script>
+    <script src="app/controllers/detailController.js?v=2"></script>
+    <script src="app/controllers/settingController.js?v=2"></script>
+    <script src="app/controllers/uomController.js?v=2"></script>
+    <script src="app/controllers/statusController.js?v=2"></script>
+    <script src="app/controllers/LocationController.js?v=2"></script>
+    <script src="app/controllers/InventoryHistoryController.js?v=2"></script>
+    <script src="app/controllers/profileController.js?v=2"></script>
+    <script src="app/controllers/activityController.js?v=2"></script>
+    <script src="app/controllers/mobileorderController.js?v=2"></script>
+    <script src="app/controllers/reportmenuController.js?v=2"></script>
+    <script src="app/controllers/currentinventoryController.js?v=2"></script>
+    <script src="app/controllers/inventoryactivityController.js?v=2"></script>
+    <script src="app/controllers/itemreportController.js?v=2"></script>
+    <script src="app/controllers/LocalrestockController.js?v=2"></script>
+    <script src="app/controllers/GlobalrestockController.js?v=2"></script>
+    <script src="app/controllers/inventorysummaryController.js?v=2"></script>
+    <script src="app/controllers/AccountsController.js?v=2"></script>
+    <script src="app/controllers/selectcolumnsController.js?v=2"></script>
+    <script src="app/controllers/customfieldController.js?v=2"></script>
+
+    <script src="app/controllers/activityfieldsController.js?v=2"></script>
+
+    <script src="app/controllers/permissionController.js?v=2"></script>
+    <script src="app/controllers/itemgroupController.js?v=2"></script>
+   
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBKTubnywg4QcYcBViqABbYrKM8l0mY8kI"></script>
+    <script src="app/controllers/contactController.js?v=2"></script>
+
+    <script src="app/controllers/configuresettingController.js?v=2"></script>
+
+   
+
+
+    <script src="app/controllers/BillingController.js?v=2"></script>
+    <script src="app/controllers/CreateSubscriptionController.js?v=2"></script>
+
+    <script src="js/index.js"></script>
+    
+
+
+
+
+</body>
+
+</html>
