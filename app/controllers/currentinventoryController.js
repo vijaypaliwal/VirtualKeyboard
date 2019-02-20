@@ -888,9 +888,25 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
             case "iUnitNumber1":
                 return $scope.InventoryList[Index].iUnitNumber1 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].iUnitNumber1) : "";
                 break;
+            case "iUnitNumber3":
+                return $scope.InventoryList[Index].iUnitNumber3 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].iUnitNumber3) : "";
+                break;
+
+            case "iUnitNumber4":
+                return $scope.InventoryList[Index].iUnitNumber4 != null ? ChangeIntoNumberFormat($scope.InventoryList[Index].iUnitNumber4) : "";
+                break;
+
             case "iUnitDate2":
 
                 return $scope.InventoryList[Index].iUnitDate2 != null ? $scope.InventoryList[Index].iUnitDate2 : "";
+                break;
+
+            case "iUnitDate3":
+                return $scope.InventoryList[Index].iUnitDate3 != null ? $scope.InventoryList[Index].iUnitDate3 : "";
+                break;
+
+            case "iUnitDate4":
+                return $scope.InventoryList[Index].iUnitDate4 != null ? $scope.InventoryList[Index].iUnitDate4 : "";
                 break;
 
             case "iCostPerUnit":
@@ -902,6 +918,22 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                 break;
             case "iUnitTag2":
                 return $scope.InventoryList[Index].iUnitTag2 != null ? $scope.InventoryList[Index].iUnitTag2 : "";
+                break;
+
+            case "iUnitTag4":
+                return $scope.InventoryList[Index].iUnitTag4 != null ? $scope.InventoryList[Index].iUnitTag4 : "";
+                break;
+            case "iUnitTag5":
+                return $scope.InventoryList[Index].iUnitTag5 != null ? $scope.InventoryList[Index].iUnitTag5 : "";
+                break;
+            case "iUnitTag6":
+                return $scope.InventoryList[Index].iUnitTag6 != null ? $scope.InventoryList[Index].iUnitTag6 : "";
+                break;
+            case "iUnitTag7":
+                return $scope.InventoryList[Index].iUnitTag7 != null ? $scope.InventoryList[Index].iUnitTag7 : "";
+                break;
+            case "iUnitTag8":
+                return $scope.InventoryList[Index].iUnitTag8 != null ? $scope.InventoryList[Index].iUnitTag8 : "";
                 break;
 
             case "HasConversion":
@@ -1700,7 +1732,7 @@ app.controller('currentinventoryController', ['$scope', 'localStorageService', '
                     }
                 }
 
-                if ($scope.FilterArray[i].ColumnName == "iUniqueDate" || $scope.FilterArray[i].ColumnName == "iUnitDate2") {
+                if ($scope.FilterArray[i].ColumnName == "iUniqueDate" || $scope.FilterArray[i].ColumnName == "iUnitDate2" || $scope.FilterArray[i].ColumnName == "iUnitDate3" || $scope.FilterArray[i].ColumnName == "iUnitDate4") {
                     var fieldSpecialType = $scope.getUnitSpecialType($scope.FilterArray[i].ColumnName.substring(1));
                     if (fieldSpecialType != undefined) {
                         if ($.trim($scope.FilterArray[i].SearchValue) != "") {

@@ -1042,6 +1042,14 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
             case "itUnitNumber1":
                 return $scope.ActivityList[Index].itUnitNumber1 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].itUnitNumber1) : "";
                 break;
+            case "itUnitNumber3":
+                return $scope.ActivityList[Index].itUnitNumber3 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].itUnitNumber3) : "";
+                break;
+
+            case "itUnitNumber4":
+                return $scope.ActivityList[Index].itUnitNumber4 != null ? ChangeIntoNumberFormat($scope.ActivityList[Index].itUnitNumber4) : "";
+                break;
+
             case "ItemDefaultCost":
 
                 return $scope.ActivityList[Index].ItemDefaultCost != null ? $scope.ActivityList[Index].ItemDefaultCost : "";
@@ -1079,6 +1087,12 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
             case "itUnitDate2":
                 return $scope.ActivityList[Index].itUnitDate2 != null ? $scope.ActivityList[Index].itUnitDate2 : "";
                 break;
+            case "itUnitDate3":
+                return $scope.ActivityList[Index].itUnitDate3 != null ? $scope.ActivityList[Index].itUnitDate3 : "";
+                break;
+            case "itUnitDate4":
+                return $scope.ActivityList[Index].itUnitDate4 != null ? $scope.ActivityList[Index].itUnitDate4 : "";
+                break;
 
 
             case "itUpdateDate":
@@ -1094,6 +1108,22 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                 break;
             case "itUnitTag3":
                 return $scope.ActivityList[Index].itUnitTag3 != null ? $scope.ActivityList[Index].itUnitTag3 : "";
+                break;
+
+            case "itUnitTag4":
+                return $scope.ActivityList[Index].itUnitTag4 != null ? $scope.ActivityList[Index].itUnitTag4 : "";
+                break;
+            case "itUnitTag5":
+                return $scope.ActivityList[Index].itUnitTag5 != null ? $scope.ActivityList[Index].itUnitTag5 : "";
+                break;
+            case "itUnitTag6":
+                return $scope.ActivityList[Index].itUnitTag6 != null ? $scope.ActivityList[Index].itUnitTag6 : "";
+                break;
+            case "itUnitTag7":
+                return $scope.ActivityList[Index].itUnitTag7 != null ? $scope.ActivityList[Index].itUnitTag7 : "";
+                break;
+            case "itUnitTag8":
+                return $scope.ActivityList[Index].itUnitTag8 != null ? $scope.ActivityList[Index].itUnitTag8 : "";
                 break;
 
 
@@ -1983,7 +2013,7 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
                     }
                 }
-                if ($scope.FilterArray[i].ColumnName == "itUniqueDate" || $scope.FilterArray[i].ColumnName == "itUnitDate2") {
+                if ($scope.FilterArray[i].ColumnName == "itUniqueDate" || $scope.FilterArray[i].ColumnName == "itUnitDate2" || $scope.FilterArray[i].ColumnName == "itUnitDate3" || $scope.FilterArray[i].ColumnName == "itUnitDate4") {
                     var fieldSpecialType = $scope.getUnitSpecialType($scope.FilterArray[i].ColumnName.slice(2));
                     if (fieldSpecialType != undefined) {
                         if (fieldSpecialType == 17) {
@@ -2031,11 +2061,13 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
 
                       if (response.GetInventoryActivitiesResult.Success == true) {
 
-
-
                           _TotalRecordsCurrent = response.GetInventoryActivitiesResult.Payload[0].Data.length;
                           $scope.currentrecord = response.GetInventoryActivitiesResult.Payload[0].Data.length;
                           $scope.ActivityList = response.GetInventoryActivitiesResult.Payload[0].Data;
+                    
+                          console.log("All data");
+                          console.log($scope.ActivityList);
+
                           $scope.totalrecords = response.GetInventoryActivitiesResult.Payload[0].TotalRercords;
                           $scope.Columns = response.GetInventoryActivitiesResult.Payload[0].Columns;
                           $scope.ActualTotalRecords = response.GetInventoryActivitiesResult.Payload[0].ActualTotalRecords;
