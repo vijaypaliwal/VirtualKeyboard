@@ -20,6 +20,11 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.IsFromSlideChange = false;
 
     $scope.UniqueTagCombovalues = [];
+    $scope.UniqueTag8Combovalues = [];
+    $scope.UniqueTag7Combovalues = [];
+    $scope.UniqueTag6Combovalues = [];
+    $scope.UniqueTag5Combovalues = [];
+    $scope.UniqueTag4Combovalues = [];
     $scope.UniqueTag3Combovalues = [];
     $scope.UniqueTag2Combovalues = [];
 
@@ -34,28 +39,57 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.UnitNumber2FieldNumberMax = 0;
     $scope.UnitNumber2FieldNumberMin = 0;
 
+    $scope.UnitNumber3FieldDefaultValue = 0;
+    $scope.UnitNumber3FieldNumberMax = 0;
+    $scope.UnitNumber3FieldNumberMin = 0;
+
+    $scope.UnitNumber4FieldDefaultValue = 0;
+    $scope.UnitNumber4FieldNumberMax = 0;
+    $scope.UnitNumber4FieldNumberMin = 0;
+
 
 
 
     $scope.UniqueTagRadiovalues = [];
     $scope.UniqueTag2Radiovalues = [];
     $scope.UniqueTag3Radiovalues = [];
+    $scope.UniqueTag4Radiovalues = [];
+    $scope.UniqueTag5Radiovalues = [];
+    $scope.UniqueTag6Radiovalues = [];
+    $scope.UniqueTag7Radiovalues = [];
+    $scope.UniqueTag8Radiovalues = [];
 
     $scope.UniqueDateFieldDefaultValue = ""
     $scope.UnitDate2FieldDefaultValue = ""
+    $scope.UnitDate3FieldDefaultValue = ""
+    $scope.UnitDate4FieldDefaultValue = ""
 
     $scope.ReqValueFieldSpecialType = "";
     $scope.UnitTag2FieldSpecialType = "";
     $scope.UnitTag3FieldSpecialType = "";
+    $scope.UnitTag4FieldSpecialType = "";
+    $scope.UnitTag5FieldSpecialType = "";
+    $scope.UnitTag6FieldSpecialType = "";
+    $scope.UnitTag7FieldSpecialType = "";
+    $scope.UnitTag8FieldSpecialType = "";
     $scope.UniqueDateFieldSpecialType = "";
     $scope.UnitDate2FieldSpecialType = "";
+    $scope.UnitDate3FieldSpecialType = "";
+    $scope.UnitDate4FieldSpecialType = "";
     $scope.UnitNumber1FieldSpecialType = "";
     $scope.UnitNumber2FieldSpecialType = "";
-
+    $scope.UnitNumber3FieldSpecialType = "";
+    $scope.UnitNumber4FieldSpecialType = "";
 
     $scope.ReqValueFieldDefaultType = "";
     $scope.UnitTag2FieldDefaultValue = "";
     $scope.UnitTag3FieldDefaultValue = "";
+    $scope.UnitTag4FieldDefaultValue = "";
+    $scope.UnitTag5FieldDefaultValue = "";
+    $scope.UnitTag6FieldDefaultValue = "";
+    $scope.UnitTag7FieldDefaultValue = "";
+    $scope.UnitTag8FieldDefaultValue = "";
+
 
     $scope.ActiveUnitRadioField = "";
     $scope.ActiveUnitAutoCompleteField = "";
@@ -80,8 +114,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     var _IsSavedItemGroupData = "";
     $scope.InventoryObject = {
         IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", DefaultItemLocationID: 0, DefaultItemUOM: 0, pDefaultCost: 0, pTargetQty: null, pReorderQty: null, Quantity: "", Uom: "unit/s", UomID: 0, Location: "Inventory", lZone: "", LocationID: 0, UniqueTag: "", Cost:null,
-        UpdateDate: GetDefaultDate(), Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
-        UnitTag3: "", CustomPartData: [], CustomTxnData: [], incrementedValue: "", incrementedValue2: "", incrementedValue3: ""
+        UpdateDate: GetDefaultDate(), Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null,UnitDate3: null, UnitDate4: null,  UnitNumber1: "", UnitNumber2: "",  UnitNumber3: "", UnitNumber4: "",UnitTag2: "",
+        UnitTag3: "",  UnitTag4: "",   UnitTag5: "",   UnitTag6: "",   UnitTag7: "",   UnitTag8: "",  CustomPartData: [], CustomTxnData: [], incrementedValue: "", incrementedValue2: "", incrementedValue3: "",incrementedValue4: "",incrementedValue5: "",incrementedValue6: "",incrementedValue7: "",incrementedValue8: ""
     };
     var _defaultUnitObj = {
         AccountID: 0,
@@ -296,7 +330,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         }
     });
 
-    $scope.CommonArray = ['Image', 'DefaultItemUOM', 'pDefaultCost', 'pReorderQty', 'pTargetQty', 'DefaultItemLocation', 'iUnitNumber1', 'iUnitNumber2', 'iUniqueDate', 'iUnitDate2', 'iUnitTag3', 'iUnitTag2', 'iReqValue', 'pPart', 'pDescription', 'iQty', 'lLoc', 'lZone', 'iStatusValue', 'uomUOM', 'pCountFrq', 'iCostPerUnit'];
+    $scope.CommonArray = ['Image', 'DefaultItemUOM', 'pDefaultCost', 'pReorderQty', 'pTargetQty', 'DefaultItemLocation', 'iUnitNumber1', 'iUnitNumber2', 'iUnitNumber3', 'iUnitNumber4', 'iUniqueDate', 'iUnitDate2', 'iUnitDate3', 'iUnitDate4', 'iUnitTag8', 'iUnitTag7', 'iUnitTag6', 'iUnitTag5', 'iUnitTag4', 'iUnitTag3', 'iUnitTag2', 'iReqValue', 'pPart', 'pDescription', 'iQty', 'lLoc', 'lZone', 'iStatusValue', 'uomUOM', 'pCountFrq', 'iCostPerUnit'];
 
     $scope.LocationList = [{ LocationName: "dhdd", LocationZone: "", LocationID: 678325 },
                            { LocationName: "Here", LocationZone: "", LocationID: 678323 },
@@ -920,10 +954,19 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         $scope.GetLastValue('Inv_UniqueTag', '#UniqueTag');
         $scope.GetLastValue('Inv_UnitTag2', '#UnitTag2');
         $scope.GetLastValue('Inv_UnitTag3', '#UnitTag3');
+        $scope.GetLastValue('Inv_UnitTag4', '#UnitTag4');
+        $scope.GetLastValue('Inv_UnitTag5', '#UnitTag5');
+        $scope.GetLastValue('Inv_UnitTag6', '#UnitTag6');
+        $scope.GetLastValue('Inv_UnitTag7', '#UnitTag7');
+        $scope.GetLastValue('Inv_UnitTag8', '#UnitTag8');
         $scope.GetLastValue('Inv_UniqueDate', '#UniqueDate');
         $scope.GetLastValue('Inv_UnitDate2', '#UnitDate2');
+        $scope.GetLastValue('Inv_UnitDate3', '#UnitDate3');
+        $scope.GetLastValue('Inv_UnitDate4', '#UnitDate4');
         $scope.GetLastValue('Inv_UnitNumber1', '#UnitNumber1');
         $scope.GetLastValue('Inv_UnitNumber2', '#UnitNumber2');
+        $scope.GetLastValue('Inv_UnitNumber3', '#UnitNumber3');
+        $scope.GetLastValue('Inv_UnitNumber4', '#UnitNumber4');
 
         $scope.GetLastValue('Inv_DefaultItemLocationID', '#DefaultItemLocationID');
         $scope.GetLastValue('Inv_pTargetQty', '#pTargetQty');
@@ -1577,6 +1620,51 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             }
 
         }
+        if ($scope.UnitTag4FieldSpecialType == 4) {
+            var _emailValue = $.trim($("#UnitTag4").val());
+
+            if (_emailValue != "" && $scope.IsProperEmail(_emailValue) == false) {
+                return true;
+
+            }
+
+        }
+        if ($scope.UnitTag5FieldSpecialType == 4) {
+            var _emailValue = $.trim($("#UnitTag5").val());
+
+            if (_emailValue != "" && $scope.IsProperEmail(_emailValue) == false) {
+                return true;
+
+            }
+
+        }
+        if ($scope.UnitTag6FieldSpecialType == 4) {
+            var _emailValue = $.trim($("#UnitTag6").val());
+
+            if (_emailValue != "" && $scope.IsProperEmail(_emailValue) == false) {
+                return true;
+
+            }
+
+        }
+        if ($scope.UnitTag7FieldSpecialType == 4) {
+            var _emailValue = $.trim($("#UnitTag7").val());
+
+            if (_emailValue != "" && $scope.IsProperEmail(_emailValue) == false) {
+                return true;
+
+            }
+
+        }
+        if ($scope.UnitTag8FieldSpecialType == 4) {
+            var _emailValue = $.trim($("#UnitTag8").val());
+
+            if (_emailValue != "" && $scope.IsProperEmail(_emailValue) == false) {
+                return true;
+
+            }
+
+        }
         return false;
 
     }
@@ -1589,8 +1677,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.resetObject = function () {
         $scope.InventoryObject = {
             IsFullPermission: true, AutoID: false, PID: 0, ItemID: "", Description: "", DefaultItemLocationID: 0, DefaultItemUOM: 0, pDefaultCost: 0, pTargetQty: null, pReorderQty: null, Quantity: "", Uom: "unit/s", UomID: 0, Location: "Inventory", lZone: "", LocationID: 0, UniqueTag: "", Cost: 0,
-            UpdateDate: GetDefaultDate(), Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitNumber1: "", UnitNumber2: "", UnitTag2: "",
-            UnitTag3: "", CustomPartData: [], CustomTxnData: []
+            UpdateDate: GetDefaultDate(), Status: "", ItemGroup: "", UniqueDate: null, UnitDate2: null, UnitDate3: null, UnitDate4: null, UnitNumber1: "", UnitNumber2: "",UnitNumber3: "", UnitNumber4: "",  UnitTag2: "",
+            UnitTag3: "",UnitTag4: "",UnitTag5: "",UnitTag6: "",UnitTag7: "",UnitTag8: "", CustomPartData: [], CustomTxnData: []
         };
         $scope.ImageList = [];
 
@@ -1763,16 +1851,110 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 }
 
 
+                var _u4prefix = $("#UnitTag4").attr("data-prefix");
+                var _u4suffix = $("#UnitTag4").attr("data-suffix");
+                var _u4original = $("#UnitTag4").attr("data-original-value");
+                var _u4value = $("#UnitTag4").val();
+
+                if ($.trim(_u4prefix) != "" || $.trim(_u4suffix) != "") {
+                    $scope.InventoryObject.UnitTag4 = _u4original;
+
+                    if ($.trim(_u4value) != "") {
+                        $scope.InventoryObject.UnitTag4 = _u4original;
+                    }
+                    else {
+                        $scope.InventoryObject.UnitTag4 = "";
+                    }
+                }
+
+
+                var _u5prefix = $("#UnitTag5").attr("data-prefix");
+                var _u5suffix = $("#UnitTag5").attr("data-suffix");
+                var _u5original = $("#UnitTag5").attr("data-original-value");
+                var _u5value = $("#UnitTag5").val();
+
+                if ($.trim(_u5prefix) != "" || $.trim(_u5suffix) != "") {
+                    $scope.InventoryObject.UnitTag5 = _u5original;
+
+                    if ($.trim(_u5value) != "") {
+                        $scope.InventoryObject.UnitTag5 = _u5original;
+                    }
+                    else {
+                        $scope.InventoryObject.UnitTag5 = "";
+                    }
+                }
+
+
+                var _u6prefix = $("#UnitTag6").attr("data-prefix");
+                var _u6suffix = $("#UnitTag6").attr("data-suffix");
+                var _u6original = $("#UnitTag6").attr("data-original-value");
+                var _u6value = $("#UnitTag6").val();
+
+                if ($.trim(_u6prefix) != "" || $.trim(_u6suffix) != "") {
+                    $scope.InventoryObject.UnitTag6 = _u6original;
+
+                    if ($.trim(_u6value) != "") {
+                        $scope.InventoryObject.UnitTag6 = _u6original;
+                    }
+                    else {
+                        $scope.InventoryObject.UnitTag6 = "";
+                    }
+                }
+
+
+                var _u7prefix = $("#UnitTag7").attr("data-prefix");
+                var _u7suffix = $("#UnitTag7").attr("data-suffix");
+                var _u7original = $("#UnitTag7").attr("data-original-value");
+                var _u7value = $("#UnitTag7").val();
+
+                if ($.trim(_u7prefix) != "" || $.trim(_u7suffix) != "") {
+                    $scope.InventoryObject.UnitTag7 = _u7original;
+
+                    if ($.trim(_u7value) != "") {
+                        $scope.InventoryObject.UnitTag7 = _u7original;
+                    }
+                    else {
+                        $scope.InventoryObject.UnitTag7 = "";
+                    }
+                }
+
+
+                var _u8prefix = $("#UnitTag8").attr("data-prefix");
+                var _u8suffix = $("#UnitTag8").attr("data-suffix");
+                var _u8original = $("#UnitTag8").attr("data-original-value");
+                var _u8value = $("#UnitTag8").val();
+
+                if ($.trim(_u8prefix) != "" || $.trim(_u8suffix) != "") {
+                    $scope.InventoryObject.UnitTag8 = _u8original;
+
+                    if ($.trim(_u8value) != "") {
+                        $scope.InventoryObject.UnitTag8 = _u8original;
+                    }
+                    else {
+                        $scope.InventoryObject.UnitTag8 = "";
+                    }
+                }
+
+
                 var _inc1 = $scope.getUnitObjByName("ReqValue").FieldSpecialType == 0 ? GetProperUnitValue($scope.InventoryObject.UniqueTag, $scope.getUnitObjByName("ReqValue").Prefix, $scope.getUnitObjByName("ReqValue").Suffix) : 0;
 
                 var _inc2 = $scope.getUnitObjByName("UnitTag2").FieldSpecialType == 0 ? GetProperUnitValue($scope.InventoryObject.UnitTag2, $scope.getUnitObjByName("UnitTag2").Prefix, $scope.getUnitObjByName("UnitTag2").Suffix) : 0;
-
                 var _inc3 = $scope.getUnitObjByName("UnitTag3").FieldSpecialType == 0 ? GetProperUnitValue($scope.InventoryObject.UnitTag3, $scope.getUnitObjByName("UnitTag3").Prefix, $scope.getUnitObjByName("UnitTag3").Suffix) : 0;
-
+                var _inc4 = $scope.getUnitObjByName("UnitTag4").FieldSpecialType == 0 ? GetProperUnitValue($scope.InventoryObject.UnitTag4, $scope.getUnitObjByName("UnitTag4").Prefix, $scope.getUnitObjByName("UnitTag4").Suffix) : 0;
+                var _inc5 = $scope.getUnitObjByName("UnitTag5").FieldSpecialType == 0 ? GetProperUnitValue($scope.InventoryObject.UnitTag5, $scope.getUnitObjByName("UnitTag5").Prefix, $scope.getUnitObjByName("UnitTag5").Suffix) : 0;
+                var _inc6 = $scope.getUnitObjByName("UnitTag6").FieldSpecialType == 0 ? GetProperUnitValue($scope.InventoryObject.UnitTag6, $scope.getUnitObjByName("UnitTag6").Prefix, $scope.getUnitObjByName("UnitTag6").Suffix) : 0;
+                var _inc7 = $scope.getUnitObjByName("UnitTag7").FieldSpecialType == 0 ? GetProperUnitValue($scope.InventoryObject.UnitTag7, $scope.getUnitObjByName("UnitTag7").Prefix, $scope.getUnitObjByName("UnitTag7").Suffix) : 0;
+                var _inc8 = $scope.getUnitObjByName("UnitTag8").FieldSpecialType == 0 ? GetProperUnitValue($scope.InventoryObject.UnitTag8, $scope.getUnitObjByName("UnitTag8").Prefix, $scope.getUnitObjByName("UnitTag8").Suffix) : 0;
 
                 $scope.InventoryObject.incrementedValue = $.trim(_inc1) != "" ? _inc1 : 0;
                 $scope.InventoryObject.incrementedValue2 = $.trim(_inc2) != "" ? _inc2 : 0;
                 $scope.InventoryObject.incrementedValue3 = $.trim(_inc3) != "" ? _inc3 : 0;
+                $scope.InventoryObject.incrementedValue4 = $.trim(_inc4) != "" ? _inc4 : 0;
+                $scope.InventoryObject.incrementedValue5 = $.trim(_inc5) != "" ? _inc5 : 0;
+                $scope.InventoryObject.incrementedValue6 = $.trim(_inc6) != "" ? _inc6 : 0;
+                $scope.InventoryObject.incrementedValue7 = $.trim(_inc7) != "" ? _inc7 : 0;
+                $scope.InventoryObject.incrementedValue8 = $.trim(_inc8) != "" ? _inc8 : 0;
+              
 
                 if ($.trim($scope.InventoryObject.ItemID) == "") {
                     $scope.InventoryObject.AutoID = true;
@@ -1784,6 +1966,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 if ($scope.InventoryObject.UnitNumber2 == "") {
                     $scope.InventoryObject.UnitNumber2 = null;
                 }
+                if ($scope.InventoryObject.UnitNumber3 == "") {
+                    $scope.InventoryObject.UnitNumber3 = null;
+                }
+
+                if ($scope.InventoryObject.UnitNumber4 == "") {
+                    $scope.InventoryObject.UnitNumber4 = null;
+                }
+
 
                 $scope.InventoryObject.Quantity = $scope.InventoryObject.Quantity == "" || $scope.InventoryObject.Quantity == null || $scope.InventoryObject.Quantity == undefined ? 0 : $scope.InventoryObject.Quantity;
                 var _updateDateval = $scope.InventoryObject.UniqueDate;
@@ -1914,7 +2104,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                     else if ($scope.UnitDate2FieldSpecialType == 17) {
 
 
-                        var dsplit1 = _updateDateval1.split(":");
+                        var dsplit13 = _updateDateval1.split(":");
                         var d122 = new Date(1900, 0, 1);
 
                         var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]), parseInt(dsplit1[1]), 0, 0))
@@ -1930,6 +2120,121 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 else {
                     $scope.InventoryObject.UnitDate2 = null;
                 }
+
+
+
+                var _updateDateval2 = $scope.InventoryObject.UnitDate3;
+
+
+                if (_updateDateval2 != null && _updateDateval2 != "") {
+                    var wcfDateStr1234 = null;
+
+                    if ($scope.UnitDate3FieldSpecialType != 16 && $scope.UnitDate3FieldSpecialType != 17) {
+
+
+
+                        var dsplit12 = _updateDateval2.split("-");
+
+                        var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
+
+                        d1222.setDate(d1222.getDate() + _genVar);
+                        var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), 0, 0, 0, 0))
+
+                        wcfDateStr1234 = d1222.toMSJSON();
+
+                    }
+
+                    else if ($scope.UnitDate3FieldSpecialType == 16) {
+                        var _dateValuearray = _updateDateval2.split("T");
+
+
+                        var tsplit12 = _dateValuearray[1].split(":");
+                        var dsplit12 = _dateValuearray[0].split("-");
+
+                        var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
+
+                        d1222.setDate(d1222.getDate());
+                        var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
+
+                        wcfDateStr1234 = d1122.toMSJSONTime();
+                    }
+                    else if ($scope.UnitDate3FieldSpecialType == 17) {
+
+
+                        var dsplit1 = _updateDateval2.split(":");
+                        var d122 = new Date(1900, 0, 1);
+
+                        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]), parseInt(dsplit1[1]), 0, 0))
+
+                        d122.setDate(d122.getDate());
+                        var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
+                        wcfDateStr1234 = d1123.toMSJSONTime();
+                    }
+
+                    $scope.InventoryObject.UnitDate3 = wcfDateStr1234;
+
+                }
+                else {
+                    $scope.InventoryObject.UnitDate3 = null;
+                }
+
+
+                var _updateDateval3 = $scope.InventoryObject.UnitDate4;
+
+
+                if (_updateDateval3 != null && _updateDateval3 != "") {
+                    var wcfDateStr1234 = null;
+
+                    if ($scope.UnitDate4FieldSpecialType != 16 && $scope.UnitDate4FieldSpecialType != 17) {
+
+
+
+                        var dsplit12 = _updateDateval3.split("-");
+
+                        var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
+
+                        d1222.setDate(d1222.getDate() + _genVar);
+                        var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), 0, 0, 0, 0))
+
+                        wcfDateStr1234 = d1222.toMSJSON();
+
+                    }
+
+                    else if ($scope.UnitDate4FieldSpecialType == 16) {
+                        var _dateValuearray = _updateDateval3.split("T");
+
+
+                        var tsplit12 = _dateValuearray[1].split(":");
+                        var dsplit12 = _dateValuearray[0].split("-");
+
+                        var d1222 = new Date(dsplit12[0], dsplit12[1] - 1, dsplit12[2]);
+
+                        d1222.setDate(d1222.getDate());
+                        var d1122 = new Date(Date.UTC(d1222.getFullYear(), d1222.getMonth(), d1222.getDate(), parseInt(tsplit12[0]), parseInt(tsplit12[1]), 0, 0))
+
+                        wcfDateStr1234 = d1122.toMSJSONTime();
+                    }
+                    else if ($scope.UnitDate4FieldSpecialType == 17) {
+
+
+                        var dsplit13 = _updateDateval3.split(":");
+                        var d122 = new Date(1900, 0, 1);
+
+                        var d112 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), parseInt(dsplit1[0]), parseInt(dsplit1[1]), 0, 0))
+
+                        d122.setDate(d122.getDate());
+                        var d1123 = new Date(Date.UTC(d122.getFullYear(), d122.getMonth(), d122.getDate(), dsplit1[0], dsplit1[1], 0, 0))
+                        wcfDateStr1234 = d1123.toMSJSONTime();
+                    }
+
+                    $scope.InventoryObject.UnitDate4 = wcfDateStr1234;
+
+                }
+                else {
+                    $scope.InventoryObject.UnitDate4 = null;
+                }
+
+
                 var _sum = 0;
 
 
@@ -3036,8 +3341,8 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
         return false;
     }
     $scope.CheckUnitDataFieldValueAll = function () {
-        var _FieldArray = ["iReqValue", "iUnitTag2", "iUnitTag3", "iUniqueDate", "iUnitDate2", "iUnitNumber1", "iUnitNumber2"];
-        var _FieldArray1 = ["ReqValue", "UnitTag2", "UnitTag3", "UniqueDate", "UnitDate2", "UnitNumber1", "UnitNumber2"];
+        var _FieldArray = ["iReqValue", "iUnitTag2", "iUnitTag3", "iUnitTag4", "iUnitTag5", "iUnitTag6", "iUnitTag7", "iUnitTag8", "iUniqueDate", "iUnitDate2", "iUnitDate3", "iUnitDate4", "iUnitNumber1", "iUnitNumber2","iUnitNumber3", "iUnitNumber4"];
+        var _FieldArray1 = ["ReqValue", "UnitTag2", "UnitTag3","UnitTag4", "UnitTag5","UnitTag6", "UnitTag7","UnitTag8", "UniqueDate", "UnitDate2", "UnitDate3", "UnitDate4", "UnitNumber1", "UnitNumber2", "UnitNumber3", "UnitNumber4"];
         var value = "";
         var _returnVar = true;
         var _count = 1;
@@ -3109,6 +3414,111 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                         break;
+                    case "iUnitTag4":
+                    case "UnitTag4":
+                        value = $scope.InventoryObject.UnitTag4;
+                        if ($.trim(value) != "") {
+
+                            var _sample = CheckUnitDataDuplicate(ColumnName, value);
+                            if (_sample == false) {
+                                _count = _count * 0;
+                                $scope.UnitDataColumnWithError = ColumnName;
+                            }
+                            else {
+                                _count = _count * 1;
+
+                            }
+                        }
+                        else {
+                            _count = _count * 1;
+                        }
+
+
+                        break;
+                    case "iUnitTag5":
+                    case "UnitTag5":
+                        value = $scope.InventoryObject.UnitTag5;
+                        if ($.trim(value) != "") {
+
+                            var _sample = CheckUnitDataDuplicate(ColumnName, value);
+                            if (_sample == false) {
+                                _count = _count * 0;
+                                $scope.UnitDataColumnWithError = ColumnName;
+                            }
+                            else {
+                                _count = _count * 1;
+
+                            }
+                        }
+                        else {
+                            _count = _count * 1;
+                        }
+
+
+                        break;
+                    case "iUnitTag6":
+                    case "UnitTag6":
+                        value = $scope.InventoryObject.UnitTag6;
+                        if ($.trim(value) != "") {
+
+                            var _sample = CheckUnitDataDuplicate(ColumnName, value);
+                            if (_sample == false) {
+                                _count = _count * 0;
+                                $scope.UnitDataColumnWithError = ColumnName;
+                            }
+                            else {
+                                _count = _count * 1;
+
+                            }
+                        }
+                        else {
+                            _count = _count * 1;
+                        }
+
+
+                        break;
+                    case "iUnitTag7":
+                    case "UnitTag7":
+                        value = $scope.InventoryObject.UnitTag7;
+                        if ($.trim(value) != "") {
+
+                            var _sample = CheckUnitDataDuplicate(ColumnName, value);
+                            if (_sample == false) {
+                                _count = _count * 0;
+                                $scope.UnitDataColumnWithError = ColumnName;
+                            }
+                            else {
+                                _count = _count * 1;
+
+                            }
+                        }
+                        else {
+                            _count = _count * 1;
+                        }
+
+
+                        break;
+                    case "iUnitTag8":
+                    case "UnitTag8":
+                        value = $scope.InventoryObject.UnitTag8;
+                        if ($.trim(value) != "") {
+
+                            var _sample = CheckUnitDataDuplicate(ColumnName, value);
+                            if (_sample == false) {
+                                _count = _count * 0;
+                                $scope.UnitDataColumnWithError = ColumnName;
+                            }
+                            else {
+                                _count = _count * 1;
+
+                            }
+                        }
+                        else {
+                            _count = _count * 1;
+                        }
+
+
+                        break;
                     case "iUnitNumber1":
                     case "UnitNumber1":
                         value = $scope.InventoryObject.UnitNumber1;
@@ -3153,9 +3563,95 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         }
 
                         break;
+                    case "iUnitNumber3":
+                    case "UnitNumber4":
+                        value = $scope.InventoryObject.UnitNumber3;
+
+                        if ($.trim(value) != "") {
+
+                            var _sample = CheckUnitDataDuplicate(ColumnName, value);
+                            if (_sample == false) {
+                                _count = _count * 0;
+                                $scope.UnitDataColumnWithError = ColumnName;
+
+                            }
+                            else {
+                                _count = _count * 1;
+
+                            }
+                        }
+                        else {
+                            _count = _count * 1;
+                        }
+
+                        break;
+                    case "iUnitNumber4":
+                    case "UnitNumber4":
+                        value = $scope.InventoryObject.UnitNumber4;
+
+                        if ($.trim(value) != "") {
+
+                            var _sample = CheckUnitDataDuplicate(ColumnName, value);
+                            if (_sample == false) {
+                                _count = _count * 0;
+                                $scope.UnitDataColumnWithError = ColumnName;
+
+                            }
+                            else {
+                                _count = _count * 1;
+
+                            }
+                        }
+                        else {
+                            _count = _count * 1;
+                        }
+
+                        break;
                     case "iUnitDate2":
                     case "UnitDate2":
                         value = $scope.InventoryObject.UnitDate2;
+                        if ($.trim(value) != "") {
+
+                            var _sample = CheckUnitDataDuplicate(ColumnName, value);
+                            if (_sample == false) {
+                                _count = _count * 0;
+                                $scope.UnitDataColumnWithError = ColumnName;
+
+                            }
+                            else {
+                                _count = _count * 1;
+
+                            }
+                        }
+                        else {
+                            _count = _count * 1;
+                        }
+
+                        break;
+                    case "iUnitDate3":
+                    case "UnitDate3":
+                        value = $scope.InventoryObject.UnitDate3;
+                        if ($.trim(value) != "") {
+
+                            var _sample = CheckUnitDataDuplicate(ColumnName, value);
+                            if (_sample == false) {
+                                _count = _count * 0;
+                                $scope.UnitDataColumnWithError = ColumnName;
+
+                            }
+                            else {
+                                _count = _count * 1;
+
+                            }
+                        }
+                        else {
+                            _count = _count * 1;
+                        }
+
+                        break;
+                    case "iUnitDate4":
+                    case "UnitDate4":
+                        value = $scope.InventoryObject.UnitDate4;
                         if ($.trim(value) != "") {
 
                             var _sample = CheckUnitDataDuplicate(ColumnName, value);
@@ -3235,6 +3731,41 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
 
                     break;
+                case "iUnitTag4":
+                case "UnitTag4":
+                    value = $scope.InventoryObject.UnitTag4;
+
+
+
+                    break;
+                case "iUnitTag5":
+                case "UnitTag5":
+                    value = $scope.InventoryObject.UnitTag5;
+
+
+
+                    break;
+                case "iUnitTag6":
+                case "UnitTag6":
+                    value = $scope.InventoryObject.UnitTag6;
+
+
+
+                    break;
+                case "iUnitTag7":
+                case "UnitTag7":
+                    value = $scope.InventoryObject.UnitTag7;
+
+
+
+                    break;
+                case "iUnitTag8":
+                case "UnitTag8":
+                    value = $scope.InventoryObject.UnitTag8;
+
+
+
+                    break;
                 case "iUnitNumber1":
                 case "UnitNumber1":
                     value = $scope.InventoryObject.UnitNumber1;
@@ -3246,6 +3777,32 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 case "UnitNumber2":
                     value = $scope.InventoryObject.UnitNumber2;
 
+
+
+                    break;
+                case "iUnitNumber3":
+                case "UnitNumber3":
+                    value = $scope.InventoryObject.UnitNumber3;
+
+
+
+                    break;
+                case "iUnitNumber4":
+                case "UnitNumber4":
+                    value = $scope.InventoryObject.UnitNumber4;
+
+
+
+                    break;
+                case "iUnitDate4":
+                case "UnitDate4":
+                    value = $scope.InventoryObject.UnitDate4;
+
+
+                    break;
+                case "iUnitDate3":
+                case "UnitDate3":
+                    value = $scope.InventoryObject.UnitDate3;
 
 
                     break;
@@ -3289,6 +3846,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
             contentType: 'application/json; charset=utf-8',
             dataType: 'text json',
             success: function (result) {
+
                 if (result.CheckDuplicateUnitDataResult.Success == true) {
                     if (result.CheckDuplicateUnitDataResult.Payload == 1) {
                         _returnVar = false;
@@ -3423,6 +3981,75 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                                        console.log("UT3 field sepecial type - 6");
                                        console.log($scope.UnitTag3FieldSpecialType);
                                    }
+                                   else if (item.FieldName == 'UnitTag4') {
+                                       $scope.UnitTag4FieldSpecialType = item.FieldSpecialType;
+                                       $scope.UnitTag4FieldDefaultValue = item.FieldDefaultValue;
+                                       $scope.InventoryObject.UnitTag4 = item.FieldDefaultValue;
+                                       if (item.FieldComboValues != null) {
+                                           $scope.UniqueTag4Combovalues = item.FieldComboValues.split("\n");
+                                       }
+                                       if (item.FieldRadioValues != null) {
+                                           $scope.UniqueTag4Radiovalues = item.FieldRadioValues.split("\r\n");
+                                       }
+                                       console.log("UT4 field sepecial type - 6");
+                                       console.log($scope.UnitTag4FieldSpecialType);
+                                   }
+
+                                   else if (item.FieldName == 'UnitTag5') {
+                                       $scope.UnitTag5FieldSpecialType = item.FieldSpecialType;
+                                       $scope.UnitTag5FieldDefaultValue = item.FieldDefaultValue;
+                                       $scope.InventoryObject.UnitTag5 = item.FieldDefaultValue;
+                                       if (item.FieldComboValues != null) {
+                                           $scope.UniqueTag5Combovalues = item.FieldComboValues.split("\n");
+                                       }
+                                       if (item.FieldRadioValues != null) {
+                                           $scope.UniqueTag5Radiovalues = item.FieldRadioValues.split("\r\n");
+                                       }
+                                       console.log("UT5 field sepecial type - 6");
+                                       console.log($scope.UnitTag5FieldSpecialType);
+                                   }
+
+                                   else if (item.FieldName == 'UnitTag6') {
+                                       $scope.UnitTag6FieldSpecialType = item.FieldSpecialType;
+                                       $scope.UnitTag6FieldDefaultValue = item.FieldDefaultValue;
+                                       $scope.InventoryObject.UnitTag6 = item.FieldDefaultValue;
+                                       if (item.FieldComboValues != null) {
+                                           $scope.UniqueTag6Combovalues = item.FieldComboValues.split("\n");
+                                       }
+                                       if (item.FieldRadioValues != null) {
+                                           $scope.UniqueTag6Radiovalues = item.FieldRadioValues.split("\r\n");
+                                       }
+                                       console.log("UT6 field sepecial type - 6");
+                                       console.log($scope.UnitTag6FieldSpecialType);
+                                   }
+
+                                   else if (item.FieldName == 'UnitTag7') {
+                                       $scope.UnitTag7FieldSpecialType = item.FieldSpecialType;
+                                       $scope.UnitTag7FieldDefaultValue = item.FieldDefaultValue;
+                                       $scope.InventoryObject.UnitTag7 = item.FieldDefaultValue;
+                                       if (item.FieldComboValues != null) {
+                                           $scope.UniqueTag7Combovalues = item.FieldComboValues.split("\n");
+                                       }
+                                       if (item.FieldRadioValues != null) {
+                                           $scope.UniqueTag7Radiovalues = item.FieldRadioValues.split("\r\n");
+                                       }
+                                       console.log("UT7 field sepecial type - 6");
+                                       console.log($scope.UnitTag7FieldSpecialType);
+                                   }
+
+                                   else if (item.FieldName == 'UnitTag8') {
+                                       $scope.UnitTag8FieldSpecialType = item.FieldSpecialType;
+                                       $scope.UnitTag8FieldDefaultValue = item.FieldDefaultValue;
+                                       $scope.InventoryObject.UnitTag8 = item.FieldDefaultValue;
+                                       if (item.FieldComboValues != null) {
+                                           $scope.UniqueTag8Combovalues = item.FieldComboValues.split("\n");
+                                       }
+                                       if (item.FieldRadioValues != null) {
+                                           $scope.UniqueTag8Radiovalues = item.FieldRadioValues.split("\r\n");
+                                       }
+                                       console.log("UT8 field sepecial type - 6");
+                                       console.log($scope.UnitTag8FieldSpecialType);
+                                   }
 
                                    else if (item.FieldName == 'UniqueDate') {
                                  
@@ -3471,6 +4098,52 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                                        $scope.InventoryObject.UnitDate2 = $scope.UnitDate2FieldDefaultValue;
 
                                    }
+                                   else if (item.FieldName == 'UnitDate3') {
+                                       $scope.UnitDate3FieldSpecialType = item.FieldSpecialType;
+
+                                       if (item.FieldSpecialType == 15) {
+
+
+                                           $scope.UnitDate3FieldDefaultValue = ConverttoMsJsonDate(item.FieldDefaultValue);
+                                       }
+
+                                       else if (item.FieldSpecialType == 16) {
+
+
+                                           $scope.UnitDate3FieldDefaultValue = ConverttoMsJsonDateTime(item.FieldDefaultValue);
+                                       }
+
+                                       else {
+
+
+                                           $scope.UnitDate3FieldDefaultValue = ConvertToTime(item.FieldDefaultValue);
+                                       }
+                                       $scope.InventoryObject.UnitDate3 = $scope.UnitDate3FieldDefaultValue;
+
+                                   }
+                                   else if (item.FieldName == 'UnitDate4') {
+                                       $scope.UnitDate4FieldSpecialType = item.FieldSpecialType;
+
+                                       if (item.FieldSpecialType == 15) {
+
+
+                                           $scope.UnitDate4FieldDefaultValue = ConverttoMsJsonDate(item.FieldDefaultValue);
+                                       }
+
+                                       else if (item.FieldSpecialType == 16) {
+
+
+                                           $scope.UnitDate4FieldDefaultValue = ConverttoMsJsonDateTime(item.FieldDefaultValue);
+                                       }
+
+                                       else {
+
+
+                                           $scope.UnitDate4FieldDefaultValue = ConvertToTime(item.FieldDefaultValue);
+                                       }
+                                       $scope.InventoryObject.UnitDate4 = $scope.UnitDate4FieldDefaultValue;
+
+                                   }
 
                                    else if (item.FieldName == 'UnitNumber1') {
 
@@ -3486,7 +4159,18 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                                        $scope.UnitNumber2FieldNumberMax = $.trim(item.FieldNumberMax) == "" ? "" : item.FieldNumberMax;
                                        $scope.UnitNumber2FieldNumberMin = $.trim(item.FieldNumberMin) == "" ? "" : item.FieldNumberMin;
                                    }
-
+                                   else if (item.FieldName == 'UnitNumber3') {
+                                       $scope.UnitNumber3FieldSpecialType = item.FieldSpecialType;
+                                       $scope.InventoryObject.UnitNumber3 = $.trim(item.FieldDefaultValue) == "" ? "" : item.FieldDefaultValue;
+                                       $scope.UnitNumber3FieldNumberMax = $.trim(item.FieldNumberMax) == "" ? "" : item.FieldNumberMax;
+                                       $scope.UnitNumber3FieldNumberMin = $.trim(item.FieldNumberMin) == "" ? "" : item.FieldNumberMin;
+                                   }
+                                   else if (item.FieldName == 'UnitNumber4') {
+                                       $scope.UnitNumber4FieldSpecialType = item.FieldSpecialType;
+                                       $scope.InventoryObject.UnitNumber4 = $.trim(item.FieldDefaultValue) == "" ? "" : item.FieldDefaultValue;
+                                       $scope.UnitNumber4FieldNumberMax = $.trim(item.FieldNumberMax) == "" ? "" : item.FieldNumberMax;
+                                       $scope.UnitNumber4FieldNumberMin = $.trim(item.FieldNumberMin) == "" ? "" : item.FieldNumberMin;
+                                   }
                                }
 
                       // });
@@ -3534,6 +4218,26 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 $scope.UnitAutoComboValues = $scope.UniqueTag3Combovalues;
                 $scope.ActiveUnitAutoCompleteField = FieldName
                 break;
+            case 'UnitTag4':
+                $scope.UnitAutoComboValues = $scope.UniqueTag4Combovalues;
+                $scope.ActiveUnitAutoCompleteField = FieldName
+                break;
+            case 'UnitTag5':
+                $scope.UnitAutoComboValues = $scope.UniqueTag5Combovalues;
+                $scope.ActiveUnitAutoCompleteField = FieldName
+                break;
+            case 'UnitTag6':
+                $scope.UnitAutoComboValues = $scope.UniqueTag6Combovalues;
+                $scope.ActiveUnitAutoCompleteField = FieldName
+                break;
+            case 'UnitTag7':
+                $scope.UnitAutoComboValues = $scope.UniqueTag7Combovalues;
+                $scope.ActiveUnitAutoCompleteField = FieldName
+                break;
+            case 'UnitTag8':
+                $scope.UnitAutoComboValues = $scope.UniqueTag8Combovalues;
+                $scope.ActiveUnitAutoCompleteField = FieldName
+                break;
             default:
         }
     }
@@ -3563,6 +4267,26 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                 break;
             case 'UnitTag3':
                 $scope.UnitRadioValues = $scope.UniqueTag3Radiovalues;
+                $scope.ActiveUnitRadioField = FieldName
+                break;
+            case 'UnitTag4':
+                $scope.UnitRadioValues = $scope.UniqueTag4Radiovalues;
+                $scope.ActiveUnitRadioField = FieldName
+                break;
+            case 'UnitTag5':
+                $scope.UnitRadioValues = $scope.UniqueTag5Radiovalues;
+                $scope.ActiveUnitRadioField = FieldName
+                break;
+            case 'UnitTag6':
+                $scope.UnitRadioValues = $scope.UniqueTag6Radiovalues;
+                $scope.ActiveUnitRadioField = FieldName
+                break;
+            case 'UnitTag7':
+                $scope.UnitRadioValues = $scope.UniqueTag7Radiovalues;
+                $scope.ActiveUnitRadioField = FieldName
+                break;
+            case 'UnitTag8':
+                $scope.UnitRadioValues = $scope.UniqueTag8Radiovalues;
                 $scope.ActiveUnitRadioField = FieldName
                 break;
             default:
@@ -4114,7 +4838,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     }
 
     $scope.IsinavailableInventoryField = function (field) {
-        var _FieldArray = ["iReqValue", "iUnitTag2", "iUnitTag3", "iUniqueDate", "pDefaultCost", "pReorderQty", "pTargetQty", "iUnitDate2", "iUnitNumber1", "iUnitNumber2", "pDescription", "pPart", "lLoc", "uomUOM", "iQty", "iStatusValue", "pCountFrq", "lZone"]
+        var _FieldArray = ["iReqValue", "iUnitTag2", "iUnitTag3", "iUnitTag4", "iUnitTag5", "iUnitTag6", "iUnitTag7", "iUnitTag8", "iUniqueDate", "pDefaultCost", "pReorderQty", "pTargetQty", "iUnitDate2", "iUnitDate3", "iUnitDate4", "iUnitNumber1", "iUnitNumber2", "iUnitNumber3", "iUnitNumber4", "pDescription", "pPart", "lLoc", "uomUOM", "iQty", "iStatusValue", "pCountFrq", "lZone"]
 
 
 
@@ -4138,11 +4862,15 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
             case "iUniqueDate":
             case "iUnitDate2":
+            case "iUnitDate3":
+            case "iUnitDate4":
                 return 3;
                 break;
             case "iQty":
             case "iUnitNumber1":
             case "iUnitNumber2":
+            case "iUnitNumber3":
+            case "iUnitNumber4":
                 return 1;
                 break;
             default:
@@ -4229,6 +4957,26 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                             _id = "#UnitTag3";
                             $scope.InventoryObject.UnitTag3 = resultvalue;
                             break;
+                        case "iUnitTag4":
+                            _id = "#UnitTag4";
+                            $scope.InventoryObject.UnitTag4 = resultvalue;
+                            break;
+                        case "iUnitTag5":
+                            _id = "#UnitTag5";
+                            $scope.InventoryObject.UnitTag5 = resultvalue;
+                            break;
+                        case "iUnitTag6":
+                            _id = "#UnitTag6";
+                            $scope.InventoryObject.UnitTag6 = resultvalue;
+                            break;
+                        case "iUnitTag7":
+                            _id = "#UnitTag7";
+                            $scope.InventoryObject.UnitTag7 = resultvalue;
+                            break;
+                        case "iUnitTag8":
+                            _id = "#UnitTag8";
+                            $scope.InventoryObject.UnitTag8 = resultvalue;
+                            break;
                         case "iUniqueDate":
                             _id = "#UniqueDate";
                             resultvalue = ConvertDatetoDate(resultvalue);
@@ -4239,6 +4987,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                             resultvalue = ConvertDatetoDate(resultvalue);
                             $scope.InventoryObject.UnitDate2 = resultvalue;
                             break;
+                        case "iUnitDate3":
+                            _id = "#UnitDate3";
+                            resultvalue = ConvertDatetoDate(resultvalue);
+                            $scope.InventoryObject.UnitDate3 = resultvalue;
+                            break;
+                        case "iUnitDate4":
+                            _id = "#UnitDate4";
+                            resultvalue = ConvertDatetoDate(resultvalue);
+                            $scope.InventoryObject.UnitDate4 = resultvalue;
+                            break;
                         case "iUnitNumber1":
                             _id = "#UnitNumber1";
                             $scope.InventoryObject.UnitNumber1 = resultvalue;
@@ -4246,6 +5004,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         case "iUnitNumber2":
                             _id = "#UnitNumber2";
                             $scope.InventoryObject.UnitNumber2 = resultvalue;
+                            break;
+                        case "iUnitNumber3":
+                            _id = "#UnitNumber3";
+                            $scope.InventoryObject.UnitNumber3 = resultvalue;
+                            break;
+                        case "iUnitNumber4":
+                            _id = "#UnitNumber4";
+                            $scope.InventoryObject.UnitNumber4 = resultvalue;
                             break;
                         case "pCountFrq":
                             _id = "#itemgroup";
@@ -4384,6 +5150,26 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                             _id = "#UnitTag3";
                             $scope.InventoryObject.UnitTag3 = resultvalue;
                             break;
+                        case "iUnitTag4":
+                            _id = "#UnitTag4";
+                            $scope.InventoryObject.UnitTag4 = resultvalue;
+                            break;
+                        case "iUnitTag5":
+                            _id = "#UnitTag5";
+                            $scope.InventoryObject.UnitTag5 = resultvalue;
+                            break;
+                        case "iUnitTag6":
+                            _id = "#UnitTag6";
+                            $scope.InventoryObject.UnitTag6 = resultvalue;
+                            break;
+                        case "iUnitTag7":
+                            _id = "#UnitTag7";
+                            $scope.InventoryObject.UnitTag7 = resultvalue;
+                            break;
+                        case "iUnitTag8":
+                            _id = "#UnitTag8";
+                            $scope.InventoryObject.UnitTag8 = resultvalue;
+                            break;
                         case "iUniqueDate":
                             _id = "#UniqueDate";
                             resultvalue = ConvertDatetoDate(resultvalue);
@@ -4394,6 +5180,16 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                             resultvalue = ConvertDatetoDate(resultvalue);
                             $scope.InventoryObject.UnitDate2 = resultvalue;
                             break;
+                        case "iUnitDate3":
+                            _id = "#UnitDate3";
+                            resultvalue = ConvertDatetoDate(resultvalue);
+                            $scope.InventoryObject.UnitDate3 = resultvalue;
+                            break;
+                        case "iUnitDate4":
+                            _id = "#UnitDate4";
+                            resultvalue = ConvertDatetoDate(resultvalue);
+                            $scope.InventoryObject.UnitDate4 = resultvalue;
+                            break;
                         case "iUnitNumber1":
                             _id = "#UnitNumber1";
                             $scope.InventoryObject.UnitNumber1 = resultvalue;
@@ -4401,6 +5197,14 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                         case "iUnitNumber2":
                             _id = "#UnitNumber2";
                             $scope.InventoryObject.UnitNumber2 = resultvalue;
+                            break;
+                        case "iUnitNumber3":
+                            _id = "#UnitNumber3";
+                            $scope.InventoryObject.UnitNumber3 = resultvalue;
+                            break;
+                        case "iUnitNumber4":
+                            _id = "#UnitNumber4";
+                            $scope.InventoryObject.UnitNumber4 = resultvalue;
                             break;
                         case "pCountFrq":
                             _id = "#itemgroup";
@@ -5458,6 +6262,26 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
          
             $(this).trigger("change");
         })
+        $("#UnitTag4").each(function () {
+
+            $(this).trigger("change");
+        })
+        $("#UnitTag5").each(function () {
+
+            $(this).trigger("change");
+        })
+        $("#UnitTag6").each(function () {
+
+            $(this).trigger("change");
+        })
+        $("#UnitTag7").each(function () {
+
+            $(this).trigger("change");
+        })
+        $("#UnitTag8").each(function () {
+
+            $(this).trigger("change");
+        })
 
         $("#UniqueTag").each(function () {
             $(this).trigger("change");
@@ -5734,4 +6558,20 @@ app.directive('testCase', function () {
             });
         }
     }
+});
+
+app.directive('ngFloat', function () {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, $el, attrs, ngModel) {
+            ngModel.$parsers.push(function (value) {
+                return parseFloat(value, 10);
+            });
+
+            ngModel.$formatters.push(function (value) {
+                return value.toString();
+            });
+        }
+    };
 });
