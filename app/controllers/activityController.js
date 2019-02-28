@@ -7671,7 +7671,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             var _val1 = $scope.CurrentCart[k].InventoryDataList.iReqValue != null && $scope.CurrentCart[k].InventoryDataList.iReqValue != undefined ? $scope.CurrentCart[k].InventoryDataList.iReqValue : "";
 
                             //var _val2 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 : "";
-                            var _val2 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 != undefined ? ($scope.ApplyTransactionData('UnitTag1').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag1').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag1 + ($scope.GetUnitDataFieldByName('UnitTag1').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag1').Suffix : "") : "";
+                            var _val2 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag1').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag1').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag1 + ($scope.GetUnitDataFieldByName('UnitTag1').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag1').Suffix : "") : "";
 
                             _x1 = MatchString(_val1, _val2);
                         }
@@ -7685,7 +7685,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             var _val11 = $scope.CurrentCart[k].InventoryDataList.iUnitTag2 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag2 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag2 : "";
 
                           //  var _val12 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 : "";
-                            var _val12 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != undefined ? ($scope.ApplyTransactionData('UnitTag2').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag2').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag2 + ($scope.GetUnitDataFieldByName('UnitTag2').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag2').Suffix : "") : "";
+                            var _val12 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag2').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag2').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag2 + ($scope.GetUnitDataFieldByName('UnitTag2').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag2').Suffix : "") : "";
 
                             _x2 = MatchString(_val11, _val12);
 
@@ -7701,7 +7701,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             var _val21 = $scope.CurrentCart[k].InventoryDataList.iUnitTag3 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag3 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag3 : "";
 
                            // var _val22 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 : "";
-                            var _val22 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != undefined ? ($scope.ApplyTransactionData('UnitTag3').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag3').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag3 + ($scope.GetUnitDataFieldByName('UnitTag3').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag3').Suffix : "") : "";
+                            var _val22 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag3').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag3').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag3 + ($scope.GetUnitDataFieldByName('UnitTag3').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag3').Suffix : "") : "";
 
                             _x3 = MatchString(_val21, _val22);
 
@@ -7716,7 +7716,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             var _val23 = $scope.CurrentCart[k].InventoryDataList.iUnitTag4 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag4 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag4 : "";
 
                           //  var _val24 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 : "";
-                            var _val24 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 != undefined ? ($scope.ApplyTransactionData('UnitTag4').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag4').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag4 + ($scope.GetUnitDataFieldByName('UnitTag4').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag4').Suffix : "") : "";
+                            var _val24 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag4').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag4').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag4 + ($scope.GetUnitDataFieldByName('UnitTag4').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag4').Suffix : "") : "";
 
                             _x4 = MatchString(_val23, _val24);
 
@@ -7730,7 +7730,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             var _val25 = $scope.CurrentCart[k].InventoryDataList.iUnitTag5 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag5 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag5 : "";
 
                           //  var _val26 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 : "";
-                            var _val26 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 != undefined ? ($scope.ApplyTransactionData('UnitTag5').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag5').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag5 + ($scope.GetUnitDataFieldByName('UnitTag5').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag5').Suffix : "") : "";
+                            var _val26 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag5').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag5').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag5 + ($scope.GetUnitDataFieldByName('UnitTag5').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag5').Suffix : "") : "";
 
                             _x5 = MatchString(_val25, _val26);
 
@@ -7745,7 +7745,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             var _val27 = $scope.CurrentCart[k].InventoryDataList.iUnitTag6 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag6 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag6 : "";
 
                          //   var _val28 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 : "";
-                            var _val28 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 != undefined ? ($scope.ApplyTransactionData('UnitTag6').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag6').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag6 + ($scope.GetUnitDataFieldByName('UnitTag6').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag6').Suffix : "") : "";
+                            var _val28 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag6').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag6').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag6 + ($scope.GetUnitDataFieldByName('UnitTag6').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag6').Suffix : "") : "";
 
                             _x6 = MatchString(_val27, _val28);
 
@@ -7760,7 +7760,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             var _val29 = $scope.CurrentCart[k].InventoryDataList.iUnitTag7 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag7 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag7 : "";
 
                           //  var _val30 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 : "";
-                            var _val30 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 != undefined ? ($scope.ApplyTransactionData('UnitTag7').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag7').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag7 + ($scope.GetUnitDataFieldByName('UnitTag7').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag7').Suffix : "") : "";
+                            var _val30 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag7').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag7').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag7 + ($scope.GetUnitDataFieldByName('UnitTag7').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag7').Suffix : "") : "";
 
                             _x7 = MatchString(_val29, _val30);
 
@@ -7775,7 +7775,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                             var _val31 = $scope.CurrentCart[k].InventoryDataList.iUnitTag8 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag8 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag8 : "";
 
                          //   var _val32 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 : "";
-                            var _val32 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 != undefined ? ($scope.ApplyTransactionData('UnitTag8').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag8').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag8 + ($scope.GetUnitDataFieldByName('UnitTag8').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag8').Suffix : "") : "";
+                            var _val32 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag8').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag8').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag8 + ($scope.GetUnitDataFieldByName('UnitTag8').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag8').Suffix : "") : "";
 
                             _x8 = MatchString(_val31, _val32);
 
