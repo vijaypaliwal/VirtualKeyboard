@@ -7647,7 +7647,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     break;
                 case "Apply":
                     for (k = 0; k < $scope.CurrentCart.length; k++) {
-                         
+                        debugger;
                         var _x1 = false;
                         var _x2 = false;
                         var _x3 = false;
@@ -7657,21 +7657,20 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         var _x7 = false;
                         var _x8 = false;
                         var _x9 = false;
-                        var _x10 = false;          
+                        var _x10 = false;
                         var _x11 = false;
                         var _x12 = false;
                         var _x13 = false;
                         var _x14 = false;
                         var _x15 = false;
                         var _x16 = false;
-    
 
                         if ($scope.IsMyInventoryColumns('iReqValue') == true) {
 
                             var _val1 = $scope.CurrentCart[k].InventoryDataList.iReqValue != null && $scope.CurrentCart[k].InventoryDataList.iReqValue != undefined ? $scope.CurrentCart[k].InventoryDataList.iReqValue : "";
 
-                            //var _val2 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 : "";
-                            var _val2 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 != undefined ? ($scope.GetUnitDataFieldByName('ReqValue').Prefix != null ? $scope.GetUnitDataFieldByName('ReqValue').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag1 + ($scope.GetUnitDataFieldByName('ReqValue').Suffix != null ? $scope.GetUnitDataFieldByName('ReqValue').Suffix : "") : "";
+                            var _val2 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 != undefined ? ($scope.GetUnitDataFieldByName('ReqValue').Prefix != null ? $scope.GetUnitDataFieldByName('ReqValue').Prefix : "") + $scope.CurrentCart[k].ApplyTransactionData.UnitTag1 + ($scope.GetUnitDataFieldByName('ReqValue').Suffix != null ? $scope.GetUnitDataFieldByName('ReqValue').Suffix : "") : "";
+
 
                             _x1 = MatchString(_val1, _val2);
                         }
@@ -7684,9 +7683,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             var _val11 = $scope.CurrentCart[k].InventoryDataList.iUnitTag2 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag2 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag2 : "";
 
-                          //  var _val12 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 : "";
-                            var _val12 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag2').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag2').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag2 + ($scope.GetUnitDataFieldByName('UnitTag2').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag2').Suffix : "") : "";
-
+                            //  var _val12 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 : "";
+                            var _val12 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag2').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag2').Prefix : "") + $scope.CurrentCart[k].ApplyTransactionData.UnitTag2 + ($scope.GetUnitDataFieldByName('UnitTag2').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag2').Suffix : "") : "";
                             _x2 = MatchString(_val11, _val12);
 
 
@@ -7700,8 +7698,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             var _val21 = $scope.CurrentCart[k].InventoryDataList.iUnitTag3 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag3 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag3 : "";
 
-                           // var _val22 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 : "";
-                            var _val22 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag3').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag3').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag3 + ($scope.GetUnitDataFieldByName('UnitTag3').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag3').Suffix : "") : "";
+                            //var _val22 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 : "";
+                            var _val22 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag3').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag3').Prefix : "") + $scope.CurrentCart[k].ApplyTransactionData.UnitTag3 + ($scope.GetUnitDataFieldByName('UnitTag3').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag3').Suffix : "") : "";
 
                             _x3 = MatchString(_val21, _val22);
 
@@ -7713,12 +7711,12 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         if ($scope.IsMyInventoryColumns('iUnitTag4') == true) {
 
 
-                            var _val23 = $scope.CurrentCart[k].InventoryDataList.iUnitTag4 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag4 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag4 : "";
+                            var _val31 = $scope.CurrentCart[k].InventoryDataList.iUnitTag4 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag4 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag4 : "";
 
-                          //  var _val24 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 : "";
-                            var _val24 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag4').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag4').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag4 + ($scope.GetUnitDataFieldByName('UnitTag4').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag4').Suffix : "") : "";
+                            //  var _val32 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 : "";
+                            var _val32 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag4').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag4').Prefix : "") + $scope.CurrentCart[k].ApplyTransactionData.UnitTag4 + ($scope.GetUnitDataFieldByName('UnitTag4').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag4').Suffix : "") : "";
 
-                            _x4 = MatchString(_val23, _val24);
+                            _x4 = MatchString(_val31, _val32);
 
                         } else {
 
@@ -7727,62 +7725,57 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                         if ($scope.IsMyInventoryColumns('iUnitTag5') == true) {
 
 
-                            var _val25 = $scope.CurrentCart[k].InventoryDataList.iUnitTag5 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag5 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag5 : "";
+                            var _val41 = $scope.CurrentCart[k].InventoryDataList.iUnitTag5 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag5 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag5 : "";
 
-                          //  var _val26 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 : "";
-                            var _val26 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag5').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag5').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag5 + ($scope.GetUnitDataFieldByName('UnitTag5').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag5').Suffix : "") : "";
+                            //var _val42 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 : "";
+                            var _val42 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag5').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag5').Prefix : "") + $scope.CurrentCart[k].ApplyTransactionData.UnitTag5 + ($scope.GetUnitDataFieldByName('UnitTag5').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag5').Suffix : "") : "";
 
-                            _x5 = MatchString(_val25, _val26);
+                            _x5 = MatchString(_val41, _val42);
 
                         } else {
 
                             _x5 = true;
                         }
-
                         if ($scope.IsMyInventoryColumns('iUnitTag6') == true) {
 
 
-                            var _val27 = $scope.CurrentCart[k].InventoryDataList.iUnitTag6 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag6 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag6 : "";
+                            var _val51 = $scope.CurrentCart[k].InventoryDataList.iUnitTag6 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag6 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag6 : "";
 
-                         //   var _val28 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 : "";
-                            var _val28 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag6').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag6').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag6 + ($scope.GetUnitDataFieldByName('UnitTag6').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag6').Suffix : "") : "";
-
-                            _x6 = MatchString(_val27, _val28);
+                            //var _val52 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 : "";
+                            var _val52 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag6').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag6').Prefix : "") + $scope.CurrentCart[k].ApplyTransactionData.UnitTag6 + ($scope.GetUnitDataFieldByName('UnitTag6').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag6').Suffix : "") : "";
+                            _x6 = MatchString(_val51, _val52);
 
                         } else {
 
                             _x6 = true;
                         }
-
                         if ($scope.IsMyInventoryColumns('iUnitTag7') == true) {
 
 
-                            var _val29 = $scope.CurrentCart[k].InventoryDataList.iUnitTag7 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag7 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag7 : "";
+                            var _val61 = $scope.CurrentCart[k].InventoryDataList.iUnitTag7 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag7 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag7 : "";
 
-                          //  var _val30 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 : "";
-                            var _val30 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag7').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag7').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag7 + ($scope.GetUnitDataFieldByName('UnitTag7').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag7').Suffix : "") : "";
-
-                            _x7 = MatchString(_val29, _val30);
+                            // var _val62 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 : "";
+                            var _val62 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag7').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag7').Prefix : "") + $scope.CurrentCart[k].ApplyTransactionData.UnitTag7 + ($scope.GetUnitDataFieldByName('UnitTag7').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag7').Suffix : "") : "";
+                            _x7 = MatchString(_val61, _val62);
 
                         } else {
 
                             _x7 = true;
                         }
-
                         if ($scope.IsMyInventoryColumns('iUnitTag8') == true) {
 
 
-                            var _val31 = $scope.CurrentCart[k].InventoryDataList.iUnitTag8 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag8 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag8 : "";
+                            var _val71 = $scope.CurrentCart[k].InventoryDataList.iUnitTag8 != null && $scope.CurrentCart[k].InventoryDataList.iUnitTag8 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitTag8 : "";
 
-                         //   var _val32 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 : "";
-                            var _val32 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag8').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag8').Prefix : "") + $scope.CurrentCart[k].MoveUpdateTagTransactionData.UnitTag8 + ($scope.GetUnitDataFieldByName('UnitTag8').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag8').Suffix : "") : "";
-
-                            _x8 = MatchString(_val31, _val32);
+                            // var _val72 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 : "";
+                            var _val72 = $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 != undefined ? ($scope.GetUnitDataFieldByName('UnitTag8').Prefix != null ? $scope.GetUnitDataFieldByName('UnitTag8').Prefix : "") + $scope.CurrentCart[k].ApplyTransactionData.UnitTag8 + ($scope.GetUnitDataFieldByName('UnitTag8').Suffix != null ? $scope.GetUnitDataFieldByName('UnitTag8').Suffix : "") : "";
+                            _x8 = MatchString(_val71, _val72);
 
                         } else {
 
                             _x8 = true;
                         }
+
                         if ($scope.IsMyInventoryColumns('iUniqueDate') == true) {
 
 
@@ -7812,6 +7805,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             _x10 = true;
                         }
+
                         if ($scope.IsMyInventoryColumns('iUnitDate3') == true) {
 
 
@@ -7842,14 +7836,15 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                             _x12 = true;
                         }
+
                         if ($scope.IsMyInventoryColumns('iUnitNumber1') == true) {
 
 
-                            var _val41 = $scope.CurrentCart[k].InventoryDataList.iUnitNumber1 != "" && $scope.CurrentCart[k].InventoryDataList.iUnitNumber1 != null && $scope.CurrentCart[k].InventoryDataList.iUnitNumber1 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitNumber1 : null;
+                            var _val43 = $scope.CurrentCart[k].InventoryDataList.iUnitNumber1 != "" && $scope.CurrentCart[k].InventoryDataList.iUnitNumber1 != null && $scope.CurrentCart[k].InventoryDataList.iUnitNumber1 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitNumber1 : null;
 
-                            var _val42 = $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 != "" && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 : null;
+                            var _val44 = $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 != "" && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitNumber1 : null;
 
-                            _x13 = (_val41 == _val42);
+                            _x13 = (_val43 == _val44);
 
                         } else {
 
@@ -7858,11 +7853,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                         if ($scope.IsMyInventoryColumns('iUnitNumber2') == true) {
 
-                            var _val43 = $scope.CurrentCart[k].InventoryDataList.iUnitNumber2 != "" && $scope.CurrentCart[k].InventoryDataList.iUnitNumber2 != null && $scope.CurrentCart[k].InventoryDataList.iUnitNumber2 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitNumber2 : null;
+                            var _val45 = $scope.CurrentCart[k].InventoryDataList.iUnitNumber2 != "" && $scope.CurrentCart[k].InventoryDataList.iUnitNumber2 != null && $scope.CurrentCart[k].InventoryDataList.iUnitNumber2 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitNumber2 : null;
 
-                            var _val44 = $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 != "" && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 : null;
+                            var _val46 = $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 != "" && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitNumber2 : null;
 
-                            _x14 = (_val43 == _val44);
+                            _x14 = (_val45 == _val46);
 
                         } else {
 
@@ -7871,11 +7866,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                         if ($scope.IsMyInventoryColumns('iUnitNumber3') == true) {
 
-                            var _val45 = $scope.CurrentCart[k].InventoryDataList.iUnitNumber3 != "" && $scope.CurrentCart[k].InventoryDataList.iUnitNumber3 != null && $scope.CurrentCart[k].InventoryDataList.iUnitNumber3 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitNumber3 : null;
+                            var _val47 = $scope.CurrentCart[k].InventoryDataList.iUnitNumber3 != "" && $scope.CurrentCart[k].InventoryDataList.iUnitNumber3 != null && $scope.CurrentCart[k].InventoryDataList.iUnitNumber3 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitNumber3 : null;
 
-                            var _val46 = $scope.CurrentCart[k].ApplyTransactionData.UnitNumber3 != "" && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber3 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber3 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitNumber3 : null;
+                            var _val48 = $scope.CurrentCart[k].ApplyTransactionData.UnitNumber3 != "" && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber3 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber3 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitNumber3 : null;
 
-                            _x15 = (_val45 == _val46);
+                            _x15 = (_val47 == _val48);
 
                         } else {
 
@@ -7884,16 +7879,17 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                         if ($scope.IsMyInventoryColumns('iUnitNumber4') == true) {
 
-                            var _val47 = $scope.CurrentCart[k].InventoryDataList.iUnitNumber4 != "" && $scope.CurrentCart[k].InventoryDataList.iUnitNumber4 != null && $scope.CurrentCart[k].InventoryDataList.iUnitNumber4 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitNumber4 : null;
+                            var _val49 = $scope.CurrentCart[k].InventoryDataList.iUnitNumber4 != "" && $scope.CurrentCart[k].InventoryDataList.iUnitNumber4 != null && $scope.CurrentCart[k].InventoryDataList.iUnitNumber4 != undefined ? $scope.CurrentCart[k].InventoryDataList.iUnitNumber4 : null;
 
-                            var _val48 = $scope.CurrentCart[k].ApplyTransactionData.UnitNumber4 != "" && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber4 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber4 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitNumber4 : null;
+                            var _val50 = $scope.CurrentCart[k].ApplyTransactionData.UnitNumber4 != "" && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber4 != null && $scope.CurrentCart[k].ApplyTransactionData.UnitNumber4 != undefined ? $scope.CurrentCart[k].ApplyTransactionData.UnitNumber4 : null;
 
-                            _x16 = (_val47 == _val48);
+                            _x16 = (_val49 == _val50);
 
                         } else {
 
                             _x16 = true;
                         }
+
 
                         if (_x1 == false || _x2 == false || _x3 == false || _x4 == false || _x5 == false || _x6 == false || _x7 == false || _x8 == false || _x9 == false || _x10 == false || _x11 == false || _x12 == false || _x13 == false || _x14 == false || _x15 == false || _x16 == false) {
 
