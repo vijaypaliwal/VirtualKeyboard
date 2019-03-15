@@ -555,7 +555,7 @@ app.controller('indexController', ['$scope', 'localStorageService', 'authService
 
             }
             else {
-                alert("timeout error");
+               
             }
         }
         else {
