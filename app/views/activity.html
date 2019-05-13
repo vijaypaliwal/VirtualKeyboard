@@ -2800,7 +2800,7 @@
                                 </div>
 
 
-                                <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveTransactionField(obj.cfdID)">
+                                <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveIncreaseTransactionField(obj.cfdID)">
                                     <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
                                     <div ng-if="obj.cfdDataType=='string'" class="input-group">
 
@@ -2837,7 +2837,7 @@
                                             <span ng-if="(obj.cfdprefixsuffixtype=='1'|| obj.cfdprefixsuffixtype=='2'|| obj.cfdprefixsuffixtype=='3') && (obj.cfdSuffix !=undefined && obj.cfdSuffix !=null && obj.cfdSuffix !='')" class="input-group-addon append last">
                                                 <span class="inner">{{obj.cfdSuffix}}</span>
                                             </span>
-                                          
+
                                             <span class="input-group-addon last" ng-click="ScanLineItem(3,obj.cfdID,$index,0)"><i class="fa fa-barcode"></i></span>
                                         </div>
 
@@ -2964,7 +2964,7 @@
                                 </div>
 
 
-                                <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveTransactionField(obj.cfdID)">
+                                <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveDecreaseTransactionField(obj.cfdID)">
                                     <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
                                     <div ng-if="obj.cfdDataType=='string'" class="input-group">
 
@@ -5693,7 +5693,7 @@
                                             </div>
 
 
-                                            <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveTransactionField(obj.cfdID)">
+                                            <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveIncreaseTransactionField(obj.cfdID)">
                                                 <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
 
                                                 <div ng-if="obj.cfdDataType=='string'" class="input-group">
@@ -5855,7 +5855,7 @@
                                             </div>
 
 
-                                            <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveTransactionField(obj.cfdID)">
+                                            <div class="form-group" ng-repeat="obj in CustomActivityDataList" ng-if="CustomActivityDataList.length > 0 && obj.isLineItem!='True' && IsActiveDecreaseTransactionField(obj.cfdID)">
                                                 <label>{{obj.cfdName}} <span ng-if="obj.cfdIsRequired">*</span></label>
 
                                                 <div ng-if="obj.cfdDataType=='string'" class="input-group">
