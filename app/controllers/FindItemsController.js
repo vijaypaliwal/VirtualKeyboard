@@ -1615,6 +1615,13 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     $scope._areZeroRecordsShown = result.GetInventoriesResult.Payload[0].AreZeroRecords
                     $scope.InventoryItems = result.GetInventoriesResult.Payload[0].Data;
 
+                    if ($scope._areImagesShown == false) {
+                        for (var i = 0; i < $scope.InventoryItems.length; i++) {
+                            $scope.InventoryItems[i].ImagePath = "";
+                            $scope.InventoryItems[i].ImageThumbPath = "";
+                        }
+                    }
+
                     _TotalRecordsCurrent = result.GetInventoriesResult.Payload[0].Data.length;
 
                     $scope.currentrecord = _TotalRecordsCurrent;
