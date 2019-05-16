@@ -881,6 +881,11 @@ body {
     bottom: 120px !important;
 }
 
+    .cd-top {
+        padding-left:0;
+    }
+
+
       .widget-products li .product {
     display: block;
     margin-left: 120px;
