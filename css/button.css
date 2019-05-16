@@ -681,17 +681,133 @@ input[type="password"]:focus
 }
     
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px)  {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1366px)  {
  .form-control
  {
      height:55px;
      font-size:20px;
  }
+
+ #Inventorylistmodal .modal-header h4
+ {
+     font-size:20px;
+ }
+ .Inventorylist li a
+ {
+     font-size:20px;
+ }
+
+ #Inventorylistmodal .modal-header
+ {
+     padding:17px;
+ }
+
+ .widget-products .list-group-item-text .text
+ {
+     font-size:17px !important;
+ }
+
+ .checkout-product-title h6
+ {
+     font-size:22px;
+ }
+
+  .checkout-product-title h6 span
+ {
+     font-size:22px;
+ }
+
+ .cartitems  .itemcontent  .checkout-details .checkout-image
+ {
+     height:90px !important;
+     width:90px !important;
+ }
+
+ form h4
+ {
+     font-size:22px;
+ }
+
+ .filtercross
+ {
+     font-size:40px;
+     padding:10px;
+ }
+
+ .itemdetail h4
+ {
+     font-size:18px !important;
+ }
+
+ .statedetail h4
+ {
+     font-size:18px !important;
+ }
+
+ .inventorydetail h4 {
+     font-size:22px !important;
+ }
+
+ .itemdetail table p {
+    font-size: 16px !important;
+}
+
+  .statedetail table td {
+    font-size: 16px !important;
+}
+
+
+ .spinner img
+ {
+     height:80px !important;
+     width:80px !important;
+ }
+
+ .morebtn
+ {
+     height:50px !important;
+     width:50px !important;
+     line-height:45px !important;
+ }
+
+ .morebtn i
+ {
+     font-size:23px !important;
+ }
+
+ .swiper-wrapper table.imagesection img
+ {
+     height:90px !important;
+     width:90px !important;
+ }
+
+
+ #mysmallModalWaiting span
+ {
+     font-size:17px !important;
+ }
+
+ #accordion1
+ {
+     min-height:100px;
+ }
+
+ .loaderanimation img
+ {
+     height:100px !important;
+     width:100px !important;
+ }
+
  .open-left
  {
      margin-top:10px;
  }
 
+ #imagepreview
+ {
+     max-height:500px !important;
+     max-width:500px !important;
+ }
 
  .Ipadheight
  {
@@ -703,17 +819,16 @@ input[type="password"]:focus
     }
 
  .has-feedback .form-control-feedback {
-   
-   
     width: 40px;
-    height: 40px;
-    line-height: 55px;
-   
+    height: 49px;
+    line-height: 53px;
+    font-size: 43px;
+    right: 8px !important;
 }
 
 
  .Btndisabled {
- background: #ccc;
+    background: #ccc;
     border: 1px solid brown !important;
     color: brown !important;
     background-color: #ccc !important;
@@ -936,7 +1051,8 @@ input[type="password"]:focus
         width:125px !important;
     }
     p {
-        font-size:18px;
+        font-size:18px !important;
+
     }
 
     .form-group {
