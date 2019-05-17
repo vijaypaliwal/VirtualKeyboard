@@ -684,9 +684,63 @@ input[type="password"]:focus
 @media only screen and (min-device-width: 768px) and (max-device-width: 1366px)  {
  .form-control
  {
-     height:55px;
-     font-size:20px;
+   height:55px;
+   font-size:20px;
  }
+
+
+ .bluearea img
+ {
+     height:160px !important;
+     width:160px !important;
+ }
+
+ .profilepage .detailmode .container h4
+{
+ font-size:20px;
+}
+
+ #mysmallModal .errorcontent
+ {
+     width:300px;
+     padding:50px;
+     border-radius:20px;
+ }
+
+ #mysmallModal .errorcontent i
+ {
+     font-size:50px !important;
+ }
+
+  #mysmallModal .errorcontent span
+ {
+     font-size:35px !important;
+ }
+
+
+ .profilepage .bluearea
+ {
+       min-height: 155px;
+    margin-top: -4px !important;
+    padding-top: 34px;
+ }
+
+ .followMeBar.bluearea h4
+ {
+     font-size:28px;
+ }
+
+ .followMeBar i
+ {
+     font-size:30px;
+ }
+
+ .Addbtn.cd-top .fa
+ {
+     margin-top:17px;
+     margin-left: -1px !important;
+ }
+
 
  #Inventorylistmodal .modal-header h4
  {
@@ -1152,8 +1206,23 @@ input[type="password"]:focus
 
     .filtercross
     {
-        margin-top:8px;
+        margin-top:0px;
     }
+
+    .right47 {
+    right: 60px;
+}
+
+    #btnClearSearch.filtercross.active
+{
+          margin-top:8px;
+    }
+
+    #btnClearSearchNew.filtercross
+{
+          margin-top:8px;
+    }
+
 
     .scrollbar-for-ipad
     {

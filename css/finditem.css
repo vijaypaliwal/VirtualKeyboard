@@ -885,6 +885,10 @@ body {
         padding-left:0;
     }
 
+    .filtercross {
+    margin-top: 0px;
+}
+
 
       .widget-products li .product {
     display: block;
