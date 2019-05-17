@@ -707,6 +707,27 @@ input[type="password"]:focus
      border-radius:20px;
  }
 
+
+ #myloginModal .errorcontent
+ {
+     width:300px;
+     padding:50px;
+     border-radius:20px;
+ }
+
+
+ #myloginModal .errorcontent img
+ {
+     height:60px !important;
+     width:60px !important;
+ }
+
+ #myloginModal .errorcontent span
+ {
+      font-size:27px !important;
+ }
+
+
  #mysmallModal .errorcontent i
  {
      font-size:50px !important;
