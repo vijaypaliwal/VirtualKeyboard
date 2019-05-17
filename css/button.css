@@ -711,7 +711,7 @@ input[type="password"]:focus
  #myloginModal .errorcontent
  {
      width:300px;
-     padding:50px;
+     padding:40px;
      border-radius:20px;
  }
 
