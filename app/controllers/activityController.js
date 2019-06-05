@@ -195,6 +195,8 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     $scope.Accountlimit = function () {
 
+       
+
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             $scope.SecurityToken = authData.token;
@@ -209,7 +211,12 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
                success: function (response) {
 
-                   $scope.objOverLimit = response.GetAccountLimitResult.Payload;                
+               
+
+                   $scope.objOverLimit = response.GetAccountLimitResult.Payload;
+                   $scope.DefaultQty = $scope.objOverLimit.DefaultQty;
+
+                 
 
                },
                error: function (err) {
@@ -3172,6 +3179,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         AssignFirstObject();
     }
     function IsAvailableMyInventoryColumn(ColumnName) {
+        if (ColumnName == 'iQty' && $scope.DefaultQty == "1") {
+
+            return true;
+        }
         var i = 0;
         for (i = 0; i < $scope.MyinventoryFields.length; i++) {
             if ($scope.MyinventoryFields[i].ColumnName == ColumnName) {
@@ -3986,7 +3997,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }
     $scope.UpdateQty = function (Qty, Index) {        
 
-        debugger;
+ 
 
         $scope.ActionQuantityValue = Qty;
         var value = 0;
@@ -5013,7 +5024,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         wcfDateStr123 = d122.toMSJSON();
 
-        debugger;
+  
 
 
 
@@ -5190,7 +5201,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
         for (_i = 0; _i < $scope.CurrentCart.length; _i++) {
 
-            debugger;
+         
 
             _MyObjdata = {
                 InvID: 0,
@@ -6475,7 +6486,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
     $scope.SubmitAllActivities = function () {
 
-        debugger;
+
 
         var _unchangeData = $scope.UnchangedData();
         var _validateObjectVm = $scope.ValidateObjectVM();
@@ -7670,7 +7681,7 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                     break;
                 case "Apply":
                     for (k = 0; k < $scope.CurrentCart.length; k++) {
-                        debugger;
+                      
                         var _x1 = false;
                         var _x2 = false;
                         var _x3 = false;
