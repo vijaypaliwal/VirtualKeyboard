@@ -451,7 +451,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
 
     $scope.OpenmenuModal = function () {
 
-        debugger;
+     
 
 
         if ($("body").hasClass("modal-open")) {
@@ -541,7 +541,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     $scope.GetInventories();
                 }
                 else {
-                    // log.info("You have already loaded all data.")
                 }
 
             }
@@ -1615,13 +1614,6 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                     $scope._areZeroRecordsShown = result.GetInventoriesResult.Payload[0].AreZeroRecords
                     $scope.InventoryItems = result.GetInventoriesResult.Payload[0].Data;
 
-                    if ($scope._areImagesShown == false) {
-                        for (var i = 0; i < $scope.InventoryItems.length; i++) {
-                            $scope.InventoryItems[i].ImagePath = "";
-                            $scope.InventoryItems[i].ImageThumbPath = "";
-                        }
-                    }
-
                     _TotalRecordsCurrent = result.GetInventoriesResult.Payload[0].Data.length;
 
                     $scope.currentrecord = _TotalRecordsCurrent;
@@ -1960,6 +1952,14 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
     }
 
     $scope.IsAvailableMyInventoryColumn = function (ColumnName) {
+
+        debugger;
+
+        if (ColumnName == 'iQty' && $scope.DefaultQty == "1") {
+       
+            return true;
+        }
+
         var i = 0;
         for (i = 0; i < $scope.MyinventoryFields.length; i++) {
             if ($scope.MyinventoryFields[i].ColumnName == ColumnName) {
@@ -2710,6 +2710,8 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                success: function (response) {
 
                    $scope.objOverLimit = response.GetAccountLimitResult.Payload;
+                   $scope.DefaultQty = $scope.objOverLimit.DefaultQty;
+                  // alert($scope.objOverLimit.DefaultQty);
 
                },
                error: function (err) {
