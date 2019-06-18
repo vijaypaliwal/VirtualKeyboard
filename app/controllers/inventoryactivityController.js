@@ -1005,16 +1005,14 @@ app.controller('inventoryactivityController', ['$scope', 'localStorageService', 
                 return $scope.ActivityList[Index].itCostPerUnit != null ? $scope.ActivityList[Index].itCostPerUnit : "";
                 break;
             case "ItemDescription":
-
                 return $scope.ActivityList[Index].ItemDescription != null ? $scope.ActivityList[Index].ItemDescription : "";
                 break;
             case "itQty":
                 return $scope.ActivityList[Index].itQty;
                 break;
             case "itQtyChange":
-                return $scope.ActivityList[Index].itQty;
+                return $scope.ActivityList[Index].itQtyChange;
                 break;
-
             case "ItemGroup":
                 return $scope.ActivityList[Index].ItemGroup != null ? $scope.ActivityList[Index].ItemGroup : "";
 
