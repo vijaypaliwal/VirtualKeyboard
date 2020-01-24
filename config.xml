@@ -122,7 +122,7 @@
         <icon height="58" gap:platform="ios" src=".pgbomit/res/icon/ios/icon-small@2x.png" width="58" />
         <icon height="87" gap:platform="ios" src=".pgbomit/res/icon/ios/icon-small@3x.png" width="87" />
   
-  <icon src=".pgbomit/res/icon/webos/icon-64.png"          gap:platform="webos" />
+   
   
  
   
