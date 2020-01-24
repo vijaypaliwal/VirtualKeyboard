@@ -95,12 +95,7 @@
 <preference name="SplashScreenDelay" value="10000"/>
 
   <icon src="icon.png" />
-  <icon src=".pgbomit/res/icon/android/icon-36-ldpi.png"   gap:platform="android"    gap:density="ldpi" />
-  <icon src=".pgbomit/res/icon/android/icon-48-mdpi.png"   gap:platform="android"    gap:density="mdpi" />
-  <icon src=".pgbomit/res/icon/android/icon-72-hdpi.png"   gap:platform="android"    gap:density="hdpi" />
-  <icon src=".pgbomit/res/icon/android/icon-96-xhdpi.png"  gap:platform="android"    gap:density="xhdpi" />
-  <icon src=".pgbomit/res/icon/blackberry/icon-80.png"     gap:platform="blackberry" />
-  <icon src=".pgbomit/res/icon/blackberry/icon-80.png"     gap:platform="blackberry" gap:state="hover"/>
+   
   <icon src=".pgbomit/res/icon/ios/icon-57.png"            gap:platform="ios"        width="57" height="57" />
   <icon src=".pgbomit/res/icon/ios/icon-72.png"            gap:platform="ios"        width="72" height="72" />
    <icon src=".pgbomit/res/icon/ios/icon-120.png"            gap:platform="ios"        width="120" height="120" />
