@@ -152,9 +152,9 @@
 
 
 
-  <preference name="phonegap-version" value="cli-7.0.1" />
+  <preference name="phonegap-version" value="cli-6.5.0" />
 
-  <preference name='pgb-builder-version' value='1' />
+  <preference name='pgb-builder-version' value='2' />
   <preference name="orientation"   value="all" />
 
   <preference name="target-device"  value="universal" />
@@ -189,7 +189,7 @@
 
 
 
-  <icon src="icon.png" />
+  <icon src="icon.png"   width="1024" height="1024" />
 
 
 
