@@ -76,7 +76,8 @@
   <preference name="UIWebViewBounce" value="false" />
   <preference name="DisallowOverscroll" value="true" />
   
- <preference name="phonegap-version" value="cli-7.1.0"/>
+  <preference name='phonegap-version' value='cli-6.5.0' />
+<preference name='pgb-builder-version' value='2' />
   <preference name="orientation"   value="all" />
   <preference name="target-device"  value="universal" />
   <preference name="fullscreen" value="false" />
