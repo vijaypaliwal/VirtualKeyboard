@@ -246,7 +246,7 @@
   <icon src=".pgbomit/res/icon/ios/icon-1024-76.png"            gap:platform="ios"        width="76" height="76" />
   <icon src=".pgbomit/res/icon/ios/icon-1024-76@2x.png"            gap:platform="ios"        width="152" height="152" />
   <icon src=".pgbomit/res/icon/ios/icon-1024-83.5@2x.png"            gap:platform="ios"        width="167" height="167" />
-  <icon src=".pgbomit/res/icon/ios/-1024-1024.png"            gap:platform="ios"        width="1024" height="1024" />
+  <icon src=".pgbomit/res/icon/ios/icon-1024-1024.png"            gap:platform="ios"        width="1024" height="1024" />
 
 
 
