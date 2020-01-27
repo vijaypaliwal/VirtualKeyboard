@@ -191,9 +191,9 @@
 
 
 
-  <!--<icon src="icon.jpg"   width="1024" height="1024" />
+<icon src="icon.jpg"   width="1024" height="1024" />
 
-  <icon src=".pgbomit/res/icon/ios/icon-57.png"            gap:platform="ios"        width="57" height="57" />
+    <!--<icon src=".pgbomit/res/icon/ios/icon-57.png"            gap:platform="ios"        width="57" height="57" />
 
   <icon src=".pgbomit/res/icon/ios/icon-72.png"            gap:platform="ios"        width="72" height="72" />
 
