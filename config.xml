@@ -185,8 +185,7 @@
 
   <preference name="SplashScreenDelay" value="10000"/>
 
-  <preference name="deployment-target" value="8.0"/>
-
+  <preference name="deployment-target" value="7.1.2" />
 
 
 
