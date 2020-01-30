@@ -185,6 +185,10 @@
 
   <preference name="SplashScreenDelay" value="10000"/>
 
+  <preference name="deployment-target" value="7.1.2" />
+
+
+
   <icon src="icon/ios/icon.png" width="1024" height="1024" platform="ios" />
 
   <icon src=".pgbomit/res/icon/ios/icon-1024-20@2x.png" gap:platform="ios" width="40" height="40" />
