@@ -3411,6 +3411,10 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
            });
     }
 
+    $scope.Quantitylabel = "Quantity";
+    $scope.Locationlabel = "Location";
+    $scope.UOMlabel = "UOM";
+
 
     $scope.GetMyinventoryColumns = function () {
 
@@ -3443,16 +3447,25 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
 
                           if (_TempArray[i].ColumnName == "pPart") {
                               $scope.realItemname = _TempArray[i].ColumnLabel;
-
                           }
 
                           if (_TempArray[i].ColumnName == "pDescription") {
                               $scope.realDescname = _TempArray[i].ColumnLabel;
-
                           }
 
                           if (_TempArray[i].ColumnName == "iStatusValue") {
                               $scope.statusLabel = _TempArray[i].ColumnLabel;
+                          }
+                          if (_TempArray[i].ColumnName == "iQty") {
+                              $scope.Quantitylabel = _TempArray[i].ColumnLabel;
+                          }
+
+                          if (_TempArray[i].ColumnName == "lLoc") {
+                              $scope.Locationlabel = _TempArray[i].ColumnLabel;
+                          }
+
+                          if (_TempArray[i].ColumnName == "uomUOM") {
+                              $scope.UOMlabel = _TempArray[i].ColumnLabel;
                           }
 
                       }
@@ -7168,8 +7181,6 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
     }, 1000);
 
     setTimeout(function () {
-
-
         $(".datetimedata").each(function () {
             var _val = $(this).val();
             $(this).val(_val);
@@ -7179,13 +7190,11 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
                 $(this).trigger("change");
             }, 1000);
         });
-
         $(".weekPicker,.monthPicker").each(function () {
             var _val = $(this).attr("selectvalue");
             $(this).val(_val);
             $(this).trigger("change");
         });
-
     }, 4000);
 
 
@@ -7194,28 +7203,28 @@ app.controller('activityController', ['$scope', 'localStorageService', 'authServ
         var _Msg = "Please update at least one unit data field or change status or location to perform an activity.";
         switch (Action) {
             case "Move":
-                _MsgTitle = "ONE (OR MORE) LOCATIONs HAVE NOT CHANGED";
-                _Msg = "You are trying to move some units in your cart to their current locations, which is not allowed.  Please make sure that the units in each line item of your cart are moving to locations that are different from their current locations."
+                _MsgTitle = "ONE (OR MORE) "+ $scope.Locationlabel + " HAVE NOT CHANGED";
+                _Msg = "You are trying to move some units in your cart to their current " + $scope.Locationlabel + ", which is not allowed.  Please make sure that the units in each line item of your cart are moving to " + $scope.Locationlabel + " that are different from their current " + $scope.Locationlabel + ".";
                 break;
             case "Convert":
-                _MsgTitle = "ONE (OR MORE) UNITS OF MEASURE HAVE NOT CHANGED";
-                _Msg = "You are trying to convert some units in your cart to their current unit of measure, which is not allowed.  Please make sure that the units in each line item of your cart are converting to units of measure that are different than their current unit of measure."
+                _MsgTitle = "ONE (OR MORE) " + $scope.UOMlabel + " HAVE NOT CHANGED";
+                _Msg = "You are trying to convert some units in your cart to their current " + $scope.UOMlabel + ", which is not allowed.  Please make sure that the units in each line item of your cart are converting to " + $scope.UOMlabel + " that are different than their current " + $scope.UOMlabel + ".";
                 break;
             case "Update":
-                _MsgTitle = "ONE (OR MORE) STATUSES HAVE NOT CHANGED";
-                _Msg = "You are trying to update some units in your cart with to their current status, which is not allowed.  Please make sure that the units in each line item of your cart are getting updated to statuses that are different than their current status."
+                _MsgTitle = "ONE (OR MORE) " + $scope.statusLabel + " HAVE NOT CHANGED";
+                _Msg = "You are trying to update some units in your cart with to their current " + $scope.statusLabel + ", which is not allowed.  Please make sure that the units in each line item of your cart are getting updated to " + $scope.statusLabel + " that are different than their current " + $scope.statusLabel + ".";
                 break;
             case "Apply":
                 _MsgTitle = "ONE (OR MORE) STATES HAVE NOT CHANGED";
-                _Msg = "You are trying to tag some units in your cart with their current values, which is not allowed.  Please make sure that the units in each line item of your cart are getting tagged with at least one value which is different than the current value."
+                _Msg = "You are trying to tag some units in your cart with their current values, which is not allowed.  Please make sure that the units in each line item of your cart are getting tagged with at least one value which is different than the current value.";
                 break;
             case "MoveTagUpdate":
-                _MsgTitle = "ONE (OR MORE) LOCATIONS, STATES, AND/OR STATUSES HAVE NOT CHANGED";
-                _Msg = "You are trying to move & change some units in your cart without changing their location, tags, or statuses, which is not allowed.  Please make sure that the units in each line item of your cart have at least one value (location or tag or status) that is different than their current value."
+                _MsgTitle = "ONE (OR MORE) " + $scope.Locationlabel + ", STATES, AND/OR " + $scope.statusLabel + " HAVE NOT CHANGED";
+                _Msg = "You are trying to move & change some units in your cart without changing their " + $scope.Locationlabel + ", tags, or " + $scope.statusLabel + ", which is not allowed.  Please make sure that the units in each line item of your cart have at least one value (" + $scope.Locationlabel + " or tag or " + $scope.statusLabel + ") that is different than their current value."
                 break;
             default:
         }
-        //toastr.newwarning(_Msg);
+    
         toastr.error(_Msg, _MsgTitle, {
             "closeButton": true,
             "timeOut": 0,

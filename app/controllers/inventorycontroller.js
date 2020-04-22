@@ -101,6 +101,10 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
     $scope.ActiveUnitAutoCompleteField = [];
     $scope.weeklist = [];
 
+    $scope.Quantitylabel = "Quantity";
+    $scope.Locationlabel = "Location";
+    $scope.UOMlabel = "UOM";
+
     $scope.CurrentYear = new Date().getFullYear();
 
     for (var i = 1; i <= 52; i++) {
@@ -3032,6 +3036,7 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
                
 
                   if (response.GetMyInventoryColumnsResult.Success == true) {
+                      debugger;
 
                       var _TempArray = response.GetMyInventoryColumnsResult.Payload;
 
@@ -3052,9 +3057,24 @@ app.controller('inventoryController', ['$scope', '$location', 'authService', 'lo
 
                           }
 
-                          if (_TempArrayDummy[i].ColumnName == "iStatusValue") {
-                              $scope.statusLabel = _TempArrayDummy[i].ColumnLabel;
+                          if (_TempArray[i].ColumnName == "iStatusValue") {
+                              $scope.statusLabel = _TempArray[i].ColumnLabel;
                           }
+                          if (_TempArray[i].ColumnName == "iQty") {
+                              $scope.Quantitylabel = _TempArray[i].ColumnLabel;
+                          }
+
+                          if (_TempArray[i].ColumnName == "lLoc") {
+                              $scope.Locationlabel = _TempArray[i].ColumnLabel;
+                          }
+
+                          if (_TempArray[i].ColumnName == "uomUOM") {
+                              $scope.UOMlabel = _TempArray[i].ColumnLabel;
+                          }
+
+                          
+
+                         
 
                       }
                       CheckScopeBeforeApply()

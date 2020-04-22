@@ -98,13 +98,12 @@ app.controller('AccountsController', ['$scope', '$location', 'authService', 'loc
     }
 
     $scope.GetDisabledClass = function () {
-        if($.trim($scope.InventoryObj.InventoryAccountName)=="")
-        {
+        if ($.trim($scope.InventoryObj.InventoryAccountName) == "") {
             return "disabled";
         }
 
         return "";
-    }
+    };
 
    
 

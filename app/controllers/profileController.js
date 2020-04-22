@@ -21,15 +21,12 @@ app.controller('profileController', ['$scope', 'localStorageService', 'authServi
         $scope.CurrentAccount = localStorageService.get('AccountID');
         $scope.Getuserinfo();
         $scope.$apply();
-    }
-
-
+    };
 
     //Image Crop 
     $scope.myImage = '';
     $scope.myCroppedImage = '';
 
-  
 
     $(".modal-backdrop").remove();
 

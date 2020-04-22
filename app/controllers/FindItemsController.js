@@ -980,7 +980,7 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
             case "iStatusValue":
                 $scope.CurrentActiveSearchType = 4;
                 $scope.SearchFromText = "Status";
-                $('#MasterSearch').attr("placeholder", "Search by Status");
+                $('#MasterSearch').attr("placeholder", "Search by " + $scope.statusLabel);
                 $scope.CurrentActiveSearchField = "iStatusValue";
                 break;
 
@@ -995,14 +995,14 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                 $scope.CurrentActiveSearchField = "lLoc";
                 $scope.CurrentActiveSearchType = 1;
                 $scope.SearchFromText = "Location";
-                $('#MasterSearch').attr("placeholder", "Search by Location");
+                $('#MasterSearch').attr("placeholder", "Search by " + $scope.locationlabel);
                 break;
             case "pPart":
                 $scope.CurrentActiveSearchField = "pPart";
 
                 $scope.CurrentActiveSearchType = 1;
                 $scope.SearchFromText = "Items";
-                $('#MasterSearch').attr("placeholder", "Search by Item");
+                $('#MasterSearch').attr("placeholder", "Search by " + $scope.itemlabel);
                 break;
             case "All":
                 $scope.CurrentActiveSearchField = "All";
@@ -1875,6 +1875,16 @@ app.controller('FindItemsController', ['$scope', 'localStorageService', 'authSer
                         if (_TempArrayMyInventory[i].ColumnName == "pPart") {
                             $scope.itemlabel = _TempArrayMyInventory[i].ColumnLabel;
                         }
+
+                        if (_TempArrayMyInventory[i].ColumnName == "lLoc") {
+                            $scope.locationlabel = _TempArrayMyInventory[i].ColumnLabel;
+                        }
+
+                        if (_TempArrayMyInventory[i].ColumnName == "iQty") {
+                            $scope.Quantitylabel = _TempArrayMyInventory[i].ColumnLabel;
+                        }
+
+                        
                     }
                     CheckScopeBeforeApply();
                 }

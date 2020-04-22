@@ -57,7 +57,7 @@
                                 <ul class="dropdown-menu dm-icon searchlist" id="dynamicd">
                                     <li class="suggestItem1"><a ng-click="searchfunction('All')" alt="All">All</a></li>
                                     <li class="suggestItem2"><a ng-click="searchfunction('pPart')" alt="pPart">{{itemlabel}}</a></li>
-                                    <li class="suggestItem3"><a ng-click="searchfunction('lLoc')" alt="lLoc">Location</a></li>
+                                    <li class="suggestItem3"><a ng-click="searchfunction('lLoc')" alt="lLoc">{{locationlabel}}</a></li>
                                     <li class="suggestItem4"><a ng-click="searchfunction('iStatusValue')" alt="iStatusValue">{{statusLabel}}</a></li>
                                     <li class="suggestItem5"><a ng-click="searchfunction('uomUOM')" alt="uomUOM">UOM</a></li>
 
@@ -467,8 +467,8 @@
                 <li ng-if="checkpermission('ACTION:CanAddInventory')==true && totalrecords!=0"> <a href="#/inventory"><span class="newinv">New Inventory</span></a><a href="#/inventory" class=" waves-effect btn-success btn"> <i class="fa fa-plus"></i> </a></li>
                 <li class="bottomlink" ng-if="totalrecords!=0 && _areImagesShown==false" ng-click="Showhideimage('true')"> <span>Show Image</span><a class="waves-effect btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
                 <li class="bottomlink" ng-if="totalrecords!=0 &&_areImagesShown==true" ng-click="Showhideimage('false')"> <span>Hide Image</span><a class="waves-effect btn-info btn decrease" style="background-color: #C65E28;" data-dismiss="modal"> <i class="fa fa-image"></i> </a></li>
-                <li class="bottomlink" ng-if="totalrecords!=0 &&_areZeroRecordsShown==false" ng-click=" showhidezerorecord('true')"><span>Show Zero Quantities</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
-                <li class="bottomlink" ng-if="totalrecords!=0 &&_areZeroRecordsShown==true" ng-click="showhidezerorecord('false')"><span>Hide Zero Quantities</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+                <li class="bottomlink" ng-if="totalrecords!=0 &&_areZeroRecordsShown==false" ng-click=" showhidezerorecord('true')"><span>Show Zero {{Quantitylabel}}(s)</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
+                <li class="bottomlink" ng-if="totalrecords!=0 &&_areZeroRecordsShown==true" ng-click="showhidezerorecord('false')"><span>Hide Zero {{Quantitylabel}}(s)</span><a class="waves-effect btn-info btn decrease" style="background-color: #583782;" data-dismiss="modal"> 0 </a></li>
                 <li ng-click="SelectAll()" class="bottomlink"><span>Select All</span><a class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-check"></i>  </a></li>
                 <li ng-click="ClearFilter()" class="bottomlink"><span data-dismiss="modal">Clear Filters</span><a style="background:#bbb !important;" class=" waves-effect btn-primary btn decrease" data-dismiss="modal"> <i class="fa fa-times"></i>  </a></li>
             </ul>

@@ -150,39 +150,42 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
         }
         $scope.IsLocationLoading = true;
         $.ajax
-           ({
-               type: "POST",
-               url: serviceBase + 'GetLocations',
-               contentType: 'application/json; charset=utf-8',
-               dataType: 'text json',
-               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
-               success: function (response) {
+            ({
+                type: "POST",
+                url: serviceBase + 'GetLocations',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'text json',
+                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken }),
+                success: function (response) {
 
-                   $scope.IsLocationLoading = false;
+                    $scope.IsLocationLoading = false;
 
-                   if (response.GetLocationsResult.Success == true) {
-                       $scope.LocationList = response.GetLocationsResult.Payload;
-                       $scope.LocationSearchList = $scope.LocationList;
-
-
-                   }
-                   else {
-                       $scope.ShowErrorMessage("Getting Location count", 1, 1, response.GetLocationsResult.Message)
-
-                   }
-
-                   $scope.$apply();
-               },
-               error: function (response) {
-
-                   $scope.IsLocationLoading = false;
-                   $scope.ShowErrorMessage("Getting Location count", 2, 1, response.statusText);
+                    if (response.GetLocationsResult.Success == true) {
+                        $scope.LocationList = response.GetLocationsResult.Payload;
+                        $scope.LocationSearchList = $scope.LocationList;
 
 
-               }
-           });
+                    }
+                    else {
+                        $scope.ShowErrorMessage("Getting Location count", 1, 1, response.GetLocationsResult.Message)
 
-    }
+                    }
+
+                    $scope.$apply();
+                },
+                error: function (response) {
+
+                    $scope.IsLocationLoading = false;
+                    $scope.ShowErrorMessage("Getting Location count", 2, 1, response.statusText);
+
+
+                }
+            });
+
+    };
+    $scope.Locationlabel = "Location";
+    $scope.UOMlabel = "UOM";
+    $scope.Statuslabel = "Status";
 
     $scope.GetMyinventoryColumns = function () {
 
@@ -222,6 +225,37 @@ app.controller('settingController', ['$scope', 'localStorageService', 'authServi
                                   $scope.columnlist2.push(_myinventorycols[i]);
                               }
                           }
+                      }
+
+
+                      var _TempArrayDummy = response.GetMyInventoryColumnsResult.Payload;
+
+                      for (var i = 0; i < _TempArrayDummy.length; i++) {
+
+                          if (_TempArrayDummy[i].ColumnName == "pPart") {
+                              $scope.realItemname = _TempArrayDummy[i].ColumnLabel;
+                          }
+
+                          if (_TempArrayDummy[i].ColumnName == "pDescription") {
+                              $scope.realDescname = _TempArrayDummy[i].ColumnLabel;
+                          }
+
+                          if (_TempArrayDummy[i].ColumnName == "iQty") {
+                              $scope.Quantitylabel = _TempArrayDummy[i].ColumnLabel;
+                          }
+
+                          if (_TempArrayDummy[i].ColumnName == "lLoc") {
+                              $scope.Locationlabel = _TempArrayDummy[i].ColumnLabel;
+                          }
+
+                          if (_TempArrayDummy[i].ColumnName == "uomUOM") {
+                              $scope.UOMlabel = _TempArrayDummy[i].ColumnLabel;
+                          }
+
+                          if (_TempArrayDummy[i].ColumnName == "iStatusValue") {
+                              $scope.Statuslabel = _TempArrayDummy[i].ColumnLabel;
+                          }
+
                       }
 
 

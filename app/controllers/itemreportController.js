@@ -54,15 +54,6 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
     }
 
 
-
-
-
-
-
-
-
-
-
     $scope.clearAllFilter = false;
     $scope.CurrentView = { Name: "Item" };
     $scope.ItemViews = [];
@@ -170,20 +161,16 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
         $("#imagepreview").attr("src", Object);
     }
 
-    $scope.isFurtherCalculatedColumn=function(ColumnName)
-    {
+    $scope.isFurtherCalculatedColumn = function (ColumnName) {
         for (var i = 0; i < $scope.Columns.length; i++) {
             if ($scope.Columns[i].ColumnID == ColumnName) {
-                if ($scope.Columns[i].isFirstFurtherCalculated == true || $scope.Columns[i].isSecondFurtherCalculated == true)
-                {
+                if ($scope.Columns[i].isFirstFurtherCalculated == true || $scope.Columns[i].isSecondFurtherCalculated == true) {
                     return true;
-
                 }
             }
-
         }
         return false;
-    }
+    };
 
 
     $('#bottommenumodal').on('hidden.bs.modal', function () {
@@ -192,22 +179,17 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
 
 
     $scope.Openbottommenu = function () {
-
         if ($("body").hasClass("modal-open")) {
             $("#bottommenumodal").modal('hide');
-
-            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars')
-
-
+            $(".menubtn .fa").removeClass('fa-times').addClass('fa-bars');
         }
         else {
             $("#bottommenumodal").modal('show');
             $(".menubtn .fa").removeClass('fa-bars').addClass('fa-times');
         }
-    }
+    };
     $scope.ClearImageFilter = function () {
         $scope.HasImage = "";
-
         CheckScopeBeforeApply();
     }
     $scope.clearfilterArray = function () {
@@ -222,14 +204,10 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
         $scope.FilterData.SearchValue = "";
         CheckScopeBeforeApply();
         $scope.GetItemsDataAccordingToView();
-    }
-    $scope.clearfilter=function()
-    {
+    };
+    $scope.clearfilter = function () {
         $scope.clearfilterArray();
-      
-      //  CheckScopeBeforeApply();
-      //  $scope.GetItemViews();
-    }
+    };
     $scope.GetComboData=function(ColumnName)
     {
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
@@ -421,40 +399,32 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
 
 
         $.ajax
-           ({
-               type: "POST",
-               url: serviceBase + 'GetCustomFieldsData',
-               contentType: 'application/json; charset=utf-8',
-               dataType: 'text json',
-               data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type }),
-               success: function (response) {
+            ({
+                type: "POST",
+                url: serviceBase + 'GetCustomFieldsData',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'text json',
+                data: JSON.stringify({ "SecurityToken": $scope.SecurityToken, "Type": Type }),
+                success: function (response) {
 
+                    if (response.GetCustomFieldsDataResult.Success == true) {
 
-                   
+                        $scope.CustomItemDataList = response.GetCustomFieldsDataResult.Payload;
 
-                   if (response.GetCustomFieldsDataResult.Success == true) {
+                    }
+                    else {
+                        $scope.ShowErrorMessage("Custom column's data", 1, 1, response.GetCustomFieldsDataResult.Message)
 
-                       $scope.CustomItemDataList = response.GetCustomFieldsDataResult.Payload;
+                    }
 
-                   }
-                   else {
-                       $scope.ShowErrorMessage("Custom column's data", 1, 1, response.GetCustomFieldsDataResult.Message)
-
-                   }
-                  
-
-                      
-
-                   CheckScopeBeforeApply();
-               },
-               error: function (response) {
-                   log.error(response.statusText);
-                   $scope.ShowErrorMessage("Custom column's data", 2, 1, err.statusText);
-
-                   //$scope.InventoryObject.Location = 678030;
-               }
-           });
-    }
+                    CheckScopeBeforeApply();
+                },
+                error: function (response) {
+                    log.error(response.statusText);
+                    $scope.ShowErrorMessage("Custom column's data", 2, 1, err.statusText);
+                }
+            });
+    };
     $scope.GetCustomFieldByID = function (ID) {
         
         for (var i = 0; i < $scope.CustomItemDataList.length; i++) {
@@ -1384,6 +1354,11 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
 
     }
 
+    $scope.Quantitylabel = "Quantity";
+    $scope.Locationlabel = "Location";
+    $scope.UOMlabel = "UOM";
+
+
 
     $scope.GetMyinventoryColumns = function () {
 
@@ -1415,18 +1390,24 @@ app.controller('itemreportController', ['$scope', 'localStorageService', 'authSe
 
                       for (var i = 0; i < _TempArrayDummy.length; i++) {
 
-
-
                           if (_TempArrayDummy[i].ColumnName == "pPart") {
                               $scope.realItemname = _TempArrayDummy[i].ColumnLabel;
-
-
-
                           }
 
                           if (_TempArrayDummy[i].ColumnName == "pDescription") {
                               $scope.realDescname = _TempArrayDummy[i].ColumnLabel;
+                          }
 
+                          if (_TempArrayDummy[i].ColumnName == "iQty") {
+                              $scope.Quantitylabel = _TempArrayDummy[i].ColumnLabel;
+                          }
+
+                          if (_TempArrayDummy[i].ColumnName == "lLoc") {
+                              $scope.Locationlabel = _TempArrayDummy[i].ColumnLabel;
+                          }
+
+                          if (_TempArrayDummy[i].ColumnName == "uomUOM") {
+                              $scope.UOMlabel = _TempArrayDummy[i].ColumnLabel;
                           }
 
                       }
